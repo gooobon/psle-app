@@ -1,0 +1,2025 @@
+{
+  "extractedAt": "2026-06-18T14:36:34.908Z",
+  "source": "src/app/ClaudeApp.js",
+  "note": "SCIENCE_QB was null",
+  "SCIENCE_QB": null,
+  "MATH_QB": {
+    "MCQ": [
+      {
+        "id": "m01",
+        "difficulty": "foundation",
+        "topic": "Numbers",
+        "q": "In 6825, the digit 8 is in the _______ place.",
+        "options": [
+          "ones",
+          "tens",
+          "hundreds",
+          "thousands"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Place Value Chart",
+          "steps": [
+            "Th  H  T  O",
+            " 6  8  2  5",
+            "    ↑",
+            "HUNDREDS",
+            "Answer: Hundreds place"
+          ],
+          "tip": "Count from the RIGHT: O · T · H · Th"
+        }
+      },
+      {
+        "id": "m02",
+        "difficulty": "foundation",
+        "topic": "Addition",
+        "q": "What is the sum of 3456 and 1298?",
+        "options": [
+          "2158",
+          "4644",
+          "4754",
+          "4854"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "  3 4 5 6",
+            "+ 1 2 9 8",
+            "─────────",
+            "O: 6+8=14 → write 4, carry 1",
+            "T: 5+9+1=15 → write 5, carry 1",
+            "H: 4+2+1=7",
+            "Th: 3+1=4",
+            "─────────",
+            "  4 7 5 4"
+          ],
+          "tip": "Always add from the ONES column first →"
+        }
+      },
+      {
+        "id": "m03",
+        "difficulty": "core",
+        "topic": "Numbers",
+        "q": "Arrange the following numbers in decreasing order: 7450, 7540, 7405",
+        "options": [
+          "7540, 7450, 7405",
+          "7540, 7405, 7450",
+          "7405, 7450, 7540",
+          "7450, 7405, 7540"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Compare Place by Place",
+          "steps": [
+            "7 5 4 0  ← H=5 (biggest)",
+            "7 4 5 0  ← H=4, T=5",
+            "7 4 0 5  ← H=4, T=0 (smallest)",
+            "─────────────────",
+            "Decreasing: 7540 > 7450 > 7405"
+          ],
+          "tip": "Compare LEFT to RIGHT — first different digit decides!"
+        }
+      },
+      {
+        "id": "m04",
+        "difficulty": "foundation",
+        "topic": "Multiplication",
+        "q": "8 × 6 is the same as _______.",
+        "options": [
+          "8 + 6",
+          "6 + 6 + 6 + 6 + 6 + 6 + 6 + 6",
+          "8 × 8 × 8 × 8 × 8 × 8",
+          "8 + 8 + 8 + 8 + 8 + 8"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Multiplication Table",
+          "steps": [
+            "8 × 6 = ?",
+            "8 × 1 = 8",
+            "8 × 2 = 16",
+            "8 × 3 = 24",
+            "8 × 4 = 32",
+            "8 × 5 = 40",
+            "8 × 6 = 48",
+            "= 8+8+8+8+8+8 ← 6 eights"
+          ],
+          "tip": "8×6 = add 8 six times"
+        }
+      },
+      {
+        "id": "m05",
+        "difficulty": "foundation",
+        "topic": "Money",
+        "q": "Jenny has $45.20. Her father gives her $10. How much does she have now?",
+        "options": [
+          "$35.20",
+          "$46.20",
+          "$55.20",
+          "$50.20"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Money Addition",
+          "steps": [
+            "  $ 4 5 . 2 0",
+            "+ $ 1 0 . 0 0",
+            "─────────────",
+            "  $ 5 5 . 2 0"
+          ],
+          "tip": "Line up the decimal points!"
+        }
+      },
+      {
+        "id": "m06",
+        "difficulty": "stretch",
+        "topic": "Division",
+        "q": "When a number is divided by 7, the quotient is 12 and the remainder is 3. What is the number?",
+        "options": [
+          "84",
+          "87",
+          "81",
+          "22"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Work Backwards",
+          "steps": [
+            "Quotient × Divisor = ?",
+            "   12    ×    7   = 84",
+            "",
+            "84 + Remainder = Answer",
+            "84 +     3     = 87",
+            "",
+            "Check: 87 ÷ 7 = 12 r 3 ✓"
+          ],
+          "tip": "Number = (Q × D) + R"
+        }
+      },
+      {
+        "id": "m07",
+        "difficulty": "foundation",
+        "topic": "Numbers",
+        "q": "In 4519, the value of the digit 5 is _______.",
+        "options": [
+          "5",
+          "50",
+          "500",
+          "5000"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Place Value Chart",
+          "steps": [
+            "Th  H  T  O",
+            " 4  5  1  9",
+            "    ↑",
+            "5 is in HUNDREDS",
+            "Value = 5 × 100 = 500"
+          ],
+          "tip": "Value = digit × its column (1 / 10 / 100 / 1000)"
+        }
+      },
+      {
+        "id": "m08",
+        "difficulty": "core",
+        "topic": "Division",
+        "q": "Which of the following leaves NO remainder when divided by 4?",
+        "options": [
+          "14",
+          "46",
+          "58",
+          "72"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Division Check",
+          "steps": [
+            "14 ÷ 4 = 3 r 2  ✗",
+            "46 ÷ 4 = 11 r 2  ✗",
+            "58 ÷ 4 = 14 r 2  ✗",
+            "72 ÷ 4 = 18 r 0  ✓",
+            "Answer: 72"
+          ],
+          "tip": "No remainder = divisible exactly"
+        }
+      },
+      {
+        "id": "m09",
+        "difficulty": "core",
+        "topic": "Money",
+        "q": "Mr Tan bought trousers for $73.40. He gave the cashier two $50 notes. How much change did he receive?",
+        "options": [
+          "$23.40",
+          "$26.60",
+          "$123.40",
+          "$173.40"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Change Calculation",
+          "steps": [
+            "2 × $50 = $100.00",
+            "",
+            "  $ 1 0 0 . 0 0",
+            "−  $ 7 3 . 4 0",
+            "────────────────",
+            "  $  2 6 . 6 0"
+          ],
+          "tip": "Change = Given − Price"
+        }
+      },
+      {
+        "id": "m10",
+        "difficulty": "foundation",
+        "topic": "Numbers",
+        "q": "In 7394, the digit 9 is in the _______ place.",
+        "options": [
+          "ones",
+          "tens",
+          "hundreds",
+          "thousands"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Place Value Chart",
+          "steps": [
+            "Th  H  T  O",
+            " 7  3  9  4",
+            "       ↑",
+            "9 is in TENS place"
+          ],
+          "tip": "Count from RIGHT: O · T · H · Th"
+        }
+      },
+      {
+        "id": "m11",
+        "difficulty": "foundation",
+        "topic": "Multiplication",
+        "q": "7 × 8 is the same as _______.",
+        "options": [
+          "7 + 8",
+          "8 + 8 + 8 + 8 + 8 + 8 + 8",
+          "7 × 7 × 7 × 7 × 7 × 7 × 7 × 7",
+          "7 + 7 + 7 + 7 + 7 + 7 + 7 + 7"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Multiplication Table",
+          "steps": [
+            "7 × 8 = ?",
+            "7 × 8 = 7+7+7+7+7+7+7+7",
+            "     = 14+14+14+14",
+            "     = 28+28",
+            "     = 56"
+          ],
+          "tip": "7×8 = add 7 eight times"
+        }
+      },
+      {
+        "id": "m12",
+        "difficulty": "foundation",
+        "topic": "Addition",
+        "q": "What is the sum of 5134 and 2865?",
+        "options": [
+          "7989",
+          "7999",
+          "8099",
+          "8999"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "  5 1 3 4",
+            "+ 2 8 6 5",
+            "─────────",
+            "O: 4+5=9",
+            "T: 3+6=9",
+            "H: 1+8=9",
+            "Th: 5+2=7",
+            "─────────",
+            "  7 9 9 9"
+          ],
+          "tip": "No carrying needed here — each column ≤ 9"
+        }
+      },
+      {
+        "id": "m13",
+        "difficulty": "core",
+        "topic": "Subtraction",
+        "q": "Subtract 3245 from 6000.",
+        "options": [
+          "2755",
+          "2855",
+          "3245",
+          "3755"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Column Subtraction",
+          "steps": [
+            "  6 0 0 0",
+            "− 3 2 4 5",
+            "─────────",
+            "Borrow: 6000 → 5|9|9|10",
+            "O: 10−5=5",
+            "T: 9−4=5",
+            "H: 9−2=7",
+            "Th: 5−3=2",
+            "─────────",
+            "  2 7 5 5"
+          ],
+          "tip": "When you see 0s, borrow from the left!"
+        }
+      },
+      {
+        "id": "m14",
+        "difficulty": "core",
+        "topic": "Division",
+        "q": "What is the remainder when 569 is divided by 7?",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Long Division",
+          "steps": [
+            "  8 1",
+            "7 ) 5 6 9",
+            "   5 6  ↓",
+            "   ─────",
+            "     0 9",
+            "     0 7",
+            "     ───",
+            "       2  ← Remainder",
+            "Answer: 569 ÷ 7 = 81 r 2"
+          ],
+          "tip": "Remainder = what's left over"
+        }
+      },
+      {
+        "id": "m15",
+        "difficulty": "core",
+        "topic": "Multiplication",
+        "q": "A stationery shop sells markers in boxes of 8. If it sold 45 boxes, how many markers were sold?",
+        "options": [
+          "53",
+          "320",
+          "360",
+          "400"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Multiplication",
+          "steps": [
+            "  4 5",
+            "×  8",
+            "────",
+            "8×5 = 40 → write 0, carry 4",
+            "8×4 = 32+4 = 36",
+            "────",
+            "  3 6 0",
+            "Answer: 360 markers"
+          ],
+          "tip": "45×8: multiply ones first, then tens"
+        }
+      },
+      {
+        "id": "m16",
+        "difficulty": "core",
+        "topic": "Numbers",
+        "q": "What is the product of 500 and 7?",
+        "options": [
+          "350",
+          "507",
+          "3500",
+          "5007"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Multiplication with Zeros",
+          "steps": [
+            "500 × 7",
+            "= 5 × 7 × 100",
+            "= 35 × 100",
+            "= 3500"
+          ],
+          "tip": "Ignore zeros, multiply, then add zeros back"
+        }
+      },
+      {
+        "id": "m17",
+        "difficulty": "core",
+        "topic": "Addition",
+        "q": "Find the missing number: _______ + 1500 = 4200",
+        "options": [
+          "2700",
+          "2600",
+          "3700",
+          "5700"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Missing Addend",
+          "steps": [
+            "? + 1500 = 4200",
+            "",
+            "  4 2 0 0",
+            "− 1 5 0 0",
+            "─────────",
+            "  2 7 0 0",
+            "",
+            "Check: 2700 + 1500 = 4200 ✓"
+          ],
+          "tip": "? = Total − Known part"
+        }
+      },
+      {
+        "id": "m18",
+        "difficulty": "stretch",
+        "topic": "Subtraction",
+        "q": "Subtract 4567 from 8000.",
+        "options": [
+          "3433",
+          "3533",
+          "4433",
+          "4533"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Column Subtraction",
+          "steps": [
+            "  8 0 0 0",
+            "− 4 5 6 7",
+            "─────────",
+            "Borrow: 8000 → 7|9|9|10",
+            "O: 10−7=3",
+            "T: 9−6=3",
+            "H: 9−5=4",
+            "Th: 7−4=3",
+            "─────────",
+            "  3 4 3 3"
+          ],
+          "tip": "Multiple zeros: borrow from thousands"
+        }
+      },
+      {
+        "id": "m19",
+        "difficulty": "core",
+        "topic": "Addition",
+        "q": "What is the sum of 2345 and 6789?",
+        "options": [
+          "8024",
+          "8134",
+          "9034",
+          "9134"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "  2 3 4 5",
+            "+ 6 7 8 9",
+            "─────────",
+            "O: 5+9=14 → write 4, carry 1",
+            "T: 4+8+1=13 → write 3, carry 1",
+            "H: 3+7+1=11 → write 1, carry 1",
+            "Th: 2+6+1=9",
+            "─────────",
+            "  9 1 3 4"
+          ],
+          "tip": "Carry over when column sum ≥ 10"
+        }
+      },
+      {
+        "id": "m20",
+        "difficulty": "stretch",
+        "topic": "Subtraction",
+        "q": "Find the difference between 7000 and 1458.",
+        "options": [
+          "5542",
+          "5642",
+          "6542",
+          "8458"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Column Subtraction",
+          "steps": [
+            "  7 0 0 0",
+            "− 1 4 5 8",
+            "─────────",
+            "Borrow: 7000 → 6|9|9|10",
+            "O: 10−8=2",
+            "T: 9−5=4",
+            "H: 9−4=5",
+            "Th: 6−1=5",
+            "─────────",
+            "  5 5 4 2"
+          ],
+          "tip": "Cascade borrow through all zeros"
+        }
+      }
+    ],
+    "ShortAnswer": [
+      {
+        "id": "s01",
+        "difficulty": "foundation",
+        "topic": "Numbers",
+        "q": "Write eight thousand, nine hundred and five in numerals.",
+        "answer": "8905",
+        "unit": "",
+        "solution": {
+          "method": "Place Value",
+          "steps": [
+            "Th  H  T  O",
+            " 8  9  0  5",
+            "↑            → 8 thousands = 8000",
+            "    ↑        → 9 hundreds  =  900",
+            "       ↑     → 0 tens      =    0",
+            "          ↑  → 5 ones      =    5",
+            "─────────────────────────",
+            "8000+900+0+5 = 8905"
+          ],
+          "tip": "No tens mentioned → write 0 in the T column!"
+        }
+      },
+      {
+        "id": "s02",
+        "difficulty": "stretch",
+        "topic": "Numbers",
+        "q": "Use all digits 3, 0, 7, 2 to form the smallest 4-digit odd number. (Each digit used once.)",
+        "answer": "2037",
+        "unit": "",
+        "solution": {
+          "method": "Smallest Odd Number",
+          "steps": [
+            "Digits: 3  0  7  2",
+            "Need: ODD → last digit = 3 or 7",
+            "",
+            "Try O=7: remaining = {0,2,3}",
+            "Th  H  T  O",
+            " 2  0  3  7  → 2037",
+            "",
+            "Try O=3: remaining = {0,2,7}",
+            "Th  H  T  O",
+            " 2  0  7  3  → 2073",
+            "",
+            "2037 < 2073 → Answer: 2037"
+          ],
+          "tip": "Smallest + Odd: smallest odd digit goes LAST, then fill smallest to largest"
+        }
+      },
+      {
+        "id": "s03",
+        "difficulty": "foundation",
+        "topic": "Patterns",
+        "q": "Find the missing number in the pattern: 3450, 3550, 3650, _____, 3850",
+        "answer": "3750",
+        "unit": "",
+        "solution": {
+          "method": "Number Pattern",
+          "steps": [
+            "3450 → 3550 → 3650 → ? → 3850",
+            "        +100    +100       +100",
+            "",
+            "Rule: +100 each time",
+            "3650 + 100 = 3750",
+            "",
+            "Check: 3750 + 100 = 3850 ✓"
+          ],
+          "tip": "Find the gap between any two consecutive numbers"
+        }
+      },
+      {
+        "id": "s04",
+        "difficulty": "core",
+        "topic": "Division",
+        "q": "What is the remainder when 458 is divided by 6?",
+        "answer": "2",
+        "unit": "",
+        "solution": {
+          "method": "Long Division",
+          "steps": [
+            "   7 6",
+            "6 ) 4 5 8",
+            "   4 2  ↓",
+            "   ─────",
+            "     3 8",
+            "     3 6",
+            "     ───",
+            "       2  ← Remainder",
+            "Answer: 458 ÷ 6 = 76 r 2"
+          ],
+          "tip": "Remainder = 458 − (6 × 76) = 458 − 456 = 2"
+        }
+      },
+      {
+        "id": "s05",
+        "difficulty": "core",
+        "topic": "Money",
+        "q": "A shirt costs $35.50. A pair of pants costs $12.40 more than the shirt. How much does the pair of pants cost?",
+        "answer": "47.90",
+        "unit": "$",
+        "solution": {
+          "method": "Bar Model + Column Addition",
+          "steps": [
+            "Shirt  [    $35.50    ]",
+            "Pants  [    $35.50    ][+$12.40]",
+            "              ?",
+            "",
+            "  $ 3 5 . 5 0",
+            "+ $ 1 2 . 4 0",
+            "─────────────",
+            "  $ 4 7 . 9 0"
+          ],
+          "tip": "'More than' → add the extra"
+        }
+      },
+      {
+        "id": "s06",
+        "difficulty": "core",
+        "topic": "Multiplication",
+        "q": "Find the product of 148 and 8.",
+        "answer": "1184",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "    1 4 8",
+            "  ×     8",
+            "  ───────",
+            "  8×8=64 → write 4, carry 6",
+            "  8×4=32 +6=38 → write 8, carry 3",
+            "  8×1=8  +3=11 → write 11",
+            "  ───────",
+            "  1 1 8 4"
+          ],
+          "tip": "Multiply from ONES → TENS → HUNDREDS"
+        }
+      },
+      {
+        "id": "s07",
+        "difficulty": "core",
+        "topic": "Addition",
+        "q": "The sum of two numbers is 3400. One of the numbers is 1250. What is the other number?",
+        "answer": "2150",
+        "unit": "",
+        "solution": {
+          "method": "Part-Whole Model",
+          "steps": [
+            "Total    [         3400        ]",
+            "Part 1   [  1250  ] Part 2 [?]",
+            "",
+            "  3 4 0 0",
+            "− 1 2 5 0",
+            "─────────",
+            "  2 1 5 0",
+            "",
+            "Check: 1250 + 2150 = 3400 ✓"
+          ],
+          "tip": "Part 2 = Total − Part 1"
+        }
+      },
+      {
+        "id": "s08",
+        "difficulty": "core",
+        "topic": "Division",
+        "q": "Mrs Lee baked 145 tarts. She packed them into boxes of 6. How many tarts were left unpacked?",
+        "answer": "1",
+        "unit": "",
+        "solution": {
+          "method": "Long Division",
+          "steps": [
+            "   2 4",
+            "6 ) 1 4 5",
+            "   1 2  ↓",
+            "   ─────",
+            "     2 5",
+            "     2 4",
+            "     ───",
+            "       1  ← Remainder",
+            "1 tart left unpacked"
+          ],
+          "tip": "The remainder = tarts that couldn't fill a box"
+        }
+      },
+      {
+        "id": "s09",
+        "difficulty": "core",
+        "topic": "Numbers",
+        "q": "Find the value of 608 × 9.",
+        "answer": "5472",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "    6 0 8",
+            "  ×     9",
+            "  ───────",
+            "  9×8=72 → write 2, carry 7",
+            "  9×0=0  +7=7 → write 7  ← don't skip!",
+            "  9×6=54 → write 54",
+            "  ───────",
+            "  5 4 7 2"
+          ],
+          "tip": "608 has a 0 in tens — still multiply! 9×0=0"
+        }
+      },
+      {
+        "id": "s10",
+        "difficulty": "stretch",
+        "topic": "Division",
+        "q": "What is the quotient when 804 is divided by 6?",
+        "answer": "134",
+        "unit": "",
+        "solution": {
+          "method": "Long Division",
+          "steps": [
+            "    1 3 4",
+            "6 ) 8 0 4",
+            "    6    ↓↓",
+            "    ──────",
+            "    2 0  ↓",
+            "    1 8  ↓",
+            "    ──────",
+            "      2 4",
+            "      2 4",
+            "      ───",
+            "        0",
+            "Answer: 134"
+          ],
+          "tip": "D→M→S→B: Divide, Multiply, Subtract, Bring down"
+        }
+      },
+      {
+        "id": "s11",
+        "difficulty": "core",
+        "topic": "Subtraction",
+        "q": "Find the missing number: 5400 − _____ = 1850",
+        "answer": "3550",
+        "unit": "",
+        "solution": {
+          "method": "Missing Subtrahend",
+          "steps": [
+            "5400 − ? = 1850",
+            "? = 5400 − 1850",
+            "",
+            "  5 4 0 0",
+            "− 1 8 5 0",
+            "─────────",
+            "  3 5 5 0",
+            "",
+            "Check: 5400 − 3550 = 1850 ✓"
+          ],
+          "tip": "? = big number − result"
+        }
+      },
+      {
+        "id": "s12",
+        "difficulty": "stretch",
+        "topic": "Multiplication",
+        "q": "Find the missing number: 4 groups of 8 = _____ + 12",
+        "answer": "20",
+        "unit": "",
+        "solution": {
+          "method": "Balance Equation",
+          "steps": [
+            "4 × 8 = ? + 12",
+            "",
+            "Left side:  4 × 8 = 32",
+            "",
+            "32 = ? + 12",
+            "?  = 32 − 12",
+            "?  = 20",
+            "",
+            "Check: 4×8 = 20+12 → 32=32 ✓"
+          ],
+          "tip": "Calculate the known side first!"
+        }
+      },
+      {
+        "id": "s13",
+        "difficulty": "core",
+        "topic": "Numbers",
+        "q": "Write 9 thousands and 34 ones in numerals.",
+        "answer": "9034",
+        "unit": "",
+        "solution": {
+          "method": "Place Value",
+          "steps": [
+            "34 ones = 3 tens + 4 ones",
+            "",
+            "Th  H  T  O",
+            " 9  0  3  4",
+            "↑   ↑  ↑  ↑",
+            "9k  0 34ones",
+            "",
+            "Answer: 9034"
+          ],
+          "tip": "TRAP: 34 ones = 3 tens + 4 ones. Put 3 in T column, 4 in O column. Answer is 9034, NOT 934!"
+        }
+      },
+      {
+        "id": "s14",
+        "difficulty": "stretch",
+        "topic": "Numbers",
+        "q": "Find the sum of the values of digit 6 in 6204 and 2761.",
+        "answer": "6060",
+        "unit": "",
+        "solution": {
+          "method": "Place Value × 2",
+          "steps": [
+            "6204:  Th H T O",
+            "        6 2 0 4",
+            "        ↑ → 6 × 1000 = 6000",
+            "",
+            "2761:  Th H T O",
+            "        2 7 6 1",
+            "              ↑ ... no",
+            "           ↑ → 6 × 10 = 60",
+            "",
+            "  6000",
+            "+   60",
+            "──────",
+            "  6060"
+          ],
+          "tip": "Same digit, different position = different VALUE"
+        }
+      },
+      {
+        "id": "s15",
+        "difficulty": "core",
+        "topic": "Multiplication",
+        "q": "Multiply 106 by 5.",
+        "answer": "530",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "    1 0 6",
+            "  ×     5",
+            "  ───────",
+            "  5×6=30 → write 0, carry 3",
+            "  5×0=0  +3=3 → write 3",
+            "  5×1=5  → write 5",
+            "  ───────",
+            "    5 3 0"
+          ],
+          "tip": "0 in the middle: still multiply! 5×0=0"
+        }
+      },
+      {
+        "id": "s16",
+        "difficulty": "foundation",
+        "topic": "Measurement",
+        "q": "Write 2 kilograms 25 grams in grams.",
+        "answer": "2025",
+        "unit": "g",
+        "solution": {
+          "method": "Unit Conversion",
+          "steps": [
+            "1 kg = 1000 g",
+            "",
+            "2 kg = 2 × 1000 = 2000 g",
+            "",
+            "2000 g + 25 g = 2025 g"
+          ],
+          "tip": "kg → g: multiply by 1000"
+        }
+      },
+      {
+        "id": "s17",
+        "difficulty": "core",
+        "topic": "Money",
+        "q": "Ming wanted to buy a board game for $82.40. He had $27.80. How much MORE money does he need?",
+        "answer": "54.60",
+        "unit": "$",
+        "solution": {
+          "method": "Column Subtraction",
+          "steps": [
+            "Need = Price − Have",
+            "",
+            "  $ 8 2 . 4 0",
+            "− $ 2 7 . 8 0",
+            "─────────────",
+            "  $ 5 4 . 6 0"
+          ],
+          "tip": "How much MORE needed = Price − Money he has"
+        }
+      },
+      {
+        "id": "s18",
+        "difficulty": "stretch",
+        "topic": "Fractions",
+        "q": "Find the value of 2/5 − 3/10.",
+        "answer": "1/10",
+        "unit": "",
+        "solution": {
+          "method": "Common Denominator",
+          "steps": [
+            "2/5 − 3/10",
+            "",
+            "2/5 = 4/10  (×2 top and bottom)",
+            "",
+            "4/10 − 3/10 = 1/10",
+            "",
+            "Answer: 1/10"
+          ],
+          "tip": "Make denominators the SAME before subtracting"
+        }
+      },
+      {
+        "id": "s19",
+        "difficulty": "foundation",
+        "topic": "Numbers",
+        "q": "Write seven hundred and twelve in numerals.",
+        "answer": "712",
+        "unit": "",
+        "solution": {
+          "method": "Place Value",
+          "steps": [
+            "seven hundred → 700 → H = 7",
+            "twelve = 10 + 2 → T = 1, O = 2",
+            "",
+            "H  T  O",
+            "7  1  2",
+            "",
+            "Answer: 712"
+          ],
+          "tip": "'Twelve' gives you both T and O digits!"
+        }
+      },
+      {
+        "id": "s20",
+        "difficulty": "foundation",
+        "topic": "Patterns",
+        "q": "Find the missing number: 120, 130, 140, _____, 160, 170",
+        "answer": "150",
+        "unit": "",
+        "solution": {
+          "method": "Number Pattern",
+          "steps": [
+            "120 → 130 → 140 → ? → 160 → 170",
+            "      +10    +10       +10   +10",
+            "",
+            "Rule: +10",
+            "140 + 10 = 150"
+          ],
+          "tip": "Find the gap, then apply the rule"
+        }
+      },
+      {
+        "id": "s21",
+        "difficulty": "foundation",
+        "topic": "Addition",
+        "q": "Add 485 and 236.",
+        "answer": "721",
+        "unit": "",
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "  4 8 5",
+            "+ 2 3 6",
+            "───────",
+            "O: 5+6=11 → write 1, carry 1",
+            "T: 8+3+1=12 → write 2, carry 1",
+            "H: 4+2+1=7",
+            "───────",
+            "  7 2 1"
+          ],
+          "tip": "Start from ones, carry when ≥ 10"
+        }
+      },
+      {
+        "id": "s22",
+        "difficulty": "core",
+        "topic": "Addition",
+        "q": "Add 3648 and 2954.",
+        "answer": "6602",
+        "unit": "",
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "  3 6 4 8",
+            "+ 2 9 5 4",
+            "─────────",
+            "O: 8+4=12 → write 2, carry 1",
+            "T: 4+5+1=10 → write 0, carry 1",
+            "H: 6+9+1=16 → write 6, carry 1",
+            "Th: 3+2+1=6",
+            "─────────",
+            "  6 6 0 2"
+          ],
+          "tip": "Carry in EVERY column possible here!"
+        }
+      },
+      {
+        "id": "s23",
+        "difficulty": "stretch",
+        "topic": "Subtraction",
+        "q": "Subtract 1987 from 4050.",
+        "answer": "2063",
+        "unit": "",
+        "solution": {
+          "method": "Column Subtraction",
+          "steps": [
+            "  4 0 5 0",
+            "− 1 9 8 7",
+            "─────────",
+            "O: 0→borrow → 10−7=3",
+            "T: 4→3(lent)→3−8→borrow→13−8=5",
+            "H: 0→borrow → 9−9=0... wait",
+            "Easier: 4050−2000=2050, +13=2063",
+            "─────────",
+            "  2 0 6 3",
+            "Check: 2063+1987=4050 ✓"
+          ],
+          "tip": "Round 1987→2000, subtract, add back 13"
+        }
+      },
+      {
+        "id": "s24",
+        "difficulty": "core",
+        "topic": "Multiplication",
+        "q": "Find the product of 238 and 7.",
+        "answer": "1666",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "    2 3 8",
+            "  ×     7",
+            "  ───────",
+            "  7×8=56 → write 6, carry 5",
+            "  7×3=21 +5=26 → write 6, carry 2",
+            "  7×2=14 +2=16 → write 16",
+            "  ───────",
+            "  1 6 6 6"
+          ],
+          "tip": "Always add the carry BEFORE writing down"
+        }
+      },
+      {
+        "id": "s25",
+        "difficulty": "core",
+        "topic": "Numbers",
+        "q": "Write 8000 + 40 + 5 as a 4-digit number.",
+        "answer": "8045",
+        "unit": "",
+        "solution": {
+          "method": "Expanded Form",
+          "steps": [
+            "8000 + 40 + 5",
+            "",
+            "Th  H  T  O",
+            " 8  0  4  5",
+            "↑   ↑  ↑  ↑",
+            "8k  0  4  5",
+            "",
+            "Answer: 8045 (not 845!)"
+          ],
+          "tip": "No hundreds → H = 0, must be placeholder"
+        }
+      },
+      {
+        "id": "s26",
+        "difficulty": "core",
+        "topic": "Patterns",
+        "q": "Find the missing number: 2450, 2600, 2750, ___, 3050, 3200",
+        "answer": "2900",
+        "unit": "",
+        "solution": {
+          "method": "Number Pattern",
+          "steps": [
+            "2450 → 2600 → 2750 → ? → 3050 → 3200",
+            "       +150    +150       +150   +150",
+            "",
+            "Rule: +150",
+            "2750 + 150 = 2900",
+            "Check: 2900+150=3050 ✓"
+          ],
+          "tip": "The gap is 150, not 100 — always calculate!"
+        }
+      },
+      {
+        "id": "s27",
+        "difficulty": "foundation",
+        "topic": "Addition",
+        "q": "What number must be added to 3400 to make 8000?",
+        "answer": "4600",
+        "unit": "",
+        "solution": {
+          "method": "Missing Addend",
+          "steps": [
+            "3400 + ? = 8000",
+            "",
+            "  8 0 0 0",
+            "− 3 4 0 0",
+            "─────────",
+            "  4 6 0 0",
+            "",
+            "Check: 3400+4600=8000 ✓"
+          ],
+          "tip": "? = Total − Known part"
+        }
+      },
+      {
+        "id": "s28",
+        "difficulty": "core",
+        "topic": "Multiplication",
+        "q": "Find the product of 105 and 8.",
+        "answer": "840",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "    1 0 5",
+            "  ×     8",
+            "  ───────",
+            "  8×5=40 → write 0, carry 4",
+            "  8×0=0  +4=4 → write 4",
+            "  8×1=8  → write 8",
+            "  ───────",
+            "    8 4 0"
+          ],
+          "tip": "Middle zero: 8×0=0, then add carry!"
+        }
+      }
+    ],
+    "ProblemSum": [
+      {
+        "id": "p01",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "There are 1250 boys in a school. There are 380 fewer girls than boys.\n(a) How many girls are there?\n(b) How many students altogether?",
+        "parts": [
+          {
+            "label": "(a) Number of girls",
+            "answer": "870",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "Boys  [          1250          ]",
+                "Girls [      ?      ] 380 fewer",
+                "",
+                "Girls = 1250 − 380",
+                "",
+                "  1 2 5 0",
+                "−   3 8 0",
+                "─────────",
+                "    8 7 0 boys"
+              ],
+              "tip": "'Fewer than' → subtract from the bigger number"
+            }
+          },
+          {
+            "label": "(b) Total students",
+            "answer": "2120",
+            "solution": {
+              "method": "Addition",
+              "steps": [
+                "Total = Boys + Girls",
+                "",
+                "  1 2 5 0  (boys)",
+                "+   8 7 0  (girls)",
+                "─────────",
+                "  2 1 2 0  students"
+              ],
+              "tip": "'Altogether' = add both groups"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p02",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "Mr Tan bought 8 boxes of pens. There were 24 pens in each box. He gave 45 pens to his students. How many pens did he have left?",
+        "parts": [
+          {
+            "label": "Pens left",
+            "answer": "147",
+            "solution": {
+              "method": "×  then  −",
+              "steps": [
+                "Step 1: Total pens",
+                "  2 4",
+                "×  8",
+                "────",
+                "  192 pens",
+                "",
+                "Step 2: Pens left",
+                "  192 − 45 = 147 pens"
+              ],
+              "tip": "Find total FIRST, then subtract what was used"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p03",
+        "difficulty": "stretch",
+        "topic": "Word Problem",
+        "q": "Mary saved $140. She saved 4 times as much as Peter. How much did they save altogether?",
+        "parts": [
+          {
+            "label": "Total savings",
+            "answer": "$175",
+            "solution": {
+              "method": "Bar Model (÷)",
+              "steps": [
+                "【Concept 1: Times As Much → Divide to find 1 unit】",
+                "Mary  [====][====][====][====]  $140",
+                "Peter [====]   ← 1 unit = ?",
+                "1 unit = $140 ÷ 4 = $35  (Peter's savings)",
+                "",
+                "【Concept 2: Altogether → Add Both】",
+                "Total = Mary + Peter",
+                "Total = $140 + $35 = $175"
+              ],
+              "tip": "'4 times as much' → divide to find 1 unit"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p04",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "A baker baked 420 cupcakes. He sold 215 in the morning and packed the rest equally into 5 boxes. How many cupcakes in each box?",
+        "parts": [
+          {
+            "label": "Cupcakes per box",
+            "answer": "41",
+            "solution": {
+              "method": "−  then  ÷",
+              "steps": [
+                "Step 1: Remaining cupcakes",
+                "420 − 215 = 205",
+                "",
+                "Step 2: Per box",
+                "  2 0 5 ÷ 5",
+                "",
+                "   4 1",
+                "5) 2 0 5",
+                "   2 0",
+                "   ───",
+                "     0 5",
+                "     0 5",
+                "     ───",
+                "       0",
+                "Answer: 41 per box"
+              ],
+              "tip": "Find the 'rest' first, then divide equally"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p05",
+        "difficulty": "stretch",
+        "topic": "Word Problem",
+        "q": "Ahmad and Ben have 640 marbles altogether. Ahmad has 120 more than Ben. How many marbles does Ben have?",
+        "parts": [
+          {
+            "label": "Ben's marbles",
+            "answer": "260",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "【Concept 1: Bar Model — Draw It Out】",
+                "Ahmad [====][====][+120]",
+                "Ben   [====]",
+                "Total: 640",
+                "",
+                "【Concept 2: Remove Extra, Then Halve】",
+                "2 equal parts = 640 − 120 = 520",
+                "1 part (Ben)  = 520 ÷ 2 = 260",
+                "",
+                "Check: Ben=260, Ahmad=260+120=380",
+                "       260+380 = 640 ✓"
+              ],
+              "tip": "Strip the extra first, then halve"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p06",
+        "difficulty": "stretch",
+        "topic": "Word Problem",
+        "q": "A dress costs $58.50. It costs $15.20 more than a skirt.\n(a) How much does the skirt cost?\n(b) Jane bought 1 dress and 1 skirt. She gave $150. How much change?",
+        "parts": [
+          {
+            "label": "(a) Skirt cost",
+            "answer": "$43.30",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "【Concept: 'More than' → Find the cheaper item】",
+                "Dress costs $15.20 MORE than Skirt",
+                "So: Skirt = Dress − $15.20",
+                "  $58.50",
+                "− $15.20",
+                "--------",
+                "  $43.30"
+              ],
+              "tip": "Dress costs MORE → Skirt = Dress − extra"
+            }
+          },
+          {
+            "label": "(b) Change received",
+            "answer": "$48.20",
+            "solution": {
+              "method": "Add then Change",
+              "steps": [
+                "Total = $58.50 + $43.30 = $101.80",
+                "",
+                "  $ 1 5 0 . 0 0",
+                "− $ 1 0 1 . 8 0",
+                "───────────────",
+                "  $   4 8 . 2 0"
+              ],
+              "tip": "Change = Given − Total cost"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p07",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "Factory A produces 3450 bags. Factory B produces 850 fewer bags.\n(a) How many bags does Factory B produce?\n(b) How many bags do both factories produce altogether?",
+        "parts": [
+          {
+            "label": "(a) Factory B bags",
+            "answer": "2600",
+            "solution": {
+              "method": "Subtraction",
+              "steps": [
+                "Factory A [          3450          ]",
+                "Factory B [       ?      ] 850 less",
+                "",
+                "  3 4 5 0",
+                "−   8 5 0",
+                "─────────",
+                "  2 6 0 0 bags"
+              ],
+              "tip": "'850 fewer' → subtract"
+            }
+          },
+          {
+            "label": "(b) Total bags",
+            "answer": "6050",
+            "solution": {
+              "method": "Addition",
+              "steps": [
+                "  3 4 5 0  (A)",
+                "+ 2 6 0 0  (B)",
+                "─────────",
+                "  6 0 5 0  bags"
+              ],
+              "tip": "Both factories together = add"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p08",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "A florist has 300 roses. She packs them into bouquets of 9 roses each.\n(a) Greatest number of bouquets she can make?\n(b) How many roses left unpacked?",
+        "parts": [
+          {
+            "label": "(a) Number of bouquets",
+            "answer": "33",
+            "solution": {
+              "method": "Long Division",
+              "steps": [
+                "   3 3",
+                "9) 3 0 0",
+                "   2 7  ↓",
+                "   ──────",
+                "     3 0",
+                "     2 7",
+                "     ───",
+                "       3  ← Remainder",
+                "33 complete bouquets"
+              ],
+              "tip": "Quotient = complete groups"
+            }
+          },
+          {
+            "label": "(b) Roses unpacked",
+            "answer": "3",
+            "solution": {
+              "method": "Remainder",
+              "steps": [
+                "300 − (9 × 33)",
+                "= 300 − 297",
+                "= 3 roses left"
+              ],
+              "tip": "Remainder = leftover after dividing"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p09",
+        "difficulty": "foundation",
+        "topic": "Word Problem",
+        "q": "There are 1250 girls in a school. There are 250 more boys than girls.\n(a) How many boys?\n(b) How many students altogether?",
+        "parts": [
+          {
+            "label": "(a) Number of boys",
+            "answer": "1500",
+            "solution": {
+              "method": "Addition",
+              "steps": [
+                "Boys = Girls + 250",
+                "",
+                "  1 2 5 0  (girls)",
+                "+   2 5 0",
+                "─────────",
+                "  1 5 0 0  boys"
+              ],
+              "tip": "'More than' → add"
+            }
+          },
+          {
+            "label": "(b) Total students",
+            "answer": "2750",
+            "solution": {
+              "method": "Addition",
+              "steps": [
+                "  1 2 5 0  (girls)",
+                "+ 1 5 0 0  (boys)",
+                "─────────",
+                "  2 7 5 0  students"
+              ],
+              "tip": ""
+            }
+          }
+        ]
+      },
+      {
+        "id": "p10",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "Mrs Wong bought 7 packets of sweets. There were 35 sweets in each packet. She gave 68 sweets to her neighbours. How many sweets did she have left?",
+        "parts": [
+          {
+            "label": "Sweets left",
+            "answer": "177",
+            "solution": {
+              "method": "×  then  −",
+              "steps": [
+                "Step 1: Total sweets",
+                "  3 5",
+                "×  7",
+                "────",
+                "  7×5=35 → write 5, carry 3",
+                "  7×3=21 +3=24",
+                "  245 sweets",
+                "",
+                "Step 2: Left",
+                "  245 − 68 = 177 sweets"
+              ],
+              "tip": "Find total first, then subtract given away"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p11",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "John saved $180. He saved 3 times as much as his sister. How much did they save altogether?",
+        "parts": [
+          {
+            "label": "Total savings",
+            "answer": "$240",
+            "solution": {
+              "method": "Bar Model (÷)",
+              "steps": [
+                "John   [===][===][===]  $180",
+                "Sister [===]              ?",
+                "        1 unit",
+                "",
+                "1 unit = $180 ÷ 3 = $60 (sister)",
+                "",
+                "Total = $180 + $60 = $240"
+              ],
+              "tip": "'3 times as much' → divide to find 1 unit"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p12",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "A farmer collected 530 eggs. He sold 260 in the morning and packed the rest equally into 6 trays. How many eggs in each tray?",
+        "parts": [
+          {
+            "label": "Eggs per tray",
+            "answer": "45",
+            "solution": {
+              "method": "−  then  ÷",
+              "steps": [
+                "Step 1: Eggs left",
+                "530 − 260 = 270 eggs",
+                "",
+                "Step 2: Per tray",
+                "   4 5",
+                "6) 2 7 0",
+                "   2 4  ↓",
+                "   ──────",
+                "     3 0",
+                "     3 0",
+                "     ───",
+                "       0",
+                "Answer: 45 eggs per tray"
+              ],
+              "tip": "Subtract first, then divide"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p13",
+        "difficulty": "stretch",
+        "topic": "Word Problem",
+        "q": "Sarah and Lily have 750 stickers altogether. Lily has 150 more stickers than Sarah. How many stickers does Sarah have?",
+        "parts": [
+          {
+            "label": "Sarah's stickers",
+            "answer": "300",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "Sarah [====]",
+                "Lily  [====][+150]",
+                "Total: 750",
+                "",
+                "2 equal parts = 750 − 150 = 600",
+                "Sarah = 600 ÷ 2 = 300",
+                "",
+                "Lily = 300 + 150 = 450",
+                "Check: 300 + 450 = 750 ✓"
+              ],
+              "tip": "Remove the extra, then halve"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p14",
+        "difficulty": "stretch",
+        "topic": "Word Problem",
+        "q": "A pair of shoes costs $65.50. It costs $22.40 more than a shirt.\n(a) How much does the shirt cost?\n(b) Ali bought 1 pair of shoes and 1 shirt. He gave $150. How much change?",
+        "parts": [
+          {
+            "label": "(a) Shirt cost",
+            "answer": "$43.10",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "Shoes  [    ?    ][+$22.40]  = $65.50",
+                "Shirt  [    ?    ]",
+                "",
+                "  $ 6 5 . 5 0",
+                "− $ 2 2 . 4 0",
+                "─────────────",
+                "  $ 4 3 . 1 0"
+              ],
+              "tip": "Shirt (cheaper) = Shoes − extra"
+            }
+          },
+          {
+            "label": "(b) Change received",
+            "answer": "$41.40",
+            "solution": {
+              "method": "Add then Change",
+              "steps": [
+                "  $ 6 5 . 5 0  (shoes)",
+                "+ $ 4 3 . 1 0  (shirt)",
+                "─────────────",
+                "  $ 1 0 8 . 6 0  total",
+                "",
+                "  $ 1 5 0 . 0 0",
+                "− $ 1 0 8 . 6 0",
+                "───────────────",
+                "  $   4 1 . 4 0  change"
+              ],
+              "tip": "Always find total cost first"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p15",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "There are 3 schools: A, B, and C. School A has 1200 students. School B has 350 more than A. School C has 180 fewer than B. How many students in School C?",
+        "parts": [
+          {
+            "label": "Students in School C",
+            "answer": "1370",
+            "solution": {
+              "method": "Chain Model",
+              "steps": [
+                "A = 1200",
+                "B = 1200 + 350 = 1550",
+                "C = 1550 − 180 = 1370",
+                "",
+                "  1 5 5 0",
+                "−   1 8 0",
+                "─────────",
+                "  1 3 7 0 students"
+              ],
+              "tip": "Work A → B → C in order"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p16",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "A bookshop owner bought 5 cartons of notebooks. Each carton had 150 notebooks. He then bought another 345 loose notebooks. How many notebooks altogether?",
+        "parts": [
+          {
+            "label": "Total notebooks",
+            "answer": "1095",
+            "solution": {
+              "method": "×  then  +",
+              "steps": [
+                "Step 1: In cartons",
+                "  1 5 0",
+                "×     5",
+                "───────",
+                "    750",
+                "",
+                "Step 2: Total",
+                "  750 + 345 = 1095 notebooks"
+              ],
+              "tip": "Two groups: multiply one, then add the other"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p17",
+        "difficulty": "core",
+        "topic": "Word Problem",
+        "q": "There are 3 fish tanks A, B, C. Tank A has 1250 fish. Tank B has 340 more than A. Tank C has 150 fewer than B. How many fish in Tank C?",
+        "parts": [
+          {
+            "label": "Fish in Tank C",
+            "answer": "1440",
+            "solution": {
+              "method": "Chain Model",
+              "steps": [
+                "A = 1250",
+                "B = 1250 + 340 = 1590",
+                "C = 1590 − 150 = 1440",
+                "",
+                "Answer: 1440 fish"
+              ],
+              "tip": "Work step by step: A → B → C"
+            }
+          }
+        ]
+      },
+      {
+        "id": "p18",
+        "difficulty": "foundation",
+        "topic": "Word Problem",
+        "q": "Mr Lee had $4000. He bought a TV for $1250 and a sofa for $1890.\n(a) How much did he spend altogether?\n(b) How much money did he have left?",
+        "parts": [
+          {
+            "label": "(a) Total spent",
+            "answer": "$3140",
+            "solution": {
+              "method": "Column Addition",
+              "steps": [
+                "  $ 1 2 5 0  (TV)",
+                "+ $ 1 8 9 0  (sofa)",
+                "───────────",
+                "  $ 3 1 4 0  spent"
+              ],
+              "tip": "Total spent = add all items"
+            }
+          },
+          {
+            "label": "(b) Money left",
+            "answer": "$860",
+            "solution": {
+              "method": "Column Subtraction",
+              "steps": [
+                "  $ 4 0 0 0",
+                "− $ 3 1 4 0",
+                "───────────",
+                "  $   8 6 0  left"
+              ],
+              "tip": "Left = Started − Spent"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "MATH_PAST_PAPER": {
+    "school": "Ai Tong Primary School",
+    "year": "2024 Semestral Assessment 1",
+    "MCQ": [
+      {
+        "id": "at_m01",
+        "topic": "Numbers",
+        "q": "In 5836, the digit 8 is in the _______ place.",
+        "options": [
+          "ones",
+          "tens",
+          "hundreds",
+          "thousands"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Place Value Chart",
+          "steps": [
+            "5|8|3|6 → Th|H|T|O",
+            "8 is in HUNDREDS place"
+          ],
+          "tip": "🧠 Count from right: O, T, H, Th"
+        }
+      },
+      {
+        "id": "at_m02",
+        "topic": "Numbers",
+        "q": "Arrange the following in decreasing order: 4270, 4720, 4027",
+        "options": [
+          "4720, 4270, 4027",
+          "4720, 4027, 4270",
+          "4027, 4270, 4720",
+          "4270, 4027, 4720"
+        ],
+        "answer": 0,
+        "solution": {
+          "method": "Compare Digit by Digit",
+          "steps": [
+            "All start with 4. Compare hundreds: 7>2>0",
+            "Decreasing: 4720 > 4270 > 4027"
+          ],
+          "tip": "🧠 Decreasing = largest first"
+        }
+      },
+      {
+        "id": "at_m03",
+        "topic": "Addition",
+        "q": "What is the sum of 2468 and 3795?",
+        "options": [
+          "6163",
+          "6253",
+          "6263",
+          "6363"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Column Addition",
+          "steps": [
+            "Answer: 6263"
+          ],
+          "tip": "🧠 Add right to left, carry when ≥10!"
+        }
+      },
+      {
+        "id": "at_m04",
+        "topic": "Multiplication",
+        "q": "6 × 9 is the same as _______.",
+        "options": [
+          "6 + 9",
+          "9 + 9 + 9 + 9 + 9 + 9",
+          "6 × 6 × 6 × 6 × 6 × 6 × 6 × 6 × 6",
+          "6 + 6 + 6 + 6 + 6 + 6 + 6 + 6 + 6"
+        ],
+        "answer": 3,
+        "solution": {
+          "method": "Repeated Addition",
+          "steps": [
+            "6 × 9 = 6 added 9 times",
+            "= 6+6+6+6+6+6+6+6+6 = 54"
+          ],
+          "tip": "🧠 a × b = a added b times"
+        }
+      },
+      {
+        "id": "at_m05",
+        "topic": "Division",
+        "q": "When a number is divided by 6, the quotient is 15 and the remainder is 4. What is the number?",
+        "options": [
+          "90",
+          "94",
+          "96",
+          "100"
+        ],
+        "answer": 1,
+        "solution": {
+          "method": "Reverse Division",
+          "steps": [
+            "Number = (Quotient × Divisor) + Remainder",
+            "= (15 × 6) + 4",
+            "= 90 + 4 = 94"
+          ],
+          "tip": "🧠 Number = (Q × D) + R"
+        }
+      },
+      {
+        "id": "at_m06",
+        "topic": "Money",
+        "q": "A book costs $12.85. A pen costs $3.40 less than the book. How much do they cost altogether?",
+        "options": [
+          "$9.45",
+          "$16.25",
+          "$22.30",
+          "$25.70"
+        ],
+        "answer": 2,
+        "solution": {
+          "method": "Compare then Add",
+          "steps": [
+            "Pen = $12.85 - $3.40 = $9.45",
+            "Total = $12.85 + $9.45 = $22.30"
+          ],
+          "tip": "🧠 Find pen cost first, then add both!"
+        }
+      }
+    ],
+    "ShortAnswer": [
+      {
+        "id": "at_s01",
+        "topic": "Numbers",
+        "q": "Write six thousand, four hundred and eight in numerals.",
+        "answer": "6408",
+        "unit": "",
+        "solution": {
+          "method": "Place Value",
+          "steps": [
+            "6000 + 400 + 0 + 8 = 6408"
+          ],
+          "tip": "🧠 Remember the 0 in the tens place!"
+        }
+      },
+      {
+        "id": "at_s02",
+        "topic": "Numbers",
+        "q": "Use all digits 4, 0, 6, 1 to form the largest 4-digit even number. (Each digit used once.)",
+        "answer": "6410",
+        "unit": "",
+        "solution": {
+          "method": "Largest Even Strategy",
+          "steps": [
+            "Answer: 6410"
+          ],
+          "tip": "🧠 Largest even: sort descending, ensure last digit is even"
+        }
+      },
+      {
+        "id": "at_s03",
+        "topic": "Patterns",
+        "q": "Find the missing number: 5100, 5300, 5500, _____, 5900",
+        "answer": "5700",
+        "unit": "",
+        "solution": {
+          "method": "Number Pattern",
+          "steps": [
+            "5300-5100=200, pattern: +200",
+            "Missing = 5500 + 200 = 5700"
+          ],
+          "tip": "🧠 Find the rule (+200) then apply!"
+        }
+      },
+      {
+        "id": "at_s04",
+        "topic": "Division",
+        "q": "What is the remainder when 347 is divided by 8?",
+        "answer": "3",
+        "unit": "",
+        "solution": {
+          "method": "Division",
+          "steps": [
+            "347 ÷ 8: 8×43=344",
+            "347 - 344 = 3",
+            "Remainder = 3"
+          ],
+          "tip": "🧠 Find the largest multiple of 8 ≤ 347"
+        }
+      },
+      {
+        "id": "at_s05",
+        "topic": "Multiplication",
+        "q": "Find the product of 125 and 7.",
+        "answer": "875",
+        "unit": "",
+        "solution": {
+          "method": "Long Multiplication",
+          "steps": [
+            "125 × 7",
+            "= 100×7 + 25×7"
+          ],
+          "tip": "🧠 Split: 125 = 100+25, multiply each part!"
+        }
+      },
+      {
+        "id": "at_s06",
+        "topic": "Addition",
+        "q": "The sum of two numbers is 4600. One number is 1850. What is the other?",
+        "answer": "2750",
+        "unit": "",
+        "solution": {
+          "method": "Part-Whole",
+          "steps": [
+            "Other = 4600 - 1850 = 2750"
+          ],
+          "tip": "🧠 Part + Part = Whole → Other = Whole - Known"
+        }
+      }
+    ],
+    "ProblemSum": [
+      {
+        "id": "at_p01",
+        "topic": "Word Problem",
+        "q": "There are 1350 pupils in Ai Tong Primary. There are 280 more girls than boys.\n(a) How many boys are there?\n(b) How many girls are there?",
+        "parts": [
+          {
+            "label": "(a) Number of boys",
+            "answer": "535",
+            "solution": {
+              "method": "Bar Model",
+              "steps": [
+                "Boys + Girls = 1350",
+                "Girls = Boys + 280"
+              ],
+              "tip": "🧠 Bar Model: 2 equal parts + 280 extra = 1350. Equal part = (1350-280)÷2"
+            }
+          },
+          {
+            "label": "(b) Number of girls",
+            "answer": "815",
+            "solution": {
+              "method": "Addition",
+              "steps": [
+                "Girls = 535 + 280 = 815"
+              ],
+              "tip": "🧠 Girls = Boys + extra"
+            }
+          }
+        ]
+      },
+      {
+        "id": "at_p02",
+        "topic": "Word Problem",
+        "q": "Mr Lim bought 9 boxes of oranges. Each box had 48 oranges. He threw away 25 rotten oranges. How many good oranges did he have?",
+        "parts": [
+          {
+            "label": "Good oranges",
+            "answer": "407",
+            "solution": {
+              "method": "Multiply then Subtract",
+              "steps": [
+                "Total = 9 × 48 = 432",
+                "Good = 432 - 25 = 407"
+              ],
+              "tip": "🧠 Find total first, then remove the rotten ones!"
+            }
+          }
+        ]
+      },
+      {
+        "id": "at_p03",
+        "topic": "Word Problem",
+        "q": "A school has 5 classes of P3 students. Each class has 40 students. Of these, 85 students joined the art club. How many did NOT join the art club?",
+        "parts": [
+          {
+            "label": "Students NOT in art club",
+            "answer": "115",
+            "solution": {
+              "method": "Multiply then Subtract",
+              "steps": [
+                "Total P3 = 5 × 40 = 200",
+                "Not in art club = 200 - 85 = 115"
+              ],
+              "tip": "🧠 Find total, subtract the ones who joined!"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}
