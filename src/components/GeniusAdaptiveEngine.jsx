@@ -371,17 +371,15 @@ For each section, distribute questions as:
   Slot C (Stretch): 1 question at one level above target_difficulty
 
 [INSTRUCTION]
-Generate the complete adaptive question set for Session #${nextSession}.
-VERIFY before outputting:
-  [ ] Section question counts match exactly
-  [ ] Remediation questions use force_difficulty, NOT target_difficulty
-  [ ] trap_type is varied from last_trap_type for remediation questions
-  [ ] memory_hook present on ALL is_remediation=true questions
-  [ ] SG answers should be in past tense if passage uses past tense
-  [ ] SC passage coherence - all blanks flow naturally in context
-Return ONLY the JSON object.
-CRITICAL: Be concise. Max 15 words per explanation. Omit memory_hook unless is_remediation=true.
-Keep prompts under 30 words each. This reduces output size for faster generation.`;
+Generate the adaptive question set for Session #${nextSession}.
+STRICT RULES FOR SPEED:
+- Max 15 words per prompt
+- Max 10 words per explanation  
+- memory_hook ONLY for is_remediation=true questions
+- options: max 6 words each
+- No lengthy passages - keep Section C passage under 80 words
+- Section G passage under 80 words
+Return ONLY the JSON object. No markdown. No preamble.`;
 }
 
 // ==============================================================================
@@ -704,6 +702,7 @@ export default function GeniusAdaptiveEngine() {
   const [ctx, setCtx]   = useState(DEFAULT_CTX);
   const [perf, setPerf] = useState(DEFAULT_PERF);
   const [status, setStatus] = useState("idle");
+  const [progress, setProgress] = useState(0);
   const [result, setResult] = useState(null);
   const [validation, setValidation] = useState(null);
   const [errorMsg, setErrorMsg] = useState("");
@@ -753,34 +752,67 @@ export default function GeniusAdaptiveEngine() {
 
   const generate = useCallback(async () => {
     if (!curriculum) { setErrorMsg("Curriculum not configured"); setStatus("error"); return; }
-    setStatus("loading"); setResult(null); setValidation(null); setErrorMsg(""); setActiveTab("output");
-    try {
-      const sys  = buildSystemPrompt(ctx, curriculum, sectionTargets, perf.frequentErrors);
-      const user = buildUserPrompt(ctx, perf, curriculum, sectionTargets);
+    setStatus("loading"); setProgress(0); setResult(null); setValidation(null); setErrorMsg(""); setActiveTab("output");
+
+    // Split sections into 2 parts to stay within Vercel 10s timeout
+    const allSections = curriculum.sections;
+    const mid = Math.ceil(allSections.length / 2);
+    const part1Sections = allSections.slice(0, mid);
+    const part2Sections = allSections.slice(mid);
+
+    const sys = buildSystemPrompt(ctx, curriculum, sectionTargets, perf.frequentErrors);
+    const nextSession = Math.max(...(perf.sessions_analyzed || [0])) + 1;
+
+    async function callAPI(sections) {
+      const userPrompt = buildUserPromptForSections(ctx, perf, curriculum, sectionTargets, sections, nextSession);
       const resp = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "claude-sonnet-4-6",
-          max_tokens: 16000,
+          max_tokens: 8000,
           system: sys,
-          messages: [{ role: "user", content: user }],
+          messages: [{ role: "user", content: userPrompt }],
         }),
       });
       const data = await resp.json();
       if (!resp.ok) throw new Error(data.error?.message || `HTTP ${resp.status}`);
       const raw = data.content?.map(b => b.text||"").join("") || "";
       const clean = raw.replace(/^```json\s*/i,"").replace(/```\s*$/i,"").trim();
-      const parsed = JSON.parse(clean);
-      const v = validateResult(parsed, curriculum, perf, sectionTargets);
-      setResult(parsed);
+      return JSON.parse(clean);
+    }
+
+    try {
+      // Part 1
+      setProgress(1);
+      const part1 = await callAPI(part1Sections);
+      setProgress(2);
+
+      // Part 2
+      const part2 = await callAPI(part2Sections);
+      setProgress(3);
+
+      // Merge results
+      const merged = {
+        ...part1,
+        sections: { ...part1.sections, ...part2.sections },
+        slot_allocation: { ...(part1.slot_allocation||{}), ...(part2.slot_allocation||{}) },
+        remediation_tags_targeted: [
+          ...(part1.remediation_tags_targeted||[]),
+          ...(part2.remediation_tags_targeted||[])
+        ],
+      };
+
+      const v = validateResult(merged, curriculum, perf, sectionTargets);
+      setResult(merged);
       setValidation(v);
       setStatus("done");
-      // Update session history (in-memory)
-      const newIds = Object.values(parsed.sections||{})
+
+      const newIds = Object.values(merged.sections||{})
         .flatMap(s => (s.questions||[]).map(q => q.question_id)).filter(Boolean);
       newIds.forEach(id => SESSION_STORE.solvedIds.add(id));
-      SESSION_STORE.sessions.push({ sessionNum: Math.max(...perf.sessions_analyzed)+1, ids: newIds });
+      SESSION_STORE.sessions.push({ sessionNum: nextSession, ids: newIds });
+
     } catch(e) {
       setErrorMsg(e.message + (e instanceof SyntaxError ? " - JSON parse failed" : ""));
       setStatus("error");
@@ -1029,10 +1061,18 @@ export default function GeniusAdaptiveEngine() {
             {status==="loading" && (
               <div style={{ textAlign:"center", padding:"50px 20px" }}>
                 <style>{`@keyframes spin{to{transform:rotate(360deg)}}`}</style>
-                <div style={{ fontSize:40, animation:"spin 1.1s linear infinite", display:"inline-block", marginBottom:12 }}>...</div>
-                <p style={{ fontWeight:800, color:"#7B68EE", fontSize:13 }}>Assembling adaptive session…</p>
-                <p style={{ fontSize:11, color:"#AAA", marginTop:5 }}>
-                  {perf.frequentErrors.length} error patterns . {curriculum?.sections.reduce((s,c)=>s+c.count,0)||0} questions
+                <div style={{ fontSize:40, animation:"spin 1.1s linear infinite", display:"inline-block", marginBottom:16 }}>...</div>
+                <p style={{ fontWeight:800, color:"#7B68EE", fontSize:13, marginBottom:12 }}>
+                  {progress === 0 && "Preparing..."}
+                  {progress === 1 && "Part 1/2: Sections A, B, C..."}
+                  {progress === 2 && "Part 2/2: Sections D, E, F, G..."}
+                  {progress === 3 && "Combining results..."}
+                </p>
+                <div style={{ margin:"0 auto 10px", width:220, height:8, borderRadius:4, background:"#E8E8F0" }}>
+                  <div style={{ height:"100%", borderRadius:4, background:"#7B68EE", width:`${Math.round((progress/3)*100)}%`, transition:"width 0.5s ease" }} />
+                </div>
+                <p style={{ fontSize:11, color:"#AAA" }}>
+                  {Math.round((progress/3)*100)}% . {curriculum?.sections.reduce((s,c)=>s+c.count,0)||0} questions total
                 </p>
               </div>
             )}
@@ -1117,3 +1157,64 @@ export default function GeniusAdaptiveEngine() {
     </div>
   );
 }
+function buildUserPromptForSections(context, performance, curriculum, sectionTargets, sections, nextSession) {
+  const { grade, subject, stage } = context;
+
+  const remediationMap = {};
+  sections.forEach(s => {
+    const tgt = sectionTargets[s.id]?.target_difficulty || "Medium";
+    remediationMap[s.id] = {
+      target_difficulty: tgt,
+      remediation_difficulty: getRemediationDifficulty(tgt),
+      question_count: s.count,
+    };
+  });
+
+  const sectionIds = sections.map(s => s.id);
+  const errorDetail = performance.frequentErrors
+    .filter(e => sectionIds.includes(e.section) || !e.section)
+    .map(e => ({
+      tag: e.tag,
+      section: e.section || "ANY",
+      error_count: e.count,
+      priority: e.count >= 3 ? "HIGH" : "MEDIUM",
+      last_trap_type: e.lastTrapType || null,
+      force_difficulty: getRemediationDifficulty(sectionTargets[e.section]?.target_difficulty || "Medium"),
+    }));
+
+  return `[SESSION CONTEXT]
+student_id: "${performance.student_id}"
+session_number: ${nextSession}
+curriculum: ${grade} / ${subject} / ${stage}
+sections_to_generate: [${sectionIds.join(", ")}]
+
+[SECTION DIFFICULTY MAP]
+${JSON.stringify(remediationMap, null, 2)}
+
+[FREQUENT ERRORS FOR THESE SECTIONS]
+${errorDetail.length > 0 ? JSON.stringify(errorDetail, null, 2) : "[]"}
+
+[EXCLUSION LIST]
+${performance.solvedIds.length > 0 ? JSON.stringify(performance.solvedIds) : "[]"}
+
+[INSTRUCTION]
+Generate ONLY sections [${sectionIds.join(", ")}] for Session #${nextSession}.
+STRICT SPEED RULES:
+- Max 15 words per prompt
+- Max 10 words per explanation
+- memory_hook ONLY for is_remediation=true
+- Section C/G passages: max 80 words
+Return ONLY valid JSON with this structure:
+{
+  "set_id": "DYNAMIC-${grade}-${subject}-${stage}-${nextSession}-[${sectionIds.join("-")}]",
+  "generated_at": "<ISO 8601>",
+  "adaptive_for": "${performance.student_id}",
+  "curriculum": {"grade":"${grade}","subject":"${subject}","stage":"${stage}"},
+  "target_difficulties": {${sectionIds.map(id => `"${id}":"${sectionTargets[id]?.target_difficulty||"Medium"}"`).join(",")}},
+  "slot_allocation": {},
+  "remediation_tags_targeted": [],
+  "sections": { <only sections ${sectionIds.join(", ")}> }
+}`;
+}
+
+
