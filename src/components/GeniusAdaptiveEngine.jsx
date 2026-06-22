@@ -760,7 +760,7 @@ export default function GeniusAdaptiveEngine() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           model: "claude-sonnet-4-6",
-          max_tokens: 8000,
+          max_tokens: 16000,
           system: sys,
           messages: [{ role: "user", content: user }],
         }),
