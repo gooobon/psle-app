@@ -542,7 +542,26 @@ function validateResult(result, curriculum, performance, sectionTargets) {
 // ==============================================================================
 // 5. DEFAULT STATE
 // ==============================================================================
-const DEFAULT_CTX = { grade:"P3", subject:"English", stage:"WA1" };
+// Read URL params if coming from main app
+function getInitialCtx() {
+  if (typeof window === 'undefined') return { grade:"P3", subject:"English", stage:"WA1" };
+  const p = new URLSearchParams(window.location.search);
+  return {
+    grade:   p.get('grade')   || "P3",
+    subject: p.get('subject') || "English",
+    stage:   p.get('stage')   || "WA1",
+  };
+}
+
+function getInitialPerf(base) {
+  if (typeof window === 'undefined') return base;
+  const p = new URLSearchParams(window.location.search);
+  const userId   = p.get('userId')   || base.student_id;
+  const userName = decodeURIComponent(p.get('userName') || base.student_name);
+  return { ...base, student_id: userId, student_name: userName };
+}
+
+const DEFAULT_CTX = getInitialCtx();
 
 const DEFAULT_PERF = {
   student_id: "S2024-P3-001",
@@ -783,7 +802,7 @@ function ValidationPanel({ v }) {
 // ==============================================================================
 export default function GeniusAdaptiveEngine() {
   const [ctx, setCtx]   = useState(DEFAULT_CTX);
-  const [perf, setPerf] = useState(DEFAULT_PERF);
+  const [perf, setPerf] = useState(() => getInitialPerf(DEFAULT_PERF));
   const [status, setStatus] = useState("idle");
   const [progress, setProgress] = useState(0);
   const [result, setResult] = useState(null);
@@ -927,8 +946,17 @@ export default function GeniusAdaptiveEngine() {
             <span style={{ color:"#fff", fontWeight:900, fontSize:16, letterSpacing:"-0.02em" }}>Genius Project</span>
             <Chip label="ADAPTIVE AI ENGINE v3" bg="#7B68EE" color="#fff" />
           </div>
-          <div style={{ color:"#444", fontSize:10, marginTop:2, marginLeft:28 }}>
-            {curriculum?.label||"Select curriculum:"} . {perf.student_name}
+          <div style={{ display:"flex", alignItems:"center", gap:8, marginTop:2, marginLeft:28 }}>
+            {typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('userId') && (
+              <button onClick={() => window.location.href = '/'} style={{
+                background:"rgba(255,255,255,0.1)", border:"none", borderRadius:6,
+                color:"rgba(255,255,255,0.6)", fontSize:10, fontWeight:700,
+                padding:"2px 8px", cursor:"pointer"
+              }}>Back</button>
+            )}
+            <span style={{ color:"#444", fontSize:10 }}>
+              {curriculum?.label||"Select curriculum"} . {perf.student_name}
+            </span>
           </div>
         </div>
         <div style={{ textAlign:"right" }}>
