@@ -16,7 +16,7 @@ import {
 import {
   SUBJECTS, GRADES, LIVE_CONTENT,
   ComingSoonToast, SubjectSelectScreen, ComingSoonScreen,
-  LevelPicker, StudentHome, ZhHome, StudentShell,
+  StudentHome, ZhHome, StudentShell,
 } from '@/components/Dashboard';
 
 import { SessionScreen }   from '@/components/EnglishSession';
@@ -136,7 +136,7 @@ function makeSeedHistory(userId){
 
 
 function ChineseApp({user, getProgress, setProgress, onBack}){
-  const [level,setLevel]=React.useState(null);
+
   const grade="P3", subject="Chinese";
   const prog = getProgress(grade, subject);
 
@@ -183,7 +183,7 @@ function ChineseApp({user, getProgress, setProgress, onBack}){
 
   return(
     <Wrap>
-      <><div style={{padding:"14px 16px 0"}}><LevelPicker value={level} onChange={setLevel} recommended={recommendLevel(prog.history)}/></div>
+      <>
       <ZhHome user={user} prog={prog} onStart={()=>setInSession(true)} onBack={onBack}/></>
     </Wrap>
   );
@@ -775,7 +775,7 @@ function SignupParentForm({onSignup, onBack}){
 
 
 function StudentApp({user, onLogout, getProgress, setProgress}){
-  const [enLevel,setEnLevel]=React.useState(null);
+
   const [grade,           setGrade]           = useState(user.grade||"P3");
   const [subject,         setSubject]         = useState("English");
   const [subjectSelected, setSubjectSelected] = useState(false);
@@ -826,7 +826,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   if(inSession) return(
     <Wrap>
       <SessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, enLevel||recommendLevel(prog.history))}
+        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         onFinish={handleSessionDone}
@@ -881,7 +881,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       {!isLive ? (
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
-        <><div style={{padding:"14px 16px 0"}}><LevelPicker value={enLevel} onChange={setEnLevel} recommended={recommendLevel(prog.history)}/></div>
+        <>
       <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>

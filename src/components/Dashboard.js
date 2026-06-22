@@ -3,7 +3,33 @@ import React, { useState } from "react";
 import {
   C, Wrap, AnimNumber, AnimProgressBar,
 } from "@/lib/uiShared";
+import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
+// ── App-wide constants ─────────────────────────────────────────
+export const GRADES = ["P3", "P4", "P5", "P6"];
 
+export const SUBJECTS = {
+  English: { label: "English",     icon: "📖", color: "#3B82F6" },
+  Chinese: { label: "华文 Chinese", icon: "📝", color: "#EF4444" },
+  Math:    { label: "Mathematics", icon: "🔢", color: "#10B981" },
+  Science: { label: "Science",     icon: "🔬", color: "#8B5CF6" },
+};
+
+export const LIVE_CONTENT = {
+  P3_English: true,
+  P3_Chinese: true,
+};
+// ───────────────────────────────────────────────────────────────
+
+
+function SchoolBanner({school}){
+  return(
+    <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"8px 16px",
+      display:"flex",alignItems:"center",gap:8}}>
+      <span style={{fontSize:14}}>🏫</span>
+      <span style={{color:"rgba(255,255,255,0.85)",fontSize:12,fontWeight:700}}>{school}</span>
+    </div>
+  );
+}
 function ComingSoonToast({message, onDone}){
   React.useEffect(()=>{
     const t = setTimeout(()=>onDone?.(), 2500);
@@ -63,7 +89,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
         {Object.entries(SUBJECTS).map(([key,sub])=>{
           const live=!!LIVE_CONTENT[grade+"_"+key];
           return(
-            <button key={key} onClick={()=>{ if(live){ onSelect(key); } else { setToastMsg("Coming Soon: 준비 중인 과목입니다"); setComingSoon(key); } }}
+            <button key={key} onClick={()=>{ if(live){ onSelect(key); } else { setToastMsg("Coming Soon: ì¤€ë¹„ ì¤‘ì¸ ê³¼ëª©ìž…ë‹ˆë‹¤"); setComingSoon(key); } }}
               className={`gm-fadeIn-${Math.min(Object.keys(SUBJECTS).indexOf(key)+1,4)}`}
               style={{width:"100%",background:live
                 ?"linear-gradient(135deg,"+sub.color+","+sub.color+"cc)"
@@ -150,12 +176,12 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.55)",
           display:"flex",alignItems:"center",justifyContent:"center",zIndex:200,padding:20}}>
           <div style={{background:"#fff",borderRadius:24,padding:"32px 24px",maxWidth:340,width:"100%",textAlign:"center"}}>
-            <div style={{fontSize:48,marginBottom:12}}>{SUBJECTS[comingSoon]?.icon||"🚧"}</div>
+            <div style={{fontSize:48,marginBottom:12}}>{SUBJECTS[comingSoon]?.icon||"🚇"}</div>
             <div style={{fontSize:20,fontWeight:900,color:C.text,marginBottom:8}}>
               {SUBJECTS[comingSoon]?.label} — Coming Soon!
             </div>
             <div style={{fontSize:13,color:C.muted,lineHeight:1.6,marginBottom:24}}>
-              이 과목은 곧 제공될 예정입니다. 조금만 기다려 주세요!
+              ì´ ê³¼ëª©ì€ ê³§ ì œê³µë  ì˜ˆì •ìž…ë‹ˆë‹¤. ì¡°ê¸ˆë§Œ ê¸°ë‹¤ë ¤ ì£¼ì„¸ìš”!
             </div>
             <div style={{background:C.lGreen,borderRadius:12,padding:"10px 14px",marginBottom:20,
               fontSize:13,fontWeight:700,color:"#065F46"}}>
@@ -175,7 +201,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
 }
 
 
-// ── Mistake Re-injection: pull up to N past-wrong question IDs ─
+// â”€â”€ Mistake Re-injection: pull up to N past-wrong question IDs â”€
 
 
 
@@ -251,7 +277,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onMistakes
               {grade} {subject} · {prog.nextSession>=11?"Past Paper #"+(prog.nextSession-10):isMockDue?"Mock Exam":"Session #"+prog.nextSession}
             </div>
             <div style={{fontSize:18,fontWeight:900,color:"#fff",marginBottom:4}}>
-              {prog.nextSession>=11?"🏫 Start Past Paper →":isMockDue?"🏫 Start Mock Exam →":"▶ Start Practice for Today →"}
+              {prog.nextSession>=11?"🏫 Start Past Paper →":isMockDue?"🏫 Start Mock Exam →":"→ Start Practice for Today →"}
             </div>
             <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>{prog.nextSession>=11?"📄 Real school past paper · ~35 min":isMockDue?"Nanyang Primary WA1 style · ~30 min":"Grammar · Vocabulary · Comprehension · ~35 min"+(user.school?" · "+user.school+" style":"")}</div>
           </div>
@@ -355,7 +381,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onMistakes
             <span style={{fontSize:11,fontWeight:700,color:C.text}}>Mistakes</span>
           </button>
           <button onClick={onReview} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <span style={{fontSize:22}}>🔁</span>
+            <span style={{fontSize:22}}>📑</span>
             <span style={{fontSize:11,fontWeight:700,color:C.text}}>Review</span>
           </button>
         </div>
@@ -375,17 +401,17 @@ function ZhHome({user, prog, onStart, onBack}){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
           <div>
             <div style={{color:"rgba(255,255,255,.55)",fontSize:10,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase"}}>Genius Project</div>
-            <div style={{color:"#fff",fontSize:17,fontWeight:900}}>🀄 P3 高级华文</div>
-            <div style={{color:"rgba(255,255,255,.6)",fontSize:11,marginTop:2}}>菩提学校 · Maha Bodhi School</div>
+            <div style={{color:"#fff",fontSize:17,fontWeight:900}}>📝 P3 é«˜çº§åŽæ–‡</div>
+            <div style={{color:"rgba(255,255,255,.6)",fontSize:11,marginTop:2}}>è©æå­¦æ ¡ · Maha Bodhi School</div>
           </div>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:10,padding:"7px 12px",color:"rgba(255,255,255,.85)",cursor:"pointer",fontSize:12,fontWeight:700}}>← 返回</button>
+          <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:10,padding:"7px 12px",color:"rgba(255,255,255,.85)",cursor:"pointer",fontSize:12,fontWeight:700}}>â† è¿”å›ž</button>
         </div>
       </div> <div style={{background:"#fff",padding:"14px 16px",borderBottom:`1px solid ${C.border}`}}>
         <div style={{display:"flex",gap:10}}>
           {[
-            {icon:"📋",l:"练习次数",v:history.length},
-            {icon:"🎯",l:"平均分",v:avgTotal?`${avgTotal}%`:"—"},
-            {icon:"📅",l:"下一节",v:`#${prog.nextSession}`},
+            {icon:"📋",l:"ç»ƒä¹ æ¬¡æ•°",v:history.length},
+            {icon:"🎯",l:"å¹³å‡åˆ†",v:avgTotal?`${avgTotal}%`:"—"},
+            {icon:"📅",l:"ä¸‹ä¸€èŠ‚",v:`#${prog.nextSession}`},
           ].map((s,i)=>(
             <div key={i} style={{flex:1,background:"#F8FAFC",borderRadius:12,padding:"8px 4px",textAlign:"center"}}>
               <div style={{fontSize:16}}>{s.icon}</div>
@@ -401,8 +427,8 @@ function ZhHome({user, prog, onStart, onBack}){
             <div style={{display:"flex",alignItems:"center",gap:10}}>
               <span style={{fontSize:28}}>📄</span>
               <div>
-                <div style={{color:"#fff",fontSize:14,fontWeight:900}}>Ai Tong Primary 基出题 #{prog.nextSession-10}</div>
-                <div style={{color:"rgba(255,255,255,.7)",fontSize:11,marginTop:2}}>爱同学校 · 2024 SA1 真题</div>
+                <div style={{color:"#fff",fontSize:14,fontWeight:900}}>Ai Tong Primary åŸºå‡ºé¢˜ #{prog.nextSession-10}</div>
+                <div style={{color:"rgba(255,255,255,.7)",fontSize:11,marginTop:2}}>çˆ±åŒå­¦æ ¡ · 2024 SA1 çœŸé¢˜</div>
               </div>
             </div>
           </div>
@@ -410,10 +436,10 @@ function ZhHome({user, prog, onStart, onBack}){
         <button onClick={onStart} style={{width:"100%",background:"linear-gradient(135deg,#7C2D12,#EF4444)",color:"#fff",border:"none",borderRadius:18,padding:0,cursor:"pointer",boxShadow:"0 8px 28px rgba(124,45,18,.35)",overflow:"hidden",textAlign:"left",marginBottom:16}}>
           <div style={{padding:"18px 20px"}}>
             <div style={{fontSize:11,color:"rgba(255,255,255,.6)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>
-              P3 高级华文 · 第{prog.nextSession}节
+              P3 é«˜çº§åŽæ–‡ · ç¬¬{prog.nextSession}èŠ‚
             </div>
-            <div style={{fontSize:17,fontWeight:900,color:"#fff",marginBottom:4}}>▶ 开始今天的练习 →</div>
-            <div style={{fontSize:11,color:"rgba(255,255,255,.5)"}}>辨字 · 词语 · 看图 · 搭配 · 扩句 · 组段 · 阅读</div>
+            <div style={{fontSize:17,fontWeight:900,color:"#fff",marginBottom:4}}>→ å¼€å§‹ä»Šå¤©çš„ç»ƒä¹  →</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,.5)"}}>è¾¨å­— · è¯è¯­ · çœ‹å›¾ · æ­é… · æ‰©å¥ · ç»„æ®µ · é˜…è¯»</div>
           </div>
           <div style={{background:"rgba(255,255,255,.06)",padding:"8px 20px",display:"flex",gap:12}}>
             {ZH_SECTION_ORDER.map(k=>{
@@ -437,7 +463,7 @@ function ZhHome({user, prog, onStart, onBack}){
         </div> {history.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowRecent(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontWeight:800,fontSize:13,color:C.text}}>📋 最近练习 ({history.length})</div>
+              <div style={{fontWeight:800,fontSize:13,color:C.text}}>📋 æœ€è¿‘ç»ƒä¹  ({history.length})</div>
               <span style={{color:C.muted,fontSize:13,transform:showRecent?"rotate(90deg)":"none",transition:"transform .2s"}}>›</span>
             </button>
             {showRecent&&(
@@ -446,9 +472,9 @@ function ZhHome({user, prog, onStart, onBack}){
                   const col=h.totalPct>=85?C.green:h.totalPct>=70?C.amber:C.red;
                   return(
                     <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<4?`1px solid ${C.border}`:"none"}}>
-                      <div style={{width:32,height:32,borderRadius:9,background:col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>🀄</div>
+                      <div style={{width:32,height:32,borderRadius:9,background:col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>📝</div>
                       <div style={{flex:1}}>
-                        <div style={{fontSize:12,fontWeight:700}}>第 #{h.sessionNum} 节</div>
+                        <div style={{fontSize:12,fontWeight:700}}>ç¬¬ #{h.sessionNum} èŠ‚</div>
                         <div style={{fontSize:10,color:C.muted}}>{h.date}</div>
                       </div>
                       <div style={{fontSize:16,fontWeight:900,color:col}}>{h.totalPct}%</div>
@@ -465,47 +491,6 @@ function ZhHome({user, prog, onStart, onBack}){
 }
 
 
-// ── Level Picker — choose difficulty set / past paper ────────
-
-function LevelPicker({value, onChange, recommended}){
-  const opts=[
-    ["easy","🟢 Easy","Foundation level"],
-    ["medium","🟡 Medium","Standard exam level"],
-    ["hard","🔴 Hard","Above average"],
-    ["pastpaper","🏫 Past Paper","Real school paper"],
-  ];
-  return(
-    <div style={{background:"#fff",borderRadius:16,padding:"14px 16px",marginBottom:14,
-      boxShadow:"0 2px 8px rgba(0,0,0,.05)"}}>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-        <div style={{fontSize:12,fontWeight:800,color:"#0F172A"}}>🎯 Question Set</div>
-        <div style={{fontSize:10,color:"#64748B"}}>
-          ⭐ Recommended: <strong style={{color:"#0D9488"}}>
-            {recommended==="easy"?"Easy":recommended==="hard"?"Hard":"Medium"}</strong>
-        </div>
-      </div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:8}}>
-        {opts.map(([k,label,desc])=>{
-          const sel=(value||recommended)===k;
-          return(
-            <button key={k} onClick={()=>onChange(k)}
-              style={{background:sel?"#0F172A":"#F8FAFC",color:sel?"#fff":"#334155",
-                border:"1.5px solid "+(sel?"#0F172A":"#E2E8F0"),borderRadius:12,
-                padding:"9px 10px",cursor:"pointer",textAlign:"left"}}>
-              <div style={{fontSize:12,fontWeight:800}}>{label}
-                {recommended===k&&!value&&<span style={{marginLeft:4}}>⭐</span>}</div>
-              <div style={{fontSize:9,opacity:.75,marginTop:1}}>{desc}</div>
-            </button>
-          );
-        })}
-      </div>
-      <div style={{fontSize:10,color:"#94A3B8",marginTop:8,lineHeight:1.5}}>
-        Sets change every session — you will never repeat the same set.
-        Score &lt;60% → Easy next · 60–75% → Medium · &gt;75% → Hard.
-      </div>
-    </div>
-  );
-}
 
 export function StudentShell({ user, grade, subject, onGradeChange, onSubjectChange, onLogout, toastMsg, onToastDone }) {
   return (
@@ -550,5 +535,7 @@ export function StudentShell({ user, grade, subject, onGradeChange, onSubjectCha
 export {
   SUBJECTS, GRADES, LIVE_CONTENT,
   ComingSoonToast, SubjectSelectScreen, ComingSoonScreen,
-  LevelPicker, StudentHome, ZhHome, StudentShell,
+  StudentHome, ZhHome, StudentShell,
 };
+
+
