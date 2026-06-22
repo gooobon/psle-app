@@ -312,8 +312,8 @@ SG (Comprehension OEQ): Q1 (G-001) provides the full passage (120-180 words).
         "prompt": "<full question text>",
         "options": ["A)...","B)...","C)...","D)..."],
         "answer": "<correct answer>",
-        "explanation": "<why correct + why top distractor is wrong, 2 sentences>",
-        "memory_hook": "<catchy cheat-code rule - mandatory for is_remediation=true>"
+        "explanation": "<1 sentence: why correct answer is right>",
+        "memory_hook": "<only for is_remediation=true, omit otherwise>"
       }]
     }
   }
@@ -379,7 +379,9 @@ VERIFY before outputting:
   [ ] memory_hook present on ALL is_remediation=true questions
   [ ] SG answers should be in past tense if passage uses past tense
   [ ] SC passage coherence - all blanks flow naturally in context
-Return ONLY the JSON object.`;
+Return ONLY the JSON object.
+CRITICAL: Be concise. Max 15 words per explanation. Omit memory_hook unless is_remediation=true.
+Keep prompts under 30 words each. This reduces output size for faster generation.`;
 }
 
 // ==============================================================================
