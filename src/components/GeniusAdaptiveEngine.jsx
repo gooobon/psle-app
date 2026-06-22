@@ -755,7 +755,7 @@ export default function GeniusAdaptiveEngine() {
     try {
       const sys  = buildSystemPrompt(ctx, curriculum, sectionTargets, perf.frequentErrors);
       const user = buildUserPrompt(ctx, perf, curriculum, sectionTargets);
-      const resp = await fetch("https://api.anthropic.com/v1/messages", {
+      const resp = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
