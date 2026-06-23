@@ -123,13 +123,15 @@ function toEnglishClozeSet(set) {
   const blanks = (set.questions || set.blanks || []).map((q, i) => {
     const num = parseInt(q.questionNo || q.num || q.blank || i + 1, 10);
     const rawAns = q.answer ?? q.correctAnswer ?? "";
+    const rawAnsStr = String(rawAns);
     const answer =
-      wordBank.length && /^[A-F]$/i.test(String(rawAns))
-        ? letterToWordBankAnswer(rawAns, wordBank)
-        : rawAns;
+      wordBank.length && /^[A-F]$/i.test(rawAnsStr)
+        ? letterToWordBankAnswer(rawAnsStr, wordBank)
+        : rawAnsStr;
     return {
       num: Number.isNaN(num) ? i + 1 : num,
       answer,
+      choices: q.choices || null,
       wordBank: q.wordBank || wordBank,
       hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
     };
