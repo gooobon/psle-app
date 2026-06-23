@@ -174,7 +174,9 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
       timeTaken: Math.round(t / items.length),
     }));
+    // Save results first, then trigger page advance
     onPageDone(results);
+    onPageDone(null, true);
   }
 
   const allAnswered = items.every(q => answers[q.id] !== undefined);
@@ -1017,32 +1019,31 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, onFinish, onBack
   const globalQStart = pageIdx * MCQ_PER_PAGE + 1;
 
   function handlePageDone(results, advance) {
+    // Save results if provided
+    let latestResults = pageResults;
     if (results) {
-      setPageResults(prev => [...prev, ...results]);
+      latestResults = [...pageResults, ...results];
+      setPageResults(latestResults);
     }
     if (advance) {
       // Move to next page or section
-      const merged = [...allResults, ...(results ? [] : pageResults)];
-      if (!results) {
-        // "Next Page/Section" pressed after seeing explanations
-        const newAll = [...allResults, ...pageResults];
-        setAllResults(newAll);
-        setPageResults([]);
+      const newAll = [...allResults, ...latestResults];
+      setAllResults(newAll);
+      setPageResults([]);
 
-        if (sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") {
-          if (pageIdx + 1 < mcqPages.length) {
-            setPageIdx(p => p + 1);
-            return;
-          }
+      if (sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") {
+        if (pageIdx + 1 < mcqPages.length) {
+          setPageIdx(p => p + 1);
+          return;
         }
-        // Move to next section
-        if (secIdx + 1 >= plan.length) {
-          setDone(true);
-          onFinish(newAll);
-        } else {
-          setSecIdx(s => s + 1);
-          setPageIdx(0);
-        }
+      }
+      // Move to next section
+      if (secIdx + 1 >= plan.length) {
+        setDone(true);
+        onFinish(newAll);
+      } else {
+        setSecIdx(s => s + 1);
+        setPageIdx(0);
       }
     }
   }
