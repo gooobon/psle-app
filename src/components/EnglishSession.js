@@ -32,7 +32,7 @@ function SessionScreen({plan, isMockExam, mockInfo, onFinish, onBack}){
       {section.type==="VocabMCQ"     &&<MCQSection   key={secIdx} items={section.items} sectionType="VocabMCQ"     meta={meta} onDone={handleSectionDone}/>}
       {section.type==="GrammarCloze" &&<ClozeSection key={secIdx} sets={section.items}  sectionType="GrammarCloze" meta={meta} onDone={handleSectionDone}/>}
       {section.type==="VocabCloze"   &&<ClozeSection key={secIdx} sets={section.items}  sectionType="VocabCloze"   meta={meta} onDone={handleSectionDone}/>}
-      {section.type==="Editing"      &&<EditSection  key={secIdx} sets={section.items}  sectionType="Editing"      meta={meta} onDone={handleSectionDone}/>}
+      {section.type==="Editing"      &&<EditSection  key={secIdx} sets={section.items}  sectionType="Editing"      meta={meta} onDone={handleSectionDone} level={section.level}/>}
       {section.type==="Comprehension"&&<CompSection  key={secIdx} sets={section.items}  sectionType="Comprehension"meta={meta} onDone={handleSectionDone}/>}
     </div>
   );
@@ -190,31 +190,244 @@ function ClozeSection({sets,sectionType,meta,onDone}){
   );
 }
 
-function EditSection({sets,sectionType,meta,onDone}){
-  const [setIdx,setSetIdx]=useState(0);const [answers,setAnswers]=useState({});const [attempts,setAttempts]=useState({});const [correct,setCorrect]=useState({});const [revealed,setRevealed]=useState({});const [results,setResults]=useState([]);const startRef=useRef(Date.now());
-  const cs=sets[setIdx]||sets[0]||{}; const items=cs.items||[];
-  function allSettled(){return items.every(item=>correct[item.id]||revealed[item.id]);}
-  function handleSelect(id,opt){if(correct[id]||revealed[id])return;setAnswers(a=>({...a,[id]:opt}));}
-  function handleCheck(item){const chosen=answers[item.id];if(!chosen)return;const t=Date.now()-startRef.current;if(item.options[item.answer]===chosen){setCorrect(p=>({...p,[item.id]:true}));setResults(r=>[...r,{id:item.id,topic:"Editing",sectionType,correct:(attempts[item.id]||0)===0,solvedAfterHint:(attempts[item.id]||0)>0,attempts:(attempts[item.id]||0)+1,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}else{const prev=attempts[item.id]||0;const next=prev+1;setAttempts(p=>({...p,[item.id]:next}));setAnswers(a=>({...a,[item.id]:null}));if(next>=3){setRevealed(p=>({...p,[item.id]:true}));setResults(r=>[...r,{id:item.id,topic:"Editing",sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}}
-  function next(){if(setIdx+1>=sets.length){onDone(results);return;}setSetIdx(i=>i+1);setAnswers({});setAttempts({});setCorrect({});setRevealed({});startRef.current=Date.now();}
+function EditSection({sets, sectionType, meta, onDone, level}){
+  const [setIdx,setSetIdx]   = useState(0);
+  const [typedAnswers,setTypedAnswers] = useState({});   // item.id -> string
+  const [attempts,setAttempts]   = useState({});         // item.id -> number
+  const [correct,setCorrect]     = useState({});
+  const [revealed,setRevealed]   = useState({});
+  const [showHint,setShowHint]   = useState({});         // item.id -> bool
+  const [results,setResults]     = useState([]);
+  const startRef = useRef(Date.now());
+
+  const cs    = sets[setIdx] || sets[0] || {};
+  const items = cs.items || [];
+
+  // Levenshtein distance for typo detection
+  function levenshtein(a, b){
+    const m=a.length, n=b.length;
+    const dp=Array.from({length:m+1},(_,i)=>Array.from({length:n+1},(_,j)=>i?j?0:i:j));
+    for(let i=1;i<=m;i++) for(let j=1;j<=n;j++)
+      dp[i][j]=a[i-1]===b[j-1]?dp[i-1][j-1]:1+Math.min(dp[i-1][j],dp[i][j-1],dp[i-1][j-1]);
+    return dp[m][n];
+  }
+
+  function normalize(s){ return (s||"").trim().toLowerCase(); }
+
+  // Max attempts by level: easy=1, medium=2, hard=3
+  function maxAttempts(){
+    if(level==="easy")   return 1;
+    if(level==="hard")   return 3;
+    return 2; // medium (default)
+  }
+
+  // Hint after attempt N by level:
+  // easy: show hint immediately (before first attempt)
+  // medium: show after 1st fail
+  // hard: show after 2nd fail
+  function hintThreshold(){
+    if(level==="easy")   return 0;
+    if(level==="hard")   return 2;
+    return 1;
+  }
+
+  // Generate progressive hint: reveal more letters each time
+  function generateHint(answer, attemptNum){
+    const letters = answer.split("");
+    const revealCount = level==="easy" ? Math.ceil(letters.length/2)
+                      : level==="hard" ? 1
+                      : 2;
+    // Always reveal first letter + some more based on attemptNum
+    const toReveal = Math.min(revealCount + attemptNum, letters.length);
+    return letters.map((c,i) => i < toReveal ? c : (c===" " ? " " : "_")).join(" ");
+  }
+
+  function allSettled(){
+    return items.every(item => correct[item.id] || revealed[item.id]);
+  }
+
+  function handleCheck(item){
+    const typed  = normalize(typedAnswers[item.id] || "");
+    const answer = normalize(item.answer);
+    if(!typed) return;
+    const t = Date.now() - startRef.current;
+    const wa = attempts[item.id] || 0;
+
+    if(typed === answer){
+      // Correct!
+      setCorrect(p=>({...p,[item.id]:true}));
+      setResults(r=>[...r,{
+        id:item.id, topic:"Editing", sectionType,
+        correct: wa===0,
+        solvedAfterHint: wa>0,
+        attempts: wa+1,
+        timeTaken: t,
+        flagged: guessFlag(t, sectionType)
+      }]);
+    } else {
+      const dist = levenshtein(typed, answer);
+      const next = wa + 1;
+      setAttempts(p=>({...p,[item.id]:next}));
+      setTypedAnswers(a=>({...a,[item.id]:""}));
+
+      // Show hint after threshold
+      if(next >= hintThreshold()){
+        setShowHint(p=>({...p,[item.id]:true}));
+      }
+
+      // Reveal after max attempts
+      if(next >= maxAttempts()){
+        setRevealed(p=>({...p,[item.id]:true}));
+        setResults(r=>[...r,{
+          id:item.id, topic:"Editing", sectionType,
+          correct:false, attempts:next, timeTaken:t,
+          flagged: guessFlag(t, sectionType)
+        }]);
+      }
+    }
+  }
+
+  function handleNext(){
+    if(setIdx+1>=sets.length){ onDone(results); return; }
+    setSetIdx(i=>i+1);
+    setTypedAnswers({}); setAttempts({});
+    setCorrect({}); setRevealed({}); setShowHint({});
+    startRef.current=Date.now();
+  }
+
+  // Level badge
+  const lvlBadge = level==="easy" ? {label:"Easy 🟢", bg:"#D1FAE5", col:"#065F46"}
+                 : level==="hard" ? {label:"Hard 🔴", bg:"#FEE2E2", col:"#991B1B"}
+                 : {label:"Medium 🟡", bg:"#FEF3C7", col:"#92400E"};
+
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
-      <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}><span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span><TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill></div>
+      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
+        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span>
+        <div style={{display:"flex",gap:8,alignItems:"center"}}>
+          <span style={{background:lvlBadge.bg,color:lvlBadge.col,borderRadius:8,padding:"2px 10px",fontSize:11,fontWeight:700}}>{lvlBadge.label}</span>
+          <TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill>
+        </div>
+      </div>
       <div style={{background:"#FFF7ED",border:"1px solid #FDE68A",borderRadius:12,padding:"10px 14px",marginBottom:14,fontSize:13,color:"#78350F"}}>{cs.instructions}</div>
-      {(items||[]).map(item=>{const wa=attempts[item.id]||0;const isC=correct[item.id];const isR=revealed[item.id];const cw=item.options[item.answer];
-        return(<div key={item.id} style={{background:C.card,borderRadius:16,padding:"14px 16px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}}>
-          <div style={{fontSize:14,lineHeight:1.8,marginBottom:10,color:C.text}}>{item.sentence.split(item.wrongWord).map((part,i,arr)=>(<span key={i}>{part}{i<arr.length-1&&<span style={{background:"#FEF3C7",border:"1px dashed #F59E0B",borderRadius:4,padding:"1px 6px",fontWeight:700,color:isC||isR?"#065F46":"#92400E",textDecoration:isC||isR?"line-through":"none"}}>{item.wrongWord}</span>}</span>))}{(isC||isR)&&<span style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:4,padding:"1px 6px",fontWeight:700,color:C.green,marginLeft:4}}>→ {cw}</span>}</div>
-          <div style={{marginBottom:8,fontSize:12,fontWeight:700,color:C.muted}}>Choose the correct spelling:</div>
-          <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8}}>{(item.options||[]).map((opt,i)=>{let bg="#F1F5F9",border=C.border,col=C.text,cursor="pointer";if(isC||isR)cursor="default";if((isC||isR)&&i===item.answer){bg=C.lGreen;border=C.green;col="#065F46";}else if(answers[item.id]===opt&&!isC&&!isR){bg=C.lBlue;border=meta.color;col=meta.color;}return(<div key={opt} onClick={()=>handleSelect(item.id,opt)} style={{background:bg,border:`2px solid ${border}`,borderRadius:10,padding:"6px 14px",fontSize:14,fontWeight:600,cursor,color:col,transition:"all 0.15s"}}>{opt}</div>);})}</div>
-          {wa>0&&!isC&&!isR&&<HintBox text={item.hints&&item.hints[Math.min(wa-1,1)]} level={wa}/>}
-          {isR&&<div style={{background:"#FEE2E2",border:`1px solid ${C.red}`,borderRadius:10,padding:"8px 12px",fontSize:13,color:C.red,fontWeight:600}}>✏️ Correct spelling: <strong>{cw}</strong></div>}
-          {!isC&&!isR&&<button onClick={()=>handleCheck(item)} disabled={!answers[item.id]} style={{marginTop:6,background:answers[item.id]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 20px",fontSize:13,fontWeight:700,cursor:answers[item.id]?"pointer":"not-allowed"}}>Check ({3-wa} tries left)</button>}
-        </div>);
+
+      {items.map(item=>{
+        const wa    = attempts[item.id] || 0;
+        const isC   = correct[item.id];
+        const isR   = revealed[item.id];
+        const typed = typedAnswers[item.id] || "";
+        const hint  = showHint[item.id] ? generateHint(item.answer, wa) : null;
+        const triesLeft = maxAttempts() - wa;
+
+        return(
+          <div key={item.id} style={{background:C.card,borderRadius:16,padding:"14px 16px",marginBottom:14,
+            boxShadow: isC?"0 0 0 2px #10B981":"0 2px 8px rgba(0,0,0,0.06)",
+            border: isC?`1.5px solid ${C.green}`:isR?`1.5px solid ${C.red}`:"1.5px solid transparent"}}>
+
+            {/* Sentence with wrong word highlighted */}
+            <div style={{fontSize:14,lineHeight:1.9,marginBottom:12,color:C.text}}>
+              {item.sentence.split(item.wrongWord).map((part,i,arr)=>(
+                <span key={i}>{part}{i<arr.length-1&&(
+                  <span style={{background:"#FEF3C7",border:"1px dashed #F59E0B",borderRadius:4,
+                    padding:"1px 6px",fontWeight:700,
+                    color: isC||isR ? "#065F46":"#92400E",
+                    textDecoration: isC||isR ? "line-through":"none"}}>
+                    {item.wrongWord}
+                  </span>
+                )}</span>
+              ))}
+              {(isC||isR)&&<span style={{background:C.lGreen,border:`1px solid ${C.green}`,
+                borderRadius:4,padding:"1px 8px",fontWeight:800,color:C.green,marginLeft:6,fontSize:14}}>
+                → {item.answer}
+              </span>}
+            </div>
+
+            {/* Easy mode: show hint before first attempt */}
+            {level==="easy" && !isC && !isR && (
+              <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:8,
+                padding:"6px 12px",marginBottom:10,fontSize:12,color:"#1D4ED8",fontWeight:600}}>
+                💡 Hint: {generateHint(item.answer, 0)}
+              </div>
+            )}
+
+            {/* Progressive hint after failure */}
+            {hint && level!=="easy" && !isC && !isR && (
+              <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:8,
+                padding:"6px 12px",marginBottom:10,fontSize:12,color:"#1D4ED8",fontWeight:600,
+                letterSpacing:2}}>
+                💡 Hint: {hint}
+              </div>
+            )}
+
+            {/* Typing input */}
+            {!isC && !isR && (
+              <div style={{marginBottom:8}}>
+                <div style={{fontSize:12,fontWeight:700,color:C.muted,marginBottom:6}}>
+                  Type the correct spelling:
+                </div>
+                <div style={{display:"flex",gap:8,alignItems:"center"}}>
+                  <input
+                    type="text"
+                    value={typed}
+                    onChange={e=>setTypedAnswers(a=>({...a,[item.id]:e.target.value}))}
+                    onKeyDown={e=>{ if(e.key==="Enter") handleCheck(item); }}
+                    placeholder="Type your answer..."
+                    style={{flex:1,padding:"8px 12px",borderRadius:10,fontSize:14,fontWeight:600,
+                      border:`2px solid ${typed ? meta.color : C.border}`,outline:"none",
+                      background:"#FAFAFA",color:C.text}}
+                  />
+                  <button onClick={()=>handleCheck(item)} disabled={!typed}
+                    style={{background:typed?meta.color:"#C8D3E0",color:"#fff",border:"none",
+                      borderRadius:10,padding:"8px 18px",fontSize:13,fontWeight:700,
+                      cursor:typed?"pointer":"not-allowed",whiteSpace:"nowrap"}}>
+                    Check
+                  </button>
+                </div>
+                <div style={{fontSize:11,color:wa>0?C.red:C.muted,marginTop:4,fontWeight:600}}>
+                  {wa===0 ? `${maxAttempts()} attempt${maxAttempts()>1?"s":""} allowed`
+                          : `${triesLeft} attempt${triesLeft!==1?"s":""} left`}
+                </div>
+              </div>
+            )}
+
+            {/* Correct feedback */}
+            {isC && (
+              <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:10,
+                padding:"10px 14px",fontSize:13}}>
+                <div style={{fontWeight:800,color:C.green,marginBottom:4}}>
+                  {wa===0?"⭐ Perfect spelling!":"✅ Correct!"}
+                </div>
+                {item.hints&&item.hints[0]&&(
+                  <div style={{fontSize:12,color:"#065F46"}}>💡 {item.hints[0]}</div>
+                )}
+              </div>
+            )}
+
+            {/* Revealed (failed) feedback */}
+            {isR && (
+              <div style={{background:"#FEE2E2",border:`1px solid ${C.red}`,borderRadius:10,
+                padding:"10px 14px",fontSize:13}}>
+                <div style={{fontWeight:800,color:C.red,marginBottom:4}}>
+                  ✏️ Correct spelling: <strong>{item.answer}</strong>
+                </div>
+                {item.hints&&item.hints[0]&&(
+                  <div style={{fontSize:12,color:"#7F1D1D",marginTop:4}}>💡 {item.hints[0]}</div>
+                )}
+              </div>
+            )}
+          </div>
+        );
       })}
-      {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":"Next Set →"}</ActionBtn>}
+
+      {allSettled()&&(
+        <ActionBtn color={meta.color} onClick={handleNext}>
+          {setIdx+1>=sets.length?"Finish Section →":"Next Set →"}
+        </ActionBtn>
+      )}
     </div>
   );
 }
+
 
 function CompSection({sets,sectionType,meta,onDone}){
   const [setIdx,setSetIdx]=useState(0);const [answers,setAnswers]=useState({});const [attempts,setAttempts]=useState({});const [correct,setCorrect]=useState({});const [revealed,setRevealed]=useState({});const [results,setResults]=useState([]);const startRef=useRef(Date.now());
