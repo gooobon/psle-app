@@ -1047,8 +1047,9 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
-export function ExamSessionScreen({ plan, isMockExam, mockInfo, onFinish, onBack }) {
-  const [secIdx, setSecIdx] = useState(0);
+export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, onFinish, onBack }) {
+  const startSecIdx = startFrom ? Math.max(0, plan.findIndex(s => s.type === startFrom)) : 0;
+  const [secIdx, setSecIdx] = useState(startSecIdx);
   const [pageIdx, setPageIdx] = useState(0);
   const [allResults, setAllResults] = useState([]);
   const [pageResults, setPageResults] = useState([]); // buffered until next page
