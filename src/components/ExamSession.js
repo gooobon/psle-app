@@ -215,9 +215,8 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                 const isSel = chosen === i;
                 let color = "#000", fontWeight = "normal", bg = "transparent";
                 if (submitted) {
-                  // Show correct answer in green only if: student got it right, OR student has retried
-                  if (isAns && (isFirstCorrect || hasRetried)) { color = "#16a34a"; fontWeight = "700"; }
-                  else if (isSel && !isFirstCorrect) color = "#dc2626";
+                  if (isAns) { color = "#16a34a"; fontWeight = "700"; }
+                  else if (isSel) color = "#dc2626";
                 } else if (isSel) bg = "#dbeafe";
                 return (
                   <div key={i} onClick={() => handleSelect(q.id, i)}
@@ -227,7 +226,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                       background: bg, borderRadius: 4, padding: "1px 4px" }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
-                    {submitted && isAns && (isFirstCorrect || hasRetried) && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
+                    {submitted && isAns && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
                     {submitted && isSel && !isAns && <span style={{ color: "#dc2626", marginLeft: 4 }}>X</span>}
                   </div>
                 );
@@ -351,16 +350,22 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
 function ClozePage({ set, sectionLabel, marks, onPageDone }) {
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
-  const [answers, setAnswers] = useState({});   // num word
+  const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const startRef = useRef(Date.now());
+
+  // Detect cloze type:
+  // "bracket" = passage has [word1 / word2] patterns, no word bank
+  // "wordbank" = separate word bank, blanks in passage
+  const hasBrackets = (set.passage || "").includes(" / ") || (set.passage || "").includes("[ ");
+  const hasWordBank = wordBank.length > 0;
 
   function handleSelect(num, word) {
     if (submitted) return;
     setAnswers(a => ({ ...a, [num]: word }));
   }
 
-  function handleSubmit() {
+  function handleFinish() {
     if (submitted) return;
     setSubmitted(true);
     const t = Date.now() - startRef.current;
@@ -370,6 +375,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       timeTaken: Math.round(t / blanks.length),
     }));
     onPageDone(results);
+    onPageDone(null, true);
   }
 
   const allAnswered = blanks.every(b => answers[b.num] !== undefined);
@@ -377,10 +383,9 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
     (answers[b.num] || "").toLowerCase() === (b.answer || "").toLowerCase()
   ).length : 0;
 
-  // Render passage with inline blanks
-  function renderPassage() {
-    let passage = set.passage || "";
-    // Replace blank markers like (8)_______ with rendered blanks
+  // -- Render passage with inline word-bank blanks --------------
+  function renderWordBankPassage() {
+    const passage = set.passage || "";
     const parts = [];
     let last = 0;
     const blankRegex = /\((\d+)\)\s*_{3,}/g;
@@ -393,22 +398,77 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       const chosen = answers[num];
       const isCorrect = submitted && (chosen || "").toLowerCase() === (blank.answer || "").toLowerCase();
       parts.push(
-        <span key={num} style={{ display: "inline-block", position: "relative" }}>
-          <span style={{ fontSize: 12, fontWeight: 700, verticalAlign: "super", marginRight: 2 }}>({num})</span>
-          <span
-            onClick={() => !submitted && setAnswers(a => ({ ...a, [num]: undefined }))}
-            style={{
-              display: "inline-block",
-              minWidth: 100, borderBottom: "1.5px solid #000",
-              padding: "0 4px", textAlign: "center",
-              color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
-              fontWeight: chosen ? 600 : 400,
-              fontSize: 14,
-            }}>
-            {chosen || "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
+        <span key={num} style={{ display: "inline-block" }}>
+          <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super", marginRight: 1 }}>({num})</span>
+          <span style={{
+            display: "inline-block", minWidth: 90, borderBottom: "1.5px solid #000",
+            padding: "0 4px", textAlign: "center", fontSize: 14,
+            color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
+            fontWeight: chosen ? 600 : 400,
+            cursor: !submitted && chosen ? "pointer" : "default",
+          }}
+            onClick={() => !submitted && chosen && setAnswers(a => { const n={...a}; delete n[num]; return n; })}>
+            {chosen || "        "}
           </span>
           {submitted && !isCorrect && (
-            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 4 }}> {blank.answer}</span>
+            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 3 }}>{blank.answer}</span>
+          )}
+        </span>
+      );
+      last = match.index + match[0].length;
+    }
+    parts.push(passage.slice(last));
+    return parts;
+  }
+
+  // -- Render passage with inline bracket choices ---------------
+  // Pattern: (19) [ spend / spends ]
+  function renderBracketPassage() {
+    const passage = set.passage || "";
+    const parts = [];
+    let last = 0;
+    // Match patterns like (19) [ word1 / word2 ] or (19) [ word1, word2 ]
+    const bracketRegex = /\((\d+)\)\s*\[([^\]]+)\]/g;
+    let match;
+    while ((match = bracketRegex.exec(passage)) !== null) {
+      const num = parseInt(match[1]);
+      const options = match[2].split(/\s*[\/,]\s*/).map(s => s.trim()).filter(Boolean);
+      const blank = blanks.find(b => b.num === num);
+      if (!blank || options.length < 2) continue;
+      parts.push(passage.slice(last, match.index));
+      const chosen = answers[num];
+      const isCorrect = submitted && (chosen || "").toLowerCase() === (blank.answer || "").toLowerCase();
+      parts.push(
+        <span key={num} style={{ display: "inline-block", margin: "0 2px" }}>
+          <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super" }}>({num})</span>
+          {" [ "}
+          {options.map((opt, oi) => {
+            const isAns = opt.toLowerCase() === (blank.answer || "").toLowerCase();
+            const isSel = chosen === opt;
+            let bg = "transparent", color = "#000", fw = "normal";
+            if (submitted) {
+              if (isAns) { color = "#16a34a"; fw = "700"; }
+              else if (isSel && !isAns) { color = "#dc2626"; fw = "700"; }
+            } else if (isSel) { bg = "#dbeafe"; color = "#1d4ed8"; fw = "700"; }
+            return (
+              <span key={opt}>
+                {oi > 0 && <span style={{ color: "#94a3b8", margin: "0 4px" }}>/</span>}
+                <span
+                  onClick={() => !submitted && setAnswers(a => ({ ...a, [num]: opt }))}
+                  style={{
+                    cursor: submitted ? "default" : "pointer",
+                    background: bg, color, fontWeight: fw,
+                    padding: "0 3px", borderRadius: 3,
+                    textDecoration: submitted && isSel && !isAns ? "line-through" : "none",
+                  }}>
+                  {opt}
+                </span>
+              </span>
+            );
+          })}
+          {" ]"}
+          {submitted && !isCorrect && (
+            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 4 }}>{blank.answer}</span>
           )}
         </span>
       );
@@ -423,34 +483,27 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       <div style={{ padding: "14px 20px 0" }}>
         <div style={S.sectionHeader}>{sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})</div>
         <div style={S.instructions}>
-          Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only.
+          {hasBrackets
+            ? "Read the passage carefully. Underline or tap the correct word from the words given in the brackets."
+            : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only."}
         </div>
 
-        {/* Word bank */}
-        {wordBank.length > 0 && (
+        {/* Word bank box - only for word bank type */}
+        {hasWordBank && !hasBrackets && (
           <div style={{
-            border: "1px solid #000", borderRadius: 4,
-            padding: "10px 14px", marginBottom: 14,
+            border: "1px solid #000", padding: "10px 14px", marginBottom: 14,
             display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6,
           }}>
             {wordBank.map((w, i) => {
               const letter = String.fromCharCode(65 + i);
               const isUsed = Object.values(answers).includes(w);
               return (
-                <div key={w}
-                  onClick={() => {
-                    // Find next unfilled blank and fill it
-                    if (submitted) return;
-                    const nextBlank = blanks.find(b => !answers[b.num]);
-                    if (nextBlank) handleSelect(nextBlank.num, w);
-                  }}
-                  style={{
-                    fontSize: 14, fontFamily: EXAM_BODY,
-                    cursor: submitted ? "default" : "pointer",
-                    opacity: submitted ? 1 : (isUsed ? 0.4 : 1),
-                    padding: "3px 6px", borderRadius: 4,
-                    background: !submitted && isUsed ? "#f1f5f9" : "transparent",
-                  }}>
+                <div key={w} style={{
+                  fontSize: 14, cursor: submitted ? "default" : "pointer",
+                  opacity: submitted ? 1 : (isUsed ? 0.4 : 1),
+                  padding: "2px 4px",
+                  textDecoration: !submitted && isUsed ? "line-through" : "none",
+                }}>
                   ({letter}) {w}
                 </div>
               );
@@ -459,71 +512,71 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
         )}
       </div>
 
-      <div style={{ padding: "0 20px" }}>
+      <div style={{ padding: "0 20px 100px" }}>
         {/* Passage */}
         <div style={{
           border: "1px solid #ddd", borderRadius: 8, padding: "14px 16px",
-          marginBottom: 16, fontSize: 14, fontFamily: EXAM_BODY, lineHeight: 2,
+          marginBottom: 16, fontSize: 14, fontFamily: EXAM_BODY, lineHeight: 2.2,
         }}>
-          {set.passage ? renderPassage() : (
-            // Fallback: show blanks as separate items
-            blanks.map((b, i) => {
+          {hasBrackets ? renderBracketPassage()
+           : set.passage ? renderWordBankPassage()
+           : blanks.map((b, i) => {
               const chosen = answers[b.num];
               const isCorrect = submitted && (chosen || "").toLowerCase() === (b.answer || "").toLowerCase();
               return (
                 <div key={b.num} style={{ marginBottom: 10 }}>
                   <span style={{ fontWeight: 700, marginRight: 6 }}>({b.num})</span>
-                  <span style={{ marginRight: 8, color: "#64748b" }}>{b.stem || ""}</span>
+                  <span style={{ color: "#64748b", marginRight: 8 }}>{b.stem || ""}</span>
                   <span style={{
                     display: "inline-block", borderBottom: "1.5px solid #000",
                     minWidth: 100, textAlign: "center", padding: "0 4px",
                     color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
                     fontWeight: 600,
-                  }}>{chosen || "\u00A0\u00A0\u00A0"}</span>
+                  }}>{chosen || "   "}</span>
                   {submitted && !isCorrect && (
-                    <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}> {b.answer}</span>
+                    <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}>{b.answer}</span>
                   )}
                 </div>
               );
             })
-          )}
+          }
         </div>
 
-        {/* Word bank buttons for selection */}
-        <div style={{ marginBottom: 14 }}>
-          <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
-            Tap a word to fill the next blank:
-          </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-            {wordBank.map((w, i) => {
-              const letter = String.fromCharCode(65 + i);
-              const isUsed = Object.values(answers).includes(w);
-              return (
-                <button key={w} disabled={submitted || isUsed}
-                  onClick={() => {
-                    const nextBlank = blanks.find(b => !answers[b.num]);
-                    if (nextBlank) handleSelect(nextBlank.num, w);
-                  }}
-                  style={{
-                    padding: "6px 14px", borderRadius: 8, fontSize: 14,
-                    border: "1.5px solid #000", fontFamily: EXAM_BODY,
-                    background: isUsed ? "#f1f5f9" : "#fff",
-                    color: isUsed ? "#94a3b8" : "#000",
-                    cursor: submitted || isUsed ? "not-allowed" : "pointer",
-                    textDecoration: isUsed ? "line-through" : "none",
-                    fontWeight: 600,
-                  }}>
-                  ({letter}) {w}
-                </button>
-              );
-            })}
-          </div>
-          {/* Clear buttons */}
-          {!submitted && (
-            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 10 }}>
-              {blanks.map(b => answers[b.num] && (
+        {/* Word bank tap buttons - for word bank type only */}
+        {hasWordBank && !hasBrackets && !submitted && (
+          <div style={{ marginBottom: 14 }}>
+            <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
+              Tap a word to fill the next blank:
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
+              {wordBank.map((w, i) => {
+                const letter = String.fromCharCode(65 + i);
+                const isUsed = Object.values(answers).includes(w);
+                return (
+                  <button key={w} disabled={isUsed}
+                    onClick={() => {
+                      const nextBlank = blanks.find(b => !answers[b.num]);
+                      if (nextBlank) handleSelect(nextBlank.num, w);
+                    }}
+                    style={{
+                      padding: "6px 16px", borderRadius: 8, fontSize: 14,
+                      border: "1.5px solid #000",
+                      background: isUsed ? "#f1f5f9" : "#fff",
+                      color: isUsed ? "#94a3b8" : "#000",
+                      cursor: isUsed ? "not-allowed" : "pointer",
+                      textDecoration: isUsed ? "line-through" : "none",
+                      fontWeight: 600,
+                    }}>
+                    ({letter}) {w}
+                  </button>
+                );
+              })}
+            </div>
+            {/* Clear individual answers */}
+            <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
+              {blanks.filter(b => answers[b.num]).map(b => (
                 <button key={b.num}
-                  onClick={() => setAnswers(a => { const n = {...a}; delete n[b.num]; return n; })}
+                  onClick={() => setAnswers(a => { const n={...a}; delete n[b.num]; return n; })}
                   style={{
                     padding: "3px 10px", borderRadius: 6, fontSize: 12,
                     border: "1px solid #e2e8f0", background: "#f8fafc",
@@ -533,18 +586,14 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
                 </button>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         {/* Explanations after submit */}
         {submitted && blanks.map(b => {
           const isCorrect = (answers[b.num] || "").toLowerCase() === (b.answer || "").toLowerCase();
           return b.hints?.[0] ? (
-            <ExplanationBox key={b.num}
-              correct={isCorrect}
-              answer={b.answer}
-              explanation={b.hints[0]}
-            />
+            <ExplanationBox key={b.num} correct={isCorrect} answer={b.answer} explanation={b.hints[0]} />
           ) : null;
         })}
 
@@ -555,42 +604,42 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             display: "flex", justifyContent: "space-between", alignItems: "center",
           }}>
             <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{blanks.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: score === blanks.length ? "#16a34a" : "#d97706" }}>
+            <span style={{ fontSize: 13, fontWeight: 700,
+              color: score === blanks.length ? "#16a34a" : "#d97706" }}>
               {Math.round(score / blanks.length * 100)}%
             </span>
           </div>
         )}
 
-        <div style={{ paddingBottom: 120 }}>
-          {!submitted ? (
-            <button onClick={handleSubmit}
-              style={{
-                width: "100%", padding: "14px", borderRadius: 10,
-                background: allAnswered ? "#1e3a6e" : "#94a3b8",
-                color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
-                cursor: allAnswered ? "pointer" : "not-allowed", fontFamily: EXAM_BODY,
-              }}>
-              Submit
-            </button>
-          ) : (
-            <button onClick={() => onPageDone(null, true)}
-              style={{
-                width: "100%", padding: "14px", borderRadius: 10,
-                background: "#1e3a6e", color: "#fff", border: "none",
-                fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
-              }}>
-              Next Section
-            </button>
-          )}
-        </div>
+        {!submitted ? (
+          <button onClick={handleFinish}
+            style={{
+              width: "100%", padding: "14px", borderRadius: 10,
+              background: allAnswered ? "#1e3a6e" : "#94a3b8",
+              color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
+              cursor: allAnswered ? "pointer" : "not-allowed",
+            }}>
+            Submit
+            {!allAnswered && <span style={{ fontSize: 12, fontWeight: 400, display: "block" }}>
+              Fill in all blanks first
+            </span>}
+          </button>
+        ) : (
+          <button onClick={() => onPageDone(null, true)}
+            style={{
+              width: "100%", padding: "14px", borderRadius: 10,
+              background: "#1e3a6e", color: "#fff", border: "none",
+              fontSize: 15, fontWeight: 700, cursor: "pointer",
+            }}>
+            Next Section
+          </button>
+        )}
       </div>
     </div>
   );
 }
 
-// 
-//  EDITING PAGE - Type the correct spelling
-// 
+
 function EditingPage({ set, sectionLabel, marks, onPageDone }) {
   const items = set.items || [];
   const [answers, setAnswers] = useState({});
@@ -614,27 +663,18 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing",
-      correct: (answers[item.id] || '').trim().toLowerCase() === getCorrectAnswer(item).toLowerCase(),
+      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results);
-    onPageDone(null, true);
-  }
-
-  // Handle both string answers and index-based answers
-  function getCorrectAnswer(item) {
-    if (typeof item.answer === 'number' && Array.isArray(item.options) && item.options[item.answer]) {
-      return item.options[item.answer];
-    }
-    return String(item.answer || '');
   }
 
   const score = submitted ? items.filter(item =>
-    (answers[item.id] || '').trim().toLowerCase() === getCorrectAnswer(item).toLowerCase()
+    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
   ).length : 0;
 
   const allRetriedWrong = submitted && items
-    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== getCorrectAnswer(item).toLowerCase())
+    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
     .every(item => retried[item.id]);
 
   return (
@@ -652,19 +692,19 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
           const typed = answers[item.id] || '';
-          const isCorrect = submitted && typed.trim().toLowerCase() === getCorrectAnswer(item).toLowerCase();
+          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
           const isWrong = submitted && !isCorrect;
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
           const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
 
           return (
-            <div key={item.id || idx} style={{ marginBottom: 20 }}>
+            <div key={item.id} style={{ marginBottom: 20 }}>
               {/* Question number + sentence context */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
                 <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
-                  {item.wrongWord && item.sentence ? item.sentence.replace(item.wrongWord, `[${item.wrongWord}]`) : (item.sentence || item.stem || '')}
+                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
                 </span>
               </div>
 
@@ -703,7 +743,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
                             border: "1.5px solid #16a34a", color: "#16a34a",
                             background: "#f0fdf4", minWidth: 100, textAlign: "center" }}>
-                            {getCorrectAnswer(item)}
+                            {item.answer}
                           </div>
                         </div>
 
@@ -714,7 +754,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                             <div style={{ display: "flex", gap: 4 }}>
                               <input type="text" value={retryTyped}
                                 onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                                placeholder={String(getCorrectAnswer(item)).split('').join(' . ')}
+                                placeholder={item.answer?.split('').join(' . ')}
                                 style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                                   border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
                               <button onClick={() => handleRetry(item)}
@@ -1007,9 +1047,8 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
-export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, onFinish, onBack }) {
-  const startSecIdx = startFrom ? plan.findIndex(s => s.type === startFrom) : 0;
-  const [secIdx, setSecIdx] = useState(Math.max(0, startSecIdx));
+export function ExamSessionScreen({ plan, isMockExam, mockInfo, onFinish, onBack }) {
+  const [secIdx, setSecIdx] = useState(0);
   const [pageIdx, setPageIdx] = useState(0);
   const [allResults, setAllResults] = useState([]);
   const [pageResults, setPageResults] = useState([]); // buffered until next page
