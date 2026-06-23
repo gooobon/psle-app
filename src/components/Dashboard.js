@@ -4,28 +4,28 @@ import {
   C, Wrap, AnimNumber, AnimProgressBar,
 } from "@/lib/uiShared";
 import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
-// ── App-wide constants ─────────────────────────────────────────
+//  App-wide constants 
 export const GRADES = ["P3", "P4", "P5", "P6"];
 
 export const SUBJECTS = {
-  English: { label: "English",     icon: "📖", color: "#3B82F6" },
-  Chinese: { label: "华文 Chinese", icon: "📝", color: "#EF4444" },
-  Math:    { label: "Mathematics", icon: "🔢", color: "#10B981" },
-  Science: { label: "Science",     icon: "🔬", color: "#8B5CF6" },
+  English: { label: "English",     icon: "", color: "#3B82F6" },
+  Chinese: { label: " Chinese", icon: "", color: "#EF4444" },
+  Math:    { label: "Mathematics", icon: "", color: "#10B981" },
+  Science: { label: "Science",     icon: "", color: "#8B5CF6" },
 };
 
 export const LIVE_CONTENT = {
   P3_English: true,
   P3_Chinese: true,
 };
-// ───────────────────────────────────────────────────────────────
+// 
 
 
 function SchoolBanner({school}){
   return(
     <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"8px 16px",
       display:"flex",alignItems:"center",gap:8}}>
-      <span style={{fontSize:14}}>🏫</span>
+      <span style={{fontSize:14}}></span>
       <span style={{color:"rgba(255,255,255,0.85)",fontSize:12,fontWeight:700}}>{school}</span>
     </div>
   );
@@ -58,7 +58,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
             <div style={{color:"rgba(255,255,255,.5)",fontSize:10,fontWeight:700,
               letterSpacing:1.5,textTransform:"uppercase"}}>Genius Project</div>
             <div style={{color:"#fff",fontSize:20,fontWeight:900,marginTop:2}}>
-              Hello, {user.name.split(" ")[0]}! 👋
+              Hello, {user.name.split(" ")[0]}! 
             </div>
             <div style={{color:"rgba(255,255,255,.55)",fontSize:12,marginTop:2}}>
               {user.school||"Primary School"} · {grade}
@@ -176,7 +176,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.55)",
           display:"flex",alignItems:"center",justifyContent:"center",zIndex:200,padding:20}}>
           <div style={{background:"#fff",borderRadius:24,padding:"32px 24px",maxWidth:340,width:"100%",textAlign:"center"}}>
-            <div style={{fontSize:48,marginBottom:12}}>{SUBJECTS[comingSoon]?.icon||"🚇"}</div>
+            <div style={{fontSize:48,marginBottom:12}}>{SUBJECTS[comingSoon]?.icon||""}</div>
             <div style={{fontSize:20,fontWeight:900,color:C.text,marginBottom:8}}>
               {SUBJECTS[comingSoon]?.label} — Coming Soon!
             </div>
@@ -185,7 +185,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
             </div>
             <div style={{background:C.lGreen,borderRadius:12,padding:"10px 14px",marginBottom:20,
               fontSize:13,fontWeight:700,color:"#065F46"}}>
-              ✅ Currently available: P3 English & Chinese
+               Currently available: P3 English & Chinese
             </div>
             <button onClick={()=>setComingSoon(null)}
               style={{width:"100%",background:"linear-gradient(135deg,#1E3A6E,#2563EB)",
@@ -215,14 +215,14 @@ function ComingSoonScreen({grade,subject}){
         This subject is coming soon!<br/>We're working hard to bring you{"\n"}high-quality practice questions for {grade} {sub.label}.
       </div>
       <div style={{background:C.lBlue,borderRadius:14,padding:"12px 20px",fontSize:13,color:"#1D4ED8",fontWeight:600}}>
-        ✅ Currently available: P3 English & Chinese
+         Currently available: P3 English & Chinese
       </div>
     </div>
   );
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onMistakes, onReview}){
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, availableSections, onMistakes, onReview}){
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
   const mockH    = history.filter(h=>h.isMockExam);
@@ -240,7 +240,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
   return(
     <div style={{paddingBottom:80}}> {user.school&&<SchoolBanner school={user.school}/>} <div style={{background:"#fff",padding:"14px 16px 0",borderBottom:`1px solid ${C.border}`}}>
         <div style={{display:"flex",gap:10,paddingBottom:14}}>
-          {[{icon:"📋",l:"Sessions",v:history.length},{icon:"🎯",l:"Avg",v:avgTotal?`${avgTotal}%`:"—"},{icon:"🏫",l:"Mock",v:mockH.length},{icon:"📅",l:"Next",v:`#${prog.nextSession}`}].map((s,i)=>(
+          {[{icon:"",l:"Sessions",v:history.length},{icon:"",l:"Avg",v:avgTotal?`${avgTotal}%`:"—"},{icon:"",l:"Mock",v:mockH.length},{icon:"",l:"Next",v:`#${prog.nextSession}`}].map((s,i)=>(
             <div key={i} style={{flex:1,background:"#F8FAFC",borderRadius:12,padding:"8px 4px",textAlign:"center"}}>
               <div style={{fontSize:16}}>{s.icon}</div>
               <div style={{fontSize:15,fontWeight:900,color:C.navy}}>{s.v}</div>
@@ -253,7 +253,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
       <div style={{padding:"16px 16px 0"}}> {prog.nextSession>=11&&(
           <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(15,23,42,0.35)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontSize:28}}>📄</span>
+              <span style={{fontSize:28}}></span>
               <div>
                 <div style={{color:"#fff",fontSize:14,fontWeight:900}}>Past Paper #{prog.nextSession-10} Unlocked!</div>
                 <div style={{color:"rgba(255,255,255,0.75)",fontSize:12,marginTop:1}}>{user.school ? user.school+" style" : "School paper style"} · Real exam questions</div>
@@ -264,7 +264,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
         {isMockDue&&prog.nextSession<11&&(
           <div style={{background:"linear-gradient(135deg,#7C3AED,#8B5CF6)",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(124,58,237,0.3)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontSize:28}}>🏫</span>
+              <span style={{fontSize:28}}></span>
               <div>
                 <div style={{color:"#fff",fontSize:14,fontWeight:900}}>Mock Exam Unlocked!</div>
                 <div style={{color:"rgba(255,255,255,0.8)",fontSize:12,marginTop:1}}>10 sessions complete — real school paper test awaits</div>
@@ -277,19 +277,22 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
               {grade} {subject} · {prog.nextSession>=11?"Past Paper #"+(prog.nextSession-10):isMockDue?"Mock Exam":"Session #"+prog.nextSession}
             </div>
             <div style={{fontSize:18,fontWeight:900,color:"#fff",marginBottom:4}}>
-              {prog.nextSession>=11?"🏫 Start Past Paper →":isMockDue?"🏫 Start Mock Exam →":"→ Start Practice for Today →"}
+              {prog.nextSession>=11?" Start Past Paper →":isMockDue?" Start Mock Exam →":"→ Start Practice for Today →"}
             </div>
-            <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>{prog.nextSession>=11?"📄 Real school past paper · ~35 min":isMockDue?"Nanyang Primary WA1 style · ~30 min":"Grammar · Vocabulary · Comprehension · ~35 min"+(user.school?" · "+user.school+" style":"")}</div>
+            <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>{prog.nextSession>=11?" Real school past paper · ~35 min":isMockDue?"Nanyang Primary WA1 style · ~30 min":"Grammar · Vocabulary · Comprehension · ~35 min"+(user.school?" · "+user.school+" style":"")}</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.06)",padding:"8px 20px",display:"flex",gap:8,flexWrap:"wrap"}}>
             {Object.entries(SECTIONS).map(([k,v])=>(
               <button key={k}
-                onClick={e=>{e.stopPropagation();onStartFrom&&onStartFrom(k);}}
-                style={{display:"flex",alignItems:"center",gap:4,background:"rgba(255,255,255,0.1)",
+                onClick={e=>{e.stopPropagation();if(availableSections&&!availableSections.includes(k))return;onStartFrom&&onStartFrom(k);}}
+                style={{display:"flex",alignItems:"center",gap:4,
+                  background:availableSections&&!availableSections.includes(k)?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.1)",
                   border:"1px solid rgba(255,255,255,0.2)",borderRadius:8,padding:"4px 10px",
-                  cursor:"pointer",transition:"background 0.15s"}}
-                onMouseEnter={e=>e.currentTarget.style.background="rgba(255,255,255,0.25)"}
-                onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.1)"}>
+                  cursor:availableSections&&!availableSections.includes(k)?"default":"pointer",
+                  opacity:availableSections&&!availableSections.includes(k)?0.3:1,
+                  transition:"background 0.15s"}}
+                onMouseEnter={e=>{if(availableSections&&availableSections.includes(k))e.currentTarget.style.background="rgba(255,255,255,0.25)"}}
+                onMouseLeave={e=>e.currentTarget.style.background=availableSections&&!availableSections.includes(k)?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.1)"}>
                 <span style={{fontSize:13}}>{v.icon}</span>
                 <span style={{fontSize:10,color:"rgba(255,255,255,0.8)",fontWeight:600}}>{k.replace("MCQ","").replace("Cloze","Cl.")}</span>
               </button>
@@ -298,7 +301,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
         </button> {regularH.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowProgress(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"14px 16px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontWeight:800,fontSize:14,color:C.text}}>📊 My Progress</div>
+              <div style={{fontWeight:800,fontSize:14,color:C.text}}> My Progress</div>
               <span style={{color:C.muted,fontSize:13,transform:showProgress?"rotate(90deg)":"none",transition:"transform 0.2s"}}>›</span>
             </button>
           {showProgress&&<div style={{padding:"0 16px 16px"}}>
@@ -320,7 +323,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
                       <div key={i} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:2}}>
                         <div style={{fontSize:8,color:col,fontWeight:800}}>{h.totalPct}%</div>
                         <div style={{width:"100%",background:col,borderRadius:"3px 3px 0 0",height:`${Math.max(h.totalPct*0.65,4)}%`,minHeight:4,position:"relative"}}>
-                          {h.isMockExam&&<span style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",fontSize:8}}>🏫</span>}
+                          {h.isMockExam&&<span style={{position:"absolute",top:-10,left:"50%",transform:"translateX(-50%)",fontSize:8}}></span>}
                         </div>
                         <div style={{fontSize:7,color:C.muted}}>{`S${h.sessionNum}`}</div>
                       </div>
@@ -357,7 +360,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
         )} {history.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowRecent(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontWeight:800,fontSize:13,color:C.text}}>📋 Recent Sessions ({history.length})</div>
+              <div style={{fontWeight:800,fontSize:13,color:C.text}}> Recent Sessions ({history.length})</div>
               <span style={{color:C.muted,fontSize:13,transform:showRecent?"rotate(90deg)":"none",transition:"transform 0.2s"}}>›</span>
             </button>
           {showRecent&&<div style={{padding:"0 14px 14px"}}>
@@ -366,7 +369,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
               return(
                 <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 0",borderBottom:i<4?`1px solid ${C.border}`:"none"}}>
                   <div style={{width:36,height:36,borderRadius:10,background:h.isMockExam?"#EDE9FE":col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>
-                    {h.isMockExam?"🏫":"📝"}
+                    {h.isMockExam?"":""}
                   </div>
                   <div style={{flex:1}}>
                     <div style={{fontSize:12,fontWeight:700,color:C.text}}>{h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:`Session #${h.sessionNum}`}</div>
@@ -383,11 +386,11 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
           </div>
         )} <div style={{display:"flex",gap:10}}>
           <button onClick={onMistakes} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <span style={{fontSize:22}}>📅</span>
+            <span style={{fontSize:22}}></span>
             <span style={{fontSize:11,fontWeight:700,color:C.text}}>Mistakes</span>
           </button>
           <button onClick={onReview} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <span style={{fontSize:22}}>📑</span>
+            <span style={{fontSize:22}}></span>
             <span style={{fontSize:11,fontWeight:700,color:C.text}}>Review</span>
           </button>
         </div>
@@ -407,7 +410,7 @@ function ZhHome({user, prog, onStart, onBack}){
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:4}}>
           <div>
             <div style={{color:"rgba(255,255,255,.55)",fontSize:10,fontWeight:700,letterSpacing:1.5,textTransform:"uppercase"}}>Genius Project</div>
-            <div style={{color:"#fff",fontSize:17,fontWeight:900}}>📝 P3 é«˜çº§åŽæ–‡</div>
+            <div style={{color:"#fff",fontSize:17,fontWeight:900}}> P3 é«˜çº§åŽæ–‡</div>
             <div style={{color:"rgba(255,255,255,.6)",fontSize:11,marginTop:2}}>è©æå­¦æ ¡ · Maha Bodhi School</div>
           </div>
           <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",borderRadius:10,padding:"7px 12px",color:"rgba(255,255,255,.85)",cursor:"pointer",fontSize:12,fontWeight:700}}>â† è¿”å›ž</button>
@@ -415,9 +418,9 @@ function ZhHome({user, prog, onStart, onBack}){
       </div> <div style={{background:"#fff",padding:"14px 16px",borderBottom:`1px solid ${C.border}`}}>
         <div style={{display:"flex",gap:10}}>
           {[
-            {icon:"📋",l:"ç»ƒä¹ æ¬¡æ•°",v:history.length},
-            {icon:"🎯",l:"å¹³å‡åˆ†",v:avgTotal?`${avgTotal}%`:"—"},
-            {icon:"📅",l:"ä¸‹ä¸€èŠ‚",v:`#${prog.nextSession}`},
+            {icon:"",l:"ç»ƒä¹ æ¬¡æ•°",v:history.length},
+            {icon:"",l:"å¹³å‡åˆ†",v:avgTotal?`${avgTotal}%`:"—"},
+            {icon:"",l:"ä¸‹ä¸€èŠ‚",v:`#${prog.nextSession}`},
           ].map((s,i)=>(
             <div key={i} style={{flex:1,background:"#F8FAFC",borderRadius:12,padding:"8px 4px",textAlign:"center"}}>
               <div style={{fontSize:16}}>{s.icon}</div>
@@ -431,7 +434,7 @@ function ZhHome({user, prog, onStart, onBack}){
       <div style={{padding:"16px 16px 0"}}> {prog.nextSession>=11&&(
           <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(15,23,42,.35)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontSize:28}}>📄</span>
+              <span style={{fontSize:28}}></span>
               <div>
                 <div style={{color:"#fff",fontSize:14,fontWeight:900}}>Ai Tong Primary åŸºå‡ºé¢˜ #{prog.nextSession-10}</div>
                 <div style={{color:"rgba(255,255,255,.7)",fontSize:11,marginTop:2}}>çˆ±åŒå­¦æ ¡ · 2024 SA1 çœŸé¢˜</div>
@@ -469,7 +472,7 @@ function ZhHome({user, prog, onStart, onBack}){
         </div> {history.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowRecent(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontWeight:800,fontSize:13,color:C.text}}>📋 æœ€è¿‘ç»ƒä¹  ({history.length})</div>
+              <div style={{fontWeight:800,fontSize:13,color:C.text}}> æœ€è¿‘ç»ƒä¹  ({history.length})</div>
               <span style={{color:C.muted,fontSize:13,transform:showRecent?"rotate(90deg)":"none",transition:"transform .2s"}}>›</span>
             </button>
             {showRecent&&(
@@ -478,7 +481,7 @@ function ZhHome({user, prog, onStart, onBack}){
                   const col=h.totalPct>=85?C.green:h.totalPct>=70?C.amber:C.red;
                   return(
                     <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<4?`1px solid ${C.border}`:"none"}}>
-                      <div style={{width:32,height:32,borderRadius:9,background:col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}>📝</div>
+                      <div style={{width:32,height:32,borderRadius:9,background:col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16,flexShrink:0}}></div>
                       <div style={{flex:1}}>
                         <div style={{fontSize:12,fontWeight:700}}>ç¬¬ #{h.sessionNum} èŠ‚</div>
                         <div style={{fontSize:10,color:C.muted}}>{h.date}</div>
@@ -504,11 +507,11 @@ export function StudentShell({ user, grade, subject, onGradeChange, onSubjectCha
       <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",padding:"18px 20px 0"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
           <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{width:36,height:36,borderRadius:12,background:user.color||C.blue,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>{user.avatar||"🎒"}</div>
+            <div style={{width:36,height:36,borderRadius:12,background:user.color||C.blue,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20}}>{user.avatar||""}</div>
             <div>
               <div style={{color:"rgba(255,255,255,0.65)",fontSize:10,fontWeight:700,letterSpacing:1,textTransform:"uppercase"}}>Genius Project</div>
               <div style={{color:"#fff",fontSize:15,fontWeight:800}}>{user.name}</div>
-              {user.school&&<div style={{color:"rgba(255,255,255,0.55)",fontSize:10,marginTop:1}}>🏫 {user.school}</div>}
+              {user.school&&<div style={{color:"rgba(255,255,255,0.55)",fontSize:10,marginTop:1}}> {user.school}</div>}
             </div>
           </div>
           <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 12px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>

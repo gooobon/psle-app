@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 import {
   buildPlan, buildZhPlan, buildZhPastPaperPlan, buildPastPaperPlan,
-  recommendLevel, recommendSectionLevels, selectPastPaper,
+  recommendLevel, selectPastPaper,
   pickQuestionsForSchool, getSchoolProfile,
   DEFAULT_SETTINGS,
 } from '@/lib/dataEngine';
@@ -913,7 +913,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} availableSections={(()=>{ try{ const p=buildPlan(prog.settings,user.school,prog.nextSession,recommendLevel(prog.history),recommendSectionLevels(prog.history)); return (p||[]).map(s=>s.type); }catch(e){ return []; } })()}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : screen==="review" ? (
@@ -1645,5 +1645,3 @@ if(typeof window !== 'undefined' && !document.getElementById("genius-styles")){
 
 
 export default App;
-
-
