@@ -614,19 +614,27 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing",
-      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
+      correct: (answers[item.id] || '').trim().toLowerCase() === getCorrectAnswer(item).toLowerCase(),
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results);
     onPageDone(null, true);
   }
 
+  // Handle both string answers and index-based answers
+  function getCorrectAnswer(item) {
+    if (typeof item.answer === 'number' && Array.isArray(item.options) && item.options[item.answer]) {
+      return item.options[item.answer];
+    }
+    return String(item.answer || '');
+  }
+
   const score = submitted ? items.filter(item =>
-    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
+    (answers[item.id] || '').trim().toLowerCase() === getCorrectAnswer(item).toLowerCase()
   ).length : 0;
 
   const allRetriedWrong = submitted && items
-    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
+    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== getCorrectAnswer(item).toLowerCase())
     .every(item => retried[item.id]);
 
   return (
@@ -644,14 +652,14 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
           const typed = answers[item.id] || '';
-          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
+          const isCorrect = submitted && typed.trim().toLowerCase() === getCorrectAnswer(item).toLowerCase();
           const isWrong = submitted && !isCorrect;
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
           const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
 
           return (
-            <div key={item.id} style={{ marginBottom: 20 }}>
+            <div key={item.id || idx} style={{ marginBottom: 20 }}>
               {/* Question number + sentence context */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
@@ -695,7 +703,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
                             border: "1.5px solid #16a34a", color: "#16a34a",
                             background: "#f0fdf4", minWidth: 100, textAlign: "center" }}>
-                            {item.answer}
+                            {getCorrectAnswer(item)}
                           </div>
                         </div>
 
