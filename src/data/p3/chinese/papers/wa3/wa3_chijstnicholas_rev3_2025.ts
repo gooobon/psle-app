@@ -1,30 +1,29 @@
 // ============================================================================
-// CHIJ St Nicholas Girls' School (圣尼各拉女校 小学部)
+// CHIJ St Nicholas Girls'School (圣尼各拉女校 小学部)
 // P3 Higher Chinese (高级华文) — 2025 复习（三）第九课至第十二课
 // Source: sgexam.com P3 Chinese WA3 compilation
 // Total marks: 56
 //
-// NOTE: 改正错字(Q1-10)는 인쇄된 '틀린 글자' 형태가 OCR상 일부 불명확하여,
-//   정답키(p79)의 '바른 글자'를 answer로 넣고 의도 문장을 복원했음.
-//   형태가 불확실한 항목은 needsParentVerify: true.
+// NOTE: 改正错字(Q1-10) — some characters were unclear during OCR scanning,'틀린 글자'so the answer key (p79) answers were used to restore the intended sentences.
+//   Items with uncertain forms have needsParentVerify: true.
 // ============================================================================
 
 import type { Question } from "@/data/p3/chinese/types";
 
 export const wa3_chijstnicholas_rev3_2025: Question[] = [
   // ==========================================================================
-  // (一) 改正错字 BianZi — Q1-Q10 (10题20分)
-  // 형식: 문장 속 틀린 글자를 찾아 바른 글자로 고친다. answer = 바른 글자.
+  // (一) 改正错字 BianZi — Q1-Q10 (10 questions, 20 marks)
+  // Format: Find the wrong character in the sentence and write the correct character. answer = correct character.
   // ==========================================================================
   {
     id: "p3_zh_wa3_csn3_001",
     topic: "BianZi",
     difficulty: "core",
-    instruction: "请圈出错误的汉字，然后把正确的汉字填写在括号里。",
+    instruction: "Please circle the wrong Chinese character, then write the correct Chinese character in the brackets.",
     q: "我【让】为乱丢垃圾是不对的。",
     answer: "认",
     pinyin: "rèn wéi",
-    meaning: "Correct '让→认'. '认为(rènwéi)' = to think/believe. 我认为乱丢垃圾是不对的.",
+    meaning: "Correct'바른 글자'The character written is correct.'让→认'. '认为(rènwéi)' = to think/believe. 我认为乱丢垃圾是不对的.",
     solution: {
       method: "Correcting characters that look or sound alike (homophone/similar-shape errors)",
       steps: [
@@ -324,7 +323,7 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
 
   // ==========================================================================
   // (四) 选择句子 CiYu — Q18-Q21 (4题8分)
-  // 划线词语가 '바르게 쓰인' 문장을 고른다.
+  // 划线词语가 '\'Turn a deaf ear (to ignore completely)\' + keeps playing games → Being too focused on games is the cause.' 문장을 고른다.
   // ==========================================================================
   {
     id: "p3_zh_wa3_csn3_018",

@@ -41,13 +41,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '주어의 수와 "every Saturday morning"(반복 습관)을 본다.',
+        method: 'Look at the number of the subject and \'every Saturday morning\' (repeated habit).',
         steps: [
-          '주어 "Max and his friend"는 복수.',
-          '"every Saturday morning"은 매주 반복되는 습관 → 단순현재.',
-          '복수 주어의 단순현재형은 원형 cycle → 정답 (1).',
+          'The subject \'Max and his friend\' is plural.',
+          '\'Every Saturday morning\' shows a habit that repeats every week → Simple Present.',
+          'The Simple Present form for a plural subject uses the base form \'cycle\' → Answer is (1).',
         ],
-        tip: '"every + time expression"은 반복 습관을 나타내는 단순현재의 신호입니다.',
+        tip: '\'Every + time expression\' is a signal for Simple Present to show a repeated habit.',
       },
     },
     {
@@ -66,13 +66,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"Every + noun"는 단수로 취급된다는 규칙과 "daily"(반복 습관)를 본다.',
+        method: 'Look at the rule that \'Every + noun\' is treated as singular, and look at \'daily\' (repeated habit).',
         steps: [
-          '"Every pupil"은 문법적으로 단수 주어로 취급한다.',
-          '"daily"는 매일 반복되는 일 → 단순현재.',
-          '단수 주어의 단순현재 "have"의 형태는 has → 정답 (1).',
+          '\'Every pupil\' is treated as a singular subject in grammar.',
+          '\'Daily\' means something that happens every day → Simple Present.',
+          'The Simple Present form of \'have\' for a singular subject is \'has\' → Answer is (1).',
         ],
-        tip: '"Every + noun (singular form)"는 항상 단수 동사와 함께 씁니다.',
+        tip: '\'Every + noun (singular form)\' is always used with a singular verb.',
       },
     },
     {
@@ -91,13 +91,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '명사의 수(단수/복수)와 거리(가까움/멈)를 본다.',
+        method: 'Look at the number of the noun (singular/plural) and the distance (near/far).',
         steps: [
-          '"group"은 단수 명사(동사 is와 일치) → these/those(복수) 제외.',
-          '"on the field over there"(저쪽 운동장)는 멀리 있음 → this가 아니라 that.',
-          '따라서 정답은 (2) That.',
+          '\'Group\' is a singular noun (matches with the verb \'is\') → \'these\' and \'those\' (plural) are ruled out.',
+          '\'On the field over there\' means the group is far away → use \'that\', not \'this\'.',
+          'Therefore, the answer is (2) That.',
         ],
-        tip: '"group, team, class"처럼 집합을 가리키는 명사는 보통 단수로 취급합니다.',
+        tip: 'Nouns that refer to a collection of people, such as \'group\', \'team\', and \'class\', are usually treated as singular.',
       },
     },
     {
@@ -119,11 +119,11 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       solution: {
         method: '앞 문장의 명사("worksheets")의 수를 확인해 대명사를 고른다.',
         steps: [
-          '앞 문장: "I have taken my friend\'s worksheets"(복수, worksheets).',
-          '복수 명사를 대신하는 목적격 대명사는 "them".',
-          '따라서 "I will return them to him" → 정답 (4) them.',
+          '앞 문장: "I have taken my friend\'The word \'worksheets\' is plural.',
+          'The object pronoun that replaces a plural noun is \'them\'.',
+          'Therefore, \'I will return them to him\' → the correct answer is (4) them.',
         ],
-        tip: '대명사는 가리키는 명사가 단수인지 복수인지 먼저 확인합니다(worksheets = 복수 → them).',
+        tip: 'When using a pronoun, first check whether the noun it refers to is singular or plural (worksheets = plural → them).',
       },
     },
     {
@@ -142,13 +142,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"when ~ rang"(과거의 한 순간)과 동시에 진행 중이던 동작을 나타낸다.',
+        method: 'The action was happening at the same time as \'when ~ rang\' (a single moment in the past).',
         steps: [
-          '"when her mobile phone rang" — rang은 과거형, 특정 순간을 가리킴.',
-          '그 순간 엄마는 요리를 "was/were in the middle of doing something"이었다 → 과거진행형.',
-          '주어 "Mother"는 단수 → "was cooking" → 정답 (4).',
+          '\'When her mobile phone rang\' — \'rang\' is in the Simple Past tense and refers to a specific moment.',
+          'At that moment, Mother was in the middle of doing something → we use the Past Continuous tense.',
+          'The subject \'Mother\' is singular → \'was cooking\' → the correct answer is (4).',
         ],
-        tip: '"when + Simple Past (a sudden moment in time)"이 있으면, 그 순간 진행 중이던 동작은 was/were -ing로 씁니다.',
+        tip: 'When you see \'when + Simple Past (a sudden moment in time)\', the action that was in progress at that moment is written as \'was/were + -ing\'.',
       },
     },
     {
@@ -167,13 +167,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"It has been + period of time + ___ + past event" 구문에 맞는 접속사를 고른다.',
+        method: 'Choose the conjunction that fits the structure: \'It has been + period of time + ___ + past event\'.',
         steps: [
-          '"It has been five years ___ she left"는 "It has been 5 years since (someone) left"는 의미.',
-          '"It has been + period of time + since + past event"은 정해진 구문(since = ~한 이래로).',
-          '따라서 정답은 (3) since.',
+          '\'It has been five years ___ she left\' means \'It has been 5 years since someone left\'.',
+          '\'It has been + period of time + since + past event\' is a fixed structure (since = from the time that).',
+          'Therefore, the correct answer is (3) since.',
         ],
-        tip: '"It has been [period of time] since [past event]"은 "It has been [period of time] since [something happened]"는 뜻의 고정 표현입니다.',
+        tip: '\'It has been [period of time] since [past event]\' is a fixed expression meaning \'It has been [period of time] since [something happened]\'.',
       },
     },
     {
@@ -196,9 +196,9 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         steps: [
           '"earlier in the day"는 "a point in time that has already passed during that day"을 가리키며 과거시제를 요구한다.',
           'leave의 과거형은 left.',
-          '따라서 "Wee Boon\'s father left for a meeting earlier in the day." → 정답 (1) left.',
+          '따라서 "Wee Boon\'\'His father left for a meeting earlier in the day.\' → the correct answer is (1) left.',
         ],
-        tip: '"earlier in the day/week" 같은 표현은 보통 과거시제와 함께 쓰입니다.',
+        tip: 'Expressions like "earlier in the day/week" are usually used with the Simple Past tense.',
       },
     },
     {
@@ -218,13 +218,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"shampoo"의 가산 여부와 문장의 긍정/부정을 본다.',
+        method: 'Look at whether "shampoo" is countable or uncountable, and whether the sentence is positive or negative.',
         steps: [
-          '"shampoo"는 셀 수 없는 명사 → few/many(가산용) 제외.',
-          '"There is still ___ shampoo left"는 긍정문(샴푸가 남아있다는 사실 전달).',
-          '긍정문에서 "a little is still left / there is a small amount remaining"는 의미에는 "some"이 자연스럽다 → 정답 (3) some.',
+          '"Shampoo" is an uncountable noun → few/many (used for countable nouns) are not correct.',
+          '"There is still ___ shampoo left" is a positive sentence (it tells us that some shampoo remains).',
+          'In a positive sentence meaning "a little is still left / there is a small amount remaining", "some" is the most natural choice → Answer: (3) some.',
         ],
-        tip: '"any"는 주로 부정문/의문문에, "some"은 긍정문에 쓰입니다(불가산 명사 모두 가능).',
+        tip: '"Any" is mainly used in negative sentences and questions, while "some" is used in positive sentences (both can be used with uncountable nouns).',
       },
     },
     {
@@ -243,13 +243,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"to go on holiday / to take a vacation"라는 표현에 맞는 전치사를 고른다.',
+        method: 'Choose the correct preposition that goes with the expression "to go on holiday / to take a vacation".',
         steps: [
-          '"go on a vacation/holiday/trip" = 휴가/여행을 가다 → 정해진 전치사 표현.',
-          'in/at/by는 이 표현에 쓰이지 않는다.',
-          '따라서 정답은 (4) on.',
+          '"Go on a vacation/holiday/trip" means to go for a holiday or trip → this is a fixed preposition phrase.',
+          'in / at / by are not used in this expression.',
+          'Therefore, the answer is (4) on.',
         ],
-        tip: '"go on a vacation/trip/holiday"는 통째로 외워야 할 전치사 표현입니다.',
+        tip: '"Go on a vacation/trip/holiday" is a fixed preposition phrase that you should memorise as a whole.',
       },
     },
     {
@@ -269,13 +269,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"Children"(여러 명, 2인칭 you)에 맞는 재귀대명사를 고른다.',
+        method: 'Choose the correct reflexive pronoun to match "Children" (more than one person, second person "you").',
         steps: [
-          'Mrs Loh이 여러 아이들("Children")에게 직접 말하고 있다 → 2인칭 복수 "you".',
-          '2인칭 복수의 재귀대명사는 "yourselves".',
-          '"by yourselves"(너희들 스스로) → 정답 (4) yourselves.',
+          'Mrs Loh is speaking directly to several children ("Children") → second person plural "you".',
+          'The reflexive pronoun for second person plural is "yourselves".',
+          '"By yourselves" (on your own, all of you) → Answer: (4) yourselves.',
         ],
-        tip: '"by oneself"는 "by yourself / on your own"라는 뜻이며, 듣는 대상이 여러 명이면 yourselves를 씁니다.',
+        tip: '"by oneself" means "by yourself / on your own". If you are talking to more than one person, use "yourselves" instead.',
       },
     },
 
@@ -298,13 +298,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '경찰 사이렌을 듣고 도망치는 도둑의 동작에 맞는 동사를 고른다.',
+        method: 'Choose the verb that best describes what the thief does when he hears the police siren.',
         steps: [
-          '경찰 사이렌을 듣고 급히 도망쳤다 → 매우 빠르게 달아남.',
-          '"bolt" = 갑자기 빠르게 달아나다 → 도둑의 행동과 정확히 일치.',
-          'strolled(한가로이 걷다)/trudged(터덜터덜 걷다)/stomped(발을 구르며 걷다)는 급한 도주와 안 맞는다 → 정답 (1) bolted.',
+          'The thief heard the police siren and ran away quickly → he moved away very fast.',
+          '"bolt" = to suddenly run away very quickly → this matches exactly what the thief did.',
+          'strolled (walked leisurely) / trudged (walked heavily and slowly) / stomped (walked by stamping feet) do not match a quick escape → the answer is (1) bolted.',
         ],
-        tip: '"bolted"는 놀라서 갑자기 빠르게 달아나는 동작을 나타냅니다.',
+        tip: '"bolted" describes the action of suddenly running away very fast, usually out of fear or surprise.',
       },
     },
     {
@@ -324,13 +324,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"was unhappy and complained"는 의미에 맞는 동사를 고른다.',
+        method: 'Choose the verb that best fits the meaning of "was unhappy and complained".',
         steps: [
-          '손님들이 서비스에 불만을 느끼고 사장에게 그것에 대해 말했다.',
-          '"grumble about something to someone" = ~에게 ~에 대해 (낮은 목소리로) 불평하다.',
-          'sobbed(흐느꼈다)는 슬픔, fussed/nagged는 더 격하거나 반복적인 잔소리 느낌 → "grumbled"가 가장 자연스럽다 → 정답 (4).',
+          'The customers were unhappy with the service and told the owner about it.',
+          '"grumble about something to someone" = to complain to someone about something, usually in a low, unhappy voice.',
+          'sobbed (cried) shows sadness; fussed / nagged suggests louder or repeated scolding → "grumbled" is the most natural fit → the answer is (4).',
         ],
-        tip: '"grumble about X to Y"는 불만을 표현할 때 자주 쓰는 짝꿍 표현입니다.',
+        tip: '"grumble about X to Y" is a common word pairing used to express dissatisfaction.',
       },
     },
     {
@@ -349,13 +349,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"was very hungry"는 이유와 "gobbled"(급히 먹어치웠다)에 어울리는 부사를 고른다.',
+        method: 'Choose the adverb that best fits the reason "was very hungry" and the verb "gobbled" (ate very quickly).',
         steps: [
-          '"gobbled"은 이미 급하게 먹는 모습을 나타낸다.',
-          '"as he was very hungry"(배고팠기 때문에) → 욕심내듯 먹었다는 의미로 "greedily"가 자연스럽다.',
-          'slowly(천천히)는 gobbled와 모순, untidily/carelessly는 배고픔과 직접 관련 없음 → 정답 (3) greedily.',
+          '"gobbled" already shows the idea of eating very quickly and eagerly.',
+          '"as he was very hungry" (because he was very hungry) → the idea of eating eagerly suggests that "greedily" is the most natural choice.',
+          'slowly contradicts gobbled; untidily / carelessly are not directly related to being hungry → the answer is (3) greedily.',
         ],
-        tip: '이유(very hungry)가 행동의 감정(욕심내며 = greedily)을 알려주는 단서입니다.',
+        tip: 'The reason (very hungry) is a clue that tells us the emotion behind the action (greedily).',
       },
     },
     {
@@ -374,13 +374,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"gets in the way of doing homework"는 상황에서 음량에 대한 요청을 생각한다.',
+        method: 'Think about what \'gets in the way of doing homework\' tells us about the request regarding volume in this situation.',
         steps: [
-          '"I\'m trying to do my homework"(숙제 중) → 조용한 환경이 필요함.',
-          '"turn down the volume" = 음량을 줄이다.',
-          'turn up(높이다)은 반대 의미, turn over(뒤집다)/turn away(외면하다)는 음량과 무관 → 정답 (4) turn down.',
+          '\'I\'m trying to do my homework\' (currently doing homework) → A quiet environment is needed.',
+          '\'turn down the volume\' = to lower the volume.',
+          '\'turn up\' means to increase, while \'turn over\' (to flip) and \'turn away\' (to look away) are not related to volume → The correct answer is (4) turn down.',
         ],
-        tip: '"turn up/down the volume"은 소리를 높이거나 줄일 때 쓰는 표현입니다.',
+        tip: '\'turn up/down the volume\' is the expression used when increasing or decreasing sound.',
       },
     },
     {
@@ -399,13 +399,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"has very poor eyesight"를 나타내는 직유(simile) 관용어를 고른다.',
+        method: 'Choose the simile idiom that describes someone who \'has very poor eyesight\'.',
         steps: [
-          '"blind as a bat" = 눈이 매우 나쁜(박쥐처럼 시력이 안 좋은) → 매우 흔한 영어 관용 표현.',
-          'fox(교활한)/pig(욕심 많은)/owl(지혜로운)은 시력과 관련된 관용 표현이 아니다.',
-          '따라서 정답은 (1) bat.',
+          '\'blind as a bat\' = having very poor eyesight (bats are known for poor vision) → This is a very common English idiom.',
+          'fox (cunning) / pig (greedy) / owl (wise) do not have idioms related to eyesight.',
+          'Therefore, the correct answer is (1) bat.',
         ],
-        tip: '"as blind as a bat"는 시력이 매우 나쁨을 나타내는 정해진 직유 표현입니다.',
+        tip: '\'as blind as a bat\' is a fixed simile expression that means having very poor eyesight.',
       },
     },
     {
@@ -425,13 +425,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '손에 떨어진 작은 물의 단위를 나타내는 명사를 고른다.',
+        method: 'Choose the noun that describes a small unit of water that falls onto your hand.',
         steps: [
-          '비가 오기 전 손에 떨어진 작은 물 한 알 → "a drop of water"(물 한 방울).',
-          'pool(연못/물웅덩이)·puddle(고인 물웅덩이)은 이미 모인 물, splash(첨벙거림)는 소리/움직임을 강조.',
-          '"one grain that fell into the hand"이라는 의미에 가장 맞는 것은 (2) drop.',
+          'A small amount of water that falls onto your hand just before it rains → \'a drop of water\' (one water droplet).',
+          '\'pool\' (a body of water) and \'puddle\' (collected water on the ground) refer to water that has already gathered, while \'splash\' emphasises sound or movement.',
+          'The word that best matches the meaning of \'a single small amount that fell into the hand\' is (2) drop.',
         ],
-        tip: '"a drop of water"는 작은 물방울 하나를 가리키는 표현입니다.',
+        tip: '"a drop of water" refers to a single small droplet of water.',
       },
     },
     {
@@ -450,13 +450,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"tower over"(훨씬 더 크다)와 어울리는 직유를 고른다.',
+        method: 'Choose a simile that matches the meaning of "tower over" (to be much bigger/taller).',
         steps: [
-          '"towers over her older brother" = 오빠보다 훨씬 키가 크다.',
-          '"as tall as a giraffe"(기린처럼 키가 큰)는 큰 키를 직접 표현.',
-          'wise(지혜로운)/big(덩치가 큰, 키와는 다름)/proud(거만한)는 "is tall"와 안 맞는다 → 정답 (1).',
+          '"towers over her older brother" means she is much taller than her older brother.',
+          '"as tall as a giraffe" directly expresses great height by comparing to a giraffe.',
+          'wise (having good judgment) / big (large in size, not specifically about height) / proud (arrogant) do not match "is tall" → Answer: (1).',
         ],
-        tip: '"tower over"는 키/높이가 압도적으로 큼을 의미하므로 키와 관련된 직유를 고릅니다.',
+        tip: '"tower over" means to be overwhelmingly taller or higher, so choose a simile related to height.',
       },
     },
     {
@@ -475,13 +475,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '뜨거운 액체로 인한 피부 손상을 나타내는 동사를 고른다.',
+        method: 'Choose a verb that describes skin injury caused by a hot liquid.',
         steps: [
-          '뜨거운 커피를 자기 몸에 쏟았다 → 화상(뜨거운 액체로 인한 상처).',
-          '"scald" = 뜨거운 액체에 데다 → 정확히 일치.',
-          'twisted(삐다)/sprained(접질리다)는 관절 부상, blazed(불타다)는 직접 화상 표현이 아님 → 정답 (3) scalded.',
+          'He spilled hot coffee on himself → a burn caused by a hot liquid.',
+          '"scald" means to be burned by a hot liquid → this matches exactly.',
+          'twisted / sprained refer to joint injuries, and blazed means to burn with flames, which does not specifically describe a hot liquid burn → Answer: (3) scalded.',
         ],
-        tip: '"scald"는 특히 뜨거운 물·음료 등 액체에 의한 화상을 가리킵니다.',
+        tip: '"scald" refers specifically to a burn caused by hot water, hot drinks, or other hot liquids.',
       },
     },
     {
@@ -501,13 +501,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"can be trusted and relied on"는 신뢰와 어울리는 성격 형용사를 고른다.',
+        method: 'Choose a personality adjective that matches the meaning of "can be trusted and relied on".',
         steps: [
-          '"You can trust him to take care of the class"(맡겨도 믿을 수 있다) → 책임감.',
-          '"responsible" = 책임감 있는 → 신뢰와 직접 연결된다.',
-          'polite(공손한)/strong(강한)/pleasant(상냥한)은 "a sense of trust that one can be relied on"과 직접 관련 없다 → 정답 (4) responsible.',
+          '"You can trust him to take care of the class" (he can be counted on) → shows a sense of responsibility.',
+          '"responsible" means having a sense of responsibility → this directly connects to being trustworthy.',
+          'polite (well-mannered) / strong (powerful) / pleasant (friendly and agreeable) are not directly related to "a sense of trust that one can be relied on" → Answer: (4) responsible.',
         ],
-        tip: '"trust someone to do something"은 책임감(responsible)과 짝지어 자주 쓰입니다.',
+        tip: '"trust someone to do something" is often paired with the word \'responsible\'.',
       },
     },
     {
@@ -527,13 +527,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"is ~ for health"는 표준 경고 표현에 맞는 형용사를 고른다.',
+        method: '"is ~ for health" — choose the adjective that fits the standard warning phrase.',
         steps: [
-          '"harmful to your health"(건강에 해로운)는 흡연 경고에서 가장 흔히 쓰이는 표현.',
-          'fearful(두려운)/hurtful(상처 주는, 보통 감정에)/painful(아픈)은 "is bad for health"는 표준 표현이 아니다.',
-          '따라서 정답은 (4) harmful.',
+          '"harmful to your health" is the most commonly used expression in health warnings, such as on cigarette labels.',
+          'fearful (feeling afraid) / hurtful (causing emotional pain) / painful (causing physical pain) — note that "is bad for health" is not a standard expression.',
+          'Therefore, the correct answer is (4) harmful.',
         ],
-        tip: '"harmful to your health"는 흡연·오염 등 건강 경고에서 자주 쓰이는 정해진 표현입니다.',
+        tip: '"harmful to your health" is a fixed expression commonly used in health warnings about smoking, pollution, and similar topics.',
       },
     },
 
@@ -562,13 +562,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She told (21) ________ that we would be participating in the \'Clean Plate\' campaign.',
           answer: 'D',
           solution: {
-            method: 'Miss Yeo가 "our class (our class)"에게 한 말의 목적어를 고른다.',
+            method: 'Choose the object that refers to who Miss Yeo spoke to — "our class".',
             steps: [
-              '문장 앞: "Miss Yeo told our class." — 선생님이 학급 전체에게 말함.',
-              '"we (the whole class)"를 가리키는 목적격 대명사는 "us".',
-              '보기에서 us는 (D) → 정답 (D).',
+              'The sentence starts with: "Miss Yeo told our class." — the teacher spoke to the whole class.',
+              'The object pronoun that refers to "we (the whole class)" is "us".',
+              'From the options, us is (D) → The correct answer is (D).',
             ],
-            tip: '"told + object"에서 목적어는 말을 들은 대상을 가리키는 목적격 대명사입니다.',
+            tip: 'In "told + object", the object is the object pronoun that refers to the person or people who received the message.',
           },
         },
         {
@@ -578,13 +578,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Miss Yeo instructed all of us to order only what (22) ________ could finish to avoid wastage.',
           answer: 'E',
           solution: {
-            method: '"all of us (all of us)"를 가리키는 주어 대명사를 고른다.',
+            method: 'Choose the subject pronoun that refers to "all of us".',
             steps: [
-              '"all of us"(우리 모두)가 다 먹을 수 있는 만큼만 시키라는 지시.',
-              '"we"를 가리키는 주어 대명사는 "we".',
-              '보기에서 we는 (E) → 정답 (E).',
+              '"All of us" were told to order only as much food as everyone could eat.',
+              'The subject pronoun that refers to "we" is "we".',
+              'From the options, we is (E) → The correct answer is (E).',
             ],
-            tip: '목적격(us)이 이미 언급됐다면, 같은 사람들을 주어로 가리킬 때는 주격(we)을 씁니다.',
+            tip: 'If the object pronoun (us) has already been mentioned, use the subject pronoun (we) when referring to the same people as the subject.',
           },
         },
         {
@@ -594,13 +594,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'When I got home, I told (23) ________ mother about the campaign.',
           answer: 'C',
           solution: {
-            method: '화자(I) 자신의 엄마를 가리키는 소유격을 고른다.',
+            method: 'Choose the possessive pronoun that refers to the speaker\'s (I) own mum.',
             steps: [
-              '주어가 "I"(나)이고, "Mum"는 나의 엄마.',
-              '1인칭 소유격은 "my".',
-              '보기에서 my는 (C) → 정답 (C).',
+              'The subject is \'I\', and \'Mum\' is my mum.',
+              'The first-person possessive pronoun is \'my\'.',
+              'In the options, \'my\' is (C) → Answer is (C).',
             ],
-            tip: '"I"의 소유격은 my입니다(my mother = 나의 엄마).',
+            tip: 'The possessive pronoun for \'I\' is \'my\' (my mother = my mum).',
           },
         },
         {
@@ -610,13 +610,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She was happy as (24) ________ will teach me good eating habits.',
           answer: 'B',
           solution: {
-            method: '앞에서 언급된 사물(캠페인)을 대신하는 대명사를 고른다.',
+            method: 'Choose the pronoun that replaces the thing (the campaign) mentioned earlier.',
             steps: [
-              '문맥상 "To teach good eating habits"의 주체는 앞서 언급된 "the campaign"(캠페인, 사물).',
-              '사물을 대신하는 주어 대명사는 "it".',
-              '보기에서 it은 (B) → 정답 (B).',
+              'From the context, the one doing \'To teach good eating habits\' is \'the campaign\' mentioned earlier — a thing.',
+              'The subject pronoun used to replace a thing is \'it\'.',
+              'In the options, \'it\' is (B) → Answer is (B).',
             ],
-            tip: '캠페인/제도처럼 사물·개념을 가리킬 때는 it을 씁니다.',
+            tip: 'When referring to a thing or concept such as a campaign or programme, use \'it\'.',
           },
         },
         {
@@ -626,13 +626,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'The next day, (25) ________ waited for Miss Yeo to give me more details about the campaign.',
           answer: 'A',
           solution: {
-            method: '뒤에 나오는 "give me"의 me와 같은 사람(화자 자신)을 가리키는 주어 대명사를 고른다.',
+            method: 'Choose the subject pronoun that refers to the same person as \'me\' in \'give me\' later in the sentence — the speaker themselves.',
             steps: [
-              '"...give me more details" — me는 화자 자신.',
-              '화자 자신을 가리키는 1인칭 단수 주어는 "I".',
-              '보기에서 I는 (A) → 정답 (A). (남은 단어 없이 5개 모두 사용 완료)',
+              '\'...give me more details\' — \'me\' refers to the speaker themselves.',
+              'The first-person singular subject pronoun referring to the speaker themselves is \'I\'.',
+              'In the options, \'I\' is (A) → Answer is (A). (All 5 words have been used with none left over.)',
             ],
-            tip: '문장 안에 "me"가 나오면 같은 문장의 주어는 보통 "I"입니다(같은 화자).',
+            tip: 'When \'me\' appears in a sentence, the subject of the same sentence is usually \'I\' (same speaker).',
           },
         },
       ],
@@ -661,13 +661,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She wanted to own a (26) ________, but her parents could not afford to buy one.',
           answer: 'C',
           solution: {
-            method: '"Wanting to have one because of loving animals"이 무엇인지 생각한다.',
+            method: 'Think about what \'Wanting to have one because of loving animals\' means.',
             steps: [
-              '"Hazel adored animals. She wanted to own a ___" → 키우고 싶은 동물 = 애완동물.',
-              '"pet"(애완동물)이 가장 자연스럽다.',
-              '보기에서 pet은 (C) → 정답 (C).',
+              '\'Hazel adored animals. She wanted to own a ___\' → The animal she wants to keep = a pet.',
+              '\'pet\' is the most natural word to use here.',
+              'In the options, pet is (C) → Answer is (C).',
             ],
-            tip: '"own a pet"은 애완동물을 키운다는 뜻의 흔한 표현입니다.',
+            tip: '\'own a pet\' is a common expression meaning to keep a pet.',
           },
         },
         {
@@ -677,13 +677,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Hazel was at the park when she heard an animal (27) ________ in pain.',
           answer: 'E',
           solution: {
-            method: '아픈 동물이 내는 소리를 나타내는 단어를 고른다.',
+            method: 'Choose the word that describes the sound a hurt animal makes.',
             steps: [
-              '"heard an animal ___ in pain" — 아파서 내는 소리.',
-              '"whining" = 낑낑대는 소리 → 아픈 동물(특히 개)이 내는 소리.',
-              '보기에서 whining은 (E) → 정답 (E).',
+              '\'heard an animal ___ in pain\' — a sound made because of pain.',
+              '\'whining\' = a whimpering sound → the sound a hurt animal (especially a dog) makes.',
+              'In the options, whining is (E) → Answer is (E).',
             ],
-            tip: '"whining"은 강아지가 아프거나 슬플 때 내는 낑낑거리는 소리를 나타냅니다.',
+            tip: '\'whining\' describes the whimpering sound a puppy makes when it is hurt or sad.',
           },
         },
         {
@@ -693,13 +693,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'It was a stray puppy with many (28) ________ on its body.',
           answer: 'D',
           solution: {
-            method: '강아지 몸에 난 상처의 종류를 나타내는 단어를 고른다.',
+            method: 'Choose the word that describes the type of wounds found on the puppy\'s body.',
             steps: [
-              '"a stray puppy with many ___ on its body" — 몸에 난 상처들.',
-              '"scratches" = 긁힌 상처들 → 아파서 낑낑거리는 강아지의 상태와 일치.',
-              '보기에서 scratches는 (D) → 정답 (D).',
+              '\'a stray puppy with many ___ on its body\' — wounds on its body.',
+              '\'scratches\' = scratch marks on the body → matches the condition of a puppy that is whining in pain.',
+              'In the options, scratches is (D) → Answer is (D).',
             ],
-            tip: '뒤에 나오는 "the vet applied some medicine on the scratches"와 연결해 확인할 수 있습니다.',
+            tip: 'You can confirm this by connecting it to the phrase that comes after: \'the vet applied some medicine on the scratches\'.',
           },
         },
         {
@@ -709,13 +709,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She gently (29) ________ the puppy to a veterinary clinic nearby.',
           answer: 'A',
           solution: {
-            method: '강아지를 동물병원까지 옮긴 동작을 나타내는 동사를 고른다.',
+            method: 'Choose the verb that describes the action of bringing the puppy to the animal clinic.',
             steps: [
-              '"gently ___ the puppy to a veterinary clinic" — 강아지를 조심스럽게 데려갔다.',
-              '"carried" = (안아서) 데려갔다 → 아픈 강아지를 옮기는 동작에 자연스럽다.',
-              '보기에서 carried는 (A) → 정답 (A).',
+              '\'gently ___ the puppy to a veterinary clinic\' — someone carefully brought the puppy there.',
+              '\'carried\' means to hold and bring someone or something — this fits naturally as an action of moving an injured puppy.',
+              'In the options, \'carried\' is (A) → The answer is (A).',
             ],
-            tip: '"gently carried"는 다친 동물을 조심스럽게 안아 옮길 때 쓰는 표현입니다.',
+            tip: '\'gently carried\' is an expression used when carefully holding and moving an injured animal.',
           },
         },
         {
@@ -725,13 +725,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'The vet applied some (30) ________ on the scratches.',
           answer: 'B',
           solution: {
-            method: '상처에 발라주는 것을 나타내는 단어를 고른다.',
+            method: 'Choose the word that describes something being put onto the scratches.',
             steps: [
-              '"The vet applied some ___ on the scratches" — 상처에 무언가를 발랐다.',
-              '"medicine" = 약 → 상처에 바르는 약품.',
-              '보기에서 medicine은 (B) → 정답 (B). (5개 보기 모두 사용 완료)',
+              '\'The vet applied some ___ on the scratches\' — the vet put something on the scratches.',
+              '\'medicine\' means medication → something that is applied onto a wound.',
+              'In the options, \'medicine\' is (B) → The answer is (B). (All 5 options have now been used.)',
             ],
-            tip: '"apply medicine on a wound"는 상처에 약을 바른다는 뜻의 표현입니다.',
+            tip: '\'apply medicine on a wound\' is an expression that means to put medicine onto a wound.',
           },
         },
       ],

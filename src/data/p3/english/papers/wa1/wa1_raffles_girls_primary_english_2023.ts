@@ -1,12 +1,12 @@
 // =============================================================================
 // src/data/p3/english/papers/wa1_raffles_girls_primary_english_2023.ts
-// Raffles Girls' Primary School — 2023 Weighted Assessment 1 (English) — Primary 3
-// 원본 PDF: P3_English_WA1.pdf, 물리적 페이지 148–156 (시험지 표지 p.1–8)
+// Raffles Girls'Primary School — 2023 Weighted Assessment 1 (English) — Primary 3
+// Original PDF: P3_English_WA1.pdf, physical pages 148–156 (exam paper cover p.1–8)
 // Total Time: 50 minutes / Total: 15 marks (Section A 7 + Section B 8)
-// 듣기·작문 제외. 모든 문제 100% 전사 + 상세 solution 포함.
+// Listening and composition excluded. All questions 100% transcribed + detailed solutions included.
 // =============================================================================
 
-import type { EnglishPaper } from '../types';
+import type { EnglishPaper } from'../types';
 
 export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
   meta: {

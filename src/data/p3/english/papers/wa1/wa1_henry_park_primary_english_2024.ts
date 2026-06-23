@@ -46,13 +46,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: '"Which movie shall (1) ________ watch?" asked Max eagerly.',
           answer: 'we',
           solution: {
-            method: '말하는 사람과 듣는 사람을 모두 포함하는 주어 대명사를 고른다.',
+            method: 'Choose the subject pronoun that includes both the speaker and the listener.',
             steps: [
-              'Max가 자신과 Sarah 두 사람이 "together" 볼 영화를 묻고 있다.',
-              '화자(Max) + 청자(Sarah)를 함께 가리키는 1인칭 복수 주어는 "we".',
-              '"shall we watch?"는 함께 무엇을 할지 제안할 때 쓰는 자연스러운 표현.',
+              'Max is asking which movie the two of them — Max and Sarah — will watch \'together\'.',
+              'The 1st person plural subject that refers to both the speaker (Max) and the listener (Sarah) together is \'we\'.',
+              '\'Shall we watch?\' is a natural expression used when suggesting something to do together.',
             ],
-            tip: '"shall we ~?"는 "Shall we ~?"라는 권유/제안 표현으로 자주 출제됩니다.',
+            tip: '\'Shall we ~?\' is a suggestion or invitation expression that often appears in exam questions.',
           },
         },
         {
@@ -62,13 +62,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: '"Do (2) ________ want to watch the latest movie, \'Wonka\'?" suggested Sarah.',
           answer: 'you',
           solution: {
-            method: 'Sarah가 상대방(Max)에게 직접 묻는 상황의 주어를 찾는다.',
+            method: 'Find the subject that shows Sarah is asking the other person (Max) directly.',
             steps: [
-              'Sarah가 Max에게 "Do you want to ~?"라고 직접 물어보고 있다.',
-              '듣는 상대 한 사람을 가리키는 2인칭 주어는 "you".',
-              '"Do you want ~?"는 상대의 의향을 묻는 기본 문형.',
+              'Sarah is asking Max directly using \'Do you want to ~?\'.',
+              'The 2nd person subject that refers to one person you are speaking to is \'you\'.',
+              '\'Do you want ~?\' is a basic sentence pattern used to ask about someone else\'s wishes.',
             ],
-            tip: '상대에게 직접 질문할 때 동사 do와 어울리는 주어는 보통 you입니다.',
+            tip: 'When asking someone a direct question, the subject that goes with the verb \'do\' is usually \'you\'.',
           },
         },
         {
@@ -78,13 +78,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: '"My friends watched it yesterday and (3) ________ liked it."',
           answer: 'they',
           solution: {
-            method: '앞에 나온 복수 명사(My friends)를 대신하는 대명사를 고른다.',
+            method: 'Choose the pronoun that replaces the plural noun (\'My friends\') mentioned earlier.',
             steps: [
-              '바로 앞 주어가 "My friends"(복수 사람).',
-              '복수의 사람을 대신하는 주어 대명사는 "they".',
-              '"they liked it"으로 문장이 자연스럽게 이어진다.',
+              'The subject just before is \'My friends\', which is plural and refers to people.',
+              'The subject pronoun that replaces plural people is \'they\'.',
+              'The sentence continues naturally as \'they liked it\'.',
             ],
-            tip: '대명사는 바로 앞에 나온 명사가 누구/무엇인지를 먼저 확인하고 고릅니다.',
+            tip: 'When choosing a pronoun, always check who or what the noun mentioned just before is referring to.',
           },
         },
         {
@@ -94,13 +94,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'Max agreed and (4) ________ nodded.',
           answer: 'he',
           solution: {
-            method: '문장의 주어가 남자 한 명(Max)임을 확인한다.',
+            method: 'Check that the subject of the sentence is one male person (Max).',
             steps: [
-              '"Max agreed and ___ nodded." — 고개를 끄덕인 사람은 Max.',
-              'Max는 남자 한 명이므로 3인칭 단수 남성 주어 "he".',
-              '남은 보기 중 he만 사용되지 않았으므로 he가 정답(단어는 ONCE only).',
+              '"Max agreed and ___ nodded." — The person who nodded is Max.',
+              'Max is one male person, so the correct third-person singular male pronoun is "he".',
+              'Among the remaining answer choices, "he" is the only word not yet used, so "he" is the answer (each word is used ONCE only).',
             ],
-            tip: '"Use each word ONCE only" 규칙이 있으면, 마지막 빈칸은 남은 단어로 검증할 수 있습니다.',
+            tip: 'When you see the rule "Use each word ONCE only", you can check the last blank by seeing which word is left over.',
           },
         },
       ],
@@ -131,13 +131,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'He enjoys (5) ________ sunflowers in his garden.',
           answer: 'growing',
           solution: {
-            method: 'enjoy 뒤에는 동명사(-ing)가 온다는 규칙을 적용한다.',
+            method: 'Apply the rule that a gerund (-ing form) comes after the verb "enjoy".',
             steps: [
-              '동사 enjoy는 목적어로 동명사(-ing)를 취한다 (enjoy doing).',
-              '따라서 "enjoys growing"이 올바른 형태.',
-              'to-부정사(to grow)는 enjoy와 함께 쓰지 않는다.',
+              'The verb "enjoy" takes a gerund (-ing form) as its object (enjoy doing).',
+              'Therefore, "enjoys growing" is the correct form.',
+              'The to-infinitive (to grow) is not used together with "enjoy".',
             ],
-            tip: 'enjoy, finish, keep, avoid 뒤에는 항상 -ing 형태가 옵니다.',
+            tip: 'After enjoy, finish, keep, and avoid, always use the -ing form.',
           },
         },
         {
@@ -147,13 +147,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'The sunflowers have (6) ________ so tall!',
           answer: 'grown',
           solution: {
-            method: '"have + Past Participle" 현재완료 형태를 만든다.',
+            method: '"have + Past Participle" makes the Present Perfect tense.',
             steps: [
-              '조동사 "have"가 앞에 있으므로 뒤에는 과거분사가 필요.',
-              'grow의 과거분사는 grown (grow–grew–grown).',
-              '"have grown so tall" = 지금 보니 (이미) 그만큼 자라 있다.',
+              'Because the helping verb "have" comes before the blank, a Past Participle is needed after it.',
+              'The Past Participle of "grow" is "grown" (grow – grew – grown).',
+              '"have grown so tall" means they have already grown that much by now.',
             ],
-            tip: 'have/has 뒤에는 동사의 과거분사(3단 변화 세 번째 형태)가 옵니다.',
+            tip: 'After have or has, use the Past Participle of the verb (the third form in the three-form verb change).',
           },
         },
         {
@@ -163,13 +163,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: '"How did they (7) ________ so quickly?" Alicia asked.',
           answer: 'grow',
           solution: {
-            method: '조동사 did 뒤에는 동사원형이 온다는 규칙을 적용한다.',
+            method: 'After the helping verb \'did\', we always use the base form of the verb.',
             steps: [
-              '의문문 "How did they ___?"에서 시제는 이미 did가 담당.',
-              'did 뒤에는 항상 동사원형(grow)이 온다.',
-              'grew(과거형)는 did와 함께 쓰지 않는다.',
+              'In the question \'How did they ___?\', the word \'did\' already shows the past tense.',
+              'After \'did\', we always use the base form of the verb, which is \'grow\'.',
+              '\'Grew\' (past tense form) cannot be used together with \'did\'.',
             ],
-            tip: 'do/does/did가 들어간 문장의 본동사는 반드시 동사원형입니다.',
+            tip: 'When a sentence has \'do\', \'does\', or \'did\', the main verb must always be in its base form.',
           },
         },
         {
@@ -179,13 +179,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'Tim wondered how the sunflowers (8) ________ overnight.',
           answer: 'grew',
           solution: {
-            method: '과거 사건을 서술하는 단순과거 동사를 고른다.',
+            method: 'Choose the Simple Past verb that describes something that happened in the past.',
             steps: [
-              '문장 전체가 과거 이야기(wondered, planted 등 과거시제)이다.',
-              '주어 "the sunflowers"는 복수이므로 "was growing"(단수)은 부적합.',
-              '밤사이 자란 일을 나타내는 단순과거형 "grew"가 정답 (남은 단어로도 확인 가능).',
+              'The whole passage is a past story, as shown by past tense words like \'wondered\' and \'planted\'.',
+              'The subject \'the sunflowers\' is plural, so \'was growing\' (singular) is incorrect.',
+              'The Simple Past form \'grew\' is the correct answer to show what happened overnight (you can also check using the remaining words).',
             ],
-            tip: '주어가 복수면 was가 아니라 were를 쓰며, 단순한 과거 사실은 단순과거형으로 표현합니다.',
+            tip: 'When the subject is plural, we use \'were\' instead of \'was\'. A simple past fact is expressed using the Simple Past tense.',
           },
         },
       ],
@@ -207,14 +207,14 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
         'When ________________________________________.',
       answer: 'When Jason was cycling at the park, he saw his teacher.',
       solution: {
-        method: '"When"으로 시작하는 시간 부사절로 두 문장을 연결한다.',
+        method: 'Use a time clause starting with \'When\' to join two sentences.',
         steps: [
-          '두 사건이 같은 시간에 일어났음을 "When"으로 표현한다.',
-          '첫 문장을 종속절로: "When Jason was cycling at the park,".',
-          '두 번째 문장을 주절로 잇되, 반복되는 Jason은 대명사 he로 바꾼다: "he saw his teacher".',
-          '완성: "When Jason was cycling at the park, he saw his teacher."',
+          'Use \'When\' to show that two events happened at the same time.',
+          'Turn the first sentence into a subordinate clause: \'When Jason was cycling at the park,\'.',
+          'Join the second sentence as the main clause, and replace the repeated name \'Jason\' with the pronoun \'he\': \'he saw his teacher\'.',
+          'The completed sentence is: \'When Jason was cycling at the park, he saw his teacher.\'',
         ],
-        tip: '같은 사람이 반복되면 두 번째는 대명사(he/she)로 바꿔 자연스럽게 만듭니다. 종속절 뒤에는 쉼표(,)를 찍습니다.',
+        tip: 'When the same person is mentioned again, replace their name with a pronoun (he/she) to make the sentence sound more natural. Remember to put a comma (,) after a subordinate clause.',
       },
     },
     {
@@ -230,13 +230,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
         'Both ________________________________________.',
       answer: 'Both Ali and Juliet like chocolate milk.',
       solution: {
-        method: '"Both ... and ..." 구문으로 두 주어를 묶는다.',
+        method: 'Use the \'Both ... and ...\' structure to join two subjects together.',
         steps: [
-          '두 사람이 같은 것을 좋아하므로 "Both A and B" 형태로 합친다.',
-          '주어가 "Both Ali and Juliet"(복수)가 되면 동사는 likes → like로 바꾼다.',
-          '완성: "Both Ali and Juliet like chocolate milk."',
+          'Since two people like the same thing, combine them using the \'Both A and B\' structure.',
+          'When the subject becomes \'Both Ali and Juliet\' (plural), change the verb from likes → like.',
+          'Completed sentence: "Both Ali and Juliet like chocolate milk."',
         ],
-        tip: '"Both A and B"는 항상 복수 취급이므로 동사에 -s를 붙이지 않습니다 (like, not likes).',
+        tip: '\'Both A and B\' is always treated as plural, so do not add -s to the verb (use like, not likes).',
       },
     },
 
@@ -274,13 +274,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '지문에서 "leaves rustling"과 함께 언급된 소리를 그대로 찾는다.',
+            method: 'Find the sound mentioned together with \'leaves rustling\' in the passage.',
             steps: [
-              '첫 단락: "they could hear birds chirping and leaves rustling."',
-              '"leaves rustling"과 짝지어진 소리는 "birds chirping".',
-              '따라서 정답은 (2) birds chirping.',
+              'First paragraph: "they could hear birds chirping and leaves rustling."',
+              'The sound paired with \'leaves rustling\' is \'birds chirping\'.',
+              'Therefore, the answer is (2) birds chirping.',
             ],
-            tip: '빈칸 채우기 MCQ는 지문에서 같은 문장을 찾아 그대로 대조하면 가장 정확합니다.',
+            tip: 'For fill-in-the-blank MCQ questions, find the exact sentence in the passage and match it directly for the most accurate answer.',
           },
         },
         {
@@ -295,14 +295,14 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '각 인물이 무엇을 보고 싶어 했는지 구분한다.',
+            method: 'Identify what each character wanted to see.',
             steps: [
-              '지문: "He hoped to see a kingfisher." (He = Ben)',
-              'crocodile을 보고 싶어 한 사람은 Amelia이다.',
-              'monitor lizard는 이미 물에서 본 동물.',
-              '따라서 Ben이 보고 싶어 한 것은 (2) kingfisher.',
+              'From the passage: "He hoped to see a kingfisher." (He = Ben)',
+              'The person who wanted to see a crocodile was Amelia.',
+              'The monitor lizard was the animal they had already seen in the water.',
+              'Therefore, Ben wanted to see (2) kingfisher.',
             ],
-            tip: '인물별로 원한 대상이 다를 때는 누가(he/she) 한 말·생각인지 꼭 구분하세요.',
+            tip: 'When different characters want different things, always check whose words or thoughts they are (he/she).',
           },
         },
         {
@@ -317,13 +317,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           answer:
             'Ben forgave Amelia for frightening the bird away = 2; Ben reminded Amelia about their Dad\'s instructions = 1; Ben praised Amelia for being quiet and not frightening the bird = 3',
           solution: {
-            method: '사건이 지문에 등장한 순서대로 번호를 매긴다.',
+            method: 'Number the events in the order they appear in the passage.',
             steps: [
-              '먼저: 공원 입장 직후 Ben이 "Dad told us not to frighten the birds..."라며 아빠의 당부를 상기시킨다 → 1.',
-              '다음: 새를 쫓아낸 뒤 Ben이 "It\'s all right, Amelia."라며 용서한다 → 2.',
-              '마지막: Amelia가 조용히 해서 물총새를 볼 수 있게 되자 "Well done, little sister."라고 칭찬한다 → 3.',
+              'First: Right after entering the park, Ben reminds everyone of Dad\'s instructions by saying \'Dad told us not to frighten the birds...\' → 1.',
+              'Next: After the bird is scared away, Ben forgives Amelia by saying \'It\'s all right, Amelia.\' → 2.',
+              'Last: When Amelia stays quiet and they get to see the kingfisher, Ben praises her by saying \'Well done, little sister.\' → 3.',
             ],
-            tip: '순서 문제는 지문을 위에서 아래로 따라가며 사건이 나오는 위치를 표시하면 헷갈리지 않습니다.',
+            tip: 'For sequence questions, follow the passage from top to bottom and mark where each event appears — this helps you avoid mixing up the order.',
           },
         },
         {
@@ -333,13 +333,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'Read the statement and tick ("True" or "False"): Amelia spotted the kingfisher first.',
           answer: 'False',
           solution: {
-            method: '누가 먼저 새를 발견했는지 지문에서 확인한다.',
+            method: 'Check the passage to find out who spotted the bird first.',
             steps: [
-              '지문: "Suddenly, Ben stopped walking. He had spotted a bird... \'It\'s a kingfisher.\'"',
-              '물총새를 처음 발견한 사람은 Ben이다.',
-              '따라서 "Amelia discovered it first"는 거짓 → False.',
+              'Passage: \'Suddenly, Ben stopped walking. He had spotted a bird... "It\'s a kingfisher."\'',
+              'The first person to spot the kingfisher was Ben.',
+              'Therefore, \'Amelia discovered it first\' is wrong → False.',
             ],
-            tip: 'True/False 문제는 문장 속 핵심 단어(여기서는 "first")가 지문과 맞는지 따져봅니다.',
+            tip: 'For True/False questions, check whether the key word in the statement (here, \'first\') matches what the passage says.',
           },
         },
         {
@@ -350,13 +350,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
             'Read the statement and tick ("True" or "False"): Amelia yelled loudly and frightened the kingfisher away.',
           answer: 'True',
           solution: {
-            method: 'Amelia의 행동과 그 결과를 지문에서 확인한다.',
+            method: 'Check the passage for what Amelia did and what happened as a result.',
             steps: [
-              '지문: "\'Where?\' she yelled." — Amelia가 큰 소리를 냈다.',
-              '이어서 "Startled, the bird flapped its wings and flew off."',
-              'Amelia의 고함 때문에 새가 놀라 날아갔으므로 → True.',
+              'Passage: \'"Where?" she yelled.\' — Amelia made a loud noise.',
+              'Next: \'Startled, the bird flapped its wings and flew off.\'',
+              'Because Amelia\'s shouting startled the bird and made it fly away → True.',
             ],
-            tip: '원인(고함)과 결과(새가 날아감)가 지문에 모두 나오면 True로 판단합니다.',
+            tip: 'If both the cause (shouting) and the effect (bird flying away) are stated in the passage, we decide it is True.',
           },
         },
         {
@@ -371,13 +371,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: 'B',
           solution: {
-            method: '두 단어의 뜻을 비교해 "Squinting to look carefully"에 맞는 것을 고른다.',
+            method: 'Compare the meanings of the two words and choose the one that matches \'Squinting to look carefully\'.',
             steps: [
-              'gripped = 꽉 붙잡다 (손의 동작) → 보는 것과 관련 없음.',
-              'squinted = 눈을 가늘게 뜨다 (잘 보려고 애쓸 때의 동작).',
-              '눈을 애써 집중하는 의미는 (B) squinted.',
+              'gripped = to hold tightly (an action of the hands) → not related to seeing.',
+              'squinted = to partly close your eyes (an action done when trying to see better).',
+              'The word that means trying hard to focus with your eyes is (B) squinted.',
             ],
-            tip: '단어 선택 문제는 각 단어가 가리키는 신체 동작/의미를 떠올려 질문의 뜻과 연결합니다.',
+            tip: 'For word choice questions, think about the body action or meaning each word describes, then match it to what the question is asking.',
           },
         },
         {
@@ -387,13 +387,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'What does the word "them" in line 13 refer to?',
           answer: 'the tears (that welled up in Amelia\'s eyes)',
           solution: {
-            method: '대명사 them 바로 앞에 나온 복수 명사를 찾는다.',
+            method: 'Find the plural noun that appears just before the pronoun \'them\'.',
             steps: [
-              '해당 문장: "tears welled up in her eyes. She wiped them away".',
-              '"wiped them away"에서 닦아낸 대상은 바로 앞의 "tears".',
-              '따라서 them = the tears (Amelia의 눈에 고인 눈물).',
+              'The sentence is: \'tears welled up in her eyes. She wiped them away\'.',
+              'In \'wiped them away\', the thing being wiped is \'tears\', which appears just before.',
+              'Therefore, them = the tears (the tears that welled up in Amelia\'s eyes).',
             ],
-            tip: '지시어(them/it/they) 문제는 그 단어 바로 앞 문장에서 가장 가까운 명사를 먼저 확인합니다.',
+            tip: 'For pronoun reference questions (them / it / they), always check the sentence just before for the closest noun first.',
           },
         },
         {
@@ -404,13 +404,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
             'Name two things that their father advised them not to do when observing birds.\n(a) ________\n(b) ________',
           answer: '(a) frighten the birds  (b) destroy their nests',
           solution: {
-            method: '아빠의 당부가 적힌 문장을 찾아 두 가지를 나눈다.',
+            method: 'Find the sentence where Dad gives his instructions, then separate the two things he mentioned.',
             steps: [
-              '지문: "Dad told us not to frighten the birds or destroy their nests".',
-              '"or"로 두 가지 금지 사항이 연결되어 있다.',
-              '(a) 새를 놀라게 하지 말 것 / (b) 둥지를 부수지 말 것.',
+              'Passage: \'Dad told us not to frighten the birds or destroy their nests\'.',
+              'The word \'or\' connects the two things that are not allowed.',
+              '(a) Do not startle the birds / (b) Do not destroy the nest.',
             ],
-            tip: '"two things"를 요구하면 지문 한 문장 안의 "and/or"로 묶인 두 항목을 각각 답으로 나누세요.',
+            tip: 'When a question asks for "two things", split the two items joined by "and/or" in one sentence from the passage into two separate answers.',
           },
         },
         {
@@ -423,13 +423,13 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
             'At the end of the story: ________',
           answer: 'At the start: excited;  At the end: calm',
           solution: {
-            method: '이야기 처음과 끝에서 Amelia의 행동 묘사를 찾아 보기 단어와 연결한다.',
+            method: 'Find descriptions of Amelia\'s actions at the beginning and end of the story, then match them to the answer choices.',
             steps: [
-              '처음: "Amelia squealed, jumping up and down." → 신난 모습 = excited.',
-              '끝: "She kept very quiet and did not make a sound." → 차분한 모습 = calm.',
-              '따라서 시작=excited, 끝=calm.',
+              'Beginning: "Amelia squealed, jumping up and down." → This shows she was excited.',
+              'End: "She kept very quiet and did not make a sound." → This shows she was calm.',
+              'Therefore, beginning = excited, end = calm.',
             ],
-            tip: '인물의 성격/기분 문제는 그 사람이 "What someone did (action)"를 근거로 형용사를 고릅니다.',
+            tip: 'For questions about a character\'s personality or feelings, choose the adjective based on what that person did (their action).',
           },
         },
       ],

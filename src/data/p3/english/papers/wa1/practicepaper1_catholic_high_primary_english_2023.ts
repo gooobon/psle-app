@@ -4,13 +4,13 @@
 // 원본 PDF: P3_English_WA1.pdf, 물리적 페이지 96–106 (시험지 표지 p.1–11)
 // Total: 50 marks
 // 주의: 표지에 연도가 인쇄돼 있지 않음(내부 출처 인용은 What's Up 2021.10).
-//       모음집 배열상 2023년으로 처리(검증 권장). 이 시험지는 WA가 아닌 'Practice Paper 1'.
-// 듣기·작문 제외. 모든 문제 100% 전사 + 상세 solution 포함.
-// 구성: A문법MCQ(8) B어휘MCQ(6) C문법클로즈(4) D문법클로즈(4) E어휘클로즈(3)
-//       F교정(5) G독해클로즈(4) H독해(8) I독해서술형(8) = 50점
+//       Arranged as 2023 in the collection (verification recommended). This paper is not WA but'Practice Paper 1'.
+// Listening and composition excluded. All questions 100% transcribed + detailed solutions included.
+// Structure: A Grammar MCQ(8) B Vocabulary MCQ(6) C Grammar Cloze(4) D Grammar Cloze(4) E Vocabulary Cloze(3)
+//       F Editing(5) G Comprehension Cloze(4) H Comprehension(8) I Comprehension Open-ended(8) = 50 marks
 // =============================================================================
 
-import type { EnglishPaper } from '../types';
+import type { EnglishPaper } from'../types';
 
 export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
   meta: {
@@ -943,10 +943,10 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
 
     // =========================================================================
     // Section I — Comprehension: Open-ended (4 x 2 marks) — Q42–45
-    // 지문: The Sad Peacock (공작과 나이팅게일, 요정)
+    // Passage: The Sad Peacock (Peacock, Nightingale, and Fairy)
     // =========================================================================
     {
-      kind: 'set',
+      kind:'set',
       id: 'chs-pp1-secI-comprehension',
       topic: 'ComprehensionOE',
       title: 'Section I — Comprehension: The Sad Peacock',

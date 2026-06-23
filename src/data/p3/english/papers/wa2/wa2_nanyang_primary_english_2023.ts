@@ -42,13 +42,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '명사의 수(단수/복수)와 거리(가까움/멈)를 본다.',
+        method: 'Look at the noun — is it singular or plural, and is it near or far?',
         steps: [
-          '"girl"은 단수 → these/those(복수) 제외.',
-          '"sitting over there"(저기 앉아 있는)는 멀리 있음 → this(가까움)가 아니라 that.',
-          '따라서 정답은 (2) That.',
+          '"girl" is singular → we cannot use these/those (which are plural).',
+          '"sitting over there" means the girl is far away → use that, not this (which is for things nearby).',
+          'So the correct answer is (2) That.',
         ],
-        tip: 'this/that=단수, these/those=복수. 가까우면 this/these, 멀면 that/those.',
+        tip: 'this/that = singular, these/those = plural. Use this/these for things nearby, and that/those for things far away.',
       },
     },
     {
@@ -67,13 +67,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '빈도부사(usually)로 현재 습관임을, 주어로 동사 형태를 정한다.',
+        method: 'The frequency adverb (usually) tells us it is a present habit, and the subject tells us which verb form to use.',
         steps: [
-          '"usually"는 평소 반복되는 일(현재 습관)을 나타낸다 → 현재시제.',
-          '주어 "The postman"은 3인칭 단수.',
-          '3인칭 단수 현재형은 동사에 -s를 붙인다 → delivers, 정답 (2).',
+          '"usually" describes something that happens regularly (a present habit) → use the Present Simple tense.',
+          'The subject "The postman" is third person singular.',
+          'For third person singular in the Present Simple, add -s to the verb → delivers. The correct answer is (2).',
         ],
-        tip: '주어가 he/she/단수명사이고 현재 습관이면 동사에 -s를 붙입니다.',
+        tip: 'If the subject is he/she/a singular noun and it is a present habit, add -s to the verb.',
       },
     },
     {
@@ -92,13 +92,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '명사의 가산 여부와 부정문 구조를 본다.',
+        method: 'Check whether the noun is countable or uncountable, and look at the sentence structure (negative).',
         steps: [
-          '"girls"는 셀 수 있는 복수 명사 → little/much(불가산용) 제외.',
-          '"are not ___ girls"(많지 않다) 구조에 어울리는 것은 many.',
-          'few는 보통 not 없이 쓰여(=거의 없다) "are not few"는 어색 → 정답 (3) many.',
+          '"girls" is a countable plural noun → we cannot use little or much (these are for uncountable nouns).',
+          'The structure "are not ___ girls" (meaning not many) fits the word many.',
+          'few is usually used without not (meaning hardly any), so "are not few" sounds unnatural → the correct answer is (3) many.',
         ],
-        tip: '가산 복수 명사의 양을 부정할 때는 not many를 씁니다.',
+        tip: 'When you want to say there is not a large number of a countable plural noun, use not many.',
       },
     },
 
@@ -121,13 +121,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '선인장(cactus)에 있고 손가락을 찌르는 것이 무엇인지 생각한다.',
+        method: 'Think about what is on a cactus that can poke your finger.',
         steps: [
-          '선인장 표면에는 뾰족한 가시가 있다.',
-          '가시 = prickles → 손가락을 찌른다(poked)는 표현과 맞는다.',
-          'tusks(엄니)/warts(사마귀)/whiskers(수염)는 선인장과 무관 → 정답 (3) prickles.',
+          'The surface of a cactus has sharp, pointed spikes.',
+          'Spikes = prickles → this matches the action of being poked (poked) by them.',
+          'tusks / warts / whiskers have nothing to do with a cactus → the correct answer is (3) prickles.',
         ],
-        tip: '특정 사물(cactus)과 짝지어지는 명사를 떠올리면 어휘 문제가 쉬워집니다.',
+        tip: 'When you think of nouns that are closely linked to a specific object (like cactus), vocabulary questions become much easier.',
       },
     },
     {
@@ -146,13 +146,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '문을 갑자기 세게 여는 동작을 나타내는 동사를 고른다.',
+        method: 'Choose the verb that best describes the action of suddenly opening a door with great force.',
         steps: [
-          '뒤에 서 있던 여동생이 깜짝 놀랐다(startling) → 문이 갑자기 세게 열렸음.',
-          'wrench = 힘껏 비틀어/잡아당기다 → "wrenched the door open"이 자연스럽다.',
-          'jiggle/wiggle(살살 흔들다)·prod(쿡 찌르다)는 세게 여는 의미와 약하다 → 정답 (4) wrenched.',
+          'The younger sister standing behind was startled (startling) → this tells us the door was flung open suddenly and forcefully.',
+          'wrench = to twist or pull hard → \'wrenched the door open\' sounds the most natural here.',
+          'jiggle / wiggle (to shake gently) and prod (to poke lightly) do not suggest a forceful opening → the correct answer is (4) wrenched.',
         ],
-        tip: '결과(여동생이 놀람)를 보고 동작의 강도에 맞는 동사를 고릅니다.',
+        tip: 'Look at the result (the sister was startled) to choose the verb that matches the strength of the action.',
       },
     },
     {
@@ -172,13 +172,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '궁지에 몰려 으르렁대는 멧돼지의 상태에 맞는 직유(simile)를 고른다.',
+        method: 'Choose the simile that best matches the state of a wild boar that is cornered and growling.',
         steps: [
-          '도망 못 가게 몰리자 으르렁댔다(growled) → 사납고 공격적인 상태.',
-          '"as fierce as a lion"(사자처럼 사나운)이 가장 잘 맞는다.',
-          'timid(소심한)/proud(거만한)/hungry(배고픈)는 으르렁대는 상황과 안 맞는다 → 정답 (1).',
+          'When it was cornered and could not escape, it growled → it is in a fierce and aggressive state.',
+          '\'as fierce as a lion\' (as fierce as a lion) fits the best.',
+          'timid / proud / hungry do not match a growling, cornered situation → the correct answer is (1).',
         ],
-        tip: '"as ~ as ..." 직유 문제는 앞 문장의 상황·행동(growled)과 어울리는 성질을 고릅니다.',
+        tip: 'For \'as ~ as ...\' simile questions, choose the quality that best matches the situation and action (growled) described in the sentence before it.',
       },
     },
 
@@ -206,13 +206,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Ali plays soccer for the school team. (7) ________ asked Mary and Raju to come and watch him play.',
           answer: 'B',
           solution: {
-            method: '앞 문장 주어(Ali)를 대신하는 대명사를 고른다.',
+            method: 'Choose the pronoun that replaces the subject (Ali) from the previous sentence.',
             steps: [
-              '바로 앞 주어가 "Ali"(남자 한 명).',
-              'Mary와 Raju에게 와서 보라고 부탁한 사람도 Ali.',
-              '남자 한 명을 대신하는 주어는 "he" → 보기 (B).',
+              'The subject just before is \'Ali\' (one male).',
+              'Ali is also the person who asked Mary and Raju to come and see.',
+              'The subject pronoun that replaces one male is \'he\' → Answer (B).',
             ],
-            tip: '대명사는 바로 앞에 나온 명사(여기서는 Ali)를 먼저 확인하고 고릅니다.',
+            tip: 'When choosing a pronoun, always check the noun that appeared just before (in this case, Ali).',
           },
         },
         {
@@ -222,12 +222,12 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: '(8) ________ both agreed and went to the match.',
           answer: 'F',
           solution: {
-            method: '"both"(둘 다)로 두 사람(Mary와 Raju)을 가리킴을 파악한다.',
+            method: 'Understand that \'both\' refers to two people (Mary and Raju) together.',
             steps: [
-              '"both agreed" — 두 사람(Mary와 Raju)이 모두 동의했다.',
-              '두 사람을 함께 가리키는 주어는 "they" → 보기 (F).',
+              '\'both agreed\' — both people (Mary and Raju) agreed.',
+              'The subject pronoun that refers to two people together is \'they\' → Answer (F).',
             ],
-            tip: '"both"가 있으면 주어는 보통 복수(they)입니다.',
+            tip: 'When you see \'both\', the subject pronoun is usually plural (they).',
           },
         },
         {
@@ -237,12 +237,12 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Mary was excited as (9) ________ had never been to a soccer match before.',
           answer: 'D',
           solution: {
-            method: '바로 앞 주어(Mary)를 대신하는 대명사를 고른다.',
+            method: 'Choose the pronoun that replaces the subject (Mary) from the previous sentence.',
             steps: [
-              '"Mary was excited as ___ had never been..." — 경기를 처음 보는 사람은 Mary.',
-              'Mary는 여자 한 명 → 주어 "she" → 보기 (D). (남은 A·C·E로도 확인 가능)',
+              '\'Mary was excited as ___ had never been...\' — Mary is the one who has never watched the match before.',
+              'Mary is one female → subject pronoun is \'she\' → Answer (D). (You can also check using the remaining options A, C, and E.)',
             ],
-            tip: '여자 한 명을 대신하는 주어 대명사는 she입니다.',
+            tip: 'The subject pronoun that replaces one female is \'she\'.',
           },
         },
       ],
@@ -258,7 +258,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
       topic: 'Editing',
       title: '(D) Editing for Spelling',
       instructions:
-        'Each of the underlined words contains a spelling error. Write the correct word in each box. (밑줄 친 단어 = creachers(10), inseks(11), ameizing(12))',
+        'Each of the underlined words contains a spelling error. Write the correct word in each box. (The underlined words are: creachers (10), inseks (11), ameizing (12))',
       passage:
         'Have you ever heard a hoot at night? This may be the call of an owl looking for its dinner.\n\n' +
         'Owls have an acute sense of hearing. This helps them to find small (10) [creachers] in the dark. As the owls fly, they look straight down so that they can search and listen for their prey. They eat mice, frogs, snakes and small birds. Sometimes, they eat (11) [inseks] such as beetles and grasshoppers. If you ever get to see an owl in action, you will find that it is an (12) [ameizing] animal. Unfortunately, it is hard to spot one in Singapore.',
@@ -271,13 +271,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the spelling of the underlined word: "to find small creachers in the dark."',
           answer: 'creatures',
           solution: {
-            method: '문맥(작은 생물)에 맞는 단어의 정확한 철자를 떠올린다.',
+            method: 'Think of the correct spelling of the word that fits the context (small living creatures).',
             steps: [
-              '잘못된 철자: creachers.',
-              '의미는 "living things/animals". 바른 단어는 creatures.',
-              '-ture로 끝나며 발음은 "wow / whoa"처럼 나지만 철자는 t-u-r-e.',
+              'Incorrect spelling: creachers.',
+              'The meaning is "living things/animals". The correct word is creatures.',
+              'It ends in -ture. Even though it sounds like "wow / whoa", the spelling is t-u-r-e.',
             ],
-            tip: 'creature, picture, nature처럼 "-ture"는 발음과 달리 t-u-r-e로 씁니다.',
+            tip: 'Words like creature, picture, and nature all end in "-ture" — even though it doesn\'t sound that way, always spell it t-u-r-e.',
           },
         },
         {
@@ -287,13 +287,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the spelling of the underlined word: "they eat inseks such as beetles."',
           answer: 'insects',
           solution: {
-            method: '딱정벌레·메뚜기를 가리키는 단어의 철자를 확인한다.',
+            method: 'Check the spelling of the word that refers to beetles and grasshoppers.',
             steps: [
-              '잘못된 철자: inseks.',
-              '딱정벌레와 메뚜기 같은 곤충 = insects.',
-              '발음상 "-ks"로 들려도 철자는 c-t-s(insect → insects).',
+              'Incorrect spelling: inseks.',
+              'Insects like beetles and grasshoppers = insects.',
+              'Even though it sounds like "-ks" when you say it, the spelling is c-t-s (insect → insects).',
             ],
-            tip: 'insect의 복수는 끝에 -s만 붙인 insects입니다(소리 나는 대로 -ks로 쓰지 않기).',
+            tip: 'To make insect plural, just add -s to get insects. Don\'t spell it with -ks the way it sounds.',
           },
         },
         {
@@ -303,13 +303,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the spelling of the underlined word: "it is an ameizing animal."',
           answer: 'amazing',
           solution: {
-            method: '"amazing / surprising"이라는 단어의 정확한 철자를 떠올린다.',
+            method: 'Think about the correct spelling of the word that means "amazing / surprising".',
             steps: [
-              '잘못된 철자: ameizing.',
-              '바른 단어는 amazing (amaze + -ing).',
-              'amaze의 e는 -ing 앞에서 탈락 → amazing (ei가 아니라 a).',
+              'Incorrect spelling: ameizing.',
+              'The correct word is amazing (amaze + -ing).',
+              'The e in amaze is dropped before adding -ing → amazing (the vowel is a, not ei).',
             ],
-            tip: 'amaze → amazing처럼 -e로 끝나는 동사는 -ing 붙일 때 e를 뺍니다.',
+            tip: 'Just like amaze → amazing, when a verb ends in -e, drop the e before adding -ing.',
           },
         },
       ],
@@ -347,7 +347,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '4',
           solution: {
-            method: '집(home)과 일터(work)를 구분해 일했던 장소를 찾는다.',
+            method: 'Tell the difference between home and work to find the place where someone worked.',
             steps: [
               '1단락: "walk from her home at Chinatown to Collyer Quay where she worked."',
               'Chinatown은 집, 일한 곳은 Collyer Quay.',
@@ -407,11 +407,11 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '4단락에서 "does not give up because of age"를 보여주는 여덟 단어 표현을 찾는다.',
             steps: [
-              '4단락: "...and does not let her age slow her down."',
-              '나이가 자신을 느리게 만들도록 두지 않는다 = 여전히 활동적.',
-              '여덟 단어: does / not / let / her / age / slow / her / down.',
+              'Paragraph 4: \'...and does not let her age slow her down.\'',
+              'Does not let her age slow her down = she is still active.',
+              'Eight words: does / not / let / her / age / slow / her / down.',
             ],
-            tip: '"8-word phrase"는 단어 수를 손가락으로 세어 정확히 여덟 개인지 확인하세요.',
+            tip: 'For the \'8-word phrase\', count each word on your fingers to check there are exactly eight.',
           },
         },
         {
@@ -426,13 +426,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           answer:
             'Madam Ng was adopted = 1; Madam Ng moved to a flat in Redhill = 3; Madam Ng worked at construction sites = 2',
           solution: {
-            method: '인생 사건을 시간 순서(어릴 때 → 성인 → 현재)로 배열한다.',
+            method: 'Arrange life events in time order (young → adult → present).',
             steps: [
-              '먼저: 어릴 때 입양됨("adopted when she was young") → 1.',
-              '성인이 되어: 공사장에서 일함("supported herself by working at construction sites") → 2.',
-              '현재: 은퇴 후 Redhill 아파트로 이사("retired and lives in a flat in Redhill") → 3.',
+              'First: adopted when she was young (\'adopted when she was young\') → 1.',
+              'As an adult: worked at construction sites (\'supported herself by working at construction sites\') → 2.',
+              'Present: retired and moved to a flat in Redhill (\'retired and lives in a flat in Redhill\') → 3.',
             ],
-            tip: '시간 순서 문제는 "childhood → adult → present (today)"처럼 인생 단계를 따라가면 쉽습니다.',
+            tip: 'For time order questions, just follow the life stages: childhood → adult → present (today).',
           },
         },
         {
@@ -443,13 +443,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             'Read the statement and tick "True" or "False": Madam Ng still supports herself after retirement.',
           answer: 'True',
           solution: {
-            method: '은퇴 후 수입원이 있는지 4단락에서 확인한다.',
+            method: 'Check Paragraph 4 to see if she has a source of income after retirement.',
             steps: [
-              '4단락: "She earns money by selling used cardboard that she collects from the neighbourhood."',
-              '은퇴 후에도 폐지를 팔아 스스로 돈을 번다.',
-              '따라서 "still supports herself/himself"는 사실 → True.',
+              'Paragraph 4: \'She earns money by selling used cardboard that she collects from the neighbourhood.\'',
+              'Even after retirement, she earns money on her own by selling cardboard.',
+              'So the statement \'still supports herself/himself\' is true → True.',
             ],
-            tip: '"still"(여전히)이 든 진술은 현재 상황을 지문에서 확인해 판단합니다.',
+            tip: 'For statements with \'still\', check the passage for her current situation before deciding.',
           },
         },
         {
@@ -460,13 +460,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             'Read the statement and tick "True" or "False": Madam Ng is a volunteer at the Apex Club.',
           answer: 'False',
           solution: {
-            method: 'Apex Club에서 Madam Ng의 역할(받는 사람 vs 봉사자)을 구분한다.',
+            method: 'Identify Madam Ng\'s role in the Apex Club — is she someone who receives help, or someone who volunteers?',
             steps: [
-              '5단락: "she goes to the Apex Club... where she receives a food package."',
-              '그녀는 식품을 "receiving" 사람이며, "young volunteers"(젊은 봉사자들)에게 고마워한다.',
-              '봉사자는 다른 사람들이므로 "Madam Ng as a volunteer"라는 진술은 거짓 → False.',
+              'Paragraph 5 says: "she goes to the Apex Club... where she receives a food package."',
+              'She is the person who is *receiving* the food, and she is thankful to the "young volunteers".',
+              'The volunteers are other people, not her — so the statement "Madam Ng is a volunteer" is False.',
             ],
-            tip: '"receiver / person who receives"과 "volunteer"를 바꿔놓은 함정 진술에 주의하세요.',
+            tip: 'Watch out for trick statements that swap "receiver / person who receives" with "volunteer".',
           },
         },
       ],

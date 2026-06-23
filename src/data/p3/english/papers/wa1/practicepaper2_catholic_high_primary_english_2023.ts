@@ -554,8 +554,8 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
 
     // =========================================================================
     // Section E — Vocabulary Cloze (3 x 1 mark) — Q23–25
-    // 지문: The Bundle of Sticks (이솝우화)
-    // 보기 6개 중 3개 사용 (powerful, strong, tied, time, turns, untied)
+    // Passage: The Bundle of Sticks (Aesop\'s Fable)
+    // Use 3 out of 6 given words (powerful, strong, tied, time, turns, untied)
     // =========================================================================
     {
       kind: 'set',
@@ -625,8 +625,8 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
 
     // =========================================================================
     // Section F — Editing (5 x 1 mark) — Q26–30
-    // 지문: De Ming의 성적표 이야기
-    // 굵은 단어 순서: desappointed(26), arived(27), paniking(28), worryed(29), cairless(30)
+    // Passage: De Ming\'s report card story
+    // Bold words in order: desappointed(26), arived(27), paniking(28), worryed(29), cairless(30)
     // =========================================================================
     {
       kind: 'set',

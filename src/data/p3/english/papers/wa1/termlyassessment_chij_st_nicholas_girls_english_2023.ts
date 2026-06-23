@@ -102,7 +102,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           '원인과 결과를 잇는 접속사는 "so"(그래서).',
           '"but"(그러나)/"even though"(비록 ~이지만)는 대조 관계라 안 맞는다 → 정답 (2) so.',
         ],
-        tip: '"so"는 앞 내용이 원인이고 뒤 내용이 그 결과일 때 씁니다.',
+        tip: 'We use "so" when the first part is the cause and the second part is the result.',
       },
     },
     {
@@ -120,14 +120,14 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '음료를 컵 "into (moving inside)" 따르는 동작에 맞는 전치사를 고른다.',
+        method: 'Choose the correct preposition for the action of pouring a drink "into (moving inside)" a cup.',
         steps: [
-          '주스를 따를 때는 컵 "into (moving inside)" 들어가야 한다.',
-          '"pour A into B" = A를 B 안으로 따르다.',
-          '"at"(~을 향해)/"on"(~위에)은 액체를 따르는 동작과 안 맞는다 → 정답 (3) into. (공식 정답표 확인됨)',
+          'When pouring juice, it must go "into (moving inside)" the cup.',
+          '"pour A into B" = to pour A inside B.',
+          '"at" (towards something) / "on" (on top of something) do not match the action of pouring a liquid → Answer: (3) into. (Confirmed from official answer key)',
         ],
         tip:
-          '"pour into a cup"은 액체를 따르는 동작을 나타내는 정해진 전치사 표현입니다. (참고: 원본 스캔에 보기 (4)가 인쇄되어 있지 않았으나, 정답 (3) into는 공식 정답표로 확인됨)',
+          '"pour into a cup" is a fixed preposition phrase used to describe the action of pouring a liquid. (Note: Option (4) was not printed in the original scanned copy, but Answer (3) into has been confirmed from the official answer key.)',
       },
     },
     {
@@ -146,13 +146,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '구체적인 건물 번지/주소 앞에 쓰는 전치사를 고른다.',
+        method: 'Choose the correct preposition to use in front of a specific building block number or address.',
         steps: [
-          '"Block 56, Mayflower Street"는 구체적인 주소(번지수 포함).',
-          '구체적인 주소 앞에는 "at"을 쓴다 (live at + 번지).',
-          '"in"은 도시/나라처럼 큰 지역에, "on"은 도로명 앞에 쓰일 수 있으나 번지수가 있으면 at이 더 적합 → 정답 (2) at.',
+          '"Block 56, Mayflower Street" is a specific address that includes a block number.',
+          'We use "at" in front of a specific address (live at + block number).',
+          '"in" is used for large areas like cities or countries, and "on" can be used before street names, but when a block number is included, "at" is more suitable → Answer: (2) at.',
         ],
-        tip: '구체적인 번지수가 있는 주소 앞에는 보통 "at"을 씁니다(live at Block 56...).',
+        tip: 'We usually use "at" in front of an address with a specific block number (live at Block 56...).',
       },
     },
     {
@@ -172,13 +172,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '명사의 수(단수/복수)와 거리(가까움/멈)를 본다.',
+        method: 'Look at the number of the noun (singular/plural) and the distance (near/far).',
         steps: [
-          '"flowers"는 복수 → this/that(단수) 제외.',
-          '엄마가 직접 들고 있는(holding) 꽃다발 → 가까운 거리.',
-          '복수+가까움 = these → 정답 (4) These.',
+          '"flowers" is plural → this/that (singular) are not suitable.',
+          'Mum is holding the flowers right now → the flowers are nearby.',
+          'Plural + near = these → Answer: (4) These.',
         ],
-        tip: '손에 들고 있는 가까운 복수 사물은 these로 가리킵니다.',
+        tip: 'Use \'these\' to point to plural objects that are nearby and held in your hands.',
       },
     },
     {
@@ -197,13 +197,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"~ or result"(안 하면 ~된다)는 강한 의무/경고 구문을 본다.',
+        method: 'The structure \'~ or result\' means something bad will happen if you don\'t do it — this is a strong obligation or warning.',
         steps: [
-          '"~ or you will have tooth decay"(안 그러면 충치가 생긴다) → 강한 경고.',
-          '강한 의무를 나타내는 조동사는 "must"(반드시 해야 한다).',
-          'can(할 수 있다)/might(할지도 모른다)/would(~할 텐데)는 의무의 강도가 부족 → 정답 (2) must.',
+          '\'~ or you will have tooth decay\' is a strong warning that means something bad will happen if you don\'t act.',
+          'The modal verb that shows strong obligation is \'must\' (meaning you absolutely have to do it).',
+          '\'can\' (able to) / \'might\' (maybe) / \'would\' (would do) do not show strong enough obligation — so the answer is (2) must.',
         ],
-        tip: '"must... or (bad result/consequence)"는 반드시 해야 할 일을 경고하는 구문입니다.',
+        tip: 'The structure \'must... or (bad result)\' is used to warn someone that they absolutely have to do something.',
       },
     },
     {
@@ -222,13 +222,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"had + past participle" 과거완료 형태를 만든다.',
+        method: '\'had + past participle\' forms the Past Perfect tense.',
         steps: [
-          '조동사 "had"가 앞에 있으므로 뒤에는 과거분사가 필요.',
-          'forget의 과거분사는 forgotten (forget–forgot–forgotten).',
-          '"had forgotten to bring it home"(가져오는 것을 잊었었다) → 정답 (3) forgotten.',
+          'Because \'had\' comes before the verb, a past participle is needed after it.',
+          'The past participle of \'forget\' is \'forgotten\' (forget – forgot – forgotten).',
+          '\'had forgotten to bring it home\' means someone forgot to bring it home earlier — so the answer is (3) forgotten.',
         ],
-        tip: 'had 뒤에는 동사의 과거분사(3단 변화 세 번째 형태)가 옵니다.',
+        tip: 'After \'had\', always use the past participle (the third form of the verb).',
       },
     },
 
@@ -251,13 +251,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '배가 고플 때 배에서 나는 소리를 나타내는 동사를 고른다.',
+        method: 'Choose the verb that describes the sound your stomach makes when you are very hungry.',
         steps: [
-          '배가 많이 고프면 배에서 꾸르륵 소리가 난다.',
-          '"rumble" = (배에서) 꾸르륵거리다 → "stomach rumbled"가 정확한 표현.',
-          'howled(울부짖다)/tumbled(굴러떨어지다)/whimpered(낑낑거리다)는 배와 안 맞는다 → 정답 (3) rumbled.',
+          'When you are very hungry, your stomach makes a low rumbling sound.',
+          '\'rumble\' means to make a low, rolling sound — so \'stomach rumbled\' is the correct expression.',
+          '\'howled\' (to cry loudly) / \'tumbled\' (to fall and roll) / \'whimpered\' (to make a small crying sound) do not match the stomach — so the answer is (3) rumbled.',
         ],
-        tip: '"stomach rumbles"는 배고플 때 나는 소리를 표현하는 정해진 동사입니다.',
+        tip: '"stomach rumbles" is a fixed verb phrase used to describe the sound made when someone is hungry.',
       },
     },
     {
@@ -276,13 +276,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"air"를 목적어로 하는 자연스러운 동사를 고른다.',
+        method: 'Choose the most natural verb that goes with "air" as its object.',
         steps: [
-          '해로운 가스가 공기에 끼치는 영향 → 공기를 오염시킴.',
-          '"pollute the air" = 공기를 오염시키다 → 가장 자연스러운 표현.',
-          'hurt/endanger는 보통 생명체에, burn은 불태움에 쓰여 air와 덜 어울린다 → 정답 (3) pollute.',
+          'The effect of harmful gases on the air → it pollutes the air.',
+          '"pollute the air" = to make the air dirty and harmful → the most natural expression.',
+          '"hurt" and "endanger" are usually used with living things, and "burn" refers to setting something on fire, so neither fits well with "air" → answer: (3) pollute.',
         ],
-        tip: '"pollute"는 air, water, environment 같은 명사와 짝지어 자주 쓰입니다.',
+        tip: '"pollute" is commonly paired with nouns such as air, water, and environment.',
       },
     },
     {
@@ -301,13 +301,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '주머니 속 물건이 있는지 확인하는 가벼운 동작을 나타내는 동사를 고른다.',
+        method: 'Choose the verb that describes a light action of checking whether something is inside a pocket.',
         steps: [
-          '주머니 안에서 열쇠를 가볍게 흔들어 소리/감촉으로 확인하는 동작.',
-          '"jiggle" = 가볍게 흔들다 → 주머니 속 물건을 확인할 때 쓰는 자연스러운 표현.',
-          'jab(쿡 찌르다)/wrench(세게 비틀다)는 너무 강함, wiggle은 주로 몸의 일부(손가락 등)를 움직일 때 → 정답 (1) jiggled.',
+          'The action of lightly shaking keys inside a pocket to check by sound or touch.',
+          '"jiggle" = to shake lightly → a natural expression used when checking something inside a pocket.',
+          '"jab" (to poke sharply) and "wrench" (to twist forcefully) are too strong, and "wiggle" is mainly used for moving a body part such as fingers → answer: (1) jiggled.',
         ],
-        tip: '"jiggle keys in a pocket"은 주머니 속 열쇠를 가볍게 흔들어 확인하는 흔한 표현입니다.',
+        tip: '"jiggle keys in a pocket" is a common expression meaning to lightly shake keys inside a pocket to check they are there.',
       },
     },
     {
@@ -327,13 +327,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"defeat / loss"가 증명하는 성질이 무엇인지 생각한다.',
+        method: 'Think about what quality a "defeat" or "loss" proves about a team.',
         steps: [
-          '작년에 진 팀에게도 졌다 → 이 팀이 "unbeatable / invincible"이 아님을 보여준다.',
-          '"invincible" = 무적의, 절대 지지 않는.',
-          '"not invincible"(무적이 아니다)이 패배 사실과 자연스럽게 연결 → 정답 (3) invincible.',
+          'They lost to the same team they lost to last year → this shows the team is not "unbeatable" or "invincible".',
+          '"invincible" = unbeatable; never losing.',
+          '"not invincible" (not unbeatable) connects naturally with the fact that they suffered a defeat → answer: (3) invincible.',
         ],
-        tip: '"proved that it was not [adjective]"는 사건(여기서는 패배)이 반증하는 성질을 찾는 문제입니다.',
+        tip: 'The question asks you to find the quality that the event (here, the defeat) disproves, based on the phrase \'proved that it was not [adjective]\'.',
       },
     },
     {
@@ -352,13 +352,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '아기가 자고 있을 때 말하는 방식에 맞는 부사를 고른다.',
+        method: 'Choose the adverb that fits the way you would speak when a baby is sleeping.',
         steps: [
-          '"The baby is sleeping"(아기가 자고 있다) → 깨우지 않도록 조용히 말해야 함.',
-          '"softly" = 작은 소리로/부드럽게 → 조용히 말하라는 의미에 맞는다.',
-          'wisely(슬기롭게)/politely(공손하게)/properly(제대로)는 "volume of sound / loudness"와 무관 → 정답 (1) softly.',
+          '\'The baby is sleeping\' → You should speak quietly so as not to wake the baby.',
+          '\'Softly\' means in a quiet or gentle voice → This matches the idea of speaking quietly.',
+          '\'Wisely\', \'politely\', and \'properly\' are not related to the volume or loudness of sound → The answer is (1) softly.',
         ],
-        tip: '뒤 문장(아기가 잔다)이 빈칸 부사의 의미(조용히)를 알려주는 단서입니다.',
+        tip: 'The second part of the sentence (the baby is sleeping) is the clue that tells you the meaning of the missing adverb (quietly).',
       },
     },
     {
@@ -377,13 +377,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"The match was postponed because of the weather"는 의미의 동사구를 고른다.',
+        method: 'The question asks you to choose the verb phrase that matches the meaning of \'The match was postponed because of the weather\'.',
         steps: [
-          '나쁜 날씨 때문에 경기가 내일로 연기되었다.',
-          '"put off" = 연기하다/미루다 → "has been put off until tomorrow"가 자연스럽다.',
-          'put on(입다/공연하다)/put out(끄다, 내놓다)/put away(치우다)는 "postponement / delay"의 의미가 없다 → 정답 (2) put off.',
+          'The match was moved to tomorrow because of bad weather.',
+          '\'Put off\' means to delay or postpone → \'has been put off until tomorrow\' fits naturally.',
+          '\'Put on\' (to wear / to perform), \'put out\' (to extinguish / to place outside), and \'put away\' (to tidy up) do not carry the meaning of postponement or delay → The answer is (2) put off.',
         ],
-        tip: '"put off"는 일정을 나중으로 미룰 때 쓰는 동사구입니다.',
+        tip: '\'Put off\' is a verb phrase used when a plan or event is moved to a later time.',
       },
     },
 
@@ -434,13 +434,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '4',
           solution: {
-            method: '광고의 "Power Lab Outlets" 목록에서 North Zone에 해당하는 지점을 찾는다.',
+            method: 'Find the branch that belongs to the North Zone from the \'Power Lab Outlets\' list in the advertisement.',
             steps: [
-              '목록: "North Zone – Mayflower Parade #04-11".',
-              'North Zone에 해당하는 지점은 Mayflower Parade.',
-              '따라서 정답은 (4) Mayflower Parade.',
+              'The list shows: \'North Zone – Mayflower Parade #04-11\'.',
+              'The branch that belongs to the North Zone is Mayflower Parade.',
+              'Therefore, the answer is (4) Mayflower Parade.',
             ],
-            tip: '시각 자료 문제는 표/목록에서 키워드(여기서는 North Zone)를 정확히 찾아 대조합니다.',
+            tip: 'For visual aid questions, carefully locate the keyword (here, \'North Zone\') in the table or list and match it to the answer choices.',
           },
         },
         {
@@ -457,16 +457,16 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '세일 기간(5~7월 6일)과 영업시간(요일별)을 동시에 만족하는 보기를 찾는다.',
+            method: 'Find the answer choice that satisfies BOTH the sale period (5–7 June) AND the opening hours (which vary by day).',
             steps: [
-              '세일 기간: 금요일 5 June ~ 일요일 7 June.',
-              '영업시간: 월~목 10am~10pm, 금~일 11am~10pm.',
-              '(1) 5 June(금) 10am → 금요일은 11am부터 개점 → 아직 문 안 엶.',
-              '(2) 6 June(토) 10am → 토요일도 11am부터 개점 → 아직 문 안 엶.',
-              '(4) 8 June(월) 11am → 세일 기간(7 June까지) 종료 후.',
-              '(3) 7 June(일) 11am → 세일 기간 내 + 일요일 개점 시각(11am)과 일치 → 정답 (3).',
+              'Sale period: Friday 5 June – Sunday 7 June.',
+              'Opening hours: Monday–Thursday 10am–10pm, Friday–Sunday 11am–10pm.',
+              '(1) 5 June (Friday) at 10am → Friday opening is 11am → The shop is not open yet.',
+              '(2) 6 June (Saturday) at 10am → Saturday opening is also 11am → The shop is not open yet.',
+              '(4) 8 June (Monday) at 11am → The sale has already ended (sale ends 7 June).',
+              '(3) 7 June (Sunday) at 11am → Within the sale period AND matches Sunday\'s opening time (11am) → Correct answer: (3).',
             ],
-            tip: '날짜와 시각 두 조건을 모두 만족해야 정답입니다. 한쪽만 맞으면 오답이에요.',
+            tip: 'Both the date AND the time must be correct to get the right answer. If only one condition is met, it is wrong.',
           },
         },
         {
@@ -483,14 +483,14 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '"definitely"(반드시/확실히)에 해당하는, 조건/제한이 없는 항목을 찾는다.',
+            method: 'Look for the option that matches \'definitely\' — meaning it has no conditions or restrictions.',
             steps: [
-              'Face Painting: "below 12 years old" — John은 18세라 자격 없음.',
-              'Goodie Bags: "first 50 walk-in customers" — 50명 안에 들지 보장 안 됨.',
-              'Food & Drinks: "while stocks last" — 재고가 남아있어야 함, 보장 안 됨.',
-              'Photo Booth: "available from 12 pm" — 시간 조건만 있고, 2pm은 12pm 이후이므로 확실히 이용 가능 → 정답 (2).',
+              'Face Painting: \'below 12 years old\' — John is 18, so he does not qualify.',
+              'Goodie Bags: \'first 50 walk-in customers\' — There is no guarantee John will be among the first 50.',
+              'Food & Drinks: \'while stocks last\' — Stocks may run out, so it is not guaranteed.',
+              'Photo Booth: \'available from 12 pm\' — The only condition is the time, and 2pm is after 12pm, so John can definitely use it → Correct answer: (2).',
             ],
-            tip: '"definitely"는 다른 제한 조건(나이/수량/재고) 없이 확실히 가능한 항목을 찾는 신호입니다.',
+            tip: '\'Definitely\' is a signal to find the option that is certain, with no other restrictions such as age, quantity, or stock limits.',
           },
         },
         {
@@ -506,15 +506,15 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '각 보기를 광고의 조건과 하나씩 대조한다.',
+            method: 'Compare each option against the conditions stated in the advertisement one by one.',
             steps: [
-              '(1) "All shoppers"(모든 손님) — 무료 상품권은 "first 100 customers"만 받음 → 거짓.',
-              '(2) 혜택들은 "Available only in stores!"라고 명시 → 온라인 쇼핑객이 모든 혜택을 누릴 수 없음 → 거짓.',
-              '(3) "Free parking with purchases above $20" — $30 > $20이므로 무료 주차 혜택을 받음 → 참.',
-              '(4) Bundle Deal은 "Participating brands: Fony, Nayer & Techno"로 제한 — "any"(어떤 브랜드든)는 거짓.',
-              '따라서 참인 진술은 (3).',
+              '(1) \'All shoppers\' — the free voucher is only for the \'first 100 customers\' → False.',
+              '(2) The benefits are stated as \'Available only in stores!\' → Online shoppers cannot enjoy all the benefits → False.',
+              '(3) \'Free parking with purchases above $20\' — $30 > $20, so free parking applies → True.',
+              '(4) The Bundle Deal is limited to \'Participating brands: Fony, Nayer & Techno\' — \'any\' (any brand) is False.',
+              'Therefore, the correct statement is (3).',
             ],
-            tip: '"all/any" 같은 절대적 표현이 있는 보기는 광고의 제한 조건(특정 브랜드/인원수 등)과 자주 충돌합니다.',
+            tip: 'Options with absolute words like \'all\' or \'any\' often conflict with the limitations in the advertisement (such as specific brands or number of people).',
           },
         },
       ],
@@ -552,13 +552,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '1',
           solution: {
-            method: '싱가포르에 처음 온 목적을 1단락에서 찾는다.',
+            method: 'Look in Paragraph 1 for the reason why he first came to Singapore.',
             steps: [
-              '1단락: "Born in Malaysia in 1798, he came to Singapore to find work."',
-              '처음 온 목적은 일을 찾는 것.',
-              '병원 건립이나 빈민 돕기는 나중(부자가 된 후)의 일 → 정답 (1) find work.',
+              'Paragraph 1: \'Born in Malaysia in 1798, he came to Singapore to find work.\'',
+              'His reason for coming was to find work.',
+              'Building a hospital or helping the poor happened later (after he became wealthy) → The answer is (1) find work.',
             ],
-            tip: '"first came"(처음 왔을 때)는 이야기의 가장 앞부분에서 답을 찾습니다.',
+            tip: 'For questions about \'first came\', look for the answer at the very beginning of the story.',
           },
         },
         {
@@ -574,13 +574,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '채소와 닭을 팔러 시내에 갈 때의 이동 방법을 2단락에서 찾는다.',
+            method: 'Look in Paragraph 2 for how he travelled to town to sell vegetables and chickens.',
             steps: [
-              '2단락: "cycle long distances on his bicycle to sell them in the marketplace in town."',
-              '자전거를 타고(cycled) 시내로 갔다.',
-              '"Walking, or even running, would take too long"이라고 명시 → walked/ran은 오답 → 정답 (2) cycled.',
+              'Paragraph 2: \'cycle long distances on his bicycle to sell them in the marketplace in town.\'',
+              'He cycled (rode his bicycle) to town.',
+              'The passage states \'Walking, or even running, would take too long\' → walked/ran are wrong answers → The correct answer is (2) cycled.',
             ],
-            tip: '지문에 이동수단이 직접 언급되면 그대로 답으로 사용합니다.',
+            tip: 'If a mode of transport is directly mentioned in the passage, use it as the answer.',
           },
         },
         {
@@ -591,13 +591,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             'Read the statement and tick "True" or "False": He was born in a rich family.',
           answer: 'False',
           solution: {
-            method: '출신 가정의 형편을 1단락에서 확인한다.',
+            method: 'Check paragraph 1 to find out about the family background he was born into.',
             steps: [
-              '1단락: "Tan Tock Seng was born in a humble family. He was quite poor."',
-              '그는 가난한(humble, poor) 집안에서 태어났다.',
-              '따라서 "was born into a rich family"는 거짓 → False.',
+              'Paragraph 1: \'Tan Tock Seng was born in a humble family. He was quite poor.\'',
+              'He was born into a humble and poor family.',
+              'Therefore, \'was born into a rich family\' is false → False.',
             ],
-            tip: '"humble family"(평범하고 가난한 집안)는 "rich family"의 반대입니다.',
+            tip: '\'Humble family\' (a simple and poor family) is the opposite of \'rich family\'.',
           },
         },
         {
@@ -607,13 +607,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           stem: 'Read the statement and tick "True" or "False": He was born in China.',
           answer: 'False',
           solution: {
-            method: '출생지를 1단락에서 확인한다.',
+            method: 'Check paragraph 1 to find out where he was born.',
             steps: [
-              '1단락: "Born in Malaysia in 1798, he came to Singapore to find work."',
-              '그는 말레이시아(Malaysia)에서 태어났다.',
-              '따라서 "was born in China"는 거짓 → False. (지문의 "workers from China"는 나중에 그가 도운 다른 사람들을 가리킴)',
+              'Paragraph 1: \'Born in Malaysia in 1798, he came to Singapore to find work.\'',
+              'He was born in Malaysia.',
+              'Therefore, \'was born in China\' is false → False. (The \'workers from China\' mentioned in the passage refers to other people he helped later on.)',
             ],
-            tip: '비슷한 단어(China)가 다른 곳에 나와도, 출생지에 관한 직접적인 문장을 찾아야 합니다.',
+            tip: 'Even if a similar word (China) appears elsewhere in the passage, you must find the sentence that directly talks about where he was born.',
           },
         },
         {
@@ -624,13 +624,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             'Read the statement and tick "True" or "False": He bought his goods from the countryside.',
           answer: 'True',
           solution: {
-            method: '물건을 구입한 장소를 2단락에서 확인한다.',
+            method: 'Check paragraph 2 to find out where the items were bought.',
             steps: [
-              '2단락: "He would buy fresh vegetables and chickens from the countryside".',
-              '채소와 닭을 시골(countryside)에서 구입했다.',
-              '진술과 일치 → True.',
+              'Paragraph 2: \'He would buy fresh vegetables and chickens from the countryside.\'',
+              'He bought vegetables and chickens from the countryside.',
+              'The statement matches → True.',
             ],
-            tip: '"buy A from B" 구조에서 B(장소)를 정확히 확인합니다.',
+            tip: 'In the \'buy A from B\' structure, identify B (the place) carefully.',
           },
         },
         {
@@ -641,13 +641,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             'Read the statement and tick "True" or "False": He saved up his money to buy his first shophouse.',
           answer: 'True',
           solution: {
-            method: '근면·절약과 첫 상점 구입의 관계를 3단락에서 확인한다.',
+            method: 'Check paragraph 3 for the connection between being hardworking and thrifty, and buying the first shop.',
             steps: [
-              '3단락: "the hardworking and thrifty man did well enough to buy a shophouse."',
-              '"thrifty"(절약하는)는 돈을 모았다는 뜻을 내포한다.',
-              '근면하고 절약하여 돈을 모아 상점을 살 수 있었다 → True.',
+              'Paragraph 3: \'the hardworking and thrifty man did well enough to buy a shophouse.\'',
+              '\'Thrifty\' (spending carefully) implies that he saved up money.',
+              'He was hardworking and thrifty, saved up money, and was able to buy a shop → True.',
             ],
-            tip: '"thrifty"(절약하는)라는 단어가 "saved up money"(돈을 모았다)와 연결됨을 기억하세요.',
+            tip: 'Remember that the word \'thrifty\' (spending carefully) is connected to \'saved up money\'.',
           },
         },
         {
@@ -662,13 +662,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           ],
           answer: 'A',
           solution: {
-            method: 'inexpensive(비싸지 않은)와 같은 뜻의 단어를 고른다.',
+            method: 'Choose a word that means the same as \'inexpensive\' (not expensive).',
             steps: [
-              'affordable = (가격이) 적당한, 부담 없는 → inexpensive와 의미가 통한다.',
-              'basic = 기본적인 → 가격과는 직접 관련 없음.',
-              '따라서 정답은 (A) affordable.',
+              '\'Affordable\' means reasonably priced and not too expensive → it has the same meaning as \'inexpensive\'.',
+              '\'Basic\' means simple or fundamental → it is not directly related to price.',
+              'Therefore, the answer is (A) affordable.',
             ],
-            tip: 'affordable은 "an affordable price"이라는 뜻으로 inexpensive와 자주 동의어로 쓰입니다.',
+            tip: '\'Affordable\' is used in phrases like \'an affordable price\' and is often used as a synonym for \'inexpensive\'.',
           },
         },
         {
@@ -683,13 +683,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
           answer:
             'Tan Tock Seng went to the marketplace to sell goods = 1; Tan Tock Seng bought land = 2; Tan Tock Seng built a hospital for the poor = 3',
           solution: {
-            method: '지문의 단락 순서(2→3→4단락)를 따라 사건을 배열한다.',
+            method: 'Arrange the events by following the order of the paragraphs in the passage (paragraphs 2 → 3 → 4).',
             steps: [
-              '2단락: 젊은 시절 시장에 가서 채소·닭을 팔았다 → 1.',
-              '3단락: 돈을 모아 상점을 산 뒤 "also bought land and more shops"(bought land and more shophouses) → 2.',
-              '4단락: 부자가 된 뒤 "donated money to build a hospital"(donated money to build a hospital) → 3.',
+              'Paragraph 2: In his youth, he went to the market to sell vegetables and chickens → Event 1.',
+              'Paragraph 3: After saving up money and buying a shop, he \'also bought land and more shops\' (bought land and more shophouses) → Event 2.',
+              'Paragraph 4: After becoming rich, he \'donated money to build a hospital\' → Answer is 3.',
             ],
-            tip: '인물의 일생 이야기는 보통 지문의 단락 순서와 시간 순서가 일치합니다.',
+            tip: 'When a passage tells the life story of a person, the order of the paragraphs usually matches the order of events in time.',
           },
         },
         {
@@ -700,14 +700,14 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             'According to the passage, tick 2 boxes to best describe how the poor and needy felt after Tan Tock Seng Hospital was built.\nOptions: inspired | relieved | satisfied | thankful',
           answer: 'relieved, thankful',
           solution: {
-            method: '5단락에서 빈민들의 감정을 나타내는 단서를 찾는다.',
+            method: 'Look for clue words in Paragraph 5 that show how the poor people felt.',
             steps: [
-              '5단락: "The poor and needy were appreciative of his help as they did not have to worry about their hospital bills."',
-              '"appreciative"(감사하는) → thankful과 같은 의미.',
-              '"did not have to worry"(걱정하지 않아도 됨) → 부담을 덜어 마음이 편해짐 = relieved.',
-              '따라서 정답은 relieved와 thankful 두 가지.',
+              'Paragraph 5: \'The poor and needy were appreciative of his help as they did not have to worry about their hospital bills.\'',
+              '\'appreciative\' means the same as thankful — it shows that someone is grateful.',
+              '\'did not have to worry\' means they no longer felt burdened or stressed, which means they felt relieved.',
+              'So there are two correct answers: relieved and thankful.',
             ],
-            tip: '"appreciative"는 thankful의 동의어, "no longer need to worry"는 relieved의 단서입니다.',
+            tip: '\'appreciative\' is a synonym for thankful, and \'no longer need to worry\' is the clue word for relieved.',
           },
         },
       ],

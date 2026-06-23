@@ -42,13 +42,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"Last Sunday"(과거 시점)에 맞는 동사 시제를 정한다.',
+        method: 'Decide the correct verb tense to match the past time \'Last Sunday\'.',
         steps: [
-          '"Last Sunday"는 명확한 과거 시점을 나타낸다.',
-          'take의 과거형은 took.',
-          '따라서 "Oliver took a nature walk" → 정답 (2) took.',
+          '\'Last Sunday\' shows a clear point in the past.',
+          'The Simple Past form of \'take\' is \'took\'.',
+          'So \'Oliver took a nature walk\' → the correct answer is (2) took.',
         ],
-        tip: '"Last + time expression"은 과거시제(took, went, did 등)와 함께 쓰입니다.',
+        tip: '\'Last + time expression\' is used with Simple Past tense verbs (took, went, did, etc.).',
       },
     },
     {
@@ -67,13 +67,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '주어 "Nina"(3인칭 여성 단수)에 맞는 재귀대명사를 고른다.',
+        method: 'Choose the correct reflexive pronoun to match the subject \'Nina\' (3rd person, female, singular).',
         steps: [
-          '"Nina ... was so proud of ___" — Nina 자신에 대한 자랑스러움.',
-          'Nina는 3인칭 여성 단수 → 재귀대명사 "herself".',
-          '따라서 정답은 (2) herself.',
+          '\'Nina ... was so proud of ___\' — Nina feels proud of herself.',
+          'Nina is 3rd person, female, singular → the reflexive pronoun is \'herself\'.',
+          'So the correct answer is (2) herself.',
         ],
-        tip: '재귀대명사는 문장의 주어와 인칭·성별·수가 일치해야 합니다(Nina → herself).',
+        tip: 'A reflexive pronoun must match the subject in person, gender, and number (Nina → herself).',
       },
     },
     {
@@ -93,13 +93,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '명사의 수(단수)와 거리(가까움)을 본다.',
+        method: 'Look at the noun\'s number (singular or plural) and distance (near or far).',
         steps: [
-          '"cup"은 단수 → these/those(복수) 제외.',
-          '"the cup in her hand"(손에 든 컵)는 매우 가까운 거리.',
-          '단수+가까움 = This → 정답 (1).',
+          '\'cup\' is singular → rule out \'these\' and \'those\' (plural).',
+          '\'the cup in her hand\' — the cup is very close (she is holding it).',
+          'Singular + near = \'This\' → the correct answer is (1).',
         ],
-        tip: '손에 들고 있는 것처럼 매우 가까운 단수 사물은 "this"로 가리킵니다.',
+        tip: 'When a singular object is very close, like something held in your hand, we use \'this\'.',
       },
     },
     {
@@ -119,13 +119,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"The tickets were sold out"는 사실과 어울리는 인원 표현을 고른다.',
+        method: 'For \'The tickets were sold out\', choose the correct quantity word that matches the situation.',
         steps: [
-          '"The tickets ... were sold out"(표가 매진됨) → 많은 사람이 왔음을 암시.',
-          '"people"은 가산명사 → "Much"(불가산용) 제외.',
-          '매진된 만큼 많은 사람이 왔다는 의미로 "Many"가 가장 자연스럽다 → 정답 (2) Many.',
+          '\'The tickets ... were sold out\' (tickets were all sold) → This suggests that many people came.',
+          '\'people\' is a countable noun → \'Much\' (used for uncountable nouns) cannot be used.',
+          'Since the tickets were sold out, it means many people came, so \'Many\' is the most natural choice → Answer: (2) Many.',
         ],
-        tip: '"sold out"(매진)은 많은 사람이 참여했음을 암시하는 단서입니다.',
+        tip: '\'sold out\' is a clue that tells us a large number of people attended.',
       },
     },
 
@@ -201,13 +201,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"So as not to disturb others"라는 의도에 맞는 말하기 동사를 고른다.',
+        method: 'For the intention \'so as not to disturb others\', choose the correct speaking verb that matches.',
         steps: [
-          '"not wanting to disturb the others"(다른 사람들을 방해하지 않으려고) → 조용히 말함.',
-          '"whispered" = 속삭였다 → "in Mother\'s ear"(엄마 귀에 대고)와도 잘 맞는다.',
-          'shouted(소리쳤다)/gossiped(수다 떨었다)/chattered(재잘거렸다)는 모두 "Quietly"와 반대되거나 부적합 → 정답 (4) whispered.',
+          '\'not wanting to disturb the others\' (not wanting to bother other people) → This means speaking quietly.',
+          '\'whispered\' = spoke very quietly → This also fits well with \'in Mother\'s ear\'.',
+          'shouted (yelled) / gossiped (talked about others) / chattered (talked noisily) all go against or do not fit with speaking quietly → Answer: (4) whispered.',
         ],
-        tip: '"whisper in someone\'s ear"는 남에게 들리지 않게 속삭이는 동작입니다.',
+        tip: '\'whisper in someone\'s ear\' is the action of speaking so softly that only that person can hear.',
       },
     },
     {
@@ -239,7 +239,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
 
     // =========================================================================
     // (C) Grammar Cloze — Prepositions (4 marks) — Q9–12
-    // 보기: (A) down (B) for (C) from (D) of (E) through (F) up
+    // Options: (A) down (B) for (C) from (D) of (E) through (F) up
     // =========================================================================
     {
       kind: 'set',
@@ -406,7 +406,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
 
     // =========================================================================
     // (E) Editing for Spelling (4 marks) — Q17–20
-    // 지문: Walt Disney와 길든 들쥐 이야기
+    // Passage: The story of Walt Disney and a tame mouse
     // =========================================================================
     {
       kind: 'set',

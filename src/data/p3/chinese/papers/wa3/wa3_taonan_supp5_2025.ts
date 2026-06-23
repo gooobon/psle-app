@@ -425,39 +425,7 @@ export const wa3_taonan_supp5_2025: Question[] = [
     solution: {
       method: "Change direct speech into indirect speech (转述句) using '告诉'.",
       steps: [
-        "Change '说：\"…\"' to '告诉大家 …'.",
-        "Change demonstratives and pronouns: 这→那, 我→他.",
-        "→ 小明告诉大家那是他最喜欢的一本书。",
-      ],
-      tip: "When changing to indirect speech, always switch: 这→那, 我→他/她, 你→the person being referred to.",
-    },
-  },
-
-  // ==========================================================================
-  // (六) 短文填空 TianKong — Q21-Q24 (4题4分) — SET
-  // 词语库: 1突然 2意思 3商量 4果然 5立刻 6主意
-  // ==========================================================================
-  {
-    id: "p3_zh_wa3_tn5_set1",
-    topic: "TianKong",
-    difficulty: "core",
-    setLabel: "Tao Nan 补充(五) — 短文填空（交换雨衣）",
-    instruction:
-      "根据短文的内容，选出最适当的答案，然后把代表它的数字（1-6）填写在右边的括号里。【词语库：1突然 2意思 3商量 4果然 5立刻 6主意】",
-    passage:
-      "一天下午，小丽和小英在商店里各自买了一件雨衣。她们刚走出店门，（Q21）下起了大雨。两人站在店门外，你看看我，我看看你，都不愿意穿上自己刚买的新雨衣，担心它会被雨水淋湿。于是，她们便站在店门外（Q22）要怎样回家。\n" +
-      "店主听到了她们的对话，对她们说：“你们交换雨衣来穿吧。”她们想了想，觉得这是一个好（Q23），便交换雨衣来穿。\n" +
-      "穿上雨衣后，她们（Q24）跑回家。由于她们身上穿的都不是自己的雨衣，所以被雨淋湿了也不会心疼。",
-    questions: [
-      {
-        id: "p3_zh_wa3_tn5_021",
-        type: "MCQ",
-        q: "（Q21）下起了大雨。",
-        // 보기를 단어库 번호로 매핑하여 표기
-        options: ["突然", "意思", "商量", "果然", "立刻", "主意"],
-        answer: 0, // 1突然
-        pinyin: "tū rán",
-        meaning: "'突然' = suddenly. 突然下起了大雨 = it suddenly started to rain heavily.",
+        "Change '说：\"…\"' to '告诉大家 …'Change demonstratives and pronouns: 这→那, 我→他.'突然' = suddenly. 突然下起了大雨 = it suddenly started to rain heavily.",
         solution: {
           method: "Clue: sudden change",
           steps: [

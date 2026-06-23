@@ -1,13 +1,13 @@
 // =============================================================================
 // src/data/p3/english/papers/wa1_raffles_girls_primary_english_2025.ts
-// Raffles Girls' Primary School — Weighted Assessment 1 (2025) English Language — Primary 3
-// 원본 PDF: P3_English_WA1.pdf, 물리적 페이지 251–256 (시험지 표지 p.1–6)
+// Raffles Girls'Primary School — Weighted Assessment 1 (2025) English Language — Primary 3
+// Source PDF: P3_English_WA1.pdf, physical pages 251–256 (cover page p.1–6)
 // Total Time: 50 minutes / Total: 15 marks (Section A 7 + Section B 8)
-// ★ 공식 정답표(p257) 기준 13문항 전부 100% 일치 확인됨.
-// 듣기·작문 제외. 모든 문제 100% 전사 + 상세 solution 포함.
+// ★ All 13 questions verified 100% correct against official answer key (p257).
+// Listening and composition excluded. All questions fully transcribed with detailed solutions.
 // =============================================================================
 
-import type { EnglishPaper } from '../types';
+import type { EnglishPaper } from'../types';
 
 export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
   meta: {
@@ -53,13 +53,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '"glittery"의 의미를 문맥(빨간 구슬 묘사)에서 파악한다.',
+            method: 'Find the meaning of "glittery" from the context (description of the red marble).',
             steps: [
-              '"glittery, red marble"(반짝이는 빨간 구슬) — glittery는 빛나는/반짝이는 성질을 묘사.',
-              '"bright and shiny" = 밝고 반짝이는 → glittery와 정확히 일치.',
-              '"small and rough"(작고 거친)/"old and scratched"(오래되고 긁힌)은 반짝임과 무관 → 정답 (2). (공식 정답표 확인됨)',
+              '"glittery, red marble" — the word glittery describes something that sparkles or shines.',
+              '"bright and shiny" means something that gives off light and sparkles — this matches glittery exactly.',
+              '"small and rough" and "old and scratched" have nothing to do with sparkling or shining, so they are incorrect. The answer is (2). (Verified against official answer key.)',
             ],
-            tip: '"glitter"(반짝임)에서 파생된 "glittery"는 빛이 반짝거리는 외모를 나타냅니다.',
+            tip: '"glittery" comes from the word "glitter" and describes an appearance that sparkles or shines with light.',
           },
         },
         {
@@ -69,13 +69,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           stem: 'In paragraph 2, which word has the same meaning as "kindness"?',
           answer: 'care',
           solution: {
-            method: '"kindness"(친절함)과 같은 뜻의 단어를 2단락에서 찾는다.',
+            method: 'Find a word in Paragraph 2 that means the same as "kindness".',
             steps: [
-              '2단락: "You\'re showing great care, Lily." — Mrs Lim이 Lily의 행동을 칭찬함.',
-              '"care" = 배려/돌봄 → kindness(친절함)와 의미가 통한다.',
-              '따라서 답은 care. (공식 정답표 확인됨)',
+              'In Paragraph 2, Mrs Lim says: "You\'re showing great care, Lily." — Mrs Lim is praising Lily\'s actions.',
+              '"care" means looking out for others and thinking about their feelings — this has the same meaning as "kindness".',
+              'Therefore, the answer is care. (Verified against official answer key.)',
             ],
-            tip: '"care"(배려)와 "kindness"(친절)은 타인을 위하는 마음이라는 공통된 의미를 가집니다.',
+            tip: 'Both "care" and "kindness" share the same idea — thinking about and doing good things for others.',
           },
         },
         {
@@ -86,13 +86,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": Mrs Lim praised Lily for her kind deed.',
           answer: 'True',
           solution: {
-            method: '2단락에서 Mrs Lim의 반응을 확인한다.',
+            method: 'Look at Paragraph 2 to find out how Mrs Lim reacted.',
             steps: [
-              '2단락: "Mrs Lim smiled and said, \'You\'re showing great care, Lily.\' She was proud of Lily\'s remarkable deed."',
-              'Mrs Lim이 "great care"라고 칭찬하고 "proud"(자랑스러워함) → 친절한 행동을 칭찬한 것이 맞다.',
-              '따라서 True. (공식 정답표 확인됨)',
+              'In Paragraph 2: "Mrs Lim smiled and said, \'You\'re showing great care, Lily.\' She was proud of Lily\'s remarkable deed."',
+              'Mrs Lim praised Lily by saying "great care" and felt "proud" of her — this confirms that Mrs Lim was praising Lily\'s kind action.',
+              'Therefore, the answer is True. (Verified against official answer key.)',
             ],
-            tip: '"smiled", "you\'re showing great care", "proud"는 모두 칭찬의 표현입니다.',
+            tip: '"smiled", "you\'re showing great care", and "proud" are all expressions of praise.',
           },
         },
         {
@@ -103,13 +103,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": Max was glad to have found his lost marble.',
           answer: 'True',
           solution: {
-            method: '3단락에서 Max가 구슬을 돌려받은 후의 감정을 확인한다.',
+            method: 'Check paragraph 3 to find out how Max felt after getting his marble back.',
             steps: [
-              '3단락: "He had been looking for it and was so happy to get it back."',
-              '"so happy"(매우 기뻤다) → 돌려받아서 기뻐했다는 의미.',
-              '"glad"(기쁜)는 "happy"와 같은 의미 → 따라서 True. (공식 정답표 확인됨)',
+              'Paragraph 3: "He had been looking for it and was so happy to get it back."',
+              '"so happy" means he was very pleased to get it back.',
+              '"glad" (pleased) means the same as "happy", so the answer is True. (Confirmed in answer key)',
             ],
-            tip: '"happy to get it back"과 "glad to have found"는 같은 의미의 표현입니다.',
+            tip: '"happy to get it back" and "glad to have found" express the same meaning.',
           },
         },
         {
@@ -120,13 +120,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": Lily decided to keep the marble for her collection.',
           answer: 'False',
           solution: {
-            method: '2단락에서 Lily가 구슬로 무엇을 했는지 확인한다.',
+            method: 'Check paragraph 2 to find out what Lily did with the marble.',
             steps: [
-              '2단락: "Lily decided to take the marble to the lost-and-found corner at school."',
-              'Lily는 구슬을 본인 컬렉션에 넣지 않고 "Lost and Found corner"에 가져갔다.',
-              '"decided to keep it for her collection"(자신의 컬렉션에 보관하기로)는 거짓 → False. (공식 정답표 확인됨)',
+              'Paragraph 2: "Lily decided to take the marble to the lost-and-found corner at school."',
+              'Lily did not keep the marble for herself — she brought it to the Lost and Found corner.',
+              '"decided to keep it for her collection" is not true, so the answer is False. (Confirmed in answer key)',
             ],
-            tip: '1단락의 생각(컬렉션과 비슷한 것이라 운이 좋다고 생각함)과 실제 행동(분실물 코너에 제출)을 혼동하지 마세요.',
+            tip: 'Do not mix up what Lily thought in paragraph 1 (she thought she was lucky as it looked like her collection) with what she actually did (she handed it in to the lost-and-found corner).',
           },
         },
         {
@@ -138,13 +138,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           answer:
             '(i) Lily learnt that doing something kind for someone made her very happy.\n(ii) Lily learnt that sharing joy with others can bring happiness as well.',
           solution: {
-            method: '마지막 단락에서 Lily가 배운 두 가지를 찾는다.',
+            method: 'Look at the last paragraph to find the two things Lily learned.',
             steps: [
-              '마지막 단락: "She realised that doing something kind for someone made her very happy. She also learned that sharing joy with others can bring happiness as well."',
-              '(i) 누군가를 위해 친절한 일을 하는 것이 자신을 매우 행복하게 만들었다.',
-              '(ii) 기쁨을 다른 사람과 나누는 것도 행복을 가져올 수 있다.',
+              'Last paragraph: "She realised that doing something kind for someone made her very happy. She also learned that sharing joy with others can bring happiness as well."',
+              '(i) Doing something kind for someone made her very happy.',
+              '(ii) Sharing joy with others can also bring happiness.',
             ],
-            tip: '"She realised that ~" and "She also learned that ~" — 두 문장이 각각 (i), (ii)에 해당합니다.',
+            tip: 'The sentences \'She realised that ~\' and \'She also learned that ~\' match (i) and (ii) respectively.',
           },
         },
       ],
@@ -177,13 +177,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           stem: 'In paragraph 1, what was the relationship between Fox and Alligator?\nThey were ________.',
           answer: 'friends',
           solution: {
-            method: '1단락에서 Fox와 Alligator의 관계를 찾는다.',
+            method: 'Find the relationship between Fox and Alligator in paragraph 1.',
             steps: [
-              '1단락: "there lived a cunning fox and his good-natured friend, Alligator."',
-              'Alligator는 Fox의 "friend"(친구)로 소개된다.',
-              '따라서 "They were friends." (공식 정답표 확인됨)',
+              'Paragraph 1: \'there lived a cunning fox and his good-natured friend, Alligator.\'',
+              'Alligator is introduced as Fox\'s \'friend\'.',
+              'Therefore, the answer is \'They were friends.\' (confirmed in official answer key)',
             ],
-            tip: '"his good-natured friend, Alligator"에서 관계(friend)를 직접 찾습니다.',
+            tip: 'Find the relationship (friend) directly from the phrase \'his good-natured friend, Alligator\'.',
           },
         },
         {
@@ -199,13 +199,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '"never had enough to eat"(충분히 먹지 못했다)라는 결과로 scarce의 의미를 추론한다.',
+            method: 'Use the result \'never had enough to eat\' to infer the meaning of \'scarce\'.',
             steps: [
-              '1단락: "Food was often scarce and they never had enough to eat."',
-              '"never had enough to eat" → 음식이 부족했다는 의미.',
-              '"scarce" = 부족한/드문 → "insufficient"(불충분한)와 정확히 일치. (공식 정답표 확인됨)',
+              'Paragraph 1: \'Food was often scarce and they never had enough to eat.\'',
+              '\'never had enough to eat\' → this tells us that food was in short supply.',
+              '\'scarce\' means not enough / rare → matches exactly with \'insufficient\'. (confirmed in official answer key)',
             ],
-            tip: '뒤따르는 결과 "never had enough to eat"이 scarce의 의미를 알려줍니다.',
+            tip: 'The result that follows, \'never had enough to eat\', tells us what \'scarce\' means.',
           },
         },
         {
@@ -220,14 +220,14 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           answer:
             'Alligator found out that he only had the roots of the corn plant = 2; Fox laughed and happily ate up all the corn = 3; Alligator and Fox harvested the potatoes together = 1',
           solution: {
-            method: '3단락(옥수수)과 4단락(감자)의 사건 순서를 따라간다.',
+            method: 'Follow the order of events in paragraph 3 (corn) and paragraph 4 (potatoes).',
             steps: [
-              '⚠ 정답표: 2, 3, 1 순서. 즉 "Fox laughed/ate corn"=2, "Alligator/Fox harvested potatoes"=3, "Alligator found out"=1이 아니라 보기의 첫째/둘째/셋째에 해당하는 숫자가 2, 3, 1이다.',
-              '보기 순서대로: (Fox laughed/ate corn)=2, (Alligator/Fox harvested potatoes)=3, (Alligator found out only roots)=1.',
-              '즉: 가장 먼저 일어난 것은 "Alligator found out he only had roots"(1번), 그 다음 "Fox laughed and ate the corn"(2번), 마지막이 "Alligator and Fox harvested potatoes"(3번).',
+              '⚠ Answer key: the order is 2, 3, 1. This means the numbers for the first, second, and third options listed are 2, 3, 1 — not that \'Fox laughed/ate corn\' is event 1.',
+              'Going by the order of the options: (Fox laughed/ate corn) = 2, (Alligator/Fox harvested potatoes) = 3, (Alligator found out he only had roots) = 1.',
+              'In other words: the first thing that happened was \'Alligator found out he only had roots\' (1st), then \'Fox laughed and ate the corn\' (2nd), and finally \'Alligator and Fox harvested potatoes\' (3rd).',
             ],
             tip:
-              '3단락: 옥수수 수확 → Alligator가 뿌리만 갖게 됨(①) → Fox 웃으며 옥수수 먹음(②). 4단락: 감자 수확 → Alligator가 "The top part / upper section"이라 감자를 못 가짐(③). 따라서 "Fox laughed/ate corn"=2, "potatoes together"=3, "roots of corn"=1.',
+              'Paragraph 3: Corn harvest → Alligator only gets the roots (①) → Fox laughs and eats the corn (②). Paragraph 4: Potato harvest → Alligator asks for \'the top part / upper section\' so he gets no potatoes (③). Therefore: \'Fox laughed/ate corn\' = 2, \'potatoes together\' = 3, \'roots of corn\' = 1.',
           },
         },
         {
@@ -238,13 +238,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             'Which three-word phrase in paragraph 5 tells you that Alligator thought of a solution?',
           answer: 'came up with',
           solution: {
-            method: '"Thought of a solution / came up with an answer"는 의미의 세 단어 구를 5단락에서 찾는다.',
+            method: 'Find the three-word phrase in Paragraph 5 that means \'thought of a solution / came up with an answer\'.',
             steps: [
-              '5단락: "Alligator came up with a good way to share the harvest fairly."',
-              '"came up with" = (아이디어/해결책을) 생각해내다 → 세 단어.',
-              '따라서 답은 came up with. (공식 정답표 확인됨)',
+              'Paragraph 5 states: \'Alligator came up with a good way to share the harvest fairly.\'',
+              '\'Came up with\' is a three-word phrase that means to think of an idea or solution.',
+              'Therefore, the answer is \'came up with\'. (Verified against official answer key.)',
             ],
-            tip: '"came up with"는 "To think of a good idea / to come up with a solution"를 뜻하는 세 단어 구동사입니다.',
+            tip: '\'Came up with\' is a three-word phrasal verb that means \'to think of a good idea / to find a solution\'.',
           },
         },
         {
@@ -260,13 +260,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: '1',
           solution: {
-            method: '5단락에서 사탕수수 수확을 어떻게 나누기로 했는지 확인한다.',
+            method: 'Check Paragraph 5 to find out how they decided to share the sugarcane harvest.',
             steps: [
-              '5단락: "Alligator suggested they split it equally. Feeling sorry, Fox agreed with Alligator."',
-              '"split it equally" = 똑같이 나누다 → "divide the crop equally"와 같은 의미.',
-              '따라서 정답은 (1). (공식 정답표 확인됨)',
+              'Paragraph 5 states: \'Alligator suggested they split it equally. Feeling sorry, Fox agreed with Alligator.\'',
+              '\'Split it equally\' means to divide into equal parts, which has the same meaning as \'divide the crop equally\'.',
+              'Therefore, the answer is (1). (Verified against official answer key.)',
             ],
-            tip: '"split equally"와 "divide equally"는 똑같이 나누다라는 동의어 표현입니다.',
+            tip: '\'Split equally\' and \'divide equally\' are synonyms — both mean to share something into equal parts.',
           },
         },
         {
@@ -276,13 +276,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           stem: 'What does the word "it" in paragraph 5 refer to?\nThe word "it" refers to ________.',
           answer: 'the sugarcane',
           solution: {
-            method: '"it" 바로 앞에 언급된 명사를 5단락에서 찾는다.',
+            method: 'Find the noun mentioned just before \'it\' in Paragraph 5.',
             steps: [
-              '5단락: "Then, Fox decided that they should grow sugarcane. ... Alligator suggested they split it equally."',
-              '"it"은 바로 앞에 언급된 "the sugarcane"(사탕수수/수확물)을 가리킨다.',
-              '따라서 "The word \'it\' refers to the sugarcane." (공식 정답표 확인됨)',
+              'Paragraph 5 states: \'Then, Fox decided that they should grow sugarcane. ... Alligator suggested they split it equally.\'',
+              '\'It\' refers to \'the sugarcane\' mentioned just before it in the paragraph.',
+              'Therefore, the answer is: \'The word \\\'it\\\' refers to the sugarcane.\' (Verified against official answer key.)',
             ],
-            tip: '대명사 it은 바로 앞 문장의 핵심 단수 명사를 가리킵니다.',
+            tip: 'The pronoun \'it\' refers to the key singular noun in the sentence just before it.',
           },
         },
         {
@@ -294,14 +294,14 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
           answer:
             'Fox and Alligator always had plenty of food to eat, and they lived happily ever after.',
           solution: {
-            method: '마지막(6) 단락에서 공평하게 나눈 후의 결과 두 가지를 찾는다.',
+            method: 'In the last paragraph (paragraph 6), find the two outcomes that happened after they shared fairly.',
             steps: [
-              '6단락: "Fox and Alligator always had plenty of food to eat and they lived happily ever after."',
-              '결과 1: 항상 충분한 음식이 생겼다(always had plenty of food to eat).',
-              '결과 2: 행복하게 살게 되었다(lived happily ever after).',
-              '두 가지를 모두 포함한 완전한 문장으로 답한다. (공식 정답표 확인됨)',
+              'Paragraph 6: "Fox and Alligator always had plenty of food to eat and they lived happily ever after."',
+              'Outcome 1: They always had enough food (always had plenty of food to eat).',
+              'Outcome 2: They lived happily (lived happily ever after).',
+              'Answer in one complete sentence that includes both outcomes. (Verified against official answer scheme)',
             ],
-            tip: '"and"로 연결된 두 결과를 각각 (i), (ii)에 해당하는 내용으로 정리합니다.',
+            tip: 'The two outcomes connected by \'and\' should be matched to (i) and (ii) respectively.',
           },
         },
       ],

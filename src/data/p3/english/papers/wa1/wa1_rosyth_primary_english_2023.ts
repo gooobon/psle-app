@@ -43,13 +43,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '주어의 수(복수)와 시간 표지("Last week")를 본다.',
+        method: 'Look at the number of the subject (plural) and the time marker \'Last week\'.',
         steps: [
-          '"Last week"은 과거 시점을 나타낸다.',
-          '주어 "the students"는 복수.',
-          '복수 주어 + 과거 be동사 → were → 정답 (4).',
+          '\'Last week\' tells us the sentence is about the past.',
+          'The subject \'the students\' is plural.',
+          'Plural subject + past tense be verb → were → Answer is (4).',
         ],
-        tip: '"Last week"처럼 과거 시간 표현이 있으면 was/were를 씁니다(주어가 복수면 were).',
+        tip: 'When there is a past time expression like \'Last week\', use was/were (use were if the subject is plural).',
       },
     },
     {
@@ -69,13 +69,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"Like a pet rabbit" 움직이는 동작에 맞는 동사를 고른다.',
+        method: 'Look at \'Like a pet rabbit\' and choose the verb that matches how a rabbit moves.',
         steps: [
-          '토끼(rabbit)가 움직이는 방식은 "hop"(깡충깡충 뛰다).',
-          '"hop around like my pet rabbit"가 자연스럽다.',
-          'fly(날다)/flit(훌쩍 옮겨다니다, 보통 새·곤충)/jump(점프하다, 토끼보다는 일반적)는 토끼 특유의 움직임과 덜 맞는다 → 정답 (2) hop.',
+          'The way a rabbit moves is called \'hop\' (to jump with short bouncy jumps).',
+          '\'Hop around like my pet rabbit\' sounds natural.',
+          'fly (to move through the air) / flit (to move lightly and quickly, usually for birds or insects) / jump (a general jump, not specific to rabbits) — these do not match how a rabbit typically moves → Answer is (2) hop.',
         ],
-        tip: '"hop"은 토끼·개구리처럼 깡충깡충 뛰는 동작을 나타내는 정해진 동사입니다.',
+        tip: '\'Hop\' is the verb used to describe the short bouncy jumping movement of animals like rabbits and frogs.',
       },
     },
     {
@@ -94,13 +94,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"Between two places"에 위치함을 나타내는 전치사를 고른다.',
+        method: 'Choose the preposition that shows something is located between two places.',
         steps: [
-          '"the post office AND the bookshop" — 두 장소가 언급됨.',
-          '"between A and B" = A와 B 사이에.',
-          'at/over/along은 "Between two locations"라는 의미를 직접 담지 않는다 → 정답 (4) between.',
+          '\'The post office AND the bookshop\' — two places are mentioned.',
+          '\'Between A and B\' means in the space that separates A and B.',
+          'at / over / along do not directly mean \'in the space between two locations\' → Answer is (4) between.',
         ],
-        tip: '"between A and B"는 두 지점/사물 사이의 위치를 나타냅니다.',
+        tip: '\'Between A and B\' is used to show the position of something in the space that separates two points or objects.',
       },
     },
     {
@@ -119,13 +119,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '주어 "We"(화자들 자신)에 맞는 재귀대명사를 고른다.',
+        method: 'Choose the reflexive pronoun that matches the subject \'We\' (the speakers themselves).',
         steps: [
-          '"the girls"가 "We"라고 말하고 있다 → 화자 자신들을 가리킴.',
-          '1인칭 복수("We")의 재귀대명사는 "ourselves".',
-          '따라서 정답은 (3) ourselves.',
+          '\'The girls\' are saying \'We\' → they are referring to themselves as the speakers.',
+          'The reflexive pronoun for first person plural (\'We\') is \'ourselves\'.',
+          'Therefore, the correct answer is (3) ourselves.',
         ],
-        tip: '대화 속 "We"가 주어이면 재귀대명사는 ourselves입니다(themselves는 3인칭 관찰자 시점에서 쓰임).',
+        tip: 'When \'We\' is the subject in a conversation, the reflexive pronoun is \'ourselves\' (note: \'themselves\' is used when talking about others from an observer\'s point of view).',
       },
     },
 
@@ -148,13 +148,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"Was hungry because he/she did not eat breakfast"는 상황에 맞는 식사 속도를 나타내는 부사를 고른다.',
+        method: 'The situation is \'was hungry because he/she did not eat breakfast\' → choose the adverb that best describes how the person ate.',
         steps: [
-          '"had not taken her breakfast"(아침을 안 먹었다) → 점심때 매우 배고픔.',
-          '배고픈 사람은 보통 음식을 "Quickly" 먹는다.',
-          'slowly(천천히)/gently(부드럽게)는 배고픈 상황과 반대, briskly(활발하게)는 보통 걷기 등 움직임에 쓰여 식사에는 덜 어울린다 → 정답 (3) quickly.',
+          '\'Had not taken her breakfast\' (skipped breakfast) → she would be very hungry by lunchtime.',
+          'A hungry person would usually eat \'quickly\'.',
+          '\'Slowly\' and \'gently\' are the opposite of what a hungry person would do, and \'briskly\' is usually used for movements like walking, not eating → correct answer is (3) quickly.',
         ],
-        tip: '"had not taken breakfast"(배고픔)는 "quickly ate"(빨리 먹었다)와 자연스럽게 연결됩니다.',
+        tip: '\'Had not taken breakfast\' (feeling hungry) connects naturally with \'quickly ate\' (ate fast).',
       },
     },
     {
@@ -173,13 +173,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"Weather that is good for flying a kite"에 어울리는 형용사를 고른다.',
+        method: 'Choose the adjective that best describes weather that is good for flying a kite.',
         steps: [
-          '"Let\'s go to the park to fly a kite"(연을 날리러 가자) — 연을 날리려면 바람이 필요하다.',
-          '"windy" = 바람이 부는 → 연날리기에 적합한 날씨.',
-          'rainy(비 오는)/stormy(폭풍우의)는 연날리기에 부적합, cloudy(흐린)는 바람과 직접 관련 없다 → 정답 (1) windy.',
+          '\'Let\'s go to the park to fly a kite\' — you need wind to fly a kite.',
+          '\'Windy\' means there is a lot of wind → this is the best weather for flying a kite.',
+          '\'Rainy\' and \'stormy\' are not suitable for flying a kite, and \'cloudy\' is not directly related to wind → correct answer is (1) windy.',
         ],
-        tip: '연날리기(fly a kite)에는 바람(wind)이 필요하므로 windy가 가장 자연스럽습니다.',
+        tip: 'To fly a kite, you need wind, so \'windy\' is the most natural choice.',
       },
     },
     {
@@ -199,13 +199,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"Did ~ with ~ against the wall"는 신체적 동작에 맞는 동사를 고른다.',
+        method: 'For \'Did ~ with ~ against the wall\', choose the verb that matches a physical action.',
         steps: [
-          '"___ his sister against the wall"(여동생을 벽에 대고 ~했다) — 신체적으로 밀치는 동작.',
-          '"pushed" = 밀었다 → "pushed against the wall"이 자연스럽다.',
-          'flicked(가볍게 튕겼다)/pointed(가리켰다)는 약하거나 무관, attacked(공격했다)는 더 강하고 일반적인 단어로 이 문맥의 구체적 동작(against the wall)과 덜 맞는다 → 정답 (2) pushed.',
+          '\'___ his sister against the wall\' — choose a verb that shows a physical pushing action.',
+          '\'pushed\' means to shove someone → \'pushed against the wall\' sounds natural.',
+          '\'flicked\' (lightly tapped) and \'pointed\' (indicated a direction) are too weak or unrelated; \'attacked\' is too general and does not fit the specific action of \'against the wall\' → correct answer is (2) pushed.',
         ],
-        tip: '"push someone against the wall"은 벽으로 밀어붙이는 구체적인 동작을 나타냅니다.',
+        tip: '\'push someone against the wall\' describes the specific action of forcing someone up against a wall.',
       },
     },
 
@@ -235,13 +235,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'While (8) ________, he saw Owl outside his treetop house.',
           answer: 'walking',
           solution: {
-            method: '"While + -ing"(~하는 동안) 구문을 적용한다.',
+            method: 'Apply the \'While + -ing\' (while doing something) structure.',
             steps: [
               '"While ___, he saw Owl" — "Saw Owl while walking".',
-              '"While -ing"는 "While ~ / During ~"이라는 뜻의 분사구문.',
-              '따라서 빈칸은 walking.',
+              '\'While -ing\' is a participial phrase that means \'while ~\' or \'during ~\'.',
+              'Therefore, the blank should be filled with \'walking\'.',
             ],
-            tip: '"While -ing"는 한 동작이 진행되는 동안 다른 일이 일어났음을 나타냅니다.',
+            tip: '\'While -ing\' shows that one action was happening when another event occurred.',
           },
         },
         {
@@ -251,13 +251,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: '"I\'m taking a leisurely (9) ________ through the woods."',
           answer: 'walk',
           solution: {
-            method: '"a leisurely ___"(여유로운 ~) — 명사 형태를 고른다.',
+            method: 'For \'a leisurely ___\' (a relaxed ~), choose the noun form.',
             steps: [
-              '"take a ___"(~을 하다) 뒤에는 명사가 온다.',
-              '"a leisurely walk" = 여유로운 산책(명사).',
-              '따라서 빈칸은 walk.',
+              'After \'take a ___\', a noun is needed.',
+              '\'a leisurely walk\' = a relaxed stroll (noun).',
+              'Therefore, the blank should be filled with \'walk\'.',
             ],
-            tip: '"take a walk/rest/break"처럼 "take a + noun"는 "To do ~"라는 뜻입니다.',
+            tip: 'Phrases like \'take a walk / rest / break\' follow the pattern \'take a + noun\', which means \'to do ~\'.',
           },
         },
         {
@@ -267,13 +267,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: '"I was told that he (10) ________ through the woods earlier on too."',
           answer: 'walked',
           solution: {
-            method: '"earlier on"(앞서/이전에)이라는 과거 표현에 맞는 동사 형태를 고른다.',
+            method: 'Look for the verb form that matches the past time expression \'earlier on\'.',
             steps: [
-              '"earlier on"은 과거의 한 시점을 가리킨다.',
-              '단순과거형은 walked.',
-              '따라서 "he walked through the woods earlier on" → 정답 walked.',
+              '"Earlier on" refers to a point of time in the past.',
+              'The Simple Past form is walked.',
+              'Therefore, "he walked through the woods earlier on" → the answer is walked.',
             ],
-            tip: '"earlier on/earlier today"는 단순과거시제와 자주 함께 쓰입니다.',
+            tip: '"Earlier on / earlier today" is often used together with the Simple Past tense.',
           },
         },
         {
@@ -283,13 +283,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: '"When I (11) ________ past his logpile house, I did not see him."',
           answer: 'had walked',
           solution: {
-            method: '남은 보기(had walked)를 적용하고 과거완료의 의미를 확인한다.',
+            method: 'Apply the remaining option (had walked) and check if it matches the meaning of the Past Perfect tense.',
             steps: [
-              '나머지 세 단어(walking/walk/walked)는 이미 Q8~10에서 사용됨 → 남은 단어는 "had walked".',
-              '"When I had walked past his house, I did not see him."은 "When he/she had already passed by his house (had passed before that moment), he/she did not see him — this uses the Past Perfect tense"는 의미로 자연스럽다.',
-              '따라서 빈칸은 had walked.',
+              'The other three words (walking / walk / walked) have already been used in Q8–10 → the remaining word is "had walked".',
+              '"When I had walked past his house, I did not see him." means "By the time he/she passed by the house (before that moment), he/she did not see him" — this uses the Past Perfect tense and sounds natural.',
+              'Therefore, the answer for the blank is had walked.',
             ],
-            tip: '단어를 한 번씩만 쓰는 클로즈 문제는, 남은 단어가 자연스럽게 맞는지 마지막에 확인합니다.',
+            tip: 'For a cloze activity where each word is used only once, always check at the end whether the remaining word fits naturally.',
           },
         },
       ],
@@ -320,13 +320,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'He (12) ________ a hare and chased it.',
           answer: 'spotted',
           solution: {
-            method: '"Discovered and chased"는 흐름에 맞는 동사를 고른다.',
+            method: '"Discovered and chased" — choose the verb that fits the flow of the sentence.',
             steps: [
-              '"He ___ a hare and chased it" — 토끼를 발견한 후 쫓았다.',
-              '"spotted" = 발견했다/알아챘다 → 쫓기 전의 동작으로 자연스럽다.',
-              '따라서 빈칸은 spotted.',
+              '"He ___ a hare and chased it" — he spotted the rabbit first, then chased it.',
+              '"Spotted" means noticed / discovered → it is natural as the action that happens before chasing.',
+              'Therefore, the answer for the blank is spotted.',
             ],
-            tip: '"spotted ... and chased"는 "Discover → Chase"의 자연스러운 순서입니다.',
+            tip: '"Spotted ... and chased" follows the natural order of Discover → Chase.',
           },
         },
         {
@@ -337,13 +337,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             '"Remove this thorn for me!" Bear roared but (13) ________ dared to help as they were afraid of him.',
           answer: 'nobody',
           solution: {
-            method: '"Could not help anyone because of ~"는 의미에 맞는 단어를 고른다.',
+            method: '"Could not help anyone because of ~" — choose the word that matches the meaning of the sentence.',
             steps: [
-              '"as they were afraid of him"(그를 무서워했기 때문에) → 도와줄 사람이 없었다는 의미.',
-              '"nobody dared to help" = 아무도 돕지 못했다.',
-              '따라서 빈칸은 nobody.',
+              '"as they were afraid of him" means there was no one willing to help Bear because they feared him.',
+              '"nobody dared to help" means not a single person was brave enough to help.',
+              'So the answer for the blank is "nobody".',
             ],
-            tip: '"afraid of him"(그를 무서워함)은 "nobody helped"(아무도 돕지 않음)와 자연스럽게 이어집니다.',
+            tip: '"afraid of him" (they feared him) connects naturally with "nobody helped" (no one helped him).',
           },
         },
         {
@@ -353,13 +353,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'Upon hearing this, Bear became (14) ________ and refused.',
           answer: 'angry',
           solution: {
-            method: '"refused"는 행동과 짝을 이루는 감정을 고른다.',
+            method: '"refused" goes with the feeling that matches the action of saying no.',
             steps: [
-              'Fox의 조건("must promise never to hurt us again")을 들은 Bear의 반응.',
-              '거만한 Bear가 조건을 듣고 화를 냄 → "angry"(화난).',
-              '따라서 "became angry and refused" → 정답 angry.',
+              'This is Bear\'s reaction after hearing Fox\'s condition: "must promise never to hurt us again".',
+              'The proud Bear gets angry after hearing the condition → "angry".',
+              'So "became angry and refused" → the answer is "angry".',
             ],
-            tip: '"refused"(거절했다) 앞에는 보통 부정적 감정(angry)이 옵니다.',
+            tip: 'A negative feeling like "angry" usually comes before "refused" (turned down the offer).',
           },
         },
         {
@@ -369,13 +369,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'In the end, he reluctantly (15) ________.',
           answer: 'agreed',
           solution: {
-            method: '"reluctantly did ~"는 표현과 이야기의 결말을 연결한다.',
+            method: '"reluctantly did ~" links the expression to the ending of the story.',
             steps: [
-              '"his paw hurt badly and only Fox had come forward to help him" — 결국 도움이 필요했음.',
-              '"reluctantly ___" = 마지못해 ~했다 → Fox의 조건을 받아들였다는 의미.',
-              '"agreed" = 동의했다 → "reluctantly agreed"(마지못해 동의했다) → 정답 agreed. (남은 somebody·captured는 사용되지 않음)',
+              '"his paw hurt badly and only Fox had come forward to help him" — Bear eventually needed the help.',
+              '"reluctantly ___" means did something unwillingly → it means Bear accepted Fox\'s condition.',
+              '"agreed" means to accept → "reluctantly agreed" (accepted unwillingly) → the answer is "agreed". (The remaining words "somebody" and "captured" are not used.)',
             ],
-            tip: '"reluctantly agreed"는 내키지 않지만 결국 받아들였다는 뜻입니다.',
+            tip: '"reluctantly agreed" means Bear did not really want to, but he accepted in the end.',
           },
         },
       ],
@@ -397,14 +397,14 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
         '________________________________________ but ________________________________________.',
       answer: "Tom forgot to attend the soccer practice, but his teacher was not angry.",
       solution: {
-        method: '두 사건을 대조 접속사 "but"으로 연결한다.',
+        method: 'Two events are joined using the contrast conjunction "but".',
         steps: [
-          '앞: Tom이 축구 연습에 빠짐(부정적) / 뒤: 선생님이 화내지 않음(예상과 다른 결과).',
-          '"but"(그러나)으로 두 문장을 연결: "Tom forgot to attend the soccer practice, but..."',
-          '반복되는 "Tom\'s teacher"는 "his teacher"로 줄여 쓴다.',
-          '완성: "Tom forgot to attend the soccer practice, but his teacher was not angry."',
+          'Front: Tom missed soccer practice (negative) / Back: The teacher was not angry (unexpected result).',
+          'Connect two sentences with \'but\': \'Tom forgot to attend the soccer practice, but...\'',
+          'The repeated \'Tom\'s teacher\' is shortened to \'his teacher\'.',
+          'Complete sentence: \'Tom forgot to attend the soccer practice, but his teacher was not angry.\'',
         ],
-        tip: '예상(혼날 것 같음)과 다른 결과(화내지 않음)가 이어질 때 "but"으로 연결합니다.',
+        tip: 'Use \'but\' to connect when the result is different from what you expected (expected: teacher would be angry / actual: teacher was not angry).',
       },
     },
     {
@@ -420,14 +420,14 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
         '________________________________________ so ________________________________________.',
       answer: 'Mary wanted to bake a cake, so she bought eggs and butter at the supermarket.',
       solution: {
-        method: '"so"는 원인 뒤에 결과를 연결하므로, 원인(목적)을 먼저 배치한다.',
+        method: 'Since \'so\' connects a cause to its effect, always place the cause first.',
         steps: [
-          '두 사건의 관계: "wanted to make a cake"(목적/원인) → "so he/she bought eggs and butter from the supermarket"(결과/행동).',
-          '"so"(그래서)는 "[cause], so [effect]" 순서로 쓴다.',
+          'Relationship between the two events: \'wanted to make a cake\' (purpose/cause) → \'so he/she bought eggs and butter from the supermarket\' (result/action).',
+          '\'so\' follows the order: \'[cause], so [effect]\'.',
           '"Mary wanted to bake a cake, so she bought eggs and butter at the supermarket."',
-          '두 번째 Mary는 "she"로 바꾼다.',
+          'The second \'Mary\' is replaced with \'she\'.',
         ],
-        tip: '"so" 문제는 두 문장 중 어느 것이 "cause (purpose)"이고 어느 것이 "effect (action)"인지 먼저 파악한 뒤, 원인을 앞에 둡니다.',
+        tip: 'For \'so\' questions, first identify which sentence is the cause (purpose) and which is the effect (action), then place the cause first.',
       },
     },
 
@@ -457,13 +457,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             'The Green Tree Frog is the most (18) ________ type of frog that people keep as pets.',
           answer: 'common',
           solution: {
-            method: '"the most commonly kept as pets by people"이라는 의미에 맞는 단어를 넣는다.',
+            method: 'Fill in the blank with a word that means \'the most commonly kept as pets by people\'.',
             steps: [
-              '"the most ___ type of frog that people keep as pets" — 사람들이 가장 많이 선택하는 종류.',
-              '"common" = 흔한, 일반적인 → "the most commonly kept type"라는 의미에 적합.',
-              '따라서 빈칸은 common. (공식 정답표 확인됨)',
+              '\'The most ___ type of frog that people keep as pets\' — the type that people choose most often.',
+              '\'common\' means usual or widespread → it fits the meaning of \'the most commonly kept type\'.',
+              'Therefore, the answer for the blank is: common. (Confirmed from the official answer key.)',
             ],
-            tip: '"the most common type that people keep"은 "the type most commonly kept by people"라는 뜻입니다.',
+            tip: '\'The most common type that people keep\' means \'the type most commonly kept by people\'.',
           },
         },
         {
@@ -473,13 +473,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'The Green Tree Frog is (19) ________ in most parts of Australia.',
           answer: 'found',
           solution: {
-            method: '"is found in / lives in ~"는 의미에 맞는 단어를 넣는다.',
+            method: 'Fill in the blank with the word that fits the meaning of \'is found in / lives in ~\'.',
             steps: [
-              '"The Green Tree Frog is ___ in most parts of Australia" — 호주 대부분 지역에 산다는 의미.',
-              '"found" = 발견되다 → "is found in"(~에서 발견된다, 즉 ~에 서식한다)는 동식물의 분포를 설명하는 정해진 표현.',
-              '따라서 빈칸은 found.',
+              '\'The Green Tree Frog is ___ in most parts of Australia\' — this means it lives in most parts of Australia.',
+              '\'found\' means \'to be discovered\' → \'is found in\' (discovered in ~, meaning lives in ~) is a fixed phrase used to describe where animals or plants live.',
+              'Therefore, the answer for the blank is \'found\'.',
             ],
-            tip: '"is found in [place]"은 동식물의 서식 분포를 설명하는 표현입니다.',
+            tip: '\'is found in [place]\' is a set phrase used to describe where animals or plants live.',
           },
         },
         {
@@ -489,13 +489,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'As adults, they can (20) ________ up to 10 cm long and live for 25 years!',
           answer: 'grow',
           solution: {
-            method: '"grows up to ~"는 의미에 맞는 동사를 넣는다.',
+            method: 'Fill in the blank with the verb that fits the meaning of \'grows up to ~\'.',
             steps: [
-              '"can ___ up to 10 cm long" — 길이가 10cm까지 커진다는 의미.',
-              '"grow up to [length]" = ~까지 자라다.',
-              '따라서 빈칸은 grow.',
+              '\'can ___ up to 10 cm long\' — this means it can grow to a length of 10 cm.',
+              '\'grow up to [length]\' means to grow as long as a certain size.',
+              'Therefore, the answer for the blank is \'grow\'.',
             ],
-            tip: '"grow up to [size/length]"는 동식물의 성장 크기를 설명하는 표현입니다.',
+            tip: '\'grow up to [size/length]\' is a set phrase used to describe how big an animal or plant can get.',
           },
         },
       ],
@@ -547,13 +547,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '포스터의 날짜(29 May)를 한 달 안에서의 위치로 환산한다.',
+            method: 'Find where the date on the poster (29 May) falls within the month.',
             steps: [
-              '포스터: "Date: Saturday, 29 May 2021".',
-              '5월은 31일까지 있으므로 29일은 달의 "the end part / tip"에 해당한다.',
-              '"throughout the month"(한 달 내내)/"in the middle"(중반)/"at the beginning"(초반)은 29일과 안 맞는다 → 정답 (2) at the end of the month.',
+              'The poster says: \'Date: Saturday, 29 May 2021\'.',
+              'May has 31 days, so the 29th is near the end of the month.',
+              '\'throughout the month\' (the whole month) / \'in the middle\' (mid-month) / \'at the beginning\' (early in the month) do not match the 29th → the correct answer is (2) at the end of the month.',
             ],
-            tip: '날짜 숫자가 그 달의 마지막 날짜에 가까우면 "at the end of the month"입니다.',
+            tip: 'If the date is close to the last day of the month, we use \'at the end of the month\'.',
           },
         },
         {
@@ -569,13 +569,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '포스터의 핵심 메시지("Pet Adoption" 섹션)를 확인한다.',
+            method: 'Look at the main message in the \'Pet Adoption\' section of the poster.',
             steps: [
-              '"Pet Adoption" 섹션: "Come and view our adorable rescued animals. Adopt! Don\'t buy. Please give an abandoned pet a loving home."',
-              '이는 구조된 동물들에게 새로운 집(입양 가정)을 찾아주려는 목적을 직접 나타낸다.',
-              '무료 다이어리(1)·판매 촉진(2)·위생 교육(4)은 부수적이거나 포스터의 핵심 목적이 아니다 → 정답 (3).',
+              '\'Pet Adoption\' section: \'Come and view our adorable rescued animals. Adopt! Don\'t buy. Please give an abandoned pet a loving home.\'',
+              'This directly shows the purpose of finding new homes (adoptive families) for rescued animals.',
+              'A free diary (1), promoting sales (2), and hygiene education (4) are secondary or not the main purpose of the poster → The answer is (3).',
             ],
-            tip: '"main purpose"는 포스터에서 가장 강조된 섹션(여기서는 Pet Adoption)에서 찾습니다.',
+            tip: 'To find the \'main purpose\', look at the most emphasised section of the poster (in this case, Pet Adoption).',
           },
         },
         {
@@ -591,13 +591,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '"Items for Sale" 목록과 "free diary"의 차이를 구분한다.',
+            method: 'Tell apart the \'Items for Sale\' list from the \'free diary\'.',
             steps: [
-              '"Items for Sale": Pet food, Pet toys, Pet toiletries(샴푸 등) — 이들은 판매 품목.',
-              '다이어리는 "Get a free diary when you spend at least $60"라고 명시 — 판매 품목이 아니라 "free gift".',
-              '따라서 살 수 없는(판매하지 않는) 것은 (3) diaries.',
+              '\'Items for Sale\': Pet food, Pet toys, Pet toiletries (such as shampoo) — these are items you can buy.',
+              'The diary is stated as \'Get a free diary when you spend at least $60\' — it is a free gift, not an item for sale.',
+              'Therefore, the item that cannot be bought (not for sale) is (3) diaries.',
             ],
-            tip: '"free gift"(무료 증정품)는 "for sale"(판매 품목)과 다릅니다.',
+            tip: 'A \'free gift\' is different from an item \'for sale\'.',
           },
         },
         {
@@ -613,13 +613,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '4',
           solution: {
-            method: '포스터 상단의 "Organised by" 항목을 확인한다.',
+            method: 'Check the \'Organised by\' section at the top of the poster.',
             steps: [
-              '포스터: "Organised by Daisy Animal Shelter".',
-              'Dr Shane/Dr Juliet은 강연자, Tanjong Puteh Park은 장소(venue)일 뿐 주최자가 아니다.',
-              '따라서 정답은 (4) Daisy Animal Shelter.',
+              'The poster states: \'Organised by Daisy Animal Shelter\'.',
+              'Dr Shane and Dr Juliet are speakers, and Tanjong Puteh Park is only the venue — they are not the organisers.',
+              'Therefore, the answer is (4) Daisy Animal Shelter.',
             ],
-            tip: '"Organised by"는 행사 주최자를 직접 명시하는 표현입니다.',
+            tip: '\'Organised by\' is a phrase that directly tells you who is hosting the event.',
           },
         },
         {
@@ -635,15 +635,15 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '각 보기를 포스터의 내용과 하나씩 대조한다.',
+            method: 'Compare each option against the information in the poster one by one.',
             steps: [
-              '(1) "Adopt! Don\'t buy." — 동물은 입양(무료)하는 것이지 구매하는 것이 아니다 → 거짓.',
-              '(2) "spend at least $60"으로 명시되어 있는데 보기는 "$50" → 금액 불일치 → 거짓.',
-              '(3) "For more information on pet adoption, please contact: Mdm Lim at 6762 9000..." → 참.',
-              '(4) 강연 제목들("Am I ready for a pet?", "What is a healthy diet...", "Why exercise my pet?") 중 "how to choose a pet"이라는 주제는 없고, 특정 강연자(Dr Juliet)와 짝지어진 내용도 명시되지 않음 → 거짓.',
-              '따라서 참인 진술은 (3).',
+              '(1) The poster says \'Adopt! Don\'t buy.\' — animals are adopted (for free), not bought → False.',
+              '(2) The poster clearly states \'spend at least $60\', but the option says \'$50\' → the amount does not match → False.',
+              '(3) \'For more information on pet adoption, please contact: Mdm Lim at 6762 9000...\' → True.',
+              '(4) The talk titles listed are \'Am I ready for a pet?\', \'What is a healthy diet...\', and \'Why exercise my pet?\' — there is no talk about \'how to choose a pet\', and no talk is specifically matched to Dr Juliet → False.',
+              'Therefore, the statement that is true is (3).',
             ],
-            tip: '광고 속 숫자(금액 등)는 정확히 일치하는지 항상 다시 확인하세요($60 vs $50).',
+            tip: 'Always double-check numbers (such as amounts of money) in advertisements to make sure they match exactly ($60 vs $50).',
           },
         },
       ],
@@ -674,13 +674,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'Who was Gloomy?',
           answer: 'Gloomy was a/the big black cloud (in the sky above the village).',
           solution: {
-            method: '1단락 첫 문장에서 Gloomy의 정체를 확인한다.',
+            method: 'Find out who Gloomy is from the first sentence of Paragraph 1.',
             steps: [
-              '1단락: "One hot day, Gloomy, the big black cloud, was sitting high up in the sky of the village."',
-              'Gloomy는 "big black cloud"이다.',
-              '완전한 문장으로: "Gloomy was a big black cloud."',
+              'Paragraph 1: \'One hot day, Gloomy, the big black cloud, was sitting high up in the sky of the village.\'',
+              'Gloomy is a \'big black cloud\'.',
+              'Written as a complete sentence: \'Gloomy was a big black cloud.\'',
             ],
-            tip: '"Who was ~"는 인물(또는 캐릭터)의 정체를 묻는 질문으로, 보통 처음 등장하는 문장에서 답을 찾습니다.',
+            tip: 'A \'Who was ~\' question asks about the identity of a person or character. You can usually find the answer in the sentence where the character is first introduced.',
           },
         },
         {
@@ -690,13 +690,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: "What was Gloomy's problem?",
           answer: 'Gloomy\'s problem was that he could not rain (no matter how hard he tried).',
           solution: {
-            method: '2단락 첫 문장에서 Gloomy의 문제를 직접 찾는다.',
+            method: 'Find Gloomy\'s problem directly from the first sentence of Paragraph 2.',
             steps: [
-              '2단락: "However, Gloomy had a problem. Try as he might, he could not rain."',
-              'Gloomy의 문제는 비를 내릴 수 없다는 것.',
-              '완전한 문장으로: "Gloomy\'s problem was that he could not rain."',
+              'Paragraph 2: \'However, Gloomy had a problem. Try as he might, he could not rain.\'',
+              'Gloomy\'s problem was that he could not rain.',
+              'Write as a complete sentence: "Gloomy\'s problem was that he could not rain."',
             ],
-            tip: '"had a problem" 바로 뒤 문장이 문제의 구체적인 내용을 설명합니다.',
+            tip: 'The sentence right after "had a problem" explains the specific details of what the problem was.',
           },
         },
         {
@@ -708,11 +708,11 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: "Find a word in paragraph 3 that means the same as 'displeased' (unhappy, not satisfied).",
             steps: [
-              '3단락: "Feeling annoyed because Wind ignored him, Gloomy asked Lightning to flash his light at Wind."',
-              '"annoyed" = 짜증난/언짢은 → displeased와 의미가 통한다.',
-              '따라서 답은 annoyed.',
+              'Paragraph 3: "Feeling annoyed because Wind ignored him, Gloomy asked Lightning to flash his light at Wind."',
+              '"annoyed" means feeling irritated or unhappy → it has the same meaning as displeased.',
+              'Therefore, the answer is annoyed.',
             ],
-            tip: '"annoyed"는 displeased(불쾌해하는)와 자주 교체되어 쓰이는 동의어입니다.',
+            tip: '"annoyed" is a synonym that is often used interchangeably with displeased.',
           },
         },
         {
@@ -726,13 +726,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             '(c) Wind immediately helped Gloomy when he asked for help.',
           answer: '(a) True  (b) False  (c) False',
           solution: {
-            method: '각 진술을 2~3단락의 사실과 대조한다.',
+            method: 'Compare each statement against the facts in paragraphs 2 and 3.',
             steps: [
-              '(a) 2단락: "The villagers below were waiting patiently for him to provide enough water for their farms." — 처음에는 물이 충분하지 않아 기다리고 있었음 → True.',
-              '(b) 2단락: Gloomy는 혼자서가 아니라 "had no choice but to get help"하여 Wind와 Lightning의 도움을 받아 어두운 구름을 모았다 → "on his own"(혼자서)은 거짓 → False.',
-              '(c) 2단락: "Wind did not like to be told what to do so he ignored Gloomy." — Wind는 즉시 돕지 않고 무시했다 → False.',
+              '(a) Paragraph 2: "The villagers below were waiting patiently for him to provide enough water for their farms." — At first, there was not enough water and they were waiting → True.',
+              '(b) Paragraph 2: Gloomy did not do it alone — he "had no choice but to get help" and received help from Wind and Lightning to gather dark clouds → "on his own" is not true → False.',
+              '(c) Paragraph 2: "Wind did not like to be told what to do so he ignored Gloomy." — Wind did not help immediately and ignored Gloomy → False.',
             ],
-            tip: '"on his own"(혼자서), "immediately"(즉시)처럼 절대적인 표현이 들어간 진술은 지문과 정확히 일치하는지 꼼꼼히 확인하세요.',
+            tip: 'Be careful with absolute words like "on his own" and "immediately" — check that they match exactly with what the passage says.',
           },
         },
         {
@@ -743,13 +743,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           answer:
             'Gloomy was angry at Wind because Wind ignored him (refused to blow the dark clouds towards him when he asked for help).',
           solution: {
-            method: '3단락 첫 부분에서 Gloomy가 화난 이유를 찾는다.',
+            method: 'Find the reason why Gloomy was upset in the first part of paragraph 3.',
             steps: [
-              '3단락: "Feeling annoyed because Wind ignored him..."',
-              'Gloomy가 화난 이유는 Wind가 그를 무시했기 때문(도와달라는 부탁을 무시함).',
-              '완전한 문장으로 이유를 서술한다.',
+              'Paragraph 3: "Feeling annoyed because Wind ignored him..."',
+              'Gloomy was annoyed because Wind ignored him (Wind ignored his request for help).',
+              'Write the reason as a complete sentence.',
             ],
-            tip: '"Feeling [emotion] because ~"에서 because 뒤가 바로 이유입니다.',
+            tip: 'In \'Feeling [emotion] because ~\', the reason comes right after the word \'because\'.',
           },
         },
         {
@@ -764,14 +764,14 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           answer:
             'Lightning frightened Wind = 1; A few dark clouds joined Gloomy = 2; Gloomy rained = 3',
           solution: {
-            method: '3단락의 사건 순서(번개 → 구름 합류 → 비)를 따라간다.',
+            method: 'Follow the order of events in Paragraph 3: Lightning flashes → clouds join → rain falls.',
             steps: [
-              '3단락: "Gloomy asked Lightning to flash his light at Wind. As Wind was afraid of Lightning, he quickly blew the dark clouds towards Gloomy. As soon as the dark clouds joined Gloomy, the rain fell."',
-              '먼저: Lightning이 Wind를 향해 빛을 번쩍여 Wind를 두렵게 함 → 1.',
-              '그 다음: (두려워진 Wind가 구름을 불어 보내) 어두운 구름들이 Gloomy와 합류함 → 2.',
-              '마지막: 비가 내림 → 3.',
+              'Paragraph 3: "Gloomy asked Lightning to flash his light at Wind. As Wind was afraid of Lightning, he quickly blew the dark clouds towards Gloomy. As soon as the dark clouds joined Gloomy, the rain fell."',
+              'First: Lightning flashed his light at Wind, making Wind afraid → Event 1.',
+              'Next: (The frightened Wind blew the clouds over,) and the dark clouds joined Gloomy → Event 2.',
+              'Finally: The rain fell → Event 3.',
             ],
-            tip: '"As soon as A, B"는 A 다음에 곧바로 B가 일어났음을 나타냅니다(A=2번, B=3번).',
+            tip: '\'As soon as A, B\' means that B happened immediately after A (A = Event 2, B = Event 3).',
           },
         },
         {
@@ -782,13 +782,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           answer:
             'Gloomy felt satisfied because, with the help of the dark clouds, he had done a good job — the villagers now had enough water for their farming.',
           solution: {
-            method: '4단락 첫 부분에서 만족한 이유를 찾는다.',
+            method: 'Look at the beginning of Paragraph 4 to find the reason why he felt satisfied.',
             steps: [
-              '4단락: "Gloomy felt very happy and satisfied. With the help of the few dark clouds, he knew he had done a good job as the villagers had enough water for farming."',
-              '만족한 이유는 (어두운 구름들의 도움으로) 일을 잘 해냈고, 농사에 필요한 물을 마을 사람들에게 충분히 제공했기 때문.',
-              '두 가지 요소(좋은 일을 해냄 + 마을 사람들이 충분한 물을 얻음)를 포함해 완전한 문장으로 답한다.',
+              'Paragraph 4: "Gloomy felt very happy and satisfied. With the help of the few dark clouds, he knew he had done a good job as the villagers had enough water for farming."',
+              'Gloomy felt satisfied because he had done a good job (with the help of the dark clouds) and had given the villagers enough water for farming.',
+              'Include both parts in your answer — that he did a good job AND that the villagers had enough water — and write it as a complete sentence.',
             ],
-            tip: '"felt satisfied because ~" 직후 문장의 "as ~"절이 구체적인 이유를 보충 설명합니다.',
+            tip: 'The \'as ~\' clause right after \'felt satisfied because ~\' gives the specific reason that supports why he felt that way.',
           },
         },
       ],

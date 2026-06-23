@@ -1,28 +1,28 @@
 // ============================================================================
-// CHIJ St Nicholas Girls' School (圣尼各拉女校 小学部)
-// P3 Higher Chinese (高级华文) — 2025 复习（四）第十三课至第十七课
+// CHIJ St Nicholas Girls'School (St. Nicholas Girls\' School Primary Section)
+// P3 Higher Chinese — 2025 Revision (4) Lessons 13 to 17
 // Source: sgexam.com P3 Chinese WA3 compilation (answer key p81)
 // Total marks: 56
 //
-// NOTE: 改正错字(Q1-10)는 정답키(p81)의 '바른 글자'를 answer로 넣고 문장을 복원함.
-//   인쇄된 '틀린 글자' 형태가 OCR상 불명확한 항목은 needsParentVerify: true.
+// NOTE: For 改正错字 (Q1-10), the answer from the answer key (p81)'바른 글자'is used as the answer and the sentence is restored.
+// Items where the printed'틀린 글자'form is unclear in OCR are marked as needsParentVerify: true.
 // ============================================================================
 
 import type { Question } from "@/data/p3/chinese/types";
 
 export const wa3_chijstnicholas_rev4_2025: Question[] = [
   // ==========================================================================
-  // (一) 改正错字 BianZi — Q1-Q10 (10题20分)
+  // (一) 改正错字 BianZi — Q1-Q10 (10 questions, 20 marks)
   // ==========================================================================
   {
     id: "p3_zh_wa3_csn4_001",
     topic: "BianZi",
     difficulty: "core",
-    instruction: "请在错误的汉字下面划线，然后把正确的汉字填写在括号里。",
+    instruction: "Underline the wrong Chinese character, then write the correct Chinese character in the brackets.",
     q: "我不【感】在半夜上厕所。",
     answer: "敢",
     pinyin: "gǎn",
-    meaning: "Correct '感→敢'. '不敢(bùgǎn)' = dare not. 我不敢在半夜上厕所.",
+    meaning: "Correct'感→敢'. '不敢(bùgǎn)' = dare not. 我不敢在半夜上厕所.",
     solution: {
       method: "Correcting a wrong character that sounds the same (homophone error)",
       steps: ["'不感' is wrong → to mean 'dare not do something', the correct word is '不敢'.", "Change '感 (to feel)' to '敢 (to dare)'."],

@@ -442,57 +442,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
         "In a 把-sentence, the order is: Subject + adverbial + 把…",
         "→ 小安小心地把…收进书包里。",
       ],
-      tip: "When adding a '…地' adverbial in a 把-sentence, place it before '把'.",
-    },
-  },
-  {
-    id: "p3_zh_wa3_rsw_022",
-    topic: "JuZi",
-    difficulty: "stretch",
-    instruction: "请用括号里的词语改写句子。（叫）",
-    q: "小象说：“小熊，快想一个办法救小鸭子！”",
-    answer: "小象叫小熊想一个办法救小鸭子。",
-    pinyin: "xiǎo xiàng jiào xiǎo xióng xiǎng yí gè bàn fǎ jiù xiǎo yā zi",
-    meaning: "The little elephant told the little bear to think of a way to save the duckling. (Direct → 兼语句 with 叫)",
-    solution: {
-      method: "Changing direct speech into a pivot sentence (겸어문) using '叫'.",
+      tip: "When adding a '…地' adverbial in a 把-sentence, place it before '把'Rewrite the sentence using the word in brackets. (叫) — Change direct speech into a pivot sentence (兼语句) using 叫. A command given in a quote is rewritten as a plain statement.'叫'.",
       steps: [
         "A command in a quote is changed to '叫 + person + action'.",
         "'说：“小熊，快…！”' → '叫小熊 想一个办法救小鸭子'.",
         "Remove the address ('小熊，'), '快', exclamation marks, and quotation marks.",
       ],
-      tip: "'叫 + person + action' — a command in a quote is rewritten as a plain statement.",
-    },
-  },
-
-  // ==========================================================================
-  // (六-1) 综合理解 YueReadMCQ — Q23 (MCQ) — SET (passage 공유)
-  // ==========================================================================
-  {
-    id: "p3_zh_wa3_rsw_set1",
-    topic: "YueReadMCQ",
-    difficulty: "core",
-    setLabel: "Red Swastika 复习(三) — 综合理解（小猴）选择题",
-    instruction: "根据短文内容，回答问题。",
-    passage:
-      "小猴是森林里最聪明的动物。森林里的小动物们遇到什么问题都会来找小猴帮忙。小猴教小鸟怎样唱歌，教小狗怎样写字，教小猫怎样画画。\n" +
-      "小鸟想成为歌手，它每天一早起床就练歌。小狗想成为老师，它每天认真地学写字。小猫想成为画家，也每天到河边去练习画画。小猴想成为医生，可是它每天不是在家里喝茶、听音乐，就是躺在床上睡觉。\n" +
-      "日子一天天过去了，小动物们都有了很大的进步。\n" +
-      "这天，小猴拿起报纸来看时，才发现小动物们都实现自己的愿望。小猴伤心地说：“大家都努力学习，实现了自己的愿望，可是我呢？”",
-    questions: [
-      {
-        id: "p3_zh_wa3_rsw_023",
-        type: "MCQ",
-        q: "为什么小动物们遇到问题都会找小猴帮忙？",
-        options: [
-          "因为它最喜欢帮助人。",
-          "因为它是最聪明的小动物。",
-          "因为它可以帮它们实现愿望。",
-          "因为它会唱歌、写字和画画。",
-        ],
-        answer: 1, // 因为它是最聪明的小动物
-        pinyin: "yīn wèi tā shì zuì cōng míng de xiǎo dòng wù",
-        meaning: "Why do the animals seek the monkey's help? Because it is the cleverest animal in the forest.",
+      tip: "'叫 + person + action'According to the passage, answer the question. — Why do the animals always go to the little monkey for help? Because it is the smartest animal in the forest.'s help? Because it is the cleverest animal in the forest.",
         solution: {
           method: "Finding the reason — quote the first sentence.",
           steps: [

@@ -44,13 +44,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"during recess"이라는 의미에 맞는 전치사를 고른다.',
+        method: 'Choose the correct preposition that matches the meaning of \'during recess\'.',
         steps: [
-          '"stayed behind ___ recess to clean"(쉬는 시간 동안 남아서 청소함) — 쉬는 시간이라는 기간 동안.',
-          '"during"은 특정 기간/시간대 동안을 나타낸다.',
-          'on/with/towards는 "during a period of time"이라는 의미와 안 맞는다 → 정답 (3) during.',
+          '\'stayed behind ___ recess to clean\' (stayed back during recess to clean) — during a period of time called recess.',
+          '\'during\' is used to show something happening throughout a specific period or time.',
+          'on/with/towards do not match the meaning of \'during a period of time\' → correct answer is (3) during.',
         ],
-        tip: '"during + noun (a period of time / an event)"는 "while doing something"이라는 뜻입니다(during recess, during the movie).',
+        tip: '\'during + noun (a period of time / an event)\' means something happens in that time (e.g. during recess, during the movie).',
       },
     },
     {
@@ -279,10 +279,10 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
         steps: [
           '본문장 "Adele visits..."는 단순현재 + 긍정문.',
           '부가의문문은 본문장과 시제를 일치시키고, 긍정문이면 부정 형태로 묻는다.',
-          '단순현재 부정 조동사는 doesn\'t, 주어는 Adele(3인칭 단수)을 받는 she.',
-          '따라서 "doesn\'t she?" → 정답 (4).',
+          '단순현재 부정 조동사는 doesn\'The subject refers to Adele (3rd person singular), so the pronoun is \'she\'.',
+          'Therefore, the tag is \'doesn\'t she?\' → correct answer is (4).',
         ],
-        tip: '부가의문문: 긍정문 → 부정형 태그 (긍정문 + doesn\'t/isn\'t she 등), 시제는 본문장과 일치시킵니다.',
+        tip: 'Question tags: a positive sentence uses a negative tag (positive sentence + doesn\'t/isn\'t she, etc.), and the tense must match the main sentence.',
       },
     },
 
@@ -305,13 +305,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"after washing hands"에 수도꼭지에 하는 동작을 나타내는 동사구를 고른다.',
+        method: 'Choose the verb phrase that describes what is done to the tap \'after washing hands\'.',
         steps: [
-          '"as soon as he had washed his hands"(손을 다 씻고 나서) → 물을 더 이상 틀어둘 필요가 없음.',
-          '"turn off the tap" = 수도꼭지를 끄다.',
-          'turned in(제출하다)/turned on(틀다)/turned down(줄이다, 거절하다)은 손을 씻은 후의 동작과 안 맞는다 → 정답 (3) turned off.',
+          '\'as soon as he had washed his hands\' (once he finished washing his hands) → there is no need to keep the tap running anymore.',
+          '\'turn off the tap\' = to switch off the tap.',
+          'turned in (to submit) / turned on (to switch on) / turned down (to lower or reject) do not match the action after washing hands → correct answer is (3) turned off.',
         ],
-        tip: '"had washed"(이미 다 씻음) 다음에는 수도꼭지를 끄는 동작(turn off)이 자연스럽습니다.',
+        tip: '\'had washed\' (already finished washing) is naturally followed by the action of turning off the tap.',
       },
     },
     {
@@ -331,13 +331,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"so much that the curtains were shaking wildly"의 바람을 나타내는 명사를 고른다.',
+        method: 'Choose the noun that describes the wind in \'so much that the curtains were shaking wildly\'.',
         steps: [
-          '"The curtains flapped about"(커튼이 마구 흔들렸다) → 갑작스럽고 강한 바람.',
-          '"a gust of wind" = 한차례의 강한 바람(돌풍) → 강하게 흔들리는 모습과 일치.',
-          'puff(작은 한 번의 입김)/flurry(눈발이 흩날리는 모습)/breeze(약한 바람)는 "shaking wildly"에 비해 약하다 → 정답 (2) gust.',
+          '\'The curtains flapped about\' (the curtains were flapping around wildly) → this suggests a sudden and strong wind.',
+          '"a gust of wind" = one sudden, strong burst of wind → matches the idea of shaking wildly.',
+          'puff (a small breath of air) / flurry (swirling snow or movement) / breeze (a gentle wind) are all too weak to cause "shaking wildly" → correct answer is (2) gust.',
         ],
-        tip: '"gust of wind"는 갑작스럽고 강한 한차례의 바람을 나타냅니다.',
+        tip: '"gust of wind" describes a sudden and strong burst of wind that happens in one go.',
       },
     },
     {
@@ -419,7 +419,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
 
     // =========================================================================
     // Section C: Editing for Spelling and Grammar (5 marks) — Q16–20
-    // 지문: Kung Fu Panda 영화 소개
+    // Passage: Introduction to the movie Kung Fu Panda
     // =========================================================================
     {
       kind: 'set',
@@ -441,13 +441,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: 'They are back [togedder] for their fourth adventure this year.',
           answer: 'together',
           solution: {
-            method: '"together"라는 단어의 정확한 철자를 확인한다.',
+            method: 'Check the correct spelling of the word "together".',
             steps: [
-              '잘못된 철자: togedder.',
-              '바른 단어는 together — "to-geth-er"로 th를 사용한다.',
-              '따라서 together.',
+              'Incorrect spelling: togedder.',
+              'The correct word is together — spelled "to-geth-er", using "th".',
+              'Therefore, the answer is together.',
             ],
-            tip: 'together는 "ge-th-er"로, dd가 아닌 th를 씁니다.',
+            tip: 'together is spelled "to-geth-er" — use "th", not "dd".',
           },
         },
         {
@@ -457,13 +457,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Po the Panda is [serlecterd] to train a new warrior.',
           answer: 'selected',
           solution: {
-            method: '"to be chosen/selected"라는 단어의 정확한 철자를 확인한다.',
+            method: 'Check the correct spelling of the word meaning "to be chosen/selected".',
             steps: [
-              '잘못된 철자: serlecterd.',
-              '바른 단어는 select — se-lect, 과거분사형은 selected.',
-              '따라서 selected.',
+              'Incorrect spelling: serlecterd.',
+              'The correct word is select — spelled "se-lect", and its past participle form is selected.',
+              'Therefore, the answer is selected.',
             ],
-            tip: 'select는 "se-lect"로 씁니다(serlect ✗).',
+            tip: 'select is spelled "se-lect" — not "serlect".',
           },
         },
         {
@@ -474,13 +474,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
             'his mission [became] very challenging when he meets a witch with magical powers.',
           answer: 'becomes',
           solution: {
-            method: '지문 전체의 시제(영화 줄거리 소개 = 현재시제)와 일치시킨다.',
+            method: 'Match the tense throughout the passage to the correct tense (movie plot summary = Present Tense).',
             steps: [
-              '지문은 영화 줄거리를 현재시제로 소개한다: "Po the Panda is selected...", "He teams up...", "they persevere..."',
-              '같은 문장의 "he meets a witch"도 현재시제.',
-              '따라서 "became"(과거)은 전체 시제와 어긋남 → 현재형 becomes로 고쳐야 한다.',
+              'The passage introduces the movie plot using Present Tense: "Po the Panda is selected...", "He teams up...", "they persevere..."',
+              'In the same sentence, "he meets a witch" is also in Present Tense.',
+              'Therefore, "became" (Simple Past) does not match the tense used in the rest of the passage → it should be corrected to the Present Tense form "becomes".',
             ],
-            tip: '영화/책 줄거리를 소개할 때는 보통 현재시제(narrative present)를 일관되게 사용합니다.',
+            tip: 'When describing a movie or book plot, we consistently use Present Tense (called the narrative present).',
           },
         },
         {

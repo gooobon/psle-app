@@ -44,13 +44,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"did not get good grades"는 결과에 어울리는 감정 형용사를 고른다.',
+        method: 'Choose an emotion adjective that fits the result of \'did not get good grades\'.',
         steps: [
-          '시험에서 좋은 성적을 받지 못했다 → 실망/낙심하는 감정.',
-          '"disheartened" = 낙심한, 의기소침한 → 정확히 일치.',
-          'overjoyed(매우 기쁜)/fascinated(매료된)/enthusiastic(열정적인)은 긍정적 감정이라 안 맞는다 → 정답 (4) disheartened.',
+          'Not getting good grades in a test → feeling disappointed or disheartened.',
+          '\'Disheartened\' means feeling sad and losing hope → it matches exactly.',
+          'overjoyed (very happy) / fascinated (amazed) / enthusiastic (eager) are all positive emotions, so they do not fit → correct answer is (4) disheartened.',
         ],
-        tip: '"did not achieve"처럼 부정적 결과 뒤에는 부정적 감정 형용사가 옵니다.',
+        tip: 'After a negative result like \'did not achieve\', use a negative emotion adjective.',
       },
     },
     {
@@ -70,13 +70,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '신문 더미에서 좋은 기사를 "scanning and searching through" 동작을 나타내는 동사를 고른다.',
+        method: 'Choose a verb that shows the action of \'scanning and searching through\' a pile of newspapers to find a good article.',
         steps: [
-          '"look for a good article"(좋은 기사를 찾기 위해) 신문 더미를 훑어봄.',
-          '"browse through" = (책·신문 등을) 휙휙 넘겨보다/훑어보다 → 정확히 일치.',
-          'gazed(오래 응시함)/glared(노려봄)/peered(자세히 들여다봄)는 신문을 훑어보며 기사를 찾는 동작과 덜 맞는다 → 정답 (4) browsed.',
+          'Looking through a pile of newspapers \'to look for a good article\'.',
+          '\'Browse through\' means to flip through and skim pages of newspapers, magazines, etc. → it matches exactly.',
+          'gazed (stared at something for a long time) / glared (looked angrily) / peered (looked closely at something) do not fit the action of flipping through newspapers to find an article → correct answer is (4) browsed.',
         ],
-        tip: '"browse through" 는 신문·잡지·인터넷 등을 휙휙 넘겨보며 살펴보는 동작입니다.',
+        tip: '\'Browse through\' is used when you flip through newspapers, magazines, or websites to look at things quickly.',
       },
     },
     {
@@ -96,13 +96,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '강연자에게 감사의 표시로 주는 기념품을 나타내는 명사를 고른다.',
+        method: 'Choose a noun that describes a gift given to a speaker as a sign of thanks.',
         steps: [
-          '강연을 해준 것에 대한 "a sign of thanks / appreciation"로 주는 것.',
-          '"plaque" = (감사·기념의 의미로 주는) 명판/패 → 강연자에게 주는 감사패에 적합.',
-          'prize(상품, 경쟁의 결과)/trophy(트로피, 경쟁의 승리)/correspondence(서신, 편지)는 "a thank-you gift"과 안 맞는다 → 정답 (3) plaque.',
+          'Something given as \'a sign of thanks or appreciation\' for giving a talk.',
+          '\'Plaque\' means a flat board or plate given as a sign of thanks or in memory of something → it is suitable as a thank-you gift for a speaker.',
+          'prize (a reward for winning a competition) / trophy (awarded for winning) / correspondence (letters or messages) do not match \'a thank-you gift\' → correct answer is (3) plaque.',
         ],
-        tip: '"plaque"는 감사·기념의 의미로 수여하는 패(상패와 비슷하지만 경쟁과 무관)입니다.',
+        tip: 'A \'plaque\' is a flat plate awarded as a sign of thanks or remembrance, similar to an award but not related to any competition.',
       },
     },
     {
@@ -121,13 +121,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '먹잇감을 향해 "suddenly jumping and pouncing on" 동작을 나타내는 동사를 고른다.',
+        method: 'Choose the verb that shows the action of \'suddenly jumping and pouncing on\' a prey.',
         steps: [
-          '"waited for the right time and ___ on its prey" — 적절한 때를 기다렸다가 먹잇감에게 공격.',
-          '"pounce on" = (갑자기) 달려들어 덮치다 → 사냥 동작과 정확히 일치.',
-          'crept(살금살금 기어감)/limped(절뚝거림)/strolled(한가로이 걸음)는 "the action of pouncing"과 안 맞는다 → 정답 (4) pounced.',
+          '\'waited for the right time and ___ on its prey\' — waited for the right moment, then attacked its prey.',
+          '\'pounce on\' means to suddenly jump and attack → this matches the hunting action exactly.',
+          'crept (moved quietly)/limped (walked with a limp)/strolled (walked slowly and relaxed) do not match \'the action of pouncing\' → correct answer is (4) pounced.',
         ],
-        tip: '"pounce on its prey"는 동물이 갑자기 먹잇감을 덮치는 동작을 나타내는 정해진 표현입니다.',
+        tip: '\'pounce on its prey\' is a set phrase that describes an animal suddenly leaping onto its prey.',
       },
     },
     {
@@ -357,13 +357,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '결과("It is natural to have no friends")와 일치하는 주어를 고른다.',
+        method: 'Choose the subject that matches the result: \'It is natural to have no friends\'.',
         steps: [
-          '"It\'s no wonder he has no friends."(친구가 없는 게 당연하다) → 모두가 그를 싫어한다는 의미.',
-          '"Everybody dislikes Alan"(모두가 Alan을 싫어한다)이 결과와 자연스럽게 연결된다.',
-          'Nobody(아무도 안)/Anybody/Somebody는 "Has no friends at all"을 설명하기에 부족 → 정답 (4) Everybody.',
+          '\'It\'s no wonder he has no friends.\' means that everyone dislikes him — so it makes sense he has no friends.',
+          '\'Everybody dislikes Alan\' connects naturally to the result of having no friends.',
+          'Nobody/Anybody/Somebody are not strong enough to explain \'has no friends at all\' → correct answer is (4) Everybody.',
         ],
-        tip: '"It\'s no wonder ~"(~은 당연하다) 앞에는 그 결과의 원인이 되는 강한 진술(모두가 ~)이 자연스럽게 옵니다.',
+        tip: 'Before \'It\'s no wonder ~\', a strong statement about the cause (such as \'everybody ~\') fits most naturally.',
       },
     },
     {
@@ -383,13 +383,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"Look again"는 지시와 어울리는 장소부사를 고른다.',
+        method: 'Choose the place adverb that matches the instruction \'Look again\'.',
         steps: [
-          '"Go and look for it again"(다시 찾아봐라) → 책은 방 안 "Somewhere"에 있을 것이다.',
-          '"somewhere" = 어딘가에 → 위치를 특정하지 않지만 존재함을 암시.',
-          '"nowhere"(아무데도 없음)는 다시 찾아보라는 지시와 모순, "anywhere/everywhere"는 이 문맥에 덜 맞는다 → 정답 (4) somewhere.',
+          '\'Go and look for it again\' → the book is probably \'somewhere\' inside the room.',
+          '\'somewhere\' means in some place — it does not name the exact place, but suggests the thing exists there.',
+          '\'nowhere\' (not in any place) contradicts the instruction to look again; \'anywhere/everywhere\' do not fit this context as well → correct answer is (4) somewhere.',
         ],
-        tip: '"somewhere"는 정확한 위치는 모르지만 "Is somewhere"는 의미입니다.',
+        tip: '\'somewhere\' means the exact location is unknown, but the book does exist in some place.',
       },
     },
 
@@ -564,9 +564,9 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
 
     // =========================================================================
     // Section D: Vocabulary Cloze (5 x 1 mark) — Q23–27
-    // 보기: (A) annoyed (B) apologised (C) examined (D) fascinated (E) offered
+    // Word bank: (A) annoyed (B) apologised (C) examined (D) fascinated (E) offered
     //       (F) patiently (G) reluctantly (H) spotted
-    // 지문: Sam과 두리안 장수
+    // Passage: Sam and the Durian Seller
     // =========================================================================
     {
       kind: 'set',
@@ -589,13 +589,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Sam waited (23) ________ for the man to pack his durians into styrofoam boxes.',
           answer: 'F',
           solution: {
-            method: '오래 기다리는 태도를 나타내는 부사를 고른다.',
+            method: 'Choose the adverb that describes the attitude of waiting for a long time.',
             steps: [
-              '두리안을 포장하는 동안 가만히 기다리는 모습.',
-              '"patiently" = 참을성 있게/끈기 있게 → "waited patiently"가 자연스럽다.',
-              '보기에서 patiently는 (F) → 정답 (F).',
+              'The action of staying still and waiting while the durian is being packed.',
+              '"patiently" means to wait calmly without giving up → "waited patiently" sounds natural.',
+              'In the word bank, patiently is (F) → Answer is (F).',
             ],
-            tip: '"waited patiently"는 불평 없이 차분히 기다리는 모습을 나타냅니다.',
+            tip: '"waited patiently" describes waiting quietly and calmly without complaining.',
           },
         },
         {
@@ -606,13 +606,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'As Sam was watching the man pry open the durians, he (24) ________ the man dropping a section of each durian into another basket.',
           answer: 'H',
           solution: {
-            method: '"Noticed / Spotted"는 의미의 동사를 고른다.',
+            method: 'Choose the verb that means "Noticed / Spotted".',
             steps: [
-              'Sam이 지켜보다가 주인의 부정행위를 "Realised / Noticed".',
-              '"spotted" = (눈여겨보다가) 발견하다/알아채다.',
-              '보기에서 spotted는 (H) → 정답 (H).',
+              'Sam was watching carefully and "Realised / Noticed" the seller cheating.',
+              '"spotted" means to notice or discover something after looking carefully.',
+              'In the word bank, spotted is (H) → Answer is (H).',
             ],
-            tip: '"spotted"는 주의 깊게 보다가 무언가를 알아챘을 때 씁니다.',
+            tip: '"spotted" is used when you notice something after paying close attention.',
           },
         },
         {
@@ -639,13 +639,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'He paid for his durians (26) ________ and told the man, "Sir, I saw what you did. Next time I won\'t buy durians from you."',
           answer: 'G',
           solution: {
-            method: '"Reluctantly, with a dissatisfied feeling" 행동했음을 나타내는 부사를 고른다.',
+            method: 'Choose the adverb that describes doing something "reluctantly, with a dissatisfied feeling".',
             steps: [
-              '주인의 부정행위에 짜증났지만(annoyed) 그래도 돈을 지불해야 했음.',
-              '"reluctantly" = 마지못해/꺼림칙하게 → 짜증난 감정과 어울린다.',
-              '보기에서 reluctantly는 (G) → 정답 (G).',
+              'Sam was annoyed by the seller\'s cheating, but still had to pay the money.',
+              '"reluctantly" means doing something unwillingly → it matches the feeling of being annoyed.',
+              'In the word bank, reluctantly is (G) → Answer is (G).',
             ],
-            tip: '"annoyed"한 감정 뒤에는 "reluctantly"(마지못해)처럼 내키지 않는 행동이 자연스럽게 이어집니다.',
+            tip: 'After the feeling of being \'annoyed\', it is natural to follow up with an unwilling action like \'reluctantly\'.',
           },
         },
         {
@@ -656,13 +656,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Embarrassed, the man (27) ________ to Sam for cheating and gave him another box of durian.',
           answer: 'B',
           solution: {
-            method: '"Apologised shyly/with embarrassment"는 의미의 동사를 고른다.',
+            method: 'Choose a verb that means \'apologised shyly\' or \'apologised with embarrassment\'.',
             steps: [
-              '"Embarrassed"(당황하여) 한 행동.',
-              '"apologised" = 사과했다 → "apologised to Sam for cheating"이 자연스럽다.',
-              '보기에서 apologised는 (B) → 정답 (B). (남은 C·D·E는 사용되지 않음)',
+              'An action done when feeling \'embarrassed\'.',
+              '\'apologised\' means said sorry → \'apologised to Sam for cheating\' sounds natural.',
+              'From the options, \'apologised\' is (B) → the answer is (B). (The remaining options C, D, and E are not used.)',
             ],
-            tip: '"Embarrassed, ... apologised"는 부끄러움 → 사과의 흐름을 보여줍니다.',
+            tip: '\'Embarrassed, ... apologised\' shows the flow from feeling ashamed → saying sorry.',
           },
         },
       ],
@@ -686,13 +686,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Everyone in the class party ( has / have ) received a gift from Mrs Kee.',
           answer: 'has',
           solution: {
-            method: '주어 "Everyone"의 수를 확인한다.',
+            method: 'Check the number (singular or plural) of the subject \'Everyone\'.',
             steps: [
-              '"Everyone"은 항상 단수로 취급한다.',
-              '단수 주어에 맞는 현재완료 조동사는 has.',
-              '따라서 "Everyone... has received" → has.',
+              '\'Everyone\' is always treated as singular.',
+              'The Present Perfect helping verb that matches a singular subject is \'has\'.',
+              'Therefore, \'Everyone... has received\' → use \'has\'.',
             ],
-            tip: '"Everyone/Everybody/Someone" 등은 단수 동사(has, is, was)와 함께 씁니다.',
+            tip: 'Words like \'Everyone\', \'Everybody\', and \'Someone\' are used with singular verbs such as \'has\', \'is\', and \'was\'.',
           },
         },
         {
@@ -702,13 +702,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Lilian always ( do / does ) her homework immediately after taking her lunch.',
           answer: 'does',
           solution: {
-            method: '주어 "Lilian"(단수)과 "always"(반복 습관)을 본다.',
+            method: 'Look at the subject \'Lilian\' (singular) and the word \'always\' (repeated habit).',
             steps: [
-              '"Lilian"은 3인칭 단수.',
-              '"always"는 반복되는 습관 → 단순현재.',
-              '3인칭 단수 현재형은 -s를 붙인 does → does.',
+              '\'Lilian\' is third person singular.',
+              '\'always\' shows a repeated habit → use Simple Present tense.',
+              'The Simple Present form for third person singular adds -s, giving \'does\' → use \'does\'.',
             ],
-            tip: '3인칭 단수 주어의 현재형 동사는 -s/-es를 붙입니다(do → does).',
+            tip: 'For a third-person singular subject in the present tense, add -s/-es to the verb (do → does).',
           },
         },
         {
@@ -718,13 +718,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'We need to do our part to keep the ( enviroment / environment ) clean.',
           answer: 'environment',
           solution: {
-            method: '"Environment"이라는 단어의 정확한 철자를 확인한다.',
+            method: 'Check the correct spelling of the word "environment".',
             steps: [
-              '잘못된 철자: enviroment (n이 하나 빠짐).',
-              '바른 단어는 environment — "environ" + "ment", n이 두 번 들어간다.',
-              '따라서 environment.',
+              'Incorrect spelling: enviroment (missing one \'n\').',
+              'The correct word is environment — "environ" + "ment", with \'n\' appearing twice.',
+              'Therefore: environment.',
             ],
-            tip: 'environment는 "environ-ment"로, n이 두 번 들어갑니다.',
+            tip: '"Environment" is spelled "environ-ment", with \'n\' appearing twice.',
           },
         },
         {
@@ -734,13 +734,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'The snake glided away to escape from its ( predator / predater ).',
           answer: 'predator',
           solution: {
-            method: '"Predator"라는 단어의 끝 철자(-or vs -er)를 확인한다.',
+            method: 'Check the ending spelling of the word "predator" (-or vs -er).',
             steps: [
-              '잘못된 철자: predater.',
-              '바른 단어는 predator — 끝이 -or.',
-              '따라서 predator.',
+              'Incorrect spelling: predater.',
+              'The correct word is predator — ending in -or.',
+              'Therefore: predator.',
             ],
-            tip: 'predator는 끝이 -or입니다(predater ✗).',
+            tip: '"Predator" ends in -or (predater ✗).',
           },
         },
         {
@@ -751,13 +751,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Ben was ( disappointed / dissapointed ) when he was told that he was not selected to join the school team.',
           answer: 'disappointed',
           solution: {
-            method: '"Disappointed"이라는 단어의 접두사(dis-)와 자음 중복을 확인한다.',
+            method: 'Check the prefix (dis-) and double consonants in the word "disappointed".',
             steps: [
-              '잘못된 철자: dissapointed (s가 두 번, p는 한 번).',
-              '바른 단어는 disappointed — dis(접두사, s 한 번) + appoint(p가 두 번) + ed.',
-              '따라서 disappointed.',
+              'Incorrect spelling: dissapointed (double \'s\', single \'p\').',
+              'The correct word is disappointed — dis (prefix, one \'s\') + appoint (double \'p\') + ed.',
+              'Therefore: disappointed.',
             ],
-            tip: 'disappointed는 dis-(s 1개) + ap-point(p 2개) 구조입니다.',
+            tip: 'The word \'disappointed\' is spelled with dis- (one \'s\') + ap-point (two \'p\'s).',
           },
         },
       ],
@@ -779,14 +779,14 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
         '________________________________________, so ________________________________________.',
       answer: 'Tom did not complete his homework, so he was not allowed to play soccer.',
       solution: {
-        method: '원인과 결과를 "so"로 연결한다.',
+        method: 'Use \'so\' to connect a cause and an effect.',
         steps: [
-          '원인: 숙제를 끝내지 않음 / 결과: 축구를 못함.',
-          '"so"(그래서)는 원인 뒤에 결과를 연결하는 접속사.',
+          'Cause: did not finish homework / Effect: could not play football.',
+          '\'so\' (therefore) is a conjunction that connects a cause to its effect.',
           '"Tom did not complete his homework, so he was not allowed to play soccer."',
-          '두 번째 Tom은 반복을 피하기 위해 "he"로 바꾼다.',
+          'The second mention of Tom is changed to \'he\' to avoid repeating the name.',
         ],
-        tip: '"A, so B"는 "Because of A (cause), B happens (effect)"라는 뜻입니다. 반복되는 이름은 대명사로 바꾸세요.',
+        tip: '\'A, so B\' means \'Because of A (cause), B happens (effect).\' Replace repeated names with pronouns.',
       },
     },
     {
@@ -802,14 +802,14 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
         '________________________________________ when ________________________________________.',
       answer: 'Emily was surprised when she saw a birthday cake on her desk.',
       solution: {
-        method: '두 사건을 "when"(~했을 때)으로 연결한다.',
+        method: 'Use \'when\' to connect two events that happen at the same time or trigger each other.',
         steps: [
-          '앞: Emily가 놀랐다(결과/감정) / 뒤: 책상에서 생일 케이크를 보았다(원인이 된 사건).',
-          '"when"은 "When ~ happened"라는 뜻으로 동시에 일어난/계기가 된 사건을 연결한다.',
+          'First part: Emily was surprised (effect/feeling) / Second part: she saw a birthday cake on the desk (the event that caused it).',
+          '\'when\' means \'at the time when ~ happened\' and connects two events that occur together or trigger each other.',
           '"Emily was surprised when she saw a birthday cake on her desk."',
-          '반복되는 Emily는 "she"로 바꾼다.',
+          'The repeated name Emily is changed to \'she\'.',
         ],
-        tip: '"A when B"는 "When B happened, A happened"는 뜻으로, 보통 감정(A)의 원인이 되는 사건(B)을 연결합니다.',
+        tip: '\'A when B\' means \'When B happened, A happened.\' It is usually used to connect a feeling (A) to the event (B) that caused it.',
       },
     },
 
@@ -841,13 +841,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'How long was the herd of goats lost in the forest?',
           answer: 'They were lost in the forest for two days.',
           solution: {
-            method: '1단락에서 염소 떼가 길을 잃은 기간을 찾는다.',
+            method: 'Look in Paragraph 1 for how long the herd of goats was lost.',
             steps: [
-              '1단락: "A herd of goats was lost in the forest for two days."',
-              '염소 떼는 이틀(two days) 동안 길을 잃었다.',
-              '따라서 답은 "two days" (또는 "for two days").',
+              'Paragraph 1: "A herd of goats was lost in the forest for two days."',
+              'The herd of goats was lost for two days.',
+              'So the answer is \'two days\' (or \'for two days\').',
             ],
-            tip: '"How long"은 지문에서 기간을 나타내는 표현(for ~ days)을 그대로 찾으면 됩니다.',
+            tip: 'For \'How long\' questions, find the expression showing a period of time in the passage (e.g. for ~ days) and use it directly as your answer.',
           },
         },
         {
@@ -862,13 +862,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: 'B',
           solution: {
-            method: 'tired(피곤한)와 같은 뜻의 단어를 고른다.',
+            method: 'Choose a word that means the same as \'tired\'.',
             steps: [
-              'confused = 혼란스러운 → tired와 다른 의미.',
-              'exhausted = 매우 피곤한, 지친 → tired와 동의어.',
-              '따라서 정답은 (B) exhausted.',
+              '\'confused\' means feeling mixed up or unsure — this has a different meaning from \'tired\'.',
+              '\'exhausted\' means very tired or worn out — this is a synonym of \'tired\'.',
+              'Therefore, the correct answer is (B) exhausted.',
             ],
-            tip: 'exhausted는 "Very tired/exhausted"이라는 뜻으로 tired의 강한 동의어입니다.',
+            tip: '\'exhausted\' means \'very tired\', making it a strong synonym of \'tired\'.',
           },
         },
         {
@@ -878,13 +878,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Why did the brown goat want to rest?\nThe brown goat was ________ and ________.',
           answer: 'The brown goat was thirsty and hungry.',
           solution: {
-            method: '2단락에서 갈색 염소가 쉬자고 한 이유 두 가지를 찾는다.',
+            method: 'Find two reasons in Paragraph 2 that explain why the brown goat suggested taking a rest.',
             steps: [
-              '2단락: "We have not eaten for days. I\'m so thirsty and hungry. Shall we take a rest?"',
-              '쉬자고 한 이유는 목이 마르고(thirsty) 배가 고프기(hungry) 때문.',
-              '빈칸에 각각 thirsty와 hungry를 적는다.',
+              'Paragraph 2: "We have not eaten for days. I\'m so thirsty and hungry. Shall we take a rest?"',
+              'The brown goat wanted to rest because it was thirsty and hungry.',
+              'Write \'thirsty\' and \'hungry\' in the two blanks.',
             ],
-            tip: '"Shall we take a rest?" 바로 앞의 두 형용사(thirsty, hungry)가 이유입니다.',
+            tip: 'The two adjectives \'thirsty\' and \'hungry\' that appear just before \'Shall we take a rest?\' are the two reasons.',
           },
         },
         {
@@ -894,13 +894,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: "Which word in paragraph 5 has the same meaning as 'unfriendly'?",
           answer: 'hostile',
           solution: {
-            method: 'unfriendly(불친절한/적대적인)와 같은 뜻의 단어를 5단락에서 찾는다.',
+            method: 'Find a word in Paragraph 5 that means the same as \'unfriendly\'.',
             steps: [
-              '5단락: "The rest of the goats began to move away from the buffalo and they were hostile to him."',
-              '"hostile" = 적대적인/불친절한 → unfriendly와 의미가 통한다.',
-              '따라서 답은 hostile.',
+              'Paragraph 5: "The rest of the goats began to move away from the buffalo and they were hostile to him."',
+              '\'hostile\' means unfriendly or acting against someone — it has the same meaning as \'unfriendly\'.',
+              'Therefore, the answer is \'hostile\'.',
             ],
-            tip: '"hostile"은 적대적이고 불친절한 태도를 나타내는 단어입니다.',
+            tip: '"Hostile" is a word that means having an unfriendly and aggressive attitude towards someone.',
           },
         },
         {
@@ -915,15 +915,15 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             '(4) The oldest goat did not know the way out of the forest.',
           answer: '(1) and (4)',
           solution: {
-            method: '각 보기를 지문과 하나씩 대조한다.',
+            method: 'Check each answer option against the passage one by one.',
             steps: [
-              '(1) 5단락: 처음에 염소들은 버팔로를 무시하고 멀리하며 적대적이었다("Let\'s ignore him", "hostile to him") → 참.',
-              '(2) 버팔로는 "To find the way" 도움을 주었을 뿐, "To find food"라는 언급은 없음 → 거짓.',
-              '(3) 4단락: 버팔로는 "I\'ve been lost in the forest for four days"(나흘) — 이틀이 아님 → 거짓.',
-              '(4) 1단락: 염소 떼가 가장 경험 많은 가장 늙은 염소를 따라갔음에도 길을 잃었다 → 가장 늙은 염소도 길을 몰랐음을 암시 → 참.',
-              '따라서 참인 진술은 (1)과 (4).',
+              '(1) Paragraph 5: At first, the goats ignored the buffalo, stayed away from him, and were hostile towards him ("Let\'s ignore him", "hostile to him") → True.',
+              '(2) The buffalo only helped "To find the way" — there is no mention of "To find food" in the passage → False.',
+              '(3) Paragraph 4: The buffalo said "I\'ve been lost in the forest for four days" (four days) — not two days → False.',
+              '(4) Paragraph 1: Even though the goats followed the oldest and most experienced goat, they still got lost → This suggests that even the oldest goat did not know the way → True.',
+              'Therefore, the statements that are true are (1) and (4).',
             ],
-            tip: '숫자(four days vs two days)가 들어간 보기는 지문의 정확한 숫자와 꼭 대조하세요.',
+            tip: 'For answer options that include numbers (such as four days vs two days), always check them carefully against the exact numbers in the passage.',
           },
         },
         {
@@ -934,13 +934,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Tick your chosen answer. The goats were ________ to the buffalo as he helped them to find the way out.\nOptions: sorry | grateful',
           answer: 'grateful',
           solution: {
-            method: '마지막 단락에서 염소들의 최종 감정을 확인한다.',
+            method: 'Check the last paragraph to find out how the goats feel at the end of the story.',
             steps: [
-              '마지막 단락: "The goats thanked the buffalo for helping them to find the way out of the forest."',
-              '"thanked"(감사했다) → "grateful"(감사하는)과 의미가 통한다.',
-              '따라서 정답은 grateful. (공식 정답표 확인됨)',
+              'Last paragraph: "The goats thanked the buffalo for helping them to find the way out of the forest."',
+              '"Thanked" (showed thanks) connects in meaning to "grateful" (feeling thankful).',
+              'Therefore, the answer is grateful. (Confirmed against the answer key.)',
             ],
-            tip: '"thanked"는 grateful(감사하는)과 직접 연결됩니다.',
+            tip: '"Thanked" links directly to the word grateful (feeling thankful).',
           },
         },
       ],
@@ -975,13 +975,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'How did the merchant earn a living?\nThe merchant earned a living by ________.',
           answer: 'The merchant earned a living by selling (sacks of) salt to villages.',
           solution: {
-            method: '1단락에서 상인의 직업/생계 수단을 찾는다.',
+            method: 'Find the merchant\'s job and how he earns a living in Paragraph 1.',
             steps: [
-              '1단락: "A merchant wanted to sell a few sacks of salt to a village nearby."',
-              '상인은 소금을 마을에 파는 일로 생계를 유지했다.',
-              '따라서 "by selling salt to villages" → 정답.',
+              'Paragraph 1: "A merchant wanted to sell a few sacks of salt to a village nearby."',
+              'The merchant earned his living by selling salt to villages.',
+              'Therefore, \'by selling salt to villages\' → correct answer.',
             ],
-            tip: '"How did ~ earn a living"은 인물의 직업/거래 품목을 지문에서 찾으면 됩니다.',
+            tip: 'For \'How did ~ earn a living\' questions, look in the passage for the character\'s job or the item they traded.',
           },
         },
         {
@@ -993,11 +993,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: "Find the noun that 'it' refers to in the same sentence or the sentence before it.",
             steps: [
-              '해당 줄: "The size of the sacks shrunk as the salt in them reduced tremendously. Most of it had dissolved in the water."',
+              'The relevant sentence is: \'The size of the sacks shrunk as the salt in them reduced tremendously. Most of it had dissolved in the water.\'',
               "'it' refers to 'the salt' that was mentioned just before.",
               "Write as a complete sentence: \"'it' refers to the salt.\"",
             ],
-            tip: '대명사 it은 바로 앞 문장의 단수 사물 명사(여기서는 salt)를 가리키는 경우가 많습니다.',
+            tip: 'The pronoun \'it\' often refers to the singular noun in the sentence just before it — in this case, \'salt\'.',
           },
         },
         {
@@ -1009,11 +1009,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: "Find a word in paragraph 5 that means the same as 'completely wet'.",
             steps: [
-              '5단락: "...the merchant removed the sacks of cotton and led the drenched donkey out of the river."',
-              '"drenched" = 완전히 젖은 → 정확히 일치.',
-              '따라서 답은 drenched.',
+              'Paragraph 5 states: \'...the merchant removed the sacks of cotton and led the drenched donkey out of the river.\'',
+              '\'drenched\' means completely wet → this matches exactly.',
+              'Therefore, the answer is \'drenched\'.',
             ],
-            tip: '"drenched"는 물에 흠뻑 젖은 상태를 강조하는 단어입니다.',
+            tip: '\'drenched\' is a word that emphasises being soaking wet from water.',
           },
         },
         {
@@ -1028,13 +1028,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           answer:
             'The donkey fell into the water accidentally = 1; The donkey boasted to his friends = 2; The donkey fell into the water with the sacks of cotton = 3',
           solution: {
-            method: '지문의 날짜별 사건(첫째 날 → 둘째 날 → 셋째 날)을 따라간다.',
+            method: 'Follow the events in the passage day by day (Day 1 → Day 2 → Day 3).',
             steps: [
-              '2단락(첫째 날): "Then the donkey tripped and fell into the water."(우연히 빠짐) → 1.',
-              '3단락(둘째 날): "The donkey was very happy and boasted to his friends that he had found a way to make his work easier."(자랑함) → 2.',
-              '5단락(셋째 날): "the donkey tried the same trick again. He jumped into the water..."(목화 자루와 함께 빠짐) → 3.',
+              'Paragraph 2 (Day 1): \'Then the donkey tripped and fell into the water.\' (fell in by accident) → 1.',
+              'Paragraph 3 (Day 2): \'The donkey was very happy and boasted to his friends that he had found a way to make his work easier.\' (boasted to friends) → 2.',
+              'Paragraph 5 (Day 3): \'the donkey tried the same trick again. He jumped into the water...\' (jumped in with the cotton sacks) → 3.',
             ],
-            tip: '"The next day"/"On the third day" 같은 시간 표지를 따라가면 사건 순서를 쉽게 정리할 수 있습니다.',
+            tip: 'Follow time signal words like \'The next day\' and \'On the third day\' to easily work out the order of events.',
           },
         },
         {
@@ -1049,13 +1049,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             '(a) False — The donkey fell into the river accidentally on the FIRST day (not the second day); on the second day, he fell on purpose (deliberately, as a trick).\n' +
             '(b) True — After the merchant taught him a lesson with the heavy cotton sacks, the donkey was embarrassed and never tried to be lazy again.',
           solution: {
-            method: '각 단락이 가리키는 "for several days"인지 정확히 확인한다.',
+            method: 'Check carefully which paragraph is referring to \'for several days\'.',
             steps: [
-              '(a) 2단락(첫째 날): "Then the donkey tripped and fell into the water."(우연한 사고) → 첫째 날에 일어남. 3단락(둘째 날): "fell into the water on purpose"(고의로) → 둘째 날은 고의였음. 따라서 "accidentally fell in on the second day"는 거짓(False).',
-              '(b) 마지막 단락: "After that incident, the donkey never tried to be lazy again." → 교훈을 얻었음이 명확함 → 참(True).',
-              '각 답에 지문에서 찾은 근거(이유)를 함께 적는다.',
+              '(a) Paragraph 2 (Day 1): \'Then the donkey tripped and fell into the water.\' — this was an accident, and it happened on the first day. Paragraph 3 (Day 2): \'fell into the water on purpose\' — the second day was on purpose. So the statement \'accidentally fell in on the second day\' is False.',
+              '(b) The last paragraph states: \'After that incident, the donkey never tried to be lazy again.\' — this clearly shows the donkey learned a lesson. So the statement is True.',
+              'For each answer, include evidence (a reason) from the passage to support your choice.',
             ],
-            tip: '"accidentally"(우연히)와 "on purpose"(고의로)는 각각 다른 날(1일차/2일차)에 해당하므로 날짜를 혼동하지 않도록 주의하세요.',
+            tip: 'Note that \'accidentally\' (by accident) and \'on purpose\' (deliberately) happened on different days — Day 1 and Day 2 respectively. Be careful not to mix up the days.',
           },
         },
         {
@@ -1066,14 +1066,14 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           answer:
             'The merchant used sacks of cotton because cotton absorbs water and becomes much heavier when wet (unlike salt, which dissolves and becomes lighter). So when the donkey deliberately fell into the water again expecting his load to feel lighter, the cotton sacks became three times heavier instead, punishing him for trying to be lazy and teaching him not to repeat the trick.',
           solution: {
-            method: '소금과 목화의 성질 차이를 비교해 상인의 의도를 추론한다.',
+            method: 'Compare the properties of salt and cotton to work out what the merchant planned to do.',
             steps: [
-              '소금은 물에 녹아 가벼워지지만(2단락), 목화는 물을 흡수해 "becomes three times heavier"(5단락: "three times heavier than before because the cotton absorbed water").',
-              '당나귀는 이전처럼 짐이 가벼워질 것이라 기대하고 또 일부러 물에 빠졌지만, 목화 때문에 오히려 훨씬 무거워져 고생했다.',
-              '이는 게으름을 피우려 한 당나귀에게 교훈을 주기 위한 상인의 의도된 함정이었다.',
-              '두 재료의 물 흡수 성질 차이와 그로 인한 결과를 모두 포함해 답한다.',
+              'Salt dissolves in water and makes the load lighter (Paragraph 2). Cotton absorbs water and \'becomes three times heavier than before because the cotton absorbed water\' (Paragraph 5).',
+              'The donkey expected the load to become lighter again like before, so it deliberately fell into the water. However, because of the cotton, the load became much heavier instead, and the donkey struggled greatly.',
+              'This was the merchant\'s deliberate trap to teach the lazy donkey a lesson.',
+              'Your answer should include both the difference in how the two materials react to water and the result that followed.',
             ],
-            tip: '"Why"에 2점이 배정된 문제는 보통 두 가지 요소(성질의 차이 + 그로 인한 결과/교훈)를 모두 포함해야 합니다.',
+            tip: 'For a \'Why\' question worth 2 marks, you usually need to include two parts: the difference in properties (how salt and cotton react differently to water) and the result or lesson that came from it.',
           },
         },
       ],

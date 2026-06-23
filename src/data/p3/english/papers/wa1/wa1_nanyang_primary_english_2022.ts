@@ -29,7 +29,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'Tom ________ as he was unwrapping the present and saw it was what he had wanted.',
       options: [{ label: '1', text: 'cheer' }, { label: '2', text: 'cheers' }, { label: '3', text: 'cheered' }, { label: '4', text: 'is cheering' }],
       answer: '3',
-      solution: { method: '"was unwrapping"(과거진행) + "saw"(과거)에 맞는 시제를 고른다.', steps: ['"was unwrapping"(과거진행)과 "saw"(과거)가 모두 과거 시점을 나타낸다.', 'Tom이 기뻐한 것도 같은 과거 시점 → cheered(과거) → 정답 (3).'], tip: '지문 전체가 과거이면 빈칸도 과거형을 씁니다.' },
+      solution: { method: 'Choose the correct tense to match "was unwrapping" (Past Continuous) + "saw" (Simple Past).', steps: ['Both "was unwrapping" (Past Continuous) and "saw" (Simple Past) describe actions in the past.', 'Tom cheering also happened at the same past moment → cheered (Simple Past) → Answer (3).'], tip: 'If the whole passage is in the past, use the past tense form in the blank as well.' },
     },
     {
       kind: 'single', id: 'ny22wa1-q2', topic: 'GrammarMCQ', format: 'mcq',
@@ -37,7 +37,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'My sister prefers to complete the work ________ instead of asking for help.',
       options: [{ label: '1', text: 'herself' }, { label: '2', text: 'himself' }, { label: '3', text: 'ourselves' }, { label: '4', text: 'themselves' }],
       answer: '1',
-      solution: { method: '"My sister"(3인칭 여성 단수)에 맞는 재귀대명사를 고른다.', steps: ['"My sister"는 3인칭 여성 단수 → herself.', '따라서 정답 (1) herself.'], tip: 'she/sister → herself' },
+      solution: { method: 'Choose the correct reflexive pronoun to match "My sister" (3rd person female singular).', steps: ['"My sister" is 3rd person female singular → herself.', 'Therefore, the answer is (1) herself.'], tip: 'she/sister → herself' },
     },
     {
       kind: 'single', id: 'ny22wa1-q3', topic: 'GrammarMCQ', format: 'mcq',
@@ -45,7 +45,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'Mother baked ________ mouth-watering apple pies on that table for our housewarming party.',
       options: [{ label: '1', text: 'this' }, { label: '2', text: 'that' }, { label: '3', text: 'these' }, { label: '4', text: 'those' }],
       answer: '4',
-      solution: { method: '"apple pies"(복수) + "that table"(저쪽 테이블, 먼 거리)을 본다.', steps: ['"apple pies"는 복수 → these/those 중 하나.', '"on that table"(저 테이블)은 먼 거리 → those → 정답 (4).'], tip: '"that table"(먼 거리+단수) 위에 있는 복수 사물은 those로 가리킵니다.' },
+      solution: { method: 'Look at "apple pies" (plural) + "that table" (over there, far away).', steps: ['"apple pies" is plural → it must be either these or those.', '"on that table" (far away) → those → Answer (4).'], tip: 'When referring to plural objects on a table that is far away, use those.' },
     },
     {
       kind: 'single', id: 'ny22wa1-q4', topic: 'GrammarMCQ', format: 'mcq',
@@ -53,7 +53,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'Feeling anxious, Fiona took in ________ deep breaths before her performance.',
       options: [{ label: '1', text: 'any' }, { label: '2', text: 'much' }, { label: '3', text: 'a few' }, { label: '4', text: 'a little' }],
       answer: '3',
-      solution: { method: '"deep breaths"(가산 복수)에 맞는 수량 표현을 고른다.', steps: ['"breaths"는 가산 복수 명사 → much/a little(불가산용) 제외.', '"a few" = 몇 개의(가산 복수) → "took a few deep breaths"가 자연스럽다 → 정답 (3).'], tip: '"take a few deep breaths"는 불안할 때 심호흡을 몇 번 하는 정해진 표현입니다.' },
+      solution: { method: 'Choose the correct quantity expression to match "deep breaths" (countable plural).', steps: ['"breaths" is a countable plural noun → much and a little are for uncountable nouns, so they cannot be used.', '"a few" = a small number of (used with countable plural nouns) → "took a few deep breaths" sounds natural → Answer (3).'], tip: '"take a few deep breaths" is a fixed expression used to describe breathing deeply a few times when feeling anxious.' },
     },
     // (B) Vocabulary Q5-8
     {
@@ -62,7 +62,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'The ________ warrior defeated all his enemies.',
       options: [{ label: '1', text: 'loud' }, { label: '2', text: 'invisible' }, { label: '3', text: 'invincible' }, { label: '4', text: 'unfriendly' }],
       answer: '3',
-      solution: { method: '"defeated all enemies"는 전사의 특성을 나타내는 형용사를 고른다.', steps: ['"defeated all his enemies"(모든 적을 물리침) → 패배하지 않는/무적의.', '"invincible" = 무적의, 정복할 수 없는 → 정확히 일치 → 정답 (3).'], tip: '"invincible"은 "in-(not) + vincible (able to be conquered)"으로 "cannot be conquered / unbeatable"을 뜻합니다.' },
+      solution: { method: 'For \'defeated all enemies\', choose an adjective that describes the warrior\'s characteristic.', steps: ['\'Defeated all his enemies\' (beat every opponent) → never loses / cannot be beaten.', '\'Invincible\' = unbeatable, cannot be conquered → matches exactly → Answer (3).'], tip: '\'Invincible\' comes from \'in- (not) + vincible (able to be conquered)\', meaning \'cannot be conquered / unbeatable\'.' },
     },
     {
       kind: 'single', id: 'ny22wa1-q6', topic: 'VocabMCQ', format: 'mcq',
@@ -70,7 +70,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'Eating a ________ mushroom is deadly.',
       options: [{ label: '1', text: 'wild' }, { label: '2', text: 'bitter' }, { label: '3', text: 'poisonous' }, { label: '4', text: 'overcooked' }],
       answer: '3',
-      solution: { method: '"eating it will cause death"는 결과에 맞는 버섯의 특성을 고른다.', steps: ['"is deadly"(치명적이다) → 독이 있어야 치명적.', '"poisonous" = 독이 있는 → 정확히 일치 → 정답 (3).'], tip: '"deadly"(치명적)는 poisonous(독이 있는)와 자연스럽게 짝을 이룹니다.' },
+      solution: { method: 'For \'eating it will cause death\', choose the adjective that matches this result about the mushroom.', steps: ['\'Is deadly\' (causes death) → something must be poisonous to be deadly.', '\'Poisonous\' = contains poison → matches exactly → Answer (3).'], tip: '\'Deadly\' (causes death) naturally pairs with \'poisonous\' (contains poison).' },
     },
     {
       kind: 'single', id: 'ny22wa1-q7', topic: 'VocabMCQ', format: 'mcq',
@@ -99,13 +99,13 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       marks: 4,
       questions: [
         { questionNo: '9', format: 'fib', marks: 1, stem: 'Bob started counting (9) ________ loudly.', answer: 'C',
-          solution: { method: '"countdown"(숫자가 줄어드는)에 맞는 전치사구를 고른다.', steps: ['"Twenty, nineteen, eighteen..."는 카운트다운(하향) → "counting down"(셋 다운).', '보기에서 down은 (C) → 정답 (C).'], tip: '"count down"은 숫자가 내려가는 카운트다운을 나타냅니다.' } },
+          solution: { method: 'For \'countdown\' (numbers going down), choose the correct phrasal verb.', steps: ['\'Twenty, nineteen, eighteen...\' is counting downward → \'counting down\'.', 'Among the choices, \'down\' is option (C) → Answer (C).'], tip: '\'Count down\' means to count backwards, with numbers getting smaller.' } },
         { questionNo: '10', format: 'fib', marks: 1, stem: 'Carol and I grinned as we signalled (10) ________ each other the possible hiding spots.', answer: 'B',
-          solution: { method: '"to send a signal"의 전치사를 고른다.', steps: ['"signal to someone" = ~에게 신호를 보내다 → 정해진 표현.', '보기에서 to는 (B) → 정답 (B).'], tip: '"signal to"는 누군가에게 신호를 보내는 표현입니다.' } },
+          solution: { method: 'Choose the correct preposition for \'to send a signal\'.', steps: ['\'Signal to someone\' = to send a signal to a person → this is a fixed expression.', 'Among the choices, \'to\' is option (B) → Answer (B).'], tip: '"signal to" is an expression meaning to give a signal to someone.' } },
         { questionNo: '11', format: 'fib', marks: 1, stem: 'I spotted a better location (11) ________ the corner of my eye.', answer: 'D',
-          solution: { method: '"from the corner of the eye"라는 표현에 맞는 전치사를 고른다.', steps: ['"from the corner of my eye" = 곁눈으로/눈의 구석으로 → 정해진 관용구.', '보기에서 from은 (D) → 정답 (D).'], tip: '"from the corner of one\'s eye"는 곁눈으로 보다라는 관용 표현입니다.' } },
+          solution: { method: 'Choose the correct preposition that fits the expression "from the corner of the eye".', steps: ['"from the corner of my eye" means to look sideways or out of the corner of your eye. It is a fixed idiom.', 'From the choices, "from" is option (D), so the answer is (D).'], tip: '"from the corner of one\'s eye" is an idiom meaning to look at something sideways, without turning your head fully.' } },
         { questionNo: '12', format: 'fib', marks: 1, stem: 'The gap (12) ________ the wall and cupboard!', answer: 'F',
-          solution: { method: '"the gap between the wall and the cupboard"에 맞는 전치사를 고른다.', steps: ['"the gap between A and B" = A와 B 사이의 틈 → 정해진 표현.', '보기에서 between은 (F) → 정답 (F).'], tip: '"between A and B"는 두 사물 사이를 나타냅니다.' } },
+          solution: { method: 'Choose the correct preposition that fits "the gap between the wall and the cupboard".', steps: ['"the gap between A and B" means the space or gap between A and B. This is a fixed expression.', 'From the choices, "between" is option (F), so the answer is (F).'], tip: '"between A and B" is used to show the space or position separating two things.' } },
       ],
     },
     // (D) Grammar Cloze – SVA Q13-16
@@ -119,13 +119,13 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       marks: 4,
       questions: [
         { questionNo: '13', format: 'fib', marks: 1, stem: 'Superheroes (13) [come / comes] in all shapes and sizes.', answer: 'come',
-          solution: { method: '"Superheroes"(복수) → 동사 원형.', steps: ['복수 주어 + 단순현재 → come(원형).'], tip: '복수 주어에는 -s를 붙이지 않습니다.' } },
+          solution: { method: '"Superheroes" is plural, so we use the base form of the verb.', steps: ['Plural Subject + Simple Present → use "come" (base form).'], tip: 'With a plural subject, do not add -s to the verb.' } },
         { questionNo: '14', format: 'fib', marks: 1, stem: 'Sometimes, they even (14) [has / have] tails!', answer: 'have',
-          solution: { method: '"they"(복수) → have.', steps: ['"they"는 복수 → have.'], tip: 'they → have (has는 단수 주어용)' } },
+          solution: { method: '"they" is plural, so we use "have".', steps: ['"they" is plural, so we use "have".'], tip: '"they" → use "have" ("has" is used with singular subjects only).' } },
         { questionNo: '15', format: 'fib', marks: 1, stem: 'their keen sense of smell (15) [is / are] their superpower.', answer: 'is',
-          solution: { method: '"sense of smell"(단수 핵심 명사)를 본다.', steps: ['"sense"가 핵심 명사(단수) → is.'], tip: '"A of B" 구조에서 A(핵심 명사)가 수를 결정합니다.' } },
+          solution: { method: 'Look at the key noun \'sense of smell\' (singular key noun).', steps: ['\'sense\' is the key noun (singular) → use is.'], tip: 'In an \'A of B\' structure, A (the key noun) determines the verb.' } },
         { questionNo: '16', format: 'fib', marks: 1, stem: 'a dog named Rocky (16) [was / were] presented with the "Animal of the Year" award.', answer: 'was',
-          solution: { method: '"a dog"(단수) + 과거시제를 본다.', steps: ['단수 주어 + 과거 be동사 → was.'], tip: '단수 주어의 과거 be동사는 was입니다.' } },
+          solution: { method: 'Look at \'a dog\' (singular) + past tense.', steps: ['Singular subject + past tense be verb → was.'], tip: 'The past tense be verb for a singular subject is was.' } },
       ],
     },
     // (E) Editing Q17-20
@@ -139,13 +139,13 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       marks: 4,
       questions: [
         { questionNo: '17', format: 'editing', marks: 1, stem: 'his father\'s arm [musels] were put to good use', answer: 'muscles',
-          solution: { method: '"muscle"의 정확한 철자를 확인한다.', steps: ['잘못된 철자: musels.', '바른 단어: muscles — m-u-s-c-l-e-s.'], tip: 'muscles는 "musc-les"로 c가 들어갑니다.' } },
+          solution: { method: 'Check the correct spelling of \'muscle\'.', steps: ['Incorrect spelling: musels.', 'Correct word: muscles — m-u-s-c-l-e-s.'], tip: 'muscles is spelled \'musc-les\' — remember the letter c.' } },
         { questionNo: '18', format: 'editing', marks: 1, stem: 'their [favurit] spot', answer: 'favourite',
-          solution: { method: '"favourite"이라는 단어의 정확한 철자를 확인한다.', steps: ['잘못된 철자: favurit.', '바른 단어: favourite — f-a-v-o-u-r-i-t-e.'], tip: 'favourite는 "fav-our-ite"로 씁니다.' } },
+          solution: { method: 'Check the correct spelling of the word \'favourite\'.', steps: ['Incorrect spelling: favurit.', 'Correct word: favourite — f-a-v-o-u-r-i-t-e.'], tip: 'favourite is spelled \'fav-our-ite\'.' } },
         { questionNo: '19', format: 'editing', marks: 1, stem: '"David, feeling [hangree] yet?"', answer: 'hungry',
-          solution: { method: '"hungry"이라는 단어의 정확한 철자를 확인한다.', steps: ['잘못된 철자: hangree.', '바른 단어: hungry — h-u-n-g-r-y.'], tip: 'hungry는 "hung-ry"로 씁니다.' } },
+          solution: { method: 'Check the correct spelling of the word \'hungry\'.', steps: ['Incorrect spelling: hangree.', 'Correct word: hungry — h-u-n-g-r-y.'], tip: 'hungry is spelled as \'hung-ry\'.' } },
         { questionNo: '20', format: 'editing', marks: 1, stem: 'David nodded eagerly and squealed at the [feest] prepared.', answer: 'feast',
-          solution: { method: '"feast / banquet"이라는 단어의 정확한 철자를 확인한다.', steps: ['잘못된 철자: feest.', '바른 단어: feast — f-e-a-s-t (ea로 씀).'], tip: 'feast는 "fe-ast"로 ee가 아닌 ea로 씁니다.' } },
+          solution: { method: 'Check the correct spelling of the word \'feast / banquet\'.', steps: ['Incorrect spelling: feest.', 'Correct word: feast — f-e-a-s-t (spelled with ea).'], tip: 'feast is spelled as \'fe-ast\', using ea and not ee.' } },
       ],
     },
   ],

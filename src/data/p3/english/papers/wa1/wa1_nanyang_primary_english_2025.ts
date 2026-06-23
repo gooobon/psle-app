@@ -233,8 +233,8 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
 
     // =========================================================================
     // (C) Grammar Cloze — Prepositions (4 marks) — Q9–12
-    // 보기: (A) in (B) to (C) by (D) from (E) into (F) across
-    // 지문: Maisie's Web (거미 Maisie)
+    // Options: (A) in (B) to (C) by (D) from (E) into (F) across
+    // Passage: Maisie's Web (거미 Maisie)
     // =========================================================================
     {
       kind: 'set',
@@ -318,10 +318,10 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
 
     // =========================================================================
     // (D) Grammar Cloze — Subject-Verb Agreement (4 marks) — Q13–16
-    // 지문: Sea Turtles (ReadWorks)
+    // Passage: Sea Turtles (ReadWorks)
     // =========================================================================
     {
-      kind: 'set',
+      kind:'set',
       id: 'ny2025-secD-sva',
       topic: 'GrammarCloze',
       title: '(D) Grammar Cloze — Subject-Verb Agreement',
@@ -401,10 +401,10 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
 
     // =========================================================================
     // (E) Editing for Spelling (4 marks) — Q17–20
-    // 지문: Davey와 형제의 숲속 모험
+    // Passage: Davey and his brother\'s forest adventure
     // =========================================================================
     {
-      kind: 'set',
+      kind:'set',
       id: 'ny2025-secE-editing',
       topic: 'Editing',
       title: '(E) Editing for Spelling',

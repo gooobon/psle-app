@@ -1,12 +1,12 @@
 // =============================================================================
 // src/data/p3/english/papers/wa1_raffles_girls_primary_english_2024.ts
-// Raffles Girls' Primary School — 2024 Weighted Assessment 1 (English) — Primary 3
-// 원본 PDF: P3_English_WA1.pdf, 물리적 페이지 65–73 (시험지 표지 p.1–9)
+// Raffles Girls'Primary School — 2024 Weighted Assessment 1 (English) — Primary 3
+// Original PDF: P3_English_WA1.pdf, physical pages 65–73 (cover page p.1–9)
 // Total Time: 50 minutes / Total: 15 marks (Section A 7 + Section B 8)
-// 듣기·작문 제외. 모든 문제 100% 전사 + 상세 solution 포함.
+// Listening and writing excluded. All questions 100% transcribed with detailed solutions.
 // =============================================================================
 
-import type { EnglishPaper } from '../types';
+import type { EnglishPaper } from'../types';
 
 export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
   meta: {
@@ -53,13 +53,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: '1',
           solution: {
-            method: '1단락에서 모두가 매료된 이유를 그대로 찾는다.',
+            method: 'Find the reason why everyone was attracted, directly from Paragraph 1.',
             steps: [
-              '1단락: "It sang so sweetly that anyone who heard it would be attracted to its singing."',
-              '매료된 이유는 "sang very sweetly" 때문.',
-              '따라서 정답은 (1) sang very sweetly.',
+              'Paragraph 1: "It sang so sweetly that anyone who heard it would be attracted to its singing."',
+              'The reason everyone was attracted is because it "sang very sweetly".',
+              'Therefore, the answer is (1) sang very sweetly.',
             ],
-            tip: '"why" 문제는 지문에서 결과 앞에 나오는 원인(so ~ that 구문 등)을 찾으면 됩니다.',
+            tip: 'For "why" questions, look for the cause that comes before the effect in the passage — for example, look out for the "so ~ that" sentence structure.',
           },
         },
         {
@@ -69,13 +69,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           stem: 'In paragraph 2, which word has the same meaning as immediately?',
           answer: 'instantly',
           solution: {
-            method: 'immediately(즉시)와 같은 뜻의 단어를 2단락에서 찾는다.',
+            method: 'Find a word in Paragraph 2 that means the same as "immediately".',
             steps: [
-              '2단락: "she fell in love instantly with it."',
-              'instantly = 즉시, 곧바로 → immediately와 같은 의미.',
-              '따라서 답은 instantly.',
+              'Paragraph 2: "she fell in love instantly with it."',
+              '"instantly" means right away, without delay — the same meaning as "immediately".',
+              'Therefore, the answer is "instantly".',
             ],
-            tip: '동의어 찾기 문제는 보기 단어를 지문 문장에 대입해 의미가 자연스러운지 확인합니다.',
+            tip: 'For synonym questions, try replacing the given word with the word from the passage and check if the meaning still makes sense.',
           },
         },
         {
@@ -86,13 +86,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": Mr Wu kept the nightingale in his room.',
           answer: 'False',
           solution: {
-            method: 'Mr Wu가 나이팅게일을 어디에 두었는지 확인한다.',
+            method: 'Check where Mr Wu placed the nightingale.',
             steps: [
-              '2단락: Mr Wu는 새를 잡아 "a cage in the balcony"(발코니 새장)에 두었다.',
-              '자기 방에 둔 것이 아니며, 방에 숨긴 사람은 Ling이다("hid the nightingale in her room").',
-              '따라서 "Mr Wu placed in his room"는 거짓 → False.',
+              'Paragraph 2: Mr Wu caught the bird and put it in "a cage in the balcony" (a cage on the balcony).',
+              'He did not place it in his room — it was Ling who hid the nightingale in her room ("hid the nightingale in her room").',
+              'Therefore, the statement "Mr Wu placed it in his room" is not true → False.',
             ],
-            tip: '장소를 묻는 True/False는 누가 어디에 두었는지 인물별로 정확히 구분해야 합니다.',
+            tip: 'For True/False questions about locations, you must clearly identify where each character placed the object — match the right person to the right place.',
           },
         },
         {
@@ -103,13 +103,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": Ling did not enjoy listening to the nightingale\'s singing.',
           answer: 'False',
           solution: {
-            method: 'Ling이 나이팅게일 노래를 좋아했는지 확인한다.',
+            method: 'Check whether Ling liked the nightingale\'s song.',
             steps: [
-              '2단락: "she fell in love instantly with it." — Ling은 새에 푹 빠졌다.',
-              '3단락: 새를 독차지하려고 자기 방에 숨길 정도였다.',
-              '따라서 "did not enjoy"는 거짓 → False.',
+              'Paragraph 2: \'she fell in love instantly with it.\' — Ling loved the bird right away.',
+              'Paragraph 3: She even hid the bird in her room so she could keep it all to herself.',
+              'Therefore, \'did not enjoy\' is false → False.',
             ],
-            tip: '부정문 진술(did not ~)은 지문 내용과 반대면 False가 됩니다.',
+            tip: 'When a statement uses a negative form (did not ~), if it is the opposite of what the passage says, the answer is False.',
           },
         },
         {
@@ -120,13 +120,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'Based on paragraphs 2 and 3, tick "True" or "False": At first, the nightingale was put in a cage and placed in the balcony.',
           answer: 'True',
           solution: {
-            method: '처음에 새를 어디에 두었는지 지문에서 확인한다.',
+            method: 'Check the passage to find out where the bird was placed at first.',
             steps: [
-              '2단락: "He then captured the nightingale and placed it in a cage in the balcony."',
-              '처음에 새는 새장에 넣어져 발코니에 놓였다.',
-              '진술과 지문이 일치하므로 → True.',
+              'Paragraph 2: \'He then captured the nightingale and placed it in a cage in the balcony.\'',
+              'At first, the bird was put in a cage and placed on the balcony.',
+              'The statement matches the passage → True.',
             ],
-            tip: '"At first"(처음에)는 사건의 시간 순서까지 맞아야 True입니다.',
+            tip: 'When a statement includes \'at first\', the timing must also match the passage for the answer to be True.',
           },
         },
         {
@@ -137,13 +137,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'From the last paragraph, list 2 things that Mr Wu promised to do to keep the nightingale forever.\n(i) ________\n(ii) ________',
           answer: '(i) get rid of the toy bird  (ii) take good care of the nightingale',
           solution: {
-            method: '마지막 단락의 "promised to ~" 문장에서 두 가지 약속을 나눈다.',
+            method: 'In the last paragraph, find the sentence with \'promised to ~\' and identify the two promises made.',
             steps: [
-              '마지막 단락: "He promised to get rid of the toy bird and to take good care of the nightingale forever."',
-              '"and"로 두 가지 약속이 연결되어 있다.',
-              '(i) 장난감 새를 없애겠다 / (ii) 나이팅게일을 잘 돌보겠다.',
+              'Last paragraph: \'He promised to get rid of the toy bird and to take good care of the nightingale forever.\'',
+              'The word \'and\' connects two promises together.',
+              '(i) To get rid of the toy bird / (ii) To take good care of the nightingale forever.',
             ],
-            tip: '"list 2 things"는 한 문장 속 and로 이어진 두 행동을 각각 나눠 적습니다.',
+            tip: '"list 2 things" means you write down each of the two actions connected by "and" in a sentence separately.',
           },
         },
       ],

@@ -48,13 +48,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: '"Should (1) ________ help him?" Sarah asked.',
           answer: 'we',
           solution: {
-            method: 'Sarah가 Tom에게 자신과 Tom을 포함해 "Shall we help together?"라고 묻는 주어를 고른다.',
+            method: 'Choose the subject that includes both Sarah and Tom, as Sarah is asking Tom to do something together with her using \'Shall we help together?\'',
             steps: [
-              'Sarah는 자기 자신과 Tom을 포함해서 묻고 있다("Yes, let\'s do that" — Tom도 함께 동의함).',
-              '화자(Sarah) 자신을 포함한 복수 주어는 "we".',
-              '따라서 "Should we help him?" → 정답 we.',
+              'Sarah is asking a question that includes both herself and Tom (\'Yes, let\'s do that\' — Tom agrees to join her).',
+              'When the speaker (Sarah) includes herself in a group, the correct plural subject is \'we\'.',
+              'Therefore, \'Should we help him?\' → the correct answer is \'we\'.',
             ],
-            tip: '"Let\'s ~"(우리 ~하자)로 답하는 질문에는 보통 "we"로 제안합니다.',
+            tip: 'When answering a question with \'Let\'s ~\' (meaning \'let us\'), we usually use \'we\' to make the suggestion.',
           },
         },
         {
@@ -64,13 +64,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: '"Yes, let\'s do that," Tom replied. (2) ________ walked up to the man.',
           answer: 'they',
           solution: {
-            method: 'Sarah와 Tom 두 사람을 함께 가리키는 3인칭 복수 주어를 고른다.',
+            method: 'Choose the third-person plural subject that refers to both Sarah and Tom together.',
             steps: [
-              '이 문장은 서술자가 Sarah와 Tom을 외부에서 바라보는 시점(3인칭 서술).',
-              'Sarah와 Tom 두 사람 = 3인칭 복수 → "they".',
-              '따라서 "They walked up to the man." → 정답 they.',
+              'This sentence is told from an outside point of view, where the narrator is describing Sarah and Tom (third-person narration).',
+              'Sarah and Tom together = third-person plural → \'they\'.',
+              'Therefore, \'They walked up to the man.\' → the correct answer is \'they\'.',
             ],
-            tip: '이야기 서술에서 등장인물 두 명 이상을 함께 가리킬 때는 they를 씁니다.',
+            tip: 'In a story, when referring to two or more characters together, we use \'they\'.',
           },
         },
         {
@@ -80,13 +80,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: '"Can we help you with (3) ________ box?" Tom asked.',
           answer: 'your',
           solution: {
-            method: 'Tom이 노인(old man)에게 직접 묻는 말의 소유격을 고른다.',
+            method: 'Choose the possessive that Tom uses when speaking directly to the old man.',
             steps: [
-              'Tom이 노인에게 "Your box"를 도와줄지 묻고 있다.',
-              '상대방(노인)의 소유를 나타내는 2인칭 소유격은 "your".',
-              '따라서 "Can we help you with your box?" → 정답 your.',
+              'Tom is asking the old man whether they can help with \'your box\'.',
+              'The second-person possessive used to show that something belongs to the person you are talking to is \'your\'.',
+              'Therefore, \'Can we help you with your box?\' → the correct answer is \'your\'.',
             ],
-            tip: '"you"(목적격)가 이미 쓰였으면, 같은 사람의 소유물을 가리킬 때는 소유격 "your"를 씁니다.',
+            tip: 'When \'you\' (object form) is already used in the sentence, use the possessive \'your\' to refer to something that belongs to that same person.',
           },
         },
         {
@@ -96,13 +96,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'Helping others made (4) ________ feel good.',
           answer: 'them',
           solution: {
-            method: '서술자가 Sarah와 Tom을 외부에서 가리키는 목적격 대명사를 고른다.',
+            method: 'Choose the object pronoun that the narrator uses to refer to Sarah and Tom from the outside.',
             steps: [
-              '"Helping others made ___ feel good" — 다른 사람을 도운 것이 Sarah와 Tom의 기분을 좋게 만들었다.',
-              'Sarah와 Tom(3인칭 복수)을 목적어로 가리키는 대명사는 "them".',
-              '따라서 "made them feel good" → 정답 them. (남은 us·you는 사용되지 않음)',
+              '"Helping others made ___ feel good" — helping other people made Sarah and Tom feel good.',
+              'The pronoun that refers to Sarah and Tom (3rd person plural) as the object is "them".',
+              'So "made them feel good" → the answer is them. (The remaining options us and you are not used here.)',
             ],
-            tip: '3인칭 복수를 목적어로 가리킬 때는 them을 씁니다(주격 they의 목적격형).',
+            tip: 'When referring to 3rd person plural as the object, we use them (the object form of the subject pronoun they).',
           },
         },
       ],
@@ -131,13 +131,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'She always (5) ________ with a big smile whenever she hears her favourite songs.',
           answer: 'dances',
           solution: {
-            method: '"always... whenever"(반복 습관)와 주어(She, 단수)에 맞춘다.',
+            method: 'Match the verb to "always... whenever" (repeated habit) and the subject (She, singular).',
             steps: [
-              '"always... whenever she hears"는 반복되는 습관 → 단순현재.',
-              '주어 "She"는 3인칭 단수 → 동사에 -s.',
-              '따라서 "She always dances" → 정답 dances.',
+              '"always... whenever she hears" shows a repeated habit → use Simple Present.',
+              'The subject "She" is 3rd person singular → add -s to the verb.',
+              'So "She always dances" → the answer is dances.',
             ],
-            tip: '"always/whenever"는 반복 습관을 나타내는 단순현재의 신호입니다.',
+            tip: '"always" and "whenever" are signal words for Simple Present showing repeated habits.',
           },
         },
         {
@@ -147,13 +147,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'Everyone took turns to (6) ________ on the stage.',
           answer: 'dance',
           solution: {
-            method: '"took turns to + base verb" 구문을 적용한다.',
+            method: 'Apply the structure "took turns to + base verb".',
             steps: [
-              '"take turns to + base verb" = 차례로 ~하다.',
-              'to 뒤에는 동사원형이 온다.',
-              '따라서 "took turns to dance" → 정답 dance.',
+              '"take turns to + base verb" means to do something one after another.',
+              'After "to", use the base verb (base form of the verb).',
+              'So "took turns to dance" → the answer is dance.',
             ],
-            tip: '"to" 뒤에는 항상 동사원형이 옵니다(to + base verb).',
+            tip: 'After "to", always use the base verb (to + base verb).',
           },
         },
         {
@@ -163,13 +163,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'Jenny (7) ________ as gracefully as a ballerina.',
           answer: 'danced',
           solution: {
-            method: '지문 전체의 시제("Last weekend"=과거)에 맞춘다.',
+            method: 'Match the tense to the whole passage (\'Last weekend\' = past tense).',
             steps: [
-              '"Last weekend, my class had a party..."로 시작하는 단락은 과거시제 서술.',
-              '주어 "Jenny"(단수) + 과거 → danced.',
-              '따라서 "Jenny danced as gracefully as a ballerina." → 정답 danced.',
+              'A paragraph starting with \'Last weekend, my class had a party...\' is written in the Simple Past tense.',
+              'Subject \'Jenny\' (singular) + past tense → danced.',
+              'Therefore, \'Jenny danced as gracefully as a ballerina.\' → the correct answer is danced.',
             ],
-            tip: '"Last weekend"로 시작하는 단락 안의 모든 동사는 과거시제로 일관되게 씁니다.',
+            tip: 'All verbs inside a paragraph that begins with \'Last weekend\' should consistently be written in the Simple Past tense.',
           },
         },
         {
@@ -179,13 +179,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'While we (8) ________, the principal walked in and cheered for us.',
           answer: 'were dancing',
           solution: {
-            method: '"While + subject + ___, [one past event]" 구조에서 진행 중이던 동작을 본다.',
+            method: 'In a \'While + subject + ___, [one past event]\' structure, look at the action that was already in progress.',
             steps: [
-              '"the principal walked in"(과거의 한 순간)이 일어났을 때, "we"는 춤을 추는 "In the middle of / during"이었다.',
-              '특정 과거 시점에 진행 중인 동작 → 과거진행형.',
-              '주어 "we"(복수) → "were dancing" → 정답 were dancing.',
+              'When \'the principal walked in\' (a single moment in the past) happened, \'we\' were in the middle of dancing.',
+              'An action that was in progress at a specific point in the past → Past Continuous tense.',
+              'Subject \'we\' (plural) → \'were dancing\' → the correct answer is were dancing.',
             ],
-            tip: '"While + subject + was/were -ing, [another past event]"은 한 동작이 진행되는 동안 다른 일이 일어났음을 나타냅니다.',
+            tip: '\'While + subject + was/were -ing, [another past event]\' shows that while one action was in progress, another event happened.',
           },
         },
       ],
@@ -208,13 +208,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
         '________________________________________',
       answer: 'When the doorbell rang, Rina was reading in her room.',
       solution: {
-        method: '"When + [short event], [situation that was already happening]" 구조로 연결한다.',
+        method: 'Use the structure \'When + [short event], [situation that was already happening]\' to connect the two ideas.',
         steps: [
-          '"The doorbell rang"(초인종이 울림)은 한순간에 일어난 짧은 사건.',
-          '"Rina was reading in her room"(읽고 있던 중)은 그 사건이 일어났을 때 진행 중이던 상황.',
-          '"When + [short event], [situation that was already happening]." 구조: "When the doorbell rang, Rina was reading in her room."',
+          '\'The doorbell rang\' is a short event that happened in a single moment.',
+          '\'Rina was reading in her room\' is the situation that was already in progress when that short event happened.',
+          'Structure: \'When + [short event], [situation that was already happening].\' → \'When the doorbell rang, Rina was reading in her room.\'',
         ],
-        tip: '"When" 뒤에는 보통 짧고 갑작스러운 사건(rang)이 오고, 그 뒤 콤마 뒤에는 그 순간 진행 중이던 더 긴 동작(was reading)이 옵니다.',
+        tip: 'After \'When\', we usually have a short, sudden event (rang), and after the comma, we have the longer action that was already in progress at that moment (was reading).',
       },
     },
     {
@@ -231,13 +231,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
         '________________________________________',
       answer: 'Both Don and Ariel like to sing in front of others.',
       solution: {
-        method: '"Both A and B" 구문으로 두 사람을 묶는다.',
+        method: 'Use the structure "Both A and B" to join two people together.',
         steps: [
-          '두 사람 모두 같은 특징(다른 사람 앞에서 노래하는 것을 좋아함)을 가지므로 "Both A and B"로 합친다.',
-          '주어가 "Both Don and Ariel"(복수)이 되면 동사는 likes → like로 바꾼다.',
-          '완성: "Both Don and Ariel like to sing in front of others."',
+          'Since both people share the same trait (they like to sing in front of others), we join them using "Both A and B".',
+          'When the subject becomes "Both Don and Ariel" (plural), the verb changes from likes → like.',
+          'Completed sentence: "Both Don and Ariel like to sing in front of others."',
         ],
-        tip: '"Both A and B"는 복수 취급이므로 동사에 -s를 붙이지 않습니다(likes → like).',
+        tip: '"Both A and B" is treated as plural, so do not add -s to the verb (likes → like).',
       },
     },
 
@@ -274,14 +274,14 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: '1',
           solution: {
-            method: '1단락 첫 문장에서 까마귀가 목이 마른 배경(날씨)을 확인한다.',
+            method: 'Look at the first sentence of Paragraph 1 to find the background (weather) that explains why the crow is thirsty.',
             steps: [
-              '1단락: "On a hot summer day, a thirsty crow flew over a garden."',
-              '"hot summer day"(더운 여름날) = "a sunny day"(맑고 더운 날) → 더운 날씨가 갈증의 배경.',
-              '지문에는 "for hours"(몇 시간 동안 물을 찾음)라고만 나오며, "for days"(며칠 동안)라는 표현은 없음 → (2)·(3) 거짓.',
-              '따라서 정답은 (1) was a sunny day.',
+              'Paragraph 1: "On a hot summer day, a thirsty crow flew over a garden."',
+              '"hot summer day" = "a sunny day" (bright and hot day) → The hot weather explains why the crow is thirsty.',
+              'The passage only says "for hours" (searched for water for hours). The phrase "for days" (for several days) does not appear in the passage → Options (2) and (3) are false.',
+              'Therefore, the correct answer is (1) was a sunny day.',
             ],
-            tip: '지문의 정확한 시간 표현("hours" vs "days")을 보기와 꼼꼼히 대조하세요.',
+            tip: 'Carefully compare the exact time expression in the passage ("hours" vs "days") with each answer option.',
           },
         },
         {
@@ -296,13 +296,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: '1',
           solution: {
-            method: '1~2단락에서 "Excited"의 직접적인 원인을 찾는다.',
+            method: 'Look in Paragraphs 1 and 2 to find the direct cause of "Excited".',
             steps: [
-              '1단락: "Suddenly, it spotted a jug on a table in the garden."',
-              '2단락: "Excited, the crow flew down and perched on the jug\'s rim."',
-              '까마귀가 흥분한 것은 "The kettle (jar) on the garden table"를 발견했기 때문 → 정답 (1) a jug on a table.',
+              'Paragraph 1: "Suddenly, it spotted a jug on a table in the garden."',
+              'Paragraph 2: "Excited, the crow flew down and perched on the jug\'s rim."',
+              'The crow became excited because it spotted "a jug on a table in the garden" → The correct answer is (1) a jug on a table.',
             ],
-            tip: '"Excited" 바로 앞 문장에서 흥분한 원인(발견한 대상)을 찾습니다.',
+            tip: 'Find the cause of excitement (the thing discovered) in the sentence just before the word \'Excited\'.',
           },
         },
         {
@@ -317,13 +317,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           answer:
             "The crow landed on the jug's rim = 1; The crow saw pebbles on the ground = 2; The crow drank the water = 3",
           solution: {
-            method: '지문의 단락 순서(2단락 → 3단락 → 5단락)를 따라간다.',
+            method: 'Follow the order of paragraphs in the passage (Paragraph 2 → Paragraph 3 → Paragraph 5).',
             steps: [
-              '2단락: "the crow flew down and perched on the jug\'s rim." → 1.',
-              '3단락: "It looked around the garden and saw some small pebbles on the ground." → 2.',
-              '5단락: "the crow dipped its beak into the water and took a long, refreshing drink." → 3.',
+              'Paragraph 2: \'the crow flew down and perched on the jug\'s rim.\' → 1.',
+              'Paragraph 3: \'It looked around the garden and saw some small pebbles on the ground.\' → 2.',
+              'Paragraph 5: \'the crow dipped its beak into the water and took a long, refreshing drink.\' → 3.',
             ],
-            tip: '사건의 순서는 지문의 단락이 전개되는 순서를 그대로 따라가면 됩니다.',
+            tip: 'The order of events simply follows the order in which the paragraphs appear in the passage.',
           },
         },
         {
@@ -335,13 +335,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           answer:
             '(i) The water level was very low.\n(ii) The jug was too deep.',
           solution: {
-            method: '2단락에서 부리로 물에 닿을 수 없었던 두 가지 이유를 찾는다.',
+            method: 'Find the two reasons in Paragraph 2 why the crow could not reach the water with its beak.',
             steps: [
-              '2단락: "It looked inside and saw some water, but the water level was very low. The crow tried to reach the water with its beak, but it could not. The jug was too deep."',
-              '이유 1: 물의 높이가 매우 낮았다(the water level was very low).',
-              '이유 2: 항아리가 너무 깊었다(the jug was too deep).',
+              'Paragraph 2: \'It looked inside and saw some water, but the water level was very low. The crow tried to reach the water with its beak, but it could not. The jug was too deep.\'',
+              'Reason 1: The water level was very low.',
+              'Reason 2: The jug was too deep.',
             ],
-            tip: '"but" 뒤에 나오는 두 문장이 각각 (i), (ii)의 이유에 해당합니다.',
+            tip: 'The two sentences that come after \'but\' match reasons (i) and (ii) respectively.',
           },
         },
         {
@@ -356,13 +356,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: 'A',
           solution: {
-            method: '"Worked hard without resting"는 의미와 같은 단어를 고른다.',
+            method: 'Choose the word that has the same meaning as \'worked hard without resting\'.',
             steps: [
-              '"tirelessly" = 지치지 않고/쉬지 않고 → "worked hard without stopping"과 정확히 일치.',
-              '"back and forth"(왔다 갔다)는 움직임의 방향/패턴을 나타낼 뿐, "Without stopping / Without rest"을 직접 의미하지 않는다.',
-              '따라서 정답은 (A) tirelessly.',
+              '\'tirelessly\' means without getting tired or without stopping → it matches exactly with \'worked hard without stopping\'.',
+              '\'back and forth\' only describes the direction or pattern of movement, and does not directly mean \'without stopping\' or \'without rest\'.',
+              'Therefore, the correct answer is (A) tirelessly.',
             ],
-            tip: '"tirelessly"는 "Kept going without getting tired"라는 뜻으로, "without stopping"과 직접 연결됩니다.',
+            tip: '"Tirelessly" means "kept going without getting tired", and it connects directly to "without stopping".',
           },
         },
         {
@@ -374,11 +374,11 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           solution: {
             method: "Find the key noun in the sentence just before 'it'.",
             steps: [
-              '해당 문장(4~5단락 경계): "After a long time, the water finally rose high enough for the crow to reach it."',
+              'The sentence is found at the boundary of paragraphs 4 and 5: "After a long time, the water finally rose high enough for the crow to reach it."',
               "'it' refers to 'the water' that was mentioned in the sentence just before.",
               "In a complete sentence: \"'it' refers to the water.\"",
             ],
-            tip: '대명사 it은 바로 앞 문장에서 가장 가까운 단수 사물 명사를 가리키는 경우가 많습니다.',
+            tip: 'The pronoun "it" often refers to the closest singular noun (a thing) in the sentence just before it.',
           },
         },
         {
@@ -389,13 +389,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           answer:
             'The crow learned that with patience and smart thinking, even difficult problems could be solved.',
           solution: {
-            method: '마지막 단락의 마지막 문장에서 까마귀가 배운 점을 찾는다.',
+            method: 'Look at the last sentence of the final paragraph to find what the crow learned.',
             steps: [
-              '마지막 단락: "It had learned that with patience and smart thinking, even difficult problems could be solved."',
-              '까마귀가 배운 것은 "With patience and wise thinking, even difficult problems can be solved."는 점.',
-              '지문의 문장을 그대로 옮겨 완전한 문장으로 답한다.',
+              'The final paragraph states: "It had learned that with patience and smart thinking, even difficult problems could be solved."',
+              'What the crow learned is: "With patience and wise thinking, even difficult problems can be solved."',
+              'Copy the sentence directly from the passage and write it as a complete sentence in your answer.',
             ],
-            tip: '"learned that ~"의 ~ 부분이 바로 배운 교훈입니다.',
+            tip: 'The part that comes after "learned that ~" is exactly the lesson that was learned.',
           },
         },
         {
