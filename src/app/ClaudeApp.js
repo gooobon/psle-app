@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
 
@@ -134,7 +134,7 @@ function makeSeedHistory(userId){
           { id:"gm03", topic:"Simple Past", sectionType:"GrammarMCQ", correct:false, solvedAfterHint:true, attempts:2, difficulty:"core",
             q:"Yesterday, the children ______ to the zoo.", yourAnswer:"go", correctAnswer:"went",
             explanation:"'Yesterday' is a past-time clue, so we use the simple past tense 'went' (not 'go').",
-            solution:{method:"Time Clue > Tense", steps:["'Yesterday' = past time","Past tense of 'go' = 'went'","Answer: went"], tip:"Past-time words (yesterday, last week) always need past tense."} },
+            solution:{method:"Time Clue  Tense", steps:["'Yesterday' = past time","Past tense of 'go' = 'went'","Answer: went"], tip:"Past-time words (yesterday, last week) always need past tense."} },
           { id:"vm05", topic:"Vocabulary", sectionType:"VocabMCQ", correct:false, solvedAfterHint:false, attempts:1, difficulty:"core",
             q:"The naughty boy felt ______ after breaking the vase.", yourAnswer:"proud", correctAnswer:"guilty",
             explanation:"'Guilty' means feeling bad after doing something wrong - that fits breaking the vase." }
@@ -548,7 +548,7 @@ function LoginForm({onLogin, onGoSignup}){
           <div style={{fontSize:11,fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account</div>
           <div style={{fontSize:11,color:"#3B82F6"}}>{role==="student"?"ID: demo_student / PW: demo123":"ID: demo_parent / PW: demo456"}</div>
         </div>
-        <span style={{color:"#3B82F6",fontSize:13,fontWeight:700}}>Fill</span>
+        <span style={{color:"#3B82F6",fontSize:13,fontWeight:700}}>Fill </span>
       </div>
 
       <InputField label="ID" value={id} onChange={setId} placeholder="Your login ID"/>
@@ -559,7 +559,7 @@ function LoginForm({onLogin, onGoSignup}){
 
       {err&&<ErrorBox msg={err}/>}
 
-      <BigBtn color={C.navy} onClick={handleLogin}>Log In</BigBtn>
+      <BigBtn color={C.navy} onClick={handleLogin}>Log In </BigBtn>
 
       <div style={{marginTop:20,textAlign:"center"}}>
         <div style={{fontSize:13,color:C.muted,marginBottom:12}}>Don't have an account?</div>
@@ -585,7 +585,7 @@ function SignupStudentForm({onSignup, onBack}){
   const BOY_AVATARS = ["","","","",""];
   const BOY_NAMES   = ["Bronto","Rex","Croco","Drake","Gecko"];
 
-  const GIRL_AVATARS = ["","","","","*"];
+  const GIRL_AVATARS = ["","","","",""];
   const GIRL_NAMES   = ["Uni","Blossom","Flutter","Rainbow","Starly"];
 
   const BOY_COLORS  = ["#3B82F6","#10B981","#0EA5E9","#6366F1","#14B8A6"];
@@ -623,7 +623,7 @@ function SignupStudentForm({onSignup, onBack}){
 
   return(
     <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>Back to Login</button>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
       <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Student Account </div>
       <div style={{fontSize:13,color:C.muted,marginBottom:20}}>Set up your practice profile</div> <div style={{marginBottom:20}}>
         <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>Step 1 . I am a...</div>
@@ -713,7 +713,7 @@ function SignupStudentForm({onSignup, onBack}){
       <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={handleSubmit}/>
 
       {err&&<ErrorBox msg={err}/>}
-      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account</BigBtn>
+      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account </BigBtn>
     </div>
   );
 }
@@ -736,7 +736,7 @@ function SignupParentForm({onSignup, onBack}){
     const child = allUsers().find(u=>u.id===cid&&u.role==="student");
     if(!child){ setLinkMsg("No student with ID '"+cid+"' found. Please check the ID."); return; }
     setLinkedIds(p=>[...p,cid]);
-    setLinkMsg("[OK] Linked: "+child.name+" ("+child.grade+")");
+    setLinkMsg(" Linked: "+child.name+" ("+child.grade+")");
     setChildInput("");
   }
 
@@ -756,7 +756,7 @@ function SignupParentForm({onSignup, onBack}){
 
   return(
     <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>Back to Login</button>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
       <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Parent Account </div>
       <div style={{fontSize:13,color:C.muted,marginBottom:20}}>Monitor your child's progress</div>
 
@@ -775,7 +775,7 @@ function SignupParentForm({onSignup, onBack}){
           <input value={childInput} onChange={e=>setChildInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter") addChild();}} placeholder="Enter student ID..." style={{flex:1,border:"1.5px solid #DDD6FE",borderRadius:10,padding:"9px 12px",fontSize:13,outline:"none"}}/>
           <button onClick={addChild} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontSize:13,fontWeight:700,cursor:"pointer"}}>Add</button>
         </div>
-        {linkMsg&&<div style={{fontSize:12,color:linkMsg.startsWith("[OK]")?C.green:C.red,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
+        {linkMsg&&<div style={{fontSize:12,color:linkMsg.startsWith("")?C.green:C.red,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
         {linkedIds.length===0&&<div style={{fontSize:12,color:C.muted,fontStyle:"italic"}}>No children linked yet. You can also add them later.</div>}
         {linkedIds.map(cid=>{
           const ch=allUsers().find(u=>u.id===cid);
@@ -794,7 +794,7 @@ function SignupParentForm({onSignup, onBack}){
       </div>
 
       {err&&<ErrorBox msg={err}/>}
-      <BigBtn color="#7C3AED" onClick={handleSubmit}>Create Parent Account</BigBtn>
+      <BigBtn color="#7C3AED" onClick={handleSubmit}>Create Parent Account </BigBtn>
     </div>
   );
 }
@@ -808,6 +808,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [screen,          setScreen]          = useState("home");
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
+  const [startFromSection, setStartFromSection] = useState(null);
   const [studentToast,    setStudentToast]    = useState(null);
 
   const prog = getProgress(grade, subject);
@@ -815,7 +816,10 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 
   const isMockDue = prog.nextSession > 1 && (prog.nextSession - 1) % 10 === 0;
 
-  function startSession(){ setInSession(true); }
+  function startSession(fromSection){ 
+    setStartFromSection(fromSection||null); 
+    setInSession(true); 
+  }
 
   function handleSessionDone(results){
     const sessionNum = prog.nextSession;
@@ -852,11 +856,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   if(inSession) return(
     <Wrap>
       <ExamSessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history))}
+        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
+        startFrom={startFromSection}
         onFinish={handleSessionDone}
-        onBack={()=>setInSession(false)}
+        onBack={()=>{ setInSession(false); setStartFromSection(null); }}
       />
     </Wrap>
   );
@@ -908,7 +913,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : screen==="review" ? (
@@ -1154,7 +1159,7 @@ function VocabQuizTab({mistakes}){
       {picked!==null&&(
         <button onClick={next} style={{width:"100%",background:"#0F172A",color:"#fff",
           border:"none",borderRadius:12,padding:"13px",fontSize:14,fontWeight:800,cursor:"pointer"}}>
-          {idx+1>=order.length?"Finish >":"Next Word >"}
+          {idx+1>=order.length?"Finish ":"Next Word "}
         </button>
       )}
     </div>
@@ -1195,7 +1200,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
       <div style={{background:"linear-gradient(135deg,#7C2D12,#DC2626)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:12,
-          fontWeight:700,marginBottom:10}}>Back</button>
+          fontWeight:700,marginBottom:10}}> Back</button>
         <div style={{color:"#fff",fontSize:18,fontWeight:900}}> Mistakes Log</div>
         <div style={{color:"rgba(255,255,255,.6)",fontSize:12,marginTop:2}}>
           {filtered.length} wrong answer{filtered.length!==1?"s":""}
@@ -1298,7 +1303,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                     </div>
                   </div>
                   <span style={{color:"#94A3B8",fontSize:16,
-                    transform:isOpen?"rotate(90deg)":"none",transition:"transform .2s"}}>&gt;</span>
+                    transform:isOpen?"rotate(90deg)":"none",transition:"transform \.2s"}}></span>
                 </button>
 
                 {isOpen&&(
@@ -1406,7 +1411,7 @@ function ReviewTab({mistakes, onBack}){
       <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:12,
-          fontWeight:700,marginBottom:10}}>Back</button>
+          fontWeight:700,marginBottom:10}}> Back</button>
         <div style={{color:"#fff",fontSize:18,fontWeight:900}}> Review & Analysis</div>
         <div style={{color:"rgba(255,255,255,.6)",fontSize:12,marginTop:2}}>
           {mistakes.length} total mistakes recorded
@@ -1471,10 +1476,10 @@ function ReviewTab({mistakes, onBack}){
                     padding:"8px 12px",marginTop:10,fontSize:12,fontWeight:700,
                     color:improved?"#065F46":"#92400E"}}>
                     {improved
-                      ? ` Mistakes reduced from ${first} > ${last}. Great improvement!`
+                      ? ` Mistakes reduced from ${first}  ${last}. Great improvement!`
                       : last===first
-                      ? "Steady performance. Keep practising!"
-                      : ` More mistakes recently (${first} > ${last}). Review weak topics below.`}
+                      ? " Steady performance. Keep practising!"
+                      : ` More mistakes recently (${first}  ${last}). Review weak topics below.`}
                   </div>
                 );
               })()}
@@ -1640,3 +1645,4 @@ if(typeof window !== 'undefined' && !document.getElementById("genius-styles")){
 
 
 export default App;
+

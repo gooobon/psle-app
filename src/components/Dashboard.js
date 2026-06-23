@@ -222,7 +222,7 @@ function ComingSoonScreen({grade,subject}){
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onMistakes, onReview}){
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onMistakes, onReview}){
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
   const mockH    = history.filter(h=>h.isMockExam);
@@ -281,12 +281,18 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onMistakes
             </div>
             <div style={{fontSize:11,color:"rgba(255,255,255,0.5)"}}>{prog.nextSession>=11?"📄 Real school past paper · ~35 min":isMockDue?"Nanyang Primary WA1 style · ~30 min":"Grammar · Vocabulary · Comprehension · ~35 min"+(user.school?" · "+user.school+" style":"")}</div>
           </div>
-          <div style={{background:"rgba(255,255,255,0.06)",padding:"8px 20px",display:"flex",gap:12}}>
+          <div style={{background:"rgba(255,255,255,0.06)",padding:"8px 20px",display:"flex",gap:8,flexWrap:"wrap"}}>
             {Object.entries(SECTIONS).map(([k,v])=>(
-              <div key={k} style={{display:"flex",alignItems:"center",gap:4}}>
+              <button key={k}
+                onClick={e=>{e.stopPropagation();onStartFrom&&onStartFrom(k);}}
+                style={{display:"flex",alignItems:"center",gap:4,background:"rgba(255,255,255,0.1)",
+                  border:"1px solid rgba(255,255,255,0.2)",borderRadius:8,padding:"4px 10px",
+                  cursor:"pointer",transition:"background 0.15s"}}
+                onMouseEnter={e=>e.currentTarget.style.background="rgba(255,255,255,0.25)"}
+                onMouseLeave={e=>e.currentTarget.style.background="rgba(255,255,255,0.1)"}>
                 <span style={{fontSize:13}}>{v.icon}</span>
-                <span style={{fontSize:10,color:"rgba(255,255,255,0.5)",fontWeight:600}}>{k.replace("MCQ","").replace("Cloze","Cl.")}</span>
-              </div>
+                <span style={{fontSize:10,color:"rgba(255,255,255,0.8)",fontWeight:600}}>{k.replace("MCQ","").replace("Cloze","Cl.")}</span>
+              </button>
             ))}
           </div>
         </button> {regularH.length>0&&(
