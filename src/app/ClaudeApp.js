@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 import {
   buildPlan, buildZhPlan, buildZhPastPaperPlan, buildPastPaperPlan,
-  recommendLevel, recommendSectionLevels, selectPastPaper,
+  recommendLevel, recommendSectionLevels, recommendZhSectionLevels, selectPastPaper,
   pickQuestionsForSchool, getSchoolProfile,
   DEFAULT_SETTINGS,
 } from '@/lib/dataEngine';
@@ -163,7 +163,7 @@ function ChineseApp({user, getProgress, setProgress, onBack}){
   if(inSession) return(
     <Wrap>
       <ZhSessionScreen
-        plan={buildZhPlan(prog.nextSession, level||recommendLevel(prog.history))}
+        plan={buildZhPlan(prog.nextSession, recommendLevel(prog.history), recommendZhSectionLevels(prog.history))}
         onFinish={handleSessionDone}
         onBack={()=>setInSession(false)}
       />

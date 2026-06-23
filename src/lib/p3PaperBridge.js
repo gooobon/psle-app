@@ -432,7 +432,7 @@ function flattenChineseRawQuestions(questions = []) {
   return flat;
 }
 
-export function buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum) {
+export function buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum, sectionLevels) {
   const grouped = {
     BianZi: [],
     CiYu: [],
@@ -449,6 +449,10 @@ export function buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum)
     ZuJu: [],
     YueRead: [],
   };
+
+  // Per-section level helper — falls back to overall level
+  const lvl = (type) =>
+    (sectionLevels && sectionLevels[type]) ? sectionLevels[type] : (level || "medium");
 
   for (const raw of flattenChineseRawQuestions(paper.questions || [])) {
     const topic = raw.topic || "";
@@ -471,28 +475,30 @@ export function buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum)
   const plan = [];
   const sIdx = ((sessionNum || 1) - 1) % 10;
 
+  // BianZi & CiYu: apply per-section level for question selection
   const bz = pickByLevel
-    ? pickByLevel(grouped.BianZi, level, sessionNum, Math.min(5, grouped.BianZi.length))
+    ? pickByLevel(grouped.BianZi, lvl("BianZi"), sessionNum, Math.min(5, grouped.BianZi.length))
     : grouped.BianZi.slice(0, 5);
   const cy = pickByLevel
-    ? pickByLevel(grouped.CiYu, level, sessionNum, Math.min(4, grouped.CiYu.length))
+    ? pickByLevel(grouped.CiYu, lvl("CiYu"), sessionNum, Math.min(4, grouped.CiYu.length))
     : grouped.CiYu.slice(0, 4);
 
-  if (bz.length) plan.push({ type: "BianZi", items: bz });
-  if (cy.length) plan.push({ type: "CiYu", items: cy });
+  if (bz.length) plan.push({ type: "BianZi", items: bz, level: lvl("BianZi") });
+  if (cy.length) plan.push({ type: "CiYu",   items: cy, level: lvl("CiYu") });
 
+  // Set-based sections: difficulty reflected in level field for future use
   if (sets.KanTu.length)
-    plan.push({ type: "KanTu", set: sets.KanTu[sIdx % sets.KanTu.length] });
+    plan.push({ type: "KanTu",  set: sets.KanTu[sIdx % sets.KanTu.length],   level: lvl("KanTu") });
   if (sets.PeiDui.length)
-    plan.push({ type: "PeiDui", set: sets.PeiDui[sIdx % sets.PeiDui.length] });
+    plan.push({ type: "PeiDui", set: sets.PeiDui[sIdx % sets.PeiDui.length], level: lvl("PeiDui") });
 
   const jzItems = grouped.JuZi.slice(0, 3);
-  if (jzItems.length) plan.push({ type: "JuZi", items: jzItems });
+  if (jzItems.length) plan.push({ type: "JuZi", items: jzItems, level: lvl("JuZi") });
 
   if (sets.ZuJu.length)
-    plan.push({ type: "ZuJu", set: sets.ZuJu[sIdx % sets.ZuJu.length] });
+    plan.push({ type: "ZuJu",    set: sets.ZuJu[sIdx % sets.ZuJu.length],       level: lvl("ZuJu") });
   if (sets.YueRead.length)
-    plan.push({ type: "YueRead", set: sets.YueRead[sIdx % sets.YueRead.length] });
+    plan.push({ type: "YueRead", set: sets.YueRead[sIdx % sets.YueRead.length], level: lvl("YueRead") });
 
   plan.paperMeta = paper.meta;
   plan.isPastPaper = !!paper.meta?.assessment?.includes?.("EOY");

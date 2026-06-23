@@ -111,6 +111,10 @@ const SECTION_TYPES = [
   "GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Comprehension"
 ];
 
+const ZH_SECTION_TYPES = [
+  "BianZi","CiYu","KanTu","PeiDui","JuZi","ZuJu","YueRead"
+];
+
 function sectionAvgForBlock(sessions, sectionType){
   const vals = sessions
     .map(h => h.scores?.[sectionType])
@@ -159,6 +163,32 @@ export function recommendSectionLevels(history){
 }
 
 /**
+ * Same logic as recommendSectionLevels but for Chinese section types.
+ * Returns: { BianZi:"medium", CiYu:"hard", ... }
+ */
+export function recommendZhSectionLevels(history){
+  const regular = (history||[]).filter(h => !h.isMockExam);
+
+  if(regular.length < 3){
+    const defaults = {};
+    ZH_SECTION_TYPES.forEach(t => { defaults[t] = "medium"; });
+    return defaults;
+  }
+
+  const blockSize = 3;
+  const completedBlocks = Math.floor(regular.length / blockSize);
+  const blockStart = (completedBlocks - 1) * blockSize;
+  const block = regular.slice(blockStart, blockStart + blockSize);
+
+  const levels = {};
+  ZH_SECTION_TYPES.forEach(t => {
+    const avg = sectionAvgForBlock(block, t);
+    levels[t] = levelFromAvg(avg);
+  });
+  return levels;
+}
+
+/**
  * Returns a single overall level (easy/medium/hard) for backwards
  * compatibility with buildZhPlan which uses one level for all sections.
  */
@@ -198,10 +228,10 @@ export function buildPlan(settings, schoolName, sessionNum, level, sectionLevels
 }
 
 // ── Chinese plan builders ─────────────────────────────────────
-export function buildZhPlan(sessionNum, level) {
+export function buildZhPlan(sessionNum, level, sectionLevels) {
   const isPast = level==="pastpaper" || (sessionNum >= 11 && !LEVEL_MAP[level]);
   const paper = pickChinesePaper({ sessionNum: sessionNum||1, isPastPaper: isPast });
-  const plan = buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum);
+  const plan = buildChinesePlanFromPaper(paper, pickByLevel, level, sessionNum, sectionLevels);
   plan.isPastPaper = isPast;
   return plan;
 }
