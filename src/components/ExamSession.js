@@ -215,8 +215,9 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                 const isSel = chosen === i;
                 let color = "#000", fontWeight = "normal", bg = "transparent";
                 if (submitted) {
-                  if (isAns) { color = "#16a34a"; fontWeight = "700"; }
-                  else if (isSel) color = "#dc2626";
+                  // Show correct answer in green only if: student got it right, OR student has retried
+                  if (isAns && (isFirstCorrect || hasRetried)) { color = "#16a34a"; fontWeight = "700"; }
+                  else if (isSel && !isFirstCorrect) color = "#dc2626";
                 } else if (isSel) bg = "#dbeafe";
                 return (
                   <div key={i} onClick={() => handleSelect(q.id, i)}
@@ -226,7 +227,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                       background: bg, borderRadius: 4, padding: "1px 4px" }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
-                    {submitted && isAns && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
+                    {submitted && isAns && (isFirstCorrect || hasRetried) && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
                     {submitted && isSel && !isAns && <span style={{ color: "#dc2626", marginLeft: 4 }}>X</span>}
                   </div>
                 );
@@ -617,6 +618,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results);
+    onPageDone(null, true);
   }
 
   const score = submitted ? items.filter(item =>
@@ -654,7 +656,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
                 <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
-                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
+                  {item.wrongWord && item.sentence ? item.sentence.replace(item.wrongWord, `[${item.wrongWord}]`) : (item.sentence || item.stem || '')}
                 </span>
               </div>
 
