@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 import {
   buildPlan, buildZhPlan, buildZhPastPaperPlan, buildPastPaperPlan,
-  recommendLevel, selectPastPaper,
+  recommendLevel, recommendSectionLevels, selectPastPaper,
   pickQuestionsForSchool, getSchoolProfile,
   DEFAULT_SETTINGS,
 } from '@/lib/dataEngine';
@@ -826,7 +826,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   if(inSession) return(
     <Wrap>
       <SessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history))}
+        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         onFinish={handleSessionDone}
