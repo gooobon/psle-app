@@ -158,10 +158,96 @@ function MCQSection({items,sectionType,meta,onDone}){
 
 function ClozeSection({sets,sectionType,meta,onDone}){
   const [setIdx,setSetIdx]=useState(0);
-  const [cAns,setCAns]=useState({});const [cAtt,setCAtt]=useState({});const [cCor,setCCor]=useState({});const [cRev,setCRev]=useState({});
-  const [results,setResults]=useState([]);const startRef=useRef(Date.now());
-  const cs=sets[setIdx]||sets[0]||{}; const blanks=cs.blanks||[];
-  function allSettled(){return blanks.length>0&&blanks.every(b=>cCor[b.num]||cRev[b.num]);}
+  const [cAns,setCAns]=useState({});
+  const [cAtt,setCAtt]=useState({});
+  const [cCor,setCCor]=useState({});
+  const [cRev,setCRev]=useState({});
+  const [results,setResults]=useState([]);
+  const [submitted,setSubmitted]=useState(false);
+  // Word Bank: which word is "selected" (pending placement into next blank)
+  const [wbSelected,setWbSelected]=useState(null);
+  // Word Bank: which blank num is "active" (waiting for a word tap)
+  const [activeBlank,setActiveBlank]=useState(null);
+  const startRef=useRef(Date.now());
+
+  const cs=sets[setIdx]||sets[0]||{};
+  const blanks=cs.blanks||[];
+  // Detect cloze type
+  const isBracket = blanks.length>0 && blanks.every(b=>b.choices&&b.choices.length>=2);
+  const hasWordBank = (cs.wordBank&&cs.wordBank.length>0) || blanks.some(b=>b.wordBank&&b.wordBank.length>0);
+  const wordBank = cs.wordBank || (blanks[0]?.wordBank) || [];
+
+  function allAnswered(){
+    return blanks.length>0 && blanks.every(b=>cAns[b.num]!=null);
+  }
+  function allSettled(){
+    if(isBracket) return submitted;
+    return blanks.length>0 && blanks.every(b=>cCor[b.num]||cRev[b.num]);
+  }
+
+  // ── Word Bank handlers ──────────────────────────────────────
+  function handleWbTap(word){
+    if(submitted) return;
+    if(wbSelected===word){ setWbSelected(null); setActiveBlank(null); return; }
+    setWbSelected(word);
+    // Auto-fill next unanswered blank
+    const nextBlank = blanks.find(b=>cAns[b.num]==null);
+    if(nextBlank){
+      setCAns(a=>({...a,[nextBlank.num]:word}));
+      setWbSelected(null);
+      setActiveBlank(null);
+    } else {
+      setActiveBlank(null);
+    }
+  }
+  function handleBlankTap(num){
+    if(submitted) return;
+    if(!hasWordBank) return;
+    if(cAns[num]!=null){
+      // Cancel: return word to bank
+      setCAns(a=>({...a,[num]:null}));
+      setWbSelected(null);
+    } else if(wbSelected!=null){
+      setCAns(a=>({...a,[num]:wbSelected}));
+      setWbSelected(null);
+    } else {
+      setActiveBlank(num);
+    }
+  }
+
+  // ── Word Bank submit (check all at once) ───────────────────
+  function handleWbSubmit(){
+    if(!allAnswered()) return;
+    const t=Date.now()-startRef.current;
+    blanks.forEach(b=>{
+      const chosen=cAns[b.num];
+      const correct=chosen===b.answer;
+      if(correct) setCCor(p=>({...p,[b.num]:true}));
+      else setCRev(p=>({...p,[b.num]:true}));
+      setResults(r=>[...r,{id:`${cs.id}_${b.num}`,topic:sectionType,sectionType,correct,attempts:1,solvedAfterHint:false,timeTaken:t,flagged:guessFlag(t,sectionType)}]);
+    });
+    setSubmitted(true);
+  }
+
+  // ── Bracket handlers ────────────────────────────────────────
+  function handleBracketSelect(num,opt){
+    if(submitted) return;
+    setCAns(a=>({...a,[num]:opt}));
+  }
+  function handleBracketSubmit(){
+    if(!allAnswered()) return;
+    const t=Date.now()-startRef.current;
+    blanks.forEach(b=>{
+      const chosen=cAns[b.num];
+      const correct=chosen===b.answer;
+      if(correct) setCCor(p=>({...p,[b.num]:true}));
+      else setCRev(p=>({...p,[b.num]:true}));
+      setResults(r=>[...r,{id:`${cs.id}_${b.num}`,topic:sectionType,sectionType,correct,attempts:1,solvedAfterHint:false,timeTaken:t,flagged:guessFlag(t,sectionType)}]);
+    });
+    setSubmitted(true);
+  }
+
+  // ── Word Bank MCQ (per-blank, old style fallback) ───────────
   function handleSelect(num,opt){if(cCor[num]||cRev[num])return;setCAns(a=>({...a,[num]:opt}));}
   function handleCheck(blank){
     const chosen=cAns[blank.num]; if(!chosen)return;
@@ -169,11 +255,209 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     if(chosen===blank.answer){setCCor(p=>({...p,[blank.num]:true}));setResults(r=>[...r,{id:`${cs.id}_${blank.num}`,topic:sectionType,sectionType,correct:(cAtt[blank.num]||0)===0,solvedAfterHint:(cAtt[blank.num]||0)>0,attempts:(cAtt[blank.num]||0)+1,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}
     else{const prev=cAtt[blank.num]||0;const next=prev+1;setCAtt(p=>({...p,[blank.num]:next}));setCAns(a=>({...a,[blank.num]:null}));if(next>=3){setCRev(p=>({...p,[blank.num]:true}));setResults(r=>[...r,{id:`${cs.id}_${blank.num}`,topic:sectionType,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}
   }
-  function next(){if(setIdx+1>=sets.length){onDone(results);return;}setSetIdx(i=>i+1);setCAns({});setCAtt({});setCCor({});setCRev({});startRef.current=Date.now();}
+
+  function next(){
+    if(setIdx+1>=sets.length){onDone(results);return;}
+    setSetIdx(i=>i+1);
+    setCAns({});setCAtt({});setCCor({});setCRev({});
+    setSubmitted(false);setWbSelected(null);setActiveBlank(null);
+    startRef.current=Date.now();
+  }
+
+  // ── Render passage with inline bracket choices ─────────────
+  function renderBracketPassage(){
+    if(!cs.passage) return null;
+    // Build map of blank num -> blank object
+    const blankMap={};
+    blanks.forEach(b=>{ blankMap[b.num]=b; });
+    // Split passage by blank markers like (19), (20)...
+    const parts=cs.passage.split(/(\(\d+\))/g);
+    return(
+      <div style={{fontSize:14,color:C.text,lineHeight:2.2}}>
+        {parts.map((part,i)=>{
+          const m=part.match(/^\((\d+)\)$/);
+          if(m){
+            const num=parseInt(m[1],10);
+            const b=blankMap[num];
+            if(!b||!b.choices) return <span key={i} style={{fontWeight:700}}>{part}</span>;
+            const chosen=cAns[num];
+            const isCorrect=submitted&&cCor[num];
+            const isWrong=submitted&&cRev[num];
+            return(
+              <span key={i} style={{display:"inline-flex",alignItems:"center",gap:4,margin:"0 2px",verticalAlign:"middle"}}>
+                <span style={{fontSize:11,fontWeight:800,color:C.muted,marginRight:2}}>({num})</span>
+                {b.choices.map(ch=>{
+                  const sel=chosen===ch;
+                  let bg="transparent",col=C.text,borderB="none",fw=500;
+                  if(sel&&!submitted){bg=C.lBlue;col=meta.color;borderB=`2px solid ${meta.color}`;fw=700;}
+                  if(sel&&isCorrect){bg=C.lGreen;col=C.green;borderB=`2px solid ${C.green}`;fw=700;}
+                  if(sel&&isWrong){bg="#FEE2E2";col=C.red;borderB=`2px solid ${C.red}`;fw=700;}
+                  if(!sel&&submitted&&ch===b.answer){bg=C.lGreen;col=C.green;fw=700;}
+                  return(
+                    <span key={ch} onClick={()=>handleBracketSelect(num,ch)}
+                      style={{background:bg,color:col,border:borderB||`1.5px solid ${sel?"transparent":C.border}`,
+                        borderRadius:8,padding:"2px 10px",fontSize:13,fontWeight:fw,
+                        cursor:submitted?"default":"pointer",transition:"all 0.15s",display:"inline-block"}}>
+                      {ch}
+                    </span>
+                  );
+                })}
+              </span>
+            );
+          }
+          return <span key={i}>{part}</span>;
+        })}
+      </div>
+    );
+  }
+
+  // ── Render passage with blank boxes (Word Bank type) ────────
+  function renderWordBankPassage(){
+    if(!cs.passage) return null;
+    const blankMap={};
+    blanks.forEach(b=>{ blankMap[b.num]=b; });
+    const parts=cs.passage.split(/(\(\d+\))/g);
+    return(
+      <div style={{fontSize:14,color:C.text,lineHeight:2.4}}>
+        {parts.map((part,i)=>{
+          const m=part.match(/^\((\d+)\)$/);
+          if(m){
+            const num=parseInt(m[1],10);
+            const b=blankMap[num];
+            const filled=cAns[num];
+            const isCorrect=submitted&&cCor[num];
+            const isWrong=submitted&&cRev[num];
+            const isActive=activeBlank===num;
+            let bg="#F1F5F9",col=C.muted,border=`2px dashed ${C.border}`;
+            if(filled&&!submitted){bg=C.lBlue;col=meta.color;border=`2px solid ${meta.color}`;}
+            if(isCorrect){bg=C.lGreen;col=C.green;border=`2px solid ${C.green}`;}
+            if(isWrong){bg="#FEE2E2";col=C.red;border=`2px solid ${C.red}`;}
+            if(isActive&&!filled){border=`2px solid ${meta.color}`;bg=meta.color+"10";}
+            return(
+              <span key={i} style={{display:"inline-flex",alignItems:"center",gap:3,verticalAlign:"middle",margin:"0 2px"}}>
+                <span style={{fontSize:11,fontWeight:800,color:C.muted}}>({num})</span>
+                <span onClick={()=>handleBlankTap(num)}
+                  style={{minWidth:80,background:bg,color:col,border,borderRadius:8,
+                    padding:"2px 10px",fontSize:13,fontWeight:700,cursor:submitted?"default":"pointer",
+                    textAlign:"center",display:"inline-block",transition:"all 0.15s"}}>
+                  {filled||(isWrong?b?.answer:"\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0")}
+                </span>
+                {isWrong&&filled!==b?.answer&&<span style={{fontSize:11,color:C.red,textDecoration:"line-through"}}>{filled}</span>}
+              </span>
+            );
+          }
+          return <span key={i}>{part}</span>;
+        })}
+      </div>
+    );
+  }
+
+  // ── BRACKET TYPE ────────────────────────────────────────────
+  if(isBracket){
+    return(
+      <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
+          <span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span>
+          <TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill>
+        </div>
+        <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"16px 18px",marginBottom:16}}>
+          <div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
+            📖 Underline the correct word in each bracket
+          </div>
+          {renderBracketPassage()}
+        </div>
+        {submitted&&(
+          <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:12,padding:"10px 14px",marginBottom:12,fontSize:13,fontWeight:700,color:"#065F46"}}>
+            ✅ {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
+          </div>
+        )}
+        {!submitted&&(
+          <button onClick={handleBracketSubmit} disabled={!allAnswered()}
+            style={{width:"100%",background:allAnswered()?meta.color:"#C8D3E0",color:"#fff",border:"none",
+              borderRadius:14,padding:"13px",fontSize:15,fontWeight:800,
+              cursor:allAnswered()?"pointer":"not-allowed",marginBottom:12}}>
+            Submit
+            {!allAnswered()&&<div style={{fontSize:11,fontWeight:500,marginTop:2,opacity:0.8}}>
+              Select an answer for each bracket first
+            </div>}
+          </button>
+        )}
+        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":"Next Set →"}</ActionBtn>}
+      </div>
+    );
+  }
+
+  // ── WORD BANK TYPE ──────────────────────────────────────────
+  if(hasWordBank){
+    const usedWords=Object.values(cAns).filter(Boolean);
+    return(
+      <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
+        <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
+          <span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span>
+          <TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill>
+        </div>
+
+        {/* Word Bank Box */}
+        <div style={{background:C.lBlue,border:`1.5px solid ${meta.color}44`,borderRadius:14,padding:"12px 14px",marginBottom:14}}>
+          <div style={{fontSize:11,fontWeight:800,color:meta.color,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
+            Word Bank — tap a word, then tap its blank
+          </div>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
+            {wordBank.map((w,i)=>{
+              const letter=String.fromCharCode(65+i);
+              const used=usedWords.includes(w);
+              const sel=wbSelected===w;
+              let bg="#fff",border=`1.5px solid ${meta.color}33`,col=meta.color,op=1,cursor="pointer";
+              if(used&&!submitted){bg="#E2E8F0";col=C.muted;border=`1.5px solid ${C.border}`;op=0.5;cursor="default";}
+              if(sel){bg=meta.color;col="#fff";border=`1.5px solid ${meta.color}`;}
+              if(submitted){cursor="default";}
+              return(
+                <div key={w} onClick={()=>{if(!used&&!submitted)handleWbTap(w);}}
+                  style={{background:bg,border,borderRadius:10,padding:"6px 14px",
+                    fontSize:13,fontWeight:700,cursor,color:col,opacity:op,
+                    transition:"all 0.15s",display:"flex",alignItems:"center",gap:5,
+                    boxShadow:sel?"0 2px 8px "+meta.color+"44":"none"}}>
+                  <span style={{fontSize:11,fontWeight:800,opacity:0.6}}>({letter})</span>
+                  {w}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Passage with inline blank boxes */}
+        <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"16px 18px",marginBottom:16}}>
+          <div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
+            📖 Tap a word above, then tap its blank — tap a filled blank to undo
+          </div>
+          {renderWordBankPassage()}
+        </div>
+
+        {submitted&&(
+          <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:12,padding:"10px 14px",marginBottom:12,fontSize:13,fontWeight:700,color:"#065F46"}}>
+            ✅ {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
+          </div>
+        )}
+        {!submitted&&(
+          <button onClick={handleWbSubmit} disabled={!allAnswered()}
+            style={{width:"100%",background:allAnswered()?meta.color:"#C8D3E0",color:"#fff",border:"none",
+              borderRadius:14,padding:"13px",fontSize:15,fontWeight:800,
+              cursor:allAnswered()?"pointer":"not-allowed",marginBottom:12}}>
+            Submit
+            {!allAnswered()&&<div style={{fontSize:11,fontWeight:500,marginTop:2,opacity:0.8}}>
+              Fill in all blanks first
+            </div>}
+          </button>
+        )}
+        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":"Next Set →"}</ActionBtn>}
+      </div>
+    );
+  }
+
+  // ── FALLBACK: per-blank MCQ (original behaviour) ───────────
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}><span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span><TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill></div>
-      {cs.wordBank&&<div style={{background:C.lBlue,border:`1px solid ${meta.color}33`,borderRadius:14,padding:"10px 14px",marginBottom:14}}><div style={{fontSize:11,fontWeight:800,color:meta.color,marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>Word Bank</div><div style={{display:"flex",gap:8,flexWrap:"wrap"}}>{cs.wordBank.map(w=><span key={w} style={{background:"#fff",border:`1px solid ${meta.color}44`,borderRadius:8,padding:"3px 12px",fontSize:13,fontWeight:600}}>{w}</span>)}</div></div>}
       <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"14px 16px",marginBottom:16}}><div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>📖 Read & Fill in the Blanks</div><div style={{fontSize:14,color:C.text,lineHeight:2}}>{cs.passage}</div></div>
       {blanks.map(b=>{
         const wa=cAtt[b.num]||0;const correct=cCor[b.num];const rev=cRev[b.num];
