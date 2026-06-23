@@ -190,6 +190,8 @@ function toEnglishCompSet(set) {
 
 function classifyEnglishItem(item) {
   const topic = item.topic || "";
+  // Skip SentenceCombining (Word Order) — not yet supported
+  if (topic.includes("SentenceCombining") || topic.includes("WordOrder")) return null;
   if (
     item.kind === "set" ||
     item.kind === "B" ||
@@ -221,6 +223,7 @@ function normalizeEnglishQuestions(questions = []) {
   for (const raw of questions) {
     if (!raw || typeof raw !== "object") continue;
     const type = classifyEnglishItem(raw);
+    if (!type) continue; // Skip unsupported types (e.g. SentenceCombining)
     if (type.endsWith("MCQ")) {
       buckets[type].push(toEnglishMcq(raw));
     } else if (type === "GrammarCloze") {
