@@ -374,8 +374,8 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
 
     // =========================================================================
     // Section D: Grammar Cloze (4 x 1 mark) — Q14–17
-    // Word bank: his, hers, ours, mine, theirs, yours (6 out of 8 options, possessive pronouns)
-    // Passage: Reindeer and Penguin (a story about secrets and boasting between friends)
+    // 보기: his, hers, ours, mine, theirs, yours (8개 중 6개, 소유대명사)
+    // 지문: Reindeer and Penguin (친구 사이의 비밀과 거짓 자랑 이야기)
     // =========================================================================
     {
       kind: 'set',
@@ -385,7 +385,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       instructions:
         'Read the passage carefully. Choose the correct word from the box and write the answer in the blanks provided. Each word can only be used once. Box: his | hers | ours | mine | theirs | yours',
       passage:
-        'Reindeer and Penguin are good friends. One day, Penguin found a basket of fruit and decided to keep it for themselves. He told Reindeer,"These fruit are (14) ________. Don\'t tell anyone about it."\n\n' +
+        'Reindeer and Penguin are good friends. One day, Penguin found a basket of fruit and decided to keep it for themselves. He told Reindeer, "These fruit are (14) ________. Don\'t tell anyone about it."\n\n' +
         'The next day, Reindeer forgot about (15) ________ promise to Penguin and showed off the fruit to the other animals.\n\n' +
         '"Wow! Are all these (16) ________?" they asked Reindeer admiringly.\n\n' +
         '"Yes, they\'re all (17) ________," Reindeer boasted. Penguin could not believe his ears!\n\n' +
@@ -462,8 +462,8 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
 
     // =========================================================================
     // Section E (Vocabulary Cloze, 5 x 1 mark) — Q18–22
-    // Word bank: courageous, timid, instantly, quivering, slowly, thankful, wobbling, strange (5 out of 8 options)
-    // Passage: Andy (a shy boy) and Sarah (a brave friend), a story about school bullying
+    // 보기: courageous, timid, instantly, quivering, slowly, thankful, wobbling, strange (8개 중 5개)
+    // 지문: Andy(소심한 소년)와 Sarah(용감한 친구), 학교폭력 이야기
     // =========================================================================
     {
       kind: 'set',
@@ -473,7 +473,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       instructions:
         'Read the passage carefully. Choose the best word from the box and write the answer in the blanks provided. Each word can only be used once. Box: courageous | timid | instantly | quivering | slowly | thankful | wobbling | strange',
       passage:
-        'Andy was a shy boy with little confidence. He was (18) ________ and was often picked on by Max, the class bully. Everyone was afraid of Max except for Sarah. Sarah was (19) ________ and not afraid to stand up to him.\\n\\n' +
+        'Andy was a shy boy with little confidence. He was (18) ________ and was often picked on by Max, the class bully. Everyone was afraid of Max except for Sarah. Sarah was (19) ________ and not afraid to stand up to him.\n\n' +
         'One day during recess, Max was looking for Andy to bully him, as usual. Sarah could see Andy hiding in a corner. He was (20) ________ in fear. Sarah did not waste any time. She (21) ________ marched up to Max and told him to stop bullying others or else she would report him to the teacher. He felt angry. However, he did not want to get into trouble, so he stopped. Andy felt so (22) ________ that he had such a helpful friend like Sarah. She was one person who would always come to his rescue.',
       marks: 5,
       questions: [
@@ -484,7 +484,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           stem: 'He was (18) ________ and was often picked on by Max, the class bully.',
           answer: 'timid',
           solution: {
-            method:"See solution steps below.",
+            method: "See solution steps below.",
             steps: [
               "Study the example carefully.",
               "Study the example carefully.",
@@ -562,20 +562,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
     },
 
     // =========================================================================
-    // Section E (Comprehension Open-Ended, 8 marks total: Q23–29) — Note: the original document
-    // shows a different numbering, but the total marks (1+1+1+2+1+1+1=8) match the 30-mark total on the cover page.
-    // Passage: The King of the Forest (Lion, Mouse, Fox, hunters)
-    // =========================================================================
-    {
-      kind: 'set',
-      id: 'mb2024-secE-comprehension',
-      topic: 'ComprehensionOE',
-      title: 'Section E: Comprehension Open-Ended — The King of the Forest',
-      instructions:
-        'Read the passage carefully and annotate. Answer the following questions in complete sentences (unless otherwise stated). Your answers must be based on the passage read.',
-      passage:
-        'In the forest, Lion was the king and all the animals were afraid of him. One day, Lion heard the cries of an animal in a cave. He saw a huge fox holding a tiny mouse in his paws.\\n\\n' +
-        '"(10 marks)"로 표기되어 있으나
+    // Section E (Comprehension Open-Ended, 8 marks total: Q23-29) — note: 원문에는 "(10 marks)"로 표기되어 있으나
     // 실제 배점 합계(1+1+1+2+1+1+1=8)는 표지의 총점 30점과 일치함.
     // 지문: The King of the Forest (Lion, Mouse, Fox, hunters)
     // =========================================================================

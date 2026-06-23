@@ -295,7 +295,7 @@ export const wa3_taonan_wa3_2025: Question[] = [
     meaning: "'努力学习' = to study hard.",
     solution: {
       method: "Adverb + Verb Agreement",
-      steps: ["Use '열심히 (hard/diligently)' before '学习 (to study)'.", "'努力' matches → 努力学习 (option 4).", "The remaining '参加 (1)' is an unused trap word."],
+      steps: ["Before '学习 (to study)' → use '열심히 (hard/diligently)'.", "'努力' matches → 努力学习 (option 4).", "The remaining '参加 (1)' is an unused trap word."],
       tip: "'Study hard' → 努力学习. (参加 goes with 比赛/活动, meaning competitions or activities)",
     },
   },
@@ -360,7 +360,34 @@ export const wa3_taonan_wa3_2025: Question[] = [
     meaning: "There are many students in the classroom; some are listening, some are reading. (Model imitating '有的……有的'.)",
     solution: {
       method: "Copy the sentence pattern — '有的…，有的…'",
-      steps: ["Keep the pattern 'Place + 有很多…，有的在 A，有的在 B'When different people in a group are each doing different things, use 有的…有的…. For example: 课堂里…，有的在听课，有的在看书。 (Other correct answers are possible.)'突然' = suddenly. 突然，一只狐狸跳了出来 = suddenly a fox jumped out.",
+      steps: ["Keep the pattern 'Place + 有很多…，有的在 A，有的在 B'.", "→ 课堂里…，有的在听课，有的在看书。 (Other correct answers are possible.)"],
+      tip: "When different people in a group are each doing different things, use 有的…有的….",
+    },
+  },
+
+  // ==========================================================================
+  // (六) 短文填空 TianKong — Q21-Q24 (4题4分) — SET  ★2025 전용 문항★
+  // 词语库: 1着急 2答应 3好奇 4回答 5突然 6急忙
+  // ==========================================================================
+  {
+    id: "p3_zh_wa3_tnw_set1",
+    topic: "TianKong",
+    difficulty: "core",
+    setLabel: "Tao Nan WA3 2025 — 短文填空（鸭子骗狐狸）",
+    instruction:
+      "根据短文的内容，选出最适当的答案，然后把代表它的数字（1-6）填写在右边的括号里。【词语库：1着急 2答应 3好奇 4回答 5突然 6急忙】",
+    passage:
+      "一天鸭子在河里洗完澡后，就往村子里走去。（Q21），一只狐狸从树林里跳了出来，想要吃掉鸭子。鸭子说：“狐狸先生，您先别吃我。告诉您，我会学狐狸叫。您先听我叫几声，再吃掉我吧!”狐狸听了，觉得很（Q22），心想：怎么可能？鸭子怎么会叫得像狐狸呢？于是，狐狸（Q23）了鸭子的请求，放开了它。\n" +
+      "狐狸听鸭子叫了几声后，说：“你叫得一点儿也不像，还是听听我的叫声吧。”说完，它也叫了几声。这时，村子里的狗听到狐狸的叫声，一起冲了过来。狐狸听到远处的狗叫声，（Q24）逃走了。看到狐狸逃走了，鸭子便高高兴兴地回家了。",
+    questions: [
+      {
+        id: "p3_zh_wa3_tnw_021",
+        type: "MCQ",
+        q: "（Q21），一只狐狸从树林里跳了出来。",
+        options: ["着急", "答应", "好奇", "回答", "突然", "急忙"],
+        answer: 4, // 5突然
+        pinyin: "tū rán",
+        meaning: "'突然' = suddenly. 突然，一只狐狸跳了出来 = suddenly a fox jumped out.",
         solution: {
           method: "Look for clues that show something appears suddenly.",
           steps: ["The fox jumps out all of a sudden → use 突然.", "→ 5 突然."],
@@ -391,7 +418,7 @@ export const wa3_taonan_wa3_2025: Question[] = [
         meaning: "'答应' = to agree/consent. 答应了鸭子的请求 = agreed to the duck's request.",
         solution: {
           method: "Make sure the verb and object match correctly: '___了…的请求'",
-          steps: ["To 'grant/agree to' a request → 答应 means to say yes to someone's request.", "This has a cause-and-effect relationship with '放开了它' (let it go) that comes after.", "→ 2 答应."],
+          steps: ["To 'grant/agree to' a request (부탁) → 答应 means to say yes to someone's request.", "This has a cause-and-effect relationship with '放开了它' (let it go) that comes after.", "→ 2 答应."],
           tip: "To 'agree to' a request → 答应请求 means to accept what someone has asked for.",
         },
       },

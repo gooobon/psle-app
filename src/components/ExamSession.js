@@ -131,8 +131,12 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
 //  MCQ PAGE - Grammar MCQ / Vocab MCQ
 // 
 function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone }) {
-  const [answers, setAnswers] = useState({});   // id optionIndex
+  const [answers, setAnswers] = useState({});
+  const [retryAnswers, setRetryAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [retried, setRetried] = useState({});
+  const [retriedCorrect, setRetriedCorrect] = useState({});
+  const [showExplanation, setShowExplanation] = useState({});
   const startRef = useRef(Date.now());
 
   function handleSelect(id, i) {
@@ -140,157 +144,207 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
     setAnswers(a => ({ ...a, [id]: i }));
   }
 
+  function handleRetrySelect(id, i) {
+    if (retried[id]) return;
+    setRetryAnswers(a => ({ ...a, [id]: i }));
+  }
+
+  function handleRetry(q) {
+    const chosen = retryAnswers[q.id];
+    if (chosen === undefined) return;
+    setRetried(r => ({ ...r, [q.id]: true }));
+    setRetriedCorrect(r => ({ ...r, [q.id]: chosen === q.answer }));
+    setShowExplanation(e => ({ ...e, [q.id]: true }));
+  }
+
   function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
+    const auto = {};
+    items.forEach(q => { if (answers[q.id] === q.answer) auto[q.id] = true; });
+    setShowExplanation(auto);
+  }
+
+  function handleFinishPage() {
     const t = Date.now() - startRef.current;
     const results = items.map(q => ({
       id: q.id, topic: q.topic, sectionType: q.topic,
       correct: answers[q.id] === q.answer,
-      studentAnswer: answers[q.id] ?? -1,
-      correctAnswer: q.answer,
-      attempts: answers[q.id] !== undefined ? 1 : 0,
+      solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
+      attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
       timeTaken: Math.round(t / items.length),
-      explanation: q.explanation || "",
-      hint: q.hints?.[0] || "",
     }));
     onPageDone(results);
   }
 
   const allAnswered = items.every(q => answers[q.id] !== undefined);
+  const wrongItems = submitted ? items.filter(q => answers[q.id] !== q.answer) : [];
+  const allRetriedOrCorrect = submitted && wrongItems.every(q => retried[q.id]);
   const score = submitted ? items.filter(q => answers[q.id] === q.answer).length : 0;
 
   return (
-    <div style={S.page}>
-      {/* Section header */}
+    <div style={{ background: "#fff", minHeight: "100vh" }}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={S.sectionHeader}>{sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})</div>
-        <div style={S.instructions}>{instructions}</div>
-        {/* word bank / blank */}
+        <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
+          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        </div>
+        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>{instructions}</div>
       </div>
-
       <div style={{ padding: "0 20px 120px" }}>
         {items.map((q, qi) => {
           const qNum = globalQStart + qi;
           const chosen = answers[q.id];
-          const isCorrect = submitted && chosen === q.answer;
-          const isWrong = submitted && chosen !== q.answer;
+          const isFirstCorrect = submitted && chosen === q.answer;
+          const isFirstWrong = submitted && chosen !== q.answer;
+          const hasRetried = retried[q.id];
+          const retryChosen = retryAnswers[q.id];
+          const isRetryCorrect = retriedCorrect[q.id];
+          const showExp = showExplanation[q.id];
 
           return (
-            <div key={q.id} style={{ marginBottom: 18 }}>
-              {/* Question */}
+            <div key={q.id} style={{ marginBottom: 20 }}>
               <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                <span style={S.qNum}>{qNum}.</span>
-                <span style={S.qText}>
-                  {q.sentence || q.question || ""}
-                </span>
+                <span style={{ fontWeight: "bold", fontSize: 14, minWidth: 24 }}>{qNum}.</span>
+                <span style={{ fontSize: 14, lineHeight: 1.8, flex: 1 }}>{q.sentence || q.question || ""}</span>
               </div>
 
-              {/* Options */}
               {(q.options || []).map((opt, i) => {
                 const isAns = i === q.answer;
                 const isSel = chosen === i;
-                let color = "#000";
-                let fontWeight = "normal";
-                let prefix = `(${i + 1})`;
+                let color = "#000", fontWeight = "normal", bg = "transparent";
                 if (submitted) {
                   if (isAns) { color = "#16a34a"; fontWeight = "700"; }
-                  else if (isSel && !isAns) { color = "#dc2626"; }
-                }
+                  else if (isSel) color = "#dc2626";
+                } else if (isSel) bg = "#dbeafe";
                 return (
-                  <div key={i}
-                    onClick={() => handleSelect(q.id, i)}
-                    style={{
-                      ...S.optionRow,
-                      color,
-                      fontWeight,
-                      cursor: submitted ? "default" : "pointer",
-                      background: !submitted && isSel ? "#dbeafe" : "transparent",
-                      borderRadius: 4,
-                      padding: "1px 4px",
-                    }}>
-                    <span style={{ minWidth: 28, fontFamily: EXAM_BODY, fontSize: 14 }}>{prefix}</span>
+                  <div key={i} onClick={() => handleSelect(q.id, i)}
+                    style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 28,
+                      marginBottom: 3, cursor: submitted ? "default" : "pointer",
+                      fontSize: 14, lineHeight: 1.6, color, fontWeight,
+                      background: bg, borderRadius: 4, padding: "1px 4px" }}>
+                    <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
-                    {submitted && isAns && <span style={{ marginLeft: 4 }}></span>}
-                    {submitted && isSel && !isAns && <span style={{ marginLeft: 4, color: "#dc2626" }}></span>}
-                    {/* Answer bracket */}
-                    {i === q.options.length - 1 && (
-                      <span style={{ ...S.bracketAns, marginLeft: "auto",
-                        background: submitted ? (isCorrect ? "#f0fdf4" : "#fef2f2") : (isSel ? "#dbeafe" : "#fff"),
-                        color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen !== undefined ? "#1d4ed8" : "#000"),
-                        borderColor: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : "#000",
-                      }}>
-                        {chosen !== undefined ? chosen + 1 : ""}
-                      </span>
-                    )}
+                    {submitted && isAns && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
+                    {submitted && isSel && !isAns && <span style={{ color: "#dc2626", marginLeft: 4 }}>X</span>}
                   </div>
                 );
               })}
 
-              {/* Explanation after submit */}
-              {submitted && (
-                <ExplanationBox
-                  correct={isCorrect}
-                  answer={q.options[q.answer]}
-                  explanation={q.explanation || q.hints?.[0]}
-                  tip={q.hints?.[1]}
-                />
+              {isFirstWrong && !hasRetried && (
+                <div style={{ marginLeft: 28, marginTop: 8, marginBottom: 8,
+                  background: "#fffbeb", border: "1px solid #fde68a",
+                  borderRadius: 8, padding: "10px 12px" }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 4 }}>
+                    Not quite! Hint:
+                  </div>
+                  <div style={{ fontSize: 12, color: "#78350f", marginBottom: 10 }}>
+                    {q.hints?.[0] || "Think carefully and try again!"}
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 6 }}>Try again:</div>
+                  {(q.options || []).map((opt, i) => {
+                    if (chosen === i) return null;
+                    const isSel = retryChosen === i;
+                    return (
+                      <div key={i} onClick={() => handleRetrySelect(q.id, i)}
+                        style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4,
+                          cursor: "pointer", fontSize: 13,
+                          background: isSel ? "#dbeafe" : "#fff", borderRadius: 4,
+                          padding: "3px 8px", border: "1px solid " + (isSel ? "#3b82f6" : "#e5e7eb") }}>
+                        <span>({i + 1})</span><span>{opt}</span>
+                      </div>
+                    );
+                  })}
+                  <button onClick={() => handleRetry(q)} disabled={retryChosen === undefined}
+                    style={{ marginTop: 6, padding: "6px 16px", borderRadius: 8,
+                      background: retryChosen !== undefined ? "#1e3a6e" : "#94a3b8",
+                      color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                      cursor: retryChosen !== undefined ? "pointer" : "not-allowed" }}>
+                    Check
+                  </button>
+                </div>
               )}
 
-              {qi < items.length - 1 && <div style={S.divider} />}
+              {isFirstWrong && hasRetried && (
+                <div style={{ marginLeft: 28, marginTop: 6, marginBottom: 6,
+                  padding: "8px 12px", borderRadius: 8,
+                  background: isRetryCorrect ? "#f0fdf4" : "#fef2f2",
+                  border: "1px solid " + (isRetryCorrect ? "#16a34a" : "#dc2626") }}>
+                  <div style={{ fontSize: 12, fontWeight: 700,
+                    color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
+                    {isRetryCorrect ? "V Correct on retry!" : "X Correct answer: " + q.options[q.answer]}
+                  </div>
+                  {showExp && q.explanation && (
+                    <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6, marginTop: 6 }}>
+                      {q.explanation}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {isFirstCorrect && showExp && q.explanation && (
+                <div style={{ marginLeft: 28, marginTop: 6,
+                  borderLeft: "3px solid #16a34a", paddingLeft: 10,
+                  background: "#f0fdf4", borderRadius: "0 8px 8px 0",
+                  padding: "8px 10px 8px 14px" }}>
+                  <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.explanation}</div>
+                </div>
+              )}
+
+              {isFirstCorrect && !showExp && (
+                <button onClick={() => setShowExplanation(e => ({...e, [q.id]: true}))}
+                  style={{ marginLeft: 28, marginTop: 4, fontSize: 11, color: "#6b7280",
+                    background: "none", border: "1px solid #e5e7eb", borderRadius: 6,
+                    padding: "2px 8px", cursor: "pointer" }}>
+                  Show explanation
+                </button>
+              )}
+
+              {qi < items.length - 1 && <div style={{ borderTop: "1px solid #ccc", margin: "14px 0" }} />}
             </div>
           );
         })}
 
-        {/* Score summary after submit */}
         {submitted && (
-          <div style={{
-            background: "#f8fafc", border: "1px solid #e2e8f0",
+          <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0",
             borderRadius: 10, padding: "12px 16px", marginBottom: 16,
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-          }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>
-              Page score: {score}/{items.length}
-            </span>
-            <span style={{ fontSize: 13, color: score === items.length ? "#16a34a" : score >= items.length * 0.6 ? "#d97706" : "#dc2626", fontWeight: 700 }}>
+            display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+            <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
+            <span style={{ fontSize: 13, fontWeight: 700,
+              color: score === items.length ? "#16a34a" : score >= items.length * 0.6 ? "#d97706" : "#dc2626" }}>
               {Math.round(score / items.length * 100)}%
             </span>
           </div>
         )}
 
-        {/* Submit / Next button */}
         {!submitted ? (
           <button onClick={handleSubmit}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
               color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
-              cursor: allAnswered ? "pointer" : "not-allowed",
-              fontFamily: EXAM_BODY,
-            }}>
+              cursor: allAnswered ? "pointer" : "not-allowed" }}>
             Submit Page {pageIdx + 1}/{totalPages}
             {!allAnswered && <span style={{ fontSize: 12, fontWeight: 400, display: "block" }}>
               Answer all {items.length} questions first
             </span>}
           </button>
-        ) : (
-          <button onClick={() => onPageDone(null, true)}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
+        ) : allRetriedOrCorrect ? (
+          <button onClick={handleFinishPage}
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
-            }}>
-            {pageIdx + 1 >= totalPages ? "Finish Section" : `Next Page`}
+              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
+            {pageIdx + 1 >= totalPages ? "Finish Section" : "Next Page"}
           </button>
+        ) : (
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
+            Please complete the retry questions above before continuing.
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-// 
-//  CLOZE PAGE - Grammar Cloze / Vocab Cloze
-// 
+
 function ClozePage({ set, sectionLabel, marks, onPageDone }) {
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
@@ -536,155 +590,176 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
 // 
 function EditingPage({ set, sectionLabel, marks, onPageDone }) {
   const items = set.items || [];
-  const [answers, setAnswers] = useState({});   // id string
+  const [answers, setAnswers] = useState({});
+  const [retryAnswers, setRetryAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [retried, setRetried] = useState({});
   const startRef = useRef(Date.now());
 
   function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
+  }
+
+  function handleRetry(item) {
+    const typed = (retryAnswers[item.id] || '').trim();
+    if (!typed) return;
+    setRetried(r => ({ ...r, [item.id]: typed }));
+  }
+
+  function handleFinish() {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing",
-      correct: (answers[item.id] || "").trim().toLowerCase() === (item.answer || "").toLowerCase(),
+      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results);
   }
 
   const score = submitted ? items.filter(item =>
-    (answers[item.id] || "").trim().toLowerCase() === (item.answer || "").toLowerCase()
+    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
   ).length : 0;
 
-  // Render passage with underlined wrong words and answer boxes
-  function renderPassageWithBoxes() {
-    // passage has underlined words marked in item.sentence
-    // Show full passage with boxes where answers go
-    const passage = set.passage || set.instructions || "";
-    if (!passage) return null;
-
-    // Find all items' wrong words in passage and render
-    let parts = [passage];
-    items.forEach((item, idx) => {
-      parts = parts.flatMap(part => {
-        if (typeof part !== "string") return [part];
-        const ww = item.wrongWord || item.errorWord || "";
-        if (!ww || !part.includes(ww)) return [part];
-        const splitParts = part.split(ww);
-        return splitParts.flatMap((p, i) => {
-          if (i === splitParts.length - 1) return [p];
-          const isC = submitted && (answers[item.id] || "").trim().toLowerCase() === (item.answer || "").toLowerCase();
-          return [
-            p,
-            <span key={`${item.id}_${i}`} style={{ display: "inline-block" }}>
-              {/* Question number */}
-              <span style={{ fontSize: 12, fontWeight: 700, verticalAlign: "super", marginRight: 2 }}>
-                ({item.questionNumber || idx + 1})
-              </span>
-              {/* Wrong word with strikethrough after submit */}
-              <span style={{
-                textDecoration: "underline",
-                fontStyle: "italic",
-                color: submitted ? "#dc2626" : "#000",
-                textDecorationStyle: submitted ? "line-through" : "underline",
-              }}>{ww}</span>
-            </span>
-          ];
-        });
-      });
-    });
-
-    return parts;
-  }
+  const allRetriedWrong = submitted && items
+    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
+    .every(item => retried[item.id]);
 
   return (
-    <div style={S.page}>
+    <div style={{ background: "#fff", minHeight: "100vh" }}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={S.sectionHeader}>{sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})</div>
-        <div style={S.instructions}>
+        <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
+          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        </div>
+        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
           Each of the underlined words contains a spelling error. Write the correct word in the box provided.
         </div>
       </div>
 
       <div style={{ padding: "0 20px 120px" }}>
-        {/* Passage */}
-        {(set.passage || set.text) && (
-          <div style={{
-            border: "1px solid #ddd", borderRadius: 8, padding: "14px 16px",
-            marginBottom: 20, fontSize: 14, fontFamily: `${EXAM_FONT}`,
-            lineHeight: 2, fontStyle: "italic",
-          }}>
-            {renderPassageWithBoxes()}
-          </div>
-        )}
-
-        {/* Answer boxes */}
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
-          const typed = answers[item.id] || "";
-          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || "").toLowerCase();
+          const typed = answers[item.id] || '';
+          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
           const isWrong = submitted && !isCorrect;
+          const retryTyped = retryAnswers[item.id] || '';
+          const hasRetried = retried[item.id];
+          const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
 
           return (
-            <div key={item.id} style={{ marginBottom: 16 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 6 }}>
-                <span style={{ fontSize: 14, fontWeight: 700, minWidth: 32 }}>({qNum})</span>
-                {/* Sentence context */}
-                <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontFamily: EXAM_BODY }}>
-                  {item.sentence?.replace(item.wrongWord, `[${item.wrongWord}]`) || ""}
+            <div key={item.id} style={{ marginBottom: 20 }}>
+              {/* Question number + sentence context */}
+              <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
+                <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
+                <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
+                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
                 </span>
               </div>
 
-              {/* Answer input / display */}
-              <div style={{ display: "flex", alignItems: "center", gap: 10, marginLeft: 32 }}>
-                {!submitted ? (
-                  <input
-                    type="text"
-                    value={typed}
+              {/* Input box */}
+              {!submitted ? (
+                <div style={{ marginLeft: 32 }}>
+                  <input type="text" value={typed}
                     onChange={e => setAnswers(a => ({ ...a, [item.id]: e.target.value }))}
                     placeholder="Write correct spelling..."
-                    style={{
-                      ...S.answerBox,
-                      minWidth: 160, border: `1.5px solid ${typed ? "#1d4ed8" : "#000"}`,
-                      outline: "none", borderRadius: 4, color: "#1d4ed8",
-                    }}
-                  />
-                ) : (
-                  <span style={{
-                    ...S.answerBox, display: "inline-flex", alignItems: "center",
-                    border: `1.5px solid ${isCorrect ? "#16a34a" : "#dc2626"}`,
-                    color: isCorrect ? "#16a34a" : "#dc2626",
-                    fontWeight: 700, borderRadius: 4, minWidth: 160,
-                  }}>
-                    {typed || "(blank)"}
-                    <span style={{ marginLeft: 4 }}>{isCorrect ? "" : ""}</span>
-                  </span>
-                )}
-              </div>
+                    style={{ padding: "6px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                      border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
+                      outline: "none", minWidth: 160 }} />
+                </div>
+              ) : (
+                <div style={{ marginLeft: 32 }}>
+                  {/* Row: My answer | Correct answer | Retry box */}
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                    {/* My answer */}
+                    <div style={{ textAlign: "center" }}>
+                      <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
+                      <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                        border: "1.5px solid " + (isCorrect ? "#16a34a" : "#dc2626"),
+                        color: isCorrect ? "#16a34a" : "#dc2626",
+                        background: isCorrect ? "#f0fdf4" : "#fef2f2",
+                        minWidth: 100, textAlign: "center" }}>
+                        {typed || "(blank)"} {isCorrect ? "V" : "X"}
+                      </div>
+                    </div>
 
-              {/* Explanation */}
-              {submitted && (
-                <ExplanationBox
-                  correct={isCorrect}
-                  answer={item.answer}
-                  explanation={item.hints?.[0] || item.solution?.steps?.join(" ")}
-                  tip={item.hints?.[1] || item.solution?.tip}
-                />
+                    {/* Correct answer (shown only if wrong) */}
+                    {isWrong && (
+                      <>
+                        <div style={{ fontSize: 18, color: "#94a3b8" }}>vs</div>
+                        <div style={{ textAlign: "center" }}>
+                          <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Correct answer</div>
+                          <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
+                            border: "1.5px solid #16a34a", color: "#16a34a",
+                            background: "#f0fdf4", minWidth: 100, textAlign: "center" }}>
+                            {item.answer}
+                          </div>
+                        </div>
+
+                        {/* Retry input */}
+                        {!hasRetried && (
+                          <div style={{ textAlign: "center" }}>
+                            <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
+                            <div style={{ display: "flex", gap: 4 }}>
+                              <input type="text" value={retryTyped}
+                                onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
+                                placeholder={item.answer?.split('').join(' . ')}
+                                style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                                  border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
+                              <button onClick={() => handleRetry(item)}
+                                disabled={!retryTyped}
+                                style={{ padding: "5px 10px", borderRadius: 6,
+                                  background: retryTyped ? "#1e3a6e" : "#94a3b8",
+                                  color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                                  cursor: retryTyped ? "pointer" : "not-allowed" }}>
+                                OK
+                              </button>
+                            </div>
+                          </div>
+                        )}
+
+                        {/* Retry result */}
+                        {hasRetried && (
+                          <div style={{ textAlign: "center" }}>
+                            <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your retry</div>
+                            <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
+                              border: "1.5px solid " + (retryIsCorrect ? "#16a34a" : "#dc2626"),
+                              color: retryIsCorrect ? "#16a34a" : "#dc2626",
+                              background: retryIsCorrect ? "#f0fdf4" : "#fef2f2",
+                              minWidth: 100, textAlign: "center" }}>
+                              {hasRetried} {retryIsCorrect ? "V" : "X"}
+                            </div>
+                          </div>
+                        )}
+                      </>
+                    )}
+                  </div>
+
+                  {/* Explanation */}
+                  {(item.hints?.[0] || item.solution?.tip) && (
+                    <div style={{ marginTop: 8,
+                      borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#f59e0b"),
+                      paddingLeft: 10, background: isCorrect ? "#f0fdf4" : "#fffbeb",
+                      borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>
+                        {item.hints?.[0] || item.solution?.tip}
+                      </div>
+                    </div>
+                  )}
+                </div>
               )}
 
-              {idx < items.length - 1 && <div style={{ ...S.divider, marginLeft: 32 }} />}
+              {idx < items.length - 1 && <div style={{ borderTop: "1px solid #e5e7eb", margin: "14px 0" }} />}
             </div>
           );
         })}
 
         {submitted && (
-          <div style={{
-            background: "#f8fafc", border: "1px solid #e2e8f0",
+          <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0",
             borderRadius: 10, padding: "12px 16px", marginBottom: 16,
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-          }}>
+            display: "flex", justifyContent: "space-between", alignItems: "center" }}>
             <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: score === items.length ? "#16a34a" : "#d97706" }}>
+            <span style={{ fontSize: 13, fontWeight: 700,
+              color: score === items.length ? "#16a34a" : "#d97706" }}>
               {Math.round(score / items.length * 100)}%
             </span>
           </div>
@@ -692,31 +767,29 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
 
         {!submitted ? (
           <button onClick={handleSubmit}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
-            }}>
+              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
             Submit
           </button>
-        ) : (
-          <button onClick={() => onPageDone(null, true)}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
+        ) : allRetriedWrong ? (
+          <button onClick={handleFinish}
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
-            }}>
+              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
             Next Section
           </button>
+        ) : (
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
+            Please write the correct spelling for each wrong answer before continuing.
+          </div>
         )}
       </div>
     </div>
   );
 }
 
-// 
-//  COMPREHENSION PAGE
-// 
+
 function CompPage({ set, sectionLabel, marks, onPageDone }) {
   const questions = set.questions || [];
   const [answers, setAnswers] = useState({});
