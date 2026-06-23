@@ -4,18 +4,18 @@ import { C } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 
-// ─────────────────────────────────────────────────────────────
-//  EXAM MODE — Looks & feels like a real Singapore P3 exam paper
-//  • All questions shown at once per page (4–5 per page)
-//  • Student can freely move between questions on same page
-//  • "Submit Page" → marks + explanations revealed for that page
-//  • Then moves to next page
-// ─────────────────────────────────────────────────────────────
+// 
+//  EXAM MODE - Looks & feels like a real Singapore P3 exam paper
+//  - All questions shown at once per page (4-5 per page)
+//  - Student can freely move between questions on same page
+//  - "Submit Page" marks + explanations revealed for that page
+//  - Then moves to next page
+// 
 
 const EXAM_FONT = "'Times New Roman', Times, serif";
 const EXAM_BODY = "'Arial', sans-serif";
 
-// ── Shared exam styles ────────────────────────────────────────
+//  Shared exam styles 
 const S = {
   page: {
     background: "#fff",
@@ -94,7 +94,7 @@ const S = {
   },
 };
 
-// ── Helper: split questions into pages of N ───────────────────
+//  Helper: split questions into pages of N 
 function paginate(items, perPage = 4) {
   const pages = [];
   for (let i = 0; i < items.length; i += perPage) {
@@ -103,7 +103,7 @@ function paginate(items, perPage = 4) {
   return pages;
 }
 
-// ── Explanation box shown after Submit ────────────────────────
+//  Explanation box shown after Submit 
 function ExplanationBox({ correct, answer, explanation, tip }) {
   return (
     <div style={{
@@ -113,25 +113,25 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
       borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
     }}>
       <div style={{ fontSize: 12, fontWeight: 700, color: correct ? "#16a34a" : "#dc2626", marginBottom: 3 }}>
-        {correct ? "✓ Correct" : `✗ Correct answer: ${answer}`}
+        {correct ? " Correct" : ` Correct answer: ${answer}`}
       </div>
       {explanation && (
         <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{explanation}</div>
       )}
       {tip && (
         <div style={{ fontSize: 11, color: "#6b7280", marginTop: 4, fontStyle: "italic" }}>
-          💡 {tip}
+           {tip}
         </div>
       )}
     </div>
   );
 }
 
-// ════════════════════════════════════════════════════════════
-//  MCQ PAGE — Grammar MCQ / Vocab MCQ
-// ════════════════════════════════════════════════════════════
+// 
+//  MCQ PAGE - Grammar MCQ / Vocab MCQ
+// 
 function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone }) {
-  const [answers, setAnswers] = useState({});   // id -> optionIndex
+  const [answers, setAnswers] = useState({});   // id optionIndex
   const [submitted, setSubmitted] = useState(false);
   const startRef = useRef(Date.now());
 
@@ -211,8 +211,8 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                     }}>
                     <span style={{ minWidth: 28, fontFamily: EXAM_BODY, fontSize: 14 }}>{prefix}</span>
                     <span>{opt}</span>
-                    {submitted && isAns && <span style={{ marginLeft: 4 }}>✓</span>}
-                    {submitted && isSel && !isAns && <span style={{ marginLeft: 4, color: "#dc2626" }}>✗</span>}
+                    {submitted && isAns && <span style={{ marginLeft: 4 }}></span>}
+                    {submitted && isSel && !isAns && <span style={{ marginLeft: 4, color: "#dc2626" }}></span>}
                     {/* Answer bracket */}
                     {i === q.options.length - 1 && (
                       <span style={{ ...S.bracketAns, marginLeft: "auto",
@@ -280,7 +280,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
             }}>
-            {pageIdx + 1 >= totalPages ? "Finish Section →" : `Next Page →`}
+            {pageIdx + 1 >= totalPages ? "Finish Section" : `Next Page`}
           </button>
         )}
       </div>
@@ -288,13 +288,13 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   );
 }
 
-// ════════════════════════════════════════════════════════════
-//  CLOZE PAGE — Grammar Cloze / Vocab Cloze
-// ════════════════════════════════════════════════════════════
+// 
+//  CLOZE PAGE - Grammar Cloze / Vocab Cloze
+// 
 function ClozePage({ set, sectionLabel, marks, onPageDone }) {
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
-  const [answers, setAnswers] = useState({});   // num -> word
+  const [answers, setAnswers] = useState({});   // num word
   const [submitted, setSubmitted] = useState(false);
   const startRef = useRef(Date.now());
 
@@ -351,7 +351,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             {chosen || "\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0"}
           </span>
           {submitted && !isCorrect && (
-            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 4 }}>→ {blank.answer}</span>
+            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 4 }}> {blank.answer}</span>
           )}
         </span>
       );
@@ -424,7 +424,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
                     fontWeight: 600,
                   }}>{chosen || "\u00A0\u00A0\u00A0"}</span>
                   {submitted && !isCorrect && (
-                    <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}>→ {b.answer}</span>
+                    <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}> {b.answer}</span>
                   )}
                 </div>
               );
@@ -522,7 +522,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
                 background: "#1e3a6e", color: "#fff", border: "none",
                 fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
               }}>
-              Next Section →
+              Next Section
             </button>
           )}
         </div>
@@ -531,12 +531,12 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
   );
 }
 
-// ════════════════════════════════════════════════════════════
-//  EDITING PAGE — Type the correct spelling
-// ════════════════════════════════════════════════════════════
+// 
+//  EDITING PAGE - Type the correct spelling
+// 
 function EditingPage({ set, sectionLabel, marks, onPageDone }) {
   const items = set.items || [];
-  const [answers, setAnswers] = useState({});   // id -> string
+  const [answers, setAnswers] = useState({});   // id string
   const [submitted, setSubmitted] = useState(false);
   const startRef = useRef(Date.now());
 
@@ -657,7 +657,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                     fontWeight: 700, borderRadius: 4, minWidth: 160,
                   }}>
                     {typed || "(blank)"}
-                    <span style={{ marginLeft: 4 }}>{isCorrect ? "✓" : "✗"}</span>
+                    <span style={{ marginLeft: 4 }}>{isCorrect ? "" : ""}</span>
                   </span>
                 )}
               </div>
@@ -706,7 +706,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
             }}>
-            Next Section →
+            Next Section
           </button>
         )}
       </div>
@@ -714,9 +714,9 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
   );
 }
 
-// ════════════════════════════════════════════════════════════
+// 
 //  COMPREHENSION PAGE
-// ════════════════════════════════════════════════════════════
+// 
 function CompPage({ set, sectionLabel, marks, onPageDone }) {
   const questions = set.questions || [];
   const [answers, setAnswers] = useState({});
@@ -780,7 +780,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
                     }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
-                    {submitted && isAns && <span style={{ marginLeft: 4 }}>✓</span>}
+                    {submitted && isAns && <span style={{ marginLeft: 4 }}></span>}
                   </div>
                 );
               })}
@@ -828,7 +828,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
             }}>
-            Next Section →
+            Next Section
           </button>
         )}
       </div>
@@ -836,9 +836,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
   );
 }
 
-// ════════════════════════════════════════════════════════════
+// 
 //  EXAM SUMMARY
-// ════════════════════════════════════════════════════════════
+// 
 function ExamSummary({ results, duration, onHome, onRetry }) {
   const total = results.length;
   const correct = results.filter(r => r.correct).length;
@@ -857,11 +857,11 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
         background: "#1e3a6e", padding: "28px 24px 24px", textAlign: "center", color: "#fff",
       }}>
         <div style={{ fontSize: 48, marginBottom: 8 }}>
-          {pct >= 80 ? "🏆" : pct >= 60 ? "👍" : "💪"}
+          {pct >= 80 ? "" : pct >= 60 ? "" : ""}
         </div>
         <div style={{ fontSize: 42, fontWeight: 900, fontFamily: EXAM_BODY }}>{pct}%</div>
         <div style={{ fontSize: 16, opacity: 0.85, marginTop: 4 }}>
-          {correct}/{total} correct · {fmtTime(duration)}
+          {correct}/{total} correct . {fmtTime(duration)}
         </div>
       </div>
 
@@ -904,7 +904,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
             borderRadius: 12, padding: "15px 0", fontSize: 15, fontWeight: 700,
             cursor: "pointer", fontFamily: EXAM_BODY, marginBottom: 10,
           }}>
-          ← Back to Home
+           Back to Home
         </button>
         <button onClick={onRetry}
           style={{
@@ -912,16 +912,16 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
             border: "2px solid #1e3a6e", borderRadius: 12, padding: "13px 0",
             fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
           }}>
-          🔄 New Session
+           New Session
         </button>
       </div>
     </div>
   );
 }
 
-// ════════════════════════════════════════════════════════════
-//  EXAM SESSION SCREEN — Main controller
-// ════════════════════════════════════════════════════════════
+// 
+//  EXAM SESSION SCREEN - Main controller
+// 
 export function ExamSessionScreen({ plan, isMockExam, mockInfo, onFinish, onBack }) {
   const [secIdx, setSecIdx] = useState(0);
   const [pageIdx, setPageIdx] = useState(0);
@@ -1004,14 +1004,14 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, onFinish, onBack
           background: "none", border: "1px solid #000", borderRadius: 6,
           width: 30, height: 30, cursor: "pointer", fontSize: 14,
           display: "flex", alignItems: "center", justifyContent: "center",
-        }}>←</button>
+        }}></button>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: EXAM_BODY, fontWeight: 700, fontSize: 13 }}>
-            {isMockExam ? `📄 ${mockInfo?.school || "Mock Exam"}` : `Section ${secIdx + 1}/${totalSections}`}
+            {isMockExam ? ` ${mockInfo?.school || "Mock Exam"}` : `Section ${secIdx + 1}/${totalSections}`}
           </div>
           <div style={{ fontFamily: EXAM_BODY, fontSize: 11, color: "#64748b" }}>
             {sectionLabel}
-            {totalPages > 1 && ` · Page ${pageIdx + 1}/${totalPages}`}
+            {totalPages > 1 && ` . Page ${pageIdx + 1}/${totalPages}`}
           </div>
         </div>
         <div style={{

@@ -1,10 +1,10 @@
-﻿"use client";
+"use client";
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
 
 import {
   buildPlan, buildZhPlan, buildZhPastPaperPlan, buildPastPaperPlan,
-  recommendLevel, recommendSectionLevels, selectPastPaper,
+  recommendLevel, selectPastPaper,
   pickQuestionsForSchool, getSchoolProfile,
   DEFAULT_SETTINGS,
 } from '@/lib/dataEngine';
@@ -34,7 +34,7 @@ import { ParentApp } from '@/components/ParentDashboard';
 
 
 
-// â”€â”€ Seed accounts â€” always present after any artifact reload â”€â”€
+//  Seed accounts - always present after any artifact reload 
 const SEED_USERS = {
   "joonhee2018": {
     id:"joonhee2018", password:"002323", role:"student",
@@ -55,19 +55,48 @@ const SEED_USERS = {
   },
 };
 
-// Initialise store â€” preserve existing session data, seed missing accounts
-if(!window._GENIUS_STORE){
-  window._GENIUS_STORE = { users:{}, progress:{} };
-}
-const STORE = window._GENIUS_STORE;
+//  Persistent store using localStorage 
+// Users and progress survive page refreshes, deployments, and browser restarts
+const LS_USERS_KEY    = "genius_users_v2";
+const LS_PROGRESS_KEY = "genius_progress_v2";
 
-// Merge seed users (never overwrite a user already registered this session)
+function _loadFromLS(key, fallback){
+  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+  catch(e){ return fallback; }
+}
+function _saveToLS(key, val){
+  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){}
+}
+
+// Load persisted data
+const _persistedUsers    = _loadFromLS(LS_USERS_KEY, {});
+const _persistedProgress = _loadFromLS(LS_PROGRESS_KEY, {});
+
+// Build in-memory store seeded from localStorage
+const STORE = {
+  users:    { ..._persistedUsers },
+  progress: { ..._persistedProgress },
+};
+
+// Merge seed users (never overwrite a user already in localStorage)
 Object.entries(SEED_USERS).forEach(([id, u])=>{
   if(!STORE.users[id]) STORE.users[id] = {...u};
 });
+// Always persist merged seed users
+_saveToLS(LS_USERS_KEY, STORE.users);
 
 function storeGet(key)   { return STORE[key]; }
 function storeSet(key, v){ STORE[key] = v; }
+
+// Save users to localStorage whenever changed
+function persistUsers(){
+  _saveToLS(LS_USERS_KEY, STORE.users);
+}
+// Save progress to localStorage whenever changed
+function persistProgressLS(key, data){
+  STORE.progress[key] = data;
+  _saveToLS(LS_PROGRESS_KEY, STORE.progress);
+}
 
 function allUsers(){ return Object.values(STORE.users); }
 
@@ -94,11 +123,7 @@ function getProgress(userId, grade, subject){
 
 function setProgress(userId, grade, subject, data){
   const key = `${userId}_${grade}_${subject}`;
-  STORE.progress[key] = data;
-  // Persist to IndexedDB for survival across tab closes
-  if(typeof persistProgress === 'function'){
-    persistProgress(userId, grade, subject, data);
-  }
+  persistProgressLS(key, data);
 }
 
 function makeSeedHistory(userId){
@@ -109,16 +134,16 @@ function makeSeedHistory(userId){
           { id:"gm03", topic:"Simple Past", sectionType:"GrammarMCQ", correct:false, solvedAfterHint:true, attempts:2, difficulty:"core",
             q:"Yesterday, the children ______ to the zoo.", yourAnswer:"go", correctAnswer:"went",
             explanation:"'Yesterday' is a past-time clue, so we use the simple past tense 'went' (not 'go').",
-            solution:{method:"Time Clue â†’ Tense", steps:["'Yesterday' = past time","Past tense of 'go' = 'went'","Answer: went"], tip:"Past-time words (yesterday, last week) always need past tense."} },
+            solution:{method:"Time Clue > Tense", steps:["'Yesterday' = past time","Past tense of 'go' = 'went'","Answer: went"], tip:"Past-time words (yesterday, last week) always need past tense."} },
           { id:"vm05", topic:"Vocabulary", sectionType:"VocabMCQ", correct:false, solvedAfterHint:false, attempts:1, difficulty:"core",
             q:"The naughty boy felt ______ after breaking the vase.", yourAnswer:"proud", correctAnswer:"guilty",
-            explanation:"'Guilty' means feeling bad after doing something wrong â€” that fits breaking the vase." }
+            explanation:"'Guilty' means feeling bad after doing something wrong - that fits breaking the vase." }
         ] },
       { sessionNum:2,  date:"13 May 2026", scores:{ GrammarMCQ:68, VocabMCQ:62, GrammarCloze:75, VocabCloze:62, Editing:87, Comprehension:66 }, totalPct:70, isMockExam:false,
         mistakes:[
           { id:"vm08", topic:"Vocabulary", sectionType:"VocabMCQ", correct:false, solvedAfterHint:false, attempts:1, difficulty:"stretch",
             q:"The ______ smell of fresh bread filled the kitchen.", yourAnswer:"gloomy", correctAnswer:"fragrant",
-            explanation:"'Fragrant' means having a nice, sweet smell â€” perfect for fresh bread." }
+            explanation:"'Fragrant' means having a nice, sweet smell - perfect for fresh bread." }
         ] },
       { sessionNum:3,  date:"16 May 2026", scores:{ GrammarMCQ:75, VocabMCQ:68, GrammarCloze:100,VocabCloze:75, Editing:87, Comprehension:83 }, totalPct:79, isMockExam:false },
       { sessionNum:4,  date:"18 May 2026", scores:{ GrammarMCQ:81, VocabMCQ:75, GrammarCloze:100,VocabCloze:75, Editing:100,Comprehension:83 }, totalPct:85, isMockExam:false },
@@ -196,9 +221,9 @@ function AuthScreen({onLogin, onSignup}){
   return(
     <Wrap>
       <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0F172A"}}> <div style={{background:"linear-gradient(160deg,#1E3A6E,#1E40AF)",padding:"48px 24px 36px",textAlign:"center",flexShrink:0}}>
-          <div style={{fontSize:56,marginBottom:10}}>ðŸŽ“</div>
+          <div style={{fontSize:56,marginBottom:10}}></div>
           <div style={{color:"#fff",fontSize:30,fontWeight:900,letterSpacing:1}}>Genius Project</div>
-          <div style={{color:"rgba(255,255,255,0.6)",fontSize:13,marginTop:6}}>PSLE Practice Â· English Â· Math Â· Science Â· Chinese</div>
+          <div style={{color:"rgba(255,255,255,0.6)",fontSize:13,marginTop:6}}>PSLE Practice . English . Math . Science . Chinese</div>
           <div style={{display:"flex",gap:8,justifyContent:"center",marginTop:16,flexWrap:"wrap"}}>
             {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.12)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.75)",fontSize:12,fontWeight:700}}>{g}</span>)}
           </div>
@@ -399,8 +424,8 @@ function SchoolFeedbackBox({school}){
   return(
     <div style={{marginTop:10,background:col+"15",border:"1px solid "+col+"44",borderRadius:10,padding:"9px 13px",fontSize:12,fontWeight:600,lineHeight:1.6,color:col}}>
       {profile
-        ? "ðŸ“š We have past papers from "+school+"! Focus topics: "+( profile.focusTopics ? profile.focusTopics.slice(0,3).join(", ") : "")
-        : "ðŸ“š Got it! We'll use similar school papers as reference for your practice."}
+        ? " We have past papers from "+school+"! Focus topics: "+( profile.focusTopics ? profile.focusTopics.slice(0,3).join(", ") : "")
+        : " Got it! We'll use similar school papers as reference for your practice."}
     </div>
   );
 }
@@ -412,10 +437,10 @@ function SchoolBanner({school}){
   const col = styleColors[profile.style] || C.navy;
   return(
     <div style={{background:col+"12",borderBottom:"1px solid "+col+"22",padding:"8px 16px",display:"flex",alignItems:"center",gap:8}}>
-      <span style={{fontSize:16}}>ðŸ«</span>
+      <span style={{fontSize:16}}></span>
       <div style={{flex:1}}>
         <span style={{fontSize:12,fontWeight:700,color:col}}>{school}</span>
-        <span style={{fontSize:11,color:C.muted}}> Â· Focus: </span>
+        <span style={{fontSize:11,color:C.muted}}> . Focus: </span>
         <span style={{fontSize:11,color:C.muted}}>{profile.focusTopics ? profile.focusTopics.slice(0,2).join(", ") : ""}</span>
       </div>
       <span style={{background:col,color:"#fff",fontSize:9,fontWeight:800,padding:"2px 8px",borderRadius:8,textTransform:"uppercase"}}>{profile.style}</span>
@@ -437,11 +462,11 @@ function SchoolDropdown({value, onChange}){
   return(
     <div style={{position:"relative",marginBottom:0}}> <div onClick={()=>setOpen(o=>!o)} style={{background:"#fff",border:`1.5px solid ${open?C.navy:C.border}`,borderRadius:12,padding:"12px 14px",fontSize:14,fontWeight:hasVal?700:400,color:hasVal?"#0F172A":C.muted,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",transition:"border 0.15s",boxShadow:open?"0 0 0 3px rgba(30,58,110,0.1)":"none"}}>
         <span style={{flex:1,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{displayVal}</span>
-        <span style={{fontSize:12,color:C.muted,marginLeft:8,flexShrink:0,transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}}>â–¼</span>
+        <span style={{fontSize:12,color:C.muted,marginLeft:8,flexShrink:0,transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}}></span>
       </div> {open&&(
         <div style={{position:"absolute",top:"calc(100% + 6px)",left:0,right:0,background:"#fff",border:`1.5px solid ${C.navy}`,borderRadius:14,boxShadow:"0 8px 32px rgba(15,23,42,0.18)",zIndex:999,overflow:"hidden"}}> <div style={{padding:"10px 12px",borderBottom:`1px solid ${C.border}`,background:"#F8FAFC"}}>
             <div style={{display:"flex",alignItems:"center",gap:8,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:10,padding:"7px 12px"}}>
-              <span style={{fontSize:14,color:C.muted}}>ðŸ”</span>
+              <span style={{fontSize:14,color:C.muted}}></span>
               <input
                 autoFocus
                 value={search}
@@ -449,7 +474,7 @@ function SchoolDropdown({value, onChange}){
                 placeholder="Search school name..."
                 style={{border:"none",outline:"none",fontSize:13,flex:1,fontFamily:"Nunito,sans-serif",color:"#0F172A"}}
               />
-              {search&&<button onClick={()=>setSearch("")} style={{background:"none",border:"none",cursor:"pointer",fontSize:14,color:C.muted,padding:0}}>Ã—</button>}
+              {search&&<button onClick={()=>setSearch("")} style={{background:"none",border:"none",cursor:"pointer",fontSize:14,color:C.muted,padding:0}}>x</button>}
             </div>
           </div> <div style={{maxHeight:240,overflowY:"auto"}}>
             {filtered.length===0&&(
@@ -459,7 +484,7 @@ function SchoolDropdown({value, onChange}){
               const isSelected = school===value;
               const isOther    = school==="Other / Not Listed";
               const profile    = getSchoolProfile(school);
-              const styleTag   = profile ? {challenging:"ðŸ”´",advanced:"ðŸŸ£",standard:"ðŸ”µ"}[profile.style] : null;
+              const styleTag   = profile ? {challenging:"",advanced:"",standard:""}[profile.style] : null;
               return(
                 <div key={i}
                   onClick={()=>{ onChange(school); setOpen(false); setSearch(""); }}
@@ -467,15 +492,15 @@ function SchoolDropdown({value, onChange}){
                   onMouseEnter={e=>{ if(!isSelected) e.currentTarget.style.background="#F8FAFC"; }}
                   onMouseLeave={e=>{ if(!isSelected) e.currentTarget.style.background="#fff"; }}
                 >
-                  <span style={{fontSize:16,flexShrink:0}}>{isOther?"âœï¸":"ðŸ«"}</span>
+                  <span style={{fontSize:16,flexShrink:0}}>{isOther?"":""}</span>
                   <span style={{flex:1,fontSize:13,fontWeight:isSelected?800:500,color:isSelected?C.navy:"#0F172A"}}>{school}</span>
                   {styleTag&&<span style={{fontSize:12,flexShrink:0}}>{styleTag}</span>}
-                  {isSelected&&<span style={{fontSize:14,flexShrink:0}}>âœ“</span>}
+                  {isSelected&&<span style={{fontSize:14,flexShrink:0}}></span>}
                 </div>
               );
             })}
           </div> <div style={{padding:"8px 14px",background:"#F8FAFC",borderTop:`1px solid ${C.border}`,display:"flex",gap:12,fontSize:10,color:C.muted}}>
-            <span>ðŸ”´ Challenging</span><span>ðŸŸ£ Advanced</span><span>ðŸ”µ Standard</span>
+            <span> Challenging</span><span> Advanced</span><span> Standard</span>
           </div>
         </div>
       )}
@@ -496,7 +521,7 @@ function LoginForm({onLogin, onGoSignup}){
   }
 
   if(!STORE.users["demo_student"]){
-    STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"ðŸ‘§",color:"#3B82F6"};
+    STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"",color:"#3B82F6"};
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
@@ -511,39 +536,39 @@ function LoginForm({onLogin, onGoSignup}){
 
   return(
     <div>
-      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:6}}>Welcome back ðŸ‘‹</div>
+      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:6}}>Welcome back </div>
       <div style={{fontSize:13,color:C.muted,marginBottom:20}}>Log in to continue your practice</div> <div style={{display:"flex",background:"#E2E8F0",borderRadius:14,padding:4,marginBottom:20}}>
         {["student","parent"].map(r=>(
           <button key={r} onClick={()=>{setRole(r);setErr("");}} style={{flex:1,background:role===r?"#fff":"none",border:"none",borderRadius:11,padding:"10px 0",fontSize:14,fontWeight:800,cursor:"pointer",color:role===r?"#0F172A":C.muted,boxShadow:role===r?"0 2px 8px rgba(0,0,0,0.1)":"none",transition:"all 0.2s"}}>
-            {r==="student"?"ðŸŽ’ Student":"ðŸ‘© Parent"}
+            {r==="student"?" Student":" Parent"}
           </button>
         ))}
       </div> <div onClick={fillDemo} style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"10px 14px",marginBottom:18,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <div>
-          <div style={{fontSize:11,fontWeight:800,color:"#1D4ED8",marginBottom:2}}>ðŸŽ® Try Demo Account</div>
+          <div style={{fontSize:11,fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account</div>
           <div style={{fontSize:11,color:"#3B82F6"}}>{role==="student"?"ID: demo_student / PW: demo123":"ID: demo_parent / PW: demo456"}</div>
         </div>
-        <span style={{color:"#3B82F6",fontSize:13,fontWeight:700}}>Fill â†’</span>
+        <span style={{color:"#3B82F6",fontSize:13,fontWeight:700}}>Fill</span>
       </div>
 
       <InputField label="ID" value={id} onChange={setId} placeholder="Your login ID"/>
       <div style={{position:"relative",marginBottom:16}}>
         <InputField label="Password" value={pw} onChange={setPw} type={showPw?"text":"password"} placeholder="Your password" onEnter={handleLogin}/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"ðŸ™ˆ":"ðŸ‘ï¸"}</button>
+        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"":""}</button>
       </div>
 
       {err&&<ErrorBox msg={err}/>}
 
-      <BigBtn color={C.navy} onClick={handleLogin}>Log In â†’</BigBtn>
+      <BigBtn color={C.navy} onClick={handleLogin}>Log In</BigBtn>
 
       <div style={{marginTop:20,textAlign:"center"}}>
         <div style={{fontSize:13,color:C.muted,marginBottom:12}}>Don't have an account?</div>
         <div style={{display:"flex",gap:10}}>
           <button onClick={()=>onGoSignup("signup_student")} style={{flex:1,background:"none",border:`2px solid ${C.navy}`,borderRadius:12,padding:"12px",fontSize:13,fontWeight:800,cursor:"pointer",color:C.navy}}>
-            ðŸŽ’ Student Sign Up
+             Student Sign Up
           </button>
           <button onClick={()=>onGoSignup("signup_parent")} style={{flex:1,background:"none",border:`2px solid #7C3AED`,borderRadius:12,padding:"12px",fontSize:13,fontWeight:800,cursor:"pointer",color:"#7C3AED"}}>
-            ðŸ‘© Parent Sign Up
+             Parent Sign Up
           </button>
         </div>
       </div>
@@ -557,10 +582,10 @@ function SignupStudentForm({onSignup, onBack}){
   const [err, setErr] = useState("");
   const [gender, setGender] = useState(null); // null | "boy" | "girl"
 
-  const BOY_AVATARS = ["ðŸ¦•","ðŸ¦–","ðŸŠ","ðŸ‰","ðŸ¦Ž"];
+  const BOY_AVATARS = ["","","","",""];
   const BOY_NAMES   = ["Bronto","Rex","Croco","Drake","Gecko"];
 
-  const GIRL_AVATARS = ["ðŸ¦„","ðŸŒ¸","ðŸ¦‹","ðŸŒˆ","â­"];
+  const GIRL_AVATARS = ["","","","","*"];
   const GIRL_NAMES   = ["Uni","Blossom","Flutter","Rainbow","Starly"];
 
   const BOY_COLORS  = ["#3B82F6","#10B981","#0EA5E9","#6366F1","#14B8A6"];
@@ -598,18 +623,18 @@ function SignupStudentForm({onSignup, onBack}){
 
   return(
     <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>â† Back to Login</button>
-      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Student Account ðŸŽ’</div>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>Back to Login</button>
+      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Student Account </div>
       <div style={{fontSize:13,color:C.muted,marginBottom:20}}>Set up your practice profile</div> <div style={{marginBottom:20}}>
-        <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>Step 1 Â· I am a...</div>
+        <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>Step 1 . I am a...</div>
         <div style={{display:"flex",gap:12}}>
           <button onClick={()=>selectGender("boy")} style={{flex:1,background:gender==="boy"?"linear-gradient(135deg,#3B82F6,#2563EB)":"#F1F5F9",border:gender==="boy"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="boy"?"0 6px 18px rgba(59,130,246,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}>ðŸ¦•</div>
+            <div style={{fontSize:36,marginBottom:6}}></div>
             <div style={{fontSize:15,fontWeight:900,color:gender==="boy"?"#fff":"#0F172A"}}>Boy</div>
             <div style={{fontSize:10,color:gender==="boy"?"rgba(255,255,255,0.7)":C.muted,marginTop:2}}>Dinosaur avatars</div>
           </button>
           <button onClick={()=>selectGender("girl")} style={{flex:1,background:gender==="girl"?"linear-gradient(135deg,#EC4899,#A855F7)":"#F1F5F9",border:gender==="girl"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="girl"?"0 6px 18px rgba(236,72,153,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}>ðŸ¦„</div>
+            <div style={{fontSize:36,marginBottom:6}}></div>
             <div style={{fontSize:15,fontWeight:900,color:gender==="girl"?"#fff":"#0F172A"}}>Girl</div>
             <div style={{fontSize:10,color:gender==="girl"?"rgba(255,255,255,0.7)":C.muted,marginTop:2}}>Unicorn avatars</div>
           </button>
@@ -617,7 +642,7 @@ function SignupStudentForm({onSignup, onBack}){
       </div> {gender&&(
         <div style={{marginBottom:20}}>
           <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
-            Step 2 Â· Pick your avatar
+            Step 2 . Pick your avatar
           </div>
           <div style={{display:"flex",gap:8,marginBottom:12}}>
             {AVATARS.map((av,i)=>{
@@ -650,7 +675,7 @@ function SignupStudentForm({onSignup, onBack}){
 
       <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
         <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
-          ðŸ« Step 3 Â· Your School
+           Step 3 . Your School
         </div>
         <div style={{fontSize:12,color:C.muted,marginBottom:10,lineHeight:1.5}}>
           We use your school's past papers to tailor questions to your exam style!
@@ -664,7 +689,7 @@ function SignupStudentForm({onSignup, onBack}){
         {form.school&&form.school!=="Other / Not Listed"&&<SchoolFeedbackBox school={form.school}/>}
         {form.school==="Other / Not Listed"&&form.schoolCustom&&(
           <div style={{marginTop:8,background:"#F0FDF4",borderRadius:10,padding:"9px 13px",fontSize:12,color:"#065F46",fontWeight:600,lineHeight:1.6}}>
-            ðŸ“š Got it! We'll use similar school papers as reference for your practice questions.
+             Got it! We'll use similar school papers as reference for your practice questions.
           </div>
         )}
       </div>
@@ -683,12 +708,12 @@ function SignupStudentForm({onSignup, onBack}){
       <InputField label="Student ID (for login)" value={form.id} onChange={v=>f("id",v.toLowerCase().replace(/\s/g,"_"))} placeholder="e.g. mei_lin_2026"/>
       <div style={{position:"relative",marginBottom:4}}>
         <InputField label="Password (min 6 chars)" value={form.password} onChange={v=>f("password",v)} type={showPw?"text":"password"} placeholder="Create a password"/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"ðŸ™ˆ":"ðŸ‘ï¸"}</button>
+        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"":""}</button>
       </div>
       <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={handleSubmit}/>
 
       {err&&<ErrorBox msg={err}/>}
-      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account â†’</BigBtn>
+      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account</BigBtn>
     </div>
   );
 }
@@ -711,7 +736,7 @@ function SignupParentForm({onSignup, onBack}){
     const child = allUsers().find(u=>u.id===cid&&u.role==="student");
     if(!child){ setLinkMsg("No student with ID '"+cid+"' found. Please check the ID."); return; }
     setLinkedIds(p=>[...p,cid]);
-    setLinkMsg("âœ… Linked: "+child.name+" ("+child.grade+")");
+    setLinkMsg("[OK] Linked: "+child.name+" ("+child.grade+")");
     setChildInput("");
   }
 
@@ -731,18 +756,18 @@ function SignupParentForm({onSignup, onBack}){
 
   return(
     <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>â† Back to Login</button>
-      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Parent Account ðŸ‘©</div>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:13,fontWeight:700,marginBottom:16,padding:0}}>Back to Login</button>
+      <div style={{fontWeight:900,fontSize:20,color:"#0F172A",marginBottom:4}}>Create Parent Account </div>
       <div style={{fontSize:13,color:C.muted,marginBottom:20}}>Monitor your child's progress</div>
 
       <InputField label="Parent Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mrs Lee"/>
       <InputField label="Parent ID (for login)" value={form.id} onChange={v=>f("id",v.toLowerCase().replace(/\s/g,"_"))} placeholder="e.g. mrs_lee_parent"/>
       <div style={{position:"relative",marginBottom:4}}>
         <InputField label="Password (min 6 chars)" value={form.password} onChange={v=>f("password",v)} type={showPw?"text":"password"} placeholder="Create a password"/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"ðŸ™ˆ":"ðŸ‘ï¸"}</button>
+        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:16,color:C.muted}}>{showPw?"":""}</button>
       </div>
       <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password"/> <div style={{background:"#F5F3FF",border:"1.5px solid #DDD6FE",borderRadius:16,padding:"14px",marginBottom:16,marginTop:4}}>
-        <div style={{fontWeight:800,fontSize:13,color:"#4C1D95",marginBottom:8}}>ðŸ”— Link Student Accounts</div>
+        <div style={{fontWeight:800,fontSize:13,color:"#4C1D95",marginBottom:8}}> Link Student Accounts</div>
         <div style={{fontSize:12,color:"#6D28D9",marginBottom:10,lineHeight:1.6}}>
           Ask your child to share their Student ID, then add it here. You can add multiple children.
         </div>
@@ -750,26 +775,26 @@ function SignupParentForm({onSignup, onBack}){
           <input value={childInput} onChange={e=>setChildInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter") addChild();}} placeholder="Enter student ID..." style={{flex:1,border:"1.5px solid #DDD6FE",borderRadius:10,padding:"9px 12px",fontSize:13,outline:"none"}}/>
           <button onClick={addChild} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontSize:13,fontWeight:700,cursor:"pointer"}}>Add</button>
         </div>
-        {linkMsg&&<div style={{fontSize:12,color:linkMsg.startsWith("âœ…")?C.green:C.red,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
+        {linkMsg&&<div style={{fontSize:12,color:linkMsg.startsWith("[OK]")?C.green:C.red,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
         {linkedIds.length===0&&<div style={{fontSize:12,color:C.muted,fontStyle:"italic"}}>No children linked yet. You can also add them later.</div>}
         {linkedIds.map(cid=>{
           const ch=allUsers().find(u=>u.id===cid);
           if(!ch) return null;
           return(
             <div key={cid} style={{display:"flex",alignItems:"center",gap:8,background:"#fff",borderRadius:10,padding:"8px 12px",marginBottom:6}}>
-              <span style={{fontSize:18}}>{ch.avatar||"ðŸ‘¤"}</span>
+              <span style={{fontSize:18}}>{ch.avatar||""}</span>
               <div style={{flex:1}}>
                 <div style={{fontSize:13,fontWeight:700,color:"#4C1D95"}}>{ch.name}</div>
-                <div style={{fontSize:11,color:C.muted}}>{ch.grade} Â· ID: {cid}</div>
+                <div style={{fontSize:11,color:C.muted}}>{ch.grade} . ID: {cid}</div>
               </div>
-              <button onClick={()=>removeChild(cid)} style={{background:"none",border:"none",cursor:"pointer",color:C.red,fontSize:16}}>Ã—</button>
+              <button onClick={()=>removeChild(cid)} style={{background:"none",border:"none",cursor:"pointer",color:C.red,fontSize:16}}>x</button>
             </div>
           );
         })}
       </div>
 
       {err&&<ErrorBox msg={err}/>}
-      <BigBtn color="#7C3AED" onClick={handleSubmit}>Create Parent Account â†’</BigBtn>
+      <BigBtn color="#7C3AED" onClick={handleSubmit}>Create Parent Account</BigBtn>
     </div>
   );
 }
@@ -827,7 +852,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   if(inSession) return(
     <Wrap>
       <ExamSessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
+        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         onFinish={handleSessionDone}
@@ -874,7 +899,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         grade={grade}
         subject={subject}
         onGradeChange={(g)=>{setGrade(g);setScreen("home");}}
-        onSubjectChange={(key, live)=>{ setSubject(key); setScreen("home"); if(!live) setStudentToast("Coming Soon: ì¤€ë¹„ ì¤‘ì¸ ê³¼ëª©ìž…ë‹ˆë‹¤"); else setStudentToast(null); }}
+        onSubjectChange={(key, live)=>{ setSubject(key); setScreen("home"); if(!live) setStudentToast("Coming Soon:   "); else setStudentToast(null); }}
         onLogout={onLogout}
         toastMsg={studentToast}
         onToastDone={()=>setStudentToast(null)}
@@ -896,7 +921,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 }
 
 
-// â”€â”€ Level-aware question picker (easy/medium/hard sets) â”€â”€â”€â”€â”€â”€
+//  Level-aware question picker (easy/medium/hard sets) 
 
 
 function AdminApp({user, onLogout}){
@@ -910,7 +935,7 @@ function AdminApp({user, onLogout}){
     <Wrap>
       <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"16px 20px"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <div style={{color:"#fff",fontWeight:900,fontSize:15}}>ðŸ›¡ï¸ Admin Dashboard</div>
+          <div style={{color:"#fff",fontWeight:900,fontSize:15}}> Admin Dashboard</div>
           <button onClick={onLogout} style={{...T,background:"rgba(255,255,255,.15)",color:"#fff",fontSize:11}}>Logout</button>
         </div>
         <div style={{display:"flex",gap:6,marginTop:10}}>
@@ -921,7 +946,7 @@ function AdminApp({user, onLogout}){
         {tab==="overview"&&(
           <div>
             <div style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10,marginBottom:14}}>
-              {[["ðŸ‘¥","Total Users",users.length],["ðŸŽ’","Students",students.length],["ðŸ‘©","Parents",parents.length]].map(([ic,lb,v],i)=>(
+              {[["","Total Users",users.length],["","Students",students.length],["","Parents",parents.length]].map(([ic,lb,v],i)=>(
                 <div key={i} style={{background:"#fff",borderRadius:12,padding:"12px 8px",textAlign:"center",boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
                   <div style={{fontSize:22}}>{ic}</div>
                   <div style={{fontSize:18,fontWeight:900,color:"#1E3A6E"}}>{v}</div>
@@ -936,12 +961,12 @@ function AdminApp({user, onLogout}){
                 const pct = prog.history?.length ? Math.round(prog.history.reduce((a,h)=>a+h.totalPct,0)/prog.history.length) : null;
                 return(
                   <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<7?"1px solid #F1F5F9":"none"}}>
-                    <div style={{width:32,height:32,borderRadius:9,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{s.avatar||"ðŸŽ’"}</div>
+                    <div style={{width:32,height:32,borderRadius:9,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:16}}>{s.avatar||""}</div>
                     <div style={{flex:1}}>
                       <div style={{fontSize:12,fontWeight:700}}>{s.name}</div>
-                      <div style={{fontSize:10,color:"#64748B"}}>{s.school||"â€”"} Â· {s.grade}</div>
+                      <div style={{fontSize:10,color:"#64748B"}}>{s.school||"-"} . {s.grade}</div>
                     </div>
-                    <div style={{fontSize:12,fontWeight:700,color:pct>=70?"#10B981":pct?"#F59E0B":"#94A3B8"}}>{pct!=null?pct+"%":"â€”"}</div>
+                    <div style={{fontSize:12,fontWeight:700,color:pct>=70?"#10B981":pct?"#F59E0B":"#94A3B8"}}>{pct!=null?pct+"%":"-"}</div>
                   </div>
                 );
               })}
@@ -956,10 +981,10 @@ function AdminApp({user, onLogout}){
               const sessions = prog.history?.length||0;
               return(
                 <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<students.length-1?"1px solid #F1F5F9":"none"}}>
-                  <div style={{width:30,height:30,borderRadius:8,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>{s.avatar||"ðŸŽ’"}</div>
+                  <div style={{width:30,height:30,borderRadius:8,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:14}}>{s.avatar||""}</div>
                   <div style={{flex:1}}>
                     <div style={{fontSize:12,fontWeight:700}}>{s.name} <span style={{color:"#94A3B8",fontWeight:400}}>({s.id})</span></div>
-                    <div style={{fontSize:10,color:"#64748B"}}>{s.grade} Â· {sessions} sessions Â· {s.school||"â€”"}</div>
+                    <div style={{fontSize:10,color:"#64748B"}}>{s.grade} . {sessions} sessions . {s.school||"-"}</div>
                   </div>
                 </div>
               );
@@ -968,12 +993,12 @@ function AdminApp({user, onLogout}){
         )}
         {tab==="accounts"&&(
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            {[["ðŸŽ’ Students",students,"#1E3A6E"],["ðŸ‘© Parents",parents,"#059669"],["ðŸ›¡ï¸ Admins",users.filter(u=>u.role==="admin"),"#7C3AED"]].map(([title,list,color],gi)=>(
+            {[[" Students",students,"#1E3A6E"],[" Parents",parents,"#059669"],[" Admins",users.filter(u=>u.role==="admin"),"#7C3AED"]].map(([title,list,color],gi)=>(
               <div key={gi} style={{background:"#fff",borderRadius:14,padding:14,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
                 <div style={{fontWeight:800,fontSize:13,color,marginBottom:8}}>{title} ({list.length})</div>
                 {list.map((u,i)=>(
                   <div key={i} style={{fontSize:12,padding:"4px 0",borderBottom:i<list.length-1?"1px solid #F8FAFC":"none",color:"#0F172A"}}>
-                    {u.name} Â· <span style={{color:"#64748B"}}>{u.id}</span>
+                    {u.name} . <span style={{color:"#64748B"}}>{u.id}</span>
                   </div>
                 ))}
               </div>
@@ -992,7 +1017,7 @@ function AdminApp({user, onLogout}){
 
 
 
-// â”€â”€ Vocab Quiz â€” wrong words with meanings/syn/ant, quiz mode â”€
+//  Vocab Quiz - wrong words with meanings/syn/ant, quiz mode 
 function buildVocabEntries(mistakes){
   const seen=new Set(); const out=[];
   (mistakes||[]).forEach(m=>{
@@ -1031,7 +1056,7 @@ function VocabQuizTab({mistakes}){
 
   if(entries.length<2) return(
     <div style={{textAlign:"center",padding:"50px 20px",color:"#64748B"}}>
-      <div style={{fontSize:44,marginBottom:12}}>ðŸ“š</div>
+      <div style={{fontSize:44,marginBottom:12}}></div>
       <div style={{fontSize:14,fontWeight:800,color:"#0F172A",marginBottom:6}}>Not enough words yet</div>
       <div style={{fontSize:12}}>Wrong vocabulary words from English & Chinese will collect here for quizzing.</div>
     </div>
@@ -1058,18 +1083,18 @@ function VocabQuizTab({mistakes}){
 
   if(done) return(
     <div style={{textAlign:"center",padding:"40px 20px"}}>
-      <div style={{fontSize:44}}>ðŸ†</div>
+      <div style={{fontSize:44}}></div>
       <div style={{fontSize:18,fontWeight:900,color:"#0F172A",margin:"10px 0 4px"}}>
         {score.right} / {score.right+score.wrong} correct
       </div>
       <div style={{fontSize:12,color:"#64748B",marginBottom:16}}>
-        ðŸ‘¨â€ðŸ‘§ Parents: ask your child to say each word's meaning out loud, then retry!
+         Parents: ask your child to say each word's meaning out loud, then retry!
       </div>
       <button onClick={()=>{setOrder(seededShuffle(entries.map((_,i)=>i),Date.now()%100000));
           setIdx(0);setPicked(null);setScore({right:0,wrong:0});setDone(false);}}
         style={{background:"#0F172A",color:"#fff",border:"none",borderRadius:12,
           padding:"12px 28px",fontSize:14,fontWeight:800,cursor:"pointer"}}>
-        ðŸ” Quiz Again (reshuffled)
+         Quiz Again (reshuffled)
       </button>
     </div>
   );
@@ -1079,8 +1104,8 @@ function VocabQuizTab({mistakes}){
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
         <span style={{fontSize:12,fontWeight:700,color:"#64748B"}}>Word {idx+1} / {order.length}</span>
         <span style={{fontSize:12,fontWeight:800}}>
-          <span style={{color:"#10B981"}}>âœ“{score.right}</span>{" "}
-          <span style={{color:"#EF4444"}}>âœ—{score.wrong}</span>
+          <span style={{color:"#10B981"}}>{score.right}</span>{" "}
+          <span style={{color:"#EF4444"}}>{score.wrong}</span>
         </span>
       </div>
 
@@ -1092,7 +1117,7 @@ function VocabQuizTab({mistakes}){
           <SpeakBtn text={cur.word} lang={cur.lang}/>
         </div>
         {cur.pinyin&&<div style={{fontSize:13,color:"#2563EB",fontWeight:700,marginTop:4}}>{cur.pinyin}</div>}
-        {!cur.verified&&<div style={{fontSize:10,color:"#92400E",marginTop:4}}>âš ï¸ è¯·å®¶é•¿ç¡®è®¤</div>}
+        {!cur.verified&&<div style={{fontSize:10,color:"#92400E",marginTop:4}}> </div>}
         <div style={{fontSize:12,color:"#64748B",marginTop:8}}>What does this word mean?</div>
       </div>
 
@@ -1122,14 +1147,14 @@ function VocabQuizTab({mistakes}){
             {cur.word} = {cur.meaning}
           </div>
           {cur.syn&&<div style={{fontSize:11,color:"#0D9488",fontWeight:700}}>= same: {cur.syn}</div>}
-          {cur.ant&&<div style={{fontSize:11,color:"#DC2626",fontWeight:700}}>â‰  opposite: {cur.ant}</div>}
+          {cur.ant&&<div style={{fontSize:11,color:"#DC2626",fontWeight:700}}>!= opposite: {cur.ant}</div>}
         </div>
       )}
 
       {picked!==null&&(
         <button onClick={next} style={{width:"100%",background:"#0F172A",color:"#fff",
           border:"none",borderRadius:12,padding:"13px",fontSize:14,fontWeight:800,cursor:"pointer"}}>
-          {idx+1>=order.length?"Finish â†’":"Next Word â†’"}
+          {idx+1>=order.length?"Finish >":"Next Word >"}
         </button>
       )}
     </div>
@@ -1170,17 +1195,17 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
       <div style={{background:"linear-gradient(135deg,#7C2D12,#DC2626)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:12,
-          fontWeight:700,marginBottom:10}}>â† Back</button>
-        <div style={{color:"#fff",fontSize:18,fontWeight:900}}>âŒ Mistakes Log</div>
+          fontWeight:700,marginBottom:10}}>Back</button>
+        <div style={{color:"#fff",fontSize:18,fontWeight:900}}> Mistakes Log</div>
         <div style={{color:"rgba(255,255,255,.6)",fontSize:12,marginTop:2}}>
           {filtered.length} wrong answer{filtered.length!==1?"s":""}
-          {mistakes.length>0&&` Â· ${Math.round((1-filtered.length/Math.max(mistakes.length,1))*100)}% accuracy`}
+          {mistakes.length>0&&` . ${Math.round((1-filtered.length/Math.max(mistakes.length,1))*100)}% accuracy`}
         </div>
       </div>
 
       {/* Sub-tabs: mistakes list / vocab quiz */}
       <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2E8F0"}}>
-        {[["list","âŒ Mistakes"],["quiz","ðŸ“š Vocab Quiz"]].map(([v,l])=>(
+        {[["list"," Mistakes"],["quiz"," Vocab Quiz"]].map(([v,l])=>(
           <button key={v} onClick={()=>setView(v)}
             style={{flex:1,background:"none",border:"none",cursor:"pointer",padding:"12px 8px",
               fontSize:13,fontWeight:view===v?800:500,color:view===v?"#7C2D12":"#64748B",
@@ -1203,7 +1228,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
 
       {filtered.length===0?(
         <div style={{textAlign:"center",padding:"60px 24px",color:"#64748B"}}>
-          <div style={{fontSize:48,marginBottom:12}}>ðŸŽ‰</div>
+          <div style={{fontSize:48,marginBottom:12}}></div>
           <div style={{fontSize:16,fontWeight:800,color:"#0F172A",marginBottom:6}}>
             No mistakes {filter==="today"?"today":filter==="week"?"this week":"yet"}!
           </div>
@@ -1246,8 +1271,8 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                     padding:"13px 16px",textAlign:"left",display:"flex",alignItems:"center",gap:12}}>
                   <div style={{width:32,height:32,borderRadius:9,background:col+"18",
                     display:"flex",alignItems:"center",justifyContent:"center",fontSize:14,flexShrink:0}}>
-                    {m.sectionType==="MCQ"?"ðŸ“Š":m.sectionType==="ShortAnswer"?"âœï¸":
-                     m.sectionType==="ProblemSum"?"ðŸ“":"ðŸ€„"}
+                    {m.sectionType==="MCQ"?"":m.sectionType==="ShortAnswer"?"":
+                     m.sectionType==="ProblemSum"?"":""}
                   </div>
                   <div style={{flex:1,minWidth:0}}>
                     <div style={{fontSize:12,fontWeight:700,color:"#0F172A",
@@ -1261,19 +1286,19 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                       {m.solvedAfterHint&&(
                         <span style={{background:"#FEF3C7",color:"#92400E",fontSize:10,fontWeight:700,
                           padding:"2px 7px",borderRadius:7}}>
-                          ðŸ’¡ Solved on try {m.attempts||2}
+                           Solved on try {m.attempts||2}
                         </span>
                       )}
                       {!m.solvedAfterHint&&m.attempts===0&&(
                         <span style={{background:"#FEE2E2",color:"#991B1B",fontSize:10,fontWeight:700,
                           padding:"2px 7px",borderRadius:7}}>
-                          âŒ Not solved
+                           Not solved
                         </span>
                       )}
                     </div>
                   </div>
                   <span style={{color:"#94A3B8",fontSize:16,
-                    transform:isOpen?"rotate(90deg)":"none",transition:"transform .2s"}}>â€º</span>
+                    transform:isOpen?"rotate(90deg)":"none",transition:"transform .2s"}}>&gt;</span>
                 </button>
 
                 {isOpen&&(
@@ -1291,13 +1316,13 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                       <div style={{flex:1,background:"#FEE2E2",borderRadius:10,padding:"9px 12px"}}>
                         <div style={{fontSize:10,fontWeight:700,color:"#991B1B",marginBottom:3}}>YOUR ANSWER</div>
                         <div style={{fontSize:13,fontWeight:700,color:"#7F1D1D"}}>
-                          {m.yourAnswer||"â€”"}
+                          {m.yourAnswer||"-"}
                         </div>
                       </div>
                       <div style={{flex:1,background:"#D1FAE5",borderRadius:10,padding:"9px 12px"}}>
                         <div style={{fontSize:10,fontWeight:700,color:"#065F46",marginBottom:3}}>CORRECT</div>
                         <div style={{fontSize:13,fontWeight:700,color:"#064E3B"}}>
-                          {m.correctAnswer||m.answer||"â€”"}
+                          {m.correctAnswer||m.answer||"-"}
                         </div>
                       </div>
                     </div>
@@ -1308,7 +1333,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                         borderRadius:14,padding:"12px 14px"}}>
                         <div style={{fontSize:11,fontWeight:800,color:"#065F46",marginBottom:8,
                           textTransform:"uppercase",letterSpacing:.8}}>
-                          ðŸ“ How to solve: {m.solution.method}
+                           How to solve: {m.solution.method}
                         </div>
                         {(m.solution.steps||[]).slice(0,4).map((step,si)=>(
                           <div key={si} style={{display:"flex",gap:8,marginBottom:4,alignItems:"flex-start"}}>
@@ -1318,7 +1343,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                               {si+1}
                             </span>
                             <div style={{fontSize:12,color:"#0F172A",lineHeight:1.6,
-                              fontFamily:/[=+\-Ã—Ã·]/.test(step)?"monospace":"inherit"}}>
+                              fontFamily:/[=+\-x/]/.test(step)?"monospace":"inherit"}}>
                               {step}
                             </div>
                           </div>
@@ -1326,7 +1351,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                         {m.solution.tip&&(
                           <div style={{background:"#FEF3C7",borderRadius:9,padding:"7px 10px",
                             marginTop:8,fontSize:11,color:"#92400E",fontWeight:700}}>
-                            ðŸ’¡ {m.solution.tip.replace("ðŸ§  ","")}
+                             {m.solution.tip.replace(" ","")}
                           </div>
                         )}
                       </div>
@@ -1337,7 +1362,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                       <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:12,
                         padding:"10px 12px",marginTop:8}}>
                         <div style={{fontSize:10,fontWeight:800,color:"#1D4ED8",marginBottom:3,
-                          textTransform:"uppercase",letterSpacing:.7}}>ðŸ“– English Meaning</div>
+                          textTransform:"uppercase",letterSpacing:.7}}> English Meaning</div>
                         <div style={{fontSize:13,fontWeight:600,color:"#1E40AF"}}>{m.meaning}</div>
                       </div>
                     )}
@@ -1381,8 +1406,8 @@ function ReviewTab({mistakes, onBack}){
       <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:12,
-          fontWeight:700,marginBottom:10}}>â† Back</button>
-        <div style={{color:"#fff",fontSize:18,fontWeight:900}}>ðŸ“Š Review & Analysis</div>
+          fontWeight:700,marginBottom:10}}>Back</button>
+        <div style={{color:"#fff",fontSize:18,fontWeight:900}}> Review & Analysis</div>
         <div style={{color:"rgba(255,255,255,.6)",fontSize:12,marginTop:2}}>
           {mistakes.length} total mistakes recorded
         </div>
@@ -1390,7 +1415,7 @@ function ReviewTab({mistakes, onBack}){
 
       {/* Tab switcher */}
       <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2E8F0"}}>
-        {[["trend","ðŸ“ˆ Trend"],["weak","ðŸŽ¯ Weak Topics"]].map(([v,l])=>(
+        {[["trend"," Trend"],["weak"," Weak Topics"]].map(([v,l])=>(
           <button key={v} onClick={()=>setView(v)}
             style={{flex:1,background:"none",border:"none",cursor:"pointer",
               padding:"13px 8px",fontSize:13,fontWeight:view===v?800:500,
@@ -1446,10 +1471,10 @@ function ReviewTab({mistakes, onBack}){
                     padding:"8px 12px",marginTop:10,fontSize:12,fontWeight:700,
                     color:improved?"#065F46":"#92400E"}}>
                     {improved
-                      ? `ðŸ“‰ Mistakes reduced from ${first} â†’ ${last}. Great improvement!`
+                      ? ` Mistakes reduced from ${first} > ${last}. Great improvement!`
                       : last===first
-                      ? "â†’ Steady performance. Keep practising!"
-                      : `ðŸ“ˆ More mistakes recently (${first} â†’ ${last}). Review weak topics below.`}
+                      ? "Steady performance. Keep practising!"
+                      : ` More mistakes recently (${first} > ${last}). Review weak topics below.`}
                   </div>
                 );
               })()}
@@ -1460,7 +1485,7 @@ function ReviewTab({mistakes, onBack}){
               <div style={{background:"#fff",borderRadius:18,padding:"16px",
                 boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
                 <div style={{fontSize:13,fontWeight:800,color:"#0F172A",marginBottom:12}}>
-                  ðŸ” Last Mistakes to Revisit
+                   Last Mistakes to Revisit
                 </div>
                 {mistakes.slice(-3).reverse().map((m,i)=>{
                   const col = topicColors[m.topic||m.sectionType]||"#64748B";
@@ -1473,14 +1498,14 @@ function ReviewTab({mistakes, onBack}){
                           {m.topic||m.sectionType}
                         </span>
                         <div style={{fontSize:12,color:"#0F172A",fontWeight:600,lineHeight:1.5}}>
-                          {(m.q||m.id||"â€”").slice(0,80)}{(m.q||"").length>80?"â€¦":""}
+                          {(m.q||m.id||"-").slice(0,80)}{(m.q||"").length>80?"...":""}
                         </div>
                       </div>
                       {m.solution&&(
                         <div style={{background:"#F0FDF4",borderRadius:10,padding:"8px 10px",
                           marginTop:8,fontSize:11,color:"#065F46",fontWeight:600}}>
-                          ðŸ’¡ {m.solution.tip
-                            ? m.solution.tip.replace("ðŸ§  ","")
+                           {m.solution.tip
+                            ? m.solution.tip.replace(" ","")
                             : (m.solution.steps||[])[0]||"See solution in Mistakes tab"}
                         </div>
                       )}
@@ -1505,7 +1530,7 @@ function ReviewTab({mistakes, onBack}){
             ):topTopics.map(([topic,count],i)=>{
               const col = topicColors[topic]||"#64748B";
               const pct = Math.round(count/maxCount*100);
-              const priority = i===0?"ðŸ”´ High":i<=1?"ðŸŸ  Medium":"ðŸŸ¡ Low";
+              const priority = i===0?" High":i<=1?" Medium":" Low";
               return(
                 <div key={topic} style={{marginBottom:14}}>
                   <div style={{display:"flex",justifyContent:"space-between",
@@ -1538,40 +1563,20 @@ function ReviewTab({mistakes, onBack}){
 }
 
 
-// â”€â”€ English Vocabulary Dictionary (P3 Level) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+//  English Vocabulary Dictionary (P3 Level) 
 // Used for vocabulary building, word definitions on hover
 
 function App(){
   const [auth,    setAuth]    = useState(null);   // { role, user }
   const [tick,    setTick]    = useState(0);       // force re-render after store mutations
   
-  // On mount: load persisted progress from IndexedDB back into STORE
-  React.useEffect(()=>{
-    (async()=>{
-      try {
-        const db = await getDB();
-        const tx = db.transaction('progress','readonly');
-        const store = tx.objectStore('progress');
-        const allKeys = await new Promise((res,rej)=>{
-          const req = store.getAllKeys();
-          req.onsuccess = ()=>res(req.result);
-          req.onerror   = ()=>rej(req.error);
-        });
-        for(const key of allKeys){
-          if(!STORE.progress[key]){
-            const val = await dbGet('progress', key);
-            if(val) STORE.progress[key] = val;
-          }
-        }
-        if(allKeys.length > 0) setTick(t=>t+1);
-      } catch(e){ /* IndexedDB not available â€” no problem */ }
-    })();
-  },[]);
+  // Data is loaded from localStorage at startup - no async needed
 
   function refresh(){ setTick(t=>t+1); }
 
   function handleSignup(role, userData){
     STORE.users[userData.id] = {...userData, role};
+    persistUsers();
     setAuth({role, user:userData});
   }
   function handleLogin(role, user){ 
@@ -1635,5 +1640,3 @@ if(typeof window !== 'undefined' && !document.getElementById("genius-styles")){
 
 
 export default App;
-
-
