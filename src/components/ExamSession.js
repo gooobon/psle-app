@@ -714,7 +714,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                             <div style={{ display: "flex", gap: 4 }}>
                               <input type="text" value={retryTyped}
                                 onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                                placeholder={item.answer?.split('').join(' . ')}
+                                placeholder={String(getCorrectAnswer(item)).split('').join(' . ')}
                                 style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                                   border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
                               <button onClick={() => handleRetry(item)}
