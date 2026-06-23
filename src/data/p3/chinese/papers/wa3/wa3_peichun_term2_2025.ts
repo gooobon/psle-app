@@ -23,13 +23,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "shì qíng",
     meaning: "matter / affair — '事情(shìqíng)' means 'a matter, an event'. Here the blank completes 事情.",
     solution: {
-      method: "형성자(形声字) 변별 — 같은 성부 '青'에서 파생된 글자 구분",
+      method: "Identifying Phono-semantic Characters (形声字) — telling apart characters that share the same phonetic component '青'",
       steps: [
-        "보기 4글자는 모두 '青(qīng)'을 성부로 공유한다: 晴(맑을 청), 请(청할 청), 情(뜻 정), 青(푸를 청).",
-        "문장의 '事___'는 '일, 사건'을 뜻하는 단어가 필요하다.",
-        "'事情(shìqíng)'이 자연스러운 단어이므로 의미부 '忄(마음 심)'이 붙은 '情'을 고른다.",
+        "All 4 answer choices share '青 (qīng)' as their phonetic component: 晴 (clear weather), 请 (to invite/request), 情 (feeling/matter), 青 (green/blue).",
+        "The blank in '事___' needs a word that means 'matter' or 'affair'.",
+        "'事情 (shìqíng)' is the natural word here, so we choose '情', which has the semantic component '忄(heart radical)', suggesting something related to feelings or matters.",
       ],
-      tip: "晴=날씨(日), 请=말(讠), 情=마음(忄). 의미부(部首)를 보고 뜻을 가른다.",
+      tip: "晴 = weather (日 sun radical), 请 = speech (讠speech radical), 情 = heart/feeling (忄heart radical). Look at the semantic component (部首) to work out the meaning.",
     },
   },
   {
@@ -43,13 +43,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "lái bù jí",
     meaning: "'来不及(láibùjí)' = there isn't enough time / too late to do something.",
     solution: {
-      method: "관용 표현(固定词组) 채우기",
+      method: "Filling in a fixed expression (固定词组)",
       steps: [
-        "'来不___ 吃早餐' → 시간이 부족해 아침을 못 먹는 상황.",
-        "'来不及'가 '~할 겨를이 없다'라는 정해진 표현이다.",
-        "'及(jí)'를 고른다.",
+        "'来不___ 吃早餐' → a situation where there is not enough time to eat breakfast.",
+        "'来不及' is a set phrase meaning 'there is no time to do something' or 'it is too late to do something'.",
+        "We choose '及 (jí)'.",
       ],
-      tip: "급할 急(jí)과 헷갈리기 쉬움. '来得及 / 来不及'는 항상 '及'를 쓴다.",
+      tip: "Be careful not to mix it up with 急 (jí), which means 'urgent'. The phrases '来得及' and '来不及' always use '及'.",
     },
   },
   {
@@ -63,13 +63,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "zhuàng",
     meaning: "'撞(zhuàng)' = to crash into / collide. 撞上了大树 = crashed into the tree.",
     solution: {
-      method: "의미부(部首)로 동작 동사 고르기",
+      method: "Choosing an action verb using the semantic component (部首)",
       steps: [
-        "차가 빠르게 달려 나무에 '부딪쳤다'는 동작이 필요하다.",
-        "'撞'은 손동작 부수 '扌(手)'를 가진 '부딪치다'라는 뜻.",
-        "懂(이해하다·忄), 理(다스리다·王), 童(아이)는 의미가 맞지 않는다.",
+        "We need an action word meaning the car was going fast and 'crashed into' a tree.",
+        "'撞' has the hand radical '扌(手)', and it means 'to crash into' or 'to collide with'.",
+        "懂 (to understand · 忄), 理 (to manage · 王), and 童 (child) do not fit the meaning here.",
       ],
-      tip: "扌(손)이 붙으면 손·몸의 동작인 경우가 많다 → 撞, 推, 拉.",
+      tip: "Characters with 扌(hand radical) often describe actions done with the hands or body → for example: 撞 (crash), 推 (push), 拉 (pull).",
     },
   },
   {
@@ -83,13 +83,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "tuō",
     meaning: "'脱(tuō)' = to take off (clothes/shoes). 脱鞋 = take off shoes.",
     solution: {
-      method: "문맥 동작 동사 고르기",
+      method: "Choosing the right action verb based on context",
       steps: [
-        "집에 와서 샤워(冲凉) 전에 신발에 하는 동작 → '벗다'.",
-        "'脱掉鞋子 / 把鞋子脱掉' = 신발을 벗다.",
-        "推(밀다), 改(고치다), 退(물러나다)는 신발과 어울리지 않는다.",
+        "What do you do with your shoes when you come home before showering (冲凉)? → You 'take them off' (脱).",
+        "'脱掉鞋子 / 把鞋子脱掉' means to take off your shoes.",
+        "推 (push), 改 (change/fix), and 退 (step back) do not go together with shoes.",
       ],
-      tip: "옷·신발을 벗을 땐 '脱', 입을 땐 '穿'.",
+      tip: "Use '脱' when taking off clothes or shoes, and '穿' when putting them on.",
     },
   },
 
@@ -107,13 +107,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "tū rán",
     meaning: "'突然(tūrán)' = suddenly / unexpectedly.",
     solution: {
-      method: "부사 의미 매칭 — '没想到(예상치 못하게)' 단서 활용",
+      method: "Matching adverb meanings — use the clue '没想到 (unexpectedly)'",
       steps: [
-        "앞에 '没想到(생각지도 못하게)'가 있어 '갑작스러움'을 나타내야 한다.",
-        "'突然(갑자기)'이 '没想到'와 의미가 호응한다.",
-        "刚刚(방금), 一直(줄곧), 经常(자주)은 '예상 밖' 느낌을 주지 못한다.",
+        "Because '没想到 (didn't expect)' appears at the start, the sentence needs a word that shows something happened suddenly or by surprise.",
+        "'突然 (suddenly)' matches the meaning of '没想到' very well.",
+        "刚刚 (just now), 一直 (all along), and 经常 (often) do not give the feeling of something unexpected.",
       ],
-      tip: "'没想到'와 '突然'은 자주 짝지어 나온다.",
+      tip: "'没想到' and '突然' are often used together as a pair.",
     },
   },
   {
@@ -127,13 +127,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "zhǔn bèi",
     meaning: "'准备(zhǔnbèi)' = to prepare / get ready. 准备礼物 = prepare a gift.",
     solution: {
-      method: "동사+목적어 호응 확인",
+      method: "Checking that the verb and object match correctly (Subject-Verb Agreement)",
       steps: [
-        "'___ 了生日礼物，送给外婆' → 선물을 '마련/준비'해서 드린 것.",
-        "'准备礼物'가 자연스러운 동목 호응이다.",
-        "希望(바라다)·争取(쟁취하다)·庆祝(축하하다)는 '礼物'를 목적어로 잘 받지 않는다.",
+        "'___ 了生日礼物，送给外婆' → This means someone prepared or got a gift to give to Grandma.",
+        "'准备礼物' is the most natural verb-object match here.",
+        "希望 (hope), 争取 (strive for), and 庆祝 (celebrate) are not usually used with '礼物' as the object.",
       ],
-      tip: "礼物와 자주 쓰는 동사: 准备/送/收/买.",
+      tip: "Common verbs used with 礼物: 准备 (prepare) / 送 (give) / 收 (receive) / 买 (buy).",
     },
   },
   {
@@ -147,13 +147,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "bān dòng",
     meaning: "'搬动(bāndòng)' = to move (something heavy). 搬动桌子 = move the heavy table.",
     solution: {
-      method: "단서 '很重 / 几个人一起'로 동사 추론",
+      method: "Use the clues '很重 / 几个人一起' to figure out the correct verb.",
       steps: [
-        "책상이 무거워 여러 명이 함께 해야 하는 동작 → 무거운 물건을 '옮기다'.",
-        "'搬动'은 무거운 물건을 힘써 옮긴다는 뜻이라 적합.",
-        "碰到(부딪치다), 溜走(몰래 가다), 拿走(들고 가다)는 무거운 책상에 부적절.",
+        "The desk is heavy and needs several people to move it together → the action is 'to move a heavy object'.",
+        "'搬动' means to move something heavy with effort, so it is the best fit.",
+        "碰到 (to bump into), 溜走 (to sneak away), and 拿走 (to take away) do not make sense with a heavy desk.",
       ],
-      tip: "무거운 물건엔 '搬'을, 가벼운 물건엔 '拿'를 쓴다.",
+      tip: "Use '搬' for heavy objects and '拿' for light objects.",
     },
   },
 
@@ -180,12 +180,12 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "shū shu",
         meaning: "Who gave 'me' the game console? Answer: 叔叔 (uncle).",
         solution: {
-          method: "직접 정보 찾기(细节题)",
+          method: "Finding information directly from the text (Detail Question)",
           steps: [
-            "첫 문장 '生日那天，叔叔送了我一台游戏机'에서 직접 확인.",
-            "선물을 준 사람은 '叔叔(삼촌)'.",
+            "The answer can be found directly in the first sentence: '生日那天，叔叔送了我一台游戏机'.",
+            "The person who gave the gift is '叔叔' (uncle).",
           ],
-          tip: "지문에 그대로 답이 나오는 세부정보 문제는 첫 문단을 먼저 본다.",
+          tip: "For detail questions where the answer appears directly in the passage, always check the first paragraph first.",
         },
       },
       {
@@ -202,13 +202,13 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "xué xí bù rèn zhēn",
         meaning: "Why was mum angry? Because 'I' was not studying seriously (上课睡觉, 功课不认真).",
         solution: {
-          method: "원인 찾기(因果题)",
+          method: "Finding the reason or cause (Cause-and-Effect Question)",
           steps: [
-            "엄마의 말: '功课做得很不认真，上课也常常睡觉'이 화난 이유.",
-            "이것을 요약한 보기 (4) '学习不认真'이 정답.",
-            "(2) 게임을 한 것은 직접 원인이 아니라 학습 태도가 핵심.",
+            "Mum's words: '功课做得很不认真，上课也常常睡觉' tell us why she is angry.",
+            "Option (4) '学习不认真', which summarises this, is the correct answer.",
+            "Option (2) playing games is not the main cause — the key issue is the poor attitude towards learning.",
           ],
-          tip: "엄마/선생님 대사에 이유가 직접 들어있는 경우가 많다.",
+          tip: "The reason is often found directly in what the mum or teacher says in the passage.",
         },
       },
       {
@@ -225,13 +225,13 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "zhī dào zì jǐ cuò le",
         meaning: "Why did 'I' lower my head? Because 'I' knew I was wrong (low head = shame/admitting fault).",
         solution: {
-          method: "행동의 의미 해석(推断题)",
+          method: "Understanding the meaning behind an action (Inference Question)",
           steps: [
-            "'低下了头' 직후 '对不起…我知道错了'라고 말함.",
-            "고개를 숙인 것은 잘못을 인정·반성하는 행동.",
-            "보기 (1) '知道自己错了'가 정답.",
+            "Right after '低下了头' (lowered her head), she said '对不起…我知道错了' (Sorry… I know I was wrong).",
+            "Lowering one's head is an action that shows admitting a mistake and feeling sorry.",
+            "Option (1) '知道自己错了' (knew she did something wrong) is the correct answer.",
           ],
-          tip: "'低下头'는 보통 부끄러움·반성의 신호.",
+          tip: "'低下头' (lower one's head) usually signals feeling embarrassed or sorry about something.",
         },
       },
     ],
@@ -250,13 +250,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "wǒ men kě yǐ yóu yǒng huò zhě dǎ qiú",
     meaning: "We can swim or play ball. ('或者' = or, connecting two choices.)",
     solution: {
-      method: "선택 관계 접속사 '或者'로 두 문장 합치기",
+      method: "Use the conjunction '或者' (or) to join two sentences that show a choice.",
       steps: [
-        "두 문장의 공통 부분 '我们可以'를 한 번만 쓴다.",
-        "동사구 '游泳'과 '打球'를 '或者'로 연결한다.",
+        "Since both sentences share '我们可以' (We can), write it only once.",
+        "Connect the verb phrases '游泳' (swim) and '打球' (play ball) using '或者'.",
         "→ 我们可以游泳或者打球。",
       ],
-      tip: "주어·앞부분이 같으면 반복하지 말고 뒷부분만 '或者'로 잇는다.",
+      tip: "When the subject and the first part are the same in both sentences, do not repeat them — just join the different ending parts with '或者'.",
     },
   },
   {
@@ -269,13 +269,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "mèi mei kě yǐ dào tú shū guǎn jiè shū huò zhě kàn bào zhǐ",
     meaning: "Younger sister can borrow books or read newspapers at the library.",
     solution: {
-      method: "공통 부분 생략 후 '或者' 연결",
+      method: "Leave out the common part and connect the different parts with '或者'.",
       steps: [
-        "공통 부분 '妹妹可以到图书馆'을 한 번만 쓴다.",
-        "차이 나는 '借书'와 '看报纸'를 '或者'로 잇는다.",
+        "Since both sentences share '妹妹可以到图书馆' (younger sister can go to the library), write it only once.",
+        "Connect the different parts '借书' (borrow books) and '看报纸' (read newspapers) using '或者'.",
         "→ 妹妹可以到图书馆借书或者看报纸。",
       ],
-      tip: "장소(到图书馆)까지 같으면 그것도 반복하지 않는다.",
+      tip: "If even the place '到图书馆' (to the library) is the same in both sentences, do not repeat it either.",
     },
   },
   {
@@ -288,13 +288,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "xiǎo lè kě yǐ qù hǎi biān huò zhě gōng yuán",
     meaning: "Xiao Le can go to the beach or the park.",
     solution: {
-      method: "공통 부분 생략 후 '或者' 연결",
+      method: "Leave out the common part and connect the different parts with '或者'.",
       steps: [
-        "공통 부분 '小乐可以去'를 한 번만 쓴다.",
-        "장소 '海边'과 '公园'을 '或者'로 잇는다.",
+        "Since both sentences share '小乐可以去' (Xiao Le can go to), write it only once.",
+        "Connect the two places '海边' (the beach) and '公园' (the park) using '或者'.",
         "→ 小乐可以去海边或者公园。",
       ],
-      tip: "'去'도 한 번만 쓰고 장소만 '或者'로 연결한다.",
+      tip: "Use '去' only once, and connect the two places using '或者'.",
     },
   },
 
@@ -311,13 +311,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "dì di shāng xīn de kū le qǐ lái",
     meaning: "Younger brother started crying sadly. ('伤心地' = sadly, an adverbial before the verb.)",
     solution: {
-      method: "상황어(状语) '~地' 위치 잡기 — 동사 앞",
+      method: "Positioning the adverbial (状语) '~地' — it goes BEFORE the verb.",
       steps: [
-        "'伤心地'는 '~하게'라는 상황어로, 꾸미는 동사 '哭' 바로 앞에 둔다.",
-        "주어 '弟弟' 뒤, 동사 '哭了起来' 앞에 삽입.",
+        "'伤心地' is an adverbial meaning 'sadly'. Place it directly before the verb it describes, '哭'.",
+        "Insert it after the subject '弟弟' and before the verb '哭了起来'.",
         "→ 弟弟伤心地哭了起来。",
       ],
-      tip: "'…地' 뒤에는 반드시 동사가 온다(부사어 표지).",
+      tip: "After '…地', there must always be a verb. ('地' is the adverbial marker.)",
     },
   },
   {
@@ -330,13 +330,13 @@ export const wa3_peichun_term2_2025: Question[] = [
     pinyin: "wǒ dà kǒu dà kǒu de hē bēi zi lǐ de niú nǎi",
     meaning: "I gulped down the milk in the cup. ('大口大口地' = in big gulps, adverbial before verb.)",
     solution: {
-      method: "상황어(状语) '~地' 위치 잡기 — 동사 앞",
+      method: "Positioning the adverbial (状语) '~地' — it goes BEFORE the verb.",
       steps: [
-        "'大口大口地'는 마시는 모습을 꾸미는 상황어.",
-        "동사 '喝' 바로 앞, 주어 '我' 뒤에 둔다.",
+        "'大口大口地' is an adverbial that describes how someone drinks.",
+        "Place it directly before the verb '喝' and after the subject '我'.",
         "→ 我大口大口地喝杯子里的牛奶。",
       ],
-      tip: "동작의 '모양/방식'을 나타내는 말은 동사 앞.",
+      tip: "Words that describe the manner or way of an action go BEFORE the verb.",
     },
   },
 
@@ -362,13 +362,13 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "yī kāi shǐ xiǎo lì huì hài pà, yīn wèi tā cóng xiǎo jiù pà shuǐ, yě méi yǒu xué guò yóu yǒng",
         meaning: "At first Xiao Li was afraid because she had feared water since young and had never learnt to swim.",
         solution: {
-          method: "원인 서술형 — '因为' 구문으로 답하기",
+          method: "Answering 'reason' questions — use the '因为' structure.",
           steps: [
-            "질문이 '为什么'이므로 '因为…'로 시작하는 답을 만든다.",
-            "1문단 '她从小就怕水，也没有学过游泳'을 근거로 인용.",
+            "Because the question uses '为什么', your answer should begin with '因为…'.",
+            "Use the evidence from paragraph 1: '她从小就怕水，也没有学过游泳'.",
             "→ 因为她从小就怕水，也没有学过游泳。",
           ],
-          tip: "'为什么' 질문은 답을 '因为…'로 마무리하면 안전하다.",
+          tip: "For '为什么' questions, it is always safe to end your answer with a '因为…' clause.",
         },
       },
       {
@@ -379,13 +379,13 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "tā bù tíng de liàn xí bǎ tóu fàng jìn shuǐ lǐ de dòng zuò, ràng zì jǐ xí guàn zài shuǐ lǐ de gǎn jué",
         meaning: "She kept practising the action of putting her head into the water so as to get used to the feeling.",
         solution: {
-          method: "방법 서술형 — '怎么(어떻게)' 답하기",
+          method: "Answering 'method' questions — answer using '怎么 (how)'.",
           steps: [
-            "선생님 말 '只要多练习这个动作，你就会习惯'이 단서.",
-            "2문단 '小丽不停地练习'을 활용.",
+            "The teacher's words '只要多练习这个动作，你就会习惯' is your clue.",
+            "Use the phrase '小丽不停地练习' from Paragraph 2.",
             "→ 她不停地练习把头放进水里的动作。",
           ],
-          tip: "'怎么' 질문은 구체적 '행동/방법'을 답에 넣는다.",
+          tip: "For '怎么' questions, include a specific action or method in your answer.",
         },
       },
       {
@@ -397,13 +397,13 @@ export const wa3_peichun_term2_2025: Question[] = [
         pinyin: "xiǎo lì xǐ huān shàng le yóu yǒng kè. cóng …… kě yǐ kàn chū lái",
         meaning: "Yes, Xiao Li liked the swimming lesson. It can be seen from her thought after class: 'Today was so fun, I want to attend swimming lessons again!'",
         solution: {
-          method: "판단+근거 인용형 — 두 소문항 모두 답하기",
+          method: "Judgement + Evidence question — make sure you answer both parts.",
           steps: [
-            "먼저 '喜欢吗?'에 명확히 답: 小丽喜欢上了游泳课。",
-            "'从哪里可以看出'에는 지문의 마지막 문장(심리 묘사)을 근거로 인용.",
+            "First, clearly answer '喜欢吗?' : 小丽喜欢上了游泳课。",
+            "For '从哪里可以看出', quote the last sentence of the passage (which describes her feelings) as your evidence.",
             "→ 从“今天真开心，我还想上游泳课！”可以看出。",
           ],
-          tip: "'从哪里看出'은 반드시 지문 속 문장을 직접 근거로 든다.",
+          tip: "For '从哪里看出' questions, you must always quote a sentence directly from the passage as your evidence.",
         },
       },
     ],

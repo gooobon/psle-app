@@ -48,7 +48,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           'take의 과거형은 took.',
           '따라서 "Oliver took a nature walk" → 정답 (2) took.',
         ],
-        tip: '"Last + 시간 표현"은 과거시제(took, went, did 등)와 함께 쓰입니다.',
+        tip: '"Last + time expression"은 과거시제(took, went, did 등)와 함께 쓰입니다.',
       },
     },
     {
@@ -119,7 +119,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"표가 매진되었다"는 사실과 어울리는 인원 표현을 고른다.',
+        method: '"The tickets were sold out"는 사실과 어울리는 인원 표현을 고른다.',
         steps: [
           '"The tickets ... were sold out"(표가 매진됨) → 많은 사람이 왔음을 암시.',
           '"people"은 가산명사 → "Much"(불가산용) 제외.',
@@ -149,11 +149,11 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"멋진 작품(artwork)을 만든" 사람을 가리키는 직업명을 고른다.',
+        method: '"Made a wonderful artwork" 사람을 가리키는 직업명을 고른다.',
         steps: [
           '"created stunning artwork"(멋진 작품을 만들었다) — 그림/미술 작품을 만든 사람.',
           '"artist" = 화가/예술가 → artwork를 만드는 사람과 정확히 일치.',
-          'actor(배우)/author(작가, 글)/advertiser(광고주)는 "artwork 제작"과 직접 관련 없다 → 정답 (2) artist.',
+          'actor(배우)/author(작가, 글)/advertiser(광고주)는 "Making an artwork"과 직접 관련 없다 → 정답 (2) artist.',
         ],
         tip: '"artwork"(미술 작품)을 만드는 사람은 artist입니다.',
       },
@@ -175,7 +175,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"매서운 바람"에 대한 사람의 신체 반응을 나타내는 동사를 고른다.',
+        method: '"Biting/harsh wind"에 대한 사람의 신체 반응을 나타내는 동사를 고른다.',
         steps: [
           '"piercing wind"(매서운 바람)에 떠는 모습 → "shivered"(추워서 떨었다).',
           '뒤 문장 "wrapped himself more tightly in his thick woollen jacket"(두꺼운 옷을 더 단단히 둘렀다)도 추위를 뒷받침한다.',
@@ -201,11 +201,11 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"다른 사람들을 방해하지 않으려고"라는 의도에 맞는 말하기 동사를 고른다.',
+        method: '"So as not to disturb others"라는 의도에 맞는 말하기 동사를 고른다.',
         steps: [
           '"not wanting to disturb the others"(다른 사람들을 방해하지 않으려고) → 조용히 말함.',
           '"whispered" = 속삭였다 → "in Mother\'s ear"(엄마 귀에 대고)와도 잘 맞는다.',
-          'shouted(소리쳤다)/gossiped(수다 떨었다)/chattered(재잘거렸다)는 모두 "조용히"와 반대되거나 부적합 → 정답 (4) whispered.',
+          'shouted(소리쳤다)/gossiped(수다 떨었다)/chattered(재잘거렸다)는 모두 "Quietly"와 반대되거나 부적합 → 정답 (4) whispered.',
         ],
         tip: '"whisper in someone\'s ear"는 남에게 들리지 않게 속삭이는 동작입니다.',
       },
@@ -227,7 +227,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"모두가 박수쳤다"는 반응에 어울리는 불꽃놀이 묘사 형용사를 고른다.',
+        method: '"Everyone clapped"는 반응에 어울리는 불꽃놀이 묘사 형용사를 고른다.',
         steps: [
           '"Everyone applauded after it ended"(모두가 박수쳤다) → 화려하고 멋진 불꽃놀이였음을 암시.',
           '"vibrant" = 화려하고 생동감 있는 → 박수를 받을 만한 멋진 불꽃놀이에 적합.',
@@ -262,13 +262,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Patrick used a wheelchair to get (9) ________ one place to another.',
           answer: 'C',
           solution: {
-            method: '"한 장소에서 다른 장소로" 이동한다는 표현에 맞는 전치사를 고른다.',
+            method: '"From one place to another place" 이동한다는 표현에 맞는 전치사를 고른다.',
             steps: [
               '"get from one place to another" = 한 곳에서 다른 곳으로 이동하다 → 정해진 표현.',
-              '"from"이 "한 장소(시작점)에서"를 나타낸다.',
+              '"from"이 "From one place (starting point)"를 나타낸다.',
               '보기에서 from은 (C) → 정답 (C).',
             ],
-            tip: '"from A to B"는 "A에서 B로"라는 뜻의 짝꿍 전치사입니다.',
+            tip: '"from A to B"는 "From A to B"라는 뜻의 짝꿍 전치사입니다.',
           },
         },
         {
@@ -278,7 +278,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'A year ago, while struggling to get (10) ________ the front door, Patrick dropped his keys.',
           answer: 'E',
           solution: {
-            method: '"문을 통과해 들어가다"는 동작에 맞는 전치사를 고른다.',
+            method: '"To go through a door"는 동작에 맞는 전치사를 고른다.',
             steps: [
               '"get through the door" = 문을 통과해 지나가다.',
               '"through"는 통과의 의미를 가진 전치사.',
@@ -294,13 +294,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'It was a nightmare (11) ________ him to reach out for the keys...',
           answer: 'B',
           solution: {
-            method: '"~에게 있어"라는 의미의 전치사를 고른다.',
+            method: '"For someone / When it comes to someone"라는 의미의 전치사를 고른다.',
             steps: [
-              '"It was a nightmare ___ him" — "그에게는 악몽 같았다"는 의미.',
-              '"for"는 "~에게 있어/~에게는"이라는 의미로 쓰인다.',
+              '"It was a nightmare ___ him" — "It was like a nightmare for him"는 의미.',
+              '"for"는 "For someone / To someone"이라는 의미로 쓰인다.',
               '보기에서 for는 (B) → 정답 (B).',
             ],
-            tip: '"It was [형용사] for someone"은 "~에게는 [형용사]였다"는 뜻입니다.',
+            tip: '"It was [adjective] for someone"은 "It was [adjective] for someone / to someone"는 뜻입니다.',
           },
         },
         {
@@ -310,7 +310,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: '...leaning out of his wheelchair to pick (12) ________ the keys was dangerous.',
           answer: 'F',
           solution: {
-            method: '"바닥에 떨어진 것을 집어 들다"라는 동사구의 전치사를 고른다.',
+            method: '"To pick up something that fell on the floor"라는 동사구의 전치사를 고른다.',
             steps: [
               '"pick up the keys" = 열쇠를 집어 들다(바닥에서 위로).',
               '"up"은 아래에서 위로 들어 올리는 동작을 나타낸다.',
@@ -350,7 +350,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
               '복수 주어 → be동사는 are.',
               '따라서 "Very few animals are a threat" → are.',
             ],
-            tip: '"Very few + 복수명사"는 복수 주어이므로 are를 씁니다.',
+            tip: '"Very few + plural noun"는 복수 주어이므로 are를 씁니다.',
           },
         },
         {
@@ -428,7 +428,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Walt Disney once [corght] a mouse and made a leash for it using a string.',
           answer: 'caught',
           solution: {
-            method: '"잡았다"는 단어(catch의 과거형)의 정확한 철자를 확인한다.',
+            method: '"Caught / Grabbed"는 단어(catch의 과거형)의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: corght.',
               'catch의 과거형은 caught (불규칙 동사 catch–caught–caught).',
@@ -460,7 +460,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'One of his classmates saw the little animal and [skreemed].',
           answer: 'screamed',
           solution: {
-            method: '"비명을 질렀다"는 단어의 정확한 철자를 확인한다.',
+            method: '"Screamed"는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: skreemed.',
               '바른 단어는 scream — sc로 시작하고 ea로 쓴다.',
@@ -476,7 +476,7 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Walt was not upset. He was [pleesed] to get all the attention with his pet mouse for a day.',
           answer: 'pleased',
           solution: {
-            method: '"기뻐했다"는 단어의 정확한 철자를 확인한다.',
+            method: '"Was happy / Rejoiced"는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: pleesed.',
               '바른 단어는 please — ea로 쓴다(plea-se).',

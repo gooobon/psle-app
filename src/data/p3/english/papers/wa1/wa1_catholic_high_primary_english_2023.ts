@@ -47,7 +47,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '"every Saturday morning"은 매주 반복되는 습관 → 단순현재.',
           '복수 주어의 단순현재형은 원형 cycle → 정답 (1).',
         ],
-        tip: '"every + 시간 표현"은 반복 습관을 나타내는 단순현재의 신호입니다.',
+        tip: '"every + time expression"은 반복 습관을 나타내는 단순현재의 신호입니다.',
       },
     },
     {
@@ -66,13 +66,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"Every + 명사"는 단수로 취급된다는 규칙과 "daily"(반복 습관)를 본다.',
+        method: '"Every + noun"는 단수로 취급된다는 규칙과 "daily"(반복 습관)를 본다.',
         steps: [
           '"Every pupil"은 문법적으로 단수 주어로 취급한다.',
           '"daily"는 매일 반복되는 일 → 단순현재.',
           '단수 주어의 단순현재 "have"의 형태는 has → 정답 (1).',
         ],
-        tip: '"Every + 명사(단수형)"는 항상 단수 동사와 함께 씁니다.',
+        tip: '"Every + noun (singular form)"는 항상 단수 동사와 함께 씁니다.',
       },
     },
     {
@@ -145,10 +145,10 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         method: '"when ~ rang"(과거의 한 순간)과 동시에 진행 중이던 동작을 나타낸다.',
         steps: [
           '"when her mobile phone rang" — rang은 과거형, 특정 순간을 가리킴.',
-          '그 순간 엄마는 요리를 "하고 있던 중"이었다 → 과거진행형.',
+          '그 순간 엄마는 요리를 "was/were in the middle of doing something"이었다 → 과거진행형.',
           '주어 "Mother"는 단수 → "was cooking" → 정답 (4).',
         ],
-        tip: '"when + 과거형(한 순간의 사건)"이 있으면, 그 순간 진행 중이던 동작은 was/were -ing로 씁니다.',
+        tip: '"when + Simple Past (a sudden moment in time)"이 있으면, 그 순간 진행 중이던 동작은 was/were -ing로 씁니다.',
       },
     },
     {
@@ -167,13 +167,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"It has been + 기간 + ___ + 과거 사건" 구문에 맞는 접속사를 고른다.',
+        method: '"It has been + period of time + ___ + past event" 구문에 맞는 접속사를 고른다.',
         steps: [
-          '"It has been five years ___ she left"는 "떠난 지 5년이 되었다"는 의미.',
-          '"It has been + 기간 + since + 과거 사건"은 정해진 구문(since = ~한 이래로).',
+          '"It has been five years ___ she left"는 "It has been 5 years since (someone) left"는 의미.',
+          '"It has been + period of time + since + past event"은 정해진 구문(since = ~한 이래로).',
           '따라서 정답은 (3) since.',
         ],
-        tip: '"It has been [기간] since [과거 사건]"은 "~한 지 [기간]이 되었다"는 뜻의 고정 표현입니다.',
+        tip: '"It has been [period of time] since [past event]"은 "It has been [period of time] since [something happened]"는 뜻의 고정 표현입니다.',
       },
     },
     {
@@ -194,7 +194,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       solution: {
         method: '"earlier in the day"(이미 지난 그날의 시간)로 과거시제를 파악한다.',
         steps: [
-          '"earlier in the day"는 "그날 중 이미 지난 시점"을 가리키며 과거시제를 요구한다.',
+          '"earlier in the day"는 "a point in time that has already passed during that day"을 가리키며 과거시제를 요구한다.',
           'leave의 과거형은 left.',
           '따라서 "Wee Boon\'s father left for a meeting earlier in the day." → 정답 (1) left.',
         ],
@@ -222,7 +222,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         steps: [
           '"shampoo"는 셀 수 없는 명사 → few/many(가산용) 제외.',
           '"There is still ___ shampoo left"는 긍정문(샴푸가 남아있다는 사실 전달).',
-          '긍정문에서 "약간 남아있다"는 의미에는 "some"이 자연스럽다 → 정답 (3) some.',
+          '긍정문에서 "a little is still left / there is a small amount remaining"는 의미에는 "some"이 자연스럽다 → 정답 (3) some.',
         ],
         tip: '"any"는 주로 부정문/의문문에, "some"은 긍정문에 쓰입니다(불가산 명사 모두 가능).',
       },
@@ -243,7 +243,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"휴가를 가다"라는 표현에 맞는 전치사를 고른다.',
+        method: '"to go on holiday / to take a vacation"라는 표현에 맞는 전치사를 고른다.',
         steps: [
           '"go on a vacation/holiday/trip" = 휴가/여행을 가다 → 정해진 전치사 표현.',
           'in/at/by는 이 표현에 쓰이지 않는다.',
@@ -275,7 +275,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '2인칭 복수의 재귀대명사는 "yourselves".',
           '"by yourselves"(너희들 스스로) → 정답 (4) yourselves.',
         ],
-        tip: '"by oneself"는 "스스로/혼자서"라는 뜻이며, 듣는 대상이 여러 명이면 yourselves를 씁니다.',
+        tip: '"by oneself"는 "by yourself / on your own"라는 뜻이며, 듣는 대상이 여러 명이면 yourselves를 씁니다.',
       },
     },
 
@@ -324,7 +324,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"불만스러워 불평했다"는 의미에 맞는 동사를 고른다.',
+        method: '"was unhappy and complained"는 의미에 맞는 동사를 고른다.',
         steps: [
           '손님들이 서비스에 불만을 느끼고 사장에게 그것에 대해 말했다.',
           '"grumble about something to someone" = ~에게 ~에 대해 (낮은 목소리로) 불평하다.',
@@ -349,7 +349,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"매우 배고팠다"는 이유와 "gobbled"(급히 먹어치웠다)에 어울리는 부사를 고른다.',
+        method: '"was very hungry"는 이유와 "gobbled"(급히 먹어치웠다)에 어울리는 부사를 고른다.',
         steps: [
           '"gobbled"은 이미 급하게 먹는 모습을 나타낸다.',
           '"as he was very hungry"(배고팠기 때문에) → 욕심내듯 먹었다는 의미로 "greedily"가 자연스럽다.',
@@ -374,7 +374,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"숙제하는 데 방해된다"는 상황에서 음량에 대한 요청을 생각한다.',
+        method: '"gets in the way of doing homework"는 상황에서 음량에 대한 요청을 생각한다.',
         steps: [
           '"I\'m trying to do my homework"(숙제 중) → 조용한 환경이 필요함.',
           '"turn down the volume" = 음량을 줄이다.',
@@ -399,7 +399,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"눈이 매우 나쁘다"를 나타내는 직유(simile) 관용어를 고른다.',
+        method: '"has very poor eyesight"를 나타내는 직유(simile) 관용어를 고른다.',
         steps: [
           '"blind as a bat" = 눈이 매우 나쁜(박쥐처럼 시력이 안 좋은) → 매우 흔한 영어 관용 표현.',
           'fox(교활한)/pig(욕심 많은)/owl(지혜로운)은 시력과 관련된 관용 표현이 아니다.',
@@ -429,7 +429,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         steps: [
           '비가 오기 전 손에 떨어진 작은 물 한 알 → "a drop of water"(물 한 방울).',
           'pool(연못/물웅덩이)·puddle(고인 물웅덩이)은 이미 모인 물, splash(첨벙거림)는 소리/움직임을 강조.',
-          '"손에 떨어진 한 알"이라는 의미에 가장 맞는 것은 (2) drop.',
+          '"one grain that fell into the hand"이라는 의미에 가장 맞는 것은 (2) drop.',
         ],
         tip: '"a drop of water"는 작은 물방울 하나를 가리키는 표현입니다.',
       },
@@ -454,7 +454,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         steps: [
           '"towers over her older brother" = 오빠보다 훨씬 키가 크다.',
           '"as tall as a giraffe"(기린처럼 키가 큰)는 큰 키를 직접 표현.',
-          'wise(지혜로운)/big(덩치가 큰, 키와는 다름)/proud(거만한)는 "키가 크다"와 안 맞는다 → 정답 (1).',
+          'wise(지혜로운)/big(덩치가 큰, 키와는 다름)/proud(거만한)는 "is tall"와 안 맞는다 → 정답 (1).',
         ],
         tip: '"tower over"는 키/높이가 압도적으로 큼을 의미하므로 키와 관련된 직유를 고릅니다.',
       },
@@ -501,11 +501,11 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"믿고 맡길 수 있다"는 신뢰와 어울리는 성격 형용사를 고른다.',
+        method: '"can be trusted and relied on"는 신뢰와 어울리는 성격 형용사를 고른다.',
         steps: [
           '"You can trust him to take care of the class"(맡겨도 믿을 수 있다) → 책임감.',
           '"responsible" = 책임감 있는 → 신뢰와 직접 연결된다.',
-          'polite(공손한)/strong(강한)/pleasant(상냥한)은 "맡길 수 있는 신뢰감"과 직접 관련 없다 → 정답 (4) responsible.',
+          'polite(공손한)/strong(강한)/pleasant(상냥한)은 "a sense of trust that one can be relied on"과 직접 관련 없다 → 정답 (4) responsible.',
         ],
         tip: '"trust someone to do something"은 책임감(responsible)과 짝지어 자주 쓰입니다.',
       },
@@ -527,10 +527,10 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"건강에 ~하다"는 표준 경고 표현에 맞는 형용사를 고른다.',
+        method: '"is ~ for health"는 표준 경고 표현에 맞는 형용사를 고른다.',
         steps: [
           '"harmful to your health"(건강에 해로운)는 흡연 경고에서 가장 흔히 쓰이는 표현.',
-          'fearful(두려운)/hurtful(상처 주는, 보통 감정에)/painful(아픈)은 "건강에 해롭다"는 표준 표현이 아니다.',
+          'fearful(두려운)/hurtful(상처 주는, 보통 감정에)/painful(아픈)은 "is bad for health"는 표준 표현이 아니다.',
           '따라서 정답은 (4) harmful.',
         ],
         tip: '"harmful to your health"는 흡연·오염 등 건강 경고에서 자주 쓰이는 정해진 표현입니다.',
@@ -562,13 +562,13 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She told (21) ________ that we would be participating in the \'Clean Plate\' campaign.',
           answer: 'D',
           solution: {
-            method: 'Miss Yeo가 "우리 반(our class)"에게 한 말의 목적어를 고른다.',
+            method: 'Miss Yeo가 "our class (our class)"에게 한 말의 목적어를 고른다.',
             steps: [
               '문장 앞: "Miss Yeo told our class." — 선생님이 학급 전체에게 말함.',
-              '"우리(반 전체)"를 가리키는 목적격 대명사는 "us".',
+              '"we (the whole class)"를 가리키는 목적격 대명사는 "us".',
               '보기에서 us는 (D) → 정답 (D).',
             ],
-            tip: '"told 목적어"에서 목적어는 말을 들은 대상을 가리키는 목적격 대명사입니다.',
+            tip: '"told + object"에서 목적어는 말을 들은 대상을 가리키는 목적격 대명사입니다.',
           },
         },
         {
@@ -578,10 +578,10 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Miss Yeo instructed all of us to order only what (22) ________ could finish to avoid wastage.',
           answer: 'E',
           solution: {
-            method: '"우리 모두(all of us)"를 가리키는 주어 대명사를 고른다.',
+            method: '"all of us (all of us)"를 가리키는 주어 대명사를 고른다.',
             steps: [
               '"all of us"(우리 모두)가 다 먹을 수 있는 만큼만 시키라는 지시.',
-              '"우리"를 가리키는 주어 대명사는 "we".',
+              '"we"를 가리키는 주어 대명사는 "we".',
               '보기에서 we는 (E) → 정답 (E).',
             ],
             tip: '목적격(us)이 이미 언급됐다면, 같은 사람들을 주어로 가리킬 때는 주격(we)을 씁니다.',
@@ -596,7 +596,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '화자(I) 자신의 엄마를 가리키는 소유격을 고른다.',
             steps: [
-              '주어가 "I"(나)이고, "엄마"는 나의 엄마.',
+              '주어가 "I"(나)이고, "Mum"는 나의 엄마.',
               '1인칭 소유격은 "my".',
               '보기에서 my는 (C) → 정답 (C).',
             ],
@@ -612,7 +612,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '앞에서 언급된 사물(캠페인)을 대신하는 대명사를 고른다.',
             steps: [
-              '문맥상 "좋은 식습관을 가르쳐줄 것"의 주체는 앞서 언급된 "the campaign"(캠페인, 사물).',
+              '문맥상 "To teach good eating habits"의 주체는 앞서 언급된 "the campaign"(캠페인, 사물).',
               '사물을 대신하는 주어 대명사는 "it".',
               '보기에서 it은 (B) → 정답 (B).',
             ],
@@ -661,7 +661,7 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She wanted to own a (26) ________, but her parents could not afford to buy one.',
           answer: 'C',
           solution: {
-            method: '"동물을 좋아해서 갖고 싶어한 것"이 무엇인지 생각한다.',
+            method: '"Wanting to have one because of loving animals"이 무엇인지 생각한다.',
             steps: [
               '"Hazel adored animals. She wanted to own a ___" → 키우고 싶은 동물 = 애완동물.',
               '"pet"(애완동물)이 가장 자연스럽다.',

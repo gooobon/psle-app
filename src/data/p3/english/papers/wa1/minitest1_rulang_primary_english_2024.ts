@@ -44,13 +44,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"쉬는 시간 동안"이라는 의미에 맞는 전치사를 고른다.',
+        method: '"during recess"이라는 의미에 맞는 전치사를 고른다.',
         steps: [
           '"stayed behind ___ recess to clean"(쉬는 시간 동안 남아서 청소함) — 쉬는 시간이라는 기간 동안.',
           '"during"은 특정 기간/시간대 동안을 나타낸다.',
-          'on/with/towards는 "기간 동안"이라는 의미와 안 맞는다 → 정답 (3) during.',
+          'on/with/towards는 "during a period of time"이라는 의미와 안 맞는다 → 정답 (3) during.',
         ],
-        tip: '"during + 명사(기간/행사)"는 "~하는 동안"이라는 뜻입니다(during recess, during the movie).',
+        tip: '"during + noun (a period of time / an event)"는 "while doing something"이라는 뜻입니다(during recess, during the movie).',
       },
     },
     {
@@ -175,7 +175,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
         method: '앞뒤 내용이 대조/양보 관계인지 확인한다.',
         steps: [
           '앞: 대회에 참가하기로 결심함(determined) / 뒤: 몸이 안 좋음(feeling unwell).',
-          '몸이 안 좋음에도 "불구하고" 참가를 결심함 → 대조/양보 관계.',
+          '몸이 안 좋음에도 "despite / in spite of" 참가를 결심함 → 대조/양보 관계.',
           '"although"(비록 ~이지만)가 양보의 의미를 나타낸다.',
           'so(그래서)/because(왜냐하면)는 원인-결과 관계라 안 맞는다 → 정답 (3) although.',
         ],
@@ -224,10 +224,10 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"~한 것에 대한 상장/증명서"라는 표현에 맞는 전치사를 고른다.',
+        method: '"a certificate for [achievement / action]"라는 표현에 맞는 전치사를 고른다.',
         steps: [
           '"a certificate ___ reading the most books"(가장 많은 책을 읽은 것에 대한 상장).',
-          '"a certificate for [성취/행동]" = ~에 대한 상장/증명서.',
+          '"a certificate for [achievement / action]" = ~에 대한 상장/증명서.',
           'in/of/from은 이 의미와 안 맞는다 → 정답 (3) for.',
         ],
         tip: '"a certificate/award for [achievement]"는 어떤 성취에 대해 주는 상을 나타냅니다.',
@@ -305,7 +305,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"손을 씻은 후"에 수도꼭지에 하는 동작을 나타내는 동사구를 고른다.',
+        method: '"after washing hands"에 수도꼭지에 하는 동작을 나타내는 동사구를 고른다.',
         steps: [
           '"as soon as he had washed his hands"(손을 다 씻고 나서) → 물을 더 이상 틀어둘 필요가 없음.',
           '"turn off the tap" = 수도꼭지를 끄다.',
@@ -331,11 +331,11 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"커튼이 마구 흔들릴 정도"의 바람을 나타내는 명사를 고른다.',
+        method: '"so much that the curtains were shaking wildly"의 바람을 나타내는 명사를 고른다.',
         steps: [
           '"The curtains flapped about"(커튼이 마구 흔들렸다) → 갑작스럽고 강한 바람.',
           '"a gust of wind" = 한차례의 강한 바람(돌풍) → 강하게 흔들리는 모습과 일치.',
-          'puff(작은 한 번의 입김)/flurry(눈발이 흩날리는 모습)/breeze(약한 바람)는 "마구 흔들림"에 비해 약하다 → 정답 (2) gust.',
+          'puff(작은 한 번의 입김)/flurry(눈발이 흩날리는 모습)/breeze(약한 바람)는 "shaking wildly"에 비해 약하다 → 정답 (2) gust.',
         ],
         tip: '"gust of wind"는 갑작스럽고 강한 한차례의 바람을 나타냅니다.',
       },
@@ -382,11 +382,11 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"두려움에 떨었다"는 결과와 어울리는 감정 형용사를 고른다.',
+        method: '"trembled with fear"는 결과와 어울리는 감정 형용사를 고른다.',
         steps: [
           '"trembled with fear"(두려움에 떨었다) → 깜짝 놀라고 불안한 감정.',
           '"alarmed" = 놀란/불안한(위험을 느낌) → fear와 직접 연결.',
-          'irritated(짜증난)/ashamed(부끄러운)/embarrassed(당황한, 민망함)는 "두려움"과는 다른 감정 → 정답 (2) alarmed.',
+          'irritated(짜증난)/ashamed(부끄러운)/embarrassed(당황한, 민망함)는 "fear"과는 다른 감정 → 정답 (2) alarmed.',
         ],
         tip: '"trembled with fear"는 alarmed(놀라서 불안해진)와 자연스럽게 짝을 이룹니다.',
       },
@@ -407,11 +407,11 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"but"으로 대조되는, "긴장하지 않음"을 나타내는 직유를 고른다.',
+        method: '"but"으로 대조되는, "not nervous"을 나타내는 직유를 고른다.',
         steps: [
           '"All of us were nervous ... but Rachel was ___" — Rachel은 모두와 달리 긴장하지 않았다.',
           '"as cool as a cucumber" = 매우 차분하고 침착한 → "nervous"와 정반대.',
-          '"as jumpy as a cat"(겁이 많고 불안한)은 오히려 nervous와 비슷한 의미라 대조에 안 맞고, "as cold as ice"(차가운 성격)/"as meek as a mouse"(온순한)는 "긴장하지 않음"을 직접 나타내지 않는다 → 정답 (4).',
+          '"as jumpy as a cat"(겁이 많고 불안한)은 오히려 nervous와 비슷한 의미라 대조에 안 맞고, "as cold as ice"(차가운 성격)/"as meek as a mouse"(온순한)는 "not nervous"을 직접 나타내지 않는다 → 정답 (4).',
         ],
         tip: '"as cool as a cucumber"는 긴장된 상황에서도 매우 침착함을 나타내는 정해진 직유입니다.',
       },
@@ -441,7 +441,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: 'They are back [togedder] for their fourth adventure this year.',
           answer: 'together',
           solution: {
-            method: '"함께"라는 단어의 정확한 철자를 확인한다.',
+            method: '"together"라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: togedder.',
               '바른 단어는 together — "to-geth-er"로 th를 사용한다.',
@@ -457,7 +457,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Po the Panda is [serlecterd] to train a new warrior.',
           answer: 'selected',
           solution: {
-            method: '"선택되다"라는 단어의 정확한 철자를 확인한다.',
+            method: '"to be chosen/selected"라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: serlecterd.',
               '바른 단어는 select — se-lect, 과거분사형은 selected.',
@@ -490,7 +490,7 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: "He teams up with his friends and they [perservear] to stop the witch's plans.",
           answer: 'persevere',
           solution: {
-            method: '"인내하다/꾸준히 노력하다"는 단어의 정확한 철자를 확인한다.',
+            method: '"to persevere / to keep trying steadily"는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: perservear.',
               '바른 단어는 persevere — per-se-vere로 v와 e의 순서에 주의.',

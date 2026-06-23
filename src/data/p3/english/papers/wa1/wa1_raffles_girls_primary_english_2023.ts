@@ -104,8 +104,8 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
             method: '천 조각의 크기에 관한 묘사를 2단락에서 확인한다.',
             steps: [
               '2단락: "The cloth had been cut into square pieces, all of the same size."',
-              '천 조각들은 "모두 같은 크기"(all of the same size)였다.',
-              '따라서 "다른 크기로 잘려있었다"는 거짓 → False.',
+              '천 조각들은 "All the same size"(all of the same size)였다.',
+              '따라서 "Were cut into different sizes"는 거짓 → False.',
             ],
             tip: '"all of the same size"(모두 같은 크기)는 "different sizes"(서로 다른 크기)와 정반대입니다.',
           },
@@ -136,7 +136,7 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
           answer:
             '(i) They brought the parcel to Aunt Joyce (the rightful owner).  (ii) They apologised for opening the parcel.',
           solution: {
-            method: '마지막 단락에서 "느낀 후 한 행동" 두 가지를 찾는다.',
+            method: '마지막 단락에서 "An action done after feeling something" 두 가지를 찾는다.',
             steps: [
               '마지막 단락: "They quickly brought the parcel to Aunt Joyce and apologised for opening the parcel."',
               '"and"로 두 가지 행동이 연결되어 있다.',
@@ -216,7 +216,7 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
           stem: 'Which sentence in paragraph 3 tells you that the old woman was tired?',
           answer: 'Soon, she stopped to rest her feet.',
           solution: {
-            method: '"피곤함"을 드러내는 문장을 3단락에서 찾는다.',
+            method: '"Tiredness / Feeling tired"을 드러내는 문장을 3단락에서 찾는다.',
             steps: [
               '3단락 첫 문장: "Soon, she stopped to rest her feet."',
               '발을 쉬려고 멈췄다는 것은 그녀가 지쳤음을 보여준다.',
@@ -233,9 +233,9 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
             'Answer in a complete sentence. In paragraph 2, what does the phrase "carrying it would break her back" tell you about the pot?',
           answer: 'It tells us that the pot was very heavy.',
           solution: {
-            method: '"등이 부러질 정도"라는 표현이 의미하는 항아리의 특징을 생각한다.',
+            method: '"To the point of breaking one's back"라는 표현이 의미하는 항아리의 특징을 생각한다.',
             steps: [
-              '"carrying it would break her back"는 "들고 가면 등이 부러질 것이다"라는 과장된 표현.',
+              '"carrying it would break her back"는 "If you carry it, your back will break"라는 과장된 표현.',
               '이는 항아리가 매우 무거웠음을 나타낸다.',
               '완전한 문장으로: "It tells us that the pot was very heavy."',
             ],
@@ -254,7 +254,7 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
             method: '6단락(쇠로 변한 후의 반응)에서 노파의 생각을 찾는다.',
             steps: [
               '6단락: "\'This is luck! I shall sell this iron and be rich.\'"',
-              '그녀는 쇠로 변한 것을 "행운(luck)"이라 여기고, 팔아서 부자가 될 수 있다고 생각했다.',
+              '그녀는 쇠로 변한 것을 "Luck"이라 여기고, 팔아서 부자가 될 수 있다고 생각했다.',
               '실망하지 않은 이유는 매번 새로운 가치를 발견했기 때문 → 완전한 문장으로 서술.',
             ],
             tip: '인물이 실망하지 않은 이유는 보통 그 인물의 직접적인 말(따옴표) 속에서 찾을 수 있습니다.',
@@ -273,7 +273,7 @@ export const wa1RafflesGirlsPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '"심장이 뛸 듯이 놀랐다" 이후의 상황(8~9단락)을 통해 감정을 추론한다.',
+            method: '"Was so surprised that the heart nearly jumped out" 이후의 상황(8~9단락)을 통해 감정을 추론한다.',
             steps: [
               '7단락 직후: "Oh my!"라고 외치고, 9단락에서 "The stone had turned into a creature and it looked like it was going to pounce on her."',
               '돌이 생물로 변해 자신에게 달려들 듯한 모습을 보고 놀랐다 → 매우 두려운 감정.',

@@ -22,13 +22,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "tú",
     meaning: "'涂(tú)' = to apply/spread (colour, paint). 涂上颜色 = to colour in.",
     solution: {
-      method: "유사형 글자(形近字) 변별 + 동작 의미",
+      method: "Identifying similar-looking characters (形近字) + understanding action meanings",
       steps: [
-        "카드에 색을 '칠하는' 동작 → 涂.",
-        "图(그림·명사), 吐(뱉다·口), 突(갑자기)는 의미 부적합.",
-        "'涂(氵)'는 액체(물감)를 바르는 뜻.",
+        "The action of 'painting' colour on a card → 涂.",
+        "图 (picture/noun), 吐 (to spit/口), 突 (suddenly) do not fit the meaning here.",
+        "'涂 (氵)' means to spread or apply a liquid (like paint or colour).",
       ],
-      tip: "색칠·물감 바르기엔 ‘涂’ (涂颜色/涂药).",
+      tip: "For colouring or applying paint, use '涂' (e.g. 涂颜色 / 涂药).",
     },
   },
   {
@@ -42,13 +42,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "kǎo shì",
     meaning: "'考试(kǎoshì)' = examination / to take a test.",
     solution: {
-      method: "단어 '考试' 인식 + 형근자 변별",
+      method: "Recognising the word '考试' + identifying similar-looking characters (形近字)",
       steps: [
-        "'___试得了第一名' → 시험에서 1등.",
-        "'考试'이 필요하므로 '考'.",
-        "者·孝·老는 모양이 비슷하나 '试'와 어울리지 않음.",
+        "'___试得了第一名' → came in 1st place in a test/exam.",
+        "We need '考试' (exam), so the answer is '考'.",
+        "者, 孝, and 老 look similar but do not go together with '试'.",
       ],
-      tip: "考(시험 볼 고)와 老(늙을 로)는 윗부분이 비슷하니 주의.",
+      tip: "Be careful: 考 (to take an exam) and 老 (old) look similar at the top.",
     },
   },
   {
@@ -62,13 +62,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "huí shōu xiāng",
     meaning: "'回收箱(huíshōu xiāng)' = recycling bin/box.",
     solution: {
-      method: "동음자 변별 + 의미부 '竹(상자)'",
+      method: "Identifying characters with the same sound + understanding the meaning of the radical '竹 (box)'",
       steps: [
-        "신문지를 넣는 '상자' → 箱.",
-        "'回收箱(재활용 상자)'.",
-        "相/想/香은 동음이지만 '상자' 뜻이 없다.",
+        "A 'box' that newspapers are put into → 箱.",
+        "'回收箱' (recycling box/bin).",
+        "相 / 想 / 香 sound the same but do not mean 'box'.",
       ],
-      tip: "‘箱’은 대나무·나무로 만든 상자류(箱子, 信箱).",
+      tip: "'箱' refers to box-like containers made of bamboo or wood (e.g. 箱子, 信箱).",
     },
   },
   {
@@ -82,13 +82,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "luàn",
     meaning: "'乱(luàn)' = in a disorderly manner / carelessly. 乱丢 = to throw about carelessly.",
     solution: {
-      method: "부사적 의미 매칭",
+      method: "Matching the meaning of adverbs",
       steps: [
-        "신발을 '아무렇게나' 던지는 모습 → 乱丢.",
-        "活(살다)·话(말)·甜(달다)은 의미가 맞지 않음.",
+        "The image of throwing shoes 'carelessly' or 'randomly' → 乱丢.",
+        "活 (to live), 话 (speech), and 甜 (sweet) do not match the meaning.",
         "→ 乱.",
       ],
-      tip: "‘乱+동사’ = 함부로/아무렇게나 ~하다 (乱丢, 乱跑, 乱说).",
+      tip: "'乱 + verb' = to do something carelessly or randomly (e.g. 乱丢, 乱跑, 乱说).",
     },
   },
   {
@@ -102,13 +102,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "huán bǎo dài",
     meaning: "'环保袋(huánbǎo dài)' = eco-friendly / reusable bag.",
     solution: {
-      method: "단어 '环保袋' 인식",
+      method: "Recognising the word '环保袋'",
       steps: [
-        "마트에서 쓰는 재사용 가방 → 环保袋.",
-        "'环(환경 환)'을 고른다.",
-        "还(또)·坏(나쁘다)·杯(컵)은 부적합.",
+        "The reusable bag used at the supermarket → 环保袋.",
+        "We choose '环 (environment)'.",
+        "还 (also), 坏 (bad), and 杯 (cup) are not suitable.",
       ],
-      tip: "环(고리/환경)과 坏(나쁠 괴)는 자형이 유사 — 部首 ‘王’ vs ‘土’.",
+      tip: "环 (ring/environment) and 坏 (bad) look similar in shape — check the radical: '王' vs '土'.",
     },
   },
 
@@ -126,13 +126,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "xū yào",
     meaning: "'需要(xūyào)' = to need / require. 需要三个人 = need three people.",
     solution: {
-      method: "문맥 의미 매칭",
+      method: "Matching meaning using context",
       steps: [
-        "크고 무거운 책상을 옮기려면 세 명이 '필요하다'.",
-        "'需要三个人'이 자연스럽다.",
-        "如果(만약)·可以(할 수 있다)·就能(곧 ~할 수 있다)은 문맥에 어색.",
+        "To move a big and heavy desk, three people are 'needed'.",
+        "'需要三个人' sounds natural here.",
+        "如果 (if), 可以 (can), and 就能 (then can) feel awkward in this context.",
       ],
-      tip: "‘인원/조건이 있어야 가능’할 때 ‘需要’.",
+      tip: "When something is needed as a condition or requirement, use '需要'.",
     },
   },
   {
@@ -146,13 +146,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "lì yòng",
     meaning: "'利用(lìyòng)' = to make use of (time/opportunity). 利用假期 = make use of the holidays.",
     solution: {
-      method: "근접어(近义词) 변별 — '시간/기회 활용'",
+      method: "Telling apart near-synonyms (近义词) — 'making use of time or opportunity'",
       steps: [
-        "'___ 学校假期'에서 '시간을 활용하다'.",
-        "'利用(시간·기회를 활용)'이 적합.",
-        "使用(도구 사용), 选用(골라 쓰다), 借用(빌려 쓰다)은 '시간'과 부적합.",
+        "In '___ 学校假期', we need a verb that means 'to make use of time'.",
+        "'利用' (to make use of time or opportunity) is the best fit here.",
+        "使用 (to use a tool), 选用 (to choose and use), and 借用 (to borrow) do not go well with '时间' (time).",
       ],
-      tip: "시간·기회는 ‘利用’, 물건·도구는 ‘使用’.",
+      tip: "Use '利用' with time or opportunities, and '使用' with objects or tools.",
     },
   },
   {
@@ -166,12 +166,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "jué dìng",
     meaning: "'决定(juédìng)' = to decide. 决定带我们去 = decided to take us.",
     solution: {
-      method: "문맥 동사 매칭",
+      method: "Matching the correct verb to the context",
       steps: [
-        "다음 토요일에 데려가기로 '정하다' → 决定.",
-        "认为(여기다)·请求(요청)·回答(대답)은 문맥에 맞지 않음.",
+        "'Decided' to take (someone) next Saturday → use 决定.",
+        "认为 (to think/feel), 请求 (to request), and 回答 (to answer) do not fit this context.",
       ],
-      tip: "미래 계획을 ‘정하다’ → ‘决定 + 동사구’.",
+      tip: "When 'deciding' on a future plan → use '决定 + verb phrase'.",
     },
   },
   {
@@ -185,13 +185,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "yí bù fen",
     meaning: "'一部分(yíbùfen)' = a part / a portion. 一部分时间 = part of the time.",
     solution: {
-      method: "양사·명사 호응 '一___的时间'",
+      method: "Measure word and noun matching: '一___的时间'",
       steps: [
-        "'一___的时间' → 시간의 '일부분'.",
-        "'一部分的时间'이 자연스럽다.",
-        "半边(한쪽)·相同(같은)·不同(다른)은 '时间'과 호응 어색.",
+        "'一___的时间' refers to 'a portion of time'.",
+        "'一部分的时间' is the most natural expression.",
+        "半边 (one side), 相同 (same), and 不同 (different) do not match well with '时间'.",
       ],
-      tip: "전체 중 일부 → ‘一部分’ (一部分人/时间/钱).",
+      tip: "When talking about a part of a whole → use '一部分' (e.g. 一部分人 / 时间 / 钱).",
     },
   },
   {
@@ -205,13 +205,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "bù tíng de",
     meaning: "'不停地(bùtíng de)' = continuously / without stopping. 不停地往前走 = kept walking forward.",
     solution: {
-      method: "단서 '终于走到了'로 추론 — 부사어 자리",
+      method: "Use the clue '终于走到了' to figure out the correct adverb for the blank.",
       steps: [
-        "마침내 강가에 도착하려면 '쉬지 않고 계속' 걸어야 한다.",
-        "'不停地 + 往前走'가 호응(부사어 ‘…地’).",
-        "停下了/停不了/不想停은 '终于走到'와 모순.",
+        "To 'finally' reach the riverbank, one must have walked 'non-stop, continuously' the whole time.",
+        "'不停地 + 往前走' go together because adverbs ending in '地' must be followed by a verb.",
+        "停下了/停不了/不想停 all contradict '终于走到', so they cannot be correct.",
       ],
-      tip: "‘…地 + 동사’ 구조와 ‘终于(마침내)’의 인과를 함께 본다.",
+      tip: "Look at the '…地 + verb' structure together with '终于 (finally)' to understand the cause-and-effect relationship.",
     },
   },
 
@@ -231,13 +231,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "tā méi guān shuǐ lóng tóu, jiù hé xiǎo guāng pǎo xiàng qiú chǎng qù le",
     meaning: "He didn't turn off the tap and ran off to the field with Xiao Guang. (Order position: 3)",
     solution: {
-      method: "사건 순서 배열 — 시간·인과로 위치 추론",
+      method: "Arranging events in order — use time and cause-and-effect to work out where each sentence belongs.",
       steps: [
-        "전체 흐름: ①밥 먹고 손 씻음 → ②손 씻자마자 小光이 부름 → ③수도꼭지 안 잠그고 뛰어감 → ④물이 계속 흐름 → ⑤선생님이 불러 꾸짖음 → ⑥명화가 사과함.",
-        "이 문장(수도 안 잠그고 뛰어감)은 ‘부름(2)’ 뒤, ‘물이 흐름(4)’ 앞.",
-        "→ 순서 3.",
+        "Overall story flow: ① Finished eating and washed hands → ② Just after washing hands, 小光 called out → ③ Left the tap open and ran off → ④ Water kept running → ⑤ Teacher called and scolded → ⑥ 明华 apologised.",
+        "This sentence (ran off without turning off the tap) comes after 'being called (②)' and before 'water running (④)'.",
+        "→ Position 3.",
       ],
-      tip: "‘没关水龙头, 就…跑’은 잘못이 시작되는 지점 → 중간 부분.",
+      tip: "'没关水龙头, 就…跑' is the point where the mistake begins → it belongs in the middle of the story.",
     },
   },
   {
@@ -251,13 +251,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "míng huá tīng le, xiàng lǎo shī shuō duì bù qǐ, yě dā ying bù zài zhè yàng zuò le",
     meaning: "Ming Hua apologised to the teacher and promised not to do it again. (Order position: 6, the ending)",
     solution: {
-      method: "결말 신호 포착",
+      method: "Spot the signal that tells you it is the ending.",
       steps: [
-        "'听了…说对不起…答应不再…'는 꾸중 뒤의 반응 → 이야기의 마무리.",
-        "선생님이 꾸짖는 문장(5) 다음에 온다.",
-        "→ 순서 6(마지막).",
+        "'听了…说对不起…答应不再…' shows the character's reaction after being scolded → this wraps up the story.",
+        "It comes right after the sentence where the teacher scolds (⑤).",
+        "→ Position 6 (last).",
       ],
-      tip: "사과·반성·약속 문장은 보통 ‘맨 끝’.",
+      tip: "Sentences with an apology, reflection, or promise usually come at the very end.",
     },
   },
   {
@@ -271,13 +271,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "lǎo shī kàn jiàn hòu, bǎ míng huá jiào huí lái, gào su tā bù yīng gāi làng fèi shuǐ",
     meaning: "The teacher saw it, called Ming Hua back, and told him not to waste water. (Order position: 5)",
     solution: {
-      method: "인과 연결 — '看见 → 叫回来'",
+      method: "Cause-and-effect connection — '看见 → 叫回来'",
       steps: [
-        "물이 계속 흐르는 것(4)을 선생님이 '看见' 후 부르는 장면.",
-        "물 흐름(4) 다음, 사과(6) 앞.",
-        "→ 순서 5.",
+        "The teacher '看见 (sees)' the water still running (④), and then calls the character back.",
+        "After water flowing (4), before apple/apology (6).",
+        "→ Position 5.",
       ],
-      tip: "교사의 개입(看见后…告诉)은 잘못 직후, 사과 직전.",
+      tip: "The teacher's intervention (看见后…告诉) happens right after the mistake and right before the apology.",
     },
   },
   {
@@ -291,13 +291,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "míng huá gāng xǐ wán shǒu, xiǎo guāng jiù jiào tā dào qiú chǎng qù wán qiú",
     meaning: "Just after Ming Hua washed his hands, Xiao Guang called him to play ball at the field. (Order position: 2)",
     solution: {
-      method: "연결어 '刚…就…'으로 직후 위치 파악",
+      method: "Use the connective '刚…就…' to find the position right after the event.",
       steps: [
-        "'刚洗完手(1번 문장의 손 씻기 직후)'라는 단서.",
-        "주어진 1번(손 씻기) 바로 다음에 온다.",
-        "→ 순서 2.",
+        "The clue '刚洗完手' (right after washing hands in sentence 1).",
+        "It comes right after the given sentence 1 (washing hands).",
+        "→ Position 2.",
       ],
-      tip: "‘刚…就…(막 ~하자마자)’는 앞 사건 바로 뒤를 가리킨다.",
+      tip: "'刚…就…' (just as soon as…) points to what happens immediately after the first event.",
     },
   },
   {
@@ -311,13 +311,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "shuǐ lóng tóu méi guān shàng, shuǐ yì zhí liú gè bù tíng",
     meaning: "The tap was not turned off, and the water kept running. (Order position: 4)",
     solution: {
-      method: "인과 결과 위치 파악",
+      method: "Finding the position using cause and effect.",
       steps: [
-        "'没关水龙头, 就…跑(3)'의 결과 → '물이 계속 흐름'.",
-        "뛰어간 뒤(3) 다음, 선생님이 보는 장면(5) 앞.",
-        "→ 순서 4.",
+        "The result of '没关水龙头, 就…跑 (3)' → 'water keeps flowing'.",
+        "After running away (3), before the teacher sees it (5).",
+        "→ Position 4.",
       ],
-      tip: "원인(没关→跑) 뒤에 결과(水一直流)가 따라온다.",
+      tip: "The result (水一直流 / water keeps flowing) follows the cause (didn't turn off tap → ran away).",
     },
   },
 
@@ -336,12 +336,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "shēng rì hè kǎ",
     meaning: "'生日贺卡' = birthday card.",
     solution: {
-      method: "명사+명사 합성 짝짓기",
+      method: "Matching noun + noun compound pairs.",
       steps: [
-        "'生日(생일)' 뒤에 올 명사 → 카드.",
-        "'贺卡(축하 카드)'가 호응 → 生日贺卡.",
+        "The noun that comes after '生日 (birthday)' → card.",
+        "The word '贺卡 (greeting card)' matches best → 生日贺卡 (birthday card).",
       ],
-      tip: "贺卡=축하 카드(贺年卡=연하장).",
+      tip: "贺卡 = greeting card; 贺年卡 = New Year card.",
     },
   },
   {
@@ -355,12 +355,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "qīng xǐ dì bǎn",
     meaning: "'清洗地板' = to clean/mop the floor.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun matching",
       steps: [
-        "'清洗(씻다·닦다)'의 목적어 → 바닥.",
-        "'地板(마룻바닥)'이 호응 → 清洗地板.",
+        "The object that goes with '清洗 (to wash/clean)' → the floor.",
+        "The word '地板 (floor)' matches best → 清洗地板 (clean the floor).",
       ],
-      tip: "바닥을 닦다 → 清洗地板 / 擦地板.",
+      tip: "To clean the floor → 清洗地板 or 擦地板.",
     },
   },
   {
@@ -374,12 +374,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "ài hù huā cǎo",
     meaning: "'爱护花草' = to cherish/protect flowers and plants.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun matching",
       steps: [
-        "'花草(화초)' 앞에 올 동작 → '아끼고 보호하다'.",
-        "'爱护'가 호응 → 爱护花草.",
+        "The action that goes before '花草 (flowers and plants)' → 'to cherish and protect'.",
+        "The word '爱护' matches best → 爱护花草 (take care of flowers and plants).",
       ],
-      tip: "공공물·동식물을 ‘아끼다’ → 爱护 (爱护公物/花草).",
+      tip: "To cherish public property or plants and animals → use 爱护 (e.g. 爱护公物 / 爱护花草).",
     },
   },
   {
@@ -393,12 +393,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "gǎn jǐn liū zǒu",
     meaning: "'赶紧溜走' = to hurriedly slip away.",
     solution: {
-      method: "부사+동사 호응",
+      method: "Adverb + Verb matching",
       steps: [
-        "'溜走(몰래 빠져나가다)' 앞에 올 부사 → '서둘러'.",
-        "'赶紧(얼른·서둘러)'이 호응 → 赶紧溜走.",
+        "The adverb that goes before '溜走 (to sneak away)' → 'quickly' or 'in a hurry'.",
+        "The word '赶紧 (quickly/hurry)' matches best → 赶紧溜走 (quickly sneak away).",
       ],
-      tip: "‘赶紧+동사’ = 서둘러 ~하다 (赶紧走/赶紧做).",
+      tip: "'赶紧 + verb' means to do something quickly or in a hurry (e.g. 赶紧走 / 赶紧做).",
     },
   },
 
@@ -417,13 +417,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
       "rú guǒ wǒ men bǎ chuān bú xià de yī fú zuò chéng xiǎo dài zi, jiù néng wèi huán bǎo jìn yí fèn lì",
     meaning: "If we turn clothes we've outgrown into small bags, we can do our part for the environment.",
     solution: {
-      method: "가정 관계 '如果……就……'로 두 문장 합치기",
+      method: "Joining two sentences using the 'if...then...' pattern: 如果……就……",
       steps: [
-        "조건(앞 문장)을 '如果' 절에, 결과(뒤 문장)를 '就' 절에 둔다.",
-        "두 번째 주어 '我们'은 생략 가능.",
+        "Put the condition (first part) in the '如果' clause, and the result (second part) in the '就' clause.",
+        "The second subject '我们' can be left out (omitted).",
         "→ 如果我们…做成小袋子，就能为环保尽一份力。",
       ],
-      tip: "‘如果 A, 就 B’ = A하면 (그러면) B한다.",
+      tip: "'如果 A, 就 B' means: If A, then B.",
     },
   },
   {
@@ -436,13 +436,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "xiǎo ān xiǎo xīn de bǎ xīn ài de gù shi shū shōu jìn shū bāo lǐ",
     meaning: "Xiao An carefully put his beloved storybook into his bag.",
     solution: {
-      method: "상황어(状语) '小心地' 위치 — 把자문 동사 앞",
+      method: "The adverbial (状语) '小心地' goes before the verb in a 把-sentence.",
       steps: [
-        "'小心地'는 동작의 방식을 꾸미는 상황어.",
-        "把자문에서는 ‘주어 + 상황어 + 把…’ 순서.",
+        "'小心地' is an adverbial that describes how an action is done.",
+        "In a 把-sentence, the order is: Subject + adverbial + 把…",
         "→ 小安小心地把…收进书包里。",
       ],
-      tip: "把자문에 ‘…地’ 부사어를 넣을 땐 ‘把’ 앞에 둔다.",
+      tip: "When adding a '…地' adverbial in a 把-sentence, place it before '把'.",
     },
   },
   {
@@ -455,13 +455,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "xiǎo xiàng jiào xiǎo xióng xiǎng yí gè bàn fǎ jiù xiǎo yā zi",
     meaning: "The little elephant told the little bear to think of a way to save the duckling. (Direct → 兼语句 with 叫)",
     solution: {
-      method: "직접화법 → 겸어문 '叫' 전환",
+      method: "Changing direct speech into a pivot sentence (겸어문) using '叫'.",
       steps: [
-        "명령형 인용을 '叫 + 대상 + 동작'으로 변환.",
+        "A command in a quote is changed to '叫 + person + action'.",
         "'说：“小熊，快…！”' → '叫小熊 想一个办法救小鸭子'.",
-        "호칭 '小熊，'와 '快', 느낌표·따옴표는 정리.",
+        "Remove the address ('小熊，'), '快', exclamation marks, and quotation marks.",
       ],
-      tip: "‘叫 + 사람 + 시키는 행동’ — 명령 인용은 평서문으로 바꾼다.",
+      tip: "'叫 + person + action' — a command in a quote is rewritten as a plain statement.",
     },
   },
 
@@ -494,13 +494,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
         pinyin: "yīn wèi tā shì zuì cōng míng de xiǎo dòng wù",
         meaning: "Why do the animals seek the monkey's help? Because it is the cleverest animal in the forest.",
         solution: {
-          method: "원인 찾기 — 첫 문장 인용",
+          method: "Finding the reason — quote the first sentence.",
           steps: [
-            "1문장: '小猴是森林里最聪明的动物'.",
-            "그래서 모두 도움을 청함.",
+            "Sentence 1: '小猴是森林里最聪明的动物'.",
+            "That is why everyone comes to ask for help.",
             "→ (2) 因为它是最聪明的小动物.",
           ],
-          tip: "(4)는 ‘구체적 능력’일 뿐, 근본 이유는 ‘가장 똑똑함’.",
+          tip: "Answer (4) only shows a specific ability; the real reason is that he is 'the smartest'.",
         },
       },
     ],
@@ -531,12 +531,12 @@ export const wa3_redswastika_rev3_2025: Question[] = [
           "dāng xiǎo dòng wù men zài liàn xí shí, xiǎo hóu měi tiān bú shì zài jiā lǐ hē chá, tīng yīn yuè, jiù shì tǎng zài chuáng shàng shuì jiào",
         meaning: "While the other animals were practising, the monkey was either drinking tea and listening to music at home, or lying in bed sleeping.",
         solution: {
-          method: "대비 행동 서술 — '不是…就是…' 구문 인용",
+          method: "Contrasting actions — quoting the '不是…就是…' sentence structure",
           steps: [
-            "2문단 끝: '小猴…每天不是在家里喝茶、听音乐，就是躺在床上睡觉'.",
-            "다른 동물의 노력과 대비되는 소원숭이의 게으른 행동을 그대로 옮긴다.",
+            "End of Paragraph 2: '小猴…每天不是在家里喝茶、听音乐，就是躺在床上睡觉'.",
+            "Copy the lazy monkey's actions directly, as they contrast with the hard work of the other animals.",
           ],
-          tip: "‘不是 A 就是 B’ 표현을 답에 그대로 살리면 만점에 가깝다.",
+          tip: "Including the '不是 A 就是 B' expression in your answer will get you close to full marks.",
         },
       },
       {
@@ -549,13 +549,13 @@ export const wa3_redswastika_rev3_2025: Question[] = [
           "xiǎo hóu méi yǒu shí xiàn zì jǐ de yuàn wàng. tā yīng gāi nǔ lì xué xí, cái néng shí xiàn zì jǐ de yuàn wàng",
         meaning: "No, the monkey did not realise its wish. It should study/work hard so that it can achieve its dream.",
         solution: {
-          method: "판단 + 조언형 — 두 소문항 모두 답하기",
+          method: "Judgement + Advice type — answer both parts of the question",
           steps: [
-            "앞: 사실 판단 → 小猴没有实现自己的愿望(다른 동물과 달리 노력 안 함).",
-            "뒤: 조언 → 应该努力学习，才能实现愿望.",
-            "‘…吗 + 应该怎么做’ 두 부분을 분리해 답한다.",
+            "First part: State the fact — 小猴没有实现自己的愿望 (unlike the other animals, the monkey did not put in effort).",
+            "Second part: Give advice — 应该努力学习，才能实现愿望.",
+            "Split your answer into two parts: the '…吗' (judgement) part and the 'what should be done' (advice) part.",
           ],
-          tip: "마지막 ‘可是我呢?’ 한탄이 ‘소원 미실현’의 단서. 조언은 본문 주제(努力)와 연결.",
+          tip: "The sigh '可是我呢?' at the end is a clue that the monkey's wish was not fulfilled. Your advice should connect back to the main theme of the passage — working hard (努力).",
         },
       },
     ],

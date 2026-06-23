@@ -48,7 +48,7 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: '"Should (1) ________ help him?" Sarah asked.',
           answer: 'we',
           solution: {
-            method: 'Sarah가 Tom에게 자신과 Tom을 포함해 "함께 도울까?"라고 묻는 주어를 고른다.',
+            method: 'Sarah가 Tom에게 자신과 Tom을 포함해 "Shall we help together?"라고 묻는 주어를 고른다.',
             steps: [
               'Sarah는 자기 자신과 Tom을 포함해서 묻고 있다("Yes, let\'s do that" — Tom도 함께 동의함).',
               '화자(Sarah) 자신을 포함한 복수 주어는 "we".',
@@ -82,7 +82,7 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           solution: {
             method: 'Tom이 노인(old man)에게 직접 묻는 말의 소유격을 고른다.',
             steps: [
-              'Tom이 노인에게 "당신의 상자"를 도와줄지 묻고 있다.',
+              'Tom이 노인에게 "Your box"를 도와줄지 묻고 있다.',
               '상대방(노인)의 소유를 나타내는 2인칭 소유격은 "your".',
               '따라서 "Can we help you with your box?" → 정답 your.',
             ],
@@ -147,9 +147,9 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'Everyone took turns to (6) ________ on the stage.',
           answer: 'dance',
           solution: {
-            method: '"took turns to + 동사원형" 구문을 적용한다.',
+            method: '"took turns to + base verb" 구문을 적용한다.',
             steps: [
-              '"take turns to + 동사원형" = 차례로 ~하다.',
+              '"take turns to + base verb" = 차례로 ~하다.',
               'to 뒤에는 동사원형이 온다.',
               '따라서 "took turns to dance" → 정답 dance.',
             ],
@@ -179,13 +179,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'While we (8) ________, the principal walked in and cheered for us.',
           answer: 'were dancing',
           solution: {
-            method: '"While + 주어 + ___, [과거의 한 사건]" 구조에서 진행 중이던 동작을 본다.',
+            method: '"While + subject + ___, [one past event]" 구조에서 진행 중이던 동작을 본다.',
             steps: [
-              '"the principal walked in"(과거의 한 순간)이 일어났을 때, "we"는 춤을 추는 "중"이었다.',
+              '"the principal walked in"(과거의 한 순간)이 일어났을 때, "we"는 춤을 추는 "In the middle of / during"이었다.',
               '특정 과거 시점에 진행 중인 동작 → 과거진행형.',
               '주어 "we"(복수) → "were dancing" → 정답 were dancing.',
             ],
-            tip: '"While + 주어 + was/were -ing, [다른 과거 사건]"은 한 동작이 진행되는 동안 다른 일이 일어났음을 나타냅니다.',
+            tip: '"While + subject + was/were -ing, [another past event]"은 한 동작이 진행되는 동안 다른 일이 일어났음을 나타냅니다.',
           },
         },
       ],
@@ -208,11 +208,11 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
         '________________________________________',
       answer: 'When the doorbell rang, Rina was reading in her room.',
       solution: {
-        method: '"When + [짧은 사건], [진행 중이던 상황]" 구조로 연결한다.',
+        method: '"When + [short event], [situation that was already happening]" 구조로 연결한다.',
         steps: [
           '"The doorbell rang"(초인종이 울림)은 한순간에 일어난 짧은 사건.',
           '"Rina was reading in her room"(읽고 있던 중)은 그 사건이 일어났을 때 진행 중이던 상황.',
-          '"When + [짧은 사건], [진행 중이던 상황]." 구조: "When the doorbell rang, Rina was reading in her room."',
+          '"When + [short event], [situation that was already happening]." 구조: "When the doorbell rang, Rina was reading in her room."',
         ],
         tip: '"When" 뒤에는 보통 짧고 갑작스러운 사건(rang)이 오고, 그 뒤 콤마 뒤에는 그 순간 진행 중이던 더 긴 동작(was reading)이 옵니다.',
       },
@@ -300,7 +300,7 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
             steps: [
               '1단락: "Suddenly, it spotted a jug on a table in the garden."',
               '2단락: "Excited, the crow flew down and perched on the jug\'s rim."',
-              '까마귀가 흥분한 것은 "정원 탁자 위의 주전자(항아리)"를 발견했기 때문 → 정답 (1) a jug on a table.',
+              '까마귀가 흥분한 것은 "The kettle (jar) on the garden table"를 발견했기 때문 → 정답 (1) a jug on a table.',
             ],
             tip: '"Excited" 바로 앞 문장에서 흥분한 원인(발견한 대상)을 찾습니다.',
           },
@@ -356,13 +356,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           ],
           answer: 'A',
           solution: {
-            method: '"쉬지 않고 열심히 일했다"는 의미와 같은 단어를 고른다.',
+            method: '"Worked hard without resting"는 의미와 같은 단어를 고른다.',
             steps: [
               '"tirelessly" = 지치지 않고/쉬지 않고 → "worked hard without stopping"과 정확히 일치.',
-              '"back and forth"(왔다 갔다)는 움직임의 방향/패턴을 나타낼 뿐, "쉬지 않음"을 직접 의미하지 않는다.',
+              '"back and forth"(왔다 갔다)는 움직임의 방향/패턴을 나타낼 뿐, "Without stopping / Without rest"을 직접 의미하지 않는다.',
               '따라서 정답은 (A) tirelessly.',
             ],
-            tip: '"tirelessly"는 "지치지 않고 계속해서"라는 뜻으로, "without stopping"과 직접 연결됩니다.',
+            tip: '"tirelessly"는 "Kept going without getting tired"라는 뜻으로, "without stopping"과 직접 연결됩니다.',
           },
         },
         {
@@ -372,11 +372,11 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
           stem: 'What does the word "it" in line 14 refer to?',
           answer: 'It refers to the water (in the jug).',
           solution: {
-            method: "'it' 바로 앞 문장에서 핵심 명사를 찾는다.",
+            method: "Find the key noun in the sentence just before 'it'.",
             steps: [
               '해당 문장(4~5단락 경계): "After a long time, the water finally rose high enough for the crow to reach it."',
-              "'it'은 바로 앞에 언급된 'the water'를 가리킨다.",
-              "완전한 문장으로: \"'it' refers to the water.\"",
+              "'it' refers to 'the water' that was mentioned in the sentence just before.",
+              "In a complete sentence: \"'it' refers to the water.\"",
             ],
             tip: '대명사 it은 바로 앞 문장에서 가장 가까운 단수 사물 명사를 가리키는 경우가 많습니다.',
           },
@@ -392,7 +392,7 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
             method: '마지막 단락의 마지막 문장에서 까마귀가 배운 점을 찾는다.',
             steps: [
               '마지막 단락: "It had learned that with patience and smart thinking, even difficult problems could be solved."',
-              '까마귀가 배운 것은 "인내심과 지혜로운 생각이 있으면 어려운 문제도 풀 수 있다"는 점.',
+              '까마귀가 배운 것은 "With patience and wise thinking, even difficult problems can be solved."는 점.',
               '지문의 문장을 그대로 옮겨 완전한 문장으로 답한다.',
             ],
             tip: '"learned that ~"의 ~ 부분이 바로 배운 교훈입니다.',

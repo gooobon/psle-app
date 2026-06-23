@@ -18,13 +18,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "gēn",
     meaning: "with, to follow (跟……玩 = to play with...)",
     solution: {
-      method: "'喜欢____哥哥玩游戏'에서, '형(오빠)와 함께 게임을 하다'라는 의미를 완성하는 글자를 고른다.",
+      method: "In '喜欢____哥哥玩游戏', choose the character that completes the meaning 'to play games together with older brother'.",
       steps: [
-        "'____哥哥玩游戏' = '오빠____게임을 하다'라는 뜻이 되어야 한다.",
-        "①眼(yǎn, 눈), ②根(gēn, 뿌리/근본) 모두 '함께'라는 의미가 없다.",
-        "③跟(gēn, ~와 함께/~를 따라)을 넣으면 '跟哥哥玩游戏(형과 함께 게임을 하다)'가 되어 문맥과 일치하므로 정답은 ③ 跟이다.",
+        "'____哥哥玩游戏' should mean 'older brother ____ play games'.",
+        "①眼 (yǎn, eye) and ②根 (gēn, root) both do not mean 'together'.",
+        "If we put in ③跟 (gēn, together with / to follow), it becomes '跟哥哥玩游戏 (to play games together with older brother)', which matches the meaning. So the answer is ③ 跟.",
       ],
-      tip: "跟(gēn)은 '~와 함께'라는 뜻의 전치사로도 쓰이고, '따라가다'라는 동사로도 쓰인다. 跟/根/眼은 발음이 비슷하므로 모양으로 구별해야 한다 (足부수 = 跟, 木부수 = 根, 目부수 = 眼).",
+      tip: "跟 (gēn) can be used as a preposition meaning 'together with', or as a verb meaning 'to follow'. 跟, 根, and 眼 sound similar, so you need to tell them apart by their shape (足 radical = 跟, 木 radical = 根, 目 radical = 眼).",
     },
   },
   {
@@ -38,13 +38,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "tiē",
     meaning: "to paste, to stick",
     solution: {
-      method: "'把画____在墙上(그림을 벽에 ____하다)'에서, 그림을 벽에 붙이는 동작을 나타내는 동사를 고른다.",
+      method: "In '把画____在墙上 (to ____ the picture on the wall)', choose the verb that describes the action of putting a picture on a wall.",
       steps: [
-        "'把画____在墙上' = '그림을 벽에 ____하다'.",
-        "②站(zhàn, 서다)와 ③钻(zuān, 뚫다/파고들다)은 그림을 벽에 고정시키는 동작과 관련이 없다.",
-        "①贴(tiē, 붙이다)는 '贴在墙上(벽에 붙이다)'라는 표현으로 자연스럽게 쓰이므로 정답은 ① 贴이다.",
+        "'把画____在墙上' means 'to ____ the picture on the wall'.",
+        "②站 (zhàn, to stand) and ③钻 (zuān, to drill / to dig into) are not related to fixing a picture onto a wall.",
+        "①贴 (tiē, to stick / to paste) fits naturally in '贴在墙上 (to stick onto the wall)', so the answer is ① 贴.",
       ],
-      tip: "贴(tiē)는 '붙이다'라는 뜻으로, 贴海报(포스터를 붙이다), 贴邮票(우표를 붙이다) 등에 자주 쓰인다.",
+      tip: "贴 (tiē) means 'to stick' or 'to paste'. It is often used in phrases like 贴海报 (to put up a poster) and 贴邮票 (to stick a stamp).",
     },
   },
   {
@@ -58,13 +58,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "pén",
     meaning: "pot, basin (measure word for potted plants)",
     solution: {
-      method: "'几____花(몇____의 꽃)'에서 화분을 세는 단위(양사)로 적절한 글자를 고른다.",
+      method: "In '几____花 (a few ____ of flowers)', choose the measure word (classifier) that is suitable for counting pots of flowers.",
       steps: [
-        "'给院子里的几____花浇水' = '정원에 있는 몇 ____의 꽃에 물을 주다'.",
-        "②盖(gài, 뚜껑), ③盒(hé, 상자)는 화분을 세는 양사로 쓰이지 않는다.",
-        "①盆(pén, 화분/대야)은 화분에 심은 식물을 세는 양사로 쓰여 '几盆花(몇 그루의 꽃)'가 되므로 정답은 ① 盆이다.",
+        "'给院子里的几____花浇水' means 'to water a few ____ of flowers in the garden'.",
+        "②盖 (gài, lid) and ③盒 (hé, box) are not used as measure words for pots of flowers.",
+        "①盆 (pén, flowerpot / basin) is used as a measure word for plants grown in pots, giving us '几盆花 (a few pots of flowers)', so the answer is ① 盆.",
       ],
-      tip: "盆(pén)은 화분이나 대야 모양의 그릇을 세는 양사이다. 예: 一盆花(화분 하나), 一盆水(물 한 대야).",
+      tip: "盆 (pén) is a measure word for things in a pot or basin shape. For example: 一盆花 (one pot of flowers), 一盆水 (one basin of water).",
     },
   },
   {
@@ -78,13 +78,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "tóng",
     meaning: "child (儿童节 = Children's Day)",
     solution: {
-      method: "'儿____节'와 결합하여 '儿童节(어린이날)'을 이루는 글자를 고른다.",
+      method: "Find the character that combines with '儿____节' to form '儿童节' (Children's Day).",
       steps: [
-        "'张老师在儿____节那天' = '장 선생님은 어린이____날에'.",
-        "①同(tóng, 같다)와 ③桶(tǒng, 통/양동이)은 '儿同节', '儿桶节'와 같은 단어를 만들지 않는다.",
-        "②童(tóng, 아이)을 넣으면 '儿童节(Children's Day, 어린이날)'이라는 정확한 단어가 되므로 정답은 ② 童이다.",
+        "'张老师在儿____节那天' means 'Teacher Zhang on Children's Day'.",
+        "①同 (tóng, same) and ③桶 (tǒng, bucket) do not form real words like '儿同节' or '儿桶节'.",
+        "Putting in ②童 (tóng, child) gives us '儿童节' (Children's Day), which is the correct word. So the answer is ②童.",
       ],
-      tip: "童(tóng)은 '아이'라는 뜻으로, 儿童(아동), 童话(동화), 童年(어린 시절) 등에 쓰인다. 同(tóng)은 발음이 같지만 '같다/함께'라는 뜻이다.",
+      tip: "童 (tóng) means 'child' and is used in words like 儿童 (children), 童话 (fairy tale), and 童年 (childhood). 同 (tóng) sounds the same but means 'same' or 'together'.",
     },
   },
   {
@@ -98,13 +98,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "xiàng",
     meaning: "to be like, as if (像……一样 = just like ...)",
     solution: {
-      method: "'____一阵风一样冲过来(____한바탕 바람____ 돌진해 오다)'에서, '~처럼/같이'라는 비유를 나타내는 글자를 고른다.",
+      method: "In '____一阵风一样冲过来' (came rushing like a gust of wind), find the character that shows a comparison meaning 'like' or 'as'.",
       steps: [
-        "'____一阵风一样冲过来' = '한바탕 바람____ 돌진해 오다'.",
-        "②响(xiǎng, 소리가 나다)와 ③想(xiǎng, 생각하다)은 비유의 의미가 없다.",
-        "①像(xiàng, ~와 같다)을 넣으면 '像一阵风一样(한바탕 바람과 같이/처럼)'이라는 비유 표현이 되어 문맥과 일치하므로 정답은 ① 像이다.",
+        "'____一阵风一样冲过来' means 'came rushing ____a gust of wind'.",
+        "②响 (xiǎng, to make a sound) and ③想 (xiǎng, to think) do not carry the meaning of comparison.",
+        "Putting in ①像 (xiàng, to be like) gives us '像一阵风一样' (like a gust of wind), which matches the meaning in the sentence. So the answer is ①像.",
       ],
-      tip: "'像……一样'은 '~처럼/같이'라는 비유를 나타내는 고정 표현이다. 想(xiǎng, 생각하다)과 像(xiàng, ~와 같다)은 발음이 비슷하지만 부수(心 vs 人)로 구별할 수 있다.",
+      tip: "'像……一样' is a set phrase meaning 'like' or 'as'. 想 (xiǎng, to think) and 像 (xiàng, to be like) sound similar, but you can tell them apart by their radicals (心 vs 人).",
     },
   },
 
@@ -119,13 +119,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "róng yì",
     meaning: "easy",
     solution: {
-      method: "주어진 한어병음(汉语拼音)에 해당하는 한자(漢字)를 쓰는 문제이다. 병음과 문맥을 함께 고려하여 정확한 단어를 떠올린다.",
+      method: "This question asks you to write the correct Chinese character (漢字) for the given Hanyu Pinyin (汉语拼音). Use both the pinyin and the context of the sentence to find the right word.",
       steps: [
-        "'róng yì'라는 발음을 가진 단어 중, '이 수학 문제가 매우 ____해서 바로 다 풀었다'라는 문맥에 맞는 단어를 생각한다.",
-        "'róng yì'는 '쉽다'라는 뜻의 '容易'에 해당한다.",
-        "한자로 정확히 '容易'를 써 넣는다. 容(róng)과 易(yì)의 획순과 부수를 정확히 기억해 두자.",
+        "Think of a word pronounced 'róng yì' that fits the sentence: 'This maths question is very ____, so I finished it right away'.",
+        "'róng yì' matches the word '容易', which means 'easy'.",
+        "Write '容易' correctly. Remember the stroke order and radicals for both 容 (róng) and 易 (yì).",
       ],
-      tip: "'容易(쉽다)'의 반의어는 '困难(곤란하다)' 또는 '难(어렵다)'이다. 함께 외워두면 좋다.",
+      tip: "The opposite of '容易' (easy) is '困难' or '难' (difficult). Try to learn them together!",
     },
   },
   {
@@ -138,13 +138,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "zāng / chòu",
     meaning: "dirty / smelly",
     solution: {
-      method: "'又____又____'는 두 가지 특징을 동시에 나열하는 표현이다. 각 빈칸에 들어갈 병음에 해당하는 한자를 쓴다.",
+      method: "The pattern '又____又____' is used to list two characteristics at the same time. Write the Chinese characters that match the pinyin given in each blank.",
       steps: [
-        "첫 번째 빈칸 'zāng'은 '더럽다'라는 뜻의 '脏'에 해당한다.",
-        "두 번째 빈칸 'chòu'은 '냄새가 나다/구리다'라는 뜻의 '臭'에 해당한다.",
-        "따라서 '又脏又臭(더럽고 냄새난다)'가 완성된다. '쓰레기가 치워지지 않아서 더럽고 냄새가 난다'는 문맥과 일치한다.",
+        "The first blank 'zāng' matches the character '脏', which means 'dirty'.",
+        "The second blank 'chòu' matches the character '臭', which means 'smelly'.",
+        "So the completed phrase is '又脏又臭', meaning 'dirty and smelly'. This matches the context that the rubbish was not cleared, making the place dirty and smelly.",
       ],
-      tip: "'又A又B'는 두 가지 성질/상태를 동시에 가지고 있음을 나타내는 표현이다. 예: 又高又大(크고 높다), 又脏又臭(더럽고 냄새난다).",
+      tip: "The pattern '又A又B' is used to show that something has two qualities or states at the same time. Examples: 又高又大 (tall and big), 又脏又臭 (dirty and smelly).",
     },
   },
   {
@@ -157,13 +157,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "sàn bù",
     meaning: "to take a walk, to stroll",
     solution: {
-      method: "'sàn bù'라는 병음에 해당하는 한자를 떠올리고, 문맥(매일 저녁 할아버지가 공원에서 ____한다)에 맞는지 확인한다.",
+      method: "Think of the Chinese characters that match the pinyin 'sàn bù', and check if it fits the context: 'Every evening, Grandpa ____s in the park'.",
       steps: [
-        "'每天晚上，爷爷都会到公园里____' = '매일 저녁, 할아버지는 공원에서 ____하신다'.",
-        "'sàn bù'는 '산책하다'라는 뜻의 '散步'에 해당한다.",
-        "공원에서 매일 하는 활동으로 '산책'이 자연스럽게 어울리므로 '散步'가 정답이다.",
+        "'每天晚上，爷爷都会到公园里____' means 'Every evening, Grandpa ____s in the park'.",
+        "The pinyin 'sàn bù' matches the characters '散步', which means 'to take a walk'.",
+        "Taking a walk is a natural daily activity in the park, so '散步' is the correct answer.",
       ],
-      tip: "'散(sàn)'은 '흩어지다/거닐다'라는 뜻이고, '步(bù)'는 '걸음'이라는 뜻이다. 두 글자의 부수(攴, 止)를 정확히 익혀 쓰는 연습을 하자.",
+      tip: "'散 (sàn)' means 'to stroll/wander' and '步 (bù)' means 'step/walk'. Pay attention to the radicals of both characters (攴 and 止) and practise writing them carefully.",
     },
   },
   {
@@ -176,13 +176,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "cāi mí",
     meaning: "to guess riddles",
     solution: {
-      method: "'cāi mí'라는 병음에 해당하는 한자를 떠올리고, '재미있는 ____게임'이라는 문맥에 맞는지 확인한다.",
+      method: "Think of the Chinese characters that match the pinyin 'cāi mí', and check if it fits the context: 'a fun ____ game'.",
       steps: [
-        "'老师让我们玩了一个有趣的____游戏' = '선생님은 우리에게 재미있는 ____게임을 시켜주셨다'.",
-        "'cāi mí'는 '수수께끼를 맞히다'라는 뜻의 '猜谜'에 해당한다.",
-        "'猜谜游戏(수수께끼 맞히기 게임)'는 자연스럽게 어울리는 표현이므로 '猜谜'가 정답이다.",
+        "'老师让我们玩了一个有趣的____游戏' means 'The teacher let us play a fun ____ game'.",
+        "The pinyin 'cāi mí' matches the characters '猜谜', which means 'to guess riddles'.",
+        "'猜谜游戏' means 'riddle-guessing game', which fits naturally in the sentence, so '猜谜' is the correct answer.",
       ],
-      tip: "'猜(cāi)'는 '추측하다/맞히다'라는 뜻이고, '谜(mí)'는 '수수께끼'라는 뜻이다. '猜谜语(수수께끼를 맞히다)'도 같은 의미로 자주 쓰인다.",
+      tip: "'猜 (cāi)' means 'to guess' and '谜 (mí)' means 'riddle'. The phrase '猜谜语' is also commonly used with the same meaning.",
     },
   },
 
@@ -204,13 +204,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "fèi wù",
         meaning: "waste material (废物利用 = to recycle/reuse waste)",
         solution: {
-          method: "'____利用(____를 활용하다)'와 자연스럽게 어울리는 단어를 고른다.",
+          method: "Choose the word that goes naturally with '____利用 (to make use of ____)' .",
           steps: [
-            "利用(lìyòng, 활용하다/이용하다)의 목적어로 적절한 단어를 찾는다.",
-            "⑤废物(fèiwù, 폐기물/쓸모없는 물건)와 결합하면 '废物利用(폐품 활용/재활용)'이라는 자연스러운 표현이 된다.",
-            "①检查 ②宠物 ③跑步 ④保护 ⑥散步는 모두 利用과 자연스럽게 결합하지 않는다.",
+            "Find the word that works as the object of 利用 (lìyòng, to use/make use of).",
+            "⑤废物 (fèiwù, waste/useless things) combines with 利用 to form the natural phrase '废物利用', which means to reuse or recycle old things.",
+            "Options ①检查 ②宠物 ③跑步 ④保护 and ⑥散步 do not combine naturally with 利用.",
           ],
-          tip: "'废物利用'은 쓸모없어진 물건을 다시 활용한다는 뜻으로, '环保(환경 보호)'와 관련된 주제에서 자주 등장한다.",
+          tip: "'废物利用' means to make use of things that are no longer needed. This phrase often appears in topics related to 环保 (protecting the environment).",
         },
       },
       {
@@ -222,13 +222,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "chǒng wù",
         meaning: "pet",
         solution: {
-          method: "'照顾____(____를 돌보다)'와 자연스럽게 어울리는 단어를 고른다.",
+          method: "Choose the word that goes naturally with '照顾____ (to take care of ____)' .",
           steps: [
-            "照顾(zhàogù, 돌보다)의 목적어로는 보살핌이 필요한 대상이 와야 한다.",
-            "②宠物(chǒngwù, 애완동물)와 결합하면 '照顾宠物(애완동물을 돌보다)'라는 자연스러운 표현이 된다.",
-            "다른 단어들은 모두 照顾의 목적어로 어울리지 않는다.",
+            "The object of 照顾 (zhàogù, to take care of) should be something or someone that needs looking after.",
+            "②宠物 (chǒngwù, pet) combines with 照顾 to form the natural phrase '照顾宠物', which means to take care of a pet.",
+            "The other words do not work naturally as the object of 照顾.",
           ],
-          tip: "照顾 + 사람/동물 (예: 照顾弟弟, 照顾宠物, 照顾病人) 형태로 '~를 돌보다'라는 뜻을 나타낸다.",
+          tip: "照顾 + person/animal (e.g. 照顾弟弟, 照顾宠物, 照顾病人) is used to mean 'to take care of someone or something'.",
         },
       },
       {
@@ -240,13 +240,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "jiǎn chá",
         meaning: "to check, to examine (检查试卷 = to check an exam paper)",
         solution: {
-          method: "'____试卷(시험지를 ____하다)'와 자연스럽게 어울리는 단어를 고른다.",
+          method: "Choose the word that goes naturally with '____试卷 (to ____ the exam paper)'.",
           steps: [
-            "试卷(shìjuàn, 시험지)을 대상으로 하는 동작을 나타내는 단어를 찾는다.",
-            "①检查(jiǎnchá, 검사하다)와 결합하면 '检查试卷(시험지를 검토/확인하다)'라는 자연스러운 표현이 된다.",
-            "다른 단어들은 모두 试卷과 자연스럽게 결합하지 않는다.",
+            "Find the word that describes an action done to 试卷 (shìjuàn, exam paper).",
+            "①检查 (jiǎnchá, to check/inspect) combines with 试卷 to form the natural phrase '检查试卷', which means to check or review the exam paper.",
+            "The other words do not combine naturally with 试卷.",
           ],
-          tip: "检查 + 명사 (예: 检查作业, 检查试卷, 检查身体) 형태로 '~를 검토/검사하다'라는 뜻을 나타낸다.",
+          tip: "检查 + noun (e.g. 检查作业, 检查试卷, 检查身体) is used to mean 'to check or review something'.",
         },
       },
       {
@@ -258,13 +258,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "pǎo bù",
         meaning: "to run, running",
         solution: {
-          method: "'练习____(____를 연습하다)'와 자연스럽게 어울리는 단어를 고른다.",
+          method: "Choose the word that goes naturally with '练习____ (to practise ____)'.",
           steps: [
-            "练习(liànxí, 연습하다)의 목적어로는 연습할 수 있는 동작/기술이 와야 한다.",
-            "③跑步(pǎobù, 달리기)와 결합하면 '练习跑步(달리기를 연습하다)'라는 자연스러운 표현이 된다.",
-            "다른 단어들은 모두 练习의 목적어로 어울리지 않는다.",
+            "The object of 练习 (liànxí, to practise) should be an action or skill that can be practised.",
+            "③ 跑步 (pǎobù, running) combines with 练习 to make '练习跑步 (to practise running)', which is a natural expression.",
+            "All the other words do not fit naturally as the object of 练习.",
           ],
-          tip: "练习 + 동작/기술 (예: 练习跑步, 练习写字, 练习唱歌) 형태로 '~를 연습하다'라는 뜻을 나타낸다.",
+          tip: "练习 + action/skill (e.g. 练习跑步, 练习写字, 练习唱歌) means 'to practise ~'.",
         },
       },
       {
@@ -276,13 +276,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "bǎo hù",
         meaning: "to protect (保护环境 = to protect the environment)",
         solution: {
-          method: "'____环境(환경을 ____하다)'와 자연스럽게 어울리는 단어를 고른다.",
+          method: "Choose the word that goes naturally with '____环境 (to ____ the environment)'.",
           steps: [
-            "环境(huánjìng, 환경)을 대상으로 하는 동작을 나타내는 단어를 찾는다.",
-            "④保护(bǎohù, 보호하다)와 결합하면 '保护环境(환경을 보호하다)'라는 자연스러운 표현이 된다.",
-            "다른 단어들은 모두 环境과 자연스럽게 결합하지 않는다.",
+            "Find the word that describes an action you can do towards 环境 (huánjìng, environment).",
+            "④ 保护 (bǎohù, to protect) combines with 环境 to make '保护环境 (to protect the environment)', which is a natural expression.",
+            "All the other words do not combine naturally with 环境.",
           ],
-          tip: "保护 + 명사 (예: 保护环境, 保护动物, 保护自己) 형태로 '~를 보호하다'라는 뜻을 나타낸다.",
+          tip: "保护 + noun (e.g. 保护环境, 保护动物, 保护自己) means 'to protect ~'.",
         },
       },
     ],
@@ -306,13 +306,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "zǐ xì",
         meaning: "careful, meticulous",
         solution: {
-          method: "'小明做事____，很少会做错(샤오밍은 일을 ____하게 해서, 거의 실수하지 않는다)'에서, 실수가 적은 이유에 해당하는 단어를 찾는다.",
+          method: "In the sentence '小明做事____，很少会做错 (Xiao Ming does things ____, and rarely makes mistakes)', find the word that explains why he rarely makes mistakes.",
           steps: [
-            "실수를 거의 하지 않는 이유로 적절한 성격/태도를 나타내는 단어를 찾는다.",
-            "⑤仔细(zǐxì, 세심하다/꼼꼼하다)가 '일을 꼼꼼하게 하면 실수가 적다'는 논리와 맞아떨어진다.",
-            "①愿望(소원) ②请求(요청) ③果然(과연) ④虽然(비록~이지만) ⑥希望(희망)은 모두 '做事(일을 하다)'를 수식하는 형용사로 어울리지 않는다.",
+            "Find the word that describes a suitable personality or attitude that would lead to making very few mistakes.",
+            "⑤ 仔细 (zǐxì, careful/thorough) fits perfectly with the idea that 'doing things carefully leads to fewer mistakes'.",
+            "① 愿望 (wish) ② 请求 (request) ③ 果然 (as expected) ④ 虽然 (although~) ⑥ 希望 (hope) do not fit as adjectives describing how to '做事 (do things)'.",
           ],
-          tip: "'做事仔细'는 '일을 꼼꼼하게/세심하게 한다'는 뜻으로, 성격이나 태도를 묘사할 때 자주 쓰인다.",
+          tip: "'做事仔细' means 'to do things carefully and thoroughly', and is often used to describe someone's personality or attitude.",
         },
       },
       {
@@ -324,13 +324,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "qǐng qiú",
         meaning: "request",
         solution: {
-          method: "'妈妈答应我的____，带我去动物园玩(엄마가 나의 ____을 들어주셔서, 동물원에 데려가 주셨다)'에서, '答应(들어주다/승낙하다)'의 목적어로 적절한 단어를 찾는다.",
+          method: "In the sentence 'Mum granted my ____, and took me to the zoo (妈妈答应我的____，带我去动物园玩)', we need to find the right word to use as the object of '答应 (to grant/agree to)'.",
           steps: [
-            "'答应'은 보통 누군가의 '요청/부탁'을 들어줄 때 쓰는 동사이다.",
-            "②请求(qǐngqiú, 요청/부탁)와 결합하면 '答应我的请求(나의 부탁을 들어주다)'라는 자연스러운 표현이 된다.",
-            "①愿望(소원)도 의미상 가능해 보이지만, '答应……的请求'가 더 자연스럽고 표준적인 표현으로 정답으로 채택된다.",
+            "'答应' is a verb used when someone agrees to or grants another person's 'request'.",
+            "When paired with ②请求 (qǐngqiú, request), it forms the natural phrase '答应我的请求 (to grant my request)'.",
+            "①愿望 (wish) might seem possible in meaning, but '答应……的请求' is a more natural and standard expression, so it is the correct answer.",
           ],
-          tip: "'答应 + 사람 + 的 + 请求/要求'는 '~의 부탁/요구를 들어주다'라는 뜻의 자연스러운 표현이다.",
+          tip: "'答应 + person + 的 + 请求/要求' is a natural expression meaning 'to grant someone's request/demand'.",
         },
       },
       {
@@ -342,13 +342,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "suī rán",
         meaning: "although",
         solution: {
-          method: "문장 뒤에 '但(그러나)'이 있으므로, 앞 절에는 양보(비록~이지만)를 나타내는 접속사가 와야 한다.",
+          method: "Since '但 (but/however)' appears at the end of the sentence, the first part of the sentence needs a conjunction that shows contrast (meaning 'even though/although').",
           steps: [
-            "'____题目很难，但小华仍然努力把它做完' = '____문제가 어렵지만, 샤오화는 여전히 노력해서 끝까지 풀었다'.",
-            "'但'과 짝을 이루는 접속사는 ④虽然(suīrán, 비록~이지만)이다. '虽然……但……'은 양보 관계를 나타내는 고정 표현이다.",
-            "다른 단어들은 접속사로서 '但'과 짝을 이루지 않는다.",
+            "'____题目很难，但小华仍然努力把它做完' means '____the question was difficult, Xiao Hua still tried hard and finished it'.",
+            "The conjunction that pairs with '但' is ④虽然 (suīrán, although/even though). '虽然……但……' is a fixed expression used to show contrast.",
+            "The other words do not pair with '但' as conjunctions.",
           ],
-          tip: "'虽然……但是/但……'은 짝을 이루는 접속사 표현이다. 한쪽이 보이면 다른 쪽도 함께 와야 한다는 것을 기억하자.",
+          tip: "'虽然……但是/但……' is a paired conjunction expression. Remember that when you see one part, the other part must come with it.",
         },
       },
       {
@@ -360,13 +360,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "guǒ rán",
         meaning: "as expected, sure enough",
         solution: {
-          method: "선생님이 알려준 방법대로 했더니 '실제로 예상대로' 답을 찾았다는 의미의 단어를 찾는다.",
+          method: "We need to find a word that means something turned out 'exactly as expected' after following the method the teacher taught.",
           steps: [
-            "'我按照老师说的方法去做，____找到了答案' = '나는 선생님이 말한 방법대로 했고, ____답을 찾았다'.",
-            "선생님의 방법을 따른 결과가 예상대로(효과가 있었다는) 의미이므로 ③果然(guǒrán, 과연/예상대로)이 적절하다.",
-            "다른 단어들은 결과를 나타내는 부사로 어울리지 않는다.",
+            "'我按照老师说的方法去做，____找到了答案' means 'I followed the method the teacher taught, and ____ found the answer'.",
+            "Since the result of following the teacher's method turned out as expected (it worked), ③果然 (guǒrán, as expected/sure enough) is the right choice.",
+            "The other words are not suitable adverbs for describing a result that turned out as expected.",
           ],
-          tip: "果然은 어떤 방법이나 예측이 '실제로 맞았다'는 것을 강조할 때 사용한다.",
+          tip: "果然 is used to emphasise that a method or prediction 'actually turned out to be correct'.",
         },
       },
       {
@@ -378,13 +378,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "xī wàng",
         meaning: "to hope, to wish",
         solution: {
-          method: "'我____假期快点到来(나는 방학이 빨리 오기를 ____한다)'에서, '바라다/희망하다'를 나타내는 동사를 고른다.",
+          method: "In '我____假期快点到来 (I ____ for the holidays to come quickly)', choose the verb that means 'to wish/to hope'.",
           steps: [
-            "'假期快点到来'는 화자가 바라는 일이므로, 그 앞에는 '바라다/희망하다'를 뜻하는 동사가 와야 한다.",
-            "⑥希望(xīwàng, 희망하다/바라다)이 동사로 쓰여 '我希望……(나는 ~하기를 바란다)'라는 자연스러운 문장을 만든다.",
-            "①愿望(소원, 명사)은 동사로 쓰일 수 없으므로 이 문맥에서는 적절하지 않다.",
+            "'假期快点到来' is something the speaker hopes for, so the verb before it must mean 'to wish' or 'to hope'.",
+            "⑥希望 (xīwàng, to hope/to wish) is used as a verb to make the natural sentence '我希望…… (I hope that…)'.",
+            "①愿望 (wish/desire) is a noun and cannot be used as a verb, so it does not fit in this sentence.",
           ],
-          tip: "'希望'은 동사(바라다)와 명사(희망, 소원) 둘 다로 쓰일 수 있지만, '愿望'은 명사로만 쓰인다. '我希望……'은 자주 쓰이는 표현이다.",
+          tip: "'希望' can be used as both a verb (to hope) and a noun (hope, wish), but '愿望' can only be used as a noun. '我希望……' is a very commonly used expression.",
         },
       },
     ],
@@ -401,13 +401,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "bì xū",
     meaning: "must, have to",
     solution: {
-      method: "괄호 속 '必须(반드시~해야 한다)'를 문장에 삽입하여 의미를 강화한다. 必须는 동사 앞, 주어 뒤에 위치하는 부사이다.",
+      method: "Insert '必须 (must/have to)' from the brackets into the sentence to make it stronger. 必须 is an adverb that is placed after the subject and before the verb.",
       steps: [
-        "원문: 上课时，同学们认真听讲。(수업 시간에 학생들은 열심히 듣는다.)",
-        "'必须'는 '반드시 ~해야 한다'는 의무를 나타내는 부사이므로 주어(同学们) 뒤, 동사(认真听讲) 앞에 위치한다.",
-        "결과: 上课时，同学们必须认真听讲。 — '반드시 열심히 들어야 한다'는 의무의 의미가 추가되었다.",
+        "Original sentence: 上课时，同学们认真听讲。(During class, the students listen carefully.)",
+        "Since '必须' is an adverb showing strong obligation meaning 'must', it is placed after the subject (同学们) and before the verb (认真听讲).",
+        "Result: 上课时，同学们必须认真听讲。— The meaning of obligation, 'must listen carefully', has been added.",
       ],
-      tip: "必须는 '꼭/반드시'라는 강한 의무를 나타내는 부사로, 부정형은 '不必(~할 필요 없다)' 또는 '不能(~해서는 안 된다)'로 표현한다.",
+      tip: "必须 is an adverb showing strong obligation meaning 'must/have to'. Its negative forms are '不必 (no need to)' or '不能 (must not)'.",
     },
   },
   {
@@ -420,13 +420,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "fù jìn de",
     meaning: "nearby (the ~ nearby)",
     solution: {
-      method: "괄호 속 '附近的(근처의)'를 명사(巴刹) 앞에 삽입하여 장소를 더 구체적으로 설명한다.",
+      method: "Insert '附近的 (nearby)' from the brackets before the noun 巴刹 to give a more specific description of the place.",
       steps: [
-        "원문: 奶奶带我去巴刹买水果。(할머니가 나를 데리고 시장에 가서 과일을 산다.)",
-        "'附近的(근처의)'는 명사를 수식하는 형용사구이므로, 수식하려는 명사인 '巴刹(시장)' 바로 앞에 위치한다.",
-        "결과: 奶奶带我去附近的巴刹买水果。 — '근처에 있는 시장'이라는 더 구체적인 정보가 추가되었다.",
+        "Original sentence: 奶奶带我去巴刹买水果。(Grandma takes me to the market to buy fruit.)",
+        "'附近的 (nearby)' is an adjective phrase that describes a noun, so it is placed directly before the noun it describes, '巴刹 (market)'.",
+        "Result: 奶奶带我去附近的巴刹买水果。— More specific information, 'the nearby market', has been added.",
       ],
-      tip: "'……的 + 명사' 구조는 명사를 꾸미는 형용사구를 만든다. 수식어는 항상 꾸미는 명사 바로 앞에 위치한다.",
+      tip: "The structure '……的 + noun' creates an adjective phrase that describes a noun. The describing word is always placed directly before the noun it describes.",
     },
   },
   {
@@ -439,13 +439,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "yī xià zi",
     meaning: "all at once, suddenly",
     solution: {
-      method: "괄호 속 '一下子(갑자기/순식간에)'를 동사(安静) 앞에 삽입하여, 변화가 매우 빠르게 일어났음을 강조한다.",
+      method: "Insert '一下子 (suddenly / in an instant)' from the brackets before the verb (安静) to show that the change happened very quickly.",
       steps: [
-        "원문: 老师走进来，课室安静了许多。(선생님이 들어오자, 교실이 많이 조용해졌다.)",
-        "'一下子'는 '단번에/갑자기'라는 뜻의 부사이므로, 주어(课室) 뒤, 동사(安静) 앞에 위치한다.",
-        "결과: 老师走进来，课室一下子安静了许多。 — '교실이 순식간에/갑자기 조용해졌다'는 더 생동감 있는 표현이 되었다.",
+        "Original sentence: 老师走进来，课室安静了许多。(When the teacher walked in, the classroom became much quieter.)",
+        "'一下子' is an adverb meaning 'all at once / suddenly', so it is placed after the subject (课室) and before the verb (安静).",
+        "Result: 老师走进来，课室一下子安静了许多。— This now gives a more vivid picture, meaning 'the classroom suddenly became quiet in an instant.'",
       ],
-      tip: "'一下子'는 '짧은 시간 안에/순식간에'라는 뜻으로, 변화가 매우 빠르게 일어났음을 강조할 때 사용한다.",
+      tip: "'一下子' means 'in a short time / all of a sudden'. We use it to show that a change happened very quickly.",
     },
   },
   {
@@ -458,13 +458,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "xīng fèn de",
     meaning: "excitedly",
     solution: {
-      method: "괄호 속 '兴奋地(흥분하여/신나서)'를 동사(跳了起来) 앞에 삽입하여, 동작이 일어난 감정 상태를 더 구체적으로 묘사한다.",
+      method: "Insert '兴奋地 (excitedly)' from the brackets before the verb (跳了起来) to describe the feeling behind the action more clearly.",
       steps: [
-        "원문: 看到爸爸买的礼物，妹妹跳了起来。(아빠가 사 온 선물을 보고, 여동생이 펄쩍 뛰었다.)",
-        "'兴奋地'는 동사를 수식하는 부사어이므로, 동사(跳了起来) 바로 앞에 위치한다.",
-        "결과: 看到爸爸买的礼物，妹妹兴奋地跳了起来。 — '신나서/흥분해서' 뛰었다는 감정 정보가 추가되었다.",
+        "Original sentence: 看到爸爸买的礼物，妹妹跳了起来。(Seeing the gift Dad bought, younger sister jumped up.)",
+        "'兴奋地' is an adverb that describes the verb (跳了起来), so it is placed directly before the verb.",
+        "Result: 看到爸爸买的礼物，妹妹兴奋地跳了起来。— This adds the feeling of being 'excited' to describe how she jumped up.",
       ],
-      tip: "형용사 + '地'는 동사를 꾸미는 부사어를 만든다. 동작이 일어날 때의 모습/감정을 묘사할 때 자주 쓰인다 (예: 兴奋地, 难过地, 大声地).",
+      tip: "Adjective + '地' is used to make an adverb that describes a verb. We use this to show how someone does something or what feeling they have while doing it (e.g. 兴奋地, 难过地, 大声地).",
     },
   },
   {
@@ -477,13 +477,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
     pinyin: "tōu tōu de",
     meaning: "secretly, stealthily",
     solution: {
-      method: "괄호 속 '偷偷地(몰래)'를 동사(玩起了) 앞에 삽입하여, 행동이 은밀하게 이루어졌음을 나타낸다.",
+      method: "Insert '偷偷地 (secretly)' from the brackets before the verb (玩起了) to show that the action was done in a sneaky way.",
       steps: [
-        "원문: 看到妈妈忙着做家务，哥哥玩起了手机游戏。(엄마가 집안일로 바쁜 것을 보고, 형이 핸드폰 게임을 시작했다.)",
-        "'偷偷地'는 동사를 수식하는 부사어이므로, 동사(玩起了) 바로 앞에 위치한다.",
-        "결과: 看到妈妈忙着做家务，哥哥偷偷地玩起了手机游戏。 — '엄마가 모르게 몰래' 게임을 했다는 정보가 추가되었다.",
+        "Original sentence: 看到妈妈忙着做家务，哥哥玩起了手机游戏。(Seeing Mum busy with housework, older brother started playing mobile games.)",
+        "'偷偷地' is an adverb that describes the verb (玩起了), so it is placed directly before the verb.",
+        "Result: 看到妈妈忙着做家务，哥哥偷偷地玩起了手机游戏。— This adds the idea that older brother played the game secretly without Mum knowing.",
       ],
-      tip: "'偷偷地'는 다른 사람이 모르게 어떤 행동을 할 때 사용하며, 주로 부정적이거나 장난스러운 행동을 묘사할 때 쓰인다.",
+      tip: "'偷偷地' is used when someone does something without others knowing. It is mostly used to describe actions that are naughty or mischievous.",
     },
   },
 
@@ -506,13 +506,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "bù zhī bù jué",
         meaning: "unconsciously, without realizing it",
         solution: {
-          method: "샤오안이 계속 음식을 집다 보니 '자기도 모르게' 많은 음식을 가져갔다는 의미의 표현을 찾는다.",
+          method: "We are looking for an expression that means Xiao An kept picking up food and 'without realising it' ended up taking a lot.",
           steps: [
-            "'小安不停地拿菜，Q25拿了好多食物' = '샤오안은 계속 음식을 집다가, Q25 많은 음식을 가져갔다'.",
-            "음식을 계속 집다 보니 자기도 모르게 양이 많아졌다는 흐름이 자연스럽다.",
-            "⑥不知不觉(bùzhī bùjué, 자기도 모르게/어느새)가 이 의미에 가장 적합하다.",
+            "'小安不停地拿菜，Q25拿了好多食物' = 'Xiao An kept picking up food, and Q25 took a lot of food.'",
+            "It makes sense that because she kept picking up food, the amount grew without her noticing.",
+            "⑥不知不觉 (bùzhī bùjué, 'without realising / before one knows it') fits this meaning best.",
           ],
-          tip: "'不知不觉'는 시간이 지나거나 행동이 진행되면서 '자기도 인식하지 못한 사이에' 어떤 결과가 생겼음을 나타낸다.",
+          tip: "'不知不觉' is used when, as time passes or an action continues, a result happens without the person being aware of it.",
         },
       },
       {
@@ -524,13 +524,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "gào sù",
         meaning: "to tell, to inform",
         solution: {
-          method: "부모님이 아이에게 음식을 너무 많이 가져가지 말라고 '말했다'는 의미의 동사를 찾는다.",
+          method: "We are looking for a verb that means the parents 'told' the child not to take too much food.",
           steps: [
-            "'爸爸妈妈Q26他不要拿那么多食物' = '부모님은 그에게 그렇게 많은 음식을 가져가지 말라고 Q26했다'.",
-            "뒤에 '不要……(~하지 말아라)'라는 명령/충고의 말이 이어지므로, '말하다/알리다'를 뜻하는 동사가 필요하다.",
-            "①告诉(gàosù, 말하다/알리다)가 '告诉他不要……(그에게 ~하지 말라고 말하다)'라는 자연스러운 구조를 만든다.",
+            "'爸爸妈妈Q26他不要拿那么多食物' = 'Mum and Dad Q26 him not to take so much food.'",
+            "Because the sentence continues with '不要……(do not…)', which is a command or advice, we need a verb meaning 'to tell / to inform'.",
+            "①告诉 (gàosù, 'to tell / to inform') creates the natural structure '告诉他不要…… (tell him not to…)'.",
           ],
-          tip: "'告诉 + 사람 + (不要)동작'은 '~에게 (~하지 말라고) 말하다'라는 뜻의 자주 쓰이는 구문이다.",
+          tip: "'告诉 + person + (不要) action' is a commonly used pattern meaning 'to tell someone (not to) do something'.",
         },
       },
       {
@@ -542,13 +542,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "zhǔn bèi",
         meaning: "to prepare, to be about to (do something)",
         solution: {
-          method: "아빠가 지갑을 꺼내 돈을 내려고 '준비하는' 동작에 해당하는 단어를 찾는다.",
+          method: "We are looking for a word that describes Dad's action of taking out his wallet, getting ready to pay.",
           steps: [
-            "'爸爸拿出钱包，Q27付钱时' = '아빠는 지갑을 꺼내, Q27 돈을 내려고 할 때'.",
-            "'拿出钱包(지갑을 꺼내다)'는 돈을 낼 '준비'를 하는 동작이므로, ④准备(zhǔnbèi, 준비하다)가 가장 자연스럽다.",
-            "'准备付钱(돈을 낼 준비를 하다/막 돈을 내려고 하다)'라는 표현이 문맥과 일치한다.",
+            "'爸爸拿出钱包，Q27付钱时' = 'Dad took out his wallet, and when he Q27 to pay.'",
+            "Since '拿出钱包 (take out the wallet)' is the action of getting ready to pay, ④准备 (zhǔnbèi, 'to prepare / to get ready') fits most naturally.",
+            "'准备付钱 (get ready to pay / be about to pay)' matches the context of the sentence.",
           ],
-          tip: "'准备 + 동작'은 '~할 준비를 하다' 또는 '막 ~하려고 하다'라는 뜻을 나타낸다.",
+          tip: "'准备 + action' means 'to prepare to do something' or 'to be about to do something'.",
         },
       },
       {
@@ -560,13 +560,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "nán wéi qíng",
         meaning: "embarrassed, ashamed",
         solution: {
-          method: "직원에게 야단을 맞은 후 샤오안이 느낀 감정을 나타내는 형용사를 찾는다.",
+          method: "Find the adjective that describes how Xiao An felt after being scolded by the staff member.",
           steps: [
-            "'小安听了，感到十分Q28' = '샤오안은 그 말을 듣고, 매우 Q28을 느꼈다'.",
-            "음식을 낭비한 것에 대해 직원에게 지적을 받았으니, 부끄럽고 난처한 감정이 생기는 것이 자연스럽다.",
-            "⑤难为情(nánwéiqíng, 난처하다/부끄럽다)이 '感到十分难为情(매우 부끄러움을 느끼다)'라는 자연스러운 표현을 만든다.",
+            "'小安听了，感到十分Q28' means 'After hearing that, Xiao An felt very Q28.'",
+            "Since Xiao An was told off by the staff for wasting food, it is natural that she would feel embarrassed and uncomfortable.",
+            "⑤难为情 (nánwéiqíng, embarrassed/uncomfortable) creates the natural phrase '感到十分难为情' meaning 'felt very embarrassed'.",
           ],
-          tip: "'感到 + 감정형용사'는 '~한 감정을 느끼다'라는 뜻이다. 难为情은 잘못이나 실수로 인한 부끄러움을 나타낸다.",
+          tip: "'感到 + emotion adjective' means 'to feel a certain emotion'. 难为情 describes the feeling of embarrassment from doing something wrong or making a mistake.",
         },
       },
       {
@@ -578,13 +578,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "làng fèi",
         meaning: "to waste",
         solution: {
-          method: "'음식을 더 아끼고, 먹을 만큼만 가져가며, 다시는 ____하지 않겠다'는 다짐에서, '낭비하다'를 의미하는 동사를 찾는다.",
+          method: "From the promise 'to treasure food more, take only what you can eat, and never ____ again', find the verb that means 'to waste'.",
           steps: [
-            "'不再Q29' = '다시는 Q29하지 않겠다'.",
-            "앞 문장에서 '更爱惜食物(음식을 더 아낀다)', '吃多少就拿多少(먹을 만큼만 가져간다)'라고 했으므로, 다짐의 내용은 '음식을 낭비하지 않겠다'는 것이다.",
-            "②浪费(làngfèi, 낭비하다)가 '不再浪费(다시는 낭비하지 않겠다)'라는 자연스러운 표현을 만든다.",
+            "'不再Q29' means 'will not Q29 anymore'.",
+            "The earlier sentences say '更爱惜食物 (treasure food more)' and '吃多少就拿多少 (take only what you can eat)', so the promise is about 'not wasting food'.",
+            "②浪费 (làngfèi, to waste) creates the natural phrase '不再浪费' meaning 'will not waste anymore'.",
           ],
-          tip: "'爱惜(아끼다)'와 '浪费(낭비하다)'는 반의어 관계이다. 함께 기억해두면 이런 문맥 문제를 풀기 쉽다.",
+          tip: "'爱惜 (to treasure)' and '浪费 (to waste)' are antonyms (opposites). Remembering them together will help you answer context questions like this more easily.",
         },
       },
     ],
@@ -608,13 +608,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "mián huā táng",
         meaning: "cotton candy",
         solution: {
-          method: "지문에서 '我(나)'가 구입한 물건을 직접 언급한 부분을 찾는다.",
+          method: "Find the part of the passage where '我 (I)' directly mentions what was bought.",
           steps: [
-            "지문: '我买了棉花糖和鸡蛋仔，一边吃一边看着各种摊位。'",
-            "여기서 '我'가 구입한 것은 '棉花糖(솜사탕)'과 '鸡蛋仔(에그와플)'이다.",
-            "'玩具和小礼物'는 언니(姐姐)가 산 것이고, '烤肉串和炸鸡翅'는 다른 사람들이 줄을 서서 산 것이므로 정답은 ③이다.",
+            "Passage: '我买了棉花糖和鸡蛋仔，一边吃一边看着各种摊位。'",
+            "Here, '我' bought '棉花糖 (candy floss)' and '鸡蛋仔 (egg waffles)'.",
+            "'玩具和小礼物 (toys and small gifts)' were bought by the older sister (姐姐), and '烤肉串和炸鸡翅 (grilled meat skewers and fried chicken wings)' were what others queued up to buy. So the correct answer is ③.",
           ],
-          tip: "인물별로 행동/구매 내용을 구분해서 읽는 것이 중요하다 - '我'와 '姐姐'를 혼동하지 않도록 주의하자.",
+          tip: "It is important to read carefully and keep track of what each character does or buys — be careful not to mix up '我' and '姐姐'.",
         },
       },
       {
@@ -630,13 +630,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "huí bù liǎo jiā",
         meaning: "unable to go home",
         solution: {
-          method: "지문에서 집에 돌아가지 못하게 된 상황과 그 이유를 설명한 부분을 찾는다.",
+          method: "Find the part in the passage that explains the situation where they could not go home and the reason why.",
           steps: [
-            "지문: '正当我们要走时，天空突然下起了大雨。我们没有带伞，周围也没有躲雨的地方，我们又冷又着急。'",
-            "갑자기 큰 비가 내렸고, 우산이 없어서 비를 피할 곳도 없었다는 것이 집에 돌아가기 어려워진 직접적인 원인이다.",
-            "①은 길을 잃었다는 내용이 본문에 없고, ②는 휴대폰이 있었지만 배터리가 없었다는 것이므로 '핸드폰이 없다'는 표현이 정확하지 않다. 따라서 정답은 ③이다.",
+            "Passage: '正当我们要走时，天空突然下起了大雨。我们没有带伞，周围也没有躲雨的地方，我们又冷又着急。'",
+            "A sudden heavy rain fell, and because they had no umbrella and nowhere to shelter from the rain, this is the direct cause of why it became difficult for them to go home.",
+            "Option ① is wrong because there is nothing in the passage about getting lost. Option ② is not accurate because they did have a mobile phone, but its battery was dead — so saying 'they had no mobile phone' is incorrect. Therefore, the correct answer is ③.",
           ],
-          tip: "'원인'을 묻는 문제는 결과(回不了家) 바로 앞이나 가까운 부분에서 직접적인 이유를 찾는 것이 효과적이다.",
+          tip: "For questions asking about a 'cause', it is effective to look just before or near the result (回不了家) to find the direct reason.",
         },
       },
       {
@@ -652,13 +652,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "gǎn shòu",
         meaning: "feeling, impression",
         solution: {
-          method: "지문의 마지막 문장에서 '나(我)'가 이 일을 통해 느낀 점/소감을 직접적으로 표현한 부분을 찾는다.",
+          method: "Find the part in the last sentence of the passage where 'I (我)' directly expresses what they felt or their thoughts after this experience.",
           steps: [
-            "지문 마지막 문장: '这件事深深感动了我。我相信，世界上和那位阿姨一样的好心人一定还有很多很多！'",
-            "여기서 '나'는 친절한 아주머니의 행동에 감동했고, '세상에는 그런 좋은 사람들이 많을 것'이라고 믿게 되었다.",
-            "이는 ②'世界上有很多好心人(세상에는 좋은 사람들이 많다)'과 정확히 일치한다.",
+            "Last sentence of the passage: '这件事深深感动了我。我相信，世界上和那位阿姨一样的好心人一定还有很多很多！'",
+            "Here, 'I' was deeply moved by the kind aunty's actions and came to believe that 'there must be many more good people like her in the world'.",
+            "This matches exactly with option ② '世界上有很多好心人 (There are many kind-hearted people in the world)'.",
           ],
-          tip: "지문의 마지막 문단/문장에는 보통 글의 '주제'나 '교훈/느낀 점'이 담겨 있으므로, '感受(느낀 점)'를 묻는 질문은 마지막 부분을 주의해서 보자.",
+          tip: "The last paragraph or sentence of a passage usually contains the 'main idea' or 'lesson / feelings'. So for questions asking about '感受 (feelings)', always read the last part carefully.",
         },
       },
     ],
@@ -681,13 +681,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "yuán liàng",
         meaning: "to forgive",
         solution: {
-          method: "지문에서 주어진 뜻('다른 사람이 잘못한 일에 대해 더 이상 화내지 않다')과 일치하는 단어를 찾는다.",
+          method: "Find the word in the passage that matches the given meaning: 'to no longer be angry about a mistake someone else has made'.",
           steps: [
-            "'다른 사람의 실수를 더 이상 탓하지 않다/화내지 않다'라는 뜻을 가진 단어는 '용서하다'이다.",
-            "지문에서 '可是今天，自己却没有原谅弟弟。'라는 문장에 '原谅(yuánliàng, 용서하다)'이라는 단어가 등장한다.",
-            "따라서 정답은 '原谅'이다.",
+            "The word that means 'to no longer blame or be angry at someone for their mistake' is 'forgive'.",
+            "In the passage, the sentence '可是今天，自己却没有原谅弟弟。' contains the word '原谅 (yuánliàng, to forgive)'.",
+            "Therefore, the correct answer is '原谅'.",
           ],
-          tip: "이런 문제는 지문에 나온 단어 중, 제시된 뜻풀이와 정확히 일치하는 단어를 찾는 어휘 이해 문제이다. 단어의 의미를 정확히 알고 있어야 빠르게 찾을 수 있다.",
+          tip: "This type of question is a vocabulary comprehension question where you find the word in the passage that exactly matches the given definition. Knowing the meaning of words accurately will help you find the answer quickly.",
         },
       },
       {
@@ -698,13 +698,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "duàn",
         meaning: "to break, broken",
         solution: {
-          method: "지문 첫 문단에서 연필이 부러진 '경위/과정'을 설명한 부분을 찾는다.",
+          method: "Find the part in the first paragraph of the passage that explains how and why the pencil broke.",
           steps: [
-            "지문: '弟弟想找他玩玩具车时，不小心把哥哥的新铅笔碰掉在地上。哥哥捡起笔，发现笔断了……'",
-            "동생이 형과 함께 장난감 자동차를 가지고 놀려고 하다가, 실수로 형의 새 연필을 바닥에 떨어뜨렸고, 그 결과 연필이 부러졌다.",
-            "이 과정을 그대로 정리하여 '弟弟不小心把哥哥的新铅笔碰掉在地上弄断了。'와 같이 답한다.",
+            "Passage: '弟弟想找他玩玩具车时，不小心把哥哥的新铅笔碰掉在地上。哥哥捡起笔，发现笔断了……'",
+            "The younger brother accidentally knocked the older brother's new pencil onto the floor while trying to get him to play with toy cars together, and as a result, the pencil broke.",
+            "Summarise this sequence of events and answer with a sentence like: '弟弟不小心把哥哥的新铅笔碰掉在地上弄断了。'",
           ],
-          tip: "'怎样……的?' 유형의 질문은 결과(연필이 부러짐)가 일어난 '과정/원인'을 지문에서 찾아 시간 순서대로 정리하는 것이 핵심이다.",
+          tip: "For '怎样……的?' questions, the key is to find the sequence of events or cause that led to the result (the pencil breaking) in the passage, and organise them in order.",
         },
       },
       {
@@ -716,13 +716,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "zhuàn lái zhuàn qù",
         meaning: "to wander around, to circle around",
         solution: {
-          method: "'어디서 알 수 있는가?' 유형의 질문이므로, 동생의 행동을 묘사한 문장을 지문에서 찾아 인용한다.",
+          method: "This is a 'How do we know?' question, so find and quote the sentence in the passage that directly describes the younger brother's actions.",
           steps: [
-            "지문: '弟弟拿着玩具车，在哥哥旁边转来转去，不肯离开，想要哥哥和他一起玩。'",
-            "이 문장은 동생이 장난감 자동차를 들고 형 옆을 빙빙 돌며 떠나지 않으려 했다는 행동을 직접적으로 묘사하고 있다.",
-            "이 문장을 '从……可以看出……' 형식으로 정리하여 답한다.",
+            "Passage: '弟弟拿着玩具车，在哥哥旁边转来转去，不肯离开，想要哥哥和他一起玩。'",
+            "This sentence directly describes how the younger brother was walking around the older brother with a toy car and refused to leave.",
+            "Use this sentence to form your answer using the structure '从……可以看出……'.",
           ],
-          tip: "'从哪里可以看出……?' 문제는 인물의 행동/말을 묘사한 문장을 그대로 가져와 답하면 되는 경우가 많다.",
+          tip: "For '从哪里可以看出……?' questions, you can often find the answer by directly quoting the sentence in the passage that describes what the character did or said.",
         },
       },
       {
@@ -735,13 +735,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "fǎn yìng",
         meaning: "reaction, response",
         solution: {
-          method: "지문에서 '형이 동생을 혼낼 때'와 '형이 동생에게 사과할 때' 각각의 상황에서 동생이 보인 반응을 찾아 표에 정리한다.",
+          method: "Find the younger brother's reaction in two different situations in the passage — when the older brother scolded him, and when the older brother apologised to him — and fill in the table.",
           steps: [
-            "①'哥哥骂弟弟时(형이 동생을 혼낼 때)': 지문에서 '弟弟吓了一跳，小声说：\u201c对不起……\u201d'라는 문장을 찾는다 → '놀라서 작은 목소리로 \u201c对不起\u201d라고 말했다'.",
-            "②'哥哥向弟弟道歉时(형이 동생에게 사과할 때)': 지문에서 '弟弟听了，笑着说：\u201c没关系，我们还是好兄弟！\u201d'라는 문장을 찾는다 → '웃으며 \u201c没关系, 우리는 여전히 좋은 형제다\u201d라고 말했다'.",
-            "두 가지 반응을 표의 각 칸에 알맞게 채워 넣는다.",
+            "① '哥哥骂弟弟时 (When the older brother scolded the younger brother)': Find the sentence '弟弟吓了一跳，小声说：\"对不起……\"' in the passage → The younger brother was shocked and said \"对不起\" in a soft voice.",
+            "② '哥哥向弟弟道歉时 (When the older brother apologised to the younger brother)': Find the sentence '弟弟听了，笑着说：\"没关系，我们还是好兄弟！\"' in the passage → The younger brother smiled and said \"没关系, we are still good brothers!\"",
+            "Fill in each box of the table with the two different reactions.",
           ],
-          tip: "표(표격) 완성 문제는 지문에서 '시간/상황별'로 흩어져 있는 정보를 찾아 분류하는 능력을 평가한다. 각 상황에 해당하는 문장을 먼저 찾고 정리하자.",
+          tip: "Table completion questions test your ability to find and sort information from different parts of the passage based on situation or time. Start by finding the sentence that matches each situation, then organise your answers.",
         },
       },
       {
@@ -753,13 +753,13 @@ export const eoyNanyangHigherPaper2_2025: EOYQuestion[] = [
         pinyin: "liǎn hóng",
         meaning: "to blush, face turning red (with embarrassment)",
         solution: {
-          method: "지문 마지막 부분에서 형이 얼굴이 빨개진 '이유'를 두 가지 사건(과거-현재)을 비교하여 설명한다.",
+          method: "The last part of the passage explains the *reason* why the older brother's face turned red, by comparing two events (past and present).",
           steps: [
-            "지문: 엄마는 형에게 '예전에 동생이 네 장난감을 망가뜨렸을 때, 동생은 어떻게 했었니?'라고 물었고, 형은 그 당시 동생이 화내지 않고 오히려 자신에게 다른 장난감을 줬던 일을 떠올린다.",
-            "그런데 형은 오늘 동생에게 화를 내며 큰소리로 혼냈다 - 과거 동생의 너그러운 행동과 자신의 오늘 행동을 비교하니 부끄러움을 느꼈다.",
-            "이 두 가지 비교 내용을 '因为……可是……所以脸红了' 형식으로 종합하여 답한다.",
+            "In the passage: Mum asked the older brother, 'When your younger brother broke your toy in the past, what did he do?' The older brother then remembered that at that time, his younger brother did not get angry — instead, he gave him another toy.",
+            "However, today the older brother got angry at his younger brother and scolded him loudly. When he compared his younger brother's kind behaviour in the past with his own behaviour today, he felt ashamed.",
+            "Combine both comparisons to answer in the format: '因为……可是……所以脸红了' (Because… but… therefore his face turned red).",
           ],
-          tip: "'为什么……?' 질문에 답할 때, 지문에 여러 사건이 비교/대조되어 있다면 두 사건을 모두 포함해서 '인과 관계(因为...所以...)'로 설명해야 완전한 답이 된다.",
+          tip: "When answering a '为什么……?' (Why…?) question, if the passage compares or contrasts more than one event, you must include both events and explain them using cause and effect (因为...所以...) to give a complete answer.",
         },
       },
     ],

@@ -24,9 +24,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "gǎn",
     meaning: "Correct '感→敢'. '不敢(bùgǎn)' = dare not. 我不敢在半夜上厕所.",
     solution: {
-      method: "동음 오자 교정",
-      steps: ["'不感'은 잘못 → '감히 ~하지 못하다'는 '不敢'.", "'感(느끼다)'을 '敢(감히)'으로 고친다."],
-      tip: "敢(감히 감) vs 感(느낄 감) — 동음(gǎn), 자형 일부 유사.",
+      method: "Correcting a wrong character that sounds the same (homophone error)",
+      steps: ["'不感' is wrong → to mean 'dare not do something', the correct word is '不敢'.", "Change '感 (to feel)' to '敢 (to dare)'."],
+      tip: "敢 (to dare) vs 感 (to feel) — same sound (gǎn), and their written forms look a little similar.",
     },
   },
   {
@@ -39,9 +39,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "wèi",
     meaning: "Correct '为→喂'. '喂食(wèishí)' = to feed. 给猴子喂食 = feed the monkeys.",
     solution: {
-      method: "동음 오자 교정 (口 부수)",
-      steps: ["동물에게 '먹이를 주다' → 喂.", "'为(wèi)'를 '喂(wèi)'로 고친다."],
-      tip: "喂(먹일 위)는 ‘口’ 부수, 为(할 위)와 동음.",
+      method: "Correcting a wrong character that sounds the same (homophone error) — involves the '口' radical",
+      steps: ["To 'feed' an animal → use 喂.", "Change '为 (wèi)' to '喂 (wèi)'."],
+      tip: "喂 (to feed) has the '口' radical, and sounds the same as 为 (to do/for).",
     },
   },
   {
@@ -54,9 +54,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "qī fu",
     meaning: "Correct '七→欺'. '欺负(qīfu)' = to bully. 欺负弟弟 = bully the younger brother.",
     solution: {
-      method: "동음 오자 교정",
-      steps: ["'七负'는 잘못 → '괴롭히다'는 '欺负'.", "'七(qī)'를 '欺(qī)'로 고친다."],
-      tip: "欺负(괴롭히다)의 ‘欺’ — 七과 발음 같음.",
+      method: "Correcting a wrong character that sounds the same (homophone error)",
+      steps: ["'七负' is wrong → to mean 'to bully', the correct word is '欺负'.", "Change '七 (qī)' to '欺 (qī)'."],
+      tip: "The '欺' in 欺负 (to bully) — sounds exactly the same as 七.",
     },
   },
   {
@@ -69,9 +69,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "yǎng",
     meaning: "Correct '样→养'. '养鱼(yǎngyú)' = to raise/keep fish.",
     solution: {
-      method: "형근·동음 오자 교정",
-      steps: ["물고기를 '기르다' → 养.", "'样(모양)'을 '养(기르다)'으로 고친다."],
-      tip: "养(기를 양)과 样(모양 양) 자형 유사.",
+      method: "Correcting a wrong character that looks similar and sounds the same",
+      steps: ["To 'raise' or 'keep' fish → use 养.", "Change '样 (appearance/shape)' to '养 (to raise/to keep)'."],
+      tip: "The characters 养 and 样 look similar in shape.",
     },
   },
   {
@@ -84,9 +84,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "shì juàn",
     meaning: "Correct '士→试'. '试卷(shìjuàn)' = exam paper.",
     solution: {
-      method: "형근 오자 교정",
-      steps: ["이름을 쓰는 것 → '试卷(시험지)'.", "'士'를 '试'로 고친다."],
-      tip: "试卷(시험지)의 ‘试’ — 士가 들어간 형근자.",
+      method: "Correction of a look-alike character mistake.",
+      steps: ["Writing one's name → '试卷' (exam paper).", "Change '士' to '试'."],
+      tip: "The character '试' in 试卷 (exam paper) — a look-alike character that contains '士'.",
     },
   },
   {
@@ -95,14 +95,14 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     difficulty: "core",
     needsParentVerify: true,
     instruction: "请在错误的汉字下面划线，然后把正确的汉字填写在括号里。",
-    q: "听写时，我发现小文在【偷错字】看。（정답 문장: 听写时，我发现小文在偷看。）",
+    q: "During 听写 (dictation), I found that 小文 was 【偷错字】looking secretly. (Correct sentence: 听写时，我发现小文在偷看。)",
     answer: "偷",
     pinyin: "tōu",
     meaning: "Corrected to '偷(tōu)'. '偷看(tōukàn)' = to peek/sneak a look. 小文在偷看 = Xiao Wen was peeking.",
     solution: {
-      method: "문맥 동작 교정",
-      steps: ["받아쓰기 중 몰래 '훔쳐보다' → 偷看.", "원문의 잘못된 글자를 '偷'로 고친다."],
-      tip: "⚠ 인쇄된 ‘틀린 글자’ 형태가 OCR상 불명확. 바른 글자 ‘偷’만 확정 — 학부모 검수 권장.",
+      method: "Correction of an action word based on context.",
+      steps: ["To secretly look during dictation → 偷看.", "Change the wrong character in the original to '偷'."],
+      tip: "⚠ The printed 'wrong character' form is unclear in OCR. Only the correct character '偷' is confirmed — parent review is recommended.",
     },
   },
   {
@@ -115,9 +115,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "děng",
     meaning: "Correct '灯→等'. '等(děng)' = to wait. 等了三十分钟 = waited 30 minutes.",
     solution: {
-      method: "형근 오자 교정",
-      steps: ["버스를 '기다리다' → 等.", "'灯(등불)'을 '等(기다리다)'으로 고친다."],
-      tip: "等(기다릴 등)과 灯(등 등) 자형 유사.",
+      method: "Correction of a look-alike character mistake.",
+      steps: ["To 'wait' for a bus → 等.", "Change '灯 (light)' to '等 (to wait)'."],
+      tip: "The characters 等 and 灯 look similar in shape.",
     },
   },
   {
@@ -130,9 +130,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "rèn shi",
     meaning: "Correct '视→识'. '认识(rènshi)' = to know/be acquainted with. 认识的人不多.",
     solution: {
-      method: "형근 오자 교정",
-      steps: ["'认视'는 잘못 → '알다'는 '认识'.", "'视(보다)'를 '识(알다)'로 고친다."],
-      tip: "认识(알다)의 ‘识’ — 视와 자형 비슷.",
+      method: "Correction of a look-alike character mistake.",
+      steps: ["'认视' is wrong → the correct word for 'to know someone' is '认识'.", "Change '视 (to see/look)' to '识 (to know/recognise)'."],
+      tip: "In 认识 (to know someone), the character '识' looks similar to '视', so be careful not to mix them up.",
     },
   },
   {
@@ -145,9 +145,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "zuò wèi",
     meaning: "Correct '做→座'. '座位(zuòwèi)' = seat. 把座位让给老奶奶 = gave up the seat to the old lady.",
     solution: {
-      method: "동음 오자 교정",
-      steps: ["'做位'는 잘못 → '자리'는 '座位'.", "'做(하다)'를 '座(자리)'로 고친다."],
-      tip: "座位(자리)·座(자리 좌) — 做(zuò)와 동음.",
+      method: "Correcting a wrong character that sounds the same as the right one",
+      steps: ["'做位' is wrong → the correct word for 'seat' is '座位'.", "Change '做 (to do)' to '座 (seat)'."],
+      tip: "'座位 (seat)' uses '座 (seat)' — it sounds the same as '做 (zuò)', so they are easy to mix up.",
     },
   },
   {
@@ -160,9 +160,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "wàng",
     meaning: "Correct '望→忘'. '忘(wàng)' = to forget. 忘了把作业带回家 = forgot to bring homework home.",
     solution: {
-      method: "형근·동음 오자 교정",
-      steps: ["숙제 가져오는 걸 '잊다' → 忘.", "'望(바라보다)'을 '忘(잊다)'으로 고친다."],
-      tip: "忘(잊을 망)과 望(바랄 망) — 동음(wàng), 자형 유사.",
+      method: "Correcting characters that look similar or sound the same",
+      steps: ["To 'forget' to bring homework → use the character 忘.", "Change '望 (to look into the distance)' to '忘 (to forget)'."],
+      tip: "'忘 (to forget)' and '望 (to hope/look)' sound the same (wàng) and look similar, so be careful not to mix them up.",
     },
   },
 
@@ -179,9 +179,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "táo",
     meaning: "'逃(táo)' = to flee. 逃走 = run away.",
     solution: {
-      method: "병음→한자 쓰기 (辶 부수)",
-      steps: ["táo = 달아나다 → 逃.", "逃走 = 도망가다."],
-      tip: "逃(달아날 도)는 ‘辶’ 부수.",
+      method: "Writing Chinese characters from Pinyin (using the 辶 radical)",
+      steps: ["táo = to run away → 逃.", "逃走 = to run away / to escape."],
+      tip: "The character 逃 (to escape) uses the '辶' radical.",
     },
   },
   {
@@ -194,9 +194,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "jiǎn",
     meaning: "'简(jiǎn)' = simple. 简单 = simple/easy.",
     solution: {
-      method: "병음→한자 쓰기 (竹 부수)",
-      steps: ["jiǎn + 单 = 简单(간단하다).", "'不难'의 단서와 호응."],
-      tip: "简单(간단)의 ‘简’ — ‘竹(대 죽)’ 부수.",
+      method: "Writing Chinese characters from Pinyin (竹 radical)",
+      steps: ["jiǎn + 单 = 简单 (simple / easy).", "Matches the clue given by '不难' (not difficult)."],
+      tip: "The character '简' in 简单 (simple) uses the '竹 (bamboo)' radical.",
     },
   },
   {
@@ -209,9 +209,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "gù",
     meaning: "'顾(gù)' = to look after. 照顾 = to take care of.",
     solution: {
-      method: "병음→한자 쓰기",
-      steps: ["照 + gù = 照顾(돌보다).", "동생을 '돌보다'."],
-      tip: "照顾(돌보다)의 ‘顾’.",
+      method: "Writing Chinese characters from Pinyin",
+      steps: ["照 + gù = 照顾 (to take care of).", "Meaning: to 'take care of' a younger sibling."],
+      tip: "The character '顾' in 照顾 (to take care of).",
     },
   },
   {
@@ -224,9 +224,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "jià",
     meaning: "'假(jià)' = holiday. 假期 = holiday/vacation.",
     solution: {
-      method: "병음→한자 쓰기 (다음자 주의)",
-      steps: ["jià + 期 = 假期(방학·휴가).", "'十二月假期' = 12월 방학."],
-      tip: "假: 휴가=jià(4성), 가짜=jiǎ(3성). 뜻으로 음 결정.",
+      method: "Writing Chinese characters from Pinyin (watch out — this character has more than one pronunciation!)",
+      steps: ["jià + 期 = 假期 (school holiday / vacation).", "'十二月假期' means the December school holidays."],
+      tip: "假 has two readings: jià (4th tone) means holiday/vacation, jiǎ (3rd tone) means fake/false. The meaning of the word helps you decide which pronunciation to use.",
     },
   },
   {
@@ -239,9 +239,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "lùn",
     meaning: "'论(lùn)' = to discuss. 讨论 = to discuss.",
     solution: {
-      method: "병음→한자 쓰기 (讠 부수)",
-      steps: ["讨 + lùn = 讨论(토론하다).", "어떻게 축하할지 '의논'."],
-      tip: "讨论(토론)의 ‘论’ — ‘讠(말씀 언)’ 부수.",
+      method: "Writing Chinese characters from Pinyin (讠radical)",
+      steps: ["讨 + lùn = 讨论 (to discuss).", "Talking about how to celebrate — meaning 'to discuss'."],
+      tip: "The character '论' in '讨论' (discussion) belongs to the '讠(speech)' radical.",
     },
   },
 
@@ -258,9 +258,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "yán",
     meaning: "'沿(yán)' = along. 沿着小路走 = walk along the path.",
     solution: {
-      method: "병음 쓰기",
-      steps: ["'沿着(~을 따라)'의 '沿' = yán (2성).", "→ yán."],
-      tip: "沿着…走 = ~을 따라 걷다. ‘沿’=yán.",
+      method: "Writing Pinyin",
+      steps: ["The character '沿' in '沿着' (along/following) is pronounced yán (2nd tone).", "→ yán."],
+      tip: "'沿着…走' means 'to walk along…'. '沿' is pronounced yán.",
     },
   },
   {
@@ -273,9 +273,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "zuǐ / niàn",
     meaning: "嘴(zuǐ) = mouth; 念(niàn) = to read aloud. 张开嘴巴，念出课文.",
     solution: {
-      method: "병음 쓰기 — 두 글자(嘴/念)",
-      steps: ["嘴(입) = zuǐ (3성).", "念(소리 내어 읽다) = niàn (4성).", "→ 嘴 zuǐ / 念 niàn."],
-      tip: "嘴巴(입)·念课文(과문을 낭독). 두 글자 모두 정확히.",
+      method: "Writing Pinyin — two characters (嘴 / 念)",
+      steps: ["'嘴' (mouth) is pronounced zuǐ (3rd tone).", "'念' (to read aloud) is pronounced niàn (4th tone).", "→ 嘴 zuǐ / 念 niàn."],
+      tip: "'嘴巴' (mouth) and '念课文' (read the passage aloud). Make sure both characters are written correctly.",
     },
   },
 
@@ -299,13 +299,13 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "suī rán",
     meaning: "'虽然' = although. Correct in (2): although the teacher was absent, the students stayed quiet.",
     solution: {
-      method: "양보 관계 정확성 — '虽然…但…'",
+      method: "Using concessive sentence structures correctly — '虽然…但…' (Although… But…)",
       steps: [
-        "'虽然'은 '但是/还是'와 호응(양보).",
+        "'虽然' (although) must be paired with '但是' or '还是' to form a correct concessive sentence.",
         "(2) '虽然…，但同学们还是很安静' ✓.",
-        "(1)就 / (3)就 / (4)所以는 호응 어긋남.",
+        "Options (1) '就', (3) '就', and (4) '所以' do not correctly pair with '虽然'.",
       ],
-      tip: "‘虽然 A，但(是) B’ 짝이 맞는 문장.",
+      tip: "The correct pattern is '虽然 A，但(是) B' — make sure both parts of the pair match.",
     },
   },
   {
@@ -325,12 +325,12 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "bì xū",
     meaning: "'必须' = must (+ verb). Correct in (1): must finish homework first before going out.",
     solution: {
-      method: "어휘 용법 변별 — '必须'는 '반드시 ~해야 한다(+동사)'",
+      method: "Knowing how to use vocabulary correctly — '必须' means 'must / have to' and is always followed by a verb.",
       steps: [
-        "(1) '必须先把功课做完' → 동사 앞 ✓.",
-        "(3)은 '需要', (4)는 '必需(필수품)'이 맞고, (2)는 어색.",
+        "Example (1): '必须先把功课做完' — '必须' is placed before the verb. ✓",
+        "For (3), the correct word is '需要' (need); for (4), the correct word is '必需' (necessity/essential item); and (2) sounds unnatural.",
       ],
-      tip: "必须+동사(반드시 해야 함) ↔ 必需+명사(필수품).",
+      tip: "必须 + verb (something you must do) ↔ 必需 + noun (something you must have). These two words are different!",
     },
   },
   {
@@ -350,13 +350,13 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "jié guǒ",
     meaning: "'结果' = as a result. Correct in (1): only played every day, as a result failed the spelling test.",
     solution: {
-      method: "인과 결과 정확성 판단",
+      method: "Deciding if a cause and effect is correct",
       steps: [
-        "'结果'는 '앞 원인 → 뒤 결과'를 이어야 한다.",
-        "(1) '只想玩耍 → 听写不及格'이 자연스러운 인과 ✓.",
-        "(2)才 / (3) / (4)会는 인과가 어색.",
+        "'结果' must connect a cause at the front to a result at the back.",
+        "(1) 'Only wanting to play → failing dictation' is a natural cause and effect ✓.",
+        "(2) 才 / (3) / (4) 会 have awkward cause-and-effect connections.",
       ],
-      tip: "‘原因，结果 + 실제 일어난 일’ 구조가 맞는 문장.",
+      tip: "The correct sentence structure is: 'Cause, Result + what actually happened'.",
     },
   },
   {
@@ -376,12 +376,12 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "jiǎn chá",
     meaning: "'检查' = to check/inspect. Correct in (3): the teacher asked us to check before handing in homework.",
     solution: {
-      method: "어휘 용법 변별 — '检查'는 '점검·확인'",
+      method: "Learning the difference between vocabulary words — '检查' means 'to check or inspect'.",
       steps: [
-        "(3) '检查之后再交作业' → 과제를 점검 ✓.",
-        "(1)은 '看报纸', (2)는 '看了手表', (4)는 '反省'이 맞다.",
+        "(3) '检查之后再交作业' → checking the work before handing it in ✓.",
+        "(1) should use '看报纸', (2) should use '看了手表', and (4) should use '反省'.",
       ],
-      tip: "‘잘못을 돌아보다’는 反省, 답안·물건을 ‘점검’은 检查.",
+      tip: "'Reflecting on a mistake' uses 反省, while 'checking an answer or an item' uses 检查.",
     },
   },
 
@@ -415,13 +415,13 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
         pinyin: "yí dìng huì shū",
         meaning: "Why did the hare want another race? Because it thought the tortoise would surely lose.",
         solution: {
-          method: "원인 추론 — 토끼의 심리",
+          method: "Finding the reason — understanding the rabbit's feelings",
           steps: [
-            "'看不起小乌龟…比不上自己', 졌더니 '很不高兴' → 다시 이기려 함.",
-            "토끼는 거북이가 질 거라 자신함.",
+            "The rabbit '看不起小乌龟' and thinks the tortoise is no match for him. After losing, he feels '很不高兴', so he wants to win again.",
+            "The rabbit is confident that the tortoise will lose.",
             "→ (1) 认为小乌龟一定会输的.",
           ],
-          tip: "‘看不起 + 输了不高兴’ → 다시 이기려는 자만심이 동기.",
+          tip: "'看不起 + feeling unhappy after losing' → the rabbit's pride is what motivates him to race again.",
         },
       },
       {
@@ -433,13 +433,13 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
         pinyin: "hěn chī jīng",
         meaning: "How did the hare feel when the tortoise offered to carry it? Very surprised (很吃惊).",
         solution: {
-          method: "행동 단서로 감정 추론",
+          method: "Using clues about actions to figure out how a character feels",
           steps: [
-            "'睁大了眼睛，不相信乌龟说的话' → 놀람.",
-            "경쟁자가 도와준다니 예상 밖 → 吃惊.",
+            "'睁大了眼睛，不相信乌龟说的话' shows surprise.",
+            "It is surprising that a competitor offers to help → 吃惊 (shocked/surprised).",
             "→ (3) 很吃惊.",
           ],
-          tip: "‘睁大眼睛·不相信’은 ‘놀람(吃惊)’의 전형적 표현.",
+          tip: "'睁大眼睛·不相信' (wide eyes, disbelief) is a typical expression of surprise (吃惊).",
         },
       },
       {
@@ -451,13 +451,13 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
         pinyin: "rè xīn",
         meaning: "What kind of animal is the tortoise? Warm-hearted/helpful (热心).",
         solution: {
-          method: "인물 성격 판단 — 행동 근거",
+          method: "Judging a character's personality — based on their actions",
           steps: [
-            "경쟁 중에도 '我背你过河', '友情第一' → 남을 돕는 마음.",
-            "본문 끝 '乐于助人(남 돕기를 즐김)'과 연결.",
+            "Even during a race, saying '我背你过河' and putting '友情第一' shows a caring and helpful heart.",
+            "This connects to '乐于助人 (happy to help others)' at the end of the passage.",
             "→ (2) 热心.",
           ],
-          tip: "‘乐于助人’ = 热心. 경쟁보다 우정을 택한 행동이 근거.",
+          tip: "'乐于助人' = being warm-hearted and helpful. The evidence is choosing friendship over winning the competition.",
         },
       },
     ],
@@ -476,9 +476,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "hǔ",
     meaning: "'虎(hǔ)' = tiger. 8 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
-      steps: ["虎 = hǔ (3성).", "획수 총 8획."],
-      tip: "老虎(호랑이)의 ‘虎’, 8획.",
+      method: "Learn the Pinyin and count the number of strokes.",
+      steps: ["虎 = hǔ (3rd tone).", "Total stroke count: 8 strokes."],
+      tip: "'虎' from 老虎 (tiger) has 8 strokes.",
     },
   },
   {
@@ -491,9 +491,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "tuǐ",
     meaning: "'腿(tuǐ)' = leg. 13 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
-      steps: ["腿 = tuǐ (3성).", "획수 총 13획."],
-      tip: "腿(다리)는 ‘月(肉)’ 부수, 13획.",
+      method: "Learn the Pinyin and count the number of strokes.",
+      steps: ["腿 = tuǐ (3rd tone).", "Total stroke count: 13 strokes."],
+      tip: "'腿' (leg) uses the '月(肉)' radical and has 13 strokes.",
     },
   },
   {
@@ -506,9 +506,9 @@ export const wa3_chijstnicholas_rev4_2025: Question[] = [
     pinyin: "chuán",
     meaning: "'传(chuán)' = to pass on / spread. 6 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
-      steps: ["传 = chuán (2성).", "획수 총 6획."],
-      tip: "传(전할 전)은 ‘亻(사람 인)’ 부수, 6획.",
+      method: "Pinyin + counting the number of strokes",
+      steps: ["传 = chuán (2nd tone).", "Total stroke count: 6 strokes."],
+      tip: "传 (meaning: to pass on/transmit) uses the '亻(person)' radical, 6 strokes.",
     },
   },
 ];

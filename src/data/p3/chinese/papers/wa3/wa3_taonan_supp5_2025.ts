@@ -23,13 +23,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "hé",
     meaning: "'河(hé)' = river. 放进河里 = put it into the river.",
     solution: {
-      method: "동음·유사형(同音形近字) 변별 — 의미부 '氵(물)'",
+      method: "Homophones and similar-looking characters — the meaning component '氵(water)'",
       steps: [
-        "나뭇잎을 작은 배로 띄울 '곳' → 물이 있는 강.",
-        "'河'는 물 부수 '氵'를 가져 '강'을 뜻한다.",
-        "可/何/阿는 물과 무관해 제외.",
+        "We need a 'place' to float a leaf like a small boat → somewhere with water, like a river.",
+        "'河' has the water radical '氵', so it means 'river'.",
+        "可, 何, and 阿 have nothing to do with water, so they are not the answer.",
       ],
-      tip: "물과 관련된 글자엔 ‘氵’가 붙는다 → 河, 海, 池.",
+      tip: "Characters related to water have '氵' → for example, 河 (river), 海 (sea), 池 (pond).",
     },
   },
   {
@@ -44,13 +44,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "huán jìng",
     meaning: "'环境(huánjìng)' = environment. 爱护环境 = cherish/protect the environment.",
     solution: {
-      method: "유사형 글자 변별 + 단어 '环境' 인식",
+      method: "Identifying similar-looking characters + recognising the word '环境' (environment)",
       steps: [
-        "'___境清洁'에서 '환경'이라는 단어가 필요 → 环境.",
-        "'环(고리·환경)'을 고른다.",
-        "杯(컵)·怀(품다)·坏(나쁘다)는 의미가 맞지 않음.",
+        "The phrase '___境清洁' needs the word meaning 'environment' → 环境.",
+        "We choose '环', which means 'ring' or 'environment'.",
+        "杯 (cup), 怀 (to hold in the arms), and 坏 (bad) do not fit the meaning.",
       ],
-      tip: "环(둥글 환)과 坏(나쁠 괴)는 모양이 비슷하니 주의.",
+      tip: "Be careful: 环 (ring/environment) and 坏 (bad) look very similar!",
     },
   },
   {
@@ -65,13 +65,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "shēng",
     meaning: "'升(shēng)' = to rise. 太阳升上来 = the sun rises.",
     solution: {
-      method: "문맥에 맞는 동사 고르기",
+      method: "Choosing the correct verb to match the context",
       steps: [
-        "해가 동쪽에서 하는 동작 → '떠오르다/올라오다'.",
-        "'升上来'가 자연스럽다.",
-        "举(들다)·走(걷다)·飞(날다)는 해의 동작으로 부적절.",
+        "The action the sun does in the east → 'to rise up'.",
+        "'升上来' sounds the most natural here.",
+        "举 (to lift), 走 (to walk), and 飞 (to fly) do not describe what the sun does.",
       ],
-      tip: "해·달·기온이 오를 때 ‘升’을 쓴다 → 上升, 升起.",
+      tip: "When the sun, moon, or temperature goes up, we use '升' → for example, 上升, 升起.",
     },
   },
   {
@@ -86,13 +86,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "tíng",
     meaning: "'停(tíng)' = to stop/park. 把车子停好 = park the car (properly).",
     solution: {
-      method: "동사+목적어 호응",
+      method: "Verb + Object Agreement",
       steps: [
-        "차(车子)에 대한 동작 → '주차하다/세우다'.",
-        "'把车子停好'가 정확한 표현.",
-        "位·休·付는 '车子'와 호응하지 않음.",
+        "The action done to a car (车子) → use '停' meaning 'to park/stop'.",
+        "'把车子停好' is the correct expression.",
+        "'位', '休', and '付' do not match with '车子' as action verbs.",
       ],
-      tip: "‘把…停好’는 ‘잘 ~해 두다’의 把자문 구조.",
+      tip: "'把…停好' is a 把-sentence structure meaning 'to properly settle something'.",
     },
   },
   {
@@ -107,13 +107,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "rēng",
     meaning: "'扔(rēng)' = to throw away. 扔掉 = throw away/discard.",
     solution: {
-      method: "문맥 동작 동사 고르기 (扌 부수)",
+      method: "Choosing the correct action verb based on context (verbs with the 扌 radical)",
       steps: [
-        "고장 난(坏了) 물병을 '버리는' 동작 → 扔掉.",
-        "'扔'을 고른다.",
-        "拔(뽑다)·打(치다)·拍(두드리다)는 '버리다' 뜻이 아님.",
+        "The action of 'throwing away' a broken (坏了) water bottle → use '扔掉'.",
+        "Choose '扔'.",
+        "'拔' (to pull out), '打' (to hit), and '拍' (to pat) do not mean 'to throw away'.",
       ],
-      tip: "‘扔掉’는 ‘버려 없애다’라는 결과보어 구조.",
+      tip: "'扔掉' is a result complement structure meaning 'to throw away and be rid of it'.",
     },
   },
 
@@ -132,14 +132,14 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "zhòng liàng",
     meaning: "'重量(zhòngliàng)' = weight. 多音字 '重' here reads zhòng (heavy), not chóng (again).",
     solution: {
-      method: "다음자(多音字) '重'과 '量' 성조 판별",
+      method: "Identifying the correct tone for the multi-pronunciation characters (多音字) '重' and '量'",
       steps: [
-        "'重'은 '무겁다'일 때 zhòng, '다시/거듭'일 때 chóng.",
-        "여기선 '무게(重量)'이므로 zhòng.",
-        "'量'은 명사 '양/무게'일 때 liàng(4성).",
+        "'重' is pronounced 'zhòng' when it means 'heavy', and 'chóng' when it means 'again/repeat'.",
+        "Here, it refers to 'weight' (重量), so it is pronounced 'zhòng'.",
+        "'量' is pronounced 'liàng' (4th tone) when used as a noun meaning 'amount/weight'.",
         "→ zhòng liàng.",
       ],
-      tip: "重量(무게)=zhòngliàng, 重复(반복)=chóngfù. 뜻으로 음을 가른다.",
+      tip: "'重量' (weight) = zhòngliàng; '重复' (repetition) = chóngfù. The meaning determines the pronunciation.",
     },
   },
   {
@@ -154,13 +154,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "zhú gān",
     meaning: "'竹竿(zhúgān)' = a bamboo pole.",
     solution: {
-      method: "권설음(zh)·운모(an) 정확히 듣기",
+      method: "Listen carefully to the retroflex initial (zh) and the final (an)",
       steps: [
-        "'竹'은 권설음 zhú (zú 아님).",
-        "'竿'은 gān (gāng 아님, 비음운미 없음).",
+        "'竹' uses the retroflex sound zhú — not zú.",
+        "'竿' is pronounced gān — not gāng. There is no nasal ending.",
         "→ zhú gān.",
       ],
-      tip: "z/zh, n/ng 구분이 핵심. 竹=zhú, 竿=gān.",
+      tip: "Telling apart z/zh and n/ng is the key point. 竹=zhú, 竿=gān.",
     },
   },
 
@@ -179,13 +179,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "àn zhào",
     meaning: "'按照(ànzhào)' = according to / in accordance with. 按照方法 = follow the method.",
     solution: {
-      method: "전치사성 동사 의미 매칭",
+      method: "Match the meaning of prepositional verbs",
       steps: [
-        "'___ 书上的方法去做' → 방법'대로/에 따라' 한다.",
-        "'按照(~에 따라)'가 '方法'와 호응.",
-        "听从(따르다·사람말), 答应(승낙), 想象(상상)은 부적절.",
+        "'___ 书上的方法去做' → doing something 'according to' or 'following' a method.",
+        "'按照 (according to)' pairs correctly with '方法'.",
+        "听从 (follow someone's words), 答应 (agree/promise), and 想象 (imagine) do not fit here.",
       ],
-      tip: "‘按照+방법/规定/顺序’ 형태로 자주 쓰인다.",
+      tip: "'按照' is often used in the pattern: 按照 + method / rule / order (e.g. 按照规定, 按照顺序).",
     },
   },
   {
@@ -200,13 +200,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "yáo bǎi",
     meaning: "'摇摆(yáobǎi)' = to sway / swing back and forth.",
     solution: {
-      method: "상황(바람) 단서로 동사 고르기",
+      method: "Use context clues about the situation (wind) to choose the right verb",
       steps: [
-        "강한 바람에 작은 나무가 하는 동작 → 좌우로 '흔들리다'.",
-        "'摇摆'가 적합.",
-        "变化(변하다), 下沉(가라앉다), 活动(활동하다)은 부적절.",
+        "When a strong wind blows against a small tree, the action is swaying side to side.",
+        "'摇摆' is the best fit here.",
+        "变化 (change), 下沉 (sink), and 活动 (move around/exercise) do not fit this situation.",
       ],
-      tip: "바람·물결에 흔들리는 모습은 ‘摇摆 / 摇晃’.",
+      tip: "When something sways in wind or waves, use '摇摆' or '摇晃'.",
     },
   },
   {
@@ -221,13 +221,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "bàn fǎ",
     meaning: "'办法(bànfǎ)' = method / solution to solve a problem. 好办法 = a good solution.",
     solution: {
-      method: "근접 의미어(近义词) 변별",
+      method: "Tell apart words with similar meanings (近义词)",
       steps: [
-        "문제(구덩이에 빠진 강아지)를 '해결하는 방법' → 办法.",
-        "说法(견해·표현), 看法(관점), 做法(처리 방식)은 '해결책' 뉘앙스가 약함.",
-        "'想到一个好办法'가 정해진 표현.",
+        "The 'way to solve' a problem (a puppy that has fallen into a pit) → 办法.",
+        "说法 (opinion/expression), 看法 (viewpoint), 做法 (way of handling) have a weaker meaning of 'solution'.",
+        "'想到一个好办法' is a set phrase.",
       ],
-      tip: "문제 해결의 ‘방법’엔 ‘办法’가 1순위 — 想办法/好办法.",
+      tip: "For a 'method' to solve a problem, 办法 is the top choice — 想办法/好办法.",
     },
   },
   {
@@ -242,13 +242,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "jué dìng",
     meaning: "'决定(juédìng)' = to decide / make a decision.",
     solution: {
-      method: "단서 '终于(마침내)'로 추론",
+      method: "Use the clue '终于 (finally)' to work out the answer.",
       steps: [
-        "밤새 고민한(想了一个晚上) 끝에 '마침내(终于)' 하는 행동 → '결정하다'.",
-        "'决定出国读书'가 자연스럽다.",
-        "想象(상상), 建议(제안), 觉得(느끼다)는 '终于' 뒤 결단과 부적합.",
+        "After thinking all night (想了一个晚上), the action that comes after '终于 (finally)' means → 'to decide'.",
+        "'决定出国读书' sounds natural.",
+        "想象 (imagine), 建议 (suggest), 觉得 (feel) do not fit well after '终于' when showing a final decision.",
       ],
-      tip: "‘终于’ 뒤에는 결정·완성 같은 결과 동사가 잘 온다.",
+      tip: "After '终于', result verbs such as deciding or completing something work best.",
     },
   },
 
@@ -267,12 +267,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "bǎo chí jiàn kāng",
     meaning: "'保持健康' = to stay/keep healthy.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun collocation",
       steps: [
-        "'保持(유지하다)' 뒤에 올 상태 명사 필요.",
-        "'健康(건강)'이 호응 → 保持健康.",
+        "A state noun is needed after '保持 (to keep/maintain)'.",
+        "'健康 (health)' collocates correctly → 保持健康.",
       ],
-      tip: "保持+健康/清洁/安静 처럼 ‘상태’가 목적어.",
+      tip: "保持 is followed by a 'state' as its object, like 保持+健康/清洁/安静.",
     },
   },
   {
@@ -286,12 +286,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "zhāo hu kè rén",
     meaning: "'招呼客人' = to greet / attend to guests.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun collocation",
       steps: [
-        "'客人(손님)' 앞에 올 동작 → '맞이하다/응대하다'.",
-        "'招呼'가 호응 → 招呼客人.",
+        "The action that goes before '客人 (guest)' should mean 'to welcome / to receive'.",
+        "'招呼' matches with → 招呼客人.",
       ],
-      tip: "손님을 ‘맞이/응대’할 때 ‘招呼客人 / 接待客人’.",
+      tip: "When greeting or serving guests: '招呼客人 / 接待客人'.",
     },
   },
   {
@@ -305,12 +305,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "zhuǎn shēn lí kāi",
     meaning: "'转身离开' = to turn around and leave.",
     solution: {
-      method: "연속 동작 짝짓기",
+      method: "Matching verbs that go together in a sequence",
       steps: [
-        "'转身(몸을 돌리다)' 다음 자연스러운 동작 → '떠나다'.",
-        "'离开'가 호응 → 转身离开.",
+        "The natural action that follows '转身 (to turn around)' → 'to leave'.",
+        "'离开' matches with → 转身离开.",
       ],
-      tip: "‘转身离开’는 ‘몸을 돌려 떠나다’의 굳어진 연속동작.",
+      tip: "'转身离开' is a fixed sequence of actions meaning 'to turn around and leave'.",
     },
   },
   {
@@ -324,12 +324,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "qīng xǐ gān jìng",
     meaning: "'清洗干净' = to wash clean (washed thoroughly clean).",
     solution: {
-      method: "동사+결과보어 짝짓기",
+      method: "Matching Verb + Result Complement pairs",
       steps: [
-        "'___ 干净(깨끗하게 ~하다)'의 동사 자리.",
-        "'清洗(씻다)'가 '干净'과 결과보어로 호응 → 清洗干净.",
+        "What verb goes in the blank for '___ 干净 (to ___ cleanly)'.",
+        "'清洗 (to wash)' pairs with '干净' as a Result Complement → 清洗干净.",
       ],
-      tip: "‘동사+干净’은 결과보어 — 洗干净, 擦干净, 打扫干净.",
+      tip: "'Verb + 干净' is a Result Complement — 洗干净, 擦干净, 打扫干净.",
     },
   },
   {
@@ -343,12 +343,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "xiǎng chū bàn fǎ",
     meaning: "'想出办法' = to think of a solution / come up with a method.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun matching",
       steps: [
-        "'想出(생각해 내다)' 뒤 목적어 → '방법'.",
-        "'办法'가 호응 → 想出办法.",
+        "The object that comes after '想出 (to think of)' → 'a method/way'.",
+        "'办法' matches with → 想出办法.",
       ],
-      tip: "‘想出’의 단골 목적어: 办法 / 主意.",
+      tip: "Common objects used with '想出': 办法 / 主意.",
     },
   },
 
@@ -365,13 +365,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "jīn tiān wǒ men bù néng qù wài pó de jiā, yīn wèi xià yǔ le",
     meaning: "We can't go to grandma's house today because it rained.",
     solution: {
-      method: "인과 관계 접속사 '因为'로 두 문장 합치기",
+      method: "Joining two sentences using the cause-and-effect conjunction '因为'",
       steps: [
-        "결과 문장(去不了)을 앞에, 원인(下雨了)을 '因为' 뒤에 둔다.",
-        "공통 시간어 '今天'은 한 번만 쓴다.",
+        "Put the result sentence (去不了) first, and place the cause (下雨了) after '因为'.",
+        "The shared time word '今天' should only be written once.",
         "→ 今天我们不能去外婆的家，因为下雨了。",
       ],
-      tip: "‘결과, 因为 원인’ 또는 ‘因为 원인, 所以 결과’ 둘 다 가능.",
+      tip: "Both structures work: 'Result, 因为 Cause' or '因为 Cause, 所以 Result'.",
     },
   },
   {
@@ -385,13 +385,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
       "zài tú shū guǎn lǐ dà shēng shuō huà shì bù duì de, yīn wèi huì chǎo dào bié rén",
     meaning: "Speaking loudly in the library is wrong, because it disturbs others.",
     solution: {
-      method: "인과 접속사 '因为' + 중복 주어 생략",
+      method: "Causal conjunction '因为' + omit the repeated subject.",
       steps: [
-        "앞 문장(…是不对的)을 결과로, 뒤 문장의 핵심(会吵到别人)을 이유로.",
-        "반복되는 '在图书馆里大声说话'는 두 번째에선 생략.",
+        "Use the first sentence (…是不对的) as the result, and the key idea from the second sentence (会吵到别人) as the reason.",
+        "The repeated phrase '在图书馆里大声说话' should be left out the second time.",
         "→ …是不对的，因为会吵到别人。",
       ],
-      tip: "같은 주어/주제는 ‘因为’ 절에서 생략해 간결하게.",
+      tip: "If the subject is the same, leave it out in the '因为' clause to keep the sentence short and neat.",
     },
   },
   {
@@ -404,13 +404,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "jiě jie jiào mèi mei bǎ shū zhuō shōu shi gān jìng",
     meaning: "Elder sister told/asked the younger sister to tidy up the desk. (Direct → indirect command with 叫.)",
     solution: {
-      method: "직접화법 → 겸어문(兼语句) '叫' 전환",
+      method: "Change direct speech into a pivot sentence (兼语句) using '叫'.",
       steps: [
-        "명령형 인용을 '叫 + 사람 + 동작'의 겸어문으로 바꾼다.",
+        "Change a command in quotes into a pivot sentence using the pattern '叫 + person + action'.",
         "'对妹妹说：“…”' → '叫妹妹 把书桌收拾干净'.",
-        "따옴표와 호칭 '妹妹，'는 제거.",
+        "Remove the quotation marks and the address term '妹妹，'.",
       ],
-      tip: "‘叫/让/请 + 대상 + 동사’ — 시키는 말은 따옴표 없이 평서문으로.",
+      tip: "For sentences using '叫/让/请 + person + verb', write it as a plain statement without quotation marks.",
     },
   },
   {
@@ -423,13 +423,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
     pinyin: "xiǎo míng gào su dà jiā nà shì tā zuì xǐ huān de yì běn shū",
     meaning: "Xiao Ming told everyone that that was his favourite book. (Direct → reported speech.)",
     solution: {
-      method: "직접화법 → 간접화법(转述句) '告诉' 전환",
+      method: "Change direct speech into indirect speech (转述句) using '告诉'.",
       steps: [
-        "'说：“…”' → '告诉大家 …'로 바꾼다.",
-        "지시어·인칭 변환: 这→那, 我→他.",
+        "Change '说：\"…\"' to '告诉大家 …'.",
+        "Change demonstratives and pronouns: 这→那, 我→他.",
         "→ 小明告诉大家那是他最喜欢的一本书。",
       ],
-      tip: "간접화법 전환 시 ‘这→那, 我→他/她, 你→대상’으로 인칭·지시어를 꼭 바꾼다.",
+      tip: "When changing to indirect speech, always switch: 这→那, 我→他/她, 你→the person being referred to.",
     },
   },
 
@@ -459,13 +459,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "tū rán",
         meaning: "'突然' = suddenly. 突然下起了大雨 = it suddenly started to rain heavily.",
         solution: {
-          method: "갑작스러운 변화 단서",
+          method: "Clue: sudden change",
           steps: [
-            "가게를 막 나오자마자(刚走出店门) 비가 옴 → 예상 밖·갑작스러움.",
-            "'突然下起了大雨'가 자연스럽다.",
+            "It started raining right after they walked out of the shop → something unexpected and sudden.",
+            "'突然下起了大雨' is the most natural way to say it.",
             "→ 1 突然.",
           ],
-          tip: "예고 없이 시작되는 비/사건엔 ‘突然’.",
+          tip: "Use '突然' when rain or an event starts without any warning.",
         },
       },
       {
@@ -477,13 +477,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "shāng liang",
         meaning: "'商量' = to discuss / talk over. 商量要怎样回家 = discuss how to get home.",
         solution: {
-          method: "동사 자리 + 뒤 목적어 '要怎样回家'",
+          method: "Verb position + object '要怎样回家' that follows",
           steps: [
-            "'어떻게 집에 갈지'를 함께 '의논하다'.",
-            "'商量(상의하다)'가 호응.",
+            "'Discuss' what to do and how to get home together.",
+            "'商量 (to discuss)' matches best here.",
             "→ 3 商量.",
           ],
-          tip: "두 사람이 방법을 정하려 ‘의논’할 땐 ‘商量’.",
+          tip: "When two people are trying to decide on a plan together, use '商量'.",
         },
       },
       {
@@ -495,13 +495,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "zhǔ yi",
         meaning: "'主意' = idea / plan. 一个好主意 = a good idea.",
         solution: {
-          method: "‘一个好___’ 명사 자리",
+          method: "'一个好___' — noun position",
           steps: [
-            "'好(좋은)' 뒤, 양사 '一个' 뒤에 올 명사 → '아이디어'.",
-            "'一个好主意'가 굳어진 표현.",
+            "After '好 (good)' and the measure word '一个', the word that fits is 'idea'.",
+            "'一个好主意' is a fixed, commonly used phrase.",
             "→ 6 主意.",
           ],
-          tip: "‘一个好主意 / 想个好办法’ 형태로 자주 출제.",
+          tip: "'一个好主意 / 想个好办法' — these forms often appear in exam questions.",
         },
       },
       {
@@ -513,13 +513,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "lì kè",
         meaning: "'立刻' = immediately / at once. 立刻跑回家 = ran home immediately.",
         solution: {
-          method: "부사 자리 + 즉시성",
+          method: "Adverb position + idea of doing something immediately",
           steps: [
-            "비옷을 입자마자(穿上雨衣后) 바로 한 행동.",
-            "'立刻(즉시)'가 동사 '跑' 앞에서 호응.",
+            "The action happened right after putting on the raincoat (穿上雨衣后).",
+            "'立刻 (immediately)' goes before the verb '跑' and matches the meaning perfectly.",
             "→ 5 立刻.",
           ],
-          tip: "‘…后, 立刻/马上 + 동사’는 즉각 행동 패턴.",
+          tip: "'...后, 立刻/马上 + verb' shows an immediate action pattern.",
         },
       },
     ],
@@ -549,13 +549,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "yí gè niǎo lóng",
         meaning: "What gift did Xiao Ming receive on his birthday? A birdcage (一个鸟笼).",
         solution: {
-          method: "세부정보 — 함정 구분",
+          method: "Finding specific details — spotting the trap",
           steps: [
-            "1문장: '叔叔送了一个鸟笼给他' → 선물은 새장.",
-            "小鸟는 '小明到屋外捉了' 즉 스스로 잡은 것이지 선물이 아님.",
+            "Sentence 1: '叔叔送了一个鸟笼给他' → the gift is a birdcage.",
+            "The bird '小鸟' was '小明到屋外捉了' — meaning Xiao Ming caught it himself, so it is not a gift.",
             "→ (2) 一个鸟笼.",
           ],
-          tip: "‘선물 vs 본인이 마련한 것’을 헷갈리지 않게 동사를 확인한다.",
+          tip: "Check the verb carefully so you do not mix up 'what was given as a gift' and 'what the person got on their own'.",
         },
       },
       {
@@ -567,13 +567,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "huì shī qù zì yóu",
         meaning: "Why did mum disapprove? Because the bird would lose its freedom (and become unhappy).",
         solution: {
-          method: "원인 찾기 — 엄마 대사 인용",
+          method: "Finding the cause — quoting what Mum said",
           steps: [
-            "엄마 말: '它会失去自由而变得不开心'.",
-            "핵심은 '자유를 잃는다(失去自由)'.",
+            "Mum said: '它会失去自由而变得不开心'.",
+            "The key idea is 'losing freedom (失去自由)'.",
             "→ (3) 小鸟会失去自由.",
           ],
-          tip: "인물의 ‘말’에 이유가 직접 들어있는 경우가 많다.",
+          tip: "The reason is often found directly in what a character says.",
         },
       },
       {
@@ -590,13 +590,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "xiǎng kàn xiǎo niǎo shì bú shì shēng bìng le",
         meaning: "Why did Xiao Ming open the cage? Because he wanted to see whether the bird was sick.",
         solution: {
-          method: "원인 찾기 — 직접 진술",
+          method: "Finding the cause — direct statement",
           steps: [
-            "2문단: '他连忙打开笼子，想看看小鸟是不是生病了'.",
+            "Paragraph 2: '他连忙打开笼子，想看看小鸟是不是生病了'.",
             "→ (4) 想看小鸟是不是生病了.",
-            "결과적으로 새가 날아간 것은 의도가 아님(没想到).",
+            "The bird flying away was not on purpose (没想到).",
           ],
-          tip: "‘想/为了 + 행동’에 목적(원인)이 드러난다.",
+          tip: "'想/为了 + action' shows the purpose (cause) behind the action.",
         },
       },
       {
@@ -608,13 +608,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "bù xiǎng bèi guān zài lóng zi lǐ",
         meaning: "Which statement is correct? The bird did not want to be locked in the cage.",
         solution: {
-          method: "전체 주제 파악(总结题) — 오답 소거",
+          method: "Understanding the main theme (总结题) — removing wrong answers",
           steps: [
-            "마지막 문단: '小鸟并没有生病，只是想逃出鸟笼' → (1) 병사 X.",
-            "새가 안 먹은 건 '자유가 없어서'이지 벌레를 싫어해서가 아님 → (2) X.",
-            "새는 새장을 나가고 싶어함 → (3) X, (4) O.",
+            "Last paragraph: '小鸟并没有生病，只是想逃出鸟笼' → (1) The bird did NOT die of illness.",
+            "The bird did not eat because it had no freedom, not because it disliked the worm → (2) X.",
+            "The bird wants to leave the cage → (3) X, (4) O.",
           ],
-          tip: "‘正确한 문장 고르기’는 본문과 하나씩 대조해 소거한다.",
+          tip: "For 'choose the correct sentence' questions, compare each option with the passage one by one and eliminate the wrong ones.",
         },
       },
     ],
@@ -643,13 +643,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "guǒ rán",
         meaning: "'果然' = as expected / sure enough (it really happened as predicted).",
         solution: {
-          method: "동의어 찾기(找近义词) — 본문에서 단어 추출",
+          method: "Finding synonyms (找近义词) — pick the word directly from the passage.",
           steps: [
-            "'真的发生了(정말로 일어났다)'에 해당하는 말 찾기.",
-            "본문: '蚊子果然都飞到了他身上'.",
+            "Find the phrase in the passage that means 'it really happened / it truly came true'.",
+            "The passage says: '蚊子果然都飞到了他身上'.",
             "→ 果然.",
           ],
-          tip: "‘果然’ = 예상대로 진짜 그렇게 됨.",
+          tip: "'果然' means things turned out exactly as expected — it really happened just like that.",
         },
       },
       {
@@ -660,13 +660,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
         pinyin: "xīn téng",
         meaning: "'心疼' = to feel deep affection/pity for; to be reluctant to see someone suffer.",
         solution: {
-          method: "동의어 찾기(找近义词)",
+          method: "Finding synonyms (找近义词).",
           steps: [
-            "'舍不得(아까워하다/안쓰러워하다)'와 통하는 말 찾기.",
-            "본문: '妈妈…心疼地问阿宝'.",
+            "Find the phrase that has the same meaning as '舍不得' (to feel it is a pity / to feel sorry for someone).",
+            "The passage says: '妈妈…心疼地问阿宝'.",
             "→ 心疼.",
           ],
-          tip: "‘心疼’은 사랑하는 이가 아파/고생할 때 안쓰러운 마음.",
+          tip: "'心疼' means feeling sad and sorry for someone you love when they are hurt or having a hard time.",
         },
       },
       {
@@ -679,12 +679,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
           "lín jū men kuā ā bǎo shì gè dǒng shì de hái zi, yīn wèi tā wǔ liù suì shí jiù cháng cháng gēn zhe fù mǔ qù tián lǐ bāng máng",
         meaning: "The neighbours praised Ah Bao as a sensible child because, even at five or six years old, he often went to the fields with his parents to help.",
         solution: {
-          method: "원인 서술형 — '因为' 인용",
+          method: "Answering a 'reason' question — use '因为' in your answer.",
           steps: [
-            "1문단: '阿宝五六岁时就常常跟着父母去田里帮忙'이 칭찬 이유.",
-            "'为什么' 질문 → '因为…'로 답한다.",
+            "Paragraph 1: '阿宝五六岁时就常常跟着父母去田里帮忙' is the reason for the praise.",
+            "When the question asks '为什么', always answer with '因为…'.",
           ],
-          tip: "원인 답은 본문 문장을 거의 그대로 옮겨 적으면 안전하다.",
+          tip: "For reason answers, it is safe to copy the sentence from the passage almost exactly as it is.",
         },
       },
       {
@@ -697,12 +697,12 @@ export const wa3_taonan_supp5_2025: Question[] = [
           "yīn wèi dào le xià tiān, tā men yì jiā rén huì bèi yòu dà yòu hēi de wén zi yǎo de zhěng wǎn dōu shuì bù hǎo",
         meaning: "Because in summer the whole family was bitten by big, black mosquitoes all night and couldn't sleep well.",
         solution: {
-          method: "원인 서술형",
+          method: "Cause/Reason answer type",
           steps: [
-            "2문단: '到了夏天就会被又大又黑的蚊子咬得整晚都睡不好'.",
-            "가난해서 蚊帐(모기장)을 못 사는 점도 배경이지만, 직접 원인은 모기에 물려서.",
+            "Paragraph 2: '到了夏天就会被又大又黑的蚊子咬得整晚都睡不好'.",
+            "Being too poor to buy a mosquito net (蚊帐) is part of the background, but the direct cause is being bitten by mosquitoes.",
           ],
-          tip: "‘什么事令…’도 결국 원인 질문 → 핵심 사건(蚊子咬)을 답에 담는다.",
+          tip: "'什么事令…' is also asking for a cause — make sure your answer includes the key event (蚊子咬).",
         },
       },
       {
@@ -714,13 +714,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
           "bà ba mā ma gǎn jǐn bǎ ā bǎo shēn shàng de wén zi quán dōu gǎn pǎo le",
         meaning: "Dad and mum hurriedly chased away all the mosquitoes on Ah Bao's body.",
         solution: {
-          method: "반응(행동) 직접 서술 — '为什么' 아님에 주의",
+          method: "Describe the reaction/action directly — note that this is NOT a '为什么' question.",
           steps: [
-            "질문이 '有什么反应'이므로 '因为'로 답하지 않는다(아빠·엄마의 행동을 그대로).",
-            "3문단: '赶紧把阿宝身上的蚊子全都赶跑了'.",
-            "→ 그 행동을 그대로 적는다.",
+            "Since the question asks '有什么反应', do NOT answer with '因为' — instead, write the father's and mother's actions directly.",
+            "Paragraph 3: '赶紧把阿宝身上的蚊子全都赶跑了'.",
+            "→ Write that action directly in your answer.",
           ],
-          tip: "‘有什么反应’ 유형은 인물의 ‘행동/반응’을 직서술. 이유 설명 X.",
+          tip: "For '有什么反应' question type, describe the character's action or reaction directly. Do NOT explain the reason.",
         },
       },
       {
@@ -733,13 +733,13 @@ export const wa3_taonan_supp5_2025: Question[] = [
           "wǒ rèn wéi ā bǎo shì yí gè xīn téng fù mǔ (xiào shùn) de hǎo hái zi. yīn wèi tā wèi le ràng fù mǔ shuì gè hǎo jué, guāng zhe shàng shēn shuì zài fù mǔ shēn páng, ràng wén zi lái yǎo zì jǐ.",
         meaning: "I think Ah Bao is a child who loves/honours his parents, because to let his tired parents sleep well, he slept bare-bodied beside them and let the mosquitoes bite him instead.",
         solution: {
-          method: "평가+근거형 — 두 소문항 분리 답변(孝顺 주제 연결)",
+          method: "Opinion + Evidence answer type — answer the two parts separately (connect to the theme of 孝顺).",
           steps: [
-            "앞: 인물 평가 → '我认为阿宝是一个心疼父母/孝顺的孩子'.",
-            "뒤: 본문 속 구체 사례로 증명 → 光着上身睡在父母身旁让蚊子咬自己.",
-            "두 부분(怎样 + 为什么)을 모두 채워야 만점.",
+            "First part: Give your opinion of the character → '我认为阿宝是一个心疼父母/孝顺的孩子'.",
+            "Second part: Prove it with a specific example from the passage → 光着上身睡在父母身旁让蚊子咬自己.",
+            "You must complete both parts (怎样 + 为什么) to get full marks.",
           ],
-          tip: "‘怎样의 孩子 + 为什么’는 ‘성격평가 + 본문 근거’ 세트로 답한다.",
+          tip: "'怎样的孩子 + 为什么' must be answered as a set: character description + evidence from the passage.",
         },
       },
     ],

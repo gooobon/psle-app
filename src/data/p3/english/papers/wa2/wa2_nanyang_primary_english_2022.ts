@@ -54,7 +54,7 @@ export const wa2NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'The bald eagle ________ down from the sky to catch its prey.',
       options: [{ label: '1', text: 'soared' }, { label: '2', text: 'stepped' }, { label: '3', text: 'dropped' }, { label: '4', text: 'swooped' }],
       answer: '4',
-      solution: { method: '독수리가 먹이를 잡기 위해 "급강하하는" 동작을 나타내는 동사를 고른다.', steps: ['"down from the sky to catch its prey"(하늘에서 먹이를 잡으러 아래로) → 급강하.', '"swooped" = 급강하하다 → 정확히 일치 → 정답 (4).'], tip: '"swoop down"은 새·비행기가 빠르게 아래로 급강하하는 동작입니다.' },
+      solution: { method: '독수리가 먹이를 잡기 위해 "plunging down steeply" 동작을 나타내는 동사를 고른다.', steps: ['"down from the sky to catch its prey"(하늘에서 먹이를 잡으러 아래로) → 급강하.', '"swooped" = 급강하하다 → 정확히 일치 → 정답 (4).'], tip: '"swoop down"은 새·비행기가 빠르게 아래로 급강하하는 동작입니다.' },
     },
     {
       kind: 'single', id: 'ny22wa2-q5', topic: 'VocabMCQ', format: 'mcq',
@@ -62,7 +62,7 @@ export const wa2NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'Vincent van Gogh was a ________ painter whose works are exhibited around the world.',
       options: [{ label: '1', text: 'smart' }, { label: '2', text: 'famous' }, { label: '3', text: 'resourceful' }, { label: '4', text: 'quick-witted' }],
       answer: '2',
-      solution: { method: '"전 세계에 전시된다"는 사실에 맞는 형용사를 고른다.', steps: ['"works are exhibited around the world"(작품이 전 세계에 전시됨) → 세계적으로 알려진.', '"famous" = 유명한 → 정확히 일치 → 정답 (2).'], tip: '전 세계 전시 = 세계적 명성 = famous.' },
+      solution: { method: '"displayed all around the world"는 사실에 맞는 형용사를 고른다.', steps: ['"works are exhibited around the world"(작품이 전 세계에 전시됨) → 세계적으로 알려진.', '"famous" = 유명한 → 정확히 일치 → 정답 (2).'], tip: '전 세계 전시 = 세계적 명성 = famous.' },
     },
     {
       kind: 'single', id: 'ny22wa2-q6', topic: 'VocabMCQ', format: 'mcq',
@@ -70,7 +70,7 @@ export const wa2NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: 'The goat is running away as fast as it can from its ________.',
       options: [{ label: '1', text: 'prey' }, { label: '2', text: 'victim' }, { label: '3', text: 'target' }, { label: '4', text: 'predator' }],
       answer: '4',
-      solution: { method: '"도망치고 있는 염소"를 쫓는 존재를 나타내는 단어를 고른다.', steps: ['"running away from its ___" → 염소를 잡으려는 포식자.', '"predator" = 포식자 → 정확히 일치 → 정답 (4).'], tip: '먹이(prey/goat)가 도망치는 대상은 포식자(predator)입니다.' },
+      solution: { method: '"a goat that is running away"를 쫓는 존재를 나타내는 단어를 고른다.', steps: ['"running away from its ___" → 염소를 잡으려는 포식자.', '"predator" = 포식자 → 정확히 일치 → 정답 (4).'], tip: '먹이(prey/goat)가 도망치는 대상은 포식자(predator)입니다.' },
     },
     // (C) Grammar Cloze – Pronouns Q7-9
     {
@@ -85,9 +85,9 @@ export const wa2NanyangPrimaryEnglish2022: EnglishPaper = {
         { questionNo: '7', format: 'fib', marks: 1, stem: '"Sally, what\'s wrong?" (7) ________ asked.', answer: 'B',
           solution: { method: '화자 자신("I")이 물었다.', steps: ['서술자(화자)가 Sally에게 물음 → I.', '보기에서 I는 (B) → 정답 (B).'], tip: '화자 자신이 말하는 주어는 I입니다.' } },
         { questionNo: '8', format: 'fib', marks: 1, stem: '"Then why are (8) ________ crying?" I said.', answer: 'F',
-          solution: { method: '"화자가 Sally에게 직접 묻는 말"의 주어를 고른다.', steps: ['Sally(상대방)에게 "왜 울고 있니?"라고 물음 → you.', '보기에서 you는 (F) → 정답 (F).'], tip: '상대방에게 직접 묻는 주어는 you입니다.' } },
+          solution: { method: '"the speaker asking Sally directly"의 주어를 고른다.', steps: ['Sally(상대방)에게 "Why are you crying?"라고 물음 → you.', '보기에서 you는 (F) → 정답 (F).'], tip: '상대방에게 직접 묻는 주어는 you입니다.' } },
         { questionNo: '9', format: 'fib', marks: 1, stem: '"Go away and leave (9) ________ alone!" she yelled.', answer: 'C',
-          solution: { method: '"나를 혼자 내버려 두라"는 말의 목적어를 고른다.', steps: ['Sally가 화자(나)에게 "나(=나 자신)를 혼자 내버려 두라"고 함.', 'Sally가 "나(화자)"에게 말하는 것이므로 목적어는 "me(나를)".', '보기에서 me는 (C) → 정답 (C).'], tip: '"leave me alone"은 나를 혼자 내버려 두라는 표현입니다.' } },
+          solution: { method: '"leave me alone"는 말의 목적어를 고른다.', steps: ['Sally가 화자(나)에게 "leave me (myself) alone"고 함.', 'Sally가 "I (the speaker)"에게 말하는 것이므로 목적어는 "me (the object form of I)".', '보기에서 me는 (C) → 정답 (C).'], tip: '"leave me alone"은 나를 혼자 내버려 두라는 표현입니다.' } },
       ],
     },
     // (D) Editing Q10-12
@@ -101,11 +101,11 @@ export const wa2NanyangPrimaryEnglish2022: EnglishPaper = {
       marks: 3,
       questions: [
         { questionNo: '10', format: 'editing', marks: 1, stem: 'grows in soil that has [leetle] nitrogen.', answer: 'little',
-          solution: { method: '"거의 없는"을 나타내는 단어의 철자를 확인한다.', steps: ['잘못된 철자: leetle.', '바른 단어: little — l-i-t-t-l-e.'], tip: 'little은 "lit-tle"로 tt가 들어갑니다.' } },
+          solution: { method: '"very few / hardly any"을 나타내는 단어의 철자를 확인한다.', steps: ['잘못된 철자: leetle.', '바른 단어: little — l-i-t-t-l-e.'], tip: 'little은 "lit-tle"로 tt가 들어갑니다.' } },
         { questionNo: '11', format: 'editing', marks: 1, stem: 'The Venus Flytrap can snap shut very [quikly].', answer: 'quickly',
-          solution: { method: '"빠르게"라는 부사의 철자를 확인한다.', steps: ['잘못된 철자: quikly (ck 빠짐).', '바른 단어: quickly — q-u-i-c-k-l-y.'], tip: 'quickly는 "quick+ly"로 ck가 들어갑니다.' } },
+          solution: { method: '"quickly / fast"라는 부사의 철자를 확인한다.', steps: ['잘못된 철자: quikly (ck 빠짐).', '바른 단어: quickly — q-u-i-c-k-l-y.'], tip: 'quickly는 "quick+ly"로 ck가 들어갑니다.' } },
         { questionNo: '12', format: 'editing', marks: 1, stem: 'When an insect crawls [leefs] along the and touches any hair on them...', answer: 'leaves',
-          solution: { method: '"잎들"이라는 단어의 복수 철자를 확인한다.', steps: ['잘못된 철자: leefs.', '바른 단어: leaves — l-e-a-v-e-s (leaf의 불규칙 복수형).'], tip: 'leaf의 복수는 leaves (leaf → leaves, 불규칙 변화).' } },
+          solution: { method: '"leaves"이라는 단어의 복수 철자를 확인한다.', steps: ['잘못된 철자: leefs.', '바른 단어: leaves — l-e-a-v-e-s (leaf의 불규칙 복수형).'], tip: 'leaf의 복수는 leaves (leaf → leaves, 불규칙 변화).' } },
       ],
     },
     // (E) Comprehension Q13-19

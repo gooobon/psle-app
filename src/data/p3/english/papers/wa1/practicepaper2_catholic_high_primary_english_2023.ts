@@ -73,7 +73,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '미래의 한 시점에 진행될 일은 미래진행형 "will be -ing"으로 표현.',
           '따라서 "will be singing" → 정답 (4).',
         ],
-        tip: '"upcoming", "next", "this(미래 날짜와 함께)"는 미래시제의 신호입니다.',
+        tip: '"upcoming", "next", "this (used with future dates)"는 미래시제의 신호입니다.',
       },
     },
     {
@@ -124,7 +124,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '"so much time"을 미술 프로젝트에 써서 잠잘 시간이 되었다 → 남은 시간이 거의 없음.',
           '"little time"(거의 없는 시간)이 가장 적합 → 정답 (1).',
         ],
-        tip: 'little=거의 없는(불가산), few=거의 없는(가산). some/many/several은 "있다"는 의미라 문맥과 안 맞습니다.',
+        tip: 'little=거의 없는(불가산), few=거의 없는(가산). some/many/several은 "there is / there are"는 의미라 문맥과 안 맞습니다.',
       },
     },
     {
@@ -172,10 +172,10 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
         method: '"has been -ing"(현재완료진행)와 짝을 이루는 시간 접속사를 고른다.',
         steps: [
           '"has been learning"은 과거부터 지금까지 계속됨을 나타내는 현재완료진행형.',
-          '이런 문형은 보통 "since + 과거 시점"과 함께 쓰인다.',
+          '이런 문형은 보통 "since + a point in the past"과 함께 쓰인다.',
           '"since he was four years old"(네 살 때부터) → 정답 (4) since.',
         ],
-        tip: '"have/has been -ing ... since ~"는 "~부터 지금까지 계속"이라는 짝꿍 표현입니다.',
+        tip: '"have/has been -ing ... since ~"는 "continuing from then until now"이라는 짝꿍 표현입니다.',
       },
     },
     {
@@ -195,7 +195,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"동사 is"(단수)와 "Look up there"(멀리 위)를 본다.',
+        method: '"verb 'is'"(단수)와 "Look up there"(멀리 위)를 본다.',
         steps: [
           '뒤의 동사가 "is"(단수) → these/those(복수) 제외.',
           '"Look up there!"(저 위를 봐!)는 멀리 있는 대상 → this(가까움)가 아니라 that.',
@@ -325,13 +325,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"수도 파이프(water pipes)"를 고치는 직업을 고른다.',
+        method: '"water pipes"를 고치는 직업을 고른다.',
         steps: [
           '수도/배관 관련 일을 하는 사람은 plumber(배관공).',
           'cobbler(신발 수선공)/electrician(전기 기술자)/technician(일반 기술자)은 파이프와 직접 관련이 적다.',
           '따라서 정답은 (2) plumber.',
         ],
-        tip: '직업명 어휘는 "어떤 일을 고치는가"와 연결해 외우면 쉽습니다.',
+        tip: '직업명 어휘는 "what problem is being fixed"와 연결해 외우면 쉽습니다.',
       },
     },
     {
@@ -354,9 +354,9 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
         steps: [
           '자리를 양보한 것은 남을 배려하는 행동.',
           'considerate = 사려 깊은/배려심 있는 → 가장 적합.',
-          'diligent(근면한)/grateful(감사하는)/responsible(책임감 있는)은 "배려"와 직접 관련 없다 → 정답 (4) considerate.',
+          'diligent(근면한)/grateful(감사하는)/responsible(책임감 있는)은 "consideration / caring for others"와 직접 관련 없다 → 정답 (4) considerate.',
         ],
-        tip: '"It was [형용사] of [사람] to ~"는 그 사람의 성격/태도를 평가하는 구문입니다.',
+        tip: '"It was [adjective] of [person] to ~"는 그 사람의 성격/태도를 평가하는 구문입니다.',
       },
     },
     {
@@ -375,7 +375,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"안전벨트를 ~하다"에 어울리는 동사를 고른다.',
+        method: '"to ~ a seatbelt"에 어울리는 동사를 고른다.',
         steps: [
           '안전벨트를 맬 때 쓰는 동사는 "fasten"(매다, 채우다).',
           '"fasten your seat belt"는 항공기·차량 안내에서 흔히 쓰는 표현.',
@@ -412,10 +412,10 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             method: '"grow up"(자라다)이라는 동사구를 완성한다.',
             steps: [
               '"grow up" = 자라다, 성장하다.',
-              '문맥상 어릴 적 꿈을 가진 뒤 "자라서" 유명해졌다는 의미.',
+              '문맥상 어릴 적 꿈을 가진 뒤 "when (he/she) grows up" 유명해졌다는 의미.',
               '보기에서 up은 (F) → 정답 (F).',
             ],
-            tip: '"grow up"은 "자라다"라는 뜻의 자주 쓰이는 동사구입니다.',
+            tip: '"grow up"은 "to grow up"라는 뜻의 자주 쓰이는 동사구입니다.',
           },
         },
         {
@@ -427,7 +427,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '"famous for ~"(~으로 유명한) 구문을 완성한다.',
             steps: [
-              '"famous for + -ing/명사"는 "~으로 유명한"이라는 뜻.',
+              '"famous for + -ing / noun"는 "famous for ~"이라는 뜻.',
               '"famous for making that dream come true"가 자연스럽다.',
               '보기에서 for는 (C) → 정답 (C).',
             ],
@@ -441,13 +441,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She loved reading, especially (17) ________ the stars and studied how living things move about in space.',
           answer: 'A',
           solution: {
-            method: '"~에 관한 글을 읽다"라는 표현에 맞는 전치사를 고른다.',
+            method: '"to read a passage about ~"라는 표현에 맞는 전치사를 고른다.',
             steps: [
               '"reading about the stars" = 별에 관해 읽다.',
-              '"about"은 "~에 관하여"라는 의미의 전치사.',
+              '"about"은 "about ~"라는 의미의 전치사.',
               '보기에서 about은 (A) → 정답 (A).',
             ],
-            tip: '"read/talk/think about something"은 "~에 관하여"라는 의미의 짝꿍 전치사입니다.',
+            tip: '"read/talk/think about something"은 "about ~"라는 의미의 짝꿍 전치사입니다.',
           },
         },
         {
@@ -458,7 +458,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             'In 1992, Mae was the first African American female to fly (18) ________ space.',
           answer: 'D',
           solution: {
-            method: '"우주로 날아가다"는 방향성을 나타내는 전치사를 고른다.',
+            method: '"to fly into space"는 방향성을 나타내는 전치사를 고른다.',
             steps: [
               '"fly into space" = 우주 안으로(into) 날아가다.',
               '"into"는 안으로 들어가는 움직임을 나타낸다.',
@@ -579,13 +579,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Father... told them to take (23) ________ to break the sticks.',
           answer: 'turns',
           solution: {
-            method: '"한 명씩 차례로 시도하다"라는 표현에 맞는 단어를 고른다.',
+            method: '"to try one at a time"라는 표현에 맞는 단어를 고른다.',
             steps: [
               '다음 문장: "One by one, each brother tried" — 한 명씩 순서대로 시도했다.',
               '"take turns"(번갈아/차례로 하다)가 이 상황과 맞는다.',
               '따라서 정답은 turns.',
             ],
-            tip: '"take turns to do something"은 "차례로 ~하다"라는 뜻의 숙어입니다.',
+            tip: '"take turns to do something"은 "to ~ in turns"라는 뜻의 숙어입니다.',
           },
         },
         {
@@ -598,7 +598,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             method: '묶음을 풀어서 막대를 하나씩 나눠준 동작에 맞는 동사를 고른다.',
             steps: [
               '아버지는 묶음(bundle)을 풀어 각자에게 막대 하나씩 주었다.',
-              '"untie"는 "풀다"(tie의 반대) → untied가 맞다.',
+              '"untie"는 "to solve"(tie의 반대) → untied가 맞다.',
               '"tied"(묶었다)는 이미 처음에 한 행동이므로 여기서는 반대 동작 필요 → 정답 untied.',
             ],
             tip: 'tied(묶었다)와 untied(풀었다)는 반대말로, 문맥상 동작 방향을 확인합니다.',
@@ -611,7 +611,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: '"See how (25) ________ the sticks were when they were put together."',
           answer: 'strong',
           solution: {
-            method: '"함께 묶이면 부러지지 않는다"는 성질을 나타내는 형용사를 고른다.',
+            method: '"together we cannot be broken"는 성질을 나타내는 형용사를 고른다.',
             steps: [
               '묶음 상태에서는 부러뜨릴 수 없었다 → 강함을 나타냄.',
               '"strong"(강한, 튼튼한)이 막대 다발의 상태를 묘사하기에 적합.',
@@ -647,7 +647,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "Even though he knew his parents would be desappointed".',
           answer: 'disappointed',
           solution: {
-            method: '"실망한"이라는 단어의 첫 음절 철자를 확인한다.',
+            method: '"disappointed"이라는 단어의 첫 음절 철자를 확인한다.',
             steps: [
               '잘못된 철자: desappointed.',
               '바른 단어는 disappointed — 접두사가 de-가 아니라 dis-.',
@@ -663,7 +663,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "When he arived home".',
           answer: 'arrived',
           solution: {
-            method: '"도착했다"는 단어의 자음 중복을 확인한다.',
+            method: '"arrived"는 단어의 자음 중복을 확인한다.',
             steps: [
               '잘못된 철자: arived.',
               '바른 단어는 arrive — r이 두 개(ar-rive).',
@@ -746,13 +746,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: '(31) ________ playing for about twenty minutes, they saw a policeman approaching.',
           answer: 'After',
           solution: {
-            method: '"~한 지 20분 후" 의미에 맞는 시간 접속사를 넣는다.',
+            method: '"20 minutes after ~" 의미에 맞는 시간 접속사를 넣는다.',
             steps: [
               '20분 동안 놀고 나서 경찰을 보았다는 시간 순서.',
               '"After playing for about twenty minutes"(20분 동안 놀고 난 후) → After.',
               '따라서 빈칸은 After.',
             ],
-            tip: '"After + -ing"는 "~한 후에"라는 뜻으로 사건의 순서를 나타냅니다.',
+            tip: '"After + -ing"는 "after ~"라는 뜻으로 사건의 순서를 나타냅니다.',
           },
         },
         {
@@ -762,7 +762,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'He immediately (32) ________ them from playing.',
           answer: 'stopped',
           solution: {
-            method: '"~하는 것을 못하게 하다"는 뜻의 동사를 "~ from -ing" 구조에 넣는다.',
+            method: '"to stop someone from doing ~"는 뜻의 동사를 "~ from -ing" 구조에 넣는다.',
             steps: [
               '경찰이 그들이 노는 것을 막았다.',
               '"stop someone from doing something" = ~가 ~하는 것을 막다.',
@@ -794,13 +794,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: '...and told them sternly that they were not (34) ________ to play ball games there.',
           answer: 'allowed',
           solution: {
-            method: '"~하는 것이 허용되지 않다"는 뜻의 단어를 넣는다.',
+            method: '"to not be allowed to ~"는 뜻의 단어를 넣는다.',
             steps: [
               '"No Ball Games" 표지판은 공놀이를 금지한다는 뜻.',
               '"were not allowed to play"(놀도록 허용되지 않았다)가 자연스럽다.',
               '따라서 빈칸은 allowed. (공식 정답표 확인됨)',
             ],
-            tip: '"allowed to do something"은 "~하도록 허용되다"라는 뜻입니다.',
+            tip: '"allowed to do something"은 "to be allowed to ~"라는 뜻입니다.',
           },
         },
       ],
@@ -851,13 +851,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: 'B',
           solution: {
-            method: "comforted(위로하다)와 같은 뜻의 단어를 고른다.",
+            method: "Choose a word that means the same as 'comforted'.",
             steps: [
               'stroked = (부드럽게) 쓰다듬다 → 신체적 동작.',
               'consoled = 위로하다 → comforted와 같은 의미.',
               '따라서 정답은 (B) consoled.',
             ],
-            tip: 'console과 comfort는 둘 다 "위로하다"는 뜻의 동의어입니다.',
+            tip: 'console과 comfort는 둘 다 "To comfort"는 뜻의 동의어입니다.',
           },
         },
         {
@@ -872,13 +872,13 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: "대명사 'her'가 가리키는 인물을 문맥에서 찾는다.",
+            method: "Find in the context who the pronoun 'her' is referring to.",
             steps: [
               '7번째 줄: "It would simply sit quietly on her lap." (It = Snowy)',
               'Snowy가 무릎 위에 앉는 대상은 주인인 Sue Lin.',
               '따라서 \'her\'는 (2) Sue Lin을 가리킨다.',
             ],
-            tip: "동물(It)의 행동 대상이 누구인지(주인)를 먼저 파악하면 'her'를 쉽게 찾을 수 있습니다.",
+            tip: "If you first figure out who the animal (It) is doing the action to (the owner), you can easily find who 'her' refers to.",
           },
         },
         {
@@ -892,7 +892,7 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '2단락: "Being the only child, Sue Lin had no sibling to keep her company."',
               'Sue Lin은 외동(only child)이며 형제가 없다.',
-              '따라서 "여동생이 있었다"는 거짓 → False.',
+              '따라서 "Had a younger sister"는 거짓 → False.',
             ],
             tip: '"only child"(외동)라는 표현이 나오면 형제자매가 없음을 뜻합니다.',
           },
@@ -925,10 +925,10 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             method: 'Sue Lin이 속상할 때 Snowy의 행동을 정확히 확인한다.',
             steps: [
               '2단락: "Snowy seemed to know when Sue Lin felt upset. It would simply sit quietly on her lap."',
-              '속상할 때 Snowy는 "꼬리를 흔드는 것"이 아니라 "무릎에 조용히 앉는다".',
+              '속상할 때 Snowy는 "Wagging its tail"이 아니라 "Sits quietly on the lap".',
               '"wagging its tail"(꼬리 흔들기)은 학교에서 돌아올 때(door에서)의 행동이지, 속상할 때의 행동이 아니다 → False.',
             ],
-            tip: '같은 단락 안에서도 "다른 상황(when)"에 따른 행동을 구분해야 합니다.',
+            tip: '같은 단락 안에서도 "A different situation (when)"에 따른 행동을 구분해야 합니다.',
           },
         },
         {
@@ -1034,28 +1034,9 @@ export const practicePaper2CatholicHighPrimaryEnglish2023: EnglishPaper = {
             method: '10번째 줄의 화자가 누구인지 확인한다.',
             steps: [
               '3단락은 토끼(the rabbit)가 사자에게 하는 말("The rabbit... said, \\"Your Majesty...")',
-              '"I escaped to tell you this."에서 "I"는 말하는 사람인 토끼.',
-              '완전한 문장: "\'I\' refers to the rabbit."',
+              '"I escaped to tell you this."From / At (location particle)"I"Is the speaker, the rabbit. Complete sentence:"\'I\' refers to the rabbit."',
             ],
-            tip: '대화문에서 "I"는 그 말을 하는 화자(여기서는 토끼)를 가리킵니다.',
-          },
-        },
-        {
-          questionNo: '46',
-          format: 'open',
-          marks: 2,
-          stem: 'Why did the lion jump into the well?',
-          answer:
-            'The lion jumped into the well because he saw his own reflection in the water and thought it was the other lion (his enemy), so he roared and jumped in to attack it.',
-          solution: {
-            method: '4단락에서 사자가 우물에 뛰어든 직접적 원인을 찾는다.',
-            steps: [
-              '4단락: "The lion looked into the well and roared when he saw his reflection. He jumped into the well and drowned."',
-              '사자는 물에 비친 자신의 모습을 "적(다른 사자)"으로 오해했다.',
-              '그 적을 공격하려고 우물 속으로 뛰어들었다가 빠져 죽었다.',
-              '이유를 완전한 문장으로 서술한다.',
-            ],
-            tip: '"reflection"(비친 모습)을 적으로 오해한 것이 사건의 핵심 원인입니다.',
+            tip: '대화문에서 "I"Refers to the speaker of those words (in this case, the rabbit)."The lion looked into the well and roared when he saw his reflection. He jumped into the well and drowned."Find the direct reason why the lion jumped into the well in paragraph 4."적(다른 사자)"The lion mistook his own reflection in the water as an enemy."reflection"(비친 모습)을 적으로 오해한 것이 사건의 핵심 원인입니다.',
           },
         },
       ],

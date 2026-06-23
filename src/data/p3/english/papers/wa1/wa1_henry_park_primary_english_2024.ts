@@ -48,11 +48,11 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           solution: {
             method: '말하는 사람과 듣는 사람을 모두 포함하는 주어 대명사를 고른다.',
             steps: [
-              'Max가 자신과 Sarah 두 사람이 "함께" 볼 영화를 묻고 있다.',
+              'Max가 자신과 Sarah 두 사람이 "together" 볼 영화를 묻고 있다.',
               '화자(Max) + 청자(Sarah)를 함께 가리키는 1인칭 복수 주어는 "we".',
               '"shall we watch?"는 함께 무엇을 할지 제안할 때 쓰는 자연스러운 표현.',
             ],
-            tip: '"shall we ~?"는 "우리 ~할까?"라는 권유/제안 표현으로 자주 출제됩니다.',
+            tip: '"shall we ~?"는 "Shall we ~?"라는 권유/제안 표현으로 자주 출제됩니다.',
           },
         },
         {
@@ -64,7 +64,7 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           solution: {
             method: 'Sarah가 상대방(Max)에게 직접 묻는 상황의 주어를 찾는다.',
             steps: [
-              'Sarah가 Max에게 "~하고 싶니?"라고 직접 물어보고 있다.',
+              'Sarah가 Max에게 "Do you want to ~?"라고 직접 물어보고 있다.',
               '듣는 상대 한 사람을 가리키는 2인칭 주어는 "you".',
               '"Do you want ~?"는 상대의 의향을 묻는 기본 문형.',
             ],
@@ -147,7 +147,7 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           stem: 'The sunflowers have (6) ________ so tall!',
           answer: 'grown',
           solution: {
-            method: '"have + 과거분사" 현재완료 형태를 만든다.',
+            method: '"have + Past Participle" 현재완료 형태를 만든다.',
             steps: [
               '조동사 "have"가 앞에 있으므로 뒤에는 과거분사가 필요.',
               'grow의 과거분사는 grown (grow–grew–grown).',
@@ -337,7 +337,7 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
             steps: [
               '지문: "Suddenly, Ben stopped walking. He had spotted a bird... \'It\'s a kingfisher.\'"',
               '물총새를 처음 발견한 사람은 Ben이다.',
-              '따라서 "Amelia가 먼저 발견했다"는 거짓 → False.',
+              '따라서 "Amelia discovered it first"는 거짓 → False.',
             ],
             tip: 'True/False 문제는 문장 속 핵심 단어(여기서는 "first")가 지문과 맞는지 따져봅니다.',
           },
@@ -371,7 +371,7 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: 'B',
           solution: {
-            method: '두 단어의 뜻을 비교해 "눈을 가늘게 떠 자세히 보려 함"에 맞는 것을 고른다.',
+            method: '두 단어의 뜻을 비교해 "Squinting to look carefully"에 맞는 것을 고른다.',
             steps: [
               'gripped = 꽉 붙잡다 (손의 동작) → 보는 것과 관련 없음.',
               'squinted = 눈을 가늘게 뜨다 (잘 보려고 애쓸 때의 동작).',
@@ -429,7 +429,7 @@ export const wa1HenryParkPrimaryEnglish2024: EnglishPaper = {
               '끝: "She kept very quiet and did not make a sound." → 차분한 모습 = calm.',
               '따라서 시작=excited, 끝=calm.',
             ],
-            tip: '인물의 성격/기분 문제는 그 사람이 "무엇을 했는지(행동)"를 근거로 형용사를 고릅니다.',
+            tip: '인물의 성격/기분 문제는 그 사람이 "What someone did (action)"를 근거로 형용사를 고릅니다.',
           },
         },
       ],

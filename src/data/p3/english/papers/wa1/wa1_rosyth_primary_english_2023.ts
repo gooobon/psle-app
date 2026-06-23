@@ -69,7 +69,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"애완 토끼처럼" 움직이는 동작에 맞는 동사를 고른다.',
+        method: '"Like a pet rabbit" 움직이는 동작에 맞는 동사를 고른다.',
         steps: [
           '토끼(rabbit)가 움직이는 방식은 "hop"(깡충깡충 뛰다).',
           '"hop around like my pet rabbit"가 자연스럽다.',
@@ -94,11 +94,11 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"두 장소 사이"에 위치함을 나타내는 전치사를 고른다.',
+        method: '"Between two places"에 위치함을 나타내는 전치사를 고른다.',
         steps: [
           '"the post office AND the bookshop" — 두 장소가 언급됨.',
           '"between A and B" = A와 B 사이에.',
-          'at/over/along은 "두 곳 사이"라는 의미를 직접 담지 않는다 → 정답 (4) between.',
+          'at/over/along은 "Between two locations"라는 의미를 직접 담지 않는다 → 정답 (4) between.',
         ],
         tip: '"between A and B"는 두 지점/사물 사이의 위치를 나타냅니다.',
       },
@@ -148,10 +148,10 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"아침을 먹지 못해 배고팠다"는 상황에 맞는 식사 속도를 나타내는 부사를 고른다.',
+        method: '"Was hungry because he/she did not eat breakfast"는 상황에 맞는 식사 속도를 나타내는 부사를 고른다.',
         steps: [
           '"had not taken her breakfast"(아침을 안 먹었다) → 점심때 매우 배고픔.',
-          '배고픈 사람은 보통 음식을 "빨리(quickly)" 먹는다.',
+          '배고픈 사람은 보통 음식을 "Quickly" 먹는다.',
           'slowly(천천히)/gently(부드럽게)는 배고픈 상황과 반대, briskly(활발하게)는 보통 걷기 등 움직임에 쓰여 식사에는 덜 어울린다 → 정답 (3) quickly.',
         ],
         tip: '"had not taken breakfast"(배고픔)는 "quickly ate"(빨리 먹었다)와 자연스럽게 연결됩니다.',
@@ -173,7 +173,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"연을 날리기 좋은 날씨"에 어울리는 형용사를 고른다.',
+        method: '"Weather that is good for flying a kite"에 어울리는 형용사를 고른다.',
         steps: [
           '"Let\'s go to the park to fly a kite"(연을 날리러 가자) — 연을 날리려면 바람이 필요하다.',
           '"windy" = 바람이 부는 → 연날리기에 적합한 날씨.',
@@ -199,7 +199,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"~을 벽에 대고 ~했다"는 신체적 동작에 맞는 동사를 고른다.',
+        method: '"Did ~ with ~ against the wall"는 신체적 동작에 맞는 동사를 고른다.',
         steps: [
           '"___ his sister against the wall"(여동생을 벽에 대고 ~했다) — 신체적으로 밀치는 동작.',
           '"pushed" = 밀었다 → "pushed against the wall"이 자연스럽다.',
@@ -237,8 +237,8 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '"While + -ing"(~하는 동안) 구문을 적용한다.',
             steps: [
-              '"While ___, he saw Owl" — "걷고 있는 동안 Owl을 보았다".',
-              '"While -ing"는 "~하는 동안"이라는 뜻의 분사구문.',
+              '"While ___, he saw Owl" — "Saw Owl while walking".',
+              '"While -ing"는 "While ~ / During ~"이라는 뜻의 분사구문.',
               '따라서 빈칸은 walking.',
             ],
             tip: '"While -ing"는 한 동작이 진행되는 동안 다른 일이 일어났음을 나타냅니다.',
@@ -257,7 +257,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
               '"a leisurely walk" = 여유로운 산책(명사).',
               '따라서 빈칸은 walk.',
             ],
-            tip: '"take a walk/rest/break"처럼 "take a + 명사"는 "~을 하다"라는 뜻입니다.',
+            tip: '"take a walk/rest/break"처럼 "take a + noun"는 "To do ~"라는 뜻입니다.',
           },
         },
         {
@@ -286,7 +286,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             method: '남은 보기(had walked)를 적용하고 과거완료의 의미를 확인한다.',
             steps: [
               '나머지 세 단어(walking/walk/walked)는 이미 Q8~10에서 사용됨 → 남은 단어는 "had walked".',
-              '"When I had walked past his house, I did not see him."은 "그의 집을 지나갔을 때(그 전에 이미 지나간 상태)는 그를 보지 못했다"는 의미로 자연스럽다.',
+              '"When I had walked past his house, I did not see him."은 "When he/she had already passed by his house (had passed before that moment), he/she did not see him — this uses the Past Perfect tense"는 의미로 자연스럽다.',
               '따라서 빈칸은 had walked.',
             ],
             tip: '단어를 한 번씩만 쓰는 클로즈 문제는, 남은 단어가 자연스럽게 맞는지 마지막에 확인합니다.',
@@ -320,13 +320,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'He (12) ________ a hare and chased it.',
           answer: 'spotted',
           solution: {
-            method: '"발견하고 쫓았다"는 흐름에 맞는 동사를 고른다.',
+            method: '"Discovered and chased"는 흐름에 맞는 동사를 고른다.',
             steps: [
               '"He ___ a hare and chased it" — 토끼를 발견한 후 쫓았다.',
               '"spotted" = 발견했다/알아챘다 → 쫓기 전의 동작으로 자연스럽다.',
               '따라서 빈칸은 spotted.',
             ],
-            tip: '"spotted ... and chased"는 "발견 → 추격"의 자연스러운 순서입니다.',
+            tip: '"spotted ... and chased"는 "Discover → Chase"의 자연스러운 순서입니다.',
           },
         },
         {
@@ -337,7 +337,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             '"Remove this thorn for me!" Bear roared but (13) ________ dared to help as they were afraid of him.',
           answer: 'nobody',
           solution: {
-            method: '"~ 때문에 아무도 돕지 못했다"는 의미에 맞는 단어를 고른다.',
+            method: '"Could not help anyone because of ~"는 의미에 맞는 단어를 고른다.',
             steps: [
               '"as they were afraid of him"(그를 무서워했기 때문에) → 도와줄 사람이 없었다는 의미.',
               '"nobody dared to help" = 아무도 돕지 못했다.',
@@ -353,9 +353,9 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'Upon hearing this, Bear became (14) ________ and refused.',
           answer: 'angry',
           solution: {
-            method: '"거절했다(refused)"는 행동과 짝을 이루는 감정을 고른다.',
+            method: '"refused"는 행동과 짝을 이루는 감정을 고른다.',
             steps: [
-              'Fox의 조건("다시는 우리를 해치지 않겠다고 약속해야 한다")을 들은 Bear의 반응.',
+              'Fox의 조건("must promise never to hurt us again")을 들은 Bear의 반응.',
               '거만한 Bear가 조건을 듣고 화를 냄 → "angry"(화난).',
               '따라서 "became angry and refused" → 정답 angry.',
             ],
@@ -369,7 +369,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'In the end, he reluctantly (15) ________.',
           answer: 'agreed',
           solution: {
-            method: '"마지못해 ~했다"는 표현과 이야기의 결말을 연결한다.',
+            method: '"reluctantly did ~"는 표현과 이야기의 결말을 연결한다.',
             steps: [
               '"his paw hurt badly and only Fox had come forward to help him" — 결국 도움이 필요했음.',
               '"reluctantly ___" = 마지못해 ~했다 → Fox의 조건을 받아들였다는 의미.',
@@ -422,12 +422,12 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
       solution: {
         method: '"so"는 원인 뒤에 결과를 연결하므로, 원인(목적)을 먼저 배치한다.',
         steps: [
-          '두 사건의 관계: "케이크를 만들고 싶었다"(목적/원인) → "그래서 슈퍼마켓에서 계란과 버터를 샀다"(결과/행동).',
-          '"so"(그래서)는 "[원인], so [결과]" 순서로 쓴다.',
+          '두 사건의 관계: "wanted to make a cake"(목적/원인) → "so he/she bought eggs and butter from the supermarket"(결과/행동).',
+          '"so"(그래서)는 "[cause], so [effect]" 순서로 쓴다.',
           '"Mary wanted to bake a cake, so she bought eggs and butter at the supermarket."',
           '두 번째 Mary는 "she"로 바꾼다.',
         ],
-        tip: '"so" 문제는 두 문장 중 어느 것이 "원인(목적)"이고 어느 것이 "결과(행동)"인지 먼저 파악한 뒤, 원인을 앞에 둡니다.',
+        tip: '"so" 문제는 두 문장 중 어느 것이 "cause (purpose)"이고 어느 것이 "effect (action)"인지 먼저 파악한 뒤, 원인을 앞에 둡니다.',
       },
     },
 
@@ -457,13 +457,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             'The Green Tree Frog is the most (18) ________ type of frog that people keep as pets.',
           answer: 'common',
           solution: {
-            method: '"사람들이 애완용으로 가장 많이 기르는"이라는 의미에 맞는 단어를 넣는다.',
+            method: '"the most commonly kept as pets by people"이라는 의미에 맞는 단어를 넣는다.',
             steps: [
               '"the most ___ type of frog that people keep as pets" — 사람들이 가장 많이 선택하는 종류.',
-              '"common" = 흔한, 일반적인 → "가장 흔하게 기르는 종류"라는 의미에 적합.',
+              '"common" = 흔한, 일반적인 → "the most commonly kept type"라는 의미에 적합.',
               '따라서 빈칸은 common. (공식 정답표 확인됨)',
             ],
-            tip: '"the most common type that people keep"은 "사람들이 가장 흔히 기르는 종류"라는 뜻입니다.',
+            tip: '"the most common type that people keep"은 "the type most commonly kept by people"라는 뜻입니다.',
           },
         },
         {
@@ -473,13 +473,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'The Green Tree Frog is (19) ________ in most parts of Australia.',
           answer: 'found',
           solution: {
-            method: '"~에서 발견된다/서식한다"는 의미에 맞는 단어를 넣는다.',
+            method: '"is found in / lives in ~"는 의미에 맞는 단어를 넣는다.',
             steps: [
               '"The Green Tree Frog is ___ in most parts of Australia" — 호주 대부분 지역에 산다는 의미.',
               '"found" = 발견되다 → "is found in"(~에서 발견된다, 즉 ~에 서식한다)는 동식물의 분포를 설명하는 정해진 표현.',
               '따라서 빈칸은 found.',
             ],
-            tip: '"is found in [지역]"은 동식물의 서식 분포를 설명하는 표현입니다.',
+            tip: '"is found in [place]"은 동식물의 서식 분포를 설명하는 표현입니다.',
           },
         },
         {
@@ -489,13 +489,13 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: 'As adults, they can (20) ________ up to 10 cm long and live for 25 years!',
           answer: 'grow',
           solution: {
-            method: '"~까지 자란다"는 의미에 맞는 동사를 넣는다.',
+            method: '"grows up to ~"는 의미에 맞는 동사를 넣는다.',
             steps: [
               '"can ___ up to 10 cm long" — 길이가 10cm까지 커진다는 의미.',
-              '"grow up to [길이]" = ~까지 자라다.',
+              '"grow up to [length]" = ~까지 자라다.',
               '따라서 빈칸은 grow.',
             ],
-            tip: '"grow up to [크기/길이]"는 동식물의 성장 크기를 설명하는 표현입니다.',
+            tip: '"grow up to [size/length]"는 동식물의 성장 크기를 설명하는 표현입니다.',
           },
         },
       ],
@@ -550,7 +550,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             method: '포스터의 날짜(29 May)를 한 달 안에서의 위치로 환산한다.',
             steps: [
               '포스터: "Date: Saturday, 29 May 2021".',
-              '5월은 31일까지 있으므로 29일은 달의 "끝부분"에 해당한다.',
+              '5월은 31일까지 있으므로 29일은 달의 "the end part / tip"에 해당한다.',
               '"throughout the month"(한 달 내내)/"in the middle"(중반)/"at the beginning"(초반)은 29일과 안 맞는다 → 정답 (2) at the end of the month.',
             ],
             tip: '날짜 숫자가 그 달의 마지막 날짜에 가까우면 "at the end of the month"입니다.',
@@ -594,7 +594,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             method: '"Items for Sale" 목록과 "free diary"의 차이를 구분한다.',
             steps: [
               '"Items for Sale": Pet food, Pet toys, Pet toiletries(샴푸 등) — 이들은 판매 품목.',
-              '다이어리는 "Get a free diary when you spend at least $60"라고 명시 — 판매 품목이 아니라 "무료 증정품".',
+              '다이어리는 "Get a free diary when you spend at least $60"라고 명시 — 판매 품목이 아니라 "free gift".',
               '따라서 살 수 없는(판매하지 않는) 것은 (3) diaries.',
             ],
             tip: '"free gift"(무료 증정품)는 "for sale"(판매 품목)과 다릅니다.',
@@ -677,7 +677,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
             method: '1단락 첫 문장에서 Gloomy의 정체를 확인한다.',
             steps: [
               '1단락: "One hot day, Gloomy, the big black cloud, was sitting high up in the sky of the village."',
-              'Gloomy는 "큰 검은 구름"이다.',
+              'Gloomy는 "big black cloud"이다.',
               '완전한 문장으로: "Gloomy was a big black cloud."',
             ],
             tip: '"Who was ~"는 인물(또는 캐릭터)의 정체를 묻는 질문으로, 보통 처음 등장하는 문장에서 답을 찾습니다.',
@@ -706,7 +706,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
           stem: "Which word in paragraph 3 has the same meaning as 'displeased'?",
           answer: 'annoyed',
           solution: {
-            method: "displeased(불쾌한, 마음에 들지 않는)와 같은 뜻의 단어를 3단락에서 찾는다.",
+            method: "Find a word in paragraph 3 that means the same as 'displeased' (unhappy, not satisfied).",
             steps: [
               '3단락: "Feeling annoyed because Wind ignored him, Gloomy asked Lightning to flash his light at Wind."',
               '"annoyed" = 짜증난/언짢은 → displeased와 의미가 통한다.',
@@ -749,7 +749,7 @@ export const wa1RosythPrimaryEnglish2023: EnglishPaper = {
               'Gloomy가 화난 이유는 Wind가 그를 무시했기 때문(도와달라는 부탁을 무시함).',
               '완전한 문장으로 이유를 서술한다.',
             ],
-            tip: '"Feeling [감정] because ~"에서 because 뒤가 바로 이유입니다.',
+            tip: '"Feeling [emotion] because ~"에서 because 뒤가 바로 이유입니다.',
           },
         },
         {

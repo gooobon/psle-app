@@ -52,7 +52,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           'go의 과거형은 went.',
           '따라서 "my friends and I went to the cinema" → 정답 (2) went.',
         ],
-        tip: '"Last + 시간 표현"은 과거시제(went, made, was 등)와 함께 씁니다.',
+        tip: '"Last + time expression"은 과거시제(went, made, was 등)와 함께 씁니다.',
       },
     },
     {
@@ -71,13 +71,13 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"when + 과거 사건"이 일어났을 때 진행 중이던 동작을 나타낸다.',
+        method: '"when + past event"이 일어났을 때 진행 중이던 동작을 나타낸다.',
         steps: [
           '"when her cat jumped onto her bed" — "jumped"는 과거의 한순간.',
-          '그 순간 Ruby는 자고 있는 "중"이었다 → 과거진행형.',
+          '그 순간 Ruby는 자고 있는 "in the middle of / during"이었다 → 과거진행형.',
           '주어 "Ruby"는 단수 → "was sleeping" → 정답 (4).',
         ],
-        tip: '"when + 과거형(한 순간의 사건)"에서 진행 중이던 동작은 was/were -ing로 씁니다.',
+        tip: '"when + Simple Past (a single moment in the past)"에서 진행 중이던 동작은 was/were -ing로 씁니다.',
       },
     },
     {
@@ -358,7 +358,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           solution: {
             method: 'Tom and Mary 두 사람을 함께 가리키는 소유대명사를 고른다.',
             steps: [
-              'Tom and Mary 둘 다 받지 못했다 → "둘의 것(theirs)".',
+              'Tom and Mary 둘 다 받지 못했다 → "belonging to both of them (theirs)".',
               '"they did not receive theirs"(그들 각자의 것을 받지 못했다) → theirs.',
               '따라서 정답 theirs. (공식 정답표 확인됨)',
             ],
@@ -374,7 +374,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           solution: {
             method: 'Tom 자신의 것인지 확인하는 소유대명사를 고른다.',
             steps: [
-              'Tom이 장을 넘겨보다가 "이건 내 것이 아니구나"라고 깨달았다.',
+              'Tom이 장을 넘겨보다가 "This is not mine"라고 깨달았다.',
               'Tom을 가리키는 소유대명사는 "his"(그의 것).',
               '따라서 "it was not his" → 정답 his. (공식 정답표 확인됨)',
             ],
@@ -388,7 +388,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: 'He told Mary that the book had to be (16) ________.',
           answer: 'hers',
           solution: {
-            method: 'Tom이 Mary에게 "이게 당신 것"이라고 말하는 소유대명사를 고른다.',
+            method: 'Tom이 Mary에게 "This is yours"이라고 말하는 소유대명사를 고른다.',
             steps: [
               'Tom은 자신의 것이 아님을 확인하고 → Mary의 것임을 추론.',
               'Mary(여성 단수)의 소유를 가리키는 소유대명사는 "hers".',
@@ -404,9 +404,9 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: 'Mary looked at the pages and exclaimed, "Yes! It\'s (17) ________!"',
           answer: 'mine',
           solution: {
-            method: 'Mary 자신이 확인하며 "내 것"이라고 외치는 소유대명사를 고른다.',
+            method: 'Mary 자신이 확인하며 "Mine"이라고 외치는 소유대명사를 고른다.',
             steps: [
-              'Mary가 장을 확인하고 직접 "맞아, 이건 내 것이야!"라고 외쳤다.',
+              'Mary가 장을 확인하고 직접 "Yes, this is mine!"라고 외쳤다.',
               '화자(Mary) 자신의 것을 가리키는 소유대명사는 "mine".',
               '따라서 "It\'s mine!" → 정답 mine. (공식 정답표 확인됨)',
             ],
@@ -459,7 +459,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: '"No need to search any further," thought the (19) ________ monkey.',
           answer: 'sly',
           solution: {
-            method: '"까마귀를 속여 바나나를 얻으려는" 원숭이의 성격을 나타내는 형용사를 고른다.',
+            method: '"trying to trick the crow to get the banana" 원숭이의 성격을 나타내는 형용사를 고른다.',
             steps: [
               '"He was going to trick the crow"(까마귀를 속이려 했다) → 교활한 원숭이.',
               '"sly" = 교활한 → 정확히 일치.',
@@ -475,7 +475,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: '"Good morning, you\'re such a (20) ________ bird with your shiny black feathers!"',
           answer: 'beautiful',
           solution: {
-            method: '"반짝이는 검은 깃털"을 칭찬하는 형용사를 고른다.',
+            method: '"shiny black feathers"을 칭찬하는 형용사를 고른다.',
             steps: [
               '"shiny black feathers"(반짝이는 검은 깃털)에 대한 칭찬 → 외모를 칭찬.',
               '"beautiful" = 아름다운 → 깃털 외모 칭찬에 자연스럽다.',
@@ -491,7 +491,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: 'She opened its beak (21) ________, all ready to sing.',
           answer: 'wide',
           solution: {
-            method: '"노래하기 위해 입을 크게 벌렸다"는 표현에 맞는 단어를 고른다.',
+            method: '"opened his mouth wide to sing"는 표현에 맞는 단어를 고른다.',
             steps: [
               '"opened its beak ___, all ready to sing" — 노래하기 위해 부리를 크게 열었다.',
               '"opened wide" = 활짝 열었다 → "open one\'s mouth wide"와 같은 표현.',
@@ -507,7 +507,7 @@ export const review1MahaBodhiEnglish2025: EnglishPaper = {
           stem: 'The monkey licked his mouth after eating the piece of (22) ________ banana.',
           answer: 'delicious',
           solution: {
-            method: '"입술을 핥았다"는 행동에 어울리는 바나나 묘사 형용사를 고른다.',
+            method: '"licked his lips"는 행동에 어울리는 바나나 묘사 형용사를 고른다.',
             steps: [
               '"licked his mouth"(입술을 핥았다) → 맛있어서 입술을 핥는 모습.',
               '"delicious" = 맛있는 → "licked his mouth"와 자연스럽게 연결.',

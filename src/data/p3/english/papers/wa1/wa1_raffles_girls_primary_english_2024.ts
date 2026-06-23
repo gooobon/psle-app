@@ -56,7 +56,7 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             method: '1단락에서 모두가 매료된 이유를 그대로 찾는다.',
             steps: [
               '1단락: "It sang so sweetly that anyone who heard it would be attracted to its singing."',
-              '매료된 이유는 "매우 달콤하게 노래했기" 때문.',
+              '매료된 이유는 "sang very sweetly" 때문.',
               '따라서 정답은 (1) sang very sweetly.',
             ],
             tip: '"why" 문제는 지문에서 결과 앞에 나오는 원인(so ~ that 구문 등)을 찾으면 됩니다.',
@@ -90,7 +90,7 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             steps: [
               '2단락: Mr Wu는 새를 잡아 "a cage in the balcony"(발코니 새장)에 두었다.',
               '자기 방에 둔 것이 아니며, 방에 숨긴 사람은 Ling이다("hid the nightingale in her room").',
-              '따라서 "Mr Wu가 자기 방에 두었다"는 거짓 → False.',
+              '따라서 "Mr Wu placed in his room"는 거짓 → False.',
             ],
             tip: '장소를 묻는 True/False는 누가 어디에 두었는지 인물별로 정확히 구분해야 합니다.',
           },
@@ -107,7 +107,7 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             steps: [
               '2단락: "she fell in love instantly with it." — Ling은 새에 푹 빠졌다.',
               '3단락: 새를 독차지하려고 자기 방에 숨길 정도였다.',
-              '따라서 "즐기지 않았다"는 거짓 → False.',
+              '따라서 "did not enjoy"는 거짓 → False.',
             ],
             tip: '부정문 진술(did not ~)은 지문 내용과 반대면 False가 됩니다.',
           },
@@ -231,7 +231,7 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           stem: "Which word in paragraph 2 has the same meaning as 'deadly'?",
           answer: 'harmful',
           solution: {
-            method: "'deadly'(해로운/위험한)와 비슷한 뜻의 단어를 2단락에서 찾는다.",
+            method: "Find a word in Paragraph 2 that has a similar meaning to 'deadly' (harmful/dangerous).",
             steps: [
               '2단락: "They are harmful," — 할머니가 씨앗이 해롭다고 경고.',
               'harmful = 해로운 → deadly와 의미가 통한다.',
@@ -248,10 +248,10 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'Which three-word phrase in paragraph 2 tells you that the writer and her brother spent a lot of fun time playing with the seeds?',
           answer: 'hours of enjoyment',
           solution: {
-            method: '"많은 즐거운 시간"을 나타내는 세 단어 표현을 2단락에서 찾는다.',
+            method: '"many happy times"을 나타내는 세 단어 표현을 2단락에서 찾는다.',
             steps: [
               '2단락: "The deep red seeds of the saga trees gave us hours of enjoyment."',
-              '"hours of enjoyment"가 세 단어로 된 표현이며 "오랜 즐거움"을 뜻한다.',
+              '"hours of enjoyment"가 세 단어로 된 표현이며 "long-lasting joy"을 뜻한다.',
               '따라서 답은 hours of enjoyment.',
             ],
             tip: '"three-word phrase"를 요구하면 정확히 세 단어를 그대로 옮겨 적어야 합니다.',
@@ -276,7 +276,7 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
               '집안에 두지 않은 이유는 동생이 실수로 삼키는 것을 막기 위해서.',
               '따라서 정답은 (2) toddler sister가 실수로 삼키지 않도록.',
             ],
-            tip: '오답 보기(shakers, Art and Craft)는 "씨앗의 용도"일 뿐, "조심한 이유"가 아님에 주의하세요.',
+            tip: '오답 보기(shakers, Art and Craft)는 "the use of seeds"일 뿐, "the reason for being careful"가 아님에 주의하세요.',
           },
         },
         {

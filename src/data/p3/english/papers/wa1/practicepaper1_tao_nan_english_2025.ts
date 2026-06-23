@@ -41,7 +41,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"dirty tray를 테이블에 남겨둔 사람"을 묻는 의문사를 고른다.',
+        method: '"The person who left a dirty tray on the table"을 묻는 의문사를 고른다.',
         steps: [
           '"___ left the dirty tray on the table?"에서 빈칸은 행위자(사람)를 묻는다.',
           '"Who"는 사람을 묻는 의문사.',
@@ -66,13 +66,13 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"콘서트가 취소되었기 때문에 환불해줬다"는 원인-결과 관계의 접속사를 고른다.',
+        method: '"They gave a refund because the concert was cancelled"는 원인-결과 관계의 접속사를 고른다.',
         steps: [
           '"the concert was cancelled"(취소됨) → 그 결과로 환불해줌.',
           '"Since" = ~했기 때문에/~한 이후로 → 원인을 나타낸다.',
           'If(만약)/While(동시에)/Unless(~하지 않는다면)는 원인-결과 관계에 맞지 않는다 → 정답 (3) Since.',
         ],
-        tip: '"Since + 원인절, 결과절"은 "~했기 때문에/~한 이후로"라는 의미입니다.',
+        tip: '"Since + cause clause, result clause"은 "Because ~ / Since ~"라는 의미입니다.',
       },
     },
     {
@@ -120,9 +120,9 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
         steps: [
           '"rare editions"(희귀 판본들)은 가산 복수 명사.',
           '"many" = 많은 (가산 복수 명사와 함께 사용) → 정확히 일치.',
-          'little/much는 불가산, few는 가산이나 "부정적 수"(거의 없는) 의미라 "large collection"과 모순 → 정답 (3) many.',
+          'little/much는 불가산, few는 가산이나 "Negative numbers"(거의 없는) 의미라 "large collection"과 모순 → 정답 (3) many.',
         ],
-        tip: '"many"는 가산 복수 명사와 함께 "많은"을 나타냅니다.',
+        tip: '"many"는 가산 복수 명사와 함께 "Many / A lot of"을 나타냅니다.',
       },
     },
     {
@@ -169,10 +169,10 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
         method: '"laid"(과거)와 동시에 진행 중이었던 동작을 나타낸다.',
         steps: [
           '"Shanti\'s sister laid the table"(과거) — "as"는 동시에 진행 중임을 나타낸다.',
-          '"their mother"가 저녁을 준비하는 "중"이었다 → 과거진행형.',
+          '"their mother"가 저녁을 준비하는 "Among"이었다 → 과거진행형.',
           '단수 "their mother" → "was preparing" → 정답 (4).',
         ],
-        tip: '"as A+과거, B was -ing"는 두 동작이 동시에 진행된 과거의 상황을 나타냅니다.',
+        tip: '"As A + Simple Past, B was -ing"는 두 동작이 동시에 진행된 과거의 상황을 나타냅니다.',
       },
     },
     {
@@ -222,7 +222,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           '부가의문문은 긍정문 → 부정형, 현재완료의 부정 조동사는 "haven\'t".',
           '주어는 "the participants"(3인칭 복수) → "they" → 정답 (4) haven\'t they?',
         ],
-        tip: '현재완료(have/has+pp) 긍정문의 부가의문문은 "haven\'t/hasn\'t + 주어?"입니다.',
+        tip: '현재완료(have/has+pp) 긍정문의 부가의문문은 "Haven't/Hasn't + subject?"입니다.',
       },
     },
     {
@@ -299,7 +299,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
         steps: [
           '"rehearsed daily"(매일 연습함) → 하지만 무대에서 기대와 다른 상황 발생.',
           '"had butterflies in his stomach" = 매우 긴장하다/설레다/겁이 나다 → 무대 위에서 긴장한 것.',
-          '"cried over spilt milk"(엎질러진 물을 후회)/"had a whale of a time"(즐거운 시간)/"was on top of the world"(매우 행복한)은 "연습했는데 무대에서 달라진" 상황과 안 맞는다 → 정답 (4).',
+          '"cried over spilt milk"(엎질러진 물을 후회)/"had a whale of a time"(즐거운 시간)/"was on top of the world"(매우 행복한)은 "Practised but performed differently on stage" 상황과 안 맞는다 → 정답 (4).',
         ],
         tip: '"have butterflies in one\'s stomach"은 무대/발표 전 극도로 긴장하는 상황을 나타냅니다.',
       },
@@ -320,13 +320,13 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"수업에서 거의 말하지 않는다"는 행동에 맞는 직유를 고른다.',
+        method: '"Hardly speaks in class"는 행동에 맞는 직유를 고른다.',
         steps: [
           '"She hardly speaks in class"(수업에서 거의 말하지 않는다) → 매우 조용함.',
           '"as quiet as a mouse" = 쥐처럼 조용한 → 정확히 일치.',
-          'as good as gold(품행이 좋은)/as sweet as sugar(달콤한)/as gentle as a dove(온화한)는 "조용함"과 직접 연결되지 않는다 → 정답 (4).',
+          'as good as gold(품행이 좋은)/as sweet as sugar(달콤한)/as gentle as a dove(온화한)는 "Quietness / Being quiet"과 직접 연결되지 않는다 → 정답 (4).',
         ],
-        tip: '"as quiet as a mouse"는 "쥐처럼 조용한"이라는 뜻의 정해진 직유 표현입니다.',
+        tip: '"as quiet as a mouse"는 "As quiet as a mouse"이라는 뜻의 정해진 직유 표현입니다.',
       },
     },
     {
@@ -345,11 +345,11 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"늦을까봐 걱정하면서" 열쇠를 찾는 모습에 맞는 부사를 고른다.',
+        method: '"Worrying about being late" 열쇠를 찾는 모습에 맞는 부사를 고른다.',
         steps: [
           '"Worried that she would be late"(늦을까봐 걱정함) → 급하고 절박하게 찾는 모습.',
           '"desperately" = 필사적으로/절박하게 → 시간에 쫓기며 찾는 상황과 정확히 일치.',
-          'keenly(예리하게)/accidentally(우연히)/enthusiastically(열정적으로)는 "걱정스럽게 필사적으로 찾는" 모습과 덜 맞는다 → 정답 (2) desperately.',
+          'keenly(예리하게)/accidentally(우연히)/enthusiastically(열정적으로)는 "Searching anxiously and desperately" 모습과 덜 맞는다 → 정답 (2) desperately.',
         ],
         tip: '"worried"(걱정스러운)는 "desperately"(필사적으로)와 자연스럽게 연결됩니다.',
       },
@@ -370,7 +370,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"악천후로 2시간 늦어진" 항공편의 상황에 맞는 동사를 고른다.',
+        method: '"delayed by 2 hours due to bad weather" 항공편의 상황에 맞는 동사를 고른다.',
         steps: [
           '"for two hours"(2시간 동안) — 일정 시간 동안 출발이 늦춰진 것.',
           '"delayed" = 지연된 → 비행기가 2시간 늦게 출발함 → 정확히 일치.',
@@ -395,11 +395,11 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"모든 사람의 말을 믿는다"는 특성에 맞는 형용사를 고른다.',
+        method: '"believes everything everyone says"는 특성에 맞는 형용사를 고른다.',
         steps: [
           '"believes everything that people say"(모든 말을 믿는다) → 지나치게 믿는 성향.',
           '"trusting" = 잘 믿는/신뢰하는 → 이 행동의 성격과 정확히 일치.',
-          'sensible(분별력 있는)/obedient(순종적인)/cooperative(협조적인)는 "모든 것을 믿는" 행동과 직접 연결되지 않는다 → 정답 (1) trusting.',
+          'sensible(분별력 있는)/obedient(순종적인)/cooperative(협조적인)는 "believes everything" 행동과 직접 연결되지 않는다 → 정답 (1) trusting.',
         ],
         tip: '"trusting"은 타인을 쉽게/과도하게 믿는 성향을 나타냅니다.',
       },
@@ -577,7 +577,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
             method: '"Sepak Takraw ___ players on each side"에서 구조를 파악한다.',
             steps: [
               'Sepak Takraw에 대한 소개: "___ players on each side kick a rattan ball..."',
-              '"where" = 각 편에 ~명의 선수들이 있는 경기를 소개할 때 쓸 수 있으나, 문맥상 "(이 경기에서는) 양편 선수들이 ~를 한다"는 의미.',
+              '"where" = 각 편에 ~명의 선수들이 있는 경기를 소개할 때 쓸 수 있으나, 문맥상 "(in this game) players on both sides do ~"는 의미.',
               '보기에서 where은 (G) → 정답 (G). (공식 정답표 확인됨)',
             ],
             tip: '"where players on each side..."는 경기의 설명을 계속하는 관계부사적 표현입니다.',
@@ -590,7 +590,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: 'Chapteh challenges players to keep a special shuttlecock made (22) ________ a rubber disc and coloured feathers in the air...',
           answer: 'H',
           solution: {
-            method: '"made ___ [재료]"(~으로 만들어진)에 맞는 전치사를 고른다.',
+            method: '"made ___ [material]"(~으로 만들어진)에 맞는 전치사를 고른다.',
             steps: [
               '"made with a rubber disc and coloured feathers" — 재료(고무 디스크와 색깔 깃털)를 사용해 만들어진.',
               '"made with"는 여러 재료를 사용해 만들어진 것을 나타낸다(made of는 단일 재료).',
@@ -622,7 +622,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: 'In a game of Congkak, players compete to place the most marbles (24) ________ the large holes on the ends of the board...',
           answer: 'B',
           solution: {
-            method: '"구멍 안에" 구슬을 넣는 동작에 맞는 전치사를 고른다.',
+            method: '"inside the hole" 구슬을 넣는 동작에 맞는 전치사를 고른다.',
             steps: [
               '"place the most marbles ___ the large holes" — 큰 구멍 안에 구슬을 넣다.',
               '"in the holes" = 구멍 안에 → 정확히 일치.',
@@ -662,11 +662,11 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           solution: {
             method: '"Let\'s ___ to be explorers"(탐험가인 척 하자)에 맞는 동사를 고른다.',
             steps: [
-              '"Let\'s ___ to be explorers" — 탐험가인 "척" 하자는 초대 편지의 상상 놀이.',
+              '"Let\'s ___ to be explorers" — 탐험가인 "pretend" 하자는 초대 편지의 상상 놀이.',
               '"pretend to be ~" = ~인 척 하다 → 정확히 일치.',
               '보기에서 pretend는 (F) → 정답 (F). (공식 정답표 확인됨)',
             ],
-            tip: '"pretend to be"는 "~인 척 하다"라는 뜻의 표현입니다.',
+            tip: '"pretend to be"는 "to pretend to be ~"라는 뜻의 표현입니다.',
           },
         },
         {
@@ -708,7 +708,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: "With carefree hearts, we'll make each day a pleasant (28) ________.",
           answer: 'D',
           solution: {
-            method: '"즐거운 ~"을 만들어 간다는 문맥에서 하루의 경험을 나타내는 명사를 고른다.',
+            method: '"enjoyable ~"을 만들어 간다는 문맥에서 하루의 경험을 나타내는 명사를 고른다.',
             steps: [
               '"we\'ll make each day a pleasant ___" — 즐겁고 편안한 매일을 만들어 간다.',
               '"memory" = 기억/추억 → "a pleasant memory"(즐거운 추억)이 자연스럽다.',
@@ -737,13 +737,13 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
         '________________________________________',
       answer: 'To support a family of seven, Mr Ray has to work very hard.',
       solution: {
-        method: '"To + 동사원형"(목적)을 앞에 쓰고 나머지를 주절로 연결한다.',
+        method: '"To + base verb"(목적)을 앞에 쓰고 나머지를 주절로 연결한다.',
         steps: [
           '"He has a family of seven to support"의 목적(가족을 부양하기 위해)이 앞으로 나온다.',
           '"To support a family of seven"으로 시작.',
           '완성: "To support a family of seven, Mr Ray has to work very hard." (공식 정답표 확인됨)',
         ],
-        tip: '"To + 동사원형, 주어 + 동사"는 목적(~하기 위해)을 문장 앞에 두는 변환입니다.',
+        tip: '"To + base verb, Subject + Verb"는 목적(~하기 위해)을 문장 앞에 두는 변환입니다.',
       },
     },
     {
@@ -789,7 +789,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           '"As soon as"는 문장 앞에 위치하므로 원인 사건을 먼저 쓴다.',
           '"As soon as the principal entered the classroom, the students stood up to greet her." (공식 정답표 확인됨)',
         ],
-        tip: '"As soon as A, B" = "A가 일어나자마자 B했다." "she"는 "the principal"로 명시합니다.',
+        tip: '"As soon as A, B" = "As soon as A happened, B happened." "she"는 "the principal"로 명시합니다.',
       },
     },
     {
@@ -806,13 +806,13 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
         '________________________________________.',
       answer: 'Out of hunger, the girl ate all the sandwiches on the plate.',
       solution: {
-        method: '"Out of + 감정/상태"(~로 인해)로 시작하는 문장으로 변환한다.',
+        method: '"Out of + emotion/state"(~로 인해)로 시작하는 문장으로 변환한다.',
         steps: [
           '"The girl was hungry"(배가 고팠다)를 "out of hunger"(배고픔으로 인해)로 변환.',
           '"Out of hunger"로 시작하고 결과(접시의 모든 샌드위치를 먹었다)를 이어 쓴다.',
           '"Out of hunger, the girl ate all the sandwiches on the plate." (공식 정답표 확인됨)',
         ],
-        tip: '"Out of + 감정/상태"는 "~로 인해/~때문에"를 의미합니다(out of hunger, out of curiosity 등).',
+        tip: '"Out of + emotion/state"는 "because of ~ / due to ~"를 의미합니다(out of hunger, out of curiosity 등).',
       },
     },
 
@@ -890,7 +890,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: '"Don\'t worry, we\'ll be fine," (36) [asured] Mr Lee.',
           answer: 'assured',
           solution: {
-            method: '"~을 안심시켰다"는 단어의 정확한 철자를 확인한다.',
+            method: '"reassured ~"는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: asured (s가 하나 빠짐).',
               '바른 단어: assured — "as-sur-ed"(s가 두 개).',
@@ -906,7 +906,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: '"I have bought you your favourite (37) [desart] - strawberry pudding!"',
           answer: 'dessert',
           solution: {
-            method: '"디저트"라는 단어의 정확한 철자를 확인한다.',
+            method: '"dessert"라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: desart.',
               '바른 단어: dessert — "des-sert"(s가 두 개, 끝이 -ert).',
@@ -922,7 +922,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
           stem: '"I\'ll have to (38) [excecise] later."',
           answer: 'exercise',
           solution: {
-            method: '"운동하다"라는 단어의 정확한 철자를 확인한다.',
+            method: '"to exercise"라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: excecise.',
               '바른 단어: exercise — "ex-er-cise".',
@@ -1052,7 +1052,7 @@ export const practicePaper1TaoNanEnglish2025: EnglishPaper = {
               '마지막 단락: "Relieved, he hugged his grandparents appreciatively." → 문제 해결 후 감사하며 마무리.',
               '"Yes, he enjoyed his trip as the trip was filled with enjoyment and adventure." (공식 정답표 확인됨)',
             ],
-            tip: '"Did A enjoy B? Yes/No + 이유"는 지문에서 감정 표현이 나타난 곳을 근거로 제시합니다.',
+            tip: '"Did A enjoy B? Yes/No + reason"는 지문에서 감정 표현이 나타난 곳을 근거로 제시합니다.',
           },
         },
       ],

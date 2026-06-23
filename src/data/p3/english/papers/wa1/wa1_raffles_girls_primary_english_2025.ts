@@ -123,7 +123,7 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             method: '2단락에서 Lily가 구슬로 무엇을 했는지 확인한다.',
             steps: [
               '2단락: "Lily decided to take the marble to the lost-and-found corner at school."',
-              'Lily는 구슬을 본인 컬렉션에 넣지 않고 "분실물 코너"에 가져갔다.',
+              'Lily는 구슬을 본인 컬렉션에 넣지 않고 "Lost and Found corner"에 가져갔다.',
               '"decided to keep it for her collection"(자신의 컬렉션에 보관하기로)는 거짓 → False. (공식 정답표 확인됨)',
             ],
             tip: '1단락의 생각(컬렉션과 비슷한 것이라 운이 좋다고 생각함)과 실제 행동(분실물 코너에 제출)을 혼동하지 마세요.',
@@ -227,7 +227,7 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
               '즉: 가장 먼저 일어난 것은 "Alligator found out he only had roots"(1번), 그 다음 "Fox laughed and ate the corn"(2번), 마지막이 "Alligator and Fox harvested potatoes"(3번).',
             ],
             tip:
-              '3단락: 옥수수 수확 → Alligator가 뿌리만 갖게 됨(①) → Fox 웃으며 옥수수 먹음(②). 4단락: 감자 수확 → Alligator가 "위 부분"이라 감자를 못 가짐(③). 따라서 "Fox laughed/ate corn"=2, "potatoes together"=3, "roots of corn"=1.',
+              '3단락: 옥수수 수확 → Alligator가 뿌리만 갖게 됨(①) → Fox 웃으며 옥수수 먹음(②). 4단락: 감자 수확 → Alligator가 "The top part / upper section"이라 감자를 못 가짐(③). 따라서 "Fox laughed/ate corn"=2, "potatoes together"=3, "roots of corn"=1.',
           },
         },
         {
@@ -238,13 +238,13 @@ export const wa1RafflesGirlsPrimaryEnglish2025: EnglishPaper = {
             'Which three-word phrase in paragraph 5 tells you that Alligator thought of a solution?',
           answer: 'came up with',
           solution: {
-            method: '"생각해냈다/해결책을 생각해냈다"는 의미의 세 단어 구를 5단락에서 찾는다.',
+            method: '"Thought of a solution / came up with an answer"는 의미의 세 단어 구를 5단락에서 찾는다.',
             steps: [
               '5단락: "Alligator came up with a good way to share the harvest fairly."',
               '"came up with" = (아이디어/해결책을) 생각해내다 → 세 단어.',
               '따라서 답은 came up with. (공식 정답표 확인됨)',
             ],
-            tip: '"came up with"는 "생각해내다/좋은 방법을 떠올리다"를 뜻하는 세 단어 구동사입니다.',
+            tip: '"came up with"는 "To think of a good idea / to come up with a solution"를 뜻하는 세 단어 구동사입니다.',
           },
         },
         {

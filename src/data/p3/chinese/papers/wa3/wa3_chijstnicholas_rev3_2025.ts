@@ -26,12 +26,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "rèn wéi",
     meaning: "Correct '让→认'. '认为(rènwéi)' = to think/believe. 我认为乱丢垃圾是不对的.",
     solution: {
-      method: "동음·형근 오자 교정",
+      method: "Correcting characters that look or sound alike (homophone/similar-shape errors)",
       steps: [
-        "'让为'는 잘못 → 올바른 단어는 '认为(생각하다)'.",
-        "틀린 글자 '让(ràng)'을 '认(rèn)'으로 고친다.",
+        "'让为' is wrong → the correct word is '认为' (to think/believe).",
+        "Change the wrong character '让 (ràng)' to '认 (rèn)'.",
       ],
-      tip: "认为(여기다) vs 让(양보하다) — 자형이 비슷하니 주의.",
+      tip: "'认为' (to think) vs '让' (to let/give way) — these characters look similar, so be careful!",
     },
   },
   {
@@ -40,17 +40,17 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     difficulty: "core",
     needsParentVerify: true,
     instruction: "请圈出错误的汉字，然后把正确的汉字填写在括号里。",
-    q: "我们不应该【摘错字】公园里的花朵。（정답 문장: 我们不应该摘公园里的花朵。）",
+    q: "我们不应该【摘错字】公园里的花朵。(Correct sentence: 我们不应该摘公园里的花朵。)",
     answer: "摘",
     pinyin: "zhāi",
     meaning: "Corrected to '摘(zhāi)' = to pick (flowers). 不应该摘公园里的花朵 = shouldn't pick the flowers in the park.",
     solution: {
-      method: "동작 동사 교정",
+      method: "Correcting the action verb",
       steps: [
-        "공원 꽃에 하는 동작 → '따다(摘)'.",
-        "원문의 잘못된 글자를 '摘'으로 고친다.",
+        "The action done to flowers in the park → 'to pick' (摘).",
+        "Change the wrong character in the original sentence to '摘'.",
       ],
-      tip: "⚠ 인쇄된 ‘틀린 글자’ 형태가 OCR상 불명확. 바른 글자 ‘摘’만 확정 — 학부모 검수 권장.",
+      tip: "⚠ The wrong character shown in print is unclear in the scanned image. Only the correct character '摘' is confirmed — parents are advised to check the original.",
     },
   },
   {
@@ -63,12 +63,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "yǐn lái",
     meaning: "Correct '印→引'. '引来(yǐnlái)' = to attract. 糖果引来了很多蚂蚁 = the sweets attracted many ants.",
     solution: {
-      method: "동음 오자 교정",
+      method: "Correcting a homophone error (characters that sound alike)",
       steps: [
-        "'印来'는 잘못 → '끌어오다'는 '引来'.",
-        "'印(yìn)'을 '引(yǐn)'으로 고친다.",
+        "'印来' is wrong → the correct word for 'to attract/draw in' is '引来'.",
+        "Change '印 (yìn)' to '引 (yǐn)'.",
       ],
-      tip: "引来(끌어들이다)와 印(찍다)은 발음이 비슷.",
+      tip: "'引来' (to attract) and '印' (to print/stamp) sound similar — do not mix them up!",
     },
   },
   {
@@ -81,12 +81,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "guó qí",
     meaning: "Correct '七→旗'. '国旗(guóqí)' = national flag. 把国旗画在明信片的中间.",
     solution: {
-      method: "단어 의미로 오자 교정",
+      method: "Correcting a wrong character based on word meaning",
       steps: [
-        "엽서에 그리는 것 → '国旗(국기)'.",
-        "잘못된 '七'을 '旗'로 고친다.",
+        "What is drawn on a postcard → '国旗' (national flag).",
+        "Change the wrong character '七' to '旗'.",
       ],
-      tip: "国旗(국기)·旗子(깃발)의 ‘旗’.",
+      tip: "'旗' is the character used in words like 国旗 (national flag) and 旗子 (flag).",
     },
   },
   {
@@ -99,12 +99,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "mǎn yì",
     meaning: "Correct '慢→满'. '满意(mǎnyì)' = satisfied. 对我的学习表现很满意.",
     solution: {
-      method: "동음 오자 교정",
+      method: "Correcting a mistake caused by same pronunciation (homophone error)",
       steps: [
-        "'慢意'는 잘못 → '만족하다'는 '满意'.",
-        "'慢(màn)'을 '满(mǎn)'으로 고친다.",
+        "'慢意' is wrong — the correct word for 'satisfied' is '满意'.",
+        "Change '慢 (màn)' to '满 (mǎn)'.",
       ],
-      tip: "满意(만족) vs 慢(느리다) — 발음·자형 유사.",
+      tip: "满意 (satisfied) vs 慢 (slow) — they sound similar and look alike.",
     },
   },
   {
@@ -117,12 +117,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "zhuǎn",
     meaning: "Correct '专→转'. '转过头来(zhuǎn guò tóu lái)' = to turn one's head around.",
     solution: {
-      method: "형근 오자 교정",
+      method: "Correcting a mistake caused by similar-looking characters (similar form error)",
       steps: [
-        "고개를 '돌리다' → 转过头来.",
-        "'专(zhuān)'을 '转(zhuǎn)'으로 고친다.",
+        "'To turn one's head' in Chinese is 转过头来.",
+        "Change '专 (zhuān)' to '转 (zhuǎn)'.",
       ],
-      tip: "转(돌다)과 专(전문)은 우측이 비슷.",
+      tip: "转 (to turn) and 专 (specialised) look similar on the right side.",
     },
   },
   {
@@ -135,12 +135,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "qí",
     meaning: "Correct '奇→骑'. '骑脚踏车(qí jiǎotàchē)' = to ride a bicycle.",
     solution: {
-      method: "동음·형근 오자 교정",
+      method: "Correcting a mistake caused by both same pronunciation and similar-looking characters",
       steps: [
-        "자전거를 '타다' → 骑.",
-        "'奇(qí)'를 '骑(qí)'로 고친다(부수 ‘马’).",
+        "'To ride a bicycle' in Chinese uses the character 骑.",
+        "Change '奇 (qí)' to '骑 (qí)' — remember that 骑 has the radical '马' (horse).",
       ],
-      tip: "骑(말 탈 기)는 ‘马’ 부수. 奇(기이할 기)와 발음 같음.",
+      tip: "骑 (to ride) uses the '马' (horse) radical. It sounds the same as 奇 (strange/odd).",
     },
   },
   {
@@ -153,12 +153,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "dài",
     meaning: "Correct '带→袋'. '环保袋(huánbǎo dài)' = reusable bag.",
     solution: {
-      method: "동음 오자 교정",
+      method: "Correcting a mistake caused by same pronunciation (homophone error)",
       steps: [
-        "'环保带'는 잘못 → '环保袋(에코백)'.",
-        "'带(띠)'를 '袋(자루·가방)'로 고친다.",
+        "'环保带' is wrong → correct word is '环保袋 (eco bag)'.",
+        "Change '带' (belt/ribbon) to '袋' (bag/sack).",
       ],
-      tip: "袋(주머니/가방)와 带(띠/지니다)는 동음(dài).",
+      tip: "'袋' (bag/pocket) and '带' (belt/to carry) sound the same in Chinese: both are pronounced 'dài'.",
     },
   },
   {
@@ -171,12 +171,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "zhòng liàng",
     meaning: "Correct '亮→量'. '重量(zhòngliàng)' = weight. 称出大象的重量.",
     solution: {
-      method: "단어 의미로 오자 교정",
+      method: "Correcting the wrong character by thinking about the meaning of the word.",
       steps: [
-        "코끼리를 재는 것 → '重量(무게)'.",
-        "'亮(밝다)'을 '量(양·무게)'으로 고친다.",
+        "Weighing an elephant → the correct word is '重量' (weight).",
+        "Change '亮' (bright) to '量' (amount/weight).",
       ],
-      tip: "曹冲称象(조충이 코끼리 무게를 잼) 이야기 — 重量.",
+      tip: "This is from the story of Cao Chong Weighing the Elephant (曹冲称象) — the key word is '重量' (weight).",
     },
   },
   {
@@ -189,12 +189,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "wǎng",
     meaning: "Correct '忘→往'. '往……走去(wǎng…zǒu qù)' = to walk towards…. 往课室的方向走去.",
     solution: {
-      method: "형근 오자 교정",
+      method: "Correcting the wrong character by looking at its shape.",
       steps: [
-        "'____ 课室的方向走去' → '~을 향해(往)'.",
-        "'忘(잊다)'을 '往(향하다)'으로 고친다.",
+        "'____ 课室的方向走去' → use '往' to mean 'towards' or 'in the direction of'.",
+        "Change '忘' (to forget) to '往' (towards/in the direction of).",
       ],
-      tip: "往(향할 왕)과 忘(잊을 망)은 자형이 비슷.",
+      tip: "'往' (towards) and '忘' (to forget) look very similar in written form.",
     },
   },
 
@@ -212,12 +212,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "rēng",
     meaning: "'扔(rēng)' = to throw away. 扔掉 = throw away.",
     solution: {
-      method: "병음→한자 쓰기 (扌 부수)",
+      method: "Writing Chinese characters from Pinyin — focus on characters with the '扌' (hand) radical.",
       steps: [
-        "rēng = 던지다/버리다 → 扔.",
-        "손동작이므로 부수 ‘扌’.",
+        "'rēng' means to throw or to toss → the correct character is '扔'.",
+        "Because this action is done with the hand, the character uses the '扌' (hand) radical.",
       ],
-      tip: "扔(rēng)·掉 결합 → 扔掉(버리다).",
+      tip: "'扔' (rēng) + '掉' together form '扔掉', which means 'to throw away'.",
     },
   },
   {
@@ -230,9 +230,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "píng",
     meaning: "'瓶(píng)' = bottle. 瓶子 = bottle.",
     solution: {
-      method: "병음→한자 쓰기",
-      steps: ["píng + 子 = 瓶子(병)."],
-      tip: "瓶子(병)는 ‘瓦’ 부수 포함.",
+      method: "Write the Chinese character from the pinyin given.",
+      steps: ["píng + 子 = 瓶子 (bottle)."],
+      tip: "瓶子 (bottle) contains the radical '瓦'.",
     },
   },
   {
@@ -245,9 +245,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "chāo",
     meaning: "'超(chāo)' = to overtake/surpass. 超越 = to overtake.",
     solution: {
-      method: "병음→한자 쓰기",
-      steps: ["chāo + 越 = 超越(추월하다)."],
-      tip: "超越(추월)·超过(초과)의 ‘超’ (走 부수).",
+      method: "Write the Chinese character from the pinyin given.",
+      steps: ["chāo + 越 = 超越 (to overtake / surpass)."],
+      tip: "Both 超越 (surpass) and 超过 (exceed) use '超', which has the radical '走'.",
     },
   },
   {
@@ -260,9 +260,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "bào",
     meaning: "'报(bào)' = newspaper. 报纸 = newspaper.",
     solution: {
-      method: "병음→한자 쓰기",
-      steps: ["bào + 纸 = 报纸(신문)."],
-      tip: "报纸(신문)·报告(보고)의 ‘报’.",
+      method: "Write the Chinese character from the pinyin given.",
+      steps: ["bào + 纸 = 报纸 (newspaper)."],
+      tip: "Both 报纸 (newspaper) and 报告 (report) use the character '报'.",
     },
   },
   {
@@ -275,9 +275,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "zhuāng",
     meaning: "'装(zhuāng)' = to load/pack into. 装进箱子里 = pack into the box.",
     solution: {
-      method: "병음→한자 쓰기",
-      steps: ["zhuāng = (안에) 담다/넣다 → 装.", "装进…里 = ~안에 채워 넣다."],
-      tip: "装(담을 장)·安装(설치)의 ‘装’.",
+      method: "Write the Chinese character from the pinyin given.",
+      steps: ["zhuāng = to put (something) inside / to fill in → 装.", "装进…里 = to put / fill something inside something else."],
+      tip: "The character '装' appears in both 装 (to contain/pack) and 安装 (to install).",
     },
   },
 
@@ -294,13 +294,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "zāng / chòu",
     meaning: "脏(zāng) = dirty; 臭(chòu) = smelly. 又脏又臭 = dirty and smelly.",
     solution: {
-      method: "병음 쓰기 — 두 글자(脏/臭)",
+      method: "Write the pinyin — two characters (脏 / 臭).",
       steps: [
-        "脏(더럽다) = zāng (1성).",
-        "臭(냄새나다) = chòu (4성).",
+        "脏 (dirty) = zāng (1st tone).",
+        "臭 (smells bad) = chòu (4th tone).",
         "→ 脏 zāng / 臭 chòu.",
       ],
-      tip: "又脏又臭 — 두 글자 모두 정확히 표기해야 점수.",
+      tip: "又脏又臭 — Both characters must be written correctly to get the mark.",
     },
   },
   {
@@ -313,12 +313,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "qī",
     meaning: "'期(qī)' in 假期 = period/holiday. 假期(jiàqī) = holiday.",
     solution: {
-      method: "병음 쓰기 — 다음자 주의",
+      method: "Writing Pinyin — Watch out for characters with more than one pronunciation.",
       steps: [
-        "'假期'의 '期'는 qī (1성).",
+        "The character '期' in '假期' is pronounced qī (1st tone).",
         "→ qī.",
       ],
-      tip: "假期(jiàqī)=방학/휴가. ‘期’는 보통 qī.",
+      tip: "假期 (jiàqī) means holiday or vacation. '期' is usually pronounced qī.",
     },
   },
 
@@ -343,13 +343,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "jué dìng",
     meaning: "'决定' = to decide. Correct only in (4): decided to jog every morning.",
     solution: {
-      method: "어휘 용법 변별 — '决定'은 '~하기로 정하다'",
+      method: "Vocabulary usage — '决定' means 'to decide to do something'.",
       steps: [
-        "'决定'은 행동·계획을 정할 때 쓴다.",
-        "(1)(2)(3)은 '판단/생각'이라 '觉得/认为'가 맞다.",
-        "(4) '决定每天去跑步'만 올바른 용법.",
+        "'决定' is used when deciding on an action or a plan.",
+        "Sentences (1), (2), and (3) express opinions or thoughts, so '觉得' or '认为' should be used instead.",
+        "Only sentence (4) '决定每天去跑步' uses '决定' correctly.",
       ],
-      tip: "决定 + 동작계획. 의견·판단엔 ‘觉得/认为’.",
+      tip: "决定 + action or plan. For opinions and judgements, use '觉得' or '认为'.",
     },
   },
   {
@@ -369,13 +369,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "rú guǒ",
     meaning: "'如果' = if. Correct only in (2): if elder brother listens attentively, he'll do well.",
     solution: {
-      method: "가정 관계 정확성 판단 — '如果…就…'",
+      method: "Identifying correct conditional relationships — '如果…就…'",
       steps: [
-        "'如果'는 조건+결과(就/便)와 호응해야 한다.",
-        "(2) '如果…专心听课，就能有好的表现'이 자연스러운 가정.",
-        "(1)还是… / (3)但… / (4)는 호응이 어긋남.",
+        "'如果' must be paired with a result clause using '就' or '便'.",
+        "Sentence (2) '如果…专心听课，就能有好的表现' is a natural and correct conditional sentence.",
+        "Sentence (1) uses 还是…, sentence (3) uses 但…, and sentence (4) has a mismatched pairing — none of these are correct.",
       ],
-      tip: "‘如果 A，就 B’ 짝이 맞는 문장을 고른다.",
+      tip: "Choose the sentence where '如果 A，就 B' are correctly paired together.",
     },
   },
   {
@@ -395,13 +395,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "chī jīng",
     meaning: "'吃惊' = to be startled/shocked (by something sudden). Correct in (4): sudden power cut shocked us.",
     solution: {
-      method: "어휘 용법 변별 — '吃惊'은 '갑작스러운 일에 놀람'",
+      method: "Vocabulary Usage — '吃惊' means 'being surprised by something sudden and unexpected'",
       steps: [
-        "'吃惊'은 예상 밖의 갑작스러운 사건에 놀랄 때.",
-        "(4) '突然停电' → '十分吃惊'이 자연스럽다.",
-        "(1)迟到는 늘 있던 일, (2)오래 아픔, (3)길 못 찾음은 ‘着急’가 맞음.",
+        "'吃惊' is used when you are shocked by something sudden that you did not expect.",
+        "(4) '突然停电' → '十分吃惊' is the natural and correct choice here.",
+        "(1) Being late happens often, (2) being sick for a long time, (3) getting lost — these all fit '着急', not '吃惊'.",
       ],
-      tip: "‘吃惊’의 단짝 단서: 突然/没想到(갑작스러움).",
+      tip: "Key clue words that go with '吃惊': 突然 / 没想到 (something sudden or unexpected).",
     },
   },
   {
@@ -421,12 +421,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "lì yòng",
     meaning: "'利用' = to make use of (time/resource). Correct in (1): used the rest time to finish homework.",
     solution: {
-      method: "어휘 용법 변별 — '利用'은 '시간·기회·자원을 활용'",
+      method: "Vocabulary Usage — '利用' means 'to make use of time, opportunities, or resources'",
       steps: [
-        "(1) '利用休息的时间' → 시간을 활용 ✓.",
-        "(2) '利用十分大'는 명사 오용(用处/作用), (3)도구는 '使用', (4) '十分利用'은 비문.",
+        "(1) '利用休息的时间' → using time wisely ✓",
+        "(2) '利用十分大' is wrong because '利用' is a verb, not a noun — use '用处' or '作用' instead. (3) For tools and machines, use '使用'. (4) '十分利用' is incorrect and does not make sense.",
       ],
-      tip: "시간·기회는 ‘利用’, 기계·도구는 ‘使用’.",
+      tip: "Use '利用' for time and opportunities. Use '使用' for machines and tools.",
     },
   },
 
@@ -455,13 +455,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
         pinyin: "zhào gù mèi mei",
         meaning: "What did mum ask Zi Wen to do? To look after his little sister (照顾妹妹).",
         solution: {
-          method: "세부정보 — 엄마 대사 인용",
+          method: "Finding Details — quoting what Mum said",
           steps: [
-            "엄마: '妈妈去把屋外的衣服收进来，你看着妹妹'.",
-            "'看着妹妹' = 동생을 돌봐라.",
+            "Mum said: '妈妈去把屋外的衣服收进来，你看着妹妹'.",
+            "'看着妹妹' means 'look after your younger sister'.",
             "→ (3) 照顾妹妹.",
           ],
-          tip: "옷을 거두는 건 ‘엄마’의 일, 子文의 일은 ‘동생 돌보기’.",
+          tip: "Bringing in the clothes is Mum's job. 子文's job is to look after his younger sister.",
         },
       },
       {
@@ -473,13 +473,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
         pinyin: "zhǐ xiǎng wán shǒu jī de yóu xì",
         meaning: "Why did he ignore mum? Because he only wanted to keep playing his phone game.",
         solution: {
-          method: "원인 추론",
+          method: "Finding the Reason",
           steps: [
             "'又低头继续玩手机游戏，把妈妈的话当耳边风'.",
-            "게임에만 빠져 엄마 말을 흘려들음.",
+            "He was too focused on his game and did not listen carefully to what Mum said.",
             "→ (1) 只想玩手机的游戏.",
           ],
-          tip: "‘当耳边风(귓등으로 흘리다)’ + 계속 게임 → 게임에 몰두가 원인.",
+          tip: "'Turn a deaf ear (귓등으로 흘리다)' + keeps playing games → Being too focused on games is the cause.",
         },
       },
       {
@@ -491,13 +491,13 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
         pinyin: "bù dǒng shì",
         meaning: "What kind of child is Zi Wen? Not sensible / immature (不懂事).",
         solution: {
-          method: "인물 성격 판단(总结题)",
+          method: "Judging a character's personality (Summary Question / 总结题)",
           steps: [
-            "엄마 부탁을 무시하다 동생이 다침 → 철없는 행동.",
-            "'不懂事(철이 없다)'가 전체 행동을 가장 잘 요약.",
+            "Ignores mum's request and younger sibling gets hurt → Immature, irresponsible behaviour.",
+            "'不懂事 (immature/irresponsible)' best summarises the character's overall behaviour.",
             "→ (2) 不懂事.",
           ],
-          tip: "‘맡은 일을 제대로 안 하고 결과가 나쁨’ → 不懂事.",
+          tip: "'Does not do their duty properly and causes a bad outcome' → 不懂事 (immature/irresponsible).",
         },
       },
     ],
@@ -517,12 +517,12 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "qián",
     meaning: "'钱(qián)' = money. 10 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
+      method: "Pinyin + Counting the number of strokes",
       steps: [
-        "钱 = qián (2성).",
-        "획수: 钅(5획) + 戋(5획) = 10획.",
+        "钱 = qián (2nd tone).",
+        "Stroke count: 钅 (5 strokes) + 戋 (5 strokes) = 10 strokes total.",
       ],
-      tip: "钱(돈 전)은 ‘钅(쇠 금)’ 부수, 총 10획.",
+      tip: "钱 (money) uses the radical '钅 (metal)', and has 10 strokes in total.",
     },
   },
   {
@@ -535,9 +535,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "lí",
     meaning: "'离(lí)' = to leave / be apart from. 10 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
-      steps: ["离 = lí (2성).", "획수 총 10획."],
-      tip: "离开(떠나다)의 ‘离’, 10획.",
+      method: "Pinyin + Counting the number of strokes",
+      steps: ["离 = lí (2nd tone).", "Total stroke count: 10 strokes."],
+      tip: "'离' from 离开 (to leave/depart), has 10 strokes.",
     },
   },
   {
@@ -550,9 +550,9 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     pinyin: "kǎo",
     meaning: "'考(kǎo)' = to test / take an exam. 6 strokes.",
     solution: {
-      method: "병음 + 필획 수 세기",
-      steps: ["考 = kǎo (3성).", "획수 총 6획."],
-      tip: "考试(시험)의 ‘考’, 6획.",
+      method: "Pinyin + Counting the number of strokes",
+      steps: ["考 = kǎo (3rd tone).", "Total of 6 strokes."],
+      tip: "The character '考' from 考试 (exam), 6 strokes.",
     },
   },
 ];

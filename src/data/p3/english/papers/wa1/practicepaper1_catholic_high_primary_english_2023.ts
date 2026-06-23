@@ -49,7 +49,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '"behind the door"(문 뒤에)가 가장 자연스럽다.',
           'under(아래)/between(사이)/with(함께)는 문맥과 안 맞는다 → 정답 (3) behind.',
         ],
-        tip: '전치사 문제는 "어디에 있어야 보이지 않을까?"처럼 상황을 그려보면 쉽습니다.',
+        tip: '전치사 문제는 "Where should you be so that you cannot be seen?"처럼 상황을 그려보면 쉽습니다.',
       },
     },
     {
@@ -96,7 +96,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         method: '"went off"(과거)와 동시에 진행 중이던 동작을 나타낸다.',
         steps: [
           '"when the fire alarm went off" — 화재경보가 울린 시점은 과거.',
-          '그 순간 모두가 책을 읽고 "있던" 중이었으므로 과거진행형.',
+          '그 순간 모두가 책을 읽고 "Was/were (used to show something that existed or happened in the past)" 중이었으므로 과거진행형.',
           '"Everyone"은 단수 취급 → was reading → 정답 (4).',
         ],
         tip: '과거의 한 시점에 진행 중이던 동작은 "was/were + -ing"(과거진행)으로 씁니다.',
@@ -124,7 +124,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           '대조를 잇는 접속사는 but.',
           'so(그래서)·and(그리고)·or(또는)는 대조에 안 맞는다 → 정답 (3) but.',
         ],
-        tip: '"좋아하지 않는다 ↔ 즐긴다"처럼 반대 내용이 이어지면 but을 씁니다.',
+        tip: '"Does not like ↔ Enjoys"처럼 반대 내용이 이어지면 but을 씁니다.',
       },
     },
     {
@@ -171,7 +171,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
         method: '명사의 가산 여부와 긍정 문맥(인기 많음)을 본다.',
         steps: [
           '"children"은 셀 수 있는 복수 명사 → little/much(불가산) 제외.',
-          '영화가 아주 인기 있다는 긍정 문맥 → "많은 아이들"이 좋아함.',
+          '영화가 아주 인기 있다는 긍정 문맥 → "Many children"이 좋아함.',
           'Few(거의 없는)는 부정적 → 정답은 (3) Many.',
         ],
         tip: 'few=거의 없는(부정), many=많은(긍정). 가산 복수 명사에 씁니다.',
@@ -194,11 +194,11 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"소지품을 두고 가지 말라"는 당부와 어울리는 대명사를 고른다.',
+        method: '"Do not leave your belongings behind"는 당부와 어울리는 대명사를 고른다.',
         steps: [
           '뒷문장: "Do not leave your belongings behind"(소지품을 두고 가지 마라).',
-          '그러려면 "모든 것(everything)"을 챙겨야 한다.',
-          'nothing/anything/something은 "모두 챙겨라"는 뜻과 안 맞는다 → 정답 (3) everything.',
+          '그러려면 "Everything"을 챙겨야 한다.',
+          'nothing/anything/something은 "Pack/bring everything"는 뜻과 안 맞는다 → 정답 (3) everything.',
         ],
         tip: '뒤 문장이 빈칸의 의미를 풀어주는 단서가 되는 경우가 많습니다.',
       },
@@ -248,7 +248,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"갑자기 울음을 터뜨리다"라는 숙어를 떠올린다.',
+        method: '"To suddenly burst into tears"라는 숙어를 떠올린다.',
         steps: [
           '"break into tears" = 갑자기 울음을 터뜨리다(=burst into tears).',
           '빈칸 바로 뒤에 "tears"가 와서 "broke into tears"가 자연스럽다.',
@@ -274,11 +274,11 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"조용히, 들키지 않게" 움직이는 동작 동사를 고른다.',
+        method: '"Quietly, without being noticed" 움직이는 동작 동사를 고른다.',
         steps: [
           '"quietly... did not want to wake anyone up" → 몰래 살금살금 움직였다.',
           'sneak = 살금살금/몰래 움직이다 → 문맥에 맞는다.',
-          'bolted/darted/scurried는 "빠르게" 움직임을 강조해 조용함과 안 맞는다 → 정답 (4) sneaked.',
+          'bolted/darted/scurried는 "Quickly" 움직임을 강조해 조용함과 안 맞는다 → 정답 (4) sneaked.',
         ],
         tip: '동작 동사는 속도(빠름)냐 은밀함(조용함)이냐를 구분해 고릅니다.',
       },
@@ -350,7 +350,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"자신감 있고 침착함"을 나타내는 직유를 고른다.',
+        method: '"Confident and calm"을 나타내는 직유를 고른다.',
         steps: [
           '뒷문장: "He was confident" → 결과를 기다리며 침착하고 여유로웠다.',
           '"as cool as a cucumber" = 아주 침착한/태연한.',
@@ -422,7 +422,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She and (16) ________ father searched high and low for it.',
           answer: 'B',
           solution: {
-            method: '"Mabel의 아빠"를 가리키는 소유격을 고른다.',
+            method: '"Mabel's father"를 가리키는 소유격을 고른다.',
             steps: [
               '주인공은 Mabel(여자아이) → 그녀의 아빠.',
               '여성 소유격은 "her" → "her father".',
@@ -438,7 +438,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'He had taken it to do (17) ________ homework. (He = Larry)',
           answer: 'C',
           solution: {
-            method: '"Larry의 숙제"를 가리키는 소유격을 고른다.',
+            method: '"Larry's homework"를 가리키는 소유격을 고른다.',
             steps: [
               '연필을 가져간 사람은 Larry(남자) → 그의 숙제.',
               '남성 소유격은 "his" → "his homework".',
@@ -456,7 +456,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: 'Mabel이 Larry에게 직접 따지는 말의 주어를 고른다.',
             steps: [
-              'Mabel이 Larry에게 직접 "왜 네가 가져갔니?"라고 묻는 상황.',
+              'Mabel이 Larry에게 직접 "Why did you take it?"라고 묻는 상황.',
               '상대 한 사람을 가리키는 2인칭 주어는 "you".',
               '보기에서 you는 (F) → 정답 (F). (남은 A·E로도 확인 가능)',
             ],
@@ -568,7 +568,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'He simply (23) ________ to eat anything else.',
           answer: 'refused',
           solution: {
-            method: '"to + 동사원형"과 어울리며 "거부했다"는 뜻의 단어를 고른다.',
+            method: '"to + base form of verb"과 어울리며 "refused / rejected"는 뜻의 단어를 고른다.',
             steps: [
               'Abu는 팬케이크만 먹고 다른 건 안 먹으려 했다 → 거부.',
               'refuse + to-부정사: "refused to eat"(먹기를 거부했다)가 문법·의미 모두 맞다.',
@@ -584,7 +584,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: '"He should eat (24) ________ food like fruits and vegetables too!"',
           answer: 'healthy',
           solution: {
-            method: '"과일과 채소" 같은 음식을 묘사하는 형용사를 고른다.',
+            method: '"fruits and vegetables" 같은 음식을 묘사하는 형용사를 고른다.',
             steps: [
               '과일·채소는 몸에 좋은 음식 → healthy food.',
               '"healthy food like fruits and vegetables"가 자연스럽다.',
@@ -600,13 +600,13 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'She added different (25) ________ to the pancakes daily.',
           answer: 'ingredients',
           solution: {
-            method: '팬케이크 반죽에 매일 넣은 "재료"를 뜻하는 단어를 고른다.',
+            method: '팬케이크 반죽에 매일 넣은 "ingredient"를 뜻하는 단어를 고른다.',
             steps: [
-              '엄마는 당근·시금치 등을 반죽에 넣었다 → 다양한 "재료".',
+              '엄마는 당근·시금치 등을 반죽에 넣었다 → 다양한 "material".',
               'ingredients = 재료 → "different ingredients"가 자연스럽다.',
               '남은 보기(avoided/mixtures/special)는 문맥에 안 맞는다 → 정답 ingredients.',
             ],
-            tip: '요리·음식 맥락에서 "넣는 것"은 보통 ingredients(재료)입니다.',
+            tip: '요리·음식 맥락에서 "adding (something) in"은 보통 ingredients(재료)입니다.',
           },
         },
       ],
@@ -635,10 +635,10 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "take long strols".',
           answer: 'strolls',
           solution: {
-            method: '"산책"을 뜻하는 단어의 정확한 철자를 떠올린다.',
+            method: '"a walk"을 뜻하는 단어의 정확한 철자를 떠올린다.',
             steps: [
               '잘못된 철자: strols.',
-              '의미는 "한가로운 산책". 바른 단어는 strolls.',
+              '의미는 "a leisurely walk". 바른 단어는 strolls.',
               'l이 두 개(stroll), 복수는 strolls.',
             ],
             tip: 'stroll은 l을 두 번 씁니다(stroll → strolls).',
@@ -667,7 +667,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "The nature reserve suppots a variety...".',
           answer: 'supports',
           solution: {
-            method: '"뒷받침하다/유지하다"는 동사의 정확한 철자를 확인한다.',
+            method: '"to support / to maintain"는 동사의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: suppots.',
               '바른 단어는 support — p 다음에 또 p, 그리고 r이 들어간다(sup-port).',
@@ -683,7 +683,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "how importent conservation is".',
           answer: 'important',
           solution: {
-            method: '"중요한"이라는 단어의 끝 철자(-ant)를 확인한다.',
+            method: '"important"이라는 단어의 끝 철자(-ant)를 확인한다.',
             steps: [
               '잘못된 철자: importent.',
               '바른 단어는 important — 끝이 -ent가 아니라 -ant.',
@@ -699,7 +699,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the bold word: "conservation afforts".',
           answer: 'efforts',
           solution: {
-            method: '"노력"을 뜻하는 단어의 첫 글자를 확인한다.',
+            method: '"effort"을 뜻하는 단어의 첫 글자를 확인한다.',
             steps: [
               '잘못된 철자: afforts.',
               '바른 단어는 effort — 첫 글자가 a가 아니라 e.',
@@ -735,7 +735,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '"Would you ___ to ~?" 형태에 맞는 동사를 넣는다.',
             steps: [
-              '"Would you like to ~?"는 "~하고 싶나요?"라는 표준 권유 표현.',
+              '"Would you like to ~?"는 "Do you want to ~?"라는 표준 권유 표현.',
               '빈칸에 like를 넣으면 자연스럽다 → like. (공식 정답표 확인됨)',
             ],
             tip: '"Would you like to ~?"는 상대에게 권유할 때 쓰는 정해진 표현입니다.',
@@ -748,9 +748,9 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'You just need... some simple materials such (32) ________ glue, salt water and baking soda.',
           answer: 'as',
           solution: {
-            method: '"such ___ + 예시" 구문을 완성한다.',
+            method: '"such ___ + example" 구문을 완성한다.',
             steps: [
-              '"such as"는 "~와 같은"이라는 예시 도입 표현.',
+              '"such as"는 "such as ~"이라는 예시 도입 표현.',
               '뒤에 glue, salt water 등 예시가 나오므로 "such as"가 맞다.',
               '따라서 빈칸은 as.',
             ],
@@ -766,7 +766,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '글 전체 주제어를 떠올려 빈칸을 채운다.',
             steps: [
-              '이 글은 "slime(슬라임)" 만드는 법.',
+              '이 글은 "slime" 만드는 법.',
               '"watch the slime form" → 슬라임이 만들어진 뒤를 말하므로 "the slime has formed".',
               '따라서 빈칸은 slime.',
             ],
@@ -780,12 +780,12 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'You can also (34) ________ some food colouring into the slime.',
           answer: 'add',
           solution: {
-            method: '"색소를 슬라임에 ~하다"에 맞는 동사를 넣는다.',
+            method: '"to ~ food colouring into slime"에 맞는 동사를 넣는다.',
             steps: [
               '식용 색소를 슬라임에 넣는 동작 → add(더하다)가 자연스럽다.',
               '"add some food colouring into the slime" → add. (공식 정답표 확인됨)',
             ],
-            tip: '"add A into/to B"는 "A를 B에 더하다/넣다"는 뜻입니다.',
+            tip: '"add A into/to B"는 "Add A to B / Put A into B"는 뜻입니다.',
           },
         },
       ],
@@ -836,10 +836,10 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: "대명사 'he' 바로 앞 주어를 찾는다.",
+            method: "Find the subject that comes just before the pronoun 'he'.",
             steps: [
               '해당 문장: "As Haru went near a tree, he realised..."',
-              "'he'는 바로 앞의 주어 Haru를 가리킨다.",
+              "'he' refers to Haru, the subject just before it.",
               '따라서 정답은 (2) Haru.',
             ],
             tip: '지시 대명사는 같은 문장 안 가장 가까운 주어를 먼저 확인합니다.',
@@ -857,7 +857,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: 'A',
           solution: {
-            method: "sadly(슬프게)와 같은 뜻의 단어를 고른다.",
+            method: "Choose a word that means the same as 'sadly'.",
             steps: [
               'miserably = 비참하게/슬프게 → sadly와 의미가 통한다.',
               'weakly = 약하게(기운 없이) → sadly와 다르다.',
@@ -878,7 +878,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '2단락: "they decided to go home even though they were empty-handed."',
               '빈손(empty-handed)이었으므로 멧돼지를 잡지 못했다.',
-              '따라서 "멧돼지를 잡았다"는 거짓 → False.',
+              '따라서 "Caught a wild boar"는 거짓 → False.',
             ],
             tip: '"empty-handed"(빈손)는 아무것도 못 잡았다는 핵심 단서입니다.',
           },
@@ -895,7 +895,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '3단락: "Koko was a friendly but mischievous monkey."',
               '장난기 많고(mischievous), 행인에게 바나나 껍질을 던지기도 했다.',
-              '따라서 "얌전했다(well-behaved)"는 거짓 → False.',
+              '따라서 "Well-behaved"는 거짓 → False.',
             ],
             tip: '"mischievous"(장난꾸러기) 같은 단어가 나오면 well-behaved와 반대임을 기억하세요.',
           },
@@ -972,7 +972,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
             method: '1단락에서 공작의 처음 행동 두 가지를 모두 찾아 완전한 문장으로 답한다.',
             steps: [
               '1단락: "A stunning peacock was dancing happily on a cool windy day. ... he started singing too."',
-              '처음에 공작은 즐겁게 "춤추면서 노래도" 부르고 있었다.',
+              '처음에 공작은 즐겁게 "Singing while dancing" 부르고 있었다.',
               '완전한 문장으로: "The peacock was dancing and singing." (두 가지를 모두 적어야 만점)',
             ],
             tip: '서술형은 주어와 동사를 갖춘 완전한 문장으로 답해야 만점입니다.',
@@ -985,7 +985,7 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: 'Which 3-word phrase in paragraph 2 shows that the peacock felt discouraged?',
           answer: 'dampened his spirit',
           solution: {
-            method: '2단락에서 "기가 꺾였다"를 보여주는 세 단어 표현을 찾는다.',
+            method: '2단락에서 "Lost confidence / felt discouraged"를 보여주는 세 단어 표현을 찾는다.',
             steps: [
               '2단락: "The melodious voice of the nightingale further dampened his spirit."',
               '"dampened his spirit" = 그의 기운을 꺾었다 → 낙담함.',
@@ -1001,13 +1001,13 @@ export const practicePaper1CatholicHighPrimaryEnglish2023: EnglishPaper = {
           stem: "Who does the word 'you' in line 15 refer to?",
           answer: "The word 'you' refers to the peacock.",
           solution: {
-            method: "요정이 말한 'you'가 누구를 향한 것인지 확인한다.",
+            method: "Check who the fairy is talking to when she says 'you'.",
             steps: [
               '15번째 줄: 요정이 "...but you are also blessed with your unique dancing talent."라고 말함.',
               '요정은 공작에게 말하고 있으므로 you = the peacock.',
-              "완전한 문장: \"The word 'you' refers to the peacock.\"",
+              "Complete sentence: \"The word 'you' refers to the peacock.\"",
             ],
-            tip: '대화 속 you는 "말을 듣고 있는 상대"를 가리킵니다(여기서는 공작).',
+            tip: '대화 속 you는 "The person who is listening"를 가리킵니다(여기서는 공작).',
           },
         },
         {

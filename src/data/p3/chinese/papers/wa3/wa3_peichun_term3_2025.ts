@@ -30,16 +30,16 @@ export const wa3_peichun_term3_2025: Question[] = [
     meaning:
       "Re-order the sentences into a logical paragraph. Correct sequence: (3)(4)(1)(5)(2). Logical story order: see solution.",
     solution: {
-      method: "사건의 시간·인과 순서로 문장 배열하기",
+      method: "Arranging sentences in the order events happen (time and cause-and-effect)",
       steps: [
-        "① 시작 배경: '一个周末的下午，哥哥看到家里又脏又乱。' (원문 3번째 줄)",
-        "② 발단: '哥哥就对妹妹说：…收拾房间吧！' (원문 5번째 줄)",
-        "③ 전개: '妹妹听了哥哥的话，马上就拿起扫把来扫地。' (원문 1번째 줄)",
-        "④ 전개: '哥哥也去拿了一块抹布把家里的桌子都抹干净了。' (원문 2번째 줄)",
-        "⑤ 결말: '爸爸妈妈回来后，看到家里这么干净，开心极了。' (원문 4번째 줄)",
-        "따라서 원문 등장 순서(위→아래)에 매기는 번호는 3, 4, 1, 5, 2.",
+        "① Background: '一个周末的下午，哥哥看到家里又脏又乱。' (3rd line in the original text)",
+        "② Beginning: '哥哥就对妹妹说：…收拾房间吧！' (5th line in the original text)",
+        "③ Development: '妹妹听了哥哥的话，马上就拿起扫把来扫地。' (1st line in the original text)",
+        "④ Development: '哥哥也去拿了一块抹布把家里的桌子都抹干净了。' (2nd line in the original text)",
+        "⑤ Ending: '爸爸妈妈回来后，看到家里这么干净，开心极了。' (4th line in the original text)",
+        "So the correct order of the lines from top to bottom in the original text is: 3, 4, 1, 5, 2.",
       ],
-      tip: "‘제안→실행→결과’ 흐름과 ‘听了…的话’ 같은 연결어로 앞뒤를 잇는다.",
+      tip: "We can follow the flow of 'suggestion → action → result', and use linking words like '听了…的话' to connect the sentences.",
     },
   },
 
@@ -58,13 +58,13 @@ export const wa3_peichun_term3_2025: Question[] = [
     pinyin: "pò huài huán jìng",
     meaning: "'破坏环境' = to destroy/damage the environment.",
     solution: {
-      method: "동사+명사 호응 짝짓기",
+      method: "Matching verbs with the correct nouns (Verb + Noun pairing)",
       steps: [
-        "'破坏(파괴하다)'는 목적어로 큰 대상이 필요하다.",
-        "단어库에서 '环境(환경)'이 의미상 가장 잘 어울린다.",
+        "'破坏 (to destroy/damage)' needs a big or important thing as its object.",
+        "From the word bank, '环境 (environment)' fits best in meaning.",
         "→ 破坏环境 (8).",
       ],
-      tip: "‘环保(7)’는 ‘保护环境’처럼 명사적이라 ‘破坏’의 목적어로는 ‘环境(8)’이 자연스럽다.",
+      tip: "'环保 (7)' is used more like a noun (short for 'protecting the environment'), so '环境 (8)' is the more natural object to use after '破坏'.",
     },
   },
   {
@@ -78,13 +78,13 @@ export const wa3_peichun_term3_2025: Question[] = [
     pinyin: "qīng xǐ cè suǒ",
     meaning: "'清洗厕所' = to clean/wash the toilet.",
     solution: {
-      method: "동사+장소 호응 짝짓기",
+      method: "Matching verbs with the correct places (Verb + Place pairing)",
       steps: [
-        "'厕所(화장실)' 앞에 올 동작은 '씻다/청소하다'.",
-        "단어库의 '清洗'가 '厕所'와 호응.",
+        "The action that goes before '厕所 (toilet)' should mean 'to wash' or 'to clean'.",
+        "'清洗' from the word bank matches correctly with '厕所'.",
         "→ 清洗厕所 (6).",
       ],
-      tip: "‘清洗’는 물로 닦는 청소에 자주 쓰인다.",
+      tip: "'清洗' is often used for cleaning something by washing it with water.",
     },
   },
   {
@@ -98,13 +98,13 @@ export const wa3_peichun_term3_2025: Question[] = [
     pinyin: "fèi wù lì yòng",
     meaning: "'废物利用' = to reuse/recycle waste materials (a fixed environmental phrase).",
     solution: {
-      method: "고정 표현(固定词组) 인식",
+      method: "Recognising fixed phrases (固定词组)",
       steps: [
-        "'废物___'는 환경 단원의 정해진 표현 '废物利用(폐품 재활용)'.",
-        "단어库에서 '利用'을 고른다.",
+        "'废物___' is a fixed phrase from the Environment topic: 废物利用 (recycling waste materials).",
+        "Choose '利用' from the word bank.",
         "→ 废物利用 (3).",
       ],
-      tip: "환경 단원 단골 표현: 废物利用 / 保护环境 / 浪费水电.",
+      tip: "Common fixed phrases from the Environment topic: 废物利用 / 保护环境 / 浪费水电.",
     },
   },
   {
@@ -118,13 +118,13 @@ export const wa3_peichun_term3_2025: Question[] = [
     pinyin: "làng fèi shuǐ diàn",
     meaning: "'浪费水电' = to waste water and electricity.",
     solution: {
-      method: "동사+명사 호응 짝짓기",
+      method: "Matching verb + noun pairs",
       steps: [
-        "'水电(물·전기)'과 어울리는 동작 → '낭비하다'.",
-        "단어库의 '浪费'를 고른다.",
+        "Think about what action goes with '水电 (water and electricity)' → 'to waste'.",
+        "Choose '浪费' from the word bank.",
         "→ 浪费水电 (5).",
       ],
-      tip: "자원·시간·돈은 ‘浪费’와 잘 붙는다.",
+      tip: "'浪费' often goes together with resources, time, and money.",
     },
   },
   {
@@ -138,13 +138,13 @@ export const wa3_peichun_term3_2025: Question[] = [
     pinyin: "yǐn lái wén chóng",
     meaning: "'引来蚊虫' = to attract mosquitoes/insects.",
     solution: {
-      method: "동사+명사 호응 짝짓기",
+      method: "Matching verb + noun pairs",
       steps: [
-        "'蚊虫(모기·벌레)' 앞에 올 동작 → '꾀어들이다/끌어오다'.",
-        "단어库의 '引来'를 고른다.",
+        "Think about what action goes before '蚊虫 (mosquitoes and insects)' → 'to attract or draw in'.",
+        "Choose '引来' from the word bank.",
         "→ 引来蚊虫 (1).",
       ],
-      tip: "쓰레기·더러움이 벌레를 ‘引来(끌어들임)’ 하는 맥락에 자주 등장.",
+      tip: "'引来 (to attract)' often appears in contexts where rubbish or dirt attracts insects.",
     },
   },
 
@@ -158,17 +158,17 @@ export const wa3_peichun_term3_2025: Question[] = [
     difficulty: "foundation",
     instruction:
       "从表中选出最适当的词语，然后把代表它的数目字填写在括号里。【词语库：1环保袋 2东海岸 3脚踏车 4国庆日 5垃圾桶 6鱼尾狮】",
-    q: "[그림 Q7: 재활용/쓰레기 분리수거 통들의 사진]",
+    q: "[Picture Q7: Photo of recycling and waste-sorting bins]",
     answer: 5, // 垃圾桶
     pinyin: "lā jī tǒng",
     meaning: "'垃圾桶' = rubbish bin / dustbin.",
     solution: {
-      method: "그림-단어 대응 (사물 인식)",
+      method: "Matching pictures to words (identifying objects)",
       steps: [
-        "그림은 재활용 표시(△)가 있는 큰 통들 → 쓰레기통.",
-        "단어库에서 '垃圾桶'을 고른다 (5).",
+        "The picture shows large bins with a recycling symbol (△) → these are rubbish bins.",
+        "Choose '垃圾桶' from the word list (5).",
       ],
-      tip: "재활용 삼각 표시(♺)는 보통 ‘垃圾桶/回收箱’의 단서.",
+      tip: "The recycling triangle symbol (♺) is usually a clue for '垃圾桶/回收箱' (rubbish bin/recycling box).",
     },
   },
   {
@@ -177,17 +177,17 @@ export const wa3_peichun_term3_2025: Question[] = [
     difficulty: "foundation",
     instruction:
       "从表中选出最适当的词语，然后把代表它的数目字填写在括号里。【词语库：1环保袋 2东海岸 3脚踏车 4国庆日 5垃圾桶 6鱼尾狮】",
-    q: "[그림 Q8: 'GREEN'이라고 적힌 천 가방(에코백) 사진]",
+    q: "[Picture Q8: A photo of a cloth bag (eco bag) with the word 'GREEN' printed on it]",
     answer: 1, // 环保袋
     pinyin: "huán bǎo dài",
     meaning: "'环保袋' = reusable/eco-friendly bag.",
     solution: {
-      method: "그림-단어 대응 (사물 인식)",
+      method: "Picture-word matching (object recognition)",
       steps: [
-        "그림은 'GREEN'이라 적힌 재사용 천 가방.",
-        "단어库에서 '环保袋'을 고른다 (1).",
+        "The picture shows a reusable cloth bag with the word 'GREEN' printed on it.",
+        "Choose '环保袋' from the word list (1).",
       ],
-      tip: "비닐봉지 대신 쓰는 천/재사용 가방 = 环保袋.",
+      tip: "A cloth or reusable bag used instead of a plastic bag = 环保袋 (eco bag).",
     },
   },
   {
@@ -196,17 +196,17 @@ export const wa3_peichun_term3_2025: Question[] = [
     difficulty: "core",
     instruction:
       "从表中选出最适当的词语，然后把代表它的数目字填写在括号里。【词语库：1环保袋 2东海岸 3脚踏车 4国庆日 5垃圾桶 6鱼尾狮】",
-    q: "[그림 Q9: 싱가포르 머라이언 상(분수에서 물을 뿜는 사자상) 사진]",
+    q: "[Picture Q9: A photo of the Singapore Merlion statue (a lion statue with water spouting from its mouth)]",
     answer: 6, // 鱼尾狮
     pinyin: "yú wěi shī",
     meaning: "'鱼尾狮' = the Merlion (Singapore's lion-fish landmark statue).",
     solution: {
-      method: "그림-단어 대응 (싱가포르 상징물 인식)",
+      method: "Picture-word matching (recognition of Singapore landmark)",
       steps: [
-        "그림은 물을 뿜는 사자 머리+물고기 몸통의 상 → 머라이언.",
-        "단어库에서 '鱼尾狮'을 고른다 (6).",
+        "The picture shows a statue with a lion's head and a fish's body, spouting water → this is the Merlion.",
+        "Choose '鱼尾狮' from the word list (6).",
       ],
-      tip: "‘鱼尾狮(머라이언)’은 싱가포르의 대표 랜드마크로 자주 출제.",
+      tip: "'鱼尾狮 (Merlion)' is a famous Singapore landmark and often appears in exam questions.",
     },
   },
   {
@@ -215,17 +215,17 @@ export const wa3_peichun_term3_2025: Question[] = [
     difficulty: "foundation",
     instruction:
       "从表中选出最适当的词语，然后把代表它的数目字填写在括号里。【词语库：1环保袋 2东海岸 3脚踏车 4国庆日 5垃圾桶 6鱼尾狮】",
-    q: "[그림 Q10: 자전거 사진]",
+    q: "[Picture Q10: A photo of a bicycle]",
     answer: 3, // 脚踏车
     pinyin: "jiǎo tà chē",
     meaning: "'脚踏车' = bicycle (Singaporean term; 自行车 in PRC).",
     solution: {
-      method: "그림-단어 대응 (사물 인식)",
+      method: "Picture-word matching (object recognition)",
       steps: [
-        "그림은 바퀴 두 개 달린 자전거.",
-        "단어库에서 '脚踏车'을 고른다 (3).",
+        "The picture shows a bicycle with two wheels.",
+        "Choose '脚踏车' from the word bank (3).",
       ],
-      tip: "싱가포르에서는 자전거를 ‘脚踏车’라고 한다(=自行车).",
+      tip: "In Singapore, a bicycle is called '脚踏车' (same as '自行车').",
     },
   },
 
@@ -255,13 +255,13 @@ export const wa3_peichun_term3_2025: Question[] = [
           "yīn wèi xiǎo dòng wù men zài hé biān wán shí yǒu diǎn chǎo, hé mǎ hěn shēng qì, suǒ yǐ yào gǎn zǒu xiǎo dòng wù men",
         meaning: "Because the little animals were a bit noisy while playing by the river, the hippo got angry and chased them away.",
         solution: {
-          method: "원인 서술형 — '因为…所以…' 구문",
+          method: "Cause-and-effect answer type — use the '因为…所以…' sentence pattern.",
           steps: [
-            "1문단 '小动物们在河边玩时有点吵，河马很生气，就把动物们都赶走了'에서 근거.",
-            "'为什么' 질문이므로 '因为…所以…'로 묶어 답한다.",
+            "Find your evidence from Paragraph 1: '小动物们在河边玩时有点吵，河马很生气，就把动物们都赶走了'.",
+            "Because the question asks '为什么', you must answer using the '因为…所以…' pattern.",
             "→ 因为…有点吵，河马很生气，所以要赶走小动物们。",
           ],
-          tip: "지문 속 ‘吵 → 生气 → 赶走’의 인과 사슬을 그대로 답에 담는다.",
+          tip: "The passage shows a chain of causes and effects: '吵 → 生气 → 赶走'. Make sure your answer includes all three parts.",
         },
       },
       {
@@ -274,13 +274,13 @@ export const wa3_peichun_term3_2025: Question[] = [
           "xiǎo niǎo bǎ hé mǎ shēn shàng de chóng zi dōu chī diào le, xiǎo yáng hé xiǎo gǒu bá le hěn duō qīng cǎo gěi hé mǎ chī",
         meaning: "The little bird ate up all the bugs on the hippo's body, and the lamb and the dog pulled lots of grass for the hippo to eat.",
         solution: {
-          method: "구체 행동 나열형 — '怎么(어떻게)' 답하기",
+          method: "Listing specific actions answer type — answering '怎么 (how)' questions.",
           steps: [
-            "4문단에 두 가지 도움 행동이 모두 나온다.",
+            "Paragraph 4 contains both helping actions.",
             "① 小鸟把虫子吃掉, ② 小羊和小狗拔青草给河马吃.",
-            "두 행동을 모두 적어야 2점 만점.",
+            "You must write down both actions to get full marks (2 points).",
           ],
-          tip: "‘怎么帮助’는 동물별 행동을 빠짐없이 적어야 감점이 없다.",
+          tip: "For '怎么帮助', you must include every action for each animal — missing any action will cost you marks.",
         },
       },
       {
@@ -292,13 +292,13 @@ export const wa3_peichun_term3_2025: Question[] = [
           "xiǎo yáng huì yuán liàng hé mǎ, yīn wèi hé mǎ zhī dào zì jǐ cuò le",
         meaning: "The lamb would forgive the hippo, because the hippo realised it was wrong (and apologised).",
         solution: {
-          method: "추론+근거형 — '会怎么做 + 为什么' 두 부분 답하기",
+          method: "Inference + evidence answer type — you must answer two parts: '会怎么做 (what will happen)' and '为什么 (why)'.",
           steps: [
-            "앞부분: 행동 추측 → 小羊会原谅河马 (용서할 것이다).",
-            "뒷부분: 이유 → 因为河马知道自己错了 (잘못을 인정하고 사과했으므로).",
-            "두 소문항을 분리해서 모두 답한다.",
+            "First part: predict the action → 小羊会原谅河马 (Little Sheep will forgive Hippo).",
+            "Second part: give the reason → 因为河马知道自己错了 (because Hippo admitted his mistake and apologised).",
+            "Answer both sub-questions separately — do not leave either part out.",
           ],
-          tip: "‘…吗/会怎么做 + 为什么’는 반드시 ‘판단’과 ‘이유’를 모두 쓴다.",
+          tip: "For '...吗/会怎么做 + 为什么' questions, you must always write BOTH your 'judgement/decision' AND your 'reason'.",
         },
       },
     ],

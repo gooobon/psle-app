@@ -92,13 +92,13 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"하나도 나오지 않았다"는 의미에 맞는 한정사를 고른다.',
+        method: '"Did not appear even once / none at all"는 의미에 맞는 한정사를 고른다.',
         steps: [
           '"words came out"(말이 나왔다)와 부정의 의미를 결합해야 한다.',
           '"no words came out" = 한 마디도 나오지 않았다 → 두려움으로 말이 전혀 안 나오는 상황과 정확히 일치.',
-          'any는 부정문/의문문에서 "어떤 것도"를 의미하나 여기서는 긍정문이라 no가 더 자연스럽다 → 정답 (1) no.',
+          'any는 부정문/의문문에서 "Any / anything at all"를 의미하나 여기서는 긍정문이라 no가 더 자연스럽다 → 정답 (1) no.',
         ],
-        tip: '"No + 명사"는 완전 부재(아무것도 없음)를 나타냅니다. "No words came out" = 말이 전혀 안 나왔다.',
+        tip: '"No + noun"는 완전 부재(아무것도 없음)를 나타냅니다. "No words came out" = 말이 전혀 안 나왔다.',
       },
     },
     {
@@ -146,7 +146,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"꼬리를 흔들며 모든 사람에게 인사했다"는 행동에 맞는 형용사를 고른다.',
+        method: '"Wagging its tail and greeting everyone"는 행동에 맞는 형용사를 고른다.',
         steps: [
           '"greeted everyone... wagging its tail happily"(기쁘게 꼬리를 흔들며 인사함) → 사람을 좋아하는 성격.',
           '"friendly" = 친근한/사교적인 → 정확히 일치.',
@@ -171,11 +171,11 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"농담을 듣고 반 전체가 크게 웃었다"는 의미에 맞는 동사를 고른다.',
+        method: '"After hearing the joke, the whole class laughed loudly"는 의미에 맞는 동사를 고른다.',
         steps: [
           '"with laughter"(웃음으로) + "when they heard their classmate\'s joke"(농담을 듣고) → 크게 웃음.',
           '"roared with laughter" = 크게 웃음/폭소 → 정확히 일치하는 표현.',
-          'boasted(자랑했다)/rumbled(우르릉)/groaned(신음했다)는 "웃음"과 안 맞는다 → 정답 (1) roared.',
+          'boasted(자랑했다)/rumbled(우르릉)/groaned(신음했다)는 "Laughter / laughing"과 안 맞는다 → 정답 (1) roared.',
         ],
         tip: '"roared with laughter"는 크게 웃는 것을 나타내는 정해진 표현입니다.',
       },
@@ -196,11 +196,11 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"세계에서 가장 높은 인공 구조물"이라는 의미에 맞는 형용사를 고른다.',
+        method: '"The tallest man-made structure in the world"이라는 의미에 맞는 형용사를 고른다.',
         steps: [
           '"the tallest man-made structure in the world"(세계에서 가장 높은 인공 구조물) → 매우 높이 솟아있는.',
           '"towering" = 우뚝 솟아있는 → "tallest"와 의미가 직접 연결된다.',
-          'quaking(흔들리는)/trembling(떨리는)/menacing(위협적인)은 "매우 높음"을 나타내지 않는다 → 정답 (2) towering.',
+          'quaking(흔들리는)/trembling(떨리는)/menacing(위협적인)은 "Very tall / extremely high"을 나타내지 않는다 → 정답 (2) towering.',
         ],
         tip: '"towering"은 매우 높이 솟아있는 구조물·건물을 묘사할 때 씁니다.',
       },
@@ -221,11 +221,11 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"잃어버린 새끼고양이를 찾기 위해 동네에 게시하는 것"을 나타내는 명사를 고른다.',
+        method: '"Posting around the neighbourhood to find a lost kitten"을 나타내는 명사를 고른다.',
         steps: [
           '"put up several ___ all around the neighbourhood" — 동네 곳곳에 붙이다.',
-          '"posters" = 포스터 → "잃어버린 동물/사람" 전단지를 붙이는 것이 일반적인 방법.',
-          'menus(메뉴판)/websites(웹사이트, 붙이지 않는다)/instructions(지시문)은 "동네에 붙이는 것"과 안 맞는다 → 정답 (2) posters.',
+          '"posters" = 포스터 → "A lost animal or person" 전단지를 붙이는 것이 일반적인 방법.',
+          'menus(메뉴판)/websites(웹사이트, 붙이지 않는다)/instructions(지시문)은 "Something posted around the neighbourhood"과 안 맞는다 → 정답 (2) posters.',
         ],
         tip: '"put up posters"(포스터를 붙이다)는 분실물/실종 반려동물 찾기에 흔히 쓰는 표현입니다.',
       },
@@ -272,7 +272,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: 'One day, as she was resting (10) ________ her favourite window...',
           answer: 'C',
           solution: {
-            method: '"창가에서 쉬고 있었다"는 표현에 맞는 전치사를 고른다.',
+            method: '"Was resting by the window"는 표현에 맞는 전치사를 고른다.',
             steps: [
               '"resting ___ her favourite window" — 좋아하는 창문 옆/근처에서 쉬고 있었다.',
               '"by the window" = 창가에서/창문 옆에서 → 정해진 표현.',
@@ -288,7 +288,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: '...she had a brilliant idea to surprise Robert when he returned home (11) ________ work.',
           answer: 'D',
           solution: {
-            method: '"직장에서 집으로 돌아오다"라는 표현에 맞는 전치사를 고른다.',
+            method: '"To come home from work"라는 표현에 맞는 전치사를 고른다.',
             steps: [
               '"returned home ___ work" — 직장에서(출발점) 집으로 돌아오다.',
               '"from work" = 직장에서(출발점) → "return home from work"는 정해진 표현.',
@@ -304,7 +304,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: 'She began spinning the finest webs she had ever spun (12) ________ the entire living room.',
           answer: 'F',
           solution: {
-            method: '"거실 전체를 가로질러" 거미줄을 치는 동작에 맞는 전치사를 고른다.',
+            method: '"All the way across the living room" 거미줄을 치는 동작에 맞는 전치사를 고른다.',
             steps: [
               '"spinning webs ___ the entire living room" — 거실 전체에 걸쳐 거미줄을 쳤다.',
               '"across" = 가로질러/전체에 걸쳐 → "across the room"이 자연스럽다.',
@@ -423,7 +423,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: 'He greeted Davey [esciterdly], "Good morning!"',
           answer: 'excitedly',
           solution: {
-            method: '"신나게/흥분하며"라는 부사의 정확한 철자를 확인한다.',
+            method: '"Excitedly / with great excitement"라는 부사의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: esciterdly.',
               '바른 단어: excitedly — excited + -ly (excited의 d를 유지).',
@@ -439,7 +439,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: '"Are you [readee] for our adventure?"',
           answer: 'ready',
           solution: {
-            method: '"준비가 된"이라는 형용사의 정확한 철자를 확인한다.',
+            method: '"ready"이라는 형용사의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: readee.',
               '바른 단어: ready — r-e-a-d-y.',
@@ -455,10 +455,10 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: 'Together with their friends, they tied loads of [brunches] together...',
           answer: 'branches',
           solution: {
-            method: '"나뭇가지들"이라는 단어의 정확한 철자를 확인한다.',
+            method: '"branches"이라는 단어의 정확한 철자를 확인한다.',
             steps: [
-              '잘못된 철자: brunches(이건 "브런치의 복수형"이다).',
-              '문맥상 "숲에서 나뭇가지를 묶어 요새를 만들었다" → 나뭇가지 = branches.',
+              '잘못된 철자: brunches(이건 "Plural form of 'branch'"이다).',
+              '문맥상 "Tied branches in the forest to build a fort" → 나뭇가지 = branches.',
               'branch의 복수형은 branches(br-a-nch-es) → branches.',
             ],
             tip: 'branch(나뭇가지)의 복수는 branches입니다. brunch(브런치)와 혼동하지 마세요.',
@@ -471,7 +471,7 @@ export const wa1NanyangPrimaryEnglish2025: EnglishPaper = {
           stem: 'Despite the blisters on his hands and [skretches] on his legs...',
           answer: 'scratches',
           solution: {
-            method: '"긁힌 상처들"이라는 단어의 정확한 철자를 확인한다.',
+            method: '"scratches"이라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: skretches.',
               '바른 단어: scratches — scr-a-t-ch-es.',

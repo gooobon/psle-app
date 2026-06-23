@@ -27,13 +27,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "jìn",
     meaning: "'近(jìn)' = near / close. 离学校很近 = very close to the school.",
     solution: {
-      method: "동음·형근자(同音形近字) 변별 — '走之旁(辶)'",
+      method: "Distinguishing similar-looking and similar-sounding characters — 'Walking Radical (辶)'",
       steps: [
-        "걸어서 갈 수 있을 만큼 '가깝다' → 近.",
-        "进(들어가다)·金(금)·今(지금)은 의미 부적합.",
-        "'近'은 거리를 뜻하는 '辶(쉬엄쉬엄 갈 착)' 부수.",
+        "Close enough to walk there means 'near' → 近.",
+        "进 (to enter) · 金 (gold) · 今 (now) do not fit the meaning.",
+        "'近' uses the radical '辶' (walking radical), which relates to distance or movement.",
       ],
-      tip: "近(가깝다) ↔ 远(멀다). 进(들어가다)와 모양이 비슷하니 주의.",
+      tip: "近 (near) ↔ 远 (far). Be careful — 进 (to enter) looks very similar to 近.",
     },
   },
   {
@@ -48,13 +48,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "zhǔn bèi",
     meaning: "'准备(zhǔnbèi)' = to prepare / get ready.",
     solution: {
-      method: "단어 '准备' 인식",
+      method: "Recognising the word '准备' (to prepare)",
       steps: [
-        "수업 전에 교재·문구를 '준비'하는 상황.",
-        "'准备'가 필요하므로 '准'.",
-        "难(어렵다)·谁(누구)·推(밀다)는 부적합.",
+        "The situation is about getting your books and stationery ready before class.",
+        "'准备' (to prepare) is needed here, so the answer is '准'.",
+        "难 (difficult) · 谁 (who) · 推 (to push) do not fit.",
       ],
-      tip: "准(준할 준)과 难(어려울 난)은 우측 모양이 비슷하니 주의.",
+      tip: "Be careful — the right side of 准 (准) and 难 (difficult) look very similar.",
     },
   },
   {
@@ -69,12 +69,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "zhuàng",
     meaning: "'撞(zhuàng)' = to bump into / collide. 撞到了小明 = bumped into Xiao Ming.",
     solution: {
-      method: "문맥 동작 동사 — 빨리 달리다 '부딪치다'",
+      method: "Understanding action verbs from context — running fast and 'bumping into someone'",
       steps: [
-        "빨리 달리다 실수로 사람과 '부딪치다' → 撞.",
-        "追(쫓다)·跳(뛰다)·跌(넘어지다)는 '到了小明'과 부적합.",
+        "Running too fast and accidentally 'bumping into' someone → 撞.",
+        "追 (to chase) · 跳 (to jump) · 跌 (to trip and fall) do not match '到了小明'.",
       ],
-      tip: "사람·물체에 부딪칠 땐 ‘撞’ (撞到/撞上).",
+      tip: "When you bump into a person or object, use '撞' (as in 撞到 / 撞上).",
     },
   },
   {
@@ -89,13 +89,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "shū zhǎn",
     meaning: "'书展(shūzhǎn)' = book fair / book exhibition.",
     solution: {
-      method: "단어 인식 — '책을 사는 장소/행사'",
+      method: "Word recognition — 'a place or event where books are sold'",
       steps: [
-        "이야기책을 사는 곳/행사 → 书展(도서전).",
-        "보기 중 '展(펼칠 전)'이 '书展'을 이룬다.",
-        "尾(꼬리)·屋(집)·居(거주)는 '책을 사다'와 어울리지 않음.",
+        "A place or event where you buy storybooks → 书展 (Book Fair).",
+        "Among the choices, the character '展' (meaning 'to display') forms the word '书展'.",
+        "'尾' (tail), '屋' (house), and '居' (to live) do not match the meaning of 'buying books'.",
       ],
-      tip: "展览(전람)·书展(도서전)·画展(미술전)의 ‘展’.",
+      tip: "The character '展' appears in: 展览 (exhibition), 书展 (book fair), and 画展 (art exhibition).",
     },
   },
   {
@@ -110,13 +110,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "lǐ",
     meaning: "'理(lǐ)' here = to pay attention to / acknowledge. 谁也不理谁 = neither pays attention to the other.",
     solution: {
-      method: "관용 표현 '不理(상대하지 않다)' 인식",
+      method: "Recognising the set phrase '不理', which means 'to ignore someone' or 'to not respond to someone'.",
       steps: [
-        "다툰 뒤 서로 '상대하지 않는다' → 谁也不理谁.",
-        "'理'를 고른다(아는 척하다·상대하다의 부정).",
-        "管(상관하다)도 비슷하나 '谁也不理谁'가 정해진 표현.",
+        "After an argument, when both sides ignore each other → 谁也不理谁 (Neither person talks to the other).",
+        "We choose '理' because the phrase means the opposite of paying attention to or acknowledging someone.",
+        "'管' has a similar meaning, but '谁也不理谁' is the fixed, correct expression to use.",
       ],
-      tip: "‘不理(无视)’ = 무시하다/상대 안 하다.",
+      tip: "'不理' means to ignore someone or to refuse to respond to them.",
     },
   },
 
@@ -135,13 +135,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "bàng wǎn",
     meaning: "'傍晚(bàngwǎn)' = dusk / towards evening.",
     solution: {
-      method: "성모(b)·운모(an) 정확히 듣기",
+      method: "Listen carefully to the Initial (b) and Final (an) sounds to tell characters apart.",
       steps: [
-        "'傍'은 bàng (páng 아님).",
-        "'晚'은 wǎn (wǎng 아님, 비음운미 없음).",
+        "'傍' is pronounced bàng — not páng.",
+        "'晚' is pronounced wǎn — not wǎng. There is no nasal ending '-ng' in this sound.",
         "→ bàng wǎn.",
       ],
-      tip: "傍晚(bàngwǎn)=해질녘. an/ang 구분이 핵심.",
+      tip: "傍晚 (bàngwǎn) means dusk or evening. The key skill is telling apart the Finals '-an' and '-ang'.",
     },
   },
   {
@@ -156,13 +156,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "diē dǎo",
     meaning: "'跌倒(diēdǎo)' = to fall down / trip over.",
     solution: {
-      method: "성조 판별 — 跌(1성) 倒(3성)",
+      method: "Identifying tones — 跌 is 1st tone and 倒 is 3rd tone.",
       steps: [
-        "'跌'은 1성 diē (dié 아님).",
-        "'倒(넘어지다)'는 3성 dǎo (dào 아님; 4성 dào는 ‘거꾸로/붓다’).",
+        "'跌' is pronounced diē (1st tone) — not dié (2nd tone).",
+        "'倒 (to fall down)' is 3rd tone: dǎo — not dào; 4th tone dào means 'upside down / to pour'.",
         "→ diē dǎo.",
       ],
-      tip: "倒: 넘어지다=dǎo(3성), 거꾸로/따르다=dào(4성). 뜻으로 성조 결정.",
+      tip: "倒: to fall down = dǎo (3rd tone); upside down / to pour = dào (4th tone). Choose the tone based on the meaning.",
     },
   },
 
@@ -181,12 +181,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "cān guān",
     meaning: "'参观(cānguān)' = to visit (a place/exhibition). 参观动物园 = visit the zoo.",
     solution: {
-      method: "장소 방문 동사 변별",
+      method: "Telling apart verbs used for visiting places",
       steps: [
-        "동물원 같은 '장소·시설'을 둘러보는 것 → 参观.",
-        "访问(인터뷰·방문 사람), 拜访/看望(사람을 찾아뵙다)은 '장소'에 부적합.",
+        "When you go around a 'place or facility' like a zoo → use 参观.",
+        "访问 (interview / visit someone), 拜访 / 看望 (visit a person) are not suitable for visiting a place.",
       ],
-      tip: "장소·전시는 ‘参观’, 사람은 ‘拜访/看望’.",
+      tip: "For places and exhibitions, use '参观'; for visiting a person, use '拜访 / 看望'.",
     },
   },
   {
@@ -201,12 +201,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "yuán liàng",
     meaning: "'原谅(yuánliàng)' = to forgive. 请求妈妈原谅她 = ask mum to forgive her.",
     solution: {
-      method: "문맥 의미 매칭 — '做错事→请求…'",
+      method: "Matching meaning to context — 'did something wrong → ask for…'",
       steps: [
-        "잘못한 뒤 엄마에게 '용서'를 청한다 → 原谅.",
-        "明白(이해), 感谢(감사), 夸奖(칭찬)은 문맥에 안 맞음.",
+        "After doing something wrong, you ask Mum for 'forgiveness' → use 原谅.",
+        "明白 (understand), 感谢 (thank), 夸奖 (praise) do not fit this context.",
       ],
-      tip: "잘못을 빌 땐 ‘请求原谅’.",
+      tip: "When apologising for a mistake, use '请求原谅' (to ask for forgiveness).",
     },
   },
   {
@@ -221,12 +221,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "xīn xiān",
     meaning: "'新鲜(xīnxiān)' = fresh (food). 青菜和水果很新鲜 = the vegetables and fruit are fresh.",
     solution: {
-      method: "근접어 변별 — '채소·과일'과 호응",
+      method: "Telling apart similar words — which one goes with 'vegetables and fruit'",
       steps: [
-        "야채·과일이 '싱싱하다' → 新鲜.",
-        "新奇(신기하다), 清新(상쾌하다·공기), 清甜(맑고 달다)은 부적합.",
+        "When vegetables and fruit are 'fresh' → use 新鲜.",
+        "新奇 (novel / surprising), 清新 (fresh and clean, used for air), 清甜 (clear and sweet) are not suitable here.",
       ],
-      tip: "음식이 싱싱할 땐 ‘新鲜’ (공기는 ‘清新’).",
+      tip: "When food is fresh, use '新鲜'. For fresh air, use '清新'.",
     },
   },
   {
@@ -241,13 +241,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "tè bié",
     meaning: "'特别(tèbié)' = special. 一份特别的礼物 = a special gift.",
     solution: {
-      method: "'一份___的礼物' — 형용사 자리",
+      method: "'一份___的礼物' — this blank is the position for an adjective.",
       steps: [
-        "'礼物(선물)'를 꾸미는 형용사 → '특별한'.",
-        "'特别的礼物'가 자연스럽다.",
-        "特意/特地(부사: 일부러), 特色(특색·명사)은 '一份…的礼物' 자리에 부적합.",
+        "The adjective that describes '礼物 (gift)' → '特别的 (special)'.",
+        "'特别的礼物 (a special gift)' is the natural combination.",
+        "'特意/特地 (adverb: on purpose)' and '特色 (characteristic, noun)' do not fit in the '一份…的礼物 (a ... gift)' position.",
       ],
-      tip: "‘特意/特地’는 동사 앞 부사, ‘特别’은 명사 꾸미는 형용사로도 쓰임.",
+      tip: "'特意/特地' are adverbs that go before verbs, while '特别' can also be used as an adjective to describe nouns.",
     },
   },
 
@@ -268,12 +268,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "rèn zhēn fù xí",
     meaning: "'认真复习' = to revise seriously/diligently.",
     solution: {
-      method: "부사어+동사 호응",
+      method: "Adverb + Verb agreement",
       steps: [
-        "'复习(복습하다)' 앞에 올 말 → '열심히/진지하게'.",
-        "'认真复习'이 표준 결합.",
+        "The word that should come before '复习 (to revise)' → 'seriously/carefully'.",
+        "'认真复习 (revise seriously)' is the standard combination.",
       ],
-      tip: "⚠ PDF 정답키 OCR과 불일치(키엔 5로 찍힘). ‘认真复习’이 문법상 정답이라 1로 두되 학부모 검수 권장.",
+      tip: "⚠ This answer does not match the PDF answer key due to an OCR error (the key shows 5). '认真复习' is the grammatically correct answer, so it is kept as option 1. Parent review is recommended.",
     },
   },
   {
@@ -288,12 +288,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "bǎi dòng shēn tǐ",
     meaning: "'摆动身体' = to sway/move the body.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun agreement",
       steps: [
-        "'身体(몸)'를 좌우로 '흔들다' → 摆动身体.",
-        "다른 단어(比赛·国家·说话)는 '身体'와 호응 안 됨.",
+        "To 'sway' '身体 (body)' from side to side → 摆动身体.",
+        "The other words (比赛·国家·说话) do not pair naturally with '身体 (body)'.",
       ],
-      tip: "⚠ PDF 정답키 OCR과 불일치(키엔 2로 찍힘). ‘摆动身体’가 문법상 정답이라 3으로 두되 학부모 검수 권장.",
+      tip: "⚠ This answer does not match the PDF answer key due to an OCR error (the key shows 2). '摆动身体' is the grammatically correct answer, so it is kept as option 3. Parent review is recommended.",
     },
   },
   {
@@ -308,12 +308,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "qīng shēng shuō huà",
     meaning: "'轻声说话' = to speak softly / in a low voice.",
     solution: {
-      method: "부사어+동사 호응",
+      method: "Adverb + Verb agreement",
       steps: [
-        "'轻声(작은 소리로)' 뒤에 올 동작 → '말하다'.",
-        "'轻声说话'가 표준 결합.",
+        "The action that should follow '轻声 (in a soft voice)' → 'to speak'.",
+        "'轻声说话 (speak softly)' is the standard combination.",
       ],
-      tip: "⚠ PDF 정답키 OCR과 불일치(키엔 3으로 찍힘). ‘轻声说话’가 문법상 정답이라 5로 두되 학부모 검수 권장.",
+      tip: "⚠ The PDF answer key does not match the OCR scan (scanned as option 3). '轻声说话' is grammatically correct, so the answer is kept as 5. Parent review is recommended.",
     },
   },
   {
@@ -327,12 +327,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "ài hù chǒng wù",
     meaning: "'爱护宠物' = to care for / cherish pets.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun matching",
       steps: [
-        "'爱护(아끼다·보호하다)'의 목적어 → 동물·반려동물.",
-        "단어库에서 '宠物(반려동물)'이 호응.",
+        "The object of '爱护 (to care for / protect)' → animals or pets.",
+        "From the word bank, '宠物 (pet)' matches correctly.",
       ],
-      tip: "(이 문항은 PDF 정답키와 일치: 6) 동식물을 아끼다 → 爱护.",
+      tip: "(This question matches the PDF answer key: 6) To care for plants and animals → 爱护.",
     },
   },
   {
@@ -347,13 +347,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "cān jiā bǐ sài",
     meaning: "'参加比赛' = to take part in a competition.",
     solution: {
-      method: "동사+명사 호응",
+      method: "Verb + Noun matching",
       steps: [
-        "'参加(참가하다)'의 목적어 → 대회/시합.",
-        "단어库에서 '比赛(경기)'가 호응 → 参加比赛.",
-        "남은 '国家(나라)'는 미사용 함정어.",
+        "The object of '参加 (to participate in)' → a competition or match.",
+        "From the word bank, '比赛 (competition)' matches correctly → 参加比赛.",
+        "The remaining word '国家 (country)' is an unused distractor word.",
       ],
-      tip: "⚠ PDF 정답키 OCR과 불일치(키엔 4로 찍힘). ‘参加比赛’가 문법상 정답이라 2로 두되 학부모 검수 권장.",
+      tip: "⚠ The PDF answer key does not match the OCR scan (scanned as option 4). '参加比赛' is grammatically correct, so the answer is kept as 2. Parent review is recommended.",
     },
   },
 
@@ -371,13 +371,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
       "fàng xué hòu, tóng xué men kě yǐ qù cāo chǎng dǎ qiú huò zhě qù tú shū guǎn kàn shū",
     meaning: "After school, students can go to the field to play ball or to the library to read.",
     solution: {
-      method: "선택 접속사 '或者'로 합치기 + 공통부 생략",
+      method: "Combining two sentences using the either/or conjunction '或者', and leaving out the repeated common part.",
       steps: [
-        "공통부 '放学后，同学们可以'를 한 번만 쓴다.",
-        "두 선택지 '去操场打球'와 '去图书馆看书'를 '或者'로 잇는다.",
+        "The common part '放学后，同学们可以' is written only once.",
+        "The two choices '去操场打球' and '去图书馆看书' are joined together using '或者'.",
         "→ …可以去操场打球或者去图书馆看书。",
       ],
-      tip: "장소·동작이 다르므로 ‘去…’를 두 번 다 살려 ‘或者’로 연결.",
+      tip: "Because the places and actions are different, '去…' is kept in both choices and connected with '或者'.",
     },
   },
   {
@@ -390,13 +390,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "gē ge dǎ pò le dì di de bēi zi, lián yí jù duì bù qǐ yě méi shuō",
     meaning: "Elder brother broke younger brother's cup and didn't even say a single sorry.",
     solution: {
-      method: "강조 구문 '连…也…'로 합치기",
+      method: "Combining sentences using the emphasis structure '连…也…'",
       steps: [
-        "앞 사건(打破杯子)을 그대로 두고, 뒷 문장을 '连…也…' 강조구로.",
-        "'一句对不起也没说' 앞에 '连'을 붙인다.",
+        "Keep the first event (breaking the cup) as it is, and rewrite the second sentence using the '连…也…' emphasis structure.",
+        "Add '连' in front of '一句对不起也没说'.",
         "→ …连一句对不起也没说。",
       ],
-      tip: "‘连 A 也/都 B’ = A조차도 B하다(강조). ‘一句…也没…’와 자주 결합.",
+      tip: "'连 A 也/都 B' means 'even A, B' (used for emphasis). It is often used together with the '一句…也没…' pattern.",
     },
   },
   {
@@ -409,13 +409,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
     pinyin: "chú le māo, wǒ hái xǐ huān shī zi",
     meaning: "Besides cats, I also like lions. (Model sentence imitating '除了……还'.)",
     solution: {
-      method: "문형 모방(仿写) — '除了 A，还 B'",
+      method: "Sentence pattern imitation (仿写) — '除了 A，还 B'",
       steps: [
-        "'除了 + 대상1，还 + 대상2' 틀을 유지한다.",
-        "두 대상은 같은 범주여야 자연스럽다(예: 동물 猫/狮子).",
-        "→ 除了猫，我还喜欢狮子。 (다른 정답도 가능)",
+        "Keep the structure '除了 + subject 1，还 + subject 2'.",
+        "Both subjects should belong to the same category for the sentence to sound natural (e.g. animals: 猫/狮子).",
+        "→ 除了猫，我还喜欢狮子。 (Other answers are also accepted.)",
       ],
-      tip: "仿写는 ‘틀만 같으면’ 내용은 자유. 같은 범주의 단어를 넣자.",
+      tip: "For 仿写, as long as you follow the same structure, the content is up to you. Try to fill in words from the same category.",
     },
   },
   {
@@ -429,13 +429,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
       "gōng yuán lǐ yǒu hěn duō rén, yǒu de zài dǎ tài jí, yǒu de zài pǎo bù",
     meaning: "There are many people in the park; some are doing tai chi, some are jogging. (Model imitating '有的……有的'.)",
     solution: {
-      method: "문형 모방(仿写) — '有的…，有的…'",
+      method: "Sentence pattern imitation (仿写) — '有的…，有的…'",
       steps: [
-        "'장소 + 有很多人，有的在 A，有的在 B' 틀을 지킨다.",
-        "두 동작은 그 장소에서 일어날 법한 것으로.",
-        "→ 公园里…，有的在打太极，有的在跑步。 (다른 정답도 가능)",
+        "Keep the structure: 'place + 有很多人，有的在 A，有的在 B'.",
+        "The two actions should be things that would naturally happen at that place.",
+        "→ 公园里…，有的在打太极，有的在跑步。 (Other answers are also accepted.)",
       ],
-      tip: "‘有的…有的…’는 여럿 중 일부씩 다른 행동을 나열할 때.",
+      tip: "'有的…有的…' is used to describe different actions being done by different people in a group.",
     },
   },
 
@@ -466,12 +466,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "táo zǒu",
         meaning: "'逃走' = to flee / run away. 坏人逃走了 = the bad man fled.",
         solution: {
-          method: "행위자(坏人)의 다음 행동 추론",
+          method: "Predicting the next action of the character (坏人).",
           steps: [
-            "나쁜 사람이 때리고 돈을 뺏은 뒤 하는 행동 → '달아나다'.",
-            "'逃走'가 호응 → 5 逃走.",
+            "After the bad person hits someone and takes their money, the next action would be to 'run away'.",
+            "'逃走' matches the sentence → Answer: 5 逃走.",
           ],
-          tip: "(PDF 정답키와 일치: 5) 범인이 도망칠 땐 ‘逃走’.",
+          tip: "(Matches PDF answer key: 5) When a criminal runs away, we use '逃走'.",
         },
       },
       {
@@ -484,12 +484,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "jí máng",
         meaning: "'急忙' = hurriedly. 急忙走上前去 = hurried forward.",
         solution: {
-          method: "부사어+동사 호응",
+          method: "Adverb + Verb agreement",
           steps: [
-            "다친 사람을 보고 '서둘러' 다가가는 모습.",
-            "'急忙走上前去'가 자연스럽다 → 1 急忙.",
+            "Seeing an injured person and rushing over 'quickly'.",
+            "'急忙走上前去' sounds natural → Answer: 1 急忙.",
           ],
-          tip: "⚠ PDF 정답키 OCR과 불일치(키엔 3 清洁로 찍힘 — ‘清洁走上前’은 비문). ‘急忙’이 정답이라 1로 두되 학부모 검수 권장.",
+          tip: "⚠ Does not match PDF answer key OCR (key shows 3 清洁 — '清洁走上前' is not correct Chinese). '急忙' is the correct answer so we keep 1, but parents are advised to double-check.",
         },
       },
       {
@@ -502,12 +502,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "qīng xǐ",
         meaning: "'清洗' = to wash/clean. 把伤口清洗干净 = clean the wound thoroughly.",
         solution: {
-          method: "동사+결과보어 '…干净' 호응",
+          method: "Verb + Result Complement '…干净' agreement",
           steps: [
-            "상처(伤口)를 '깨끗이 씻다' → 清洗干净.",
-            "'清洗'가 호응 → 4 清洗.",
+            "To 'wash clean' a wound (伤口) → 清洗干净.",
+            "'清洗' matches the sentence → Answer: 4 清洗.",
           ],
-          tip: "⚠ PDF 정답키 OCR과 불일치(키엔 2 准备로 찍힘 — ‘准备干净’은 비문). ‘清洗干净’이 정답이라 4로 두되 학부모 검수 권장.",
+          tip: "⚠ Does not match PDF answer key OCR (key shows 2 准备 — '准备干净' is not correct Chinese). '清洗干净' is the correct answer so we keep 4, but parents are advised to double-check.",
         },
       },
       {
@@ -520,12 +520,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "zhǔn bèi",
         meaning: "'准备' = to prepare. 把食物准备好 = prepare the food (ready).",
         solution: {
-          method: "동사+'好了'(완료 결과) 호응",
+          method: "Verb + '好了' (completed result) agreement",
           steps: [
-            "밭에 나가기 전 음식을 '준비해 두다' → 准备好.",
-            "'准备'가 호응 → 2 准备.",
+            "Before going to the farm, 'prepare' the food in advance → 准备好.",
+            "'准备' matches the sentence → Answer: 2 准备.",
           ],
-          tip: "⚠ PDF 정답키 OCR과 불일치(키엔 6 出发로 찍힘 — ‘出发好了’은 비문). ‘准备好’가 정답이라 2로 두되 학부모 검수 권장.",
+          tip: "⚠ Does not match PDF answer key OCR (key shows 6 出发 — '出发好了' is not correct Chinese). '准备好' is the correct answer so we keep 2, but parents are advised to double-check.",
         },
       },
     ],
@@ -557,13 +557,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "xiǎo dòng wù méi shuǐ hē",
         meaning: "What inconvenience did the dried-up river cause? The animals had no water to drink.",
         solution: {
-          method: "세부정보 추론",
+          method: "Inferring specific details",
           steps: [
-            "강물이 마르자 花猫·猴子가 小狗에게 물을 구하러 옴.",
-            "즉 동물들이 마실 물이 없어진 것이 불편.",
+            "The river dried up, so 花猫 and 猴子 came to 小狗 to ask for water.",
+            "This means the animals had no water to drink, which was a problem for everyone.",
             "→ (1) 小动物没水喝.",
           ],
-          tip: "‘求小狗给水喝’가 ‘물 부족’의 직접 단서.",
+          tip: "'求小狗给水喝' is the direct clue that tells us there was a water shortage.",
         },
       },
       {
@@ -575,12 +575,12 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "tā jiā lǐ de jǐng hái yǒu shuǐ",
         meaning: "Why did the dog still have water? Because the well at its home still had water.",
         solution: {
-          method: "직접 정보 찾기",
+          method: "Finding information directly stated in the text.",
           steps: [
-            "1문장: '只有小狗家里的井还有水'.",
+            "Sentence 1: '只有小狗家里的井还有水'.",
             "→ (1) 它家里的井还有水.",
           ],
-          tip: "‘只有…还有水’ 구문에 답이 그대로 있다.",
+          tip: "The phrase '只有…还有水' contains the answer right inside it.",
         },
       },
       {
@@ -592,13 +592,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "tā bú ràng lín jū lái hē shuǐ",
         meaning: "Where can we see the dog was selfish? It refused to let the neighbours drink water.",
         solution: {
-          method: "근거 찾기 — '不为别人着想'의 행동",
+          method: "Finding evidence — behaviours that show '不为别人着想' (not thinking of others).",
           steps: [
-            "이웃이 물을 청했지만 '不可以'라며 쫓아냄.",
-            "남을 배려하지 않는 행동 = 물을 안 줌.",
+            "The neighbours asked for water, but 小狗 said '不可以' and sent them away.",
+            "Not caring about others = refusing to give water. This is the key behaviour.",
             "→ (3) 它不让邻居来喝水.",
           ],
-          tip: "(4) 불 끄기 거부는 ‘결과적 피해’이지, 자발적 ‘안 줌’이 핵심 단서.",
+          tip: "Option (4) — refusing to help put out the fire — shows harm caused as a result. The more important clue is the act of refusing to share water on purpose.",
         },
       },
       {
@@ -610,13 +610,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "zuò rén bù néng zhǐ wèi zì jǐ zháo xiǎng",
         meaning: "What's the moral? One should not think only of oneself (be selfish).",
         solution: {
-          method: "주제·교훈 파악(主旨题)",
+          method: "Understanding the main idea or lesson of the story (主旨题).",
           steps: [
-            "마지막 문장: '我只为自己着想，结果害了自己'.",
-            "이기심이 자신을 해친다는 교훈.",
+            "The last sentence: '我只为自己着想，结果害了自己'.",
+            "The lesson is: being selfish will end up hurting yourself.",
             "→ (4) 做人不能只为自己着想.",
           ],
-          tip: "이야기 끝 인물의 ‘깨달음 대사’가 곧 교훈인 경우가 많다.",
+          tip: "At the end of a story, when a character says something that shows what they have learnt, that line is often the lesson of the story.",
         },
       },
     ],
@@ -646,10 +646,10 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "piào liang",
         meaning: "'漂亮' = pretty / good-looking (synonym of 好看).",
         solution: {
-          method: "동의어 찾기(找近义词)",
+          method: "Finding words with similar meanings (找近义词).",
           steps: [
-            "'好看(보기 좋다)'에 해당하는 말 찾기.",
-            "본문: '交给马良一支漂亮的笔'.",
+            "Find the word that means 'good-looking' or 'nice to look at'.",
+            "Text: '交给马良一支漂亮的笔'.",
             "→ 漂亮.",
           ],
           tip: "好看 ≈ 漂亮 ≈ 美丽.",
@@ -663,13 +663,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
         pinyin: "kāi shǐ",
         meaning: "'开始' = to begin / start (here: start doing/acting, matching 动手做).",
         solution: {
-          method: "동의어/문맥어 찾기",
+          method: "Find a synonym or a word that matches the meaning in context.",
           steps: [
-            "'动手做(직접 하기 시작하다)'와 통하는 본문 단어 찾기.",
-            "본문: '这时，马良开始画风'.",
+            "Find the word in the text that has the same meaning as '动手做' (to start doing something yourself).",
+            "Text: '这时，马良开始画风'.",
             "→ 开始.",
           ],
-          tip: "‘动手’은 ‘일·행동을 시작함’ → 본문의 ‘开始’와 연결.",
+          tip: "'动手' means 'to start an action or task' — connect it to the word '开始' in the text.",
         },
       },
       {
@@ -682,13 +682,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
           "yīn wèi mǎ liáng hěn xǐ huān huà huà, kě shì méi yǒu qián mǎi huà bǐ, suǒ yǐ tā měi tiān zhǐ néng yòng shù zhī zài dì shàng huà huà",
         meaning: "Because Ma Liang loved drawing but had no money to buy a brush, so he could only draw on the ground with a twig.",
         solution: {
-          method: "원인 서술형 — '因为…所以…'",
+          method: "Cause-and-effect sentence type — use the structure '因为…所以…' (Because… Therefore…).",
           steps: [
-            "1문단: '他很喜欢画画，可是没有钱买画笔'.",
-            "그래서 나뭇가지로 땅에 그림.",
+            "Paragraph 1: '他很喜欢画画，可是没有钱买画笔'.",
+            "So he used a tree branch to draw pictures on the ground.",
             "→ 因为…没钱买画笔，所以只能用树枝在地上画画.",
           ],
-          tip: "‘喜欢 + 没钱’의 두 단서를 모두 답에 담는다.",
+          tip: "Make sure your answer includes both clues: '喜欢' (he likes drawing) and '没钱' (he has no money).",
         },
       },
       {
@@ -701,13 +701,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
           "nà zhī shén bǐ néng huà chū bù tóng de yán sè, yě néng ràng mǎ liáng huà de huà chéng zhēn",
         meaning: "The magic brush could draw different colours and could make what Ma Liang painted come true.",
         solution: {
-          method: "특징 두 가지 모두 서술",
+          method: "Describe both characteristics — make sure to include all two points.",
           steps: [
-            "노인의 말: '它能画出不同的颜色，也能让你画的画成真'.",
-            "두 가지 특별함(① 색칠 ② 그림이 진짜가 됨)을 모두 적는다.",
-            "전환 답이므로 '你→马良(他)'로 인칭 변경.",
+            "The old man's words: '它能画出不同的颜色，也能让你画的画成真'.",
+            "Write down both special things about the brush: ① it can draw different colours, and ② the drawings it makes become real.",
+            "This is a reported-speech answer, so change the pronoun from '你' to '马良' or '他'.",
           ],
-          tip: "‘有什么特别的地方’은 특징을 빠짐없이 — 두 점이면 두 가지.",
+          tip: "'有什么特别的地方' is asking for all the special features — if there are two points, make sure you write both.",
         },
       },
       {
@@ -720,13 +720,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
           "wǒ jué de mǎ liáng shì yí gè lè yú zhù rén de hái zi. yīn wèi yǒu rén de yáng bú jiàn le, mǎ liáng jiù gěi tā huà yì zhī yáng; shéi jiā méi shuǐ niú bāng máng zhòng tián, mǎ liáng jiù huà yì tóu shuǐ niú sòng gěi nà jiā rén.",
         meaning: "I think Ma Liang is a helpful child, because when someone lost a sheep he drew one for them, and when a family had no buffalo to plough, he drew one and gave it to them.",
         solution: {
-          method: "평가+본문 근거형 — 두 소문항 분리",
+          method: "Evaluation + Text Evidence Question — Two separate sub-questions",
           steps: [
-            "앞: 성격 평가 → 乐于助人(남을 잘 돕는).",
-            "뒤: 본문의 구체 사례(羊·水牛 그려 줌)로 증명.",
-            "두 부분(怎样 + 为什么)을 모두 채운다.",
+            "First part: Describe the character's personality → e.g. 乐于助人 (always willing to help others).",
+            "Second part: Prove it using a specific example from the passage (e.g. drew a sheep and a water buffalo for others).",
+            "Make sure you answer BOTH parts (怎样 + 为什么) fully.",
           ],
-          tip: "‘怎样的孩子’ 평가어는 본문 행동에서 직접 끌어낸다(乐于助人/孝顺/诚实 등).",
+          tip: "The describing word for '怎样的孩子' must come directly from the character's actions in the passage (e.g. 乐于助人 / 孝顺 / 诚实).",
         },
       },
       {
@@ -739,13 +739,13 @@ export const wa3_taonan_supp3_2024: Question[] = [
           "rú guǒ wǒ yǒu yì zhī shén bǐ, wǒ huì bāng zhù yǒu xū yào de rén. wǒ huì huà fáng zi, gěi nà xiē méi qián mǎi fáng zi de rén, ràng tā men yǒu dì fāng zhù.",
         meaning: "If I had a magic brush, I would help people in need. I would draw houses for those who can't afford one, so they'd have a place to live. (Open answer — example provided.)",
         solution: {
-          method: "상상+예시형(개방형) — '如果…我会… + 举例'",
+          method: "Imagination + Example Question (Open-ended) — '如果…我会… + give an example'",
           steps: [
-            "'如果我有…，我会…'로 시작해 의도를 밝힌다.",
-            "'请举例说明'이 있으므로 구체적 예(房子/책가방 등)를 든다.",
-            "본문 주제(乐于助人)와 결을 맞추면 더 좋다.",
+            "Start with '如果我有…，我会…' to show what you would do.",
+            "Since the question says '请举例说明', give a specific example (e.g. a house / a school bag).",
+            "It is even better if your answer matches the theme of the passage (乐于助人 — helping others).",
           ],
-          tip: "개방형은 ‘틀 + 구체 예시’만 갖추면 정답. 모범답안은 한 예일 뿐.",
+          tip: "For open-ended questions, you just need the correct sentence structure + a specific example to get full marks. The model answer is only one possible answer.",
         },
       },
     ],

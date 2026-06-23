@@ -73,7 +73,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       solution: {
         method: '조동사 did 뒤에는 동사원형이 온다는 규칙을 적용한다.',
         steps: [
-          '부정문 "did not + 동사원형" 구조.',
+          '부정문 "did not + base form of verb" 구조.',
           'did가 이미 과거시제를 담당하므로 본동사는 원형.',
           '따라서 "did not go" → 정답 (1) go.',
         ],
@@ -120,9 +120,9 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '음료를 컵 "안으로" 따르는 동작에 맞는 전치사를 고른다.',
+        method: '음료를 컵 "into (moving inside)" 따르는 동작에 맞는 전치사를 고른다.',
         steps: [
-          '주스를 따를 때는 컵 "안으로" 들어가야 한다.',
+          '주스를 따를 때는 컵 "into (moving inside)" 들어가야 한다.',
           '"pour A into B" = A를 B 안으로 따르다.',
           '"at"(~을 향해)/"on"(~위에)은 액체를 따르는 동작과 안 맞는다 → 정답 (3) into. (공식 정답표 확인됨)',
         ],
@@ -197,13 +197,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"~ or 결과"(안 하면 ~된다)는 강한 의무/경고 구문을 본다.',
+        method: '"~ or result"(안 하면 ~된다)는 강한 의무/경고 구문을 본다.',
         steps: [
           '"~ or you will have tooth decay"(안 그러면 충치가 생긴다) → 강한 경고.',
           '강한 의무를 나타내는 조동사는 "must"(반드시 해야 한다).',
           'can(할 수 있다)/might(할지도 모른다)/would(~할 텐데)는 의무의 강도가 부족 → 정답 (2) must.',
         ],
-        tip: '"must... or (안 좋은 결과)"는 반드시 해야 할 일을 경고하는 구문입니다.',
+        tip: '"must... or (bad result/consequence)"는 반드시 해야 할 일을 경고하는 구문입니다.',
       },
     },
     {
@@ -222,7 +222,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"had + 과거분사" 과거완료 형태를 만든다.',
+        method: '"had + past participle" 과거완료 형태를 만든다.',
         steps: [
           '조동사 "had"가 앞에 있으므로 뒤에는 과거분사가 필요.',
           'forget의 과거분사는 forgotten (forget–forgot–forgotten).',
@@ -276,7 +276,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"공기(air)"를 목적어로 하는 자연스러운 동사를 고른다.',
+        method: '"air"를 목적어로 하는 자연스러운 동사를 고른다.',
         steps: [
           '해로운 가스가 공기에 끼치는 영향 → 공기를 오염시킴.',
           '"pollute the air" = 공기를 오염시키다 → 가장 자연스러운 표현.',
@@ -327,13 +327,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"패배"가 증명하는 성질이 무엇인지 생각한다.',
+        method: '"defeat / loss"가 증명하는 성질이 무엇인지 생각한다.',
         steps: [
-          '작년에 진 팀에게도 졌다 → 이 팀이 "무적"이 아님을 보여준다.',
+          '작년에 진 팀에게도 졌다 → 이 팀이 "unbeatable / invincible"이 아님을 보여준다.',
           '"invincible" = 무적의, 절대 지지 않는.',
           '"not invincible"(무적이 아니다)이 패배 사실과 자연스럽게 연결 → 정답 (3) invincible.',
         ],
-        tip: '"proved that it was not [형용사]"는 사건(여기서는 패배)이 반증하는 성질을 찾는 문제입니다.',
+        tip: '"proved that it was not [adjective]"는 사건(여기서는 패배)이 반증하는 성질을 찾는 문제입니다.',
       },
     },
     {
@@ -356,7 +356,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
         steps: [
           '"The baby is sleeping"(아기가 자고 있다) → 깨우지 않도록 조용히 말해야 함.',
           '"softly" = 작은 소리로/부드럽게 → 조용히 말하라는 의미에 맞는다.',
-          'wisely(슬기롭게)/politely(공손하게)/properly(제대로)는 "소리 크기"와 무관 → 정답 (1) softly.',
+          'wisely(슬기롭게)/politely(공손하게)/properly(제대로)는 "volume of sound / loudness"와 무관 → 정답 (1) softly.',
         ],
         tip: '뒤 문장(아기가 잔다)이 빈칸 부사의 의미(조용히)를 알려주는 단서입니다.',
       },
@@ -377,11 +377,11 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"날씨 때문에 경기가 미뤄졌다"는 의미의 동사구를 고른다.',
+        method: '"The match was postponed because of the weather"는 의미의 동사구를 고른다.',
         steps: [
           '나쁜 날씨 때문에 경기가 내일로 연기되었다.',
           '"put off" = 연기하다/미루다 → "has been put off until tomorrow"가 자연스럽다.',
-          'put on(입다/공연하다)/put out(끄다, 내놓다)/put away(치우다)는 "연기"의 의미가 없다 → 정답 (2) put off.',
+          'put on(입다/공연하다)/put out(끄다, 내놓다)/put away(치우다)는 "postponement / delay"의 의미가 없다 → 정답 (2) put off.',
         ],
         tip: '"put off"는 일정을 나중으로 미룰 때 쓰는 동사구입니다.',
       },
@@ -595,7 +595,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             steps: [
               '1단락: "Tan Tock Seng was born in a humble family. He was quite poor."',
               '그는 가난한(humble, poor) 집안에서 태어났다.',
-              '따라서 "부자 집안에서 태어났다"는 거짓 → False.',
+              '따라서 "was born into a rich family"는 거짓 → False.',
             ],
             tip: '"humble family"(평범하고 가난한 집안)는 "rich family"의 반대입니다.',
           },
@@ -611,7 +611,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             steps: [
               '1단락: "Born in Malaysia in 1798, he came to Singapore to find work."',
               '그는 말레이시아(Malaysia)에서 태어났다.',
-              '따라서 "중국에서 태어났다"는 거짓 → False. (지문의 "workers from China"는 나중에 그가 도운 다른 사람들을 가리킴)',
+              '따라서 "was born in China"는 거짓 → False. (지문의 "workers from China"는 나중에 그가 도운 다른 사람들을 가리킴)',
             ],
             tip: '비슷한 단어(China)가 다른 곳에 나와도, 출생지에 관한 직접적인 문장을 찾아야 합니다.',
           },
@@ -668,7 +668,7 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
               'basic = 기본적인 → 가격과는 직접 관련 없음.',
               '따라서 정답은 (A) affordable.',
             ],
-            tip: 'affordable은 "감당할 수 있는 가격"이라는 뜻으로 inexpensive와 자주 동의어로 쓰입니다.',
+            tip: 'affordable은 "an affordable price"이라는 뜻으로 inexpensive와 자주 동의어로 쓰입니다.',
           },
         },
         {
@@ -686,8 +686,8 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
             method: '지문의 단락 순서(2→3→4단락)를 따라 사건을 배열한다.',
             steps: [
               '2단락: 젊은 시절 시장에 가서 채소·닭을 팔았다 → 1.',
-              '3단락: 돈을 모아 상점을 산 뒤 "땅과 더 많은 상점도 샀다"(bought land and more shophouses) → 2.',
-              '4단락: 부자가 된 뒤 "병원 건립에 돈을 기부했다"(donated money to build a hospital) → 3.',
+              '3단락: 돈을 모아 상점을 산 뒤 "also bought land and more shops"(bought land and more shophouses) → 2.',
+              '4단락: 부자가 된 뒤 "donated money to build a hospital"(donated money to build a hospital) → 3.',
             ],
             tip: '인물의 일생 이야기는 보통 지문의 단락 순서와 시간 순서가 일치합니다.',
           },

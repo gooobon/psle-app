@@ -121,13 +121,13 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"아무도 알아보지 못했다"는 문맥에 맞는 단어와 관용구를 찾는다.',
+        method: '"Nobody recognised him/her"는 문맥에 맞는 단어와 관용구를 찾는다.',
         steps: [
           '외계인 분장으로 정체를 숨겼기에 아무도 못 알아본 상황.',
           '"in disguise"(변장하여)는 정체를 감출 때 쓰는 굳어진 표현.',
           'camouflage는 보통 군사·동물의 위장에 쓰여 문맥과 덜 맞는다 → 정답 (3) disguise.',
         ],
-        tip: '"in disguise"는 "변장한 채로"라는 자주 나오는 숙어입니다.',
+        tip: '"in disguise"는 "While in disguise"라는 자주 나오는 숙어입니다.',
       },
     },
     {
@@ -207,7 +207,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '말하는 사람(Timmy)과 듣는 사람(Annie)을 함께 포함하는 주어를 고른다.',
             steps: [
-              'Timmy가 Annie에게 "함께(together)" 만들자고 제안.',
+              'Timmy가 Annie에게 "Together" 만들자고 제안.',
               '화자+청자를 함께 가리키는 1인칭 복수 주어는 "we".',
               '보기에서 we는 (C) → 정답 (C).',
             ],
@@ -227,7 +227,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
               '두 사람(they)의 선생님이므로 소유격 "their" teacher.',
               '보기에서 their은 (E) → 정답 (E).',
             ],
-            tip: '직접 대화가 아닌 서술 문장에서 "그들의 ~"는 our가 아니라 their로 표현합니다.',
+            tip: '직접 대화가 아닌 서술 문장에서 "Their ~"는 our가 아니라 their로 표현합니다.',
           },
         },
         {
@@ -239,7 +239,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: 'Annie가 상대(Timmy)에게 직접 권하는 말의 주어를 고른다.',
             steps: [
-              'Annie가 Timmy에게 "왜 ~하지 않니?"라고 직접 제안.',
+              'Annie가 Timmy에게 "Why don't you ~?"라고 직접 제안.',
               '상대 한 사람을 가리키는 2인칭 주어는 "you".',
               '보기에서 you는 (F) → 정답 (F). (남은 단어 A·B·D로도 확인 가능)',
             ],
@@ -272,7 +272,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the spelling of the underlined word: "presents she would resieve."',
           answer: 'receive',
           solution: {
-            method: '"i 앞의 e/ei" 철자 규칙을 적용한다.',
+            method: '"e before i / ei" 철자 규칙을 적용한다.',
             steps: [
               '잘못된 철자: resieve.',
               'c 다음에는 "ei"를 쓴다 (i before e, except after c).',
@@ -291,7 +291,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
             method: '문맥(겁에 질림)에 맞는 단어의 정확한 철자를 떠올린다.',
             steps: [
               '잘못된 철자: petreefyed.',
-              '의미는 "겁에 질린". 바른 단어는 petrified.',
+              '의미는 "Terrified". 바른 단어는 petrified.',
               '-fy로 끝나는 동사의 과거형은 y→i 후 -ed: petrify → petrified.',
             ],
             tip: '자음+y로 끝나는 동사는 과거형에서 y를 i로 바꾸고 -ed를 붙입니다.',
@@ -348,8 +348,8 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
             method: '엄마가 밖에 나가지 못하게 한 이유를 지문에서 찾아 반대말로 빈칸을 채운다.',
             steps: [
               '2단락: "you are not allowed to leave our mouse-hole by yourself as it is dangerous".',
-              '엄마는 밖이 "위험(dangerous)"하다고 했다.',
-              '"위험하다"의 반대 의미로 빈칸을 채우면 "not safe"(안전하지 않다) → safe.',
+              '엄마는 밖이 "Dangerous"하다고 했다.',
+              '"To be dangerous"의 반대 의미로 빈칸을 채우면 "not safe"(안전하지 않다) → safe.',
             ],
             tip: '지문의 단어(dangerous)를 빈칸 문장 형태(not ____)에 맞게 반대말(safe)로 바꿔야 합니다.',
           },
@@ -362,7 +362,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
             'Pick out a four-word phrase from paragraph 3 which shows that Greywhiskers was thinking about disobeying his mother.',
           answer: 'he had other plans',
           solution: {
-            method: '3단락에서 "몰래 다른 생각을 했다"를 보여주는 네 단어 표현을 찾는다.',
+            method: '3단락에서 "Secretly thought of something else"를 보여주는 네 단어 표현을 찾는다.',
             steps: [
               '3단락: "Greywhiskers nodded his head, but he had other plans."',
               '겉으로는 끄덕였지만 속으로 딴생각을 품었음을 보여주는 부분.',
@@ -389,7 +389,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
               'scrumptious = 아주 맛있는 → delicious와 같은 뜻.',
               '따라서 정답은 (B) scrumptious.',
             ],
-            tip: 'fragrant는 "냄새", scrumptious는 "맛"을 나타냄을 구분하세요.',
+            tip: 'fragrant는 "Smell", scrumptious는 "Taste"을 나타냄을 구분하세요.',
           },
         },
         {
@@ -430,7 +430,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
               '다음 날: Greywhiskers가 부엌에서 좋아하는 음식(치즈)을 봤다 → 2.',
               '그 직후: 덫에 걸렸다("something snapped shut, trapping him") → 3.',
             ],
-            tip: '"favourite food를 본 일"과 "덫에 걸린 일"은 같은 단락에 연달아 나오므로 순서에 주의하세요.',
+            tip: '"Seeing their favourite food"과 "Getting caught in a trap"은 같은 단락에 연달아 나오므로 순서에 주의하세요.',
           },
         },
         {
@@ -450,7 +450,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '5단락: "Greywhiskers sobbed... wishing he had listened to his mother."',
               '엄마 말을 들었어야 했다고 후회하며 흐느꼈다.',
-              '"후회하는" 감정 = regretful → 정답 (2).',
+              '"Regretful / Feeling sorry" 감정 = regretful → 정답 (2).',
             ],
             tip: '"wishing he had ~"(~했더라면)는 후회(regret)를 나타내는 단서 표현입니다.',
           },
@@ -467,7 +467,7 @@ export const wa1NanyangPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '마지막 단락: "Ethel felt sorry for the mouse."',
               '그녀는 화내기는커녕 덫을 열어 쥐를 풀어주었다.',
-              '따라서 "화가 났다"는 거짓 → False.',
+              '따라서 "felt angry"는 거짓 → False.',
             ],
             tip: '인물의 감정 True/False는 그 인물이 실제로 한 행동(여기서는 쥐를 풀어줌)으로 판단합니다.',
           },

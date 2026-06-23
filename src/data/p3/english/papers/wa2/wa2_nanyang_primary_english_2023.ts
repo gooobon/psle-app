@@ -274,8 +274,8 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             method: '문맥(작은 생물)에 맞는 단어의 정확한 철자를 떠올린다.',
             steps: [
               '잘못된 철자: creachers.',
-              '의미는 "생물/동물". 바른 단어는 creatures.',
-              '-ture로 끝나며 발음은 "춰"처럼 나지만 철자는 t-u-r-e.',
+              '의미는 "living things/animals". 바른 단어는 creatures.',
+              '-ture로 끝나며 발음은 "wow / whoa"처럼 나지만 철자는 t-u-r-e.',
             ],
             tip: 'creature, picture, nature처럼 "-ture"는 발음과 달리 t-u-r-e로 씁니다.',
           },
@@ -303,7 +303,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           stem: 'Correct the spelling of the underlined word: "it is an ameizing animal."',
           answer: 'amazing',
           solution: {
-            method: '"놀라운"이라는 단어의 정확한 철자를 떠올린다.',
+            method: '"amazing / surprising"이라는 단어의 정확한 철자를 떠올린다.',
             steps: [
               '잘못된 철자: ameizing.',
               '바른 단어는 amazing (amaze + -ing).',
@@ -353,7 +353,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
               'Chinatown은 집, 일한 곳은 Collyer Quay.',
               'Redhill은 현재 사는 곳, Apex Club은 식품 받는 곳 → 정답 (4) Collyer Quay.',
             ],
-            tip: '장소 문제는 "집/일터/현재 거주지"를 헷갈리지 않게 각각 구분하세요.',
+            tip: '장소 문제는 "home / workplace / current place of living"를 헷갈리지 않게 각각 구분하세요.',
           },
         },
         {
@@ -394,7 +394,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
               'ideal = 이상적인 → past와 뜻이 다르다.',
               '따라서 정답은 (A) beyond.',
             ],
-            tip: '"beyond/past the age"는 "(어떤) 나이를 지난"이라는 같은 의미로 쓰입니다.',
+            tip: '"beyond/past the age"는 "past a certain age"이라는 같은 의미로 쓰입니다.',
           },
         },
         {
@@ -405,7 +405,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             'From paragraph 4, pick out an 8-word phrase that tells you that Madam Ng is still active despite her old age.',
           answer: 'does not let her age slow her down',
           solution: {
-            method: '4단락에서 "나이에 굴하지 않는다"를 보여주는 여덟 단어 표현을 찾는다.',
+            method: '4단락에서 "does not give up because of age"를 보여주는 여덟 단어 표현을 찾는다.',
             steps: [
               '4단락: "...and does not let her age slow her down."',
               '나이가 자신을 느리게 만들도록 두지 않는다 = 여전히 활동적.',
@@ -432,7 +432,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
               '성인이 되어: 공사장에서 일함("supported herself by working at construction sites") → 2.',
               '현재: 은퇴 후 Redhill 아파트로 이사("retired and lives in a flat in Redhill") → 3.',
             ],
-            tip: '시간 순서 문제는 "어린 시절 → 성인 → 현재(today)"처럼 인생 단계를 따라가면 쉽습니다.',
+            tip: '시간 순서 문제는 "childhood → adult → present (today)"처럼 인생 단계를 따라가면 쉽습니다.',
           },
         },
         {
@@ -447,7 +447,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             steps: [
               '4단락: "She earns money by selling used cardboard that she collects from the neighbourhood."',
               '은퇴 후에도 폐지를 팔아 스스로 돈을 번다.',
-              '따라서 "여전히 스스로를 부양한다"는 사실 → True.',
+              '따라서 "still supports herself/himself"는 사실 → True.',
             ],
             tip: '"still"(여전히)이 든 진술은 현재 상황을 지문에서 확인해 판단합니다.',
           },
@@ -463,10 +463,10 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             method: 'Apex Club에서 Madam Ng의 역할(받는 사람 vs 봉사자)을 구분한다.',
             steps: [
               '5단락: "she goes to the Apex Club... where she receives a food package."',
-              '그녀는 식품을 "받는" 사람이며, "young volunteers"(젊은 봉사자들)에게 고마워한다.',
-              '봉사자는 다른 사람들이므로 "Madam Ng이 봉사자"라는 진술은 거짓 → False.',
+              '그녀는 식품을 "receiving" 사람이며, "young volunteers"(젊은 봉사자들)에게 고마워한다.',
+              '봉사자는 다른 사람들이므로 "Madam Ng as a volunteer"라는 진술은 거짓 → False.',
             ],
-            tip: '"받는 사람"과 "봉사자"를 바꿔놓은 함정 진술에 주의하세요.',
+            tip: '"receiver / person who receives"과 "volunteer"를 바꿔놓은 함정 진술에 주의하세요.',
           },
         },
       ],

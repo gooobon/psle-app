@@ -44,7 +44,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"좋은 성적을 받지 못했다"는 결과에 어울리는 감정 형용사를 고른다.',
+        method: '"did not get good grades"는 결과에 어울리는 감정 형용사를 고른다.',
         steps: [
           '시험에서 좋은 성적을 받지 못했다 → 실망/낙심하는 감정.',
           '"disheartened" = 낙심한, 의기소침한 → 정확히 일치.',
@@ -70,7 +70,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '신문 더미에서 좋은 기사를 "찾아 훑어보는" 동작을 나타내는 동사를 고른다.',
+        method: '신문 더미에서 좋은 기사를 "scanning and searching through" 동작을 나타내는 동사를 고른다.',
         steps: [
           '"look for a good article"(좋은 기사를 찾기 위해) 신문 더미를 훑어봄.',
           '"browse through" = (책·신문 등을) 휙휙 넘겨보다/훑어보다 → 정확히 일치.',
@@ -98,9 +98,9 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       solution: {
         method: '강연자에게 감사의 표시로 주는 기념품을 나타내는 명사를 고른다.',
         steps: [
-          '강연을 해준 것에 대한 "감사의 표시"로 주는 것.',
+          '강연을 해준 것에 대한 "a sign of thanks / appreciation"로 주는 것.',
           '"plaque" = (감사·기념의 의미로 주는) 명판/패 → 강연자에게 주는 감사패에 적합.',
-          'prize(상품, 경쟁의 결과)/trophy(트로피, 경쟁의 승리)/correspondence(서신, 편지)는 "감사 표시 선물"과 안 맞는다 → 정답 (3) plaque.',
+          'prize(상품, 경쟁의 결과)/trophy(트로피, 경쟁의 승리)/correspondence(서신, 편지)는 "a thank-you gift"과 안 맞는다 → 정답 (3) plaque.',
         ],
         tip: '"plaque"는 감사·기념의 의미로 수여하는 패(상패와 비슷하지만 경쟁과 무관)입니다.',
       },
@@ -121,11 +121,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '먹잇감을 향해 "갑자기 달려들어 덮치는" 동작을 나타내는 동사를 고른다.',
+        method: '먹잇감을 향해 "suddenly jumping and pouncing on" 동작을 나타내는 동사를 고른다.',
         steps: [
           '"waited for the right time and ___ on its prey" — 적절한 때를 기다렸다가 먹잇감에게 공격.',
           '"pounce on" = (갑자기) 달려들어 덮치다 → 사냥 동작과 정확히 일치.',
-          'crept(살금살금 기어감)/limped(절뚝거림)/strolled(한가로이 걸음)는 "덮치는 동작"과 안 맞는다 → 정답 (4) pounced.',
+          'crept(살금살금 기어감)/limped(절뚝거림)/strolled(한가로이 걸음)는 "the action of pouncing"과 안 맞는다 → 정답 (4) pounced.',
         ],
         tip: '"pounce on its prey"는 동물이 갑자기 먹잇감을 덮치는 동작을 나타내는 정해진 표현입니다.',
       },
@@ -147,7 +147,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"음악가들의 모임"을 가리키는 집합명사를 고른다.',
+        method: '"a group of musicians"을 가리키는 집합명사를 고른다.',
         steps: [
           '"a ___ of musicians"(음악가들의 ~) — 함께 연주하는 음악가 집단.',
           '"band" = 악단/밴드 → "a band of musicians"가 가장 자연스럽다.',
@@ -173,7 +173,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"비둘기처럼 ~한"이라는 직유에 어울리는 형용사를 고른다.',
+        method: '"being ~ like a dove"이라는 직유에 어울리는 형용사를 고른다.',
         steps: [
           '"as ___ as a dove" — dove(비둘기)는 평화롭고 온화함의 상징.',
           '"gentle" = 부드러운/온화한 → "as gentle as a dove"가 정해진 직유 표현.',
@@ -280,7 +280,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"공손하게(politely)" 묻는 표현에 맞는 조동사를 고른다.',
+        method: '"politely" 묻는 표현에 맞는 조동사를 고른다.',
         steps: [
           '"asked the diners politely" — 매우 공손한 표현이 필요.',
           '"May I take your order?"는 식당 서비스에서 가장 공식적이고 공손한 표현.',
@@ -306,13 +306,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"be about to + 동사원형" 구문을 적용한다.',
+        method: '"be about to + base verb (means something is going to happen very soon)" 구문을 적용한다.',
         steps: [
-          '"was about to ___"는 "막 ~하려던 참이었다"는 뜻의 정해진 구문.',
+          '"was about to ___"는 "was just about to ~"는 뜻의 정해진 구문.',
           'to 뒤에는 동사원형이 온다.',
           '따라서 "was about to leave" → 정답 (2) leave.',
         ],
-        tip: '"be about to + 동사원형"은 "막 ~하려는 참"이라는 뜻입니다.',
+        tip: '"be about to + base verb (means something is going to happen very soon)"은 "just about to ~"이라는 뜻입니다.',
       },
     },
     {
@@ -331,10 +331,10 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"여러 영화 중 어느 것"을 묻는 의문사를 고른다.',
+        method: '"which one among several movies"을 묻는 의문사를 고른다.',
         steps: [
           '"___ one of the movies"는 여러 영화 중에서 선택을 묻는다.',
-          '"Which"는 정해진 범위(여러 영화) 안에서 "어느 것"을 물을 때 쓴다.',
+          '"Which"는 정해진 범위(여러 영화) 안에서 "which one"을 물을 때 쓴다.',
           'Who(누구)/Where(어디)/Whose(누구의)는 영화 선택을 묻기에 부적합 → 정답 (2) Which.',
         ],
         tip: '"Which one of ~"는 정해진 선택지 중에서 하나를 고를 때 쓰는 의문사입니다.',
@@ -357,11 +357,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '결과("친구가 없는 것이 당연하다")와 일치하는 주어를 고른다.',
+        method: '결과("It is natural to have no friends")와 일치하는 주어를 고른다.',
         steps: [
           '"It\'s no wonder he has no friends."(친구가 없는 게 당연하다) → 모두가 그를 싫어한다는 의미.',
           '"Everybody dislikes Alan"(모두가 Alan을 싫어한다)이 결과와 자연스럽게 연결된다.',
-          'Nobody(아무도 안)/Anybody/Somebody는 "친구가 전혀 없음"을 설명하기에 부족 → 정답 (4) Everybody.',
+          'Nobody(아무도 안)/Anybody/Somebody는 "Has no friends at all"을 설명하기에 부족 → 정답 (4) Everybody.',
         ],
         tip: '"It\'s no wonder ~"(~은 당연하다) 앞에는 그 결과의 원인이 되는 강한 진술(모두가 ~)이 자연스럽게 옵니다.',
       },
@@ -383,13 +383,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"다시 찾아보라"는 지시와 어울리는 장소부사를 고른다.',
+        method: '"Look again"는 지시와 어울리는 장소부사를 고른다.',
         steps: [
-          '"Go and look for it again"(다시 찾아봐라) → 책은 방 안 "어딘가"에 있을 것이다.',
+          '"Go and look for it again"(다시 찾아봐라) → 책은 방 안 "Somewhere"에 있을 것이다.',
           '"somewhere" = 어딘가에 → 위치를 특정하지 않지만 존재함을 암시.',
           '"nowhere"(아무데도 없음)는 다시 찾아보라는 지시와 모순, "anywhere/everywhere"는 이 문맥에 덜 맞는다 → 정답 (4) somewhere.',
         ],
-        tip: '"somewhere"는 정확한 위치는 모르지만 "어딘가에 있다"는 의미입니다.',
+        tip: '"somewhere"는 정확한 위치는 모르지만 "Is somewhere"는 의미입니다.',
       },
     },
 
@@ -472,7 +472,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: 'Amy 자신을 가리키는 1인칭 주어 대명사를 고른다.',
             steps: [
-              'Amy가 스스로 자원하며 "Nora와 ___가 색연필을 가져올게"라고 말한다.',
+              'Amy가 스스로 자원하며 "Nora and ___ will bring the coloured pencils"라고 말한다.',
               '화자(Amy) 자신을 가리키는 1인칭 단수는 "I".',
               '보기에서 I는 (B) → 정답 (B). ("Nora and I" — 다른 사람과 함께 주어로 쓸 때도 I를 사용)',
             ],
@@ -503,11 +503,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '두 동작(자물쇠 훼손, 자전거 타고 가기)의 시간 순서를 나타내는 전치사를 고른다.',
             steps: [
-              '두 소년은 자물쇠를 훼손한 "후에" 자전거를 타고 갔다 → 자물쇠 훼손이 먼저, 타고 가기가 나중.',
+              '두 소년은 자물쇠를 훼손한 "After" 자전거를 타고 갔다 → 자물쇠 훼손이 먼저, 타고 가기가 나중.',
               '"before cycling off" = 타고 가기 전(즉, 그 전에 자물쇠를 훼손함).',
               '보기에서 before는 (H) → 정답 (H).',
             ],
-            tip: '"A before B"는 "B 전에 A"라는 뜻으로, A가 먼저 일어난 사건임을 나타냅니다.',
+            tip: '"A before B"는 "A before B"라는 뜻으로, A가 먼저 일어난 사건임을 나타냅니다.',
           },
         },
         {
@@ -517,7 +517,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Their inconsiderate act was caught (20) ________ video.',
           answer: 'M',
           solution: {
-            method: '"영상으로 포착되다"라는 표현에 맞는 전치사를 고른다.',
+            method: '"To be caught on camera"라는 표현에 맞는 전치사를 고른다.',
             steps: [
               '"caught on video" = 영상에 포착되다 → 정해진 전치사 표현.',
               '보기에서 on은 (M) → 정답 (M).',
@@ -533,9 +533,9 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Recently, a couple was filmed tossing at least two rental bicycles (21) ________ a drain.',
           answer: 'L',
           solution: {
-            method: '물건을 "~안으로" 던지는 동작에 맞는 전치사를 고른다.',
+            method: '물건을 "Into ~" 던지는 동작에 맞는 전치사를 고른다.',
             steps: [
-              '자전거를 배수구 "안으로" 던졌다는 의미.',
+              '자전거를 배수구 "Into" 던졌다는 의미.',
               '"toss A into B" = A를 B 안으로 던지다.',
               '보기에서 into는 (L) → 정답 (L).',
             ],
@@ -552,11 +552,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '회사가 위치한 국가/지역을 나타내는 전치사를 고른다.',
             steps: [
-              '"the bike-sharing companies ___ Singapore" — 싱가포르"에 있는" 회사들.',
+              '"the bike-sharing companies ___ Singapore" — 싱가포르"That is in ~" 회사들.',
               '국가/도시 앞에는 "in"을 쓴다.',
               '보기에서 in은 (K) → 정답 (K). (남은 G·J는 사용되지 않음)',
             ],
-            tip: '국가·도시 이름 앞에서 "~에 있는"을 나타낼 때는 in을 씁니다(companies in Singapore).',
+            tip: '국가·도시 이름 앞에서 "That is in ~"을 나타낼 때는 in을 씁니다(companies in Singapore).',
           },
         },
       ],
@@ -606,9 +606,9 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'As Sam was watching the man pry open the durians, he (24) ________ the man dropping a section of each durian into another basket.',
           answer: 'H',
           solution: {
-            method: '"눈치챘다/발견했다"는 의미의 동사를 고른다.',
+            method: '"Noticed / Spotted"는 의미의 동사를 고른다.',
             steps: [
-              'Sam이 지켜보다가 주인의 부정행위를 "알아챘다".',
+              'Sam이 지켜보다가 주인의 부정행위를 "Realised / Noticed".',
               '"spotted" = (눈여겨보다가) 발견하다/알아채다.',
               '보기에서 spotted는 (H) → 정답 (H).',
             ],
@@ -639,7 +639,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'He paid for his durians (26) ________ and told the man, "Sir, I saw what you did. Next time I won\'t buy durians from you."',
           answer: 'G',
           solution: {
-            method: '"불만스러운 마음으로 마지못해" 행동했음을 나타내는 부사를 고른다.',
+            method: '"Reluctantly, with a dissatisfied feeling" 행동했음을 나타내는 부사를 고른다.',
             steps: [
               '주인의 부정행위에 짜증났지만(annoyed) 그래도 돈을 지불해야 했음.',
               '"reluctantly" = 마지못해/꺼림칙하게 → 짜증난 감정과 어울린다.',
@@ -656,7 +656,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Embarrassed, the man (27) ________ to Sam for cheating and gave him another box of durian.',
           answer: 'B',
           solution: {
-            method: '"부끄러워하며 사과했다"는 의미의 동사를 고른다.',
+            method: '"Apologised shyly/with embarrassment"는 의미의 동사를 고른다.',
             steps: [
               '"Embarrassed"(당황하여) 한 행동.',
               '"apologised" = 사과했다 → "apologised to Sam for cheating"이 자연스럽다.',
@@ -718,7 +718,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'We need to do our part to keep the ( enviroment / environment ) clean.',
           answer: 'environment',
           solution: {
-            method: '"환경"이라는 단어의 정확한 철자를 확인한다.',
+            method: '"Environment"이라는 단어의 정확한 철자를 확인한다.',
             steps: [
               '잘못된 철자: enviroment (n이 하나 빠짐).',
               '바른 단어는 environment — "environ" + "ment", n이 두 번 들어간다.',
@@ -734,7 +734,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'The snake glided away to escape from its ( predator / predater ).',
           answer: 'predator',
           solution: {
-            method: '"포식자"라는 단어의 끝 철자(-or vs -er)를 확인한다.',
+            method: '"Predator"라는 단어의 끝 철자(-or vs -er)를 확인한다.',
             steps: [
               '잘못된 철자: predater.',
               '바른 단어는 predator — 끝이 -or.',
@@ -751,7 +751,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Ben was ( disappointed / dissapointed ) when he was told that he was not selected to join the school team.',
           answer: 'disappointed',
           solution: {
-            method: '"실망한"이라는 단어의 접두사(dis-)와 자음 중복을 확인한다.',
+            method: '"Disappointed"이라는 단어의 접두사(dis-)와 자음 중복을 확인한다.',
             steps: [
               '잘못된 철자: dissapointed (s가 두 번, p는 한 번).',
               '바른 단어는 disappointed — dis(접두사, s 한 번) + appoint(p가 두 번) + ed.',
@@ -786,7 +786,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           '"Tom did not complete his homework, so he was not allowed to play soccer."',
           '두 번째 Tom은 반복을 피하기 위해 "he"로 바꾼다.',
         ],
-        tip: '"A, so B"는 "A해서(원인) B한다(결과)"라는 뜻입니다. 반복되는 이름은 대명사로 바꾸세요.',
+        tip: '"A, so B"는 "Because of A (cause), B happens (effect)"라는 뜻입니다. 반복되는 이름은 대명사로 바꾸세요.',
       },
     },
     {
@@ -805,11 +805,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
         method: '두 사건을 "when"(~했을 때)으로 연결한다.',
         steps: [
           '앞: Emily가 놀랐다(결과/감정) / 뒤: 책상에서 생일 케이크를 보았다(원인이 된 사건).',
-          '"when"은 "~했을 때"라는 뜻으로 동시에 일어난/계기가 된 사건을 연결한다.',
+          '"when"은 "When ~ happened"라는 뜻으로 동시에 일어난/계기가 된 사건을 연결한다.',
           '"Emily was surprised when she saw a birthday cake on her desk."',
           '반복되는 Emily는 "she"로 바꾼다.',
         ],
-        tip: '"A when B"는 "B했을 때 A했다"는 뜻으로, 보통 감정(A)의 원인이 되는 사건(B)을 연결합니다.',
+        tip: '"A when B"는 "When B happened, A happened"는 뜻으로, 보통 감정(A)의 원인이 되는 사건(B)을 연결합니다.',
       },
     },
 
@@ -868,7 +868,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
               'exhausted = 매우 피곤한, 지친 → tired와 동의어.',
               '따라서 정답은 (B) exhausted.',
             ],
-            tip: 'exhausted는 "매우 지친"이라는 뜻으로 tired의 강한 동의어입니다.',
+            tip: 'exhausted는 "Very tired/exhausted"이라는 뜻으로 tired의 강한 동의어입니다.',
           },
         },
         {
@@ -918,7 +918,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             method: '각 보기를 지문과 하나씩 대조한다.',
             steps: [
               '(1) 5단락: 처음에 염소들은 버팔로를 무시하고 멀리하며 적대적이었다("Let\'s ignore him", "hostile to him") → 참.',
-              '(2) 버팔로는 "길을 찾기 위해" 도움을 주었을 뿐, "음식을 찾기 위해"라는 언급은 없음 → 거짓.',
+              '(2) 버팔로는 "To find the way" 도움을 주었을 뿐, "To find food"라는 언급은 없음 → 거짓.',
               '(3) 4단락: 버팔로는 "I\'ve been lost in the forest for four days"(나흘) — 이틀이 아님 → 거짓.',
               '(4) 1단락: 염소 떼가 가장 경험 많은 가장 늙은 염소를 따라갔음에도 길을 잃었다 → 가장 늙은 염소도 길을 몰랐음을 암시 → 참.',
               '따라서 참인 진술은 (1)과 (4).',
@@ -991,11 +991,11 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: "According to the passage, what does 'it' in line 6 refer to?",
           answer: 'It refers to the salt (in the sacks).',
           solution: {
-            method: "'it'이 가리키는 명사를 같은 문장/앞 문장에서 찾는다.",
+            method: "Find the noun that 'it' refers to in the same sentence or the sentence before it.",
             steps: [
               '해당 줄: "The size of the sacks shrunk as the salt in them reduced tremendously. Most of it had dissolved in the water."',
-              "'it'은 바로 앞에 언급된 'the salt'을 가리킨다.",
-              "완전한 문장으로: \"'it' refers to the salt.\"",
+              "'it' refers to 'the salt' that was mentioned just before.",
+              "Write as a complete sentence: \"'it' refers to the salt.\"",
             ],
             tip: '대명사 it은 바로 앞 문장의 단수 사물 명사(여기서는 salt)를 가리키는 경우가 많습니다.',
           },
@@ -1007,7 +1007,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: "Which word in paragraph 5 has the same meaning as 'completely wet'?",
           answer: 'drenched',
           solution: {
-            method: "'completely wet'(완전히 젖은)과 같은 뜻의 단어를 5단락에서 찾는다.",
+            method: "Find a word in paragraph 5 that means the same as 'completely wet'.",
             steps: [
               '5단락: "...the merchant removed the sacks of cotton and led the drenched donkey out of the river."',
               '"drenched" = 완전히 젖은 → 정확히 일치.',
@@ -1049,9 +1049,9 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             '(a) False — The donkey fell into the river accidentally on the FIRST day (not the second day); on the second day, he fell on purpose (deliberately, as a trick).\n' +
             '(b) True — After the merchant taught him a lesson with the heavy cotton sacks, the donkey was embarrassed and never tried to be lazy again.',
           solution: {
-            method: '각 단락이 가리키는 "며칠째"인지 정확히 확인한다.',
+            method: '각 단락이 가리키는 "for several days"인지 정확히 확인한다.',
             steps: [
-              '(a) 2단락(첫째 날): "Then the donkey tripped and fell into the water."(우연한 사고) → 첫째 날에 일어남. 3단락(둘째 날): "fell into the water on purpose"(고의로) → 둘째 날은 고의였음. 따라서 "둘째 날에 우연히 빠졌다"는 거짓(False).',
+              '(a) 2단락(첫째 날): "Then the donkey tripped and fell into the water."(우연한 사고) → 첫째 날에 일어남. 3단락(둘째 날): "fell into the water on purpose"(고의로) → 둘째 날은 고의였음. 따라서 "accidentally fell in on the second day"는 거짓(False).',
               '(b) 마지막 단락: "After that incident, the donkey never tried to be lazy again." → 교훈을 얻었음이 명확함 → 참(True).',
               '각 답에 지문에서 찾은 근거(이유)를 함께 적는다.',
             ],
@@ -1068,7 +1068,7 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: '소금과 목화의 성질 차이를 비교해 상인의 의도를 추론한다.',
             steps: [
-              '소금은 물에 녹아 가벼워지지만(2단락), 목화는 물을 흡수해 "세 배나 더 무거워진다"(5단락: "three times heavier than before because the cotton absorbed water").',
+              '소금은 물에 녹아 가벼워지지만(2단락), 목화는 물을 흡수해 "becomes three times heavier"(5단락: "three times heavier than before because the cotton absorbed water").',
               '당나귀는 이전처럼 짐이 가벼워질 것이라 기대하고 또 일부러 물에 빠졌지만, 목화 때문에 오히려 훨씬 무거워져 고생했다.',
               '이는 게으름을 피우려 한 당나귀에게 교훈을 주기 위한 상인의 의도된 함정이었다.',
               '두 재료의 물 흡수 성질 차이와 그로 인한 결과를 모두 포함해 답한다.',

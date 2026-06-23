@@ -47,7 +47,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           'go의 과거형은 went.',
           '따라서 "our family went to the beach" → 정답 (3) went.',
         ],
-        tip: '"last + 시간 표현"(last weekend/night/year)은 과거시제의 신호입니다.',
+        tip: '"last + time expression"(last weekend/night/year)은 과거시제의 신호입니다.',
       },
     },
     {
@@ -69,7 +69,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
         method: '"when ~ blew"(과거의 한 순간)와 동시에 진행 중이던 동작, 주어의 수를 본다.',
         steps: [
           '"when a strong gust of wind blew it down" — 바람이 분 것은 과거의 한 순간.',
-          '그 순간 남자들은 텐트를 치는 "중"이었다 → 과거진행형.',
+          '그 순간 남자들은 텐트를 치는 "among / in the middle of"이었다 → 과거진행형.',
           '주어 "The men"은 복수 → "were pitching" → 정답 (4).',
         ],
         tip: '과거의 한 순간에 진행 중인 동작은 주어의 수에 맞춰 was/were + -ing로 씁니다.',
@@ -91,9 +91,9 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"shocked to + 동사원형"(~해서 충격을 받다) 구문을 본다.',
+        method: '"shocked to + base verb"(~해서 충격을 받다) 구문을 본다.',
         steps: [
-          '"was shocked to + 동사원형"은 "~하고서 충격을 받았다"는 뜻의 정해진 구문.',
+          '"was shocked to + base verb"은 "was shocked after doing something"는 뜻의 정해진 구문.',
           'to 뒤에는 동사원형이 와야 한다.',
           '따라서 "shocked to find"(발견하고 충격받음) → 정답 (1) find.',
         ],
@@ -116,13 +116,13 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '강 "옆/근처"에서 낚시하는 위치를 나타내는 전치사를 고른다.',
+        method: '강 "beside / near"에서 낚시하는 위치를 나타내는 전치사를 고른다.',
         steps: [
           '낚시는 보통 강가(강 옆)에서 한다.',
           '"by the river" = 강가에서/강 옆에서.',
           'on(강 위, 배를 타고 있다면 가능하나 일반적이지 않음)/under(강 아래)/around(강 주변을 둘러서)는 덜 자연스럽다 → 정답 (1) by.',
         ],
-        tip: '"by the river/sea"는 "강가에서/바닷가에서"라는 뜻으로 자주 쓰입니다.',
+        tip: '"by the river/sea"는 "at the riverside / at the seaside"라는 뜻으로 자주 쓰입니다.',
       },
     },
     {
@@ -196,11 +196,11 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"좋은 조언을 해준다"는 특징에 맞는 직유를 고른다.',
+        method: '"gives good advice"는 특징에 맞는 직유를 고른다.',
         steps: [
           '"He gives all his grandchildren good advice." — 좋은 조언 = 지혜로움.',
           '"as wise as an owl" = 올빼미처럼 지혜로운.',
-          'fast(빠른)/busy(바쁜)/cunning(교활한)은 "조언을 잘 해줌"과 안 맞는다 → 정답 (3).',
+          'fast(빠른)/busy(바쁜)/cunning(교활한)은 "good at giving advice"과 안 맞는다 → 정답 (3).',
         ],
         tip: '"as wise as an owl"은 지혜로운 사람을 묘사하는 정해진 직유입니다.',
       },
@@ -250,7 +250,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
         steps: [
           '구슬들을 모아 손목에 묶었다 → 실에 꿴 구슬 줄.',
           '"a string of beads" = 구슬을 꿴 줄(목걸이/팔찌 형태) → 가장 자연스럽다.',
-          'bottle(병)/bunch(다발, 보통 과일·꽃)/collection(수집품)은 "묶어서 손목에 차는" 모양과 덜 맞는다 → 정답 (1) string.',
+          'bottle(병)/bunch(다발, 보통 과일·꽃)/collection(수집품)은 "tied together and worn around the wrist" 모양과 덜 맞는다 → 정답 (1) string.',
         ],
         tip: '"a string of beads/pearls"는 구슬을 실에 꿴 줄을 가리키는 정해진 표현입니다.',
       },
@@ -272,11 +272,11 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"약하고 도움이 필요한 상태"를 나타내는 부사를 고른다.',
+        method: '"weak and in need of help"를 나타내는 부사를 고른다.',
         steps: [
           '"The weak kitten"(약한 새끼고양이)이 좁은 구멍에서 나오지 못해 야옹거렸다.',
           '"helplessly" = 무력하게, 도움을 청하듯 → 약한 새끼고양이의 상태와 정확히 일치.',
-          'loudly(크게)/gracefully(우아하게)/wonderfully(멋지게)는 "약하고 곤란한 상황"과 안 맞는다 → 정답 (3) helplessly.',
+          'loudly(크게)/gracefully(우아하게)/wonderfully(멋지게)는 "weak and in a difficult situation"과 안 맞는다 → 정답 (3) helplessly.',
         ],
         tip: '"weak"(약한)이라는 형용사가 부사(helplessly)의 의미를 알려주는 단서입니다.',
       },
@@ -298,11 +298,11 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"도망갈 수 없게 가두다"는 의미에 맞는 동사를 고른다.',
+        method: '"to trap so that one cannot escape"는 의미에 맞는 동사를 고른다.',
         steps: [
           '"so that the prey cannot escape"(먹이가 도망갈 수 없도록) — 가두는 동작.',
           '"trap" = 가두다/덫에 걸리게 하다 → 거미줄로 먹이를 가두는 것과 정확히 일치.',
-          'kill(죽이다)/wrap(감싸다)/cover(덮다)는 "도망 못 가게 하다"는 의미를 직접 담지 않는다 → 정답 (2) trap.',
+          'kill(죽이다)/wrap(감싸다)/cover(덮다)는 "to prevent from escaping"는 의미를 직접 담지 않는다 → 정답 (2) trap.',
         ],
         tip: '"trap"은 거미줄·덫처럼 무언가를 가두어 빠져나가지 못하게 하는 동작입니다.',
       },
@@ -354,19 +354,19 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
             { label: '1', text: "Hello, who's there." },
             { label: '2', text: '"Hello, who\'s there.' },
             { label: '3', text: 'Hello, who\'s there"?' },
-            { label: '4', text: '"Hello, who\'s there?' },
+            { label: '4', text: '"Hello, who's there?'  },
           ],
           answer: '4',
           solution: {
-            method: '인용된 질문의 큰따옴표 위치와 끝맺음 부호(물음표)를 확인한다.',
+            method: 'Check the position of the double quotation marks and the ending punctuation mark (question mark) in the quoted question.',
             steps: [
-              '말한 내용은 질문이므로 마지막에 물음표(?)가 필요하다.',
-              '직접 인용은 여는 큰따옴표(")로 시작해야 한다.',
+              'The spoken words are a question, so a question mark (?) is needed at the end.',
+              'A direct quote uses an opening double quotation mark (")로 시작해야 한다.',
               '(1)은 따옴표가 없고 마침표로 끝남, (2)는 따옴표는 있지만 마침표로 끝남, (3)은 여는 따옴표가 없고 물음표 위치가 잘못됨.',
               '(4)는 여는 큰따옴표와 물음표가 올바른 위치에 있음 → 정답 (4). (공식 정답표 확인됨)',
             ],
             tip:
-              '직접 인용한 질문은 "큰따옴표로 시작 + 물음표로 끝남"이 기본 규칙입니다.',
+              '직접 인용한 질문은 "Starts with opening quotation marks + ends with a question mark"이 기본 규칙입니다.',
           },
         },
       ],
@@ -399,10 +399,10 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           stem: 'He told Reindeer, "These fruit are (14) ________. Don\'t tell anyone about it."',
           answer: 'ours',
           solution: {
-            method: 'Penguin이 발견한 과일을 Reindeer와 "함께" 가진 비밀로 표현하는 소유대명사를 고른다.',
+            method: 'Penguin이 발견한 과일을 Reindeer와 "Together" 가진 비밀로 표현하는 소유대명사를 고른다.',
             steps: [
               'Penguin은 Reindeer에게만 이 사실을 말하고("Don\'t tell anyone about it") 둘만의 비밀로 한다.',
-              '"이 과일은 우리(둘)의 것"이라는 의미로 "ours"가 자연스럽다.',
+              '"This fruit belongs to both of us"이라는 의미로 "ours"가 자연스럽다.',
               '뒤에서 Reindeer가 다른 동물들 앞에서 "mine"이라고 자랑하는 것과 대조되어 이야기가 자연스럽게 이어진다 → 정답 ours.',
             ],
             tip: '비밀을 공유하는 두 사람을 가리킬 때는 "ours"(우리의 것)를 씁니다.',
@@ -422,7 +422,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
               'Reindeer는 단수 남성으로 취급되므로(이야기 끝의 "his ears" 참고) 소유격은 "his".',
               '따라서 "his promise" → 정답 his.',
             ],
-            tip: '명사 앞의 소유격은 "누구의 것인지"를 나타냅니다(Reindeer → his promise).',
+            tip: '명사 앞의 소유격은 "Whose it belongs to"를 나타냅니다(Reindeer → his promise).',
           },
         },
         {
@@ -434,8 +434,8 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           solution: {
             method: '다른 동물들이 Reindeer에게 직접 묻는 말의 소유대명사를 고른다.',
             steps: [
-              '다른 동물들이 Reindeer에게 "이게 다 네 것이니?"라고 묻고 있다.',
-              '상대(Reindeer)에게 "네 것이니?"라고 물을 때는 "yours".',
+              '다른 동물들이 Reindeer에게 "Is all of this yours?"라고 묻고 있다.',
+              '상대(Reindeer)에게 "Is it yours?"라고 물을 때는 "yours".',
               '따라서 "Are all these yours?" → 정답 yours.',
             ],
             tip: '상대방의 소유를 물을 때는 "Is/Are this/these yours?"를 씁니다.',
@@ -450,7 +450,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           solution: {
             method: 'Reindeer가 자기 자신의 것이라고 자랑하는 소유대명사를 고른다.',
             steps: [
-              'Reindeer는 (사실 Penguin과 나눈 비밀임에도) 모든 과일이 "자기 것"이라고 자랑한다.',
+              'Reindeer는 (사실 Penguin과 나눈 비밀임에도) 모든 과일이 "One's own"이라고 자랑한다.',
               '자기 자신의 것을 가리키는 소유대명사는 "mine".',
               '따라서 "they\'re all mine" → 정답 mine. (남은 hers/theirs는 사용되지 않음)',
             ],
@@ -484,7 +484,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           stem: 'He was (18) ________ and was often picked on by Max, the class bully.',
           answer: 'timid',
           solution: {
-            method: '"자신감이 적은 소심한 소년"을 나타내는 형용사를 고른다.',
+            method: '"A shy boy who is not very confident"을 나타내는 형용사를 고른다.',
             steps: [
               '앞 문장: "Andy was a shy boy with little confidence."',
               '"timid" = 소심한, 겁이 많은 → shy와 같은 의미.',
@@ -500,7 +500,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           stem: 'Sarah was (19) ________ and not afraid to stand up to him.',
           answer: 'courageous',
           solution: {
-            method: '"맞서기를 두려워하지 않는다"는 의미에 맞는 형용사를 고른다.',
+            method: '"Not afraid to stand up against"는 의미에 맞는 형용사를 고른다.',
             steps: [
               '"not afraid to stand up to him"(그에게 맞서기를 두려워하지 않음) → 용감함.',
               '"courageous" = 용감한 → 정확히 일치.',
@@ -532,7 +532,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           stem: 'She (21) ________ marched up to Max and told him to stop bullying others.',
           answer: 'instantly',
           solution: {
-            method: '"지체 없이 즉시" 행동했음을 나타내는 부사를 고른다.',
+            method: '"Right away, without any delay" 행동했음을 나타내는 부사를 고른다.',
             steps: [
               '앞 문장: "Sarah did not waste any time."(시간을 낭비하지 않았다) → 즉시 행동함을 강조.',
               '"instantly" = 즉시, 곧바로 → "instantly marched up to Max"가 자연스럽다.',
@@ -618,7 +618,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
             steps: [
               '"\'Let the mouse go!\' snarled Lion. Instantly, Fox released Mouse from his hold."',
               'Fox가 Mouse를 놓아준 것은 Lion의 명령(Let the mouse go!) 때문이다.',
-              'Fox가 긴장한 것(appeared nervous)은 Lion을 본 직후의 반응이지, 풀어준 직접적 "이유"는 Lion의 지시이다 → 정답 (3).',
+              'Fox가 긴장한 것(appeared nervous)은 Lion을 본 직후의 반응이지, 풀어준 직접적 "Reason"는 Lion의 지시이다 → 정답 (3).',
             ],
             tip: '"Instantly" 바로 앞 문장(직접적인 명령/사건)이 결과의 원인임을 나타냅니다.',
           },
@@ -638,7 +638,7 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
             method: '6단락에서 Lion이 웃은 이유에 해당하는 표현을 정확히 찾는다.',
             steps: [
               '6단락: "Lion just laughed and said that Mouse was too small to help someone like him."',
-              '"too small to help"는 몸집(크기/힘)이 작아서 도울 수 없다는 의미 → "강하지 않다(not strong enough)"와 연결된다.',
+              '"too small to help"는 몸집(크기/힘)이 작아서 도울 수 없다는 의미 → "Not strong enough"와 연결된다.',
               '"talented"(재능)나 "never need help"는 본문의 "too small"과 직접 연결되지 않는다 → 정답 (3).',
             ],
             tip: '"too small to help"는 신체적 크기/힘 부족을 가리키므로 "not strong enough"와 짝지어집니다.',
@@ -658,11 +658,11 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           solution: {
             method: '7단락에서 사냥꾼의 목적과 동물들이 돕지 않은 진짜 이유를 확인한다.',
             steps: [
-              '(a) "They wanted to trap and sell the animals as pets to people in other countries." — 음식이 아니라 애완동물로 팔기 위함 → 진술 "음식을 위해 죽이지 않았다"는 참(True).',
-              '(b) "they were scared that they would be caught by the hunters, except for Mouse." — 동물들이 두려워한 대상은 "사냥꾼"이지 "Lion"이 아니다 → 진술은 거짓(False).',
+              '(a) "They wanted to trap and sell the animals as pets to people in other countries." — 음식이 아니라 애완동물로 팔기 위함 → 진술 "Did not kill for food"는 참(True).',
+              '(b) "they were scared that they would be caught by the hunters, except for Mouse." — 동물들이 두려워한 대상은 "Hunter"이지 "Lion"이 아니다 → 진술은 거짓(False).',
               '각 답에 지문에서 찾은 근거를 이유로 함께 적는다.',
             ],
-            tip: '"because they were afraid of him(Lion)"처럼 두려움의 "대상"이 바뀌어 있는 함정 문장에 주의하세요.',
+            tip: '"because they were afraid of him(Lion)"처럼 두려움의 "Target"이 바뀌어 있는 함정 문장에 주의하세요.',
           },
         },
         {
@@ -698,11 +698,11 @@ export const review1MahaBodhiEnglish2024: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '"방법을 생각해냈다(thought of a way)"는 표현에 맞는 성격을 고른다.',
+            method: '"thought of a way (came up with a way)"는 표현에 맞는 성격을 고른다.',
             steps: [
               '"thought of a way to help"는 아이디어/해결책을 생각해낸 것 → 영리함/지혜로움.',
-              '"intelligent" = 영리한, 똑똑한 → "생각해내다"라는 행위와 가장 직접적으로 연결된다.',
-              'kind(친절한)/brave(용감한)는 행동의 동기나 태도를 나타내지만, "생각해내는 능력"을 직접 가리키지는 않는다 → 정답 (3) intelligent.',
+              '"intelligent" = 영리한, 똑똑한 → "to think of / to come up with"라는 행위와 가장 직접적으로 연결된다.',
+              'kind(친절한)/brave(용감한)는 행동의 동기나 태도를 나타내지만, "the ability to think of ideas / the ability to come up with ideas"을 직접 가리키지는 않는다 → 정답 (3) intelligent.',
             ],
             tip: '"thought of a way"(아이디어를 떠올림)는 보통 intelligent/clever와 짝지어집니다.',
           },
