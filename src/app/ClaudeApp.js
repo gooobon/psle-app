@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 
 import {
   buildPlan, buildZhPlan, buildZhPastPaperPlan, buildPastPaperPlan,
-  recommendLevel, selectPastPaper,
+  recommendLevel, recommendSectionLevels, selectPastPaper,
   pickQuestionsForSchool, getSchoolProfile,
   DEFAULT_SETTINGS,
 } from '@/lib/dataEngine';
@@ -54,48 +54,19 @@ const SEED_USERS = {
   },
 };
 
-// ── Persistent store using localStorage ─────────────────────
-// Users and progress survive page refreshes, deployments, and browser restarts
-const LS_USERS_KEY    = "genius_users_v2";
-const LS_PROGRESS_KEY = "genius_progress_v2";
-
-function _loadFromLS(key, fallback){
-  try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
-  catch(e){ return fallback; }
+// Initialise store — preserve existing session data, seed missing accounts
+if(!window._GENIUS_STORE){
+  window._GENIUS_STORE = { users:{}, progress:{} };
 }
-function _saveToLS(key, val){
-  try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){}
-}
+const STORE = window._GENIUS_STORE;
 
-// Load persisted data
-const _persistedUsers    = _loadFromLS(LS_USERS_KEY, {});
-const _persistedProgress = _loadFromLS(LS_PROGRESS_KEY, {});
-
-// Build in-memory store seeded from localStorage
-const STORE = {
-  users:    { ..._persistedUsers },
-  progress: { ..._persistedProgress },
-};
-
-// Merge seed users (never overwrite a user already in localStorage)
+// Merge seed users (never overwrite a user already registered this session)
 Object.entries(SEED_USERS).forEach(([id, u])=>{
   if(!STORE.users[id]) STORE.users[id] = {...u};
 });
-// Always persist merged seed users
-_saveToLS(LS_USERS_KEY, STORE.users);
 
 function storeGet(key)   { return STORE[key]; }
 function storeSet(key, v){ STORE[key] = v; }
-
-// Save users to localStorage whenever changed
-function persistUsers(){
-  _saveToLS(LS_USERS_KEY, STORE.users);
-}
-// Save progress to localStorage whenever changed
-function persistProgressLS(key, data){
-  STORE.progress[key] = data;
-  _saveToLS(LS_PROGRESS_KEY, STORE.progress);
-}
 
 function allUsers(){ return Object.values(STORE.users); }
 
@@ -122,7 +93,11 @@ function getProgress(userId, grade, subject){
 
 function setProgress(userId, grade, subject, data){
   const key = `${userId}_${grade}_${subject}`;
-  persistProgressLS(key, data);
+  STORE.progress[key] = data;
+  // Persist to IndexedDB for survival across tab closes
+  if(typeof persistProgress === 'function'){
+    persistProgress(userId, grade, subject, data);
+  }
 }
 
 function makeSeedHistory(userId){
@@ -851,7 +826,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   if(inSession) return(
     <Wrap>
       <SessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history))}
+        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         onFinish={handleSessionDone}
@@ -1569,13 +1544,33 @@ function App(){
   const [auth,    setAuth]    = useState(null);   // { role, user }
   const [tick,    setTick]    = useState(0);       // force re-render after store mutations
   
-  // Data is loaded from localStorage at startup — no async needed
+  // On mount: load persisted progress from IndexedDB back into STORE
+  React.useEffect(()=>{
+    (async()=>{
+      try {
+        const db = await getDB();
+        const tx = db.transaction('progress','readonly');
+        const store = tx.objectStore('progress');
+        const allKeys = await new Promise((res,rej)=>{
+          const req = store.getAllKeys();
+          req.onsuccess = ()=>res(req.result);
+          req.onerror   = ()=>rej(req.error);
+        });
+        for(const key of allKeys){
+          if(!STORE.progress[key]){
+            const val = await dbGet('progress', key);
+            if(val) STORE.progress[key] = val;
+          }
+        }
+        if(allKeys.length > 0) setTick(t=>t+1);
+      } catch(e){ /* IndexedDB not available — no problem */ }
+    })();
+  },[]);
 
   function refresh(){ setTick(t=>t+1); }
 
   function handleSignup(role, userData){
     STORE.users[userData.id] = {...userData, role};
-    persistUsers();
     setAuth({role, user:userData});
   }
   function handleLogin(role, user){ 
