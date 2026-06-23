@@ -507,8 +507,7 @@ export const eoyNanHuaHigherPaper2_2025: EOYQuestion[] = [
     difficulty: "stretch",
     setLabel: "Nan Hua EOY Paper 2 - 六、组句成段",
     passage:
-      "Arrange the sentences in the correct order and write the correct number in the brackets.
-(1) 小明和小华不小心弄脏了邻居的鞋。← This is already given as sentence 1 (the beginning of the story).",
+      "Arrange the sentences in the correct order and write the correct number in the brackets.\n(1) 小明和小华不小心弄脏了邻居的鞋。← This is already given as sentence 1 (the beginning of the story).",
     wordBank: [
       "(1) 小明和小华不小心弄脏了邻居的鞋。",
       "小明想了想，明白自己做得不对。",
