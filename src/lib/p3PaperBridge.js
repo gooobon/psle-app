@@ -244,11 +244,16 @@ export function englishPaperToPlan(
   schoolName,
   pickByLevel,
   pickQuestionsForSchool,
+  sectionLevels,
 ) {
   const buckets = normalizeEnglishQuestions(paper.questions || []);
   const s = settings || {};
   const sIdx = sessionNum ? (sessionNum - 1) % 10 : 0;
   const sections = [];
+
+  // Per-section level: use sectionLevels[type] if available, else overall level
+  const lvl = (type) =>
+    (sectionLevels && sectionLevels[type]) ? sectionLevels[type] : (level || "medium");
 
   const gmAll = buckets.GrammarMCQ.length
     ? pickQuestionsForSchool(buckets.GrammarMCQ, schoolName, buckets.GrammarMCQ.length)
@@ -258,14 +263,14 @@ export function englishPaperToPlan(
     : [];
 
   const gmItems = gmAll.length
-    ? pickByLevel(gmAll, level, sessionNum, Math.min(10, gmAll.length))
+    ? pickByLevel(gmAll, lvl("GrammarMCQ"), sessionNum, Math.min(10, gmAll.length))
     : buckets.GrammarMCQ.slice(0, 10);
   const vmItems = vmAll.length
-    ? pickByLevel(vmAll, level, sessionNum, Math.min(10, vmAll.length))
+    ? pickByLevel(vmAll, lvl("VocabMCQ"), sessionNum, Math.min(10, vmAll.length))
     : buckets.VocabMCQ.slice(0, 10);
 
-  if (gmItems.length) sections.push({ type: "GrammarMCQ", items: gmItems });
-  if (vmItems.length) sections.push({ type: "VocabMCQ", items: vmItems });
+  if (gmItems.length) sections.push({ type: "GrammarMCQ", items: gmItems, level: lvl("GrammarMCQ") });
+  if (vmItems.length) sections.push({ type: "VocabMCQ", items: vmItems, level: lvl("VocabMCQ") });
 
   ["GrammarCloze", "VocabCloze", "Editing", "Comprehension"].forEach((type) => {
     const sets = buckets[type];
@@ -273,7 +278,7 @@ export function englishPaperToPlan(
     const maxSets = s[type]?.sets || 1;
     const chosen = [];
     for (let i = 0; i < maxSets; i++) chosen.push(sets[(sIdx + i) % sets.length]);
-    sections.push({ type, sets: maxSets, items: chosen });
+    sections.push({ type, sets: maxSets, items: chosen, level: lvl(type) });
   });
 
   sections.paperMeta = paper.meta;
