@@ -1303,7 +1303,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
                     </div>
                   </div>
                   <span style={{color:"#94A3B8",fontSize:16,
-                    transform:isOpen?"rotate(90deg)":"none",transition:"transform \.2s"}}></span>
+                    transform:isOpen?"rotate(90deg)":"none",transition:"transform .2s"}}>{">"}</span>
                 </button>
 
                 {isOpen&&(
