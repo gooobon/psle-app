@@ -891,6 +891,20 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
     return String(s || '').trim().toLowerCase().replace(/[.,!?'"]/g, '');
   }
 
+  // Colored CORRECT / INCORRECT pill shown after submit.
+  function verdictBadge(ok) {
+    return (
+      <span style={{ display: 'inline-block', marginTop: 8,
+        fontFamily: EX.sans, fontSize: 11, fontWeight: 800,
+        letterSpacing: '.5px', padding: '3px 10px', borderRadius: 999,
+        background: ok ? '#DCFCE7' : '#FEE2E2',
+        color: ok ? '#15803D' : '#B91C1C',
+        border: `1px solid ${ok ? '#16A34A' : '#DC2626'}` }}>
+        {ok ? 'CORRECT' : 'INCORRECT'}
+      </span>
+    );
+  }
+
   function isAutoGraded(q) {
     return ['mcq','ab_circle','true_false','sequence','fill_blank','fill_word'].includes(getFormat(q));
   }
@@ -1036,17 +1050,22 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
                 outline: 'none', background: 'transparent' }} />
           ) : (
             <div>
-              <span style={{ fontFamily: EX.font, fontSize: 14 }}>
-                <u>{val || '(blank)'}</u>
+              <span style={{ fontFamily: EX.font, fontSize: 14,
+                background: ok ? '#DCFCE7' : '#FEE2E2',
+                padding: '2px 8px', borderRadius: 4,
+                borderBottom: `2px solid ${ok ? '#16A34A' : '#DC2626'}` }}>
+                {val || '(blank)'}
               </span>
-              <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700,
-                color: ok ? '#1a6b2e' : '#9b1c1c', marginTop: 6 }}>
-                {ok ? 'CORRECT' : 'INCORRECT'}
-              </div>
+              {verdictBadge(ok)}
               {bad && q.answer && (
-                <div style={{ marginTop: 4, border: EX.thin, padding: '6px 12px',
-                  fontFamily: EX.font, fontSize: 14 }}>
-                  {q.answer}
+                <div style={{ marginTop: 4 }}>
+                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                    color: '#16A34A', marginRight: 6 }}>Answer:</span>
+                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700,
+                    background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
+                    border: '1px solid #16A34A', color: '#14532D' }}>
+                    {q.answer}
+                  </span>
                 </div>
               )}
             </div>
@@ -1069,18 +1088,23 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
                 padding: '8px 12px', fontSize: 14, fontFamily: EX.font, outline: 'none' }} />
           ) : (
             <div>
-              <div style={{ display: 'inline-block', border: EX.thin, padding: '5px 12px',
-                fontFamily: EX.font, fontSize: 14, maxWidth: 280 }}>
+              <div style={{ display: 'inline-block', padding: '5px 12px',
+                fontFamily: EX.font, fontSize: 14, maxWidth: 280, borderRadius: 6,
+                background: ok ? '#DCFCE7' : '#FEE2E2',
+                border: `1.5px solid ${ok ? '#16A34A' : '#DC2626'}`,
+                color: ok ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
                 {val || '(blank)'}
               </div>
-              <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700,
-                color: ok ? '#1a6b2e' : '#9b1c1c', marginTop: 6 }}>
-                {ok ? 'CORRECT' : 'INCORRECT'}
-              </div>
+              {verdictBadge(ok)}
               {bad && q.answer && (
-                <div style={{ marginTop: 4, border: EX.thin, padding: '6px 12px',
-                  fontFamily: EX.font, fontSize: 14 }}>
-                  {q.answer}
+                <div style={{ marginTop: 4 }}>
+                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                    color: '#16A34A', marginRight: 6 }}>Answer:</span>
+                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700,
+                    background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
+                    border: '1px solid #16A34A', color: '#14532D' }}>
+                    {q.answer}
+                  </span>
                 </div>
               )}
             </div>
@@ -1401,7 +1425,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
   }
 
   // -------------------------------------------------
-  // Evidence box (post-submit, black-and-white exam style)
+  // Evidence box (post-submit) -- colored & icon-coded for readability.
+  // Evidence (purple) and Trap (amber) are emphasized most strongly.
   // -------------------------------------------------
   function renderEvidenceBox(q) {
     if (!submitted) return null;
@@ -1414,14 +1439,34 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
     const steps          = sol.steps          || [];
     if (!tip && !evidence && !trap && !answerFormat && !steps.length) return null;
 
-    function exBox(label, content, clickable) {
+    // Generic colored callout box. `accent` is the left bar + label color,
+    // `bg` is the soft background, `strong` raises border weight (for emphasis).
+    function callout({ label, icon, accent, bg, content, clickable, strong }) {
       return (
         <div key={label}
           onClick={clickable ? () => setActiveQ(q.id) : undefined}
-          style={{ border: '1px solid #bbb', padding: '9px 12px', fontSize: 13,
-            marginBottom: 8, cursor: clickable ? 'pointer' : 'default', fontFamily: EX.font }}>
-          <div style={{ fontFamily: EX.sans, fontWeight: 700, fontSize: 11,
-            textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 4 }}>
+          style={{
+            background: bg,
+            border: `1px solid ${strong ? accent : '#E5E7EB'}`,
+            borderLeft: `${strong ? 5 : 4}px solid ${accent}`,
+            borderRadius: 8,
+            padding: '10px 14px',
+            fontSize: 13,
+            marginBottom: 8,
+            cursor: clickable ? 'pointer' : 'default',
+            fontFamily: EX.font,
+          }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6,
+            fontFamily: EX.sans, fontWeight: 800, fontSize: 11,
+            textTransform: 'uppercase', letterSpacing: '.5px',
+            color: accent, marginBottom: 5 }}>
+            <span aria-hidden="true" style={{
+              display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
+              width: 16, height: 16, borderRadius: '50%',
+              background: accent, color: '#fff', fontSize: 10, fontWeight: 900,
+              fontFamily: EX.sans, flexShrink: 0 }}>
+              {icon}
+            </span>
             {label}
           </div>
           {content}
@@ -1430,26 +1475,70 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
     }
 
     return (
-      <div style={{ marginTop: 12, borderTop: '1px solid #ccc', paddingTop: 12 }}>
-        {tip && exBox('Tip', <div>{tip}</div>)}
-        {evidence && exBox('Where to find it',
-          <div>
-            <div style={{ borderLeft: '3px solid #1a1a1a', paddingLeft: 9, fontStyle: 'italic', marginBottom: 4 }}>
-              "{evidence}"
+      <div style={{ marginTop: 12, borderTop: '1px solid #E5E7EB', paddingTop: 12 }}>
+        {/* EVIDENCE -- purple, emphasized (priority 1) */}
+        {evidence && callout({
+          label: 'Where to find it', icon: 'F', accent: '#7C3AED',
+          bg: '#F5F3FF', strong: true, clickable: true,
+          content: (
+            <div>
+              <div style={{ borderLeft: '3px solid #7C3AED', paddingLeft: 10,
+                fontStyle: 'italic', marginBottom: 4, color: '#4C1D95' }}>
+                "{evidence}"
+              </div>
+              <div style={{ fontFamily: EX.sans, fontSize: 11, color: '#7C3AED', fontWeight: 600 }}>
+                Tap to highlight in the passage
+              </div>
             </div>
-            <div style={{ fontFamily: EX.sans, fontSize: 11, color: EX.faint }}>
-              Tap to highlight in the passage
+          ),
+        })}
+
+        {/* TRAP -- amber, emphasized (priority 2) */}
+        {trap && callout({
+          label: 'Trap to avoid', icon: '!', accent: '#D97706',
+          bg: '#FFFBEB', strong: true,
+          content: (
+            <div style={{ color: '#92400E' }}>
+              <span style={{ fontWeight: 700 }}>"{trap}"</span>
+              {trapExplanation ? ' -- ' + trapExplanation : ''}
             </div>
-          </div>, true
-        )}
-        {trap && exBox('Trap to avoid',
-          <div>"{trap}"{trapExplanation ? ' -- ' + trapExplanation : ''}</div>
-        )}
-        {answerFormat && exBox('Answer format', <div>{answerFormat}</div>)}
+          ),
+        })}
+
+        {/* TIP -- blue, soft */}
+        {tip && callout({
+          label: 'Tip', icon: 'i', accent: '#2563EB',
+          bg: '#EFF6FF',
+          content: <div style={{ color: '#1E3A5F' }}>{tip}</div>,
+        })}
+
+        {/* ANSWER FORMAT -- teal, soft */}
+        {answerFormat && callout({
+          label: 'Answer format', icon: 'A', accent: '#0D9488',
+          bg: '#F0FDFA',
+          content: <div style={{ color: '#134E4A' }}>{answerFormat}</div>,
+        })}
+
+        {/* STEPS -- neutral gray, numbered chips */}
         {steps.length > 0 && (
-          <div style={{ fontFamily: EX.font, fontSize: 13, paddingLeft: 4 }}>
+          <div style={{ background: '#F8FAFC', border: '1px solid #E5E7EB',
+            borderRadius: 8, padding: '10px 14px', fontFamily: EX.font, fontSize: 13 }}>
+            <div style={{ fontFamily: EX.sans, fontWeight: 800, fontSize: 11,
+              textTransform: 'uppercase', letterSpacing: '.5px',
+              color: '#64748B', marginBottom: 6 }}>
+              How to work it out
+            </div>
             {steps.map((step, i) => (
-              <div key={i} style={{ marginBottom: 3 }}>{i + 1}. {step}</div>
+              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start',
+                marginBottom: i < steps.length - 1 ? 5 : 0 }}>
+                <span style={{ flexShrink: 0, width: 18, height: 18, borderRadius: '50%',
+                  background: '#475569', color: '#fff', fontFamily: EX.sans,
+                  fontSize: 11, fontWeight: 800, display: 'inline-flex',
+                  alignItems: 'center', justifyContent: 'center', marginTop: 1 }}>
+                  {i + 1}
+                </span>
+                <span style={{ color: '#334155', lineHeight: 1.5 }}>{step}</span>
+              </div>
             ))}
           </div>
         )}
