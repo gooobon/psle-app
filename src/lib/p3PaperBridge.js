@@ -147,21 +147,36 @@ function toEnglishClozeSet(set) {
 
 function toEnglishEditSet(set) {
   const items = (set.questions || set.items || []).map((q, i) => {
-    const options = parseOptionTexts(q.options);
-    const wrongWord = q.wrongWord || q.errorWord || q.highlight || "___";
+    // Editing answers are plain strings (e.g. "together", "becomes"),
+    // NOT option indices. Never run parseAnswerIndex on them.
+    const rawAnswer = q.answer ?? q.correctAnswer ?? "";
+    const answer = String(rawAnswer);
+
+    // wrongWord: explicit field > errorWord > extract [word] from stem > fallback
+    let wrongWord = q.wrongWord || q.errorWord || q.highlight || "";
+    if (!wrongWord) {
+      const src = q.stem || q.sentence || q.question || "";
+      const m = src.match(/\[([^\]]+)\]/);
+      if (m) wrongWord = m[1];
+    }
+    wrongWord = wrongWord || "___";
+
+    // sentence: strip [ ] bracket markers for cleaner display
+    const rawSentence = q.sentence || q.stem || q.question || "";
+
     return {
-      id: q.id || `${set.id || "ed"}_${i}`,
-      sentence: q.sentence || q.stem || q.question || "",
+      id: q.id || `${set.id || "ed"}_${q.questionNo || i}`,
+      sentence: rawSentence,
       wrongWord,
-      options: options.length ? options : [q.answer].filter(Boolean),
-      answer: parseAnswerIndex(q.answer, options),
+      answer,
       hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+      solution: q.solution || null,
     };
   });
   return {
     id: set.id || "edit_set",
     setLabel: set.setLabel || set.title || set.topic || "Editing",
-    instructions: set.instructions || "Choose the correct spelling.",
+    instructions: set.instructions || "Correct the spelling or grammar error.",
     items,
   };
 }
