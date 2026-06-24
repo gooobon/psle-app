@@ -612,12 +612,12 @@ function SignupStudentForm({onSignup, onBack}){
           <button onClick={()=>selectGender("boy")} style={{flex:1,background:gender==="boy"?"linear-gradient(135deg,#3B82F6,#2563EB)":"#F1F5F9",border:gender==="boy"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="boy"?"0 6px 18px rgba(59,130,246,0.35)":"none"}}>
             <div style={{fontSize:36,marginBottom:6}}></div>
             <div style={{fontSize:15,fontWeight:900,color:gender==="boy"?"#fff":"#0F172A"}}>Boy</div>
-            <div style={{fontSize:10,color:gender==="boy"?"rgba(255,255,255,0.7)":C.muted,marginTop:2}}>Dinosaur avatars</div>
+            
           </button>
           <button onClick={()=>selectGender("girl")} style={{flex:1,background:gender==="girl"?"linear-gradient(135deg,#EC4899,#A855F7)":"#F1F5F9",border:gender==="girl"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="girl"?"0 6px 18px rgba(236,72,153,0.35)":"none"}}>
             <div style={{fontSize:36,marginBottom:6}}></div>
             <div style={{fontSize:15,fontWeight:900,color:gender==="girl"?"#fff":"#0F172A"}}>Girl</div>
-            <div style={{fontSize:10,color:gender==="girl"?"rgba(255,255,255,0.7)":C.muted,marginTop:2}}>Unicorn avatars</div>
+            
           </button>
         </div>
       </div>       <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
