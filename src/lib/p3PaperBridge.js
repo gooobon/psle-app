@@ -166,6 +166,37 @@ function toEnglishEditSet(set) {
   };
 }
 
+function detectCompFormat(q, options) {
+  // 실제 데이터에는 format 필드가 없는 경우가 많아 question 내용으로 자동 감지
+  if (q.format) return q.format;
+
+  const qText = String(q.question || q.stem || q.q || "").toLowerCase();
+  const ansStr = String(q.answer ?? "");
+
+  // MCQ: options가 있음
+  if (options && options.length >= 2) return "mcq";
+
+  // True/False + Reason
+  if ((qText.includes("true or false") || qText.includes("state whether")) && qText.includes("reason")) return "truefalse_reason";
+
+  // True/False only
+  if (ansStr.toLowerCase() === "true" || ansStr.toLowerCase() === "false") return "truefalse";
+
+  // Sequence: "write 1, 2 or 3" / "write 1, 2 and 3" / "indicate the order"
+  if (/write\s+1[,\s]+2/.test(qText) || (qText.includes("order") && /\b[123]\b/.test(qText))) return "sequence";
+
+  // Tick-choice (checkbox): has [ ] markers in question
+  if (q.question && (q.question.includes("[ ]") || q.question.includes("☐") || q.question.includes("□"))) return "tick_choice";
+
+  // Short fill: answer is 1-4 words, no newline, < 40 chars
+  if (!ansStr.includes("\n") && ansStr.split(/\s+/).length <= 4 && ansStr.length < 40 && ansStr.length > 0) return "fill_short";
+
+  // Multi-part open: answer has (i)/(ii) or \n
+  if (ansStr.includes("(i)") || ansStr.includes("(ii)") || ansStr.includes("\n")) return "open_multi";
+
+  return "open";
+}
+
 function toEnglishCompSet(set) {
   const passage =
     set.passage ||
@@ -175,33 +206,41 @@ function toEnglishCompSet(set) {
 
   const questions = (set.questions || []).map((q, i) => {
     const options = parseOptionTexts(q.options);
-    const fmt = q.format || q.questionType || (options.length > 0 ? "mcq" : "open");
+    const fmt = detectCompFormat(q, options);
 
-    // Only MCQ-type formats use parseAnswerIndex (numeric index).
-    // All other formats (open, fill, truefalse, sequence, truefalse_reason)
-    // preserve the raw string answer so CompPage can display it correctly.
-    const isMcqFmt = fmt === "mcq" || (options.length > 0 && !["open","fill","truefalse","truefalse_reason","sequence"].includes(fmt));
-    const answer = isMcqFmt
+    // MCQ: use parseAnswerIndex. All other formats: preserve raw string answer.
+    const isMcq = fmt === "mcq";
+    const answer = isMcq
       ? parseAnswerIndex(q.answer, options)
-      : (q.answer ?? q.correctAnswer ?? "");
+      : String(q.answer ?? q.correctAnswer ?? "");
 
-    // sequenceItems: extract from q.items or q.sequenceItems for sequence format
-    const sequenceItems = fmt === "sequence"
-      ? (q.sequenceItems || q.items || [])
-      : undefined;
+    // For sequence format, extract the event items from the question text
+    let sequenceItems = q.sequenceItems || q.items || null;
+    if (fmt === "sequence" && !sequenceItems && q.question) {
+      // Parse "( ) Event A. ( ) Event B." pattern
+      const matches = [...q.question.matchAll(/\(\s*\)\s*([^.(]+)/g)];
+      if (matches.length >= 2) sequenceItems = matches.map(m => m[1].trim());
+    }
+
+    // For tick_choice format, extract checkbox options from [ ] pattern
+    let tickOptions = null;
+    if (fmt === "tick_choice" && q.question) {
+      const matches = [...q.question.matchAll(/\[\s*\]\s*([^\[\n]+)/g)];
+      if (matches.length >= 2) tickOptions = matches.map(m => m[1].trim());
+    }
 
     return {
-      id:             q.id || `comp_${i}`,
-      questionNo:     q.questionNo || String(i + 1),
-      format:         fmt,
-      marks:          q.marks || 1,
-      stem:           q.stem || q.question || q.q || "",
-      question:       q.stem || q.question || q.q || "",
-      options,
+      id:            q.id || `comp_${i}`,
+      questionNo:    q.questionNo || String(i + 1),
+      format:        fmt,
+      marks:         q.marks || 1,
+      question:      q.question || q.stem || q.q || "",
+      stem:          q.question || q.stem || q.q || "",
+      options:       tickOptions || options,
       answer,
       sequenceItems,
-      hints:          q.hints || (q.solution?.tip ? [q.solution.tip] : []),
-      solution:       q.solution || null,
+      hints:         q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+      solution:      q.solution || null,
     };
   });
 
@@ -212,6 +251,7 @@ function toEnglishCompSet(set) {
     questions,
   };
 }
+
 
 function classifyEnglishItem(item) {
   const topic = item.topic || "";

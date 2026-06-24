@@ -870,7 +870,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
 
   function isAutoGraded(q) {
     const f = getFormat(q);
-    return ['mcq', 'truefalse', 'sequence', 'fill'].includes(f);
+    return ['mcq', 'truefalse', 'sequence', 'fill', 'fill_short', 'tick_choice'].includes(f);
   }
 
   function isAnswered(q) {
@@ -883,7 +883,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
     if (f === 'truefalse_reason') {
       return val !== undefined && (answers[q.id + '_reason'] || '').trim().length > 0;
     }
-    if (f === 'open' || f === 'fill') return (val || '').trim().length > 0;
+    if (f === 'open' || f === 'fill' || f === 'fill_short') return (val || '').trim().length > 0;
+    if (f === 'open_multi') return (val || '').trim().length > 0;
+    if (f === 'tick_choice') {
+      try { return JSON.parse(val || '[]').length > 0; } catch { return false; }
+    }
     return val !== undefined;
   }
 
@@ -1005,8 +1009,17 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
         return val === correct[i];
       });
     }
-    if (f === 'fill') {
+    if (f === 'fill' || f === 'fill_short') {
       return normalize(answers[q.id]) === normalize(q.answer);
+    }
+    if (f === 'tick_choice') {
+      try {
+        const selected = JSON.parse(answers[q.id] || '[]');
+        const correctList = String(q.answer || '').toLowerCase().split(/[,，]+/).map(s => s.trim());
+        const selLower = selected.map(s => s.toLowerCase());
+        return correctList.every(c => selLower.some(s => s.includes(c) || c.includes(s))) &&
+               selLower.every(s => correctList.some(c => s.includes(c) || c.includes(s)));
+      } catch { return false; }
     }
     // open / truefalse_reason: use self-check
     return selfCheck[q.id] === 'yes';
@@ -1246,9 +1259,153 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
       );
     }
 
+    // FILL SHORT — single word/short phrase (vocabulary, synonym)
+    if (f === 'fill_short') {
+      const val = answers[q.id] || '';
+      const isRight = submitted && String(val).trim().toLowerCase() === String(q.answer || '').trim().toLowerCase();
+      const isWrong = submitted && !isRight;
+      return (
+        <div>
+          {!submitted ? (
+            <input type="text" value={val}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              placeholder="Write the word or phrase..."
+              style={{ padding: '8px 12px', borderRadius: 8, fontSize: 14, fontWeight: 600,
+                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', minWidth: 200 }} />
+          ) : (
+            <div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
+                <div>
+                  <div style={{ fontSize: 10, color: '#64748B', marginBottom: 2 }}>Your answer</div>
+                  <div style={{ padding: '5px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
+                    background: isRight ? '#DCFCE7' : '#FEE2E2',
+                    border: `1.5px solid ${isRight ? '#16A34A' : '#DC2626'}`,
+                    color: isRight ? '#14532D' : '#7F1D1D' }}>
+                    {val || '(blank)'} {isRight ? '✅' : '❌'}
+                  </div>
+                </div>
+                {isWrong && (
+                  <div>
+                    <div style={{ fontSize: 10, color: '#16A34A', marginBottom: 2 }}>Answer</div>
+                    <div style={{ padding: '5px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
+                      background: '#DCFCE7', border: '1.5px solid #16A34A', color: '#14532D' }}>
+                      {String(q.answer)}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // TICK CHOICE — checkbox style (Which TWO of the following...)
+    if (f === 'tick_choice') {
+      const opts = q.options || [];
+      const correctAnswers = String(q.answer || '').toLowerCase().split(/[,，]+/).map(s => s.trim());
+      const selected = answers[q.id] ? JSON.parse(answers[q.id]) : [];
+      function toggleOpt(opt) {
+        if (submitted) return;
+        const cur = answers[q.id] ? JSON.parse(answers[q.id]) : [];
+        const idx = cur.indexOf(opt);
+        const next = idx >= 0 ? cur.filter(x => x !== opt) : [...cur, opt];
+        setAnswers(a => ({ ...a, [q.id]: JSON.stringify(next) }));
+      }
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {opts.map((opt, i) => {
+            const isSel = selected.includes(opt);
+            const isCorrect = correctAnswers.some(c => opt.toLowerCase().includes(c) || c.includes(opt.toLowerCase()));
+            const isAns = submitted && isCorrect;
+            const isWrong = submitted && isSel && !isCorrect;
+            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
+            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
+            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
+            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+            return (
+              <div key={i} onClick={() => toggleOpt(opt)}
+                style={{ display: 'flex', alignItems: 'center', gap: 10,
+                  background: bg, border: `1.5px solid ${border}`, borderRadius: 10,
+                  padding: '9px 14px', cursor: submitted ? 'default' : 'pointer',
+                  transition: 'all 0.15s' }}>
+                <div style={{ width: 20, height: 20, borderRadius: 4, flexShrink: 0,
+                  background: isSel ? '#3B82F6' : '#E2E8F0',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  {isSel && <span style={{ color: '#fff', fontSize: 12, fontWeight: 800 }}>✓</span>}
+                </div>
+                <span style={{ fontSize: 14, color: col, flex: 1 }}>{opt}</span>
+                {isAns && <span>✅</span>}
+                {isWrong && <span>❌</span>}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // OPEN MULTI — multi-part answer (i)(ii) or numbered parts
+    if (f === 'open_multi') {
+      const val = answers[q.id] || '';
+      const parts = String(q.answer || '').split('\n').filter(Boolean);
+      return (
+        <div>
+          {!submitted ? (
+            <textarea value={val} rows={Math.max(3, parts.length + 1)}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              placeholder={parts.length > 1 ? `Write all ${parts.length} parts:\n(i) ...\n(ii) ...` : 'Write your answer...'}
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
+                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+          ) : (
+            <div>
+              <div style={{ marginBottom: 8 }}>
+                <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4, fontWeight: 700 }}>Your answer:</div>
+                <div style={{ background: '#F8FAFC', border: '1.5px solid #CBD5E1',
+                  borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#334155',
+                  whiteSpace: 'pre-line', minHeight: 50 }}>
+                  {val || '(no answer)'}
+                </div>
+              </div>
+              <div style={{ marginBottom: 10 }}>
+                <div style={{ fontSize: 11, color: '#16A34A', marginBottom: 4, fontWeight: 700 }}>Model answer:</div>
+                <div style={{ background: '#DCFCE7', border: '1.5px solid #16A34A',
+                  borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#14532D',
+                  fontWeight: 600, whiteSpace: 'pre-line' }}>
+                  {String(q.answer || '—')}
+                </div>
+              </div>
+              {!selfCheck[q.id] ? (
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'yes' }))}
+                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #16A34A',
+                      background: '#F0FDF4', color: '#16A34A', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+                    ✅ I got it right
+                  </button>
+                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'no' }))}
+                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #DC2626',
+                      background: '#FEF2F2', color: '#DC2626', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
+                    ❌ I need practice
+                  </button>
+                </div>
+              ) : (
+                <div style={{ background: selfCheck[q.id] === 'yes' ? '#DCFCE7' : '#FEE2E2',
+                  border: `1px solid ${selfCheck[q.id] === 'yes' ? '#16A34A' : '#DC2626'}`,
+                  borderRadius: 8, padding: '6px 12px', fontSize: 13,
+                  color: selfCheck[q.id] === 'yes' ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
+                  {selfCheck[q.id] === 'yes' ? '✅ Self-assessed: Correct' : '❌ Self-assessed: Need practice'}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
     // OPEN (default) — short answer, vocabulary, full sentence
     const val = answers[q.id] || '';
-    const isLong = (q.stem || '').toLowerCase().includes('sentence') ||
+    const isLong = (q.stem || q.question || '').toLowerCase().includes('sentence') ||
                    (q.marks || 1) >= 2;
     return (
       <div>
