@@ -5,6 +5,7 @@
 // ============================================================================
 
 // ── WA1 imports (24) ──
+import rawTestComprehension8TypesGolden from './wa1/test_comprehension_8types_golden';
 import rawMinitest1RulangPrimaryEnglish2024 from './wa1/minitest1_rulang_primary_english_2024';
 import rawPaper2NanHuaPrimaryEnglish2023 from './wa1/paper2_nan_hua_primary_english_2023';
 import rawPracticepaper1CatholicHighPrimaryEnglish2023 from './wa1/practicepaper1_catholic_high_primary_english_2023';
@@ -159,6 +160,7 @@ export function normalizePaper(raw: unknown): NormalizedEnglishPaper {
 }
 
 export const p3EnglishWA1Papers: NormalizedEnglishPaper[] = [
+  normalizePaper(rawTestComprehension8TypesGolden),
   normalizePaper(rawMinitest1RulangPrimaryEnglish2024),
   normalizePaper(rawPaper2NanHuaPrimaryEnglish2023),
   normalizePaper(rawPracticepaper1CatholicHighPrimaryEnglish2023),
