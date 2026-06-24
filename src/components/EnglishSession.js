@@ -78,7 +78,7 @@ function MCQSection({items,sectionType,meta,onDone}){
     if(selected===null||solved||revealed) return;
     const t=Date.now()-startRef.current;
     if(selected===q.answer){ setSolved(true); setResults(r=>[...r,{id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,correctAnswer:q.answer,studentAnswer:selected,sectionType,correct:attempts===0,solvedAfterHint:attempts>0,attempts:attempts+1,timeTaken:t,flagged:guessFlag(t,sectionType),explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp}]); }
-    else { const na=attempts+1;setAttempts(na);setWrongTried(p=>[...p,selected]);setSelected(null); if(na>=2){setRevealed(true);setResults(r=>[...r,{id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,correctAnswer:q.answer,studentAnswer:selected,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType),explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp}]);} }
+    else { const na=attempts+1;setAttempts(na);setWrongTried(p=>[...p,selected]);setSelected(null); if(na>=3){setRevealed(true);setResults(r=>[...r,{id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,correctAnswer:q.answer,studentAnswer:selected,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType),explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp}]);} }
   }
   function next(){ if(qIdx+1>=items.length){onDone(results);return;} setQIdx(i=>i+1);resetQ(); }
   const [learnAck, setLearnAck] = useState(false);
@@ -253,7 +253,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     const chosen=cAns[blank.num]; if(!chosen)return;
     const t=Date.now()-startRef.current;
     if(chosen===blank.answer){setCCor(p=>({...p,[blank.num]:true}));setResults(r=>[...r,{id:`${cs.id}_${blank.num}`,topic:sectionType,sectionType,correct:(cAtt[blank.num]||0)===0,solvedAfterHint:(cAtt[blank.num]||0)>0,attempts:(cAtt[blank.num]||0)+1,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}
-    else{const prev=cAtt[blank.num]||0;const next=prev+1;setCAtt(p=>({...p,[blank.num]:next}));setCAns(a=>({...a,[blank.num]:null}));if(next>=2){setCRev(p=>({...p,[blank.num]:true}));setResults(r=>[...r,{id:`${cs.id}_${blank.num}`,topic:sectionType,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}
+    else{const prev=cAtt[blank.num]||0;const next=prev+1;setCAtt(p=>({...p,[blank.num]:next}));setCAns(a=>({...a,[blank.num]:null}));if(next>=3){setCRev(p=>({...p,[blank.num]:true}));setResults(r=>[...r,{id:`${cs.id}_${blank.num}`,topic:sectionType,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}
   }
 
   function next(){
@@ -718,7 +718,7 @@ function CompSection({sets,sectionType,meta,onDone}){
   const cs=sets[setIdx]||sets[0]||{};
   function allSettled(){return (cs.questions||[]).every(q=>correct[q.id]||revealed[q.id]);}
   function handleSelect(qid,i){if(correct[qid]||revealed[qid])return;setAnswers(a=>({...a,[qid]:i}));}
-  function handleCheck(q){const chosen=answers[q.id];if(chosen===undefined)return;const t=Date.now()-startRef.current;if(chosen===q.answer){setCorrect(p=>({...p,[q.id]:true}));setResults(r=>[...r,{id:q.id,topic:"Comprehension",sectionType,correct:(attempts[q.id]||0)===0,solvedAfterHint:(attempts[q.id]||0)>0,attempts:(attempts[q.id]||0)+1,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}else{const prev=attempts[q.id]||0;const next=prev+1;setAttempts(p=>({...p,[q.id]:next}));setAnswers(a=>({...a,[q.id]:undefined}));if(next>=2){setRevealed(p=>({...p,[q.id]:true}));setResults(r=>[...r,{id:q.id,topic:"Comprehension",sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}}
+  function handleCheck(q){const chosen=answers[q.id];if(chosen===undefined)return;const t=Date.now()-startRef.current;if(chosen===q.answer){setCorrect(p=>({...p,[q.id]:true}));setResults(r=>[...r,{id:q.id,topic:"Comprehension",sectionType,correct:(attempts[q.id]||0)===0,solvedAfterHint:(attempts[q.id]||0)>0,attempts:(attempts[q.id]||0)+1,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}else{const prev=attempts[q.id]||0;const next=prev+1;setAttempts(p=>({...p,[q.id]:next}));setAnswers(a=>({...a,[q.id]:undefined}));if(next>=3){setRevealed(p=>({...p,[q.id]:true}));setResults(r=>[...r,{id:q.id,topic:"Comprehension",sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType)}]);}}}
   function next(){if(setIdx+1>=sets.length){onDone(results);return;}setSetIdx(i=>i+1);setAnswers({});setAttempts({});setCorrect({});setRevealed({});startRef.current=Date.now();}
 
   const passagePanel = (
@@ -785,5 +785,6 @@ function SummaryScreen({summary,mastery,onHome,onRetry}){
 
 
 export { SessionScreen };
+
 
 
