@@ -167,33 +167,77 @@ function toEnglishEditSet(set) {
 }
 
 function detectCompFormat(q, options) {
-  // 실제 데이터에는 format 필드가 없는 경우가 많아 question 내용으로 자동 감지
-  if (q.format) return q.format;
-
-  const qText = String(q.question || q.stem || q.q || "").toLowerCase();
+  // 데이터의 format 필드가 'open'으로 잘못 일괄 태깅된 경우가 많으므로
+  // question/stem 내용을 항상 재검사하여 실제 유형을 감지한다.
+  const declared = q.format || q.questionType || null;
+  const qRaw = String(q.question || q.stem || q.q || "");
+  const qText = qRaw.toLowerCase();
   const ansStr = String(q.answer ?? "");
+  const ansLower = ansStr.toLowerCase().trim();
 
-  // MCQ: options가 있음
+  // 1) MCQ: options가 존재하면 항상 MCQ
   if (options && options.length >= 2) return "mcq";
 
-  // True/False + Reason
-  if ((qText.includes("true or false") || qText.includes("state whether")) && qText.includes("reason")) return "truefalse_reason";
+  // 2) True/False + Reason
+  if ((qText.includes("true or false") || qText.includes("state whether")) &&
+      (qText.includes("reason") || qText.includes("why you think"))) {
+    // 복합형: "each statement" 또는 (a)(b) 여러 개 → open_multi (학생이 각각 작성)
+    if (qText.includes("each statement") || (qRaw.includes("(a)") && qRaw.includes("(b)"))) {
+      return "open_multi";
+    }
+    return "truefalse_reason";
+  }
 
-  // True/False only
-  if (ansStr.toLowerCase() === "true" || ansStr.toLowerCase() === "false") return "truefalse";
+  // 3) True/False only: answer가 정확히 true/false
+  if (ansLower === "true" || ansLower === "false") return "truefalse";
 
-  // Sequence: "write 1, 2 or 3" / "write 1, 2 and 3" / "indicate the order"
-  if (/write\s+1[,\s]+2/.test(qText) || (qText.includes("order") && /\b[123]\b/.test(qText))) return "sequence";
+  // 4) Sequence: "write 1, 2 or 3" / "put ... in sequence/order"
+  //    Detect by: explicit "write 1, 2..." OR (sequence/order keyword + numbered slots)
+  const emptyBracketCount = (qRaw.match(/\(\s*\)/g) || []).length;
+  const blankSlotCount = (qRaw.match(/(?:^|\s)_{2,}/g) || []).length;
+  const numberedSlots = emptyBracketCount + blankSlotCount;
+  const hasSeqKeyword = qText.includes("sequence") || qText.includes("the order") ||
+                        qText.includes("order of events") || qText.includes("order in which");
+  if (/write\s+1\s*[,，]?\s*2/.test(qText) ||
+      /put\s+(?:these|the)\s+events/.test(qText) ||
+      (hasSeqKeyword && numberedSlots >= 2) ||
+      emptyBracketCount >= 3) {
+    return "sequence";
+  }
 
-  // Tick-choice (checkbox): has [ ] markers in question
-  if (q.question && (q.question.includes("[ ]") || q.question.includes("☐") || q.question.includes("□"))) return "tick_choice";
+  // 5) Tick-choice (checkbox): has [ ] markers in question (>=2)
+  const tickCount = (qRaw.match(/\[\s*\]/g) || []).length;
+  if (tickCount >= 2) return "tick_choice";
 
-  // Short fill: answer is 1-4 words, no newline, < 40 chars
-  if (!ansStr.includes("\n") && ansStr.split(/\s+/).length <= 4 && ansStr.length < 40 && ansStr.length > 0) return "fill_short";
+  // 6) If author explicitly declared a non-open special format, honor it
+  if (declared && !["open", "mcq", "ComprehensionOE", "ComprehensionMCQ", "ComprehensionFIB"].includes(declared)) {
+    return declared;
+  }
 
-  // Multi-part open: answer has (i)/(ii) or \n
-  if (ansStr.includes("(i)") || ansStr.includes("(ii)") || ansStr.includes("\n")) return "open_multi";
+  // 7) Short fill: answer is 1-4 words, no newline, < 40 chars
+  //    BUT only if the question asks to "find a word/phrase" (vocabulary lookup)
+  const isWordLookup =
+    qText.includes("which word") ||
+    qText.includes("which phrase") ||
+    qText.includes("same meaning") ||
+    qText.includes("word in paragraph") ||
+    qText.includes("word from") ||
+    qText.includes("a word that");
+  if (isWordLookup) {
+    // word lookup questions are always short single-word/phrase answers
+    if (!ansStr || (!ansStr.includes("\n") && ansStr.split(/\s+/).length <= 6 && ansStr.length < 60)) {
+      return "fill_short";
+    }
+  }
 
+  // 8) Multi-part open: answer has (i)/(ii) or multiple lines
+  if (ansStr.includes("(i)") || ansStr.includes("(ii)") ||
+      ansStr.includes("(a)") || ansStr.includes("(b)") ||
+      (ansStr.match(/\n/g) || []).length >= 1) {
+    return "open_multi";
+  }
+
+  // 9) default: open (single sentence answer)
   return "open";
 }
 
