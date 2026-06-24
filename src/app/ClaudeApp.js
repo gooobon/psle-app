@@ -620,41 +620,7 @@ function SignupStudentForm({onSignup, onBack}){
             <div style={{fontSize:10,color:gender==="girl"?"rgba(255,255,255,0.7)":C.muted,marginTop:2}}>Unicorn avatars</div>
           </button>
         </div>
-      </div> {gender&&(
-        <div style={{marginBottom:20}}>
-          <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
-            Step 2 . Pick your avatar
-          </div>
-          <div style={{display:"flex",gap:8,marginBottom:12}}>
-            {AVATARS.map((av,i)=>{
-              const isSelected = avatar===av;
-              const selBg = gender==="boy"?"#DBEAFE":"#FCE7F3";
-              const selBorder = gender==="boy"?C.blue:"#EC4899";
-              return(
-                <button key={i} onClick={()=>setAvatar(av)} style={{flex:1,padding:"10px 4px",borderRadius:14,background:isSelected?selBg:"#F8FAFC",border:isSelected?`2.5px solid ${selBorder}`:"2px solid #E2E8F0",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:3,transition:"all 0.15s",boxShadow:isSelected?"0 4px 12px rgba(0,0,0,0.1)":"none"}}>
-                  <span style={{fontSize:28}}>{av}</span>
-                  <span style={{fontSize:9,fontWeight:700,color:isSelected?selBorder:C.muted}}>{NAMES[i]}</span>
-                </button>
-              );
-            })}
-          </div> <div style={{background:COLORS[colorIdx]+"15",border:`1.5px solid ${COLORS[colorIdx]}44`,borderRadius:14,padding:"14px 16px",display:"flex",alignItems:"center",gap:14,marginBottom:12}}>
-            <div style={{width:56,height:56,borderRadius:16,background:COLORS[colorIdx],display:"flex",alignItems:"center",justifyContent:"center",fontSize:32,boxShadow:`0 4px 14px ${COLORS[colorIdx]}55`,flexShrink:0}}>
-              {avatar}
-            </div>
-            <div style={{flex:1}}>
-              <div style={{fontSize:13,fontWeight:800,color:"#0F172A",marginBottom:4}}>Your Profile Card</div>
-              <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-                {COLORS.map((col,i)=>(
-                  <button key={i} onClick={()=>setColorIdx(i)} style={{width:26,height:26,borderRadius:"50%",background:col,border:colorIdx===i?"3px solid #0F172A":"2.5px solid transparent",cursor:"pointer",transition:"all 0.15s",boxShadow:colorIdx===i?`0 2px 8px ${col}66`:"none"}}/>
-                ))}
-              </div>
-              <div style={{fontSize:11,color:C.muted,marginTop:5}}>Pick a colour for your profile</div>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
+      </div>       <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
         <div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
            Step 3 . Your School
         </div>
