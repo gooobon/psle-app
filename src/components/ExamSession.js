@@ -653,10 +653,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const id = item.id || String(item.questionNo || item.questionNumber || Math.random());
     const answer = String(item.answer || '');
     const hint = (item.hints && item.hints[0]) || (item.solution && item.solution.tip) || '';
-
-    // Derive sentence: prefer item.sentence, else item.stem
     const sentence = item.sentence || item.stem || '';
-    // wrongWord: prefer explicit field, else extract [word] from stem
     let wrongWord = item.wrongWord || '';
     if (!wrongWord && item.stem) {
       const m = item.stem.match(/\[([^\]]+)\]/);
@@ -709,7 +706,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const { sentence, wrongWord } = item;
     if (!sentence) return null;
     if (!wrongWord || !sentence.includes(wrongWord)) {
-      // Fallback: highlight [word] pattern in stem
       const parts = sentence.split(/(\[[^\]]+\])/g);
       return (
         <span>
@@ -758,7 +754,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
 
           return (
             <div key={item.id} style={{ marginBottom: 20 }}>
-              {/* Question number + sentence */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
                 <span style={{ fontSize: 13, color: "#374151", flex: 1, lineHeight: 1.8 }}>
@@ -766,7 +761,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                 </span>
               </div>
 
-              {/* Input box (before submit) */}
               {!submitted ? (
                 <div style={{ marginLeft: 32 }}>
                   <input type="text" value={typed}
@@ -779,9 +773,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                 </div>
               ) : (
                 <div style={{ marginLeft: 32 }}>
-                  {/* Answers row */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
-                    {/* My answer */}
                     <div style={{ textAlign: "center" }}>
                       <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
                       <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
@@ -793,7 +785,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                       </div>
                     </div>
 
-                    {/* Correct answer + retry (wrong only) */}
                     {isWrong && (
                       <>
                         <div style={{ fontSize: 18, color: "#94a3b8" }}>vs</div>
@@ -806,7 +797,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           </div>
                         </div>
 
-                        {/* Retry input */}
                         {!hasRetried && (
                           <div style={{ textAlign: "center" }}>
                             <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
@@ -828,7 +818,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           </div>
                         )}
 
-                        {/* Retry result */}
                         {hasRetried && (
                           <div style={{ textAlign: "center" }}>
                             <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your retry</div>
@@ -845,7 +834,6 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                     )}
                   </div>
 
-                  {/* Hint / explanation (always shown after submit) */}
                   {item.hint && (
                     <div style={{ marginTop: 8,
                       borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#f59e0b"),
