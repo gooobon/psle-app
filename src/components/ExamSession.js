@@ -643,12 +643,36 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
 
 
 function EditingPage({ set, sectionLabel, marks, onPageDone }) {
-  const items = set.items || [];
+  // Support both data schemas:
+  // ExamSession schema: set.questions[], item.stem, item.questionNo, item.solution.tip
+  // EnglishSession schema: set.items[], item.sentence, item.wrongWord, item.hints[]
+  const rawItems = set.items || set.questions || [];
+
+  // Normalize each item to a unified shape
+  const items = rawItems.map(item => {
+    const id = item.id || String(item.questionNo || item.questionNumber || Math.random());
+    const answer = String(item.answer || '');
+    const hint = (item.hints && item.hints[0]) || (item.solution && item.solution.tip) || '';
+
+    // Derive sentence: prefer item.sentence, else item.stem
+    const sentence = item.sentence || item.stem || '';
+    // wrongWord: prefer explicit field, else extract [word] from stem
+    let wrongWord = item.wrongWord || '';
+    if (!wrongWord && item.stem) {
+      const m = item.stem.match(/\[([^\]]+)\]/);
+      if (m) wrongWord = m[1];
+    }
+    const questionNumber = item.questionNumber || item.questionNo || '';
+    return { id, answer, hint, sentence, wrongWord, questionNumber };
+  });
+
   const [answers, setAnswers] = useState({});
   const [retryAnswers, setRetryAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [retried, setRetried] = useState({});
   const startRef = useRef(Date.now());
+
+  function normalize(s) { return String(s || '').trim().toLowerCase(); }
 
   function handleSubmit() {
     if (submitted) return;
@@ -665,19 +689,51 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing",
-      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
-      timeTaken: Math.round(t / items.length),
+      correct: normalize(answers[item.id]) === normalize(item.answer),
+      timeTaken: Math.round(t / Math.max(items.length, 1)),
     }));
     onPageDone(results);
+    onPageDone(null, true);
   }
 
   const score = submitted ? items.filter(item =>
-    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
+    normalize(answers[item.id]) === normalize(item.answer)
   ).length : 0;
 
   const allRetriedWrong = submitted && items
-    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
+    .filter(item => normalize(answers[item.id]) !== normalize(item.answer))
     .every(item => retried[item.id]);
+
+  // Render sentence with wrongWord highlighted
+  function renderSentence(item) {
+    const { sentence, wrongWord } = item;
+    if (!sentence) return null;
+    if (!wrongWord || !sentence.includes(wrongWord)) {
+      // Fallback: highlight [word] pattern in stem
+      const parts = sentence.split(/(\[[^\]]+\])/g);
+      return (
+        <span>
+          {parts.map((p, i) => {
+            const isHighlight = /^\[[^\]]+\]$/.test(p);
+            return isHighlight
+              ? <span key={i} style={{ background: "#fef9c3", border: "1px dashed #ca8a04",
+                  borderRadius: 3, padding: "0 4px", fontWeight: 700, color: "#92400e" }}>{p}</span>
+              : <span key={i}>{p}</span>;
+          })}
+        </span>
+      );
+    }
+    const idx = sentence.indexOf(wrongWord);
+    return (
+      <span>
+        {sentence.slice(0, idx)}
+        <span style={{ background: "#fef9c3", border: "1px dashed #ca8a04",
+          borderRadius: 3, padding: "0 4px", fontWeight: 700, color: "#92400e",
+          textDecoration: "underline" }}>{wrongWord}</span>
+        {sentence.slice(idx + wrongWord.length)}
+      </span>
+    );
+  }
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -686,7 +742,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
           {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
         </div>
         <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
-          Each of the underlined words contains a spelling error. Write the correct word in the box provided.
+          Each word in bold / underlined contains a spelling or grammar error. Write the correct word in the box provided.
         </div>
       </div>
 
@@ -694,27 +750,28 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
           const typed = answers[item.id] || '';
-          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
+          const isCorrect = submitted && normalize(typed) === normalize(item.answer);
           const isWrong = submitted && !isCorrect;
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
-          const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
+          const retryIsCorrect = hasRetried && normalize(hasRetried) === normalize(item.answer);
 
           return (
             <div key={item.id} style={{ marginBottom: 20 }}>
-              {/* Question number + sentence context */}
+              {/* Question number + sentence */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
-                <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
-                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
+                <span style={{ fontSize: 13, color: "#374151", flex: 1, lineHeight: 1.8 }}>
+                  {renderSentence(item)}
                 </span>
               </div>
 
-              {/* Input box */}
+              {/* Input box (before submit) */}
               {!submitted ? (
                 <div style={{ marginLeft: 32 }}>
                   <input type="text" value={typed}
                     onChange={e => setAnswers(a => ({ ...a, [item.id]: e.target.value }))}
+                    onKeyDown={e => { if (e.key === "Enter") handleSubmit(); }}
                     placeholder="Write correct spelling..."
                     style={{ padding: "6px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                       border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
@@ -722,7 +779,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                 </div>
               ) : (
                 <div style={{ marginLeft: 32 }}>
-                  {/* Row: My answer | Correct answer | Retry box */}
+                  {/* Answers row */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
                     {/* My answer */}
                     <div style={{ textAlign: "center" }}>
@@ -736,7 +793,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                       </div>
                     </div>
 
-                    {/* Correct answer (shown only if wrong) */}
+                    {/* Correct answer + retry (wrong only) */}
                     {isWrong && (
                       <>
                         <div style={{ fontSize: 18, color: "#94a3b8" }}>vs</div>
@@ -756,7 +813,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                             <div style={{ display: "flex", gap: 4 }}>
                               <input type="text" value={retryTyped}
                                 onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                                placeholder={item.answer?.split('').join(' . ')}
+                                placeholder={String(item.answer ?? '').split('').join(' . ')}
                                 style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                                   border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
                               <button onClick={() => handleRetry(item)}
@@ -788,14 +845,14 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                     )}
                   </div>
 
-                  {/* Explanation */}
-                  {(item.hints?.[0] || item.solution?.tip) && (
+                  {/* Hint / explanation (always shown after submit) */}
+                  {item.hint && (
                     <div style={{ marginTop: 8,
                       borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#f59e0b"),
-                      paddingLeft: 10, background: isCorrect ? "#f0fdf4" : "#fffbeb",
+                      background: isCorrect ? "#f0fdf4" : "#fffbeb",
                       borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
                       <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>
-                        {item.hints?.[0] || item.solution?.tip}
+                        {item.hint}
                       </div>
                     </div>
                   )}
@@ -814,7 +871,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
             <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
             <span style={{ fontSize: 13, fontWeight: 700,
               color: score === items.length ? "#16a34a" : "#d97706" }}>
-              {Math.round(score / items.length * 100)}%
+              {items.length > 0 ? Math.round(score / items.length * 100) : 0}%
             </span>
           </div>
         )}

@@ -592,7 +592,7 @@ function EditSection({sets, sectionType, meta, onDone, level}){
 
   // Generate progressive hint: reveal more letters each time
   function generateHint(answer, attemptNum){
-    const letters = answer.split("");
+    const letters = String(answer ?? '').split("");
     const revealCount = level==="easy" ? Math.ceil(letters.length/2)
                       : level==="hard" ? 1
                       : 2;
