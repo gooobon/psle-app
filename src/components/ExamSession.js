@@ -214,9 +214,11 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                 const isAns = i === q.answer;
                 const isSel = chosen === i;
                 let color = "#000", fontWeight = "normal", bg = "transparent";
-                if (submitted) {
+                if (submitted && (isFirstCorrect || hasRetried)) {
                   if (isAns) { color = "#16a34a"; fontWeight = "700"; }
                   else if (isSel) color = "#dc2626";
+                } else if (submitted && isFirstWrong && !hasRetried) {
+                  if (isSel) color = "#dc2626";
                 } else if (isSel) bg = "#dbeafe";
                 return (
                   <div key={i} onClick={() => handleSelect(q.id, i)}
@@ -226,7 +228,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                       background: bg, borderRadius: 4, padding: "1px 4px" }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
-                    {submitted && isAns && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
+                    {submitted && isAns && (isFirstCorrect || hasRetried) && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
                     {submitted && isSel && !isAns && <span style={{ color: "#dc2626", marginLeft: 4 }}>X</span>}
                   </div>
                 );
