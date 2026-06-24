@@ -147,36 +147,21 @@ function toEnglishClozeSet(set) {
 
 function toEnglishEditSet(set) {
   const items = (set.questions || set.items || []).map((q, i) => {
-    // Editing answers are plain strings (e.g. "together", "becomes"),
-    // NOT option indices. Never run parseAnswerIndex on them.
-    const rawAnswer = q.answer ?? q.correctAnswer ?? "";
-    const answer = String(rawAnswer);
-
-    // wrongWord: explicit field > errorWord > extract [word] from stem > fallback
-    let wrongWord = q.wrongWord || q.errorWord || q.highlight || "";
-    if (!wrongWord) {
-      const src = q.stem || q.sentence || q.question || "";
-      const m = src.match(/\[([^\]]+)\]/);
-      if (m) wrongWord = m[1];
-    }
-    wrongWord = wrongWord || "___";
-
-    // sentence: strip [ ] bracket markers for cleaner display
-    const rawSentence = q.sentence || q.stem || q.question || "";
-
+    const options = parseOptionTexts(q.options);
+    const wrongWord = q.wrongWord || q.errorWord || q.highlight || "___";
     return {
-      id: q.id || `${set.id || "ed"}_${q.questionNo || i}`,
-      sentence: rawSentence,
+      id: q.id || `${set.id || "ed"}_${i}`,
+      sentence: q.sentence || q.stem || q.question || "",
       wrongWord,
-      answer,
+      options: options.length ? options : [q.answer].filter(Boolean),
+      answer: parseAnswerIndex(q.answer, options),
       hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
-      solution: q.solution || null,
     };
   });
   return {
     id: set.id || "edit_set",
     setLabel: set.setLabel || set.title || set.topic || "Editing",
-    instructions: set.instructions || "Correct the spelling or grammar error.",
+    instructions: set.instructions || "Choose the correct spelling.",
     items,
   };
 }
@@ -187,18 +172,41 @@ function toEnglishCompSet(set) {
     set.meta?.passageText ||
     set.readingPassage ||
     "";
+
   const questions = (set.questions || []).map((q, i) => {
     const options = parseOptionTexts(q.options);
+    const fmt = q.format || q.questionType || (options.length > 0 ? "mcq" : "open");
+
+    // Only MCQ-type formats use parseAnswerIndex (numeric index).
+    // All other formats (open, fill, truefalse, sequence, truefalse_reason)
+    // preserve the raw string answer so CompPage can display it correctly.
+    const isMcqFmt = fmt === "mcq" || (options.length > 0 && !["open","fill","truefalse","truefalse_reason","sequence"].includes(fmt));
+    const answer = isMcqFmt
+      ? parseAnswerIndex(q.answer, options)
+      : (q.answer ?? q.correctAnswer ?? "");
+
+    // sequenceItems: extract from q.items or q.sequenceItems for sequence format
+    const sequenceItems = fmt === "sequence"
+      ? (q.sequenceItems || q.items || [])
+      : undefined;
+
     return {
-      id: q.id || `comp_${i}`,
-      question: q.question || q.stem || q.q || "",
+      id:             q.id || `comp_${i}`,
+      questionNo:     q.questionNo || String(i + 1),
+      format:         fmt,
+      marks:          q.marks || 1,
+      stem:           q.stem || q.question || q.q || "",
+      question:       q.stem || q.question || q.q || "",
       options,
-      answer: parseAnswerIndex(q.answer, options),
-      hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+      answer,
+      sequenceItems,
+      hints:          q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+      solution:       q.solution || null,
     };
   });
+
   return {
-    id: set.id || "comp_set",
+    id:       set.id || "comp_set",
     setLabel: set.setLabel || set.title || set.topic || "Comprehension",
     passage,
     questions,
