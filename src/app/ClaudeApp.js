@@ -20,7 +20,6 @@ import {
 } from '@/components/Dashboard';
 
 import { SessionScreen }   from '@/components/EnglishSession';
-import { ExamSessionScreen } from '@/components/ExamSession';
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
 
@@ -802,11 +801,10 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 
   if(inSession) return(
     <Wrap>
-      <ExamSessionScreen
+      <SessionScreen
         plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
-        startFrom={startFromSection}
         onFinish={handleSessionDone}
         onBack={()=>{ setInSession(false); setStartFromSection(null); }}
       />
