@@ -61,83 +61,136 @@ function AnnotatedSentence({sentence}){
   return <span>{sentence}</span>;
 }
 
-function MCQSection({items,sectionType,meta,onDone}){
-  const [qIdx,setQIdx]=useState(0);
-  const [attempts,setAttempts]=useState(0);
-  const [wrongTried,setWrongTried]=useState([]);
-  const [selected,setSelected]=useState(null);
-  const [solved,setSolved]=useState(false);
-  const [revealed,setRevealed]=useState(false);
-  const [results,  setResults]  = useState([]);
-  const [lookedUp, setLookedUp] = useState([]);
-  const startRef=useRef(Date.now());
-  const q=items[qIdx]||items[0];
-  function resetQ(){ setAttempts(0);setWrongTried([]);setSelected(null);setSolved(false);setRevealed(false);startRef.current=Date.now(); setLearnAck(false); }
-  function handleSelect(i){ if(solved||revealed||wrongTried.includes(i)) return; setSelected(i); }
-  function handleCheck(){
-    if(selected===null||solved||revealed) return;
-    const t=Date.now()-startRef.current;
-    if(selected===q.answer){ setSolved(true); setResults(r=>[...r,{id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,correctAnswer:q.answer,studentAnswer:selected,sectionType,correct:attempts===0,solvedAfterHint:attempts>0,attempts:attempts+1,timeTaken:t,flagged:guessFlag(t,sectionType),explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp}]); }
-    else { const na=attempts+1;setAttempts(na);setWrongTried(p=>[...p,selected]);setSelected(null); if(na>=3){setRevealed(true);setResults(r=>[...r,{id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,correctAnswer:q.answer,studentAnswer:selected,sectionType,correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType),explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp}]);} }
+// ── MCQItem: 문제 1개 담당. key 로 마운트되어 상태 완전 초기화 보장 ──
+function MCQItem({q, qIdx, total, sectionType, meta, onResult, onNext}){
+  const [attempts,  setAttempts]  = useState(0);
+  const [wrongTried,setWrongTried]= useState([]);
+  const [selected,  setSelected]  = useState(null);
+  const [solved,    setSolved]    = useState(false);
+  const [revealed,  setRevealed]  = useState(false);
+  const [learnAck,  setLearnAck]  = useState(false);
+  const [lookedUp,  setLookedUp]  = useState([]);
+  const startRef = useRef(Date.now());
+
+  const canCheck = selected!==null && !solved && !revealed;
+  const canNext  = (solved||revealed) && learnAck;
+  const badge    = solved ? scoreBadge(attempts+1) : null;
+
+  function handleSelect(i){
+    if(solved||revealed||wrongTried.includes(i)) return;
+    setSelected(i);
   }
-  function next(){ if(qIdx+1>=items.length){onDone(results);return;} setQIdx(i=>i+1);resetQ(); }
-  const [learnAck, setLearnAck] = useState(false);
-  const canNext=(solved||revealed)&&learnAck; const canCheck=selected!==null&&!solved&&!revealed;
-  const badge=solved?scoreBadge(attempts+1):null;
+
+  function handleCheck(){
+    if(!canCheck) return;
+    const t = Date.now()-startRef.current;
+    if(selected===q.answer){
+      setSolved(true);
+      onResult({id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,
+        correctAnswer:q.answer,studentAnswer:selected,sectionType,
+        correct:attempts===0,solvedAfterHint:attempts>0,attempts:attempts+1,
+        timeTaken:t,flagged:guessFlag(t,sectionType),
+        explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp});
+    } else {
+      const na = attempts+1;
+      setAttempts(na);
+      setWrongTried(p=>[...p,selected]);
+      setSelected(null);
+      if(na>=3){
+        setRevealed(true);
+        onResult({id:q.id,topic:q.topic,sentence:q.sentence,options:q.options,
+          correctAnswer:q.answer,studentAnswer:selected,sectionType,
+          correct:false,attempts:0,timeTaken:t,flagged:guessFlag(t,sectionType),
+          explanation:q.explanation||"",hint:q.hints?.[0]||"",lookedUpWords:lookedUp});
+      }
+    }
+  }
+
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>Q {qIdx+1} / {items.length}</span>
+        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>Q {qIdx+1} / {total}</span>
         <div style={{display:"flex",gap:4,alignItems:"center"}}>
-          {[0,1].map(i=><div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<attempts?C.red:"#E2E8F0"}}/>)}
+          {[0,1,2].map(i=>(
+            <div key={i} style={{width:8,height:8,borderRadius:"50%",
+              background:i<attempts?"#EF4444":"#E2E8F0"}}/>
+          ))}
           <span style={{fontSize:10,color:C.muted,marginLeft:4}}>tries</span>
         </div>
       </div>
-      <div style={{background:C.card,borderRadius:18,padding:"18px 16px",marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,0.07)"}}>
-        <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:6}}>
+      <div style={{background:"#fff",borderRadius:18,padding:"18px 16px",marginBottom:14,
+        boxShadow:"0 2px 12px rgba(0,0,0,0.08)",border:"1.5px solid #E2E8F0"}}>
+        <div style={{display:"flex",alignItems:"center",gap:8,flexWrap:"wrap",marginBottom:8}}>
           <TagPill color={meta.color} bg={meta.color+"18"}>{q.topic}</TagPill>
           {q.emoji&&<span style={{fontSize:18}}>{q.emoji}</span>}
         </div>
-        {false&&q.wordNote&&null}
-        {q.question&&<div style={{fontSize:13,color:C.muted,marginBottom:8}}>{q.question}</div>}
+        {q.question&&<div style={{fontSize:13,color:"#475569",marginBottom:8,fontWeight:600}}>{q.question}</div>}
         {q.highlights
-          ? <SVASentence sentence={q.sentence} subject={q.highlights.subject} trap={q.highlights.trap}/>
-          : <div style={{background:"#F0F9FF",borderRadius:12,padding:"12px 16px",fontSize:16,fontWeight:700,color:C.text,lineHeight:1.7}}>
+          ? <SVASentence sentence={q.sentence} highlights={q.highlights}/>
+          : <div style={{background:"#F0F9FF",borderRadius:12,padding:"14px 16px",
+              fontSize:16,fontWeight:800,color:"#0F172A",lineHeight:1.8}}>
               <div style={{display:"flex",gap:8,alignItems:"flex-start"}}>
                 <SpeakBtn text={q.sentence.replace(/_+/g,"blank")} lang="en" style={{flexShrink:0,marginTop:2}}/>
                 <div style={{flex:1}}>
-                  <AnnotatedSentence sentence={q.sentence} onLookup={(w)=>{setLookedUp(p=>[...new Set([...p,w])]); TTS.speakEnglish(w);}}/>
+                  <AnnotatedSentence sentence={q.sentence}
+                    onLookup={(w)=>{setLookedUp(p=>[...new Set([...p,w])]);TTS.speakEnglish(w);}}/>
                 </div>
               </div>
             </div>
         }
       </div>
-      {attempts>0&&!solved&&!revealed&&<HintBox text={q.hints&&q.hints[Math.min(attempts-1,1)]} level={attempts}/>}
-      {attempts>0&&!solved&&!revealed&&q.ruleCard&&<RuleCard card={q.ruleCard}/>}
-      {attempts>0&&!solved&&!revealed&&<WrongBanner attempts={attempts}/>}
+      {wrongTried.length>0&&!solved&&!revealed&&(
+        <HintBox text={q.hints&&q.hints[Math.min(attempts-1,1)]} level={attempts}/>
+      )}
+      {wrongTried.length>0&&!solved&&!revealed&&q.ruleCard&&(
+        <RuleCard card={q.ruleCard}/>
+      )}
+      {wrongTried.length>0&&!solved&&!revealed&&(
+        <WrongBanner attempts={attempts}/>
+      )}
       <div style={{marginBottom:14}}>
         {(q.options||[]).map((opt,i)=>{
-          const isWrong=wrongTried.includes(i);const isAns=i===q.answer;
-          let bg=C.card,border=C.border,col=C.text,op=1;
-          if(revealed||solved){if(isAns){bg=C.lGreen;border=C.green;col="#065F46";}else op=0.35;}
-          else if(isWrong){bg="#FEE2E2";border=C.red;col=C.red;op=0.6;}
-          else if(selected===i){bg=C.lBlue;border=meta.color;col=meta.color;}
-          const showMeaning = (solved||revealed);
-          const cleanOpt = opt.replace(/[.,!?'"]/g,"").toLowerCase();
-          const meaning = showMeaning ? (WORD_DICT[cleanOpt] || null) : null;
+          const isWrong = wrongTried.includes(i);
+          const isAns   = i===q.answer;
+          const isSel   = selected===i;
+          let bg="#fff", border=C.border, col="#0F172A", op=1;
+          if(solved||revealed){
+            if(isAns){ bg=C.lGreen; border=C.green; col="#065F46"; }
+            else { op=0.45; }
+          } else if(isWrong){
+            bg="#FEE2E2"; border=C.red; col=C.red; op=0.7;
+          } else if(isSel){
+            bg=C.lBlue; border=meta.color; col=meta.color;
+          }
+          const meaning = (solved||revealed)
+            ? (WORD_DICT[opt.replace(/[.,!'"]/g,"").toLowerCase()]||null) : null;
           return(
-            <div key={i} onClick={()=>handleSelect(i)} style={{background:bg,border:`2px solid ${border}`,borderRadius:14,padding:"13px 16px",marginBottom:10,cursor:(solved||revealed||isWrong)?"default":"pointer",display:"flex",alignItems:"center",gap:12,opacity:op,transition:"all 0.15s"}}>
-              <div style={{width:28,height:28,borderRadius:"50%",background:(selected===i&&!isWrong)?meta.color:"#EEF2F7",color:(selected===i&&!isWrong)?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800,flexShrink:0}}>{String.fromCharCode(65+i)}</div>
+            <div key={i} onClick={()=>handleSelect(i)}
+              style={{background:bg,border:`2px solid ${border}`,borderRadius:14,
+                padding:"13px 16px",marginBottom:10,opacity:op,
+                cursor:(solved||revealed||isWrong)?"default":"pointer",
+                display:"flex",alignItems:"center",gap:12,
+                transition:"background 0.12s, border 0.12s, opacity 0.12s"}}>
+              <div style={{width:30,height:30,borderRadius:"50%",flexShrink:0,
+                display:"flex",alignItems:"center",justifyContent:"center",
+                fontSize:13,fontWeight:800,
+                background:isSel&&!isWrong&&!(solved||revealed)?meta.color
+                          :(solved||revealed)&&isAns?"#10B981"
+                          :isWrong?"#FCA5A5":"#EEF2F7",
+                color:isSel&&!isWrong&&!(solved||revealed)?"#fff"
+                     :(solved||revealed)&&isAns?"#fff"
+                     :isWrong?C.red:C.muted}}>
+                {String.fromCharCode(65+i)}
+              </div>
               <div style={{flex:1}}>
-                <span style={{fontSize:14,fontWeight:600,color:col}}>{opt}</span>
+                <span style={{fontSize:15,fontWeight:700,color:col}}>{opt}</span>
                 {meaning&&(
-                  <div style={{fontSize:11,color:isAns?"#065F46":"#64748B",marginTop:3,fontStyle:"italic",lineHeight:1.4}}>
-                    {meaning}
-                  </div>
+                  <div style={{fontSize:11,color:isAns?"#065F46":"#64748B",
+                    marginTop:3,fontStyle:"italic"}}>{meaning}</div>
                 )}
               </div>
-              {(solved||revealed)&&isAns&&<span style={{flexShrink:0}}>âœ…</span>}
-              {isWrong&&<span style={{flexShrink:0}}>âŒ</span>}
+              {(solved||revealed)&&isAns&&<span style={{flexShrink:0,fontSize:18}}>&#x2705;</span>}
+              {isWrong&&!solved&&!revealed&&<span style={{flexShrink:0,fontSize:18}}>&#x274C;</span>}
             </div>
           );
         })}
@@ -149,13 +202,35 @@ function MCQSection({items,sectionType,meta,onDone}){
         <LearnCard q={q} sectionType={sectionType} wasCorrect={solved&&attempts===0}
           onAcknowledge={()=>setLearnAck(true)}/>
       )}
-      {canNext?<ActionBtn color={meta.color} onClick={next}>{qIdx+1>=items.length?"Finish Section â†’":"Next Question â†’"}</ActionBtn>
-               :(solved||revealed)?null
-               :<ActionBtn color={meta.color} onClick={handleCheck} disabled={!canCheck}>Check Answer</ActionBtn>}
+      {canNext
+        ? <ActionBtn color={meta.color} onClick={onNext}>
+            {qIdx+1>=total?"Finish Section →":"Next Question →"}
+          </ActionBtn>
+        : !(solved||revealed)&&
+          <ActionBtn color={meta.color} onClick={handleCheck} disabled={!canCheck}>
+            Check Answer
+          </ActionBtn>
+      }
     </div>
   );
 }
 
+function MCQSection({items,sectionType,meta,onDone}){
+  const [qIdx,    setQIdx]   = useState(0);
+  const [results, setResults]= useState([]);
+  function handleResult(r){ setResults(p=>[...p,r]); }
+  function handleNext(){
+    if(qIdx+1>=items.length){ onDone([...results]); return; }
+    setQIdx(i=>i+1);
+  }
+  const q   = items[qIdx]||items[0];
+  const key = q?.id ? `${sectionType}_${q.id}` : `${sectionType}_q${qIdx}`;
+  return(
+    <MCQItem key={key} q={q} qIdx={qIdx} total={items.length}
+      sectionType={sectionType} meta={meta}
+      onResult={handleResult} onNext={handleNext}/>
+  );
+}
 function ClozeSection({sets,sectionType,meta,onDone}){
   const [setIdx,setSetIdx]=useState(0);
   const [cAns,setCAns]=useState({});
