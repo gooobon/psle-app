@@ -643,33 +643,12 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
 
 
 function EditingPage({ set, sectionLabel, marks, onPageDone }) {
-  // Support both data schemas:
-  // ExamSession schema: set.questions[], item.stem, item.questionNo, item.solution.tip
-  // EnglishSession schema: set.items[], item.sentence, item.wrongWord, item.hints[]
-  const rawItems = set.items || set.questions || [];
-
-  // Normalize each item to a unified shape
-  const items = rawItems.map(item => {
-    const id = item.id || String(item.questionNo || item.questionNumber || Math.random());
-    const answer = String(item.answer || '');
-    const hint = (item.hints && item.hints[0]) || (item.solution && item.solution.tip) || '';
-    const sentence = item.sentence || item.stem || '';
-    let wrongWord = item.wrongWord || '';
-    if (!wrongWord && item.stem) {
-      const m = item.stem.match(/\[([^\]]+)\]/);
-      if (m) wrongWord = m[1];
-    }
-    const questionNumber = item.questionNumber || item.questionNo || '';
-    return { id, answer, hint, sentence, wrongWord, questionNumber };
-  });
-
+  const items = set.items || [];
   const [answers, setAnswers] = useState({});
   const [retryAnswers, setRetryAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [retried, setRetried] = useState({});
   const startRef = useRef(Date.now());
-
-  function normalize(s) { return String(s || '').trim().toLowerCase(); }
 
   function handleSubmit() {
     if (submitted) return;
@@ -686,50 +665,19 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing",
-      correct: normalize(answers[item.id]) === normalize(item.answer),
-      timeTaken: Math.round(t / Math.max(items.length, 1)),
+      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
+      timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results);
-    onPageDone(null, true);
   }
 
   const score = submitted ? items.filter(item =>
-    normalize(answers[item.id]) === normalize(item.answer)
+    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
   ).length : 0;
 
   const allRetriedWrong = submitted && items
-    .filter(item => normalize(answers[item.id]) !== normalize(item.answer))
+    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
     .every(item => retried[item.id]);
-
-  // Render sentence with wrongWord highlighted
-  function renderSentence(item) {
-    const { sentence, wrongWord } = item;
-    if (!sentence) return null;
-    if (!wrongWord || !sentence.includes(wrongWord)) {
-      const parts = sentence.split(/(\[[^\]]+\])/g);
-      return (
-        <span>
-          {parts.map((p, i) => {
-            const isHighlight = /^\[[^\]]+\]$/.test(p);
-            return isHighlight
-              ? <span key={i} style={{ background: "#fef9c3", border: "1px dashed #ca8a04",
-                  borderRadius: 3, padding: "0 4px", fontWeight: 700, color: "#92400e" }}>{p}</span>
-              : <span key={i}>{p}</span>;
-          })}
-        </span>
-      );
-    }
-    const idx = sentence.indexOf(wrongWord);
-    return (
-      <span>
-        {sentence.slice(0, idx)}
-        <span style={{ background: "#fef9c3", border: "1px dashed #ca8a04",
-          borderRadius: 3, padding: "0 4px", fontWeight: 700, color: "#92400e",
-          textDecoration: "underline" }}>{wrongWord}</span>
-        {sentence.slice(idx + wrongWord.length)}
-      </span>
-    );
-  }
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -738,7 +686,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
           {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
         </div>
         <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
-          Each word in bold / underlined contains a spelling or grammar error. Write the correct word in the box provided.
+          Each of the underlined words contains a spelling error. Write the correct word in the box provided.
         </div>
       </div>
 
@@ -746,26 +694,27 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
           const typed = answers[item.id] || '';
-          const isCorrect = submitted && normalize(typed) === normalize(item.answer);
+          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
           const isWrong = submitted && !isCorrect;
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
-          const retryIsCorrect = hasRetried && normalize(hasRetried) === normalize(item.answer);
+          const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
 
           return (
             <div key={item.id} style={{ marginBottom: 20 }}>
+              {/* Question number + sentence context */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
-                <span style={{ fontSize: 13, color: "#374151", flex: 1, lineHeight: 1.8 }}>
-                  {renderSentence(item)}
+                <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
+                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
                 </span>
               </div>
 
+              {/* Input box */}
               {!submitted ? (
                 <div style={{ marginLeft: 32 }}>
                   <input type="text" value={typed}
                     onChange={e => setAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                    onKeyDown={e => { if (e.key === "Enter") handleSubmit(); }}
                     placeholder="Write correct spelling..."
                     style={{ padding: "6px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                       border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
@@ -773,7 +722,9 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                 </div>
               ) : (
                 <div style={{ marginLeft: 32 }}>
+                  {/* Row: My answer | Correct answer | Retry box */}
                   <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
+                    {/* My answer */}
                     <div style={{ textAlign: "center" }}>
                       <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
                       <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
@@ -785,6 +736,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                       </div>
                     </div>
 
+                    {/* Correct answer (shown only if wrong) */}
                     {isWrong && (
                       <>
                         <div style={{ fontSize: 18, color: "#94a3b8" }}>vs</div>
@@ -797,13 +749,14 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           </div>
                         </div>
 
+                        {/* Retry input */}
                         {!hasRetried && (
                           <div style={{ textAlign: "center" }}>
                             <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
                             <div style={{ display: "flex", gap: 4 }}>
                               <input type="text" value={retryTyped}
                                 onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                                placeholder={String(item.answer ?? '').split('').join(' . ')}
+                                placeholder={item.answer?.split('').join(' . ')}
                                 style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
                                   border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
                               <button onClick={() => handleRetry(item)}
@@ -818,6 +771,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                           </div>
                         )}
 
+                        {/* Retry result */}
                         {hasRetried && (
                           <div style={{ textAlign: "center" }}>
                             <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your retry</div>
@@ -834,13 +788,14 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                     )}
                   </div>
 
-                  {item.hint && (
+                  {/* Explanation */}
+                  {(item.hints?.[0] || item.solution?.tip) && (
                     <div style={{ marginTop: 8,
                       borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#f59e0b"),
-                      background: isCorrect ? "#f0fdf4" : "#fffbeb",
+                      paddingLeft: 10, background: isCorrect ? "#f0fdf4" : "#fffbeb",
                       borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
                       <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>
-                        {item.hint}
+                        {item.hints?.[0] || item.solution?.tip}
                       </div>
                     </div>
                   )}
@@ -859,7 +814,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
             <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
             <span style={{ fontSize: 13, fontWeight: 700,
               color: score === items.length ? "#16a34a" : "#d97706" }}>
-              {items.length > 0 ? Math.round(score / items.length * 100) : 0}%
+              {Math.round(score / items.length * 100)}%
             </span>
           </div>
         )}
@@ -891,122 +846,714 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
 
 function CompPage({ set, sectionLabel, marks, onPageDone }) {
   const questions = set.questions || [];
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const startRef = useRef(Date.now());
+  const passage = set.passage || '';
 
-  function handleSubmit() {
-    if (submitted) return;
-    setSubmitted(true);
-    const t = Date.now() - startRef.current;
-    const results = questions.map(q => ({
-      id: q.id, topic: "Comprehension", sectionType: "Comprehension",
-      correct: answers[q.id] === q.answer,
-      timeTaken: Math.round(t / questions.length),
-    }));
-    onPageDone(results);
+  // answers: { [qId]: value }
+  // open/fill → string, mcq → option index or label string
+  // truefalse → 'True'|'False', sequence → {[itemIdx]: number}
+  const [answers, setAnswers]         = useState({});
+  const [selfCheck, setSelfCheck]     = useState({}); // open: 'yes'|'no'
+  const [submitted, setSubmitted]     = useState(false);
+  const [activeQ, setActiveQ]         = useState(null); // highlighted question id
+  const [highlightRange, setHighlightRange] = useState(null); // {text, type}
+  const passageRef = useRef(null);
+  const startRef   = useRef(Date.now());
+
+  // ── helpers ──────────────────────────────────────────────
+  function normalize(s) { return String(s || '').trim().toLowerCase(); }
+
+  function getFormat(q) {
+    if (q.format) return q.format;
+    if (q.options && q.options.length) return 'mcq';
+    return 'open';
   }
 
-  const allAnswered = questions.every(q => answers[q.id] !== undefined);
-  const score = submitted ? questions.filter(q => answers[q.id] === q.answer).length : 0;
+  function isAutoGraded(q) {
+    const f = getFormat(q);
+    return ['mcq', 'truefalse', 'sequence', 'fill'].includes(f);
+  }
 
-  return (
-    <div style={S.page}>
-      <div style={{ padding: "14px 20px 0" }}>
-        <div style={S.sectionHeader}>{sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})</div>
-      </div>
+  function isAnswered(q) {
+    const f = getFormat(q);
+    const val = answers[q.id];
+    if (f === 'sequence') {
+      const items = q.sequenceItems || q.items || [];
+      return items.every((_, i) => answers[q.id + '_seq_' + i] !== undefined);
+    }
+    if (f === 'truefalse_reason') {
+      return val !== undefined && (answers[q.id + '_reason'] || '').trim().length > 0;
+    }
+    if (f === 'open' || f === 'fill') return (val || '').trim().length > 0;
+    return val !== undefined;
+  }
 
-      <div style={{ padding: "0 20px 120px" }}>
-        {/* Passage */}
-        <div style={{
-          border: "1px solid #ddd", borderRadius: 8, padding: "14px 16px",
-          marginBottom: 16, fontSize: 14, fontFamily: EXAM_FONT, lineHeight: 2,
-        }}>
-          {set.passage}
-        </div>
+  const allAnswered = questions.every(q => isAnswered(q));
 
-        {questions.map((q, qi) => {
-          const chosen = answers[q.id];
-          const isCorrect = submitted && chosen === q.answer;
+  // ── highlight evidence in passage ────────────────────────
+  function extractEvidence(q) {
+    // Try solution.evidenceText first, then parse from steps[0]
+    if (q.solution?.evidenceText) return q.solution.evidenceText;
+    if (q.solution?.steps?.[0]) {
+      const m = q.solution.steps[0].match(/["""]([^"""]{6,})["""]/);
+      if (m) return m[1];
+      // "Paragraph N: 'text'" pattern
+      const m2 = q.solution.steps[0].match(/:\s*['""](.{6,})['""]$/);
+      if (m2) return m2[1];
+    }
+    return null;
+  }
 
+  function extractTrap(q) {
+    return q.solution?.trapText || null;
+  }
+
+  // Render passage with highlights
+  function renderPassage(q) {
+    if (!passage) return null;
+    const evidence = q ? extractEvidence(q) : null;
+    const trap     = q ? extractTrap(q) : null;
+
+    if (!evidence && !trap) {
+      return <span style={{ whiteSpace: 'pre-line', lineHeight: 2 }}>{passage}</span>;
+    }
+
+    // Split passage into segments and highlight
+    let segments = [{ text: passage, type: 'plain' }];
+
+    function applyHighlight(segs, target, type) {
+      if (!target) return segs;
+      const result = [];
+      segs.forEach(seg => {
+        if (seg.type !== 'plain') { result.push(seg); return; }
+        const idx = seg.text.indexOf(target);
+        if (idx === -1) { result.push(seg); return; }
+        if (idx > 0) result.push({ text: seg.text.slice(0, idx), type: 'plain' });
+        result.push({ text: target, type });
+        const after = seg.text.slice(idx + target.length);
+        if (after) result.push({ text: after, type: 'plain' });
+      });
+      return result;
+    }
+
+    segments = applyHighlight(segments, evidence, 'evidence');
+    segments = applyHighlight(segments, trap, 'trap');
+
+    const colors = {
+      evidence: { bg: '#DBEAFE', border: '#3B82F6', color: '#1E3A8A' }, // blue
+      trap:     { bg: '#FEF3C7', border: '#F59E0B', color: '#92400E' }, // amber
+      plain:    { bg: 'transparent', border: 'none', color: 'inherit' },
+    };
+
+    return (
+      <span style={{ whiteSpace: 'pre-line', lineHeight: 2 }}>
+        {segments.map((seg, i) => {
+          const c = colors[seg.type] || colors.plain;
+          if (seg.type === 'plain') return <span key={i}>{seg.text}</span>;
           return (
-            <div key={q.id} style={{ marginBottom: 16 }}>
-              <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                <span style={S.qNum}>{qi + 1}.</span>
-                <span style={S.qText}>{q.question}</span>
-              </div>
-
-              {(q.options || []).map((opt, i) => {
-                const isAns = i === q.answer;
-                const isSel = chosen === i;
-                return (
-                  <div key={i}
-                    onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: i }))}
-                    style={{
-                      ...S.optionRow,
-                      cursor: submitted ? "default" : "pointer",
-                      color: submitted ? (isAns ? "#16a34a" : isSel && !isAns ? "#dc2626" : "#000") : "#000",
-                      fontWeight: submitted && isAns ? 700 : "normal",
-                      background: !submitted && isSel ? "#dbeafe" : "transparent",
-                      borderRadius: 4, padding: "1px 4px",
-                    }}>
-                    <span style={{ minWidth: 28 }}>({i + 1})</span>
-                    <span>{opt}</span>
-                    {submitted && isAns && <span style={{ marginLeft: 4 }}></span>}
-                  </div>
-                );
-              })}
-
-              {submitted && (
-                <ExplanationBox
-                  correct={isCorrect}
-                  answer={q.options?.[q.answer]}
-                  explanation={q.hints?.[0]}
-                />
+            <span key={i} style={{
+              background: c.bg,
+              borderBottom: `2px solid ${c.border}`,
+              color: c.color,
+              fontWeight: 700,
+              borderRadius: 2,
+              padding: '0 2px',
+            }}>
+              {seg.text}
+              {seg.type === 'evidence' && (
+                <span style={{ fontSize: 10, color: c.border, marginLeft: 2,
+                  verticalAlign: 'super', fontWeight: 800 }}>
+                  ★
+                </span>
               )}
-
-              {qi < questions.length - 1 && <div style={S.divider} />}
-            </div>
+            </span>
           );
         })}
+      </span>
+    );
+  }
 
-        {submitted && (
-          <div style={{
-            background: "#f8fafc", border: "1px solid #e2e8f0",
-            borderRadius: 10, padding: "12px 16px", marginBottom: 16,
-            display: "flex", justifyContent: "space-between", alignItems: "center",
-          }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{questions.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: score === questions.length ? "#16a34a" : "#d97706" }}>
-              {Math.round(score / questions.length * 100)}%
-            </span>
+  // ── grading ───────────────────────────────────────────────
+  function gradeQuestion(q) {
+    const f = getFormat(q);
+    if (f === 'mcq') {
+      const chosen = answers[q.id];
+      const correct = q.answer;
+      // answer can be index number or label string like 'A','B','1','2'
+      if (typeof correct === 'number') return chosen === correct;
+      if (typeof correct === 'string') {
+        // label match: 'A','B' → options[0],[1]
+        const labelIdx = correct.toUpperCase().charCodeAt(0) - 65;
+        if (labelIdx >= 0 && labelIdx < (q.options || []).length) return chosen === labelIdx;
+        // numeric string
+        const n = parseInt(correct, 10);
+        if (!isNaN(n)) return chosen === n - 1 || chosen === n;
+      }
+      return false;
+    }
+    if (f === 'truefalse') {
+      return normalize(answers[q.id]) === normalize(q.answer);
+    }
+    if (f === 'sequence') {
+      const items = q.sequenceItems || q.items || [];
+      const correctOrder = q.answer; // e.g. [2,1,3] or '2,1,3'
+      if (!correctOrder) return false;
+      const correct = Array.isArray(correctOrder)
+        ? correctOrder
+        : String(correctOrder).split(',').map(Number);
+      return items.every((_, i) => {
+        const val = parseInt(answers[q.id + '_seq_' + i] || '0', 10);
+        return val === correct[i];
+      });
+    }
+    if (f === 'fill') {
+      return normalize(answers[q.id]) === normalize(q.answer);
+    }
+    // open / truefalse_reason: use self-check
+    return selfCheck[q.id] === 'yes';
+  }
+
+  // ── submit ────────────────────────────────────────────────
+  function handleSubmit() {
+    if (submitted || !allAnswered) return;
+    setSubmitted(true);
+    setActiveQ(questions[0]?.id || null);
+  }
+
+  function handleFinish() {
+    const t = Date.now() - startRef.current;
+    const results = questions.map(q => ({
+      id: q.id,
+      topic: 'Comprehension',
+      sectionType: 'Comprehension',
+      correct: gradeQuestion(q),
+      timeTaken: Math.round(t / Math.max(questions.length, 1)),
+    }));
+    onPageDone(results);
+    onPageDone(null, true);
+  }
+
+  const autoScore  = submitted ? questions.filter(q => isAutoGraded(q) && gradeQuestion(q)).length : 0;
+  const autoTotal  = questions.filter(q => isAutoGraded(q)).length;
+  const openTotal  = questions.filter(q => !isAutoGraded(q)).length;
+  const openDone   = Object.keys(selfCheck).length;
+  const canFinish  = submitted && (openTotal === 0 || openDone >= openTotal);
+
+  // ── render question input ─────────────────────────────────
+  function renderInput(q) {
+    const f = getFormat(q);
+    const isActive = activeQ === q.id;
+
+    // MCQ
+    if (f === 'mcq') {
+      const opts = (q.options || []).map(o =>
+        typeof o === 'string' ? o : (o.text || o.label || String(o))
+      );
+      const chosen = answers[q.id];
+      const correct = (() => {
+        const a = q.answer;
+        if (typeof a === 'number') return a;
+        if (typeof a === 'string') {
+          const li = a.toUpperCase().charCodeAt(0) - 65;
+          if (li >= 0 && li < opts.length) return li;
+          const n = parseInt(a, 10);
+          if (!isNaN(n)) return n >= 1 ? n - 1 : n;
+        }
+        return 0;
+      })();
+
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+          {opts.map((opt, i) => {
+            const label = String.fromCharCode(65 + i);
+            const isSel = chosen === i;
+            const isAns = submitted && i === correct;
+            const isWrong = submitted && isSel && i !== correct;
+            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
+            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
+            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
+            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+            return (
+              <div key={i} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: i }))}
+                style={{ display: 'flex', alignItems: 'center', gap: 10,
+                  background: bg, border: `1.5px solid ${border}`, borderRadius: 10,
+                  padding: '9px 14px', cursor: submitted ? 'default' : 'pointer',
+                  transition: 'all 0.15s' }}>
+                <span style={{ width: 24, height: 24, borderRadius: '50%',
+                  background: (isAns || (!submitted && isSel)) ? border : '#E2E8F0',
+                  color: (isAns || (!submitted && isSel)) ? '#fff' : '#64748B',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  fontSize: 12, fontWeight: 800, flexShrink: 0 }}>{label}</span>
+                <span style={{ fontSize: 14, fontWeight: isSel || isAns ? 700 : 400,
+                  color: col, flex: 1 }}>{opt}</span>
+                {isAns && <span style={{ fontSize: 16 }}>✅</span>}
+                {isWrong && <span style={{ fontSize: 16 }}>❌</span>}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // TRUE/FALSE
+    if (f === 'truefalse') {
+      const val = answers[q.id];
+      const correct = q.answer; // 'True' or 'False'
+      return (
+        <div style={{ display: 'flex', gap: 10 }}>
+          {['True', 'False'].map(opt => {
+            const isSel = val === opt;
+            const isAns = submitted && normalize(opt) === normalize(correct);
+            const isWrong = submitted && isSel && normalize(opt) !== normalize(correct);
+            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
+            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
+            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
+            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+            return (
+              <button key={opt} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
+                style={{ flex: 1, padding: '10px', borderRadius: 10, border: `2px solid ${border}`,
+                  background: bg, color: col, fontSize: 14, fontWeight: 700,
+                  cursor: submitted ? 'default' : 'pointer', transition: 'all 0.15s' }}>
+                {opt} {isAns ? '✅' : ''}{isWrong ? '❌' : ''}
+              </button>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // TRUE/FALSE + REASON
+    if (f === 'truefalse_reason') {
+      const val = answers[q.id];
+      const reason = answers[q.id + '_reason'] || '';
+      const correct = typeof q.answer === 'object' ? q.answer?.verdict : q.answer;
+      const modelReason = typeof q.answer === 'object' ? q.answer?.reason : (q.solution?.steps?.[0] || '');
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          <div style={{ display: 'flex', gap: 10 }}>
+            {['True', 'False'].map(opt => {
+              const isSel = val === opt;
+              const isAns = submitted && normalize(opt) === normalize(correct);
+              const isWrong = submitted && isSel && !isAns;
+              let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
+              if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
+              if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
+              if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+              return (
+                <button key={opt} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
+                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: `2px solid ${border}`,
+                    background: bg, color: col, fontSize: 14, fontWeight: 700,
+                    cursor: submitted ? 'default' : 'pointer' }}>
+                  {opt} {isAns ? '✅' : ''}{isWrong ? '❌' : ''}
+                </button>
+              );
+            })}
+          </div>
+          {!submitted ? (
+            <textarea value={reason} rows={2}
+              onChange={e => setAnswers(a => ({ ...a, [q.id + '_reason']: e.target.value }))}
+              placeholder="Give a reason for your answer..."
+              style={{ width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 13,
+                border: `1.5px solid ${reason ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+          ) : (
+            <div>
+              <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4 }}>Your reason:</div>
+              <div style={{ background: '#F8FAFC', borderRadius: 8, padding: '8px 12px',
+                fontSize: 13, color: '#334155', marginBottom: 8 }}>{reason || '(no reason given)'}</div>
+              {modelReason && (
+                <div style={{ background: '#DCFCE7', border: '1px solid #16A34A',
+                  borderRadius: 8, padding: '8px 12px', fontSize: 13, color: '#14532D' }}>
+                  <strong>Model reason:</strong> {modelReason}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // SEQUENCE
+    if (f === 'sequence') {
+      const items = q.sequenceItems || q.items || [];
+      const correctOrder = q.answer;
+      const correct = Array.isArray(correctOrder)
+        ? correctOrder
+        : String(correctOrder || '').split(',').map(Number);
+      return (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+          {items.map((item, i) => {
+            const key = q.id + '_seq_' + i;
+            const val = answers[key];
+            const correctNum = correct[i];
+            const isRight = submitted && parseInt(val || '0', 10) === correctNum;
+            const isWrong = submitted && !isRight;
+            return (
+              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10,
+                background: submitted ? (isRight ? '#DCFCE7' : '#FEE2E2') : '#F8FAFC',
+                border: `1.5px solid ${submitted ? (isRight ? '#16A34A' : '#DC2626') : '#CBD5E1'}`,
+                borderRadius: 10, padding: '10px 14px' }}>
+                <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
+                  {[1, 2, 3].map(n => (
+                    <button key={n} onClick={() => !submitted && setAnswers(a => ({ ...a, [key]: n }))}
+                      style={{ width: 28, height: 28, borderRadius: '50%', border: 'none',
+                        background: val === n ? '#1E3A8E' : '#E2E8F0',
+                        color: val === n ? '#fff' : '#475569',
+                        fontSize: 13, fontWeight: 700, cursor: submitted ? 'default' : 'pointer' }}>
+                      {n}
+                    </button>
+                  ))}
+                </div>
+                <span style={{ fontSize: 13, flex: 1, color: '#334155' }}>{item}</span>
+                {submitted && <span style={{ fontSize: 14 }}>{isRight ? '✅' : `❌ (${correctNum})`}</span>}
+              </div>
+            );
+          })}
+        </div>
+      );
+    }
+
+    // FILL
+    if (f === 'fill') {
+      const val = answers[q.id] || '';
+      const isRight = submitted && normalize(val) === normalize(q.answer);
+      const isWrong = submitted && !isRight;
+      return (
+        <div>
+          {!submitted ? (
+            <input type="text" value={val}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              placeholder="Fill in the blank..."
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
+                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', boxSizing: 'border-box' }} />
+          ) : (
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+              <div style={{ padding: '6px 14px', borderRadius: 8, fontSize: 14, fontWeight: 600,
+                background: isRight ? '#DCFCE7' : '#FEE2E2',
+                border: `1.5px solid ${isRight ? '#16A34A' : '#DC2626'}`,
+                color: isRight ? '#14532D' : '#7F1D1D' }}>
+                {val || '(blank)'} {isRight ? '✅' : '❌'}
+              </div>
+              {isWrong && (
+                <div style={{ padding: '6px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
+                  background: '#DCFCE7', border: '1.5px solid #16A34A', color: '#14532D' }}>
+                  ✏️ {q.answer}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // OPEN (default) — short answer, vocabulary, full sentence
+    const val = answers[q.id] || '';
+    const isLong = (q.stem || '').toLowerCase().includes('sentence') ||
+                   (q.marks || 1) >= 2;
+    return (
+      <div>
+        {!submitted ? (
+          isLong ? (
+            <textarea value={val} rows={3}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              placeholder="Write your answer in a complete sentence..."
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
+                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+          ) : (
+            <input type="text" value={val}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              placeholder="Write your answer..."
+              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
+                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
+                outline: 'none', boxSizing: 'border-box' }} />
+          )
+        ) : (
+          <div>
+            {/* Student answer */}
+            <div style={{ marginBottom: 8 }}>
+              <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4, fontWeight: 700 }}>
+                Your answer:
+              </div>
+              <div style={{ background: '#F8FAFC', border: '1.5px solid #CBD5E1',
+                borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#334155',
+                minHeight: 36 }}>
+                {val || '(no answer given)'}
+              </div>
+            </div>
+            {/* Model answer */}
+            <div style={{ marginBottom: 10 }}>
+              <div style={{ fontSize: 11, color: '#16A34A', marginBottom: 4, fontWeight: 700 }}>
+                Model answer:
+              </div>
+              <div style={{ background: '#DCFCE7', border: '1.5px solid #16A34A',
+                borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#14532D',
+                fontWeight: 600, minHeight: 36 }}>
+                {q.answer || '—'}
+              </div>
+            </div>
+            {/* Answer format tip */}
+            {q.solution?.answerFormat && (
+              <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE',
+                borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#1D4ED8',
+                marginBottom: 8 }}>
+                💡 Format tip: {q.solution.answerFormat}
+              </div>
+            )}
+            {/* Self-check */}
+            {!selfCheck[q.id] ? (
+              <div>
+                <div style={{ fontSize: 12, color: '#64748B', marginBottom: 6, fontWeight: 600 }}>
+                  Compare your answer with the model answer:
+                </div>
+                <div style={{ display: 'flex', gap: 8 }}>
+                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'yes' }))}
+                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #16A34A',
+                      background: '#F0FDF4', color: '#16A34A', fontWeight: 700,
+                      fontSize: 13, cursor: 'pointer' }}>
+                    ✅ I got it right
+                  </button>
+                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'no' }))}
+                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #DC2626',
+                      background: '#FEF2F2', color: '#DC2626', fontWeight: 700,
+                      fontSize: 13, cursor: 'pointer' }}>
+                    ❌ I need practice
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8,
+                background: selfCheck[q.id] === 'yes' ? '#DCFCE7' : '#FEE2E2',
+                border: `1px solid ${selfCheck[q.id] === 'yes' ? '#16A34A' : '#DC2626'}`,
+                borderRadius: 8, padding: '6px 12px', fontSize: 13,
+                color: selfCheck[q.id] === 'yes' ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
+                {selfCheck[q.id] === 'yes' ? '✅ Self-assessed: Correct' : '❌ Self-assessed: Need practice'}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  // ── render evidence box (after submit) ───────────────────
+  function renderEvidenceBox(q) {
+    if (!submitted) return null;
+    const evidence = extractEvidence(q);
+    const trap = extractTrap(q);
+    const tip = q.solution?.tip || q.hints?.[0] || '';
+    const steps = q.solution?.steps || [];
+    const keywords = q.solution?.keywords || [];
+
+    return (
+      <div style={{ marginTop: 10 }}>
+        {/* Tip */}
+        {tip && (
+          <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A',
+            borderRadius: 8, padding: '8px 12px', fontSize: 12,
+            color: '#92400E', marginBottom: 8 }}>
+            <strong>💡 Tip:</strong> {tip}
           </div>
         )}
 
-        {!submitted ? (
-          <button onClick={handleSubmit}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
-              background: allAnswered ? "#1e3a6e" : "#94a3b8",
-              color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
-              cursor: allAnswered ? "pointer" : "not-allowed", fontFamily: EXAM_BODY,
-            }}>
-            Submit
-          </button>
-        ) : (
-          <button onClick={() => onPageDone(null, true)}
-            style={{
-              width: "100%", padding: "14px", borderRadius: 10,
-              background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
-            }}>
-            Next Section
-          </button>
+        {/* Evidence in passage */}
+        {evidence && (
+          <div
+            onClick={() => setActiveQ(q.id)}
+            style={{ background: '#EFF6FF', border: '1px solid #BFDBFE',
+              borderRadius: 8, padding: '8px 12px', fontSize: 12,
+              color: '#1E40AF', marginBottom: 6, cursor: 'pointer' }}>
+            <strong>🔵 Evidence in passage:</strong>
+            <div style={{ marginTop: 4, fontStyle: 'italic',
+              borderLeft: '3px solid #3B82F6', paddingLeft: 8, marginLeft: 4 }}>
+              "...{evidence}..."
+            </div>
+            <div style={{ fontSize: 11, color: '#3B82F6', marginTop: 4 }}>
+              ↑ Tap to highlight in passage
+            </div>
+          </div>
+        )}
+
+        {/* Trap warning */}
+        {trap && (
+          <div style={{ background: '#FEF3C7', border: '1px solid #F59E0B',
+            borderRadius: 8, padding: '8px 12px', fontSize: 12,
+            color: '#92400E', marginBottom: 6 }}>
+            <strong>⚠️ Watch out:</strong> "{trap}"
+            {q.solution?.trapExplanation && (
+              <div style={{ marginTop: 4 }}>{q.solution.trapExplanation}</div>
+            )}
+          </div>
+        )}
+
+        {/* Keywords */}
+        {keywords.length > 0 && (
+          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
+            <span style={{ fontSize: 11, color: '#64748B', fontWeight: 700 }}>
+              🔑 Key words:
+            </span>
+            {keywords.map((kw, i) => (
+              <span key={i} style={{ background: '#F0FDF4', border: '1px solid #86EFAC',
+                borderRadius: 12, padding: '2px 8px', fontSize: 11,
+                color: '#166534', fontWeight: 600 }}>
+                {kw}
+              </span>
+            ))}
+          </div>
+        )}
+
+        {/* Steps */}
+        {steps.length > 0 && (
+          <div style={{ background: '#F8FAFC', borderRadius: 8,
+            padding: '8px 12px', fontSize: 12, color: '#475569' }}>
+            {steps.map((step, i) => (
+              <div key={i} style={{ marginBottom: i < steps.length - 1 ? 4 : 0 }}>
+                {i + 1}. {step}
+              </div>
+            ))}
+          </div>
         )}
       </div>
+    );
+  }
+
+  // ── layout: SplitView (passage left, questions right) ────
+  const activeQuestion = questions.find(q => q.id === activeQ) || null;
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+
+  const passagePanel = (
+    <div style={{ fontSize: 14, fontFamily: "'Times New Roman', serif",
+      lineHeight: 2, color: '#1E293B' }}>
+      <div style={{ fontSize: 11, fontWeight: 800, color: '#64748B',
+        textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
+        📖 Read the Passage
+      </div>
+      {submitted && activeQuestion ? (
+        <div>
+          {renderPassage(activeQuestion)}
+          <div style={{ marginTop: 8, fontSize: 11, color: '#3B82F6', fontWeight: 600 }}>
+            🔵 Blue = answer evidence &nbsp; 🟠 Orange = trap
+          </div>
+        </div>
+      ) : (
+        <div style={{ whiteSpace: 'pre-line' }}>{passage}</div>
+      )}
+    </div>
+  );
+
+  const questionsPanel = (
+    <div style={{ paddingBottom: 100 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between',
+        alignItems: 'center', marginBottom: 12 }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: '#64748B' }}>
+          {sectionLabel} ({marks} mark{marks !== 1 ? 's' : ''})
+        </span>
+        {submitted && (
+          <span style={{ fontSize: 13, fontWeight: 800,
+            color: autoScore === autoTotal ? '#16A34A' : '#D97706' }}>
+            Auto: {autoScore}/{autoTotal}
+            {openTotal > 0 && ` · Self: ${openDone}/${openTotal}`}
+          </span>
+        )}
+      </div>
+
+      {questions.map((q, qi) => {
+        const f = getFormat(q);
+        const isActive = activeQ === q.id;
+
+        return (
+          <div key={q.id}
+            onClick={() => submitted && setActiveQ(q.id)}
+            style={{ background: '#fff', borderRadius: 14,
+              padding: '14px 16px', marginBottom: 12,
+              boxShadow: isActive && submitted
+                ? '0 0 0 3px #3B82F6, 0 2px 8px rgba(0,0,0,0.08)'
+                : '0 2px 8px rgba(0,0,0,0.06)',
+              border: isActive && submitted ? '1.5px solid #3B82F6' : '1.5px solid transparent',
+              cursor: submitted ? 'pointer' : 'default',
+              transition: 'box-shadow 0.15s, border 0.15s' }}>
+
+            {/* Question header */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 10,
+              alignItems: 'flex-start' }}>
+              <span style={{ background: isActive && submitted ? '#3B82F6' : '#E2E8F0',
+                color: isActive && submitted ? '#fff' : '#475569',
+                borderRadius: 8, padding: '2px 8px', fontSize: 12, fontWeight: 800,
+                flexShrink: 0, transition: 'all 0.15s' }}>
+                Q{q.questionNo || qi + 1}
+              </span>
+              {q.marks && (
+                <span style={{ fontSize: 11, color: '#94A3B8', flexShrink: 0,
+                  alignSelf: 'center' }}>
+                  [{q.marks}m]
+                </span>
+              )}
+              <span style={{ fontSize: 13, color: '#1E293B', lineHeight: 1.6,
+                fontWeight: 600 }}>
+                {q.stem || q.question || ''}
+              </span>
+            </div>
+
+            {/* Input area */}
+            {renderInput(q)}
+
+            {/* Evidence + explanation (after submit) */}
+            {renderEvidenceBox(q)}
+          </div>
+        );
+      })}
+
+      {/* Submit / Finish */}
+      {!submitted ? (
+        <button onClick={handleSubmit} disabled={!allAnswered}
+          style={{ width: '100%', padding: '14px', borderRadius: 12,
+            background: allAnswered ? '#1E3A6E' : '#94A3B8',
+            color: '#fff', border: 'none', fontSize: 15, fontWeight: 700,
+            cursor: allAnswered ? 'pointer' : 'not-allowed' }}>
+          {allAnswered ? 'Submit Answers' : 'Answer all questions to submit'}
+        </button>
+      ) : canFinish ? (
+        <button onClick={handleFinish}
+          style={{ width: '100%', padding: '14px', borderRadius: 12,
+            background: '#1E3A6E', color: '#fff', border: 'none',
+            fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
+          Next Section →
+        </button>
+      ) : (
+        <div style={{ textAlign: 'center', padding: '12px',
+          color: '#64748B', fontSize: 13 }}>
+          {openTotal > 0
+            ? `Please self-assess your open answers before continuing (${openDone}/${openTotal} done)`
+            : 'Loading...'}
+        </div>
+      )}
+    </div>
+  );
+
+  // Use SplitViewLayout if available, else stack
+  if (typeof SplitViewLayout !== 'undefined') {
+    return (
+      <SplitViewLayout
+        leftContent={passagePanel}
+        rightContent={questionsPanel}
+        leftLabel="Read the Passage"
+        rightLabel="Questions"
+        headerHeight={80}
+      />
+    );
+  }
+
+  return (
+    <div style={{ padding: '0 0 80px' }}>
+      <div style={{ padding: '14px 16px',
+        borderBottom: '1px solid #E2E8F0', marginBottom: 12 }}>
+        {passagePanel}
+      </div>
+      <div style={{ padding: '0 16px' }}>{questionsPanel}</div>
     </div>
   );
 }
+
 
 // 
 //  EXAM SUMMARY
