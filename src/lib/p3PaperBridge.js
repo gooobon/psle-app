@@ -170,6 +170,13 @@ function detectCompFormat(q, options) {
   // 데이터의 format 필드가 'open'으로 잘못 일괄 태깅된 경우가 많으므로
   // question/stem 내용을 항상 재검사하여 실제 유형을 감지한다.
   const declared = q.format || q.questionType || null;
+
+  // New 8-type schema formats -- bypass inference and return directly
+  const NEW_SCHEMA_FORMATS = [
+    'fill_blank','fill_word','ab_circle','true_false','tf_reason','open_sentence'
+  ];
+  if (declared && NEW_SCHEMA_FORMATS.includes(declared)) return declared;
+
   const qRaw = String(q.question || q.stem || q.q || "");
   const qText = qRaw.toLowerCase();
   const ansStr = String(q.answer ?? "");
@@ -256,7 +263,9 @@ function toEnglishCompSet(set) {
     const isMcq = fmt === "mcq";
     const answer = isMcq
       ? parseAnswerIndex(q.answer, options)
-      : String(q.answer ?? q.correctAnswer ?? "");
+      : Array.isArray(q.answer)
+        ? q.answer
+        : String(q.answer ?? q.correctAnswer ?? "");
 
     // For sequence format, extract the event items from the question text
     let sequenceItems = q.sequenceItems || q.items || null;
@@ -274,17 +283,21 @@ function toEnglishCompSet(set) {
     }
 
     return {
-      id:            q.id || `comp_${i}`,
-      questionNo:    q.questionNo || String(i + 1),
-      format:        fmt,
-      marks:         q.marks || 1,
-      question:      q.question || q.stem || q.q || "",
-      stem:          q.question || q.stem || q.q || "",
-      options:       tickOptions || options,
+      id:               q.id || `comp_${i}`,
+      questionNo:       q.questionNo || String(i + 1),
+      format:           fmt,
+      marks:            q.marks || 1,
+      question:         q.question || q.stem || q.q || "",
+      stem:             q.question || q.stem || q.q || "",
+      options:          tickOptions || options,
       answer,
       sequenceItems,
-      hints:         q.hints || (q.solution?.tip ? [q.solution.tip] : []),
-      solution:      q.solution || null,
+      statements:       q.statements       || null,
+      abSentence:       q.abSentence       || null,
+      abChoices:        q.abChoices        || null,
+      acceptableAnswers: q.acceptableAnswers || null,
+      hints:            q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+      solution:         q.solution || null,
     };
   });
 

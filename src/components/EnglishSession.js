@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 import React, { useState, useRef } from "react";
 import {
   C, TTS, SpeakBtn, SFX,
@@ -824,188 +824,116 @@ function CompSection({ sets, sectionType, meta, onDone }) {
 }
 
 function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
- set, sectionLabel, marks, onPageDone }) {
   const questions = set.questions || [];
-  const passage = set.passage || '';
+  const passage   = set.passage   || '';
 
-  // answers: { [qId]: value }
-  // open/fill → string, mcq → option index or label string
-  // truefalse → 'True'|'False', sequence → {[itemIdx]: number}
-  const [answers, setAnswers]         = useState({});
-  const [selfCheck, setSelfCheck]     = useState({}); // open: 'yes'|'no'
-  const [submitted, setSubmitted]     = useState(false);
-  const [activeQ, setActiveQ]         = useState(null); // highlighted question id
-  const [highlightRange, setHighlightRange] = useState(null); // {text, type}
-  const passageRef = useRef(null);
-  const startRef   = useRef(Date.now());
+  const [answers,   setAnswers]   = useState({});
+  const [submitted, setSubmitted] = useState(false);
+  const [activeQ,   setActiveQ]   = useState(null);
+  const startRef = useRef(Date.now());
 
-  // ── helpers ──────────────────────────────────────────────
-  function normalize(s) { return String(s || '').trim().toLowerCase(); }
+  // Exam typography tokens -- no emojis, no bright colors
+  const EX = {
+    border: '1.5px solid #1a1a1a',
+    thin:   '1px solid #1a1a1a',
+    font:   "'Times New Roman', Georgia, serif",
+    sans:   'Arial, sans-serif',
+    ink:    '#1a1a1a',
+    correct:'#dfeede',
+    wrong:  '#f5dede',
+    sel:    '#e9e9e9',
+    muted:  '#555',
+    faint:  '#888',
+  };
 
+  // -------------------------------------------------
+  // Format detection -- new 8-type schema takes priority
+  // -------------------------------------------------
   function getFormat(q) {
-    if (q.format) return q.format;
-    if (q.options && q.options.length) return 'mcq';
-    return 'open';
+    const f = q.format || '';
+    const NEW_FORMATS = ['fill_blank','fill_word','mcq','ab_circle','true_false','sequence','tf_reason','open_sentence'];
+    if (NEW_FORMATS.includes(f)) return f;
+    // Legacy aliases from old schema
+    if (f === 'truefalse')         return 'true_false';
+    if (f === 'truefalse_reason')  return 'tf_reason';
+    if (f === 'fill' || f === 'fill_short') return 'fill_blank';
+    if (f === 'open' || f === 'open_multi') return 'open_sentence';
+    // Infer from structure fields
+    if (q.statements && q.statements.length) return 'true_false';
+    if (q.abSentence || q.abChoices)         return 'ab_circle';
+    if (q.sequenceItems && q.sequenceItems.length) return 'sequence';
+    if (q.options && q.options.length >= 2)  return 'mcq';
+    return 'open_sentence';
+  }
+
+  function norm(s) {
+    return String(s || '').trim().toLowerCase().replace(/[.,!?'"]/g, '');
   }
 
   function isAutoGraded(q) {
-    const f = getFormat(q);
-    return ['mcq', 'truefalse', 'sequence', 'fill', 'fill_short', 'tick_choice'].includes(f);
+    return ['mcq','ab_circle','true_false','sequence','fill_blank','fill_word'].includes(getFormat(q));
   }
 
   function isAnswered(q) {
-    const f = getFormat(q);
+    const f   = getFormat(q);
     const val = answers[q.id];
+    if (f === 'true_false') {
+      const stmts = q.statements || [];
+      return stmts.length > 0 && stmts.every((_, si) => (val || [])[si] !== undefined);
+    }
     if (f === 'sequence') {
       const items = q.sequenceItems || q.items || [];
-      return items.every((_, i) => answers[q.id + '_seq_' + i] !== undefined);
+      return items.length > 0 && items.every((_, i) => answers[q.id + '_seq_' + i] !== undefined);
     }
-    if (f === 'truefalse_reason') {
+    if (f === 'tf_reason') {
       return val !== undefined && (answers[q.id + '_reason'] || '').trim().length > 0;
     }
-    if (f === 'open' || f === 'fill' || f === 'fill_short') return (val || '').trim().length > 0;
-    if (f === 'open_multi') return (val || '').trim().length > 0;
-    if (f === 'tick_choice') {
-      try { return JSON.parse(val || '[]').length > 0; } catch { return false; }
-    }
-    return val !== undefined;
+    return val !== undefined && String(val).trim().length > 0;
   }
 
-  const allAnswered = questions.every(q => isAnswered(q));
+  const allAnswered = questions.length > 0 && questions.every(isAnswered);
 
-  // ── highlight evidence in passage ────────────────────────
-  function extractEvidence(q) {
-    // Try solution.evidenceText first, then parse from steps[0]
-    if (q.solution?.evidenceText) return q.solution.evidenceText;
-    if (q.solution?.steps?.[0]) {
-      const m = q.solution.steps[0].match(/["""]([^"""]{6,})["""]/);
-      if (m) return m[1];
-      // "Paragraph N: 'text'" pattern
-      const m2 = q.solution.steps[0].match(/:\s*['""](.{6,})['""]$/);
-      if (m2) return m2[1];
+  // -------------------------------------------------
+  // Grading
+  // -------------------------------------------------
+  function correctIdxForMcq(q) {
+    const opts = (q.options || []).map(o => typeof o === 'string' ? o : String(o.text || o));
+    const a = q.answer;
+    if (typeof a === 'number') return a;
+    if (typeof a === 'string') {
+      const li = a.toUpperCase().charCodeAt(0) - 65;
+      if (li >= 0 && li < opts.length) return li;
+      const n = parseInt(a, 10);
+      if (!isNaN(n)) return n >= 1 ? n - 1 : n;
     }
-    return null;
+    return 0;
   }
 
-  function extractTrap(q) {
-    return q.solution?.trapText || null;
-  }
-
-  // Render passage with highlights
-  function renderPassage(q) {
-    if (!passage) return null;
-    const evidence = q ? extractEvidence(q) : null;
-    const trap     = q ? extractTrap(q) : null;
-
-    if (!evidence && !trap) {
-      return <span style={{ whiteSpace: 'pre-line', lineHeight: 2 }}>{passage}</span>;
-    }
-
-    // Split passage into segments and highlight
-    let segments = [{ text: passage, type: 'plain' }];
-
-    function applyHighlight(segs, target, type) {
-      if (!target) return segs;
-      const result = [];
-      segs.forEach(seg => {
-        if (seg.type !== 'plain') { result.push(seg); return; }
-        const idx = seg.text.indexOf(target);
-        if (idx === -1) { result.push(seg); return; }
-        if (idx > 0) result.push({ text: seg.text.slice(0, idx), type: 'plain' });
-        result.push({ text: target, type });
-        const after = seg.text.slice(idx + target.length);
-        if (after) result.push({ text: after, type: 'plain' });
-      });
-      return result;
-    }
-
-    segments = applyHighlight(segments, evidence, 'evidence');
-    segments = applyHighlight(segments, trap, 'trap');
-
-    const colors = {
-      evidence: { bg: '#DBEAFE', border: '#3B82F6', color: '#1E3A8A' }, // blue
-      trap:     { bg: '#FEF3C7', border: '#F59E0B', color: '#92400E' }, // amber
-      plain:    { bg: 'transparent', border: 'none', color: 'inherit' },
-    };
-
-    return (
-      <span style={{ whiteSpace: 'pre-line', lineHeight: 2 }}>
-        {segments.map((seg, i) => {
-          const c = colors[seg.type] || colors.plain;
-          if (seg.type === 'plain') return <span key={i}>{seg.text}</span>;
-          return (
-            <span key={i} style={{
-              background: c.bg,
-              borderBottom: `2px solid ${c.border}`,
-              color: c.color,
-              fontWeight: 700,
-              borderRadius: 2,
-              padding: '0 2px',
-            }}>
-              {seg.text}
-              {seg.type === 'evidence' && (
-                <span style={{ fontSize: 10, color: c.border, marginLeft: 2,
-                  verticalAlign: 'super', fontWeight: 800 }}>
-                  ★
-                </span>
-              )}
-            </span>
-          );
-        })}
-      </span>
-    );
-  }
-
-  // ── grading ───────────────────────────────────────────────
   function gradeQuestion(q) {
-    const f = getFormat(q);
-    if (f === 'mcq') {
-      const chosen = answers[q.id];
-      const correct = q.answer;
-      // answer can be index number or label string like 'A','B','1','2'
-      if (typeof correct === 'number') return chosen === correct;
-      if (typeof correct === 'string') {
-        // label match: 'A','B' → options[0],[1]
-        const labelIdx = correct.toUpperCase().charCodeAt(0) - 65;
-        if (labelIdx >= 0 && labelIdx < (q.options || []).length) return chosen === labelIdx;
-        // numeric string
-        const n = parseInt(correct, 10);
-        if (!isNaN(n)) return chosen === n - 1 || chosen === n;
-      }
-      return false;
-    }
-    if (f === 'truefalse') {
-      return normalize(answers[q.id]) === normalize(q.answer);
+    const f   = getFormat(q);
+    const val = answers[q.id];
+    if (f === 'mcq')       return val === correctIdxForMcq(q);
+    if (f === 'ab_circle') return norm(val) === norm(q.answer);
+    if (f === 'true_false') {
+      const correct = Array.isArray(q.answer) ? q.answer : [q.answer];
+      return correct.every((a, i) => norm((val || [])[i]) === norm(a));
     }
     if (f === 'sequence') {
-      const items = q.sequenceItems || q.items || [];
-      const correctOrder = q.answer; // e.g. [2,1,3] or '2,1,3'
-      if (!correctOrder) return false;
-      const correct = Array.isArray(correctOrder)
-        ? correctOrder
-        : String(correctOrder).split(',').map(Number);
-      return items.every((_, i) => {
-        const val = parseInt(answers[q.id + '_seq_' + i] || '0', 10);
-        return val === correct[i];
-      });
+      const items   = q.sequenceItems || q.items || [];
+      const correct = Array.isArray(q.answer) ? q.answer : String(q.answer || '').split(',').map(Number);
+      return items.every((_, i) => parseInt(answers[q.id + '_seq_' + i] || '0', 10) === correct[i]);
     }
-    if (f === 'fill' || f === 'fill_short') {
-      return normalize(answers[q.id]) === normalize(q.answer);
+    if (f === 'fill_blank' || f === 'fill_word') {
+      const accept = [q.answer, ...(q.acceptableAnswers || [])].filter(Boolean);
+      return accept.some(a => norm(val) === norm(a));
     }
-    if (f === 'tick_choice') {
-      try {
-        const selected = JSON.parse(answers[q.id] || '[]');
-        const correctList = String(q.answer || '').toLowerCase().split(/[,，]+/).map(s => s.trim());
-        const selLower = selected.map(s => s.toLowerCase());
-        return correctList.every(c => selLower.some(s => s.includes(c) || c.includes(s))) &&
-               selLower.every(s => correctList.some(c => s.includes(c) || c.includes(s)));
-      } catch { return false; }
-    }
-    // open / truefalse_reason: use self-check
-    return selfCheck[q.id] === 'yes';
+    if (f === 'tf_reason') return norm(val) === norm(q.answer);
+    return false; // open_sentence -- not auto-graded
   }
 
-  // ── submit ────────────────────────────────────────────────
+  // -------------------------------------------------
+  // Submit / Finish
+  // -------------------------------------------------
   function handleSubmit() {
     if (submitted || !allAnswered) return;
     setSubmitted(true);
@@ -1015,367 +943,396 @@ function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
   function handleFinish() {
     const t = Date.now() - startRef.current;
     const results = questions.map(q => ({
-      id: q.id,
-      topic: 'Comprehension',
+      id:          q.id,
+      topic:       'Comprehension',
       sectionType: 'Comprehension',
-      correct: gradeQuestion(q),
-      timeTaken: Math.round(t / Math.max(questions.length, 1)),
+      correct:     gradeQuestion(q),
+      timeTaken:   Math.round(t / Math.max(questions.length, 1)),
     }));
     onPageDone(results);
     onPageDone(null, true);
   }
 
-  const autoScore  = submitted ? questions.filter(q => isAutoGraded(q) && gradeQuestion(q)).length : 0;
-  const autoTotal  = questions.filter(q => isAutoGraded(q)).length;
-  const openTotal  = questions.filter(q => !isAutoGraded(q)).length;
-  const openDone   = Object.keys(selfCheck).length;
-  const canFinish  = submitted && (openTotal === 0 || openDone >= openTotal);
+  // -------------------------------------------------
+  // Passage with post-submit highlights
+  // -------------------------------------------------
+  function renderPassageText(aq) {
+    if (!passage) return null;
+    const evidence = aq?.solution?.evidence || null;
+    const trap     = aq?.solution?.trap     || null;
+    if (!evidence && !trap) {
+      return <span style={{ whiteSpace: 'pre-line', lineHeight: 2.05 }}>{passage}</span>;
+    }
+    let segs = [{ text: passage, type: 'plain' }];
+    function applyHl(segArr, target, type) {
+      if (!target) return segArr;
+      const out = [];
+      segArr.forEach(seg => {
+        if (seg.type !== 'plain') { out.push(seg); return; }
+        const idx = seg.text.indexOf(target);
+        if (idx === -1) { out.push(seg); return; }
+        if (idx > 0) out.push({ text: seg.text.slice(0, idx), type: 'plain' });
+        out.push({ text: target, type });
+        const after = seg.text.slice(idx + target.length);
+        if (after) out.push({ text: after, type: 'plain' });
+      });
+      return out;
+    }
+    segs = applyHl(segs, evidence, 'evidence');
+    segs = applyHl(segs, trap,     'trap');
+    return (
+      <span style={{ whiteSpace: 'pre-line', lineHeight: 2.05 }}>
+        {segs.map((seg, i) => {
+          if (seg.type === 'plain')
+            return <span key={i}>{seg.text}</span>;
+          if (seg.type === 'evidence')
+            return <span key={i} style={{ borderBottom: '2px solid #1a1a1a', fontWeight: 700 }}>{seg.text}</span>;
+          return <span key={i} style={{ borderBottom: '1px dashed #999', fontStyle: 'italic' }}>{seg.text}</span>;
+        })}
+      </span>
+    );
+  }
 
-  // ── render question input ─────────────────────────────────
+  // -------------------------------------------------
+  // Per-format input renderers (exam style)
+  // -------------------------------------------------
   function renderInput(q) {
-    const f = getFormat(q);
-    const isActive = activeQ === q.id;
+    const f   = getFormat(q);
+    const val = answers[q.id];
 
-    // MCQ
-    if (f === 'mcq') {
-      const opts = (q.options || []).map(o =>
-        typeof o === 'string' ? o : (o.text || o.label || String(o))
-      );
-      const chosen = answers[q.id];
-      const correct = (() => {
-        const a = q.answer;
-        if (typeof a === 'number') return a;
-        if (typeof a === 'string') {
-          const li = a.toUpperCase().charCodeAt(0) - 65;
-          if (li >= 0 && li < opts.length) return li;
-          const n = parseInt(a, 10);
-          if (!isNaN(n)) return n >= 1 ? n - 1 : n;
-        }
-        return 0;
-      })();
-
+    // -- FILL_BLANK --------------------------------
+    if (f === 'fill_blank') {
+      const accept = [q.answer, ...(q.acceptableAnswers || [])].filter(Boolean);
+      const ok  = submitted && accept.some(a => norm(val) === norm(a));
+      const bad = submitted && !ok;
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {opts.map((opt, i) => {
-            const label = String.fromCharCode(65 + i);
-            const isSel = chosen === i;
-            const isAns = submitted && i === correct;
-            const isWrong = submitted && isSel && i !== correct;
-            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
-            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
-            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
-            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
-            return (
-              <div key={i} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: i }))}
-                style={{ display: 'flex', alignItems: 'center', gap: 10,
-                  background: bg, border: `1.5px solid ${border}`, borderRadius: 10,
-                  padding: '9px 14px', cursor: submitted ? 'default' : 'pointer',
-                  transition: 'all 0.15s' }}>
-                <span style={{ width: 24, height: 24, borderRadius: '50%',
-                  background: (isAns || (!submitted && isSel)) ? border : '#E2E8F0',
-                  color: (isAns || (!submitted && isSel)) ? '#fff' : '#64748B',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: 12, fontWeight: 800, flexShrink: 0 }}>{label}</span>
-                <span style={{ fontSize: 14, fontWeight: isSel || isAns ? 700 : 400,
-                  color: col, flex: 1 }}>{opt}</span>
-                {isAns && <span style={{ fontSize: 16 }}>✅</span>}
-                {isWrong && <span style={{ fontSize: 16 }}>❌</span>}
+        <div style={{ marginTop: 10 }}>
+          {!submitted ? (
+            <input type="text" value={val || ''}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              style={{ border: 'none', borderBottom: EX.border, minWidth: 200,
+                padding: '2px 6px', fontSize: 14, fontFamily: EX.font,
+                outline: 'none', background: 'transparent' }} />
+          ) : (
+            <div>
+              <span style={{ fontFamily: EX.font, fontSize: 14 }}>
+                <u>{val || '(blank)'}</u>
+              </span>
+              <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700,
+                color: ok ? '#1a6b2e' : '#9b1c1c', marginTop: 6 }}>
+                {ok ? 'CORRECT' : 'INCORRECT'}
               </div>
-            );
-          })}
+              {bad && q.answer && (
+                <div style={{ marginTop: 4, border: EX.thin, padding: '6px 12px',
+                  fontFamily: EX.font, fontSize: 14 }}>
+                  {q.answer}
+                </div>
+              )}
+            </div>
+          )}
         </div>
       );
     }
 
-    // TRUE/FALSE
-    if (f === 'truefalse') {
-      const val = answers[q.id];
-      const correct = q.answer; // 'True' or 'False'
+    // -- FILL_WORD ---------------------------------
+    if (f === 'fill_word') {
+      const accept = [q.answer, ...(q.acceptableAnswers || [])].filter(Boolean);
+      const ok  = submitted && accept.some(a => norm(val) === norm(a));
+      const bad = submitted && !ok;
       return (
-        <div style={{ display: 'flex', gap: 10 }}>
-          {['True', 'False'].map(opt => {
-            const isSel = val === opt;
-            const isAns = submitted && normalize(opt) === normalize(correct);
-            const isWrong = submitted && isSel && normalize(opt) !== normalize(correct);
-            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
-            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
-            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
-            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+        <div style={{ marginTop: 10 }}>
+          {!submitted ? (
+            <input type="text" value={val || ''}
+              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+              style={{ border: EX.border, width: '100%', maxWidth: 280,
+                padding: '8px 12px', fontSize: 14, fontFamily: EX.font, outline: 'none' }} />
+          ) : (
+            <div>
+              <div style={{ display: 'inline-block', border: EX.thin, padding: '5px 12px',
+                fontFamily: EX.font, fontSize: 14, maxWidth: 280 }}>
+                {val || '(blank)'}
+              </div>
+              <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700,
+                color: ok ? '#1a6b2e' : '#9b1c1c', marginTop: 6 }}>
+                {ok ? 'CORRECT' : 'INCORRECT'}
+              </div>
+              {bad && q.answer && (
+                <div style={{ marginTop: 4, border: EX.thin, padding: '6px 12px',
+                  fontFamily: EX.font, fontSize: 14 }}>
+                  {q.answer}
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    // -- MCQ ---------------------------------------
+    if (f === 'mcq') {
+      const opts   = (q.options || []).map(o => typeof o === 'string' ? o : String(o.text || o));
+      const corr   = correctIdxForMcq(q);
+      const chosen = val;
+      return (
+        <div style={{ marginTop: 10 }}>
+          <table style={{ border: EX.border, borderCollapse: 'collapse', minWidth: 260, width: 'auto' }}>
+            <tbody>
+              {opts.map((opt, i) => {
+                let bg = 'transparent';
+                if (submitted) { if (i === corr) bg = EX.correct; else if (chosen === i) bg = EX.wrong; }
+                else if (chosen === i) bg = EX.sel;
+                return (
+                  <tr key={i} style={{ background: bg }}
+                    onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: i }))}>
+                    <td style={{ border: EX.thin, padding: '7px 12px', width: 46, textAlign: 'center',
+                      fontFamily: EX.sans, fontWeight: 700, fontSize: 13,
+                      cursor: submitted ? 'default' : 'pointer' }}>
+                      ({i + 1})
+                    </td>
+                    <td style={{ border: EX.thin, padding: '7px 14px', fontFamily: EX.font, fontSize: 14,
+                      cursor: submitted ? 'default' : 'pointer' }}>
+                      {opt}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+          <div style={{ fontFamily: EX.sans, fontSize: 14, marginTop: 6 }}>
+            Answer:{' '}
+            <span style={{ display: 'inline-block', minWidth: 42, border: EX.thin,
+              padding: '2px 10px', textAlign: 'center', fontWeight: 700 }}>
+              {chosen !== undefined ? '(' + (chosen + 1) + ')' : '(  )'}
+            </span>
+          </div>
+        </div>
+      );
+    }
+
+    // -- AB_CIRCLE ---------------------------------
+    if (f === 'ab_circle') {
+      const sentence = q.abSentence || q.stem || '';
+      const choices  = q.abChoices  || {};
+      const chosen   = val;
+      const matchArr = [...sentence.matchAll(/\(([AB])\)\s*(\S+)/g)];
+
+      if (!matchArr.length) {
+        // Fallback: show plain A / B buttons from abChoices
+        return (
+          <div style={{ marginTop: 10, border: EX.border, padding: '12px 16px', fontFamily: EX.font, fontSize: 14 }}>
+            {['A', 'B'].map(lab => {
+              let bg = 'transparent';
+              if (submitted) { if (lab === q.answer) bg = EX.correct; else if (chosen === lab) bg = EX.wrong; }
+              else if (chosen === lab) bg = EX.sel;
+              return (
+                <span key={lab}
+                  onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: lab }))}
+                  style={{ fontWeight: 700, borderBottom: '2px solid #1a1a1a', padding: '0 2px',
+                    background: bg, cursor: submitted ? 'default' : 'pointer',
+                    userSelect: 'none', marginRight: 16 }}>
+                  ({lab}) {choices[lab] || lab}
+                </span>
+              );
+            })}
+          </div>
+        );
+      }
+
+      // Build sentence segments: plain text + interactive (A)/(B) word spans
+      const parts = [];
+      let pos = 0;
+      for (const m of matchArr) {
+        if (m.index > pos) parts.push({ type: 'text', text: sentence.slice(pos, m.index) });
+        parts.push({ type: 'word', lab: m[1], word: m[2] });
+        pos = m.index + m[0].length;
+      }
+      if (pos < sentence.length) parts.push({ type: 'text', text: sentence.slice(pos) });
+
+      return (
+        <div style={{ marginTop: 10, border: EX.border, padding: '12px 16px',
+          fontSize: 14, lineHeight: 1.9, fontFamily: EX.font }}>
+          {parts.map((part, pi) => {
+            if (part.type === 'text') return <span key={pi}>{part.text}</span>;
+            const lab = part.lab;
+            let bg = 'transparent';
+            if (submitted) { if (lab === q.answer) bg = EX.correct; else if (chosen === lab) bg = EX.wrong; }
+            else if (chosen === lab) bg = EX.sel;
             return (
-              <button key={opt} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
-                style={{ flex: 1, padding: '10px', borderRadius: 10, border: `2px solid ${border}`,
-                  background: bg, color: col, fontSize: 14, fontWeight: 700,
-                  cursor: submitted ? 'default' : 'pointer', transition: 'all 0.15s' }}>
-                {opt} {isAns ? '✅' : ''}{isWrong ? '❌' : ''}
-              </button>
+              <span key={pi}
+                onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: lab }))}
+                style={{ fontWeight: 700, borderBottom: '2px solid #1a1a1a', padding: '0 2px',
+                  background: bg, cursor: submitted ? 'default' : 'pointer', userSelect: 'none' }}>
+                {part.word}
+                <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                  verticalAlign: 'super', color: EX.muted }}>({lab})</span>
+              </span>
             );
           })}
         </div>
       );
     }
 
-    // TRUE/FALSE + REASON
-    if (f === 'truefalse_reason') {
-      const val = answers[q.id];
-      const reason = answers[q.id + '_reason'] || '';
-      const correct = typeof q.answer === 'object' ? q.answer?.verdict : q.answer;
-      const modelReason = typeof q.answer === 'object' ? q.answer?.reason : (q.solution?.steps?.[0] || '');
+    // -- TRUE_FALSE --------------------------------
+    if (f === 'true_false') {
+      const stmts   = q.statements || [];
+      const correct = Array.isArray(q.answer) ? q.answer : [q.answer];
       return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+        <div style={{ marginTop: 10 }}>
+          <table style={{ border: EX.border, borderCollapse: 'collapse', width: '100%', fontFamily: EX.font }}>
+            <thead>
+              <tr>
+                <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
+                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 54 }}></th>
+                <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
+                  fontSize: 13, fontWeight: 700, padding: '7px 6px', textAlign: 'left' }}>Statement</th>
+                <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
+                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>True</th>
+                <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
+                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>False</th>
+              </tr>
+            </thead>
+            <tbody>
+              {stmts.map((stmt, si) => {
+                const lab    = String.fromCharCode(97 + si);
+                const chosen = (val || [])[si];
+                const corr   = correct[si];
+                function tfCell(t) {
+                  let bg = 'transparent';
+                  if (submitted) { if (t === corr) bg = EX.correct; else if (chosen === t) bg = EX.wrong; }
+                  else if (chosen === t) bg = EX.sel;
+                  return (
+                    <td key={t}
+                      onClick={() => {
+                        if (submitted) return;
+                        const next = [...(answers[q.id] || [])];
+                        next[si] = t;
+                        setAnswers(a => ({ ...a, [q.id]: next }));
+                      }}
+                      style={{ border: EX.thin, padding: '9px 6px', textAlign: 'center',
+                        cursor: submitted ? 'default' : 'pointer', background: bg, fontSize: 16 }}>
+                      {chosen === t ? '\u2713' : (submitted && t === corr ? '\u2713' : '')}
+                    </td>
+                  );
+                }
+                return (
+                  <tr key={si}>
+                    <td style={{ border: EX.thin, padding: '9px 6px', textAlign: 'center',
+                      fontWeight: 700, fontFamily: EX.sans, fontSize: 13 }}>({lab})</td>
+                    <td style={{ border: EX.thin, padding: '9px 11px', fontSize: 13.5, verticalAlign: 'top' }}>
+                      {stmt}
+                    </td>
+                    {tfCell('True')}
+                    {tfCell('False')}
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    // -- SEQUENCE ----------------------------------
+    if (f === 'sequence') {
+      const items   = q.sequenceItems || q.items || [];
+      const correct = Array.isArray(q.answer) ? q.answer : String(q.answer || '').split(',').map(Number);
+      const maxN    = items.length;
+      return (
+        <div style={{ marginTop: 10 }}>
+          <table style={{ border: EX.border, borderCollapse: 'collapse', width: '100%', fontFamily: EX.font }}>
+            <tbody>
+              {items.map((item, ii) => {
+                const key    = q.id + '_seq_' + ii;
+                const chosen = answers[key];
+                const corr   = correct[ii];
+                const ok     = submitted && chosen === corr;
+                return (
+                  <tr key={ii}>
+                    <td style={{ border: EX.thin, padding: '10px 12px', width: 90, textAlign: 'center',
+                      background: submitted ? (ok ? EX.correct : EX.wrong) : 'transparent' }}>
+                      <span style={{ display: 'inline-flex', gap: 3 }}>
+                        {Array.from({ length: maxN }, (_, n) => n + 1).map(n => (
+                          <button key={n}
+                            onClick={() => !submitted && setAnswers(a => ({ ...a, [key]: n }))}
+                            style={{ width: 24, height: 24, border: EX.thin,
+                              background: chosen === n ? '#1a1a1a' : '#fff',
+                              color:      chosen === n ? '#fff'    : '#1a1a1a',
+                              fontFamily: EX.sans, fontSize: 12,
+                              cursor: submitted ? 'default' : 'pointer' }}>
+                            {n}
+                          </button>
+                        ))}
+                      </span>
+                    </td>
+                    <td style={{ border: EX.thin, padding: '10px 12px', fontSize: 13.5 }}>
+                      {item}
+                      {submitted && !ok && (
+                        <span style={{ fontFamily: EX.sans, fontSize: 12, color: '#9b1c1c', marginLeft: 8 }}>
+                          (should be {corr})
+                        </span>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
+      );
+    }
+
+    // -- TF_REASON ---------------------------------
+    if (f === 'tf_reason') {
+      const tfVal   = val;
+      const reason  = answers[q.id + '_reason'] || '';
+      const correct = typeof q.answer === 'object' ? q.answer?.verdict : q.answer;
+      const modelAns = (q.acceptableAnswers && q.acceptableAnswers[0]) || q.solution?.evidence || '';
+      return (
+        <div style={{ marginTop: 10, display: 'flex', flexDirection: 'column', gap: 10 }}>
           <div style={{ display: 'flex', gap: 10 }}>
             {['True', 'False'].map(opt => {
-              const isSel = val === opt;
-              const isAns = submitted && normalize(opt) === normalize(correct);
-              const isWrong = submitted && isSel && !isAns;
-              let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
-              if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
-              if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
-              if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
+              let bg = '#fff';
+              if (submitted) {
+                if (norm(opt) === norm(correct)) bg = EX.correct;
+                else if (norm(tfVal) === norm(opt)) bg = EX.wrong;
+              } else if (tfVal === opt) bg = EX.sel;
               return (
-                <button key={opt} onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
-                  style={{ flex: 1, padding: '10px', borderRadius: 10, border: `2px solid ${border}`,
-                    background: bg, color: col, fontSize: 14, fontWeight: 700,
+                <button key={opt}
+                  onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
+                  style={{ flex: 1, padding: '8px 0', border: EX.border, background: bg,
+                    color: EX.ink, fontFamily: EX.sans, fontWeight: 700, fontSize: 14,
                     cursor: submitted ? 'default' : 'pointer' }}>
-                  {opt} {isAns ? '✅' : ''}{isWrong ? '❌' : ''}
+                  {opt}
                 </button>
               );
             })}
           </div>
           {!submitted ? (
-            <textarea value={reason} rows={2}
+            <textarea value={reason} rows={3}
               onChange={e => setAnswers(a => ({ ...a, [q.id + '_reason']: e.target.value }))}
               placeholder="Give a reason for your answer..."
-              style={{ width: '100%', padding: '8px 10px', borderRadius: 8, fontSize: 13,
-                border: `1.5px solid ${reason ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
+              style={{ width: '100%', padding: '8px 12px', border: EX.border,
+                fontFamily: EX.font, fontSize: 14, outline: 'none',
+                resize: 'vertical', boxSizing: 'border-box' }} />
           ) : (
             <div>
-              <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4 }}>Your reason:</div>
-              <div style={{ background: '#F8FAFC', borderRadius: 8, padding: '8px 12px',
-                fontSize: 13, color: '#334155', marginBottom: 8 }}>{reason || '(no reason given)'}</div>
-              {modelReason && (
-                <div style={{ background: '#DCFCE7', border: '1px solid #16A34A',
-                  borderRadius: 8, padding: '8px 12px', fontSize: 13, color: '#14532D' }}>
-                  <strong>Model reason:</strong> {modelReason}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    // SEQUENCE
-    if (f === 'sequence') {
-      const items = q.sequenceItems || q.items || [];
-      const correctOrder = q.answer;
-      const correct = Array.isArray(correctOrder)
-        ? correctOrder
-        : String(correctOrder || '').split(',').map(Number);
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
-          {items.map((item, i) => {
-            const key = q.id + '_seq_' + i;
-            const val = answers[key];
-            const correctNum = correct[i];
-            const isRight = submitted && parseInt(val || '0', 10) === correctNum;
-            const isWrong = submitted && !isRight;
-            return (
-              <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 10,
-                background: submitted ? (isRight ? '#DCFCE7' : '#FEE2E2') : '#F8FAFC',
-                border: `1.5px solid ${submitted ? (isRight ? '#16A34A' : '#DC2626') : '#CBD5E1'}`,
-                borderRadius: 10, padding: '10px 14px' }}>
-                <div style={{ display: 'flex', gap: 6, flexShrink: 0 }}>
-                  {[1, 2, 3].map(n => (
-                    <button key={n} onClick={() => !submitted && setAnswers(a => ({ ...a, [key]: n }))}
-                      style={{ width: 28, height: 28, borderRadius: '50%', border: 'none',
-                        background: val === n ? '#1E3A8E' : '#E2E8F0',
-                        color: val === n ? '#fff' : '#475569',
-                        fontSize: 13, fontWeight: 700, cursor: submitted ? 'default' : 'pointer' }}>
-                      {n}
-                    </button>
-                  ))}
-                </div>
-                <span style={{ fontSize: 13, flex: 1, color: '#334155' }}>{item}</span>
-                {submitted && <span style={{ fontSize: 14 }}>{isRight ? '✅' : `❌ (${correctNum})`}</span>}
+              <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
+                Your reason
               </div>
-            );
-          })}
-        </div>
-      );
-    }
-
-    // FILL
-    if (f === 'fill') {
-      const val = answers[q.id] || '';
-      const isRight = submitted && normalize(val) === normalize(q.answer);
-      const isWrong = submitted && !isRight;
-      return (
-        <div>
-          {!submitted ? (
-            <input type="text" value={val}
-              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-              placeholder="Fill in the blank..."
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
-                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', boxSizing: 'border-box' }} />
-          ) : (
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-              <div style={{ padding: '6px 14px', borderRadius: 8, fontSize: 14, fontWeight: 600,
-                background: isRight ? '#DCFCE7' : '#FEE2E2',
-                border: `1.5px solid ${isRight ? '#16A34A' : '#DC2626'}`,
-                color: isRight ? '#14532D' : '#7F1D1D' }}>
-                {val || '(blank)'} {isRight ? '✅' : '❌'}
+              <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14, minHeight: 40 }}>
+                {reason || '(no reason given)'}
               </div>
-              {isWrong && (
-                <div style={{ padding: '6px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
-                  background: '#DCFCE7', border: '1.5px solid #16A34A', color: '#14532D' }}>
-                  ✏️ {q.answer}
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    // FILL SHORT — single word/short phrase (vocabulary, synonym)
-    if (f === 'fill_short') {
-      const val = answers[q.id] || '';
-      const isRight = submitted && String(val).trim().toLowerCase() === String(q.answer || '').trim().toLowerCase();
-      const isWrong = submitted && !isRight;
-      return (
-        <div>
-          {!submitted ? (
-            <input type="text" value={val}
-              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-              placeholder="Write the word or phrase..."
-              style={{ padding: '8px 12px', borderRadius: 8, fontSize: 14, fontWeight: 600,
-                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', minWidth: 200 }} />
-          ) : (
-            <div>
-              <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap', marginBottom: 8 }}>
-                <div>
-                  <div style={{ fontSize: 10, color: '#64748B', marginBottom: 2 }}>Your answer</div>
-                  <div style={{ padding: '5px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
-                    background: isRight ? '#DCFCE7' : '#FEE2E2',
-                    border: `1.5px solid ${isRight ? '#16A34A' : '#DC2626'}`,
-                    color: isRight ? '#14532D' : '#7F1D1D' }}>
-                    {val || '(blank)'} {isRight ? '✅' : '❌'}
+              {modelAns && (
+                <div style={{ marginTop: 8 }}>
+                  <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                    textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
+                    Model answer
+                  </div>
+                  <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14 }}>
+                    {modelAns}
                   </div>
                 </div>
-                {isWrong && (
-                  <div>
-                    <div style={{ fontSize: 10, color: '#16A34A', marginBottom: 2 }}>Answer</div>
-                    <div style={{ padding: '5px 14px', borderRadius: 8, fontSize: 14, fontWeight: 700,
-                      background: '#DCFCE7', border: '1.5px solid #16A34A', color: '#14532D' }}>
-                      {String(q.answer)}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-        </div>
-      );
-    }
-
-    // TICK CHOICE — checkbox style (Which TWO of the following...)
-    if (f === 'tick_choice') {
-      const opts = q.options || [];
-      const correctAnswers = String(q.answer || '').toLowerCase().split(/[,，]+/).map(s => s.trim());
-      const selected = answers[q.id] ? JSON.parse(answers[q.id]) : [];
-      function toggleOpt(opt) {
-        if (submitted) return;
-        const cur = answers[q.id] ? JSON.parse(answers[q.id]) : [];
-        const idx = cur.indexOf(opt);
-        const next = idx >= 0 ? cur.filter(x => x !== opt) : [...cur, opt];
-        setAnswers(a => ({ ...a, [q.id]: JSON.stringify(next) }));
-      }
-      return (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
-          {opts.map((opt, i) => {
-            const isSel = selected.includes(opt);
-            const isCorrect = correctAnswers.some(c => opt.toLowerCase().includes(c) || c.includes(opt.toLowerCase()));
-            const isAns = submitted && isCorrect;
-            const isWrong = submitted && isSel && !isCorrect;
-            let bg = '#F8FAFC', border = '#CBD5E1', col = '#1E293B';
-            if (!submitted && isSel) { bg = '#DBEAFE'; border = '#3B82F6'; col = '#1E3A8A'; }
-            if (isAns) { bg = '#DCFCE7'; border = '#16A34A'; col = '#14532D'; }
-            if (isWrong) { bg = '#FEE2E2'; border = '#DC2626'; col = '#7F1D1D'; }
-            return (
-              <div key={i} onClick={() => toggleOpt(opt)}
-                style={{ display: 'flex', alignItems: 'center', gap: 10,
-                  background: bg, border: `1.5px solid ${border}`, borderRadius: 10,
-                  padding: '9px 14px', cursor: submitted ? 'default' : 'pointer',
-                  transition: 'all 0.15s' }}>
-                <div style={{ width: 20, height: 20, borderRadius: 4, flexShrink: 0,
-                  background: isSel ? '#3B82F6' : '#E2E8F0',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  {isSel && <span style={{ color: '#fff', fontSize: 12, fontWeight: 800 }}>✓</span>}
-                </div>
-                <span style={{ fontSize: 14, color: col, flex: 1 }}>{opt}</span>
-                {isAns && <span>✅</span>}
-                {isWrong && <span>❌</span>}
-              </div>
-            );
-          })}
-        </div>
-      );
-    }
-
-    // OPEN MULTI — multi-part answer (i)(ii) or numbered parts
-    if (f === 'open_multi') {
-      const val = answers[q.id] || '';
-      const parts = String(q.answer || '').split('\n').filter(Boolean);
-      return (
-        <div>
-          {!submitted ? (
-            <textarea value={val} rows={Math.max(3, parts.length + 1)}
-              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-              placeholder={parts.length > 1 ? `Write all ${parts.length} parts:\n(i) ...\n(ii) ...` : 'Write your answer...'}
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
-                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
-          ) : (
-            <div>
-              <div style={{ marginBottom: 8 }}>
-                <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4, fontWeight: 700 }}>Your answer:</div>
-                <div style={{ background: '#F8FAFC', border: '1.5px solid #CBD5E1',
-                  borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#334155',
-                  whiteSpace: 'pre-line', minHeight: 50 }}>
-                  {val || '(no answer)'}
-                </div>
-              </div>
-              <div style={{ marginBottom: 10 }}>
-                <div style={{ fontSize: 11, color: '#16A34A', marginBottom: 4, fontWeight: 700 }}>Model answer:</div>
-                <div style={{ background: '#DCFCE7', border: '1.5px solid #16A34A',
-                  borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#14532D',
-                  fontWeight: 600, whiteSpace: 'pre-line' }}>
-                  {String(q.answer || '—')}
-                </div>
-              </div>
-              {!selfCheck[q.id] ? (
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'yes' }))}
-                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #16A34A',
-                      background: '#F0FDF4', color: '#16A34A', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
-                    ✅ I got it right
-                  </button>
-                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'no' }))}
-                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #DC2626',
-                      background: '#FEF2F2', color: '#DC2626', fontWeight: 700, fontSize: 13, cursor: 'pointer' }}>
-                    ❌ I need practice
-                  </button>
-                </div>
-              ) : (
-                <div style={{ background: selfCheck[q.id] === 'yes' ? '#DCFCE7' : '#FEE2E2',
-                  border: `1px solid ${selfCheck[q.id] === 'yes' ? '#16A34A' : '#DC2626'}`,
-                  borderRadius: 8, padding: '6px 12px', fontSize: 13,
-                  color: selfCheck[q.id] === 'yes' ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
-                  {selfCheck[q.id] === 'yes' ? '✅ Self-assessed: Correct' : '❌ Self-assessed: Need practice'}
-                </div>
               )}
             </div>
           )}
@@ -1383,170 +1340,95 @@ function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
       );
     }
 
-    // OPEN (default) — short answer, vocabulary, full sentence
-    const val = answers[q.id] || '';
-    const isLong = (q.stem || q.question || '').toLowerCase().includes('sentence') ||
-                   (q.marks || 1) >= 2;
-    return (
-      <div>
-        {!submitted ? (
-          isLong ? (
-            <textarea value={val} rows={3}
-              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-              placeholder="Write your answer in a complete sentence..."
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
-                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', resize: 'vertical', fontFamily: 'inherit', boxSizing: 'border-box' }} />
-          ) : (
-            <input type="text" value={val}
-              onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-              placeholder="Write your answer..."
-              style={{ width: '100%', padding: '8px 12px', borderRadius: 8, fontSize: 14,
-                border: `1.5px solid ${val ? '#3B82F6' : '#CBD5E1'}`,
-                outline: 'none', boxSizing: 'border-box' }} />
-          )
-        ) : (
-          <div>
-            {/* Student answer */}
-            <div style={{ marginBottom: 8 }}>
-              <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4, fontWeight: 700 }}>
-                Your answer:
-              </div>
-              <div style={{ background: '#F8FAFC', border: '1.5px solid #CBD5E1',
-                borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#334155',
-                minHeight: 36 }}>
-                {val || '(no answer given)'}
-              </div>
-            </div>
-            {/* Model answer */}
-            <div style={{ marginBottom: 10 }}>
-              <div style={{ fontSize: 11, color: '#16A34A', marginBottom: 4, fontWeight: 700 }}>
-                Model answer:
-              </div>
-              <div style={{ background: '#DCFCE7', border: '1.5px solid #16A34A',
-                borderRadius: 8, padding: '8px 12px', fontSize: 14, color: '#14532D',
-                fontWeight: 600, minHeight: 36 }}>
-                {q.answer || '—'}
-              </div>
-            </div>
-            {/* Answer format tip */}
-            {q.solution?.answerFormat && (
-              <div style={{ background: '#EFF6FF', border: '1px solid #BFDBFE',
-                borderRadius: 8, padding: '6px 12px', fontSize: 12, color: '#1D4ED8',
-                marginBottom: 8 }}>
-                💡 Format tip: {q.solution.answerFormat}
-              </div>
-            )}
-            {/* Self-check */}
-            {!selfCheck[q.id] ? (
-              <div>
-                <div style={{ fontSize: 12, color: '#64748B', marginBottom: 6, fontWeight: 600 }}>
-                  Compare your answer with the model answer:
-                </div>
-                <div style={{ display: 'flex', gap: 8 }}>
-                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'yes' }))}
-                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #16A34A',
-                      background: '#F0FDF4', color: '#16A34A', fontWeight: 700,
-                      fontSize: 13, cursor: 'pointer' }}>
-                    ✅ I got it right
-                  </button>
-                  <button onClick={() => setSelfCheck(s => ({ ...s, [q.id]: 'no' }))}
-                    style={{ flex: 1, padding: '8px', borderRadius: 8, border: '2px solid #DC2626',
-                      background: '#FEF2F2', color: '#DC2626', fontWeight: 700,
-                      fontSize: 13, cursor: 'pointer' }}>
-                    ❌ I need practice
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: 8,
-                background: selfCheck[q.id] === 'yes' ? '#DCFCE7' : '#FEE2E2',
-                border: `1px solid ${selfCheck[q.id] === 'yes' ? '#16A34A' : '#DC2626'}`,
-                borderRadius: 8, padding: '6px 12px', fontSize: 13,
-                color: selfCheck[q.id] === 'yes' ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
-                {selfCheck[q.id] === 'yes' ? '✅ Self-assessed: Correct' : '❌ Self-assessed: Need practice'}
-              </div>
-            )}
-          </div>
-        )}
-      </div>
-    );
-  }
-
-  // ── render evidence box (after submit) ───────────────────
-  function renderEvidenceBox(q) {
-    if (!submitted) return null;
-    const evidence = extractEvidence(q);
-    const trap = extractTrap(q);
-    const tip = q.solution?.tip || q.hints?.[0] || '';
-    const steps = q.solution?.steps || [];
-    const keywords = q.solution?.keywords || [];
-
+    // -- OPEN_SENTENCE (default) -------------------
+    const openVal  = val || '';
+    const modelAns = typeof q.answer === 'string' ? q.answer : '';
     return (
       <div style={{ marginTop: 10 }}>
-        {/* Tip */}
-        {tip && (
-          <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A',
-            borderRadius: 8, padding: '8px 12px', fontSize: 12,
-            color: '#92400E', marginBottom: 8 }}>
-            <strong>💡 Tip:</strong> {tip}
-          </div>
-        )}
-
-        {/* Evidence in passage */}
-        {evidence && (
-          <div
-            onClick={() => setActiveQ(q.id)}
-            style={{ background: '#EFF6FF', border: '1px solid #BFDBFE',
-              borderRadius: 8, padding: '8px 12px', fontSize: 12,
-              color: '#1E40AF', marginBottom: 6, cursor: 'pointer' }}>
-            <strong>🔵 Evidence in passage:</strong>
-            <div style={{ marginTop: 4, fontStyle: 'italic',
-              borderLeft: '3px solid #3B82F6', paddingLeft: 8, marginLeft: 4 }}>
-              "...{evidence}..."
+        {!submitted ? (
+          <textarea value={openVal} rows={3}
+            onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+            placeholder="Write your answer in a complete sentence..."
+            style={{ width: '100%', padding: '8px 12px', border: EX.border,
+              fontFamily: EX.font, fontSize: 14, outline: 'none',
+              resize: 'vertical', boxSizing: 'border-box' }} />
+        ) : (
+          <div>
+            <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+              textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
+              Your answer
             </div>
-            <div style={{ fontSize: 11, color: '#3B82F6', marginTop: 4 }}>
-              ↑ Tap to highlight in passage
+            <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font,
+              fontSize: 14, minHeight: 40, whiteSpace: 'pre-line' }}>
+              {openVal || '(no answer given)'}
             </div>
-          </div>
-        )}
-
-        {/* Trap warning */}
-        {trap && (
-          <div style={{ background: '#FEF3C7', border: '1px solid #F59E0B',
-            borderRadius: 8, padding: '8px 12px', fontSize: 12,
-            color: '#92400E', marginBottom: 6 }}>
-            <strong>⚠️ Watch out:</strong> "{trap}"
-            {q.solution?.trapExplanation && (
-              <div style={{ marginTop: 4 }}>{q.solution.trapExplanation}</div>
+            {modelAns && (
+              <div style={{ marginTop: 8 }}>
+                <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                  textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
+                  Model answer
+                </div>
+                <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14 }}>
+                  {modelAns}
+                </div>
+              </div>
             )}
           </div>
         )}
+      </div>
+    );
+  }
 
-        {/* Keywords */}
-        {keywords.length > 0 && (
-          <div style={{ display: 'flex', gap: 6, flexWrap: 'wrap', marginBottom: 6 }}>
-            <span style={{ fontSize: 11, color: '#64748B', fontWeight: 700 }}>
-              🔑 Key words:
-            </span>
-            {keywords.map((kw, i) => (
-              <span key={i} style={{ background: '#F0FDF4', border: '1px solid #86EFAC',
-                borderRadius: 12, padding: '2px 8px', fontSize: 11,
-                color: '#166534', fontWeight: 600 }}>
-                {kw}
-              </span>
-            ))}
+  // -------------------------------------------------
+  // Evidence box (post-submit, black-and-white exam style)
+  // -------------------------------------------------
+  function renderEvidenceBox(q) {
+    if (!submitted) return null;
+    const sol = q.solution || {};
+    const tip            = sol.tip            || '';
+    const evidence       = sol.evidence       || '';
+    const trap           = sol.trap           || '';
+    const trapExplanation= sol.trapExplanation|| '';
+    const answerFormat   = sol.answerFormat   || '';
+    const steps          = sol.steps          || [];
+    if (!tip && !evidence && !trap && !answerFormat && !steps.length) return null;
+
+    function exBox(label, content, clickable) {
+      return (
+        <div key={label}
+          onClick={clickable ? () => setActiveQ(q.id) : undefined}
+          style={{ border: '1px solid #bbb', padding: '9px 12px', fontSize: 13,
+            marginBottom: 8, cursor: clickable ? 'pointer' : 'default', fontFamily: EX.font }}>
+          <div style={{ fontFamily: EX.sans, fontWeight: 700, fontSize: 11,
+            textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 4 }}>
+            {label}
           </div>
-        )}
+          {content}
+        </div>
+      );
+    }
 
-        {/* Steps */}
+    return (
+      <div style={{ marginTop: 12, borderTop: '1px solid #ccc', paddingTop: 12 }}>
+        {tip && exBox('Tip', <div>{tip}</div>)}
+        {evidence && exBox('Where to find it',
+          <div>
+            <div style={{ borderLeft: '3px solid #1a1a1a', paddingLeft: 9, fontStyle: 'italic', marginBottom: 4 }}>
+              "{evidence}"
+            </div>
+            <div style={{ fontFamily: EX.sans, fontSize: 11, color: EX.faint }}>
+              Tap to highlight in the passage
+            </div>
+          </div>, true
+        )}
+        {trap && exBox('Trap to avoid',
+          <div>"{trap}"{trapExplanation ? ' -- ' + trapExplanation : ''}</div>
+        )}
+        {answerFormat && exBox('Answer format', <div>{answerFormat}</div>)}
         {steps.length > 0 && (
-          <div style={{ background: '#F8FAFC', borderRadius: 8,
-            padding: '8px 12px', fontSize: 12, color: '#475569' }}>
+          <div style={{ fontFamily: EX.font, fontSize: 13, paddingLeft: 4 }}>
             {steps.map((step, i) => (
-              <div key={i} style={{ marginBottom: i < steps.length - 1 ? 4 : 0 }}>
-                {i + 1}. {step}
-              </div>
+              <div key={i} style={{ marginBottom: 3 }}>{i + 1}. {step}</div>
             ))}
           </div>
         )}
@@ -1554,26 +1436,37 @@ function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
     );
   }
 
-  // ── layout: SplitView (passage left, questions right) ────
-  const activeQuestion = questions.find(q => q.id === activeQ) || null;
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+  // -------------------------------------------------
+  // Layout
+  // -------------------------------------------------
+  const activeQuestion    = submitted ? (questions.find(q => q.id === activeQ) || null) : null;
+  const autoGradedTotal   = questions.filter(isAutoGraded).length;
+  const autoGradedScore   = submitted ? questions.filter(q => isAutoGraded(q) && gradeQuestion(q)).length : 0;
+  const openTotal         = questions.filter(q => !isAutoGraded(q)).length;
 
   const passagePanel = (
-    <div style={{ fontSize: 14, fontFamily: "'Times New Roman', serif",
-      lineHeight: 2, color: '#1E293B' }}>
-      <div style={{ fontSize: 11, fontWeight: 800, color: '#64748B',
-        textTransform: 'uppercase', letterSpacing: 1, marginBottom: 10 }}>
-        📖 Read the Passage
+    <div style={{ fontFamily: EX.font, fontSize: 15.5, lineHeight: 2.05, color: EX.ink }}>
+      <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700, textTransform: 'uppercase',
+        letterSpacing: 1, borderBottom: '1px solid #ccc', paddingBottom: 8, marginBottom: 14, color: '#333' }}>
+        Read the Passage
       </div>
-      {submitted && activeQuestion ? (
-        <div>
-          {renderPassage(activeQuestion)}
-          <div style={{ marginTop: 8, fontSize: 11, color: '#3B82F6', fontWeight: 600 }}>
-            🔵 Blue = answer evidence &nbsp; 🟠 Orange = trap
-          </div>
+      {renderPassageText(activeQuestion)}
+      {submitted && activeQuestion && (
+        <div style={{ marginTop: 14, fontFamily: EX.sans, fontSize: 11, color: EX.faint,
+          display: 'flex', gap: 18, flexWrap: 'wrap' }}>
+          <span>
+            <span style={{ borderBottom: '2px solid #1a1a1a', fontWeight: 700, marginRight: 4 }}>
+              evidence
+            </span>
+            Evidence
+          </span>
+          <span>
+            <span style={{ borderBottom: '1px dashed #999', fontStyle: 'italic', marginRight: 4 }}>
+              trap
+            </span>
+            Trap to avoid
+          </span>
         </div>
-      ) : (
-        <div style={{ whiteSpace: 'pre-line' }}>{passage}</div>
       )}
     </div>
   );
@@ -1581,93 +1474,78 @@ function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
   const questionsPanel = (
     <div style={{ paddingBottom: 100 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between',
-        alignItems: 'center', marginBottom: 12 }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: '#64748B' }}>
+        alignItems: 'center', marginBottom: 12, fontFamily: EX.sans }}>
+        <span style={{ fontSize: 13, fontWeight: 700, color: EX.muted }}>
           {sectionLabel} ({marks} mark{marks !== 1 ? 's' : ''})
         </span>
         {submitted && (
           <span style={{ fontSize: 13, fontWeight: 800,
-            color: autoScore === autoTotal ? '#16A34A' : '#D97706' }}>
-            Auto: {autoScore}/{autoTotal}
-            {openTotal > 0 && ` · Self: ${openDone}/${openTotal}`}
+            color: autoGradedScore === autoGradedTotal ? '#1a6b2e' : '#9b1c1c' }}>
+            {autoGradedScore}/{autoGradedTotal} correct
+            {openTotal > 0 && ' + ' + openTotal + ' open'}
           </span>
         )}
       </div>
 
       {questions.map((q, qi) => {
-        const f = getFormat(q);
-        const isActive = activeQ === q.id;
-
+        const f        = getFormat(q);
+        const isActive = activeQ === q.id && submitted;
+        const tagLabel = f.replace(/_/g, ' ').toUpperCase();
         return (
           <div key={q.id}
             onClick={() => submitted && setActiveQ(q.id)}
-            style={{ background: '#fff', borderRadius: 14,
-              padding: '14px 16px', marginBottom: 12,
-              boxShadow: isActive && submitted
-                ? '0 0 0 3px #3B82F6, 0 2px 8px rgba(0,0,0,0.08)'
-                : '0 2px 8px rgba(0,0,0,0.06)',
-              border: isActive && submitted ? '1.5px solid #3B82F6' : '1.5px solid transparent',
-              cursor: submitted ? 'pointer' : 'default',
-              transition: 'box-shadow 0.15s, border 0.15s' }}>
+            style={{ background: '#fff',
+              border: isActive ? '2px solid #1a1a1a' : EX.border,
+              padding: '16px 18px', marginBottom: 16,
+              cursor: submitted ? 'pointer' : 'default' }}>
 
-            {/* Question header */}
-            <div style={{ display: 'flex', gap: 8, marginBottom: 10,
-              alignItems: 'flex-start' }}>
-              <span style={{ background: isActive && submitted ? '#3B82F6' : '#E2E8F0',
-                color: isActive && submitted ? '#fff' : '#475569',
-                borderRadius: 8, padding: '2px 8px', fontSize: 12, fontWeight: 800,
-                flexShrink: 0, transition: 'all 0.15s' }}>
-                Q{q.questionNo || qi + 1}
-              </span>
-              {q.marks && (
-                <span style={{ fontSize: 11, color: '#94A3B8', flexShrink: 0,
-                  alignSelf: 'center' }}>
-                  [{q.marks}m]
-                </span>
-              )}
-              <span style={{ fontSize: 13, color: '#1E293B', lineHeight: 1.6,
-                fontWeight: 600 }}>
-                {q.stem || q.question || ''}
+            {/* Header: Q41. [1m]               FILL BLANK */}
+            <div style={{ display: 'flex', gap: 8, marginBottom: 12,
+              alignItems: 'baseline', fontFamily: EX.sans }}>
+              <span style={{ fontWeight: 700, fontSize: 14 }}>{q.questionNo || qi + 1}.</span>
+              {q.marks && <span style={{ fontSize: 11, color: EX.faint }}>[{q.marks}m]</span>}
+              <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700,
+                letterSpacing: '.5px', textTransform: 'uppercase', color: EX.muted,
+                border: '1px solid #aaa', padding: '2px 7px' }}>
+                {tagLabel}
               </span>
             </div>
 
-            {/* Input area */}
+            {/* Stem */}
+            <div style={{ fontSize: 14.5, lineHeight: 1.55, whiteSpace: 'pre-line',
+              fontFamily: EX.font }}>
+              {q.stem || q.question || ''}
+            </div>
+
+            {/* Format-specific input */}
             {renderInput(q)}
 
-            {/* Evidence + explanation (after submit) */}
+            {/* Explanation boxes (post-submit) */}
             {renderEvidenceBox(q)}
           </div>
         );
       })}
 
-      {/* Submit / Finish */}
+      {/* Submit / Next Section */}
       {!submitted ? (
         <button onClick={handleSubmit} disabled={!allAnswered}
-          style={{ width: '100%', padding: '14px', borderRadius: 12,
-            background: allAnswered ? '#1E3A6E' : '#94A3B8',
-            color: '#fff', border: 'none', fontSize: 15, fontWeight: 700,
+          style={{ width: '100%', padding: '13px', fontFamily: EX.sans,
+            background: allAnswered ? EX.ink : '#bbb',
+            color: '#fff', border: 'none', fontSize: 14, fontWeight: 700,
             cursor: allAnswered ? 'pointer' : 'not-allowed' }}>
           {allAnswered ? 'Submit Answers' : 'Answer all questions to submit'}
         </button>
-      ) : canFinish ? (
-        <button onClick={handleFinish}
-          style={{ width: '100%', padding: '14px', borderRadius: 12,
-            background: '#1E3A6E', color: '#fff', border: 'none',
-            fontSize: 15, fontWeight: 700, cursor: 'pointer' }}>
-          Next Section →
-        </button>
       ) : (
-        <div style={{ textAlign: 'center', padding: '12px',
-          color: '#64748B', fontSize: 13 }}>
-          {openTotal > 0
-            ? `Please self-assess your open answers before continuing (${openDone}/${openTotal} done)`
-            : 'Loading...'}
-        </div>
+        <button onClick={handleFinish}
+          style={{ width: '100%', padding: '13px', fontFamily: EX.sans,
+            background: EX.ink, color: '#fff', border: 'none',
+            fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
+          Next Section
+        </button>
       )}
     </div>
   );
 
-  // Use SplitViewLayout if available, else stack
   if (typeof SplitViewLayout !== 'undefined') {
     return (
       <SplitViewLayout
@@ -1682,8 +1560,7 @@ function CompPageInner({ set, sectionLabel, marks, meta, onPageDone }) {
 
   return (
     <div style={{ padding: '0 0 80px' }}>
-      <div style={{ padding: '14px 16px',
-        borderBottom: '1px solid #E2E8F0', marginBottom: 12 }}>
+      <div style={{ padding: '14px 16px', borderBottom: '1px solid #E2E8F0', marginBottom: 12 }}>
         {passagePanel}
       </div>
       <div style={{ padding: '0 16px' }}>{questionsPanel}</div>
