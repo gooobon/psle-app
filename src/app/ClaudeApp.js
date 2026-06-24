@@ -860,7 +860,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} availableSections={(()=>{ try{ const p=buildPlan(prog.settings,user.school,prog.nextSession,recommendLevel(prog.history),recommendSectionLevels(prog.history)); return (p||[]).map(s=>s.type); }catch(e){ return []; } })()}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} availableSections={null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : screen==="review" ? (
