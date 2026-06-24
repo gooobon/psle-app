@@ -582,34 +582,15 @@ function SignupStudentForm({onSignup, onBack}){
   const [err, setErr] = useState("");
   const [gender, setGender] = useState(null); // null | "boy" | "girl"
 
-  const BOY_AVATARS = ["","","","",""];
-  const BOY_NAMES   = ["Bronto","Rex","Croco","Drake","Gecko"];
-
-  const GIRL_AVATARS = ["","","","",""];
-  const GIRL_NAMES   = ["Uni","Blossom","Flutter","Rainbow","Starly"];
-
-  const BOY_COLORS  = ["#3B82F6","#10B981","#0EA5E9","#6366F1","#14B8A6"];
-  const GIRL_COLORS = ["#EC4899","#A855F7","#F472B6","#FB923C","#F43F5E"];
-
-  const AVATARS = gender==="boy" ? BOY_AVATARS : gender==="girl" ? GIRL_AVATARS : [];
-  const COLORS  = gender==="boy" ? BOY_COLORS  : gender==="girl" ? GIRL_COLORS  : [];
-  const NAMES   = gender==="boy" ? BOY_NAMES   : gender==="girl" ? GIRL_NAMES   : [];
-
-  const [avatar,   setAvatar]   = useState(null);
-  const [colorIdx, setColorIdx] = useState(0);
-
   function f(k,v){ setForm(p=>({...p,[k]:v})); }
 
   function selectGender(g){
     setGender(g);
-    setAvatar(g==="boy" ? BOY_AVATARS[0] : GIRL_AVATARS[0]);
-    setColorIdx(0);
   }
 
   function handleSubmit(){
     setErr("");
     if(!gender)           return setErr("Please choose Boy or Girl.");
-    if(!avatar)           return setErr("Please pick an avatar.");
     if(!form.name.trim()) return setErr("Please enter your name.");
     const schoolFinal = form.school==="other" ? form.schoolCustom.trim() : form.school;
     if(!form.id.trim())   return setErr("Please choose a Student ID.");
@@ -617,7 +598,7 @@ function SignupStudentForm({onSignup, onBack}){
     if(allUsers().find(u=>u.id===form.id)) return setErr("This ID is already taken. Choose another.");
     if(form.password.length<6) return setErr("Password must be at least 6 characters.");
     if(form.password!==form.confirm) return setErr("Passwords do not match.");
-    const user = { id:form.id, password:form.password, name:form.name.trim(), grade:form.grade, role:"student", gender, avatar, color:COLORS[colorIdx], school:schoolFinal };
+    const user = { id:form.id, password:form.password, name:form.name.trim(), grade:form.grade, role:"student", gender, school:schoolFinal };
     onSignup("student", user);
   }
 
@@ -1645,4 +1626,5 @@ if(typeof window !== 'undefined' && !document.getElementById("genius-styles")){
 
 
 export default App;
+
 
