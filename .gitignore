@@ -79,3 +79,6 @@ show_*.js
 verify_*.js
 find_*.js
 patch_*.js
+
+map_order.js
+check_*.js

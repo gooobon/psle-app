@@ -756,7 +756,19 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
   const [startFromSection, setStartFromSection] = useState(null);
-  const [sectionResults, setSectionResults] = useState({});
+  const [sectionResults, setSectionResults] = useState(() => {
+    const p0 = getProgress(grade, subject);
+    return (p0.sessionSections && p0.sessionSections.sessionNum === p0.nextSession)
+      ? (p0.sessionSections.results || {})
+      : {};
+  });
+  // Persist helper: save current section results under the current session num.
+  function persistSectionResults(merged){
+    setProgress(grade, subject, {
+      ...prog,
+      sessionSections: { sessionNum: prog.nextSession, results: merged },
+    });
+  }
   const [studentToast,    setStudentToast]    = useState(null);
 
   const prog = getProgress(grade, subject);
@@ -777,6 +789,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     if (!type) { handleSessionDone(results); return; }
     const merged = { ...sectionResults, [type]: results || [] };
     setSectionResults(merged);
+    persistSectionResults(merged);
     setInSession(false);
     setStartFromSection(null);
     const allDone = SESSION_SECTIONS.every(t => merged[t] !== undefined);
@@ -813,7 +826,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const prevVocab   = prog.vocabBook||[];
     const newVocab    = [...prevVocab];
     vocabWords.forEach(w=>{ if(!newVocab.find(v=>v.word===w)) newVocab.push({word:w,def:WORD_DICT[w]||"",addedDate:todayStr(),fromMistake:wrongWords.includes(w)}); });
-    setProgress(grade, subject, { ...prog, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab });
+    setProgress(grade, subject, { ...prog, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
     setScreen("result");
