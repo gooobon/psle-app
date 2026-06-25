@@ -72,3 +72,10 @@ comp_passages.json
 comp_progress.json
 comp_generated_5.json
 comp_review*.html
+
+# audit/debug scratch
+audit_*.js
+show_*.js
+verify_*.js
+find_*.js
+patch_*.js

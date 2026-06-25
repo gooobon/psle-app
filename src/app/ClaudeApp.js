@@ -756,6 +756,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
   const [startFromSection, setStartFromSection] = useState(null);
+  const [sectionResults, setSectionResults] = useState({});
   const [studentToast,    setStudentToast]    = useState(null);
 
   const prog = getProgress(grade, subject);
@@ -763,9 +764,27 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 
   const isMockDue = prog.nextSession > 1 && (prog.nextSession - 1) % 10 === 0;
 
-  function startSession(fromSection){ 
-    setStartFromSection(fromSection||null); 
-    setInSession(true); 
+  // The 6 sections that make up a full English session.
+  const SESSION_SECTIONS = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Comprehension"];
+
+  function startSession(fromSection){
+    setStartFromSection(fromSection||null);
+    setInSession(true);
+  }
+
+  function handleSectionDone(results){
+    const type = startFromSection;
+    if (!type) { handleSessionDone(results); return; }
+    const merged = { ...sectionResults, [type]: results || [] };
+    setSectionResults(merged);
+    setInSession(false);
+    setStartFromSection(null);
+    const allDone = SESSION_SECTIONS.every(t => merged[t] !== undefined);
+    if (allDone) {
+      const combined = SESSION_SECTIONS.flatMap(t => merged[t] || []);
+      setSectionResults({});
+      handleSessionDone(combined);
+    }
   }
 
   function handleSessionDone(results){
@@ -807,7 +826,8 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         startFrom={startFromSection}
-        onFinish={handleSessionDone}
+        singleSection={!!startFromSection}
+        onFinish={startFromSection ? handleSectionDone : handleSessionDone}
         onBack={()=>{ setInSession(false); setStartFromSection(null); }}
       />
     </Wrap>
@@ -860,7 +880,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} availableSections={subject==="English" ? Array.from(new Set(buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history)).map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history)).map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : screen==="review" ? (

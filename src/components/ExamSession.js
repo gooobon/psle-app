@@ -1761,7 +1761,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
-export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, onFinish, onBack }) {
+export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack }) {
   const startSecIdx = startFrom ? Math.max(0, plan.findIndex(s => s.type === startFrom)) : 0;
   const [secIdx, setSecIdx] = useState(startSecIdx);
   const [pageIdx, setPageIdx] = useState(0);
@@ -1801,6 +1801,12 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, onFin
           setPageIdx(p => p + 1);
           return;
         }
+      }
+      // Single-section mode: finish after completing just this one section
+      if (singleSection) {
+        setDone(true);
+        onFinish(newAll);
+        return;
       }
       // Move to next section
       if (secIdx + 1 >= plan.length) {

@@ -373,6 +373,10 @@ function classifyEnglishItem(item) {
     item.kind === "B" ||
     (item.questions && item.passage)
   ) {
+    // FIB -> VocabCloze reclassify: ComprehensionFIB is a fill-in-blank cloze,
+    // not real comprehension. Route it to the cloze renderer instead.
+    if (topic.includes("ComprehensionFIB")) return "VocabCloze";
+    // VisualText is non-narrative; treat as comprehension only if nothing else.
     if (topic.includes("Comprehension") || topic === "VisualText")
       return "Comprehension";
     if (topic.includes("Editing")) return "Editing";
@@ -416,6 +420,27 @@ function normalizeEnglishQuestions(questions = []) {
 }
 
 var _setsByType = null;
+function isClozeStylePassage(passage) {
+  // Numbered blank markers: (NN) followed by underscores or blank,
+  // appearing 2+ times -> this is a cloze/FIB passage, not real comprehension.
+  var matches = passage.match(/\(\d{1,2}\)\s*_*/g) || [];
+  return matches.length >= 2;
+}
+
+// Lazily-built set of generated passage keys for fast membership test.
+var _genKeySet = null;
+function hasGenerated8Type(passage) {
+  if (!_genKeySet) {
+    _genKeySet = {};
+    try {
+      var keys = Object.keys(comprehensionGenerated || {});
+      for (var i = 0; i < keys.length; i++) _genKeySet[keys[i]] = true;
+    } catch (e) { _genKeySet = {}; }
+  }
+  var k = compPassageKey(passage);
+  return !!_genKeySet[k];
+}
+
 function getAllSetsForType(type) {
   if (!_setsByType) {
     _setsByType = { GrammarCloze: [], VocabCloze: [], Editing: [], Comprehension: [] };
@@ -427,7 +452,16 @@ function getAllSetsForType(type) {
         for (var i = 0; i < arr.length; i++) {
           if (!arr[i]) continue;
           // For Comprehension, require a real passage; others just need items.
-          if (t === "Comprehension" && (arr[i].passage || "").length <= 200) continue;
+          if (t === "Comprehension") {
+            var pg = arr[i].passage || "";
+            if (pg.length <= 200) continue;
+            // Exclude cloze-style (FIB) passages: they contain numbered blank
+            // markers like "(31)____" and have no real 8-type questions.
+            if (isClozeStylePassage(pg)) continue;
+            // Also require the passage to exist in the generated 8-type map,
+            // so we never borrow a comprehension we cannot render as 8-type.
+            if (!hasGenerated8Type(pg)) continue;
+          }
           _setsByType[t].push(arr[i]);
         }
       });
