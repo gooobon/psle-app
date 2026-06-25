@@ -1,5 +1,6 @@
 import { allP3EnglishPapers } from "@/data/p3/english/papers";
 import { allP3ChinesePapers } from "@/data/p3/chinese/papers";
+import { comprehensionGenerated } from "@/data/p3/english/comprehension_generated";
 
 // ── pools ────────────────────────────────────────────────────────────────────
 
@@ -248,12 +249,65 @@ function detectCompFormat(q, options) {
   return "open";
 }
 
+// Passage key: first 80 chars, lowercased, whitespace-collapsed, ASCII-normalised.
+// Must match the key logic in build_comp_ts.js exactly.
+function compPassageKey(passage) {
+  return String(passage || "")
+    .replace(/[\u2018\u2019]/g, "'")
+    .replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2013\u2014]/g, "-")
+    .replace(/\u2026/g, "...")
+    .replace(/[^\x00-\x7F]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, 80)
+    .toLowerCase();
+}
+
 function toEnglishCompSet(set) {
   const passage =
     set.passage ||
     set.meta?.passageText ||
     set.readingPassage ||
     "";
+
+  // If we have AI-generated 8-type questions for this passage, use them.
+  const genKey = compPassageKey(passage);
+  const gen = genKey ? comprehensionGenerated[genKey] : null;
+  if (gen && Array.isArray(gen.questions) && gen.questions.length > 0) {
+    const genQuestions = gen.questions.map((q, i) => {
+      const options = parseOptionTexts(q.options);
+      const fmt = q.format || detectCompFormat(q, options);
+      const isMcq = fmt === "mcq";
+      const answer = isMcq
+        ? (typeof q.answer === "number" ? q.answer : parseAnswerIndex(q.answer, options))
+        : (Array.isArray(q.answer) ? q.answer : String(q.answer ?? ""));
+      return {
+        id:                q.id || `comp_gen_${i}`,
+        questionNo:        q.questionNo || String(41 + i),
+        format:            fmt,
+        marks:             q.marks || 1,
+        question:          q.stem || q.question || "",
+        stem:              q.stem || q.question || "",
+        options,
+        answer,
+        sequenceItems:     q.sequenceItems || null,
+        statements:        q.statements || null,
+        abSentence:        q.abSentence || null,
+        abChoices:         q.abChoices || null,
+        acceptableAnswers: q.acceptableAnswers || null,
+        hints:             q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+        solution:          q.solution || null,
+      };
+    });
+    return {
+      id:       gen.id || set.id || "comp_set",
+      setLabel: set.setLabel || set.title || gen.title || "Comprehension",
+      passage,
+      questions: genQuestions,
+    };
+  }
+
 
   const questions = (set.questions || []).map((q, i) => {
     const options = parseOptionTexts(q.options);
@@ -361,6 +415,36 @@ function normalizeEnglishQuestions(questions = []) {
   return buckets;
 }
 
+var _setsByType = null;
+function getAllSetsForType(type) {
+  if (!_setsByType) {
+    _setsByType = { GrammarCloze: [], VocabCloze: [], Editing: [], Comprehension: [] };
+    var pool = flattenEnglishPool();
+    for (var p = 0; p < pool.length; p++) {
+      var buckets = normalizeEnglishQuestions(pool[p].questions || []);
+      ["GrammarCloze", "VocabCloze", "Editing", "Comprehension"].forEach(function (t) {
+        var arr = buckets[t] || [];
+        for (var i = 0; i < arr.length; i++) {
+          if (!arr[i]) continue;
+          // For Comprehension, require a real passage; others just need items.
+          if (t === "Comprehension" && (arr[i].passage || "").length <= 200) continue;
+          _setsByType[t].push(arr[i]);
+        }
+      });
+    }
+  }
+  return _setsByType[type] || [];
+}
+
+// Borrow a set of the given type from the global pool, varied by sessionNum
+// so different sessions get different content.
+function borrowSetForType(type, sessionNum) {
+  var sets = getAllSetsForType(type);
+  if (!sets.length) return null;
+  var idx = (((sessionNum || 1) - 1) % sets.length + sets.length) % sets.length;
+  return sets[idx] || sets[0];
+}
+
 export function englishPaperToPlan(
   paper,
   settings,
@@ -404,6 +488,23 @@ export function englishPaperToPlan(
     const chosen = [];
     for (let i = 0; i < maxSets; i++) chosen.push(sets[(sIdx + i) % sets.length]);
     sections.push({ type, sets: maxSets, items: chosen, level: lvl(type) });
+  });
+
+  // Ensure every session contains all 6 sections. For any set-based section
+  // missing from this paper, borrow one from the global pool so the student
+  // can complete a full session (and AI-generated comprehension can show).
+  ["GrammarCloze", "VocabCloze", "Editing", "Comprehension"].forEach(function (type) {
+    if (sections.some(function (sec) { return sec.type === type; })) return;
+    var borrowed = borrowSetForType(type, sessionNum);
+    if (borrowed) {
+      sections.push({ type: type, sets: 1, items: [borrowed], level: lvl(type) });
+    }
+  });
+
+  // Sort sections into canonical order so Next walks the full session.
+  var ORDER = ["GrammarMCQ", "VocabMCQ", "GrammarCloze", "VocabCloze", "Editing", "Comprehension"];
+  sections.sort(function (a, b) {
+    return ORDER.indexOf(a.type) - ORDER.indexOf(b.type);
   });
 
   sections.paperMeta = paper.meta;

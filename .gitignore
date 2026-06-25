@@ -52,3 +52,23 @@ fix.py
 comp_samples.txt
 all_comp_questions.txt
 test_comprehension_8types_golden.ts
+
+# more scratch
+add_*.js
+rm_*.js
+patch_*.js
+
+# comprehension pipeline scratch
+build_comp_ts.js
+extract_passages.js
+generate_comp*.js
+scan_*.js
+check*.js
+count_sections.js
+fix_*.js
+retry*.js
+inspect_comp.js
+comp_passages.json
+comp_progress.json
+comp_generated_5.json
+comp_review*.html
