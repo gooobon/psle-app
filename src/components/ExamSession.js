@@ -13,7 +13,7 @@ import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 // 
 
 const EXAM_FONT = "'Times New Roman', Times, serif";
-const EXAM_BODY = "'Arial', sans-serif";
+const EXAM_BODY = EXAM_FONT;
 
 //  Shared exam styles 
 const S = {
@@ -130,13 +130,14 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
 // 
 //  MCQ PAGE - Grammar MCQ / Vocab MCQ
 // 
-function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone }) {
-  const [answers, setAnswers] = useState({});
+function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone, reviewMode, reviewResults }) {
+  const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
+  const [answers, setAnswers] = useState(_rev || {});
   const [retryAnswers, setRetryAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
-  const [retried, setRetried] = useState({});
+  const [submitted, setSubmitted] = useState(!!reviewMode);
+  const [retried, setRetried] = useState(_rev ? Object.fromEntries(items.filter(q => _rev[q.id] !== q.answer).map(q => [q.id, true])) : {});
   const [retriedCorrect, setRetriedCorrect] = useState({});
-  const [showExplanation, setShowExplanation] = useState({});
+  const [showExplanation, setShowExplanation] = useState(_rev ? Object.fromEntries(items.map(q => [q.id, true])) : {});
   const startRef = useRef(Date.now());
 
   function handleSelect(id, i) {
@@ -168,15 +169,14 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   function handleFinishPage() {
     const t = Date.now() - startRef.current;
     const results = items.map(q => ({
-      id: q.id, topic: q.topic, sectionType: q.topic,
+      id: q.id, topic: q.topic, sectionType: q.topic, userAnswer: answers[q.id],
       correct: answers[q.id] === q.answer,
       solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
       timeTaken: Math.round(t / items.length),
     }));
     // Save results first, then trigger page advance
-    onPageDone(results);
-    onPageDone(null, true);
+    onPageDone(results, true);
   }
 
   const allAnswered = items.every(q => answers[q.id] !== undefined);
@@ -349,16 +349,19 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
 }
 
 
-function ClozePage({ set, sectionLabel, marks, onPageDone }) {
+function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+  const cmp = (a, b) => (a || "").toString().toLowerCase() === (b || "").toString().toLowerCase();
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
-  const [answers, setAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [parseInt(String(r.id).split("_").pop(), 10), r.userAnswer])) : null;
+  const [answers, setAnswers] = useState(_rev || {});
+  const [submitted, setSubmitted] = useState(!!reviewMode);
+  const [retryAnswers, setRetryAnswers] = useState({});
+  const [retried, setRetried] = useState(reviewMode && _rev ? Object.fromEntries(blanks.filter(b => !cmp(_rev[b.num], b.answer)).map(b => [b.num, true])) : {});
+  const [retriedCorrect, setRetriedCorrect] = useState({});
+  const [showExplanation, setShowExplanation] = useState(reviewMode ? Object.fromEntries(blanks.map(b => [b.num, true])) : {});
   const startRef = useRef(Date.now());
 
-  // Detect cloze type:
-  // "bracket" = passage has [word1 / word2] patterns, no word bank
-  // "wordbank" = separate word bank, blanks in passage
   const hasBrackets = (set.passage || "").includes(" / ") || (set.passage || "").includes("[ ");
   const hasWordBank = wordBank.length > 0;
 
@@ -366,26 +369,41 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
     if (submitted) return;
     setAnswers(a => ({ ...a, [num]: word }));
   }
-
-  function handleFinish() {
+  function handleRetrySelect(num, word) {
+    if (retried[num]) return;
+    setRetryAnswers(a => ({ ...a, [num]: word }));
+  }
+  function handleRetry(b) {
+    const chosen = retryAnswers[b.num];
+    if (chosen === undefined) return;
+    setRetried(r => ({ ...r, [b.num]: true }));
+    setRetriedCorrect(r => ({ ...r, [b.num]: cmp(chosen, b.answer) }));
+    setShowExplanation(e => ({ ...e, [b.num]: true }));
+  }
+  function handleSubmit() {
     if (submitted) return;
     setSubmitted(true);
+    const auto = {};
+    blanks.forEach(b => { if (cmp(answers[b.num], b.answer)) auto[b.num] = true; });
+    setShowExplanation(auto);
+  }
+  function handleFinishPage() {
     const t = Date.now() - startRef.current;
     const results = blanks.map(b => ({
-      id: `${set.id}_${b.num}`, topic: "GrammarCloze", sectionType: "GrammarCloze",
-      correct: (answers[b.num] || "").toLowerCase() === (b.answer || "").toLowerCase(),
-      timeTaken: Math.round(t / blanks.length),
+      id: set.id + "_" + b.num, topic: "GrammarCloze", sectionType: "GrammarCloze", userAnswer: answers[b.num],
+      correct: cmp(answers[b.num], b.answer),
+      solvedAfterHint: !cmp(answers[b.num], b.answer) && !!retriedCorrect[b.num],
+      attempts: cmp(answers[b.num], b.answer) ? 1 : (retried[b.num] ? 2 : 1),
+      timeTaken: Math.round(t / Math.max(blanks.length, 1)),
     }));
-    onPageDone(results);
-    onPageDone(null, true);
+    onPageDone(results, true);
   }
 
   const allAnswered = blanks.every(b => answers[b.num] !== undefined);
-  const score = submitted ? blanks.filter(b =>
-    (answers[b.num] || "").toLowerCase() === (b.answer || "").toLowerCase()
-  ).length : 0;
+  const wrongBlanks = submitted ? blanks.filter(b => !cmp(answers[b.num], b.answer)) : [];
+  const allRetriedOrCorrect = submitted && wrongBlanks.every(b => retried[b.num]);
+  const score = submitted ? blanks.filter(b => cmp(answers[b.num], b.answer)).length : 0;
 
-  // -- Render passage with inline word-bank blanks --------------
   function renderWordBankPassage() {
     const passage = set.passage || "";
     const parts = [];
@@ -398,7 +416,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       if (!blank) continue;
       parts.push(passage.slice(last, match.index));
       const chosen = answers[num];
-      const isCorrect = submitted && (chosen || "").toLowerCase() === (blank.answer || "").toLowerCase();
+      const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
         <span key={num} style={{ display: "inline-block" }}>
           <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super", marginRight: 1 }}>({num})</span>
@@ -409,10 +427,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             fontWeight: chosen ? 600 : 400,
             cursor: !submitted && chosen ? "pointer" : "default",
           }}
-            onClick={() => !submitted && chosen && setAnswers(a => { const n={...a}; delete n[num]; return n; })}>
+            onClick={() => !submitted && chosen && setAnswers(a => { const n = { ...a }; delete n[num]; return n; })}>
             {chosen || "        "}
           </span>
-          {submitted && !isCorrect && (
+          {submitted && !isCorrect && retried[num] && (
             <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 3 }}>{blank.answer}</span>
           )}
         </span>
@@ -423,13 +441,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
     return parts;
   }
 
-  // -- Render passage with inline bracket choices ---------------
-  // Pattern: (19) [ spend / spends ]
   function renderBracketPassage() {
     const passage = set.passage || "";
     const parts = [];
     let last = 0;
-    // Match patterns like (19) [ word1 / word2 ] or (19) [ word1, word2 ]
     const bracketRegex = /\((\d+)\)\s*\[([^\]]+)\]/g;
     let match;
     while ((match = bracketRegex.exec(passage)) !== null) {
@@ -439,19 +454,20 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       if (!blank || options.length < 2) continue;
       parts.push(passage.slice(last, match.index));
       const chosen = answers[num];
-      const isCorrect = submitted && (chosen || "").toLowerCase() === (blank.answer || "").toLowerCase();
+      const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
         <span key={num} style={{ display: "inline-block", margin: "0 2px" }}>
           <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super" }}>({num})</span>
           {" [ "}
           {options.map((opt, oi) => {
-            const isAns = opt.toLowerCase() === (blank.answer || "").toLowerCase();
+            const isAns = cmp(opt, blank.answer);
             const isSel = chosen === opt;
             let bg = "transparent", color = "#000", fw = "normal";
-            if (submitted) {
+            if (submitted && retried[num]) {
               if (isAns) { color = "#16a34a"; fw = "700"; }
               else if (isSel && !isAns) { color = "#dc2626"; fw = "700"; }
-            } else if (isSel) { bg = "#dbeafe"; color = "#1d4ed8"; fw = "700"; }
+            } else if (submitted && isSel && !isAns) { color = "#dc2626"; fw = "700"; }
+            else if (!submitted && isSel) { bg = "#dbeafe"; color = "#1d4ed8"; fw = "700"; }
             return (
               <span key={opt}>
                 {oi > 0 && <span style={{ color: "#94a3b8", margin: "0 4px" }}>/</span>}
@@ -469,9 +485,6 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             );
           })}
           {" ]"}
-          {submitted && !isCorrect && (
-            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 4 }}>{blank.answer}</span>
-          )}
         </span>
       );
       last = match.index + match[0].length;
@@ -490,7 +503,6 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only."}
         </div>
 
-        {/* Word bank box - only for word bank type */}
         {hasWordBank && !hasBrackets && (
           <div style={{
             border: "1px solid #000", padding: "10px 14px", marginBottom: 14,
@@ -500,8 +512,8 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
               const letter = String.fromCharCode(65 + i);
               const isUsed = Object.values(answers).includes(w);
               return (
-                <div key={w} style={{
-                  fontSize: 14, cursor: submitted ? "default" : "pointer",
+                <div key={i} style={{
+                  fontSize: 14, cursor: "default",
                   opacity: submitted ? 1 : (isUsed ? 0.4 : 1),
                   padding: "2px 4px",
                   textDecoration: !submitted && isUsed ? "line-through" : "none",
@@ -515,36 +527,33 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
       </div>
 
       <div style={{ padding: "0 20px 100px" }}>
-        {/* Passage */}
         <div style={{
           border: "1px solid #ddd", borderRadius: 8, padding: "14px 16px",
           marginBottom: 16, fontSize: 14, fontFamily: EXAM_BODY, lineHeight: 2.2,
         }}>
           {hasBrackets ? renderBracketPassage()
-           : set.passage ? renderWordBankPassage()
-           : blanks.map((b, i) => {
-              const chosen = answers[b.num];
-              const isCorrect = submitted && (chosen || "").toLowerCase() === (b.answer || "").toLowerCase();
-              return (
-                <div key={b.num} style={{ marginBottom: 10 }}>
-                  <span style={{ fontWeight: 700, marginRight: 6 }}>({b.num})</span>
-                  <span style={{ color: "#64748b", marginRight: 8 }}>{b.stem || ""}</span>
-                  <span style={{
-                    display: "inline-block", borderBottom: "1.5px solid #000",
-                    minWidth: 100, textAlign: "center", padding: "0 4px",
-                    color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
-                    fontWeight: 600,
-                  }}>{chosen || "   "}</span>
-                  {submitted && !isCorrect && (
-                    <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}>{b.answer}</span>
-                  )}
-                </div>
-              );
-            })
+            : set.passage ? renderWordBankPassage()
+              : blanks.map((b) => {
+                const chosen = answers[b.num];
+                const isCorrect = submitted && cmp(chosen, b.answer);
+                return (
+                  <div key={b.num} style={{ marginBottom: 10 }}>
+                    <span style={{ fontWeight: 700, marginRight: 6 }}>({b.num})</span>
+                    <span style={{
+                      display: "inline-block", borderBottom: "1.5px solid #000",
+                      minWidth: 100, textAlign: "center", padding: "0 4px",
+                      color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
+                      fontWeight: 600,
+                    }}>{chosen || "   "}</span>
+                    {submitted && !isCorrect && retried[b.num] && (
+                      <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}>{b.answer}</span>
+                    )}
+                  </div>
+                );
+              })
           }
         </div>
 
-        {/* Word bank tap buttons - for word bank type only */}
         {hasWordBank && !hasBrackets && !submitted && (
           <div style={{ marginBottom: 14 }}>
             <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
@@ -553,32 +562,26 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {wordBank.map((w, i) => {
                 const letter = String.fromCharCode(65 + i);
-                const isUsed = Object.values(answers).includes(w);
                 return (
-                  <button key={w} disabled={isUsed}
+                  <button key={i}
                     onClick={() => {
                       const nextBlank = blanks.find(b => !answers[b.num]);
                       if (nextBlank) handleSelect(nextBlank.num, w);
                     }}
                     style={{
                       padding: "6px 16px", borderRadius: 8, fontSize: 14,
-                      border: "1.5px solid #000",
-                      background: isUsed ? "#f1f5f9" : "#fff",
-                      color: isUsed ? "#94a3b8" : "#000",
-                      cursor: isUsed ? "not-allowed" : "pointer",
-                      textDecoration: isUsed ? "line-through" : "none",
-                      fontWeight: 600,
+                      border: "1.5px solid #000", background: "#fff", color: "#000",
+                      cursor: "pointer", fontWeight: 600,
                     }}>
                     ({letter}) {w}
                   </button>
                 );
               })}
             </div>
-            {/* Clear individual answers */}
             <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginTop: 8 }}>
               {blanks.filter(b => answers[b.num]).map(b => (
                 <button key={b.num}
-                  onClick={() => setAnswers(a => { const n={...a}; delete n[b.num]; return n; })}
+                  onClick={() => setAnswers(a => { const n = { ...a }; delete n[b.num]; return n; })}
                   style={{
                     padding: "3px 10px", borderRadius: 6, fontSize: 12,
                     border: "1px solid #e2e8f0", background: "#f8fafc",
@@ -591,12 +594,86 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
           </div>
         )}
 
-        {/* Explanations after submit */}
         {submitted && blanks.map(b => {
-          const isCorrect = (answers[b.num] || "").toLowerCase() === (b.answer || "").toLowerCase();
-          return b.hints?.[0] ? (
-            <ExplanationBox key={b.num} correct={isCorrect} answer={b.answer} explanation={b.hints[0]} />
-          ) : null;
+          const chosen = answers[b.num];
+          const isCorrect = cmp(chosen, b.answer);
+          const hasRetried = retried[b.num];
+          const isRetryCorrect = retriedCorrect[b.num];
+          const showExp = showExplanation[b.num];
+          const retryChosen = retryAnswers[b.num];
+          return (
+            <div key={b.num} style={{ marginBottom: 12 }}>
+              <div style={{ fontSize: 13, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <span>Blank ({b.num})</span>
+                <span style={{ fontWeight: 400, color: "#475569" }}>
+                  Your answer: <span style={{ fontWeight: 700, color: isCorrect ? "#16a34a" : "#dc2626" }}>{chosen || "(blank)"}</span>
+                </span>
+                <span style={{ color: isCorrect ? "#16a34a" : "#dc2626", fontWeight: 700 }}>{isCorrect ? "V" : "X"}</span>
+              </div>
+
+              {isCorrect && showExp && b.explanation && (
+                <div style={{
+                  marginTop: 4, borderLeft: "3px solid #16a34a", background: "#f0fdf4",
+                  borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
+                  fontSize: 12, color: "#374151", lineHeight: 1.6,
+                }}>
+                  {b.explanation}
+                </div>
+              )}
+
+              {!isCorrect && !hasRetried && (
+                <div style={{ marginTop: 8, background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 12px" }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 4 }}>Not quite! Hint:</div>
+                  <div style={{ fontSize: 12, color: "#78350f", marginBottom: 10 }}>
+                    {b.hint || "Think about the word that fits the meaning and grammar."}
+                  </div>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 6 }}>Try again:</div>
+                  <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                    {wordBank.filter(w => w !== chosen).map((w, i) => {
+                      const isSel = retryChosen === w;
+                      return (
+                        <button key={i} onClick={() => handleRetrySelect(b.num, w)}
+                          style={{
+                            padding: "4px 12px", borderRadius: 8, fontSize: 13,
+                            background: isSel ? "#dbeafe" : "#fff",
+                            border: "1px solid " + (isSel ? "#3b82f6" : "#e5e7eb"),
+                            color: "#000", cursor: "pointer", fontWeight: 600,
+                          }}>
+                          {w}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  <button onClick={() => handleRetry(b)} disabled={retryChosen === undefined}
+                    style={{
+                      marginTop: 8, padding: "6px 16px", borderRadius: 8,
+                      background: retryChosen !== undefined ? "#1e3a6e" : "#94a3b8",
+                      color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                      cursor: retryChosen !== undefined ? "pointer" : "not-allowed",
+                    }}>
+                    Check
+                  </button>
+                </div>
+              )}
+
+              {!isCorrect && hasRetried && (
+                <div style={{
+                  marginTop: 6, padding: "8px 12px", borderRadius: 8,
+                  background: isRetryCorrect ? "#f0fdf4" : "#fef2f2",
+                  border: "1px solid " + (isRetryCorrect ? "#16a34a" : "#dc2626"),
+                }}>
+                  <div style={{ fontSize: 12, fontWeight: 700, color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
+                    {isRetryCorrect ? "V Correct on retry!" : "X Correct answer: " + b.answer}
+                  </div>
+                  {showExp && b.explanation && (
+                    <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6, marginTop: 6 }}>{b.explanation}</div>
+                  )}
+                </div>
+              )}
+
+              <div style={{ borderTop: "1px solid #eee", marginTop: 10 }} />
+            </div>
+          );
         })}
 
         {submitted && (
@@ -606,15 +683,14 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             display: "flex", justifyContent: "space-between", alignItems: "center",
           }}>
             <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{blanks.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700,
-              color: score === blanks.length ? "#16a34a" : "#d97706" }}>
-              {Math.round(score / blanks.length * 100)}%
+            <span style={{ fontSize: 13, fontWeight: 700, color: score === blanks.length ? "#16a34a" : "#d97706" }}>
+              {blanks.length ? Math.round(score / blanks.length * 100) : 0}%
             </span>
           </div>
         )}
 
         {!submitted ? (
-          <button onClick={handleFinish}
+          <button onClick={handleSubmit}
             style={{
               width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
@@ -626,8 +702,8 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
               Fill in all blanks first
             </span>}
           </button>
-        ) : (
-          <button onClick={() => onPageDone(null, true)}
+        ) : allRetriedOrCorrect ? (
+          <button onClick={handleFinishPage}
             style={{
               width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
@@ -635,6 +711,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
             }}>
             Next Section
           </button>
+        ) : (
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
+            Please complete the retry blanks above before continuing.
+          </div>
         )}
       </div>
     </div>
@@ -642,11 +722,12 @@ function ClozePage({ set, sectionLabel, marks, onPageDone }) {
 }
 
 
-function EditingPage({ set, sectionLabel, marks, onPageDone }) {
+function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+  const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
   const items = set.items || [];
-  const [answers, setAnswers] = useState({});
+  const [answers, setAnswers] = useState(_rev || {});
   const [retryAnswers, setRetryAnswers] = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const [submitted, setSubmitted] = useState(!!reviewMode);
   const [retried, setRetried] = useState({});
   const startRef = useRef(Date.now());
 
@@ -664,11 +745,11 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
   function handleFinish() {
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
-      id: item.id, topic: "Editing", sectionType: "Editing",
+      id: item.id, topic: "Editing", sectionType: "Editing", userAnswer: answers[item.id],
       correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
       timeTaken: Math.round(t / items.length),
     }));
-    onPageDone(results);
+    onPageDone(results, true);
   }
 
   const score = submitted ? items.filter(item =>
@@ -705,8 +786,18 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
               {/* Question number + sentence context */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
                 <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
-                <span style={{ fontSize: 13, color: "#64748b", flex: 1, fontStyle: "italic" }}>
-                  {item.sentence?.replace(item.wrongWord || '', `[${item.wrongWord}]`) || ''}
+                <span style={{ fontSize: 14, lineHeight: 1.8, flex: 1 }}>
+                  {(() => {
+                    const sent = item.sentence || '';
+                    const w = item.wrongWord || '';
+                    const at = w ? sent.indexOf(w) : -1;
+                    if (at < 0) return sent;
+                    return (<>
+                      {sent.slice(0, at)}
+                      <span style={{ fontWeight: 700, fontSize: 16, background: "#fef08a", padding: "0 5px", borderRadius: 4 }}>[{w}]</span>
+                      {sent.slice(at + w.length)}
+                    </>);
+                  })()}
                 </span>
               </div>
 
@@ -750,7 +841,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
                         </div>
 
                         {/* Retry input */}
-                        {!hasRetried && (
+                        {!reviewMode && !hasRetried && (
                           <div style={{ textAlign: "center" }}>
                             <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
                             <div style={{ display: "flex", gap: 4 }}>
@@ -826,7 +917,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
               fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
             Submit
           </button>
-        ) : allRetriedWrong ? (
+        ) : (allRetriedWrong || reviewMode) ? (
           <button onClick={handleFinish}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
@@ -844,12 +935,13 @@ function EditingPage({ set, sectionLabel, marks, onPageDone }) {
 }
 
 
-function CompPage({ set, sectionLabel, marks, onPageDone }) {
+function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
   const questions = set.questions || [];
   const passage   = set.passage   || '';
 
-  const [answers,   setAnswers]   = useState({});
-  const [submitted, setSubmitted] = useState(false);
+  const _rev = reviewMode ? (function () { const m = {}; (reviewResults || []).forEach(function (r) { m[r.id] = r.userAnswer; if (Array.isArray(r.userAnswerSeq)) r.userAnswerSeq.forEach(function (v, i) { m[r.id + '_seq_' + i] = v; }); if (r.userAnswerReason !== undefined) m[r.id + '_reason'] = r.userAnswerReason; }); return m; })() : null;
+  const [answers,   setAnswers]   = useState(_rev || {});
+  const [submitted, setSubmitted] = useState(!!reviewMode);
   const [activeQ,   setActiveQ]   = useState(null);
   const startRef = useRef(Date.now());
 
@@ -857,8 +949,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
   const EX = {
     border: '1.5px solid #1a1a1a',
     thin:   '1px solid #1a1a1a',
-    font:   "'Times New Roman', Georgia, serif",
-    sans:   'Arial, sans-serif',
+    font:   EXAM_FONT,
+    sans:   EXAM_FONT,
     ink:    '#1a1a1a',
     correct:'#dfeede',
     wrong:  '#f5dede',
@@ -982,10 +1074,12 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
       topic:       'Comprehension',
       sectionType: 'Comprehension',
       correct:     gradeQuestion(q),
+      userAnswer:  answers[q.id],
+      userAnswerSeq: getFormat(q) === 'sequence' ? (q.sequenceItems || q.items || []).map(function (_, i) { return answers[q.id + '_seq_' + i]; }) : undefined,
+      userAnswerReason: getFormat(q) === 'tf_reason' ? answers[q.id + '_reason'] : undefined,
       timeTaken:   Math.round(t / Math.max(questions.length, 1)),
     }));
-    onPageDone(results);
-    onPageDone(null, true);
+    onPageDone(results, true);
   }
 
   // -------------------------------------------------
@@ -1150,6 +1244,19 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               {chosen !== undefined ? '(' + (chosen + 1) + ')' : '(  )'}
             </span>
           </div>
+          {submitted && (
+            <div style={{ marginTop: 6 }}>
+              {verdictBadge(chosen === corr)}
+              {chosen !== corr && (
+                <div style={{ marginTop: 4 }}>
+                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
+                    ({corr + 1}) {opts[corr]}
+                  </span>
+                </div>
+              )}
+            </div>
+          )}
         </div>
       );
     }
@@ -1160,6 +1267,21 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
       const choices  = q.abChoices  || {};
       const chosen   = val;
       const matchArr = [...sentence.matchAll(/\(([AB])\)\s*(\S+)/g)];
+      const abOk = submitted && norm(chosen) === norm(q.answer);
+      const abAnswerWord = (choices[q.answer] != null ? choices[q.answer] : ((matchArr.find(m => m[1] === q.answer) || [])[2] || ''));
+      const abVerdict = submitted ? (
+        <div style={{ marginTop: 8 }}>
+          {verdictBadge(abOk)}
+          {!abOk && (
+            <div style={{ marginTop: 4 }}>
+              <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+              <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
+                ({q.answer}){abAnswerWord ? ' ' + abAnswerWord : ''}
+              </span>
+            </div>
+          )}
+        </div>
+      ) : null;
 
       if (!matchArr.length) {
         // Fallback: show plain A / B buttons from abChoices
@@ -1179,6 +1301,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
                 </span>
               );
             })}
+            {abVerdict}
           </div>
         );
       }
@@ -1213,6 +1336,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               </span>
             );
           })}
+          {abVerdict}
         </div>
       );
     }
@@ -1273,6 +1397,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               })}
             </tbody>
           </table>
+          {submitted && (
+            <div style={{ marginTop: 8 }}>
+              {verdictBadge(correct.every((a, i) => norm((val || [])[i]) === norm(a)))}
+            </div>
+          )}
         </div>
       );
     }
@@ -1322,6 +1451,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               })}
             </tbody>
           </table>
+          {submitted && (
+            <div style={{ marginTop: 8 }}>
+              {verdictBadge(items.every((_, i) => parseInt(answers[q.id + '_seq_' + i] || '0', 10) === correct[i]))}
+            </div>
+          )}
         </div>
       );
     }
@@ -1352,6 +1486,16 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
               );
             })}
           </div>
+          {submitted && (
+            <div style={{ marginBottom: 2 }}>
+              {verdictBadge(norm(tfVal) === norm(correct))}
+              {norm(tfVal) !== norm(correct) && (
+                <span style={{ marginLeft: 8, fontFamily: EX.sans, fontSize: 12, fontWeight: 700, color: '#16A34A' }}>
+                  Correct answer: {correct}
+                </span>
+              )}
+            </div>
+          )}
           {!submitted ? (
             <textarea value={reason} rows={3}
               onChange={e => setAnswers(a => ({ ...a, [q.id + '_reason']: e.target.value }))}
@@ -1437,7 +1581,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
     const trapExplanation= sol.trapExplanation|| '';
     const answerFormat   = sol.answerFormat   || '';
     const steps          = sol.steps          || [];
-    if (!tip && !evidence && !trap && !answerFormat && !steps.length) return null;
+    const fmt    = getFormat(q);
+    const wrong  = fmt !== 'open_sentence' && !gradeQuestion(q);
+    if (!evidence && !trap && !(tip && wrong)) return null;
 
     // Generic colored callout box. `accent` is the left bar + label color,
     // `bg` is the soft background, `strong` raises border weight (for emphasis).
@@ -1505,43 +1651,16 @@ function CompPage({ set, sectionLabel, marks, onPageDone }) {
           ),
         })}
 
-        {/* TIP -- blue, soft */}
-        {tip && callout({
+        {/* TIP -- blue, soft (only shown when the answer is wrong) */}
+        {tip && wrong && callout({
           label: 'Tip', icon: 'i', accent: '#2563EB',
           bg: '#EFF6FF',
           content: <div style={{ color: '#1E3A5F' }}>{tip}</div>,
         })}
 
-        {/* ANSWER FORMAT -- teal, soft */}
-        {answerFormat && callout({
-          label: 'Answer format', icon: 'A', accent: '#0D9488',
-          bg: '#F0FDFA',
-          content: <div style={{ color: '#134E4A' }}>{answerFormat}</div>,
-        })}
+        {/* TIP end */}
 
-        {/* STEPS -- neutral gray, numbered chips */}
-        {steps.length > 0 && (
-          <div style={{ background: '#F8FAFC', border: '1px solid #E5E7EB',
-            borderRadius: 8, padding: '10px 14px', fontFamily: EX.font, fontSize: 13 }}>
-            <div style={{ fontFamily: EX.sans, fontWeight: 800, fontSize: 11,
-              textTransform: 'uppercase', letterSpacing: '.5px',
-              color: '#64748B', marginBottom: 6 }}>
-              How to work it out
-            </div>
-            {steps.map((step, i) => (
-              <div key={i} style={{ display: 'flex', gap: 8, alignItems: 'flex-start',
-                marginBottom: i < steps.length - 1 ? 5 : 0 }}>
-                <span style={{ flexShrink: 0, width: 18, height: 18, borderRadius: '50%',
-                  background: '#475569', color: '#fff', fontFamily: EX.sans,
-                  fontSize: 11, fontWeight: 800, display: 'inline-flex',
-                  alignItems: 'center', justifyContent: 'center', marginTop: 1 }}>
-                  {i + 1}
-                </span>
-                <span style={{ color: '#334155', lineHeight: 1.5 }}>{step}</span>
-              </div>
-            ))}
-          </div>
-        )}
+        {/* STEPS removed */}
       </div>
     );
   }
@@ -1761,8 +1880,11 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
-export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack }) {
-  const startSecIdx = startFrom ? Math.max(0, plan.findIndex(s => s.type === startFrom)) : 0;
+export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack, reviewMode, reviewResults, onSectionDone, completedTypes }) {
+  const _completed = completedTypes || [];
+  const startSecIdx = startFrom
+    ? Math.max(0, plan.findIndex(s => s.type === startFrom))
+    : Math.max(0, plan.findIndex(s => !_completed.includes(s.type)));
   const [secIdx, setSecIdx] = useState(startSecIdx);
   const [pageIdx, setPageIdx] = useState(0);
   const [allResults, setAllResults] = useState([]);
@@ -1791,29 +1913,36 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       setPageResults(latestResults);
     }
     if (advance) {
-      // Move to next page or section
-      const newAll = [...allResults, ...latestResults];
-      setAllResults(newAll);
-      setPageResults([]);
-
+      // MCQ: still more pages in THIS section -> keep accumulating in pageResults,
+      // do NOT finalize the section yet (so latestResults holds the WHOLE section).
       if (sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") {
         if (pageIdx + 1 < mcqPages.length) {
           setPageIdx(p => p + 1);
           return;
         }
       }
+      // Section complete: latestResults now holds this section's full results.
+      const newAll = [...allResults, ...latestResults];
+      setAllResults(newAll);
+      setPageResults([]);
+      // Persist this section right away so progress survives backing out mid-run.
+      if (!reviewMode && onSectionDone) onSectionDone(sectionType, latestResults);
       // Single-section mode: finish after completing just this one section
       if (singleSection) {
         setDone(true);
         onFinish(newAll);
         return;
       }
-      // Move to next section
-      if (secIdx + 1 >= plan.length) {
+      // Move to next section (full run: skip sections already completed)
+      let nextIdx = secIdx + 1;
+      if (!singleSection) {
+        while (nextIdx < plan.length && _completed.includes(plan[nextIdx].type)) nextIdx++;
+      }
+      if (nextIdx >= plan.length) {
         setDone(true);
         onFinish(newAll);
       } else {
-        setSecIdx(s => s + 1);
+        setSecIdx(nextIdx);
         setPageIdx(0);
       }
     }
@@ -1835,7 +1964,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const progress = Math.round((secIdx / totalSections) * 100);
 
   const sectionLabel = meta.label || sectionType;
-  const sectionMarks = (section.items?.length || section.sets || 1);
+  const sectionMarks = (section.marks ?? (section.items?.length || section.sets || 1));
 
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
@@ -1874,7 +2003,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
 
       {/* Section content */}
       {(sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") && mcqPages[pageIdx] && (
-        <MCQPage
+        <MCQPage reviewMode={reviewMode} reviewResults={reviewResults}
           key={`${secIdx}_${pageIdx}`}
           items={mcqPages[pageIdx]}
           pageIdx={pageIdx}
@@ -1892,7 +2021,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       )}
 
       {(sectionType === "GrammarCloze" || sectionType === "VocabCloze") && (
-        <ClozePage
+        <ClozePage reviewMode={reviewMode} reviewResults={reviewResults}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}
@@ -1902,7 +2031,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       )}
 
       {sectionType === "Editing" && (
-        <EditingPage
+        <EditingPage reviewMode={reviewMode} reviewResults={reviewResults}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}
@@ -1912,7 +2041,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       )}
 
       {sectionType === "Comprehension" && (
-        <CompPage
+        <CompPage reviewMode={reviewMode} reviewResults={reviewResults}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}

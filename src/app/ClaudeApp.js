@@ -21,6 +21,7 @@ import {
 
 import { SessionScreen }   from '@/components/EnglishSession';
 import { ExamSessionScreen } from '@/components/ExamSession';
+import { WA1_PRACTICE_SETS } from '@/data/p3/english/wa1_practice';
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
 
@@ -472,7 +473,7 @@ function SchoolDropdown({value, onChange}){
                 value={search}
                 onChange={e=>setSearch(e.target.value)}
                 placeholder="Search school name..."
-                style={{border:"none",outline:"none",fontSize:13,flex:1,fontFamily:"Nunito,sans-serif",color:"#0F172A"}}
+                style={{border:"none",outline:"none",fontSize:13,flex:1,fontFamily:"'Times New Roman', Times, serif",color:"#0F172A"}}
               />
               {search&&<button onClick={()=>setSearch("")} style={{background:"none",border:"none",cursor:"pointer",fontSize:14,color:C.muted,padding:0}}>x</button>}
             </div>
@@ -756,6 +757,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
   const [startFromSection, setStartFromSection] = useState(null);
+  const [reviewSection, setReviewSection] = useState(null);
   const [sectionResults, setSectionResults] = useState(() => {
     const p0 = getProgress(grade, subject);
     return (p0.sessionSections && p0.sessionSections.sessionNum === p0.nextSession)
@@ -775,29 +777,36 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const isLive = !!LIVE_CONTENT[`${grade}_${subject}`];
 
   const isMockDue = prog.nextSession > 1 && (prog.nextSession - 1) % 10 === 0;
+  // Practice mode: serve one of the 60 WA1 practice sets, cycling by session.
+  const _wa1Len = WA1_PRACTICE_SETS.length;
+  const wa1Plan = WA1_PRACTICE_SETS[(((prog.nextSession - 1) % _wa1Len) + _wa1Len) % _wa1Len].plan;
 
   // The 6 sections that make up a full English session.
   const SESSION_SECTIONS = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Comprehension"];
 
   function startSession(fromSection){
-    setStartFromSection(fromSection||null);
+    setStartFromSection(typeof fromSection === "string" ? fromSection : null);
     setInSession(true);
   }
 
-  function handleSectionDone(results){
-    const type = startFromSection;
-    if (!type) { handleSessionDone(results); return; }
+  // Persist a single section's results the moment it is completed (works for
+  // both the full "Start Practice" run and single-section chips). This is what
+  // makes finished sections turn green and survive backing out mid-run.
+  function recordSection(type, results){
+    if (!type) return;
     const merged = { ...sectionResults, [type]: results || [] };
     setSectionResults(merged);
     persistSectionResults(merged);
-    setInSession(false);
-    setStartFromSection(null);
     const allDone = SESSION_SECTIONS.every(t => merged[t] !== undefined);
     if (allDone) {
       const combined = SESSION_SECTIONS.flatMap(t => merged[t] || []);
       setSectionResults({});
       handleSessionDone(combined);
     }
+  }
+  function exitSession(){
+    setInSession(false);
+    setStartFromSection(null);
   }
 
   function handleSessionDone(results){
@@ -832,16 +841,30 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     setScreen("result");
   }
 
+  if(reviewSection) return(
+    <Wrap>
+      <ExamSessionScreen
+        plan={[wa1Plan.find(s=>s.type===reviewSection)]}
+        reviewMode={true}
+        reviewResults={sectionResults[reviewSection] || []}
+        onFinish={()=>setReviewSection(null)}
+        onBack={()=>setReviewSection(null)}
+      />
+    </Wrap>
+  );
+
   if(inSession) return(
     <Wrap>
       <ExamSessionScreen
-        plan={buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history))}
+        plan={wa1Plan}
         isMockExam={isMockDue}
         mockInfo={isMockDue?MOCK_EXAMS[0]:null}
         startFrom={startFromSection}
         singleSection={!!startFromSection}
-        onFinish={startFromSection ? handleSectionDone : handleSessionDone}
-        onBack={()=>{ setInSession(false); setStartFromSection(null); }}
+        completedTypes={Object.keys(sectionResults)}
+        onSectionDone={recordSection}
+        onFinish={exitSession}
+        onBack={exitSession}
       />
     </Wrap>
   );
@@ -893,7 +916,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(buildPlan(prog.settings, user.school, prog.nextSession, recommendLevel(prog.history), recommendSectionLevels(prog.history)).map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : screen==="review" ? (
@@ -1175,7 +1198,7 @@ function MistakesTab({mistakes, onBack, vocabBook=[]}){
   };
 
   return(
-    <div style={{fontFamily:"Nunito,sans-serif",paddingBottom:80}}>
+    <div style={{fontFamily:"'Times New Roman', Times, serif",paddingBottom:80}}>
       {/* Header */}
       <div style={{background:"linear-gradient(135deg,#7C2D12,#DC2626)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
@@ -1387,7 +1410,7 @@ function ReviewTab({mistakes, onBack}){
   };
 
   return(
-    <div style={{fontFamily:"Nunito,sans-serif",paddingBottom:80}}>
+    <div style={{fontFamily:"'Times New Roman', Times, serif",paddingBottom:80}}>
       <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:12,

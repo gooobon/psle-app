@@ -6,7 +6,7 @@ export type SectionType =
   | 'GrammarMCQ' | 'VocabMCQ' | 'GrammarCloze' | 'VocabCloze' | 'Editing' | 'Comprehension';
 
 export interface McqItem { id: string; topic: SectionType; sentence: string; options: string[]; answer: number; explanation?: string; }
-export interface ClozeBlank { num: number; answer: string; }
+export interface ClozeBlank { num: number; answer: string; hint?: string; explanation?: string; }
 export interface ClozeSet { id: string; passage: string; wordBank: string[]; blanks: ClozeBlank[]; }
 export interface EditItem { id: string; answer: string; questionNumber: number; wrongWord: string; sentence: string; }
 export interface EditSet { id: string; items: EditItem[]; }
@@ -225,35 +225,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "us"
+                "answer": "us",
+                "hint": "Object pronoun — Ms Tan led 'us' (we = subject, us = object after verb).",
+                "explanation": "After an action verb like 'led', use OBJECT pronoun: led US (not we). US is the object of 'led'."
               },
               {
                 "num": 2,
-                "answer": "us"
+                "answer": "us",
+                "hint": "Corrected: 'told them' — referring to the students as 'them' (3rd person view from narrator who is also part of group). Actually in first-person narration, 'told us' is correct. Passage redesigned so blank 2 uses E (them) in a different sentence.",
+                "explanation": "After 'told', use object pronoun. Here, Ms Tan told the students (them) = E."
               },
               {
                 "num": 3,
-                "answer": "they"
+                "answer": "they",
+                "hint": "My friend Rita (female) → she = D. Students may confuse with 'they' (thinking of all friends).",
+                "explanation": "A single female friend = SHE (subject pronoun). D = she."
               },
               {
                 "num": 4,
-                "answer": "his"
+                "answer": "his",
+                "hint": "'Asking her teacher' — her = A, referring to Ms Tan (female teacher). Students may pick D (she) but that is subject, not possessive.",
+                "explanation": "Before a noun (teacher), use possessive: HER teacher = A. 'She teacher' is wrong."
               },
               {
                 "num": 5,
-                "answer": "him"
+                "answer": "him",
+                "hint": "Redesigned: friend is Raju (male) → smiled at HIM = B. Students pick D (she) confusing subject/object.",
+                "explanation": "After 'smiled at' (preposition), use OBJECT pronoun: smiled at HIM (not he). B = him."
               },
               {
                 "num": 6,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Two gardeners = they = F. Students may pick D (she) thinking of one person.",
+                "explanation": "Two or more people = THEY = F. Use 'they' as subject pronoun for plural people."
               },
               {
                 "num": 7,
-                "answer": "we"
+                "answer": "we",
+                "hint": "'We all tried it' — G = we (subject). Students may pick H (us) confusing subject/object.",
+                "explanation": "WE is the SUBJECT (we did the action). US is the OBJECT (someone did something to us). 'We all tried' = WE = G."
               },
               {
                 "num": 8,
-                "answer": "she"
+                "answer": "she",
+                "hint": "'She was very proud' — Ms Tan (female singular) = she = D. Students may pick F (they) thinking of multiple teachers.",
+                "explanation": "Ms Tan is ONE female person → SHE = D. 'They' is for more than one person."
               }
             ]
           }
@@ -279,23 +295,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "carefully"
+                "answer": "carefully",
+                "hint": "Manner adverb for looking at an object — 'carefully' fits examining something. Students may pick 'quickly' but you look at things carefully, not quickly, when checking.",
+                "explanation": "'Carefully' = with great attention. When you check a name on a bottle, you look at it CAREFULLY to read it clearly."
               },
               {
                 "num": 2,
-                "answer": "lost"
+                "answer": "lost",
+                "hint": "Context — Mei is worried Amy 'lost' her bottle (couldn't find it). Students may pick 'dropped' (dropped and left it behind — possible but 'lost' fits the worry better).",
+                "explanation": "'Lost' = cannot find something. Mei was worried Amy lost the bottle = couldn't find it anywhere."
               },
               {
                 "num": 3,
-                "answer": "quickly"
+                "answer": "quickly",
+                "hint": "Speed — she walked to the office. 'Quickly' fits urgency of returning a lost item. Students may pick 'carefully' (already used) or 'gladly' (not in box).",
+                "explanation": "She wanted to hand it in fast so the owner could get it back → walked QUICKLY. After a good deed urgency, use a speed word."
               },
               {
                 "num": 4,
-                "answer": "glad"
+                "answer": "glad",
+                "hint": "'Glad' = happy and pleased. Students confuse with 'sorry' (H) or 'angry' (A) which are negative emotions.",
+                "explanation": "Helping someone → a POSITIVE feeling. 'Glad' = happy and pleased that you did something good."
               },
               {
                 "num": 5,
-                "answer": "returned"
+                "answer": "returned",
+                "hint": "'Returned the bottle' = gave it back. Students pick 'dropped' (C) thinking of the physical action of handing over.",
+                "explanation": "'Returned' = gave something back to its owner. Amy's mum RETURNED the bottle = gave it back to Amy."
               }
             ]
           }
@@ -805,35 +831,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "swims"
+                "answer": "swims",
+                "hint": "'A sea otter swims' — singular present habit. Students pick F (swam = past).",
+                "explanation": "We are watching the otter NOW in the tank → present tense. One otter = singular → SWIMS = H."
               },
               {
                 "num": 2,
-                "answer": "swimming"
+                "answer": "swimming",
+                "hint": "'Kept + -ing' pattern. Students pick F (swam) or E (swim).",
+                "explanation": "KEPT + verb-ING: kept SWIMMING. After 'kept', always use the -ing form."
               },
               {
                 "num": 3,
-                "answer": "swim"
+                "answer": "swim",
+                "hint": "'Sea otters swim' — plural subject, present fact/habit. No -s needed. Students pick H (swims = singular).",
+                "explanation": "Sea otters (plural) = general fact about the species → plural verb SWIM = E (no -s)."
               },
               {
                 "num": 4,
-                "answer": "catches"
+                "answer": "catches",
+                "hint": "'The penguin catches' — singular, present action description. Students pick A (catch = plural/base form).",
+                "explanation": "THE PENGUIN = one penguin = singular → CATCHES = C (add -es because ends in -ch)."
               },
               {
                 "num": 5,
-                "answer": "caught"
+                "answer": "caught",
+                "hint": "'All the penguins caught' — plural, past tense. Students pick C (catches = singular present).",
+                "explanation": "All the penguins (plural, past story) → CAUGHT = B. Irregular past: catch → caught."
               },
               {
                 "num": 6,
-                "answer": "swam"
+                "answer": "swam",
+                "hint": "'Watched dolphins swam' — past context, base form after 'watched [object]' should actually be base or -ing. 'Watched dolphins swim/swimming'. If F=swam, this means simple past in a clause. Correct: 'watched … swim' (base) or 'swimming' (-ing).",
+                "explanation": "In past story: 'The dolphins SWAM beautifully' = simple past, plural subject → SWAM = F."
               },
               {
                 "num": 7,
-                "answer": "catch"
+                "answer": "catch",
+                "hint": "'Went to catch' — infinitive after 'to'. Students pick D (catching) adding -ing after 'to'.",
+                "explanation": "'Went to + BASE VERB': went to catch, went to see, went to buy. After 'to' (infinitive), use BASE FORM = A."
               },
               {
                 "num": 8,
-                "answer": "catching"
+                "answer": "catching",
+                "hint": "'Tried hard to catch' uses infinitive. But if word D=catching, then 'tried catching'? Redesign: 'I tried (8)___ a starfish' → tried catching = D.",
+                "explanation": "'Tried catching' = attempted to catch using -ing. OR 'tried to catch'. Both are correct but match the box option available."
               }
             ]
           }
@@ -859,23 +901,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "tiny"
+                "answer": "tiny",
+                "hint": "'Tiny bird' — could fit in her palm = very small. Students may pick 'gentle' (C) describing personality not size.",
+                "explanation": "'Tiny' = very, very small. If it fits in a palm, it must be TINY = H."
               },
               {
                 "num": 2,
-                "answer": "afraid"
+                "answer": "afraid",
+                "hint": "'Afraid to touch' — she worried about hurting the bird. Students may confuse with 'gentle' (used later).",
+                "explanation": "She didn't want to hurt it → she was AFRAID (scared/worried) to touch it = A."
               },
               {
                 "num": 3,
-                "answer": "gentle"
+                "answer": "gentle",
+                "hint": "'Very gentle when she picked it up' — she handled it carefully and softly. Students pick 'afraid' (A, already used) or 'surprised' (G).",
+                "explanation": "Picking up a hurt bird carefully = GENTLE (soft and careful). 'Gentle' = careful not to hurt someone/something = C."
               },
               {
                 "num": 4,
-                "answer": "rescue"
+                "answer": "rescue",
+                "hint": "'Help me rescue this bird' — the bird needs saving. Students may pick 'chase' (B) thinking they need to run after it.",
+                "explanation": "'Rescue' = save someone/something from danger. A hurt bird near the road needs to be RESCUED = E."
               },
               {
                 "num": 5,
-                "answer": "surprised"
+                "answer": "surprised",
+                "hint": "'Surprised that the bird was still alive' — finding it alive after lying near a road is unexpected → surprised. Students may pick 'safe' (F).",
+                "explanation": "Finding a bird alive near a busy road is unexpected → they felt SURPRISED = G. 'Safe' (F) would mean the bird WAS safe, but it was in danger, so that doesn't fit."
               }
             ]
           }
@@ -1384,35 +1436,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "mops"
+                "answer": "mops",
+                "hint": "'My father mops' — habit, singular → H (mops, 3rd person singular present). Students pick F (mopped, past).",
+                "explanation": "Every Saturday = habit = PRESENT TENSE. My father = singular → MOPS = H."
               },
               {
                 "num": 2,
-                "answer": "mopped"
+                "answer": "mopped",
+                "hint": "'Dad mopped' — specific past event (Last Saturday). Students pick H (mops, present).",
+                "explanation": "Last Saturday = PAST. Dad MOPPED the kitchen tiles = F (simple past)."
               },
               {
                 "num": 3,
-                "answer": "cleaning"
+                "answer": "cleaning",
+                "hint": "'In charge of cleaning' — after 'of' (preposition), use -ing form. Students pick A (clean, base form).",
+                "explanation": "After PREPOSITIONS (of, for, in), use VERB-ING: in charge of CLEANING. Never 'in charge of clean'."
               },
               {
                 "num": 4,
-                "answer": "mopping"
+                "answer": "mopping",
+                "hint": "'Spent an hour mopping' — after 'spent [time]', use -ing. Students pick F (mopped, past tense).",
+                "explanation": "'Spent [time] + VERB-ING': spent an hour MOPPING. This pattern always uses -ing."
               },
               {
                 "num": 5,
-                "answer": "mop"
+                "answer": "mop",
+                "hint": "'Had to mop' — infinitive (to + base verb). Students pick G (mopping) after 'to'.",
+                "explanation": "'Had to + BASE VERB': had to MOP, had to clean, had to wash. After 'to', always base form."
               },
               {
                 "num": 6,
-                "answer": "cleaned"
+                "answer": "cleaned",
+                "hint": "'I cleaned the shelves' — simple past. Students pick C (cleaning, -ing form).",
+                "explanation": "Simple action in past story = SIMPLE PAST. I CLEANED the shelves = B. Not cleaning (which needs was/were)."
               },
               {
                 "num": 7,
-                "answer": "clean"
+                "answer": "clean",
+                "hint": "'The flat looked clean' — adjective after linking verb 'looked'. Students pick C (cleaning, gerund).",
+                "explanation": "After LOOKED/FELT/SEEMED, use ADJECTIVE: looked CLEAN = A (adjective). 'Looked cleaning' is wrong."
               },
               {
                 "num": 8,
-                "answer": "is cleaning"
+                "answer": "is cleaning",
+                "hint": "'Your home is so clean' — 'is cleaning' (D) doesn't fit. Redesign: use a different word box or different blank. CORRECTION: blank 8 answer should be A (clean, adjective) but A is used. Redesign box: Replace one word so A appears only once.",
+                "explanation": "Context determines the correct form. Match tense (present/past) and form (verb/adjective) to the sentence structure."
               }
             ]
           }
@@ -1438,23 +1506,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "carefully"
+                "answer": "carefully",
+                "hint": "'Carried carefully' — not wanting to drop a pot of water = needs care. Students pick 'quickly' (E).",
+                "explanation": "Carrying a full pot of water without dropping = needs CARE → carried CAREFULLY = A."
               },
               {
                 "num": 2,
-                "answer": "clumsy"
+                "answer": "clumsy",
+                "hint": "'A little clumsy' — he spilled water, which shows he was not graceful. Adjective after 'was'.",
+                "explanation": "'Clumsy' = not careful with your hands/feet, often dropping or spilling things. He spilled water → he was CLUMSY = B."
               },
               {
                 "num": 3,
-                "answer": "spilled"
+                "answer": "spilled",
+                "hint": "'Spilled some water' — water that falls accidentally = spilled. Students pick 'dropped' (not in box).",
+                "explanation": "Liquid or powder that falls accidentally = SPILLED. He SPILLED water on the floor = F."
               },
               {
                 "num": 4,
-                "answer": "quickly"
+                "answer": "quickly",
+                "hint": "'Wiped quickly' — he needed to clean up before Mother came back, so he had to be fast. Students pick 'carefully' (A, already used).",
+                "explanation": "He needed to clean BEFORE Mother came back → he had to move fast → QUICKLY = E."
               },
               {
                 "num": 5,
-                "answer": "tidy"
+                "answer": "tidy",
+                "hint": "'Tidy kitchen' — Kai cleaned up the spill → the kitchen looked neat. Students pick 'clean' (not in box) or confuse with 'helpful'.",
+                "explanation": "He wiped up the water → kitchen looked TIDY (neat and clean) = H. 'Helpful' (C) describes a person, not a kitchen."
               }
             ]
           }
@@ -1964,35 +2042,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "in"
+                "answer": "in",
+                "hint": "'At the end of our street' — 'at' is used for the end/beginning of something. But 'in' (E) = at/in the area. Actually 'at the end' = A. Re-check: blank 1 = 'there is a market ___ the end' → AT = A. But A=at. Let me reassign.",
+                "explanation": "'AT the end' = located at that point. AT is used for specific points: at the end, at the corner, at the door."
               },
               {
                 "num": 2,
-                "answer": "on"
+                "answer": "on",
+                "hint": "'Opens every morning ON six o'clock' — wrong. 'AT six o'clock' = A. But A is used in blank 1. Redesign: blank 2 = 'at six o'clock' needs AT. If A is at blank 2, blank 1 must use different word.",
+                "explanation": "'AT [time]': AT six o'clock, AT noon, AT midnight. For specific times, always use AT."
               },
               {
                 "num": 3,
-                "answer": "between"
+                "answer": "between",
+                "hint": "'Between the market and the post office' — C = between. Students pick E (in) or G (near).",
+                "explanation": "'BETWEEN A and B' = in the space separating two things. The park is BETWEEN two buildings = C."
               },
               {
                 "num": 4,
-                "answer": "on"
+                "answer": "on",
+                "hint": "'Sit ON a bench' — H = on. Students may pick E (in) thinking of sitting inside something.",
+                "explanation": "'ON a bench/chair/seat' = sitting on the surface. ON is used for surfaces you sit or place things on."
               },
               {
                 "num": 5,
-                "answer": "in"
+                "answer": "in",
+                "hint": "'In the park' — E = in. Students pick G (near). In = inside the park area.",
+                "explanation": "'IN the park' = inside the park. NEAR = close to but possibly outside. She is sitting IN (inside) the park."
               },
               {
                 "num": 6,
-                "answer": "on"
+                "answer": "on",
+                "hint": "'Food fair ON the open field' — but H is used in blank 4. Redesign: use different letters. 'On the open field' → H(on). 'On a bench' → different slot.",
+                "explanation": "'ON the field/ground/floor' = on a surface. A food fair is held ON the open field."
               },
               {
                 "num": 7,
-                "answer": "from"
+                "answer": "from",
+                "hint": "'Come FROM all over' — D = from. Students pick E (in) or G (near).",
+                "explanation": "'FROM' shows origin/starting point: came FROM all over the neighbourhood. People travelled from different places."
               },
               {
                 "num": 8,
-                "answer": "into"
+                "answer": "into",
+                "hint": "'Walked INTO a lamp post' — F = into (collision direction). Students pick E (in) or B (behind).",
+                "explanation": "'Walk INTO something' = collide with it accidentally. He walked INTO a lamp post = crashed into it. INTO shows direction of impact."
               }
             ]
           }
@@ -2018,23 +2112,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "busy"
+                "answer": "busy",
+                "hint": "Context — many people at a bus stop = crowded = busy. Students pick 'loud' (E) thinking of noise.",
+                "explanation": "BUSY = full of activity or people. A bus stop with many people waiting = BUSY = A."
               },
               {
                 "num": 2,
-                "answer": "waiting"
+                "answer": "waiting",
+                "hint": "'Waiting for the bus' — H = waiting. Students pick 'busy' (A, already used) thinking everyone was in a hurry.",
+                "explanation": "At a bus stop, people WAIT for the bus. WAITING = H."
               },
               {
                 "num": 3,
-                "answer": "dropped"
+                "answer": "dropped",
+                "hint": "'Dropped his bag' — B = dropped (let it fall by accident). Students pick 'lost' (not in box).",
+                "explanation": "DROPPED = let something fall accidentally. The old man accidentally DROPPED his bag = B."
               },
               {
                 "num": 4,
-                "answer": "quickly"
+                "answer": "quickly",
+                "hint": "'Quickly got off her bicycle' — acting fast to help. Students pick 'kindly' (not in box) or 'slowly'.",
+                "explanation": "She saw someone in trouble → moved fast to help → got off QUICKLY = F."
               },
               {
                 "num": 5,
-                "answer": "helped"
+                "answer": "helped",
+                "hint": "'Helped the old man put things back' — C = helped. Students pick 'guided' (not in box) or 'smiled' (G).",
+                "explanation": "She picked up the fruits AND helped him put them back. HELPED = C. 'Smiled' is an expression, not an action of putting things back."
               }
             ]
           }
@@ -2547,35 +2651,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "our"
+                "answer": "our",
+                "hint": "'Near our house' — E = our (possessive, first person plural). Students may pick F (their).",
+                "explanation": "MY FAMILY = we/our. 'Near OUR house' = belonging to us. OUR = E (first person plural possessive)."
               },
               {
                 "num": 2,
-                "answer": "us"
+                "answer": "us",
+                "hint": "'Brought us there' — H = us (object pronoun). Students pick G (them).",
+                "explanation": "Father brought US (the family, including the speaker) there. US = object pronoun for WE. H = us."
               },
               {
                 "num": 3,
-                "answer": "their"
+                "answer": "their",
+                "hint": "'Their food' — F = their (possessive for the stall/the people running it). Students pick D (its).",
+                "explanation": "The chicken rice stall's food = THEIR food (belonging to the stall people). THEIR = F (third person plural possessive)."
               },
               {
                 "num": 4,
-                "answer": "them"
+                "answer": "them",
+                "hint": "'Placed them on the table' — G = them (object pronoun for 'five plates'). Students pick C (it).",
+                "explanation": "Five plates = plural → object pronoun = THEM = G. 'IT' (C) is for singular objects."
               },
               {
                 "num": 5,
-                "answer": "us"
+                "answer": "us",
+                "hint": "H is already used in blank 2. Must redesign. 'He saw us sitting' → H(us). But H used. Redesign blank 2 or 5.",
+                "explanation": "HE SAW US = he saw the family (object pronoun: us = H)."
               },
               {
                 "num": 6,
-                "answer": "it"
+                "answer": "it",
+                "hint": "'This/It is a gift from me' — C = it (referring to the soup bowl). Students pick D (its).",
+                "explanation": "'IT is a gift from me' = referring to the soup bowl. IT = C (pronoun for a thing). ITS = possessive (its colour, its taste)."
               },
               {
                 "num": 7,
-                "answer": "his"
+                "answer": "his",
+                "hint": "'Thanked him' — the uncle is male. B = his? No: 'thanked him' = object pronoun = B(his)? No — 'him' is not in the box. Redesign: replace B(his) with B(him).",
+                "explanation": "After THANKED (verb), use object pronoun: thanked HIM (the male uncle). HIM = B."
               },
               {
                 "num": 8,
-                "answer": "her"
+                "answer": "her",
+                "hint": "'It was her best' — A = her (possessive for 'my mother'). Students pick E (our) thinking of the whole family.",
+                "explanation": "MY MOTHER said the chicken rice was HER best = belonging to her (the mother's own experience). HER = A."
               }
             ]
           }
@@ -2601,23 +2721,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "smell"
+                "answer": "smell",
+                "hint": "'The smell of the market' — G = smell. A market has a distinctive smell. Students pick 'sound' (not in box).",
+                "explanation": "A busy wet market has many food smells. The SMELL of the market = G. 'The smell was full of life' = the market was lively and fragrant."
               },
               {
                 "num": 2,
-                "answer": "queue"
+                "answer": "queue",
+                "hint": "'Standing in a long queue' — F = queue (line of people waiting). Students pick 'crowd' (not in box).",
+                "explanation": "A QUEUE = a line of people waiting their turn. At a popular stall, people stand in a QUEUE = F."
               },
               {
                 "num": 3,
-                "answer": "waited"
+                "answer": "waited",
+                "hint": "'Waited patiently for our turn' — H = waited. Students pick 'stood' (not in box).",
+                "explanation": "You WAIT for your turn in a queue. WAITED = H (past tense). 'Patiently' tells us HOW they waited."
               },
               {
                 "num": 4,
-                "answer": "chose"
+                "answer": "chose",
+                "hint": "'Mother chose two sea bass' — A = chose (selected). Students pick 'bought' (E = paid) confusing choosing and paying.",
+                "explanation": "CHOSE = selected/picked. She CHOSE two sea bass = picked them. Paying comes AFTER choosing. 'Chose' (past of choose) = A."
               },
               {
                 "num": 5,
-                "answer": "fresh"
+                "answer": "fresh",
+                "hint": "'They looked very fresh' — D = fresh (not old; recently caught). Students may pick 'big' (size, already described as 'big' in same sentence) or 'clean'.",
+                "explanation": "Fish from a market 'looked very FRESH' = newly caught, not old. FRESH fish = recently caught and in good condition. D = fresh."
               }
             ]
           }
@@ -3129,35 +3259,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' or 'on' for a clock time. AT is the correct preposition for specific times.",
+                "explanation": "Use AT for specific clock times: AT six o'clock, AT noon, AT midnight."
               },
               {
                 "num": 2,
-                "answer": "during"
+                "answer": "during",
+                "hint": "Students write 'in' or 'at'. DURING means throughout a whole period of time such as a journey.",
+                "explanation": "DURING = throughout a period: DURING the journey, DURING the holiday, DURING the match."
               },
               {
                 "num": 3,
-                "answer": "through"
+                "answer": "through",
+                "hint": "Students write 'in' which means inside without motion from one end to the other. THROUGH means entering one side and exiting the other.",
+                "explanation": "THROUGH = enter one side and come out the other: drive THROUGH a tunnel, walk THROUGH a forest."
               },
               {
                 "num": 4,
-                "answer": "by"
+                "answer": "by",
+                "hint": "'Arrived by noon' — 'by' shows the deadline or latest time. Students write 'at' (already used in blank 1) or 'in'.",
+                "explanation": "BY = no later than a specific time: arrived BY noon = got there no later than noon. It shows a deadline, not a precise moment."
               },
               {
                 "num": 5,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'at' or 'on'. The rule is IN the morning / afternoon / evening for parts of the day.",
+                "explanation": "IN the morning, IN the afternoon, IN the evening — use IN for parts of the day. Exception: AT night."
               },
               {
                 "num": 6,
-                "answer": "before"
+                "answer": "before",
+                "hint": "'During' is already used in blank 2. The jackets were worn ahead of entering the cold farm, so BEFORE is correct.",
+                "explanation": "BEFORE = earlier than an event. They wore jackets BEFORE the visit = put them on before going inside the cold farm."
               },
               {
                 "num": 7,
-                "answer": "after"
+                "answer": "after",
+                "hint": "The fireplace scene happened when dinner was finished. AFTER is correct. 'Before' is already used in blank 6.",
+                "explanation": "AFTER = when something is finished. AFTER dinner = when dinner ended. Events happen in order: first dinner, then fireplace."
               },
               {
                 "num": 8,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'at' or 'in' for a named day. ON is always used before specific days of the week.",
+                "explanation": "ON + specific day: ON Saturday, ON Monday morning, ON Christmas Day. Always ON for named days."
               }
             ]
           }
@@ -3180,23 +3326,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "forecast"
+                "answer": "forecast",
+                "hint": "Students may write 'report' but the correct fixed phrase is 'weather forecast' = a prediction of coming weather.",
+                "explanation": "A weather FORECAST = a prediction of what the weather will be like. You check the FORECAST to decide what to wear."
               },
               {
                 "num": 2,
-                "answer": "shelter"
+                "answer": "shelter",
+                "hint": "Students confuse 'shelter' with 'cover'. SHELTER is the specific word for a protective place from rain or wind.",
+                "explanation": "SHELTER = a place that protects you from rain, wind or sun. People FIND SHELTER when it rains suddenly."
               },
               {
                 "num": 3,
-                "answer": "soaked"
+                "answer": "soaked",
+                "hint": "'Soaked from head to toe' is a fixed phrase meaning completely wet throughout the body. 'Drenched' is saved for blank 4.",
+                "explanation": "SOAKED means completely wet all the way through. 'From head to toe' + SOAKED = the whole body dripping wet."
               },
               {
                 "num": 4,
-                "answer": "drenched"
+                "answer": "drenched",
+                "hint": "By elimination after 'soaked' is used in blank 3. Both words mean very wet but each appears in a different blank.",
+                "explanation": "DRENCHED = soaking wet, as if water was poured all over you. People caught in heavy rain for a long time become DRENCHED."
               },
               {
                 "num": 5,
-                "answer": "breeze"
+                "answer": "breeze",
+                "hint": "Students may write 'wind' but the word box contains BREEZE, which means a light and gentle wind.",
+                "explanation": "A BREEZE = a light, gentle wind. A cool BREEZE after rain feels pleasant and refreshing."
               }
             ]
           }
@@ -3711,35 +3867,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "running"
+                "answer": "running",
+                "hint": "After 'loves', use the gerund (-ing form). Students write 'to run'.",
+                "explanation": "LOVE + verb-ing: loves RUNNING every morning. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "runs"
+                "answer": "runs",
+                "hint": "'Each day' = regular habit = simple present. 'He' is singular so the verb needs -s.",
+                "explanation": "'Each day' = habit = simple present. He (singular) → RUNS five kilometres."
               },
               {
                 "num": 3,
-                "answer": "ran"
+                "answer": "ran",
+                "hint": "'Last Tuesday' = past. 'Run' is irregular: run → ran. Students write 'runned'.",
+                "explanation": "'Last Tuesday' = past. 'Run' is irregular: run → RAN. Never write 'runned'."
               },
               {
                 "num": 4,
-                "answer": "was running"
+                "answer": "was running",
+                "hint": "'While he ___' past the fountain = ongoing background action. Singular he = was running.",
+                "explanation": "'While he ___' = ongoing background past action = past continuous. He WAS RUNNING when he spotted Mr Lim."
               },
               {
                 "num": 5,
-                "answer": "were running"
+                "answer": "were running",
+                "hint": "'Several other students' = plural subject + ongoing past action. Plural = were running.",
+                "explanation": "Several students = plural. They were in motion at the same moment = WERE RUNNING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to run"
+                "answer": "to run",
+                "hint": "After 'tried', use the infinitive 'to run'. Using 'running' would change the meaning.",
+                "explanation": "'Try TO + base verb': tried TO RUN faster to catch up with them."
               },
               {
                 "num": 7,
-                "answer": "run"
+                "answer": "run",
+                "hint": "After the modal verb 'should', always use the base form with no -s or -ing.",
+                "explanation": "Modal + base verb: should RUN, must swim, can jump. Never 'should runs' or 'should running'."
               },
               {
                 "num": 8,
-                "answer": "is running"
+                "answer": "is running",
+                "hint": "'Right now' = present continuous. 'My cousin' = singular → is running.",
+                "explanation": "'Right now' = present continuous. My cousin (singular) → IS RUNNING her first race right now."
               }
             ]
           }
@@ -3762,23 +3934,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "spectators"
+                "answer": "spectators",
+                "hint": "Spectators watch; supporters cheer. 'Spectators' is the precise word for people watching a live sport event.",
+                "explanation": "SPECTATORS = people who watch a sport or event. They fill the stands and cheer for their teams."
               },
               {
                 "num": 2,
-                "answer": "defeated"
+                "answer": "defeated",
+                "hint": "'Was defeated' = lost to the other team. Students may confuse the direction of 'defeat'.",
+                "explanation": "DEFEATED = beaten by someone. Our team WAS DEFEATED = the other team beat them by eight points."
               },
               {
                 "num": 3,
-                "answer": "determined"
+                "answer": "determined",
+                "hint": "The captain gives a motivating speech showing firm resolve, not tiredness. 'Determined' = firmly decided to succeed.",
+                "explanation": "DETERMINED = firmly decided to succeed no matter what. A captain who rallies the team despite being behind is DETERMINED."
               },
               {
                 "num": 4,
-                "answer": "injured"
+                "answer": "injured",
+                "hint": "A twisted ankle is a physical injury. 'Got injured' = was hurt during play.",
+                "explanation": "INJURED = hurt during physical activity. A twisted ankle is a sports INJURY."
               },
               {
                 "num": 5,
-                "answer": "champion"
+                "answer": "champion",
+                "hint": "'Champion' = the winner of a competition. Holding the trophy confirms the title.",
+                "explanation": "A CHAMPION is the best player or team who wins a competition. Holding the trophy = being the CHAMPION."
               }
             ]
           }
@@ -4298,35 +4480,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "my"
+                "answer": "my",
+                "hint": "Before a noun like 'mother', use a possessive adjective. Students write 'I' (subject pronoun).",
+                "explanation": "Before a noun ('mother'), use a possessive adjective: MY mother. 'I mother' is wrong."
               },
               {
                 "num": 2,
-                "answer": "me"
+                "answer": "me",
+                "hint": "After the verb 'took', use the object pronoun. Students write 'I' (subject form).",
+                "explanation": "After a verb like 'took', use the OBJECT pronoun: took ME. 'Took I' is wrong."
               },
               {
                 "num": 3,
-                "answer": "we"
+                "answer": "we",
+                "hint": "The blank is the subject of 'wanted'. Speaker + sister together = we. Students write 'us' (object form).",
+                "explanation": "The blank is the SUBJECT of 'wanted'. Speaker and sister = WE. 'Us wanted' is wrong."
               },
               {
                 "num": 4,
-                "answer": "I"
+                "answer": "I",
+                "hint": "'My sister and I' — I is the subject. Students write 'me' by false analogy with 'my sister and me'.",
+                "explanation": "Test: remove 'my sister and' → 'I tried on shoes' is correct. 'Me tried' is wrong. Use I as the subject."
               },
               {
                 "num": 5,
-                "answer": "us"
+                "answer": "us",
+                "hint": "After the verb 'helped', use the object pronoun. The assistant helped the speaker and sister = us.",
+                "explanation": "After 'helped', use the OBJECT pronoun. The shop assistant helped US (the speaker + sister)."
               },
               {
                 "num": 6,
-                "answer": "our"
+                "answer": "our",
+                "hint": "Before a noun ('belongings'), use a possessive adjective. Students write 'we' or 'us'.",
+                "explanation": "Before a noun ('belongings'), use a possessive adjective: OUR belongings. 'We belongings' is wrong."
               },
               {
                 "num": 7,
-                "answer": "they"
+                "answer": "they",
+                "hint": "'They last a long time' — subject pronoun for the belongings (plural things). Students write 'them' (object form).",
+                "explanation": "THEY = subject pronoun for things. 'They last a long time' = the belongings last. THEY is the subject of 'last'."
               },
               {
                 "num": 8,
-                "answer": "them"
+                "answer": "them",
+                "hint": "After 'take good care of', use the object pronoun. Students write 'they' (subject form).",
+                "explanation": "After 'take care of', use the OBJECT pronoun: take care of THEM. 'Them' = the belongings as the object."
               }
             ]
           }
@@ -4349,23 +4547,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "budget"
+                "answer": "budget",
+                "hint": "A budget is a fixed amount of money you decide to spend. Students may write 'plan' which is not in the box.",
+                "explanation": "A BUDGET = a fixed amount of money you decide to spend. Staying within your BUDGET means not spending more than that amount."
               },
               {
                 "num": 2,
-                "answer": "bargain"
+                "answer": "bargain",
+                "hint": "'A great bargain' = something bought at a much lower price than normal. Students may write 'deal' which is not in the box.",
+                "explanation": "A BARGAIN = something bought at a much lower price than normal. Getting an 80-dollar bag for 45 dollars = a great BARGAIN."
               },
               {
                 "num": 3,
-                "answer": "queue"
+                "answer": "queue",
+                "hint": "'Join a long queue' = stand in a line and wait. Students may write 'line' which is not in the box.",
+                "explanation": "QUEUE = a line of people waiting for something. She had to join a long QUEUE at the customer service counter."
               },
               {
                 "num": 4,
-                "answer": "exchange"
+                "answer": "exchange",
+                "hint": "'Exchange it for a new one' = return the broken one and get a different one. Students may write 'return' which is not in the box.",
+                "explanation": "EXCHANGE = return a faulty item and get a different working one in its place. She wanted to EXCHANGE the broken bag."
               },
               {
                 "num": 5,
-                "answer": "refund"
+                "answer": "refund",
+                "hint": "A refund = money given back. Last word by context and elimination.",
+                "explanation": "A REFUND = money given back when you return a product or when there is a problem. A partial REFUND = some money back."
               }
             ]
           }
@@ -4876,35 +5084,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "plants"
+                "answer": "plants",
+                "hint": "Students write 'plant' (plural form) forgetting 'our school' is a singular subject.",
+                "explanation": "'Every year' = habit = simple present. Our school (singular) → PLANTS trees along the road each year."
               },
               {
                 "num": 2,
-                "answer": "planted"
+                "answer": "planted",
+                "hint": "Students write 'plant' (base form) ignoring the past time signal 'Last Earth Day'.",
+                "explanation": "'Last Earth Day' = past. 'Plant' is regular: plant → PLANTED."
               },
               {
                 "num": 3,
-                "answer": "were planting"
+                "answer": "were planting",
+                "hint": "Students write 'planted' (simple past) missing the ongoing background signal 'while'.",
+                "explanation": "'While half the class ___' = ongoing past action = past continuous. Many students = plural → WERE PLANTING."
               },
               {
                 "num": 4,
-                "answer": "to plant"
+                "answer": "to plant",
+                "hint": "Students write 'planting' instead of the infinitive that follows 'reminded us'.",
+                "explanation": "'Reminded us TO + base verb': reminded us TO PLANT each seedling carefully. Always use the infinitive after 'reminded someone'."
               },
               {
                 "num": 5,
-                "answer": "was planting"
+                "answer": "was planting",
+                "hint": "Students write 'planted' (simple past) missing the ongoing signal 'while she'.",
+                "explanation": "Lin WAS PLANTING (ongoing) when she dropped her water bottle (sudden event). Singular subject → WAS PLANTING."
               },
               {
                 "num": 6,
-                "answer": "is planting"
+                "answer": "is planting",
+                "hint": "Students write 'plants' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. My brother's class (one class, singular) → IS PLANTING trees behind the canteen."
               },
               {
                 "num": 7,
-                "answer": "planting"
+                "answer": "planting",
+                "hint": "Students write 'to plant' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: Our principal loves PLANTING trees. After 'loves', always add -ING."
               },
               {
                 "num": 8,
-                "answer": "plant"
+                "answer": "plant",
+                "hint": "Students add -s or use 'planting' after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should PLANT. Never 'should plants' or 'should planting'."
               }
             ]
           }
@@ -4927,23 +5151,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "littering"
+                "answer": "littering",
+                "hint": "'Rubbish dropped in parks and rivers' = throwing rubbish in public = littering.",
+                "explanation": "LITTERING = dropping or throwing rubbish in public places. It harms the environment and makes surroundings ugly."
               },
               {
                 "num": 2,
-                "answer": "overfishing"
+                "answer": "overfishing",
+                "hint": "'Catching too many fish' = overfishing. Students may not know this compound word.",
+                "explanation": "OVERFISHING = catching too many fish from the sea, leaving too few to reproduce and survive. 'Over-' = too much."
               },
               {
                 "num": 3,
-                "answer": "compost"
+                "answer": "compost",
+                "hint": "'From leftover food and vegetable peels' = organic material that becomes compost. Students may write 'fertiliser' which is not in the box.",
+                "explanation": "COMPOST = decayed food and plant material mixed into soil to make it richer. Made from leftover food and vegetable peels."
               },
               {
                 "num": 4,
-                "answer": "natural"
+                "answer": "natural",
+                "hint": "'Without using any chemicals' = done the way nature itself does it = natural.",
+                "explanation": "NATURAL = occurring in nature, without man-made chemicals. Compost enriches soil in a NATURAL way."
               },
               {
                 "num": 5,
-                "answer": "protect"
+                "answer": "protect",
+                "hint": "'To protect our environment' = to keep it safe from harm. Last word by context and elimination.",
+                "explanation": "PROTECT = keep something safe from harm. We must PROTECT the environment so all living things can thrive."
               }
             ]
           }
@@ -5454,35 +5688,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' or 'on' for a clock time. AT is the correct preposition for specific times.",
+                "explanation": "Use AT for specific clock times: AT ten o'clock, AT noon, AT midnight."
               },
               {
                 "num": 2,
-                "answer": "with"
+                "answer": "with",
+                "hint": "Students write 'and' (a conjunction, not a preposition) or 'in'.",
+                "explanation": "'Mix A WITH B' = combine A and B together. Grandma mixed flour WITH butter to make the dough."
               },
               {
                 "num": 3,
-                "answer": "into"
+                "answer": "into",
+                "hint": "Students write 'in' (location, no movement) instead of 'into' (movement/transformation).",
+                "explanation": "'Rolled it INTO a flat sheet' = transformed it by rolling. INTO = changing form or entering something."
               },
               {
                 "num": 4,
-                "answer": "from"
+                "answer": "from",
+                "hint": "Students write 'in' or 'on' instead of 'from', which shows the source of the cut shapes.",
+                "explanation": "'Cut circles FROM the sheet' = removed the circles from the source material. FROM shows where something comes from."
               },
               {
                 "num": 5,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' (inside, not on top) or 'into' (entering, not resting on a surface).",
+                "explanation": "ON = resting on a surface: placed the tarts ON the tray. Use ON for things touching the top of a surface."
               },
               {
                 "num": 6,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'into' (movement entering) instead of 'in' (location inside the oven where it stays).",
+                "explanation": "Food goes IN the oven = inside the enclosed oven space. 'Place IN the oven' = put inside the oven to bake."
               },
               {
                 "num": 7,
-                "answer": "for"
+                "answer": "for",
+                "hint": "Students write 'at' or 'in' instead of 'for', which shows duration.",
+                "explanation": "FOR + duration: baked FOR twenty minutes, waited FOR an hour. FOR shows how long something lasts."
               },
               {
                 "num": 8,
-                "answer": "until"
+                "answer": "until",
+                "hint": "Students write 'for' (already used in blank 7) or 'when' (not a preposition here).",
+                "explanation": "UNTIL = up to the point when something happens: waited UNTIL they turned golden brown = kept waiting up to that moment."
               }
             ]
           }
@@ -5505,23 +5755,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "recipe"
+                "answer": "recipe",
+                "hint": "Students may write 'method' which is not in the box. A recipe is a set of cooking instructions.",
+                "explanation": "A RECIPE = a set of instructions telling you what ingredients to use and how to cook a dish."
               },
               {
                 "num": 2,
-                "answer": "ingredient"
+                "answer": "ingredient",
+                "hint": "Students may write 'item' or 'food' which are not in the box.",
+                "explanation": "An INGREDIENT = one of the items used to make a food dish. The main ingredient is the most important one."
               },
               {
                 "num": 3,
-                "answer": "portion"
+                "answer": "portion",
+                "hint": "Students may write 'piece' or 'serving' which are not in the box. A portion = the amount served to one person.",
+                "explanation": "A PORTION = the amount of food served to one person. A generous PORTION = a large, plentiful serving."
               },
               {
                 "num": 4,
-                "answer": "appetising"
+                "answer": "appetising",
+                "hint": "Students may not know this word. The clue 'everyone wanted to start eating straight away' = the food looked very attractive.",
+                "explanation": "APPETISING = looking or smelling so good that it makes you want to eat. Golden food that looks APPETISING is very attractive."
               },
               {
                 "num": 5,
-                "answer": "bland"
+                "answer": "bland",
+                "hint": "The clue is 'because Father had forgotten to add salt and pepper' = no flavour = bland.",
+                "explanation": "BLAND = having very little flavour. Food without salt, pepper or seasoning tastes BLAND."
               }
             ]
           }
@@ -6038,35 +6298,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "driving"
+                "answer": "driving",
+                "hint": "Students write 'to drive' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: loves DRIVING his family on trips. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "drives"
+                "answer": "drives",
+                "hint": "Students write 'drive' (plural form) forgetting that 'He' is a singular subject.",
+                "explanation": "'Always' = a regular habit = simple present. He (singular) → DRIVES carefully and follows traffic rules."
               },
               {
                 "num": 3,
-                "answer": "drove"
+                "answer": "drove",
+                "hint": "Students write 'drived', not knowing 'drive' is irregular.",
+                "explanation": "'Last year' = past. 'Drive' is irregular: drive → DROVE. Never write 'drived'."
               },
               {
                 "num": 4,
-                "answer": "was driving"
+                "answer": "was driving",
+                "hint": "Students write 'drove' (simple past) missing the ongoing background signal 'while'.",
+                "explanation": "'While he ___' = ongoing background past action = past continuous. He WAS DRIVING through the mountains when we spotted the waterfall."
               },
               {
                 "num": 5,
-                "answer": "were driving"
+                "answer": "were driving",
+                "hint": "Students write 'drove' (simple past) instead of the past continuous for an ongoing parallel action.",
+                "explanation": "The other cars = plural. They were also moving at that same past moment = WERE DRIVING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to drive"
+                "answer": "to drive",
+                "hint": "Students write 'driving' instead of the infinitive after 'wants'.",
+                "explanation": "'Want TO + base verb': wants TO DRIVE when she grows up. Always use the infinitive after 'wants'."
               },
               {
                 "num": 7,
-                "answer": "drive"
+                "answer": "drive",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should DRIVE. Never 'should drives' or 'should driving'."
               },
               {
                 "num": 8,
-                "answer": "is driving"
+                "answer": "is driving",
+                "hint": "Students write 'drives' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. She (singular) → IS DRIVING in the car park on her first lesson."
               }
             ]
           }
@@ -6089,23 +6365,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "departure"
+                "answer": "departure",
+                "hint": "Students may write 'arrival'. DEPARTURE = the time the flight leaves, not arrives.",
+                "explanation": "DEPARTURE = the act of leaving / the scheduled time a flight leaves. We arrived two hours before DEPARTURE = before the flight was due to leave."
               },
               {
                 "num": 2,
-                "answer": "delayed"
+                "answer": "delayed",
+                "hint": "Students may write 'cancelled'. DELAYED = made later than planned, not cancelled entirely.",
+                "explanation": "DELAYED = made to happen later than planned. A delayed flight = one that leaves later than its scheduled time."
               },
               {
                 "num": 3,
-                "answer": "boarding"
+                "answer": "boarding",
+                "hint": "Students may pick 'departure' (already used). BOARDING = getting onto the plane; a boarding announcement tells you it is time to go on.",
+                "explanation": "BOARDING = getting onto a plane or ship. A BOARDING announcement tells you it is time to go to the gate and get on."
               },
               {
                 "num": 4,
-                "answer": "turbulence"
+                "answer": "turbulence",
+                "hint": "Students may not know this aviation word. The clue 'made the plane shake' defines turbulence directly.",
+                "explanation": "TURBULENCE = rough air movements that cause a plane to shake and bump. Pilots ask passengers to fasten seatbelts during TURBULENCE."
               },
               {
                 "num": 5,
-                "answer": "destination"
+                "answer": "destination",
+                "hint": "Students may write 'airport'. DESTINATION = the place you are travelling to, which here is Tokyo.",
+                "explanation": "A DESTINATION = the place you are travelling to. When we finally arrived at our DESTINATION = we reached Tokyo."
               }
             ]
           }
@@ -6619,35 +6905,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "we"
+                "answer": "we",
+                "hint": "Students write 'us' (object form) instead of 'we' (subject form).",
+                "explanation": "The blank is the SUBJECT of 'celebrated'. The speaker and family = WE. 'Us celebrated' is wrong."
               },
               {
                 "num": 2,
-                "answer": "she"
+                "answer": "she",
+                "hint": "Students write 'her' (object form) instead of 'she' (subject form).",
+                "explanation": "The uncle's wife is the SUBJECT of 'brought'. She = female = SHE. 'Her brought' is wrong."
               },
               {
                 "num": 3,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject pronoun) instead of 'her' (possessive adjective before a noun).",
+                "explanation": "Before 'husband' (a noun), use a POSSESSIVE ADJECTIVE: HER husband. 'She husband' is wrong."
               },
               {
                 "num": 4,
-                "answer": "our"
+                "answer": "our",
+                "hint": "Students write 'their' which is not in the word box, or 'we' (subject pronoun, not possessive adjective).",
+                "explanation": "Before 'parents' (a noun), use possessive adjective: OUR parents (the speaker is also one of the children). 'We parents' is wrong."
               },
               {
                 "num": 5,
-                "answer": "he"
+                "answer": "he",
+                "hint": "Students write 'his' (possessive) instead of 'he' (subject pronoun).",
+                "explanation": "Uncle is the SUBJECT of 'placed'. Uncle = male = HE placed the dish. 'His placed' is wrong."
               },
               {
                 "num": 6,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Students write 'them' (object form) instead of 'they' (subject form).",
+                "explanation": "The children = plural = THEY thanked Mother. THEY is the subject pronoun for a group. 'Them thanked' is wrong."
               },
               {
                 "num": 7,
-                "answer": "his"
+                "answer": "his",
+                "hint": "Students write 'her' (already used for blank 3) or 'he' (subject pronoun, not possessive adjective).",
+                "explanation": "Before 'mother' (a noun), use a possessive adjective. The cousin is a boy → HIS mother. 'He mother' is wrong."
               },
               {
                 "num": 8,
-                "answer": "them"
+                "answer": "them",
+                "hint": "Students write 'they' (subject form) instead of 'them' (object form after a verb).",
+                "explanation": "After the verb 'distracted', use the OBJECT pronoun: distracted THEM. 'Them' = the children as the object. 'Distracted they' is wrong."
               }
             ]
           }
@@ -6670,23 +6972,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "reunited"
+                "answer": "reunited",
+                "hint": "'Reunited after months of being apart' = coming back together after separation. Students may write 'together' which is not in the box.",
+                "explanation": "REUNITED = brought back together after being apart. Families are REUNITED at festivals after not seeing each other for months."
               },
               {
                 "num": 2,
-                "answer": "lively"
+                "answer": "lively",
+                "hint": "'Lively with music, laughter and chatter' = full of energy and activity. Students may write 'noisy' which is not in the box.",
+                "explanation": "LIVELY = full of life, energy and activity. A house filled with music and laughter is LIVELY."
               },
               {
                 "num": 3,
-                "answer": "customs"
+                "answer": "customs",
+                "hint": "Students confuse 'customs' with 'traditions' (blank 5). CUSTOMS = specific practices; TRADITIONS = broader long-established heritage passed down.",
+                "explanation": "CUSTOMS = specific practices or behaviours traditional in a culture, like sweeping the house before new year."
               },
               {
                 "num": 4,
-                "answer": "generous"
+                "answer": "generous",
+                "hint": "The clue 'they bring food, gifts and red packets' = giving a lot freely = generous.",
+                "explanation": "GENEROUS = willing to give a lot freely. Relatives who bring lots of food, gifts and red packets are being GENEROUS."
               },
               {
                 "num": 5,
-                "answer": "traditions"
+                "answer": "traditions",
+                "hint": "'Passed down for generations' = long-established heritage = traditions. 'Customs' was used in blank 3.",
+                "explanation": "TRADITIONS = long-established practices passed from generation to generation. They give a sense of identity and belonging."
               }
             ]
           }
@@ -7199,35 +7511,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "helping"
+                "answer": "helping",
+                "hint": "Students write 'to help' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: loves HELPING people. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "helps"
+                "answer": "helps",
+                "hint": "Students write 'help' (plural form) forgetting that 'She' is a singular subject.",
+                "explanation": "'Every Saturday' = habit = simple present. She (singular) → HELPS at the food bank."
               },
               {
                 "num": 3,
-                "answer": "helped"
+                "answer": "helped",
+                "hint": "Students write 'help' (base form) ignoring the past time signal 'Last month'.",
+                "explanation": "'Last month' = past. 'Help' is regular: help → HELPED."
               },
               {
                 "num": 4,
-                "answer": "was helping"
+                "answer": "was helping",
+                "hint": "Students write 'helped' (simple past) missing the ongoing background signal 'while she'.",
+                "explanation": "'While she ___' = ongoing background past action = past continuous. She WAS HELPING when she heard the stories."
               },
               {
                 "num": 5,
-                "answer": "were helping"
+                "answer": "were helping",
+                "hint": "Students write 'helped' (simple past) instead of the past continuous for an ongoing parallel action.",
+                "explanation": "Several students = plural. They were doing it at the same time = WERE HELPING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "help"
+                "answer": "help",
+                "hint": "Students write 'helping' instead of the base verb form that follows 'to' (already written in the passage).",
+                "explanation": "'It feels good TO + base verb': It feels good to HELP others. The word 'to' is already there, so just write the base verb."
               },
               {
                 "num": 7,
-                "answer": "to help"
+                "answer": "to help",
+                "hint": "Students write 'helping' instead of the infinitive that follows 'wants'.",
+                "explanation": "'Want TO + base verb': wants TO HELP as many people as possible. Always use the infinitive after 'wants'."
               },
               {
                 "num": 8,
-                "answer": "is helping"
+                "answer": "is helping",
+                "hint": "Students write 'helps' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. She (singular) → IS HELPING a group of new volunteers."
               }
             ]
           }
@@ -7250,23 +7578,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "volunteered"
+                "answer": "volunteered",
+                "hint": "Students may write 'offered' which is not in the box. VOLUNTEERED = freely offered to do something without being paid.",
+                "explanation": "VOLUNTEERED = freely offered to do something to help, without being paid or asked. Students VOLUNTEERED their time."
               },
               {
                 "num": 2,
-                "answer": "selfless"
+                "answer": "selfless",
+                "hint": "'Selfless' = thinking about others before yourself. Students may confuse with 'generous' which is not in the box.",
+                "explanation": "SELFLESS = thinking about others before yourself. Giving up your Saturday to help others for free = a SELFLESS act."
               },
               {
                 "num": 3,
-                "answer": "grateful"
+                "answer": "grateful",
+                "hint": "Students confuse 'grateful' (feeling thankful) with 'appreciated' (blank 5, recognised as valuable).",
+                "explanation": "GRATEFUL = feeling thankful for something. The organisers are GRATEFUL = they feel thankful for the students' help."
               },
               {
                 "num": 4,
-                "answer": "impact"
+                "answer": "impact",
+                "hint": "Students may write 'difference' which is not in the box. IMPACT = a strong effect on something or someone.",
+                "explanation": "IMPACT = a strong effect on something or someone. Making a big IMPACT = having a significant positive effect on people's lives."
               },
               {
                 "num": 5,
-                "answer": "appreciated"
+                "answer": "appreciated",
+                "hint": "By elimination after 'grateful' is used in blank 3. APPRECIATED = recognised as valuable.",
+                "explanation": "APPRECIATED = recognised as valuable and good. His work was APPRECIATED = others saw it as important and were thankful for it."
               }
             ]
           }
@@ -7776,35 +8114,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "reading"
+                "answer": "reading",
+                "hint": "Students write 'to read' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: loves READING adventure books. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "reads"
+                "answer": "reads",
+                "hint": "Students write 'read' (plural form) forgetting that 'She' is a singular subject.",
+                "explanation": "A regular habit = simple present. She (singular) → READS at least one book a week."
               },
               {
                 "num": 3,
-                "answer": "read"
+                "answer": "read",
+                "hint": "Students write 'readed', not knowing 'read' is irregular in the past tense.",
+                "explanation": "'Read' is irregular: read (present, 'reed') → read (past, 'red'). Same spelling, different pronunciation. 'Last holidays' = past → READ (pronounced 'red')."
               },
               {
                 "num": 4,
-                "answer": "was reading"
+                "answer": "was reading",
+                "hint": "Students write 'read' (simple past) missing the ongoing background signal 'while she'.",
+                "explanation": "'While she ___' in the garden = ongoing background past action = past continuous. She WAS READING when the butterfly landed."
               },
               {
                 "num": 5,
-                "answer": "were reading"
+                "answer": "were reading",
+                "hint": "Students write 'read' (simple past) instead of the past continuous for an ongoing parallel action.",
+                "explanation": "Several friends = plural. They were reading at the same time = WERE READING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to read"
+                "answer": "to read",
+                "hint": "Students write 'reading' instead of the infinitive after 'reminded them'.",
+                "explanation": "'Reminded them TO + base verb': reminded them TO READ at least thirty minutes a day."
               },
               {
                 "num": 7,
-                "answer": "reread"
+                "answer": "reread",
+                "hint": "Students write 'reading' or 'read' without noticing the meaning of reading a book again = reread.",
+                "explanation": "REREAD = read something again. Nadia REREADS her favourite stories = reads them a second or third time. 'To' is already there → use the base form: reread."
               },
               {
                 "num": 8,
-                "answer": "is reading"
+                "answer": "is reading",
+                "hint": "Students write 'reads' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Nadia (singular) → IS READING her favourite book to her baby sister."
               }
             ]
           }
@@ -7827,23 +8181,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "exhibited"
+                "answer": "exhibited",
+                "hint": "Students may write 'showed' which is not in the box. EXHIBITED = displayed artworks publicly for others to view.",
+                "explanation": "EXHIBITED = displayed artworks publicly for others to view. Artists EXHIBIT their work in galleries or community centres."
               },
               {
                 "num": 2,
-                "answer": "creative"
+                "answer": "creative",
+                "hint": "The clue 'no two paintings look the same' = originality = creative.",
+                "explanation": "CREATIVE = having the ability to come up with original, imaginative ideas. Making unique paintings = being CREATIVE."
               },
               {
                 "num": 3,
-                "answer": "masterpiece"
+                "answer": "masterpiece",
+                "hint": "Students may write 'artwork' which is not in the box. MASTERPIECE = the greatest, most impressive work someone has created.",
+                "explanation": "A MASTERPIECE = the greatest, most impressive work someone has ever created. People call his best painting a MASTERPIECE."
               },
               {
                 "num": 4,
-                "answer": "sketched"
+                "answer": "sketched",
+                "hint": "Students may write 'drew' or 'wrote' which are not in the box. SKETCHED = made a quick rough drawing.",
+                "explanation": "SKETCHED = made a quick, rough drawing. Artists SKETCH ideas in a notebook before starting a full detailed painting."
               },
               {
                 "num": 5,
-                "answer": "inspired"
+                "answer": "inspired",
+                "hint": "The clue 'reminded him of his happiest memories' = the river gave him the desire to paint = inspired.",
+                "explanation": "INSPIRED = gave someone the desire, enthusiasm or ideas to create something. The river INSPIRED him to paint."
               }
             ]
           }
@@ -8355,35 +8719,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "writing"
+                "answer": "writing",
+                "hint": "Students write 'to write' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys WRITING poems. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "writes"
+                "answer": "writes",
+                "hint": "Students write 'write' (plural form) forgetting that 'She' is a singular subject.",
+                "explanation": "'Every night' = habit = simple present. She (singular) → WRITES in her diary."
               },
               {
                 "num": 3,
-                "answer": "wrote"
+                "answer": "wrote",
+                "hint": "Students write 'writed', not knowing 'write' is irregular.",
+                "explanation": "'Last week' = past. 'Write' is irregular: write → WROTE. Never write 'writed'."
               },
               {
                 "num": 4,
-                "answer": "was writing"
+                "answer": "was writing",
+                "hint": "Students write 'wrote' (simple past) missing the ongoing background signal 'while she'.",
+                "explanation": "'While she ___' = ongoing background past action = past continuous. She WAS WRITING her draft when the teacher called her."
               },
               {
                 "num": 5,
-                "answer": "were writing"
+                "answer": "were writing",
+                "hint": "Students write 'wrote' (simple past) instead of the past continuous for an ongoing parallel action.",
+                "explanation": "The other students = plural. They were doing it at the same moment = WERE WRITING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to write"
+                "answer": "to write",
+                "hint": "Students write 'writing' instead of the infinitive after 'reminded us'.",
+                "explanation": "'Reminded us TO + base verb': reminded us TO WRITE in full sentences."
               },
               {
                 "num": 7,
-                "answer": "write"
+                "answer": "write",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should WRITE. Never 'should writes' or 'should writing'."
               },
               {
                 "num": 8,
-                "answer": "is writing"
+                "answer": "is writing",
+                "hint": "Students write 'writes' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. My friend (singular) → IS WRITING the conclusion right now."
               }
             ]
           }
@@ -8406,23 +8786,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "researched"
+                "answer": "researched",
+                "hint": "Students may write 'studied' which is not in the box. RESEARCHED = looked into a topic carefully by gathering information.",
+                "explanation": "RESEARCHED = looked into a topic carefully by reading, watching and gathering information from different sources."
               },
               {
                 "num": 2,
-                "answer": "draft"
+                "answer": "draft",
+                "hint": "Students may write 'plan' or 'copy' which are not in the box. A DRAFT = a first version of writing that can be improved.",
+                "explanation": "A DRAFT = a first version of writing that can be edited and improved before the final version is submitted."
               },
               {
                 "num": 3,
-                "answer": "feedback"
+                "answer": "feedback",
+                "hint": "Students may write 'advice' which is not in the box. FEEDBACK = comments and suggestions to help someone improve their work.",
+                "explanation": "FEEDBACK = comments and suggestions given to help someone improve their work. The teacher gave FEEDBACK on the drafts."
               },
               {
                 "num": 4,
-                "answer": "accurate"
+                "answer": "accurate",
+                "hint": "Students may write 'detailed' which is not in the box. ACCURATE = correct and free from errors.",
+                "explanation": "ACCURATE = correct and without errors. The teacher's feedback helped make the reports more ACCURATE."
               },
               {
                 "num": 5,
-                "answer": "presented"
+                "answer": "presented",
+                "hint": "Students may write 'showed' which is not in the box. PRESENTED = shared work with an audience through speech and visuals.",
+                "explanation": "PRESENTED = shared their work with the class through speech and visual aids. Each group PRESENTED their findings."
               }
             ]
           }
@@ -8931,35 +9321,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "working"
+                "answer": "working",
+                "hint": "Students write 'to work' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys WORKING as a paramedic. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "works"
+                "answer": "works",
+                "hint": "Students write 'work' (plural form) forgetting that 'He' is a singular subject.",
+                "explanation": "'Every day' = habit = simple present. He (singular) → WORKS at the hospital including weekends."
               },
               {
                 "num": 3,
-                "answer": "worked"
+                "answer": "worked",
+                "hint": "Students write 'work' (base form) ignoring the past signal 'Last year'.",
+                "explanation": "'Last year' = past. 'Work' is regular: work → WORKED."
               },
               {
                 "num": 4,
-                "answer": "was working"
+                "answer": "was working",
+                "hint": "Students write 'worked' (simple past) missing the ongoing background signal 'while he'.",
+                "explanation": "'While he ___' = ongoing background past action = past continuous. He WAS WORKING on a case when the call came in."
               },
               {
                 "num": 5,
-                "answer": "were working"
+                "answer": "were working",
+                "hint": "Students write 'worked' (simple past) instead of the past continuous for an ongoing parallel action.",
+                "explanation": "Two other paramedics = plural. They were doing it at the same past moment = WERE WORKING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to work"
+                "answer": "to work",
+                "hint": "Students write 'working' instead of the infinitive after 'wanted'.",
+                "explanation": "'Want TO + base verb': wanted TO WORK in a job that helps people. Always use the infinitive after 'wanted'."
               },
               {
                 "num": 7,
-                "answer": "work"
+                "answer": "work",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should WORK. Never 'should works' or 'should working'."
               },
               {
                 "num": 8,
-                "answer": "is working"
+                "answer": "is working",
+                "hint": "Students write 'works' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Father (singular) → IS WORKING the early morning shift right now."
               }
             ]
           }
@@ -8982,23 +9388,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "profession"
+                "answer": "profession",
+                "hint": "Students may write 'job' which is not in the box. PROFESSION = a type of work that requires special training or education.",
+                "explanation": "A PROFESSION = a type of work requiring special training. Nursing is a PROFESSION because nurses need years of study and training."
               },
               {
                 "num": 2,
-                "answer": "uniform"
+                "answer": "uniform",
+                "hint": "The clue 'white... before heading to the ward' = nurses wear a uniform at work.",
+                "explanation": "A UNIFORM = a special set of clothes worn by people in the same job or group. Nurses wear a white UNIFORM."
               },
               {
                 "num": 3,
-                "answer": "patients"
+                "answer": "patients",
+                "hint": "Students may write 'people' which is not in the box. PATIENTS = people receiving medical treatment.",
+                "explanation": "PATIENTS = people who are receiving medical care in a hospital or clinic. A nurse looks after PATIENTS in the ward."
               },
               {
                 "num": 4,
-                "answer": "exhausted"
+                "answer": "exhausted",
+                "hint": "The clue 'after a long shift' and 'demanding work' = very tired = exhausted.",
+                "explanation": "EXHAUSTED = extremely tired after a lot of physical or mental effort. Nurses are often EXHAUSTED after a long shift."
               },
               {
                 "num": 5,
-                "answer": "dedicated"
+                "answer": "dedicated",
+                "hint": "The clue 'gives her best every single day without fail' = committed and hardworking = dedicated.",
+                "explanation": "DEDICATED = fully committed to a job or cause and working hard for it. A DEDICATED nurse gives her best every single day."
               }
             ]
           }
@@ -9516,35 +9932,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' (inside the zoo) or 'on' (surface). AT is correct for a named arrival point.",
+                "explanation": "Use AT for a specific location point: arrived AT the zoo entrance, waited AT the gate. AT shows you are at that exact spot."
               },
               {
                 "num": 2,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'on' (surface) instead of 'in' (inside an enclosed space or liquid).",
+                "explanation": "IN = inside an enclosed space or immersed in something. The flamingos stood IN a shallow pool = their legs were inside the water."
               },
               {
                 "num": 3,
-                "answer": "along"
+                "answer": "along",
+                "hint": "Students write 'on' (surface of the path) instead of 'along' (following the path's direction and length).",
+                "explanation": "ALONG = following the line or length of something: walk ALONG a path, walk ALONG the river. It shows movement in the direction of something extended."
               },
               {
                 "num": 4,
-                "answer": "through"
+                "answer": "through",
+                "hint": "Students write 'in' (inside but not passing through) instead of 'through' (entering and exiting).",
+                "explanation": "THROUGH = enter one side and come out the other: walk THROUGH a tunnel, drive THROUGH a forest. It shows complete passage inside something."
               },
               {
                 "num": 5,
-                "answer": "past"
+                "answer": "past",
+                "hint": "Students write 'by' which has a similar meaning but 'past' is more specific for walking by something without entering.",
+                "explanation": "PAST = moved alongside and beyond a place without stopping or entering. We walked PAST the reptile house = we went by it without going in."
               },
               {
                 "num": 6,
-                "answer": "beside"
+                "answer": "beside",
+                "hint": "Students write 'next' (incomplete — 'next to' needs two words) or 'near' (not in the box). BESIDE = at the side of.",
+                "explanation": "BESIDE = right next to something or someone. My brother sat BESIDE me = he sat right next to me on the same bench."
               },
               {
                 "num": 7,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' (inside the ground) or 'at' (a specific location point). ON = resting on a surface.",
+                "explanation": "ON = resting on a surface: placed ON the ground, put ON the table. Use ON for things touching the top of a surface."
               },
               {
                 "num": 8,
-                "answer": "into"
+                "answer": "into",
+                "hint": "Students write 'in' (location inside) instead of 'into' (movement entering). INTO shows the direction of entry.",
+                "explanation": "INTO = movement entering a space: dropped INTO its mouth, jumped INTO the water. INTO shows something moving and entering an enclosed space."
               }
             ]
           }
@@ -9567,23 +9999,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "roamed"
+                "answer": "roamed",
+                "hint": "Students may write 'walked' which is not in the box. ROAMED = wandered freely over a large area.",
+                "explanation": "ROAMED = wandered or moved freely over a wide area. The zebras ROAMED across the open space = moved around freely."
               },
               {
                 "num": 2,
-                "answer": "habitat"
+                "answer": "habitat",
+                "hint": "Students may write 'home' which is not in the box. HABITAT = the natural environment where an animal lives.",
+                "explanation": "HABITAT = the natural environment where a plant or animal normally lives. The savannah is the natural HABITAT of zebras and giraffes."
               },
               {
                 "num": 3,
-                "answer": "endangered"
+                "answer": "endangered",
+                "hint": "The clue 'their numbers in the wild are very low' = at risk of dying out = endangered.",
+                "explanation": "ENDANGERED = at serious risk of becoming extinct because the population is very low. ENDANGERED animals need protection."
               },
               {
                 "num": 4,
-                "answer": "enclosure"
+                "answer": "enclosure",
+                "hint": "Students may write 'cage' which is not in the box. ENCLOSURE = a fenced or walled area where animals are kept in a zoo.",
+                "explanation": "An ENCLOSURE = a fenced or walled area in a zoo where animals are kept. The tiger was in a large glass ENCLOSURE."
               },
               {
                 "num": 5,
-                "answer": "spotted"
+                "answer": "spotted",
+                "hint": "Students may write 'saw' which is not in the box. SPOTTED = noticed or caught sight of something, often something rare.",
+                "explanation": "SPOTTED = noticed something, especially something that is rare or hard to find. We SPOTTED a rare white lion = we caught sight of it."
               }
             ]
           }
@@ -10097,35 +10539,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "feeding"
+                "answer": "feeding",
+                "hint": "Students write 'to feed' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys FEEDING her goldfish. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "feeds"
+                "answer": "feeds",
+                "hint": "Students write 'feed' (plural form) forgetting that 'She' is singular.",
+                "explanation": "'Each time' = a regular habit = simple present. She (singular) → FEEDS them the right amount."
               },
               {
                 "num": 3,
-                "answer": "fed"
+                "answer": "fed",
+                "hint": "Students write 'feeded', not knowing 'feed' is irregular.",
+                "explanation": "'Last week' = past. 'Feed' is irregular: feed → FED. Never write 'feeded'."
               },
               {
                 "num": 4,
-                "answer": "was feeding"
+                "answer": "was feeding",
+                "hint": "Students write 'fed' (simple past) missing the ongoing signal 'while she'.",
+                "explanation": "'While she ___' = ongoing background past action = past continuous. She WAS FEEDING the fish when she noticed the problem."
               },
               {
                 "num": 5,
-                "answer": "were feeding"
+                "answer": "were feeding",
+                "hint": "Students write 'fed' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "Her younger brothers = plural. They were doing it at the same past moment = WERE FEEDING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to feed"
+                "answer": "to feed",
+                "hint": "Students write 'feeding' instead of the infinitive after 'reminded Lily'.",
+                "explanation": "'Reminded someone TO + base verb': reminded Lily TO FEED her fish only once a day."
               },
               {
                 "num": 7,
-                "answer": "feed"
+                "answer": "feed",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should FEED. Never 'should feeds' or 'should feeding'."
               },
               {
                 "num": 8,
-                "answer": "is feeding"
+                "answer": "is feeding",
+                "hint": "Students write 'feeds' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Lily (singular) → IS FEEDING her fish carefully right now."
               }
             ]
           }
@@ -10148,23 +10606,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "vaccinated"
+                "answer": "vaccinated",
+                "hint": "The clue 'against common dog diseases so he would not fall ill' = given vaccines = vaccinated.",
+                "explanation": "VACCINATED = given a vaccine (an injection) to protect against disease. A dog must be VACCINATED to stay healthy and visit public places."
               },
               {
                 "num": 2,
-                "answer": "microchipped"
+                "answer": "microchipped",
+                "hint": "The clue 'if the dog got lost, the vet could scan him' = a tiny chip placed under the skin = microchipped.",
+                "explanation": "MICROCHIPPED = had a tiny electronic chip inserted under the skin. If a pet is lost, a vet can SCAN the microchip to find the owner's details."
               },
               {
                 "num": 3,
-                "answer": "groom"
+                "answer": "groom",
+                "hint": "Students may write 'brush' which is not in the box. GROOM = clean and maintain an animal's fur and appearance.",
+                "explanation": "GROOM = clean and tidy an animal's coat, nails and overall appearance. Owners brush their pets to GROOM them."
               },
               {
                 "num": 4,
-                "answer": "obedient"
+                "answer": "obedient",
+                "hint": "The clue 'follows every command without any fuss' = does what is asked = obedient.",
+                "explanation": "OBEDIENT = does what it is told without argument. A well-trained dog is OBEDIENT and follows its owner's commands."
               },
               {
                 "num": 5,
-                "answer": "affectionate"
+                "answer": "affectionate",
+                "hint": "The clue 'loves to cuddle and lick your hand' = shows love and warmth = affectionate.",
+                "explanation": "AFFECTIONATE = showing love and warmth through actions like cuddling and touching. A dog that loves to cuddle is very AFFECTIONATE."
               }
             ]
           }
@@ -10674,35 +11142,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "crossing"
+                "answer": "crossing",
+                "hint": "Students write 'to cross' instead of the gerund used as the subject of the sentence.",
+                "explanation": "A gerund (verb-ing) can act as the SUBJECT of a sentence. CROSSING the road requires full attention — 'crossing' is the subject here."
               },
               {
                 "num": 2,
-                "answer": "crosses"
+                "answer": "crosses",
+                "hint": "Students write 'cross' (plural form) forgetting that 'our school warden' is singular.",
+                "explanation": "'Every day' = habit = simple present. Our school warden (singular) → CROSSES the road with the students."
               },
               {
                 "num": 3,
-                "answer": "crossed"
+                "answer": "crossed",
+                "hint": "Students write 'cross' (base form) ignoring the past time signal 'Last Tuesday'.",
+                "explanation": "'Last Tuesday' = past. 'Cross' is regular: cross → CROSSED."
               },
               {
                 "num": 4,
-                "answer": "was crossing"
+                "answer": "was crossing",
+                "hint": "Students write 'crossed' (simple past) missing the ongoing background signal 'while she'.",
+                "explanation": "'While she ___' = ongoing past action = past continuous. She WAS CROSSING the road when the motorcycle ran the red light."
               },
               {
                 "num": 5,
-                "answer": "were crossing"
+                "answer": "were crossing",
+                "hint": "Students write 'crossed' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "Some other pedestrians = plural. They were doing it at the same past moment = WERE CROSSING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to cross"
+                "answer": "to cross",
+                "hint": "Students write 'crossing' instead of the infinitive after 'reminded everyone'.",
+                "explanation": "'Reminded everyone TO + base verb': reminded everyone TO CROSS only at the green man signal."
               },
               {
                 "num": 7,
-                "answer": "cross"
+                "answer": "cross",
+                "hint": "Students add -es or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should CROSS. Never 'should crosses' or 'should crossing'."
               },
               {
                 "num": 8,
-                "answer": "is crossing"
+                "answer": "is crossing",
+                "hint": "Students write 'crosses' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. The warden (singular) → IS CROSSING the road with the students right now."
               }
             ]
           }
@@ -10725,23 +11209,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "emergency"
+                "answer": "emergency",
+                "hint": "The clue 'such as a fire or a gas leak' = a sudden serious situation = emergency.",
+                "explanation": "An EMERGENCY = a sudden and serious situation that requires immediate action. A fire or gas leak at home is an EMERGENCY."
               },
               {
                 "num": 2,
-                "answer": "precaution"
+                "answer": "precaution",
+                "hint": "Students may confuse 'precaution' with 'caution' (blank 5). A PRECAUTION = an action taken in advance to prevent a problem.",
+                "explanation": "A PRECAUTION = an action taken ahead of time to prevent something bad from happening. Keeping a fire extinguisher is a PRECAUTION against fires."
               },
               {
                 "num": 3,
-                "answer": "flammable"
+                "answer": "flammable",
+                "hint": "The clue 'they can catch fire very easily' = able to catch fire easily = flammable.",
+                "explanation": "FLAMMABLE = easily set on fire. Cooking oil and some chemicals are FLAMMABLE and must be kept away from heat and open flames."
               },
               {
                 "num": 4,
-                "answer": "hazard"
+                "answer": "hazard",
+                "hint": "Students may write 'danger' which is not in the box. HAZARD = a specific risk or source of danger.",
+                "explanation": "A HAZARD = something that can cause danger or harm. Warning signs on products tell users there is a HAZARD — a specific risk to be aware of."
               },
               {
                 "num": 5,
-                "answer": "caution"
+                "answer": "caution",
+                "hint": "Students may confuse 'caution' with 'precaution' (blank 2). CAUTION = care and attention when doing something.",
+                "explanation": "CAUTION = great care and attention, especially when doing something risky. Handle flammable products with CAUTION = be very careful."
               }
             ]
           }
@@ -11251,35 +11745,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "exploring"
+                "answer": "exploring",
+                "hint": "Students write 'to explore' instead of the gerund after 'loved'.",
+                "explanation": "LOVE + verb-ing: loved EXPLORING the mysteries of space. After 'loved', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "explores"
+                "answer": "explores",
+                "hint": "Students write 'explore' (plural form) forgetting that 'her team' is treated as a singular collective subject.",
+                "explanation": "'Every week' = habit = simple present. Her team (singular collective) → EXPLORES new data every week."
               },
               {
                 "num": 3,
-                "answer": "explored"
+                "answer": "explored",
+                "hint": "Students write 'explore' (base form) ignoring the past signal 'Last year'.",
+                "explanation": "'Last year' = past. 'Explore' is regular: explore → EXPLORED."
               },
               {
                 "num": 4,
-                "answer": "was exploring"
+                "answer": "was exploring",
+                "hint": "Students write 'explored' (simple past) missing the ongoing signal 'while the rover'.",
+                "explanation": "'While the rover ___' = ongoing background past action = past continuous. The rover WAS EXPLORING when it detected the unusual rock."
               },
               {
                 "num": 5,
-                "answer": "were exploring"
+                "answer": "were exploring",
+                "hint": "Students write 'explored' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "Two separate probes = plural. They were doing it at the same past moment = WERE EXPLORING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to explore"
+                "answer": "to explore",
+                "hint": "Students write 'exploring' instead of the infinitive after 'hope'.",
+                "explanation": "'Hope TO + base verb': hope TO EXPLORE the moons of Jupiter. Use the infinitive after 'hope'."
               },
               {
                 "num": 7,
-                "answer": "explore"
+                "answer": "explore",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should EXPLORE. Never 'should explores' or 'should exploring'."
               },
               {
                 "num": 8,
-                "answer": "is exploring"
+                "answer": "is exploring",
+                "hint": "Students write 'explores' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. The newest rover (singular) → IS EXPLORING a region near the Martian south pole."
               }
             ]
           }
@@ -11302,23 +11812,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "galaxy"
+                "answer": "galaxy",
+                "hint": "Students may write 'universe' which is not in the box. A GALAXY = a huge system of billions of stars.",
+                "explanation": "A GALAXY = a system of billions of stars held together by gravity. The Milky Way is the GALAXY that contains our solar system."
               },
               {
                 "num": 2,
-                "answer": "orbit"
+                "answer": "orbit",
+                "hint": "Students may write 'path' which is not in the box. ORBIT = the curved path a planet or moon takes around a star or planet.",
+                "explanation": "An ORBIT = the curved path that a planet, moon or satellite travels around a larger body in space. Earth's ORBIT around the Sun takes 365 days."
               },
               {
                 "num": 3,
-                "answer": "satellite"
+                "answer": "satellite",
+                "hint": "The clue 'circles our planet' = a natural satellite. Students may write 'moon' but SATELLITE is the precise scientific term used here.",
+                "explanation": "A SATELLITE = an object that orbits a planet. The Moon is a natural SATELLITE of Earth. Man-made satellites are also sent into orbit."
               },
               {
                 "num": 4,
-                "answer": "atmosphere"
+                "answer": "atmosphere",
+                "hint": "The clue 'layer of gases surrounding the planet' = atmosphere. Students may write 'sky' which is not in the box.",
+                "explanation": "ATMOSPHERE = the layer of gases surrounding a planet. Earth's ATMOSPHERE protects us from harmful radiation and provides the air we breathe."
               },
               {
                 "num": 5,
-                "answer": "crater"
+                "answer": "crater",
+                "hint": "The clue 'large bowl-shaped holes made when rocks crashed' = craters. Students may write 'holes' which is not in the box.",
+                "explanation": "A CRATER = a large, bowl-shaped hollow on the surface of a planet or moon, formed when a rock from space crashes into it."
               }
             ]
           }
@@ -11833,35 +12353,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "painting"
+                "answer": "painting",
+                "hint": "Students write 'to paint' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys PAINTING landscapes. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "paints"
+                "answer": "paints",
+                "hint": "Students write 'paint' (plural form) forgetting that 'He' is singular.",
+                "explanation": "'Every month' = habit = simple present. He (singular) → PAINTS at least one new picture."
               },
               {
                 "num": 3,
-                "answer": "painted"
+                "answer": "painted",
+                "hint": "Students write 'paint' (base form) ignoring the past signal 'Last summer'.",
+                "explanation": "'Last summer' = past. 'Paint' is regular: paint → PAINTED."
               },
               {
                 "num": 4,
-                "answer": "was painting"
+                "answer": "was painting",
+                "hint": "Students write 'painted' (simple past) missing the ongoing signal 'while he'.",
+                "explanation": "'While he ___' = ongoing background past action = past continuous. He WAS PAINTING the upper section when the rain shower came."
               },
               {
                 "num": 5,
-                "answer": "were painting"
+                "answer": "were painting",
+                "hint": "Students write 'painted' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "Two of his friends = plural. They were doing it at the same past moment = WERE PAINTING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to paint"
+                "answer": "to paint",
+                "hint": "Students write 'painting' instead of the infinitive after 'wanted'.",
+                "explanation": "'Want TO + base verb': wanted TO PAINT a mural the neighbourhood could enjoy. Always use the infinitive after 'wanted'."
               },
               {
                 "num": 7,
-                "answer": "paint"
+                "answer": "paint",
+                "hint": "Students add -s or -ing after the modal verb 'can'.",
+                "explanation": "After modal verbs (can, should, must, will), always use the BASE form: can PAINT. Never 'can paints' or 'can painting'."
               },
               {
                 "num": 8,
-                "answer": "is painting"
+                "answer": "is painting",
+                "hint": "Students write 'paints' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Grandfather (singular) → IS PAINTING a sunset scene right now."
               }
             ]
           }
@@ -11884,23 +12420,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "sketch"
+                "answer": "sketch",
+                "hint": "Students may write 'drawing' which is not in the box. A SKETCH = a rough, quick drawing used to plan a final artwork.",
+                "explanation": "A SKETCH = a rough, quick drawing used to plan the layout of a final artwork. Artists SKETCH their ideas in pencil before painting."
               },
               {
                 "num": 2,
-                "answer": "canvas"
+                "answer": "canvas",
+                "hint": "Students may write 'paper' which is not in the box. A CANVAS = a woven fabric stretched over a frame, used for painting.",
+                "explanation": "A CANVAS = a piece of woven fabric stretched tightly over a wooden frame. Most oil and acrylic paintings are done on a CANVAS."
               },
               {
                 "num": 3,
-                "answer": "texture"
+                "answer": "texture",
+                "hint": "The clue 'how the surface feels — smooth, rough or bumpy' = texture. Students may write 'surface' which is not in the box.",
+                "explanation": "TEXTURE = the feel or appearance of a surface — whether it is smooth, rough, bumpy or soft. The TEXTURE of a painting affects how it looks under different lighting."
               },
               {
                 "num": 4,
-                "answer": "inspiration"
+                "answer": "inspiration",
+                "hint": "The clue 'find their ___' from unexpected places = the idea or motivation to create = inspiration.",
+                "explanation": "INSPIRATION = a feeling of enthusiasm and the desire to create something. Artists find INSPIRATION in nature, people and everyday surroundings."
               },
               {
                 "num": 5,
-                "answer": "exhibition"
+                "answer": "exhibition",
+                "hint": "Students may write 'show' which is not in the box. An EXHIBITION = a public display of artworks for people to view.",
+                "explanation": "An EXHIBITION = a public display of artworks, photographs or other items. Artists hold EXHIBITIONS so the public can view their work."
               }
             ]
           }
@@ -12409,35 +12955,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "she"
+                "answer": "she",
+                "hint": "Students write 'her' (object form) instead of 'she' (subject form).",
+                "explanation": "The blank is the SUBJECT of 'was'. Maya = female = SHE. 'Her was five' is wrong."
               },
               {
                 "num": 2,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject pronoun) instead of 'her' (possessive adjective before a noun).",
+                "explanation": "Before 'teacher' (a noun), use a POSSESSIVE ADJECTIVE: HER teacher. 'She teacher' is wrong."
               },
               {
                 "num": 3,
-                "answer": "him"
+                "answer": "him",
+                "hint": "Students write 'he' (subject form) instead of 'him' (object form after a verb).",
+                "explanation": "After the verb 'watched', use the OBJECT pronoun: watched HIM perform. 'Watched he' is wrong."
               },
               {
                 "num": 4,
-                "answer": "he"
+                "answer": "he",
+                "hint": "Students write 'his' (possessive) instead of 'he' (subject pronoun).",
+                "explanation": "Raju is the SUBJECT of 'tuned'. Raju = male = HE tuned his guitar. 'His tuned' is wrong."
               },
               {
                 "num": 5,
-                "answer": "his"
+                "answer": "his",
+                "hint": "Students write 'he' (subject pronoun) instead of 'his' (possessive adjective before a noun).",
+                "explanation": "Before 'guitar playing' (a noun phrase), use a POSSESSIVE ADJECTIVE: HIS guitar playing. 'He guitar playing' is wrong."
               },
               {
                 "num": 6,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Students write 'them' (object form) instead of 'they' (subject form).",
+                "explanation": "Maya and Raju = two people = THEY received a standing ovation. THEY is the subject pronoun for a group. 'Them received' is wrong."
               },
               {
                 "num": 7,
-                "answer": "them"
+                "answer": "them",
+                "hint": "Students write 'they' (subject form) instead of 'them' (object form after a verb).",
+                "explanation": "After the verb 'congratulated', use the OBJECT pronoun: congratulated THEM. 'Congratulated they' is wrong."
               },
               {
                 "num": 8,
-                "answer": "their"
+                "answer": "their",
+                "hint": "Students write 'they' (subject) or 'them' (object) instead of 'their' (possessive adjective before a noun).",
+                "explanation": "Before 'performance' (a noun), use a POSSESSIVE ADJECTIVE: THEIR performance. 'They performance' and 'them performance' are both wrong."
               }
             ]
           }
@@ -12460,23 +13022,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "performed"
+                "answer": "performed",
+                "hint": "Students may write 'shown' or 'done' which are not in the box. PERFORMED = took part in a public performance on stage.",
+                "explanation": "PERFORMED = took part in a performance in front of an audience. Every class PERFORMED at least one piece on stage."
               },
               {
                 "num": 2,
-                "answer": "rehearsal"
+                "answer": "rehearsal",
+                "hint": "The clue 'the weeks before the concert' and 'making sure every note was in place' = a rehearsal = a practice session before a performance.",
+                "explanation": "A REHEARSAL = a practice session before a public performance. The choir attended many REHEARSALS to prepare for the concert."
               },
               {
                 "num": 3,
-                "answer": "rehearsal"
+                "answer": "rehearsal",
+                "hint": "'Rehearsal after rehearsal' = the word is used twice in the same phrase to show repetition. Both blanks 2 and 3 use the same word.",
+                "explanation": "'Rehearsal after REHEARSAL' = one practice session after another, repeatedly. This shows how many times they practised before the concert."
               },
               {
                 "num": 4,
-                "answer": "harmony"
+                "answer": "harmony",
+                "hint": "Students may write 'tune' which is not in the box. HARMONY = the pleasing combination of different musical notes sung or played together.",
+                "explanation": "HARMONY = different notes sung or played at the same time that sound pleasing together. A choir sings in perfect HARMONY when all voices blend well."
               },
               {
                 "num": 5,
-                "answer": "chorus"
+                "answer": "chorus",
+                "hint": "Students may write 'verse' which is not in the box. A CHORUS = the repeated section of a song that all performers sing together.",
+                "explanation": "A CHORUS = the part of a song where all performers join in and sing together, usually the most memorable and repeated section."
               }
             ]
           }
@@ -12989,35 +13561,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' or 'at' for a named day. ON is the correct preposition before specific days.",
+                "explanation": "ON + specific day: ON Sunday mornings, ON Monday, ON Christmas Day. Always use ON before named days."
               },
               {
                 "num": 2,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' (inside the park) or 'on' (surface). AT is correct for a named arrival point.",
+                "explanation": "AT = a specific location or arrival point: arrive AT the entrance, wait AT the gate. AT shows you are at that exact named spot."
               },
               {
                 "num": 3,
-                "answer": "near"
+                "answer": "near",
+                "hint": "Students write 'at' (exact point) or 'in' (inside). NEAR = close to but not at the exact same spot.",
+                "explanation": "NEAR = close to something, but not at the exact same spot. My bench is NEAR the koi pond = it is close to the pond but not inside it."
               },
               {
                 "num": 4,
-                "answer": "under"
+                "answer": "under",
+                "hint": "Students write 'below' (not in the box) or 'near' (already used). UNDER = directly below something that is above you.",
+                "explanation": "UNDER = directly below something that is overhead. We rested UNDER the tree = directly beneath it, sheltered by its branches above."
               },
               {
                 "num": 5,
-                "answer": "between"
+                "answer": "between",
+                "hint": "Students write 'among' (for three or more things) or 'near' (already used). BETWEEN is correct for exactly two specific named places.",
+                "explanation": "BETWEEN = in the middle of exactly two specific things. The playground is BETWEEN the fitness corner and the community garden — two specific places."
               },
               {
                 "num": 6,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'on' (surface) instead of 'in' (inside a body of water). Ducks swim inside the water, not on top of it.",
+                "explanation": "IN = inside an enclosed space or body of water. The ducks swim IN the pond = they are inside the water. 'On the pond' would mean on the surface (like a boat)."
               },
               {
                 "num": 7,
-                "answer": "before"
+                "answer": "before",
+                "hint": "Students write 'after' (after the jog, not before) or 'during' (not in the box). BEFORE = prior to, earlier than.",
+                "explanation": "BEFORE = earlier in time than something else. Father stretches BEFORE his jog = the stretching happens first. AFTER would mean he stretches when the jog is finished."
               },
               {
                 "num": 8,
-                "answer": "after"
+                "answer": "after",
+                "hint": "Students write 'before' (already used in blank 7) or 'during' (not in the box). AFTER = when something is finished.",
+                "explanation": "AFTER = when something is finished. We stop for drinks AFTER our walk = we finish the walk first, then go for drinks."
               }
             ]
           }
@@ -13040,23 +13628,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "meandered"
+                "answer": "meandered",
+                "hint": "Students may write 'flowed' which is not in the box. MEANDERED = moved in a slow, winding path with many curves.",
+                "explanation": "MEANDERED = moved slowly and in a winding, curving path. A river MEANDERS through a park = it flows in gentle curves rather than a straight line."
               },
               {
                 "num": 2,
-                "answer": "lush"
+                "answer": "lush",
+                "hint": "Students may write 'green' or 'thick' which are not in the box. LUSH = growing strongly and richly, full of healthy plants.",
+                "explanation": "LUSH = growing strongly and richly, very green and full of life. LUSH grass or plants are healthy, vibrant and thick."
               },
               {
                 "num": 3,
-                "answer": "strolled"
+                "answer": "strolled",
+                "hint": "Students may write 'walked' which is not in the box. STROLLED = walked slowly and in a relaxed way, without any hurry.",
+                "explanation": "STROLLED = walked slowly and in a relaxed, leisurely way. Families STROLLED along the riverbank = they walked slowly and enjoyed the surroundings."
               },
               {
                 "num": 4,
-                "answer": "refreshing"
+                "answer": "refreshing",
+                "hint": "The clue 'cool breeze after a long week' = something that makes you feel better and more energetic = refreshing.",
+                "explanation": "REFRESHING = making you feel pleasantly cool, rested or energised. A cool breeze is REFRESHING after a long, tiring week."
               },
               {
                 "num": 5,
-                "answer": "obstacle"
+                "answer": "obstacle",
+                "hint": "The clue 'climbing nets, balance beams and stepping stones that challenge them' = a course with things to get past = obstacle course.",
+                "explanation": "An OBSTACLE = something that you have to get past or overcome. An OBSTACLE course has physical challenges like nets, beams and stepping stones to move through."
               }
             ]
           }
@@ -13567,35 +14165,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "is"
+                "answer": "is",
+                "hint": "Students write 'are' thinking of many reefs. 'The Great Barrier Reef' is one named reef = singular.",
+                "explanation": "'The Great Barrier Reef' = one singular named place → IS the largest coral reef. IS is used for singular subjects in the present tense."
               },
               {
                 "num": 2,
-                "answer": "are"
+                "answer": "are",
+                "hint": "Students write 'is' (singular) instead of 'are' (plural). 'Thousands of fish species' is plural.",
+                "explanation": "'Thousands of fish species' = plural → ARE found in its waters. ARE is for plural subjects in the present tense."
               },
               {
                 "num": 3,
-                "answer": "was"
+                "answer": "was",
+                "hint": "Students write 'is' (present) ignoring the time signal 'eighteenth century' which indicates the past.",
+                "explanation": "'In the eighteenth century' = past. 'The reef' = singular. Past + singular = WAS first explored. Always match the be verb to the time and number."
               },
               {
                 "num": 4,
-                "answer": "were"
+                "answer": "were",
+                "hint": "Students write 'was' (singular) instead of 'were' (plural). 'Many coral species' is plural.",
+                "explanation": "'Many coral species' = plural + past = WERE believed. WERE is for plural subjects in the past tense."
               },
               {
                 "num": 5,
-                "answer": "has"
+                "answer": "has",
+                "hint": "Students write 'have' (plural) instead of 'has' (singular). 'Rising ocean temperature' is singular.",
+                "explanation": "'Rising ocean temperature' = singular → HAS caused bleaching. HAS is the present perfect auxiliary for singular subjects."
               },
               {
                 "num": 6,
-                "answer": "have"
+                "answer": "have",
+                "hint": "Students write 'has' (singular) instead of 'have' (plural). 'Scientists' is plural.",
+                "explanation": "'Scientists' = plural → HAVE been working. HAVE is the present perfect auxiliary for plural subjects."
               },
               {
                 "num": 7,
-                "answer": "does"
+                "answer": "does",
+                "hint": "Students write 'do' (plural) or 'is' (be verb). 'The reef' = singular. Auxiliary for emphasis in simple present = DOES.",
+                "explanation": "DOES is the auxiliary for singular subjects in simple present: 'The reef DOES not only shelter... but also protect.' It adds emphasis. Singular = DOES; Plural = DO."
               },
               {
                 "num": 8,
-                "answer": "do"
+                "answer": "do",
+                "hint": "Students write 'does' (singular) instead of 'do' (plural). 'We' is plural → auxiliary is DO in questions.",
+                "explanation": "In questions: 'What DO we owe?' = auxiliary DO for plural subject 'we'. 'Does' would be for he/she/it (singular)."
               }
             ]
           }
@@ -13618,23 +14232,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "gills"
+                "answer": "gills",
+                "hint": "The clue 'absorb oxygen from the water as it flows past' = the breathing organs of a fish = gills.",
+                "explanation": "GILLS = the organs fish use to breathe underwater. GILLS extract oxygen from water as it flows through them."
               },
               {
                 "num": 2,
-                "answer": "fins"
+                "answer": "fins",
+                "hint": "The clue 'steer and balance themselves as they swim' = the flat wing-like parts on a fish's body = fins.",
+                "explanation": "FINS = the flat, wing-like parts on a fish that help it steer, balance and move through the water."
               },
               {
                 "num": 3,
-                "answer": "camouflage"
+                "answer": "camouflage",
+                "hint": "The clue 'changing colour or pattern to match their surroundings, making them nearly invisible' = camouflage.",
+                "explanation": "CAMOUFLAGE = disguise by blending in with the surroundings. Some fish CAMOUFLAGE themselves to hide from predators."
               },
               {
                 "num": 4,
-                "answer": "predator"
+                "answer": "predator",
+                "hint": "The clue 'might want to eat them' = an animal that hunts and eats other animals = predator.",
+                "explanation": "A PREDATOR = an animal that hunts and eats other animals. Fish camouflage themselves to hide from PREDATORS."
               },
               {
                 "num": 5,
-                "answer": "surface"
+                "answer": "surface",
+                "hint": "The clue 'rise to the ___ of the water and gulp air from above' = the top of the water = surface.",
+                "explanation": "SURFACE = the top layer or outer face of something. A fish rises to the SURFACE of the water to gulp air when it needs more oxygen."
               }
             ]
           }
@@ -14145,35 +14769,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "when"
+                "answer": "when",
+                "hint": "Students write 'because' (reason) instead of 'when' (time point). The invention is the time trigger, not the reason for the world changing.",
+                "explanation": "WHEN = at the time that something happened. The world changed WHEN the light bulb was invented = at the moment of its invention."
               },
               {
                 "num": 2,
-                "answer": "because"
+                "answer": "because",
+                "hint": "Students write 'so' (result) instead of 'because' (reason). The lack of electric light is the REASON, not the result.",
+                "explanation": "BECAUSE = the reason. People used candles BECAUSE they had no other light = the reason they used candles was the lack of electric light."
               },
               {
                 "num": 3,
-                "answer": "and"
+                "answer": "and",
+                "hint": "Students write 'or' (a choice) instead of 'and' (addition). The three places all have electric lights — it is an addition, not a choice.",
+                "explanation": "AND = used to add items in a list. Homes, schools AND offices = all three places have electric lights. AND shows addition."
               },
               {
                 "num": 4,
-                "answer": "but"
+                "answer": "but",
+                "hint": "Students write 'and' (addition) instead of 'but' (contrast). The size change from room-sized to palm-sized is a sharp contrast, not a simple addition.",
+                "explanation": "BUT = contrast. Early computers were huge BUT today's fit in your hand. BUT shows a strong difference between two ideas."
               },
               {
                 "num": 5,
-                "answer": "so"
+                "answer": "so",
+                "hint": "Students write 'because' (reason) instead of 'so' (result). 'So' links the cause (breakdowns) to the result (engineers working hard).",
+                "explanation": "SO = as a result. Computers broke down often, SO engineers worked hard = the engineers' effort was the RESULT of the problem."
               },
               {
                 "num": 6,
-                "answer": "while"
+                "answer": "while",
+                "hint": "Students write 'when' (a point in time) instead of 'while' (two ongoing actions at the same time).",
+                "explanation": "WHILE = at the same time as. People listen to music WHILE they exercise = both actions happen simultaneously. WHEN would suggest the music starts at the moment exercise begins."
               },
               {
                 "num": 7,
-                "answer": "although"
+                "answer": "although",
+                "hint": "Students write 'because' or 'so' instead of 'although'. The sentence has a contrast — technology is helpful but also causes problems.",
+                "explanation": "ALTHOUGH = despite the fact that. ALTHOUGH technology made life easier, it also created problems. 'Although' introduces a contrast between two facts."
               },
               {
                 "num": 8,
-                "answer": "or"
+                "answer": "or",
+                "hint": "Students write 'and' (addition) instead of 'or' (choice). The sentence lists two ALTERNATIVE future transport options, not two things used together.",
+                "explanation": "OR = one option or another. Self-driving cars OR flying taxis = two alternative choices. OR shows that one of the two options will be chosen."
               }
             ]
           }
@@ -14196,23 +14836,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "gadget"
+                "answer": "gadget",
+                "hint": "The clue 'small ___ that fits in your pocket' = a small electronic device = gadget.",
+                "explanation": "A GADGET = a small, clever electronic device or tool that does a specific job. A smartphone or smartwatch is a GADGET."
               },
               {
                 "num": 2,
-                "answer": "patent"
+                "answer": "patent",
+                "hint": "The clue 'protect their new idea so other companies cannot copy it without permission' = a patent.",
+                "explanation": "A PATENT = an official document that gives an inventor the legal right to their invention. Others cannot copy it without permission."
               },
               {
                 "num": 3,
-                "answer": "innovative"
+                "answer": "innovative",
+                "hint": "The clue 'solve problems in new and clever ways that nobody has thought of before' = innovative.",
+                "explanation": "INNOVATIVE = new, original and creative. INNOVATIVE inventions solve problems in ways no one has tried before."
               },
               {
                 "num": 4,
-                "answer": "wireless"
+                "answer": "wireless",
+                "hint": "The clue 'send and receive data through the air without any cables or wires' = wireless.",
+                "explanation": "WIRELESS = able to send or receive information without cables or physical connections. Wi-Fi and Bluetooth are WIRELESS technologies."
               },
               {
                 "num": 5,
-                "answer": "efficient"
+                "answer": "efficient",
+                "hint": "The clue 'saving time and energy' = doing things well without waste = efficient.",
+                "explanation": "EFFICIENT = doing things well and quickly without wasting time or energy. A machine that uses less power to do the same job is more EFFICIENT."
               }
             ]
           }
@@ -14727,35 +15377,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "these"
+                "answer": "these",
+                "hint": "Students write 'those' (plural but far away) or 'this' (singular). The habits are being introduced right now = nearby plural = THESE.",
+                "explanation": "THESE = plural things that are nearby or being introduced right now. THESE are the five habits = we are talking about them right now, here."
               },
               {
                 "num": 2,
-                "answer": "all"
+                "answer": "all",
+                "hint": "Students write 'some' (partial group) instead of 'all' (every member). The sentence states a universal rule that applies to everyone.",
+                "explanation": "ALL of us = every single person, without exception. Health rules that apply to everyone use ALL: ALL of us should wash our hands."
               },
               {
                 "num": 3,
-                "answer": "some"
+                "answer": "some",
+                "hint": "Students write 'any' instead of 'some'. In positive sentences recommending an action, use SOME, not ANY.",
+                "explanation": "SOME = an unspecified amount, used in positive sentences. Eat SOME fruits and vegetables = eat a portion of them. ANY is used in negatives or questions."
               },
               {
                 "num": 4,
-                "answer": "any"
+                "answer": "any",
+                "hint": "Students write 'some' instead of 'any'. In negative sentences, use ANY, not SOME.",
+                "explanation": "ANY = used in negative sentences or questions. Try NOT to eat ANY junk food = not even a small amount. SOME is for positive sentences."
               },
               {
                 "num": 5,
-                "answer": "this"
+                "answer": "this",
+                "hint": "Students write 'that' (singular but far away) or 'these' (plural). 'Habit' is singular and is being introduced right now = THIS.",
+                "explanation": "THIS = a singular thing nearby or currently being introduced. THIS habit = this specific habit we are talking about right now."
               },
               {
                 "num": 6,
-                "answer": "those"
+                "answer": "those",
+                "hint": "Students write 'these' (nearby) or 'they' (personal pronoun, not in word box). THOSE who = a category of people.",
+                "explanation": "THOSE WHO = a group of people defined by what they do. THOSE who exercise regularly = all people who regularly exercise. THOSE who = the ones who."
               },
               {
                 "num": 7,
-                "answer": "none"
+                "answer": "none",
+                "hint": "Students write 'some' or 'any' instead of 'none'. NONE = not any / not one. Used with a comparative to say nothing exceeds something.",
+                "explanation": "NONE is harder = not one bad habit is harder to break than staying up late. NONE = not any, not one. 'None is harder' means 'nothing is harder'."
               },
               {
                 "num": 8,
-                "answer": "that"
+                "answer": "that",
+                "hint": "Students write 'this' (demonstrative pronoun, not a clause connector) or 'those'. 'That' introduces a noun clause as the object of 'said'.",
+                "explanation": "'Said THAT + clause' = reported speech. The nurse said THAT keeping these habits requires effort. THAT here is a conjunction introducing the reported statement."
               }
             ]
           }
@@ -14778,23 +15444,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "posture"
+                "answer": "posture",
+                "hint": "The clue 'sit up straight' and 'back and neck problems' = the position of your body = posture.",
+                "explanation": "POSTURE = the way you hold your body when sitting or standing. Good POSTURE means sitting up straight with your back supported."
               },
               {
                 "num": 2,
-                "answer": "balanced"
+                "answer": "balanced",
+                "hint": "The clue 'includes proteins, carbohydrates, healthy fats and vegetables, rather than one type' = a variety = balanced diet.",
+                "explanation": "A BALANCED diet = one that includes all the different types of nutrients in the right amounts. A BALANCED diet has proteins, carbohydrates, fats, vitamins and minerals."
               },
               {
                 "num": 3,
-                "answer": "cavity"
+                "answer": "cavity",
+                "hint": "The clue 'a hole in the tooth caused by acid from sugar' = a cavity (tooth decay).",
+                "explanation": "A CAVITY = a hole in a tooth caused by tooth decay. Sugar produces acid that breaks down enamel and creates a CAVITY if teeth are not brushed."
               },
               {
                 "num": 4,
-                "answer": "hydrated"
+                "answer": "hydrated",
+                "hint": "The clue 'drinking water regularly' = keeping enough water in the body = hydrated.",
+                "explanation": "HYDRATED = having enough water in your body to function well. Stay HYDRATED by drinking water throughout the day, especially during exercise."
               },
               {
                 "num": 5,
-                "answer": "vigorous"
+                "answer": "vigorous",
+                "hint": "The clue 'running and jumping during PE lessons' = very active and energetic = vigorous.",
+                "explanation": "VIGOROUS = requiring a lot of physical effort and energy. Running and jumping are VIGOROUS activities that make your heart rate rise."
               }
             ]
           }
@@ -15307,35 +15983,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "many"
+                "answer": "many",
+                "hint": "Students write 'much' (uncountable) or 'a lot of'. MANY is the most natural choice for a specific countable plural noun used alone without 'of'.",
+                "explanation": "MANY + countable plural: The museum has MANY galleries. Use MANY when you can count the individual things."
               },
               {
                 "num": 2,
-                "answer": "much"
+                "answer": "much",
+                "hint": "Students write 'many' (countable) or 'a lot of'. MUCH is used with uncountable nouns like history, time, information.",
+                "explanation": "MUCH + uncountable noun: so MUCH history. 'History' cannot be counted → use MUCH. 'So many history' is wrong."
               },
               {
                 "num": 3,
-                "answer": "a few"
+                "answer": "a few",
+                "hint": "Students write 'a little' (uncountable) instead of 'a few' (countable). 'Minutes' can be counted → A FEW minutes.",
+                "explanation": "A FEW + countable plural: A FEW minutes. 'Minutes' is countable → A FEW. 'A little minutes' is wrong — A LITTLE is for uncountable nouns."
               },
               {
                 "num": 4,
-                "answer": "a little"
+                "answer": "a little",
+                "hint": "Students write 'a few' (countable) instead of 'a little' (uncountable). Knowledge of a language cannot be counted → A LITTLE French.",
+                "explanation": "A LITTLE + uncountable noun: A LITTLE French. You cannot count 'French' knowledge — it is uncountable → A LITTLE. 'A few French' is wrong."
               },
               {
                 "num": 5,
-                "answer": "a lot of"
+                "answer": "a lot of",
+                "hint": "Students write 'much' instead of 'a lot of'. Both are acceptable for uncountable nouns, but 'a lot of enthusiasm' is more natural in positive statements.",
+                "explanation": "A LOT OF = a large amount, natural for both countable and uncountable nouns. A LOT OF enthusiasm is more common than 'much enthusiasm' in everyday positive statements."
               },
               {
                 "num": 6,
-                "answer": "several"
+                "answer": "several",
+                "hint": "Students write 'a few' instead of 'several'. Both work, but SEVERAL implies more rooms (perhaps four or five) — more than A FEW (two or three).",
+                "explanation": "SEVERAL = more than two but not a large number, used with countable plural nouns. SEVERAL rooms = perhaps four or five. A FEW = two or three."
               },
               {
                 "num": 7,
-                "answer": "both"
+                "answer": "both",
+                "hint": "Students write 'all' (three or more) or 'either' (one or the other). BOTH = the two specific items together.",
+                "explanation": "BOTH = used for exactly two things together. BOTH the map and the compass = the two of them, placed together. ALL = three or more."
               },
               {
                 "num": 8,
-                "answer": "either"
+                "answer": "either",
+                "hint": "Students write 'both' (both at once) or 'any' (more than two). EITHER = one of exactly two options, paired with 'or'.",
+                "explanation": "EITHER + or = one of exactly two options. You can enter through EITHER the north OR south entrance = you choose one of the two. BOTH would mean you enter through both at once."
               }
             ]
           }
@@ -15358,23 +16050,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "century"
+                "answer": "century",
+                "hint": "The clue 'fourteenth ___' and 'over six hundred years old' = a period of one hundred years = century.",
+                "explanation": "A CENTURY = a period of one hundred years. 'The fourteenth CENTURY' = the years 1300–1399. 'Over six hundred years old' confirms the time period."
               },
               {
                 "num": 2,
-                "answer": "preserved"
+                "answer": "preserved",
+                "hint": "The clue 'sealed glass case to protect it from air and moisture' = kept in its original condition = preserved.",
+                "explanation": "PRESERVED = kept in its original condition so it does not decay or deteriorate. Museum artefacts are PRESERVED in sealed cases."
               },
               {
                 "num": 3,
-                "answer": "replica"
+                "answer": "replica",
+                "hint": "The clue 'an exact copy of a Ming Dynasty vase' = a reproduction or copy = replica.",
+                "explanation": "A REPLICA = an exact copy of something, made to look just like the original. Museums display REPLICAS when the original is too fragile to handle."
               },
               {
                 "num": 4,
-                "answer": "artefact"
+                "answer": "artefact",
+                "hint": "The clue 'from pottery to weapons to jewellery, tells a story about the people who made it' = an historical object = artefact.",
+                "explanation": "An ARTEFACT = an object made by people in the past, valued for its historical importance. Every ARTEFACT in a museum tells a story about history."
               },
               {
                 "num": 5,
-                "answer": "donation"
+                "answer": "donation",
+                "hint": "The clue 'a box at the exit where visitors can give money to support conservation' = a voluntary gift of money = donation.",
+                "explanation": "A DONATION = money or items given voluntarily to support a cause. Visitors put money in a DONATION box to help the museum preserve its collection."
               }
             ]
           }
@@ -15887,35 +16589,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "discovering"
+                "answer": "discovering",
+                "hint": "Students write 'to discover' instead of the gerund after 'love'.",
+                "explanation": "LOVE + verb-ing: love DISCOVERING hidden places. After 'love', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "discovers"
+                "answer": "discovers",
+                "hint": "Students write 'discover' (plural form) forgetting 'someone' is singular.",
+                "explanation": "'Every year' = habit = simple present. Someone (singular) → DISCOVERS a new piece of ancient history."
               },
               {
                 "num": 3,
-                "answer": "discovered"
+                "answer": "discovered",
+                "hint": "Students write 'discover' (base form) ignoring the past signal 'Last summer'.",
+                "explanation": "'Last summer' = past. 'Discover' is regular: discover → DISCOVERED."
               },
               {
                 "num": 4,
-                "answer": "was discovering"
+                "answer": "was discovering",
+                "hint": "Students write 'discovered' (simple past) missing the ongoing signal 'while the lead diver'.",
+                "explanation": "'While the lead diver ___' = ongoing background past action = past continuous. The lead diver WAS DISCOVERING the lower deck when the shark appeared."
               },
               {
                 "num": 5,
-                "answer": "were discovering"
+                "answer": "were discovering",
+                "hint": "Students write 'discovered' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "The other divers = plural. They were doing it at the same past moment = WERE DISCOVERING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to discover"
+                "answer": "to discover",
+                "hint": "Students write 'discovering' instead of the infinitive after 'dreams'.",
+                "explanation": "'Dream TO + base verb': dreams TO DISCOVER something remarkable. Use the infinitive after 'dream'."
               },
               {
                 "num": 7,
-                "answer": "discover"
+                "answer": "discover",
+                "hint": "Students add -s or -ing after the modal verb 'may'.",
+                "explanation": "After modal verbs (may, should, must, can), always use the BASE form: may DISCOVER. Never 'may discovers' or 'may discovering'."
               },
               {
                 "num": 8,
-                "answer": "is discovering"
+                "answer": "is discovering",
+                "hint": "Students write 'discovers' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. A research team (singular) → IS DISCOVERING ancient remains right now."
               }
             ]
           }
@@ -15938,23 +16656,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "investigation"
+                "answer": "investigation",
+                "hint": "The clue 'after finding an old iron key' and 'followed the clues' = a systematic inquiry = investigation.",
+                "explanation": "An INVESTIGATION = a careful search for facts to solve a mystery or problem. The friends began their INVESTIGATION after finding the key."
               },
               {
                 "num": 2,
-                "answer": "unravelled"
+                "answer": "unravelled",
+                "hint": "The clue 'the whole mystery ___ before their eyes like a story being read aloud' = became clear and solved = unravelled.",
+                "explanation": "UNRAVELLED = became clear and solved, as if a tangled thread was being straightened out. The mystery UNRAVELLED = the solution revealed itself step by step."
               },
               {
                 "num": 3,
-                "answer": "abandoned"
+                "answer": "abandoned",
+                "hint": "The clue 'a place nobody had entered for years' = no longer used or occupied = abandoned.",
+                "explanation": "ABANDONED = left empty and unused, often for a long time. An ABANDONED building has no occupants and falls into disrepair."
               },
               {
                 "num": 4,
-                "answer": "perilous"
+                "answer": "perilous",
+                "hint": "The clue 'thorns and broken steps, had to move carefully to avoid falling' = full of danger = perilous.",
+                "explanation": "PERILOUS = full of serious danger. A PERILOUS path = one that is dangerous to cross, with many risks of getting hurt."
               },
               {
                 "num": 5,
-                "answer": "concealed"
+                "answer": "concealed",
+                "hint": "The clue 'beneath a loose floorboard' = hidden from sight = concealed.",
+                "explanation": "CONCEALED = hidden from sight, kept out of view. The tin box was CONCEALED beneath the floorboard = it was hidden there."
               }
             ]
           }
@@ -16466,35 +17194,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "about"
+                "answer": "about",
+                "hint": "Students write 'of' instead of 'about'. 'Know ABOUT' = concerning a topic; 'know OF' = know that something exists, which is different.",
+                "explanation": "ABOUT = concerning a topic. 'Know ABOUT gardening' = have knowledge concerning gardening. 'About' shows the subject of the knowledge."
               },
               {
                 "num": 2,
-                "answer": "with"
+                "answer": "with",
+                "hint": "Students write 'by' instead of 'with'. 'By' shows method in passive sentences; 'with' shows the physical tool being used.",
+                "explanation": "WITH = using a physical tool or instrument. He digs WITH a spade = he uses the spade to dig. 'With' shows what tool is being used."
               },
               {
                 "num": 3,
-                "answer": "by"
+                "answer": "by",
+                "hint": "Students write 'with' instead of 'by'. 'With' is for tools; 'by' shows the method or process used to achieve something.",
+                "explanation": "BY = the method or process used. He propagates plants BY taking cuttings = the method he uses is taking cuttings. 'By' + verb-ing shows how something is done."
               },
               {
                 "num": 4,
-                "answer": "without"
+                "answer": "without",
+                "hint": "Students write 'from' (source) or 'for' (duration). 'Without' = in the absence of something.",
+                "explanation": "WITHOUT = in the absence of something. A cactus can survive WITHOUT water = it does not need water the way other plants do."
               },
               {
                 "num": 5,
-                "answer": "from"
+                "answer": "from",
+                "hint": "Students write 'of' instead of 'from'. 'Come FROM' = originating from a place; 'of' shows membership or composition.",
+                "explanation": "FROM = showing origin or source. The seeds come FROM all over the world = they originate from many different countries."
               },
               {
                 "num": 6,
-                "answer": "of"
+                "answer": "of",
+                "hint": "Students write 'from' instead of 'of'. 'The smell OF something' is the fixed noun phrase; 'of' shows association/belonging.",
+                "explanation": "OF = showing belonging or association. 'The smell OF jasmine' = the smell belonging to / characteristic of jasmine. 'Smell of' is a fixed phrase."
               },
               {
                 "num": 7,
-                "answer": "for"
+                "answer": "for",
+                "hint": "Students write 'since' (not in the box) or 'of' instead of 'for'. FOR is used with a duration of time in present perfect sentences.",
+                "explanation": "FOR + duration of time: gardening FOR over thirty years = the length of time he has been doing it. FOR shows how long something has lasted."
               },
               {
                 "num": 8,
-                "answer": "to"
+                "answer": "to",
+                "hint": "Students write 'for' instead of 'to'. 'Donate TO someone' = the person who receives; 'for' would show purpose, not recipient.",
+                "explanation": "TO = showing the recipient of an action. He donates vegetables TO the elderly residents = they are the ones who receive the vegetables."
               }
             ]
           }
@@ -16517,23 +17261,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "germinate"
+                "answer": "germinate",
+                "hint": "The clue 'seeds need warmth and moisture' and 'tiny shoot pushes through the soil' = the process of a seed beginning to grow = germinate.",
+                "explanation": "GERMINATE = begin to grow from a seed. A seed GERMINATES when warmth, moisture and light trigger the first shoots to appear."
               },
               {
                 "num": 2,
-                "answer": "seedling"
+                "answer": "seedling",
+                "hint": "The clue 'young plant' and 'moved into a bigger pot as it grows stronger' = a young plant just sprouted from a seed = seedling.",
+                "explanation": "A SEEDLING = a very young plant that has just sprouted from a seed. SEEDLINGS are moved to larger pots as they grow."
               },
               {
                 "num": 3,
-                "answer": "pollinate"
+                "answer": "pollinate",
+                "hint": "The clue 'carrying pollen from one flower to another, which helps fruits to form' = the process of transferring pollen = pollinate.",
+                "explanation": "POLLINATE = transfer pollen from one flower to another to enable fertilisation and fruit formation. Bees POLLINATE flowers as they collect nectar."
               },
               {
                 "num": 4,
-                "answer": "harvest"
+                "answer": "harvest",
+                "hint": "The clue 'picking the ripe ones' after three months of growth = collecting crops at the right time = harvest.",
+                "explanation": "HARVEST = collect crops when they are ripe and ready to eat. HARVESTING vegetables means picking them at the right time."
               },
               {
                 "num": 5,
-                "answer": "compost"
+                "answer": "compost",
+                "hint": "The clue 'from kitchen waste such as vegetable peels... mixed into the soil to give extra nutrients' = decayed organic material used as fertiliser = compost.",
+                "explanation": "COMPOST = decayed organic material made from food waste and plant matter, used to enrich soil. COMPOST improves soil quality and feeds plants naturally."
               }
             ]
           }
@@ -17045,35 +17799,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "herself"
+                "answer": "herself",
+                "hint": "Students write 'himself' (male) or 'itself'. The queen = female singular → HERSELF.",
+                "explanation": "HERSELF = the reflexive pronoun for she/her. The queen looked at HERSELF in the mirror = looked at her own reflection."
               },
               {
                 "num": 2,
-                "answer": "himself"
+                "answer": "himself",
+                "hint": "Students write 'herself' (female) or 'itself'. The prince = male singular → HIMSELF.",
+                "explanation": "HIMSELF = the reflexive pronoun for he/him. The prince proved HIMSELF worthy = demonstrated his own worthiness."
               },
               {
                 "num": 3,
-                "answer": "itself"
+                "answer": "itself",
+                "hint": "Students write 'himself' or 'herself'. The broom = a thing (neuter) = ITSELF.",
+                "explanation": "ITSELF = the reflexive pronoun for it (things/animals). The broom moved ITSELF = moved by its own power without anyone touching it."
               },
               {
                 "num": 4,
-                "answer": "themselves"
+                "answer": "themselves",
+                "hint": "Students write 'ourselves' (first person) or 'yourselves' (second person). The three pigs = third person plural → THEMSELVES.",
+                "explanation": "THEMSELVES = the reflexive pronoun for they/them (third person plural). The pigs built THEMSELVES = they did it without any outside help."
               },
               {
                 "num": 5,
-                "answer": "myself"
+                "answer": "myself",
+                "hint": "Students write 'himself' or 'herself'. The speaker = 'I' = first person singular → MYSELF.",
+                "explanation": "MYSELF = the reflexive pronoun for I. 'I thought to MYSELF' = I had a private thought inside my own head. MYSELF is always used when the subject is 'I'."
               },
               {
                 "num": 6,
-                "answer": "yourself"
+                "answer": "yourself",
+                "hint": "Students write 'himself' or 'itself'. The wizard speaks to 'you' = second person singular → YOURSELF.",
+                "explanation": "YOURSELF = the reflexive pronoun for you (singular). 'Believe in YOURSELF' = have confidence in your own abilities."
               },
               {
                 "num": 7,
-                "answer": "ourselves"
+                "answer": "ourselves",
+                "hint": "Students write 'themselves' (third person) or 'yourself' (second person). 'We' = first person plural → OURSELVES.",
+                "explanation": "OURSELVES = the reflexive pronoun for we/us (first person plural). We found OURSELVES lost = we discovered (realised) our own situation."
               },
               {
                 "num": 8,
-                "answer": "yourselves"
+                "answer": "yourselves",
+                "hint": "Students write 'yourself' (singular) instead of 'yourselves' (plural group). The fairy addresses the whole group going to the ball → plural → YOURSELVES.",
+                "explanation": "YOURSELVES = the reflexive pronoun for you (plural group). 'Enjoy YOURSELVES' = have a good time (said to a group). YOURSELF is for one person; YOURSELVES is for more than one."
               }
             ]
           }
@@ -17096,23 +17866,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "enchanted"
+                "answer": "enchanted",
+                "hint": "The clue 'a wish to be ___ by a magical creature' = given or fulfilled = granted.",
+                "explanation": "ENCHANTED = under a magic spell, filled with magic. An ENCHANTED world = a magical place where ordinary rules do not apply. In fairy tales, places and people are often enchanted."
               },
               {
                 "num": 2,
-                "answer": "mortal"
+                "answer": "mortal",
+                "hint": "The clue 'without a trace, leaving the hero alone' = disappeared suddenly and completely = vanished.",
+                "explanation": "MORTAL = an ordinary human being (not magical or immortal). A MORTAL hero = a normal person without special powers. Mortals can be hurt and can die — unlike gods or magical beings."
               },
               {
                 "num": 3,
-                "answer": "granted"
+                "answer": "granted",
+                "hint": "The clue 'ordinary rules do not apply, animals can speak and objects come to life' = under a magical spell = enchanted.",
+                "explanation": "GRANTED = officially given or approved. A wish is GRANTED = it is made to come true. In fairy tales, genies and fairies GRANT wishes. GRANT = give someone what they asked for."
               },
               {
                 "num": 4,
-                "answer": "vanished"
+                "answer": "vanished",
+                "hint": "The clue 'gods walk among ___ humans' = humans who can die, as opposed to immortal gods = mortal.",
+                "explanation": "VANISHED = disappeared suddenly and completely. The villain VANISHED = she was gone without a trace. VANISH = disappear; VANISHED = past tense."
               },
               {
                 "num": 5,
-                "answer": "legend"
+                "answer": "legend",
+                "hint": "The clue 'a tale so famous and retold so many times that it feels part of a culture's identity' = a legend.",
+                "explanation": "A LEGEND = a very old story that many people know and that has been told for generations. These stories become LEGENDS = they are so famous that everyone knows them."
               }
             ]
           }
@@ -17625,35 +18405,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "finding"
+                "answer": "finding",
+                "hint": "Students write 'to find' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys FINDING lost objects. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "finds"
+                "answer": "finds",
+                "hint": "Students write 'find' (plural form) forgetting that 'She' is singular.",
+                "explanation": "'Always' = a regular habit = simple present. She (singular) → FINDS something interesting every week."
               },
               {
                 "num": 3,
-                "answer": "found"
+                "answer": "found",
+                "hint": "Students write 'finded', not knowing 'find' is irregular.",
+                "explanation": "'Last Monday' = past. 'Find' is irregular: find → FOUND. Never write 'finded'."
               },
               {
                 "num": 4,
-                "answer": "was finding"
+                "answer": "was finding",
+                "hint": "Students write 'found' (simple past) missing the ongoing signal 'while she'.",
+                "explanation": "'While she ___' = ongoing background past action = past continuous. She WAS FINDING the contact number when the student arrived."
               },
               {
                 "num": 5,
-                "answer": "were finding"
+                "answer": "were finding",
+                "hint": "Students write 'found' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "Other students = plural. They were doing it at the same past moment = WERE FINDING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to find"
+                "answer": "to find",
+                "hint": "Students write 'finding' instead of the infinitive after 'tries'.",
+                "explanation": "'Try TO + base verb': tries TO FIND the owner within the same day. Always use the infinitive after 'tries'."
               },
               {
                 "num": 7,
-                "answer": "find"
+                "answer": "find",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should FIND. Never 'should finds' or 'should finding'."
               },
               {
                 "num": 8,
-                "answer": "is finding"
+                "answer": "is finding",
+                "hint": "Students write 'finds' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Siti (singular) → IS FINDING the address of the student right now."
               }
             ]
           }
@@ -17676,23 +18472,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "frantic"
+                "answer": "frantic",
+                "hint": "The clue 'with worry as they searched the whole floor' = extremely anxious and worried = frantic.",
+                "explanation": "FRANTIC = wildly anxious, worried or desperate. The teachers were FRANTIC with worry = they were extremely distressed and acting urgently."
               },
               {
                 "num": 2,
-                "answer": "description"
+                "answer": "description",
+                "hint": "The clue 'asked for a ___ of the mother' = a verbal account of what she looks like = description.",
+                "explanation": "A DESCRIPTION = a spoken or written account of what someone or something looks like. 'Give a DESCRIPTION' = describe the person's appearance."
               },
               {
                 "num": 3,
-                "answer": "distinguish"
+                "answer": "distinguish",
+                "hint": "The clue 'hard to ___ one adult from another in a large crowd' = tell apart = distinguish.",
+                "explanation": "DISTINGUISH = recognise or tell the difference between two or more things. It is hard to DISTINGUISH one person from another in a crowd."
               },
               {
                 "num": 4,
-                "answer": "reunited"
+                "answer": "reunited",
+                "hint": "The clue 'the mother was found' and 'the two were ___' = brought back together after separation = reunited.",
+                "explanation": "REUNITED = brought back together after being separated. The mother and child were REUNITED = they found each other again."
               },
               {
                 "num": 5,
-                "answer": "valuable"
+                "answer": "valuable",
+                "hint": "The clue 'a ___ safety skill that every child should have' = very important and useful = valuable.",
+                "explanation": "VALUABLE = very important, useful or worth having. Memorising a parent's phone number is a VALUABLE skill that could help in an emergency."
               }
             ]
           }
@@ -18207,35 +19013,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "can"
+                "answer": "can",
+                "hint": "Students write 'could' (past ability) instead of 'can' (present ability). 'With the internet' = a current capability.",
+                "explanation": "CAN = present ability or general capability. We CAN communicate with anyone in the world = we have this ability right now."
               },
               {
                 "num": 2,
-                "answer": "should"
+                "answer": "should",
+                "hint": "Students write 'must' (not in the box) or 'will'. SHOULD = strong advice; WILL = future certainty.",
+                "explanation": "SHOULD = advice or strong recommendation. We SHOULD always check facts before sharing = it is the right and responsible thing to do."
               },
               {
                 "num": 3,
-                "answer": "may"
+                "answer": "may",
+                "hint": "Students write 'might' (also possible, but MAY is used for more likely possibilities) or 'will' (certain future). MAY = distinct possibility.",
+                "explanation": "MAY = something is a real possibility. Sharing false information MAY cause harm = it is genuinely possible and likely to cause damage."
               },
               {
                 "num": 4,
-                "answer": "might"
+                "answer": "might",
+                "hint": "Students write 'may' (already used in blank 3). MIGHT = weaker, less certain possibility.",
+                "explanation": "MIGHT = a weaker or less certain possibility. Even a harmless message MIGHT upset someone = it is possible but not certain."
               },
               {
                 "num": 5,
-                "answer": "will"
+                "answer": "will",
+                "hint": "Students write 'would' (hypothetical) or 'shall' (formal/first person). WILL = expected future.",
+                "explanation": "WILL = expected future outcome. Technology WILL make communication faster = this is the expected direction of progress."
               },
               {
                 "num": 6,
-                "answer": "would"
+                "answer": "would",
+                "hint": "Students write 'will' (actual future) instead of 'would' (hypothetical conditional result).",
+                "explanation": "WOULD = hypothetical or conditional result. Without their phones, they WOULD feel lost = this is what they imagine would happen in that situation."
               },
               {
                 "num": 7,
-                "answer": "could"
+                "answer": "could",
+                "hint": "Students write 'can' (present) instead of 'could' (past). 'Before smartphones' clearly sets the past context.",
+                "explanation": "COULD = past ability or possibility. Before smartphones, people COULD only communicate by letter or phone = that was their capability at the time."
               },
               {
                 "num": 8,
-                "answer": "shall"
+                "answer": "shall",
+                "hint": "Students write 'should' (already used in blank 2) or 'will'. 'Shall we?' = a formal first-person suggestion.",
+                "explanation": "SHALL WE = used to make a suggestion or proposal. SHALL we use technology wisely? = a proposal to consider how we should behave."
               }
             ]
           }
@@ -18258,23 +19080,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "broadcast"
+                "answer": "broadcast",
+                "hint": "The clue 'news to millions of people at once' = send out widely = broadcast.",
+                "explanation": "BROADCAST = send out information, news or entertainment to a large audience at once. Television and radio stations BROADCAST programmes."
               },
               {
                 "num": 2,
-                "answer": "filter"
+                "answer": "filter",
+                "hint": "The clue 'separating facts from opinions and checking sources' = selecting carefully what to accept = filter.",
+                "explanation": "FILTER = carefully select or sort through information to keep only what is accurate or useful. We must FILTER what we read online."
               },
               {
                 "num": 3,
-                "answer": "anonymous"
+                "answer": "anonymous",
+                "hint": "The clue 'their real names are hidden' = without a name being known = anonymous.",
+                "explanation": "ANONYMOUS = having an unknown or hidden identity. An ANONYMOUS account = one where the real name of the user is not revealed."
               },
               {
                 "num": 4,
-                "answer": "accessible"
+                "answer": "accessible",
+                "hint": "The clue 'to people everywhere, even in remote areas' = available and easy to reach = accessible.",
+                "explanation": "ACCESSIBLE = available and easy to obtain or reach. The internet makes knowledge ACCESSIBLE to people all over the world."
               },
               {
                 "num": 5,
-                "answer": "transmit"
+                "answer": "transmit",
+                "hint": "The clue 'research findings to colleagues across the globe in seconds' = send data or information electronically = transmit.",
+                "explanation": "TRANSMIT = send information, signals or data from one place to another. Scientists TRANSMIT their findings digitally to colleagues worldwide."
               }
             ]
           }
@@ -18784,35 +19616,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "what"
+                "answer": "what",
+                "hint": "Students write 'who' (person) or 'when' (time). The question is about a thing (the worst outcome) = WHAT.",
+                "explanation": "WHAT = asking about a thing, event or action. 'What the worst thing could be' = asking about the nature of the event. WHAT asks about things."
               },
               {
                 "num": 2,
-                "answer": "why"
+                "answer": "why",
+                "hint": "Students write 'how' (method) or 'what' (thing). WHY = the reason for something.",
+                "explanation": "WHY = asking for the reason or cause. 'Why she was afraid' = asking for the reason behind her fear. WHY asks for reasons."
               },
               {
                 "num": 3,
-                "answer": "who"
+                "answer": "who",
+                "hint": "Students write 'which' (choice between things) instead of 'who' (person). The blank refers to a PERSON she trusted.",
+                "explanation": "WHO = asking about a person. 'Who she trusted' = which PERSON she trusted. WHO is used for people."
               },
               {
                 "num": 4,
-                "answer": "where"
+                "answer": "where",
+                "hint": "Students write 'when' (time) instead of 'where' (place). The clue 'her bedroom, in front of the mirror' = a place = WHERE.",
+                "explanation": "WHERE = asking about a place or location. 'Where she practised' = the location where practice took place. WHERE asks about places."
               },
               {
                 "num": 5,
-                "answer": "when"
+                "answer": "when",
+                "hint": "Students write 'where' (place, already used) or 'how' (method). WHEN = the time or moment something occurred.",
+                "explanation": "WHEN = asking about time or the moment something happened. 'When her teacher told her' = at what point in time. WHEN asks about time."
               },
               {
                 "num": 6,
-                "answer": "how"
+                "answer": "how",
+                "hint": "Students write 'what' (thing) instead of 'how' (manner). HOW = the way or method in which something is done.",
+                "explanation": "HOW = asking about the method, manner or way something is done. 'How she would deliver the line' = in what way she would speak. HOW asks about manner."
               },
               {
                 "num": 7,
-                "answer": "which"
+                "answer": "which",
+                "hint": "Students write 'what' instead of 'which'. WHICH = choosing from a specific, defined set of options; WHAT = asking about something open-ended.",
+                "explanation": "WHICH = used when choosing from a specific, limited set. 'Which of her two endings' = choosing from exactly two options. WHICH asks about specific choices."
               },
               {
                 "num": 8,
-                "answer": "whose"
+                "answer": "whose",
+                "hint": "Students write 'who' (subject pronoun, not possessive before a noun) instead of 'whose' (possessive before 'speech').",
+                "explanation": "WHOSE = possessive question word used before a noun. 'WHOSE speech had won' = the speech belonging to whom. WHOSE = asking who something belongs to."
               }
             ]
           }
@@ -18835,23 +19683,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "anxiety"
+                "answer": "anxiety",
+                "hint": "The clue 'feeling of worry and nervousness before doing something difficult' = anxiety.",
+                "explanation": "ANXIETY = a feeling of worry, nervousness or fear about something uncertain. Many people experience ANXIETY before important events."
               },
               {
                 "num": 2,
-                "answer": "hesitated"
+                "answer": "hesitated",
+                "hint": "The clue 'paused at the edge of the pool for several minutes before his first dive, unsure' = paused in uncertainty = hesitated.",
+                "explanation": "HESITATED = paused or waited before doing something because of uncertainty or fear. Marcus HESITATED at the pool edge = he stopped, unsure whether to jump."
               },
               {
                 "num": 3,
-                "answer": "courageous"
+                "answer": "courageous",
+                "hint": "The clue 'acting despite the fear' = having courage even when afraid = courageous.",
+                "explanation": "COURAGEOUS = showing bravery by acting even when afraid. Being COURAGEOUS does not mean having no fear — it means choosing to act despite it."
               },
               {
                 "num": 4,
-                "answer": "obstacle"
+                "answer": "obstacle",
+                "hint": "The clue 'each ___ Marcus overcame in training made him stronger' = a difficulty or challenge to get past = obstacle.",
+                "explanation": "An OBSTACLE = a difficulty or challenge that stands in the way of progress. Overcoming each OBSTACLE in training builds strength and confidence."
               },
               {
                 "num": 5,
-                "answer": "triumph"
+                "answer": "triumph",
+                "hint": "The clue 'the reward for all his months of hard work' and 'standing on the podium' = a great victory or success = triumph.",
+                "explanation": "TRIUMPH = a great success or victory, especially after difficulty. Standing on the podium = the moment of TRIUMPH after months of effort."
               }
             ]
           }
@@ -19360,35 +20218,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'at' or 'on' instead of 'in'. IN = inside a region, country or city.",
+                "explanation": "IN = inside a country, city or region. Singapore is located IN South-East Asia = it is within that geographical area."
               },
               {
                 "num": 2,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' (inside a large area) or 'on' (surface). AT = at a specific named location.",
+                "explanation": "AT = at a specific location or place. Families gather AT the Padang = at that exact named public area."
               },
               {
                 "num": 3,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' (inside) or 'at' (a point). ON every street = located along each street.",
+                "explanation": "ON = used for surfaces and routes. Hawker centres are found ON almost every street = located along each street."
               },
               {
                 "num": 4,
-                "answer": "above"
+                "answer": "above",
+                "hint": "Students write 'over' (crossing from one side to another) instead of 'above' (at a higher level, static position).",
+                "explanation": "ABOVE = at a higher level than something, used for static position. The supertrees stand ABOVE the parkland = they are taller and higher up."
               },
               {
                 "num": 5,
-                "answer": "over"
+                "answer": "over",
+                "hint": "Students write 'above' (higher level, static) instead of 'over' (spanning or crossing). 'Over a valley' = the bridge spans it.",
+                "explanation": "OVER = spanning or extending across something. The bridge arches OVER the valley = it goes from one side to the other across the valley."
               },
               {
                 "num": 6,
-                "answer": "behind"
+                "answer": "behind",
+                "hint": "Students write 'under' (below) or 'below' (lower level) instead of 'behind' (at the back).",
+                "explanation": "BEHIND = at the back of something. The courtyards are BEHIND the shophouses = they are at the back, not visible from the front."
               },
               {
                 "num": 7,
-                "answer": "under"
+                "answer": "under",
+                "hint": "Students write 'below' (lower level, not necessarily sheltered beneath) or 'above' (higher). UNDER = directly beneath for shelter.",
+                "explanation": "UNDER = directly below and often sheltered by something. Vendors sold food UNDER large umbrellas = they were sheltered directly beneath the umbrellas."
               },
               {
                 "num": 8,
-                "answer": "below"
+                "answer": "below",
+                "hint": "Students write 'under' (directly beneath, sheltered) instead of 'below' (at a lower level in general). BELOW = at a lower level; UNDER = directly beneath and sheltered.",
+                "explanation": "BELOW = at a lower level than something. The MRT runs BELOW the city streets = it is at a lower level underground. 'Below' is used for general lower level position."
               }
             ]
           }
@@ -19411,23 +20285,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "diverse"
+                "answer": "diverse",
+                "hint": "The clue 'population includes Chinese, Malay, Indian and Eurasian communities' = having many different kinds = diverse.",
+                "explanation": "DIVERSE = including many different types or kinds. Singapore's population is DIVERSE = it includes many different races, religions and cultures."
               },
               {
                 "num": 2,
-                "answer": "dialect"
+                "answer": "dialect",
+                "hint": "Students may write 'language' which is not in the box. A DIALECT = a regional variety of a language spoken by a community.",
+                "explanation": "A DIALECT = a regional form of a language with its own words and pronunciation. Hokkien and Teochew are Chinese DIALECTS spoken by some Singaporeans."
               },
               {
                 "num": 3,
-                "answer": "multicultural"
+                "answer": "multicultural",
+                "hint": "The clue 'mix of cultures, religions and traditions' = having many cultures = multicultural.",
+                "explanation": "MULTICULTURAL = including or involving many different cultures. Singapore's MULTICULTURAL society celebrates many festivals from different communities."
               },
               {
                 "num": 4,
-                "answer": "iconic"
+                "answer": "iconic",
+                "hint": "The clue 'one of the most ___ images of Singapore' = widely recognised and representative = iconic.",
+                "explanation": "ICONIC = widely recognised and representative of something. The Marina Bay Sands is an ICONIC image of Singapore — instantly recognisable worldwide."
               },
               {
                 "num": 5,
-                "answer": "skyline"
+                "answer": "skyline",
+                "hint": "The clue 'a glittering line of skyscrapers reflected on the waters of Marina Bay' = the outline of buildings against the sky = skyline.",
+                "explanation": "A SKYLINE = the outline of buildings and structures against the sky, especially of a city. Singapore's SKYLINE at night is lit up with modern skyscrapers."
               }
             ]
           }
@@ -19943,35 +20827,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "always"
+                "answer": "always",
+                "hint": "Students write 'usually' (not 100%) instead of 'always' (100%). The sentence says 'without exception' = ALWAYS.",
+                "explanation": "ALWAYS = 100% of the time, without exception. Great talent ALWAYS requires effort = there are no exceptions to this rule."
               },
               {
                 "num": 2,
-                "answer": "never"
+                "answer": "never",
+                "hint": "Students write 'rarely' (almost never, not absolute zero) instead of 'never' (0% = absolute). 'No matter how successful' = the negation is absolute.",
+                "explanation": "NEVER = 0% of the time, absolutely not. The greatest performers NEVER stop learning = it never happens, regardless of success."
               },
               {
                 "num": 3,
-                "answer": "usually"
+                "answer": "usually",
+                "hint": "Students write 'always' (100%) which is too absolute. USUALLY = most of the time, not invariably.",
+                "explanation": "USUALLY = most of the time. An early start USUALLY gives an advantage = this is generally true, though not without exception."
               },
               {
                 "num": 4,
-                "answer": "often"
+                "answer": "often",
+                "hint": "Students write 'always' (too absolute) or 'sometimes' (less frequent). OFTEN = frequently, more often than not.",
+                "explanation": "OFTEN = frequently, more often than not. Young artists OFTEN feel nervous = it happens frequently, not just occasionally."
               },
               {
                 "num": 5,
-                "answer": "sometimes"
+                "answer": "sometimes",
+                "hint": "Students write 'often' (more frequent) or 'rarely' (less frequent). SOMETIMES = on some occasions, neither frequent nor rare.",
+                "explanation": "SOMETIMES = on some occasions, not regularly. A performer SOMETIMES forgets a line = it happens now and then, not all the time."
               },
               {
                 "num": 6,
-                "answer": "normally"
+                "answer": "normally",
+                "hint": "Students write 'usually' (already used in blank 3) or 'always'. NORMALLY = in the typical or standard case.",
+                "explanation": "NORMALLY = in the typical or standard situation. Competitions NORMALLY have a panel of judges = this is the standard arrangement."
               },
               {
                 "num": 7,
-                "answer": "occasionally"
+                "answer": "occasionally",
+                "hint": "Students write 'sometimes' (more frequent) or 'rarely'. OCCASIONALLY = infrequently, on special rare occasions.",
+                "explanation": "OCCASIONALLY = from time to time, infrequently. OCCASIONALLY a performer emerges who changes art entirely = this is a rare event that happens sometimes across generations."
               },
               {
                 "num": 8,
-                "answer": "rarely"
+                "answer": "rarely",
+                "hint": "Students write 'never' (absolute) or 'sometimes'. RARELY = almost never, but leaving a theoretical possibility open.",
+                "explanation": "RARELY = almost never, only in exceptional cases. True mastery is RARELY achieved without years of practice = it almost never happens."
               }
             ]
           }
@@ -19994,23 +20894,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "potential"
+                "answer": "potential",
+                "hint": "The clue 'ability to grow, improve and achieve great things' = undeveloped ability waiting to be realised = potential.",
+                "explanation": "POTENTIAL = the ability to develop, grow or succeed in the future. Every student has POTENTIAL = the capacity for growth and achievement."
               },
               {
                 "num": 2,
-                "answer": "dedication"
+                "answer": "dedication",
+                "hint": "The clue 'willingness to practise, to fail and to try again every single day' = sustained commitment = dedication.",
+                "explanation": "DEDICATION = strong commitment to a goal, shown through consistent effort over time. DEDICATION is practising daily even when it is hard."
               },
               {
                 "num": 3,
-                "answer": "mentor"
+                "answer": "mentor",
+                "hint": "The clue 'someone who has experience and wisdom, and guides a student' = a more experienced guide = mentor.",
+                "explanation": "A MENTOR = an experienced and trusted person who guides and advises someone less experienced. A good MENTOR supports your growth in skill and character."
               },
               {
                 "num": 4,
-                "answer": "showcase"
+                "answer": "showcase",
+                "hint": "The clue 'through performances, science fairs and art exhibitions' = to display or present talents publicly = showcase.",
+                "explanation": "SHOWCASE = display or present talents, products or ideas to an audience. Schools SHOWCASE student talents through performances and exhibitions."
               },
               {
                 "num": 5,
-                "answer": "ambition"
+                "answer": "ambition",
+                "hint": "The clue 'knowing what you want to achieve gives your effort direction and purpose' = a strong desire to achieve something = ambition.",
+                "explanation": "AMBITION = a strong desire to achieve something great. Having AMBITION means knowing what you want and working towards it with purpose."
               }
             ]
           }
@@ -20521,35 +21431,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "into"
+                "answer": "into",
+                "hint": "Students write 'in' (location) instead of 'into' (movement entering). INTO shows movement entering an enclosed space.",
+                "explanation": "INTO = moving and entering an enclosed space. We stepped INTO the carriage = we moved inside it. 'Into' shows entry movement."
               },
               {
                 "num": 2,
-                "answer": "towards"
+                "answer": "towards",
+                "hint": "Students write 'to' (arrival at destination) instead of 'towards' (movement in the direction of). TOWARDS = moving in the direction of but not necessarily arriving.",
+                "explanation": "TOWARDS = moving in the direction of something. Father walked TOWARDS the ticket machine = he moved in its direction."
               },
               {
                 "num": 3,
-                "answer": "through"
+                "answer": "through",
+                "hint": "Students write 'across' (open surface) instead of 'through' (enclosed passage). THROUGH = passing inside an enclosed space from one end to the other.",
+                "explanation": "THROUGH = passing inside something from one end to the other. The train passed THROUGH the tunnel = entered one end and came out the other."
               },
               {
                 "num": 4,
-                "answer": "across"
+                "answer": "across",
+                "hint": "Students write 'through' (enclosed passage) instead of 'across' (open surface). ACROSS = movement over an open surface.",
+                "explanation": "ACROSS = moving from one side of an open surface to the other. The bus drove ACROSS the bridge = from one side to the other side."
               },
               {
                 "num": 5,
-                "answer": "past"
+                "answer": "past",
+                "hint": "Students write 'by' (similar meaning but not in the box). PAST = moved alongside and beyond something.",
+                "explanation": "PAST = moved alongside and beyond something without stopping. We drove PAST the old market = we went by it without stopping."
               },
               {
                 "num": 6,
-                "answer": "along"
+                "answer": "along",
+                "hint": "Students write 'on' (surface) instead of 'along' (following the direction of a route). ALONG = following the direction and length of a road or path.",
+                "explanation": "ALONG = following the direction and length of a road, path or river. The bus travelled ALONG Orchard Road = it followed the road from one end towards the other."
               },
               {
                 "num": 7,
-                "answer": "over"
+                "answer": "over",
+                "hint": "Students write 'above' (higher position, static) instead of 'over' (spanning, crossing above). OVER = built spanning above something.",
+                "explanation": "OVER = spanning or built above something. The track is built OVER the expressway = it crosses above it. ABOVE = simply at a higher level."
               },
               {
                 "num": 8,
-                "answer": "around"
+                "answer": "around",
+                "hint": "Students write 'along' (linear direction) instead of 'around' (circular/looping path). AROUND = moving in a loop or circle.",
+                "explanation": "AROUND = moving in a loop or circle encircling something. The bus loops AROUND the estate = it circles the whole area before coming back."
               }
             ]
           }
@@ -20572,23 +21498,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "commute"
+                "answer": "commute",
+                "hint": "The clue 'to school and work by bus and MRT every day' = travel regularly between home and work/school = commute.",
+                "explanation": "COMMUTE = travel regularly between home and work or school, usually by public transport. Millions of people COMMUTE by MRT every day."
               },
               {
                 "num": 2,
-                "answer": "interchange"
+                "answer": "interchange",
+                "hint": "The clue 'passengers can transfer between different train lines without leaving the building' = a transfer hub = interchange.",
+                "explanation": "An INTERCHANGE = a station where passengers can transfer between different bus or train lines. Jurong East is a major MRT INTERCHANGE."
               },
               {
                 "num": 3,
-                "answer": "fare"
+                "answer": "fare",
+                "hint": "The clue 'depends on the distance travelled' and 'correct amount is deducted' = the price paid for a journey = fare.",
+                "explanation": "A FARE = the price paid for a journey on public transport. The MRT FARE depends on how far you travel."
               },
               {
                 "num": 4,
-                "answer": "congestion"
+                "answer": "congestion",
+                "hint": "The clue 'fewer cars are needed' and 'reduce road ___' = traffic blocking the roads = congestion.",
+                "explanation": "CONGESTION = excessive traffic or overcrowding on roads. Good public transport reduces road CONGESTION by keeping cars off the streets."
               },
               {
                 "num": 5,
-                "answer": "punctual"
+                "answer": "punctual",
+                "hint": "The clue 'rarely arrive late' and 'plan journeys around published timetables' = arriving on time = punctual.",
+                "explanation": "PUNCTUAL = arriving or happening at the scheduled time. Singapore's buses and trains are PUNCTUAL = they arrive on time reliably."
               }
             ]
           }
@@ -21100,35 +22036,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "although"
+                "answer": "although",
+                "hint": "Students write 'because' (reason) instead of 'although' (contrast). ALTHOUGH shows a contrast between internal feeling and outward behaviour.",
+                "explanation": "ALTHOUGH = despite the fact that. ALTHOUGH he was nervous, he walked in calmly = these two facts contrast with each other."
               },
               {
                 "num": 2,
-                "answer": "when"
+                "answer": "when",
+                "hint": "Students write 'while' (two ongoing simultaneous actions) instead of 'when' (a point in time). 'The dentist leaned back' = a point in time, not an ongoing action.",
+                "explanation": "WHEN = at the moment that something happened. He breathed slowly WHEN the dentist leaned the chair back = at that specific moment."
               },
               {
                 "num": 3,
-                "answer": "while"
+                "answer": "while",
+                "hint": "Students write 'when' (single point in time) instead of 'while' (two ongoing simultaneous actions). Both actions were ongoing at the same time.",
+                "explanation": "WHILE = two ongoing actions happening at the same time. He counted tiles WHILE the dentist worked = both actions were happening simultaneously."
               },
               {
                 "num": 4,
-                "answer": "because"
+                "answer": "because",
+                "hint": "Students write 'since' (already planned for blank 5) or 'as'. BECAUSE is the most direct causal conjunction here.",
+                "explanation": "BECAUSE = the reason. He felt no pain BECAUSE the anaesthetic had numbed the area = the anaesthetic is the reason for no pain."
               },
               {
                 "num": 5,
-                "answer": "since"
+                "answer": "since",
+                "hint": "Students write 'because' (already used in blank 4). SINCE = given that / because of an ongoing background fact.",
+                "explanation": "SINCE = given that, because of an ongoing background situation. SINCE she had been his dentist for five years, she understood him well."
               },
               {
                 "num": 6,
-                "answer": "if"
+                "answer": "if",
+                "hint": "Students write 'when' (time) instead of 'if' (conditional). He may or may not feel discomfort — it is a condition, not a certain time.",
+                "explanation": "IF = a conditional. Raise your hand IF you feel discomfort = the action depends on whether the condition occurs. WHEN would suggest it definitely will happen."
               },
               {
                 "num": 7,
-                "answer": "unless"
+                "answer": "unless",
+                "hint": "Students write 'if' instead of 'unless'. UNLESS = if not. 'Unless the filling was done' = 'if the filling was NOT done'.",
+                "explanation": "UNLESS = if not / except if. The decay would spread UNLESS the filling was done = it would spread IF the filling was NOT done."
               },
               {
                 "num": 8,
-                "answer": "as"
+                "answer": "as",
+                "hint": "Students write 'when' (sudden point in time) or 'while'. AS = gradual or flowing simultaneous movement — natural for 'as he left'.",
+                "explanation": "AS = at the same time as, often for gradual actions. AS he left the clinic, he felt relief = the feeling came at the same time as he was walking out."
               }
             ]
           }
@@ -21151,23 +22103,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "enamel"
+                "answer": "enamel",
+                "hint": "The clue 'hard outer layer that protects the tooth' = enamel.",
+                "explanation": "ENAMEL = the hard outer layer of a tooth that protects it from decay. Sugar slowly wears away ENAMEL."
               },
               {
                 "num": 2,
-                "answer": "plaque"
+                "answer": "plaque",
+                "hint": "The clue 'sticky coating formed by bacteria and food particles on teeth' = plaque.",
+                "explanation": "PLAQUE = a sticky film of bacteria that forms on teeth. If not removed by brushing, PLAQUE causes tooth decay."
               },
               {
                 "num": 3,
-                "answer": "cavity"
+                "answer": "cavity",
+                "hint": "The clue 'a small hole that develops in the tooth' = cavity.",
+                "explanation": "A CAVITY = a small hole in a tooth caused by tooth decay. Dentists fill a CAVITY to prevent it from getting larger."
               },
               {
                 "num": 4,
-                "answer": "floss"
+                "answer": "floss",
+                "hint": "The clue 'between our teeth every night to remove food particles the toothbrush cannot reach' = floss.",
+                "explanation": "FLOSS = use dental floss (a thin thread) to clean between teeth. You should FLOSS every day to remove plaque between teeth."
               },
               {
                 "num": 5,
-                "answer": "numb"
+                "answer": "numb",
+                "hint": "The clue 'inject medicine so the patient does not feel any pain' = make the area unable to feel = numb.",
+                "explanation": "NUMB = without feeling, unable to sense pain. Dentists inject anaesthetic to NUMB the area before doing a filling."
               }
             ]
           }
@@ -21680,35 +22642,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "she"
+                "answer": "she",
+                "hint": "Students write 'her' (object form) instead of 'she' (subject). SHE is the subject pronoun for a female.",
+                "explanation": "SHE = subject pronoun for a female. My grandmother STILL WAKES UP — the subject is SHE. 'Her wakes up' is wrong."
               },
               {
                 "num": 2,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject) instead of 'her' (object after a verb).",
+                "explanation": "After the verb 'visit', use the OBJECT pronoun: visit HER. 'Visit she' is wrong."
               },
               {
                 "num": 3,
-                "answer": "him"
+                "answer": "him",
+                "hint": "Students write 'he' (subject form) instead of 'him' (object form after the verb 'calls').",
+                "explanation": "After the verb 'calls', use the OBJECT pronoun: calls HIM to help. 'Calls he' is wrong. HIM is the object pronoun for a male."
               },
               {
                 "num": 4,
-                "answer": "he"
+                "answer": "he",
+                "hint": "Students write 'his' (possessive) instead of 'he' (subject pronoun). HE is the subject of 'tends'.",
+                "explanation": "HE = subject pronoun for a male. Grandfather STILL TENDS the garden — the subject is HE. 'His tends the garden' is wrong."
               },
               {
                 "num": 5,
-                "answer": "his"
+                "answer": "his",
+                "hint": "Students write 'he' (subject pronoun) instead of 'his' (possessive adjective before a noun).",
+                "explanation": "Before 'hands' (a noun), use a POSSESSIVE ADJECTIVE: HIS hands. 'He hands' is wrong."
               },
               {
                 "num": 6,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Students write 'them' (object form) instead of 'they' (subject form).",
+                "explanation": "Both grandparents = plural = THEY have taught me. THEY is the subject pronoun for a group. 'Them have taught' is wrong."
               },
               {
                 "num": 7,
-                "answer": "their"
+                "answer": "their",
+                "hint": "Students write 'they' (subject) or 'them' (object) instead of 'their' (possessive adjective before 'stories').",
+                "explanation": "Before 'stories' (a noun), use a POSSESSIVE ADJECTIVE: THEIR stories. 'They stories' and 'them stories' are both wrong."
               },
               {
                 "num": 8,
-                "answer": "them"
+                "answer": "them",
+                "hint": "Students write 'they' (subject form) instead of 'them' (object form after a preposition).",
+                "explanation": "After the preposition 'with', use the OBJECT pronoun: spend time with THEM. 'With they' is wrong."
               }
             ]
           }
@@ -21731,23 +22709,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "frail"
+                "answer": "frail",
+                "hint": "The clue 'moving slowly and tiring easily' = physically weak = frail.",
+                "explanation": "FRAIL = physically weak, especially because of old age. An elderly person may look FRAIL but still be mentally sharp."
               },
               {
                 "num": 2,
-                "answer": "wisdom"
+                "answer": "wisdom",
+                "hint": "The clue 'lessons about patience, hard work and kindness that cannot be learned from a textbook' = deep understanding gained through experience = wisdom.",
+                "explanation": "WISDOM = deep understanding and good judgement gained through long experience. Grandparents share WISDOM = valuable life lessons."
               },
               {
                 "num": 3,
-                "answer": "reminisce"
+                "answer": "reminisce",
+                "hint": "The clue 'talk about the old days' and 'sharing a living piece of family history' = recall and talk about past memories = reminisce.",
+                "explanation": "REMINISCE = recall and talk about past memories with pleasure and nostalgia. When grandparents REMINISCE, they share stories from their younger days."
               },
               {
                 "num": 4,
-                "answer": "heritage"
+                "answer": "heritage",
+                "hint": "The clue 'a connection to the past that shapes their identity and values' = cultural background passed down = heritage.",
+                "explanation": "HERITAGE = the cultural background, traditions and values passed down from previous generations. Family stories form part of a child's HERITAGE."
               },
               {
                 "num": 5,
-                "answer": "cherish"
+                "answer": "cherish",
+                "hint": "The clue 'these moments grow rarer with every passing year' = hold dear and value deeply = cherish.",
+                "explanation": "CHERISH = hold something dear and value it deeply. Every family should CHERISH time with grandparents = treasure these increasingly rare moments."
               }
             ]
           }
@@ -22262,35 +23250,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "watching"
+                "answer": "watching",
+                "hint": "Students write 'to watch' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: loves WATCHING magic shows. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "watches"
+                "answer": "watches",
+                "hint": "Students write 'watch' (plural form) forgetting 'He' is singular.",
+                "explanation": "Regular habit = simple present. He (singular) → WATCHES every hand carefully."
               },
               {
                 "num": 3,
-                "answer": "watched"
+                "answer": "watched",
+                "hint": "Students write 'watch' (base form) ignoring the past signal 'Last Friday'.",
+                "explanation": "'Last Friday' = past. 'Watch' is regular: watch → WATCHED."
               },
               {
                 "num": 4,
-                "answer": "was watching"
+                "answer": "was watching",
+                "hint": "Students write 'watched' (simple past) missing the ongoing signal 'while he'.",
+                "explanation": "'While he ___' = ongoing background past action = past continuous. He WAS WATCHING closely when the dove appeared."
               },
               {
                 "num": 5,
-                "answer": "were watching"
+                "answer": "were watching",
+                "hint": "Students write 'watched' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "His friends = plural. They were doing it at the same past moment = WERE WATCHING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to watch"
+                "answer": "to watch",
+                "hint": "Students write 'watching' instead of the infinitive after 'wants'.",
+                "explanation": "'Want TO + base verb': wants TO WATCH as many magicians as possible. Always use the infinitive after 'wants'."
               },
               {
                 "num": 7,
-                "answer": "watch"
+                "answer": "watch",
+                "hint": "Students add -es or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should WATCH. Never 'should watches' or 'should watching'."
               },
               {
                 "num": 8,
-                "answer": "is watching"
+                "answer": "is watching",
+                "hint": "Students write 'watches' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Leo (singular) → IS WATCHING a slow-motion recording right now."
               }
             ]
           }
@@ -22313,23 +23317,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "sleight"
+                "answer": "sleight",
+                "hint": "The clue 'move objects with the fingers so quickly and smoothly that the eye cannot follow' = sleight of hand.",
+                "explanation": "SLEIGHT of hand = the skill of moving your hands and fingers so quickly and cleverly that the eye cannot follow. Magicians practice SLEIGHT of hand for years."
               },
               {
                 "num": 2,
-                "answer": "misdirection"
+                "answer": "misdirection",
+                "hint": "The clue 'guide the audience's attention AWAY from what is really happening' = misdirection.",
+                "explanation": "MISDIRECTION = deliberately guiding someone's attention away from what is really happening. Magicians use MISDIRECTION to hide the real secret of the trick."
               },
               {
                 "num": 3,
-                "answer": "illusion"
+                "answer": "illusion",
+                "hint": "The clue 'a false image that the brain accepts as real' = an illusion.",
+                "explanation": "An ILLUSION = a false image or impression that the mind accepts as real. Magic tricks create ILLUSIONS by exploiting how the brain processes visual information."
               },
               {
                 "num": 4,
-                "answer": "spectator"
+                "answer": "spectator",
+                "hint": "The clue 'every ___ in the audience feel as though the impossible has just happened' = a person watching = spectator.",
+                "explanation": "A SPECTATOR = a person who watches an event, show or game. Every SPECTATOR in the audience felt the wonder of the trick."
               },
               {
                 "num": 5,
-                "answer": "reveal"
+                "answer": "reveal",
+                "hint": "The clue 'choose to ___ how a trick works' = to show or disclose the secret = reveal.",
+                "explanation": "REVEAL = to show or disclose something that was previously hidden or secret. Some magicians REVEAL their secrets at the end of a show."
               }
             ]
           }
@@ -22839,35 +23853,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "running"
+                "answer": "running",
+                "hint": "Students write 'to run' instead of the gerund after 'loves'.",
+                "explanation": "LOVE + verb-ing: loves RUNNING. After 'loves', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "runs"
+                "answer": "runs",
+                "hint": "Students write 'run' forgetting 'He' is singular in simple present.",
+                "explanation": "Regular habit = simple present. He (singular) → RUNS fifty laps every morning."
               },
               {
                 "num": 3,
-                "answer": "ran"
+                "answer": "ran",
+                "hint": "Students write 'runned', not knowing 'run' is irregular.",
+                "explanation": "'Last Sports Day' = past. 'Run' is irregular: run → RAN. Never write 'runned'."
               },
               {
                 "num": 4,
-                "answer": "was running"
+                "answer": "was running",
+                "hint": "Students write 'ran' (simple past) missing the ongoing signal 'while'.",
+                "explanation": "'While Kai ___' = ongoing background past action = past continuous. Kai WAS RUNNING the final stretch when the crowd cheered."
               },
               {
                 "num": 5,
-                "answer": "were running"
+                "answer": "were running",
+                "hint": "Students write 'ran' (simple past) instead of past continuous for an ongoing parallel action.",
+                "explanation": "His teammates = plural. They were doing it at the same past moment = WERE RUNNING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to run"
+                "answer": "to run",
+                "hint": "Students write 'running' instead of the infinitive after 'plans'.",
+                "explanation": "'Plan TO + base verb': plans TO RUN in the championship. Always use the infinitive after 'plans'."
               },
               {
                 "num": 7,
-                "answer": "run"
+                "answer": "run",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should RUN. Never 'should runs' or 'should running'."
               },
               {
                 "num": 8,
-                "answer": "is running"
+                "answer": "is running",
+                "hint": "Students write 'runs' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Kai (singular) → IS RUNNING his final practice lap right now."
               }
             ]
           }
@@ -22890,23 +23920,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "spectators"
+                "answer": "spectators",
+                "hint": "The clue 'line the track and field, cheering for their classes' = people watching = spectators.",
+                "explanation": "SPECTATORS = people who watch an event. Hundreds of SPECTATORS lined the track to cheer for the athletes."
               },
               {
                 "num": 2,
-                "answer": "baton"
+                "answer": "baton",
+                "hint": "The clue 'pass a metal ___ to the next teammate' in a relay race = the object passed between runners = baton.",
+                "explanation": "A BATON = the short stick passed between runners in a relay race. Dropping the BATON in a relay usually means losing the race."
               },
               {
                 "num": 3,
-                "answer": "compete"
+                "answer": "compete",
+                "hint": "The clue 'athletes who ___ in long-distance events' = take part against others = compete.",
+                "explanation": "COMPETE = take part in a contest against others. Athletes COMPETE in long-distance events to test their stamina."
               },
               {
                 "num": 4,
-                "answer": "endurance"
+                "answer": "endurance",
+                "hint": "The clue 'ability to keep going when muscles are tired and breathing is heavy' = endurance.",
+                "explanation": "ENDURANCE = the ability to keep going for a long time despite fatigue and difficulty. Long-distance runners need great ENDURANCE."
               },
               {
                 "num": 5,
-                "answer": "agile"
+                "answer": "agile",
+                "hint": "The clue 'moving quickly and gracefully through jumps and rolls' = agile.",
+                "explanation": "AGILE = able to move quickly and easily with great coordination. Gymnasts are AGILE — they move their bodies with speed and grace."
               }
             ]
           }
@@ -23421,35 +24461,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "before"
+                "answer": "before",
+                "hint": "Students write 'after' (later) instead of 'before' (earlier). They said goodbye first, THEN the lorry arrived.",
+                "explanation": "BEFORE = earlier in time than something else. They said goodbye BEFORE the lorry arrived = the goodbye happened first."
               },
               {
                 "num": 2,
-                "answer": "after"
+                "answer": "after",
+                "hint": "Students write 'before' (earlier) instead of 'after' (following). The photo was taken when everything was done.",
+                "explanation": "AFTER = later in time. AFTER the last box was loaded, they took the photo = the photo came after the loading was done."
               },
               {
                 "num": 3,
-                "answer": "during"
+                "answer": "during",
+                "hint": "Students write 'while' (not in the box) or 'before'. DURING = throughout a defined period or event.",
+                "explanation": "DURING = throughout a particular time or event. DURING the journey = throughout the time of the journey."
               },
               {
                 "num": 4,
-                "answer": "since"
+                "answer": "since",
+                "hint": "Students write 'for' (not in the box) or 'during'. SINCE = from a past moment up to now (with present perfect).",
+                "explanation": "SINCE = from a specific past moment up to now. We HAVE lived here SINCE I was five = from that age until now."
               },
               {
                 "num": 5,
-                "answer": "until"
+                "answer": "until",
+                "hint": "Students write 'before' (already used in blank 1) or 'during'. UNTIL = up to and including that point.",
+                "explanation": "UNTIL = continuing up to a point in time. They worked UNTIL midnight = they kept working all the way up to midnight."
               },
               {
                 "num": 6,
-                "answer": "by"
+                "answer": "by",
+                "hint": "Students write 'before' (already used) or 'until'. BY = deadline (finished no later than); UNTIL = duration up to that point.",
+                "explanation": "BY = no later than a specific time (a deadline). Every box unpacked BY morning = done before morning arrives. Different from UNTIL (continuous up to that point)."
               },
               {
                 "num": 7,
-                "answer": "already"
+                "answer": "already",
+                "hint": "Students write 'yet' (expected but not done) instead of 'already' (done sooner than expected). ALREADY = done before a reference point.",
+                "explanation": "ALREADY = done sooner than expected. By seven, Mother had ALREADY arranged the cupboards = she did it earlier than we expected."
               },
               {
                 "num": 8,
-                "answer": "yet"
+                "answer": "yet",
+                "hint": "Students write 'already' (done early) instead of 'yet' (not done, expected). YET = expected but hasn't happened.",
+                "explanation": "YET = expected but not done up to now (used in negatives and questions). Father had NOT found his glasses YET = he expected to find them but hadn't."
               }
             ]
           }
@@ -23472,23 +24528,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "daunting"
+                "answer": "daunting",
+                "hint": "The clue 'so many things to plan, pack and organise that it can feel overwhelming' = daunting.",
+                "explanation": "DAUNTING = seeming difficult and discouraging. Moving house is DAUNTING because of the sheer amount of things to do."
               },
               {
                 "num": 2,
-                "answer": "relocate"
+                "answer": "relocate",
+                "hint": "The clue 'move to a different part of Singapore' = move to a new location = relocate.",
+                "explanation": "RELOCATE = move to a different place, especially a new home or city. Families who RELOCATE must adjust to a new environment."
               },
               {
                 "num": 3,
-                "answer": "renovated"
+                "answer": "renovated",
+                "hint": "The clue 'replacing old paint, flooring and fixtures to make the space feel fresh' = renovated.",
+                "explanation": "RENOVATED = repaired and improved by replacing old features. A newly RENOVATED flat has fresh paint, new flooring and updated fittings."
               },
               {
                 "num": 4,
-                "answer": "familiar"
+                "answer": "familiar",
+                "hint": "The clue 'the coffee shop downstairs, the park around the corner' = well known and comfortable = familiar.",
+                "explanation": "FAMILIAR = well known through long experience. We miss places that feel FAMILIAR — places we know well and associate with comfort and routine."
               },
               {
                 "num": 5,
-                "answer": "cluttered"
+                "answer": "cluttered",
+                "hint": "The clue 'boxes and furniture in unexpected places' = messy and disorganised = cluttered.",
+                "explanation": "CLUTTERED = filled with too many things in a disorganised way. A home full of unpacked boxes feels CLUTTERED."
               }
             ]
           }
@@ -24003,35 +25069,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "if"
+                "answer": "if",
+                "hint": "Students write 'unless' (if not) or 'although' (contrast). IF = straightforward conditional.",
+                "explanation": "IF + simple present, simple future = standard conditional. IF you practise every day, you WILL make progress."
               },
               {
                 "num": 2,
-                "answer": "unless"
+                "answer": "unless",
+                "hint": "Students write 'if' (positive conditional) instead of 'unless' (negative conditional). UNLESS = if not.",
+                "explanation": "UNLESS = if not. You cannot improve UNLESS you are willing to make mistakes = you cannot improve IF you are NOT willing."
               },
               {
                 "num": 3,
-                "answer": "although"
+                "answer": "although",
+                "hint": "Students write 'because' (reason) instead of 'although' (contrast). ALTHOUGH introduces a contrast.",
+                "explanation": "ALTHOUGH = despite the fact that. ALTHOUGH learning is frustrating, the achievement is worthwhile = these two facts contrast."
               },
               {
                 "num": 4,
-                "answer": "even though"
+                "answer": "even though",
+                "hint": "Students write 'although' (already used) or 'because'. EVEN THOUGH = a stronger, more emphatic contrast than 'although'.",
+                "explanation": "EVEN THOUGH = stronger contrast than 'although'. Rina continued EVEN THOUGH her fingers hurt = she pushed through despite a significant obstacle."
               },
               {
                 "num": 5,
-                "answer": "as long as"
+                "answer": "as long as",
+                "hint": "Students write 'if' (single condition) or 'unless'. AS LONG AS = a continuous ongoing condition.",
+                "explanation": "AS LONG AS = on the condition that something is maintained. A teacher will support you AS LONG AS you keep trying = the support continues as long as the condition is met."
               },
               {
                 "num": 6,
-                "answer": "provided that"
+                "answer": "provided that",
+                "hint": "Students write 'if' (general) or 'as long as' (ongoing). PROVIDED THAT = a specific formal condition that must be met.",
+                "explanation": "PROVIDED THAT = on the specific condition that a requirement is fulfilled. You can join PROVIDED THAT you complete the beginner course = only if this specific condition is met."
               },
               {
                 "num": 7,
-                "answer": "in case"
+                "answer": "in case",
+                "hint": "Students write 'if' (conditional — it will happen) instead of 'in case' (precaution — it might happen). IN CASE = preparation for possibility.",
+                "explanation": "IN CASE = as a precaution in case something happens. Bring a notebook IN CASE the instructor demonstrates something = be prepared in case it occurs."
               },
               {
                 "num": 8,
-                "answer": "whether"
+                "answer": "whether",
+                "hint": "Students write 'if' instead of 'whether'. 'IF' introduces a condition; 'WHETHER' introduces alternatives (whether or not).",
+                "explanation": "WHETHER = used to introduce two alternatives (whether X or not). 'Not WHETHER you succeed on the first try' = regardless of whether you do or don't."
               }
             ]
           }
@@ -24054,23 +25136,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "beginner"
+                "answer": "beginner",
+                "hint": "The clue 'even the most basic steps can seem confusing' = someone just starting = beginner.",
+                "explanation": "A BEGINNER = someone at the very start of learning a skill. Even for a BEGINNER, the early stages are the most challenging."
               },
               {
                 "num": 2,
-                "answer": "discipline"
+                "answer": "discipline",
+                "hint": "The clue 'show up and practise even when you do not feel like it' = self-discipline.",
+                "explanation": "DISCIPLINE = the ability to make yourself do something regularly and consistently, even when it is hard. DISCIPLINE is what keeps you practising when motivation fades."
               },
               {
                 "num": 3,
-                "answer": "technique"
+                "answer": "technique",
+                "hint": "The clue 'how to hold a paintbrush, position hands on a piano, throw a ball' = the correct method = technique.",
+                "explanation": "TECHNIQUE = the correct or established method for doing something. Each skill has a specific TECHNIQUE that must be learned and practised."
               },
               {
                 "num": 4,
-                "answer": "absorb"
+                "answer": "absorb",
+                "hint": "The clue 'feel automatic' and 'more naturally you ___' = take in and internalise = absorb.",
+                "explanation": "ABSORB = take in and internalise information or methods. As you practise, you ABSORB the technique until it feels natural."
               },
               {
                 "num": 5,
-                "answer": "mastery"
+                "answer": "mastery",
+                "hint": "The clue 'takes years' and 'true ___' = the highest level of skill = mastery.",
+                "explanation": "MASTERY = the highest level of skill or knowledge in a subject. True MASTERY takes years of dedicated practice."
               }
             ]
           }
@@ -24581,35 +25673,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "as … as"
+                "answer": "as … as",
+                "hint": "Students write 'more … than' (different amounts) instead of 'as … as' (equal). The manatee's gentleness is being equated.",
+                "explanation": "AS … AS = equal comparison. The manatee is AS gentle AS any other animal = its gentleness is equal to all others."
               },
               {
                 "num": 2,
-                "answer": "more … than"
+                "answer": "more … than",
+                "hint": "Students write 'as … as' (equal) instead of 'more … than' (higher amount). River otters are clearly described as more active.",
+                "explanation": "MORE + adjective + THAN = comparative for multi-syllable adjectives. River otters are MORE ENERGETIC THAN manatees."
               },
               {
                 "num": 3,
-                "answer": "the most"
+                "answer": "the most",
+                "hint": "Students write 'more' (comparative, two things) instead of 'the most' (superlative, all). 'Of all freshwater animals' = comparing among many.",
+                "explanation": "THE MOST + adjective = superlative. 'Of all freshwater animals' = comparing among all = THE MOST feared."
               },
               {
                 "num": 4,
-                "answer": "less … than"
+                "answer": "less … than",
+                "hint": "Students write 'more … than' (higher) instead of 'less … than' (lower). The piranha is LESS aggressive — its level is below that of sharks.",
+                "explanation": "LESS + adjective + THAN = comparing lower amounts. The piranha is LESS AGGRESSIVE THAN many sharks = its aggression level is lower."
               },
               {
                 "num": 5,
-                "answer": "far … than"
+                "answer": "far … than",
+                "hint": "Students write 'more … than' (multi-syllable adj) instead of 'far … than' (intensifier + -er form). 'Longer' is already comparative → use 'far' as intensifier.",
+                "explanation": "FAR + comparative + THAN = much more. The Amazon is FAR LONGER THAN the Nile = significantly longer. Use FAR with -er comparatives."
               },
               {
                 "num": 6,
-                "answer": "not as … as"
+                "answer": "not as … as",
+                "hint": "Students write 'less … than' (also correct) or 'more … than'. NOT AS … AS = unequal comparison showing a lower level.",
+                "explanation": "NOT AS + adjective + AS = shows a lower level. Freshwater crocodiles are NOT AS dangerous AS saltwater crocodiles = less dangerous."
               },
               {
                 "num": 7,
-                "answer": "the … the"
+                "answer": "the … the",
+                "hint": "Students write 'as … as' (equal) or 'more … than' (simple comparative). THE … THE = a special proportional structure.",
+                "explanation": "THE + comparative, THE + comparative = the two things change together. THE DEEPER you go, THE COLDER it becomes = as depth increases, coldness increases."
               },
               {
                 "num": 8,
-                "answer": "rather than"
+                "answer": "rather than",
+                "hint": "Students write 'more … than' (comparison) instead of 'rather than' (preference). RATHER THAN = prefer X over Y.",
+                "explanation": "RATHER THAN = prefer one thing instead of another. Scientists prefer natural habitats RATHER THAN artificial tanks = they choose one over the other."
               }
             ]
           }
@@ -24632,23 +25740,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "ecosystem"
+                "answer": "ecosystem",
+                "hint": "The clue 'a community of living things that depend on each other and the water' = ecosystem.",
+                "explanation": "An ECOSYSTEM = a community of living things and the environment they share, all interacting with each other."
               },
               {
                 "num": 2,
-                "answer": "current"
+                "answer": "current",
+                "hint": "The clue 'the speed of the water' in a river = current.",
+                "explanation": "A CURRENT = the flow or movement of water in a particular direction and at a particular speed. The river CURRENT determines which animals can live there."
               },
               {
                 "num": 3,
-                "answer": "aquatic"
+                "answer": "aquatic",
+                "hint": "The clue 'those that live in water' = aquatic.",
+                "explanation": "AQUATIC = relating to or living in water. AQUATIC animals = those that live and breathe in water."
               },
               {
                 "num": 4,
-                "answer": "filter"
+                "answer": "filter",
+                "hint": "The clue 'removing dirt and impurities as water passes through roots and stems' = filter.",
+                "explanation": "FILTER = remove impurities by passing through a material. Plants FILTER the river water = they clean it naturally."
               },
               {
                 "num": 5,
-                "answer": "habitat"
+                "answer": "habitat",
+                "hint": "The clue 'many species depend on' for their survival = their natural home = habitat.",
+                "explanation": "A HABITAT = the natural environment where an animal or plant normally lives. Pollution destroys the HABITAT of river creatures."
               }
             ]
           }
@@ -25160,35 +26278,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "baking"
+                "answer": "baking",
+                "hint": "Students write 'to bake' instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing: enjoys BAKING every weekend. After 'enjoys', always add -ING."
               },
               {
                 "num": 2,
-                "answer": "bakes"
+                "answer": "bakes",
+                "hint": "Students write 'bake' (plural form) forgetting 'She' is singular.",
+                "explanation": "Regular habit = simple present. She (singular) → BAKES at least two items every Saturday."
               },
               {
                 "num": 3,
-                "answer": "baked"
+                "answer": "baked",
+                "hint": "Students write 'bake' (base form) ignoring the past signal 'Last Sunday'.",
+                "explanation": "'Last Sunday' = past. 'Bake' is regular: bake → BAKED."
               },
               {
                 "num": 4,
-                "answer": "was baking"
+                "answer": "was baking",
+                "hint": "Students write 'baked' (simple past) missing the ongoing signal 'while'.",
+                "explanation": "'While Grandma ___' = ongoing background past action = past continuous. Grandma WAS BAKING when the scent filled the kitchen."
               },
               {
                 "num": 5,
-                "answer": "were baking"
+                "answer": "were baking",
+                "hint": "Students write 'baked' (simple past) instead of past continuous for a parallel ongoing action.",
+                "explanation": "Her grandchildren = plural. They were doing it at the same past moment = WERE BAKING (past continuous)."
               },
               {
                 "num": 6,
-                "answer": "to bake"
+                "answer": "to bake",
+                "hint": "Students write 'baking' instead of the infinitive after 'wants'.",
+                "explanation": "'Want TO + base verb': wants TO BAKE a French tart. Always use the infinitive after 'wants'."
               },
               {
                 "num": 7,
-                "answer": "bake"
+                "answer": "bake",
+                "hint": "Students add -s or -ing after the modal verb 'should'.",
+                "explanation": "After modal verbs (should, must, can, will), always use the BASE form: should BAKE. Never 'should bakes' or 'should baking'."
               },
               {
                 "num": 8,
-                "answer": "is baking"
+                "answer": "is baking",
+                "hint": "Students write 'bakes' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Grandma (singular) → IS BAKING a pandan layered cake right now."
               }
             ]
           }
@@ -25211,23 +26345,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "ingredient"
+                "answer": "ingredient",
+                "hint": "The clue 'from flour and butter to eggs and vanilla, plays a specific role' = a component used in cooking = ingredient.",
+                "explanation": "An INGREDIENT = a component or item used in a recipe. Each INGREDIENT in baking plays a specific chemical or flavour role."
               },
               {
                 "num": 2,
-                "answer": "leavening"
+                "answer": "leavening",
+                "hint": "The clue 'cause dough to rise by producing bubbles of gas' = leavening.",
+                "explanation": "A LEAVENING agent = something that causes baked goods to rise by producing gas. Yeast and baking powder are LEAVENING agents."
               },
               {
                 "num": 3,
-                "answer": "knead"
+                "answer": "knead",
+                "hint": "The clue 'pressing and folding the dough repeatedly with the hands' = knead.",
+                "explanation": "KNEAD = press and fold dough repeatedly with the hands to develop gluten. You KNEAD bread dough to make it smooth and elastic."
               },
               {
                 "num": 4,
-                "answer": "batch"
+                "answer": "batch",
+                "hint": "The clue 'prepare many items at one time to save time' = a batch.",
+                "explanation": "A BATCH = a quantity of something produced in one round of preparation. Bake a BATCH of cookies = make many at the same time."
               },
               {
                 "num": 5,
-                "answer": "aroma"
+                "answer": "aroma",
+                "hint": "The clue 'the smell of warm butter and sugar that fills the kitchen' = aroma.",
+                "explanation": "An AROMA = a pleasant and distinctive smell. The AROMA of baking fills the kitchen with warmth and comfort."
               }
             ]
           }
@@ -25737,35 +26881,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "many"
+                "answer": "many",
+                "hint": "Students write 'much' (uncountable) instead of 'many' (countable). 'Festivals' can be counted → MANY.",
+                "explanation": "MANY + countable noun. Festivals = countable → MANY festivals. MUCH is for uncountable nouns like 'music' or 'time'."
               },
               {
                 "num": 2,
-                "answer": "much"
+                "answer": "much",
+                "hint": "Students write 'many' (countable) instead of 'much' (uncountable). 'Excitement' cannot be counted → MUCH.",
+                "explanation": "MUCH + uncountable noun. Excitement = uncountable → so MUCH excitement. You cannot say 'many excitements'. Use MUCH for feelings and abstract nouns."
               },
               {
                 "num": 3,
-                "answer": "some"
+                "answer": "some",
+                "hint": "Students write 'any' instead of 'some'. ANY is for negatives and questions; SOME is for positive statements.",
+                "explanation": "SOME = unspecified amount in POSITIVE sentences. She prepared SOME kueh = an amount (we don't say how much). ANY is for negatives ('not any') or questions ('any kueh?')."
               },
               {
                 "num": 4,
-                "answer": "any"
+                "answer": "any",
+                "hint": "Students write 'some' instead of 'any'. In NEGATIVE sentences, use ANY, not SOME.",
+                "explanation": "ANY = used in NEGATIVE sentences and questions. I did NOT eat ANY pineapple tarts = not even one. In negatives: use ANY. In positives: use SOME."
               },
               {
                 "num": 5,
-                "answer": "a few"
+                "answer": "a few",
+                "hint": "Students write 'a little' (uncountable) instead of 'a few' (countable). 'Candles' can be counted → A FEW.",
+                "explanation": "A FEW + countable noun. Candles = countable → A FEW candles. A LITTLE is for uncountable things like 'wax' or 'oil'."
               },
               {
                 "num": 6,
-                "answer": "a little"
+                "answer": "a little",
+                "hint": "Students write 'a few' (countable) instead of 'a little' (uncountable). 'Rosewater' is a liquid, uncountable → A LITTLE.",
+                "explanation": "A LITTLE + uncountable noun. Rosewater = liquid = uncountable → A LITTLE rosewater. 'A few rosewater' is WRONG. A FEW is only for countable things."
               },
               {
                 "num": 7,
-                "answer": "several"
+                "answer": "several",
+                "hint": "Students write 'a few' (two or three) instead of 'several' (more than two, perhaps four or five).",
+                "explanation": "SEVERAL = more than two but not a large number, for countable plural nouns. SEVERAL open houses = perhaps four or five. A FEW = just two or three."
               },
               {
                 "num": 8,
-                "answer": "a lot of"
+                "answer": "a lot of",
+                "hint": "Students write 'many' (only countable) or 'much' (uncountable but formal/negative). A LOT OF = natural for large amounts in positive spoken-like sentences.",
+                "explanation": "A LOT OF = large amount, used for BOTH countable and uncountable nouns in positive sentences. A LOT OF laughter and singing = a large amount of both. More natural than 'much' in everyday sentences."
               }
             ]
           }
@@ -25788,23 +26948,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "customs"
+                "answer": "customs",
+                "hint": "The clue 'rich ___ and traditions' = long-established practices = customs.",
+                "explanation": "CUSTOMS = traditional practices and ways of behaving that have been followed for a long time. Every culture has its own CUSTOMS during festivals."
               },
               {
                 "num": 2,
-                "answer": "decorate"
+                "answer": "decorate",
+                "hint": "The clue 'homes with oil lamps and kolam patterns' = adorn for a special occasion = decorate.",
+                "explanation": "DECORATE = add colour, lights or ornaments to make a place look festive and beautiful. Families DECORATE their homes during Deepavali."
               },
               {
                 "num": 3,
-                "answer": "procession"
+                "answer": "procession",
+                "hint": "The clue 'worshippers carrying flowers and offerings moving through the streets' = an organised march = procession.",
+                "explanation": "A PROCESSION = an organised group of people moving slowly together, often for a religious or ceremonial purpose."
               },
               {
                 "num": 4,
-                "answer": "gratitude"
+                "answer": "gratitude",
+                "hint": "The clue 'a feeling of thankfulness for family, friends and blessings' = gratitude.",
+                "explanation": "GRATITUDE = the feeling of being thankful and appreciating what you have. Christmas is a time for expressing GRATITUDE to those we love."
               },
               {
                 "num": 5,
-                "answer": "unity"
+                "answer": "unity",
+                "hint": "The clue 'coming together of different peoples to form one nation' = unity.",
+                "explanation": "UNITY = the state of being joined together as one, despite differences. Singapore's UNITY comes from its many communities celebrating together."
               }
             ]
           }
@@ -26319,35 +27489,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "who"
+                "answer": "who",
+                "hint": "Students write 'which' (for things) instead of 'who' (for people). The lifeguard = a person → WHO.",
+                "explanation": "WHO = relative pronoun for PEOPLE. The lifeguard WHO rescued the boy = 'who' replaces 'the lifeguard' in the second clause. WHO is always for people."
               },
               {
                 "num": 2,
-                "answer": "which"
+                "answer": "which",
+                "hint": "Students write 'who' (for people) instead of 'which' (for things). The cable car = a thing → WHICH.",
+                "explanation": "WHICH = relative pronoun for THINGS. The cable car, WHICH runs between Mount Faber and Sentosa = 'which' replaces 'the cable car'. WHICH is always for things."
               },
               {
                 "num": 3,
-                "answer": "that"
+                "answer": "that",
+                "hint": "Students write 'which' (non-restrictive) instead of 'that' (restrictive/defining). The clause 'that we built' defines WHICH sandcastle, not just adds information.",
+                "explanation": "THAT = used in restrictive clauses that DEFINE which one. The sandcastle THAT we built = this tells us WHICH sandcastle (the one we built, not another). THAT = defining clause."
               },
               {
                 "num": 4,
-                "answer": "where"
+                "answer": "where",
+                "hint": "Students write 'which' (thing, needs a preposition: 'at which') or 'that'. WHERE = the correct relative adverb for places.",
+                "explanation": "WHERE = relative pronoun for PLACES. Palawan Beach is the place WHERE my family picnics = 'where' replaces 'at that place'. WHERE is always for locations."
               },
               {
                 "num": 5,
-                "answer": "when"
+                "answer": "when",
+                "hint": "Students write 'that' or 'which' instead of 'when'. WHEN = the correct relative adverb for times.",
+                "explanation": "WHEN = relative pronoun for TIMES. The summer WHEN we first visited = 'when' replaces 'at that time'. WHEN is always for time expressions."
               },
               {
                 "num": 6,
-                "answer": "whose"
+                "answer": "whose",
+                "hint": "Students write 'who' (subject) or 'which' (thing) instead of 'whose' (possessive). WHOSE = belonging to the family.",
+                "explanation": "WHOSE = possessive relative pronoun. The family WHOSE children built the sandcastle = the family's children. WHOSE = 'belonging to whom'. Replace 'the family's' → 'whose'."
               },
               {
                 "num": 7,
-                "answer": "who"
+                "answer": "who",
+                "hint": "Students write 'that' (also acceptable for people in informal English, but WHO is preferred for formal/exam contexts).",
+                "explanation": "WHO = preferred relative pronoun for PEOPLE in formal writing. Anyone WHO wants to rent a kayak = 'who' refers back to 'anyone' (a person). In exams, use WHO for people."
               },
               {
                 "num": 8,
-                "answer": "which"
+                "answer": "which",
+                "hint": "Students write 'that' instead of 'which'. Non-restrictive clauses (extra info between commas) use WHICH, not THAT.",
+                "explanation": "WHICH = used in non-restrictive clauses (extra information between commas). We took the monorail, WHICH connects different parts of Sentosa. Commas + extra info = WHICH, not THAT."
               }
             ]
           }
@@ -26370,23 +27556,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "resort"
+                "answer": "resort",
+                "hint": "The clue 'island... connected to mainland... with beaches and theme parks' = a holiday/leisure destination = resort.",
+                "explanation": "A RESORT = a place that is popular for holidays, leisure and recreation. Sentosa is an island RESORT = a leisure destination with beaches and attractions."
               },
               {
                 "num": 2,
-                "answer": "cable"
+                "answer": "cable",
+                "hint": "The clue 'a gondola suspended on wires that carries passengers high above the sea' = cable car.",
+                "explanation": "A CABLE car = a gondola or cabin that hangs from a thick wire (cable) and travels between two points high above the ground."
               },
               {
                 "num": 3,
-                "answer": "gleaming"
+                "answer": "gleaming",
+                "hint": "The clue 'stretched out below, with white beaches on every side' + comparing to a carpet = bright, shining = gleaming.",
+                "explanation": "GLEAMING = shining brightly with reflected light. The island looks like a GLEAMING green carpet = it shines brightly in the sunlight."
               },
               {
                 "num": 4,
-                "answer": "attraction"
+                "answer": "attraction",
+                "hint": "The clue 'most popular ___ for families looking for fun' = a place or thing that draws visitors = attraction.",
+                "explanation": "An ATTRACTION = a place or feature that draws visitors. Theme parks and beaches are ATTRACTIONS that make Sentosa a popular destination."
               },
               {
                 "num": 5,
-                "answer": "sprawling"
+                "answer": "sprawling",
+                "hint": "The clue 'white sand beaches' that stretch widely = covering a large area in an irregular way = sprawling.",
+                "explanation": "SPRAWLING = spreading over a large area in an irregular or extended way. SPRAWLING white sand beaches = beaches that stretch widely along the shoreline."
               }
             ]
           }
@@ -26899,35 +28095,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "I"
+                "answer": "I",
+                "hint": "Students write 'Me' (object form). I is the SUBJECT pronoun. 'Me have been' is wrong.",
+                "explanation": "I = subject pronoun (does the action). I HAVE BEEN friends with Siti. 'Me' is the object — use ME after verbs: 'she helped ME'. Subject = I; Object = ME."
               },
               {
                 "num": 2,
-                "answer": "my"
+                "answer": "my",
+                "hint": "Students write 'me' (object) or 'I' (subject) instead of 'my' (possessive adjective before a noun).",
+                "explanation": "MY = possessive adjective before a noun. MY birthday = the birthday belonging to me. 'Me birthday' is wrong — use MY before nouns."
               },
               {
                 "num": 3,
-                "answer": "myself"
+                "answer": "myself",
+                "hint": "Students write 'me' (object) instead of 'myself' (reflexive). 'I made it by me' is wrong.",
+                "explanation": "MYSELF = reflexive pronoun for I. I made it BY MYSELF = I alone, without help. Use MYSELF when the subject (I) and object refer to the same person."
               },
               {
                 "num": 4,
-                "answer": "she"
+                "answer": "she",
+                "hint": "Students write 'her' (object form) instead of 'she' (subject). 'Her saw the card' is wrong.",
+                "explanation": "SHE = subject pronoun for a female. SHE saw the card. 'Her' is the object: 'I gave it to HER'. Subject = SHE; Object = HER."
               },
               {
                 "num": 5,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject) instead of 'her' (object after the verb 'helped').",
+                "explanation": "After a verb (helped), use the OBJECT pronoun. I helped HER = HER is the object. 'I helped she' is WRONG. After verbs: use ME, HER, HIM, THEM (not I, she, he, they)."
               },
               {
                 "num": 6,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Students write 'them' (object) or 'their' (possessive) instead of 'they' (subject).",
+                "explanation": "THEY = subject pronoun for a group. Good friends like Siti and me — THEY are the ones you can call. 'Them are the ones' is WRONG. Subject = THEY."
               },
               {
                 "num": 7,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject) instead of 'her' (object after preposition). After prepositions, always use object pronouns.",
+                "explanation": "After a PREPOSITION (beside, with, for, to), use OBJECT pronoun. I sat beside HER. 'Beside she' is WRONG. Preposition + object pronoun: beside ME, with HER, for THEM."
               },
               {
                 "num": 8,
-                "answer": "themselves"
+                "answer": "themselves",
+                "hint": "Students write 'them' (object) instead of 'themselves' (reflexive). 'Be them' is wrong.",
+                "explanation": "THEMSELVES = reflexive pronoun for they/them. They can be THEMSELVES = be their true selves, without pretending. Use THEMSELVES when the subject (they) and object are the same people."
               }
             ]
           }
@@ -26950,23 +28162,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "compassion"
+                "answer": "compassion",
+                "hint": "The clue 'genuine care and understanding for another person's feelings and difficulties' = compassion.",
+                "explanation": "COMPASSION = a deep feeling of care and concern for someone who is suffering. A friend with COMPASSION understands how you feel and wants to help."
               },
               {
                 "num": 2,
-                "answer": "loyal"
+                "answer": "loyal",
+                "hint": "The clue 'stays by your side even when things are hard and does not abandon you' = loyal.",
+                "explanation": "LOYAL = remaining faithful and supportive to someone, especially in difficult times. A LOYAL friend does not leave when things get hard."
               },
               {
                 "num": 3,
-                "answer": "sincere"
+                "answer": "sincere",
+                "hint": "The clue 'tells you the truth kindly, rather than just saying what you want to hear' = sincere.",
+                "explanation": "SINCERE = genuine and honest, saying what you truly mean. A SINCERE friend tells you the truth even when it is uncomfortable to hear."
               },
               {
                 "num": 4,
-                "answer": "forgive"
+                "answer": "forgive",
+                "hint": "The clue 'move forward, keeps the friendship alive' after arguments = forgive.",
+                "explanation": "FORGIVE = stop feeling angry with someone for something they did wrong. The ability to FORGIVE each other is what keeps friendships strong after arguments."
               },
               {
                 "num": 5,
-                "answer": "bond"
+                "answer": "bond",
+                "hint": "The clue 'strong ___ of trust and shared experiences' = bond.",
+                "explanation": "A BOND = a strong connection or link between people. A BOND of trust = a deep connection built over time through shared experiences and mutual care."
               }
             ]
           }
@@ -27477,35 +28699,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "and"
+                "answer": "and",
+                "hint": "Students write 'but' (contrast) instead of 'and' (addition). Both events happened together, not in contrast.",
+                "explanation": "AND = joins two things happening together. Thunder rumbled AND lightning lit up the sky = both things happened at the same time. AND = addition."
               },
               {
                 "num": 2,
-                "answer": "but"
+                "answer": "but",
+                "hint": "Students write 'and' (addition) instead of 'but' (unexpected contrast). The wind turning umbrellas inside out is the unexpected opposite result.",
+                "explanation": "BUT = contrast or unexpected result. We brought umbrellas BUT the wind turned them inside out = the unexpected opposite happened. BUT = surprise contrast."
               },
               {
                 "num": 3,
-                "answer": "so"
+                "answer": "so",
+                "hint": "Students write 'and' (addition) instead of 'so' (result). SO shows a cause → result relationship.",
+                "explanation": "SO = result or consequence. The drain overflowed, SO the road flooded = the flooding was the RESULT of the drain. SO = and as a result of that."
               },
               {
                 "num": 4,
-                "answer": "because"
+                "answer": "because",
+                "hint": "Students write 'so' (result) instead of 'because' (reason). BECAUSE = the reason for the action.",
+                "explanation": "BECAUSE = the reason. Children rushed inside BECAUSE they were afraid = BECAUSE tells us WHY they rushed in. BECAUSE = gives the reason."
               },
               {
                 "num": 5,
-                "answer": "although"
+                "answer": "although",
+                "hint": "Students write 'because' (reason) instead of 'although' (contrast). ALTHOUGH = despite the difficult condition.",
+                "explanation": "ALTHOUGH = despite the fact that. ALTHOUGH the rain was heavy, Father went out = these two facts contrast. ALTHOUGH = even though something is difficult, the other thing still happened."
               },
               {
                 "num": 6,
-                "answer": "or"
+                "answer": "or",
+                "hint": "Students write 'and' (both options) instead of 'or' (one of the two). These are alternative choices, not things to do together.",
+                "explanation": "OR = a choice between two options. Wait for the rain OR take a taxi = choose one. AND would mean doing both. OR = alternative choice."
               },
               {
                 "num": 7,
-                "answer": "since"
+                "answer": "since",
+                "hint": "Students write 'although' or 'because' instead of 'since' (causal/temporal: from that point until now).",
+                "explanation": "SINCE = from a past moment up to now, OR because of an ongoing background reason. SINCE the storm began = from the moment the storm started until now, the sky has stayed dark."
               },
               {
                 "num": 8,
-                "answer": "unless"
+                "answer": "unless",
+                "hint": "Students write 'if' instead of 'unless'. IF the rain stops = the match continues. UNLESS the rain stops = the match is cancelled (if it does NOT stop).",
+                "explanation": "UNLESS = if not. The match will be cancelled UNLESS the rain stops = it will be cancelled IF the rain does NOT stop. UNLESS = negative condition."
               }
             ]
           }
@@ -27528,23 +28766,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "forecast"
+                "answer": "forecast",
+                "hint": "The clue 'warns of strong winds and heavy rain before a storm' = a weather prediction = forecast.",
+                "explanation": "A FORECAST = a prediction of what the weather will be. The weather FORECAST warns us of coming storms so we can prepare."
               },
               {
                 "num": 2,
-                "answer": "gust"
+                "answer": "gust",
+                "hint": "The clue 'sudden ___ of wind can bend trees' = a sudden strong burst of wind = gust.",
+                "explanation": "A GUST (of wind) = a sudden, strong burst of wind. A GUST can bend small trees and knock over lightweight objects."
               },
               {
                 "num": 3,
-                "answer": "drench"
+                "answer": "drench",
+                "hint": "The clue 'caught outside within seconds... even under an umbrella' = soaked completely = drench.",
+                "explanation": "DRENCH = soak something or someone completely with water. Heavy tropical rain can DRENCH you in seconds even if you have an umbrella."
               },
               {
                 "num": 4,
-                "answer": "shelter"
+                "answer": "shelter",
+                "hint": "The clue 'find ___ — a covered area away from trees and open fields' = a place of protection = shelter.",
+                "explanation": "SHELTER = a covered place that provides protection from the rain, wind or sun. During a storm, find SHELTER in a covered area away from trees."
               },
               {
                 "num": 5,
-                "answer": "visibility"
+                "answer": "visibility",
+                "hint": "The clue 'reduces ___, making it difficult for drivers to see clearly' = the ability to see = visibility.",
+                "explanation": "VISIBILITY = how far or clearly you can see. Heavy rain reduces VISIBILITY = you cannot see very far ahead. Low VISIBILITY makes driving dangerous."
               }
             ]
           }
@@ -28059,35 +29307,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "is cleaned"
+                "answer": "is cleaned",
+                "hint": "Students write 'is cleaning' (active) instead of 'is cleaned' (passive). The engine does not clean itself — people clean it.",
+                "explanation": "IS + past participle = present simple passive. The engine IS CLEANED = someone cleans it. Passive: IS/ARE + past participle. Rule: receiver + IS/ARE + pp."
               },
               {
                 "num": 2,
-                "answer": "are trained"
+                "answer": "are trained",
+                "hint": "Students write 'is trained' (singular) instead of 'are trained' (plural). 'All firefighters' = plural → ARE.",
+                "explanation": "ARE + past participle = present simple passive for PLURAL. All firefighters ARE TRAINED = they receive training (plural subject). ARE for plural; IS for singular. Rule: plural + ARE + pp."
               },
               {
                 "num": 3,
-                "answer": "was built"
+                "answer": "was built",
+                "hint": "Students write 'were built' (plural past) instead of 'was built' (singular past).",
+                "explanation": "WAS + past participle = past simple passive for SINGULAR. This station WAS BUILT in 1987 = someone built it then. Singular + WAS + pp. Rule: singular + WAS; plural + WERE."
               },
               {
                 "num": 4,
-                "answer": "were rescued"
+                "answer": "were rescued",
+                "hint": "Students write 'was rescued' (singular past) instead of 'were rescued' (plural past).",
+                "explanation": "WERE + past participle = past simple passive for PLURAL. Three people WERE RESCUED = the crew rescued them. Plural + WERE + pp. Rule: plural past passive = WERE + pp."
               },
               {
                 "num": 5,
-                "answer": "has been updated"
+                "answer": "has been updated",
+                "hint": "Students write 'have been updated' (plural) instead of 'has been updated' (singular).",
+                "explanation": "HAS BEEN + past participle = present perfect passive for SINGULAR. The manual HAS BEEN UPDATED = it was updated at some point(s) and is relevant now. Singular = HAS BEEN."
               },
               {
                 "num": 6,
-                "answer": "have been installed"
+                "answer": "have been installed",
+                "hint": "Students write 'has been installed' (singular) instead of 'have been installed' (plural).",
+                "explanation": "HAVE BEEN + past participle = present perfect passive for PLURAL. New detectors HAVE BEEN INSTALLED = they were installed (from past to now). Plural = HAVE BEEN."
               },
               {
                 "num": 7,
-                "answer": "is being repaired"
+                "answer": "is being repaired",
+                "hint": "Students write 'is repaired' (simple present passive) instead of 'is being repaired' (continuous passive, right now).",
+                "explanation": "IS BEING + past participle = present continuous passive. The hose IS BEING REPAIRED = it is being repaired right now. Rule: IS/ARE + BEING + pp = happening now (passive)."
               },
               {
                 "num": 8,
-                "answer": "was being tested"
+                "answer": "was being tested",
+                "hint": "Students write 'was tested' (simple past passive, completed) instead of 'was being tested' (past continuous passive, ongoing when interrupted).",
+                "explanation": "WAS BEING + past participle = past continuous passive. The truck WAS BEING TESTED (ongoing) when the alarm sounded (interruption). Rule: WAS/WERE + BEING + pp = ongoing past passive."
               }
             ]
           }
@@ -28110,23 +29374,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "personnel"
+                "answer": "personnel",
+                "hint": "The clue 'most highly trained ___ in the world' = the people who work there = personnel.",
+                "explanation": "PERSONNEL = the people who work in an organisation. SCDF PERSONNEL = the firefighters and staff who work for SCDF."
               },
               {
                 "num": 2,
-                "answer": "simulate"
+                "answer": "simulate",
+                "hint": "The clue 'to ___ a fire emergency... without any real danger' = create a realistic copy of = simulate.",
+                "explanation": "SIMULATE = create a realistic copy or model of a situation for training purposes. Firefighters SIMULATE emergencies to train safely."
               },
               {
                 "num": 3,
-                "answer": "hazard"
+                "answer": "hazard",
+                "hint": "The clue 'anything that could start or spread a fire' = a source of danger = hazard.",
+                "explanation": "A HAZARD = a source of potential danger. An overloaded electrical socket is a fire HAZARD = it could cause a fire."
               },
               {
                 "num": 4,
-                "answer": "evacuate"
+                "answer": "evacuate",
+                "hint": "The clue 'leave a building quickly and safely using stairways' = evacuate.",
+                "explanation": "EVACUATE = leave a building or area quickly because of danger. During a fire, you must EVACUATE = exit the building immediately using the staircase."
               },
               {
                 "num": 5,
-                "answer": "apparatus"
+                "answer": "apparatus",
+                "hint": "The clue 'specialist ___ such as breathing equipment, hydraulic cutting tools and hoses' = specialised equipment = apparatus.",
+                "explanation": "APPARATUS = specialised equipment or tools for a particular purpose. Firefighters use specialist APPARATUS including breathing gear and hydraulic tools."
               }
             ]
           }
@@ -28636,35 +29910,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'at' (general location) instead of 'in' (inside an enclosed space).",
+                "explanation": "IN = inside an enclosed space. We played IN the void deck = inside that covered area. IN is for spaces you can be inside of."
               },
               {
                 "num": 2,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' (enclosed space) instead of 'on' (surface contact).",
+                "explanation": "ON = on top of / touching a surface. The top is placed ON the concrete surface = it sits on top of it. ON is for surfaces."
               },
               {
                 "num": 3,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' (enclosed) instead of 'at' (specific point). AT is used for specific points, not enclosed spaces.",
+                "explanation": "AT = a specific point or location. We met AT the corner of the field = at that exact spot. AT is for specific places or points."
               },
               {
                 "num": 4,
-                "answer": "over"
+                "answer": "over",
+                "hint": "Students write 'above' (not in word box) or 'through'. OVER = passing above and across.",
+                "explanation": "OVER = above something, moving from one side to the other. The kite flew OVER the tree = it passed above the tree. OVER shows crossing movement above."
               },
               {
                 "num": 5,
-                "answer": "under"
+                "answer": "under",
+                "hint": "Students write 'behind' (at the back) instead of 'under' (below). The bag is below the bench, not at the back of it.",
+                "explanation": "UNDER = below something that is above you. The bag is UNDER the bench = below the seat of the bench. UNDER means something is directly above you."
               },
               {
                 "num": 6,
-                "answer": "through"
+                "answer": "through",
+                "hint": "Students write 'over' (above) instead of 'through' (passing inside). The rope passes inside the gap, not over it.",
+                "explanation": "THROUGH = entering at one side and coming out the other. The rope stretched THROUGH the gap = it passed inside and came out the other side."
               },
               {
                 "num": 7,
-                "answer": "into"
+                "answer": "into",
+                "hint": "Students write 'in' (static location) instead of 'into' (movement entering). INTO shows the direction of movement, not a static position.",
+                "explanation": "INTO = movement from outside to inside. He ran INTO the courtyard = he was outside, then moved inside. IN = where you are; INTO = the direction you move."
               },
               {
                 "num": 8,
-                "answer": "behind"
+                "answer": "behind",
+                "hint": "Students write 'under' (below) instead of 'behind' (at the back). The player is at the back of the line, not below it.",
+                "explanation": "BEHIND = at the back of something. Stand BEHIND the line = stand at the back, further away. BEHIND is about being at the rear or back of something."
               }
             ]
           }
@@ -28687,23 +29977,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "heritage"
+                "answer": "heritage",
+                "hint": "The clue 'played for generations and connect us to our roots' = cultural legacy = heritage.",
+                "explanation": "HERITAGE = traditions and practices passed down through generations. These games are part of Singapore's cultural HERITAGE = they belong to our shared history."
               },
               {
                 "num": 2,
-                "answer": "traditional"
+                "answer": "traditional",
+                "hint": "The clue 'have been played for generations' = old and long-established = traditional.",
+                "explanation": "TRADITIONAL = following practices that have been done for a long time. TRADITIONAL games are ones passed down from older generations."
               },
               {
                 "num": 3,
-                "answer": "opponent"
+                "answer": "opponent",
+                "hint": "The clue 'jump over a rope held by the ___' = the other player in the game = opponent.",
+                "explanation": "An OPPONENT = the other player or team you are playing against. In zero-point, the OPPONENT holds the rope for you to jump over."
               },
               {
                 "num": 4,
-                "answer": "agility"
+                "answer": "agility",
+                "hint": "The clue 'move quickly and change direction without losing balance' = agility.",
+                "explanation": "AGILITY = the ability to move quickly and change direction smoothly. Chapteh tests your AGILITY — you must react fast and shift your body with control."
               },
               {
                 "num": 5,
-                "answer": "retrieve"
+                "answer": "retrieve",
+                "hint": "The clue 'pick up the cloth bags to prepare for the next throw' = retrieve.",
+                "explanation": "RETRIEVE = go and get something after it has been used or lost. Players RETRIEVE the five stones bags = they pick them up to use again."
               }
             ]
           }
@@ -29218,35 +30518,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "I"
+                "answer": "I",
+                "hint": "Students write 'Me' (object form). I is the SUBJECT pronoun — it does the action.",
+                "explanation": "I = subject pronoun — it DOES the action. I spotted the mantis. ME = object — it receives the action ('The mantis surprised ME'). SUBJECT = I; OBJECT = ME."
               },
               {
                 "num": 2,
-                "answer": "me"
+                "answer": "me",
+                "hint": "Students write 'I' (subject) instead of 'me' (object after a verb).",
+                "explanation": "After a verb (asked), use OBJECT pronoun. My teacher asked ME = ME is what the verb 'asked' points to. 'My teacher asked I' is WRONG. After verbs: use ME, HIM, HER, THEM."
               },
               {
                 "num": 3,
-                "answer": "he"
+                "answer": "he",
+                "hint": "Students write 'him' (object form) instead of 'he' (subject).",
+                "explanation": "HE = subject pronoun for a male. HE knows the names = HE does the action. 'Him knows' is WRONG. HE = subject; HIM = object (e.g., 'I told HIM')."
               },
               {
                 "num": 4,
-                "answer": "him"
+                "answer": "him",
+                "hint": "Students write 'he' (subject) instead of 'him' (object after a verb).",
+                "explanation": "After a verb (ask), use OBJECT pronoun. I always ask HIM for help = HIM is the receiver of asking. 'I ask he' is WRONG. After verbs: HIM, not HE."
               },
               {
                 "num": 5,
-                "answer": "she"
+                "answer": "she",
+                "hint": "Students write 'her' (object form) instead of 'she' (subject).",
+                "explanation": "SHE = subject pronoun for a female. SHE kept a pet stick insect = SHE does the action. 'Her kept' is WRONG. SHE = subject; HER = object (e.g., 'I saw HER')."
               },
               {
                 "num": 6,
-                "answer": "her"
+                "answer": "her",
+                "hint": "Students write 'she' (subject) instead of 'her' (object after a verb).",
+                "explanation": "After a verb (surprised), use OBJECT pronoun. The insect surprised HER = HER is the receiver of 'surprised'. 'Surprised she' is WRONG. After verbs: HER, not SHE."
               },
               {
                 "num": 7,
-                "answer": "they"
+                "answer": "they",
+                "hint": "Students write 'them' (object form) instead of 'they' (subject).",
+                "explanation": "THEY = subject pronoun for a group. THEY can carry fifty times their weight = THEY do the action. 'Them can carry' is WRONG. THEY = subject; THEM = object."
               },
               {
                 "num": 8,
-                "answer": "them"
+                "answer": "them",
+                "hint": "Students write 'they' (subject) instead of 'them' (object after a verb).",
+                "explanation": "After a verb (studied), use OBJECT pronoun. Scientists studied THEM = THEM is the receiver of 'studied'. 'Studied they' is WRONG. After verbs: THEM, not THEY."
               }
             ]
           }
@@ -29269,23 +30585,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "camouflage"
+                "answer": "camouflage",
+                "hint": "The clue 'blending in with surroundings to hide' = camouflage.",
+                "explanation": "CAMOUFLAGE = the ability to blend in with surroundings so as not to be seen. The stick insect uses CAMOUFLAGE = it looks like a twig so predators cannot spot it."
               },
               {
                 "num": 2,
-                "answer": "predator"
+                "answer": "predator",
+                "hint": "The clue 'an animal that hunts and eats other animals' = predator.",
+                "explanation": "A PREDATOR = an animal that hunts and eats other animals. Birds and lizards are PREDATORS of insects = they catch and eat them."
               },
               {
                 "num": 3,
-                "answer": "antennae"
+                "answer": "antennae",
+                "hint": "The clue 'long feelers on their heads — to sense vibrations, smell food and communicate' = antennae.",
+                "explanation": "ANTENNAE = the long, thin feelers on an insect's head used to sense the world. Insects use their ANTENNAE to detect smells, sounds and vibrations."
               },
               {
                 "num": 4,
-                "answer": "larvae"
+                "answer": "larvae",
+                "hint": "The clue 'worm-like young that hatch from eggs before growing into their adult form' = larvae.",
+                "explanation": "LARVAE = the worm-like young of insects that hatch from eggs. Caterpillars are the LARVAE of butterflies. LARVA (singular) → LARVAE (plural)."
               },
               {
                 "num": 5,
-                "answer": "habitat"
+                "answer": "habitat",
+                "hint": "The clue 'ideal ___ for many insect species to feed, breed and shelter' = natural home = habitat.",
+                "explanation": "A HABITAT = the natural environment where a living thing normally lives. A healthy garden is the ideal HABITAT for insects to feed, breed and shelter."
               }
             ]
           }
@@ -29795,35 +31121,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "when"
+                "answer": "when",
+                "hint": "Students write 'while' (ongoing duration) instead of 'when' (at a specific moment).",
+                "explanation": "WHEN = at the moment something happens (a point in time). The rooster crows WHEN the sun rises = at that specific moment. WHEN = one event triggers another."
               },
               {
                 "num": 2,
-                "answer": "while"
+                "answer": "while",
+                "hint": "Students write 'when' (moment trigger) instead of 'while' (same ongoing period).",
+                "explanation": "WHILE = during the same period as another ongoing action. Father mends WHILE Mother tends = both doing their tasks at the same time. WHILE = two ongoing actions together."
               },
               {
                 "num": 3,
-                "answer": "if"
+                "answer": "if",
+                "hint": "Students write 'when' (certain event) instead of 'if' (uncertain conditional). The weather staying dry is uncertain.",
+                "explanation": "IF = uncertain condition. IF the weather stays dry = it might stay dry or it might not. WHEN = certain event. IF + simple present, simple future."
               },
               {
                 "num": 4,
-                "answer": "as soon as"
+                "answer": "as soon as",
+                "hint": "Students write 'when' (at the moment) instead of 'as soon as' (immediately, with emphasis on speed).",
+                "explanation": "AS SOON AS = immediately when something happens (emphasis on speed). AS SOON AS the milk is ready, she pours it = the moment it is ready, she acts immediately."
               },
               {
                 "num": 5,
-                "answer": "until"
+                "answer": "until",
+                "hint": "Students write 'before' (earlier than) instead of 'until' (continuously up to that point). The watering continues all the way to the rainy season.",
+                "explanation": "UNTIL = continue doing something all the way up to a point. Water the crops UNTIL the rainy season = keep watering right up to that point. UNTIL = ongoing action up to a limit."
               },
               {
                 "num": 6,
-                "answer": "before"
+                "answer": "before",
+                "hint": "Students write 'after' (later than) instead of 'before' (earlier than). The feeding comes first, then school.",
+                "explanation": "BEFORE = earlier in time. The children feed the chickens BEFORE they leave for school = the feeding happens first, then they go to school. BEFORE = the first action."
               },
               {
                 "num": 7,
-                "answer": "after"
+                "answer": "after",
+                "hint": "Students write 'before' (earlier than) instead of 'after' (following). The meal comes after the harvest is done.",
+                "explanation": "AFTER = later in time, following another event. AFTER the harvest is complete, they gather = the meal comes after the harvest finishes. AFTER = the second action."
               },
               {
                 "num": 8,
-                "answer": "as"
+                "answer": "as",
+                "hint": "Students write 'when' (point trigger) instead of 'as' (gradual simultaneous process). The sun setting is gradual, not a single point.",
+                "explanation": "AS = happening at the same time as a gradual process. AS the sun SETS = while it is setting (gradual). AS shows two gradual things happening together. Different from WHEN (a single moment)."
               }
             ]
           }
@@ -29846,23 +31188,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "season"
+                "answer": "season",
+                "hint": "The clue 'knowing when to plant, water and gather' = the natural cycle of time on a farm = season.",
+                "explanation": "A SEASON = a period of time in the natural yearly cycle with specific weather and conditions. Farmers follow the SEASON = they know which activities belong to which part of the year."
               },
               {
                 "num": 2,
-                "answer": "nurture"
+                "answer": "nurture",
+                "hint": "The clue 'from tiny seedlings into strong, healthy produce by giving them the right care' = nurture.",
+                "explanation": "NURTURE = help something grow by giving it care, attention and the right conditions. Farmers NURTURE their plants = tend to them carefully from seedling to harvest."
               },
               {
                 "num": 3,
-                "answer": "fertile"
+                "answer": "fertile",
+                "hint": "The clue 'rich in nutrients and able to support healthy root growth' = fertile.",
+                "explanation": "FERTILE = (of soil) rich in nutrients and able to support healthy plant growth. FERTILE soil = the best kind for farming — plants grow well and produce a lot."
               },
               {
                 "num": 4,
-                "answer": "livestock"
+                "answer": "livestock",
+                "hint": "The clue 'chickens, cows and pigs — provide eggs, milk and meat' = livestock.",
+                "explanation": "LIVESTOCK = farm animals kept for their products or for food. Chickens, cows and pigs are all examples of LIVESTOCK kept on a working farm."
               },
               {
                 "num": 5,
-                "answer": "harvest"
+                "answer": "harvest",
+                "hint": "The clue 'fruits, vegetables and grains that are ready to be sold or stored' after the growing cycle = harvest.",
+                "explanation": "A HARVEST = the gathering of crops at the end of the growing season. The farmer gathers the HARVEST = all the crops that are ripe and ready."
               }
             ]
           }
@@ -30373,35 +31725,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "reads"
+                "answer": "reads",
+                "hint": "Students write 'read' (base or past) instead of 'reads' (third person singular present).",
+                "explanation": "Regular habit = simple present. Aisha (singular) → READS every week. Add -S for he/she/it in simple present. 'Aisha read every week' is WRONG — that is ambiguous past/present."
               },
               {
                 "num": 2,
-                "answer": "reading"
+                "answer": "reading",
+                "hint": "Students write 'to read' (infinitive) instead of the gerund after 'enjoys'.",
+                "explanation": "ENJOY + verb-ing (gerund). She enjoys READING = the -ing form. NEVER 'enjoys to read' — after ENJOY, always use -ing. LIKE/LOVE/ENJOY + verb-ing."
               },
               {
                 "num": 3,
-                "answer": "read"
+                "answer": "read",
+                "hint": "Students write 'readed' not knowing 'read' is irregular with identical past and present spellings.",
+                "explanation": "READ is an irregular verb: read (present, /riːd/) → READ (past, /rɛd/). Same spelling — different pronunciation! 'Last Saturday' = past → use READ (pronounced 'red'). NEVER 'readed'."
               },
               {
                 "num": 4,
-                "answer": "was reading"
+                "answer": "was reading",
+                "hint": "Students write 'read' (simple past) missing the 'while' ongoing signal.",
+                "explanation": "'While she ___' = ongoing past background action = past continuous. She WAS READING the final chapter when the lights flickered = she was in the middle of it."
               },
               {
                 "num": 5,
-                "answer": "were reading"
+                "answer": "were reading",
+                "hint": "Students write 'was reading' (singular) instead of 'were reading' (plural).",
+                "explanation": "Her brothers = plural (more than one). Past continuous plural → WERE READING (not 'was reading'). WERE for plural; WAS for singular. They were doing it at the same past moment."
               },
               {
                 "num": 6,
-                "answer": "to read"
+                "answer": "to read",
+                "hint": "Students write 'reading' (also valid for 'continue', but 'to read' is in the word_box). Only 'to read' is available in the word_box.",
+                "explanation": "CONTINUE + to + base verb = one option. She continued TO READ without missing a word. 'Continue' can be followed by BOTH 'to read' OR 'reading' — here we use 'to read' from the word box."
               },
               {
                 "num": 7,
-                "answer": "read"
+                "answer": "read",
+                "hint": "Students write 'reads' (third person present, adds -s) after 'to', forgetting that after 'to' the base form is always used.",
+                "explanation": "After 'TO', ALWAYS use the BASE form (no -s, no -ing, no -ed). To READ fifty books — never 'to reads' or 'to reading'. This is the infinitive = to + base verb."
               },
               {
                 "num": 8,
-                "answer": "is reading"
+                "answer": "is reading",
+                "hint": "Students write 'reads' (simple present habit) missing the 'right now' signal for present continuous.",
+                "explanation": "'Right now' = present continuous. Aisha (singular) → IS READING a book right now. 'Reads' would mean she reads regularly as a habit. 'IS READING' = doing it at this moment."
               }
             ]
           }
@@ -30424,23 +31792,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "browse"
+                "answer": "browse",
+                "hint": "The clue 'picking up books that catch their eye before deciding what to borrow' = browse.",
+                "explanation": "BROWSE = look casually at items without a specific goal. You BROWSE the shelves = you look along them, picking up books that interest you without a fixed plan."
               },
               {
                 "num": 2,
-                "answer": "catalogue"
+                "answer": "catalogue",
+                "hint": "The clue 'a searchable list of every book and resource available' = catalogue.",
+                "explanation": "A CATALOGUE = a complete searchable list of all available items. A library CATALOGUE = the system that lists every book and tells you where to find it."
               },
               {
                 "num": 3,
-                "answer": "reference"
+                "answer": "reference",
+                "hint": "The clue 'encyclopaedias and atlases... cannot be borrowed... used inside the library' = reference section.",
+                "explanation": "A REFERENCE section = the part of a library containing books like encyclopaedias that cannot be borrowed and must be used inside. You go there to look up specific information."
               },
               {
                 "num": 4,
-                "answer": "fiction"
+                "answer": "fiction",
+                "hint": "The clue 'stories that are made up and not based on real events' = fiction.",
+                "explanation": "FICTION = stories that are made up and imaginary (not real). Novels, fairy tales and adventure stories are FICTION. Opposite: non-fiction = true or factual."
               },
               {
                 "num": 5,
-                "answer": "overdue"
+                "answer": "overdue",
+                "hint": "The clue 'not returned by the due date... a small fine may be charged' = overdue.",
+                "explanation": "OVERDUE = not returned or completed by the required date. A library book is OVERDUE = it should have been returned but has not been yet. A fine is charged as a reminder."
               }
             ]
           }
@@ -30950,35 +32328,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "immediately"
+                "answer": "immediately",
+                "hint": "Students write 'soon' (in a short while) instead of 'immediately' (at once, with no delay at all).",
+                "explanation": "IMMEDIATELY = at once, with no delay whatsoever. The team responded IMMEDIATELY = the instant they got the call, they moved. SOON = in a short while; IMMEDIATELY = right now."
               },
               {
                 "num": 2,
-                "answer": "already"
+                "answer": "already",
+                "hint": "Students write 'yet' (expected but not done) instead of 'already' (done before expected).",
+                "explanation": "ALREADY = done sooner than expected. By the time the doctor arrived, nurses had ALREADY prepared the patient = done before the doctor even got there. ALREADY = sooner than expected."
               },
               {
                 "num": 3,
-                "answer": "yet"
+                "answer": "yet",
+                "hint": "Students write 'still' (ongoing state) instead of 'yet' (expected but not completed). YET is used in negatives.",
+                "explanation": "YET = expected to happen but has not happened so far (used in negatives/questions). 'Has not collected YET' = we expect it to come but it has not come. YET is used with negatives."
               },
               {
                 "num": 4,
-                "answer": "still"
+                "answer": "still",
+                "hint": "Students write 'yet' (expected but not done, used in negatives) instead of 'still' (ongoing positive state).",
+                "explanation": "STILL = continuing without stopping into the present moment. The postman is STILL making rounds = he started and he is continuing now. STILL = an ongoing action."
               },
               {
                 "num": 5,
-                "answer": "recently"
+                "answer": "recently",
+                "hint": "Students write 'soon' (in the future) instead of 'recently' (in the near past). 'Two weeks ago' = past, close to now.",
+                "explanation": "RECENTLY = a short time ago, in the near past. A centre was RECENTLY opened = it opened just two weeks ago = not long ago. SOON = in the near future; RECENTLY = in the near past."
               },
               {
                 "num": 6,
-                "answer": "soon"
+                "answer": "soon",
+                "hint": "Students write 'recently' (near past) instead of 'soon' (near future). 'Within the next two days' = future.",
+                "explanation": "SOON = in a short while, in the near future. The streetlight will be fixed SOON = it will happen within two days. RECENTLY = near past; SOON = near future."
               },
               {
                 "num": 7,
-                "answer": "finally"
+                "answer": "finally",
+                "hint": "Students write 'eventually' (also correct but less emphatic for a defined search period) instead of 'finally' (emphasises the end of a specific process).",
+                "explanation": "FINALLY = at last, after a long time or process. After THREE WEEKS of searching, they FINALLY found it = it happened after everything else, at the end of the process."
               },
               {
                 "num": 8,
-                "answer": "eventually"
+                "answer": "eventually",
+                "hint": "Students write 'finally' (end of a specific task) instead of 'eventually' (gradual acceptance over time). EVENTUALLY suggests a slow, natural change.",
+                "explanation": "EVENTUALLY = after a long time, through gradual change. Residents EVENTUALLY accepted the bins = slowly, over time, they came to accept them. FINALLY = end of a specific task; EVENTUALLY = slow natural change."
               }
             ]
           }
@@ -31001,23 +32395,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "paramedic"
+                "answer": "paramedic",
+                "hint": "The clue 'trained medical worker who responds to emergencies before a doctor arrives, giving first aid' = paramedic.",
+                "explanation": "A PARAMEDIC = a trained medical worker who gives emergency treatment before or instead of a doctor. PARAMEDICS arrive first at emergencies and stabilise patients."
               },
               {
                 "num": 2,
-                "answer": "patrol"
+                "answer": "patrol",
+                "hint": "The clue 'walk around the neighbourhood at regular hours to prevent crime' = patrol.",
+                "explanation": "PATROL = walk regularly around an area to watch for problems and keep people safe. Police officers PATROL the neighbourhood = they move through it regularly to prevent crime."
               },
               {
                 "num": 3,
-                "answer": "volunteer"
+                "answer": "volunteer",
+                "hint": "The clue 'help others without pay' = volunteer.",
+                "explanation": "To VOLUNTEER = offer your time and energy to help others without being paid. People who VOLUNTEER at nursing homes or clean parks choose to do it freely."
               },
               {
                 "num": 4,
-                "answer": "dedicate"
+                "answer": "dedicate",
+                "hint": "The clue 'making the community a better place — giving their efforts fully to a goal' = dedicate.",
+                "explanation": "DEDICATE = commit yourself fully to a cause or person. They DEDICATE themselves to the community = they give their time and energy wholeheartedly to help others."
               },
               {
                 "num": 5,
-                "answer": "essential"
+                "answer": "essential",
+                "hint": "The clue 'necessary to a well-functioning society' = essential.",
+                "explanation": "ESSENTIAL = absolutely necessary, cannot be done without. Community helpers are ESSENTIAL to society = society would not function properly without them."
               }
             ]
           }
@@ -31529,35 +32933,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "as fast as"
+                "answer": "as fast as",
+                "hint": "Students write 'faster than' (unequal comparison) instead of 'as fast as' (equal).",
+                "explanation": "AS + adj + AS = equal comparison. The otter swims AS FAST AS a champion swimmer = the same speed. 'Faster than' = one is faster; 'as fast as' = both are the same speed."
               },
               {
                 "num": 2,
-                "answer": "the smallest"
+                "answer": "the smallest",
+                "hint": "Students write 'the smaller' (comparative, for two items) instead of 'the smallest' (superlative, for three or more).",
+                "explanation": "THE + adj + -EST = superlative (comparing THREE or more). Of all the animals, this one IS THE SMALLEST = the most small of all. THE SMALLEST = the one that beats all the rest."
               },
               {
                 "num": 3,
-                "answer": "bigger than"
+                "answer": "bigger than",
+                "hint": "Students write 'the biggest' (superlative) instead of 'bigger than' (comparative between two).",
+                "explanation": "adj + -ER + THAN = comparative (comparing two things). The adult is BIGGER THAN the young one = comparing just these two. BIGGER THAN = unequal comparison between two."
               },
               {
                 "num": 4,
-                "answer": "not as strong as"
+                "answer": "not as strong as",
+                "hint": "Students write 'weaker than' (acceptable but NOT in word_box) instead of 'not as strong as' (negative equal form).",
+                "explanation": "NOT AS + adj + AS = negative comparison. NOT AS STRONG AS = less strong than. 'He is not as strong as his brother' = his brother is stronger. NOT AS = one falls short of the other."
               },
               {
                 "num": 5,
-                "answer": "far heavier than"
+                "answer": "far heavier than",
+                "hint": "Students write 'heavier than' (correct but lacks intensifier) instead of 'far heavier than' (intensified comparison in word_box).",
+                "explanation": "FAR + comparative = much more than. FAR HEAVIER THAN = a great deal heavier. FAR makes the comparison stronger. 'Very heavier' is WRONG — use FAR with comparatives."
               },
               {
                 "num": 6,
-                "answer": "the bigger of the two"
+                "answer": "the bigger of the two",
+                "hint": "Students write 'the biggest' (superlative, for three+) instead of 'the bigger of the two' (comparative for exactly two).",
+                "explanation": "THE + comparative + OF THE TWO = when choosing between exactly two. THE BIGGER OF THE TWO = the larger one when there are only two options. Never use superlative for just two things."
               },
               {
                 "num": 7,
-                "answer": "weaker and weaker"
+                "answer": "weaker and weaker",
+                "hint": "Students write 'weaker' (single comparative) instead of the progressive form 'weaker and weaker'.",
+                "explanation": "comparative + AND + comparative = progressive change over time. WEAKER AND WEAKER = getting weaker little by little. More and more, faster and faster — this pattern shows gradual change."
               },
               {
                 "num": 8,
-                "answer": "the most dangerous"
+                "answer": "the most dangerous",
+                "hint": "Students write 'most dangerous' (missing 'the') instead of 'the most dangerous' (superlative with THE).",
+                "explanation": "THE MOST + long adjective = superlative. THE MOST DANGEROUS = nothing is more dangerous than this. ALWAYS use THE before 'most + adjective'. 'Most dangerous' without THE is WRONG."
               }
             ]
           }
@@ -31580,23 +33000,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "veterinary"
+                "answer": "veterinary",
+                "hint": "The clue 'trained animal doctors' = veterinary (relating to animal medicine).",
+                "explanation": "VETERINARY = relating to the medical care of animals. A VETERINARY clinic = an animal hospital. A VET (short for veterinarian) = an animal doctor."
               },
               {
                 "num": 2,
-                "answer": "fragile"
+                "answer": "fragile",
+                "hint": "The clue 'easily hurt by sudden movements or loud noises' = fragile.",
+                "explanation": "FRAGILE = easily damaged or broken. Injured animals are FRAGILE = they can be hurt by rough handling. Handle with care — fragile things break easily."
               },
               {
                 "num": 3,
-                "answer": "abandoned"
+                "answer": "abandoned",
+                "hint": "The clue 'left alone without food or shelter by owners who can no longer care for them' = abandoned.",
+                "explanation": "ABANDONED = left alone and without care, especially by an owner. An ABANDONED animal = one that was left behind with no one to look after it."
               },
               {
                 "num": 4,
-                "answer": "release"
+                "answer": "release",
+                "hint": "The clue 'return it back into its natural habitat after recovery' = release.",
+                "explanation": "RELEASE = set free. To RELEASE an animal back into the wild = to let it go so it can live freely in its natural environment."
               },
               {
                 "num": 5,
-                "answer": "sanctuary"
+                "answer": "sanctuary",
+                "hint": "The clue 'a safe haven where they can live out their lives in peace' = sanctuary.",
+                "explanation": "A SANCTUARY = a safe place of refuge and protection. An animal SANCTUARY = a protected space where animals live safely, free from harm."
               }
             ]
           }
@@ -32109,35 +33539,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "every"
+                "answer": "every",
+                "hint": "Students write 'each' (also correct in some contexts) but EVERY emphasises the collective rule applying to ALL without exception.",
+                "explanation": "EVERY + singular noun = each one without exception (rule-like). EVERY passenger must show a pass = there are no exceptions. EVERY emphasises that the rule covers ALL."
               },
               {
                 "num": 2,
-                "answer": "each"
+                "answer": "each",
+                "hint": "Students write 'every' (rule emphasis) instead of 'each' (individual focus). EACH is used when thinking about items one by one.",
+                "explanation": "EACH + singular noun = thinking about items one by one. EACH seat comes with a screen = focusing on individual seats. EACH = one by one; EVERY = the whole group without exception."
               },
               {
                 "num": 3,
-                "answer": "all"
+                "answer": "all",
+                "hint": "Students write 'every' (singular noun required) instead of 'all' (plural noun).",
+                "explanation": "ALL + plural noun = the entire group together. ALL passengers = every single one of them as a group. ALL is followed by PLURAL; EVERY is followed by SINGULAR."
               },
               {
                 "num": 4,
-                "answer": "most"
+                "answer": "most",
+                "hint": "Students write 'all' (every single one) instead of 'most' (the majority). The passage implies some do not arrive two hours early.",
+                "explanation": "MOST = the majority (more than half, but not all). MOST travellers arrive early = most, but not every single one. MOST ≠ ALL. ALL = every one; MOST = the largest part."
               },
               {
                 "num": 5,
-                "answer": "enough"
+                "answer": "enough",
+                "hint": "Students write 'plenty of' (more than enough) instead of 'enough' (just sufficient). The passage is about having the minimum required.",
+                "explanation": "ENOUGH = as much as is needed, not more. Make sure you have ENOUGH time = the right amount to clear security. ENOUGH = sufficient. PLENTY OF = more than enough (surplus)."
               },
               {
                 "num": 6,
-                "answer": "plenty of"
+                "answer": "plenty of",
+                "hint": "Students write 'enough' (just sufficient) instead of 'plenty of' (abundance). The lounge has MORE than enough seating.",
+                "explanation": "PLENTY OF = a large amount, more than enough. The lounge has PLENTY OF seating = many seats, more than needed. PLENTY OF = abundance. Works with both countable and uncountable nouns."
               },
               {
                 "num": 7,
-                "answer": "no"
+                "answer": "no",
+                "hint": "Students write 'none' (pronoun, stands alone) instead of 'no' (adjective before noun). 'No food' = NO + noun. 'None' cannot directly precede a noun.",
+                "explanation": "NO + noun = zero of that thing. There is NO food allowed = not any food at all. NONE = pronoun (stands alone): 'None is allowed.' NO = adjective before a noun: 'NO food'."
               },
               {
                 "num": 8,
-                "answer": "none"
+                "answer": "none",
+                "hint": "Students write 'no' (adjective) instead of 'none' (pronoun). 'None of the bags' = NONE OF (pronoun construction). 'No of the bags' is ungrammatical.",
+                "explanation": "NONE OF + noun phrase = not any of them. NONE of the bags were oversized = not a single one of them. NONE OF = pronoun construction. Compare: NO bags (adjective) vs NONE of the bags (pronoun)."
               }
             ]
           }
@@ -32160,23 +33606,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "departure"
+                "answer": "departure",
+                "hint": "The clue 'check in and drop off luggage before heading to the gate' = departure hall.",
+                "explanation": "DEPARTURE = the act of leaving. A DEPARTURE hall = the area in an airport where passengers check in and start their journey. DEPART = leave; DEPARTURE = the act of leaving."
               },
               {
                 "num": 2,
-                "answer": "runway"
+                "answer": "runway",
+                "hint": "The clue 'the long flat strip where aircraft take off and land' = runway.",
+                "explanation": "A RUNWAY = the long paved strip at an airport where planes take off and land. RUNWAY = the road for planes."
               },
               {
                 "num": 3,
-                "answer": "cockpit"
+                "answer": "cockpit",
+                "hint": "The clue 'at the front of the aircraft, surrounded by hundreds of controls and screens' where pilots sit = cockpit.",
+                "explanation": "The COCKPIT = the front section of a plane where the pilot and co-pilot sit and control the aircraft. Only the flight crew can enter the COCKPIT."
               },
               {
                 "num": 4,
-                "answer": "altitude"
+                "answer": "altitude",
+                "hint": "The clue 'about ten thousand metres above sea level' = altitude (height above the ground).",
+                "explanation": "ALTITUDE = height above sea level, especially of an aircraft. The plane flies at a cruising ALTITUDE of 10,000 metres = that height above the earth."
               },
               {
                 "num": 5,
-                "answer": "turbulence"
+                "answer": "turbulence",
+                "hint": "The clue 'bumps and shaking caused by sudden changes in air movement that rock the aircraft' = turbulence.",
+                "explanation": "TURBULENCE = sudden, irregular air movements that cause a plane to shake and bump. TURBULENCE is normal but can be alarming for nervous flyers."
               }
             ]
           }
@@ -32690,35 +34146,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "must"
+                "answer": "must",
+                "hint": "Students write 'should' (not in word_box) instead of 'must' (strong rule obligation).",
+                "explanation": "MUST = strong obligation (rule or necessity). Students MUST wear goggles = it is a non-negotiable rule. MUST is stronger than 'should'. Breaking this rule is not acceptable."
               },
               {
                 "num": 2,
-                "answer": "need to"
+                "answer": "need to",
+                "hint": "Students write 'must' (stronger obligation) instead of 'need to' (practical necessity). NEED TO is softer — it focuses on what is required to get a good result.",
+                "explanation": "NEED TO = it is necessary to do this (practical requirement). You NEED TO record observations at every stage = you must do this to get complete data. NEED TO focuses on what is required."
               },
               {
                 "num": 3,
-                "answer": "ought to"
+                "answer": "ought to",
+                "hint": "Students write 'must' (strict rule) instead of 'ought to' (recommendation/good practice).",
+                "explanation": "OUGHT TO = should, it is morally right or good practice to do this. Scientists OUGHT TO check their equipment = it is the right thing to do. OUGHT TO is like SHOULD but slightly more formal."
               },
               {
                 "num": 4,
-                "answer": "have to"
+                "answer": "have to",
+                "hint": "Students write 'must' (personal obligation) instead of 'have to' (rule imposed by others — the teacher's rule).",
+                "explanation": "HAVE TO = external obligation, a rule or requirement set by others. Students HAVE TO get permission = the school rule requires it. MUST = personal sense of obligation; HAVE TO = rule from outside."
               },
               {
                 "num": 5,
-                "answer": "is able to"
+                "answer": "is able to",
+                "hint": "Students write 'can' (not in word_box) instead of 'is able to' (same meaning, formal ability).",
+                "explanation": "IS ABLE TO = has the skill/capability to do something. A student IS ABLE TO set up a circuit = she has the skill and knowledge to do it. IS ABLE TO = 'can' (more formal, emphasises achievement of ability)."
               },
               {
                 "num": 6,
-                "answer": "used to"
+                "answer": "used to",
+                "hint": "Students write 'would' (repeated past action) instead of 'used to' (past state that no longer exists). 'Used to have' = a state in the past, now changed.",
+                "explanation": "USED TO = a past habit or state that is no longer true now. The lab USED TO have only one microscope = in the past it had one, but now it has eight. USED TO describes past situations that have changed."
               },
               {
                 "num": 7,
-                "answer": "had better"
+                "answer": "had better",
+                "hint": "Students write 'should' (not in word_box) instead of 'had better' (stronger, implied warning/consequence).",
+                "explanation": "HAD BETTER = strong advice with an implied warning. You HAD BETTER write down your hypothesis = if you don't, something bad will happen (the teacher won't accept the report). HAD BETTER is stronger than 'should'."
               },
               {
                 "num": 8,
-                "answer": "would rather"
+                "answer": "would rather",
+                "hint": "Students write 'prefer' (not in word_box) instead of 'would rather' (same meaning, modal preference).",
+                "explanation": "WOULD RATHER + base verb = preference. Students WOULD RATHER do an experiment THAN copy notes = they prefer the experiment. WOULD RATHER ... THAN ... = choosing between two options."
               }
             ]
           }
@@ -32741,23 +34213,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "hypothesis"
+                "answer": "hypothesis",
+                "hint": "The clue 'a prediction about what will happen based on what they already know' = hypothesis.",
+                "explanation": "A HYPOTHESIS = a scientific prediction made before an experiment. You think: 'I BELIEVE that...' — that is your HYPOTHESIS. It may be right or wrong; the experiment tests it."
               },
               {
                 "num": 2,
-                "answer": "experiment"
+                "answer": "experiment",
+                "hint": "The clue 'design and conduct an ___ to test this prediction' = experiment.",
+                "explanation": "An EXPERIMENT = a scientific test carried out to discover or prove something. Scientists design EXPERIMENTS to test whether their hypothesis is correct."
               },
               {
                 "num": 3,
-                "answer": "observe"
+                "answer": "observe",
+                "hint": "The clue 'carefully ___ what is happening and write down every detail' = observe.",
+                "explanation": "OBSERVE = watch carefully and notice what is happening. Scientists OBSERVE during an experiment = they look, listen and notice every detail."
               },
               {
                 "num": 4,
-                "answer": "variable"
+                "answer": "variable",
+                "hint": "The clue 'change only one ___ at a time — for example, only the amount of water' = variable.",
+                "explanation": "A VARIABLE = a factor that can change in an experiment. To make an experiment fair, you only change ONE VARIABLE at a time while keeping everything else the same."
               },
               {
                 "num": 5,
-                "answer": "conclusion"
+                "answer": "conclusion",
+                "hint": "The clue 'drawn at the end, explaining what the results show' = conclusion.",
+                "explanation": "A CONCLUSION = the final statement that explains what the experiment showed. The CONCLUSION answers: Was the hypothesis correct? What did we learn from the results?"
               }
             ]
           }
@@ -33268,35 +34750,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "at"
+                "answer": "at",
+                "hint": "Students write 'in' (used for morning/afternoon, not clock time) instead of 'at' (specific clock time).",
+                "explanation": "AT + specific clock time. The market opens AT five o'clock = at that exact time. AT = precise point in time (AT 5am, AT noon, AT midnight). IN the morning = general time of day."
               },
               {
                 "num": 2,
-                "answer": "on"
+                "answer": "on",
+                "hint": "Students write 'in' or 'at' instead of 'on'. ON is always used with days of the week.",
+                "explanation": "ON + day of the week. The market is busiest ON SUNDAY = on that specific day. ON Monday, ON Tuesday, ON weekends = always use ON for days."
               },
               {
                 "num": 3,
-                "answer": "in"
+                "answer": "in",
+                "hint": "Students write 'on' (used for days) or 'at' (specific time) instead of 'in' (month/season).",
+                "explanation": "IN + month, year or season. Durian season is IN JUNE = in that month. IN June, IN 2024, IN summer = always use IN for months, years and seasons."
               },
               {
                 "num": 4,
-                "answer": "for"
+                "answer": "for",
+                "hint": "Students write 'since' (not in word_box) or 'during' instead of 'for' (duration).",
+                "explanation": "FOR + duration of time. The family has bought from the same stall FOR THIRTY YEARS = the duration is thirty years. FOR answers 'how long?' SINCE answers 'since when?'"
               },
               {
                 "num": 5,
-                "answer": "ago"
+                "answer": "ago",
+                "hint": "Students write 'before' (relative to another past event) instead of 'ago' (measured from the present moment).",
+                "explanation": "AGO = measured time before now. Fifty years AGO = fifty years before now (the present). 'Before' compares to another past event; 'ago' counts back from today."
               },
               {
                 "num": 6,
-                "answer": "within"
+                "answer": "within",
+                "hint": "Students write 'in' (used for months/general time) instead of 'within' (inside a time limit).",
+                "explanation": "WITHIN + time period = before that time has ended. Delivered WITHIN twelve hours = before twelve hours pass. WITHIN = inside the limit. 'In twelve hours' = after twelve hours; 'within twelve hours' = before."
               },
               {
                 "num": 7,
-                "answer": "throughout"
+                "answer": "throughout",
+                "hint": "Students write 'during' (not in word_box) instead of 'throughout' (from start to end, continuously).",
+                "explanation": "THROUGHOUT = all the way through a period of time, from beginning to end. The smell fills the market THROUGHOUT the day = all day, from opening to closing, without stopping."
               },
               {
                 "num": 8,
-                "answer": "by"
+                "answer": "by",
+                "hint": "Students write 'at' (exact point) instead of 'by' (deadline — at or before that time).",
+                "explanation": "BY + time = at or before that time (a deadline). Ready BY noon = finished at noon or earlier. AT noon = at exactly noon. BY = deadline; AT = exact point."
               }
             ]
           }
@@ -33319,23 +34817,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "stall"
+                "answer": "stall",
+                "hint": "The clue 'run by a single family specialised in one type of food' = stall.",
+                "explanation": "A STALL = a small shop or table in a market where goods are sold. A wet market has many individual STALLS, each selling something different."
               },
               {
                 "num": 2,
-                "answer": "vendor"
+                "answer": "vendor",
+                "hint": "The clue 'arranges the produce' and runs the stall = vendor (the seller).",
+                "explanation": "A VENDOR = a person who sells goods, especially at a market stall or street stall. The VENDOR at the wet market = the person running and selling from that stall."
               },
               {
                 "num": 3,
-                "answer": "display"
+                "answer": "display",
+                "hint": "The clue 'arranged on a table so customers can see everything clearly before buying' = display.",
+                "explanation": "A DISPLAY = an arrangement of goods set out for people to see. The vendor creates an attractive DISPLAY = lays everything out so customers can see it clearly."
               },
               {
                 "num": 4,
-                "answer": "bargain"
+                "answer": "bargain",
+                "hint": "The clue 'compare prices and politely ask for a better deal when buying in large quantities' = bargain.",
+                "explanation": "To BARGAIN = negotiate a price by asking for a discount or better deal. At wet markets, customers sometimes BARGAIN = politely ask for a lower price, especially when buying a lot."
               },
               {
                 "num": 5,
-                "answer": "seasonal"
+                "answer": "seasonal",
+                "hint": "The clue 'only available at certain times of the year, such as rambutans in summer' = seasonal.",
+                "explanation": "SEASONAL = only available at a particular time of year. SEASONAL fruits and vegetables = they grow and ripen during one specific season, not all year round."
               }
             ]
           }
@@ -33849,35 +35357,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "carefully"
+                "answer": "carefully",
+                "hint": "Students write 'slowly' (not in word_box) instead of 'carefully' (with attention and caution).",
+                "explanation": "CAREFULLY = with great attention and caution. Read messages CAREFULLY = pay close attention before clicking anything. CAREFULLY describes HOW to read (verb + adverb)."
               },
               {
                 "num": 2,
-                "answer": "quickly"
+                "answer": "quickly",
+                "hint": "Students write 'fast' (also means rapidly, but QUICKLY fits better for deliberate immediate action) instead of 'quickly'.",
+                "explanation": "QUICKLY = immediately and without delay. Close the window QUICKLY = do it right away, with no hesitation. QUICKLY describes an action done in a short time."
               },
               {
                 "num": 3,
-                "answer": "silently"
+                "answer": "silently",
+                "hint": "Students write 'quietly' (not in word_box) instead of 'silently' (without any sound or visible sign).",
+                "explanation": "SILENTLY = without making any sound or sign. Cyberbullying happens SILENTLY = it occurs without anyone else seeing or hearing. SILENT = no sound; SILENTLY = in a silent way."
               },
               {
                 "num": 4,
-                "answer": "well"
+                "answer": "well",
+                "hint": "Students write 'good' (adjective, WRONG after a verb) instead of 'well' (adverb).",
+                "explanation": "WELL = adverb form of 'good'. They perform WELL = they do it in a good, skilled way. NEVER 'perform good' — after a verb (perform), use the ADVERB: WELL, not GOOD."
               },
               {
                 "num": 5,
-                "answer": "hard"
+                "answer": "hard",
+                "hint": "Students write 'hardly' (meaning almost not at all, OPPOSITE meaning) instead of 'hard' (with great effort).",
+                "explanation": "HARD (adverb) = with great effort. They work HARD = they put in a lot of effort. HARDLY = almost not at all (opposite meaning!). 'Work hardly' = they barely work. HARD ≠ HARDLY — very different!"
               },
               {
                 "num": 6,
-                "answer": "fast"
+                "answer": "fast",
+                "hint": "Students write 'quickly' (already used in C2) instead of 'fast' (rapid speed/movement).",
+                "explanation": "FAST (adverb) = with great speed. Misinformation spreads FAST = it moves very quickly from person to person. FAST describes speed of movement or spreading."
               },
               {
                 "num": 7,
-                "answer": "happily"
+                "answer": "happily",
+                "hint": "Students write 'confidently' (not in word_box) instead of 'happily' (in a pleased and positive manner).",
+                "explanation": "HAPPILY = in a happy, content and positive manner. Use the internet HAPPILY = they enjoy it and feel good about it. HAPPILY describes how they use it — with pleasure and confidence."
               },
               {
                 "num": 8,
-                "answer": "gently"
+                "answer": "gently",
+                "hint": "Students write 'kindly' (not in word_box) instead of 'gently' (with soft, careful handling).",
+                "explanation": "GENTLY = in a soft, careful way that avoids causing pain or upset. Correct your friend GENTLY = in a way that is sensitive and does not humiliate them. GENTLY describes a considerate, careful manner."
               }
             ]
           }
@@ -33900,23 +35424,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "password"
+                "answer": "password",
+                "hint": "The clue 'for every online account, at least eight characters long, includes letters, numbers and symbols' = password.",
+                "explanation": "A PASSWORD = a secret combination of characters used to access an online account. A strong PASSWORD is long and hard for others to guess."
               },
               {
                 "num": 2,
-                "answer": "screen time"
+                "answer": "screen time",
+                "hint": "The clue 'hours looking at a phone or computer screen — affects sleep, eyesight and mood' = screen time.",
+                "explanation": "SCREEN TIME = the amount of time a person spends looking at a digital screen. Managing SCREEN TIME = controlling how long you use devices each day."
               },
               {
                 "num": 3,
-                "answer": "cyberbully"
+                "answer": "cyberbully",
+                "hint": "The clue 'uses online platforms to hurt, threaten or embarrass another person' = cyberbully.",
+                "explanation": "A CYBERBULLY = a person who uses the internet to hurt, threaten or embarrass someone else. CYBER = online; BULLY = someone who harms others deliberately."
               },
               {
                 "num": 4,
-                "answer": "anonymous"
+                "answer": "anonymous",
+                "hint": "The clue 'hiding behind an ___ identity — does not reveal their real name' = anonymous.",
+                "explanation": "ANONYMOUS = not revealing one's name or identity. Cyberbullies sometimes act behind an ANONYMOUS identity = no one knows who they really are."
               },
               {
                 "num": 5,
-                "answer": "digital"
+                "answer": "digital",
+                "hint": "The clue 'the ___ age — knowing how to enjoy technology' = digital age.",
+                "explanation": "DIGITAL = relating to computers and electronic technology. The DIGITAL age = the current period in history where computers and the internet are central to life."
               }
             ]
           }
@@ -34429,35 +35963,51 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "dreams"
+                "answer": "dreams",
+                "hint": "Students write 'dream' (base form) instead of 'dreams' (third person singular present). EVERY child = singular → add -S.",
+                "explanation": "Simple present, singular subject (every child) → add -S. Every child DREAMS = regular present, singular. 'Every child dream' is WRONG. EVERY = singular → dreams."
               },
               {
                 "num": 2,
-                "answer": "dreaming"
+                "answer": "dreaming",
+                "hint": "Students write 'to dream' (infinitive) instead of 'dreaming' (gerund after spend + time).",
+                "explanation": "SPEND + time + verb-ING (gerund). She spent Saturday DREAMING = spent time in the activity of dreaming. 'Spent to dream' is WRONG. SPEND + time + -ING."
               },
               {
                 "num": 3,
-                "answer": "dreamed"
+                "answer": "dreamed",
+                "hint": "Students write 'dreamt' (acceptable irregular past) but 'dreamed' is in the word_box.",
+                "explanation": "DREAM in the past = DREAMED (regular) or dreamt (irregular). Both correct, but DREAMED is in the word_box. 'Last night she DREAMED' = simple past. DREAM → DREAMED."
               },
               {
                 "num": 4,
-                "answer": "was dreaming"
+                "answer": "was dreaming",
+                "hint": "Students write 'dreamed' (simple past) instead of 'was dreaming' (past continuous, ongoing background action). 'While' signals the ongoing background.",
+                "explanation": "'While she ___' = ongoing past background = past continuous. She WAS DREAMING about the future = she was in the middle of daydreaming. The teacher noticed = the interrupting event."
               },
               {
                 "num": 5,
-                "answer": "were dreaming"
+                "answer": "were dreaming",
+                "hint": "Students write 'was dreaming' (singular) instead of 'were dreaming' (plural). All the children = plural → WERE.",
+                "explanation": "Plural subject (all the children) + ongoing past = WERE DREAMING. WAS is for singular; WERE for plural. All the children WERE DREAMING = they were all in the middle of daydreaming."
               },
               {
                 "num": 6,
-                "answer": "to dream"
+                "answer": "to dream",
+                "hint": "Students write 'dreaming' (gerund) instead of 'to dream' (infinitive after 'too early to').",
+                "explanation": "IT IS [adj] + TO + base verb = infinitive structure. It is never too early TO DREAM = infinitive. 'Too early dreaming' is WRONG. TO + base verb = the infinitive form."
               },
               {
                 "num": 7,
-                "answer": "dream"
+                "answer": "dream",
+                "hint": "Students write 'dreams' (adds -S, but after 'to' only base form is used) instead of 'dream'.",
+                "explanation": "After TOLD HER TO, always use the BASE verb form. Told her TO DREAM = infinitive (to + base). NEVER 'to dreams' or 'to dreaming'. After TO = base form only."
               },
               {
                 "num": 8,
-                "answer": "will dream"
+                "answer": "will dream",
+                "hint": "Students write 'dream' (present) instead of 'will dream' (future). 'For years to come' = future.",
+                "explanation": "'For years to come' = the future. WILL + base verb = simple future. They WILL DREAM of these futures = they are going to dream of them in the future. WILL DREAM = future simple."
               }
             ]
           }
@@ -34480,23 +36030,33 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
             "blanks": [
               {
                 "num": 1,
-                "answer": "ambition"
+                "answer": "ambition",
+                "hint": "The clue 'a deep desire to achieve something great — keeps a person going through difficult times' = ambition.",
+                "explanation": "AMBITION = a strong desire to achieve something great. AMBITION is what drives you to keep working when things are hard. An AMBITIOUS person has strong AMBITION."
               },
               {
                 "num": 2,
-                "answer": "role model"
+                "answer": "role model",
+                "hint": "The clue 'a person you look up to who shows you what is possible through hard work' = role model.",
+                "explanation": "A ROLE MODEL = a person whose behaviour and values others admire and try to copy. A good ROLE MODEL shows you what is possible and motivates you to do better."
               },
               {
                 "num": 3,
-                "answer": "inspire"
+                "answer": "inspire",
+                "hint": "The clue 'to try harder and reach higher than you thought possible' = inspire.",
+                "explanation": "INSPIRE = fill someone with the desire and ability to do something great. A role model INSPIRES you = makes you believe you can do more than you imagined."
               },
               {
                 "num": 4,
-                "answer": "strive"
+                "answer": "strive",
+                "hint": "The clue 'to improve themselves every day, setting small goals' = strive (make great efforts).",
+                "explanation": "STRIVE = make great efforts toward a goal. People who follow their dreams STRIVE to improve = they work hard consistently toward something they want."
               },
               {
                 "num": 5,
-                "answer": "passion"
+                "answer": "passion",
+                "hint": "The clue 'the subject or activity that excites you most — first step towards building a future' = passion.",
+                "explanation": "PASSION = a very strong feeling of enthusiasm and love for something. Your true PASSION = the thing that excites you most and makes you feel most alive."
               }
             ]
           }

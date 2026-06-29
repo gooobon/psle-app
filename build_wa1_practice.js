@@ -52,7 +52,7 @@ function convertSet(setId) {
       id: `${setId}_${key}`,
       passage: sec.passage,
       wordBank: wordBankArray(sec.word_box),
-      blanks: sec.questions.map(q => ({ num: q.blank_number, answer: normWord(q.answer, sec.word_box) })),
+      blanks: sec.questions.map(q => ({ num: q.blank_number, answer: normWord(q.answer, sec.word_box), hint: q.trap_type, explanation: q.learning_tip })),
     };
     out[type] = { type, items: [set], marks: set.blanks.length };
   }
@@ -93,7 +93,7 @@ export type SectionType =
   | 'GrammarMCQ' | 'VocabMCQ' | 'GrammarCloze' | 'VocabCloze' | 'Editing' | 'Comprehension';
 
 export interface McqItem { id: string; topic: SectionType; sentence: string; options: string[]; answer: number; explanation?: string; }
-export interface ClozeBlank { num: number; answer: string; }
+export interface ClozeBlank { num: number; answer: string; hint?: string; explanation?: string; }
 export interface ClozeSet { id: string; passage: string; wordBank: string[]; blanks: ClozeBlank[]; }
 export interface EditItem { id: string; answer: string; questionNumber: number; wrongWord: string; sentence: string; }
 export interface EditSet { id: string; items: EditItem[]; }

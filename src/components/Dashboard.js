@@ -222,7 +222,7 @@ function ComingSoonScreen({grade,subject}){
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, availableSections, completedSections, onMistakes, onReview}){
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, availableSections, completedSections, onMistakes, onReview, onReviewSection}){
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
   const mockH    = history.filter(h=>h.isMockExam);
@@ -284,7 +284,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
           <div style={{background:"rgba(255,255,255,0.06)",padding:"8px 20px",display:"flex",gap:8,flexWrap:"wrap"}}>
             {Object.entries(SECTIONS).map(([k,v])=>(
               <button key={k}
-                onClick={e=>{e.stopPropagation();if(completedSections&&completedSections.includes(k))return;if(availableSections&&!availableSections.includes(k))return;onStartFrom&&onStartFrom(k);}}
+                onClick={e=>{e.stopPropagation();if(completedSections&&completedSections.includes(k)){onReviewSection&&onReviewSection(k);return;}if(availableSections&&!availableSections.includes(k))return;onStartFrom&&onStartFrom(k);}}
                 style={{display:"flex",alignItems:"center",gap:4,
                   background:completedSections&&completedSections.includes(k)?"rgba(34,197,94,0.35)":availableSections&&!availableSections.includes(k)?"rgba(255,255,255,0.04)":"rgba(255,255,255,0.1)",
                   border:completedSections&&completedSections.includes(k)?"1px solid rgba(34,197,94,0.8)":"1px solid rgba(255,255,255,0.2)",borderRadius:8,padding:"4px 10px",
