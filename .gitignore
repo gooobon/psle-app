@@ -82,3 +82,16 @@ patch_*.js
 
 map_order.js
 check_*.js
+
+# scratch / backups (not committed)
+*.backup.json
+*.bak
+*.bak2
+build_log.txt
+inspect_*.js
+diag_*.js
+classify_*.js
+realtest*.js
+_*.js
+fmt4_*.js
+comp60_review.html
