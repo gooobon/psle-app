@@ -7,6 +7,7 @@ export const SECTIONS = {
   GrammarCloze:  { label:"Grammar Cloze",          icon:"✏️", color:"#10B981", blanksPerSet:4, timed:60 },
   VocabCloze:    { label:"Vocabulary Cloze",       icon:"🔤", color:"#F59E0B", blanksPerSet:4, timed:60 },
   Editing:       { label:"Editing for Spelling",   icon:"🔍", color:"#F97316", blanksPerSet:4, timed:50 },
+  Synthesis:     { label:"Synthesis & Transformation", icon:"🔁", color:"#0EA5E9", fixedCount:2, timed:30 },
   Comprehension: { label:"Comprehension",          icon:"📖", color:"#EF4444", blanksPerSet:6, timed:90 },
 };
 

@@ -56,6 +56,7 @@ function ZhResultScreen({results, sessionNum, onHome, onNext}){
 
 
 function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession}){
+  results=(results||[]).filter(r=>r.scored!==false);
   const total=results.length, correct=results.filter(r=>r.correct).length;
   const pct=total?Math.round(correct/total*100):0;
   const wrong=results.filter(r=>!r.correct);

@@ -3,7 +3,7 @@
 // Shapes match the fields ExamSession.js renderers actually read.
 
 export type SectionType =
-  | 'GrammarMCQ' | 'VocabMCQ' | 'GrammarCloze' | 'VocabCloze' | 'Editing' | 'Comprehension';
+  | 'GrammarMCQ' | 'VocabMCQ' | 'GrammarCloze' | 'VocabCloze' | 'Editing' | 'Synthesis' | 'Comprehension';
 
 export interface McqItem { id: string; topic: SectionType; sentence: string; options: string[]; answer: number; explanation?: string; }
 export interface ClozeBlank { num: number; answer: string; hint?: string; explanation?: string; }
@@ -17,7 +17,8 @@ export interface CompQuestion {
   solution?: Record<string, any>;
 }
 export interface CompSet { id: string; passage: string; questions: CompQuestion[]; }
-export interface PlanSection { type: SectionType; items: Array<McqItem | ClozeSet | EditSet | CompSet>; marks: number; }
+export interface SynthItem { id: string; sentenceA: string; sentenceB?: string; starter?: string; instruction: string; answer: string; answerSimple?: string; hint?: string; explanation?: string; marks: number; }
+export interface PlanSection { type: SectionType; items: Array<McqItem | ClozeSet | EditSet | CompSet | SynthItem>; marks: number; }
 export interface PracticeSet { setId: string; theme: string; plan: PlanSection[]; }
 
 export const WA1_PRACTICE_SETS: PracticeSet[] = [
@@ -373,6 +374,34 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S01_F1",
+            "sentenceA": "The teacher asked the class a question.",
+            "sentenceB": "Have you all finished reading the storybook?",
+            "starter": "The teacher asked ...",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked the class if they had all finished reading the storybook.",
+            "hint": "Students write 'asked if have they all finished' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU finished?' → asked IF THEY HAD finished. Pronoun: you → they. Tense: have → had. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S01_F2",
+            "sentenceA": "Tom likes drawing.",
+            "sentenceB": "His sister likes drawing too.",
+            "starter": "Both ___________.",
+            "instruction": "Rewrite as ONE sentence using 'Both'.",
+            "answer": "Both Tom and his sister like drawing.",
+            "hint": "Both…and = plural verb — students keep 'likes' (singular) after combining.",
+            "explanation": "'Both A and B' = two people = PLURAL → use verb WITHOUT -s: Both Tom and his sister LIKE (not likes) drawing.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -981,6 +1010,34 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S02_F1",
+            "sentenceA": "The zookeeper asked the children a question.",
+            "sentenceB": "Have you ever touched a real snake before?",
+            "starter": "The zookeeper asked ...",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The zookeeper asked...'",
+            "answer": "The zookeeper asked the children if they had ever touched a real snake before.",
+            "hint": "Students write 'asked if have they ever touched' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU ever touched?' → asked IF THEY HAD ever touched. Pronoun: you → they. Tense: have → had. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S02_F2",
+            "sentenceA": "Maya has a pet rabbit.",
+            "sentenceB": "Her brother has a pet rabbit too.",
+            "starter": "Both ___________.",
+            "instruction": "Rewrite using 'Both'.",
+            "answer": "Both Maya and her brother have a pet rabbit.",
+            "hint": "Both + plural verb — 'Both Maya and her brother' = plural → 'have' not 'has'.",
+            "explanation": "'Both A and B' = two people = PLURAL. Maya HAS (singular) → Both Maya and her brother HAVE (plural). Remove the -s.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -1584,6 +1641,34 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S03_F1",
+            "sentenceA": "Mother asked Nora a question.",
+            "sentenceB": "Did you remember to take out the rubbish before school?",
+            "starter": "Mother asked ...",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'Mother asked...'",
+            "answer": "Mother asked Nora if she remembered to take out the rubbish before school.",
+            "hint": "Students write 'asked if did she remember' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Did YOU remember?' → asked IF SHE REMEMBERED. Pronoun: you → she. Tense: did remember → remembered. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S03_F2",
+            "sentenceA": "Sam was cleaning his room.",
+            "sentenceB": "Mother called him for dinner.",
+            "starter": "Sam was cleaning his room when ___________.",
+            "instruction": "Rewrite as ONE sentence using 'when'.",
+            "answer": "Sam was cleaning his room when Mother called him for dinner.",
+            "hint": "Word order — the given starter 'Sam was cleaning' is already provided. Students just need to add 'when + simple past event'.",
+            "explanation": "[Ongoing action: was -ing] WHEN [sudden event: simple past]. The sudden event comes AFTER 'when'. No comma needed when 'when' is in the middle.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -2190,6 +2275,35 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S04_F1",
+            "sentenceA": "The community officer asked the residents a question.",
+            "sentenceB": "Are you happy with the new recycling bins?",
+            "starter": "The community officer asked ...",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The community officer asked...'",
+            "answer": "The community officer asked the residents if they were happy with the new recycling bins.",
+            "hint": "Students write 'asked if are they happy' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Are YOU happy?' → asked IF THEY WERE happy. Pronoun: you → they. Tense: are → were. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S04_F2",
+            "sentenceA": "Ali waited for the bus for thirty minutes.",
+            "sentenceB": "Then he decided to walk home.",
+            "starter": "When ___________.",
+            "instruction": "Rewrite as ONE sentence using 'when'.",
+            "answer": "When Ali had waited for thirty minutes, he decided to walk home.",
+            "answerSimple": "When the bus did not come after thirty minutes, Ali decided to walk home.",
+            "hint": "Students may write 'When Ali waited for thirty minutes, he decided...' (present tense intrusion) or restructure incorrectly.",
+            "explanation": "WHEN + [past event], [result in past]. Keep all verbs in PAST TENSE. 'When [situation], [what happened next]'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -2801,6 +2915,34 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S05_F1",
+            "sentenceA": "Sam's mother asked the hawker a question.",
+            "sentenceB": "Do you make the fishballs by hand every morning?",
+            "starter": "Sam's mother asked ...",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'Sam's mother asked...'",
+            "answer": "Sam's mother asked the hawker if he made the fishballs by hand every morning.",
+            "hint": "Students write 'asked if does he make' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU make?' → asked IF HE MADE. Pronoun: you → he. Tense: do make → made. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S05_F2",
+            "sentenceA": "Rani likes chicken rice.",
+            "sentenceB": "Her father likes chicken rice.",
+            "starter": "Both ___________.",
+            "instruction": "Rewrite using 'Both'.",
+            "answer": "Both Rani and her father like chicken rice.",
+            "hint": "Students keep 'likes' (singular) after 'Both A and B'.",
+            "explanation": "'Both A and B' = plural → plural verb: Both Rani and her father LIKE (not likes) chicken rice.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -3404,6 +3546,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S06_F1",
+            "sentenceA": "The weather officer asked the reporter a question.",
+            "sentenceB": "Will the storm reach the city by midnight?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The weather officer asked...'",
+            "answer": "The weather officer asked the reporter if the storm would reach the city by midnight.",
+            "hint": "Students write 'asked if will the storm reach' (wrong order).",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'WILL the storm reach?' → asked IF the storm WOULD reach. Tense shifts: will → would. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S06_F2",
+            "sentenceA": "Father was driving home.",
+            "sentenceB": "It started to hail.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "Father was driving home when it started to hail.",
+            "hint": "Students drop 'was', writing 'Father driving home when it started to hail'.",
+            "explanation": "Father WAS DRIVING (ongoing background) when it STARTED to hail (sudden event). Keep WAS for the background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -4012,6 +4180,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S07_F1",
+            "sentenceA": "The coach asked Priya a question.",
+            "sentenceB": "Did you feel nervous before the final race?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The coach asked...'",
+            "answer": "The coach asked Priya if she felt nervous before the final race.",
+            "hint": "Students write 'asked if did she feel' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Did YOU feel nervous?' → asked IF SHE FELT nervous. Pronoun: you → she. Tense: did feel → felt. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S07_F2",
+            "sentenceA": "Sara was practising her free kicks.",
+            "sentenceB": "Her coach arrived at the field.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "Sara was practising her free kicks when her coach arrived at the field.",
+            "hint": "Students drop 'was', writing 'Sara practising her free kicks when her coach arrived'.",
+            "explanation": "Sara WAS PRACTISING (ongoing background) when her coach ARRIVED (sudden event). Keep WAS for the ongoing background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -4627,6 +4821,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S08_F1",
+            "sentenceA": "The shopkeeper asked the customer a question.",
+            "sentenceB": "Are you looking for something specific today?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The shopkeeper asked...'",
+            "answer": "The shopkeeper asked the customer if he was looking for something specific.",
+            "hint": "Students write 'asked if is he looking' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Are YOU looking?' → asked IF HE WAS looking. Pronoun: you → he. Tense: are looking → was looking. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S08_F2",
+            "sentenceA": "Mother was checking the prices.",
+            "sentenceB": "The children ran to the toy section.",
+            "instruction": "Rewrite as one sentence using 'while'.",
+            "answer": "While Mother was checking the prices, the children ran to the toy section.",
+            "hint": "Students drop 'was', writing 'While Mother checking the prices, the children ran'.",
+            "explanation": "Mother WAS CHECKING (ongoing background) while the children RAN (different simultaneous action). Keep WAS.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -5231,6 +5451,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S09_F1",
+            "sentenceA": "The nature guide asked the children a question.",
+            "sentenceB": "Have you ever seen a wild otter before?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The nature guide asked...'",
+            "answer": "The nature guide asked the children if they had ever seen a wild otter before.",
+            "hint": "Students write 'asked if have they ever seen' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU ever seen?' → asked IF THEY HAD EVER seen. Pronoun: you → they. Tense: have → had. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S09_F2",
+            "sentenceA": "The students were collecting fallen leaves.",
+            "sentenceB": "A butterfly landed on one of the bags.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "The students were collecting fallen leaves when a butterfly landed on one of the bags.",
+            "hint": "Students drop 'were', writing 'The students collecting fallen leaves when a butterfly landed'.",
+            "explanation": "The students WERE COLLECTING (ongoing background) when a butterfly LANDED (sudden event). Keep WERE for the ongoing action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -5833,6 +6079,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S10_F1",
+            "sentenceA": "The cooking teacher asked the class a question.",
+            "sentenceB": "Have you ever cooked a meal by yourself?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The cooking teacher asked...'",
+            "answer": "The cooking teacher asked the class if they had ever cooked a meal by themselves.",
+            "hint": "Students write 'asked if have they ever cooked' (wrong order) or keep 'you/yourself'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU ever cooked?' → asked IF THEY had ever cooked. Pronoun: you → they. Tense: have → had. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S10_F2",
+            "sentenceA": "Grandma was stirring the porridge.",
+            "sentenceB": "A neighbour knocked on the door.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "Grandma was stirring the porridge when a neighbour knocked on the door.",
+            "hint": "Students drop 'was', writing 'Grandma stirring the porridge when a neighbour knocked'.",
+            "explanation": "Grandma WAS STIRRING (ongoing background) when a neighbour KNOCKED (sudden event). Keep WAS for the ongoing background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -6445,6 +6717,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S11_F1",
+            "sentenceA": "The conductor asked the passengers a question.",
+            "sentenceB": "Do you have your tickets ready?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The conductor asked...'",
+            "answer": "The conductor asked the passengers if they had their tickets ready.",
+            "hint": "Students write 'asked if do they have' (wrong order) or keep 'you/your'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU have YOUR tickets?' → asked IF THEY HAD THEIR tickets. Pronoun: you → they, your → their. Tense: do have → had. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S11_F2",
+            "sentenceA": "The bus driver was checking the tickets.",
+            "sentenceB": "A passenger dropped her bag.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "The bus driver was checking the tickets when a passenger dropped her bag.",
+            "hint": "Students drop 'was', writing 'The bus driver checking the tickets when a passenger dropped her bag'.",
+            "explanation": "The driver WAS CHECKING (ongoing background) when a passenger DROPPED her bag (sudden event). Keep WAS for the ongoing action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -7050,6 +7348,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S12_F1",
+            "sentenceA": "The teacher asked the class a question.",
+            "sentenceB": "Do you celebrate any special festivals at home?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked the class if they celebrated any special festivals at home.",
+            "hint": "Students write 'asked if do they celebrate' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU celebrate?' → asked IF THEY CELEBRATED. Pronoun: you → they. Tense: do celebrate → celebrated. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S12_F2",
+            "sentenceA": "Grandmother was kneading the dough.",
+            "sentenceB": "The guests rang the doorbell.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "Grandmother was kneading the dough when the guests rang the doorbell.",
+            "hint": "Students drop 'was', writing 'Grandmother kneading the dough when the guests rang the doorbell'.",
+            "explanation": "Grandmother WAS KNEADING (ongoing background) when the guests RANG (sudden event). Keep WAS for the ongoing background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -7658,6 +7982,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S13_F1",
+            "sentenceA": "The community leader asked the volunteers a question.",
+            "sentenceB": "Did you enjoy helping at the charity event?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The community leader asked...'",
+            "answer": "The community leader asked the volunteers if they enjoyed helping at the charity event.",
+            "hint": "Students write 'asked if did they enjoy' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Did YOU enjoy?' → asked IF THEY ENJOYED. Pronoun: you → they. Tense: did enjoy → enjoyed. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S13_F2",
+            "sentenceA": "The girl noticed the old woman struggling with her bags.",
+            "sentenceB": "She immediately offered to help.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "When the girl noticed the old woman struggling with her bags, she immediately offered to help.",
+            "hint": "Students write 'The girl noticed the old woman struggling when she immediately offered to help' — wrong order.",
+            "explanation": "WHEN + [triggering event], [resulting action]. When she NOTICED, she OFFERED to help. The noticing always comes first in the 'when' clause.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -8259,6 +8609,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S14_F1",
+            "sentenceA": "The photography teacher asked the new members a question.",
+            "sentenceB": "Do you prefer to photograph people or landscapes?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The photography teacher asked...'",
+            "answer": "The photography teacher asked the new members if they preferred to photograph people or landscapes.",
+            "hint": "Students write 'asked if do they prefer' (wrong order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU prefer?' → asked IF THEY PREFERRED. Pronoun: you → they. Tense: do prefer → preferred. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S14_F2",
+            "sentenceA": "Kai was building a model ship.",
+            "sentenceB": "His mother called him for dinner.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "Kai was building a model ship when his mother called him for dinner.",
+            "hint": "Students drop 'was', writing 'Kai building a model ship when his mother called him for dinner'.",
+            "explanation": "Kai WAS BUILDING (ongoing background) when his mother CALLED (sudden event). Keep WAS for the ongoing background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -8866,6 +9242,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S15_F1",
+            "sentenceA": "The teacher asked the class a question.",
+            "sentenceB": "Have you all finished your part of the project?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked the class if they had all finished their part of the project.",
+            "hint": "Students write 'asked if have they all finished' (wrong word order) or keep 'you' instead of 'they'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU all finished?' → asked IF THEY had all finished. Pronoun: you → they. Tense: have → had. Word order is NORMAL after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S15_F2",
+            "sentenceA": "The students were pasting their charts on the board.",
+            "sentenceB": "The bell rang for recess.",
+            "instruction": "Rewrite as one sentence using 'when'.",
+            "answer": "The students were pasting their charts on the board when the bell rang for recess.",
+            "hint": "Students drop 'were', writing 'The students pasting their charts on the board when the bell rang for recess'.",
+            "explanation": "The students WERE PASTING (ongoing background) when the bell RANG (sudden event). Keep WERE for the ongoing background action.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -9466,6 +9868,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S16_F1",
+            "sentenceA": "The interviewer asked the young doctor a question.",
+            "sentenceB": "Do you enjoy your work at the hospital?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The interviewer asked...'",
+            "answer": "The interviewer asked the young doctor if he enjoyed his work at the hospital.",
+            "hint": "Students write 'asked if does he enjoy' (wrong word order) or keep 'you/your'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU enjoy YOUR work?' → asked IF HE ENJOYED HIS work. Pronoun: you → he, your → his. Tense: do → did (enjoy). Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S16_F2",
+            "sentenceA": "The road was blocked by an accident.",
+            "sentenceB": "The ambulance could not reach the hospital on time.",
+            "instruction": "Rewrite as one sentence using 'so'.",
+            "answer": "The road was blocked by an accident, so the ambulance could not reach the hospital on time.",
+            "hint": "Students reverse the clauses, writing 'The ambulance could not reach the hospital on time so the road was blocked by an accident'.",
+            "explanation": "Blocked road = CAUSE. Ambulance could not reach = RESULT. Cause + SO + result. The cause always comes BEFORE 'so'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -10079,6 +10507,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S17_F1",
+            "sentenceA": "The zookeeper asked the children a question.",
+            "sentenceB": "Can you guess what the cheetah eats?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The zookeeper asked...'",
+            "answer": "The zookeeper asked the children if they could guess what the cheetah ate.",
+            "hint": "Students write 'asked if can they guess' (wrong word order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Can YOU guess?' → asked IF THEY COULD guess. Pronoun: you → they. Tense: can → could. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S17_F2",
+            "sentenceA": "The queue for the elephant ride was very long.",
+            "sentenceB": "We decided to skip it and watch the bird show instead.",
+            "instruction": "Rewrite as one sentence using 'so'.",
+            "answer": "The queue for the elephant ride was very long, so we decided to skip it and watch the bird show instead.",
+            "hint": "Students reverse the clauses, writing 'We decided to skip it so the queue for the elephant ride was very long'.",
+            "explanation": "Long queue = CAUSE. Decided to skip = RESULT. Cause + SO + result. The cause always comes BEFORE 'so'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -10686,6 +11140,31 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S18_F1",
+            "sentenceA": "The vet said to Priya, 'Your rabbit needs more fresh vegetables in its diet.'",
+            "instruction": "Rewrite the sentence using reported speech: The vet told Priya that ________.",
+            "answer": "The vet told Priya that her rabbit needed more fresh vegetables in its diet.",
+            "hint": "Students keep 'your' instead of changing to 'her', or keep 'needs' instead of changing to 'needed' in reported speech.",
+            "explanation": "In reported speech: (1) change 'your' → 'her', (2) change 'needs' → 'needed'. The vet told Priya that HER rabbit NEEDED more fresh vegetables.",
+            "marks": 2
+          },
+          {
+            "id": "S18_F2",
+            "sentenceA": "The vet asked Priya a question.",
+            "sentenceB": "Does your rabbit eat fresh vegetables every day?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The vet asked...'",
+            "answer": "The vet asked Priya if her rabbit ate fresh vegetables every day.",
+            "hint": "Students write 'asked if does her rabbit eat' (wrong word order) or keep 'your'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Does YOUR rabbit eat?' → asked IF HER rabbit ATE. Pronoun: your → her. Tense: does eat → ate. Word order is normal after 'if'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -11289,6 +11768,31 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S19_F1",
+            "sentenceA": "The teacher said to the class, 'Never play near the swimming pool without an adult present.'",
+            "instruction": "Rewrite the sentence using reported speech: The teacher told the class ________.",
+            "answer": "The teacher told the class never to play near the swimming pool without an adult present.",
+            "hint": "Students write 'told the class to never play' (incorrect word order) or keep 'never play' without changing to infinitive form.",
+            "explanation": "Negative reported speech with 'never': told the class NEVER TO PLAY. Change the imperative 'Never play' to 'never to play' in reported speech.",
+            "marks": 2
+          },
+          {
+            "id": "S19_F2",
+            "sentenceA": "The safety officer asked the students a question.",
+            "sentenceB": "Do you always look both ways before crossing?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The safety officer asked...'",
+            "answer": "The safety officer asked the students if they always looked both ways before crossing.",
+            "hint": "Students write 'asked if do they always look' (wrong word order) or keep 'you'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Do YOU always look?' → asked IF THEY ALWAYS LOOKED. Pronoun: you → they. Tense: do look → looked. Word order is normal after 'if'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -11890,6 +12394,31 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S20_F1",
+            "sentenceA": "The astronaut asked mission control a question.",
+            "sentenceB": "Is the shuttle ready for launch?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The astronaut asked...'",
+            "answer": "The astronaut asked if the shuttle was ready for launch.",
+            "hint": "Students write 'asked if the shuttle is ready' (no tense shift).",
+            "explanation": "YES/NO question → ASKED + IF + subject + verb (normal order). 'IS the shuttle ready?' → asked IF the shuttle WAS ready. Tense shifts: is → was. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S20_F2",
+            "sentenceA": "A team of engineers built the new space telescope.",
+            "instruction": "Rewrite in the passive voice: The new space telescope ________.",
+            "answer": "The new space telescope was built by a team of engineers.",
+            "hint": "Students write 'The new space telescope built by a team of engineers' — missing the auxiliary verb 'was'.",
+            "explanation": "Passive = subject + WAS/WERE + past participle + by + agent. The new space telescope WAS BUILT BY a team of engineers.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -12500,6 +13029,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S21_F1",
+            "sentenceA": "You mix yellow and blue paint.",
+            "sentenceB": "You get green.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you mix yellow and blue paint, you get green.",
+            "hint": "Students write 'If you will mix yellow and blue paint, you will get green' — adding 'will' in the 'if' clause, which is incorrect in first conditional.",
+            "explanation": "In an 'If' sentence stating a general truth: IF + simple present, simple present. If you MIX yellow and blue, you GET green. Never use 'will' in the 'if' clause for general facts.",
+            "marks": 2
+          },
+          {
+            "id": "S21_F2",
+            "sentenceA": "The art teacher asked the class a question.",
+            "sentenceB": "Have you ever mixed your own colours?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The art teacher asked...'",
+            "answer": "The art teacher asked the class if they had ever mixed their own colours.",
+            "hint": "Students write 'asked the class if have they ever mixed' (wrong word order) or keep 'you' instead of changing to 'they'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Have YOU ever mixed?' → asked IF THEY had ever mixed. Pronoun: you → they. Tense: have → had. Word order is NORMAL after 'if' — no inversion.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -13100,6 +13655,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S22_F1",
+            "sentenceA": "Mr Chua asked Jamal a question.",
+            "sentenceB": "Did you hear the mistake you made?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'Mr Chua asked...'",
+            "answer": "Mr Chua asked Jamal if he heard the mistake he made.",
+            "hint": "Students write 'asked Jamal if did he hear' (wrong word order) or keep 'you' instead of 'he'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Did YOU hear?' → asked IF HE heard. Pronoun: you → he. Tense: did hear → heard. Word order is NORMAL after 'if' — no inversion.",
+            "marks": 2
+          },
+          {
+            "id": "S22_F2",
+            "sentenceA": "The conductor raised his baton.",
+            "sentenceB": "The orchestra played the opening note.",
+            "instruction": "Rewrite as one sentence using 'As soon as'.",
+            "answer": "As soon as the conductor raised his baton, the orchestra played the opening note.",
+            "hint": "Students write 'The orchestra played the opening note as soon as the conductor raised his baton' — both orders are acceptable but leading with 'as soon as' is the target structure.",
+            "explanation": "AS SOON AS = immediately when. AS SOON AS the conductor RAISED his baton, the orchestra PLAYED — showing that one action happened the moment the other did.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -13708,6 +14289,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S23_F1",
+            "sentenceA": "The park warden asked the children a question.",
+            "sentenceB": "Are you here to see the new playground?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The park warden asked...'",
+            "answer": "The park warden asked the children if they were there to see the new playground.",
+            "hint": "Students write 'asked the children if are they there' (wrong word order) or keep 'you/here' instead of 'they/there'.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Are YOU here?' → asked IF THEY WERE THERE. Pronoun: you → they. Place: here → there. Tense: are → were. Word order is normal after 'if'.",
+            "marks": 2
+          },
+          {
+            "id": "S23_F2",
+            "sentenceA": "Father was reading his newspaper on the bench.",
+            "sentenceB": "The children were playing on the swings nearby.",
+            "instruction": "Rewrite as one sentence using 'while'.",
+            "answer": "While Father was reading his newspaper on the bench, the children were playing on the swings nearby.",
+            "hint": "Students drop 'was' or 'were', writing 'While Father reading his newspaper, the children playing on the swings'.",
+            "explanation": "WHILE shows two ongoing actions happening at the same time. Keep WAS and WERE: While Father WAS READING, the children WERE PLAYING. Both past continuous verbs stay.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -14312,6 +14919,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S24_F1",
+            "sentenceA": "The marine biologist asked a question.",
+            "sentenceB": "Are the coral reefs recovering?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The marine biologist asked...'",
+            "answer": "The marine biologist asked if the coral reefs were recovering.",
+            "hint": "Students write 'asked if the coral reefs are recovering' (no tense shift) or 'asked if were the coral reefs recovering' (wrong word order).",
+            "explanation": "YES/NO question → reported speech: ASKED + IF/WHETHER + subject + verb (normal word order). 'ARE the reefs recovering?' → asked IF the reefs WERE recovering. Tense shifts: are → were. Word order flips to normal — no inversion.",
+            "marks": 2
+          },
+          {
+            "id": "S24_F2",
+            "sentenceA": "The coral reef was badly damaged by the storm.",
+            "sentenceB": "Scientists are now working to restore it.",
+            "instruction": "Rewrite as one sentence using 'although'.",
+            "answer": "Although the coral reef was badly damaged by the storm, scientists are now working to restore it.",
+            "hint": "Students write 'The coral reef was badly damaged by the storm although scientists are now working to restore it' — less emphatic and changes the contrast.",
+            "explanation": "ALTHOUGH + [the difficult fact], [the positive response]. ALTHOUGH the reef was damaged, scientists are working to restore it. Starting with 'although' shows the contrast more powerfully.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -14914,6 +15547,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S25_F1",
+            "sentenceA": "Alexander Graham Bell invented the telephone.",
+            "sentenceB": "The telephone changed the way people communicate.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "Alexander Graham Bell invented the telephone, which changed the way people communicate.",
+            "hint": "Students write 'Alexander Graham Bell invented the telephone which Alexander Graham Bell changed the way people communicate' — repeating the subject.",
+            "explanation": "Use 'which' to add information about a THING: Alexander Graham Bell invented the telephone, WHICH changed the way people communicate. 'Which' replaces 'the telephone' in the second clause.",
+            "marks": 2
+          },
+          {
+            "id": "S25_F2",
+            "sentenceA": "The teacher asked the students a question.",
+            "sentenceB": "Can you name the inventor of the light bulb?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked the students if they could name the inventor of the light bulb.",
+            "hint": "Students write 'asked the students if can they name' (wrong word order) or 'asked if you could name' (wrong pronoun).",
+            "explanation": "YES/NO question → reported speech: ASKED + IF + subject + verb (normal order). 'Can YOU name...?' → asked IF THEY COULD name... Pronoun changes: you → they. Tense shifts: can → could. Word order is normal — no inversion after 'if'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -15524,6 +16183,31 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S26_F1",
+            "sentenceA": "You do not get enough sleep.",
+            "sentenceB": "You will find it hard to concentrate in class.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you do not get enough sleep, you will find it hard to concentrate in class.",
+            "hint": "Students write 'If you will not get enough sleep, you will find it hard to concentrate' — adding 'will' incorrectly in the 'if' clause.",
+            "explanation": "In an 'If' conditional: IF + simple present, simple future. If you DO NOT get enough sleep, you WILL find it hard. Never use 'will' in the 'if' clause.",
+            "marks": 2
+          },
+          {
+            "id": "S26_F2",
+            "sentenceA": "Lena prefers fresh fruit to sugary snacks.",
+            "instruction": "The sentence uses 'prefers A to B'. Rewrite it beginning with: 'Lena would rather ________.'",
+            "answer": "Lena would rather eat fresh fruit than sugary snacks.",
+            "hint": "Students write 'Lena would rather fresh fruit than sugary snacks' — missing the verb 'eat' after 'would rather'.",
+            "explanation": "'Would rather + base verb + than': Lena would rather EAT fresh fruit THAN sugary snacks. Always include the base verb after 'would rather'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -16128,6 +16812,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S27_F1",
+            "sentenceA": "The ancient vase was discovered by archaeologists in Egypt.",
+            "sentenceB": "The ancient vase is now displayed in the National Museum.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The ancient vase, which was discovered by archaeologists in Egypt, is now displayed in the National Museum.",
+            "hint": "Students write 'The ancient vase which it was discovered by archaeologists is now displayed' — adding an extra pronoun 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The ancient vase, WHICH was discovered in Egypt, is now displayed. Do NOT add 'it' after 'which'.",
+            "marks": 2
+          },
+          {
+            "id": "S27_F2",
+            "sentenceA": "The class arrived at the museum.",
+            "sentenceB": "They went straight to the dinosaur exhibition.",
+            "instruction": "Rewrite as one sentence using 'After'.",
+            "answer": "After the class arrived at the museum, they went straight to the dinosaur exhibition.",
+            "hint": "Students write 'After they went straight to the dinosaur exhibition, the class arrived at the museum' — reversing the correct time order.",
+            "explanation": "AFTER + [the first event], [the second event]. AFTER the class ARRIVED, they WENT to the exhibition. The event after 'after' happened FIRST.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -16736,6 +17446,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S28_F1",
+            "sentenceA": "The explorer was mapping the cave.",
+            "sentenceB": "She suddenly noticed strange symbols on the wall.",
+            "instruction": "Rewrite as one sentence using 'while'.",
+            "answer": "While the explorer was mapping the cave, she suddenly noticed strange symbols on the wall.",
+            "hint": "Students drop 'was', writing 'While the explorer mapping the cave, she suddenly noticed strange symbols'.",
+            "explanation": "WHILE + ongoing action (past continuous), sudden event (simple past). While the explorer WAS MAPPING, she suddenly NOTICED. Keep WAS for the ongoing action.",
+            "marks": 2
+          },
+          {
+            "id": "S28_F2",
+            "sentenceA": "The detective found the hidden door.",
+            "sentenceB": "The hidden door led to a secret underground room.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The detective found the hidden door, which led to a secret underground room.",
+            "hint": "Students write 'The detective found the hidden door which it led to a secret underground room' — adding an extra 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The detective found the hidden door, WHICH led to a secret underground room. Never add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -17339,6 +18075,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S29_F1",
+            "sentenceA": "She waters her plants every day.",
+            "sentenceB": "She will have a beautiful garden in spring.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If she waters her plants every day, she will have a beautiful garden in spring.",
+            "hint": "Students write 'If she will water her plants every day, she will have a beautiful garden' — incorrectly adding 'will' in the 'if' clause.",
+            "explanation": "Conditional: IF + simple present, simple future. If she WATERS her plants, she WILL HAVE a beautiful garden. Never 'will' in the 'if' clause.",
+            "marks": 2
+          },
+          {
+            "id": "S29_F2",
+            "sentenceA": "The gardener planted a row of sunflowers.",
+            "sentenceB": "The sunflowers brighten up the whole neighbourhood.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The gardener planted a row of sunflowers, which brighten up the whole neighbourhood.",
+            "hint": "Students write 'The gardener planted a row of sunflowers which they brighten up the neighbourhood' — adding 'they' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The gardener planted sunflowers, WHICH brighten up the neighbourhood. Do NOT add 'they' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -17946,6 +18708,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S30_F1",
+            "sentenceA": "The princess touched the spindle.",
+            "sentenceB": "She immediately fell into a deep sleep.",
+            "instruction": "Rewrite as one sentence using 'As soon as'.",
+            "answer": "As soon as the princess touched the spindle, she immediately fell into a deep sleep.",
+            "hint": "Students write 'The princess touched the spindle as soon as she immediately fell' — reversing the order.",
+            "explanation": "AS SOON AS + [the trigger], [the immediate result]. AS SOON AS the princess TOUCHED the spindle, she FELL into a deep sleep. The trigger comes after 'as soon as'.",
+            "marks": 2
+          },
+          {
+            "id": "S30_F2",
+            "sentenceA": "Jack climbed the beanstalk.",
+            "sentenceB": "The beanstalk reached all the way up to the giant's castle.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "Jack climbed the beanstalk, which reached all the way up to the giant's castle.",
+            "hint": "Students write 'Jack climbed the beanstalk which it reached all the way up to the giant's castle' — adding 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. Jack climbed the beanstalk, WHICH reached up to the giant's castle. Do NOT add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -18550,6 +19338,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S31_F1",
+            "sentenceA": "You return the lost wallet to its owner.",
+            "sentenceB": "You will feel proud of yourself.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you return the lost wallet to its owner, you will feel proud of yourself.",
+            "hint": "Students write 'If you will return the lost wallet, you will feel proud' — adding 'will' in the 'if' clause.",
+            "explanation": "Conditional: IF + simple present, simple future. If you RETURN the wallet, you WILL FEEL proud. Never use 'will' in the 'if' clause.",
+            "marks": 2
+          },
+          {
+            "id": "S31_F2",
+            "sentenceA": "A girl handed in a purse.",
+            "sentenceB": "The purse contained two hundred dollars.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "A girl handed in a purse, which contained two hundred dollars.",
+            "hint": "Students write 'A girl handed in a purse which it contained two hundred dollars' — adding 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. A girl handed in a purse, WHICH contained two hundred dollars. Never add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -19160,6 +19974,30 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S32_F1",
+            "sentenceA": "The teacher said to the class, 'You must verify information before sharing it online.'",
+            "instruction": "Rewrite using reported speech: The teacher told the class that ________.",
+            "answer": "The teacher told the class that they must verify information before sharing it online.",
+            "hint": "Students keep 'you' instead of changing to 'they', or keep 'must' unchanged without recognising the pronoun shift.",
+            "explanation": "In reported speech: change 'you' → 'they'. The teacher told the class that THEY must verify information before sharing it online.",
+            "marks": 2
+          },
+          {
+            "id": "S32_F2",
+            "sentenceA": "The school's new website was designed by a team of student volunteers.",
+            "instruction": "Rewrite beginning with: A team of student volunteers ________.",
+            "answer": "A team of student volunteers designed the school's new website.",
+            "hint": "Students write 'A team of student volunteers was designed the school's new website' — incorrectly keeping passive structure when making it active.",
+            "explanation": "Active voice: AGENT + VERB + OBJECT. A team of student volunteers DESIGNED the school's new website. Remove 'was' and 'by' when converting passive to active.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -19763,6 +20601,31 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S33_F1",
+            "sentenceA": "You practise every day.",
+            "sentenceB": "Your confidence will grow over time.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you practise every day, your confidence will grow over time.",
+            "hint": "Students write 'If you will practise every day, your confidence will grow' — adding 'will' in the 'if' clause.",
+            "explanation": "Conditional: IF + simple present, simple future. If you PRACTISE every day, your confidence WILL GROW. Never 'will' in the 'if' clause.",
+            "marks": 2
+          },
+          {
+            "id": "S33_F2",
+            "sentenceA": "The coach said to Marcus, 'You performed better than anyone expected today.'",
+            "instruction": "Rewrite using reported speech: The coach told Marcus that ________.",
+            "answer": "The coach told Marcus that he performed better than anyone expected that day.",
+            "hint": "Students keep 'you' instead of 'he', or keep 'today' instead of 'that day'.",
+            "explanation": "Reported speech: 'you' → 'he'; 'today' → 'that day'. The coach told Marcus that HE had performed better than anyone expected THAT DAY.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -20363,6 +21226,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S34_F1",
+            "sentenceA": "Singapore preserves its heritage buildings.",
+            "sentenceB": "Future generations will be able to experience the city's history.",
+            "instruction": "Rewrite as one sentence using 'so that'.",
+            "answer": "Singapore preserves its heritage buildings so that future generations will be able to experience the city's history.",
+            "hint": "Students write 'Singapore preserves its heritage buildings so future generations will be able to' — omitting 'that' after 'so'.",
+            "explanation": "SO THAT = in order that (purpose). Singapore preserves heritage buildings SO THAT future generations CAN experience history. 'So that' introduces the purpose.",
+            "marks": 2
+          },
+          {
+            "id": "S34_F2",
+            "sentenceA": "The hawker centre near Tanjong Pagar serves traditional dishes.",
+            "sentenceB": "The hawker centre has been operating for over forty years.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The hawker centre near Tanjong Pagar, which has been operating for over forty years, serves traditional dishes.",
+            "hint": "Students write 'The hawker centre near Tanjong Pagar which it has been operating for over forty years serves traditional dishes' — adding 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The hawker centre, WHICH has been operating for over forty years, serves traditional dishes. Do NOT add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -20974,6 +21863,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S35_F1",
+            "sentenceA": "You believe in your talent and keep working hard.",
+            "sentenceB": "You will achieve your ambitions one day.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you believe in your talent and keep working hard, you will achieve your ambitions one day.",
+            "hint": "Students write 'If you will believe in your talent, you will achieve your ambitions' — adding 'will' in the 'if' clause.",
+            "explanation": "Conditional: IF + simple present, simple future. If you BELIEVE and KEEP working, you WILL ACHIEVE. Never 'will' in the 'if' clause.",
+            "marks": 2
+          },
+          {
+            "id": "S35_F2",
+            "sentenceA": "The young chef created a dish.",
+            "sentenceB": "The dish impressed every judge on the panel.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'that'.",
+            "answer": "The young chef created a dish that impressed every judge on the panel.",
+            "hint": "Students write 'The young chef created a dish that it impressed every judge' — adding 'it' after 'that'.",
+            "explanation": "Use 'that' to add information about a THING. The young chef created a dish THAT impressed every judge. Never add 'it' after 'that'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -21576,6 +22491,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S36_F1",
+            "sentenceA": "You tap your card when boarding the bus.",
+            "sentenceB": "You tap it again when you exit.",
+            "instruction": "Rewrite as one sentence using 'As well as'.",
+            "answer": "As well as tapping your card when boarding the bus, you tap it again when you exit.",
+            "hint": "Students write 'As well as you tap your card when boarding' — forgetting to change the verb to the -ing form after 'as well as'.",
+            "explanation": "AS WELL AS + verb-ing: AS WELL AS TAPPING your card when boarding, you tap it again when you exit. After 'as well as', always use verb-ing.",
+            "marks": 2
+          },
+          {
+            "id": "S36_F2",
+            "sentenceA": "You do not tap out properly.",
+            "sentenceB": "You will be charged the maximum fare.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you tap out properly, you will be charged the maximum fare.",
+            "hint": "Students write 'Unless you will tap out properly' — adding 'will' in the 'unless' clause, which is incorrect (same rule as 'if' conditionals).",
+            "explanation": "UNLESS = if not. UNLESS you tap out properly, you WILL be charged the maximum fare. Never use 'will' in the 'unless' clause — same rule as 'if'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -22183,6 +23124,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S37_F1",
+            "sentenceA": "She brushes her teeth every morning.",
+            "sentenceB": "She has never had a cavity.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since she brushes her teeth every morning, she has never had a cavity.",
+            "hint": "Students write 'She brushes her teeth every morning since she has never had a cavity' — reversing the cause and result.",
+            "explanation": "SINCE = because of an ongoing or established fact. SINCE she brushes every morning, she has never had a cavity. The reason comes after 'since'.",
+            "marks": 2
+          },
+          {
+            "id": "S37_F2",
+            "sentenceA": "You floss every day.",
+            "sentenceB": "Your teeth will not be as healthy as they could be.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you floss every day, your teeth will not be as healthy as they could be.",
+            "hint": "Students add 'will' in the 'unless' clause: 'Unless you will floss every day' — incorrect.",
+            "explanation": "UNLESS + simple present, simple future. UNLESS you FLOSS every day, your teeth WILL NOT BE as healthy. Never 'will' after 'unless'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -22787,6 +23754,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S38_F1",
+            "sentenceA": "My grandfather has been gardening for fifty years.",
+            "sentenceB": "He knows every plant in the garden by name.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since my grandfather has been gardening for fifty years, he knows every plant in the garden by name.",
+            "hint": "Students write 'My grandfather has been gardening for fifty years since he knows every plant' — reversing the cause and result.",
+            "explanation": "SINCE = because of an ongoing or established fact. SINCE he has been gardening for fifty years, he knows every plant. The reason comes after 'since'.",
+            "marks": 2
+          },
+          {
+            "id": "S38_F2",
+            "sentenceA": "Grandmother's kueh is the best I have ever tasted.",
+            "sentenceB": "She has refined her recipe over forty years.",
+            "instruction": "Combine into one sentence using the relative pronoun 'which'.",
+            "answer": "Grandmother's kueh, which she has refined over forty years, is the best I have ever tasted.",
+            "hint": "Students write 'Grandmother's kueh is the best I have ever tasted which she has refined over forty years' — placing 'which' in the wrong position.",
+            "explanation": "Place 'which' immediately after the noun it refers to. Grandmother's kueh, WHICH she has refined over forty years, is the best I have ever tasted.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -23397,6 +24390,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S39_F1",
+            "sentenceA": "You look closely at the magician's right hand.",
+            "sentenceB": "You will miss what the left hand is doing.",
+            "instruction": "Rewrite as one sentence using 'As'.",
+            "answer": "As you look closely at the magician's right hand, you will miss what the left hand is doing.",
+            "hint": "Students write 'You look closely as you will miss what the left hand is doing' — reversing the simultaneous/causal relationship.",
+            "explanation": "AS = at the same time that / because. AS you look at the right hand, you WILL MISS the left hand = the two things happen together. 'As' introduces the simultaneous trigger.",
+            "marks": 2
+          },
+          {
+            "id": "S39_F2",
+            "sentenceA": "You pay attention to the magician's words and movements.",
+            "sentenceB": "You will be tricked every single time.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you pay attention to the magician's words and movements, you will be tricked every single time.",
+            "hint": "Students add 'will' in the 'unless' clause: 'Unless you will pay attention' — incorrect.",
+            "explanation": "UNLESS + simple present, simple future. UNLESS you PAY attention, you WILL BE tricked. Never 'will' after 'unless'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -23998,6 +25017,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S40_F1",
+            "sentenceA": "You train consistently every week.",
+            "sentenceB": "You will see a real improvement in your speed.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you train consistently every week, you will see a real improvement in your speed.",
+            "hint": "Students write 'As long as you will train' — adding 'will' after 'as long as', which follows the same rule as 'if'.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you TRAIN consistently, you WILL SEE improvement. Never 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S40_F2",
+            "sentenceA": "The relay team trained for six months.",
+            "sentenceB": "The relay team finally won the district championship.",
+            "instruction": "Rewrite as one sentence using 'After'.",
+            "answer": "After training for six months, the relay team finally won the district championship.",
+            "hint": "Students write 'After the relay team trained for six months, they won' — acceptable, but the model answer shows the more elegant reduction using -ing.",
+            "explanation": "AFTER + verb-ing (same subject): AFTER TRAINING for six months, the team finally WON. When the same subject does both actions, use 'after' + -ing for the first.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -24608,6 +25653,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S41_F1",
+            "sentenceA": "You do not visit the new neighbourhood before moving in.",
+            "sentenceB": "You will feel nervous on the first day.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you visit the new neighbourhood before moving in, you will feel nervous on the first day.",
+            "hint": "Students write 'Unless you will visit' — adding 'will' in the 'unless' clause.",
+            "explanation": "UNLESS + simple present, simple future. UNLESS you VISIT the new neighbourhood before moving in, you WILL FEEL nervous. Never 'will' after 'unless'.",
+            "marks": 2
+          },
+          {
+            "id": "S41_F2",
+            "sentenceA": "The removal team carried our belongings with great care.",
+            "sentenceB": "Not a single item was broken.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since the removal team carried our belongings with great care, not a single item was broken.",
+            "hint": "Students reverse the order: 'Not a single item was broken since the removal team carried our belongings' — acceptable but less natural as an emphasis structure.",
+            "explanation": "SINCE = because of a background reason. SINCE the removal team carried everything carefully, not a single item was broken. The cause comes after 'since'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -25216,6 +26287,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S42_F1",
+            "sentenceA": "You start with the simplest techniques.",
+            "sentenceB": "You will build a strong foundation for more advanced skills.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you start with the simplest techniques, you will build a strong foundation for more advanced skills.",
+            "hint": "Students write 'As long as you will start' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you START with simple techniques, you WILL BUILD a strong foundation.",
+            "marks": 2
+          },
+          {
+            "id": "S42_F2",
+            "sentenceA": "Learning to cook seemed impossible at first.",
+            "sentenceB": "Mia now prepares three-course meals for her family.",
+            "instruction": "Rewrite as one sentence using 'Although'.",
+            "answer": "Although learning to cook seemed impossible at first, Mia now prepares three-course meals for her family.",
+            "hint": "Students write 'Learning to cook seemed impossible although Mia now prepares' — less natural and buries the contrast.",
+            "explanation": "ALTHOUGH + [the difficult starting point], [the impressive result]. ALTHOUGH learning to cook SEEMED impossible, Mia NOW PREPARES three-course meals.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -25818,6 +26915,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S43_F1",
+            "sentenceA": "Freshwater makes up only three percent of the Earth's water.",
+            "sentenceB": "Freshwater is one of our most precious resources.",
+            "instruction": "Rewrite as one sentence using 'Although'.",
+            "answer": "Although freshwater makes up only three percent of the Earth's water, it is one of our most precious resources.",
+            "hint": "Students write 'Freshwater makes up only three percent although it is precious' — less emphatic placement of the contrast.",
+            "explanation": "ALTHOUGH + [the surprising fact], [the important conclusion]. ALTHOUGH freshwater makes up only 3%, IT IS one of our most precious resources.",
+            "marks": 2
+          },
+          {
+            "id": "S43_F2",
+            "sentenceA": "The giant river otter hunts in groups.",
+            "sentenceB": "The giant river otter can catch fish more effectively.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since the giant river otter hunts in groups, it can catch fish more effectively.",
+            "hint": "Students write 'The giant river otter hunts in groups since it can catch fish' — reversing the cause and effect.",
+            "explanation": "SINCE = because of a background reason. SINCE the giant river otter hunts in groups, IT CAN catch fish more effectively. The reason comes after 'since'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -26425,6 +27548,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S44_F1",
+            "sentenceA": "You follow the recipe precisely.",
+            "sentenceB": "Your baked goods will turn out well every time.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you follow the recipe precisely, your baked goods will turn out well every time.",
+            "hint": "Students write 'As long as you will follow' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you FOLLOW the recipe precisely, your goods WILL TURN OUT well.",
+            "marks": 2
+          },
+          {
+            "id": "S44_F2",
+            "sentenceA": "The croissants looked perfect.",
+            "sentenceB": "They were made by an eleven-year-old student.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The croissants, which were made by an eleven-year-old student, looked perfect.",
+            "hint": "Students write 'The croissants looked perfect which they were made by an eleven-year-old' — adding 'they' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The croissants, WHICH were made by an eleven-year-old, looked perfect. Never add 'they' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -27026,6 +28175,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S45_F1",
+            "sentenceA": "You visit your neighbours during Hari Raya.",
+            "sentenceB": "The bond between communities will grow stronger.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you visit your neighbours during Hari Raya, the bond between communities will grow stronger.",
+            "hint": "Students write 'As long as you will visit' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you VISIT your neighbours, the bond WILL GROW stronger. Never use 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S45_F2",
+            "sentenceA": "The Deepavali parade passed through Little India.",
+            "sentenceB": "The parade lasted for over two hours.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The Deepavali parade, which lasted for over two hours, passed through Little India.",
+            "hint": "Students write 'The Deepavali parade which it lasted for two hours passed through Little India' — adding 'it' after 'which'.",
+            "explanation": "Use 'which' to add information about a THING. The parade, WHICH lasted for over two hours, passed through Little India. Do NOT add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -27636,6 +28811,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S46_F1",
+            "sentenceA": "The cable car broke down halfway.",
+            "sentenceB": "We would have been stranded above the sea.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless the cable car breaks down halfway, we will not be stranded above the sea.",
+            "hint": "Students misuse the conditional structure. UNLESS = if not → rephrase in present conditional.",
+            "explanation": "UNLESS = if not. 'Unless the cable car BREAKS DOWN' (simple present in the unless clause) = if it does NOT break down. UNLESS + simple present, simple future.",
+            "marks": 2
+          },
+          {
+            "id": "S46_F2",
+            "sentenceA": "The sandcastle stood three feet tall.",
+            "sentenceB": "The sandcastle took two hours to build.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The sandcastle, which took two hours to build, stood three feet tall.",
+            "hint": "Students write 'The sandcastle which it took two hours to build stood three feet tall' — adding 'it' after 'which'.",
+            "explanation": "WHICH = relative pronoun for things. The sandcastle, WHICH took two hours to build, stood three feet tall. Commas + WHICH = extra info. Never add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -28242,6 +29443,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S47_F1",
+            "sentenceA": "You are honest with your friends.",
+            "sentenceB": "The friendship will grow stronger over time.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you are honest with your friends, the friendship will grow stronger over time.",
+            "hint": "Students write 'As long as you will be honest' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you ARE honest, the friendship WILL GROW. No 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S47_F2",
+            "sentenceA": "The girl noticed her friend was upset.",
+            "sentenceB": "The girl sat with her friend without saying a word.",
+            "instruction": "Rewrite as one sentence using 'Although'.",
+            "answer": "Although the girl noticed her friend was upset, she sat with her without saying a word.",
+            "hint": "Students write 'The girl noticed her friend was upset although she sat with her' — less powerful. ALTHOUGH at the start shows the contrast more clearly.",
+            "explanation": "ALTHOUGH + [first fact], [contrasting fact]. ALTHOUGH she noticed her friend was upset, she SAT WITH HER without speaking — a contrast between noticing and choosing silence.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -28844,6 +30071,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S48_F1",
+            "sentenceA": "You hear thunder.",
+            "sentenceB": "You should go indoors immediately.",
+            "instruction": "Rewrite as one sentence using 'As soon as'.",
+            "answer": "As soon as you hear thunder, you should go indoors immediately.",
+            "hint": "Students write 'As soon as you will hear thunder' — adding 'will' in the 'as soon as' clause.",
+            "explanation": "AS SOON AS + simple present, imperative or simple future. AS SOON AS you HEAR thunder, you SHOULD go indoors. No 'will' after 'as soon as'.",
+            "marks": 2
+          },
+          {
+            "id": "S48_F2",
+            "sentenceA": "The storm knocked down an old tree.",
+            "sentenceB": "The old tree had stood at the corner of the road for fifty years.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The storm knocked down an old tree, which had stood at the corner of the road for fifty years.",
+            "hint": "Students write 'an old tree which it had stood' — adding 'it' after 'which'. Also, 'had stood' is acceptable here as it is in a relative clause describing a prior state.",
+            "explanation": "WHICH = relative pronoun for things. The storm knocked down a tree, WHICH had stood for fifty years. Non-restrictive clause (extra info, commas) → use WHICH. Never add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -29454,6 +30707,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S49_F1",
+            "sentenceA": "You test your smoke alarm regularly.",
+            "sentenceB": "You may not know it has stopped working.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you test your smoke alarm regularly, you may not know it has stopped working.",
+            "hint": "Students write 'Unless you will test' — adding 'will' in the 'unless' clause.",
+            "explanation": "UNLESS + simple present, simple future/modal. UNLESS you TEST your smoke alarm regularly, you MAY NOT KNOW it has stopped. No 'will' after 'unless'.",
+            "marks": 2
+          },
+          {
+            "id": "S49_F2",
+            "sentenceA": "The firefighter entered the burning building.",
+            "sentenceB": "She rescued two children from the third floor.",
+            "instruction": "Rewrite as one sentence using 'After'.",
+            "answer": "After entering the burning building, the firefighter rescued two children from the third floor.",
+            "hint": "Students write 'After the firefighter entered the burning building, she rescued two children' — acceptable, but the model answer uses the -ing reduction.",
+            "explanation": "AFTER + verb-ing (same subject): AFTER ENTERING the building, the firefighter rescued two children. When the subject is the same for both actions, 'after + -ing' is elegant and concise.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -30055,6 +31334,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S50_F1",
+            "sentenceA": "You practise chapteh every day.",
+            "sentenceB": "You will improve your coordination and balance.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If you practise chapteh every day, you will improve your coordination and balance.",
+            "hint": "Students write 'If you will practise' — adding 'will' in the 'if' clause.",
+            "explanation": "IF + simple present, simple future. IF you PRACTISE every day, you WILL IMPROVE. NEVER use 'will' after 'if' in the condition clause.",
+            "marks": 2
+          },
+          {
+            "id": "S50_F2",
+            "sentenceA": "The gasing competition was held at the community centre.",
+            "sentenceB": "The gasing competition attracted players from five different schools.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The gasing competition, which attracted players from five different schools, was held at the community centre.",
+            "hint": "Students write 'The gasing competition which it attracted' — adding 'it' after 'which'.",
+            "explanation": "WHICH = relative pronoun for things. The competition, WHICH attracted players from five schools, was held at the centre. NEVER add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -30665,6 +31970,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S51_F1",
+            "sentenceA": "You remove fallen leaves and dead branches from your garden.",
+            "sentenceB": "You reduce the number of hiding places for harmful insects.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you remove fallen leaves and dead branches from your garden, you reduce the number of hiding places for harmful insects.",
+            "hint": "Students write 'As long as you will remove' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple present/future. AS LONG AS you REMOVE fallen leaves, you REDUCE hiding places. No 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S51_F2",
+            "sentenceA": "The firefly produces light using a chemical reaction in its body.",
+            "sentenceB": "The firefly uses light to attract a mate.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since the firefly produces light using a chemical reaction in its body, it uses this light to attract a mate.",
+            "hint": "Students reverse the logic: 'The firefly uses light to attract a mate since it produces light using a chemical reaction' — acceptable but less natural as a causal structure.",
+            "explanation": "SINCE = because of a background reason. SINCE the firefly PRODUCES light using chemistry, IT USES this light to attract a mate. The background cause comes after 'since'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -31266,6 +32597,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S52_F1",
+            "sentenceA": "The soil is rich and well-watered.",
+            "sentenceB": "The crops will grow quickly and produce a large harvest.",
+            "instruction": "Rewrite as one sentence using 'If'.",
+            "answer": "If the soil is rich and well-watered, the crops will grow quickly and produce a large harvest.",
+            "hint": "Students write 'If the soil will be rich' — adding 'will' in the 'if' clause.",
+            "explanation": "IF + simple present, simple future. IF the soil IS rich, the crops WILL GROW quickly. NEVER use 'will' after 'if' in the condition clause.",
+            "marks": 2
+          },
+          {
+            "id": "S52_F2",
+            "sentenceA": "The old barn stood at the edge of the paddy field.",
+            "sentenceB": "The old barn was built by the farmer's grandfather fifty years ago.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The old barn, which was built by the farmer's grandfather fifty years ago, stood at the edge of the paddy field.",
+            "hint": "Students write 'The old barn which it was built by' — adding 'it' after 'which'.",
+            "explanation": "WHICH = relative pronoun for things. The old barn, WHICH was built by the farmer's grandfather, stood at the edge of the field. NEVER add 'it' after 'which'.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -31872,6 +33229,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S53_F1",
+            "sentenceA": "You read at least thirty minutes a day.",
+            "sentenceB": "Your vocabulary and comprehension will improve significantly.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you read at least thirty minutes a day, your vocabulary and comprehension will improve significantly.",
+            "hint": "Students write 'As long as you will read' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you READ thirty minutes a day, your vocabulary WILL IMPROVE. NEVER 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S53_F2",
+            "sentenceA": "The library holds a rare collection of old maps.",
+            "sentenceB": "The rare collection is not available to borrow.",
+            "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
+            "answer": "The library holds a rare collection of old maps, which is not available to borrow.",
+            "hint": "Students write 'a rare collection which it is not available' — adding 'it' after 'which'.",
+            "explanation": "WHICH = relative pronoun for things. A rare collection of old maps, WHICH is not available to borrow. NEVER add 'it' after 'which'. The collection is the antecedent.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -32473,6 +33856,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S54_F1",
+            "sentenceA": "You do not report a broken streetlight to the town council.",
+            "sentenceB": "It may stay unrepaired for weeks.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you report a broken streetlight to the town council, it may stay unrepaired for weeks.",
+            "hint": "Students write 'Unless you will report' — adding 'will' in the 'unless' clause.",
+            "explanation": "UNLESS + simple present, simple future/modal. UNLESS you REPORT the broken streetlight, it MAY STAY unrepaired. Never 'will' after 'unless'.",
+            "marks": 2
+          },
+          {
+            "id": "S54_F2",
+            "sentenceA": "The paramedic rushed to the scene.",
+            "sentenceB": "The paramedic treated three patients in under ten minutes.",
+            "instruction": "Rewrite as one sentence using 'After'.",
+            "answer": "After rushing to the scene, the paramedic treated three patients in under ten minutes.",
+            "hint": "Students write 'After the paramedic rushed to the scene, she treated' — acceptable, but model answer uses -ing reduction elegantly.",
+            "explanation": "AFTER + verb-ing (same subject): AFTER RUSHING to the scene, the paramedic treated three patients. Same subject → 'after + -ing' is concise and elegant.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -33080,6 +34489,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S55_F1",
+            "sentenceA": "You spot an injured animal near your home.",
+            "sentenceB": "You should call the wildlife rescue hotline right away.",
+            "instruction": "Rewrite as one sentence using 'Since'.",
+            "answer": "Since you spot an injured animal near your home, you should call the wildlife rescue hotline right away.",
+            "hint": "Students write 'Since you will spot' — adding 'will' in the 'since' clause.",
+            "explanation": "SINCE = because of a known or given fact. SINCE you spot an injured animal, you SHOULD CALL the hotline. 'Since' introduces the reason; the result clause follows.",
+            "marks": 2
+          },
+          {
+            "id": "S55_F2",
+            "sentenceA": "The vet asked a question.",
+            "sentenceB": "Is the fox badly injured?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The vet asked...'",
+            "answer": "The vet asked if the fox was badly injured.",
+            "hint": "Students write 'The vet asked if the fox is badly injured' (no tense shift) or 'The vet asked if was the fox badly injured' (wrong word order).",
+            "explanation": "YES/NO question → reported speech: asked + IF/WHETHER + subject + verb. 'Is the fox...?' → asked IF THE FOX WAS... Normal word order (no inversion). Tense shifts: is → was.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -33684,6 +35119,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S56_F1",
+            "sentenceA": "You do not check in online before arriving at the airport.",
+            "sentenceB": "You may have to wait in a long queue at the counter.",
+            "instruction": "Rewrite as one sentence using 'Unless'.",
+            "answer": "Unless you check in online before arriving at the airport, you may have to wait in a long queue at the counter.",
+            "hint": "Students write 'Unless you will check in' — adding 'will' in the 'unless' clause.",
+            "explanation": "UNLESS + simple present, modal verb. UNLESS you CHECK IN online, you MAY HAVE TO wait. Never use 'will' after 'unless'. UNLESS = if not.",
+            "marks": 2
+          },
+          {
+            "id": "S56_F2",
+            "sentenceA": "The passenger asked a question.",
+            "sentenceB": "What is the departure time for flight SQ317?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The passenger asked...'",
+            "answer": "The passenger asked what the departure time for flight SQ317 was.",
+            "hint": "Students write 'The passenger asked what was the departure time' — wrong word order (question inversion kept). In reported speech, use normal word order.",
+            "explanation": "WH-question → reported speech: ASKED + WH-word + subject + verb (normal order). 'What IS the time?' → asked WHAT the time WAS. NEVER 'asked what WAS the time'. Word order flips to normal in reported speech.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -34293,6 +35754,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S57_F1",
+            "sentenceA": "The experiment produced unexpected results.",
+            "sentenceB": "The students were still able to write a clear conclusion.",
+            "instruction": "Rewrite as one sentence using 'Although'.",
+            "answer": "Although the experiment produced unexpected results, the students were still able to write a clear conclusion.",
+            "hint": "Students write 'Although the experiment produced unexpected results but...' — adding 'but' redundantly after 'although'.",
+            "explanation": "ALTHOUGH introduces a contrast clause. ALTHOUGH the results were unexpected, the students STILL wrote a clear conclusion. NEVER use 'but' after 'although' — 'although' already shows the contrast.",
+            "marks": 2
+          },
+          {
+            "id": "S57_F2",
+            "sentenceA": "The teacher asked a question.",
+            "sentenceB": "What does the experiment show?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked what the experiment showed.",
+            "hint": "Students write 'The teacher asked what does the experiment show' — keeping question word order. In reported speech, use normal word order.",
+            "explanation": "WH-question → reported speech: ASKED + WH-word + subject + verb (normal order). 'What DOES the experiment SHOW?' → asked WHAT the experiment SHOWED. No inversion. Present → past (shows → showed).",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -34895,6 +36382,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S58_F1",
+            "sentenceA": "The vendor sees a customer approaching.",
+            "sentenceB": "She immediately begins to arrange the freshest produce at the front of the stall.",
+            "instruction": "Rewrite as one sentence using 'As soon as'.",
+            "answer": "As soon as the vendor sees a customer approaching, she immediately begins to arrange the freshest produce at the front of the stall.",
+            "hint": "Students write 'As soon as the vendor will see' — adding 'will' in the 'as soon as' clause.",
+            "explanation": "AS SOON AS + simple present, simple present or future. AS SOON AS the vendor SEES a customer, she BEGINS to arrange. 'As soon as' = immediately when. Never 'will' after 'as soon as'.",
+            "marks": 2
+          },
+          {
+            "id": "S58_F2",
+            "sentenceA": "The customer asked the fishmonger a question.",
+            "sentenceB": "How much do the vegetables cost?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The customer asked...'",
+            "answer": "The customer asked how much the vegetables cost.",
+            "hint": "Students write 'The customer asked how much do the vegetables cost' — keeping question word order. In reported speech, normal word order is used.",
+            "explanation": "WH-question → reported speech: ASKED + WH-word + subject + verb (normal order). 'How much DO the vegetables COST?' → asked HOW MUCH the vegetables COST. No inversion. Tense stays the same in present tense reported speech.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",
@@ -35504,6 +37017,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "marks": 5
       },
       {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S59_F1",
+            "sentenceA": "You use a strong and unique password for each account.",
+            "sentenceB": "Your personal information will be much safer online.",
+            "instruction": "Rewrite as one sentence using 'As long as'.",
+            "answer": "As long as you use a strong and unique password for each account, your personal information will be much safer online.",
+            "hint": "Students write 'As long as you will use' — adding 'will' in the 'as long as' clause.",
+            "explanation": "AS LONG AS + simple present, simple future. AS LONG AS you USE a strong password, your information WILL BE safer. NEVER 'will' after 'as long as'.",
+            "marks": 2
+          },
+          {
+            "id": "S59_F2",
+            "sentenceA": "The teacher asked a question.",
+            "sentenceB": "Do you share your password with anyone?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked if we shared our passwords with anyone.",
+            "hint": "Students write 'The teacher asked if do we share our password' — keeping question word order. In reported speech, normal word order is used.",
+            "explanation": "YES/NO question → reported speech: ASKED + IF/WHETHER + subject + verb (normal order). 'Do YOU SHARE your password?' → asked IF WE SHARED our passwords. Word order flips to normal. 'Do' disappears.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
+      },
+      {
         "type": "Comprehension",
         "items": [
           {
@@ -36108,6 +37647,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           }
         ],
         "marks": 5
+      },
+      {
+        "type": "Synthesis",
+        "items": [
+          {
+            "id": "S60_F1",
+            "sentenceA": "Priya practised her speech every single day.",
+            "sentenceB": "She became the most confident presenter in the class.",
+            "instruction": "Rewrite as one sentence using 'After'.",
+            "answer": "After practising her speech every single day, Priya became the most confident presenter in the class.",
+            "hint": "Students write 'After Priya practised, she became' — acceptable, but the model uses the more elegant -ing reduction.",
+            "explanation": "AFTER + verb-ing (same subject) = compact and elegant. AFTER PRACTISING her speech every day, Priya BECAME the most confident presenter. Same subject → 'after + -ing' is concise.",
+            "marks": 2
+          },
+          {
+            "id": "S60_F2",
+            "sentenceA": "The teacher asked Kai a question.",
+            "sentenceB": "What do you want to be when you grow up?",
+            "instruction": "Combine into one sentence using reported speech. Begin: 'The teacher asked...'",
+            "answer": "The teacher asked Kai what he wanted to be when he grew up.",
+            "hint": "Students write 'The teacher asked Kai what did he want to be' — keeping question word order. In reported speech, normal word order is used.",
+            "explanation": "WH-question → reported speech: ASKED + WH-word + subject + verb (normal order). 'What DO you WANT to be?' → asked WHAT HE WANTED to be. Word order flips to normal. Do disappears. You → he; grow → grew.",
+            "marks": 2
+          }
+        ],
+        "marks": 4
       },
       {
         "type": "Comprehension",

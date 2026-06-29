@@ -782,7 +782,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const wa1Plan = WA1_PRACTICE_SETS[(((prog.nextSession - 1) % _wa1Len) + _wa1Len) % _wa1Len].plan;
 
   // The 6 sections that make up a full English session.
-  const SESSION_SECTIONS = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Comprehension"];
+  const SESSION_SECTIONS = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Synthesis","Comprehension"];
 
   function startSession(fromSection){
     setStartFromSection(typeof fromSection === "string" ? fromSection : null);
@@ -812,22 +812,23 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   function handleSessionDone(results){
     const sessionNum = prog.nextSession;
     const isMock = isMockDue;
+    const graded = results.filter(r=>r.scored!==false);
     const scores = {};
     SECTION_ORDER.forEach(type=>{
       const items=results.filter(r=>r.sectionType===type);
       if(items.length) scores[type]=Math.round(items.filter(r=>r.correct).length/items.length*100);
     });
-    const totalPct=results.length?Math.round(results.filter(r=>r.correct).length/results.length*100):0;
+    const totalPct=graded.length?Math.round(graded.filter(r=>r.correct).length/graded.length*100):0;
     const isPastPaper = sessionNum >= 11;
     const paperInfo = isPastPaper ? selectPastPaper(user.school) : null;
     const newEntry={ sessionNum, date:todayStr(), scores, totalPct,
-      mistakes: results.filter(r=>!r.correct).map(r=>({...r})),
+      mistakes: graded.filter(r=>!r.correct).map(r=>({...r})),
       isMockExam: isMock||isPastPaper,
       school: isMock?"Nanyang Primary": isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
       examType: isMock?"WA1": isPastPaper?"Past Paper #"+(sessionNum-10):undefined };
-    const newMistakes=[...(prog.mistakes||[]),...results.filter(r=>!r.correct).map(r=>({...r,date:todayStr()}))];
+    const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map(r=>({...r,date:todayStr()}))];
     const allLookedUp = [...new Set(results.flatMap(r=>r.lookedUpWords||[]))];
-    const wrongWords  = [...new Set(results.filter(r=>!r.correct).flatMap(r=>{
+    const wrongWords  = [...new Set(graded.filter(r=>!r.correct).flatMap(r=>{
       const sentence=r.sentence||"";
       return sentence.split(/\s+/).map(w=>w.replace(/[.,!?'"]/g,"").toLowerCase()).filter(w=>WORD_DICT[w]);
     }))];

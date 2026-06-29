@@ -1798,11 +1798,13 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
 }
 
 function ExamSummary({ results, duration, onHome, onRetry }) {
-  const total = results.length;
-  const correct = results.filter(r => r.correct).length;
+  const _scored = results.filter(r => r.scored !== false);
+  const total = _scored.length;
+  const correct = _scored.filter(r => r.correct).length;
   const pct = total ? Math.round(correct / total * 100) : 0;
   const bySection = {};
   results.forEach(r => {
+    if (r.scored === false) return;
     if (!bySection[r.sectionType]) bySection[r.sectionType] = { correct: 0, total: 0 };
     bySection[r.sectionType].total++;
     if (r.correct) bySection[r.sectionType].correct++;
@@ -1880,6 +1882,134 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
+function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+  const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
+  const qs = items || [];
+  const [answers, setAnswers] = useState(_rev || {});
+  const [submitted, setSubmitted] = useState(!!reviewMode);
+  const startRef = useRef(Date.now());
+
+  function handleSubmit() {
+    if (submitted) return;
+    setSubmitted(true);
+  }
+
+  function handleFinish() {
+    const t = Date.now() - startRef.current;
+    const results = qs.map(q => ({
+      id: q.id, topic: "Synthesis", sectionType: "Synthesis", scored: false,
+      userAnswer: answers[q.id], correct: false,
+      timeTaken: Math.round(t / Math.max(qs.length, 1)),
+    }));
+    onPageDone(results, true);
+  }
+
+  return (
+    <div style={{ background: "#fff", minHeight: "100vh", fontFamily: EXAM_FONT }}>
+      <div style={{ padding: "14px 20px 0" }}>
+        <div style={{ fontFamily: EXAM_FONT, fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
+          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        </div>
+        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
+          Rewrite or combine each item as instructed, keeping the meaning the same. After you submit, compare your sentence with the model answer.
+        </div>
+      </div>
+
+      <div style={{ padding: "0 20px 120px" }}>
+        {qs.map((q, idx) => {
+          const qNum = idx + 1;
+          const typed = answers[q.id] || "";
+          return (
+            <div key={q.id} style={{ marginBottom: 22 }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
+                <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
+                <span style={{ fontSize: 14, lineHeight: 1.7, flex: 1, fontWeight: 600 }}>{q.instruction}</span>
+              </div>
+
+              <div style={{ marginLeft: 32, marginBottom: 10 }}>
+                <div style={{ fontSize: 14, lineHeight: 1.8 }}>{q.sentenceA}</div>
+                {q.sentenceB ? <div style={{ fontSize: 14, lineHeight: 1.8 }}>{q.sentenceB}</div> : null}
+                {q.starter ? (
+                  <div style={{ fontSize: 13, color: "#6b7280", marginTop: 4 }}>
+                    Begin: <span style={{ fontWeight: 700 }}>{q.starter}</span>
+                  </div>
+                ) : null}
+              </div>
+
+              {!submitted ? (
+                <div style={{ marginLeft: 32 }}>
+                  <textarea value={typed}
+                    onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
+                    placeholder="Write your sentence here..."
+                    rows={2}
+                    style={{ width: "100%", padding: "8px 10px", borderRadius: 6, fontSize: 14,
+                      fontFamily: EXAM_FONT, lineHeight: 1.6,
+                      border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
+                      outline: "none", resize: "vertical", boxSizing: "border-box" }} />
+                </div>
+              ) : (
+                <div style={{ marginLeft: 32 }}>
+                  <div style={{ marginBottom: 8 }}>
+                    <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
+                    <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                      border: "1.5px solid #cbd5e1", background: "#f8fafc", lineHeight: 1.6 }}>
+                      {typed.trim() ? typed : "(blank)"}
+                    </div>
+                  </div>
+                  <div style={{ marginBottom: 8 }}>
+                    <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Model answer</div>
+                    <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
+                      border: "1.5px solid #16a34a", color: "#166534", background: "#f0fdf4", lineHeight: 1.6 }}>
+                      {q.answer}
+                    </div>
+                    {q.answerSimple ? (
+                      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>
+                        Also acceptable: {q.answerSimple}
+                      </div>
+                    ) : null}
+                  </div>
+                  {q.explanation ? (
+                    <div style={{ marginTop: 6, borderLeft: "3px solid #2563EB",
+                      background: "#eff6ff", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.explanation}</div>
+                    </div>
+                  ) : null}
+                  {q.hint ? (
+                    <div style={{ marginTop: 6, borderLeft: "3px solid #D97706",
+                      background: "#fffbeb", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: "#92400e", marginBottom: 2 }}>Trap to avoid</div>
+                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.hint}</div>
+                    </div>
+                  ) : null}
+                </div>
+              )}
+
+              {idx < qs.length - 1 ? <div style={{ borderTop: "1px solid #e5e7eb", margin: "16px 0" }} /> : null}
+            </div>
+          );
+        })}
+
+        {!submitted ? (
+          <button onClick={handleSubmit}
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
+              background: "#1e3a6e", color: "#fff", border: "none",
+              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_FONT }}>
+            Submit
+          </button>
+        ) : (
+          <button onClick={handleFinish}
+            style={{ width: "100%", padding: "14px", borderRadius: 10,
+              background: "#1e3a6e", color: "#fff", border: "none",
+              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_FONT }}>
+            Next Section
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
+
+
 export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack, reviewMode, reviewResults, onSectionDone, completedTypes }) {
   const _completed = completedTypes || [];
   const startSecIdx = startFrom
@@ -2034,6 +2164,16 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         <EditingPage reviewMode={reviewMode} reviewResults={reviewResults}
           key={secIdx}
           set={(section.items || [])[0] || {}}
+          sectionLabel={sectionLabel}
+          marks={sectionMarks}
+          onPageDone={handlePageDone}
+        />
+      )}
+
+      {sectionType === "Synthesis" && (
+        <SynthesisPage reviewMode={reviewMode} reviewResults={reviewResults}
+          key={secIdx}
+          items={section.items || []}
           sectionLabel={sectionLabel}
           marks={sectionMarks}
           onPageDone={handlePageDone}
