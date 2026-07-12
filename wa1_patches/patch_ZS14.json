@@ -1,0 +1,217 @@
+{
+ "setId": "ZS14",
+ "mcq": {
+  "ZS14_A1": {
+   "sentence_en": "After work every day, Dad ___ (takes) me to the park for a walk.",
+   "hints": ["The blank + 我去 means to lead someone somewhere. Which character (with the cloth 巾 at the bottom, like a strap that leads a person) means 'to bring / lead'?"],
+   "keywords": [{"w":"带","py":"dài","en":"to bring; to lead"},{"w":"下班","py":"xiàbān","en":"to finish work"},{"w":"散步","py":"sànbù","en":"to take a walk"}],
+   "explanation_en": "带 means to lead or bring someone along, so 带我去公园 (takes me to the park) is correct. All four are read dài, but 带 has 巾 at the bottom, like a strap that leads a person."
+  },
+  "ZS14_A2": {
+   "sentence_en": "The food Mum cooks is ___ (fragrant) and tasty, and the whole family loves it.",
+   "hints": ["香___可口 describes food smelling strongly of a nice scent. Which character (with the mouth radical 口) forms 香喷喷 (delicious-smelling)?"],
+   "keywords": [{"w":"香喷喷","py":"xiāngpēnpēn","en":"delicious-smelling"},{"w":"可口","py":"kěkǒu","en":"tasty"},{"w":"喜欢","py":"xǐhuan","en":"to like"}],
+   "explanation_en": "香喷喷 is the fixed way to describe food that smells wonderful, so 喷 fits. 喷 has the mouth radical 口 - the fragrance seems to burst out, so 香喷喷 uses 喷."
+  },
+  "ZS14_A3": {
+   "sentence_en": "My elder brother is very ___ (warm-hearted); he always helps the old granny next door carry things.",
+   "hints": ["The blank + 心 describes someone eager to help others. Which character means 'warm / hot', used in 热心 (warm-hearted)?"],
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"邻居","py":"línjū","en":"neighbour"},{"w":"提东西","py":"tí dōngxi","en":"to carry things"}],
+   "explanation_en": "热心 means eager to help others and is a fixed word, so 热 fits. All four have the fire radical, but only 热心 describes a warm, helpful heart - remember 热 = warmth."
+  },
+  "ZS14_A4": {
+   "sentence_en": "My elder sister drew a ___ (measure word) painting as a birthday gift for Grandma.",
+   "hints": ["The blank is the measure word for a painting. Which character (with the cloth radical 巾) counts cloth and paintings?"],
+   "keywords": [{"w":"幅","py":"fú","en":"measure word for paintings"},{"w":"外婆","py":"wàipó","en":"maternal grandma"},{"w":"礼物","py":"lǐwù","en":"gift"}],
+   "explanation_en": "The measure word 幅 is used for paintings, so 一幅画 is correct. All four are read fú, but 幅 has the cloth radical 巾, used for counting cloth and paintings."
+  },
+  "ZS14_A5": {
+   "sentence_en": "My little brother ___ (happily) shared his toys with the other children.",
+   "hints": ["The blank + 心 describes a cheerful mood. Which character means 'to open', used in 开心 (happy)?"],
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"玩具","py":"wánjù","en":"toy"},{"w":"分给","py":"fēngěi","en":"to share out to"}],
+   "explanation_en": "开心 means happy, so 开心地把玩具分给大家 (happily sharing the toys) fits. The 开 in 开心 is like a door opening - when the heart opens up, you feel 开心."
+  },
+  "ZS14_B1": {
+   "sentence_en": "Mum 教导 (teaches and guides) us to respect our elders.",
+   "hints": ["教 is a polyphone: jiāo = to teach a subject; jiào = to instruct / guide. 教导 is about guiding, so which choice is jiào + dǎo?"],
+   "keywords": [{"w":"教导","py":"jiàodǎo","en":"to teach and guide"},{"w":"尊重","py":"zūnzhòng","en":"to respect"},{"w":"长辈","py":"zhǎngbèi","en":"elders"}],
+   "explanation_en": "In 教导, 教 is read jiào (4th tone, to guide), not jiāo (to teach a lesson); 导 is dǎo (3rd tone). 教 has two readings: 教书 jiāo (to teach); 教导 jiào (to guide). Here it means to guide, so read jiào."
+  },
+  "ZS14_B2": {
+   "sentence_en": "Grandpa 答应 (agreed / promised) to take me to the zoo, and I was very happy.",
+   "hints": ["应 is a polyphone: yīng in 应该 (should); yìng in 答应 (to agree). Which choice is dā + yìng?"],
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree; to promise"},{"w":"动物园","py":"dòngwùyuán","en":"zoo"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "答应 means to agree to a request; 应 here is read yìng (4th tone), not yīng. 应 has two readings: 应该 yīng (should); 答应 / 回应 yìng (to respond)."
+  },
+  "ZS14_B3": {
+   "sentence_en": "Between friends you must be 诚实 (honest) and not tell lies.",
+   "hints": ["诚 has the back nasal -ng (chéng); 实 is retroflex sh with 2nd tone (shí). Which choice is chéng + shí?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"朋友","py":"péngyou","en":"friend"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "诚 is read chéng (with back nasal -ng) and 实 is shí (retroflex sh, 2nd tone), together chéng shí. 诚 has the back nasal -ng; 实 is retroflex sh - keep the front and back nasals apart."
+  },
+  "ZS14_B4": {
+   "sentence_en": "My elder sister 照顾 (looked after) our sick grandma and did not rest the whole day.",
+   "hints": ["照 is 4th tone (zhào); 顾 is also 4th tone (gù). Which choice is zhào + gù, both falling?"],
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "照 is read zhào (4th tone) and 顾 is gù (4th tone), together zhào gù. Both characters of 照顾 are 4th tone, falling together - zhào gù."
+  },
+  "ZS14_C1": {
+   "sentence_en": "Grandma fell ill, and Dad ___ (patiently) kept watch by her bedside.",
+   "hints": ["Clue: caring for a sick person calmly, without getting irritated. Which word means 'patient', not 'happy' or 'careful'?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"守","py":"shǒu","en":"to keep watch"},{"w":"床边","py":"chuángbiān","en":"bedside"}],
+   "explanation_en": "耐心 means being patient and not getting irritated, matching looking after a sick person by the bed. 开心 (happy), 小心 (careful) and 用心 (attentive) do not describe this caring, patient manner."
+  },
+  "ZS14_C2": {
+   "sentence_en": "Mum bought ___ (a basket of) apples and put them on the table so we could eat any time.",
+   "hints": ["Clue: apples held in a basket. Which measure word means 'a basketful'?"],
+   "keywords": [{"w":"一篮","py":"yì lán","en":"a basket of"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"随时","py":"suíshí","en":"any time"}],
+   "explanation_en": "Apples can be held in a basket, so 一篮苹果 (a basket of apples) uses the right measure word. 粒 is too small, 张 is for flat things, 条 is for long thin things - none fit apples."
+  },
+  "ZS14_C3": {
+   "sentence_en": "Elder brother got good exam results, and the whole family felt ___ (proud) of him.",
+   "hints": ["Clue: good results are a happy thing, so how would the family feel? Which word means 'proud', not a negative feeling?"],
+   "keywords": [{"w":"骄傲","py":"jiāo'ào","en":"proud"},{"w":"成绩","py":"chéngjì","en":"results"},{"w":"全家","py":"quánjiā","en":"the whole family"}],
+   "explanation_en": "Good results are a happy thing, so the family feels 骄傲 (proud). 难过 (sad), 着急 (anxious) and 害怕 (afraid) are all negative and contradict 'good results'."
+  },
+  "ZS14_C4": {
+   "sentence_en": "Dad ___ (tells) us that we must be honest and never lie.",
+   "hints": ["Clue: a parent gently passing on a lesson. Which word means 'to tell', not 'to order' or 'to shout'?"],
+   "keywords": [{"w":"告诉","py":"gàosu","en":"to tell"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "告诉 means to say a lesson to someone, matching Dad guiding his children. 命令 (order) is too harsh, 叫喊 (shout) is too noisy, and 回答 (answer) needs a question first."
+  },
+  "ZS14_C5": {
+   "sentence_en": "Xiaoming and Xiaohua are good friends who grew up together; their ___ (bond) is very deep.",
+   "hints": ["Clue: it pairs with 深厚 (deep) to describe the tie between friends. Which word means 'feelings / bond', not 'mood' or 'matter'?"],
+   "keywords": [{"w":"感情","py":"gǎnqíng","en":"feelings; bond"},{"w":"深厚","py":"shēnhòu","en":"deep"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"}],
+   "explanation_en": "感情 means the bond between friends, and 感情深厚 (a deep bond) is the natural pairing. 心情 (mood), 表情 (expression) and 事情 (matter) cannot pair with 深厚."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道谢”是对别人说谢谢、表示感激，所以“向长辈道谢”就是向长辈表示感谢。“拜访、陪伴”都不是“说谢谢”的意思。",
+   "explanation_en": "道谢 (dàoxiè) means to say thank you, so 向长辈道谢 means to thank one's elders. 拜访 (visit) and 陪伴 (accompany) do not mean 'to say thanks'.",
+   "stem_en": "to thank one's elders",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to say thanks"},{"w":"长辈","py":"zhǎngbèi","en":"elders"}]
+  },
+  "2": {
+   "explanation": "“拜访”是特意去看望别人，所以“拜访好朋友”就是专程去看望好朋友。“道谢、分享”都不是“上门看望”的意思。",
+   "explanation_en": "拜访 (bàifǎng) means to go and visit someone, so 拜访好朋友 means to visit a good friend. 道谢 (thank) and 分享 (share) do not mean 'to call on someone'.",
+   "stem_en": "to visit a good friend",
+   "keywords": [{"w":"拜访","py":"bàifǎng","en":"to visit"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"}]
+  },
+  "3": {
+   "explanation": "“分享”是把好东西、快乐一起分给别人，所以“分享快乐”就是把快乐分给大家。“陪伴、关心”都不是“分给别人”的意思。",
+   "explanation_en": "分享 (fēnxiǎng) means to share good things or joy with others, so 分享快乐 means to share happiness. 陪伴 (accompany) and 关心 (care) do not mean 'to share out'.",
+   "stem_en": "to share happiness",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"快乐","py":"kuàilè","en":"happiness"}]
+  },
+  "4": {
+   "explanation": "“陪伴”是陪在别人身边，所以“陪伴家人”就是陪在家人身边、和他们在一起。“道谢、拜访”都不是“陪在身边”的意思。",
+   "explanation_en": "陪伴 (péibàn) means to stay by someone's side, so 陪伴家人 means to keep one's family company. 道谢 (thank) and 拜访 (visit) do not mean 'to stay by someone's side'.",
+   "stem_en": "to keep family company",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to accompany"},{"w":"家人","py":"jiārén","en":"family"}]
+  },
+  "5": {
+   "explanation": "“关心”是留意、在乎别人的情况，所以“关心同学的事”就是在乎同学发生的事情。“分享、陪伴”都不是“在乎别人的事”的意思。",
+   "explanation_en": "关心 (guānxīn) means to care about and pay attention to others, so 关心同学的事 means to care about a classmate's affairs. 分享 (share) and 陪伴 (accompany) do not mean 'to care about someone's matters'.",
+   "stem_en": "to care about a classmate's affairs",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"同学","py":"tóngxué","en":"classmate"}]
+  }
+ },
+ "craft": {
+  "ZS14_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Grandpa is old.' and 'Grandpa still insists on walking in the park every day.'",
+   "answer_en": "Although Grandpa is old, he still insists on walking in the park every day.",
+   "tiles": ["虽然","爷爷年纪大了，","但是","他每天坚持去公园散步。"],
+   "explanation_en": "虽然……但是…… states one situation then turns to an unexpected result. '虽然爷爷年纪大了' (although Grandpa is old) is the situation, '但是他每天坚持去公园散步' (but he still walks daily) is the unexpected action. Both words are needed."
+  },
+  "ZS14_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Little sister fell ill today.' and 'Mum stayed home to look after her.'",
+   "answer_en": "Because little sister fell ill today, Mum stayed home to look after her.",
+   "tiles": ["因为","妹妹今天生病了，","所以","妈妈留在家里照顾妹妹。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为妹妹今天生病了' (because sister is ill) is the cause, '所以妈妈留在家里照顾妹妹' (so Mum stayed to care for her) is the result. Identify which clause is the cause."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Grandma saw the family arrive and ___ (hurriedly) came out happily to welcome them.",
+   "hint": "Clue: she comes out to greet them right away. Which box word means 'hurriedly / at once'?",
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"迎","py":"yíng","en":"to welcome"}],
+   "explanation_en": "Grandma sees the family and comes out to welcome them at once, so 连忙 (hurriedly, right away) fits best."
+  },
+  "2": {
+   "sentence_en": "Everyone sat down chatting and laughing; the atmosphere was very ___ (lively).",
+   "hint": "Clue: everyone is chatting and laughing together. Which box word describes a lively, cheerful atmosphere?",
+   "keywords": [{"w":"热闹","py":"rènao","en":"lively"},{"w":"气氛","py":"qìfēn","en":"atmosphere"}],
+   "explanation_en": "With everyone chatting and laughing, 热闹 (lively, bustling) best describes the cheerful atmosphere."
+  },
+  "3": {
+   "sentence_en": "Xiaowen ___ (poured) tea for Grandma, and she stroked his head.",
+   "hint": "Clue: putting tea into a cup. Which box word means 'to pour', pairing with 茶 (tea)?",
+   "keywords": [{"w":"倒","py":"dào","en":"to pour"},{"w":"茶","py":"chá","en":"tea"}],
+   "explanation_en": "帮外婆倒茶 means pouring tea into the cup, a fixed pairing, so 倒 fits best."
+  },
+  "4": {
+   "sentence_en": "Grandma praised Xiaowen as a ___ (sensible) good child.",
+   "hint": "Clue: Grandma praises him for being thoughtful and understanding. Which box word means 'sensible / thoughtful'?",
+   "keywords": [{"w":"懂事","py":"dǒngshì","en":"sensible"},{"w":"好孩子","py":"hǎo háizi","en":"good child"}],
+   "explanation_en": "Xiaowen poured tea for Grandma, so she praises him as a 懂事 (sensible, considerate) child."
+  },
+  "5": {
+   "sentence_en": "Hearing this, Xiaowen showed a ___ (bright) smile on his face.",
+   "hint": "Clue: after being praised, his smile is beautiful and radiant. Which box word means 'bright / radiant'?",
+   "keywords": [{"w":"灿烂","py":"cànlàn","en":"bright; radiant"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation_en": "After being praised, Xiaowen is happy, so he shows a 灿烂 (bright, radiant) smile."
+  }
+ },
+ "reading": {
+  "ZS14_G1": {
+   "stem_en": "Where did Xiaohua fall?",
+   "answer_en": "At school.",
+   "keywords": [{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"学校","py":"xuéxiào","en":"school"},{"w":"膝盖","py":"xīgài","en":"knee"}],
+   "explanation": "这是细节题。短文说“小华在学校不小心摔倒了，膝盖擦破了皮”，直接说明摔倒的地点是学校，所以选(2)。(1)医务室是后来包扎的地方、(3)教室是回去休息的地方，都不是摔倒的地方。做细节题要回原文找出事情发生的确切地点。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaohua carelessly fell at school and scraped her knee', directly stating the place is school, so (2). (1) the sick bay is where she was bandaged and (3) the classroom is where she returned - neither is where she fell. Find the exact place in the passage.",
+   "solution": {"evidence": "小华在学校不小心摔倒了"}
+  },
+  "ZS14_G2": {
+   "stem_en": "What things did Xiaojie do to help Xiaohua?",
+   "answer_en": "He helped Xiaohua up, went with her to the sick bay, and carried her school bag.",
+   "keywords": [{"w":"扶","py":"fú","en":"to help up"},{"w":"医务室","py":"yīwùshì","en":"sick bay"},{"w":"书包","py":"shūbāo","en":"school bag"}],
+   "explanation": "这是细节题。短文说“连忙跑过去扶起小华，然后陪他去医务室”，又说“小杰还帮他拿书包，一直陪他回到教室”，把三件事合起来就是扶起、陪去医务室、帮拿书包，所以选(3)。(1)(2)都说小杰帮忙包扎，但包扎是护士做的，不是小杰，所以不对。做细节题要把文中做的每件事对照选项，注意谁做了什么。",
+   "explanation_en": "This is a detail question. The passage says 'hurried over to help Xiaohua up, then went with her to the sick bay', and 'Xiaojie also carried her bag and stayed with her back to the classroom'. Putting the three together gives helping up, going to the sick bay, and carrying the bag, so (3). (1) and (2) say Xiaojie bandaged the wound, but the nurse did that, not Xiaojie, so they are wrong. Match each action in the text to the options and note who did what.",
+   "solution": {"evidence": "连忙跑过去扶起小华，然后陪他去医务室。护士帮小华包扎好伤口后，小杰还帮他拿书包，一直陪他回到教室。"}
+  },
+  "ZS14_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "Friends should help one another.",
+   "keywords": [{"w":"朋友","py":"péngyou","en":"friend"},{"w":"互相","py":"hùxiāng","en":"one another"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是主旨题。全文讲小杰在小华受伤时一路帮忙，最后小杰说“我们是好朋友，互相帮助是应该的”。可见短文是要告诉我们朋友之间应该互相帮助，所以选(1)。(2)受伤要去医务室、(3)上学要小心都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaojie helping the injured Xiaohua all the way, and ends with 'we are good friends, helping each other is only right'. So it tells us that friends should help one another, so (1). (2) go to the sick bay when hurt and (3) be careful at school are minor points, not the main idea.",
+   "solution": {"evidence": "我们是好朋友，互相帮助是应该的。"}
+  },
+  "ZS14_H1": {
+   "stem_en": "Find a word in the passage close in meaning to the underlined word: 'Little brother helped Mum with the chores, and Mum was moved.' (underlined: moved = 受感动)",
+   "answer_en": "感动 (moved)",
+   "keywords": [{"w":"感动","py":"gǎndòng","en":"moved"},{"w":"受感动","py":"shòu gǎndòng","en":"to be moved"},{"w":"贴心","py":"tiēxīn","en":"considerate"}],
+   "explanation": "这是近义词题。例句里的“受感动”指心里被触动、很感激，短文中说爸爸“总是感动地说：‘有你真好。’”，“感动”和“受感动”意思相近，都是心里被触动，所以答案是“感动”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. In the example, 受感动 means to be touched in the heart; in the passage Dad 'is always moved and says: how good to have you'. 感动 and 受感动 are close in meaning, both being touched, so the answer is 感动. Find the closest word in the passage.",
+   "solution": {"evidence": "总是感动地说"}
+  },
+  "ZS14_H2": {
+   "stem_en": "What things does Xiaoling help Dad with on weekends?",
+   "answer_en": "On weekends Xiaoling helps Dad wash clothes and clean the room.",
+   "keywords": [{"w":"周末","py":"zhōumò","en":"weekend"},{"w":"洗衣服","py":"xǐ yīfu","en":"to wash clothes"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“周末，小玲还会帮爸爸洗衣服、打扫房间”，直接说明她周末帮爸爸做的两件事是洗衣服和打扫房间。答“做哪些事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'on weekends, Xiaoling also helps Dad wash clothes and clean the room', directly naming the two things. When asked 'what things', list all the actions mentioned in the text.",
+   "solution": {"evidence": "周末，小玲还会帮爸爸洗衣服、打扫房间。"}
+  },
+  "ZS14_H3": {
+   "stem_en": "When does Xiaoling feel that doing things is happy?",
+   "answer_en": "Xiaoling feels that as long as the family is together, doing anything is happy.",
+   "keywords": [{"w":"家人","py":"jiārén","en":"family"},{"w":"一起","py":"yìqǐ","en":"together"},{"w":"快乐","py":"kuàilè","en":"happy"}],
+   "explanation": "这是推断题，答案在文章最后。短文说“小玲觉得，只要家人在一起，做什么事都是快乐的”，说明她觉得只要一家人在一起，做任何事都快乐。答这类题要抓住结尾表达感受的句子。",
+   "explanation_en": "This is an inference question; the answer is at the end. The passage says 'Xiaoling feels that as long as the family is together, doing anything is happy', showing that togetherness is what makes things happy for her. For such questions, catch the closing sentence that expresses the feeling.",
+   "solution": {"evidence": "只要家人在一起，做什么事都是快乐的。"}
+  }
+ }
+}

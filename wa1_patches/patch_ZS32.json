@@ -1,0 +1,217 @@
+{
+ "setId": "ZS32",
+ "mcq": {
+  "ZS32_A1": {
+   "sentence_en": "Every night, Xiaoming ___ (sleeps) on time to make sure he gets enough rest.",
+   "hints": ["The blank + 觉 means to rest and sleep. Which character (with 目, the eye, inside) forms 睡觉?"],
+   "keywords": [{"w":"睡觉","py":"shuìjiào","en":"to sleep"},{"w":"按时","py":"ànshí","en":"on time"},{"w":"睡眠","py":"shuìmián","en":"sleep"}],
+   "explanation_en": "睡觉 is the fixed word for resting and sleeping, so 睡 fits. 睡 has 目 (the eye) inside - closing the eyes is sleeping."
+  },
+  "ZS32_A2": {
+   "sentence_en": "Dad goes to the park to ___ (take a walk) every morning to keep his body healthy.",
+   "hints": ["The blank + 步 means to walk about in a relaxed way. Which character carries the sense of 'relaxing / loosening', forming 散步?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"健康","py":"jiànkāng","en":"healthy"}],
+   "explanation_en": "散步 is the fixed word for walking about in a relaxed way, so 散 fits. 散 carries the sense of relaxing and loosening - 散步 is walking in a relaxed way."
+  },
+  "ZS32_A3": {
+   "sentence_en": "Xiaohua likes to drink ___ (plain) water, because it is good for the body.",
+   "hints": ["白___ names plain water with nothing added. Which character means the colour 'white / plain'?"],
+   "keywords": [{"w":"白水","py":"báishuǐ","en":"plain water"},{"w":"喝","py":"hē","en":"to drink"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "白水 means plain water with nothing added, good for the body, so 白 fits. The four sound alike; judge by meaning: 白 (white/plain) makes 白水, not the number 百 or the 伯 of 'uncle'."
+  },
+  "ZS32_A4": {
+   "sentence_en": "Mum tells us to ___ (wash) our hands clean before a meal before we can eat.",
+   "hints": ["The blank + 干净 means to clean off dirt with water. Which character (with the water radical 氵) means 'to wash'?"],
+   "keywords": [{"w":"洗","py":"xǐ","en":"to wash"},{"w":"饭前","py":"fànqián","en":"before a meal"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "洗干净 is a fixed pairing meaning to clean off dirt with water, so 洗 fits. 洗 has the water radical 氵 and relates to water - washing hands needs water; 冼 also has 氵 but is a surname."
+  },
+  "ZS32_A5": {
+   "sentence_en": "We should ___ (eat) more vegetables and fruit to be healthy.",
+   "hints": ["Vegetables and fruit are solid food. Which verb is used for solid food, not liquids?"],
+   "keywords": [{"w":"吃","py":"chī","en":"to eat"},{"w":"蔬菜","py":"shūcài","en":"vegetables"},{"w":"水果","py":"shuǐguǒ","en":"fruit"}],
+   "explanation_en": "Vegetables and fruit are solid food, so use 吃 (eat), not 喝 (drink). Solid food uses 吃; liquids use 喝. Vegetables and fruit are solid, so 吃."
+  },
+  "ZS32_B1": {
+   "sentence_en": "Xiaoli 运动 (exercises) for half an hour every day, so her body is very well.",
+   "hints": ["运 is 4th tone (yùn); 动 is 4th tone (dòng). Which choice is yùn + dòng, both falling?"],
+   "keywords": [{"w":"运动","py":"yùndòng","en":"to exercise"},{"w":"半小时","py":"bàn xiǎoshí","en":"half an hour"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "运 is read yùn (4th tone) and 动 is dòng (4th tone), together yùn dòng. Both characters are 4th tone; do not confuse 动 dòng with 同 tóng."
+  },
+  "ZS32_B2": {
+   "sentence_en": "The doctor says to eat a 均衡 (balanced) diet and not only eat what you like.",
+   "hints": ["均 is 1st tone (jūn); 衡 is 2nd tone (héng). Which choice is jūn + héng?"],
+   "keywords": [{"w":"均衡","py":"jūnhéng","en":"balanced"},{"w":"饮食","py":"yǐnshí","en":"diet"},{"w":"食物","py":"shíwù","en":"food"}],
+   "explanation_en": "均 is read jūn (1st tone) and 衡 is héng (2nd tone), together jūn héng. 均 (1st tone) is level, like dividing evenly; 衡 (2nd tone) rises, like a scale balancing up."
+  },
+  "ZS32_B3": {
+   "sentence_en": "When brushing teeth, be 仔细 (careful) - every tooth should be brushed.",
+   "hints": ["仔 is 3rd tone (zǐ); 细 is 4th tone (xì). Which choice is zǐ + xì?"],
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"刷牙","py":"shuāyá","en":"to brush teeth"},{"w":"牙齿","py":"yáchǐ","en":"teeth"}],
+   "explanation_en": "仔 is read zǐ (3rd tone) and 细 is xì (4th tone), together zǐ xì. 仔 (3rd tone) dips then rises; 细 (4th tone) falls - do not read both level."
+  },
+  "ZS32_B4": {
+   "sentence_en": "This dish looks tasty, but eating salty food 长期 (over the long term) is bad for the body.",
+   "hints": ["长 is a polyphone: cháng = long in time; zhǎng = to grow. 长期 means over a long time, so read cháng. 期 is qī. Which is cháng + qī?"],
+   "keywords": [{"w":"长期","py":"chángqī","en":"over the long term"},{"w":"太咸","py":"tài xián","en":"too salty"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "In 长期, 长 is read cháng (2nd tone, long in time), not zhǎng (to grow); 期 is qī (1st tone), giving cháng qī. 长 is a polyphone: cháng = long time (长期, 长久); zhǎng = to grow (长大, 成长). 期 is 1st tone qī."
+  },
+  "ZS32_C1": {
+   "sentence_en": "Xiaoqiang keeps running every day, and his body is getting ___ (healthier).",
+   "hints": ["Clue: running is exercise, and exercise improves the body. Which word means 'healthy'?"],
+   "keywords": [{"w":"健康","py":"jiànkāng","en":"healthy"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "Running is exercise, and exercise makes the body better, so 健康 (healthy) fits best. Exercise -> a better body -> 健康. Read the theme: running is for the body, so choose 健康. 聪明, 整齐 and 快乐 do not fit."
+  },
+  "ZS32_C2": {
+   "sentence_en": "Mum bought ___ (a bag of) vegetables to cook a healthy dinner.",
+   "hints": ["Clue: vegetables carried in a bag. Which measure word means 'a bagful'?"],
+   "keywords": [{"w":"一袋","py":"yí dài","en":"a bag of"},{"w":"蔬菜","py":"shūcài","en":"vegetables"},{"w":"晚餐","py":"wǎncān","en":"dinner"}],
+   "explanation_en": "Vegetables are carried in a bag, so 一袋 (a bagful) fits best. Match measure words to shape and packing: vegetables in a bag -> 一袋. 一张, 一条 and 一本 do not fit."
+  },
+  "ZS32_C3": {
+   "sentence_en": "Every day after school, Xiaomei does her homework ___ (right away), not putting it off till late.",
+   "hints": ["Clue: 'not putting it off' means doing it immediately. Which word means 'at once / right away'?"],
+   "keywords": [{"w":"马上","py":"mǎshàng","en":"right away"},{"w":"放学","py":"fàngxué","en":"after school"},{"w":"功课","py":"gōngkè","en":"homework"}],
+   "explanation_en": "The sentence says 'not putting it off till late', meaning she does it at once, so 马上 (right away) fits best. 马上 = at once, the same idea as 'not delaying'. Seeing 'not putting off', think 马上. 慢慢, 有时 and 偶尔 do not fit."
+  },
+  "ZS32_C4": {
+   "sentence_en": "The doctor tells us to ___ (drink plenty of) water, at least eight cups a day.",
+   "hints": ["Clue: it echoes 'at least eight cups' - drinking a lot. Which word means 'plenty / a lot'?"],
+   "keywords": [{"w":"多多","py":"duōduō","en":"plenty; a lot"},{"w":"喝水","py":"hē shuǐ","en":"to drink water"},{"w":"八杯","py":"bā bēi","en":"eight cups"}],
+   "explanation_en": "多多喝水 means drinking a lot of water, matching 'at least eight cups', so 多多 fits best. The 'at least eight cups' stresses a large amount, so use 多多. 好好, 快快 and 轻轻 do not fit the amount."
+  },
+  "ZS32_C5": {
+   "sentence_en": "Dad tells me to ___ (get rid of) the bad habit of sleeping late and to go to bed earlier.",
+   "hints": ["Clue: a bad habit should be removed and no longer done. Which word pairs with 坏习惯 to mean 'to get rid of'?"],
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"坏习惯","py":"huài xíguàn","en":"bad habit"},{"w":"睡觉","py":"shuìjiào","en":"to sleep"}],
+   "explanation_en": "A bad habit should be removed and no longer repeated, and the fixed pairing is 改掉坏习惯 (get rid of a bad habit), so 改掉 fits best. 掉 carries the sense of removing. 找到, 记住 and 看见 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“保护”是爱护、不让它受伤害，所以“保护眼睛”就是爱护眼睛、不让它受损。“新鲜、休息”都不是“爱护不受伤害”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护眼睛 means to protect the eyes. 新鲜 (fresh) and 休息 (rest) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the eyes",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"眼睛","py":"yǎnjing","en":"eyes"}]
+  },
+  "2": {
+   "explanation": "“新鲜”是空气干净、不闷，所以“空气很新鲜”就是空气清爽干净。“保护、注意”都不是“空气干净清爽”的意思。",
+   "explanation_en": "新鲜 (xīnxiān) means the air is clean and not stuffy, so 空气很新鲜 means the air is very fresh. 保护 (protect) and 注意 (pay attention) do not describe 'clean, fresh air'.",
+   "stem_en": "the air is very fresh",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}]
+  },
+  "3": {
+   "explanation": "“足够”是数量够、不缺少，所以“睡眠足够”就是睡的时间够、休息足够。“新鲜、注意”都不是“数量够、不缺少”的意思。",
+   "explanation_en": "足够 (zúgòu) means enough, not lacking, so 睡眠足够 means enough sleep. 新鲜 (fresh) and 注意 (pay attention) do not mean 'enough in amount'.",
+   "stem_en": "enough sleep",
+   "keywords": [{"w":"足够","py":"zúgòu","en":"enough"},{"w":"睡眠","py":"shuìmián","en":"sleep"}]
+  },
+  "4": {
+   "explanation": "“休息”是停下来让身体放松、恢复力气，所以“好好休息”就是好好地歇一歇。“保护、注意”都不是“停下来歇息”的意思。",
+   "explanation_en": "休息 (xiūxi) means to stop and let the body rest, so 好好休息 means to have a good rest. 保护 (protect) and 注意 (pay attention) do not mean 'to stop and rest'.",
+   "stem_en": "to have a good rest",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"好好","py":"hǎohǎo","en":"well; properly"}]
+  },
+  "5": {
+   "explanation": "“注意”是留心、小心看待，所以“注意饮食”就是留心自己吃的东西，讲究吃得健康。“保护、休息”都不是“留心讲究”的意思。",
+   "explanation_en": "注意 (zhùyì) means to pay attention and be careful, so 注意饮食 means to watch one's diet. 保护 (protect) and 休息 (rest) do not mean 'to pay attention to'.",
+   "stem_en": "to watch one's diet",
+   "keywords": [{"w":"注意","py":"zhùyì","en":"to pay attention"},{"w":"饮食","py":"yǐnshí","en":"diet"}]
+  }
+ },
+ "craft": {
+  "ZS32_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Exercising is tiring.' and 'Exercising is very good for the body.'",
+   "answer_en": "Although exercising is tiring, it is very good for the body.",
+   "tiles": ["虽然","运动很辛苦，","但是","对身体很有好处。"],
+   "explanation_en": "虽然……但是…… admits one thing first, then states a different result. '虽然运动很辛苦' (although exercise is tiring) is the admission, '但是对身体很有好处' (but it is good for the body) is the turn. Remember: 虽然 (the bad), 但是 (the good)."
+  },
+  "ZS32_E2": {
+   "question_en": "Combine these two sentences using the connector 只有……才 (only if…, then…): 'We brush our teeth every day.' and 'Our teeth will be healthy.'",
+   "answer_en": "Only if we brush our teeth every day will our teeth be healthy.",
+   "tiles": ["只有","每天刷牙，","我们的牙齿","才","会健康。"],
+   "explanation_en": "只有……才…… means the result comes only when the condition is met. '只有每天刷牙' (only if we brush daily) is the required condition, '才会健康' (then they will be healthy) is the result. Only this condition brings the result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Xiaowei used to dislike exercise; after school every day he would sit on the sofa watching TV. Mum was very ___ (worried) and told him to run in the park each day.",
+   "hint": "Clue: Mum sees Xiaowei never exercising and feels uneasy. Which box word means 'worried'?",
+   "keywords": [{"w":"担心","py":"dānxīn","en":"worried"},{"w":"运动","py":"yùndòng","en":"to exercise"}],
+   "explanation_en": "Mum sees Xiaowei never exercising and feels uneasy, so 担心 (worried) fits best."
+  },
+  "2": {
+   "sentence_en": "At first, Xiaowei got ___ (tired) after running only a short distance and wanted to give up.",
+   "hint": "Clue: running is physical, and a short run wears him out. Which box word means 'tired'?",
+   "keywords": [{"w":"累","py":"lèi","en":"tired"},{"w":"放弃","py":"fàngqì","en":"to give up"}],
+   "explanation_en": "Running is physical, and a short run wears him out, so 累 (tired) fits best."
+  },
+  "3": {
+   "sentence_en": "But he ___ (with effort) kept it up, running every day.",
+   "hint": "Clue: though tired, he put his heart into keeping going. Which box word means 'with effort / hard'?",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"with effort"},{"w":"坚持","py":"jiānchí","en":"to persist"}],
+   "explanation_en": "Though tired, Xiaowei put his heart into keeping going, so 努力 (with effort) fits best."
+  },
+  "4": {
+   "sentence_en": "A month later, Xiaowei's body was much ___ (stronger).",
+   "hint": "Clue: after a month of exercise his body became better and firmer. Which box word means 'strong and sturdy'?",
+   "keywords": [{"w":"强壮","py":"qiángzhuàng","en":"strong"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "After a month of exercise his body became firmer, so 强壮 (strong and sturdy) fits best."
+  },
+  "5": {
+   "sentence_en": "And in class he no longer felt ___ (sleepy).",
+   "hint": "Clue: with a stronger body, he no longer wants to sleep in class. Which box word means 'sleepy'?",
+   "keywords": [{"w":"困","py":"kùn","en":"sleepy"},{"w":"上课","py":"shàngkè","en":"in class"}],
+   "explanation_en": "No longer feeling 困 (sleepy) in class means he no longer wants to sleep, showing better spirits, which echoes his stronger body, so 困 fits best."
+  }
+ },
+ "reading": {
+  "ZS32_G1": {
+   "stem_en": "What does Xiaofang do first after school?",
+   "answer_en": "She goes to the park to run.",
+   "keywords": [{"w":"放学","py":"fàngxué","en":"after school"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"公园","py":"gōngyuán","en":"park"}],
+   "explanation": "这是细节题。短文说“放学后，小芳不会马上坐下来看电视，而是先去公园跑步二十分钟”，“不是……而是先……”说明她放学后先去公园跑步，所以选(2)。(1)坐下来看电视是她不做的、(3)喝白水是早上的事，都不对。做细节题要注意“不是……而是……”这样的对比。",
+   "explanation_en": "This is a detail question. The passage says 'after school, Xiaofang does not sit down to watch TV, but first goes to the park to run for twenty minutes'. The '不是……而是先……' shows she runs first after school, so (2). (1) sitting to watch TV is what she does NOT do, and (3) drinking plain water is a morning thing. Note the contrast '不是……而是……'.",
+   "solution": {"evidence": "放学后，小芳不会马上坐下来看电视，而是先去公园跑步二十分钟。"}
+  },
+  "ZS32_G2": {
+   "stem_en": "Why does Xiaofang rarely fall ill?",
+   "answer_en": "Because her living habits are very good.",
+   "keywords": [{"w":"生病","py":"shēngbìng","en":"to fall ill"},{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"健康","py":"jiànkāng","en":"healthy"}],
+   "explanation": "这是推断题。短文最后说“同学们都说小芳很少生病，因为她的生活习惯非常好”，“因为”后面就是原因，说明她很少生病是因为生活习惯好，所以选(3)。(1)每天喝很多水、(2)六点起床都只是好习惯里的一项，不能概括全部。推断题要看“因为”引出的原因句。",
+   "explanation_en": "This is an inference question. The passage ends with 'classmates all say Xiaofang rarely falls ill, because her living habits are very good'; the reason follows '因为', so it is her good habits, so (3). (1) drinking lots of water and (2) getting up at six are single habits, not the whole reason. Read the reason after '因为'.",
+   "solution": {"evidence": "同学们都说小芳很少生病，因为她的生活习惯非常好。"}
+  },
+  "ZS32_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Good living habits can keep us healthy.",
+   "keywords": [{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"健康","py":"jiànkāng","en":"healthy"},{"w":"保持","py":"bǎochí","en":"to keep"}],
+   "explanation": "这是主旨题。全文讲小芳早起喝水、吃早餐、跑步、早睡等好习惯，同学们说她很少生病。可见短文是要告诉我们好的生活习惯能让我们保持健康，所以选(1)。(2)早餐最重要、(3)跑步让人变聪明都只是其中一句话或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage lists Xiaofang's good habits - rising early, drinking water, eating breakfast, running, sleeping early - and classmates say she rarely gets ill. So it tells us good living habits keep us healthy, so (1). (2) breakfast is most important and (3) running makes you smart are single lines or off-topic, not the main idea.",
+   "solution": {"evidence": "小芳是一个很注意健康的小学生。"}
+  },
+  "ZS32_H1": {
+   "stem_en": "Find a word in the passage close in meaning to the underlined word: 'He made up his mind to remove this bad habit.' (underlined: remove)",
+   "answer_en": "改变 (to change)",
+   "keywords": [{"w":"改变","py":"gǎibiàn","en":"to change"},{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"决定","py":"juédìng","en":"to decide"}],
+   "explanation": "这是近义词题。例句里的“去除”指把坏毛病改掉、不再有，短文中说小明“决定从今天开始改变自己的饮食习惯”，“改变”和“去除坏毛病”意思相近，都是把原来不好的变掉，所以答案是“改变”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. In the example, 'remove' means to get rid of a bad habit; in the passage Xiaoming 'decided to change his eating habits from today'. 改变 and 'removing a bad habit' are close in meaning, both changing what was bad, so the answer is 改变. Find the closest word in the passage.",
+   "solution": {"evidence": "决定从今天开始改变自己的饮食习惯"}
+  },
+  "ZS32_H2": {
+   "stem_en": "Why did Xiaoming decide to stop drinking soft drinks?",
+   "answer_en": "Because Xiaoming knew that soft drinks are bad for the teeth, so he decided to stop drinking them.",
+   "keywords": [{"w":"汽水","py":"qìshuǐ","en":"soft drink"},{"w":"牙齿","py":"yáchǐ","en":"teeth"},{"w":"决定","py":"juédìng","en":"to decide"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“他知道汽水对牙齿不好，所以他下定决心不再喝汽水”，说明小明不再喝汽水是因为知道汽水对牙齿不好。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'he knew soft drinks are bad for the teeth, so he made up his mind to stop drinking them', so he stopped because he knew they harm the teeth. State the reason in a full sentence.",
+   "solution": {"evidence": "他知道汽水对牙齿不好，所以他下定决心不再喝汽水"}
+  },
+  "ZS32_H3": {
+   "stem_en": "What did Mum do after seeing Xiaoming's change?",
+   "answer_en": "After seeing Xiaoming's change, Mum was very happy and specially prepared all kinds of fresh fruit for him.",
+   "keywords": [{"w":"改变","py":"gǎibiàn","en":"change"},{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"准备","py":"zhǔnbèi","en":"to prepare"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“妈妈看到小明的改变，非常高兴，还特地为他准备了各种新鲜的水果”，说明妈妈看到小明改变后很高兴，还特地为他准备了新鲜水果。答“做了什么”要把文中的事写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'seeing Xiaoming's change, Mum was very happy and specially prepared all kinds of fresh fruit for him', so Mum was happy and prepared fresh fruit. State the actions clearly from the text.",
+   "solution": {"evidence": "妈妈看到小明的改变，非常高兴，还特地为他准备了各种新鲜的水果。"}
+  }
+ }
+}

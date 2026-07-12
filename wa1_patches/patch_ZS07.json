@@ -1,0 +1,217 @@
+{
+ "setId": "ZS07",
+ "mcq": {
+  "ZS07_A1": {
+   "sentence_en": "The weather is nice today, so our whole family decided to take a walk in the ___ (park).",
+   "hints": ["The blank + 公 names a place with plants where you can stroll. Which character has 土 ('earth') inside?"],
+   "keywords": [{"w":"公园","py":"gōngyuán","en":"park"},{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"天气","py":"tiānqì","en":"weather"}],
+   "explanation_en": "公园 is a place with flowers and trees where you can walk, so use 园. 园 has 土 ('earth') inside - a place where plants grow in the soil is 园. 公园 (park) and 花园 (garden) both use this character."
+  },
+  "ZS07_A2": {
+   "sentence_en": "My little brother ___ (kicks) a ball on the grass, playing very happily.",
+   "hints": ["The blank means kicking with the foot. Which character has the foot radical ⻊?"],
+   "keywords": [{"w":"踢球","py":"tī qiú","en":"to kick a ball"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "踢球 means kicking with the foot, so use 踢 with the foot radical ⻊. The four sound alike, but 踢 has the foot radical and relates to the feet - you kick a ball with your foot."
+  },
+  "ZS07_A3": {
+   "sentence_en": "The flowers in the park bloom ___ (luxuriantly), and their scent drifts far.",
+   "hints": ["The blank describes flowers blooming lushly and abundantly. Which character (with 日 'sun') means 'flourishing'?"],
+   "keywords": [{"w":"旺","py":"wàng","en":"flourishing; lush"},{"w":"花开","py":"huākāi","en":"flowers bloom"},{"w":"香味","py":"xiāngwèi","en":"scent"}],
+   "explanation_en": "旺 describes flowers blooming abundantly, so 花开得很旺 (blooming lushly) makes sense. All four sound like 'wàng', but 旺 has 日 ('sun') - with the sun shining, flowers bloom flourishingly."
+  },
+  "ZS07_A4": {
+   "sentence_en": "Mum sits on a chair ___ (reading) the newspaper, looking very relaxed.",
+   "hints": ["The blank means to read with the eyes. Which character has 目 ('eye') at the bottom?"],
+   "keywords": [{"w":"看报纸","py":"kàn bàozhǐ","en":"to read the newspaper"},{"w":"椅子","py":"yǐzi","en":"chair"},{"w":"悠闲","py":"yōuxián","en":"leisurely"}],
+   "explanation_en": "看报纸 means reading with the eyes, so 看 fits best. 看 has 手 on top over 目 ('eye') - a hand shading the eyes to look into the distance; you look at things with your eyes."
+  },
+  "ZS07_A5": {
+   "sentence_en": "A little bird stands on the tree ___ (top), singing happily.",
+   "hints": ["The blank + 树 names the very tip of the tree branches. Which character has the wood radical 木?"],
+   "keywords": [{"w":"树梢","py":"shùshāo","en":"treetop"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation_en": "树梢 is the very top of the tree branches, so a bird standing on 树梢 makes sense. 梢 has the wood radical 木 and relates to trees - 树梢 is the tip end of the branch."
+  },
+  "ZS07_B1": {
+   "sentence_en": "The air in the park is 清新 (fresh), which makes people feel good.",
+   "hints": ["Both syllables of 清新 are 1st tone (high and level): qīng xīn. Which choice has both flat tones?"],
+   "keywords": [{"w":"清新","py":"qīngxīn","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"},{"w":"心情","py":"xīnqíng","en":"mood"}],
+   "explanation_en": "清 is read qīng (1st tone) and 新 is xīn (1st tone), together qīng xīn. Both characters of 清新 are 1st tone, read flat - light and even, like fresh air."
+  },
+  "ZS07_B2": {
+   "sentence_en": "We went 散步 (for a walk) in the park for a long time.",
+   "hints": ["In 散步, 散 is sàn (flat-tongue s, 4th tone), not retroflex shàn, and 步 is bù. Which choice is sàn + bù?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"时间","py":"shíjiān","en":"time"}],
+   "explanation_en": "In 散步, 散 is read sàn (flat-tongue s, 4th tone) and 步 is bù (4th tone), together sàn bù. The 散 in 散步 is a flat-tongue sound sàn, 4th tone - do not read it as the retroflex shàn."
+  },
+  "ZS07_B3": {
+   "sentence_en": "A few 白云 (white clouds) float in the sky - so beautiful.",
+   "hints": ["Both syllables of 白云 are 2nd tone (rising): bái yún. Which choice has both rising tones?"],
+   "keywords": [{"w":"白云","py":"báiyún","en":"white cloud"},{"w":"天空","py":"tiānkōng","en":"sky"},{"w":"飘","py":"piāo","en":"to float"}],
+   "explanation_en": "白 is read bái (2nd tone) and 云 is yún (2nd tone), together bái yún. Both characters of 白云 are 2nd tone, same rising tone - remember 白 = bái, 云 = yún."
+  },
+  "ZS07_B4": {
+   "sentence_en": "Dad 长 (is built) very tall, so you can spot him at a glance in the park.",
+   "hints": ["Here 长 means 'to grow / one's build', read zhǎng (3rd tone); it reads cháng only when it means 'length'. Which reading fits?"],
+   "keywords": [{"w":"长得","py":"zhǎng de","en":"to be built; to look"},{"w":"高","py":"gāo","en":"tall"},{"w":"认出","py":"rènchū","en":"to recognize"}],
+   "explanation_en": "Here 长 means to grow / one's build, read zhǎng (3rd tone). It reads cháng only when it means 'length'. 长 has two readings: 长大/长得 (zhǎng); 长短/很长 (cháng). Judge by the meaning of the sentence."
+  },
+  "ZS07_C1": {
+   "sentence_en": "The flowers in the park ___ (give off) waves of fragrance, making people feel comfortable.",
+   "hints": ["The blank + 香味 (scent) is a fixed pairing - scent spreading out. Which word means 'to give off / emit'?"],
+   "keywords": [{"w":"发出","py":"fāchū","en":"to give off; to emit"},{"w":"香味","py":"xiāngwèi","en":"scent"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "发出香味 is a fixed collocation meaning the scent spreads out. Remember the pairing: 发出 + sound / scent / light. When you see scent, think 发出."
+  },
+  "ZS07_C2": {
+   "sentence_en": "My little sister runs about on the grass, playing ___ (happily).",
+   "hints": ["Clue: running about while playing shows a joyful mood. Which word means 'happy', not an attitude like 'earnest' or 'hardworking'?"],
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"跑来跑去","py":"pǎolái pǎoqù","en":"to run about"}],
+   "explanation_en": "Running about at play shows a joyful mood, so 开心 ('happy') fits best. Play -> good mood -> 开心. When you see 玩 (play), think 开心, not 认真 (earnest) or 努力 (hardworking)."
+  },
+  "ZS07_C3": {
+   "sentence_en": "There is ___ (a) big tree in the park, its shade covering the whole path.",
+   "hints": ["The blank is the measure word for a tree. Which one goes with 大树?"],
+   "keywords": [{"w":"棵","py":"kē","en":"measure word for trees"},{"w":"大树","py":"dàshù","en":"big tree"},{"w":"树荫","py":"shùyīn","en":"tree shade"}],
+   "explanation_en": "The measure word 棵 is used specially for counting trees, so 一棵大树 is correct. Trees use 棵: 一棵树, 一棵花. Leaves use 片: 一片叶子."
+  },
+  "ZS07_C4": {
+   "sentence_en": "My elder brother runs in the park; he runs ___ (hard), and sweat soaks his clothes.",
+   "hints": ["Clue: he runs so hard that sweat soaks his clothes - great physical effort. Which word means 'hard / with effort', suited to exercise, not studying?"],
+   "keywords": [{"w":"努力","py":"nǔlì","en":"with effort; hard"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"汗水","py":"hànshuǐ","en":"sweat"}],
+   "explanation_en": "努力跑步 means running with great effort, matching 'sweat soaks his clothes'. 用功 and 认真 usually describe studying, and 仔细 describes doing something carefully, none suited to running. Exercise uses 努力: 努力跑步, 努力练习; studying uses 用功 or 认真."
+  },
+  "ZS07_C5": {
+   "sentence_en": "We played in the park for a long time and ___ (finally) had to go home; everyone felt a little reluctant.",
+   "hints": ["Clue: after playing a long time, the moment to go home arrives at last. Which word means 'finally / at last', not 'suddenly' or 'as expected'?"],
+   "keywords": [{"w":"终于","py":"zhōngyú","en":"finally; at last"},{"w":"回家","py":"huíjiā","en":"to go home"},{"w":"不舍得","py":"bù shěde","en":"reluctant"}],
+   "explanation_en": "After playing a long time the moment to go home arrives, so 终于 ('finally, at last') fits best. Played a long time -> much time passed -> 终于 going home. 终于 means after waiting or after a period of time."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“乘凉”是在阴凉的地方休息、避开太阳，所以“在树下乘凉”表示到树荫下凉快凉快。“草地、水池”是名词，不能表示“避暑纳凉”。",
+   "explanation_en": "乘凉 (chéngliáng) means to rest in a cool, shady spot away from the sun, so 在树下乘凉 means to enjoy the cool shade under a tree. 草地 (grass) or 水池 (pond) are nouns and cannot mean 'to cool off in the shade'.",
+   "stem_en": "to enjoy the cool shade under a tree",
+   "keywords": [{"w":"乘凉","py":"chéngliáng","en":"to enjoy the cool"},{"w":"树下","py":"shù xià","en":"under a tree"}]
+  },
+  "2": {
+   "explanation": "“草地”是长满青草的地方，所以“坐在草地上”表示坐在铺满青草的地面上。“欣赏、拍照”是动作，不是可以“坐在上面”的地方。",
+   "explanation_en": "草地 (cǎodì) means ground covered with grass, so 坐在草地上 means sitting on the grass. 欣赏 (admire) or 拍照 (take photos) are actions, not a place you can 'sit on'.",
+   "stem_en": "to sit on the grass",
+   "keywords": [{"w":"草地","py":"cǎodì","en":"grass; lawn"},{"w":"坐","py":"zuò","en":"to sit"}]
+  },
+  "3": {
+   "explanation": "“欣赏”是用心地看、享受美好的事物，所以“欣赏风景”表示细细地观赏美丽的景色。“乘凉、微风”都不能表示“观赏景色”。",
+   "explanation_en": "欣赏 (xīnshǎng) means to look with enjoyment and take in something beautiful, so 欣赏风景 means to admire the scenery. 乘凉 (cool off) or 微风 (breeze) cannot mean 'to admire scenery'.",
+   "stem_en": "to admire the scenery",
+   "keywords": [{"w":"欣赏","py":"xīnshǎng","en":"to admire; to enjoy"},{"w":"风景","py":"fēngjǐng","en":"scenery"}]
+  },
+  "4": {
+   "explanation": "“微风”是轻轻吹的风，所以“一阵微风吹来”表示有一阵柔和的风吹过来。“拍照、草地”都不能和“吹来”搭配。",
+   "explanation_en": "微风 (wēifēng) means a gently blowing wind, so 一阵微风吹来 means a gentle breeze blows over. 拍照 (take photos) or 草地 (grass) cannot pair with 吹来 (blows over).",
+   "stem_en": "a gentle breeze blows over",
+   "keywords": [{"w":"微风","py":"wēifēng","en":"gentle breeze"},{"w":"吹","py":"chuī","en":"to blow"}]
+  },
+  "5": {
+   "explanation": "“拍照”是用相机把画面拍下来，所以“对着花朵拍照”表示对准花朵照相。“欣赏、乘凉”都不是“照相”的意思。",
+   "explanation_en": "拍照 (pāizhào) means to take a picture with a camera, so 对着花朵拍照 means to take a photo of the flowers. 欣赏 (admire) or 乘凉 (cool off) do not mean 'to photograph'.",
+   "stem_en": "to take a photo of the flowers",
+   "keywords": [{"w":"拍照","py":"pāizhào","en":"to take a photo"},{"w":"花朵","py":"huāduǒ","en":"flower"}]
+  }
+ },
+ "craft": {
+  "ZS07_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'The weather is very hot today.' and 'We still went to the park to play.'",
+   "answer_en": "Although the weather is very hot today, we still went to the park to play.",
+   "tiles": ["虽然","今天天气很热，","但是","我们还是去公园玩。"],
+   "explanation_en": "虽然……但是…… means the first part is a situation and the second is an opposite or unexpected result. '虽然今天天气很热' (although it is hot today) is the situation, '但是我们还是去公园玩' (but we still went to play) is the unexpected result. Put each word at the start of its own clause."
+  },
+  "ZS07_E2": {
+   "question_en": "Combine these two sentences using the connector 先……再 (first…, then…): 'We take a walk in the park.' and 'We sit down to rest.'",
+   "answer_en": "We first take a walk in the park, then sit down to rest.",
+   "tiles": ["我们","先在公园里散步，","再","坐下来休息。"],
+   "explanation_en": "先……再…… shows two actions in order: do the first, then the second. '先在公园里散步' (first walk in the park) is the first action, '再坐下来休息' (then sit down to rest) is the second. Put the earlier action after 先, the later one after 再."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Saturday morning, Mingming and his family came to the park. The air was very ___ (fresh), and Mingming took a deep breath, feeling very comfortable.",
+   "hint": "Clue: good, clean air that makes you feel comfortable. Which box word means 'fresh' (as in 新鲜的空气)?",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}],
+   "explanation_en": "Good, clean air is described as 新鲜; 新鲜的空气 (fresh air) is a fixed collocation, so it fits best."
+  },
+  "2": {
+   "sentence_en": "They ___ (strolled) along the path and saw many beautiful flowers.",
+   "hint": "Clue: walking slowly along the path in the park. Which box word means 'to take a walk / stroll'?",
+   "keywords": [{"w":"散步","py":"sànbù","en":"to stroll"},{"w":"小路","py":"xiǎolù","en":"path"}],
+   "explanation_en": "Walking slowly along the path is 散步 (strolling), which matches the park setting."
+  },
+  "3": {
+   "sentence_en": "Mingming ___ (carefully) took photos of these flowers.",
+   "hint": "Clue: he takes the photos with care and attention. Which box word means 'careful / meticulous'?",
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"拍照","py":"pāizhào","en":"to take photos"}],
+   "explanation_en": "Taking photos with care and attention is 仔细; 仔细地拍 means photographing attentively."
+  },
+  "4": {
+   "sentence_en": "After walking for a while, everyone felt ___ (glad) and sat down to rest under the big tree.",
+   "hint": "Clue: they walked happily and sat down smiling to rest. Which box word means 'happy / glad'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy; glad"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "After the walk everyone is in a good mood and sits down smiling to rest, so 高兴 ('glad') describes their mood best."
+  },
+  "5": {
+   "sentence_en": "A gentle breeze blew softly, and Mingming felt this was his ___ (happiest) day.",
+   "hint": "Clue: he describes the whole day as joyful. Which box word means 'happy / joyful' (as in 最快乐的一天)?",
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy; joyful"},{"w":"微风","py":"wēifēng","en":"gentle breeze"}],
+   "explanation_en": "Mingming feels the whole day was joyful, so 快乐 describes the day; 最快乐的一天 (the happiest day) is a natural expression."
+  }
+ },
+ "reading": {
+  "ZS07_G1": {
+   "stem_en": "Why did the little brother fall down?",
+   "answer_en": "Because he stepped on a stone while running to see the butterfly.",
+   "keywords": [{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"石头","py":"shítou","en":"stone"}],
+   "explanation": "这是因果题。短文说“弟弟跑过去的时候，不小心踩到了草地边的一块石头，摔倒了”，说明他是跑去看蝴蝶时踩到石头才摔倒，所以选(3)。(1)踩到的是石头不是花，(2)是小华叫弟弟看蝴蝶，妈妈没叫他跑。找原因要看“摔倒”前面的动作。",
+   "explanation_en": "This is a cause question. The passage says 'as the brother ran over, he accidentally stepped on a stone at the edge of the grass and fell', so he tripped on a stone while running to see the butterfly, so (3). (1) he stepped on a stone, not flowers; (2) it was Xiaohua who called him to see the butterfly, not Mum telling him to run. Look at the action before 'fell'.",
+   "solution": {"evidence": "弟弟跑过去的时候，不小心踩到了草地边的一块石头，摔倒了"}
+  },
+  "ZS07_G2": {
+   "stem_en": "Mum said 'our little brother is so brave' - because of what?",
+   "answer_en": "Because after falling, the brother held back his tears and said it did not hurt.",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"忍住","py":"rěnzhù","en":"to hold back"},{"w":"眼泪","py":"yǎnlèi","en":"tears"}],
+   "explanation": "这是推断题，要找妈妈说他勇敢的依据。短文说“弟弟忍住眼泪，说不痛”，接着妈妈才夸他勇敢，可见是因为弟弟受伤了却忍着痛不哭，所以选(1)。(2)贴创可贴的是妈妈，(3)跑得快和勇敢无关。",
+   "explanation_en": "This is an inference question - find why Mum calls him brave. The passage says 'the brother held back his tears and said it did not hurt', and then Mum praises him, so it is because he was hurt but bore the pain without crying, so (1). (2) Mum applied the plaster; (3) running fast is unrelated to bravery.",
+   "solution": {"evidence": "弟弟忍住眼泪，说不痛。"}
+  },
+  "ZS07_G3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "A family goes to the park to play; the little brother gets a small injury but everyone still has fun.",
+   "keywords": [{"w":"意外","py":"yìwài","en":"mishap; accident"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation": "这是主旨题。全文讲一家人去公园玩，弟弟看蝴蝶时摔倒受了小伤，忍痛后又高兴地去玩，最后小华觉得虽有小意外但大家玩得开心。(1)看蝴蝶和花、(3)妈妈提醒小心都是情节细节；(2)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage tells of a family playing in the park, the brother falling and getting a small injury while looking at a butterfly, bearing the pain and then playing happily again, with Xiaohua feeling everyone still had fun despite the mishap. (1) seeing butterflies and flowers and (3) Mum's reminder to be careful are just details; (2) sums up the whole.",
+   "solution": {"evidence": "小华觉得今天虽然发生了小意外，但大家还是玩得很开心。"}
+  },
+  "ZS07_H1": {
+   "stem_en": "Find a word in the passage that shows Lele watched the goldfish very attentively and carefully.",
+   "answer_en": "仔细 (carefully; attentively)",
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"carefully"},{"w":"金鱼","py":"jīnyú","en":"goldfish"},{"w":"蹲下","py":"dūn xià","en":"to crouch down"}],
+   "explanation": "这题要找形容乐乐看鱼时“认真、小心”的词。短文说“乐乐蹲下来，仔细地看着金鱼”，“仔细”就是认真又小心的意思，所以答案是“仔细”。做填词题要先看清要找什么意思，再回原文圈出。",
+   "explanation_en": "This asks for a word describing how attentively and carefully Lele watched. The passage says 'Lele crouched down and watched the goldfish 仔细地 (carefully)'; 仔细 means attentive and careful, so the answer is 仔细. Read the meaning wanted, then find it in the passage.",
+   "solution": {"evidence": "乐乐蹲下来，仔细地看着金鱼"}
+  },
+  "ZS07_H2": {
+   "stem_en": "How did the elder sister feed the fish?",
+   "answer_en": "The elder sister took bread out of the bag, broke it into small pieces, and scattered them into the water to feed the fish.",
+   "keywords": [{"w":"面包","py":"miànbāo","en":"bread"},{"w":"掰","py":"bāi","en":"to break off"},{"w":"撒","py":"sǎ","en":"to scatter"}],
+   "explanation": "这是细节题，要用完整句子回答。短文说“姐姐从包里拿出面包，掰成小块，撒进水里喂鱼”，直接说明了姐姐喂鱼的方法。答题时把“拿面包、掰小块、撒进水里”三步都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'the elder sister took bread from the bag, broke it into small pieces, and scattered them into the water to feed the fish', stating her method. Include all three steps: taking bread, breaking it into pieces, scattering it into the water.",
+   "solution": {"evidence": "姐姐从包里拿出面包，掰成小块，撒进水里喂鱼。"}
+  },
+  "ZS07_H3": {
+   "stem_en": "Do you think Lele enjoyed this trip to the park? Why?",
+   "answer_en": "I think Lele really enjoyed this park trip, because he watched the goldfish swimming about and clapped and laughed with joy, showing he had great fun.",
+   "keywords": [{"w":"喜欢","py":"xǐhuan","en":"to like; to enjoy"},{"w":"拍手","py":"pāishǒu","en":"to clap"},{"w":"大笑","py":"dàxiào","en":"to laugh out loud"}],
+   "explanation": "这是推断题，要根据乐乐的表现来判断并说理由。短文说乐乐看金鱼“高兴得拍起手来”，喂鱼时又“哈哈大笑”，爸爸也说他们玩得开心。可见乐乐很喜欢这次公园之行。答“喜欢吗＋为什么”要先表态，再用文中的表现作依据。",
+   "explanation_en": "This is an inference question - judge from Lele's behaviour and give a reason. The passage says Lele 'clapped his hands with joy' watching the fish and 'laughed out loud' feeding them, and Dad said they had fun. So Lele really enjoyed the trip. Give a stand, then support it with behaviour from the text.",
+   "solution": {"evidence": "乐乐看了哈哈大笑。"}
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "setId": "ZS05",
+ "mcq": {
+  "ZS05_A1": {
+   "sentence_en": "During class, the teacher tells us to listen ___ (attentively).",
+   "hints": ["The blank + 心 forms a word meaning to focus your attention. Which character (专, not 转/砖/传) means 'concentrated'?"],
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"focused; attentive"},{"w":"听讲","py":"tīngjiǎng","en":"to listen to a lesson"},{"w":"上课","py":"shàngkè","en":"to attend class"}],
+   "explanation_en": "专心 is a fixed word meaning to focus your attention; in class you must listen attentively. All four are read zhuān or a similar sound; 专 carries the sense of 'concentrate', so in class you must be 专心."
+  },
+  "ZS05_A2": {
+   "sentence_en": "Xiaoming ___ (put) his homework book in his schoolbag but couldn't find it for a long time.",
+   "hints": ["The blank is the action of placing something into the bag. Which character (放) means 'to put / place'?"],
+   "keywords": [{"w":"放","py":"fàng","en":"to put; to place"},{"w":"作业本","py":"zuòyèběn","en":"homework book"},{"w":"书包","py":"shūbāo","en":"schoolbag"}],
+   "explanation_en": "放在书包里 means placing the homework book inside the bag, so 放 fits best. The four sound alike (fàng or fǎng); 放 has the radical 攴 showing an action - putting something in place."
+  },
+  "ZS05_A3": {
+   "sentence_en": "In today's PE lesson, we ran on the sports ___ (field).",
+   "hints": ["The blank + 操 names the open ground where you run and exercise. Which character has the earth radical 土?"],
+   "keywords": [{"w":"操场","py":"cāochǎng","en":"sports field"},{"w":"体育课","py":"tǐyùkè","en":"PE lesson"},{"w":"跑步","py":"pǎobù","en":"to run"}],
+   "explanation_en": "操场 is the place at school for running and exercise, so 场 is correct. 场 has the earth radical 土, meaning a piece of ground - the 操场 is the ground where you do exercises."
+  },
+  "ZS05_A4": {
+   "sentence_en": "The teacher ___ (praised) me for answering the question very well.",
+   "hints": ["The blank + 表 forms the word for praising someone. Which character has the hand radical 扌?"],
+   "keywords": [{"w":"表扬","py":"biǎoyáng","en":"to praise"},{"w":"回答","py":"huídá","en":"to answer"},{"w":"问题","py":"wèntí","en":"question"}],
+   "explanation_en": "表扬 means to praise; the teacher praises the student for answering well, so use 扬. The four share 阝 or 木 and sound alike; 扬 has the hand radical 扌 - to praise is to 'lift someone up' in commendation."
+  },
+  "ZS05_A5": {
+   "sentence_en": "We should ___ (cherish) the flowers and trees in the school.",
+   "hints": ["The blank + 爱 means to care for and protect. Which character has the hand radical 扌?"],
+   "keywords": [{"w":"爱护","py":"àihù","en":"to cherish; to take care of"},{"w":"花草树木","py":"huācǎo shùmù","en":"plants and trees"},{"w":"学校","py":"xuéxiào","en":"school"}],
+   "explanation_en": "爱护 means to care for and protect, so cherishing the plants and trees is the right thing; use 护. 护 has the hand radical 扌 - protecting with your hand is 护; 爱护 = to protect with care."
+  },
+  "ZS05_B1": {
+   "sentence_en": "Xiaohua arrives at school very 准时 (punctually) every morning.",
+   "hints": ["准 is zhǔn (3rd tone, dip then rise), 时 is shí (2nd tone, rising). Which choice is zhǔn + shí?"],
+   "keywords": [{"w":"准时","py":"zhǔnshí","en":"punctual; on time"},{"w":"早上","py":"zǎoshang","en":"morning"},{"w":"学校","py":"xuéxiào","en":"school"}],
+   "explanation_en": "准 is read zhǔn (3rd tone) and 时 is shí (2nd tone), together zhǔn shí. 准 (3rd tone) dips then rises; 时 (2nd tone) rises: zhǔn shí."
+  },
+  "ZS05_B2": {
+   "sentence_en": "The students are 跑步 (running) on the field, and every one is happy.",
+   "hints": ["跑 dips then rises (3rd tone, pǎo not páo), and 步 is bù (initial b, not p). Which choice is pǎo + bù?"],
+   "keywords": [{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"操场","py":"cāochǎng","en":"field"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "跑 is read pǎo (3rd tone) and 步 is bù (4th tone), together pǎo bù. 跑 (3rd tone) is like bending over as you run; 步 (4th tone) plants each step firmly: pǎo bù."
+  },
+  "ZS05_B3": {
+   "sentence_en": "This maths problem is very 难 (hard); I thought for a long time before solving it.",
+   "hints": ["Here 难 means 'not easy', read nán (2nd tone); the other reading nàn means 'disaster'. Which choice is nán?"],
+   "keywords": [{"w":"难","py":"nán","en":"difficult"},{"w":"数学题","py":"shùxué tí","en":"maths problem"},{"w":"想","py":"xiǎng","en":"to think"}],
+   "explanation_en": "Here 难 means 'not easy', read nán (2nd tone). 难 also reads nàn, meaning 'disaster', which does not apply here. 难 has two readings: nán (difficult) and nàn (disaster); a hard problem uses nán."
+  },
+  "ZS05_B4": {
+   "sentence_en": "The teacher handed back our 作业 (homework) books.",
+   "hints": ["Both syllables of 作业 fall (4th tone): zuò yè. Which choice has both falling tones?"],
+   "keywords": [{"w":"作业","py":"zuòyè","en":"homework"},{"w":"发","py":"fā","en":"to hand out"},{"w":"老师","py":"lǎoshī","en":"teacher"}],
+   "explanation_en": "作 is read zuò (4th tone) and 业 is yè (4th tone), together zuò yè. Both characters of 作业 are 4th tone, both falling: zuò yè."
+  },
+  "ZS05_C1": {
+   "sentence_en": "Xiaoli ___ (wiped) the classroom blackboard spotlessly clean.",
+   "hints": ["The blank + 黑板 (blackboard) is a fixed pairing - you use a cloth or duster on it. Which verb means 'to wipe'?"],
+   "keywords": [{"w":"擦","py":"cā","en":"to wipe"},{"w":"黑板","py":"hēibǎn","en":"blackboard"},{"w":"干干净净","py":"gānganjìngjìng","en":"spotlessly clean"}],
+   "explanation_en": "A blackboard is cleaned with a cloth or duster, so 擦黑板 (wipe the blackboard) is the fixed collocation. Learn fixed pairings: 擦黑板 (wipe the board), 扫地板 (sweep the floor), 洗碗 (wash dishes). A blackboard is 擦-ed."
+  },
+  "ZS05_C2": {
+   "sentence_en": "During class, the students all listen to the teacher ___ (attentively).",
+   "hints": ["Clue: the blank describes HOW they listen - an attitude. Which word means 'earnest / attentive', not a mood or a manner of speaking?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest; attentive"},{"w":"听讲","py":"tīngjiǎng","en":"to listen to a lesson"},{"w":"上课","py":"shàngkè","en":"class"}],
+   "explanation_en": "Listening to the teacher takes care, so 认真 ('earnest, attentive') fits best. Listening needs 认真, showing focused care. 大声 (loudly) is a way of speaking, not an attitude of listening."
+  },
+  "ZS05_C3": {
+   "sentence_en": "The teacher gave me ___ (a) story book, and I was overjoyed.",
+   "hints": ["The blank is the measure word for a book. Which one goes with 故事书?"],
+   "keywords": [{"w":"一本","py":"yì běn","en":"a (measure word for books)"},{"w":"故事书","py":"gùshishū","en":"story book"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "A book uses the measure word 本, so 一本故事书 is correct. Book -> 一本书; paper -> 一张纸; fish -> 一条鱼. Remember each object's measure word."
+  },
+  "ZS05_C4": {
+   "sentence_en": "Xiaowen got full marks on the exam and felt extremely ___ (happy).",
+   "hints": ["Clue: full marks is a good thing - what mood follows? Which word means 'happy', not sad or scared?"],
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"满分","py":"mǎnfēn","en":"full marks"},{"w":"考试","py":"kǎoshì","en":"exam"}],
+   "explanation_en": "Getting full marks is a good thing, so the feeling should be 高兴 ('happy'), meaning glad and joyful. A good event makes one 高兴. Judge whether the event is good or bad, then pick the mood word."
+  },
+  "ZS05_C5": {
+   "sentence_en": "We should ___ (help) our classmates and must not bully those younger than us.",
+   "hints": ["Clue: we should be friendly to classmates, not bully them. Which word means 'to help', not 'to mock' or 'to command'?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"欺负","py":"qīfu","en":"to bully"}],
+   "explanation_en": "We should be kind to classmates, so 帮助同学 ('help classmates') means giving them support - the best fit. Toward classmates we should 帮助 (help), i.e. give support. 嘲笑 (mock) and 命令 (command) are unfriendly acts."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“用功”是肯下功夫、努力学习，所以“认真用功读书”表示专心又肯努力地读书。“课室、铅笔”是名词，不能表示“努力学习”。",
+   "explanation_en": "用功 (yònggōng) means to put in effort and study hard, so 认真用功读书 means to study attentively and diligently. 课室 (classroom) or 铅笔 (pencil) are nouns and cannot mean 'to study hard'.",
+   "stem_en": "to study hard and diligently",
+   "keywords": [{"w":"用功","py":"yònggōng","en":"diligent; to study hard"},{"w":"读书","py":"dúshū","en":"to study"}]
+  },
+  "2": {
+   "explanation": "“课室”是上课的房间，所以“打扫课室”表示把上课的教室打扫干净。“举手、下课”都不是可以“打扫”的地方。",
+   "explanation_en": "课室 (kèshì) means the room where lessons are held, so 打扫课室 means to clean the classroom. 举手 (raise hand) or 下课 (finish class) are not a place you can 'clean'.",
+   "stem_en": "to clean the classroom",
+   "keywords": [{"w":"课室","py":"kèshì","en":"classroom"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}]
+  },
+  "3": {
+   "explanation": "“举手”是把手抬起来，上课想回答问题要先举手，所以“举手回答问题”表示抬手请老师让你回答。“用功、跳绳”都不是回答问题前的动作。",
+   "explanation_en": "举手 (jǔshǒu) means to raise your hand; in class you raise your hand before answering, so 举手回答问题 means to raise your hand to answer. 用功 (study hard) or 跳绳 (skip rope) are not the action before answering.",
+   "stem_en": "to raise your hand to answer a question",
+   "keywords": [{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"回答","py":"huídá","en":"to answer"}]
+  },
+  "4": {
+   "explanation": "“铅笔”是写字画画用的文具，所以“用铅笔写字”表示拿铅笔来写字。“课室、下课”都不是可以拿来写字的工具。",
+   "explanation_en": "铅笔 (qiānbǐ) is a stationery item for writing and drawing, so 用铅笔写字 means to write with a pencil. 课室 (classroom) or 下课 (finish class) are not tools you write with.",
+   "stem_en": "to write with a pencil",
+   "keywords": [{"w":"铅笔","py":"qiānbǐ","en":"pencil"},{"w":"写字","py":"xiězì","en":"to write"}]
+  },
+  "5": {
+   "explanation": "“下课”是一节课结束，所以“下课后在操场玩”表示这节课上完后到操场去玩。“举手、用功”都不是“一节课结束”的意思。",
+   "explanation_en": "下课 (xiàkè) means a lesson ending, so 下课后在操场玩 means to play on the field after the lesson ends. 举手 (raise hand) or 用功 (study hard) do not mean 'a lesson ending'.",
+   "stem_en": "to play on the field after class ends",
+   "keywords": [{"w":"下课","py":"xiàkè","en":"to finish class"},{"w":"操场","py":"cāochǎng","en":"field"}]
+  }
+ },
+ "craft": {
+  "ZS05_E1": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Xiaohua listens attentively during class.' and 'Xiaohua does well in every exam.'",
+   "answer_en": "Because Xiaohua listens attentively during class, he does well in every exam.",
+   "tiles": ["因为","小华上课时认真听讲，","所以","每次考试都考得很好。"],
+   "explanation_en": "因为……所以…… shows a cause-and-result relationship. '因为小华上课时认真听讲' (because Xiaohua listens attentively) is the cause, '所以每次考试都考得很好' (so he does well in every exam) is the result. 因为 (cause) first, 所以 (result) after."
+  },
+  "ZS05_E2": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'This maths problem is very hard.' and 'Xiaoming did not give up and kept trying.'",
+   "answer_en": "Although this maths problem is very hard, Xiaoming did not give up and kept trying.",
+   "tiles": ["虽然","这道数学题很难，","但是","小明没有放弃，一直努力做。"],
+   "explanation_en": "虽然……但是…… shows a turn: the first part states a difficulty, the second states overcoming it. '虽然这道数学题很难' (although the problem is hard) is the premise, '但是小明没有放弃' (but Xiaoming did not give up) is the turn. 虽然 (difficulty), 但是 (effort)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "The teacher told the students to sweep the classroom ___ (clean).",
+   "hint": "Clue: the goal of cleaning the classroom is to leave no dirt. Which box word means 'clean'?",
+   "keywords": [{"w":"干净","py":"gānjìng","en":"clean"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}],
+   "explanation_en": "The purpose of cleaning the classroom is to make it 干净 (clean), with no dirt left, so it fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaowen was in charge of wiping the blackboard, and he did it very ___ (carefully).",
+   "hint": "Clue: he wiped the board well, showing care in his work. Which box word means 'earnest / attentive'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest; attentive"},{"w":"擦黑板","py":"cā hēibǎn","en":"to wipe the blackboard"}],
+   "explanation_en": "Wiping the board well shows Xiaowen works with care, so 认真 ('earnest') describes him best."
+  },
+  "3": {
+   "sentence_en": "Xiaoli was in charge of sweeping, and she ___ (thoroughly) swept every corner clean.",
+   "hint": "Clue: she cleaned every single corner - very detailed work. Which box word means 'careful / meticulous'?",
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful; meticulous"},{"w":"角落","py":"jiǎoluò","en":"corner"}],
+   "explanation_en": "Sweeping every corner clean shows Xiaoli works meticulously, so 仔细 ('careful, thorough') fits best."
+  },
+  "4": {
+   "sentence_en": "After everyone worked together to tidy the classroom, they all felt very ___ (happy).",
+   "hint": "Clue: they finished the task together - a good feeling. Which box word means 'happy / glad'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"合力","py":"hélì","en":"to join efforts"}],
+   "explanation_en": "Finishing the task together makes everyone feel glad, so 高兴 shows their happy mood."
+  },
+  "5": {
+   "sentence_en": "The teacher saw it and said with a smile that the students were really ___ (hardworking).",
+   "hint": "Clue: the students worked hard to clean - praise for effort. Which box word means 'diligent / hardworking'?",
+   "keywords": [{"w":"勤劳","py":"qínláo","en":"hardworking; diligent"},{"w":"称赞","py":"chēngzàn","en":"to praise"}],
+   "explanation_en": "The students worked hard cleaning, so the teacher praises them as 勤劳 ('hardworking, diligent')."
+  }
+ },
+ "reading": {
+  "ZS05_G1": {
+   "stem_en": "What time does Xiaoming arrive at school each day?",
+   "answer_en": "Half past seven.",
+   "keywords": [{"w":"七点半","py":"qī diǎn bàn","en":"half past seven"},{"w":"迟到","py":"chídào","en":"to be late"},{"w":"到","py":"dào","en":"to arrive"}],
+   "explanation": "这是细节题。短文说“他每天早上七点半到学校，从不迟到”，直接给出时间，所以选(2)。(1)七点、(3)八点文中都没有提到，是干扰的时间。做细节题回原文找准确的数字。",
+   "explanation_en": "This is a detail question. The passage says 'he arrives at school at half past seven every morning and is never late', giving the exact time, so (2). (1) seven and (3) eight are not in the text - distractor times. Find the exact number in the passage.",
+   "solution": {"evidence": "他每天早上七点半到学校，从不迟到。"}
+  },
+  "ZS05_G2": {
+   "stem_en": "Why do the classmates all like Xiaoming?",
+   "answer_en": "Because he studies well and is also glad to help others.",
+   "keywords": [{"w":"喜欢","py":"xǐhuan","en":"to like"},{"w":"乐于助人","py":"lèyú zhùrén","en":"glad to help others"},{"w":"学习","py":"xuéxí","en":"studies"}],
+   "explanation": "这是原因题。短文说“小明的同学都很喜欢他，因为他不只学习好，还很乐于帮助别人”，“因为”后面直接说明了原因，所以选(3)。(1)不迟到、(2)老师表扬都不是同学喜欢他的原因。找原因要看“因为”后面的话。",
+   "explanation_en": "This is a reason question. The passage says 'his classmates all like him because he not only studies well but is also glad to help others'; the reason follows '因为', so (3). (1) never late and (2) the teacher's praise are not why the classmates like him. For reasons, read what follows '因为'.",
+   "solution": {"evidence": "因为他不只学习好，还很乐于帮助别人。"}
+  },
+  "ZS05_G3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "Xiaoming is a good student who studies attentively and is glad to help others.",
+   "keywords": [{"w":"好学生","py":"hǎo xuésheng","en":"good student"},{"w":"乐于助人","py":"lèyú zhùrén","en":"glad to help"},{"w":"榜样","py":"bǎngyàng","en":"role model"}],
+   "explanation": "这是主旨题。全文从不迟到、认真听课、帮老师、乐于助人几方面写小明，最后老师说他是“好榜样”，可见全文是在讲小明是个学习认真又乐于助人的好学生。(2)收作业本、(3)老师爱表扬都只是其中细节；(1)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage describes Xiaoming from several angles - never late, attentive in class, helping the teacher, glad to help - and ends with the teacher calling him a 'good role model', so it is about Xiaoming being a good student who studies hard and helps others. (2) collecting homework books and (3) the teacher liking to praise are only details; (1) sums up the whole.",
+   "solution": {"evidence": "老师也常常表扬他，说他是大家学习的好榜样。"}
+  },
+  "ZS05_H1": {
+   "stem_en": "Find a word in the passage that is close in meaning to 开心 ('happy').",
+   "answer_en": "高兴 (happy / glad)",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"开心","py":"kāixīn","en":"happy"},{"w":"鼓掌","py":"gǔzhǎng","en":"to applaud"}],
+   "explanation": "这是近义词题，要在文中找和“开心”意思相近的词。短文说小芳被表扬后“心里非常高兴”，“高兴”和“开心”都表示心情快乐，意思相近，所以答案是“高兴”。做近义词题要回原文找意思最接近的词。",
+   "explanation_en": "This is a synonym question - find a word close to 开心 ('happy'). The passage says after being praised Xiaofang was 高兴 in her heart; 高兴 and 开心 both mean a joyful mood, so the answer is 高兴. Find the closest word in the passage.",
+   "solution": {"evidence": "但心里非常高兴。"}
+  },
+  "ZS05_H2": {
+   "stem_en": "Why did the classmates listen so intently?",
+   "answer_en": "Because Xiaofang told the story in the book very clearly, the classmates all listened intently.",
+   "keywords": [{"w":"入神","py":"rùshén","en":"engrossed"},{"w":"清楚","py":"qīngchu","en":"clear"},{"w":"故事","py":"gùshi","en":"story"}],
+   "explanation": "这是因果题。短文说“她说得很清楚，同学们都听得入神”，前一句是原因，后一句是结果，所以同学入神是因为小芳讲得清楚。答“为什么”要把原因写清楚，用完整句子。",
+   "explanation_en": "This is a cause question. The passage says 'she spoke very clearly, and the classmates all listened intently'; the first clause is the cause, the second the result, so they were engrossed because Xiaofang spoke clearly. State the reason clearly in a full sentence.",
+   "solution": {"evidence": "她说得很清楚，同学们都听得入神。"}
+  },
+  "ZS05_H3": {
+   "stem_en": "What did Xiaofang say she would do in the future?",
+   "answer_en": "Xiaofang said that in future she would read more and share more good stories with everyone.",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"多读书","py":"duō dúshū","en":"to read more"},{"w":"故事","py":"gùshi","en":"story"}],
+   "explanation": "这是细节题，答案在文章最后。短文说“她说，以后她要多读书，把更多好故事分享给大家”，直接说明了小芳以后要做的事。答题时把“多读书”和“分享好故事”两点都写出来，用完整句子。",
+   "explanation_en": "This is a detail question; the answer is at the end. The passage says 'she said that in future she would read more and share more good stories with everyone', stating what Xiaofang plans to do. Include both 'read more' and 'share good stories' in a full sentence.",
+   "solution": {"evidence": "以后她要多读书，把更多好故事分享给大家。"}
+  }
+ }
+}

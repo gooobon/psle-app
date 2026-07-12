@@ -56,7 +56,7 @@ function AIHintBtn({question, topic, subject, studentAnswer, onHint}){
       style={{background:used?"#F1F5F9":loading?"#FEF3C7":"#FFF7ED",
         border:"1.5px solid "+(used?"#CBD5E1":loading?"#FDE68A":"#F97316"),
         borderRadius:10,padding:"6px 14px",cursor:used||loading?"default":"pointer",
-        fontSize:12,fontWeight:700,color:used?"#94A3B8":loading?"#92400E":"#EA580C",
+        fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:used?"#94A3B8":loading?"#92400E":"#EA580C",
         display:"flex",alignItems:"center",gap:6,transition:"all .2s"}}>
       {loading ? <><span style={{animation:"spin .6s linear infinite",display:"inline-block"}}>⏳</span> Getting hint...</>
                : used ? "✅ Hint shown"
@@ -102,7 +102,7 @@ function SpeakBtn({text, lang='en', style={}}){
     <button onClick={handleSpeak}
       style={{background:speaking?"#0D9488":"#F0FDF4",
         border:"1.5px solid #0D9488",borderRadius:8,
-        padding:"4px 10px",cursor:"pointer",fontSize:13,
+        padding:"4px 10px",cursor:"pointer",fontSize:"calc(var(--fs) * 0.929)",
         transition:"all .2s",...style}}>
       {speaking?"🔊":"🔉"}
     </button>
@@ -425,7 +425,7 @@ function StarBurst({ show }){
           position:'absolute',
           top: Math.sin(i/stars.length*Math.PI*2)*40+'px',
           left: Math.cos(i/stars.length*Math.PI*2)*40+'px',
-          fontSize:20,
+          fontSize:"calc(var(--fs) * 1.429)",
           animation:`gmStarBurst 0.8s ease ${i*0.1}s forwards`,
           opacity:0,
         }}>{s}</div>
@@ -457,10 +457,10 @@ function AnimProgressBar({ pct, color='#10B981', height=8, style={} }){
 function Wrap({children}){
   return(
     <div style={{
-      fontFamily:"Nunito,system-ui,sans-serif",
+      fontFamily:"Nunito,system-ui,'KaiTi','STKaiti','LXGW WenKai',sans-serif",
       background:C.bg,
       minHeight:"100vh",
-      maxWidth:430,
+      maxWidth:"var(--wrap-w)",
       width:"100%",
       margin:"0 auto",
       position:"relative",
@@ -476,7 +476,7 @@ function Wrap({children}){
 
 function TagPill({color, bg, children}){
   return(
-    <span style={{background:bg||color+"18",color:color,fontSize:11,fontWeight:800,
+    <span style={{background:bg||color+"18",color:color,fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,
       padding:"3px 10px",borderRadius:10,display:"inline-block"}}>
       {children}
     </span>
@@ -487,7 +487,7 @@ function BigBtn({color, onClick, disabled, children}){
   return(
     <button onClick={onClick} disabled={!!disabled}
       style={{width:"100%",background:disabled?"#C8D3E0":color,color:"#fff",
-        border:"none",borderRadius:16,padding:"16px",fontSize:15,fontWeight:900,
+        border:"none",borderRadius:16,padding:"16px",fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,
         cursor:disabled?"not-allowed":"pointer",marginTop:8,letterSpacing:.3}}>
       {children}
     </button>
@@ -498,7 +498,7 @@ function ActionBtn({color, onClick, disabled, children}){
   return(
     <button onClick={onClick} disabled={!!disabled}
       style={{width:"100%",background:disabled?"#C8D3E0":`linear-gradient(135deg,${color},${color}cc)`,
-        color:"#fff",border:"none",borderRadius:16,padding:"16px",fontSize:15,
+        color:"#fff",border:"none",borderRadius:16,padding:"16px",fontSize:"calc(var(--fs) * 1.071)",
         fontWeight:900,cursor:disabled?"not-allowed":"pointer",marginTop:8}}>
       {children}
     </button>
@@ -508,7 +508,7 @@ function ActionBtn({color, onClick, disabled, children}){
 function InputField({label, value, onChange, placeholder, type="text", onEnter}){
   return(
     <div style={{marginBottom:16}}>
-      {label&&<div style={{fontSize:12,fontWeight:800,color:C.muted,marginBottom:6,
+      {label&&<div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:C.muted,marginBottom:6,
         textTransform:"uppercase",letterSpacing:.8}}>{label}</div>}
       <input
         type={type}
@@ -517,7 +517,7 @@ function InputField({label, value, onChange, placeholder, type="text", onEnter})
         onKeyDown={e=>e.key==="Enter"&&onEnter&&onEnter()}
         placeholder={placeholder||""}
         style={{width:"100%",padding:"13px 14px",borderRadius:12,
-          border:`1.5px solid ${C.border}`,fontSize:14,fontWeight:600,
+          border:`1.5px solid ${C.border}`,fontSize:"calc(var(--fs) * 1.000)",fontWeight:600,
           color:C.text,background:C.card,boxSizing:"border-box",outline:"none"}}
       />
     </div>
@@ -528,7 +528,7 @@ function ErrorBox({msg}){
   if(!msg) return null;
   return(
     <div style={{background:C.lRed,border:"1.5px solid "+C.red,borderRadius:12,
-      padding:"10px 14px",marginBottom:12,fontSize:13,fontWeight:700,color:C.red}}>
+      padding:"10px 14px",marginBottom:12,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.red}}>
       ⚠️ {msg}
     </div>
   );
@@ -539,7 +539,7 @@ function HintBox({text}){
   return(
     <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,
       padding:"10px 13px",marginBottom:10}}>
-      <div style={{fontSize:12,fontWeight:700,color:"#92400E"}}>💡 Hint: {text}</div>
+      <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:"#92400E"}}>💡 Hint: {text}</div>
     </div>
   );
 }
@@ -548,10 +548,10 @@ function FeedbackBox({badge, meaning}){
   return(
     <div style={{background:C.lGreen,border:"1.5px solid "+C.green,borderRadius:14,
       padding:"11px 14px",marginBottom:10}}>
-      <div style={{fontWeight:800,fontSize:14,color:"#065F46",marginBottom:meaning?4:0}}>
+      <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 1.000)",color:"#065F46",marginBottom:meaning?4:0}}>
         {badge==="gold"?"⭐⭐⭐ Perfect!":badge==="silver"?"⭐⭐ Great!":"⭐ Correct!"}
       </div>
-      {meaning&&<div style={{fontSize:12,color:"#047857",fontWeight:600}}>{meaning}</div>}
+      {meaning&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#047857",fontWeight:600}}>{meaning}</div>}
     </div>
   );
 }
@@ -605,8 +605,8 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
 
       {/* Header */}
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-        <span style={{fontSize:18}}>{wasCorrect?"🎓":"📖"}</span>
-        <div style={{fontSize:13,fontWeight:800,
+        <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>{wasCorrect?"🎓":"📖"}</span>
+        <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,
           color:wasCorrect?"#065F46":"#9A3412"}}>
           {wasCorrect ? "Great! Now let's lock it in" : "Let's learn this properly"}
         </div>
@@ -616,9 +616,9 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
       {keyPoint && (
         <div style={{background:"#fff",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid "+(wasCorrect?"#A7F3D0":"#FED7AA")}}>
-          <div style={{fontSize:10,fontWeight:800,color:"#0D9488",marginBottom:4,
+          <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#0D9488",marginBottom:4,
             textTransform:"uppercase",letterSpacing:.6}}>💡 Key Point</div>
-          <div style={{fontSize:13,color:"#0F172A",fontWeight:600,lineHeight:1.6}}>
+          <div style={{fontSize:"calc(var(--fs) * 0.929)",color:"#0F172A",fontWeight:600,lineHeight:1.6}}>
             {typeof keyPoint === 'string' ? keyPoint : ''}
           </div>
         </div>
@@ -628,13 +628,13 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
       {memoryItem && memoryItem.type === "chinese" && (
         <div style={{background:"#EFF6FF",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid #BFDBFE"}}>
-          <div style={{fontSize:10,fontWeight:800,color:"#1D4ED8",marginBottom:6,
+          <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#1D4ED8",marginBottom:6,
             textTransform:"uppercase",letterSpacing:.6}}>📝 记住这个字 (Remember)</div>
           <div style={{display:"flex",alignItems:"center",gap:12}}>
             <div style={{fontSize:32,fontWeight:900,color:"#1E3A6E"}}>{memoryItem.char}</div>
             <div>
-              <div style={{fontSize:14,fontWeight:700,color:"#2563EB"}}>{memoryItem.pinyin}</div>
-              <div style={{fontSize:12,color:"#475569"}}>{memoryItem.meaning}</div>
+              <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:700,color:"#2563EB"}}>{memoryItem.pinyin}</div>
+              <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#475569"}}>{memoryItem.meaning}</div>
             </div>
             {typeof SpeakBtn !== 'undefined' &&
               <SpeakBtn text={memoryItem.char} lang="zh" style={{marginLeft:"auto"}}/>}
@@ -645,10 +645,10 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
       {memoryItem && memoryItem.type === "vocab" && (
         <div style={{background:"#EFF6FF",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid #BFDBFE"}}>
-          <div style={{fontSize:10,fontWeight:800,color:"#1D4ED8",marginBottom:6,
+          <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#1D4ED8",marginBottom:6,
             textTransform:"uppercase",letterSpacing:.6}}>📝 Word to Remember</div>
-          <div style={{fontSize:16,fontWeight:800,color:"#1E3A6E"}}>{memoryItem.word}</div>
-          <div style={{fontSize:12,color:"#475569",marginTop:2}}>{memoryItem.def}</div>
+          <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:800,color:"#1E3A6E"}}>{memoryItem.word}</div>
+          <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#475569",marginTop:2}}>{memoryItem.def}</div>
         </div>
       )}
 
@@ -665,7 +665,7 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
         style={{width:"100%",
           background: canProceed ? (wasCorrect?"#10B981":"#F97316") : "#CBD5E1",
           color:"#fff",border:"none",borderRadius:12,padding:"13px",
-          fontSize:14,fontWeight:800,
+          fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,
           cursor: canProceed ? "pointer" : "not-allowed",
           transition:"background .3s"}}>
         {canProceed
@@ -681,10 +681,10 @@ function RevealBox({meaning}){
   return(
     <div style={{background:C.lRed,border:"1.5px solid "+C.red,borderRadius:14,
       padding:"11px 14px",marginBottom:10}}>
-      <div style={{fontWeight:800,fontSize:13,color:C.red,marginBottom:meaning?4:0}}>
+      <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red,marginBottom:meaning?4:0}}>
         📖 Let's learn from this one
       </div>
-      {meaning&&<div style={{fontSize:12,color:"#991B1B",fontWeight:600}}>{meaning}</div>}
+      {meaning&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#991B1B",fontWeight:600}}>{meaning}</div>}
     </div>
   );
 }
@@ -694,7 +694,7 @@ function WrongBanner({attempts}){
   return(
     <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,
       padding:"9px 13px",marginBottom:10}}>
-      <div style={{fontSize:12,fontWeight:700,color:"#92400E"}}>
+      <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:"#92400E"}}>
         ❌ {msgs[Math.min(attempts-1,2)]}
       </div>
     </div>
@@ -708,9 +708,9 @@ function RuleCard({card}){
     return(
       <div style={{background:"#EFF6FF",border:"1.5px solid #BFDBFE",borderRadius:14,
         padding:"12px 14px",marginBottom:10}}>
-        <div style={{fontSize:11,fontWeight:800,color:"#1D4ED8",marginBottom:4,
+        <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:4,
           textTransform:"uppercase",letterSpacing:.8}}>📌 Grammar Rule</div>
-        <div style={{fontSize:13,fontWeight:600,color:C.text,lineHeight:1.6}}>{card}</div>
+        <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:600,color:C.text,lineHeight:1.6}}>{card}</div>
       </div>
     );
   }
@@ -720,19 +720,19 @@ function RuleCard({card}){
     <div style={{background:"#EFF6FF",border:"1.5px solid #BFDBFE",borderRadius:14,
       padding:"12px 14px",marginBottom:10}}>
       <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-        <span style={{fontSize:18}}>{emoji}</span>
-        <div style={{fontSize:11,fontWeight:800,color:"#1D4ED8",
+        <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>{emoji}</span>
+        <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",
           textTransform:"uppercase",letterSpacing:.8}}>{title}</div>
       </div>
       {rows.length>0&&(
-        <table style={{width:"100%",borderCollapse:"collapse",fontSize:12}}>
+        <table style={{width:"100%",borderCollapse:"collapse",fontSize:"calc(var(--fs) * 0.857)"}}>
           <tbody>
             {rows.map((row,i)=>(
               <tr key={i} style={{background:i%2===0?"#EFF6FF":"#fff"}}>
                 {row.map((cell,j)=>(
                   <td key={j} style={{padding:"4px 8px",color:j===0?C.muted:C.text,
                     fontWeight:j===1?700:400,borderBottom:"1px solid #DBEAFE",
-                    fontSize:11}}>
+                    fontSize:"calc(var(--fs) * 0.786)"}}>
                     {cell}
                   </td>
                 ))}
@@ -760,12 +760,12 @@ function StudentBottomNav({screen, setScreen, mistakeCount}){
           style={{flex:1,background:"none",border:"none",cursor:"pointer",
             padding:"10px 4px 12px",display:"flex",flexDirection:"column",
             alignItems:"center",gap:2,position:"relative"}}>
-          <span style={{fontSize:20}}>{t.icon}</span>
-          <span style={{fontSize:9,fontWeight:screen===t.key?800:500,
+          <span style={{fontSize:"calc(var(--fs) * 1.429)"}}>{t.icon}</span>
+          <span style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:screen===t.key?800:500,
             color:screen===t.key?C.navy:C.muted}}>{t.label}</span>
           {t.badge>0&&(
             <span style={{position:"absolute",top:6,right:"20%",background:C.red,
-              color:"#fff",borderRadius:"50%",width:16,height:16,fontSize:9,
+              color:"#fff",borderRadius:"50%",width:16,height:16,fontSize:"calc(var(--fs) * 0.780)",
               fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center"}}>
               {t.badge>9?"9+":t.badge}
             </span>

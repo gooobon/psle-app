@@ -1,0 +1,217 @@
+{
+ "setId": "ZS12",
+ "mcq": {
+  "ZS12_A1": {
+   "sentence_en": "Xiaoming saw rubbish on the ground and ___ (bent) his waist to pick it up.",
+   "hints": ["The blank + 腰 means to bend down. Which character (with the bow radical 弓) means 'to bend'?"],
+   "keywords": [{"w":"弯腰","py":"wānyāo","en":"to bend down"},{"w":"垃圾","py":"lājī","en":"rubbish"},{"w":"捡","py":"jiǎn","en":"to pick up"}],
+   "explanation_en": "弯腰 means bending the waist down, matching the action of picking something up. 弯 has the bow radical 弓 - bending to pick something up curves the body into a bow shape."
+  },
+  "ZS12_A2": {
+   "sentence_en": "She ___ (gave) her old books to classmates who needed them.",
+   "hints": ["The blank + 给 means to give something to someone. Which character (with the walk radical 辶) means 'to give / deliver'?"],
+   "keywords": [{"w":"送给","py":"sònggěi","en":"to give to"},{"w":"旧书","py":"jiùshū","en":"old books"},{"w":"需要","py":"xūyào","en":"to need"}],
+   "explanation_en": "送 means to give something to someone, so 送给 (give to) is a fixed collocation and fits best. The four sound alike, but only 送 carries the sense of 'giving'; look for the walk radical 辶."
+  },
+  "ZS12_A3": {
+   "sentence_en": "A classmate fell, and Li Hua immediately ___ (ran) over to help him up.",
+   "hints": ["The blank means to move quickly on foot to get there fast. Which character (with the foot radical ⻊) means 'to run'?"],
+   "keywords": [{"w":"跑过去","py":"pǎo guòqù","en":"to run over"},{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "跑过去 means quickly getting there, matching rushing to help right away. All four have the foot radical ⻊, so judge by meaning: 跑 = to move fast, best matching the urgency of 马上 (immediately)."
+  },
+  "ZS12_A4": {
+   "sentence_en": "Grandma carried a heavy vegetable ___ (basket), walking with difficulty.",
+   "hints": ["The blank + 菜 names the basket for holding vegetables. Which character has the bamboo radical ⺮?"],
+   "keywords": [{"w":"菜篮","py":"càilán","en":"vegetable basket"},{"w":"提","py":"tí","en":"to carry (in hand)"},{"w":"吃力","py":"chīlì","en":"strenuous"}],
+   "explanation_en": "菜篮 is the basket for carrying vegetables; the bamboo radical ⺮ shows it is a bamboo item, so the pairing is correct. 篮 has the bamboo radical ⺮ because baskets are woven from bamboo; 蓝 has the grass radical 艹 and is a colour."
+  },
+  "ZS12_A5": {
+   "sentence_en": "Xiaoyu ___ (gave up) his seat to an old grandpa.",
+   "hints": ["The blank + 座 means to offer your seat to someone. Which character has the speech radical 讠?"],
+   "keywords": [{"w":"让座","py":"ràngzuò","en":"to give up one's seat"},{"w":"座位","py":"zuòwèi","en":"seat"},{"w":"老爷爷","py":"lǎoyéye","en":"old grandpa"}],
+   "explanation_en": "让座 means giving your seat to someone else to sit, so 让 fits best. 让 has the speech radical 讠 - using words and action to give something to another is 让."
+  },
+  "ZS12_B1": {
+   "sentence_en": "Xiaofang 帮助 (helped) a classmate clean the classroom, and the teacher praised her.",
+   "hints": ["帮 starts with b, 助 is retroflex zh (4th tone). Which choice is bāng + zhù, not flat z?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"打扫","py":"dǎsǎo","en":"to clean"},{"w":"教室","py":"jiàoshì","en":"classroom"}],
+   "explanation_en": "帮 is read bāng (initial b) and 助 is zhù (retroflex zh, 4th tone), together bāng zhù. 帮 has initial b; 助 is retroflex zh - do not write it as flat z."
+  },
+  "ZS12_B2": {
+   "sentence_en": "Grandma came carrying a vegetable basket, and I 连忙 (hurriedly) ran over to take it.",
+   "hints": ["连 is lián (2nd tone), 忙 is máng (2nd tone). Both 2nd tone. Which choice is lián + máng?"],
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"菜篮","py":"càilán","en":"vegetable basket"},{"w":"接","py":"jiē","en":"to take over"}],
+   "explanation_en": "连 is read lián (2nd tone) and 忙 is máng (2nd tone), together lián máng. Both characters of 连忙 are 2nd tone, same tone - remember '连 lián, both 2nd tone'."
+  },
+  "ZS12_B3": {
+   "sentence_en": "He 好心 (kindly) helped the old person pick up the dropped things.",
+   "hints": ["In 好心 ('kind-hearted'), 好 is hǎo (3rd tone, adjective), not the verb hào; 心 is xīn (1st tone). Which choice is hǎo + xīn?"],
+   "keywords": [{"w":"好心","py":"hǎoxīn","en":"kind-hearted"},{"w":"老人","py":"lǎorén","en":"old person"},{"w":"捡起","py":"jiǎnqǐ","en":"to pick up"}],
+   "explanation_en": "In 好心, 好 is read hǎo (3rd tone, adjective) and 心 is xīn (1st tone), together hǎo xīn. 好 has two readings: adjective 好人 hǎo (3rd tone); verb 好学 hào (4th tone). 好心 is an adjective, so read hǎo."
+  },
+  "ZS12_B4": {
+   "sentence_en": "Xiaoming 感谢 (thanks) his classmate for bringing his homework when he was ill.",
+   "hints": ["感 is gǎn (3rd tone), 谢 is xiè (4th tone). Which choice is gǎn + xiè?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"生病","py":"shēngbìng","en":"ill"},{"w":"作业","py":"zuòyè","en":"homework"}],
+   "explanation_en": "感 is read gǎn (3rd tone) and 谢 is xiè (4th tone), together gǎn xiè. 感 (3rd tone) dips then rises; 谢 (4th tone) falls down."
+  },
+  "ZS12_C1": {
+   "sentence_en": "Xiaohua ___ (lent) her umbrella to a classmate who had none.",
+   "hints": ["The blank + 给 means letting someone use your thing for a while, free. Which word means 'to lend'?"],
+   "keywords": [{"w":"借给","py":"jiègěi","en":"to lend to"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"同学","py":"tóngxué","en":"classmate"}],
+   "explanation_en": "借 means temporarily letting someone use your thing, and 借给 is a fixed collocation for a small kindness. 借 = giving it for a while without charge; among classmates, helping out uses 借 most naturally."
+  },
+  "ZS12_C2": {
+   "sentence_en": "Mum bought ___ (a bunch of) bananas and shared them with the neighbour's children.",
+   "hints": ["The blank is the measure word for bananas joined together. Which one means 'a bunch / string'?"],
+   "keywords": [{"w":"一串","py":"yí chuàn","en":"a bunch"},{"w":"香蕉","py":"xiāngjiāo","en":"banana"},{"w":"邻居","py":"línjū","en":"neighbour"}],
+   "explanation_en": "Bananas are joined together like a string, so the measure word 串 is correct: 一串香蕉. Bananas joined together = 一串; grapes are also 一串. 串 is used for fruit that grows in bunches."
+  },
+  "ZS12_C3": {
+   "sentence_en": "Teacher Li ___ (warm-heartedly) helps every classmate in difficulty, and everyone likes her.",
+   "hints": ["Clue: she eagerly cares for and helps others. Which word means 'warm-hearted', not 'careful' or 'careless'?"],
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"困难","py":"kùnnan","en":"difficulty"}],
+   "explanation_en": "热心 means eagerly caring for and helping others, matching 'helping classmates in difficulty' best. Helping others -> 热心; doing things carefully -> 细心; being happy -> 开心. See which case the sentence describes."
+  },
+  "ZS12_C4": {
+   "sentence_en": "Seeing a classmate get hurt, Xiaowen felt ___ (bad) inside and immediately ran over to help.",
+   "hints": ["Clue: he feels bad seeing someone suffer, then rushes to help. Which word means 'to feel bad / uncomfortable', not scared or angry?"],
+   "keywords": [{"w":"难受","py":"nánshòu","en":"to feel bad; uncomfortable"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "难受 means feeling uncomfortable at seeing someone suffer, matching seeing a hurt classmate and rushing to help. Seeing someone hurt -> feeling bad inside = 难受; then helping at once shows it is not fear."
+  },
+  "ZS12_C5": {
+   "sentence_en": "Grandma ___ (praised) me as a good child and stroked my head.",
+   "hints": ["The blank + 是个好孩子 is a fixed pairing meaning to praise. Which word means 'to praise / commend'?"],
+   "keywords": [{"w":"夸","py":"kuā","en":"to praise"},{"w":"好孩子","py":"hǎo háizi","en":"good child"},{"w":"摸头","py":"mō tóu","en":"to stroke the head"}],
+   "explanation_en": "夸 means to praise, and 夸……是好孩子 is a fixed collocation, matching Grandma happily stroking my head. To praise someone use 夸: 夸他是好孩子, 夸他做得好. Stroking the head = commendation, so use 夸."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“微笑”是轻轻地笑，所以“对他微笑，表示友善”表示对他露出笑容表示善意。“点头、帮忙”都不是“露出笑容”的意思。",
+   "explanation_en": "微笑 (wēixiào) means a gentle smile, so 对他微笑，表示友善 means smiling at him to show friendliness. 点头 (nod) or 帮忙 (help) do not mean 'to show a smile'.",
+   "stem_en": "to smile at him to show friendliness",
+   "keywords": [{"w":"微笑","py":"wēixiào","en":"to smile"},{"w":"友善","py":"yǒushàn","en":"friendly"}]
+  },
+  "2": {
+   "explanation": "“点头”是把头上下动一下，所以“点头表示同意”表示用点头来表示答应、赞成。“微笑、感谢”都不是“表示同意的动作”。",
+   "explanation_en": "点头 (diǎntóu) means moving the head up and down, so 点头表示同意 means to nod to show agreement. 微笑 (smile) or 感谢 (thank) are not 'the action of agreeing'.",
+   "stem_en": "to nod to show agreement",
+   "keywords": [{"w":"点头","py":"diǎntóu","en":"to nod"},{"w":"同意","py":"tóngyì","en":"to agree"}]
+  },
+  "3": {
+   "explanation": "“关心”是留意、在乎别人的情况，所以“关心他人”表示在乎、照应别人。“点头、跑步”都不是“在乎别人”的意思。",
+   "explanation_en": "关心 (guānxīn) means to care about and pay attention to others, so 关心他人 means to care about others. 点头 (nod) or 跑步 (run) do not mean 'to care about someone'.",
+   "stem_en": "to care about others",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"他人","py":"tārén","en":"others"}]
+  },
+  "4": {
+   "explanation": "“感谢”是对别人的帮助表示谢意，所以“感谢老师”表示对老师的帮助说谢谢。“帮忙、微笑”都不是“表示谢意”的意思。",
+   "explanation_en": "感谢 (gǎnxiè) means to express thanks for someone's help, so 感谢老师 means to thank the teacher. 帮忙 (help) or 微笑 (smile) do not mean 'to express thanks'.",
+   "stem_en": "to thank the teacher",
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"老师","py":"lǎoshī","en":"teacher"}]
+  },
+  "5": {
+   "explanation": "“帮忙”是给别人做事出力，所以“请你来帮忙”表示请你来出一份力、帮助做事。“关心、点头”都不是“出力帮做事”的意思。",
+   "explanation_en": "帮忙 (bāngmáng) means to help someone with a task, so 请你来帮忙 means please come and help. 关心 (care) or 点头 (nod) do not mean 'to help with a task'.",
+   "stem_en": "to please come and help",
+   "keywords": [{"w":"帮忙","py":"bāngmáng","en":"to help"},{"w":"请","py":"qǐng","en":"to please; to invite"}]
+  }
+ },
+ "craft": {
+  "ZS12_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'The weather is very hot.' and 'Xiaoli still helps Grandma carry the vegetable basket.'",
+   "answer_en": "Although the weather is very hot, Xiaoli still helps Grandma carry the vegetable basket.",
+   "tiles": ["虽然","天气很热，","但是","小丽还是帮奶奶提菜篮。"],
+   "explanation_en": "虽然……但是…… means the first situation exists but the second is unaffected. '虽然天气很热' (although it is hot) is the premise, '但是小丽还是帮奶奶提菜篮' (but Xiaoli still helps carry the basket) is the unaffected action. 虽然……但是…… = 'even though…, still…', a turn where the two clauses contrast."
+  },
+  "ZS12_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'His classmate helped him.' and 'He is very grateful to his classmate.'",
+   "answer_en": "Because his classmate helped him, he is very grateful to his classmate.",
+   "tiles": ["因为","同学帮助了他，","所以","他非常感谢同学。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为同学帮助了他' (because his classmate helped him) is the cause, '所以他非常感谢同学' (so he is grateful) is the result. See which clause is the cause and which is the result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school today, Xiaoan saw his classmate Mingming sitting alone on a chair, looking very ___ (unwell).",
+   "hint": "Clue: he has a stomachache, so his face shows discomfort. Which box word means 'feeling unwell / uncomfortable'?",
+   "keywords": [{"w":"难受","py":"nánshòu","en":"unwell; uncomfortable"},{"w":"脸色","py":"liǎnsè","en":"complexion"}],
+   "explanation_en": "Mingming has a stomachache, so his face naturally looks 难受 (unwell), showing bodily discomfort."
+  },
+  "2": {
+   "sentence_en": "Mingming said his stomach hurt a lot, ___ (so) he could not walk.",
+   "hint": "Clue: stomachache is the cause, not being able to walk is the result. Which box word links cause to result?",
+   "keywords": [{"w":"所以","py":"suǒyǐ","en":"so; therefore"},{"w":"肚子痛","py":"dùzi tòng","en":"stomachache"}],
+   "explanation_en": "The stomachache is the cause and not being able to walk is the result, so 所以 ('therefore') links them best."
+  },
+  "3": {
+   "sentence_en": "Seeing Mingming could not walk, Xiaoan ___ (hurriedly) supported him and slowly walked to the sick bay.",
+   "hint": "Clue: seeing his friend could not walk, he acted at once. Which box word means 'hurriedly / at once'?",
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"扶","py":"fú","en":"to support"}],
+   "explanation_en": "Seeing Mingming could not walk, Xiaoan helped him at once, so 连忙 ('hurriedly, immediately') fits best."
+  },
+  "4": {
+   "sentence_en": "After the nurse examined Mingming, she told him to rest ___ (at ease).",
+   "hint": "Clue: the nurse tells him to rest without worrying. Which box word means 'at ease / without worry'?",
+   "keywords": [{"w":"安心","py":"ānxīn","en":"at ease; without worry"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "The nurse tells Mingming to rest without worrying, so 安心 ('at ease') pairs best with 休息 (rest)."
+  },
+  "5": {
+   "sentence_en": "Xiaoan stayed by his side until Mingming's mother came, then ___ (left) for home.",
+   "hint": "Clue: once Mum arrived, Xiaoan went away home. Which box word means 'to leave / go away'?",
+   "keywords": [{"w":"离开","py":"líkāi","en":"to leave"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "When Mingming's mother arrived, Xiaoan went away home, so 离开 ('to leave') fits best."
+  }
+ },
+ "reading": {
+  "ZS12_G1_Q1": {
+   "stem_en": "What did Xiaoling do in the library?",
+   "answer_en": "She tidied up the misplaced books and put them back in their proper places.",
+   "keywords": [{"w":"整理","py":"zhěnglǐ","en":"to tidy up"},{"w":"书架","py":"shūjià","en":"bookshelf"},{"w":"放回","py":"fànghuí","en":"to put back"}],
+   "explanation": "这是细节题。短文说“小玲没有说什么，默默地把书一本一本整理好，放回正确的位置”，直接说明她把乱放的书整理好放回原位，所以选(1)。(2)告诉老师、(3)帮阿明找书文中都没有提到。做细节题回原文找准确的动作。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaoling said nothing and quietly tidied the books one by one, putting them back in the right places', directly stating she tidied the misplaced books, so (1). (2) telling the teacher and (3) helping Aming find a book are not in the text. Find the exact action in the passage.",
+   "solution": {"evidence": "默默地把书一本一本整理好，放回正确的位置。"}
+  },
+  "ZS12_G1_Q2": {
+   "stem_en": "Why did Aming find it strange?",
+   "answer_en": "Because the bookshelf had become neat and tidy.",
+   "keywords": [{"w":"奇怪","py":"qíguài","en":"strange"},{"w":"书架","py":"shūjià","en":"bookshelf"},{"w":"整齐","py":"zhěngqí","en":"neat"}],
+   "explanation": "这是推断题。短文说“阿明回来拿书，看到整齐的书架，很奇怪地问旁边的同学”，说明他觉得奇怪是因为原本乱的书架变整齐了，所以选(2)。(1)找不到书、(3)小玲说谢谢文中都没有作为奇怪的原因。找原因看“奇怪”前后的句子。",
+   "explanation_en": "This is an inference question. The passage says 'Aming came back for a book, saw the neat shelf, and puzzled asked a classmate', so he was puzzled because the once-messy shelf had become tidy, so (2). (1) not finding a book and (3) Xiaoling thanking him are not given as reasons. Look at the sentence around '奇怪'.",
+   "solution": {"evidence": "阿明回来拿书，看到整齐的书架，很奇怪地问旁边的同学。"}
+  },
+  "ZS12_G1_Q3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Quietly helping others is a good thing.",
+   "keywords": [{"w":"默默","py":"mòmò","en":"quietly"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"图书馆","py":"túshūguǎn","en":"library"}],
+   "explanation": "这是主旨题。全文讲小玲不声不响地把阿明放乱的书整理好，阿明发现后真诚道谢。可见全文是要说默默地帮助别人是一件好事。(1)书要放好、(2)多去图书馆都只是情节里的小点；(3)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoling quietly tidying the books Aming had misplaced, and Aming thanking her sincerely on finding out. So the point is that quietly helping others is a good thing. (1) putting books away and (2) visiting the library are minor points; (3) sums up the whole.",
+   "solution": {"evidence": "小玲没有说什么，默默地把书一本一本整理好，放回正确的位置。"}
+  },
+  "ZS12_H1_Q1": {
+   "stem_en": "Find a word in the passage close in meaning to the underlined word: 'Mum saw me helping the neighbour and praised me as a well-behaved child.' (well-behaved child = 乖孩子).",
+   "answer_en": "好孩子 (a good child)",
+   "keywords": [{"w":"好孩子","py":"hǎo háizi","en":"good child"},{"w":"乖孩子","py":"guāi háizi","en":"well-behaved child"},{"w":"称赞","py":"chēngzàn","en":"to praise"}],
+   "explanation": "这是近义词题。例句里的“乖孩子”指听话、懂事的孩子，短文中老婆婆说“你真是个好孩子”，“好孩子”和“乖孩子”意思相近，都是夸孩子好，所以答案是“好孩子”。做近义词题要回原文找意思最接近的词。",
+   "explanation_en": "This is a synonym question. In the example, 乖孩子 means an obedient, sensible child; in the passage the old lady says 'you really are a 好孩子 (good child)'. 好孩子 and 乖孩子 are close in meaning, both praising a child, so the answer is 好孩子. Find the closest word in the passage.",
+   "solution": {"evidence": "你真是个好孩子。"}
+  },
+  "ZS12_H1_Q2": {
+   "stem_en": "Why was Xiaojun a few minutes late?",
+   "answer_en": "Because Xiaojun helped the old lady carry her things to her door before continuing to school, so he was a few minutes late.",
+   "keywords": [{"w":"迟到","py":"chídào","en":"to be late"},{"w":"帮","py":"bāng","en":"to help"},{"w":"送到","py":"sòngdào","en":"to deliver to"}],
+   "explanation": "这是因果题，答案用完整句子。短文说“小俊帮老婆婆把东西送到她家门口，才继续走去学校”，说明他迟到是因为先帮老婆婆送东西才去学校。答“为什么”要把原因写清楚，用完整句子。",
+   "explanation_en": "This is a cause question, answered in a full sentence. The passage says 'Xiaojun helped the old lady carry her things to her door before continuing to school', so he was late because he first helped her. State the reason clearly in a full sentence.",
+   "solution": {"evidence": "小俊帮老婆婆把东西送到她家门口，才继续走去学校。"}
+  },
+  "ZS12_H1_Q3": {
+   "stem_en": "Why was Xiaojun happy inside?",
+   "answer_en": "Because Xiaojun helped the old lady and did a meaningful thing, so he felt happy inside.",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"有意义","py":"yǒu yìyì","en":"meaningful"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是因果题，答案在文章最后。短文说“小俊心里很高兴，因为他做了一件有意义的事”，“因为”后面就是原因，说明他高兴是因为帮了老婆婆、做了有意义的事。答“为什么”要把原因写清楚。",
+   "explanation_en": "This is a cause question; the answer is at the end. The passage says 'Xiaojun felt very happy because he had done a meaningful thing'; the reason follows '因为', so he was happy because he helped the old lady and did something meaningful. State the reason clearly.",
+   "solution": {"evidence": "小俊心里很高兴，因为他做了一件有意义的事。"}
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "setId": "ZS20",
+ "mcq": {
+  "ZS20_A1": {
+   "sentence_en": "Every morning, Xiaoming ___ (brushes) his teeth to keep his mouth clean.",
+   "hints": ["The blank + 牙 is the daily act of cleaning teeth. Which character (with the knife 刀 and cloth 巾, like a brush) means 'to brush'?"],
+   "keywords": [{"w":"刷牙","py":"shuāyá","en":"to brush teeth"},{"w":"早上","py":"zǎoshang","en":"morning"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "刷牙 is the daily act of cleaning the teeth, so 刷 is correct. 刷 has 刀 on the left and 巾 on the right - cleaning with a brush made of blade-and-cloth shape. The four look alike; note the structure of 刷."
+  },
+  "ZS20_A2": {
+   "sentence_en": "The doctor says drinking more ___ (water) is very good for the body.",
+   "hints": ["The blank names what you drink a lot of for health. Which character looks like flowing water?"],
+   "keywords": [{"w":"水","py":"shuǐ","en":"water"},{"w":"喝","py":"hē","en":"to drink"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "多喝水 (drinking more water) is a healthy habit, so 水 is correct. 水 looks like flowing water; 永 has an extra stroke like a long stream; 泳 adds the water radical to 永 and means to swim. 水 is the simplest to recognize."
+  },
+  "ZS20_A3": {
+   "sentence_en": "Mum ___ (repeatedly reminds) me to eat on time every day and not be a picky eater.",
+   "hints": ["The blank + 嘱 means to remind again and again by speaking. Which character has the mouth radical 口?"],
+   "keywords": [{"w":"叮嘱","py":"dīngzhǔ","en":"to repeatedly remind"},{"w":"按时","py":"ànshí","en":"on time"},{"w":"挑食","py":"tiāoshí","en":"to be picky about food"}],
+   "explanation_en": "叮嘱 means to remind again and again, so 叮 is correct. 叮 has the mouth radical 口 (speaking to remind); 盯 has the eye radical 目 (staring); 钉 has the metal radical 金 (a nail). Tell them apart by the radical."
+  },
+  "ZS20_A4": {
+   "sentence_en": "Xiaohua ___ (keeps up) sleeping and rising early every day, and is full of energy.",
+   "hints": ["The blank + 持 means to keep doing without giving up. Which character has 土 (earth) at the bottom, like standing firm on the ground?"],
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to keep up; persist"},{"w":"早睡早起","py":"zǎo shuì zǎo qǐ","en":"early to bed and rise"},{"w":"精神","py":"jīngshén","en":"energy"}],
+   "explanation_en": "坚持 means to keep doing something without giving up, so 坚 is correct. 坚 has 土 (earth) at the bottom, like standing firmly on the ground; 艰 has 艮 on the right and means hardship. Note the 土 base of 坚."
+  },
+  "ZS20_A5": {
+   "sentence_en": "Dad says you must ___ (wash) your hands clean before you can eat.",
+   "hints": ["The blank + 手 means to clean your hands with water. Which character has the water radical 氵?"],
+   "keywords": [{"w":"洗手","py":"xǐshǒu","en":"to wash hands"},{"w":"饭前","py":"fànqián","en":"before a meal"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "洗手 means to clean the hands with water, so 洗 is correct. 洗 is the water radical 氵 plus 先 - you need water to wash; 先 has no water radical. Remember washing needs water (the 氵 radical)."
+  },
+  "ZS20_B1": {
+   "sentence_en": "Xiaoli 运动 (exercises) every day, and her body gets healthier and healthier.",
+   "hints": ["运 is 4th tone (yùn); 动 is 4th tone (dòng). Which choice is yùn + dòng, both falling?"],
+   "keywords": [{"w":"运动","py":"yùndòng","en":"to exercise"},{"w":"身体","py":"shēntǐ","en":"body"},{"w":"健康","py":"jiànkāng","en":"healthy"}],
+   "explanation_en": "运 is read yùn (4th tone) and 动 is dòng (4th tone), together yùn dòng. Both characters of 运动 are 4th tone, falling together."
+  },
+  "ZS20_B2": {
+   "sentence_en": "The doctor tells us that 睡觉 (sleep) must be enough for the body to be well.",
+   "hints": ["睡 is retroflex sh (shuì), not flat s; in 睡觉, 觉 is read jiào (4th tone), not jiǎo. Which choice is shuì + jiào?"],
+   "keywords": [{"w":"睡觉","py":"shuìjiào","en":"to sleep"},{"w":"充足","py":"chōngzú","en":"sufficient"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "睡 is read shuì (retroflex sh) and 觉 here is jiào (4th tone), together shuì jiào. 睡 is retroflex sh (curl the tongue), not flat s; 觉 in 睡觉 is jiào, not jiǎo."
+  },
+  "ZS20_B3": {
+   "sentence_en": "Mum says eating more 蔬菜 (vegetables) is very good for the body.",
+   "hints": ["蔬 is retroflex sh (shū), not flat s; 菜 is cài, initial c without h. Which choice is shū + cài?"],
+   "keywords": [{"w":"蔬菜","py":"shūcài","en":"vegetables"},{"w":"身体","py":"shēntǐ","en":"body"},{"w":"帮助","py":"bāngzhù","en":"help"}],
+   "explanation_en": "蔬 is read shū (retroflex sh, 1st tone) and 菜 is cài (4th tone), together shū cài. 蔬 is retroflex sh (curl the tongue); 菜 is cài, initial c without an h."
+  },
+  "ZS20_B4": {
+   "sentence_en": "Little one, to 长大 (grow up), you must take good care of your own body.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"照顾","py":"zhàogù","en":"to take care of"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), not cháng (length); 大 is dà. 长 is a polyphone: cháng = length (adjective); zhǎng = to grow (verb). 长大 is a verb, so read zhǎng."
+  },
+  "ZS20_C1": {
+   "sentence_en": "Xiaoqiang ___ (keeps up) running every day and never slacks off; his body gets stronger and stronger.",
+   "hints": ["Clue: 'never slacks off' shows he keeps at it without stopping. Which word means 'to persist / keep up'?"],
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"偷懒","py":"tōulǎn","en":"to slack off"}],
+   "explanation_en": "'Never slacks off' shows he does it every day without stopping, which is exactly 坚持 (to persist). 偶尔 (occasionally), 有时 (sometimes) and 开始 (to begin) do not match 'never slacks off'."
+  },
+  "ZS20_C2": {
+   "sentence_en": "Mum bought ___ (a basket of) apples and put them on the table, telling us to eat more fruit.",
+   "hints": ["Clue: apples held in a basket. Which measure word means 'a basketful'?"],
+   "keywords": [{"w":"篮","py":"lán","en":"measure word: basket"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"水果","py":"shuǐguǒ","en":"fruit"}],
+   "explanation_en": "Apples are held in a basket, so the measure word 篮 is most natural: 一篮苹果. Match measure words to items: books -> 本; fish -> 条; paper -> 张; fruit -> 篮. Picture apples in a basket."
+  },
+  "ZS20_C3": {
+   "sentence_en": "Xiaohong ___ (got rid of) her bad habit of being picky, and started eating everything.",
+   "hints": ["Clue: a bad habit should be removed. Which word pairs with 坏习惯 to mean 'to get rid of'?"],
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"挑食","py":"tiāoshí","en":"picky eating"},{"w":"坏习惯","py":"huài xíguàn","en":"bad habit"}],
+   "explanation_en": "A bad habit should be removed, and the fixed pairing is 改掉坏习惯 (to get rid of a bad habit). 掉 means to remove, so 改掉 = to change away a bad habit. 找到, 发现 and 带走 do not fit."
+  },
+  "ZS20_C4": {
+   "sentence_en": "Little brother is ill and his face looks ___ (pale); Mum is very worried.",
+   "hints": ["Clue: when ill, the face has no colour. Which word means an unhealthy 'pale', not clean-white or bright?"],
+   "keywords": [{"w":"苍白","py":"cāngbái","en":"pale"},{"w":"脸色","py":"liǎnsè","en":"complexion"},{"w":"担心","py":"dānxīn","en":"worried"}],
+   "explanation_en": "When ill, the face has no blood colour, so 苍白 (an unhealthy pale) is the most exact. 苍白 is specially the bloodless, unhealthy white; 洁白 is a clean white; 明亮 is about bright light. Being ill -> 苍白."
+  },
+  "ZS20_C5": {
+   "sentence_en": "The teacher ___ (reminds) us always to wash our hands before eating, so as to be hygienic.",
+   "hints": ["Clue: the teacher kindly gets us to remember to wash hands. Which word means 'to remind', not 'to order' or 'to demand'?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"洗手","py":"xǐshǒu","en":"to wash hands"},{"w":"卫生","py":"wèishēng","en":"hygienic"}],
+   "explanation_en": "The teacher kindly gets us to remember to look after our health, so 提醒 (to remind gently) fits best. 命令 is too harsh, 要求 is more formal, and 回答 means to answer a question - none fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“锻炼”是通过运动使身体更强壮，所以“锻炼身体”就是靠运动让身体变得更结实。“均衡、充足”都不是“运动使身体强壮”的意思。",
+   "explanation_en": "锻炼 (duànliàn) means to make the body stronger through exercise, so 锻炼身体 means to exercise the body. 均衡 (balanced) and 充足 (sufficient) do not mean 'to strengthen the body through exercise'.",
+   "stem_en": "to exercise the body",
+   "keywords": [{"w":"锻炼","py":"duànliàn","en":"to exercise"},{"w":"身体","py":"shēntǐ","en":"body"}]
+  },
+  "2": {
+   "explanation": "“均衡”是各方面都合适、不偏多不偏少，所以“均衡饮食”就是各种食物都吃、营养平衡。“锻炼、保护”都不是“各样都吃、不偏食”的意思。",
+   "explanation_en": "均衡 (jūnhéng) means well-balanced with nothing too much or too little, so 均衡饮食 means a balanced diet. 锻炼 (exercise) and 保护 (protect) do not mean 'eating a variety, balanced'.",
+   "stem_en": "a balanced diet",
+   "keywords": [{"w":"均衡","py":"jūnhéng","en":"balanced"},{"w":"饮食","py":"yǐnshí","en":"diet"}]
+  },
+  "3": {
+   "explanation": "“充足”是数量够、不缺少，所以“睡眠充足”就是睡的时间够、休息足够。“均衡、休息”都不是“数量够、不缺少”的意思。",
+   "explanation_en": "充足 (chōngzú) means enough, not lacking, so 睡眠充足 means enough sleep. 均衡 (balanced) and 休息 (rest) do not mean 'enough in amount'.",
+   "stem_en": "enough sleep",
+   "keywords": [{"w":"充足","py":"chōngzú","en":"sufficient"},{"w":"睡眠","py":"shuìmián","en":"sleep"}]
+  },
+  "4": {
+   "explanation": "“保护”是爱护、不让它受伤害，所以“保护眼睛”就是爱护眼睛、不让它受损。“锻炼、充足”都不是“爱护不受伤害”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护眼睛 means to protect the eyes. 锻炼 (exercise) and 充足 (sufficient) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the eyes",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"眼睛","py":"yǎnjing","en":"eyes"}]
+  },
+  "5": {
+   "explanation": "“休息”是停下来让身体放松、恢复力气，所以“好好休息”就是好好地歇一歇。“保护、锻炼”都不是“停下来歇息”的意思。",
+   "explanation_en": "休息 (xiūxi) means to stop and let the body rest, so 好好休息 means to have a good rest. 保护 (protect) and 锻炼 (exercise) do not mean 'to stop and rest'.",
+   "stem_en": "to have a good rest",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"好好","py":"hǎohǎo","en":"well; properly"}]
+  }
+ },
+ "craft": {
+  "ZS20_E1": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Xiaowen keeps exercising every day.' and 'Xiaowen's body is very healthy.'",
+   "answer_en": "Because Xiaowen keeps exercising every day, his body is very healthy.",
+   "tiles": ["因为","小文每天坚持运动，","所以","他的身体非常健康。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小文每天坚持运动' (because he exercises daily) is the cause, '所以他的身体非常健康' (so his body is healthy) is the result. Find the cause (exercise) and the result (health), then fit the pattern."
+  },
+  "ZS20_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还 (not only…, but also…): 'Xiaohua sleeps and rises early every day.' and 'Xiaohua keeps drinking water.'",
+   "answer_en": "Xiaohua not only sleeps and rises early every day, but also keeps drinking water.",
+   "tiles": ["小华","不但","每天早睡早起，","还","坚持喝水。"],
+   "explanation_en": "不但……还…… means doing not just one good thing but another too. '不但每天早睡早起' (not only early to bed and rise) is the first, '还坚持喝水' (but also keeps drinking water) is the second - two good habits, a step-up."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Xiaoming is a boy who loves sport. After school every day, he puts on his sports shoes and goes to the park downstairs to ___ (keep up) running.",
+   "hint": "Clue: '每天……都会' shows he does it every day without giving up. Which box word means 'to persist'?",
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"跑步","py":"pǎobù","en":"to run"}],
+   "explanation_en": "'Every day he does it' shows he keeps at it without giving up, so 坚持 (to persist) fits best."
+  },
+  "2": {
+   "sentence_en": "After running, he drinks ___ (enough) water to replenish his body.",
+   "hint": "Clue: after running he replenishes water, so he drinks his fill. Which box word means 'enough'?",
+   "keywords": [{"w":"足够","py":"zúgòu","en":"enough"},{"w":"水分","py":"shuǐfèn","en":"water; moisture"}],
+   "explanation_en": "After running he replenishes his body, so drinking 足够 (enough) water fits best."
+  },
+  "3": {
+   "sentence_en": "After returning home, he first washes his hands, then sits down to eat dinner ___ (properly).",
+   "hint": "Clue: it describes the attitude of eating dinner well. Which box word means 'earnest / attentive'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"晚饭","py":"wǎnfàn","en":"dinner"}],
+   "explanation_en": "Sitting down to eat dinner properly, 认真 describes the attentive attitude toward the meal, so it fits best."
+  },
+  "4": {
+   "sentence_en": "Mum always reminds him to eat a ___ (balanced) diet, with more vegetables and fruit.",
+   "hint": "Clue: it pairs with 饮食 (diet) - eating a variety with balanced nutrition. Which box word means 'balanced'?",
+   "keywords": [{"w":"均衡","py":"jūnhéng","en":"balanced"},{"w":"饮食","py":"yǐnshí","en":"diet"}],
+   "explanation_en": "均衡饮食 is a fixed pairing meaning eating all kinds of food with balanced nutrition, so 均衡 fits best."
+  },
+  "5": {
+   "sentence_en": "Xiaoming took Mum's words to heart and eats very ___ (happily) every day; his body gets stronger and stronger.",
+   "hint": "Clue: he took Mum's words and eats in a good mood. Which box word describes a happy mood?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "Xiaoming took Mum's words to heart and eats in a good mood every day, so 开心 (happily) fits best."
+  }
+ },
+ "reading": {
+  "ZS20_G1": {
+   "stem_en": "What is the first thing Xiaofang does after getting up each morning?",
+   "answer_en": "She does stretching exercises.",
+   "keywords": [{"w":"起床","py":"qǐchuáng","en":"to get up"},{"w":"伸展运动","py":"shēnzhǎn yùndòng","en":"stretching exercises"},{"w":"洗脸","py":"xǐliǎn","en":"to wash the face"}],
+   "explanation": "这是细节题。短文说“她每天早上六点半起床，先做十分钟的伸展运动，再去洗脸刷牙”，“先……再……”说明起床后第一件事是做伸展运动，所以选(2)。(1)洗脸刷牙是第二件事、(3)喝一大杯水是上学前的事，都不是第一件。做细节题要注意“先……再……”这样表示顺序的词。",
+   "explanation_en": "This is a detail question. The passage says 'she gets up at 6:30, first does ten minutes of stretching, then washes her face and brushes her teeth'. '先……再……' (first…then…) shows stretching is the first thing, so (2). (1) washing and brushing is second and (3) drinking water is before school. Note order words like 先……再…….",
+   "solution": {"evidence": "她每天早上六点半起床，先做十分钟的伸展运动"}
+  },
+  "ZS20_G2": {
+   "stem_en": "On which days does Xiaofang play badminton after school?",
+   "answer_en": "Wednesday and Friday.",
+   "keywords": [{"w":"星期三","py":"xīngqīsān","en":"Wednesday"},{"w":"星期五","py":"xīngqīwǔ","en":"Friday"},{"w":"打羽毛球","py":"dǎ yǔmáoqiú","en":"to play badminton"}],
+   "explanation": "这是细节题。短文说“每个星期三和星期五放学后，她都会和同学一起打羽毛球”，直接说明是星期三和星期五，所以选(3)。(1)星期一和星期三、(2)每天放学后，文中都没有这样说。做细节题要看清楚表示时间的词语。",
+   "explanation_en": "This is a detail question. The passage says 'every Wednesday and Friday after school, she plays badminton with classmates', directly naming the days, so (3). (1) Monday and Wednesday and (2) every day are not stated. For detail questions, read the time words carefully.",
+   "solution": {"evidence": "每个星期三和星期五放学后，她都会和同学一起打羽毛球。"}
+  },
+  "ZS20_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Good living habits can make the body healthy.",
+   "keywords": [{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"健康","py":"jiànkāng","en":"healthy"},{"w":"榜样","py":"bǎngyàng","en":"role model"}],
+   "explanation": "这是主旨题。全文讲小芳早起运动、喝水、打球、早睡等好习惯，最后妈妈说“小芳的好习惯让她的身体越来越健康”。可见短文是要告诉我们好的生活习惯能让身体健康，所以选(1)。(2)打羽毛球最好、(3)每天喝很多水都只是其中一个细节，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage lists Xiaofang's good habits - early exercise, drinking water, playing ball, early sleep - and Mum says 'her good habits make her body healthier'. So it tells us good living habits keep the body healthy, so (1). (2) badminton is best and (3) drink lots of water are single details, not the main idea.",
+   "solution": {"evidence": "小芳的好习惯让她的身体越来越健康"}
+  },
+  "ZS20_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaojie's poor eating behaviour in the past: In the past, Xiaojie ___ vegetables.",
+   "answer_en": "不喜欢吃 (did not like to eat)",
+   "keywords": [{"w":"蔬菜","py":"shūcài","en":"vegetables"},{"w":"以前","py":"yǐqián","en":"in the past"},{"w":"营养","py":"yíngyǎng","en":"nutrition"}],
+   "explanation": "这是找词题。短文说“他以前很不喜欢吃蔬菜，每次吃饭都把蔬菜留在碗里”，“不喜欢吃”正好说明小杰以前不好的饮食行为，所以答案是“不喜欢吃”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'in the past he really did not like to eat vegetables and always left them in his bowl'; 不喜欢吃 exactly describes his poor past eating habit, so the answer is 不喜欢吃. Find the word in the passage that fits the situation.",
+   "solution": {"evidence": "他以前很不喜欢吃蔬菜"}
+  },
+  "ZS20_H2": {
+   "stem_en": "Why did the doctor tell Xiaojie to eat more vegetables?",
+   "answer_en": "Because without eating vegetables, the body cannot get enough nutrition and easily falls ill.",
+   "keywords": [{"w":"营养","py":"yíngyǎng","en":"nutrition"},{"w":"生病","py":"shēngbìng","en":"to fall ill"},{"w":"足够","py":"zúgòu","en":"enough"}],
+   "explanation": "这是细节题，答案用完整句子。短文说医生告诉他“不吃蔬菜，身体就得不到足够的营养，容易生病”，说明医生叫他多吃蔬菜是因为不吃蔬菜会缺营养、容易生病。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says the doctor told him 'without vegetables, the body cannot get enough nutrition and easily falls ill', so the reason is that not eating vegetables leads to lack of nutrition and illness. State the reason in a full sentence.",
+   "solution": {"evidence": "不吃蔬菜，身体就得不到足够的营养，容易生病。"}
+  },
+  "ZS20_H3": {
+   "stem_en": "What change did Xiaojie make after listening to the doctor?",
+   "answer_en": "Xiaojie decided to get rid of the bad habit of not eating vegetables, and from that day on ate up the vegetables in his bowl seriously every day.",
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"坏习惯","py":"huài xíguàn","en":"bad habit"},{"w":"认真","py":"rènzhēn","en":"seriously"}],
+   "explanation": "这是推断题。短文说“小杰听了，决定改掉不吃蔬菜的坏习惯。从那天起，他每天都认真地吃完碗里的蔬菜”，说明他的改变是决定改掉坏习惯、每天认真吃完蔬菜。答“有什么改变”要把前后行为的变化写清楚。",
+   "explanation_en": "This is an inference question. The passage says 'Xiaojie decided to get rid of the bad habit of not eating vegetables, and from that day ate up the vegetables in his bowl seriously every day', so his change was deciding to drop the bad habit and finish his vegetables daily. State the change of behaviour clearly.",
+   "solution": {"evidence": "决定改掉不吃蔬菜的坏习惯。从那天起，他每天都认真地吃完碗里的蔬菜。"}
+  }
+ }
+}

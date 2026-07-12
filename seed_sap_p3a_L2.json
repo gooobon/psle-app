@@ -1,0 +1,483 @@
+{
+ "seedId": "sap_p3a_L2",
+ "school": "SAP_High_Chinese_3A",
+ "year": "L2_wodepengyouhejiaren",
+ "track": "HCL",
+ "sections": {
+  "HanziMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "我只知道他叫小文，不知道他______什么。",
+     "options": [
+      "姓",
+      "性",
+      "生",
+      "星"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 2,
+     "skill": "tongyinzi",
+     "explain": {
+      "why": "“姓什么”问的是家族的姓氏，用“姓”。",
+      "distractors": [
+       "✓ 正确答案：姓＝家族的姓氏。",
+       "“性”读音相同，但指性别、性格。",
+       "“生”是出生、生活，意思不同。",
+       "“星”是星星，与姓氏无关。"
+      ],
+      "trapType": "tongyinzi",
+      "memoryTip": "问家族称呼用“姓”；性、生、星虽近音，义不同。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "爸爸常常运动，身体一点也不______。",
+     "options": [
+      "伴",
+      "拌",
+      "胖",
+      "判"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 2,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "“身体一点也不胖”指不肥，用月字旁的“胖”。",
+      "distractors": [
+       "“伴”是同伴、陪伴，与身体胖瘦无关。",
+       "“拌”是搅拌，意思不同。",
+       "✓ 正确答案：胖＝身体肉多，月字旁。",
+       "“判”是判断，意思不同。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "四字都含“半”，看部首：身体胖瘦用月字旁“胖”。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "弟弟又______明又听话，不会给爸妈添烦恼。",
+     "options": [
+      "总",
+      "匆",
+      "聪",
+      "葱"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 2,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "“又聪明又听话”，“聪明”指头脑好，用耳字旁的“聪”。",
+      "distractors": [
+       "“总”是总是、总共，不能组成“总明”。",
+       "“匆”是匆忙，意思不同。",
+       "✓ 正确答案：聪明＝头脑灵活。",
+       "“葱”是蔬菜大葱，意思不同。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "“聪”有耳朵，耳聪目明＝聪明。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "我听不______你说什么，请你说清楚一点！",
+     "options": [
+      "董",
+      "懂",
+      "动",
+      "洞"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 2,
+     "skill": "tongyinzi",
+     "explain": {
+      "why": "“听不懂”指不明白，用竖心旁的“懂”。",
+      "distractors": [
+       "“董”是姓氏或董事，读音相同但义不同。",
+       "✓ 正确答案：懂＝明白、了解。",
+       "“动”是动作，意思不同。",
+       "“洞”是洞穴，意思不同。"
+      ],
+      "trapType": "tongyinzi",
+      "memoryTip": "心里“懂”了＝竖心旁“懂”；董、动、洞不表明白。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "小朋友，你叫什么______字？",
+     "options": [
+      "明",
+      "鸣",
+      "名",
+      "命"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 2,
+     "skill": "tongyinzi",
+     "explain": {
+      "why": "“叫什么名字”问的是名字，用“名”。",
+      "distractors": [
+       "“明”是明白、明亮，读音相同但义不同。",
+       "“鸣”是鸟叫，意思不同。",
+       "✓ 正确答案：名＝名字、名称。",
+       "“命”是生命，意思不同。"
+      ],
+      "trapType": "tongyinzi",
+      "memoryTip": "名字用“名”；明、鸣、命虽近音，义不同。"
+     }
+    }
+   ]
+  },
+  "VocabMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "他没出声，______是不同意你的说法。",
+     "options": [
+      "因为",
+      "一些",
+      "意思",
+      "聪明"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“______是不同意”指他的用意是不同意，用“意思”。",
+      "distractors": [
+       "“因为”表示原因，不能作“是不同意”的主语。",
+       "“一些”表示数量，与句意不合。",
+       "✓ 正确答案：意思＝用意、含义。",
+       "“聪明”指头脑好，与句意不合。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“意思”＝用意、含义。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "______工作关系，他在香港住了一年。",
+     "options": [
+      "因为",
+      "意思",
+      "一定",
+      "相信"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“______工作关系”表示原因，用“因为”。",
+      "distractors": [
+       "✓ 正确答案：因为＝表示原因。",
+       "“意思”指含义，不表示原因。",
+       "“一定”表示肯定，与原因无关。",
+       "“相信”是信任，与句意不合。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "表示原因用“因为”。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "这里有______旧衣服，准备送给人。",
+     "options": [
+      "一定",
+      "聪明",
+      "意思",
+      "一些"
+     ],
+     "answer0": 3,
+     "answerKey": 4,
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“有______旧衣服”指数量不多，用“一些”。",
+      "distractors": [
+       "“一定”表示肯定，不表示数量。",
+       "“聪明”与衣服无关。",
+       "“意思”指含义，与句意不合。",
+       "✓ 正确答案：一些＝若干、不多的数量。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "表示不确定的数量用“一些”。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "如果你要提高学业成绩，______要好好学习。",
+     "options": [
+      "一些",
+      "一定",
+      "因为",
+      "相信"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“______要好好学习”表示必须、肯定，用“一定”。",
+      "distractors": [
+       "“一些”表示数量，与句意不合。",
+       "✓ 正确答案：一定＝必定、必须。",
+       "“因为”表示原因，句中不需要。",
+       "“相信”是信任，与句意不合。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "表示必须、肯定用“一定”。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "快要比赛了，我一点也不紧张，因为我______自己的能力。",
+     "options": [
+      "相信",
+      "聪明",
+      "意思",
+      "一定"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“我______自己的能力”指信任自己，用“相信”。",
+      "distractors": [
+       "✓ 正确答案：相信＝信任、认为可靠。",
+       "“聪明”指头脑好，不能带宾语“自己的能力”。",
+       "“意思”指含义，与句意不合。",
+       "“一定”表示肯定，不能说“一定自己的能力”。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "信任某人某事用“相信”。"
+     }
+    }
+   ]
+  },
+  "VocabMatch": {
+   "instruction": "把左右两边的词语连起来，搭配合理的词组。",
+   "pool": [
+    "不矮",
+    "成真",
+    "自己",
+    "卷卷",
+    "不瘦"
+   ],
+   "items": [
+    {
+     "num": 1,
+     "stem": "梦想（　）",
+     "answer0": 1,
+     "lesson": 2,
+     "skill": "dapei",
+     "explain": {
+      "why": "“梦想成真”指梦想变成现实。",
+      "distractors": [
+       "“梦想不矮”不成词。",
+       "✓ 梦想成真：梦想变成现实。",
+       "“自己”本题配“相信”。",
+       "“卷卷”本题配“头发”。",
+       "“不瘦”本题配“不胖”。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+     }
+    },
+    {
+     "num": 2,
+     "stem": "相信（　）",
+     "answer0": 2,
+     "lesson": 2,
+     "skill": "dapei",
+     "explain": {
+      "why": "“相信自己”指信任自己。",
+      "distractors": [
+       "“相信不矮”不成词。",
+       "“成真”本题配“梦想”。",
+       "✓ 相信自己：信任自己。",
+       "“卷卷”本题配“头发”。",
+       "“不瘦”本题配“不胖”。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+     }
+    },
+    {
+     "num": 3,
+     "stem": "不胖（　）",
+     "answer0": 4,
+     "lesson": 2,
+     "skill": "dapei",
+     "explain": {
+      "why": "“不胖不瘦”指胖瘦适中。",
+      "distractors": [
+       "“不矮”本题配“不高”。",
+       "“成真”本题配“梦想”。",
+       "“自己”本题配“相信”。",
+       "“卷卷”本题配“头发”。",
+       "✓ 不胖不瘦：胖瘦适中。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+     }
+    },
+    {
+     "num": 4,
+     "stem": "不高（　）",
+     "answer0": 0,
+     "lesson": 2,
+     "skill": "dapei",
+     "explain": {
+      "why": "“不高不矮”指高矮适中。",
+      "distractors": [
+       "✓ 不高不矮：高矮适中。",
+       "“成真”本题配“梦想”。",
+       "“自己”本题配“相信”。",
+       "“卷卷”本题配“头发”。",
+       "“不瘦”本题配“不胖”。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+     }
+    },
+    {
+     "num": 5,
+     "stem": "头发（　）",
+     "answer0": 3,
+     "lesson": 2,
+     "skill": "dapei",
+     "explain": {
+      "why": "“头发卷卷”指头发弯曲成卷。",
+      "distractors": [
+       "“不矮”本题配“不高”。",
+       "“成真”本题配“梦想”。",
+       "“自己”本题配“相信”。",
+       "✓ 头发卷卷：头发弯曲成卷。",
+       "“不瘦”本题配“不胖”。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+     }
+    }
+   ]
+  },
+  "PassageCloze": {
+   "passage": "外婆六十岁了，从没上过学。最近，她却做了一件 (1) ___ 的事——要我教她写字。于是每天下午，我放学后便当起小老师。她戴上老花镜，我一笔一划地教。外婆很 (2) ___，每个字的 (3) ___，她一听就懂。(4) ___ 过了几天，外婆的进步很慢，我认为 (5) ___ 是我教得不好，可是外婆却说我教得很好，是她自己太笨了。",
+   "wordBank": [
+    "一连",
+    "相信",
+    "一定",
+    "聪明",
+    "奇怪",
+    "意思"
+   ],
+   "blanks": [
+    {
+     "num": 1,
+     "answer": "奇怪",
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "外婆要“我”教她写字，这是一件出乎意料的事，用“奇怪”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“奇怪”＝出乎意料、难理解。"
+     }
+    },
+    {
+     "num": 2,
+     "answer": "聪明",
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“外婆很______，每个字一听就懂”表示她头脑好，用“聪明”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“聪明”＝头脑灵活。"
+     }
+    },
+    {
+     "num": 3,
+     "answer": "意思",
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“每个字的______，她一听就懂”指字的含义，用“意思”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“意思”＝含义。"
+     }
+    },
+    {
+     "num": 4,
+     "answer": "一连",
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“______过了几天”表示接连几天，用“一连”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“一连”＝接连不断。"
+     }
+    },
+    {
+     "num": 5,
+     "answer": "一定",
+     "lesson": 2,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“我认为______是我教得不好”表示肯定的猜测，用“一定”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“一定”＝必定、肯定。"
+     }
+    }
+   ]
+  },
+  "ReadingOpen": {
+   "passage": "许多动物有一种超越人类的本领，它们能够分辨方向，即使到很远的地方，也可以认路回家。小小的蜜蜂，在离开蜂房很远的地方去采花蜜，回家时很少会迷路。曾经有人从蜂房里取出一些蜜蜂，把它们带到较远的地方放出来。这些蜜蜂在空中转了几圈后，很快便飞回原来的蜂房里。鸟类远游的本领也很惊人。飞得最远的鸽子，曾经从法国飞到越南。这只鸽子当时被关在船舱里，由主人从越南带到陌生的法国，一天后，竟然神奇地飞回越南的老家。可是，一些没人饲养的燕子，没有经过训练，认路回家的本领也不差。有人在德国捉了七只燕子，用飞机送到英国，再把它们放出去，没多久，有五只燕子飞回了德国的老家。这些奇怪的现象，生物学家百思不解，到现在还没找到答案呢！",
+   "questions": [
+    {
+     "format": "open_sentence",
+     "stem": "试解释下面短语在文中的意思：“生物学家百思不解”。",
+     "answer": "意思是生物学家反复思索，对一些动物认路回家的本领仍然不能理解。",
+     "marks": 2,
+     "lesson": 2,
+     "skill": "vocab_in_context"
+    },
+    {
+     "format": "open_sentence",
+     "stem": "许多动物有“超越人类的本领”，指的是什么？",
+     "answer": "指的是它们认路回家的本领；许多动物即使离开到很远的地方，也能很快回到老家。",
+     "marks": 2,
+     "lesson": 2,
+     "skill": "detail"
+    },
+    {
+     "format": "open_sentence",
+     "stem": "鸽子认路的本领强不强？试简单说明。",
+     "answer": "很强。有人把鸽子关在船舱里，从越南带到陌生的法国，一天后，鸽子竟然神奇地飞回越南的老家。",
+     "marks": 2,
+     "lesson": 2,
+     "skill": "inference"
+    },
+    {
+     "format": "open_sentence",
+     "stem": "让科学家一直找不到答案的是什么？",
+     "answer": "蜜蜂、鸽子和燕子等动物认路回家的本领，科学家无法解释，找不到答案。",
+     "marks": 2,
+     "lesson": 2,
+     "skill": "detail"
+    }
+   ]
+  }
+ }
+}

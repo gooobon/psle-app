@@ -1,0 +1,217 @@
+{
+ "setId": "ZS50",
+ "mcq": {
+  "ZS50_A1": {
+   "sentence_en": "When Dad comes home from work every day, he ___ (leads) us two brothers to exercise together.",
+   "hints": ["The blank + 着我们 means to lead someone along. Which character (with 巾 at the bottom) means 'to lead / bring'?"],
+   "keywords": [{"w":"带","py":"dài","en":"to lead; bring"},{"w":"下班","py":"xiàbān","en":"to finish work"},{"w":"运动","py":"yùndòng","en":"exercise"}],
+   "explanation_en": "带 means to lead or bring someone along, so 带着我们做运动 (leads us to exercise) fits. The four are read dài; judge by meaning: leading a person -> 带; wearing a hat -> 戴; replacing -> 代; waiting -> 待."
+  },
+  "ZS50_A2": {
+   "sentence_en": "Mum uses ___ (caring) words to make me no longer afraid of exams.",
+   "hints": ["The blank + 心 means thoughtful and close to one's feelings. Which character (with the shell radical 贝) forms 贴心 (caring / thoughtful)?"],
+   "keywords": [{"w":"贴心","py":"tiēxīn","en":"caring; thoughtful"},{"w":"话语","py":"huàyǔ","en":"words"},{"w":"考试","py":"kǎoshì","en":"exam"}],
+   "explanation_en": "贴心 is the fixed word for thoughtful words close to one's heart, so 贴 fits. 贴 has the shell radical 贝 - being close to the heart is 贴心. 帖, 粘, 沾 mean quite different things."
+  },
+  "ZS50_A3": {
+   "sentence_en": "Elder sister ___ (arranged) the room neatly, so the guest could stay in comfort.",
+   "hints": ["The blank + 置 means to arrange and set out a room. Which character (read bù) forms 布置 (to arrange)?"],
+   "keywords": [{"w":"布置","py":"bùzhì","en":"to arrange"},{"w":"房间","py":"fángjiān","en":"room"},{"w":"客人","py":"kèrén","en":"guest"}],
+   "explanation_en": "布置 is the fixed word for arranging and decorating a room, so 布 fits. The four are read bù; remember 布置 is a fixed word - 布 means to spread and set out, like cloth spread out."
+  },
+  "ZS50_A4": {
+   "sentence_en": "Grandpa is old, and needs to ___ (lean on) a cane to walk.",
+   "hints": ["The blank + 着拐杖 means to use a cane for support. Which character (with the hand radical 扌) means 'to support with the hand', not 'to pat gently'?"],
+   "keywords": [{"w":"扶","py":"fú","en":"to support; lean on"},{"w":"外公","py":"wàigōng","en":"grandpa"},{"w":"拐杖","py":"guǎizhàng","en":"cane"}],
+   "explanation_en": "扶 means to support with the hand, so 扶着拐杖 (leaning on a cane) means relying on it to walk, which is correct. 扶 and 抚 both have the hand radical 扌, but 扶 is to support and 抚 is to pat gently. Leaning on a cane needs firm support, so 扶."
+  },
+  "ZS50_A5": {
+   "sentence_en": "Good friends should ___ (respect) each other and not quarrel over small things.",
+   "hints": ["The blank + 重 means to value and not belittle someone. Which character (top 酋, bottom 寸) forms 尊重?"],
+   "keywords": [{"w":"尊重","py":"zūnzhòng","en":"to respect"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"吵架","py":"chǎojià","en":"to quarrel"}],
+   "explanation_en": "尊重 is the fixed word for valuing and not belittling someone, so 尊 fits. 尊 has 酋 on top and 寸 below; remember 尊重 is a fixed word. 遵 (to obey) has an extra walk radical."
+  },
+  "ZS50_B1": {
+   "sentence_en": "Little brother cried 难过 (sadly) because his toy was broken.",
+   "hints": ["难 is a polyphone: nán = difficult / sad; nàn = disaster. 难过 means sad, so which choice is nán + guò?"],
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"哭","py":"kū","en":"to cry"},{"w":"玩具","py":"wánjù","en":"toy"}],
+   "explanation_en": "In 难过, 难 is read nán (2nd tone) and 过 is guò (4th tone), together nán guò. 难过 means feeling bad inside; the 过 of 难过 is 4th tone guò."
+  },
+  "ZS50_B2": {
+   "sentence_en": "Mum 答应 (agreed) to take me to see Grandma, and I was overjoyed.",
+   "hints": ["应 is a polyphone: yīng in 应该 (should); yìng in 答应 (to agree). Which choice is dā + yìng?"],
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree"},{"w":"外婆","py":"wàipó","en":"grandma"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "答应 means to agree to a request; 应 is read yìng (4th tone) here, and 答 is dā (1st tone). 应: 应该 yīng; 答应 / 回应 yìng (4th tone)."
+  },
+  "ZS50_B3": {
+   "sentence_en": "Grandpa 教导 (teaches and guides) us that one must be honest and not lie.",
+   "hints": ["教 is a polyphone: jiào in 教导 (to guide); jiāo in 教书 (to teach a subject). Which choice is jiào + dǎo?"],
+   "keywords": [{"w":"教导","py":"jiàodǎo","en":"to teach and guide"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "In 教导, 教 is read jiào (4th tone, to guide) and 导 is dǎo (3rd tone), together jiào dǎo. 教: 教书 / 教我 jiāo; 教育 / 教导 jiào."
+  },
+  "ZS50_B4": {
+   "sentence_en": "On the day good friends 分别 (parted), we all cried.",
+   "hints": ["分 has the front nasal -n (fēn), not -ng; 别 is bié (2nd tone). Which choice is fēn + bié?"],
+   "keywords": [{"w":"分别","py":"fēnbié","en":"to part"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"哭","py":"kū","en":"to cry"}],
+   "explanation_en": "分 is read fēn (front nasal -en, 1st tone) and 别 is bié (2nd tone), together fēn bié. The final of 分 is -en (front nasal), not -eng (back nasal); 别 is 2nd tone bié, not 3rd tone."
+  },
+  "ZS50_C1": {
+   "sentence_en": "Mum was ill, and Dad ___ (attentively) looked after her, cooking congee and bringing medicine every day.",
+   "hints": ["Clue: caring for a patient means minding many little details. Which word means 'careful / attentive'?"],
+   "keywords": [{"w":"细心","py":"xìxīn","en":"careful; attentive"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"照顾","py":"zhàogù","en":"to look after"}],
+   "explanation_en": "Caring for a patient means minding many little details, so 细心 (careful, attentive) fits best. Caring for the sick means attending to details -> 细心. 粗心 (careless) is the opposite; 勇敢 and 开心 do not fit."
+  },
+  "ZS50_C2": {
+   "sentence_en": "Grandma gave me ___ (a) new school bag, which made me happy for several days.",
+   "hints": ["Clue: a school bag is a bag-shaped object. Which general measure word fits it?"],
+   "keywords": [{"w":"一个","py":"yí gè","en":"one (general)"},{"w":"新书包","py":"xīn shūbāo","en":"new school bag"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "A school bag is a bag-shaped object, so the measure word 个 is correct: 一个书包. A school bag -> 个; a garment -> 一件; a book -> 一本; paper -> 一张. Do not mix them up."
+  },
+  "ZS50_C3": {
+   "sentence_en": "After quarrelling with his good friend, Xiaoming went to ___ (apologize) of his own accord, and the two made up.",
+   "hints": ["Clue: after a quarrel, admitting one's fault and asking to be forgiven. Which word means 'to apologize'?"],
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"吵架","py":"chǎojià","en":"to quarrel"},{"w":"和好","py":"héhǎo","en":"to make up"}],
+   "explanation_en": "After a quarrel, admitting one's fault and asking to be forgiven is 道歉 (to apologize), so it fits best. Quarrel -> admit fault -> 道歉. 道谢 is to thank, 道别 is to say goodbye, 道歉 is to say sorry."
+  },
+  "ZS50_C4": {
+   "sentence_en": "Dad told me that friends should ___ (share) with each other and not think only of themselves.",
+   "hints": ["Clue: it echoes 'not think only of themselves' - enjoying good things together. Which word means 'to share'?"],
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"朋友","py":"péngyou","en":"friend"},{"w":"自己","py":"zìjǐ","en":"oneself"}],
+   "explanation_en": "分享 means enjoying good things together, matching 'not thinking only of oneself'. Not thinking only of oneself -> giving good things to others -> 分享. 分开, 分别 and 分心 mean quite different things."
+  },
+  "ZS50_C5": {
+   "sentence_en": "Every time Grandma sees me, she always ___ (warmly) holds my hand and asks all about me.",
+   "hints": ["Clue: holding my hand and asking all about me shows a warm, caring manner. Which word means 'warm / kind'?"],
+   "keywords": [{"w":"亲切","py":"qīnqiè","en":"warm; kind"},{"w":"外婆","py":"wàipó","en":"grandma"},{"w":"问长问短","py":"wènchángwènduǎn","en":"to ask all about"}],
+   "explanation_en": "Holding my hand and asking all about me shows a warm, caring manner, so 亲切 (warm, kind) fits best. Holding hands and asking about me -> warm care -> 亲切. 冷淡 is the opposite; 严肃 and 紧张 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“照顾”是留心料理、看护，所以“照顾生病的奶奶”就是看护、料理生病的奶奶。“道别、拜访”都不是“看护料理”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to look after and care for, so 照顾生病的奶奶 means to look after a sick grandma. 道别 (say goodbye) and 拜访 (visit) do not mean 'to care for'.",
+   "stem_en": "to look after a sick grandma",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"生病","py":"shēngbìng","en":"to be ill"}]
+  },
+  "2": {
+   "explanation": "“道别”是分开前互相说再见，所以“向老朋友道别”就是和老朋友说再见。“照顾、原谅”都不是“说再见”的意思。",
+   "explanation_en": "道别 (dàobié) means to say goodbye before parting, so 向老朋友道别 means to say goodbye to an old friend. 照顾 (look after) and 原谅 (forgive) do not mean 'to say goodbye'.",
+   "stem_en": "to say goodbye to an old friend",
+   "keywords": [{"w":"道别","py":"dàobié","en":"to say goodbye"},{"w":"老朋友","py":"lǎo péngyou","en":"old friend"}]
+  },
+  "3": {
+   "explanation": "“拜访”是特意去看望别人，所以“拜访远方的亲戚”就是专程去看望住得很远的亲戚。“道别、陪伴”都不是“上门看望”的意思。",
+   "explanation_en": "拜访 (bàifǎng) means to go and visit someone, so 拜访远方的亲戚 means to visit relatives who live far away. 道别 (say goodbye) and 陪伴 (accompany) do not mean 'to call on someone'.",
+   "stem_en": "to visit relatives who live far away",
+   "keywords": [{"w":"拜访","py":"bàifǎng","en":"to visit"},{"w":"亲戚","py":"qīnqi","en":"relative"}]
+  },
+  "4": {
+   "explanation": "“原谅”是不再责怪别人的过错，所以“请你原谅我这一次”就是请对方不要再怪自己这一次。“照顾、陪伴”都不是“不再责怪”的意思。",
+   "explanation_en": "原谅 (yuánliàng) means to stop blaming someone for a fault, so 请你原谅我这一次 means please forgive me this time. 照顾 (look after) and 陪伴 (accompany) do not mean 'to stop blaming'.",
+   "stem_en": "please forgive me this time",
+   "keywords": [{"w":"原谅","py":"yuánliàng","en":"to forgive"},{"w":"这一次","py":"zhè yí cì","en":"this time"}]
+  },
+  "5": {
+   "explanation": "“陪伴”是陪在别人身边，所以“陪伴在父母身边”就是一直陪在父母身旁、和他们在一起。“道别、拜访”都不是“陪在身旁”的意思。",
+   "explanation_en": "陪伴 (péibàn) means to stay by someone's side, so 陪伴在父母身边 means to keep one's parents company. 道别 (say goodbye) and 拜访 (visit) do not mean 'to stay by someone's side'.",
+   "stem_en": "to keep one's parents company",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to accompany"},{"w":"父母","py":"fùmǔ","en":"parents"}]
+  }
+ },
+ "craft": {
+  "ZS50_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Grandpa is very old.' and 'Grandpa insists on walking in the park every day.'",
+   "answer_en": "Although Grandpa is very old, he insists on walking in the park every day.",
+   "tiles": ["虽然","爷爷年纪很大了，","但是","他每天坚持去公园散步。"],
+   "explanation_en": "虽然……但是…… makes a turn: the first says he is old, the second says he still walks daily - the two contrast. Joined by 虽然……但是……, it shows an unexpected result."
+  },
+  "ZS50_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还 (not only…, but also…): 'Xiaohua helped me finish my homework.' and 'Xiaohua taught me to draw.'",
+   "answer_en": "Xiaohua not only helped me finish my homework, but also taught me to draw.",
+   "tiles": ["小华","不但","帮我完成了功课，","还","教我画画。"],
+   "explanation_en": "不但……还…… shows a step-up: '不但帮我完成了功课' (not only helped with homework) is the first, '还教我画画' (but also taught me to draw) is the further one - Xiaohua did more."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Last weekend, Dad took me to Grandpa's house. Seeing us, Grandpa came out ___ (happily) to welcome us.",
+   "hint": "Clue: Grandpa is glad to see Dad and me, so he comes out in a good mood. Which box word means 'happily'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"迎接","py":"yíngjiē","en":"to welcome"}],
+   "explanation_en": "Grandpa is glad to see Dad and me, so he comes out 高兴地 (happily) to welcome us, and 高兴 fits best."
+  },
+  "2": {
+   "sentence_en": "At dinner, Grandpa specially cooked the fish soup I ___ (love) most.",
+   "hint": "Clue: it is the fish soup I like the most. Which box word means 'to love / like very much'?",
+   "keywords": [{"w":"喜爱","py":"xǐ'ài","en":"to love"},{"w":"鱼汤","py":"yútāng","en":"fish soup"}],
+   "explanation_en": "Grandpa specially cooked the dish I like most, so 喜爱 (love, like very much) fits naturally here."
+  },
+  "3": {
+   "sentence_en": "After the meal, Dad helped Grandpa ___ (sweep away) the fallen leaves in the yard.",
+   "hint": "Clue: there are fallen leaves in the yard to sweep clean. Which box word means 'to sweep clean'?",
+   "keywords": [{"w":"清扫","py":"qīngsǎo","en":"to sweep clean"},{"w":"落叶","py":"luòyè","en":"fallen leaves"}],
+   "explanation_en": "There are fallen leaves in the yard, and Dad helped sweep them clean, so 清扫 (to sweep clean) fits best."
+  },
+  "4": {
+   "sentence_en": "I kept Grandpa company ___ (taking a walk) in the yard.",
+   "hint": "Clue: walking slowly in the yard after the meal. Which box word means 'to take a walk'?",
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"院子","py":"yuànzi","en":"yard"}],
+   "explanation_en": "After the meal, walking slowly in the yard is 散步 (to take a walk), so 陪外公在院子里散步 (kept Grandpa company on a walk) fits naturally."
+  },
+  "5": {
+   "sentence_en": "When it got dark, we reluctantly ___ (said goodbye) to Grandpa, who stood at the door watching us leave.",
+   "hint": "Clue: it got dark, so we had to say goodbye before going home. Which box word means 'to say goodbye'?",
+   "keywords": [{"w":"道别","py":"dàobié","en":"to say goodbye"},{"w":"依依不舍","py":"yīyī-bùshě","en":"reluctant to part"}],
+   "explanation_en": "It got dark and we had to go home, saying goodbye reluctantly to Grandpa, which is 道别 (to say goodbye), so it fits naturally."
+  }
+ },
+ "reading": {
+  "ZS50_G1": {
+   "stem_en": "Why is Grandma in the hospital?",
+   "answer_en": "Because Grandma fell and hurt her right leg.",
+   "keywords": [{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"右腿","py":"yòu tuǐ","en":"right leg"},{"w":"医院","py":"yīyuàn","en":"hospital"}],
+   "explanation": "这是细节题。短文说“外婆上个星期不小心摔倒，伤了右腿，需要在医院休息几天”，直接说明外婆住院是因为摔倒伤了右腿，所以选(2)。(1)生病、(3)去探望朋友，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Grandma fell last week, hurt her right leg, and needs to rest in hospital for a few days', directly stating she is in hospital because she fell and hurt her leg, so (2). (1) being ill and (3) visiting a friend are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "外婆上个星期不小心摔倒，伤了右腿，需要在医院休息几天"}
+  },
+  "ZS50_G2": {
+   "stem_en": "What gifts did Xiaowei prepare for Grandma?",
+   "answer_en": "A bunch of flowers and a picture he drew himself.",
+   "keywords": [{"w":"一束花","py":"yí shù huā","en":"a bunch of flowers"},{"w":"画","py":"huà","en":"picture"},{"w":"亲手","py":"qīnshǒu","en":"with one's own hands"}],
+   "explanation": "这是细节题。短文说“小伟买了一束花，还亲手画了一张画，想让外婆开心一点”，直接说明小伟准备的礼物是一束花和一张亲手画的画，所以选(3)。(1)故事书、(2)一盒糖果，文中都没有这样说。做细节题要回原文找和题目直接对应的东西。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaowei bought a bunch of flowers and drew a picture himself to cheer Grandma up', directly stating the gifts were a bunch of flowers and a hand-drawn picture, so (3). (1) a story book and (2) a box of sweets are not stated. Find the exact items in the passage.",
+   "solution": {"evidence": "小伟买了一束花，还亲手画了一张画"}
+  },
+  "ZS50_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Family members should care for and cherish one another.",
+   "keywords": [{"w":"家人","py":"jiārén","en":"family"},{"w":"关心","py":"guānxīn","en":"to care"},{"w":"爱护","py":"àihù","en":"to cherish"}],
+   "explanation": "这是主旨题。全文讲小伟专程去医院探望摔伤的外婆，送花送画，外婆感动地说“有你这个好孙子，外婆什么病都好得快”。可见短文是要告诉我们家人之间要互相关心和爱护，所以选(1)。(2)探病要带花、(3)受伤要马上去医院都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaowei visiting his injured Grandma in hospital, bringing flowers and a picture, and Grandma saying with feeling 'with a good grandson like you, I'll get well quickly'. So it tells us family members should care for and cherish one another, so (1). (2) bring flowers when visiting and (3) go to hospital when hurt are minor points, not the main idea.",
+   "solution": {"evidence": "有你这个好孙子，外婆什么病都好得快。"}
+  },
+  "ZS50_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaoyu's mood changed from sad to happy after seeing the letter and photo.",
+   "answer_en": "破涕为笑 (to smile through tears)",
+   "keywords": [{"w":"破涕为笑","py":"pòtì-wéixiào","en":"to smile through tears"},{"w":"信","py":"xìn","en":"letter"},{"w":"照片","py":"zhàopiàn","en":"photo"}],
+   "explanation": "这是找词题。短文说“小雨看了，破涕为笑，把信和照片小心地放进抽屉里收好”，“破涕为笑”正好说明小雨看到信和照片后，心情从难过变成高兴，所以答案是“破涕为笑”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'Xiaoyu read it and smiled through her tears, carefully putting the letter and photo in a drawer'; 破涕为笑 exactly shows her mood changing from sad to happy after seeing the letter and photo, so the answer is 破涕为笑. Find the word that fits the situation.",
+   "solution": {"evidence": "小雨看了，破涕为笑"}
+  },
+  "ZS50_H2": {
+   "stem_en": "Why did Mum encourage Xiaoyu to write to Chenming?",
+   "answer_en": "Because Mum saw that Xiaoyu missed Chenming very much and felt sad, so she encouraged her to tell Chenming what was in her heart by writing a letter, to make Xiaoyu feel better.",
+   "keywords": [{"w":"想念","py":"xiǎngniàn","en":"to miss"},{"w":"写信","py":"xiěxìn","en":"to write a letter"},{"w":"难过","py":"nánguò","en":"sad"}],
+   "explanation": "这是推断题。短文说“妈妈看出了小雨的心思，鼓励她说：‘你可以给陈明写信，把你想说的话告诉他。’”，加上小雨非常想念陈明、心里难过，可以推断妈妈鼓励她写信，是想让小雨用写信的方式把心里话告诉陈明、好受一点。推断题要把小雨的难过和妈妈的鼓励连起来想。",
+   "explanation_en": "This is an inference question. The passage says 'Mum saw what was on Xiaoyu's mind and encouraged her: you can write to Chenming and tell him what you want to say', and Xiaoyu missed Chenming and felt sad. We can infer Mum encouraged the letter so Xiaoyu could tell Chenming her feelings and feel better. Link Xiaoyu's sadness with Mum's encouragement.",
+   "solution": {"evidence": "妈妈看出了小雨的心思，鼓励她说：“你可以给陈明写信，把你想说的话告诉他。”"}
+  },
+  "ZS50_H3": {
+   "stem_en": "What kind of person do you think Xiaoyu is? Find reasons from the passage.",
+   "answer_en": "Xiaoyu is someone who values friendship, because she missed her good friend Chenming very much, felt sad seeing the toys they used to play with, and earnestly wrote him a long letter, showing she cherishes the bond between friends.",
+   "keywords": [{"w":"友情","py":"yǒuqíng","en":"friendship"},{"w":"想念","py":"xiǎngniàn","en":"to miss"},{"w":"珍惜","py":"zhēnxī","en":"to cherish"}],
+   "explanation": "这是推断题（评价人物）。短文说小雨“非常想念陈明，每天放学回家，看到以前两人一起玩的玩具，心里就难过起来”，还认真地给陈明写了一封长信。从她想念好朋友、珍惜两人的感情，可以看出她是个重视友情的人。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Xiaoyu 'missed Chenming very much and felt sad seeing the toys they used to play with', and earnestly wrote him a long letter. From missing her good friend and cherishing their bond, we see she values friendship. State the trait, then give the events as the reason.",
+   "solution": {"evidence": "小雨非常想念陈明，每天放学回家，看到以前两人一起玩的玩具，心里就难过起来"}
+  }
+ }
+}

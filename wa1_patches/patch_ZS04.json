@@ -1,0 +1,217 @@
+{
+ "setId": "ZS04",
+ "mcq": {
+  "ZS04_A1": {
+   "sentence_en": "Spring has come, and the flowers in the garden have all ___ (bloomed).",
+   "hints": ["The blank + 放 describes flowers opening up. Which character (with a 'door' 门 inside) means 'to open'?"],
+   "keywords": [{"w":"开放","py":"kāifàng","en":"to bloom; to open"},{"w":"春天","py":"chūntiān","en":"spring"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation_en": "开放 means flowers opening up - the best word to describe a spring garden. 开 has 门 ('door') inside; an open door = 开, and a blooming flower is like the flower's door opening."
+  },
+  "ZS04_A2": {
+   "sentence_en": "Xiaoming practises hard every day, and his drawing ___ (ability) grows stronger and stronger.",
+   "hints": ["The blank + 力 forms the word for the skill to do something. Which character means 'able / capacity'?"],
+   "keywords": [{"w":"能力","py":"nénglì","en":"ability"},{"w":"练习","py":"liànxí","en":"to practise"},{"w":"越来越","py":"yuèláiyuè","en":"more and more"}],
+   "explanation_en": "能力 means the skill to do something, so 画画能力越来越强 (drawing ability getting stronger) makes sense. 能 has 月 at the bottom; ability, like the moon, can slowly grow bigger and stronger."
+  },
+  "ZS04_A3": {
+   "sentence_en": "Grandma's vegetable garden has ___ (planted) many vegetables, looking full of life.",
+   "hints": ["The blank (zhòng) means putting plants into the soil. Which character has the grain radical 禾?"],
+   "keywords": [{"w":"种","py":"zhòng","en":"to plant"},{"w":"菜园","py":"càiyuán","en":"vegetable garden"},{"w":"蔬菜","py":"shūcài","en":"vegetables"}],
+   "explanation_en": "种 (zhòng) means to plant plants in the soil, so 种了很多蔬菜 (planted many vegetables) makes sense. The 种 for planting has the grain radical 禾 and relates to plants; the 重 for weight has no 禾."
+  },
+  "ZS04_A4": {
+   "sentence_en": "The water of this little river ___ (flows) very clear; you can see the stones at the bottom.",
+   "hints": ["The blank describes how water moves. Which character has the three-dots water radical 氵?"],
+   "keywords": [{"w":"流","py":"liú","en":"to flow"},{"w":"小河","py":"xiǎohé","en":"stream"},{"w":"清","py":"qīng","en":"clear"}],
+   "explanation_en": "流 is the way water moves, so 水流得很清 (the water flows clear) makes sense. 流 has the water radical 氵 and relates to water; 留 has 田 and relates to staying."
+  },
+  "ZS04_A5": {
+   "sentence_en": "Mum says the environment here has ___ (changed) a lot; it used to be only woods.",
+   "hints": ["The blank + 化 means turning from one state into another. Which character means 'to change'?"],
+   "keywords": [{"w":"变化","py":"biànhuà","en":"change"},{"w":"环境","py":"huánjìng","en":"environment"},{"w":"树林","py":"shùlín","en":"woods"}],
+   "explanation_en": "变化 means something turning from one form into another, fitting the sentence. 变 has 亦 ('also') on top - a change means it has 'also' become another appearance."
+  },
+  "ZS04_B1": {
+   "sentence_en": "After the old building in the estate was 拆除 (demolished), a beautiful park was built.",
+   "hints": ["拆 is high and level (1st tone), 除 rises (2nd tone), and ch is a retroflex sound. Which choice is chāi + chú?"],
+   "keywords": [{"w":"拆除","py":"chāichú","en":"to demolish"},{"w":"旧楼","py":"jiù lóu","en":"old building"},{"w":"公园","py":"gōngyuán","en":"park"}],
+   "explanation_en": "拆 is read chāi (1st tone) and 除 is chú (2nd tone), together chāi chú. 拆 (1st tone) is read flat; 除 (2nd tone) rises. ch is a retroflex sound - do not write it as c."
+  },
+  "ZS04_B2": {
+   "sentence_en": "Dad says this big tree has been 长大 (growing) for many years.",
+   "hints": ["In 长大 ('to grow'), 长 is zhǎng (3rd tone, meaning 'grow'), not cháng ('long'), and 大 is dà. Which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"大树","py":"dàshù","en":"big tree"},{"w":"很多年","py":"hěnduō nián","en":"many years"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, 'to grow') and 大 is dà (4th tone), together zhǎng dà. 长大 = to grow bigger, zhǎng dà; 长相 = looks, zhǎng xiàng - both zhǎng, but note 长 also reads cháng (as in 长短, length)."
+  },
+  "ZS04_B3": {
+   "sentence_en": "The students stand 整齐 (neatly) on the field, waiting for the principal to speak.",
+   "hints": ["整 is zhěng (3rd tone), 齐 is qí (2nd tone), and 齐 begins with q, not j. Which choice is zhěng + qí?"],
+   "keywords": [{"w":"整齐","py":"zhěngqí","en":"neat; orderly"},{"w":"操场","py":"cāochǎng","en":"field"},{"w":"校长","py":"xiàozhǎng","en":"principal"}],
+   "explanation_en": "整 is read zhěng (3rd tone) and 齐 is qí (2nd tone), together zhěng qí. 整 (3rd tone) dips then rises; 齐 (2nd tone) rises. The initial of 齐 is q, not j."
+  },
+  "ZS04_B4": {
+   "sentence_en": "The grass 发芽 (sprouted) after the spring rain, a lovely fresh green.",
+   "hints": ["In 发芽, 发 is fā (1st tone, level) and 芽 is yá (2nd tone, rising). Which choice is fā + yá?"],
+   "keywords": [{"w":"发芽","py":"fāyá","en":"to sprout"},{"w":"春雨","py":"chūnyǔ","en":"spring rain"},{"w":"绿油油","py":"lǜyóuyóu","en":"lush green"}],
+   "explanation_en": "发 in 发芽 is read fā (1st tone) and 芽 is yá (2nd tone), together fā yá. The 发 in 发芽 is 1st tone, read flat; 芽 is 2nd tone, rising - imagine a little sprout slowly growing upward."
+  },
+  "ZS04_C1": {
+   "sentence_en": "My little brother learned to ride a bike for the first time and was so happy he ___ (cheered).",
+   "hints": ["Clue: he is so happy - what do people do out loud when thrilled? Which word means 'to cheer', not cry or sigh?"],
+   "keywords": [{"w":"欢呼","py":"huānhū","en":"to cheer"},{"w":"骑自行车","py":"qí zìxíngchē","en":"to ride a bike"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "Learning to ride is a happy thing, so 欢呼 ('to cheer aloud with joy') pairs best with 高兴 (happy). Happy -> 欢呼; sad -> 哭泣; scared -> 发抖; disappointed -> 叹气. Catch the emotion word and you choose right."
+  },
+  "ZS04_C2": {
+   "sentence_en": "Mum bought ___ (a piece of) new clothing to wear for the New Year.",
+   "hints": ["The blank is the measure word for clothing. Which one goes with 衣服?"],
+   "keywords": [{"w":"一件","py":"yí jiàn","en":"a piece of (measure word)"},{"w":"衣服","py":"yīfu","en":"clothing"},{"w":"过年","py":"guònián","en":"to celebrate New Year"}],
+   "explanation_en": "The measure word for clothing is 件, so use 一件新衣服. Clothing -> 件; books -> 本; paper -> 张; trees -> 棵. Learn each measure word paired with its object."
+  },
+  "ZS04_C3": {
+   "sentence_en": "Through everyone's effort, this wasteland ___ (turned into) a beautiful garden.",
+   "hints": ["The blank is followed by a result (the garden). Which word means 'to turn into' and takes a result after it?"],
+   "keywords": [{"w":"变成","py":"biànchéng","en":"to turn into"},{"w":"荒地","py":"huāngdì","en":"wasteland"},{"w":"努力","py":"nǔlì","en":"effort"}],
+   "explanation_en": "变成 is followed by a result, showing a change from one state to another, so 变成了美丽的花园 (turned into a beautiful garden) is correct. '变成 + (result)' is a fixed pattern; after it comes the new appearance."
+  },
+  "ZS04_C4": {
+   "sentence_en": "With the teacher's ___ (help), the students learned a lot of new knowledge.",
+   "hints": ["Clue: the teacher lets students gain new knowledge - a positive support. Which word means 'help', not 'scold' or 'command'?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"help"},{"w":"知识","py":"zhīshi","en":"knowledge"},{"w":"老师","py":"lǎoshī","en":"teacher"}],
+   "explanation_en": "The teacher lets students gain new knowledge - positive support, so 帮助 ('help') fits best. Gaining knowledge -> help; doing wrong -> scold / blame; must-do -> command. Judge by whether the context is positive or negative."
+  },
+  "ZS04_C5": {
+   "sentence_en": "The kitten watches the goldfish in the tank ___ (attentively), not blinking at all.",
+   "hints": ["Clue: it does not blink at all, fully focused on the fish. Which word means 'concentrated on one thing'?"],
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"focused; attentive"},{"w":"金鱼","py":"jīnyú","en":"goldfish"},{"w":"眨眼","py":"zhǎ yǎn","en":"to blink"}],
+   "explanation_en": "Not blinking at all shows full attention on the goldfish, so 专心 ('focused') fits best. Not blinking -> attention fixed -> 专心. 专 means doing only one thing, which fits exactly."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“整洁”是又整齐又干净，所以“房间打扫得非常整洁”表示房间干净整齐。“进步、惊喜”都不能形容房间打扫的样子。",
+   "explanation_en": "整洁 (zhěngjié) means neat and clean, so 房间打扫得非常整洁 means the room is cleaned neat and tidy. 进步 (progress) or 惊喜 (surprise) cannot describe a cleaned room.",
+   "stem_en": "cleaned very neatly and tidily",
+   "keywords": [{"w":"整洁","py":"zhěngjié","en":"neat; tidy"},{"w":"打扫","py":"dǎsǎo","en":"to clean; to sweep"}]
+  },
+  "2": {
+   "explanation": "“惊喜”是意外又高兴，所以“收到礼物感到非常惊喜”表示收到礼物又惊又喜。“整洁、保护”都不能表示“意外的高兴”。",
+   "explanation_en": "惊喜 (jīngxǐ) means pleasantly surprised, so 收到礼物感到非常惊喜 means feeling delightfully surprised to get a gift. 整洁 (tidy) or 保护 (protect) cannot mean 'a happy surprise'.",
+   "stem_en": "very pleasantly surprised to receive a gift",
+   "keywords": [{"w":"惊喜","py":"jīngxǐ","en":"pleasant surprise"},{"w":"礼物","py":"lǐwù","en":"gift"}]
+  },
+  "3": {
+   "explanation": "“进步”是比以前做得更好、有提高，所以“学习上有很大的进步”表示学习比以前好了很多。“惊喜、努力”都不是“比以前更好”的意思。",
+   "explanation_en": "进步 (jìnbù) means doing better than before / improving, so 学习上有很大的进步 means the studies have improved a lot. 惊喜 (surprise) or 努力 (effort) do not mean 'better than before'.",
+   "stem_en": "great progress in one's studies",
+   "keywords": [{"w":"进步","py":"jìnbù","en":"progress"},{"w":"学习","py":"xuéxí","en":"to study"}]
+  },
+  "4": {
+   "explanation": "“保护”是爱护、使不受破坏，所以“保护环境”表示爱护环境、不让它被破坏。“进步、整洁”都不能和“环境”这样搭配。",
+   "explanation_en": "保护 (bǎohù) means to protect and keep from harm, so 保护环境 means to look after the environment and not let it be damaged. 进步 (progress) or 整洁 (tidy) cannot pair with 环境 this way.",
+   "stem_en": "to protect the environment",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}]
+  },
+  "5": {
+   "explanation": "“努力”是尽心尽力地去做，所以“认真努力练习”表示用心又肯下功夫地练习。“保护、惊喜”都不能形容“练习”的态度。",
+   "explanation_en": "努力 (nǔlì) means to try one's hardest, so 认真努力练习 means to practise with care and real effort. 保护 (protect) or 惊喜 (surprise) cannot describe the attitude toward 练习.",
+   "stem_en": "to practise hard with real effort",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to make efforts"},{"w":"练习","py":"liànxí","en":"to practise"}]
+  }
+ },
+ "craft": {
+  "ZS04_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'This place used to be a piece of wasteland.' and 'Now it has turned into a beautiful park.'",
+   "answer_en": "Although this place used to be a piece of wasteland, now it has turned into a beautiful park.",
+   "tiles": ["虽然","这里以前是一片荒地，","但是","现在已经变成了美丽的公园。"],
+   "explanation_en": "虽然……但是…… links two things with a turn: the first states a poor situation, the second a good change. '虽然这里以前是一片荒地' (although it used to be wasteland) is the first half, '但是现在已经变成了美丽的公园' (but now it is a beautiful park) is the second, together showing a wonderful change. 虽然…… = one thing, 但是…… = the opposite or surprising thing."
+  },
+  "ZS04_E2": {
+   "question_en": "Combine these two sentences using the connector 只要……就 (as long as…, …): 'We water the little tree every day.' and 'The little tree will slowly grow tall.'",
+   "answer_en": "As long as we water the little tree every day, it will slowly grow tall.",
+   "tiles": ["只要","我们每天给小树浇水，","小树就会慢慢长高。"],
+   "explanation_en": "只要……就…… means when a condition is met, the result will happen. '只要我们每天给小树浇水' (as long as we water it every day) is the condition, '小树就会慢慢长高' (the tree will slowly grow tall) is the result, showing that just doing this makes the tree grow. 只要……就…… = with this condition, the result surely follows."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Spring arrived, and the little tree began to ___ (put out) tender green leaves.",
+   "hint": "Clue: the tree starts producing new leaves. Which box word means 'to grow out / put forth'?",
+   "keywords": [{"w":"长出","py":"zhǎngchū","en":"to grow out; to put forth"},{"w":"嫩绿","py":"nènlǜ","en":"tender green"}],
+   "explanation_en": "长出嫩绿的叶子 means leaves growing out from the tree, so 长出 ('to put forth') fits best."
+  },
+  "2": {
+   "sentence_en": "Dad said, 'As long as we look after it ___ (carefully), it will grow well.'",
+   "hint": "Clue: care that leads to the tree growing well - an attitude word. Which box word means 'carefully / earnestly'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"careful; earnest"},{"w":"照顾","py":"zhàogù","en":"to look after"}],
+   "explanation_en": "认真照顾 means looking after it attentively, which pairs naturally with the result '长得很好' (grows well)."
+  },
+  "3": {
+   "sentence_en": "Every day after school, Xiaoming would ___ (pour) water on the little tree.",
+   "hint": "Clue: 给小树 ___ 水 - putting water onto a plant. Which box word means 'to water (a plant)'?",
+   "keywords": [{"w":"浇","py":"jiāo","en":"to water; to pour on"},{"w":"放学","py":"fàngxué","en":"after school"}],
+   "explanation_en": "给小树浇水 is a fixed collocation; 浇 means to pour water onto a plant, so it fits best."
+  },
+  "4": {
+   "sentence_en": "A few months later the tree grew much taller and even bloomed ___ (pretty) little flowers.",
+   "hint": "Clue: the blank describes the little flowers that bloomed. Which box word means 'pretty / good-looking'?",
+   "keywords": [{"w":"漂亮","py":"piàoliang","en":"pretty"},{"w":"小花","py":"xiǎohuā","en":"little flower"}],
+   "explanation_en": "开出了漂亮的小花 means the flowers are pretty; 漂亮 best modifies 小花 (little flowers)."
+  },
+  "5": {
+   "sentence_en": "The neighbours saw it and said ___ (happily) that this tree was truly beautiful.",
+   "hint": "Clue: the neighbours admire the beautiful tree - a good mood. Which box word means 'happy / glad'?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"邻居","py":"línjū","en":"neighbour"}],
+   "explanation_en": "Seeing the beautiful tree lifts the neighbours' mood; 开心地说 ('said happily') pairs naturally."
+  }
+ },
+ "reading": {
+  "ZS04_G1": {
+   "stem_en": "What did the empty plot next to the school look like before?",
+   "answer_en": "It was overgrown with weeds and no one went there.",
+   "keywords": [{"w":"空地","py":"kòngdì","en":"empty plot"},{"w":"杂草","py":"zácǎo","en":"weeds"},{"w":"以前","py":"yǐqián","en":"before"}],
+   "explanation": "这是细节题。短文开头说“以前杂草丛生，没有人去”，直接说明空地以前的样子，所以选(3)。(1)种满花菜、(2)美丽花园都是后来变化后的样子，不是“以前”。做细节题要看清题目问的是“以前”还是“后来”。",
+   "explanation_en": "This is a detail question. The opening says 'before, it was overgrown with weeds and no one went there', directly describing the old state, so (3). (1) full of flowers and vegetables and (2) a beautiful garden are the later state, not 'before'. Check whether the question asks about 'before' or 'after'.",
+   "solution": {"evidence": "以前杂草丛生，没有人去。"}
+  },
+  "ZS04_G2": {
+   "stem_en": "Why did the students feel very happy?",
+   "answer_en": "Because they saw the things they had planted growing well.",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"种","py":"zhòng","en":"to plant"},{"w":"成果","py":"chéngguǒ","en":"fruit of one's labour"}],
+   "explanation": "这是推断题，要找高兴的原因。短文说“同学们看着自己种出来的东西，都非常高兴”，可见他们高兴是因为亲手种的花菜长得好。(2)校长表扬在文中没有作为高兴的原因，(3)“不用浇水”与原文不符。答原因题要找紧挨着“高兴”前后的句子。",
+   "explanation_en": "This is an inference question - find the reason for the happiness. The passage says 'the students looked at what they had grown and were very happy', so they are happy because their own plants grew well. (2) the principal's praise is not given as the reason, and (3) 'no more watering' is not in the text. For reason questions, look at the sentence right around 'happy'.",
+   "solution": {"evidence": "同学们看着自己种出来的东西，都非常高兴。"}
+  },
+  "ZS04_G3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "The story of how the students turned an empty plot into a beautiful garden.",
+   "keywords": [{"w":"空地","py":"kòngdì","en":"empty plot"},{"w":"花园","py":"huāyuán","en":"garden"},{"w":"主旨","py":"zhǔzhǐ","en":"main idea"}],
+   "explanation": "这是主旨题。全文按“以前空地荒芜→师生一起清理种花菜→几个月后变成美丽花园”的顺序，讲的是同学们把空地变成花园的过程。(1)校长管理学校、(3)种菜方法都不是全文重点；(2)才概括了整篇故事。",
+   "explanation_en": "This is a main-idea question. The passage follows 'the plot was barren -> teachers and students cleared and planted it -> months later it became a beautiful garden', telling how the students turned the plot into a garden. (1) the principal managing the school and (3) methods of growing vegetables are not the focus; (2) sums up the whole story.",
+   "solution": {"evidence": "几个月后，空地变成了一个美丽的小花园。"}
+  },
+  "ZS04_H1": {
+   "stem_en": "Find a word in the passage that shows the river water is now clean and clear: the water became ___.",
+   "answer_en": "清澈 (clear; limpid)",
+   "keywords": [{"w":"清澈","py":"qīngchè","en":"clear; limpid"},{"w":"干净","py":"gānjìng","en":"clean"},{"w":"透明","py":"tòumíng","en":"transparent"}],
+   "explanation": "这题要在文中找形容河水现在“干净透明”的词。短文说“现在，河水变得清澈了”，“清澈”就是水清又透明的意思，和以前“又黑又臭”相反，所以答案是“清澈”。做填词题要先看清空格前后要什么意思，再回原文找。",
+   "explanation_en": "This asks for a word describing the now clean, clear water. The passage says 'now the river water became 清澈 (clear)'; 清澈 means clear and transparent, the opposite of the earlier 'black and smelly', so the answer is 清澈. Read around the blank, then find the word.",
+   "solution": {"evidence": "河水变得清澈了"}
+  },
+  "ZS04_H2": {
+   "stem_en": "What was the environment near the little river like before?",
+   "answer_en": "Before, the river water was black and smelly, and no one liked to go near it.",
+   "keywords": [{"w":"又黑又臭","py":"yòu hēi yòu chòu","en":"black and smelly"},{"w":"靠近","py":"kàojìn","en":"to go near"},{"w":"以前","py":"yǐqián","en":"before"}],
+   "explanation": "这是细节题，要用完整句子回答。短文说“以前河水又黑又臭，大家都不喜欢靠近”，直接说明了小河以前的环境。答题时把“水的样子”和“大家的反应”都写出来，用完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'before, the river water was black and smelly, and everyone disliked going near it', directly describing the old environment. Include both what the water was like and people's reaction, in a complete sentence.",
+   "solution": {"evidence": "以前河水又黑又臭，大家都不喜欢靠近。"}
+  },
+  "ZS04_H3": {
+   "stem_en": "What lesson do Mum's words tell us?",
+   "answer_en": "Mum's words tell us that as long as everyone protects the environment together, our home will become more and more beautiful.",
+   "keywords": [{"w":"保护环境","py":"bǎohù huánjìng","en":"to protect the environment"},{"w":"家园","py":"jiāyuán","en":"home; homeland"},{"w":"美好","py":"měihǎo","en":"beautiful; fine"}],
+   "explanation": "这是道理题，要抓妈妈话里的中心意思。妈妈说“只要大家一起保护环境，我们的家园就会越来越美好”，点出道理：保护环境要靠大家一起做，做到了家园就会更美。答“什么道理”要把这句话的意思说清楚，不要只复述故事。",
+   "explanation_en": "This is a lesson question - grasp the point of Mum's words. She says 'as long as everyone protects the environment together, our home will get more and more beautiful', showing the lesson: protecting the environment depends on everyone doing it together, and then our home becomes lovelier. State this meaning clearly rather than just retelling the story.",
+   "solution": {"evidence": "只要大家一起保护环境，我们的家园就会越来越美好。"}
+  }
+ }
+}

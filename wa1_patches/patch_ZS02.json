@@ -1,0 +1,217 @@
+{
+ "setId": "ZS02",
+ "mcq": {
+  "ZS02_A1": {
+   "sentence_en": "Every day when Dad comes home from work, he ___ our heads and tells a few jokes.",
+   "hints": ["The blank is something Dad does to your head with his hand - a gentle touch. Which character has the hand radical 扌?"],
+   "keywords": [{"w":"摸","py":"mō","en":"to touch; to stroke"},{"w":"下班","py":"xiàbān","en":"to finish work"},{"w":"笑话","py":"xiàohua","en":"joke"}],
+   "explanation_en": "摸头 (mō tóu) means to gently touch someone's head with your hand, showing affection, so it is the correct word. All four characters sound alike, but 摸 has the hand radical 扌 - touching with your hand is 摸."
+  },
+  "ZS02_A2": {
+   "sentence_en": "Mum ___ (with great care) prepared a whole table of nice dishes for us.",
+   "hints": ["The word 精心 means doing something with great care and attention. Which character (not 晴/清/请) carries the idea of 'refined and careful'?"],
+   "keywords": [{"w":"精心","py":"jīngxīn","en":"with great care"},{"w":"准备","py":"zhǔnbèi","en":"to prepare"},{"w":"一桌","py":"yì zhuō","en":"a tableful"}],
+   "explanation_en": "精心 (jīngxīn) means with great care and effort; Mum carefully prepared the dishes, so 精心 fits best. 精 has the rice radical 米 - 精心 is like carefully picking the best grains, meaning careful and thorough."
+  },
+  "ZS02_A3": {
+   "sentence_en": "Grandma is old, so she needs to ___ (lean on) a walking stick when she walks.",
+   "hints": ["Grandma uses her hand to lean on the stick for support. Which character has the hand radical 扌 and means 'to support / hold up'?"],
+   "keywords": [{"w":"扶","py":"fú","en":"to support by hand"},{"w":"拐杖","py":"guǎizhàng","en":"walking stick"},{"w":"年纪","py":"niánjì","en":"age"}],
+   "explanation_en": "扶 (fú) means to support and help with the hand, so 扶着拐杖 means to walk with the help of a walking stick - the correct meaning. 扶 has the hand radical 扌; unlike 伏/服/副, which sound similar but mean different things."
+  },
+  "ZS02_A4": {
+   "sentence_en": "My elder brother and I are good friends; we go to school ___ (together) every day.",
+   "hints": ["The word means doing something at the same time as someone else. Which character forms 一___ meaning 'together' and has the 走 (walk) radical?"],
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"上学","py":"shàngxué","en":"to go to school"},{"w":"朋友","py":"péngyou","en":"friend"}],
+   "explanation_en": "一起 (yìqǐ) means together / at the same time, so 一起上学 (go to school together) makes sense. 起 has the 'walk' radical 走 - 一起 is everyone walking together; remember 起 with the 走 radical."
+  },
+  "ZS02_A5": {
+   "sentence_en": "My little sister is very ___ (sensible); she always helps Mum with the housework.",
+   "hints": ["The blank + 事 describes a child who understands and behaves well. Which character has the heart radical 忄 and means 'to understand'?"],
+   "keywords": [{"w":"懂事","py":"dǒngshì","en":"sensible; understanding"},{"w":"家务","py":"jiāwù","en":"housework"},{"w":"帮","py":"bāng","en":"to help"}],
+   "explanation_en": "懂事 (dǒngshì) means understanding others' thoughts and knowing what is right; the sister helping Mum with chores shows she is 懂事. 懂 has the heart radical 忄 - understanding with your heart is 懂; 懂事 means knowing right from wrong in your heart."
+  },
+  "ZS02_B1": {
+   "sentence_en": "Grandpa 教导 (teaches / instructs) us to respect our elders.",
+   "hints": ["教 is a two-reading character: jiāo when it means 'to teach a lesson', but jiào in 教导. And 导 dips then rises (3rd tone). Which choice matches jiào + dǎo?"],
+   "keywords": [{"w":"教导","py":"jiàodǎo","en":"to instruct; to guide"},{"w":"尊重","py":"zūnzhòng","en":"to respect"},{"w":"长辈","py":"zhǎngbèi","en":"elders"}],
+   "explanation_en": "In 教导, 教 is read jiào (4th tone) and 导 is dǎo (3rd tone), together jiào dǎo. 教 has two readings: 教书 jiāo shū, but 教导 jiào dǎo. Remember 导 is 3rd tone dǎo."
+  },
+  "ZS02_B2": {
+   "sentence_en": "Mum 亲切 (warmly / kindly) called us over to eat.",
+   "hints": ["Listen to 亲: it ends in -n (front nasal), not -ng. And 切 falls sharply (4th tone). Which choice is qīn + qiè?"],
+   "keywords": [{"w":"亲切","py":"qīnqiè","en":"warm; kindly"},{"w":"吃饭","py":"chīfàn","en":"to eat a meal"},{"w":"叫","py":"jiào","en":"to call"}],
+   "explanation_en": "亲 is read qīn (front nasal -n, 1st tone) and 切 is qiè (4th tone), together qīn qiè. Tell front and back nasals apart: 亲 qīn ends in -n, not -ng; 切 qiè is 4th tone."
+  },
+  "ZS02_B3": {
+   "sentence_en": "Dad 答应 (promised) to take us to the amusement park.",
+   "hints": ["应 is a two-reading character: yīng in 应该, but yìng when it means 'to agree / respond' as in 答应. Which choice pairs dā with yìng?"],
+   "keywords": [{"w":"答应","py":"dāying","en":"to promise; to agree"},{"w":"游乐场","py":"yóulèchǎng","en":"amusement park"},{"w":"带","py":"dài","en":"to take along"}],
+   "explanation_en": "In 答应, 应 is read yìng (4th tone, as in 答应/回应) and 答 is dā (1st tone), together dā yìng. 应 has two readings: 应该 yīng (1st tone), but 答应/回应 yìng (4th tone)."
+  },
+  "ZS02_B4": {
+   "sentence_en": "My little brother ran over 高兴 (happily) to tell me he came first.",
+   "hints": ["高 stays high and level (1st tone); 兴 in 高兴 falls (4th tone). Which choice is gāo + xìng?"],
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy; glad"},{"w":"第一名","py":"dì yī míng","en":"first place"},{"w":"告诉","py":"gàosu","en":"to tell"}],
+   "explanation_en": "高 is read gāo (1st tone) and 兴 in 高兴 is xìng (4th tone), together gāo xìng. 高 is 1st tone gāo; 兴 in 高兴 is 4th tone xìng - get both tones clear."
+  },
+  "ZS02_C1": {
+   "sentence_en": "Every time my elder sister checks my homework she is very ___ (careful), not letting a single word slip.",
+   "hints": ["The blank describes HOW she checks - an attitude, shown by 'not one word slips'. Which word means 'careful and serious', not a mood?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"careful; serious"},{"w":"检查","py":"jiǎnchá","en":"to check"},{"w":"功课","py":"gōngkè","en":"homework"}],
+   "explanation_en": "Checking homework needs care and no carelessness; 认真 ('careful, serious') best matches 'not letting a single word slip'. Use 认真 for one's attitude when doing something, and 开心 for a mood - the two mean different things."
+  },
+  "ZS02_C2": {
+   "sentence_en": "Mum bought a ___ (bunch) of bananas and put them on the table.",
+   "hints": ["The blank is a measure word for bananas, which hang joined together. Which one means a 'string / bunch' of things threaded together?"],
+   "keywords": [{"w":"串","py":"chuàn","en":"a bunch; a string (measure word)"},{"w":"香蕉","py":"xiāngjiāo","en":"banana"},{"w":"量词","py":"liàngcí","en":"measure word"}],
+   "explanation_en": "Bananas grow joined together in a bunch, so the measure word is 串; 一串香蕉 (a bunch of bananas) is the correct pairing. Bananas joined one to another -> use 串; 串 means threaded together, like stringing beads."
+  },
+  "ZS02_C3": {
+   "sentence_en": "After work Dad feels very ___ (relaxed) and sits on the sofa reading the paper to rest.",
+   "hints": ["Dad is resting on the sofa, no longer tense. Which word means 'relaxed / at ease'?"],
+   "keywords": [{"w":"轻松","py":"qīngsōng","en":"relaxed; at ease"},{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"报纸","py":"bàozhǐ","en":"newspaper"}],
+   "explanation_en": "After work he rests and no longer feels tense, so 轻松 ('relaxed') fits. Use 轻松 for the feeling of resting and relaxing."
+  },
+  "ZS02_C4": {
+   "sentence_en": "Grandma ___ (encourages) us, telling us to study hard and become useful people in the future.",
+   "hints": ["Grandma is giving the children confidence and drive to study. Which word means 'to cheer on / spur someone forward', not just 'help' or 'protect'?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"读书","py":"dúshū","en":"to study"},{"w":"有用","py":"yǒuyòng","en":"useful"}],
+   "explanation_en": "Telling someone to study hard and have a bright future gives them confidence and drive, so 鼓励 ('to encourage') fits best. 鼓励 means to raise someone's courage and spur them on - urging study gives drive, so 鼓励."
+  },
+  "ZS02_C5": {
+   "sentence_en": "Xiaoming and his friends play football ___ (happily) on the field.",
+   "hints": ["Playing football with friends is fun. All four options end in 心; look at the first character - which one means 'glad / joyful'?"],
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"操场","py":"cāochǎng","en":"playground; field"},{"w":"踢足球","py":"tī zúqiú","en":"to play football"}],
+   "explanation_en": "Playing football with friends is a happy thing, so 开心 ('happy') fits this scene best. Playing with friends -> glad -> 开心. All four options end in 心 ('heart'); look at the first character: 开 = happy, 伤 = sad, 担 = worried, 粗 = careless."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道谢”就是向别人说“谢谢”，所以“向朋友道谢”表示向朋友表示感谢。“照顾、分享”都不能表示“说谢谢”。",
+   "explanation_en": "道谢 (dàoxiè) means to say thank you to someone, so 向朋友道谢 means to thank a friend. 照顾 (take care of) or 分享 (share) cannot mean 'to say thanks'.",
+   "stem_en": "to thank a friend",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to thank; to express thanks"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "2": {
+   "explanation": "“照顾”是关心、看护，所以“照顾生病的同学”表示细心看护生病的同学。“道谢、举手”都不能表示“看护别人”。",
+   "explanation_en": "照顾 (zhàogù) means to care for / look after, so 照顾生病的同学 means to look after a sick classmate. 道谢 (thank) or 举手 (raise hand) cannot mean 'to look after'.",
+   "stem_en": "to take care of a sick classmate",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to take care of"},{"w":"生病","py":"shēngbìng","en":"to fall ill"}]
+  },
+  "3": {
+   "explanation": "“分享”是把好东西或快乐和别人一起享受，所以“分享快乐”表示把快乐和大家一起感受。“散步、排队”都不能和“快乐”搭配。",
+   "explanation_en": "分享 (fēnxiǎng) means to enjoy something good together with others, so 分享快乐 means to share happiness. 散步 (take a walk) or 排队 (queue) cannot go with 快乐 (happiness).",
+   "stem_en": "to share happiness",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"快乐","py":"kuàilè","en":"happiness; joy"}]
+  },
+  "4": {
+   "explanation": "“散步”是慢慢地走走、放松，所以“出外散步”表示到外面走一走。“举手、排队”都不是“到外面走走”的意思。",
+   "explanation_en": "散步 (sànbù) means to stroll and relax by walking slowly, so 出外散步 means to go out for a walk. 举手 (raise hand) or 排队 (queue) do not mean 'to walk outside'.",
+   "stem_en": "to go out for a walk",
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"出外","py":"chūwài","en":"to go out"}]
+  },
+  "5": {
+   "explanation": "“举手”是把手抬起来；上课想回答问题要先举手，所以“举手回答问题”表示抬手请老师让你回答。“排队”是一个接一个地站好，不是回答问题的动作。",
+   "explanation_en": "举手 (jǔshǒu) means to raise your hand; in class you raise your hand before answering, so 举手回答问题 means to raise your hand to answer. 排队 (to queue) is standing in line, not answering a question.",
+   "stem_en": "to raise your hand to answer a question",
+   "keywords": [{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"回答","py":"huídá","en":"to answer"}]
+  }
+ },
+ "craft": {
+  "ZS02_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Grandpa is very old.' and 'Grandpa insists on walking in the park every day.'",
+   "answer_en": "Although Grandpa is very old, he still insists on walking in the park every day.",
+   "tiles": ["虽然","爷爷年纪很大了，","但是","他每天坚持去公园散步。"],
+   "explanation_en": "虽然……但是…… ('although…, …') shows a turn: the first half admits he is old, the second says he still walks every day - the two are opposite, so this connector fits. 虽然……但是…… = admit something first, then state the opposite result. Remember the two words are used as a pair."
+  },
+  "ZS02_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Mum is ill today.' and 'Dad comes home early to cook.'",
+   "answer_en": "Because Mum is ill today, Dad comes home early to cook.",
+   "tiles": ["因为","妈妈今天生病了，","所以","爸爸早点回家做饭。"],
+   "explanation_en": "因为……所以…… ('because…, so…') shows cause and result: Mum being ill is the cause, Dad coming home early to cook is the result, so this connector joins them. 因为……所以…… = cause first, result after. Find which sentence is the cause and which is the result, then add the connector."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Every day after school, they walk home ___ (together).",
+   "hint": "Clue: two good friends do this every day after school. The blank means doing it at the same time as each other. Which box word means 'together'?",
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"放学","py":"fàngxué","en":"to finish school"}],
+   "explanation_en": "The two good friends walk home together every day; 一起 means jointly / at the same time, so it fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaowen ___ (at once) ran over, helped Xiaohua up, and took him home.",
+   "hint": "Clue: Xiaowen sees his friend fall and reacts with no delay. Which box word means 'right away / immediately'?",
+   "keywords": [{"w":"马上","py":"mǎshàng","en":"at once; immediately"},{"w":"摔倒","py":"shuāidǎo","en":"to fall down"}],
+   "explanation_en": "Seeing his friend fall, Xiaowen ran over at once; 马上 means immediately / very quickly, so it fits best."
+  },
+  "3": {
+   "sentence_en": "Xiaohua's mother saw it and ___ (thanked) Xiaowen again and again.",
+   "hint": "Clue: the mother is grateful that Xiaowen helped her son. Which box word means 'to say thank you'?",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to thank"},{"w":"连连","py":"liánlián","en":"again and again"}],
+   "explanation_en": "Xiaohua's mother is grateful that Xiaowen helped her son; 道谢 means to say thank you, so it fits best."
+  },
+  "4": {
+   "sentence_en": "We are good friends, and good friends should help ___ (each other).",
+   "hint": "Clue: help goes both ways between friends - you help me and I help you. Which box word means 'each other / mutually' (as in 互相帮助)?",
+   "keywords": [{"w":"互相","py":"hùxiāng","en":"each other; mutually"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "Friends help each other; 互相 means both sides do it, and 互相帮助 ('help each other') is a fixed collocation."
+  },
+  "5": {
+   "sentence_en": "Hearing this, Xiaohua felt very ___ (moved) in his heart and treasured the friendship even more.",
+   "hint": "Clue: a friend helped him with true sincerity, stirring his heart. Which box word means 'moved / touched inside'?",
+   "keywords": [{"w":"感动","py":"gǎndòng","en":"moved; touched"},{"w":"珍惜","py":"zhēnxī","en":"to treasure; to cherish"}],
+   "explanation_en": "A friend helped him sincerely and his heart was stirred; 感动 means to be moved inside, so it fits best."
+  }
+ },
+ "reading": {
+  "ZS02_G1": {
+   "stem_en": "How often does Xiaoming's family go to Grandma's house?",
+   "answer_en": "Every weekend.",
+   "keywords": [{"w":"周末","py":"zhōumò","en":"weekend"},{"w":"外婆","py":"wàipó","en":"grandma (maternal)"}],
+   "explanation": "这是细节题。短文第二句说“每个周末，全家人都会一起去外婆家”，直接说明是每个周末去一次，所以选(2)。(1)“每天”和(3)“每个月”文中都没有提到，是用来混淆你的时间词。做细节题要回原文找准确的时间词。",
+   "explanation_en": "This is a detail question. The second sentence says the whole family goes to Grandma's every weekend, so (2). (1) 'every day' and (3) 'every month' are not in the text - they are there to confuse. For detail questions, go back and find the exact time word.",
+   "solution": {"evidence": "每个周末，全家人都会一起去外婆家。"}
+  },
+  "ZS02_G2": {
+   "stem_en": "After the meal, what did Xiaoming and his sister do?",
+   "answer_en": "They kept Grandma company chatting in the living room.",
+   "keywords": [{"w":"陪","py":"péi","en":"to accompany"},{"w":"聊天","py":"liáotiān","en":"to chat"},{"w":"客厅","py":"kètīng","en":"living room"}],
+   "explanation": "这是细节题，要注意“谁做了什么”。短文说“爸爸帮外婆修理家里的东西，妈妈帮外婆洗碗，小明和妹妹则陪外婆在客厅里聊天”。(1)洗碗的是妈妈，(2)修理东西的是爸爸，都张冠李戴；只有(3)“陪外婆聊天”才是小明和妹妹做的。做这类题要把每个人和他做的事一一对上。",
+   "explanation_en": "This is a detail question - watch WHO does WHAT. The passage says Dad fixes things, Mum washes dishes, and Xiaoming and his sister chat with Grandma in the living room. (1) washing dishes is Mum, (2) fixing things is Dad - both are mixed up; only (3) is what the children did. Match each person to their action.",
+   "solution": {"evidence": "小明和妹妹则陪外婆在客厅里聊天。"}
+  },
+  "ZS02_G3": {
+   "stem_en": "What is the main idea of this passage?",
+   "answer_en": "The family often visits and keeps Grandma company so she does not feel lonely.",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to keep company"},{"w":"寂寞","py":"jìmò","en":"lonely"},{"w":"主旨","py":"zhǔzhǐ","en":"main idea"}],
+   "explanation": "这是主旨题，要看整篇文章的中心。全文讲一家人每个周末去外婆家，各自帮忙、陪外婆，外婆说看到他们来就不寂寞了。(2)炒饭好吃、(3)走路十分钟都只是文中的小细节，不能代表全文；(1)“陪伴外婆、让外婆不寂寞”才概括了整篇的意思。主旨题不要只抓一个细节，要想全文都在说什么。",
+   "explanation_en": "This is a main-idea question - look at the centre of the whole passage. The text shows the family visiting every weekend, each helping and keeping Grandma company, and Grandma says she is not lonely when they come. (2) tasty fried rice and (3) a ten-minute walk are only small details; (1) keeping Grandma company so she is not lonely sums up the whole passage. Do not grab one detail - ask what the whole text is about.",
+   "solution": {"evidence": "每次看到他们来，她就不会觉得寂寞了。"}
+  },
+  "ZS02_H1": {
+   "stem_en": "Find a word from the passage that shows Xiaoli's feeling of not wanting to part from Xiaofang.",
+   "answer_en": "舍不得 (loath to part; cannot bear to let go)",
+   "keywords": [{"w":"舍不得","py":"shěbude","en":"loath to part; reluctant"},{"w":"难过","py":"nánguò","en":"sad"},{"w":"分开","py":"fēnkāi","en":"to part; to separate"}],
+   "explanation": "这题要在文中找表示“不想分开”的心情词。短文第二句说“小丽很舍不得小芳，心里非常难过”，“舍不得”正是不愿意分开、放不下的意思，所以答案是“舍不得”。做这种题要先看清要找的是什么心情，再回原文圈出最贴切的词。",
+   "explanation_en": "This asks for a word showing the feeling of 'not wanting to part'. The second sentence says Xiaoli was 舍不得 Xiaofang and felt very sad. 舍不得 means being unwilling to part / unable to let go, so the answer is 舍不得. First be clear what feeling is wanted, then find the closest word in the text.",
+   "solution": {"evidence": "小丽很舍不得小芳，心里非常难过。"}
+  },
+  "ZS02_H2": {
+   "stem_en": "Why does Xiaoli look at the card every day?",
+   "answer_en": "Because the card has the words Xiaofang wrote, and Xiaoli misses her, so she looks at it every day.",
+   "keywords": [{"w":"想念","py":"xiǎngniàn","en":"to miss (someone)"},{"w":"卡片","py":"kǎpiàn","en":"card"},{"w":"友情","py":"yǒuqíng","en":"friendship"}],
+   "explanation": "这是推断题，答案不能照抄一句，要联系上下文。小芳送的卡片上写着“我们的友情不会改变”，小芳搬走后小丽很想念她，所以每天看卡片来想念好朋友、感受这份友情。答“为什么”要把原因说清楚：因为想念小芳。",
+   "explanation_en": "This is an inference question - link the clues rather than copy one line. The card Xiaofang gave says 'our friendship will not change'; after she moved away Xiaoli misses her, so she looks at it every day to remember her friend and feel their friendship. For 'why', state the reason clearly: because she misses Xiaofang.",
+   "solution": {"evidence": "小丽把卡片放在书桌上，每天都会看一看。"}
+  },
+  "ZS02_H3": {
+   "stem_en": "What lesson does Xiaoli understand at the end of the passage? Say it in your own words.",
+   "answer_en": "Xiaoli understands that real friends, no matter how far apart they live, keep their friendship and stay together in their hearts.",
+   "keywords": [{"w":"道理","py":"dàolǐ","en":"lesson; truth"},{"w":"真正","py":"zhēnzhèng","en":"real; true"},{"w":"友情","py":"yǒuqíng","en":"friendship"}],
+   "explanation": "这是主旨/道理题，要用自己的话概括。短文最后一句“真正的朋友，不管住得多远，心里永远都是在一起的”点出道理：真正的友情不会因为距离而改变。答“明白了什么道理”要把这个中心意思说出来，不要只抄故事情节。",
+   "explanation_en": "This is a main-idea / lesson question - sum it up in your own words. The last sentence says real friends stay together in their hearts no matter the distance. The lesson is that true friendship does not change because of distance. State this central idea rather than retelling the plot.",
+   "solution": {"evidence": "真正的朋友，不管住得多远，心里永远都是在一起的。"}
+  }
+ }
+}

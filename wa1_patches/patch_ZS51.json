@@ -1,0 +1,217 @@
+{
+ "setId": "ZS51",
+ "mcq": {
+  "ZS51_A1": {
+   "sentence_en": "Xiaoming is my best friend; he always helps me ___ (sincerely).",
+   "hints": ["The blank + 心 means truly from the heart. Which character (with the speech radical 讠) forms 诚心 (sincere)?"],
+   "keywords": [{"w":"诚心","py":"chéngxīn","en":"sincere"},{"w":"朋友","py":"péngyou","en":"friend"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "诚心 means truly from the heart, so 诚心地帮助 (helps sincerely) shows his help comes from the heart, and 诚 fits. 诚 has the speech radical 讠 - honest speech and a sincere heart, so 诚心 = sincere. 城 has the earth radical and relates to a city."
+  },
+  "ZS51_A2": {
+   "sentence_en": "My good friend and I agreed to go to the ___ (field) to play ball after school.",
+   "hints": ["___场 names the place at school for sport. Which character (with the hand radical 扌) forms 操场?"],
+   "keywords": [{"w":"操场","py":"cāochǎng","en":"field"},{"w":"打球","py":"dǎqiú","en":"to play ball"},{"w":"放学","py":"fàngxué","en":"after school"}],
+   "explanation_en": "操场 is the place at school for sport, so playing ball there after school fits, and 操 is correct. 操 has the hand radical 扌 - doing exercises and using the field needs the hands and feet active. The other three do not have the hand radical and differ in meaning."
+  },
+  "ZS51_A3": {
+   "sentence_en": "Teacher Lin says that ___ (classmates) should help one another and not be selfish.",
+   "hints": ["同___ names those who study at the same school. Which character (with the roof radical 宀) forms 同学?"],
+   "keywords": [{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"自私","py":"zìsī","en":"selfish"}],
+   "explanation_en": "同学 means those who study at the same school, so 同学之间 (among classmates) fits, and 学 is correct. 学 has the roof radical 宀 - people who study at school together are 同学. Do not be misled by look-alike characters."
+  },
+  "ZS51_A4": {
+   "sentence_en": "My good friend Aming is very ___ (honest and kind); he never scolds anyone.",
+   "hints": ["The blank + 厚 means honest and kind-hearted. Which character (with the heart radical 心 at the bottom) forms 忠厚?"],
+   "keywords": [{"w":"忠厚","py":"zhōnghòu","en":"honest and kind"},{"w":"阿明","py":"Ā Míng","en":"Aming (name)"},{"w":"骂人","py":"màrén","en":"to scold"}],
+   "explanation_en": "忠厚 describes someone honest and kind-hearted, and never scolding shows exactly this, so 忠 fits. 忠 has the heart radical 心 at the bottom - 忠心, 忠厚 all relate to the heart. The four sound alike, but only 忠 pairs with 厚."
+  },
+  "ZS51_A5": {
+   "sentence_en": "Xiaohua and I are ___ (neighbours); we walk to school together every morning.",
+   "hints": ["邻___ names people living close by. Which character (with 尸 on top, relating to a dwelling) forms 邻居?"],
+   "keywords": [{"w":"邻居","py":"línjū","en":"neighbour"},{"w":"上学","py":"shàngxué","en":"to go to school"},{"w":"一起","py":"yìqǐ","en":"together"}],
+   "explanation_en": "邻居 means people who live close by, and walking to school together shows they live near each other, so 居 fits. 居 has 尸 on top, relating to a place to live: 居住, 邻居. The other three look alike but differ in meaning."
+  },
+  "ZS51_B1": {
+   "sentence_en": "Xiaowei is my closest 伙伴 (companion); we play together every day.",
+   "hints": ["伙 is huǒ (3rd tone); 伴 has initial b (bàn), not p. Which choice is huǒ + bàn?"],
+   "keywords": [{"w":"伙伴","py":"huǒbàn","en":"companion"},{"w":"要好","py":"yàohǎo","en":"close (of friends)"},{"w":"玩","py":"wán","en":"to play"}],
+   "explanation_en": "伙 is read huǒ (3rd tone) and 伴 is bàn (4th tone), together huǒ bàn. 伙 (3rd tone) is like huǒ (fire), warm between companions; 伴 is bàn, with initial b, not p."
+  },
+  "ZS51_B2": {
+   "sentence_en": "We 相处 (get along) very well and have never quarrelled.",
+   "hints": ["处 is a polyphone: chǔ (verb, to get along) and chù (noun, a place). 相处 is a verb, so which choice is xiāng + chǔ?"],
+   "keywords": [{"w":"相处","py":"xiāngchǔ","en":"to get along"},{"w":"很好","py":"hěn hǎo","en":"very well"},{"w":"吵架","py":"chǎojià","en":"to quarrel"}],
+   "explanation_en": "In 相处, 相 is read xiāng (1st tone, mutually) and 处 is chǔ (3rd tone, to get along). 处 is a polyphone: 相处 / 处理 chǔ (verb); 到处 chù (noun, a place). 相处 is a verb, so read chǔ."
+  },
+  "ZS51_B3": {
+   "sentence_en": "Between good friends one should be 诚实 (honest) and not lie.",
+   "hints": ["诚 has the back nasal -ng (chéng); 实 is retroflex sh (shí). Which choice is chéng + shí?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "诚 is read chéng (back nasal -ng, 2nd tone) and 实 is shí (retroflex sh, 2nd tone), together chéng shí. 诚 has the back nasal -ng; 实 is retroflex sh - curl the tongue up."
+  },
+  "ZS51_B4": {
+   "sentence_en": "Xiaofang 分享 (shared) her snacks with the whole class, and everyone was happy.",
+   "hints": ["分 is 1st tone (fēn); 享 is 3rd tone (xiǎng). Which choice is fēn + xiǎng?"],
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "In 分享, 分 is read fēn (1st tone) and 享 is xiǎng (3rd tone), together fēn xiǎng. The 分 of 分享 is 1st tone fēn (to divide, to give out), and 享 is 3rd tone xiǎng. 分享 = to give out for all to enjoy."
+  },
+  "ZS51_C1": {
+   "sentence_en": "Xiaohua ___ (lent) me his colour pencils to use - a real good friend.",
+   "hints": ["Clue: letting me use his thing for a while, then returning it. Which word means 'to lend'?"],
+   "keywords": [{"w":"借","py":"jiè","en":"to lend"},{"w":"彩色铅笔","py":"cǎisè qiānbǐ","en":"colour pencils"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"}],
+   "explanation_en": "借 means letting someone use your thing for a while, then getting it back, matching a good friend's help. 借给 = to let someone use it for a time. Good friends 借 things, not 换 (swap) or 卖 (sell). 抢 (grab) does not fit."
+  },
+  "ZS51_C2": {
+   "sentence_en": "Aqiang fell, and I ___ (at once) ran over to help him up.",
+   "hints": ["Clue: a friend fell and needs help right away. Which word means 'at once / immediately'?"],
+   "keywords": [{"w":"马上","py":"mǎshàng","en":"at once"},{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "A friend fell and needs help right away, so 马上 (at once, without delay) fits best. Read the context: a friend falls -> needs immediate help -> 马上. 慢慢 and 渐渐 are too slow, 偶尔 is about frequency - none fit."
+  },
+  "ZS51_C3": {
+   "sentence_en": "Xiaoling and I are ___ (a pair of) good friends; we have known each other since Primary One.",
+   "hints": ["Clue: two people forming a pair. Which measure word means 'a pair'?"],
+   "keywords": [{"w":"对","py":"duì","en":"a pair"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"认识","py":"rènshi","en":"to know"}],
+   "explanation_en": "一对好朋友 uses the measure word 对, meaning two people forming a pair, so it is correct. 对 is a measure word for things in twos: 一对朋友, 一对耳环. Two people together are 一对. 条, 张 and 块 do not fit people."
+  },
+  "ZS51_C4": {
+   "sentence_en": "The two of us have the ___ (same) interests; we both like drawing and reading.",
+   "hints": ["Clue: 'both like' the same things shows their interests are alike. Which word means 'the same'?"],
+   "keywords": [{"w":"相同","py":"xiāngtóng","en":"the same"},{"w":"兴趣","py":"xìngqù","en":"interest"},{"w":"画画","py":"huàhuà","en":"to draw"}],
+   "explanation_en": "Both liking drawing and reading shows their interests are alike, so 相同 (the same) fits best. Both liking the same things -> interests 相同. 相反 (opposite) contradicts 'both like', so it cannot be chosen. 相信 and 相比 do not fit."
+  },
+  "ZS51_C5": {
+   "sentence_en": "Xiaojie helped me solve a hard problem, and I ___ (thank) him very much.",
+   "hints": ["Clue: expressing thanks to someone who helped. Which word means 'to thank', taking a person as object?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"难题","py":"nántí","en":"hard problem"},{"w":"解决","py":"jiějué","en":"to solve"}],
+   "explanation_en": "After being helped, one expresses thanks to the person, and 感谢 takes a person as object, so 感谢他 fits best. 感谢 + a person is fixed: 感谢他, 感谢老师, 感谢妈妈. Seeing '非常______他', find a verb that takes a person. 感觉, 感动 and 感受 do not."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“向朋友道歉”就是向朋友承认错误、说对不起。“关心、陪伴”都不是“说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向朋友道歉 means to apologize to a friend. 关心 (care) and 陪伴 (accompany) do not mean 'to say sorry'.",
+   "stem_en": "to apologize to a friend",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "2": {
+   "explanation": "“关心”是留意、在乎别人，所以“关心朋友的健康”就是在乎朋友身体好不好。“道歉、答应”都不是“在乎别人”的意思。",
+   "explanation_en": "关心 (guānxīn) means to care about others, so 关心朋友的健康 means to care about a friend's health. 道歉 (apologize) and 答应 (agree) do not mean 'to care about someone'.",
+   "stem_en": "to care about a friend's health",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"健康","py":"jiànkāng","en":"health"}]
+  },
+  "3": {
+   "explanation": "“秘密”是不能随便告诉别人的事情，所以“保守秘密”就是把秘密守住、不说出去。“道歉、陪伴”都不是“守住不说的事情”。",
+   "explanation_en": "秘密 (mìmì) means something that must not be told casually, so 保守秘密 means to keep a secret. 道歉 (apologize) and 陪伴 (accompany) do not mean 'something kept unspoken'.",
+   "stem_en": "to keep a secret",
+   "keywords": [{"w":"秘密","py":"mìmì","en":"secret"},{"w":"保守","py":"bǎoshǒu","en":"to keep"}]
+  },
+  "4": {
+   "explanation": "“答应”是同意别人的请求，所以“答应朋友的请求”就是同意朋友提出的要求。“道歉、关心”都不是“同意请求”的意思。",
+   "explanation_en": "答应 (dāying) means to agree to someone's request, so 答应朋友的请求 means to agree to a friend's request. 道歉 (apologize) and 关心 (care) do not mean 'to agree to a request'.",
+   "stem_en": "to agree to a friend's request",
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree"},{"w":"请求","py":"qǐngqiú","en":"request"}]
+  },
+  "5": {
+   "explanation": "“陪伴”是陪在别人身边，所以“陪伴在身边”就是一直陪在别人身旁、不离开。“道歉、答应”都不是“陪在身旁”的意思。",
+   "explanation_en": "陪伴 (péibàn) means to stay by someone's side, so 陪伴在身边 means to keep someone company at their side. 道歉 (apologize) and 答应 (agree) do not mean 'to stay by someone's side'.",
+   "stem_en": "to keep company at one's side",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to accompany"},{"w":"身边","py":"shēnbiān","en":"at one's side"}]
+  }
+ },
+ "craft": {
+  "ZS51_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Xiaoming lives far away.' and 'Xiaoming comes to play with me every day.'",
+   "answer_en": "Although Xiaoming lives far away, he comes to play with me every day.",
+   "tiles": ["虽然","小明家住得很远，","但是","他每天都来找我玩。"],
+   "explanation_en": "虽然……但是…… names an unfavourable condition first, then something that still happens. '虽然小明家住得很远' (although he lives far) is the condition, '但是他每天都来找我玩' (but he still comes daily) is what happens anyway."
+  },
+  "ZS51_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaofang did my homework for me.' and 'Xiaofang cleaned the classroom with me.'",
+   "answer_en": "Xiaofang not only did my homework for me, but also cleaned the classroom with me.",
+   "tiles": ["小芳","不但","帮我做了作业，","还","陪我一起打扫教室。"],
+   "explanation_en": "不但……还…… shows a step-up: on top of the first thing there is more. '不但帮我做了作业' (not only did my homework) is the first, '还陪我一起打扫教室' (but also cleaned with me) is the further one, showing Xiaofang helped a lot."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Awen is my best friend. One time, I carelessly broke his water bottle at school and felt very ___ (upset) inside.",
+   "hint": "Clue: I broke my friend's water bottle and feel bad. Which box word means 'sad / upset'?",
+   "keywords": [{"w":"难过","py":"nánguò","en":"upset"},{"w":"水壶","py":"shuǐhú","en":"water bottle"}],
+   "explanation_en": "I broke my friend's water bottle and feel bad inside, so 难过 (upset) fits best."
+  },
+  "2": {
+   "sentence_en": "I worked up my courage, walked over to him, and ___ (sincerely) apologized.",
+   "hint": "Clue: apologizing truly from the heart. Which box phrase means 'sincerely / with all one's heart'?",
+   "keywords": [{"w":"诚心诚意","py":"chéngxīn-chéngyì","en":"sincerely"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"}],
+   "explanation_en": "Apologizing truly from the heart is 诚心诚意, so 诚心诚意地向他道歉 (sincerely apologized) fits best."
+  },
+  "3": {
+   "sentence_en": "Awen was not angry but smiled and said: 'It's okay, we are good friends!' Hearing this, I felt very ___ (warm) inside.",
+   "hint": "Clue: the friend forgave me, and I felt cared for and accepted. Which box word means 'warm (in the heart)'?",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"原谅","py":"yuánliàng","en":"to forgive"}],
+   "explanation_en": "The friend forgave me, and I felt cared for and accepted, so 温暖 (warm inside) best describes this feeling, and it fits best."
+  },
+  "4": {
+   "sentence_en": "From then on, our friendship became even more ___ (deep).",
+   "hint": "Clue: after this test the friendship grew firmer. Which box word means 'deep / solid'?",
+   "keywords": [{"w":"深厚","py":"shēnhòu","en":"deep"},{"w":"友情","py":"yǒuqíng","en":"friendship"}],
+   "explanation_en": "After this test the friendship grew firmer, so 深厚 (deep and solid) describes the deepening friendship, and it fits best."
+  },
+  "5": {
+   "sentence_en": "I understood that true friends will ___ (bravely) forgive your mistakes.",
+   "hint": "Clue: forgiving someone takes courage. Which box word means 'brave'?",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"原谅","py":"yuánliàng","en":"to forgive"}],
+   "explanation_en": "Forgiving someone takes courage, so 勇敢地原谅 (bravely forgive) shows true friends have the courage to accept a mistake, and it fits best."
+  }
+ },
+ "reading": {
+  "ZS51_G1": {
+   "stem_en": "What did Xiaojie do by accident?",
+   "answer_en": "He kicked the ball onto Xiaowei's face.",
+   "keywords": [{"w":"足球","py":"zúqiú","en":"football"},{"w":"踢","py":"tī","en":"to kick"},{"w":"脸","py":"liǎn","en":"face"}],
+   "explanation": "这是细节题。短文说“小杰不小心把球踢到了小伟的脸上”，直接说明小杰不小心做的事是把球踢到小伟的脸上，所以选(1)。(2)把小伟推倒、(3)打翻零食，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaojie accidentally kicked the ball onto Xiaowei's face', directly stating what he did by accident, so (1). (2) pushing Xiaowei over and (3) knocking over snacks are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "小杰不小心把球踢到了小伟的脸上"}
+  },
+  "ZS51_G2": {
+   "stem_en": "Why was Xiaowei not angry?",
+   "answer_en": "Because Xiaowei knew Xiaojie did not do it on purpose, and Xiaojie apologized sincerely.",
+   "keywords": [{"w":"故意","py":"gùyì","en":"on purpose"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"担心","py":"dānxīn","en":"worried"}],
+   "explanation": "这是推断题。短文说小杰连忙跑过去问小伟有没有受伤、真心道歉，“小伟看到小杰那么担心自己，笑着说：‘没事，我知道你不是故意的。’”，可以推断小伟没有生气，是因为他知道小杰不是故意的，而且小杰真心道歉，所以选(2)。(1)脸不痛、(3)想要零食，文中都没有这样说。推断题要结合小杰真心道歉、小伟说的话来想。",
+   "explanation_en": "This is an inference question. The passage says Xiaojie hurried over, asked if Xiaowei was hurt, and apologized sincerely, and 'Xiaowei, seeing Xiaojie so worried, smiled and said: it's okay, I know you didn't mean to'. So Xiaowei was not angry because he knew it was an accident and Xiaojie apologized sincerely, so (2). (1) his face not hurting and (3) wanting snacks are not stated. Combine Xiaojie's sincere apology with Xiaowei's words.",
+   "solution": {"evidence": "小伟看到小杰那么担心自己，笑着说：“没事，我知道你不是故意的。”"}
+  },
+  "ZS51_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Good friends should care for each other and forgive each other's mistakes.",
+   "keywords": [{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"关心","py":"guānxīn","en":"to care"},{"w":"原谅","py":"yuánliàng","en":"to forgive"}],
+   "explanation": "这是主旨题。全文讲小杰不小心把球踢到小伟脸上，真心道歉，小伟原谅了他，两人和好如初，还互相分享零食和贴纸，觉得有这样的好朋友很幸福。可见短文是要告诉我们好朋友之间要互相关心、原谅对方的错误，所以选(3)。(1)踢球危险、(2)放学分享零食都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaojie accidentally kicking the ball onto Xiaowei's face, apologizing sincerely, Xiaowei forgiving him, the two making up and sharing snacks and stickers, feeling lucky to have such friends. So it tells us good friends should care for and forgive each other, so (3). (1) football is dangerous and (2) share snacks after school are minor points, not the main idea.",
+   "solution": {"evidence": "有这样的好朋友，真的很幸福。"}
+  },
+  "ZS51_H1": {
+   "stem_en": "Find a word in the passage that shows Chenmei was very grateful to Linxiao: Chenmei always remembered Linxiao's kindness, and told her she was very ___ to Linxiao.",
+   "answer_en": "感激 (grateful)",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"生病","py":"shēngbìng","en":"to be ill"}],
+   "explanation": "这是找词题。短文说陈美对林晓说“你在我生病的时候帮了我那么多，我真的很感激你”，“感激”正好说明陈美心里很感谢林晓，所以答案是“感激”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says Chenmei told Linxiao 'you helped me so much when I was ill, I am really grateful to you'; 感激 exactly shows Chenmei was very thankful to Linxiao, so the answer is 感激. Find the word that fits the situation.",
+   "solution": {"evidence": "我真的很感激你"}
+  },
+  "ZS51_H2": {
+   "stem_en": "What two things did Linxiao do for Chenmei every day after school?",
+   "answer_en": "Every day after school, Linxiao copied the day's homework and took it to Chenmei's house, and also patiently explained the parts she did not understand.",
+   "keywords": [{"w":"功课","py":"gōngkè","en":"homework"},{"w":"抄","py":"chāo","en":"to copy"},{"w":"讲解","py":"jiǎngjiě","en":"to explain"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“林晓每天放学后，都会把当天的功课抄好，送到陈美家里，还耐心地帮她讲解不懂的地方”，说明林晓做的两件事是抄好功课送到陈美家、耐心帮她讲解不懂的地方。答“哪两件事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'every day after school, Linxiao copied the day's homework and took it to Chenmei's house, and also patiently explained the parts she did not understand', naming the two things. When asked 'two things', list both from the text.",
+   "solution": {"evidence": "都会把当天的功课抄好，送到陈美家里，还耐心地帮她讲解不懂的地方"}
+  },
+  "ZS51_H3": {
+   "stem_en": "What kind of friend do you think Linxiao is? Why?",
+   "answer_en": "I think Linxiao is a warm-hearted friend who cares about others, because when Chenmei was ill, she went every day to bring her homework and explain the questions - very thoughtful.",
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"关心","py":"guānxīn","en":"to care"},{"w":"有心","py":"yǒuxīn","en":"thoughtful"}],
+   "explanation": "这是推断题（评价人物）。短文说“林晓每天放学后，都会把当天的功课抄好，送到陈美家里，还耐心地帮她讲解不懂的地方”，陈美的妈妈也感动地夸她。从她在陈美生病时每天去帮忙送功课、讲题，可以看出她是个热心、关心朋友的人。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says 'every day after school, Linxiao copied the homework and took it to Chenmei, and patiently explained what she did not understand', and Chenmei's mother praised her with feeling. From going every day to help while Chenmei was ill, we see she is warm-hearted and caring. State the trait, then give the events as the reason.",
+   "solution": {"evidence": "林晓每天放学后，都会把当天的功课抄好，送到陈美家里，还耐心地帮她讲解不懂的地方"}
+  }
+ }
+}

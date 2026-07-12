@@ -1,0 +1,217 @@
+{
+ "setId": "ZS39",
+ "mcq": {
+  "ZS39_A1": {
+   "sentence_en": "Xiaoming is my best ___ (friend); we go to school together every day.",
+   "hints": ["朋___ names a close companion. Which character (with 又 at the bottom) forms 朋友?"],
+   "keywords": [{"w":"朋友","py":"péngyou","en":"friend"},{"w":"最好","py":"zuìhǎo","en":"best"},{"w":"上学","py":"shàngxué","en":"to go to school"}],
+   "explanation_en": "朋友 is the fixed word for a close companion, so 友 fits. 友 has 又 at the bottom - friends help each other, a hand lending a hand. The four sound alike, so judge by meaning."
+  },
+  "ZS39_A2": {
+   "sentence_en": "My ___ (companions) and I play football on the field together, and have a great time.",
+   "hints": ["同___ names those who do things alongside you. Which character (with the person radical 亻) forms 同伴?"],
+   "keywords": [{"w":"同伴","py":"tóngbàn","en":"companion"},{"w":"操场","py":"cāochǎng","en":"field"},{"w":"踢足球","py":"tī zúqiú","en":"to play football"}],
+   "explanation_en": "同伴 means companions who do things together, matching playing football together, so 伴 fits. 伴 has the person radical 亻 - a companion is a person who stays alongside you."
+  },
+  "ZS39_A3": {
+   "sentence_en": "Xiaohua helped me ___ (carry) my school bag well, so I did not have to worry.",
+   "hints": ["The blank + 书包 means to carry the bag on the back. Which character (with the flesh radical 月) means 'to carry on the back'?"],
+   "keywords": [{"w":"背","py":"bēi","en":"to carry on the back"},{"w":"书包","py":"shūbāo","en":"school bag"},{"w":"担心","py":"dānxīn","en":"to worry"}],
+   "explanation_en": "背书包 means to carry the bag on the back, a fixed pairing, so 背 fits. All four are read bèi with different meanings; 背 has the flesh radical 月 - carrying something with your body."
+  },
+  "ZS39_A4": {
+   "sentence_en": "The classmates in our class are all very ___ (close); they help one another when they meet difficulty.",
+   "hints": ["The blank means close and warm in feeling. Which character means 'close / intimate', as in 亲近?"],
+   "keywords": [{"w":"亲","py":"qīn","en":"close; intimate"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "亲 means close and warm in feeling, so 同学都很亲 (the classmates are close) shows they get on well and help one another, and 亲 fits. 亲 means intimate - a close bond is 亲近."
+  },
+  "ZS39_A5": {
+   "sentence_en": "Good friends should ___ (respect) each other and must not make fun of one another casually.",
+   "hints": ["The blank + 重 means to value and not belittle someone. Which character (top 酋, bottom 寸) forms 尊重?"],
+   "keywords": [{"w":"尊重","py":"zūnzhòng","en":"to respect"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"取笑","py":"qǔxiào","en":"to make fun of"}],
+   "explanation_en": "尊重 is the fixed word for valuing and not belittling someone, so 尊 fits. 尊 has 酋 on top and 寸 below - measuring with the heart, valuing someone is 尊重. The four sound alike, so judge by meaning."
+  },
+  "ZS39_B1": {
+   "sentence_en": "Xiaoli is my good friend; she is very 热情 (warm) toward me.",
+   "hints": ["热 has initial r (rè), not l; 情 has the back nasal -ng (qíng). Which choice is rè + qíng?"],
+   "keywords": [{"w":"热情","py":"rèqíng","en":"warm; enthusiastic"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"对","py":"duì","en":"toward"}],
+   "explanation_en": "热 is read rè (initial r, 4th tone) and 情 is qíng (2nd tone, back nasal -ng), together rè qíng. Initials r and l differ: r curls the tongue, l keeps it flat. 热 must begin with r."
+  },
+  "ZS39_B2": {
+   "sentence_en": "I 相处 (get along) well with my classmates, and everyone is happy.",
+   "hints": ["处 is a polyphone: chǔ (verb, to get along) and chù (noun, a place). 相处 is a verb, so which choice is xiāng + chǔ?"],
+   "keywords": [{"w":"相处","py":"xiāngchǔ","en":"to get along"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "In 相处, 相 is read xiāng (1st tone) and 处 is chǔ (3rd tone, to live together). 处 is a polyphone: 相处 chǔ (3rd tone); 到处 chù (4th tone). 相处 is a verb, so read chǔ."
+  },
+  "ZS39_B3": {
+   "sentence_en": "Even if good friends have a misunderstanding, they should 重 (afresh) make up and stay friends.",
+   "hints": ["重 is a polyphone: chóng in 重新 / 重复 (again); zhòng in 很重 (heavy). Here it means 'afresh', so which reading?"],
+   "keywords": [{"w":"重新","py":"chóngxīn","en":"afresh; anew"},{"w":"误会","py":"wùhuì","en":"misunderstanding"},{"w":"和好","py":"héhǎo","en":"to make up"}],
+   "explanation_en": "The 重 of 重新 / 重复 (again, afresh) is read chóng (2nd tone). 重 is a polyphone: weight / heavy is zhòng; afresh / again is chóng. Here it means afresh, so read chóng."
+  },
+  "ZS39_B4": {
+   "sentence_en": "We 分享 (share) snacks, and everyone eats happily together.",
+   "hints": ["分 has initial f (fēn); 享 has the back nasal -ng (xiǎng, 3rd tone). Which choice is fēn + xiǎng?"],
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "分 is read fēn (initial f, 1st tone) and 享 is xiǎng (3rd tone, back nasal -ng), together fēn xiǎng. Note 享 has the back nasal -ng and is 3rd tone - do not confuse it with xiāng."
+  },
+  "ZS39_C1": {
+   "sentence_en": "Xiaowen ___ (lent) me his eraser to use - a real good friend.",
+   "hints": ["Clue: it pairs with 给我用 (for me to use), letting me use his thing for a while. Which word means 'to lend'?"],
+   "keywords": [{"w":"借","py":"jiè","en":"to lend"},{"w":"橡皮","py":"xiàngpí","en":"eraser"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"}],
+   "explanation_en": "借 means to let someone use your thing for a while, and 借给我用 (lent it for me to use) is a fixed pairing matching a friend's help. 借 + 给 = to let someone use it for a time. Seeing 给我用, 借 fits most naturally. 还, 拿 and 换 do not fit."
+  },
+  "ZS39_C2": {
+   "sentence_en": "After quarrelling with my good friend, I felt very ___ (sad), hoping he would forgive me.",
+   "hints": ["Clue: after a quarrel, hoping to be forgiven shows a low mood. Which word means 'sad'?"],
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"吵架","py":"chǎojià","en":"to quarrel"},{"w":"原谅","py":"yuánliàng","en":"to forgive"}],
+   "explanation_en": "After a quarrel, hoping to be forgiven shows a low, unhappy mood, so 难过 (sad) fits best. Quarrel -> hope for forgiveness -> feeling bad -> 难过. Infer the feeling from context. 高兴, 紧张 and 害怕 do not fit."
+  },
+  "ZS39_C3": {
+   "sentence_en": "I gave ___ (a) cake to my good friend, wishing him a happy birthday.",
+   "hints": ["Clue: cake is a block-shaped food. Which measure word is used for block-shaped foods?"],
+   "keywords": [{"w":"一块","py":"yí kuài","en":"a piece of"},{"w":"蛋糕","py":"dàngāo","en":"cake"},{"w":"生日","py":"shēngrì","en":"birthday"}],
+   "explanation_en": "Cake is a block-shaped food, so the measure word 块 is used: 一块蛋糕. Block-shaped foods use 块: 一块蛋糕, 一块豆腐, 一块巧克力. 张, 本 and 条 do not fit."
+  },
+  "ZS39_C4": {
+   "sentence_en": "My good friend was ill, so I went to ___ (visit) him and brought fruit and books.",
+   "hints": ["Clue: going to see and care for a sick friend. Which word means 'to visit (someone unwell)'?"],
+   "keywords": [{"w":"探望","py":"tànwàng","en":"to visit"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"水果","py":"shuǐguǒ","en":"fruit"}],
+   "explanation_en": "探望 means to go and see someone with care, used specially for visiting the sick or those needing care, so it fits best. Ill -> 探望; meeting an elder formally -> 拜访; seeing an exhibit -> 参观. 探望 is for caring for the sick or dear ones."
+  },
+  "ZS39_C5": {
+   "sentence_en": "Xiaohua and I have been good friends for years; our friendship is very ___ (deep).",
+   "hints": ["Clue: it pairs with 友情 (friendship) - deep and solid feeling. Which word means 'deep and solid'?"],
+   "keywords": [{"w":"深厚","py":"shēnhòu","en":"deep"},{"w":"友情","py":"yǒuqíng","en":"friendship"},{"w":"多年","py":"duōnián","en":"many years"}],
+   "explanation_en": "友情深厚 is a fixed pairing meaning the friendship is deep and solid, so 深厚 fits best. Fixed pairing: 友情 / 感情 + 深厚. Seeing 友情, think 深厚. 深刻, 严重 and 认真 do not pair with 友情."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“帮助”是替别人做事、给别人出力，所以“请你帮助我”就是请你来帮我做事、出一份力。“道歉、陪伴”都不是“替别人出力”的意思。",
+   "explanation_en": "帮助 (bāngzhù) means to do something for someone, so 请你帮助我 means please help me. 道歉 (apologize) and 陪伴 (accompany) do not mean 'to do something for someone'.",
+   "stem_en": "please help me",
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"请","py":"qǐng","en":"please"}]
+  },
+  "2": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“向朋友道歉”就是向朋友承认错误、说对不起。“帮助、约好”都不是“说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向朋友道歉 means to apologize to a friend. 帮助 (help) and 约好 (arrange) do not mean 'to say sorry'.",
+   "stem_en": "to apologize to a friend",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "3": {
+   "explanation": "“秘密”是不能随便告诉别人的事情，所以“保守秘密”就是把秘密守住、不说出去。“帮助、陪伴”都不是“守住不说的事情”。",
+   "explanation_en": "秘密 (mìmì) means something that must not be told casually, so 保守秘密 means to keep a secret. 帮助 (help) and 陪伴 (accompany) do not mean 'something kept unspoken'.",
+   "stem_en": "to keep a secret",
+   "keywords": [{"w":"秘密","py":"mìmì","en":"secret"},{"w":"保守","py":"bǎoshǒu","en":"to keep"}]
+  },
+  "4": {
+   "explanation": "“约好”是事先说好一起做某事，所以“约好一起去图书馆”就是事先说好一同去图书馆。“帮助、道歉”都不是“事先说好”的意思。",
+   "explanation_en": "约好 (yuēhǎo) means to arrange in advance to do something together, so 约好一起去图书馆 means to arrange to go to the library together. 帮助 (help) and 道歉 (apologize) do not mean 'to arrange in advance'.",
+   "stem_en": "to arrange to go to the library together",
+   "keywords": [{"w":"约好","py":"yuēhǎo","en":"to arrange"},{"w":"图书馆","py":"túshūguǎn","en":"library"}]
+  },
+  "5": {
+   "explanation": "“陪伴”是陪在别人身边，所以“一直陪伴在身边”就是一直陪在别人身旁、不离开。“帮助、约好”都不是“陪在身旁”的意思。",
+   "explanation_en": "陪伴 (péibàn) means to stay by someone's side, so 一直陪伴在身边 means to keep someone company at their side. 帮助 (help) and 约好 (arrange) do not mean 'to stay by someone's side'.",
+   "stem_en": "to keep company at one's side",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to accompany"},{"w":"身边","py":"shēnbiān","en":"at one's side"}]
+  }
+ },
+ "craft": {
+  "ZS39_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Xiaoming and I had a quarrel.' and 'We are still good friends.'",
+   "answer_en": "Although Xiaoming and I had a quarrel, we are still good friends.",
+   "tiles": ["虽然","小明和我吵了一架，","但是","我们还是好朋友。"],
+   "explanation_en": "虽然……但是…… names one thing that seems bad, then a different result. '虽然吵了一架' (although we quarrelled) is the first thing, '但是还是好朋友' (but we are still friends) is the different result."
+  },
+  "ZS39_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaohua helped me finish my homework.' and 'Xiaohua walked home with me.'",
+   "answer_en": "Xiaohua not only helped me finish my homework, but also walked home with me.",
+   "tiles": ["小华","不但","帮我做完了功课，","还","陪我一起回家。"],
+   "explanation_en": "不但……还…… means on top of the first thing there is more. '不但帮我做功课' (not only helped with homework) is the first good deed, '还陪我回家' (but also walked home with me) is the extra one - a step-up."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Xiaolin and Xiaojie are good friends. After school every day, they play ball on the field ___ (together).",
+   "hint": "Clue: two good friends play ball as one every day. Which box word means 'together'?",
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"踢球","py":"tī qiú","en":"to play ball"}],
+   "explanation_en": "Two good friends play ball as one every day, so 一起 (together), meaning doing something jointly, fits best."
+  },
+  "2": {
+   "sentence_en": "One day, Xiaolin carelessly fell and hurt his knee. Seeing this, Xiaojie ___ (at once) ran over to help him up.",
+   "hint": "Clue: seeing his friend fall, he acts with no delay. Which box word means 'at once / immediately'?",
+   "keywords": [{"w":"立刻","py":"lìkè","en":"at once"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "Seeing Xiaolin fall, Xiaojie runs over with no delay, so 立刻 (at once) fits best."
+  },
+  "3": {
+   "sentence_en": "He also helped ___ (carry on the back) Xiaolin's school bag.",
+   "hint": "Clue: carrying the bag on his back for the injured friend. Which box word means 'carrying on the back'?",
+   "keywords": [{"w":"背着","py":"bēizhe","en":"carrying on the back"},{"w":"书包","py":"shūbāo","en":"school bag"}],
+   "explanation_en": "Xiaolin was hurt, so Xiaojie carried his bag on his back, and 背着 (carrying on the back) fits best."
+  },
+  "4": {
+   "sentence_en": "At the sick bay, Xiaojie kept ___ (staying by) Xiaolin's side and would not leave.",
+   "hint": "Clue: he stays close by his friend, watching over him. Which box word means 'to keep company by one's side'?",
+   "keywords": [{"w":"陪","py":"péi","en":"to keep company"},{"w":"身边","py":"shēnbiān","en":"at one's side"}],
+   "explanation_en": "Xiaojie stayed close by, watching over Xiaolin, so 陪 (to keep company at one's side) fits best."
+  },
+  "5": {
+   "sentence_en": "Xiaolin felt very ___ (moved) inside, feeling how good it was to have such a friend.",
+   "hint": "Clue: touched by his good friend's care and help. Which box word means 'moved / touched'?",
+   "keywords": [{"w":"感动","py":"gǎndòng","en":"moved"},{"w":"关心","py":"guānxīn","en":"to care"}],
+   "explanation_en": "Xiaolin was touched by his good friend's care and help, so 感动 (moved) fits best."
+  }
+ },
+ "reading": {
+  "ZS39_G1": {
+   "stem_en": "Why did Xiaoshi apologize to Xiaomei?",
+   "answer_en": "Because Xiaoshi spilled paint on Xiaomei's school uniform.",
+   "keywords": [{"w":"颜料","py":"yánliào","en":"paint"},{"w":"校服","py":"xiàofú","en":"school uniform"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"}],
+   "explanation": "这是细节题。短文说“小诗在美术课上把颜料洒在了小美的新校服上，小美当时很不高兴”，可以看出小诗道歉是因为她把颜料洒在了小美的校服上，所以选(1)。(2)忘记还橡皮、(3)午休吵架，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaoshi spilled paint on Xiaomei's new uniform in art class, and Xiaomei was unhappy', so she apologized because she spilled paint on the uniform, so (1). (2) forgetting to return an eraser and (3) quarrelling at lunch are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "小诗在美术课上把颜料洒在了小美的新校服上"}
+  },
+  "ZS39_G2": {
+   "stem_en": "Why was Xiaomei no longer unhappy afterward?",
+   "answer_en": "Because Xiaoshi apologized sincerely, and Xiaomei was moved by her.",
+   "keywords": [{"w":"真诚","py":"zhēnchéng","en":"sincere"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"打动","py":"dǎdòng","en":"to move; touch"}],
+   "explanation": "这是推断题。短文说“小美看到小诗真诚的样子，心里的不高兴慢慢消失了”，可以推断小美不再不高兴，是因为小诗真诚地道歉、打动了她，所以选(2)。(1)买了新校服、(3)老师叫她们和好，文中都没有这样说。推断题要看“不高兴消失”前面的原因。",
+   "explanation_en": "This is an inference question. The passage says 'seeing Xiaoshi's sincere manner, Xiaomei's unhappiness slowly faded', so she stopped being unhappy because Xiaoshi's sincere apology moved her, so (2). (1) buying a new uniform and (3) the teacher telling them to make up are not stated. Read the reason before 'unhappiness faded'.",
+   "solution": {"evidence": "小美看到小诗真诚的样子，心里的不高兴慢慢消失了"}
+  },
+  "ZS39_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "True friends apologize sincerely after making a mistake, so friendship can last.",
+   "keywords": [{"w":"真心","py":"zhēnxīn","en":"true; sincere"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"友情","py":"yǒuqíng","en":"friendship"}],
+   "explanation": "这是主旨题。全文讲小诗把颜料洒在小美校服上，主动真诚道歉，小美原谅了她，两人又和好如初，小美觉得有这样的真心朋友很幸运。可见短文是要告诉我们真心的朋友在出错后会真诚道歉，友情才能长久，所以选(3)。(1)美术课要小心、(2)午休聊天最开心都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoshi spilling paint, sincerely apologizing, Xiaomei forgiving her, and the two becoming close again, with Xiaomei feeling lucky to have such a true friend. So it tells us that true friends apologize sincerely after a mistake so friendship can last, so (3). (1) be careful in art class and (2) chatting at lunch is happiest are minor points, not the main idea.",
+   "solution": {"evidence": "有这样一个真心朋友，真的很幸运。"}
+  },
+  "ZS39_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaogang's mood on his first day at the new school.",
+   "answer_en": "紧张 (nervous)",
+   "keywords": [{"w":"紧张","py":"jǐnzhāng","en":"nervous"},{"w":"转学","py":"zhuǎnxué","en":"to transfer school"},{"w":"角落","py":"jiǎoluò","en":"corner"}],
+   "explanation": "这是找词题。短文说“小刚转学来到新学校的第一天，心里很紧张”，“紧张”正好说明小刚第一天在新学校的心情，所以答案是“紧张”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'on Xiaogang's first day at the new school, he felt very nervous'; 紧张 exactly describes his mood on the first day, so the answer is 紧张. Find the word that fits the situation.",
+   "solution": {"evidence": "心里很紧张"}
+  },
+  "ZS39_H2": {
+   "stem_en": "What two things did Xiaojun do to help Xiaogang settle into the new school? Write two things.",
+   "answer_en": "Xiaojun kept Xiaogang company at lunch every day, and also introduced him to other classmates.",
+   "keywords": [{"w":"陪","py":"péi","en":"to keep company"},{"w":"午饭","py":"wǔfàn","en":"lunch"},{"w":"认识","py":"rènshi","en":"to get to know"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“从那天起，小俊每天都陪小刚一起吃午饭，还带他认识其他同学”，说明小俊做的两件事是每天陪小刚吃午饭、带他认识其他同学。答“哪两件事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'from that day, Xiaojun kept Xiaogang company at lunch every day and introduced him to other classmates', naming the two things. When asked 'two things', list both from the text.",
+   "solution": {"evidence": "小俊每天都陪小刚一起吃午饭，还带他认识其他同学"}
+  },
+  "ZS39_H3": {
+   "stem_en": "What kind of classmate do you think Xiaojun is? Why?",
+   "answer_en": "I think Xiaojun is a warm and friendly classmate, because he took the initiative to get to know Xiaogang, kept him company every day, and helped him get to know other classmates.",
+   "keywords": [{"w":"热情","py":"rèqíng","en":"warm"},{"w":"友善","py":"yǒushàn","en":"friendly"},{"w":"孤单","py":"gūdān","en":"lonely"}],
+   "explanation": "这是推断题（评价人物）。短文说小俊主动走过去认识小刚，每天陪他吃午饭、带他认识其他同学，最后小刚明白“是小俊的热情让他不再孤单”。从他主动关心、帮助新同学，可以看出他是个热情、友善的同学。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Xiaojun took the initiative to get to know Xiaogang, kept him company at lunch, introduced him to others, and Xiaogang realized 'it was Xiaojun's warmth that made him no longer lonely'. From actively caring for and helping the new classmate, we see he is warm and friendly. State the trait, then give the actions as the reason.",
+   "solution": {"evidence": "是小俊的热情让他不再孤单。"}
+  }
+ }
+}

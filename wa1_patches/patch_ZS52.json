@@ -1,0 +1,217 @@
+{
+ "setId": "ZS52",
+ "mcq": {
+  "ZS52_A1": {
+   "sentence_en": "The road in the village has ___ (become) wider, and everyone is happy.",
+   "hints": ["The blank + 宽 means to turn from narrow to wide. Which character means 'to change'?"],
+   "keywords": [{"w":"变","py":"biàn","en":"to change"},{"w":"道路","py":"dàolù","en":"road"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "变宽 means to turn from narrow to wide, and 变 means to change, so it fits. The four sound alike; judge by meaning: 变 = to change; 便 = convenient; 辩 = to argue; 遍 = a time (count). The road 'changed', so use 变."
+  },
+  "ZS52_A2": {
+   "sentence_en": "Xiaoming ___ (painstakingly) tends the little flower seedlings in the garden every day.",
+   "hints": ["The blank + 心 means with great care and attention. Which character (with the rice radical 米) forms 精心?"],
+   "keywords": [{"w":"精心","py":"jīngxīn","en":"painstakingly"},{"w":"照顾","py":"zhàogù","en":"to tend"},{"w":"花苗","py":"huāmiáo","en":"flower seedling"}],
+   "explanation_en": "精心 means with great care and attention, describing carefully tending the seedlings, so 精 fits. The four share 青 and sound alike; 精 has the rice radical 米 on the left - 精心 means as fine and careful as a grain of rice."
+  },
+  "ZS52_A3": {
+   "sentence_en": "The old tree in front of Grandma's house ___ (sprouted) many new buds this spring.",
+   "hints": ["The blank + 出 means to grow out and appear. Which character means 'to push out / emerge', forming 冒出?"],
+   "keywords": [{"w":"冒","py":"mào","en":"to emerge; push out"},{"w":"新芽","py":"xīnyá","en":"new bud"},{"w":"春天","py":"chūntiān","en":"spring"}],
+   "explanation_en": "冒出新芽 means new buds growing out and appearing, and 冒 carries the sense of pushing out and emerging, so it fits. 冒 pictures something poking out from inside; new buds poke out of the branches, so 冒出."
+  },
+  "ZS52_A4": {
+   "sentence_en": "This used to be an empty plot; now a beautiful library has been ___ (built).",
+   "hints": ["The blank + 起 means to construct and put up. Which character means 'to build', forming 建起?"],
+   "keywords": [{"w":"建","py":"jiàn","en":"to build"},{"w":"空地","py":"kòngdì","en":"empty plot"},{"w":"图书馆","py":"túshūguǎn","en":"library"}],
+   "explanation_en": "建起 means to construct and put up, so 建起了一座图书馆 (a library was built) fits. The four sound alike: 建 (build), 键 (keyboard), 健 (healthy), 件 (an item). Putting up a building uses 建 (to build)."
+  },
+  "ZS52_A5": {
+   "sentence_en": "Seeing a butterfly emerge from a caterpillar for the first time, little brother felt very ___ (amazed).",
+   "hints": ["The blank + 奇 means surprised at something wonderful. Which character (with the heart radical) forms 惊奇?"],
+   "keywords": [{"w":"惊奇","py":"jīngqí","en":"amazed"},{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"毛毛虫","py":"máomaochóng","en":"caterpillar"}],
+   "explanation_en": "惊奇 means surprised at something wonderful, describing little brother's reaction to the change, so 惊 fits. 惊 has 敬 on the left and the heart is stirred - being startled is 惊讶. Seeing a wonderful change gives 惊奇."
+  },
+  "ZS52_B1": {
+   "sentence_en": "The 变化 (change) in the estate's surroundings is huge; the old buildings are all gone.",
+   "hints": ["变 has initial b (biàn), not p; 化 is 4th tone (huà), not 1st. Which choice is biàn + huà?"],
+   "keywords": [{"w":"变化","py":"biànhuà","en":"change"},{"w":"环境","py":"huánjìng","en":"surroundings"},{"w":"旧楼","py":"jiù lóu","en":"old building"}],
+   "explanation_en": "变 is read biàn (initial b, final -iàn) and 化 is huà (4th tone), together biàn huà. 变 begins with b (not p); 化 is 4th tone huà (not huā). b and p look alike, so tell them apart."
+  },
+  "ZS52_B2": {
+   "sentence_en": "The caterpillar slowly 长大 (grows up) on the leaf and finally becomes a beautiful butterfly.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"树叶","py":"shùyè","en":"leaf"},{"w":"蝴蝶","py":"húdié","en":"butterfly"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), not cháng (length); 大 is dà (4th tone). 长 is a polyphone: length = cháng; to grow = zhǎng. 长大 is about growing bigger, so read zhǎng."
+  },
+  "ZS52_B3": {
+   "sentence_en": "Dad says the place where he lived as a child has now 发展 (developed) into a big city.",
+   "hints": ["发 is 1st tone (fā); 展 is 3rd tone (zhǎn). Which choice is fā + zhǎn?"],
+   "keywords": [{"w":"发展","py":"fāzhǎn","en":"to develop"},{"w":"小时候","py":"xiǎoshíhou","en":"childhood"},{"w":"城市","py":"chéngshì","en":"city"}],
+   "explanation_en": "发 is read fā (1st tone) and 展 is zhǎn (3rd tone), together fā zhǎn. 发 (1st tone) is level, as in 发展 / 发现; 展 (3rd tone) dips then rises."
+  },
+  "ZS52_B4": {
+   "sentence_en": "Grandma saw the flowers in the garden 盛开 (in full bloom) and smiled.",
+   "hints": ["盛 is retroflex sh (shèng, 4th tone), not flat s; 开 is kāi (1st tone), not gāi. Which choice is shèng + kāi?"],
+   "keywords": [{"w":"盛开","py":"shèngkāi","en":"to bloom fully"},{"w":"花园","py":"huāyuán","en":"garden"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation_en": "盛 is read shèng (retroflex sh, 4th tone) and 开 is kāi (1st tone), together shèng kāi. 盛 is retroflex sh, 4th tone - do not confuse it with 成 chéng; 开 begins with k, not g."
+  },
+  "ZS52_C1": {
+   "sentence_en": "A new playground ___ (appeared) in the estate, and the children are all happy.",
+   "hints": ["Clue: a playground coming into being from nothing. Which word means 'to appear / come into being'?"],
+   "keywords": [{"w":"出现","py":"chūxiàn","en":"to appear"},{"w":"游乐场","py":"yóulèchǎng","en":"playground"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "A playground coming into being from nothing is 出现 (to appear), the most natural pairing. Playgrounds and buildings coming from nothing -> 出现. 发生 goes with events, 产生 with feelings/ideas, 表现 with behaviour."
+  },
+  "ZS52_C2": {
+   "sentence_en": "Mum brought back ___ (a bunch of) fresh flowers and decorated the living room beautifully.",
+   "hints": ["Clue: flowers tied together in a bunch. Which measure word means 'a bunch / bouquet'?"],
+   "keywords": [{"w":"一束","py":"yí shù","en":"a bunch"},{"w":"鲜花","py":"xiānhuā","en":"fresh flowers"},{"w":"客厅","py":"kètīng","en":"living room"}],
+   "explanation_en": "Flowers gathered and tied together use the measure word 束: 一束鲜花. Flowers -> 一束 (tied together); a tree -> 一棵; a fish -> 一条; paper -> 一张. Remember 束 = tied together."
+  },
+  "ZS52_C3": {
+   "sentence_en": "Through everyone's effort, the wasteland ___ (gradually) became a beautiful garden.",
+   "hints": ["Clue: 'through everyone's effort' shows the change happened bit by bit. Which word means 'gradually / little by little'?"],
+   "keywords": [{"w":"渐渐","py":"jiànjiàn","en":"gradually"},{"w":"荒地","py":"huāngdì","en":"wasteland"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation_en": "'Through everyone's effort' shows the change happened bit by bit, so 渐渐 (gradually) fits best. A change built up over time -> 渐渐. 突然 (suddenly), 马上 (at once) and 竟然 (unexpectedly) do not fit a gradual change."
+  },
+  "ZS52_C4": {
+   "sentence_en": "Grandpa saw the ___ (changes) in his hometown and could not help shedding tears.",
+   "hints": ["Clue: after 的, a noun is needed for what Grandpa saw. Which word is a noun meaning 'change'?"],
+   "keywords": [{"w":"变化","py":"biànhuà","en":"change"},{"w":"家乡","py":"jiāxiāng","en":"hometown"},{"w":"眼泪","py":"yǎnlèi","en":"tears"}],
+   "explanation_en": "In '看到家乡的______', the 的 before the blank calls for a noun, and 变化 is a noun meaning 'change', so it fits. 改造 and 改良 stress the action of changing; 变成 is a verb. As the object of 看到 after 的, use the noun 变化."
+  },
+  "ZS52_C5": {
+   "sentence_en": "The classmates ___ (carefully) cleaned the classroom, ready to welcome the new term.",
+   "hints": ["Clue: cleaning while minding every corner. Which word means 'careful / attentive to detail'?"],
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"教室","py":"jiàoshì","en":"classroom"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}],
+   "explanation_en": "仔细地打扫 means cleaning while minding every corner, pairing most exactly with 'cleaned it spotless', so 仔细 fits best. 用功 and 努力 describe effort in study/work, and 认真 is more general, but 仔细 stresses attention to every detail of the cleaning."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“惊喜”是没想到的高兴、又惊又喜，所以“收到惊喜礼物”就是收到一份意外又让人高兴的礼物。“保护、种植”都不是“意外高兴”的意思。",
+   "explanation_en": "惊喜 (jīngxǐ) means a pleasant surprise, so 收到惊喜礼物 means to receive a surprise gift. 保护 (protect) and 种植 (plant) do not mean 'an unexpected joy'.",
+   "stem_en": "to receive a surprise gift",
+   "keywords": [{"w":"惊喜","py":"jīngxǐ","en":"pleasant surprise"},{"w":"礼物","py":"lǐwù","en":"gift"}]
+  },
+  "2": {
+   "explanation": "“保护”是爱护、不让它受破坏，所以“保护环境”就是爱护周围的环境，不让它变坏。“惊喜、丰富”都不是“爱护不受破坏”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护环境 means to protect the environment. 惊喜 (surprise) and 丰富 (rich) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the environment",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}]
+  },
+  "3": {
+   "explanation": "“种植”是把植物栽到土里去养，所以“种植花草树木”就是把花草树木栽进土里种起来。“保护、观看”都不是“把植物栽进土里”的意思。",
+   "explanation_en": "种植 (zhòngzhí) means to put plants into the soil to grow, so 种植花草树木 means to plant flowers, grass and trees. 保护 (protect) and 观看 (watch) do not mean 'to put plants into the soil'.",
+   "stem_en": "to plant flowers, grass and trees",
+   "keywords": [{"w":"种植","py":"zhòngzhí","en":"to plant"},{"w":"花草树木","py":"huācǎo-shùmù","en":"flowers, grass and trees"}]
+  },
+  "4": {
+   "explanation": "“整洁”是干净又整齐，所以“教室整洁”就是教室干净整齐、不乱。“惊喜、丰富”都不是“干净整齐”的意思。",
+   "explanation_en": "整洁 (zhěngjié) means clean and tidy, so 教室整洁 means the classroom is clean and tidy. 惊喜 (surprise) and 丰富 (rich) do not mean 'clean and tidy'.",
+   "stem_en": "the classroom is clean and tidy",
+   "keywords": [{"w":"整洁","py":"zhěngjié","en":"clean and tidy"},{"w":"教室","py":"jiàoshì","en":"classroom"}]
+  },
+  "5": {
+   "explanation": "“丰富”是又多又充实，所以“丰富知识”就是让知识变得又多又充实、增长见闻。“保护、观看”都不是“又多又充实”的意思。",
+   "explanation_en": "丰富 (fēngfù) means abundant and rich, so 丰富知识 means to enrich one's knowledge. 保护 (protect) and 观看 (watch) do not mean 'abundant and rich'.",
+   "stem_en": "to enrich one's knowledge",
+   "keywords": [{"w":"丰富","py":"fēngfù","en":"rich; abundant"},{"w":"知识","py":"zhīshi","en":"knowledge"}]
+  }
+ },
+ "craft": {
+  "ZS52_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'This place used to be wasteland.' and 'Now it has become a beautiful garden.'",
+   "answer_en": "Although this place used to be wasteland, now it has become a beautiful garden.",
+   "tiles": ["虽然","这里以前是一片荒地，","但是","现在已经变成了美丽的花园。"],
+   "explanation_en": "虽然……但是…… sets the two clauses in a turn: the first says it was wasteland, the second says now it is a garden - a change that contrasts. The two words are used together."
+  },
+  "ZS52_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'A park was newly built in the estate.' and 'Many flowers and trees were also planted in the estate.'",
+   "answer_en": "In the estate, not only was a park newly built, but also many flowers and trees were planted.",
+   "tiles": ["小区里","不但","新建了一个公园，","还","种了许多花草树木。"],
+   "explanation_en": "不但……还…… shows a step-up: on top of the first thing there is a second. Both are good changes, one after the other - a park, and also many flowers and trees."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school, Xiaoyun and her classmates came to the school's little garden. The flowers were blooming ___ (brilliantly), giving off waves of fragrance.",
+   "hint": "Clue: it describes flowers blooming bright and beautiful. Which box word means 'brilliant / radiant'?",
+   "keywords": [{"w":"灿烂","py":"cànlàn","en":"brilliant"},{"w":"开放","py":"kāifàng","en":"to bloom"}],
+   "explanation_en": "灿烂地开放 describes flowers blooming bright and beautiful, a common pairing, so 灿烂 fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaoyun looked ___ (carefully) at each flower and felt very happy inside.",
+   "hint": "Clue: looking closely at each flower, minding every one. Which box word means 'careful / attentive'?",
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"每一朵","py":"měi yì duǒ","en":"each one"}],
+   "explanation_en": "仔细地看 means looking closely at each flower with attention, so 仔细 fits best."
+  },
+  "3": {
+   "sentence_en": "Xiaoyun felt very ___ (happy) inside.",
+   "hint": "Clue: seeing the beautiful flowers puts her in a joyful mood. Which box word means 'happy'?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"花儿","py":"huā'ér","en":"flowers"}],
+   "explanation_en": "Seeing the beautiful flowers puts Xiaoyun in a joyful mood, so 开心 (happy) fits best."
+  },
+  "4": {
+   "sentence_en": "She remembered the teacher saying these flowers were all ___ (planted) by the students themselves.",
+   "hint": "Clue: putting the flowers into the soil with their own hands. Which box word means 'to plant'?",
+   "keywords": [{"w":"种植","py":"zhòngzhí","en":"to plant"},{"w":"亲手","py":"qīnshǒu","en":"with one's own hands"}],
+   "explanation_en": "The students put the flowers into the soil themselves, so 种植 (to plant) is the most exact word here."
+  },
+  "5": {
+   "sentence_en": "Only through everyone's careful tending did the garden come to have such a lovely ___ (change).",
+   "hint": "Clue: it pairs with 美好的 (lovely) - the difference from before to now. Which box word means 'change'?",
+   "keywords": [{"w":"变化","py":"biànhuà","en":"change"},{"w":"美好","py":"měihǎo","en":"lovely"}],
+   "explanation_en": "The garden became lovely after tending, so 美好的变化 (a lovely change) shows the difference from before to now, and 变化 fits best."
+  }
+ },
+ "reading": {
+  "ZS52_G1": {
+   "stem_en": "What did Linming most often do after coming home from school before?",
+   "answer_en": "Play mobile phone games.",
+   "keywords": [{"w":"手机","py":"shǒujī","en":"mobile phone"},{"w":"游戏","py":"yóuxì","en":"game"},{"w":"功课","py":"gōngkè","en":"homework"}],
+   "explanation": "这是细节题。短文说林明“是一个爱玩手机游戏的男孩，每天放学回家就抱着手机不放”，直接说明他以前放学后最常做的是玩手机游戏，所以选(3)。(1)认真做功课、(2)参加科学小组都是后来的事，和“以前”不符。做细节题要注意题目问的是“以前”。",
+   "explanation_en": "This is a detail question. The passage says Linming 'was a boy who loved mobile games, holding his phone the moment he got home', directly stating what he most often did before, so (3). (1) doing homework seriously and (2) joining the science group came later, not 'before'. Note the question asks about 'before'.",
+   "solution": {"evidence": "每天放学回家就抱着手机不放"}
+  },
+  "ZS52_G2": {
+   "stem_en": "Why did Linming make up his mind to change?",
+   "answer_en": "Because he saw primary students could make a robot, and he admired them.",
+   "keywords": [{"w":"机器人","py":"jīqìrén","en":"robot"},{"w":"佩服","py":"pèifú","en":"to admire"},{"w":"设计","py":"shèjì","en":"to design"}],
+   "explanation": "这是推断题。短文说导览员说这个机器人“是一群小学生花了两年时间设计出来的。林明听了，非常佩服”，接着他就下定决心改变。可以推断他下决心改变，是因为看到小学生能做出机器人、非常佩服，所以选(1)。(2)爸爸叫他读书、(3)想得第一名，文中都没有这样说。推断题要看他“佩服”后面的行动。",
+   "explanation_en": "This is an inference question. The guide said the robot 'was designed by a group of primary students over two years, and Linming admired them very much', after which he resolved to change. We can infer he decided to change because he saw primary students could make a robot and admired them, so (1). (2) Dad telling him to study and (3) wanting first place are not stated. Read the action after 'admired'.",
+   "solution": {"evidence": "这个机器人是一群小学生花了两年时间设计出来的。林明听了，非常佩服"}
+  },
+  "ZS52_G3": {
+   "stem_en": "What does this passage mainly want to tell us?",
+   "answer_en": "As long as you resolve to change and work hard, you can do what you want to do.",
+   "keywords": [{"w":"决心","py":"juéxīn","en":"resolve"},{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"改变","py":"gǎibiàn","en":"to change"}],
+   "explanation": "这是主旨题。全文讲爱玩手机的林明，看到小学生做出机器人后下定决心改变，每天认真完成功课、参加科学小组，半年后和同学做出机器人得了第一名，爸爸满意地笑了。可见短文是要告诉我们只要下定决心努力改变，就能做到想做的事，所以选(2)。(1)科学展览有趣、(3)玩手机让人不爱读书都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Linming, who loved his phone, resolving to change after seeing students make a robot, seriously finishing homework and joining the science group, and after six months making a robot that won first place, with Dad smiling with satisfaction. So it tells us that with resolve and effort you can do what you want, so (2). (1) the exhibition being fun and (3) phones making people dislike study are minor points, not the main idea.",
+   "solution": {"evidence": "从那天起，林明下定决心，每天认真完成功课"}
+  },
+  "ZS52_H1": {
+   "stem_en": "Find a word in the passage that shows the empty plot used to be unpleasant: This empty plot was ___.",
+   "answer_en": "又脏又臭 (dirty and smelly)",
+   "keywords": [{"w":"又脏又臭","py":"yòu zāng yòu chòu","en":"dirty and smelly"},{"w":"空地","py":"kòngdì","en":"empty plot"},{"w":"垃圾","py":"lājī","en":"rubbish"}],
+   "explanation": "这是找词题。短文说“以前堆满了垃圾，又脏又臭，大家都不愿意走近”，“又脏又臭”正好说明以前的空地让人感到不舒服，所以答案是“又脏又臭”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'before, it was piled with rubbish, dirty and smelly, and no one wanted to go near'; 又脏又臭 exactly shows the plot used to be unpleasant, so the answer is 又脏又臭. Find the word that fits the situation.",
+   "solution": {"evidence": "以前堆满了垃圾，又脏又臭"}
+  },
+  "ZS52_H2": {
+   "stem_en": "How did Mum and the neighbours turn the empty plot into a garden? Answer in your own words.",
+   "answer_en": "Mum and the neighbours came to help every weekend - some pulled weeds, some cleared away rubbish, and some planted flowers and grass - and after three months of effort they turned the empty plot into a little garden.",
+   "keywords": [{"w":"除草","py":"chúcǎo","en":"to pull weeds"},{"w":"垃圾","py":"lājī","en":"rubbish"},{"w":"种","py":"zhòng","en":"to plant"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“大家每个周末都来帮忙，有的除草，有的清走垃圾，有的种上花草。经过三个月的努力，空地变成了一个小花园”，说明他们每个周末除草、清垃圾、种花草，三个月把空地变成花园。答“怎样变成花园”要把文中的做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'everyone came to help every weekend - some pulled weeds, some cleared rubbish, some planted flowers and grass - and after three months of effort the plot became a little garden', so they weeded, cleared rubbish, and planted over weekends. State the method clearly from the text.",
+   "solution": {"evidence": "大家每个周末都来帮忙，有的除草，有的清走垃圾，有的种上花草"}
+  },
+  "ZS52_H3": {
+   "stem_en": "Why did Xiaofang feel very proud when she saw the smiles on everyone's faces?",
+   "answer_en": "Because Xiaofang saw the empty plot turn into a beautiful garden, with residents coming to walk and chat and everyone happy, so she was proud of the result of everyone working together.",
+   "keywords": [{"w":"花园","py":"huāyuán","en":"garden"},{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"自豪","py":"zìháo","en":"proud"}],
+   "explanation": "这是推断题。短文说空地变成美丽的花园，“每天傍晚都有很多居民来这里散步、聊天，小朋友们也在这里玩耍。小芳看到大家脸上的笑容，心里感到非常自豪”。可以推断她感到自豪，是因为空地变美了、大家都很开心，她为大家一起努力的成果感到自豪。推断题要把花园的变化和大家的笑容连起来想。",
+   "explanation_en": "This is an inference question. The passage says the plot became a beautiful garden, 'every evening many residents come to walk and chat, and children play here. Xiaofang, seeing the smiles on everyone's faces, felt very proud'. We can infer she was proud because the plot became beautiful and everyone was happy - proud of the result of everyone's joint effort. Link the garden's change with everyone's smiles.",
+   "solution": {"evidence": "小芳看到大家脸上的笑容，心里感到非常自豪。"}
+  }
+ }
+}

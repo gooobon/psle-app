@@ -1,0 +1,217 @@
+{
+ "setId": "ZS31",
+ "mcq": {
+  "ZS31_A1": {
+   "sentence_en": "The flowers in the park bloom very ___ (beautifully); the fragrance fills the whole path.",
+   "hints": ["The blank describes flowers blooming and looking lovely. Which character (top is 羊, not 母) means 'beautiful'?"],
+   "keywords": [{"w":"美","py":"měi","en":"beautiful"},{"w":"开花","py":"kāihuā","en":"to bloom"},{"w":"香气","py":"xiāngqì","en":"fragrance"}],
+   "explanation_en": "美 describes flowers blooming and looking lovely, so 花开得很美 (bloom beautifully) fits. The four are read měi / méi; use 美 for pretty; only with the woman radical 女 is it 妹 (younger sister)."
+  },
+  "ZS31_A2": {
+   "sentence_en": "Little brother ran too fast in the park and carelessly ___ (fell) to the ground.",
+   "hints": ["The blank + 倒 means to fall to the ground. Which character (with the foot radical ⻊) forms 跌倒?"],
+   "keywords": [{"w":"跌倒","py":"diēdǎo","en":"to fall"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"地上","py":"dìshang","en":"on the ground"}],
+   "explanation_en": "跌倒 means to fall to the ground, matching tripping while running, so 跌 fits. The four look alike; 跌 has the foot radical ⻊ - unsteady feet make you fall, so remember the foot radical."
+  },
+  "ZS31_A3": {
+   "sentence_en": "Mum ___ (reminds) us not to run about on the grass and to mind our safety.",
+   "hints": ["The blank + 嘱 means to remind again and again. Which character (with the mouth radical 口) forms 叮嘱?"],
+   "keywords": [{"w":"叮嘱","py":"dīngzhǔ","en":"to remind repeatedly"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"安全","py":"ānquán","en":"safety"}],
+   "explanation_en": "叮嘱 means to remind again and again, matching Mum reminding us to be safe, so 叮 fits. All four have 丁; judge by radical: 叮 has the mouth radical 口 (reminding by speaking); 盯 has the eye radical 目 (staring with the eyes)."
+  },
+  "ZS31_A4": {
+   "sentence_en": "The little bird in the park stood on a ___ (branch), happily singing.",
+   "hints": ["树___ names a branch of a tree. Which character (with the wood radical 木) forms 树枝 (branch)?"],
+   "keywords": [{"w":"树枝","py":"shùzhī","en":"branch"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation_en": "树枝 means a branch of a tree, so the bird standing on a 树枝 makes sense, and 枝 fits. All four are read zhī; 枝 has the wood radical 木 - a part of a tree naturally has the wood radical."
+  },
+  "ZS31_A5": {
+   "sentence_en": "We ___ (strolled) several rounds in the park before reluctantly going home.",
+   "hints": ["The blank + 步 means to walk slowly for a stroll. Which character (with the 攵 radical) forms 散步?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"依依不舍","py":"yīyī-bùshě","en":"reluctant to part"}],
+   "explanation_en": "散步 means to walk slowly for a stroll, so 在公园里散了好几圈 (strolled several rounds) fits, and 散 is correct. The four have sǎn / sān sounds; 散步 is a fixed word - remember 散 has the 攵 radical."
+  },
+  "ZS31_B1": {
+   "sentence_en": "The air in the park is very 清新 (fresh), which feels comfortable.",
+   "hints": ["清 is 1st tone (qīng); 新 is 1st tone (xīn). Which choice is qīng + xīn, both level?"],
+   "keywords": [{"w":"清新","py":"qīngxīn","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "清 is read qīng (1st tone) and 新 is xīn (1st tone), together qīng xīn. Both characters of 清新 are 1st tone (level), read lightly, just like fresh air."
+  },
+  "ZS31_B2": {
+   "sentence_en": "Xiaoming 弯腰 (bent down) to pick up rubbish and put it in the bin.",
+   "hints": ["弯 is 1st tone (wān); 腰 is 1st tone (yāo). Which choice is wān + yāo, both level?"],
+   "keywords": [{"w":"弯腰","py":"wānyāo","en":"to bend down"},{"w":"垃圾","py":"lājī","en":"rubbish"},{"w":"垃圾桶","py":"lājītǒng","en":"rubbish bin"}],
+   "explanation_en": "弯 is read wān (1st tone) and 腰 is yāo (1st tone), together wān yāo. Both characters of 弯腰 are 1st tone; the bending waist and the tones are both level."
+  },
+  "ZS31_B3": {
+   "sentence_en": "The weather was fine, and Dad 提议 (suggested) the whole family go to the park.",
+   "hints": ["提 has initial t (tí), not d; 议 is yì (4th tone). Which choice is tí + yì?"],
+   "keywords": [{"w":"提议","py":"tíyì","en":"to suggest"},{"w":"天气","py":"tiānqì","en":"weather"},{"w":"公园","py":"gōngyuán","en":"park"}],
+   "explanation_en": "提 is read tí (initial t, 2nd tone) and 议 is yì (4th tone), together tí yì. t and d are both tongue-tip sounds; the difference is t is aspirated (a puff of air) and d is not. 提 needs the puff, so read tí."
+  },
+  "ZS31_B4": {
+   "sentence_en": "There is a patch of 空地 (open ground) in the park where children play ball.",
+   "hints": ["空 is a polyphone: kōng (empty, as in air) and kòng (a free/open space). 空地 is an open space, so read kòng. Which is kòng + dì?"],
+   "keywords": [{"w":"空地","py":"kòngdì","en":"open ground"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"踢球","py":"tī qiú","en":"to play ball"}],
+   "explanation_en": "In 空地, 空 is read kòng (4th tone, a free open space), and 地 is dì (4th tone). 空 is a polyphone: 空气 kōng (1st tone, air); 空地 kòng (4th tone, an open space). Different meaning, different tone."
+  },
+  "ZS31_C1": {
+   "sentence_en": "In the park, little sister saw a butterfly and was so happy she ___ (cheered).",
+   "hints": ["Clue: so happy she called out joyfully. Which word means 'to cheer / shout with joy'?"],
+   "keywords": [{"w":"欢呼","py":"huānhū","en":"to cheer"},{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "Seeing the butterfly made her very happy, so 欢呼 (to cheer, shout with joy) best matches a joyful mood. Happy -> 欢呼; afraid -> 发抖; sad -> 哭泣. Choose by the emotion word. 叫喊 does not fit a joyful sound as well."
+  },
+  "ZS31_C2": {
+   "sentence_en": "In the park there is ___ (a) big tree with a thick, tall trunk.",
+   "hints": ["Clue: the measure word for a tree. Which one is used for plants?"],
+   "keywords": [{"w":"棵","py":"kē","en":"measure word for plants"},{"w":"大树","py":"dàshù","en":"big tree"},{"w":"树干","py":"shùgàn","en":"trunk"}],
+   "explanation_en": "The measure word 棵 is used for plants, such as 一棵树, 一棵花, so it is correct. 棵 has the wood radical 木 and is used specially for plants; seeing a plant, use 棵. 条, 张 and 块 do not fit a tree."
+  },
+  "ZS31_C3": {
+   "sentence_en": "Elder brother ___ (gently) helped the injured little bird, putting it into a paper box.",
+   "hints": ["Clue: helping a hurt bird means moving with a light touch. Which word means 'gently / lightly'?"],
+   "keywords": [{"w":"轻轻","py":"qīngqīng","en":"gently"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"}],
+   "explanation_en": "Helping a hurt bird means moving carefully, so 轻轻地帮助 (helping gently) best shows a light touch that will not hurt the bird. For a hurt little animal, act 轻轻地 - a light touch avoids hurting it further. 粗心, 仔细 and 勇敢 do not fit here."
+  },
+  "ZS31_C4": {
+   "sentence_en": "We played in the park a long time and ___ (still) did not want to go home.",
+   "hints": ["Clue: even after playing long, the situation is unchanged. Which word means 'still / as before'?"],
+   "keywords": [{"w":"仍然","py":"réngrán","en":"still"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "仍然 means the situation stays unchanged, so 玩了很久仍然不想回家 (still did not want to go home) fits. 仍然 = still, the situation continues; 忽然 = suddenly, a sudden change - the two are opposite. 果然 and 居然 do not fit here."
+  },
+  "ZS31_C5": {
+   "sentence_en": "Dad ___ (leafed through) the newspaper on the park bench, enjoying a leisurely time.",
+   "hints": ["Clue: casually turning the pages of a newspaper. Which word means 'to leaf through / browse'?"],
+   "keywords": [{"w":"翻看","py":"fānkàn","en":"to leaf through"},{"w":"报纸","py":"bàozhǐ","en":"newspaper"},{"w":"悠闲","py":"yōuxián","en":"leisurely"}],
+   "explanation_en": "翻看报纸 means casually turning the pages of a newspaper, a natural fixed pairing. 翻看 + newspaper / book; 欣赏 + scenery / music; 注视 + a person. Remember each word's usual object. 检查 does not fit leisurely reading."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“凉快”是感觉凉爽、不热，所以“树下凉快”就是树荫下感觉凉爽舒服。“保护、茂盛”都不是“感觉凉爽”的意思。",
+   "explanation_en": "凉快 (liángkuai) means feeling cool, not hot, so 树下凉快 means it is cool under the tree. 保护 (protect) and 茂盛 (lush) do not mean 'feeling cool'.",
+   "stem_en": "it is cool under the tree",
+   "keywords": [{"w":"凉快","py":"liángkuai","en":"cool"},{"w":"树下","py":"shùxià","en":"under a tree"}]
+  },
+  "2": {
+   "explanation": "“欢笑”是快乐地笑，所以“充满欢笑”就是到处都是快乐的笑声。“凉快、保护”都不是“快乐地笑”的意思。",
+   "explanation_en": "欢笑 (huānxiào) means to laugh happily, so 充满欢笑 means to be full of happy laughter. 凉快 (cool) and 保护 (protect) do not mean 'to laugh happily'.",
+   "stem_en": "to be full of happy laughter",
+   "keywords": [{"w":"欢笑","py":"huānxiào","en":"happy laughter"},{"w":"充满","py":"chōngmǎn","en":"to be full of"}]
+  },
+  "3": {
+   "explanation": "“保护”是爱护、不让它受破坏，所以“保护环境”就是爱护周围的环境，不让它变坏。“欢笑、新鲜”都不是“爱护不受破坏”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect and keep from harm, so 保护环境 means to protect the environment. 欢笑 (laughter) and 新鲜 (fresh) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the environment",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}]
+  },
+  "4": {
+   "explanation": "“新鲜”是空气干净、不闷，所以“空气新鲜”就是空气清爽干净、让人舒服。“保护、茂盛”都不是“空气干净清爽”的意思。",
+   "explanation_en": "新鲜 (xīnxiān) means the air is clean and not stuffy, so 空气新鲜 means the air is fresh. 保护 (protect) and 茂盛 (lush) do not describe 'clean, fresh air'.",
+   "stem_en": "the air is fresh",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}]
+  },
+  "5": {
+   "explanation": "“茂盛”是花草树木长得又多又壮，所以“草木茂盛”就是草和树长得很茂密、很旺盛。“凉快、欢笑”都不是“草木长得旺盛”的意思。",
+   "explanation_en": "茂盛 (màoshèng) means plants growing thick and strong, so 草木茂盛 means the grass and trees grow lush. 凉快 (cool) and 欢笑 (laughter) do not mean 'plants growing lush'.",
+   "stem_en": "the grass and trees grow lush",
+   "keywords": [{"w":"茂盛","py":"màoshèng","en":"lush"},{"w":"草木","py":"cǎomù","en":"grass and trees"}]
+  }
+ },
+ "craft": {
+  "ZS31_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The weather is very hot.' and 'We still played happily in the park.'",
+   "answer_en": "Although the weather is very hot, we still played happily in the park.",
+   "tiles": ["虽然","天气很热，","但是","我们还是很开心地在公园里玩。"],
+   "explanation_en": "虽然……但是…… makes a concession first, then a turn. '虽然天气很热' (although it is hot) is the concession, '但是我们还是很开心地在公园里玩' (but we still played happily) is the turn. Write out both key words."
+  },
+  "ZS31_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The flowers in the park bloom beautifully.' and 'We took many photos there.'",
+   "answer_en": "Because the flowers in the park bloom beautifully, we took many photos there.",
+   "tiles": ["因为","公园里的花开得很漂亮，","所以","我们在那里拍了很多照片。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为公园里的花开得很漂亮' (because the flowers are pretty) is the cause, '所以我们在那里拍了很多照片' (so we took many photos) is the result. Write both words; neither can be dropped."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Saturday morning, Xiaowen and his family went to a nearby park. The air in the park was ___ (fresh), which put everyone in a good mood.",
+   "hint": "Clue: it pairs with 空气 (air) - clean air that lifts the mood. Which box word means 'fresh'?",
+   "keywords": [{"w":"清新","py":"qīngxīn","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}],
+   "explanation_en": "空气清新 is a fixed pairing describing good air that puts people in a good mood, so 清新 fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaowen saw some butterflies on the grass and ___ (excitedly) chased after them.",
+   "hint": "Clue: chasing butterflies in a stirred-up, joyful state. Which box word means 'excited'?",
+   "keywords": [{"w":"兴奋","py":"xīngfèn","en":"excited"},{"w":"蝴蝶","py":"húdié","en":"butterfly"}],
+   "explanation_en": "Chasing the butterflies is a stirred-up, joyful state, so 兴奋地追 (excitedly chased) fits best."
+  },
+  "3": {
+   "sentence_en": "Mum watched him ___ (tenderly) from the side, with a smile on her face.",
+   "hint": "Clue: Mum smiles as she watches her child play, with a soft look. Which box word means 'gentle / tender'?",
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"tender"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation_en": "Mum smiles as she watches her child play, with a soft look, so 温柔地看着 (watched tenderly) fits best."
+  },
+  "4": {
+   "sentence_en": "After running a while, Xiaowen felt a bit ___ (tired), and sat under a tree to rest.",
+   "hint": "Clue: after running he sits to rest, so he is tired. Which box word means 'tired / weary'?",
+   "keywords": [{"w":"疲倦","py":"píjuàn","en":"tired"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "After running he sits down to rest, showing he is tired, so 疲倦 (weary) fits best."
+  },
+  "5": {
+   "sentence_en": "Dad came over, handed him a bottle of water, and said: 'Drink some water and ___ (rest) a while.'",
+   "hint": "Clue: Dad gives water and tells him to sit and take a break. Which box word means 'to rest'?",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"喝水","py":"hē shuǐ","en":"to drink water"}],
+   "explanation_en": "Dad gives water and tells Xiaowen to 休息一下 (rest a while); sitting and drinking water is resting, so 休息 fits best."
+  }
+ },
+ "reading": {
+  "ZS31_G1": {
+   "stem_en": "What was the first thing Xiaohua and Zhiming did in the park?",
+   "answer_en": "They played ball on the grass.",
+   "keywords": [{"w":"草地","py":"cǎodì","en":"grass"},{"w":"踢球","py":"tī qiú","en":"to play ball"},{"w":"先","py":"xiān","en":"first"}],
+   "explanation": "这是细节题。短文说“他们到了公园，先在草地上踢球，踢得满头大汗”，“先”字说明在草地上踢球是他们做的第一件事，所以选(3)。(1)坐在湖边休息、(2)爬小山丘都是后来做的事。做细节题要注意表示顺序的“先”字。",
+   "explanation_en": "This is a detail question. The passage says 'they got to the park and first played ball on the grass, working up a sweat'. The word 先 (first) shows playing ball on the grass was the first thing, so (3). (1) resting by the lake and (2) climbing the hill came later. Note the order word 先.",
+   "solution": {"evidence": "他们到了公园，先在草地上踢球，踢得满头大汗"}
+  },
+  "ZS31_G2": {
+   "stem_en": "What did Zhiming hand to Xiaohua?",
+   "answer_en": "A bottle of juice.",
+   "keywords": [{"w":"果汁","py":"guǒzhī","en":"juice"},{"w":"背包","py":"bēibāo","en":"backpack"},{"w":"递","py":"dì","en":"to hand"}],
+   "explanation": "这是细节题。短文说“志明从背包里拿出两瓶果汁，递给小华一瓶”，直接说明志明递给小华的是一瓶果汁，所以选(1)。(2)一瓶水、(3)一些零食，文中都没有这样说。做细节题要回原文找和题目直接对应的东西。",
+   "explanation_en": "This is a detail question. The passage says 'Zhiming took two bottles of juice from his backpack and handed one to Xiaohua', directly stating it was a bottle of juice, so (1). (2) a bottle of water and (3) some snacks are not stated. Find the exact item in the passage.",
+   "solution": {"evidence": "志明从背包里拿出两瓶果汁，递给小华一瓶"}
+  },
+  "ZS31_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Xiaohua and Zhiming spent a happy Sunday in the park.",
+   "keywords": [{"w":"公园","py":"gōngyuán","en":"park"},{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"星期天","py":"xīngqītiān","en":"Sunday"}],
+   "explanation": "这是主旨题。全文讲星期天小华和志明一起去公园，踢球、休息、喝果汁、爬山，玩到下午四点才依依不舍地回家。可见短文主要说的是他们在公园度过了一个快乐的星期天，所以选(2)。(1)公园景色美、(3)踢球爬山是最好的运动都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells how, on Sunday, Xiaohua and Zhiming went to the park together, playing ball, resting, drinking juice and climbing the hill, staying till four in the afternoon before reluctantly going home. So it is mainly about their happy Sunday in the park, so (2). (1) the beautiful scenery and (3) ball and climbing being the best sport are minor points, not the main idea.",
+   "solution": {"evidence": "他们玩到下午四点才依依不舍地回家。"}
+  },
+  "ZS31_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaoling looked at the flowers very attentively: Xiaoling looked at the flowers ___.",
+   "answer_en": "仔细 (carefully)",
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"carefully"},{"w":"花朵","py":"huāduǒ","en":"flowers"},{"w":"一朵一朵","py":"yìduǒ-yìduǒ","en":"one by one"}],
+   "explanation": "这是找词题。短文说“她一朵一朵地看，看得非常仔细”，“仔细”正好说明小玲看花时非常认真，所以答案是“仔细”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'she looked at them one by one, very carefully'; 仔细 exactly shows how attentively Xiaoling looked at the flowers, so the answer is 仔细. Find the word that fits the situation.",
+   "solution": {"evidence": "她一朵一朵地看，看得非常仔细"}
+  },
+  "ZS31_H2": {
+   "stem_en": "When Xiaoling saw the squirrel, why did she not dare to make a sound?",
+   "answer_en": "Because Xiaoling was afraid that making a sound would scare the squirrel away, so she did not dare to make a sound.",
+   "keywords": [{"w":"松鼠","py":"sōngshǔ","en":"squirrel"},{"w":"吓跑","py":"xiàpǎo","en":"to scare away"},{"w":"声音","py":"shēngyīn","en":"sound"}],
+   "explanation": "这是细节题，答案用完整句子。短文说小玲“静静地看着它，不敢发出声音，怕吓跑了小松鼠”，说明她不敢发出声音是因为怕吓跑小松鼠。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Xiaoling 'quietly watched it, not daring to make a sound, afraid of scaring the squirrel away', so she stayed silent because she feared scaring it off. State the reason in a full sentence.",
+   "solution": {"evidence": "静静地看着它，不敢发出声音，怕吓跑了小松鼠"}
+  },
+  "ZS31_H3": {
+   "stem_en": "From the passage, what kind of child do you think Xiaoling is? Explain in one or two sentences.",
+   "answer_en": "Xiaoling is a careful child who loves animals, because she looked at the flowers attentively and also crouched down quietly to watch the squirrel, not wanting to scare it away.",
+   "keywords": [{"w":"细心","py":"xìxīn","en":"careful"},{"w":"爱护","py":"àihù","en":"to cherish"},{"w":"松鼠","py":"sōngshǔ","en":"squirrel"}],
+   "explanation": "这是推断题（评价人物）。短文说小玲看花“看得非常仔细”，看到小松鼠又“轻轻地蹲下来，静静地看着它，不敢发出声音，怕吓跑了小松鼠”。从她仔细看花、小心不吓跑松鼠，可以看出她是个细心、爱护动物的孩子。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Xiaoling looked at the flowers 'very carefully', and on seeing the squirrel 'crouched down gently and watched it quietly, not daring to make a sound for fear of scaring it away'. From looking at flowers carefully and taking care not to frighten the squirrel, we see she is careful and loves animals. State the trait, then give the actions as the reason.",
+   "solution": {"evidence": "小玲轻轻地蹲下来，静静地看着它，不敢发出声音，怕吓跑了小松鼠。"}
+  }
+ }
+}

@@ -12,8 +12,79 @@ import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 //  - Then moves to next page
 // 
 
-const EXAM_FONT = "'Times New Roman', Times, serif";
+const EXAM_FONT = "'Times New Roman', Times, 'KaiTi','STKaiti','LXGW WenKai', serif";
 const EXAM_BODY = EXAM_FONT;
+
+// --- Chinese WA1 (additive; English flow unchanged) ---
+const ZH_FONT = "'KaiTi','STKaiti','LXGW WenKai',serif";
+
+// Exam chrome must be Chinese on the Chinese paper (real past papers carry no
+// English). The learning layer (Translate / Key words / EN notes) stays English
+// on purpose - that is what the student reads to understand the meaning.
+function marksLabel(marks, isZh) {
+  return isZh
+    ? "\uFF08" + marks + "\u5206\uFF09"
+    : "(" + marks + " mark" + (marks !== 1 ? "s" : "") + ")";
+}
+const ZH_TAG = {
+  mcq: "\u9009\u62E9\u9898",
+  fill_word: "\u627E\u8BCD\u586B\u7A7A",
+  fill_blank: "\u586B\u7A7A",
+  open_sentence: "\u95EE\u7B54",
+  true_false: "\u5224\u65AD",
+  tf_reason: "\u5224\u65AD\u8BF4\u660E",
+  sequence: "\u6392\u5E8F",
+  ab_circle: "\u9009\u62E9",
+};
+const ZH_TYPES = new Set([
+  "HanziMcq", "PinyinMcq", "VocabMcq", "VocabMatch",
+  "SentenceCraft", "PassageCloze", "ReadingMcq", "ReadingOpen",
+]);
+const ZH_MCQ_TYPES = new Set(["HanziMcq", "PinyinMcq", "VocabMcq"]);
+const ZH_LABELS = {
+  HanziMcq: "\u8FA8\u5B57", PinyinMcq: "\u62FC\u97F3", VocabMcq: "\u8BCD\u8BED",
+  VocabMatch: "\u8BCD\u8BED\u642D\u914D", SentenceCraft: "\u9020\u53E5",
+  PassageCloze: "\u77ED\u6587\u586B\u7A7A", ReadingMcq: "\u9605\u8BFB\u7406\u89E3",
+  ReadingOpen: "\u9605\u8BFB\u7406\u89E3",
+};
+const ZH_INSTRUCTIONS = {
+  HanziMcq: "\u9009\u51FA\u6B63\u786E\u7684\u5B57\uFF0C\u628A\u5B83\u7684\u53F7\u7801\u5199\u5728\u62EC\u53F7\u91CC\u3002",
+  PinyinMcq: "\u9009\u51FA\u6709\u4E0B\u5212\u7EBF\u7684\u8BCD\u8BED\u7684\u6B63\u786E\u62FC\u97F3\u3002",
+  VocabMcq: "\u9009\u51FA\u6700\u9002\u5408\u7684\u8BCD\u8BED\uFF0C\u628A\u5B83\u7684\u53F7\u7801\u5199\u5728\u62EC\u53F7\u91CC\u3002",
+};
+
+// Style for {u}...{/u} spans. A plain <u> draws a 1px underline at offset 0,
+// which collides with the bottom strokes of Chinese characters (they fill the
+// whole square, unlike Latin letters with descenders) and reads as part of the
+// glyph. Bold + a thicker underline pushed down by an offset separates the rule
+// from the strokes, and a pale wash makes the target word findable at a glance
+// while keeping the black-on-white exam-paper look.
+const U_MARK = {
+  fontWeight: 600,
+  background: "#FAEEDA",
+  padding: "1px 3px",
+  borderRadius: 3,
+  textDecoration: "underline",
+  textDecorationThickness: "2px",
+  textUnderlineOffset: "4px",
+};
+
+// Render a string with {u}...{/u} spans as underlined text. English content
+// never contains the markers, so this is a no-op for the English flow.
+function renderWithUnderline(text) {
+  const str = String(text || "");
+  if (str.indexOf("{u}") === -1) return str;
+  const parts = [];
+  const re = /\{u\}([\s\S]*?)\{\/u\}/g;
+  let last = 0, m, k = 0;
+  while ((m = re.exec(str)) !== null) {
+    if (m.index > last) parts.push(str.slice(last, m.index));
+    parts.push(<span key={"u" + k++} style={U_MARK}>{m[1]}</span>);
+    last = m.index + m[0].length;
+  }
+  if (last < str.length) parts.push(str.slice(last));
+  return parts;
+}
 
 //  Shared exam styles 
 const S = {
@@ -31,26 +102,26 @@ const S = {
   sectionHeader: {
     fontFamily: EXAM_FONT,
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: "calc(var(--fs) * 1.071)",
     marginBottom: 4,
     marginTop: 16,
   },
   instructions: {
     fontFamily: EXAM_BODY,
-    fontSize: 13,
+    fontSize: "calc(var(--fs) * 1.000)",
     marginBottom: 12,
     lineHeight: 1.6,
   },
   qNum: {
     fontFamily: EXAM_BODY,
     fontWeight: "bold",
-    fontSize: 14,
+    fontSize: "calc(var(--fs) * 1.000)",
     minWidth: 24,
     paddingTop: 1,
   },
   qText: {
     fontFamily: EXAM_BODY,
-    fontSize: 14,
+    fontSize: "calc(var(--fs) * 1.000)",
     lineHeight: 1.8,
     flex: 1,
   },
@@ -61,7 +132,7 @@ const S = {
     marginLeft: 28,
     marginBottom: 3,
     cursor: "pointer",
-    fontSize: 14,
+    fontSize: "calc(var(--fs) * 1.000)",
     fontFamily: EXAM_BODY,
     lineHeight: 1.6,
   },
@@ -78,7 +149,7 @@ const S = {
     margin: "0 4px",
     padding: "2px 6px",
     fontFamily: EXAM_BODY,
-    fontSize: 14,
+    fontSize: "calc(var(--fs) * 1.000)",
   },
   bracketAns: {
     display: "inline-block",
@@ -87,7 +158,7 @@ const S = {
     height: 22,
     textAlign: "center",
     lineHeight: "20px",
-    fontSize: 13,
+    fontSize: "calc(var(--fs) * 1.000)",
     fontFamily: EXAM_BODY,
     marginLeft: 8,
     verticalAlign: "middle",
@@ -104,6 +175,87 @@ function paginate(items, perPage = 4) {
 }
 
 //  Explanation box shown after Submit 
+function TransLine({ label, text }) {
+  if (!text) return null;
+  return (
+    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#2563eb", lineHeight: 1.5, marginBottom: 6 }}>
+      <span style={{ fontWeight: 700 }}>{label}: </span>{text}
+    </div>
+  );
+}
+
+function EnExp({ en }) {
+  if (!en) return null;
+  return (
+    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#0f172a", lineHeight: 1.6, marginTop: 6, paddingTop: 6, borderTop: "1px dashed #cbd5e1" }}>
+      {en}
+    </div>
+  );
+}
+
+function KeyWords({ list }) {
+  if (!list || !list.length) return null;
+  return (
+    <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px dashed #cbd5e1" }}>
+      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Key words</div>
+      {list.map((k, i) => (
+        <div key={i} style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#0f172a", lineHeight: 1.6 }}>
+          <span style={{ fontWeight: 700 }}>{k.w}</span>
+          <span style={{ color: "#6b7280" }}> ({k.py})</span> &mdash; {k.en}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// The rewritten Chinese explanations carry a fixed 3-layer shape, separated by
+// newlines in the data:
+//   1. verdict     - why the keyed answer is right
+//   2. elimination - why each wrong option is wrong
+//   3. method      - the transferable rule, opening with a bracket marker
+// Rendering them as one block hides that structure, so each layer gets its own
+// paragraph and the method layer gets a tinted card. Explanations with no
+// newlines (VocabMatch / Reading) fall through unchanged as a single paragraph.
+function Expl({ text }) {
+  const str = String(text || "");
+  if (!str) return null;
+  const parts = str.split("\n").map(function (s) { return s.trim(); }).filter(Boolean);
+  return (
+    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.75 }}>
+      {parts.map(function (p, i) {
+        const isMethod = p.indexOf("\u3010") === 0;
+        if (isMethod) {
+          return (
+            <div key={i} style={{
+              marginTop: 8, padding: "6px 10px",
+              background: "#F5F3FF", borderLeft: "3px solid #A78BFA",
+              borderRadius: "0 6px 6px 0", color: "#4C1D95",
+            }}>{p}</div>
+          );
+        }
+        return (
+          <div key={i} style={{ marginTop: i === 0 ? 0 : 6 }}>{p}</div>
+        );
+      })}
+    </div>
+  );
+}
+
+function ExpContent({ q }) {
+  return (
+    <div style={{ marginTop: 6 }}>
+      {q.sentence_en && (
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#2563eb", lineHeight: 1.5, marginBottom: 6 }}>
+          <span style={{ fontWeight: 700 }}>Translate: </span>{q.sentence_en}
+        </div>
+      )}
+      <Expl text={q.explanation} />
+      <EnExp en={q.explanation_en} />
+      <KeyWords list={q.keywords} />
+    </div>
+  );
+}
+
 function ExplanationBox({ correct, answer, explanation, tip }) {
   return (
     <div style={{
@@ -112,14 +264,12 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
       paddingLeft: 10, background: correct ? "#f0fdf4" : "#fef2f2",
       borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
     }}>
-      <div style={{ fontSize: 12, fontWeight: 700, color: correct ? "#16a34a" : "#dc2626", marginBottom: 3 }}>
+      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: correct ? "#16a34a" : "#dc2626", marginBottom: 3 }}>
         {correct ? " Correct" : ` Correct answer: ${answer}`}
       </div>
-      {explanation && (
-        <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{explanation}</div>
-      )}
+      {explanation && (<Expl text={explanation} />)}
       {tip && (
-        <div style={{ fontSize: 11, color: "#6b7280", marginTop: 4, fontStyle: "italic" }}>
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginTop: 4, fontStyle: "italic" }}>
            {tip}
         </div>
       )}
@@ -130,7 +280,7 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
 // 
 //  MCQ PAGE - Grammar MCQ / Vocab MCQ
 // 
-function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone, reviewMode, reviewResults }) {
+function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone, reviewMode, reviewResults, isZh }) {
   const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
   const [answers, setAnswers] = useState(_rev || {});
   const [retryAnswers, setRetryAnswers] = useState({});
@@ -170,6 +320,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
     const t = Date.now() - startRef.current;
     const results = items.map(q => ({
       id: q.id, topic: q.topic, sectionType: q.topic, userAnswer: answers[q.id],
+      skill: q.skill, trapType: q.explain && q.explain.trapType,
       correct: answers[q.id] === q.answer,
       solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
@@ -187,10 +338,10 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
-          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        <div style={{ fontFamily: isZh ? ZH_FONT : "'Times New Roman', serif", fontWeight: "bold", fontSize: "calc(var(--fs) * 1.071)", marginBottom: 4 }}>
+          {sectionLabel} {marksLabel(marks, isZh)}
         </div>
-        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>{instructions}</div>
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, lineHeight: 1.6 }}>{instructions}</div>
       </div>
       <div style={{ padding: "0 20px 120px" }}>
         {items.map((q, qi) => {
@@ -206,8 +357,8 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
           return (
             <div key={q.id} style={{ marginBottom: 20 }}>
               <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-                <span style={{ fontWeight: "bold", fontSize: 14, minWidth: 24 }}>{qNum}.</span>
-                <span style={{ fontSize: 14, lineHeight: 1.8, flex: 1 }}>{q.sentence || q.question || ""}</span>
+                <span style={{ fontWeight: "bold", fontSize: "calc(var(--fs) * 1.000)", minWidth: 24 }}>{qNum}.</span>
+                <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 2.0, flex: 1 }}>{renderWithUnderline(q.sentence || q.question || "")}</span>
               </div>
 
               {(q.options || []).map((opt, i) => {
@@ -224,7 +375,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                   <div key={i} onClick={() => handleSelect(q.id, i)}
                     style={{ display: "flex", alignItems: "center", gap: 8, marginLeft: 28,
                       marginBottom: 3, cursor: submitted ? "default" : "pointer",
-                      fontSize: 14, lineHeight: 1.6, color, fontWeight,
+                      fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.6, color, fontWeight,
                       background: bg, borderRadius: 4, padding: "1px 4px" }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
                     <span>{opt}</span>
@@ -238,20 +389,20 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                 <div style={{ marginLeft: 28, marginTop: 8, marginBottom: 8,
                   background: "#fffbeb", border: "1px solid #fde68a",
                   borderRadius: 8, padding: "10px 12px" }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 4 }}>
-                    Not quite! Hint:
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 4 }}>
+                    {isZh ? "\u518D\u60F3\u60F3\uFF01\u63D0\u793A\uFF1A" : "Not quite! Hint:"}
                   </div>
-                  <div style={{ fontSize: 12, color: "#78350f", marginBottom: 10 }}>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#78350f", marginBottom: 10 }}>
                     {q.hints?.[0] || "Think carefully and try again!"}
                   </div>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 6 }}>Try again:</div>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 6 }}>{isZh ? "\u518D\u9009\u4E00\u6B21\uFF1A" : "Try again:"}</div>
                   {(q.options || []).map((opt, i) => {
                     if (chosen === i) return null;
                     const isSel = retryChosen === i;
                     return (
                       <div key={i} onClick={() => handleRetrySelect(q.id, i)}
                         style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 4,
-                          cursor: "pointer", fontSize: 13,
+                          cursor: "pointer", fontSize: "calc(var(--fs) * 1.000)",
                           background: isSel ? "#dbeafe" : "#fff", borderRadius: 4,
                           padding: "3px 8px", border: "1px solid " + (isSel ? "#3b82f6" : "#e5e7eb") }}>
                         <span>({i + 1})</span><span>{opt}</span>
@@ -261,9 +412,9 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                   <button onClick={() => handleRetry(q)} disabled={retryChosen === undefined}
                     style={{ marginTop: 6, padding: "6px 16px", borderRadius: 8,
                       background: retryChosen !== undefined ? "#1e3a6e" : "#94a3b8",
-                      color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                      color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                       cursor: retryChosen !== undefined ? "pointer" : "not-allowed" }}>
-                    Check
+                    {isZh ? "\u786E\u8BA4" : "Check"}
                   </button>
                 </div>
               )}
@@ -273,15 +424,11 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                   padding: "8px 12px", borderRadius: 8,
                   background: isRetryCorrect ? "#f0fdf4" : "#fef2f2",
                   border: "1px solid " + (isRetryCorrect ? "#16a34a" : "#dc2626") }}>
-                  <div style={{ fontSize: 12, fontWeight: 700,
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
-                    {isRetryCorrect ? "V Correct on retry!" : "X Correct answer: " + q.options[q.answer]}
+                    {isRetryCorrect ? (isZh ? "\u2713 \u518D\u6B21\u9009\u5BF9\u4E86\uFF01" : "V Correct on retry!") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A" : "X Correct answer: ") + q.options[q.answer]}
                   </div>
-                  {showExp && q.explanation && (
-                    <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6, marginTop: 6 }}>
-                      {q.explanation}
-                    </div>
-                  )}
+                  {showExp && q.explanation && (<ExpContent q={q} />)}
                 </div>
               )}
 
@@ -290,16 +437,16 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                   borderLeft: "3px solid #16a34a", paddingLeft: 10,
                   background: "#f0fdf4", borderRadius: "0 8px 8px 0",
                   padding: "8px 10px 8px 14px" }}>
-                  <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.explanation}</div>
+                  <ExpContent q={q} />
                 </div>
               )}
 
               {isFirstCorrect && !showExp && (
                 <button onClick={() => setShowExplanation(e => ({...e, [q.id]: true}))}
-                  style={{ marginLeft: 28, marginTop: 4, fontSize: 11, color: "#6b7280",
+                  style={{ marginLeft: 28, marginTop: 4, fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280",
                     background: "none", border: "1px solid #e5e7eb", borderRadius: 6,
                     padding: "2px 8px", cursor: "pointer" }}>
-                  Show explanation
+                  {isZh ? "\u67E5\u770B\u89E3\u6790" : "Show explanation"}
                 </button>
               )}
 
@@ -312,8 +459,8 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
           <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0",
             borderRadius: 10, padding: "12px 16px", marginBottom: 16,
             display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700,
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700 }}>{isZh ? "\u5F97\u5206\uFF1A" : "Score: "}{score}/{items.length}</span>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
               color: score === items.length ? "#16a34a" : score >= items.length * 0.6 ? "#d97706" : "#dc2626" }}>
               {Math.round(score / items.length * 100)}%
             </span>
@@ -324,23 +471,23 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
           <button onClick={handleSubmit}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
-              color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
+              color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
               cursor: allAnswered ? "pointer" : "not-allowed" }}>
-            Submit Page {pageIdx + 1}/{totalPages}
-            {!allAnswered && <span style={{ fontSize: 12, fontWeight: 400, display: "block" }}>
-              Answer all {items.length} questions first
+            {isZh ? `\u63D0\u4EA4 \u7B2C${pageIdx + 1}/${totalPages}\u9875` : `Submit Page ${pageIdx + 1}/${totalPages}`}
+            {!allAnswered && <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 400, display: "block" }}>
+              {isZh ? "\u8BF7\u5148\u56DE\u7B54\u5168\u90E8 " : "Answer all "}{items.length}{isZh ? " \u9898" : " questions first"}
             </span>}
           </button>
         ) : allRetriedOrCorrect ? (
           <button onClick={handleFinishPage}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
-            {pageIdx + 1 >= totalPages ? "Finish Section" : "Next Page"}
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
+            {pageIdx + 1 >= totalPages ? (isZh ? "\u5B8C\u6210\u672C\u8282" : "Finish Section") : (isZh ? "\u4E0B\u4E00\u9875" : "Next Page")}
           </button>
         ) : (
-          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
-            Please complete the retry questions above before continuing.
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: "calc(var(--fs) * 1.000)" }}>
+            {isZh ? "\u8BF7\u5148\u5B8C\u6210\u4E0A\u9762\u7684\u91CD\u505A\u9898\u3002" : "Please complete the retry questions above before continuing."}
           </div>
         )}
       </div>
@@ -349,7 +496,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
 }
 
 
-function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
   const cmp = (a, b) => (a || "").toString().toLowerCase() === (b || "").toString().toLowerCase();
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
@@ -391,6 +538,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
     const t = Date.now() - startRef.current;
     const results = blanks.map(b => ({
       id: set.id + "_" + b.num, topic: "GrammarCloze", sectionType: "GrammarCloze", userAnswer: answers[b.num],
+      skill: b.skill, trapType: b.explain && b.explain.trapType,
       correct: cmp(answers[b.num], b.answer),
       solvedAfterHint: !cmp(answers[b.num], b.answer) && !!retriedCorrect[b.num],
       attempts: cmp(answers[b.num], b.answer) ? 1 : (retried[b.num] ? 2 : 1),
@@ -419,10 +567,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
         <span key={num} style={{ display: "inline-block" }}>
-          <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super", marginRight: 1 }}>({num})</span>
+          <span style={{ fontSize: "calc(var(--fs) * 0.786)", fontWeight: 700, verticalAlign: "super", marginRight: 1 }}>({num})</span>
           <span style={{
             display: "inline-block", minWidth: 90, borderBottom: "1.5px solid #000",
-            padding: "0 4px", textAlign: "center", fontSize: 14,
+            padding: "0 4px", textAlign: "center", fontSize: "calc(var(--fs) * 1.000)",
             color: submitted ? (isCorrect ? "#16a34a" : "#dc2626") : (chosen ? "#1d4ed8" : "transparent"),
             fontWeight: chosen ? 600 : 400,
             cursor: !submitted && chosen ? "pointer" : "default",
@@ -431,7 +579,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             {chosen || "        "}
           </span>
           {submitted && !isCorrect && retried[num] && (
-            <span style={{ fontSize: 11, color: "#16a34a", marginLeft: 3 }}>{blank.answer}</span>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#16a34a", marginLeft: 3 }}>{blank.answer}</span>
           )}
         </span>
       );
@@ -457,7 +605,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
         <span key={num} style={{ display: "inline-block", margin: "0 2px" }}>
-          <span style={{ fontSize: 11, fontWeight: 700, verticalAlign: "super" }}>({num})</span>
+          <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, verticalAlign: "super" }}>({num})</span>
           {" [ "}
           {options.map((opt, oi) => {
             const isAns = cmp(opt, blank.answer);
@@ -496,11 +644,11 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
   return (
     <div style={S.page}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={S.sectionHeader}>{sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})</div>
+        <div style={S.sectionHeader}>{sectionLabel} {marksLabel(marks, isZh)}</div>
         <div style={S.instructions}>
           {hasBrackets
-            ? "Read the passage carefully. Underline or tap the correct word from the words given in the brackets."
-            : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only."}
+            ? (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u4ECE\u65B9\u6846\u91CC\u9009\u51FA\u6B63\u786E\u7684\u8BCD\u8BED\u586B\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\uFF0C\u6BCF\u4E2A\u8BCD\u53EA\u7528\u4E00\u6B21\u3002" : "Read the passage carefully. Underline or tap the correct word from the words given in the brackets.")
+            : (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u4ECE\u65B9\u6846\u91CC\u9009\u51FA\u6B63\u786E\u7684\u8BCD\u8BED\u586B\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\uFF0C\u6BCF\u4E2A\u8BCD\u53EA\u7528\u4E00\u6B21\u3002" : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only.")}
         </div>
 
         {hasWordBank && !hasBrackets && (
@@ -513,7 +661,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
               const isUsed = Object.values(answers).includes(w);
               return (
                 <div key={i} style={{
-                  fontSize: 14, cursor: "default",
+                  fontSize: "calc(var(--fs) * 1.000)", cursor: "default",
                   opacity: submitted ? 1 : (isUsed ? 0.4 : 1),
                   padding: "2px 4px",
                   textDecoration: !submitted && isUsed ? "line-through" : "none",
@@ -529,7 +677,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       <div style={{ padding: "0 20px 100px" }}>
         <div style={{
           border: "1px solid #ddd", borderRadius: 8, padding: "14px 16px",
-          marginBottom: 16, fontSize: 14, fontFamily: EXAM_BODY, lineHeight: 2.2,
+          marginBottom: 16, fontSize: "calc(var(--fs) * 1.000)", fontFamily: isZh ? ZH_FONT : EXAM_BODY, lineHeight: 2.2,
         }}>
           {hasBrackets ? renderBracketPassage()
             : set.passage ? renderWordBankPassage()
@@ -546,7 +694,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                       fontWeight: 600,
                     }}>{chosen || "   "}</span>
                     {submitted && !isCorrect && retried[b.num] && (
-                      <span style={{ fontSize: 12, color: "#16a34a", marginLeft: 6 }}>{b.answer}</span>
+                      <span style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#16a34a", marginLeft: 6 }}>{b.answer}</span>
                     )}
                   </div>
                 );
@@ -556,7 +704,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
 
         {hasWordBank && !hasBrackets && !submitted && (
           <div style={{ marginBottom: 14 }}>
-            <div style={{ fontSize: 12, fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
+            <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
               Tap a word to fill the next blank:
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
@@ -569,7 +717,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                       if (nextBlank) handleSelect(nextBlank.num, w);
                     }}
                     style={{
-                      padding: "6px 16px", borderRadius: 8, fontSize: 14,
+                      padding: "6px 16px", borderRadius: 8, fontSize: "calc(var(--fs) * 1.000)",
                       border: "1.5px solid #000", background: "#fff", color: "#000",
                       cursor: "pointer", fontWeight: 600,
                     }}>
@@ -583,11 +731,11 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                 <button key={b.num}
                   onClick={() => setAnswers(a => { const n = { ...a }; delete n[b.num]; return n; })}
                   style={{
-                    padding: "3px 10px", borderRadius: 6, fontSize: 12,
+                    padding: "3px 10px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)",
                     border: "1px solid #e2e8f0", background: "#f8fafc",
                     cursor: "pointer", color: "#64748b",
                   }}>
-                  Clear ({b.num}): {answers[b.num]}
+                  {isZh ? "\u6E05\u9664" : "Clear"} ({b.num}): {answers[b.num]}
                 </button>
               ))}
             </div>
@@ -603,10 +751,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
           const retryChosen = retryAnswers[b.num];
           return (
             <div key={b.num} style={{ marginBottom: 12 }}>
-              <div style={{ fontSize: 13, fontWeight: 700, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                <span>Blank ({b.num})</span>
+              <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
+                <span>{isZh ? ("\u7B2C" + b.num + "\u7A7A") : ("Blank (" + b.num + ")")}</span>
                 <span style={{ fontWeight: 400, color: "#475569" }}>
-                  Your answer: <span style={{ fontWeight: 700, color: isCorrect ? "#16a34a" : "#dc2626" }}>{chosen || "(blank)"}</span>
+                  {isZh ? "\u4F60\u7684\u7B54\u6848\uFF1A" : "Your answer: "}<span style={{ fontWeight: 700, color: isCorrect ? "#16a34a" : "#dc2626" }}>{chosen || "(blank)"}</span>
                 </span>
                 <span style={{ color: isCorrect ? "#16a34a" : "#dc2626", fontWeight: 700 }}>{isCorrect ? "V" : "X"}</span>
               </div>
@@ -615,26 +763,26 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                 <div style={{
                   marginTop: 4, borderLeft: "3px solid #16a34a", background: "#f0fdf4",
                   borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
-                  fontSize: 12, color: "#374151", lineHeight: 1.6,
+                  fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6,
                 }}>
-                  {b.explanation}
+                  <TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} />
                 </div>
               )}
 
               {!isCorrect && !hasRetried && (
                 <div style={{ marginTop: 8, background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 12px" }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 4 }}>Not quite! Hint:</div>
-                  <div style={{ fontSize: 12, color: "#78350f", marginBottom: 10 }}>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 4 }}>{isZh ? "\u518D\u60F3\u60F3\uFF01\u63D0\u793A\uFF1A" : "Not quite! Hint:"}</div>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#78350f", marginBottom: 10 }}>
                     {b.hint || "Think about the word that fits the meaning and grammar."}
                   </div>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: "#92400e", marginBottom: 6 }}>Try again:</div>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 6 }}>{isZh ? "\u518D\u9009\u4E00\u6B21\uFF1A" : "Try again:"}</div>
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                     {wordBank.filter(w => w !== chosen).map((w, i) => {
                       const isSel = retryChosen === w;
                       return (
                         <button key={i} onClick={() => handleRetrySelect(b.num, w)}
                           style={{
-                            padding: "4px 12px", borderRadius: 8, fontSize: 13,
+                            padding: "4px 12px", borderRadius: 8, fontSize: "calc(var(--fs) * 1.000)",
                             background: isSel ? "#dbeafe" : "#fff",
                             border: "1px solid " + (isSel ? "#3b82f6" : "#e5e7eb"),
                             color: "#000", cursor: "pointer", fontWeight: 600,
@@ -648,10 +796,10 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                     style={{
                       marginTop: 8, padding: "6px 16px", borderRadius: 8,
                       background: retryChosen !== undefined ? "#1e3a6e" : "#94a3b8",
-                      color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                      color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                       cursor: retryChosen !== undefined ? "pointer" : "not-allowed",
                     }}>
-                    Check
+                    {isZh ? "\u786E\u8BA4" : "Check"}
                   </button>
                 </div>
               )}
@@ -662,11 +810,11 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                   background: isRetryCorrect ? "#f0fdf4" : "#fef2f2",
                   border: "1px solid " + (isRetryCorrect ? "#16a34a" : "#dc2626"),
                 }}>
-                  <div style={{ fontSize: 12, fontWeight: 700, color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
-                    {isRetryCorrect ? "V Correct on retry!" : "X Correct answer: " + b.answer}
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
+                    {isRetryCorrect ? (isZh ? "\u2713 \u518D\u6B21\u9009\u5BF9\u4E86\uFF01" : "V Correct on retry!") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A" : "X Correct answer: ") + b.answer}
                   </div>
                   {showExp && b.explanation && (
-                    <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6, marginTop: 6 }}>{b.explanation}</div>
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6, marginTop: 6 }}><TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} /></div>
                   )}
                 </div>
               )}
@@ -682,8 +830,8 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             borderRadius: 10, padding: "12px 16px", marginBottom: 16,
             display: "flex", justifyContent: "space-between", alignItems: "center",
           }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{blanks.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700, color: score === blanks.length ? "#16a34a" : "#d97706" }}>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700 }}>{isZh ? "\u5F97\u5206\uFF1A" : "Score: "}{score}/{blanks.length}</span>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: score === blanks.length ? "#16a34a" : "#d97706" }}>
               {blanks.length ? Math.round(score / blanks.length * 100) : 0}%
             </span>
           </div>
@@ -694,11 +842,11 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             style={{
               width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
-              color: "#fff", border: "none", fontSize: 15, fontWeight: 700,
+              color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
               cursor: allAnswered ? "pointer" : "not-allowed",
             }}>
             Submit
-            {!allAnswered && <span style={{ fontSize: 12, fontWeight: 400, display: "block" }}>
+            {!allAnswered && <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 400, display: "block" }}>
               Fill in all blanks first
             </span>}
           </button>
@@ -707,13 +855,13 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             style={{
               width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer",
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer",
             }}>
             Next Section
           </button>
         ) : (
-          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
-            Please complete the retry blanks above before continuing.
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: "calc(var(--fs) * 1.000)" }}>
+            {isZh ? "\u8BF7\u5148\u5B8C\u6210\u4E0A\u9762\u7684\u91CD\u505A\u7A7A\u3002" : "Please complete the retry blanks above before continuing."}
           </div>
         )}
       </div>
@@ -722,7 +870,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
 }
 
 
-function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
   const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
   const items = set.items || [];
   const [answers, setAnswers] = useState(_rev || {});
@@ -763,10 +911,10 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
   return (
     <div style={{ background: "#fff", minHeight: "100vh" }}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
-          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        <div style={{ fontFamily: "'Times New Roman', serif", fontWeight: "bold", fontSize: "calc(var(--fs) * 1.071)", marginBottom: 4 }}>
+          {sectionLabel} {marksLabel(marks, isZh)}
         </div>
-        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, lineHeight: 1.6 }}>
           Each of the underlined words contains a spelling error. Write the correct word in the box provided.
         </div>
       </div>
@@ -780,13 +928,19 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
           const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
+          // The correction stays hidden until the student has had one hinted retry
+          // (or is simply reviewing a finished paper).
+          const answerRevealed = !!hasRetried || reviewMode;
+          // Before the retry: the retry hint (never names the correction).
+          // After the retry: the full explanation (which does).
+          const showRetryHint = isWrong && !answerRevealed;
 
           return (
             <div key={item.id} style={{ marginBottom: 20 }}>
               {/* Question number + sentence context */}
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
-                <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
-                <span style={{ fontSize: 14, lineHeight: 1.8, flex: 1 }}>
+                <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)", minWidth: 32 }}>({qNum})</span>
+                <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8, flex: 1 }}>
                   {(() => {
                     const sent = item.sentence || '';
                     const w = item.wrongWord || '';
@@ -794,7 +948,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                     if (at < 0) return sent;
                     return (<>
                       {sent.slice(0, at)}
-                      <span style={{ fontWeight: 700, fontSize: 16, background: "#fef08a", padding: "0 5px", borderRadius: 4 }}>[{w}]</span>
+                      <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)", background: "#fef08a", padding: "0 5px", borderRadius: 4 }}>[{w}]</span>
                       {sent.slice(at + w.length)}
                     </>);
                   })()}
@@ -806,8 +960,8 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                 <div style={{ marginLeft: 32 }}>
                   <input type="text" value={typed}
                     onChange={e => setAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                    placeholder="Write correct spelling..."
-                    style={{ padding: "6px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                    placeholder={isZh ? "\u5199\u51FA\u6B63\u786E\u7684\u5B57\u2026\u2026" : "Write correct spelling..."}
+                    style={{ padding: "6px 10px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 600,
                       border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
                       outline: "none", minWidth: 160 }} />
                 </div>
@@ -817,8 +971,8 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                   <div style={{ display: "flex", alignItems: "center", gap: 12, flexWrap: "wrap" }}>
                     {/* My answer */}
                     <div style={{ textAlign: "center" }}>
-                      <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
-                      <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>{isZh ? "\u4F60\u7684\u7B54\u6848" : "Your answer"}</div>
+                      <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 600,
                         border: "1.5px solid " + (isCorrect ? "#16a34a" : "#dc2626"),
                         color: isCorrect ? "#16a34a" : "#dc2626",
                         background: isCorrect ? "#f0fdf4" : "#fef2f2",
@@ -827,34 +981,39 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                       </div>
                     </div>
 
-                    {/* Correct answer (shown only if wrong) */}
+                    {/* Correct answer - held back until the student has retried.
+                        Showing it before the retry makes the retry meaningless. */}
                     {isWrong && (
                       <>
-                        <div style={{ fontSize: 18, color: "#94a3b8" }}>vs</div>
-                        <div style={{ textAlign: "center" }}>
-                          <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Correct answer</div>
-                          <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
-                            border: "1.5px solid #16a34a", color: "#16a34a",
-                            background: "#f0fdf4", minWidth: 100, textAlign: "center" }}>
-                            {item.answer}
-                          </div>
-                        </div>
+                        {answerRevealed && (
+                          <>
+                            <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#94a3b8" }}>vs</div>
+                            <div style={{ textAlign: "center" }}>
+                              <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>Correct answer</div>
+                              <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
+                                border: "1.5px solid #16a34a", color: "#16a34a",
+                                background: "#f0fdf4", minWidth: 100, textAlign: "center" }}>
+                                {item.answer}
+                              </div>
+                            </div>
+                          </>
+                        )}
 
                         {/* Retry input */}
                         {!reviewMode && !hasRetried && (
                           <div style={{ textAlign: "center" }}>
-                            <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
+                            <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>Write it correctly:</div>
                             <div style={{ display: "flex", gap: 4 }}>
                               <input type="text" value={retryTyped}
                                 onChange={e => setRetryAnswers(a => ({ ...a, [item.id]: e.target.value }))}
-                                placeholder={item.answer?.split('').join(' . ')}
-                                style={{ padding: "5px 10px", borderRadius: 6, fontSize: 14, fontWeight: 600,
+                                placeholder={"_ ".repeat((item.answer || '').length).trim()}
+                                style={{ padding: "5px 10px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 600,
                                   border: "1.5px solid #1d4ed8", outline: "none", minWidth: 120 }} />
                               <button onClick={() => handleRetry(item)}
                                 disabled={!retryTyped}
                                 style={{ padding: "5px 10px", borderRadius: 6,
                                   background: retryTyped ? "#1e3a6e" : "#94a3b8",
-                                  color: "#fff", border: "none", fontSize: 12, fontWeight: 700,
+                                  color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                                   cursor: retryTyped ? "pointer" : "not-allowed" }}>
                                 OK
                               </button>
@@ -865,8 +1024,8 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                         {/* Retry result */}
                         {hasRetried && (
                           <div style={{ textAlign: "center" }}>
-                            <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your retry</div>
-                            <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
+                            <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>Your retry</div>
+                            <div style={{ padding: "5px 12px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                               border: "1.5px solid " + (retryIsCorrect ? "#16a34a" : "#dc2626"),
                               color: retryIsCorrect ? "#16a34a" : "#dc2626",
                               background: retryIsCorrect ? "#f0fdf4" : "#fef2f2",
@@ -879,14 +1038,29 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                     )}
                   </div>
 
-                  {/* Explanation */}
-                  {(item.hints?.[0] || item.solution?.tip) && (
+                  {/* Retry hint - shown INSTEAD of the answer, before the retry */}
+                  {showRetryHint && (
+                    <div style={{ marginTop: 8,
+                      borderLeft: "3px solid #f59e0b",
+                      paddingLeft: 10, background: "#fffbeb",
+                      borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#92400e", fontWeight: 700, marginBottom: 2 }}>
+                        Not quite! Hint:
+                      </div>
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6 }}>
+                        {item.hints?.[0] || "Look at the underlined word. What is wrong with it - the tense, the spelling, or the word itself?"}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Explanation - only once the answer is on screen */}
+                  {!showRetryHint && (item.explanation || item.solution?.tip) && (
                     <div style={{ marginTop: 8,
                       borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#f59e0b"),
                       paddingLeft: 10, background: isCorrect ? "#f0fdf4" : "#fffbeb",
                       borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
-                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>
-                        {item.hints?.[0] || item.solution?.tip}
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6 }}>
+                        {item.explanation || item.solution?.tip}
                       </div>
                     </div>
                   )}
@@ -902,8 +1076,8 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
           <div style={{ background: "#f8fafc", border: "1px solid #e2e8f0",
             borderRadius: 10, padding: "12px 16px", marginBottom: 16,
             display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <span style={{ fontSize: 14, fontWeight: 700 }}>Score: {score}/{items.length}</span>
-            <span style={{ fontSize: 13, fontWeight: 700,
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700 }}>{isZh ? "\u5F97\u5206\uFF1A" : "Score: "}{score}/{items.length}</span>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
               color: score === items.length ? "#16a34a" : "#d97706" }}>
               {Math.round(score / items.length * 100)}%
             </span>
@@ -914,18 +1088,18 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
           <button onClick={handleSubmit}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
             Submit
           </button>
         ) : (allRetriedWrong || reviewMode) ? (
           <button onClick={handleFinish}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer" }}>
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
             Next Section
           </button>
         ) : (
-          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: 13 }}>
+          <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: "calc(var(--fs) * 1.000)" }}>
             Please write the correct spelling for each wrong answer before continuing.
           </div>
         )}
@@ -935,7 +1109,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
 }
 
 
-function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
   const questions = set.questions || [];
   const passage   = set.passage   || '';
 
@@ -949,8 +1123,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   const EX = {
     border: '1.5px solid #1a1a1a',
     thin:   '1px solid #1a1a1a',
-    font:   EXAM_FONT,
-    sans:   EXAM_FONT,
+    font:   isZh ? ZH_FONT : EXAM_FONT,
+    sans:   isZh ? ZH_FONT : EXAM_FONT,
     ink:    '#1a1a1a',
     correct:'#dfeede',
     wrong:  '#f5dede',
@@ -987,7 +1161,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   function verdictBadge(ok) {
     return (
       <span style={{ display: 'inline-block', marginTop: 8,
-        fontFamily: EX.sans, fontSize: 11, fontWeight: 800,
+        fontFamily: EX.sans, fontSize: "calc(var(--fs) * 0.786)", fontWeight: 800,
         letterSpacing: '.5px', padding: '3px 10px', borderRadius: 999,
         background: ok ? '#DCFCE7' : '#FEE2E2',
         color: ok ? '#15803D' : '#B91C1C',
@@ -1073,6 +1247,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       id:          q.id,
       topic:       'Comprehension',
       sectionType: 'Comprehension',
+      skill:       q.skill,
+      trapType:    q.explain && q.explain.trapType,
+      scored:      isAutoGraded(q),
       correct:     gradeQuestion(q),
       userAnswer:  answers[q.id],
       userAnswerSeq: getFormat(q) === 'sequence' ? (q.sequenceItems || q.items || []).map(function (_, i) { return answers[q.id + '_seq_' + i]; }) : undefined,
@@ -1087,6 +1264,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   // -------------------------------------------------
   function renderPassageText(aq) {
     if (!passage) return null;
+    const qn = aq ? (aq.questionNo || (questions.findIndex(x => x.id === aq.id) + 1)) : null;
     const evidence = aq?.solution?.evidence || null;
     const trap     = aq?.solution?.trap     || null;
     if (!evidence && !trap) {
@@ -1115,7 +1293,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
           if (seg.type === 'plain')
             return <span key={i}>{seg.text}</span>;
           if (seg.type === 'evidence')
-            return <span key={i} style={{ borderBottom: '2px solid #1a1a1a', fontWeight: 700 }}>{seg.text}</span>;
+            return <span key={i} style={{ background: '#EDE9FE', color: '#6D28D9', fontWeight: 700, borderRadius: 3, padding: '0 3px' }}>{qn ? <sup style={{ background: '#6D28D9', color: '#fff', borderRadius: 8, padding: '0 5px', fontSize: "calc(var(--fs) * 0.780)", marginRight: 3, fontFamily: EX.sans }}>{qn}</sup> : null}{seg.text}</span>;
           return <span key={i} style={{ borderBottom: '1px dashed #999', fontStyle: 'italic' }}>{seg.text}</span>;
         })}
       </span>
@@ -1140,11 +1318,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <input type="text" value={val || ''}
               onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
               style={{ border: 'none', borderBottom: EX.border, minWidth: 200,
-                padding: '2px 6px', fontSize: 14, fontFamily: EX.font,
+                padding: '2px 6px', fontSize: "calc(var(--fs) * 1.000)", fontFamily: EX.font,
                 outline: 'none', background: 'transparent' }} />
           ) : (
             <div>
-              <span style={{ fontFamily: EX.font, fontSize: 14,
+              <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)",
                 background: ok ? '#DCFCE7' : '#FEE2E2',
                 padding: '2px 8px', borderRadius: 4,
                 borderBottom: `2px solid ${ok ? '#16A34A' : '#DC2626'}` }}>
@@ -1153,9 +1331,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {verdictBadge(ok)}
               {bad && q.answer && (
                 <div style={{ marginTop: 4 }}>
-                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                  <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     color: '#16A34A', marginRight: 6 }}>Answer:</span>
-                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700,
+                  <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
                     border: '1px solid #16A34A', color: '#14532D' }}>
                     {q.answer}
@@ -1179,11 +1357,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <input type="text" value={val || ''}
               onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
               style={{ border: EX.border, width: '100%', maxWidth: 280,
-                padding: '8px 12px', fontSize: 14, fontFamily: EX.font, outline: 'none' }} />
+                padding: '8px 12px', fontSize: "calc(var(--fs) * 1.000)", fontFamily: EX.font, outline: 'none' }} />
           ) : (
             <div>
               <div style={{ display: 'inline-block', padding: '5px 12px',
-                fontFamily: EX.font, fontSize: 14, maxWidth: 280, borderRadius: 6,
+                fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", maxWidth: 280, borderRadius: 6,
                 background: ok ? '#DCFCE7' : '#FEE2E2',
                 border: `1.5px solid ${ok ? '#16A34A' : '#DC2626'}`,
                 color: ok ? '#14532D' : '#7F1D1D', fontWeight: 700 }}>
@@ -1192,9 +1370,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {verdictBadge(ok)}
               {bad && q.answer && (
                 <div style={{ marginTop: 4 }}>
-                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                  <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     color: '#16A34A', marginRight: 6 }}>Answer:</span>
-                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700,
+                  <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
                     border: '1px solid #16A34A', color: '#14532D' }}>
                     {q.answer}
@@ -1224,11 +1402,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                   <tr key={i} style={{ background: bg }}
                     onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: i }))}>
                     <td style={{ border: EX.thin, padding: '7px 12px', width: 46, textAlign: 'center',
-                      fontFamily: EX.sans, fontWeight: 700, fontSize: 13,
+                      fontFamily: EX.sans, fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)",
                       cursor: submitted ? 'default' : 'pointer' }}>
                       ({i + 1})
                     </td>
-                    <td style={{ border: EX.thin, padding: '7px 14px', fontFamily: EX.font, fontSize: 14,
+                    <td style={{ border: EX.thin, padding: '7px 14px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)",
                       cursor: submitted ? 'default' : 'pointer' }}>
                       {opt}
                     </td>
@@ -1237,7 +1415,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               })}
             </tbody>
           </table>
-          <div style={{ fontFamily: EX.sans, fontSize: 14, marginTop: 6 }}>
+          <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", marginTop: 6 }}>
             Answer:{' '}
             <span style={{ display: 'inline-block', minWidth: 42, border: EX.thin,
               padding: '2px 10px', textAlign: 'center', fontWeight: 700 }}>
@@ -1249,8 +1427,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {verdictBadge(chosen === corr)}
               {chosen !== corr && (
                 <div style={{ marginTop: 4 }}>
-                  <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
-                  <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
+                  <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+                  <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
                     ({corr + 1}) {opts[corr]}
                   </span>
                 </div>
@@ -1274,8 +1452,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
           {verdictBadge(abOk)}
           {!abOk && (
             <div style={{ marginTop: 4 }}>
-              <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
-              <span style={{ fontFamily: EX.font, fontSize: 14, fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
+              <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+              <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
                 ({q.answer}){abAnswerWord ? ' ' + abAnswerWord : ''}
               </span>
             </div>
@@ -1286,7 +1464,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       if (!matchArr.length) {
         // Fallback: show plain A / B buttons from abChoices
         return (
-          <div style={{ marginTop: 10, border: EX.border, padding: '12px 16px', fontFamily: EX.font, fontSize: 14 }}>
+          <div style={{ marginTop: 10, border: EX.border, padding: '12px 16px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)" }}>
             {['A', 'B'].map(lab => {
               let bg = 'transparent';
               if (submitted) { if (lab === q.answer) bg = EX.correct; else if (chosen === lab) bg = EX.wrong; }
@@ -1318,7 +1496,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
 
       return (
         <div style={{ marginTop: 10, border: EX.border, padding: '12px 16px',
-          fontSize: 14, lineHeight: 1.9, fontFamily: EX.font }}>
+          fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.9, fontFamily: EX.font }}>
           {parts.map((part, pi) => {
             if (part.type === 'text') return <span key={pi}>{part.text}</span>;
             const lab = part.lab;
@@ -1331,7 +1509,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 style={{ fontWeight: 700, borderBottom: '2px solid #1a1a1a', padding: '0 2px',
                   background: bg, cursor: submitted ? 'default' : 'pointer', userSelect: 'none' }}>
                 {part.word}
-                <span style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                   verticalAlign: 'super', color: EX.muted }}>({lab})</span>
               </span>
             );
@@ -1351,13 +1529,13 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <thead>
               <tr>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 54 }}></th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 54 }}></th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: 13, fontWeight: 700, padding: '7px 6px', textAlign: 'left' }}>Statement</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', textAlign: 'left' }}>Statement</th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>True</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>True</th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: 13, fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>False</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>False</th>
               </tr>
             </thead>
             <tbody>
@@ -1378,7 +1556,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                         setAnswers(a => ({ ...a, [q.id]: next }));
                       }}
                       style={{ border: EX.thin, padding: '9px 6px', textAlign: 'center',
-                        cursor: submitted ? 'default' : 'pointer', background: bg, fontSize: 16 }}>
+                        cursor: submitted ? 'default' : 'pointer', background: bg, fontSize: "calc(var(--fs) * 1.000)" }}>
                       {chosen === t ? '\u2713' : (submitted && t === corr ? '\u2713' : '')}
                     </td>
                   );
@@ -1386,8 +1564,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 return (
                   <tr key={si}>
                     <td style={{ border: EX.thin, padding: '9px 6px', textAlign: 'center',
-                      fontWeight: 700, fontFamily: EX.sans, fontSize: 13 }}>({lab})</td>
-                    <td style={{ border: EX.thin, padding: '9px 11px', fontSize: 13.5, verticalAlign: 'top' }}>
+                      fontWeight: 700, fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)" }}>({lab})</td>
+                    <td style={{ border: EX.thin, padding: '9px 11px', fontSize: "calc(var(--fs) * 1.000)", verticalAlign: 'top' }}>
                       {stmt}
                     </td>
                     {tfCell('True')}
@@ -1431,17 +1609,17 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                             style={{ width: 24, height: 24, border: EX.thin,
                               background: chosen === n ? '#1a1a1a' : '#fff',
                               color:      chosen === n ? '#fff'    : '#1a1a1a',
-                              fontFamily: EX.sans, fontSize: 12,
+                              fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)",
                               cursor: submitted ? 'default' : 'pointer' }}>
                             {n}
                           </button>
                         ))}
                       </span>
                     </td>
-                    <td style={{ border: EX.thin, padding: '10px 12px', fontSize: 13.5 }}>
+                    <td style={{ border: EX.thin, padding: '10px 12px', fontSize: "calc(var(--fs) * 1.000)" }}>
                       {item}
                       {submitted && !ok && (
-                        <span style={{ fontFamily: EX.sans, fontSize: 12, color: '#9b1c1c', marginLeft: 8 }}>
+                        <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: '#9b1c1c', marginLeft: 8 }}>
                           (should be {corr})
                         </span>
                       )}
@@ -1479,7 +1657,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 <button key={opt}
                   onClick={() => !submitted && setAnswers(a => ({ ...a, [q.id]: opt }))}
                   style={{ flex: 1, padding: '8px 0', border: EX.border, background: bg,
-                    color: EX.ink, fontFamily: EX.sans, fontWeight: 700, fontSize: 14,
+                    color: EX.ink, fontFamily: EX.sans, fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)",
                     cursor: submitted ? 'default' : 'pointer' }}>
                   {opt}
                 </button>
@@ -1490,7 +1668,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <div style={{ marginBottom: 2 }}>
               {verdictBadge(norm(tfVal) === norm(correct))}
               {norm(tfVal) !== norm(correct) && (
-                <span style={{ marginLeft: 8, fontFamily: EX.sans, fontSize: 12, fontWeight: 700, color: '#16A34A' }}>
+                <span style={{ marginLeft: 8, fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A' }}>
                   Correct answer: {correct}
                 </span>
               )}
@@ -1499,26 +1677,26 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
           {!submitted ? (
             <textarea value={reason} rows={3}
               onChange={e => setAnswers(a => ({ ...a, [q.id + '_reason']: e.target.value }))}
-              placeholder="Give a reason for your answer..."
+              placeholder={isZh ? "\u5199\u51FA\u4F60\u7684\u7406\u7531\u2026\u2026" : "Give a reason for your answer..."}
               style={{ width: '100%', padding: '8px 12px', border: EX.border,
-                fontFamily: EX.font, fontSize: 14, outline: 'none',
+                fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", outline: 'none',
                 resize: 'vertical', boxSizing: 'border-box' }} />
           ) : (
             <div>
-              <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+              <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                 textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
                 Your reason
               </div>
-              <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14, minHeight: 40 }}>
+              <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", minHeight: 40 }}>
                 {reason || '(no reason given)'}
               </div>
               {modelAns && (
                 <div style={{ marginTop: 8 }}>
-                  <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                  <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
-                    Model answer
+                    {isZh ? "\u53C2\u8003\u7B54\u6848" : "Model answer"}
                   </div>
-                  <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14 }}>
+                  <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)" }}>
                     {modelAns}
                   </div>
                 </div>
@@ -1537,27 +1715,27 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
         {!submitted ? (
           <textarea value={openVal} rows={3}
             onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-            placeholder="Write your answer in a complete sentence..."
+            placeholder={isZh ? "\u7528\u5B8C\u6574\u7684\u53E5\u5B50\u5199\u51FA\u7B54\u6848\u2026\u2026" : "Write your answer in a complete sentence..."}
             style={{ width: '100%', padding: '8px 12px', border: EX.border,
-              fontFamily: EX.font, fontSize: 14, outline: 'none',
+              fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", outline: 'none',
               resize: 'vertical', boxSizing: 'border-box' }} />
         ) : (
           <div>
-            <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+            <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
               textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
-              Your answer
+              {isZh ? "\u4F60\u7684\u7B54\u6848" : "Your answer"}
             </div>
             <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font,
-              fontSize: 14, minHeight: 40, whiteSpace: 'pre-line' }}>
+              fontSize: "calc(var(--fs) * 1.000)", minHeight: 40, whiteSpace: 'pre-line' }}>
               {openVal || '(no answer given)'}
             </div>
             {modelAns && (
               <div style={{ marginTop: 8 }}>
-                <div style={{ fontFamily: EX.sans, fontSize: 11, fontWeight: 700,
+                <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                   textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
-                  Model answer
+                  {isZh ? "\u53C2\u8003\u7B54\u6848" : "Model answer"}
                 </div>
-                <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: 14 }}>
+                <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)" }}>
                   {modelAns}
                 </div>
               </div>
@@ -1572,6 +1750,37 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   // Evidence box (post-submit) -- colored & icon-coded for readability.
   // Evidence (purple) and Trap (amber) are emphasized most strongly.
   // -------------------------------------------------
+  // Translations + detailed explanation + key words (post-submit, per question).
+  function renderLearnBox(q) {
+    if (!submitted) return null;
+    if (!q.stem_en && !q.answer_en && !q.explanation && !(q.keywords && q.keywords.length)) return null;
+    return (
+      <div style={{ marginTop: 10 }}>
+        {(q.stem_en || q.answer_en) ? (
+          <div style={{ marginBottom: 6 }}>
+            {q.stem_en ? (
+              <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: '#2563eb', lineHeight: 1.5, marginBottom: 3 }}>
+                <span style={{ fontWeight: 700 }}>Translate (question): </span>{q.stem_en}
+              </div>
+            ) : null}
+            {q.answer_en ? (
+              <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: '#2563eb', lineHeight: 1.5 }}>
+                <span style={{ fontWeight: 700 }}>Translate (answer): </span>{q.answer_en}
+              </div>
+            ) : null}
+          </div>
+        ) : null}
+        {q.explanation ? (
+          <div style={{ borderLeft: '3px solid #2563EB', background: '#eff6ff',
+            borderRadius: '0 8px 8px 0', padding: '8px 10px 8px 14px' }}>
+            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} /></div>
+          </div>
+        ) : null}
+        <KeyWords list={q.keywords} />
+      </div>
+    );
+  }
+
   function renderEvidenceBox(q) {
     if (!submitted) return null;
     const sol = q.solution || {};
@@ -1597,19 +1806,19 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             borderLeft: `${strong ? 5 : 4}px solid ${accent}`,
             borderRadius: 8,
             padding: '10px 14px',
-            fontSize: 13,
+            fontSize: "calc(var(--fs) * 1.000)",
             marginBottom: 8,
             cursor: clickable ? 'pointer' : 'default',
             fontFamily: EX.font,
           }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 6,
-            fontFamily: EX.sans, fontWeight: 800, fontSize: 11,
+            fontFamily: EX.sans, fontWeight: 800, fontSize: "calc(var(--fs) * 1.000)",
             textTransform: 'uppercase', letterSpacing: '.5px',
             color: accent, marginBottom: 5 }}>
             <span aria-hidden="true" style={{
               display: 'inline-flex', alignItems: 'center', justifyContent: 'center',
               width: 16, height: 16, borderRadius: '50%',
-              background: accent, color: '#fff', fontSize: 10, fontWeight: 900,
+              background: accent, color: '#fff', fontSize: "calc(var(--fs) * 0.780)", fontWeight: 900,
               fontFamily: EX.sans, flexShrink: 0 }}>
               {icon}
             </span>
@@ -1632,7 +1841,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 fontStyle: 'italic', marginBottom: 4, color: '#4C1D95' }}>
                 "{evidence}"
               </div>
-              <div style={{ fontFamily: EX.sans, fontSize: 11, color: '#7C3AED', fontWeight: 600 }}>
+              <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: '#7C3AED', fontWeight: 600 }}>
                 Tap to highlight in the passage
               </div>
             </div>
@@ -1674,14 +1883,14 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   const openTotal         = questions.filter(q => !isAutoGraded(q)).length;
 
   const passagePanel = (
-    <div style={{ fontFamily: EX.font, fontSize: 15.5, lineHeight: 2.05, color: EX.ink }}>
-      <div style={{ fontFamily: EX.sans, fontSize: 12, fontWeight: 700, textTransform: 'uppercase',
+    <div style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", lineHeight: 2.05, color: EX.ink }}>
+      <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, textTransform: 'uppercase',
         letterSpacing: 1, borderBottom: '1px solid #ccc', paddingBottom: 8, marginBottom: 14, color: '#333' }}>
-        Read the Passage
+        {isZh ? "\u9605\u8BFB\u77ED\u6587" : "Read the Passage"}
       </div>
       {renderPassageText(activeQuestion)}
       {submitted && activeQuestion && (
-        <div style={{ marginTop: 14, fontFamily: EX.sans, fontSize: 11, color: EX.faint,
+        <div style={{ marginTop: 14, fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: EX.faint,
           display: 'flex', gap: 18, flexWrap: 'wrap' }}>
           <span>
             <span style={{ borderBottom: '2px solid #1a1a1a', fontWeight: 700, marginRight: 4 }}>
@@ -1704,14 +1913,15 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
     <div style={{ paddingBottom: 100 }}>
       <div style={{ display: 'flex', justifyContent: 'space-between',
         alignItems: 'center', marginBottom: 12, fontFamily: EX.sans }}>
-        <span style={{ fontSize: 13, fontWeight: 700, color: EX.muted }}>
-          {sectionLabel} ({marks} mark{marks !== 1 ? 's' : ''})
+        <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: EX.muted }}>
+          {sectionLabel} {marksLabel(marks, isZh)}
         </span>
         {submitted && (
-          <span style={{ fontSize: 13, fontWeight: 800,
+          <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 800,
             color: autoGradedScore === autoGradedTotal ? '#1a6b2e' : '#9b1c1c' }}>
-            {autoGradedScore}/{autoGradedTotal} correct
-            {openTotal > 0 && ' + ' + openTotal + ' open'}
+            {isZh ? "\u7B54\u5BF9 " + autoGradedScore + "/" + autoGradedTotal
+                  : autoGradedScore + "/" + autoGradedTotal + " correct"}
+            {openTotal > 0 && (isZh ? " + " + openTotal + " \u9898\u95EE\u7B54" : ' + ' + openTotal + ' open')}
           </span>
         )}
       </div>
@@ -1719,7 +1929,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       {questions.map((q, qi) => {
         const f        = getFormat(q);
         const isActive = activeQ === q.id && submitted;
-        const tagLabel = f.replace(/_/g, ' ').toUpperCase();
+        const tagLabel = isZh ? (ZH_TAG[f] || f) : f.replace(/_/g, ' ').toUpperCase();
         return (
           <div key={q.id}
             onClick={() => submitted && setActiveQ(q.id)}
@@ -1731,9 +1941,9 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             {/* Header: Q41. [1m]               FILL BLANK */}
             <div style={{ display: 'flex', gap: 8, marginBottom: 12,
               alignItems: 'baseline', fontFamily: EX.sans }}>
-              <span style={{ fontWeight: 700, fontSize: 14 }}>{q.questionNo || qi + 1}.</span>
-              {q.marks && <span style={{ fontSize: 11, color: EX.faint }}>[{q.marks}m]</span>}
-              <span style={{ marginLeft: 'auto', fontSize: 10, fontWeight: 700,
+              <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)" }}>{q.questionNo || qi + 1}.</span>
+              {q.marks && <span style={{ fontSize: "calc(var(--fs) * 0.786)", color: EX.faint }}>[{q.marks}m]</span>}
+              <span style={{ marginLeft: 'auto', fontSize: "calc(var(--fs) * 0.780)", fontWeight: 700,
                 letterSpacing: '.5px', textTransform: 'uppercase', color: EX.muted,
                 border: '1px solid #aaa', padding: '2px 7px' }}>
                 {tagLabel}
@@ -1741,7 +1951,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             </div>
 
             {/* Stem */}
-            <div style={{ fontSize: 14.5, lineHeight: 1.55, whiteSpace: 'pre-line',
+            <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.55, whiteSpace: 'pre-line',
               fontFamily: EX.font }}>
               {q.stem || q.question || ''}
             </div>
@@ -1749,7 +1959,10 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             {/* Format-specific input */}
             {renderInput(q)}
 
-            {/* Explanation boxes (post-submit) */}
+            {/* Translations + explanation + key words (post-submit) */}
+            {renderLearnBox(q)}
+
+            {/* Evidence / trap boxes (post-submit) */}
             {renderEvidenceBox(q)}
           </div>
         );
@@ -1760,15 +1973,15 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
         <button onClick={handleSubmit} disabled={!allAnswered}
           style={{ width: '100%', padding: '13px', fontFamily: EX.sans,
             background: allAnswered ? EX.ink : '#bbb',
-            color: '#fff', border: 'none', fontSize: 14, fontWeight: 700,
+            color: '#fff', border: 'none', fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
             cursor: allAnswered ? 'pointer' : 'not-allowed' }}>
-          {allAnswered ? 'Submit Answers' : 'Answer all questions to submit'}
+          {allAnswered ? (isZh ? "\u63D0\u4EA4\u7B54\u6848" : 'Submit Answers') : (isZh ? "\u56DE\u7B54\u5168\u90E8\u9898\u76EE\u540E\u63D0\u4EA4" : 'Answer all questions to submit')}
         </button>
       ) : (
         <button onClick={handleFinish}
           style={{ width: '100%', padding: '13px', fontFamily: EX.sans,
             background: EX.ink, color: '#fff', border: 'none',
-            fontSize: 14, fontWeight: 700, cursor: 'pointer' }}>
+            fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, cursor: 'pointer' }}>
           Next Section
         </button>
       )}
@@ -1780,8 +1993,8 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       <SplitViewLayout
         leftContent={passagePanel}
         rightContent={questionsPanel}
-        leftLabel="Read the Passage"
-        rightLabel="Questions"
+        leftLabel={isZh ? "\u9605\u8BFB\u77ED\u6587" : "Read the Passage"}
+        rightLabel={isZh ? "\u9898\u76EE" : "Questions"}
         headerHeight={80}
       />
     );
@@ -1820,7 +2033,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
           {pct >= 80 ? "" : pct >= 60 ? "" : ""}
         </div>
         <div style={{ fontSize: 42, fontWeight: 900, fontFamily: EXAM_BODY }}>{pct}%</div>
-        <div style={{ fontSize: 16, opacity: 0.85, marginTop: 4 }}>
+        <div style={{ fontSize: "calc(var(--fs) * 1.143)", opacity: 0.85, marginTop: 4 }}>
           {correct}/{total} correct . {fmtTime(duration)}
         </div>
       </div>
@@ -1828,7 +2041,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
       <div style={{ padding: "20px 20px 0" }}>
         {/* Section breakdown */}
         <div style={{ border: "1px solid #e2e8f0", borderRadius: 12, padding: "16px", marginBottom: 16 }}>
-          <div style={{ fontWeight: 800, fontSize: 14, marginBottom: 12, fontFamily: EXAM_BODY }}>
+          <div style={{ fontWeight: 800, fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, fontFamily: EXAM_BODY }}>
             Section Breakdown
           </div>
           {Object.entries(bySection).map(([type, data]) => {
@@ -1837,11 +2050,11 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
             return (
               <div key={type} style={{ marginBottom: 12 }}>
                 <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 4 }}>
-                  <span style={{ fontSize: 13, fontWeight: 700, fontFamily: EXAM_BODY }}>
+                  <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, fontFamily: EXAM_BODY }}>
                     {meta?.label || type}
                   </span>
                   <span style={{
-                    fontSize: 12, fontWeight: 800, fontFamily: EXAM_BODY,
+                    fontSize: "calc(var(--fs) * 1.000)", fontWeight: 800, fontFamily: EXAM_BODY,
                     color: p >= 80 ? "#16a34a" : p >= 60 ? "#d97706" : "#dc2626",
                   }}>
                     {data.correct}/{data.total} ({p}%)
@@ -1861,7 +2074,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
         <button onClick={onHome}
           style={{
             width: "100%", background: "#1e3a6e", color: "#fff", border: "none",
-            borderRadius: 12, padding: "15px 0", fontSize: 15, fontWeight: 700,
+            borderRadius: 12, padding: "15px 0", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
             cursor: "pointer", fontFamily: EXAM_BODY, marginBottom: 10,
           }}>
            Back to Home
@@ -1870,7 +2083,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
           style={{
             width: "100%", background: "none", color: "#1e3a6e",
             border: "2px solid #1e3a6e", borderRadius: 12, padding: "13px 0",
-            fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
+            fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
           }}>
            New Session
         </button>
@@ -1882,36 +2095,102 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
 // 
 //  EXAM SESSION SCREEN - Main controller
 // 
-function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, reviewResults }) {
+function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
+  const F = isZh ? ZH_FONT : EXAM_FONT;
   const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
   const qs = items || [];
   const [answers, setAnswers] = useState(_rev || {});
   const [submitted, setSubmitted] = useState(!!reviewMode);
+  const [built, setBuilt] = useState({});
+  const [checked, setChecked] = useState({});
   const startRef = useRef(Date.now());
+  const L = (zh, en) => (isZh ? zh : en);
 
-  function handleSubmit() {
-    if (submitted) return;
-    setSubmitted(true);
-  }
+  const shuffles = React.useMemo(() => {
+    const o = {};
+    for (const q of qs) {
+      const n = Array.isArray(q.tiles) ? q.tiles.length : 0;
+      const idx = Array.from({ length: n }, (_, i) => i);
+      for (let i = idx.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); const t = idx[i]; idx[i] = idx[j]; idx[j] = t; }
+      o[q.id] = idx;
+    }
+    return o;
+  }, []);
 
+  function norm(s) { return String(s || "").replace(/[\s\u3000,.!?;:()"'\uFF0C\u3002\uFF01\uFF1F\u3001\uFF1B\uFF1A\u201C\u201D\u2018\u2019\uFF08\uFF09]/g, ""); }
+  function handleSubmit() { if (!submitted) setSubmitted(true); }
   function handleFinish() {
     const t = Date.now() - startRef.current;
     const results = qs.map(q => ({
       id: q.id, topic: "Synthesis", sectionType: "Synthesis", scored: false,
+      skill: q.skill, trapType: q.explain && q.explain.trapType,
       userAnswer: answers[q.id], correct: false,
       timeTaken: Math.round(t / Math.max(qs.length, 1)),
     }));
     onPageDone(results, true);
   }
 
+  function Translations({ q }) {
+    if (!q.question_en && !q.answer_en) return null;
+    return (
+      <div style={{ marginTop: 4, marginBottom: 6 }}>
+        {q.question_en && (
+          <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#2563eb", lineHeight: 1.5, marginBottom: 3 }}>
+            <span style={{ fontWeight: 700 }}>Translate (question): </span>{q.question_en}
+          </div>
+        )}
+        {q.answer_en && (
+          <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#2563eb", lineHeight: 1.5 }}>
+            <span style={{ fontWeight: 700 }}>Translate (answer): </span>{q.answer_en}
+          </div>
+        )}
+      </div>
+    );
+  }
+  function ModelBox({ q }) {
+    return (
+      <div style={{ marginBottom: 8 }}>
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>{L("\u53C2\u8003\u7B54\u6848", "Model answer")}</div>
+        <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
+          border: "1.5px solid #16a34a", color: "#166534", background: "#f0fdf4", lineHeight: 1.6 }}>{q.answer}</div>
+        {q.answerSimple ? (
+          <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginTop: 4 }}>{L("\u4E5F\u53EF\u4EE5\uFF1A", "Also acceptable: ")}{q.answerSimple}</div>
+        ) : null}
+      </div>
+    );
+  }
+  function ExplBox({ q }) {
+    return (
+      <>
+        <Translations q={q} />
+        {q.explanation ? (
+          <div style={{ marginTop: 6, borderLeft: "3px solid #2563EB",
+            background: "#eff6ff", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} /></div>
+          </div>
+        ) : null}
+        {q.hint ? (
+          <div style={{ marginTop: 6, borderLeft: "3px solid #D97706",
+            background: "#fffbeb", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
+            <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 2 }}>{L("\u8981\u907F\u5F00\u7684\u9677\u9631", "Trap to avoid")}</div>
+            <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6 }}>{q.hint}</div>
+          </div>
+        ) : null}
+      </>
+    );
+  }
+
+  const tileBtn = { fontFamily: F, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: "5px 12px",
+    borderRadius: 8, border: "1.5px solid #94a3b8", background: "#fff", color: "#0f172a", cursor: "pointer" };
+
   return (
-    <div style={{ background: "#fff", minHeight: "100vh", fontFamily: EXAM_FONT }}>
+    <div style={{ background: "#fff", minHeight: "100vh", fontFamily: F }}>
       <div style={{ padding: "14px 20px 0" }}>
-        <div style={{ fontFamily: EXAM_FONT, fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>
-          {sectionLabel} ({marks} mark{marks !== 1 ? "s" : ""})
+        <div style={{ fontFamily: F, fontWeight: "bold", fontSize: "calc(var(--fs) * 1.071)", marginBottom: 4 }}>
+          {sectionLabel} {marksLabel(marks, isZh)}
         </div>
-        <div style={{ fontSize: 13, marginBottom: 12, lineHeight: 1.6 }}>
-          Rewrite or combine each item as instructed, keeping the meaning the same. After you submit, compare your sentence with the model answer.
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, lineHeight: 1.6 }}>
+          {L("\u6309\u8981\u6C42\u628A\u53E5\u5B50\u6539\u5199\u6216\u5408\u5E76\uFF0C\u610F\u601D\u4FDD\u6301\u4E0D\u53D8\u3002", "Rewrite or combine each item as instructed, keeping the meaning the same.")}
         </div>
       </div>
 
@@ -1919,19 +2198,24 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
         {qs.map((q, idx) => {
           const qNum = idx + 1;
           const typed = answers[q.id] || "";
+          const firstCorrect = submitted && (norm(typed) === norm(q.answer) || (q.answerSimple && norm(typed) === norm(q.answerSimple)));
+          const hasTiles = Array.isArray(q.tiles) && q.tiles.length > 0;
+          const b = built[q.id] || [];
+          const isChecked = !!checked[q.id];
+          const builtStr = b.map(i => q.tiles[i]).join("");
+          const tileCorrect = hasTiles && b.length === q.tiles.length && builtStr === q.answer;
           return (
             <div key={q.id} style={{ marginBottom: 22 }}>
               <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "flex-start" }}>
-                <span style={{ fontWeight: 700, fontSize: 14, minWidth: 32 }}>({qNum})</span>
-                <span style={{ fontSize: 14, lineHeight: 1.7, flex: 1, fontWeight: 600 }}>{q.instruction}</span>
+                <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)", minWidth: 32 }}>({qNum})</span>
+                <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.7, flex: 1, fontWeight: 600 }}>{q.instruction}</span>
               </div>
-
               <div style={{ marginLeft: 32, marginBottom: 10 }}>
-                <div style={{ fontSize: 14, lineHeight: 1.8 }}>{q.sentenceA}</div>
-                {q.sentenceB ? <div style={{ fontSize: 14, lineHeight: 1.8 }}>{q.sentenceB}</div> : null}
+                <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}>{q.sentenceA}</div>
+                {q.sentenceB ? <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}>{q.sentenceB}</div> : null}
                 {q.starter ? (
-                  <div style={{ fontSize: 13, color: "#6b7280", marginTop: 4 }}>
-                    Begin: <span style={{ fontWeight: 700 }}>{q.starter}</span>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginTop: 4 }}>
+                    {L("\u5F00\u5934\uFF1A", "Begin: ")}<span style={{ fontWeight: 700 }}>{q.starter}</span>
                   </div>
                 ) : null}
               </div>
@@ -1940,50 +2224,63 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
                 <div style={{ marginLeft: 32 }}>
                   <textarea value={typed}
                     onChange={e => setAnswers(a => ({ ...a, [q.id]: e.target.value }))}
-                    placeholder="Write your sentence here..."
+                    placeholder={L("\u5728\u8FD9\u91CC\u5199\u4E0B\u4F60\u7684\u53E5\u5B50\u2026\u2026", "Write your sentence here...")}
                     rows={2}
-                    style={{ width: "100%", padding: "8px 10px", borderRadius: 6, fontSize: 14,
-                      fontFamily: EXAM_FONT, lineHeight: 1.6,
-                      border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
+                    style={{ width: "100%", padding: "8px 10px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)",
+                      fontFamily: F, lineHeight: 1.6, border: "1.5px solid " + (typed ? "#1d4ed8" : "#000"),
                       outline: "none", resize: "vertical", boxSizing: "border-box" }} />
                 </div>
               ) : (
                 <div style={{ marginLeft: 32 }}>
                   <div style={{ marginBottom: 8 }}>
-                    <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Your answer</div>
-                    <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: 14, fontWeight: 600,
-                      border: "1.5px solid #cbd5e1", background: "#f8fafc", lineHeight: 1.6 }}>
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginBottom: 2 }}>{L("\u4F60\u7684\u7B54\u6848", "Your answer")}</div>
+                    <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 600,
+                      border: "1.5px solid " + (firstCorrect ? "#16a34a" : "#cbd5e1"),
+                      background: firstCorrect ? "#f0fdf4" : "#f8fafc", lineHeight: 1.6 }}>
                       {typed.trim() ? typed : "(blank)"}
                     </div>
                   </div>
-                  <div style={{ marginBottom: 8 }}>
-                    <div style={{ fontSize: 10, color: "#6b7280", marginBottom: 2 }}>Model answer</div>
-                    <div style={{ padding: "7px 12px", borderRadius: 6, fontSize: 14, fontWeight: 700,
-                      border: "1.5px solid #16a34a", color: "#166534", background: "#f0fdf4", lineHeight: 1.6 }}>
-                      {q.answer}
-                    </div>
-                    {q.answerSimple ? (
-                      <div style={{ fontSize: 12, color: "#6b7280", marginTop: 4 }}>
-                        Also acceptable: {q.answerSimple}
+
+                  {firstCorrect ? (
+                    <>
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#16a34a", marginBottom: 6 }}>{L("\u2713 \u56DE\u7B54\u6B63\u786E\uFF01", "V Correct!")}</div>
+                      <ModelBox q={q} />
+                      <ExplBox q={q} />
+                    </>
+                  ) : hasTiles && !isChecked ? (
+                    <div style={{ background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 12px" }}>
+                      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 8 }}>{L("\u518D\u8BD5\u4E00\u6B21\uFF1A\u70B9\u51FB\u4E0B\u9762\u7684\u8BCD\u8BED\uFF0C\u628A\u5B83\u4EEC\u6392\u6210\u6B63\u786E\u7684\u53E5\u5B50\u3002", "Try again: tap the words below to arrange them into the correct sentence.")}</div>
+                      <div style={{ minHeight: 34, border: "1px dashed #cbd5e1", borderRadius: 6, background: "#fff",
+                        padding: "6px 10px", marginBottom: 8, fontSize: "calc(var(--fs) * 1.071)", lineHeight: 1.9, fontFamily: F }}>
+                        {b.length ? builtStr : <span style={{ color: "#9ca3af" }}>{L("\u70B9\u51FB\u8BCD\u8BED\u2026\u2026", "Tap words...")}</span>}
                       </div>
-                    ) : null}
-                  </div>
-                  {q.explanation ? (
-                    <div style={{ marginTop: 6, borderLeft: "3px solid #2563EB",
-                      background: "#eff6ff", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
-                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.explanation}</div>
+                      <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginBottom: 8 }}>
+                        {shuffles[q.id].filter(i => !b.includes(i)).map(i => (
+                          <button key={i} onClick={() => setBuilt(m => ({ ...m, [q.id]: [...(m[q.id] || []), i] }))} style={tileBtn}>{q.tiles[i]}</button>
+                        ))}
+                      </div>
+                      <div style={{ display: "flex", gap: 8 }}>
+                        <button onClick={() => setBuilt(m => ({ ...m, [q.id]: [] }))}
+                          style={{ padding: "5px 14px", borderRadius: 8, border: "1px solid #cbd5e1", background: "#fff", color: "#475569", fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, cursor: "pointer" }}>{L("\u6E05\u7A7A", "Clear")}</button>
+                        <button disabled={b.length !== q.tiles.length} onClick={() => setChecked(m => ({ ...m, [q.id]: true }))}
+                          style={{ padding: "5px 16px", borderRadius: 8, border: "none",
+                            background: b.length === q.tiles.length ? "#1e3a6e" : "#94a3b8", color: "#fff",
+                            fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, cursor: b.length === q.tiles.length ? "pointer" : "not-allowed" }}>{L("\u786E\u8BA4", "Check")}</button>
+                      </div>
                     </div>
-                  ) : null}
-                  {q.hint ? (
-                    <div style={{ marginTop: 6, borderLeft: "3px solid #D97706",
-                      background: "#fffbeb", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
-                      <div style={{ fontSize: 11, fontWeight: 700, color: "#92400e", marginBottom: 2 }}>Trap to avoid</div>
-                      <div style={{ fontSize: 12, color: "#374151", lineHeight: 1.6 }}>{q.hint}</div>
-                    </div>
-                  ) : null}
+                  ) : (
+                    <>
+                      {hasTiles ? (
+                        <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, marginBottom: 6, color: tileCorrect ? "#16a34a" : "#dc2626" }}>
+                          {tileCorrect ? L("\u2713 \u6392\u5BF9\u4E86\uFF01", "V You built it correctly!") : L("\u2717 \u8FD8\u4E0D\u5BF9\uFF0C\u770B\u770B\u4E0B\u9762\u7684\u89E3\u91CA\u3002", "X Not quite - see the explanation below.")}
+                        </div>
+                      ) : null}
+                      <ModelBox q={q} />
+                      <ExplBox q={q} />
+                    </>
+                  )}
                 </div>
               )}
-
               {idx < qs.length - 1 ? <div style={{ borderTop: "1px solid #e5e7eb", margin: "16px 0" }} /> : null}
             </div>
           );
@@ -1991,16 +2288,195 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
 
         {!submitted ? (
           <button onClick={handleSubmit}
+            style={{ width: "100%", padding: "14px", borderRadius: 10, background: "#1e3a6e", color: "#fff",
+              border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer", fontFamily: F }}>{L("\u63D0\u4EA4", "Submit")}</button>
+        ) : (
+          <button onClick={handleFinish}
+            style={{ width: "100%", padding: "14px", borderRadius: 10, background: "#1e3a6e", color: "#fff",
+              border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer", fontFamily: F }}>{L("\u4E0B\u4E00\u8282", "Next Section")}</button>
+        )}
+      </div>
+    </div>
+  );
+}
+// 
+//  MATCH PAGE - VocabMatch (word collocation): pick the pool number for
+//  each stem; each pool entry may be used once. New renderer for Chinese WA1.
+//  set = { id, instruction, pool[6], items[{ num, stem, answer(poolIdx),
+//          explain, explanation }] }
+// 
+function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
+  const F = isZh ? ZH_FONT : EXAM_BODY;
+  const pool = set.pool || [];
+  const items = set.items || [];
+  const _rev = reviewMode
+    ? Object.fromEntries((reviewResults || []).map(r => [parseInt(String(r.id).split("_").pop(), 10), r.userAnswer]))
+    : null;
+  const [answers, setAnswers] = useState(_rev || {}); // { num: poolIdx }
+  const [submitted, setSubmitted] = useState(!!reviewMode);
+  const startRef = useRef(Date.now());
+
+  function assign(num, poolIdx) {
+    if (submitted) return;
+    setAnswers(a => {
+      const next = { ...a };
+      Object.keys(next).forEach(k => { if (next[k] === poolIdx) delete next[k]; });
+      if (next[num] === poolIdx) delete next[num];
+      else next[num] = poolIdx;
+      return next;
+    });
+  }
+
+  function handleSubmit() { if (!submitted) setSubmitted(true); }
+
+  function handleFinish() {
+    const t = Date.now() - startRef.current;
+    const results = items.map(it => ({
+      id: set.id + "_" + it.num, topic: "VocabMatch", sectionType: "VocabMatch",
+      skill: it.skill, trapType: it.explain && it.explain.trapType,
+      userAnswer: answers[it.num],
+      correct: answers[it.num] === it.answer,
+      attempts: 1,
+      timeTaken: Math.round(t / Math.max(items.length, 1)),
+    }));
+    onPageDone(results, true);
+  }
+
+  const allAnswered = items.every(it => answers[it.num] !== undefined);
+  const score = submitted ? items.filter(it => answers[it.num] === it.answer).length : 0;
+  const usedBy = {};
+  items.forEach(it => { const a = answers[it.num]; if (a !== undefined && a !== null) usedBy[a] = it.num; });
+
+  function renderStem(stem, chosenIdx) {
+    const str = String(stem || "");
+    const segs = str.split(/_{3,}|\uFF08\u3000?\uFF09/);
+    const out = [];
+    segs.forEach((part, i) => {
+      if (i > 0) {
+        out.push(
+          <span key={"b" + i} style={{
+            display: "inline-block", minWidth: 40, borderBottom: "1.5px solid #000",
+            textAlign: "center", margin: "0 4px", fontWeight: 700, color: "#1d4ed8",
+          }}>{chosenIdx !== undefined && chosenIdx !== null ? "(" + (chosenIdx + 1) + ")" : "\u00A0\u00A0"}</span>
+        );
+      }
+      out.push(<span key={"t" + i}>{part}</span>);
+    });
+    return out;
+  }
+
+  return (
+    <div style={{ background: "#fff", minHeight: "100vh", fontFamily: F }}>
+      <div style={{ padding: "14px 20px 0" }}>
+        <div style={{ fontFamily: F, fontWeight: "bold", fontSize: "calc(var(--fs) * 1.071)", marginBottom: 4 }}>
+          {sectionLabel} {marksLabel(marks, isZh)}
+        </div>
+        <div style={{ fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, lineHeight: 1.6 }}>{set.instruction || ""}</div>
+      </div>
+
+      <div style={{ padding: "0 20px 120px" }}>
+        {/* pool box */}
+        <div style={{
+          border: "1px solid #000", padding: "10px 14px", marginBottom: 16,
+          display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 6, fontSize: "calc(var(--fs) * 1.000)",
+        }}>
+          {pool.map((w, i) => {
+            const used = usedBy[i] !== undefined;
+            return (
+              <div key={i} style={{
+                padding: "2px 4px",
+                opacity: submitted ? 1 : (used ? 0.4 : 1),
+                textDecoration: !submitted && used ? "line-through" : "none",
+              }}>({i + 1}) {w}</div>
+            );
+          })}
+        </div>
+
+        {items.map((it, idx) => {
+          const chosen = answers[it.num];
+          const isCorrect = submitted && chosen === it.answer;
+          const isWrong = submitted && chosen !== it.answer;
+          return (
+            <div key={it.num} style={{ marginBottom: 18 }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 8, alignItems: "baseline" }}>
+                <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)", minWidth: 24 }}>{it.num}.</span>
+                <span style={{ fontSize: "calc(var(--fs) * 1.071)", lineHeight: 1.9, flex: 1 }}>{renderStem(it.stem, chosen)}</span>
+              </div>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: 6, marginLeft: 28 }}>
+                {pool.map((w, i) => {
+                  const usedElsewhere = usedBy[i] !== undefined && usedBy[i] !== it.num;
+                  const isSel = chosen === i;
+                  const isAns = i === it.answer;
+                  let bg = "#fff", border = "#cbd5e1", color = "#000";
+                  if (submitted) {
+                    if (isAns) { bg = "#f0fdf4"; border = "#16a34a"; color = "#166534"; }
+                    else if (isSel) { bg = "#fef2f2"; border = "#dc2626"; color = "#dc2626"; }
+                  } else if (isSel) { bg = "#dbeafe"; border = "#3b82f6"; color = "#1d4ed8"; }
+                  return (
+                    <button key={i} disabled={submitted || usedElsewhere}
+                      onClick={() => assign(it.num, i)}
+                      style={{
+                        fontFamily: F, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: "4px 10px",
+                        borderRadius: 8, border: "1.5px solid " + border, background: bg, color,
+                        cursor: (submitted || usedElsewhere) ? "default" : "pointer",
+                        opacity: usedElsewhere && !submitted ? 0.35 : 1,
+                      }}>({i + 1}) {w}</button>
+                  );
+                })}
+              </div>
+              {submitted && (
+                <div style={{
+                  marginLeft: 28, marginTop: 8,
+                  borderLeft: "3px solid " + (isCorrect ? "#16a34a" : "#dc2626"),
+                  background: isCorrect ? "#f0fdf4" : "#fef2f2",
+                  borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
+                }}>
+                  <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: isCorrect ? "#16a34a" : "#dc2626", marginBottom: 3 }}>
+                    {isCorrect ? (isZh ? "\u2713 \u6B63\u786E" : "V Correct") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A(" : "X Correct answer: (") + (it.answer + 1) + ") " + pool[it.answer]}
+                  </div>
+                  {it.stem_en && (
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#2563eb", lineHeight: 1.5, marginBottom: 6 }}>
+                      <span style={{ fontWeight: 700 }}>Translate: </span>{it.stem_en}
+                    </div>
+                  )}
+                  {it.explanation && (
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6 }}>{it.explanation}<EnExp en={it.explanation_en} /></div>
+                  )}
+                  <KeyWords list={it.keywords} />
+                </div>
+              )}
+              {idx < items.length - 1 && <div style={{ borderTop: "1px solid #ccc", margin: "14px 0" }} />}
+            </div>
+          );
+        })}
+
+        {submitted && (
+          <div style={{
+            background: "#f8fafc", border: "1px solid #e2e8f0", borderRadius: 10,
+            padding: "12px 16px", marginBottom: 16, display: "flex",
+            justifyContent: "space-between", alignItems: "center",
+          }}>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700 }}>{isZh ? "\u5F97\u5206\uFF1A" : "Score: "}{score}/{items.length}</span>
+            <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
+              color: score === items.length ? "#16a34a" : score >= items.length * 0.6 ? "#d97706" : "#dc2626" }}>
+              {Math.round(score / Math.max(items.length, 1) * 100)}%
+            </span>
+          </div>
+        )}
+
+        {!submitted ? (
+          <button onClick={handleSubmit} disabled={!allAnswered}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
-              background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_FONT }}>
+              background: allAnswered ? "#1e3a6e" : "#94a3b8", color: "#fff", border: "none",
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: allAnswered ? "pointer" : "not-allowed" }}>
             Submit
+            {!allAnswered && <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 400, display: "block" }}>{isZh ? "\u8BF7\u5148\u56DE\u7B54\u5168\u90E8 " : "Answer all "}{items.length}{isZh ? " \u9898" : " questions first"}</span>}
           </button>
         ) : (
           <button onClick={handleFinish}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: 15, fontWeight: 700, cursor: "pointer", fontFamily: EXAM_FONT }}>
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
             Next Section
           </button>
         )}
@@ -2009,9 +2485,10 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
   );
 }
 
-
 export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack, reviewMode, reviewResults, onSectionDone, completedTypes }) {
   const _completed = completedTypes || [];
+  const isZh = Array.isArray(plan) && plan.some(s => ZH_TYPES.has(s.type));
+  const isMcqSection = (t) => t === "GrammarMCQ" || t === "VocabMCQ" || ZH_MCQ_TYPES.has(t);
   const startSecIdx = startFrom
     ? Math.max(0, plan.findIndex(s => s.type === startFrom))
     : Math.max(0, plan.findIndex(s => !_completed.includes(s.type)));
@@ -2027,9 +2504,14 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const sectionType = section?.type;
   const meta = SECTIONS[sectionType] || {};
 
-  // MCQ: paginate items 4 per page
-  const MCQ_PER_PAGE = 4;
-  const mcqPages = (sectionType === "GrammarMCQ" || sectionType === "VocabMCQ")
+  // MCQ: the English paper keeps 4 per page. The Chinese paper must show the
+  // whole section on one page - HanziMcq/VocabMcq carry 5 items in all 60 sets,
+  // so a 4-per-page rule split every one of them into an odd 4+1 and made the
+  // header read "(4 marks)" because marks were counted per page, not per section.
+  const MCQ_PER_PAGE = isZh
+    ? Math.max(1, ((plan[secIdx] && plan[secIdx].items) || []).length)
+    : 4;
+  const mcqPages = isMcqSection(sectionType)
     ? paginate(section.items || [], MCQ_PER_PAGE) : [];
 
   const totalPages = mcqPages.length || 1;
@@ -2045,7 +2527,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
     if (advance) {
       // MCQ: still more pages in THIS section -> keep accumulating in pageResults,
       // do NOT finalize the section yet (so latestResults holds the WHOLE section).
-      if (sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") {
+      if (isMcqSection(sectionType)) {
         if (pageIdx + 1 < mcqPages.length) {
           setPageIdx(p => p + 1);
           return;
@@ -2093,11 +2575,11 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const totalSections = plan.length;
   const progress = Math.round((secIdx / totalSections) * 100);
 
-  const sectionLabel = meta.label || sectionType;
+  const sectionLabel = meta.label || ZH_LABELS[sectionType] || sectionType;
   const sectionMarks = (section.marks ?? (section.items?.length || section.sets || 1));
 
   return (
-    <div style={{ background: "#fff", minHeight: "100vh" }}>
+    <div className={isZh ? "zh-scope" : "en-scope"} style={{ background: "#fff", minHeight: "100vh", fontFamily: isZh ? ZH_FONT : EXAM_FONT }}>
       {/* Exam header */}
       <div style={{
         ...S.header,
@@ -2106,20 +2588,20 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       }}>
         <button onClick={onBack} style={{
           background: "none", border: "1px solid #000", borderRadius: 6,
-          width: 30, height: 30, cursor: "pointer", fontSize: 14,
+          width: 30, height: 30, cursor: "pointer", fontSize: "calc(var(--fs) * 1.000)",
           display: "flex", alignItems: "center", justifyContent: "center",
         }}></button>
         <div style={{ flex: 1 }}>
-          <div style={{ fontFamily: EXAM_BODY, fontWeight: 700, fontSize: 13 }}>
-            {isMockExam ? ` ${mockInfo?.school || "Mock Exam"}` : `Section ${secIdx + 1}/${totalSections}`}
+          <div style={{ fontFamily: EXAM_BODY, fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)" }}>
+            {isMockExam ? ` ${mockInfo?.school || (isZh ? "\u6A21\u62DF\u8003" : "Mock Exam")}` : (isZh ? `\u7B2C ${secIdx + 1}/${totalSections} \u8282` : `Section ${secIdx + 1}/${totalSections}`)}
           </div>
-          <div style={{ fontFamily: EXAM_BODY, fontSize: 11, color: "#64748b" }}>
+          <div style={{ fontFamily: EXAM_BODY, fontSize: "calc(var(--fs) * 1.000)", color: "#64748b" }}>
             {sectionLabel}
-            {totalPages > 1 && ` . Page ${pageIdx + 1}/${totalPages}`}
+            {totalPages > 1 && (isZh ? ` . \u7B2C ${pageIdx + 1}/${totalPages} \u9875` : ` . Page ${pageIdx + 1}/${totalPages}`)}
           </div>
         </div>
         <div style={{
-          fontFamily: EXAM_BODY, fontSize: 11, fontWeight: 700,
+          fontFamily: EXAM_BODY, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
           background: "#f1f5f9", borderRadius: 6, padding: "3px 10px",
         }}>
           {progress}%
@@ -2132,8 +2614,8 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       </div>
 
       {/* Section content */}
-      {(sectionType === "GrammarMCQ" || sectionType === "VocabMCQ") && mcqPages[pageIdx] && (
-        <MCQPage reviewMode={reviewMode} reviewResults={reviewResults}
+      {isMcqSection(sectionType) && mcqPages[pageIdx] && (
+        <MCQPage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
           key={`${secIdx}_${pageIdx}`}
           items={mcqPages[pageIdx]}
           pageIdx={pageIdx}
@@ -2142,16 +2624,28 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
           sectionLabel={sectionLabel}
           marks={mcqPages[pageIdx].length}
           instructions={
-            sectionType === "GrammarMCQ"
-              ? "For each question, four options are given. One of them is the correct answer. Make your choice (1, 2, 3 or 4) and write its number in the brackets provided."
-              : "For each of the following, choose the best answer and write the number (1, 2, 3 or 4) in the brackets provided."
+            ZH_MCQ_TYPES.has(sectionType)
+              ? (ZH_INSTRUCTIONS[sectionType] || "")
+              : sectionType === "GrammarMCQ"
+                ? "For each question, four options are given. One of them is the correct answer. Make your choice (1, 2, 3 or 4) and write its number in the brackets provided."
+                : "For each of the following, choose the best answer and write the number (1, 2, 3 or 4) in the brackets provided."
           }
           onPageDone={handlePageDone}
         />
       )}
 
-      {(sectionType === "GrammarCloze" || sectionType === "VocabCloze") && (
-        <ClozePage reviewMode={reviewMode} reviewResults={reviewResults}
+      {(sectionType === "GrammarCloze" || sectionType === "VocabCloze" || sectionType === "PassageCloze") && (
+        <ClozePage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
+          key={secIdx}
+          set={(section.items || [])[0] || {}}
+          sectionLabel={sectionLabel}
+          marks={sectionMarks}
+          onPageDone={handlePageDone}
+        />
+      )}
+
+      {(sectionType === "VocabMatch") && (
+        <MatchPage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}
@@ -2161,7 +2655,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       )}
 
       {sectionType === "Editing" && (
-        <EditingPage reviewMode={reviewMode} reviewResults={reviewResults}
+        <EditingPage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}
@@ -2170,8 +2664,8 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         />
       )}
 
-      {sectionType === "Synthesis" && (
-        <SynthesisPage reviewMode={reviewMode} reviewResults={reviewResults}
+      {(sectionType === "Synthesis" || sectionType === "SentenceCraft") && (
+        <SynthesisPage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
           key={secIdx}
           items={section.items || []}
           sectionLabel={sectionLabel}
@@ -2180,8 +2674,8 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         />
       )}
 
-      {sectionType === "Comprehension" && (
-        <CompPage reviewMode={reviewMode} reviewResults={reviewResults}
+      {(sectionType === "Comprehension" || sectionType === "ReadingMcq" || sectionType === "ReadingOpen") && (
+        <CompPage reviewMode={reviewMode} reviewResults={reviewResults} isZh={isZh}
           key={secIdx}
           set={(section.items || [])[0] || {}}
           sectionLabel={sectionLabel}

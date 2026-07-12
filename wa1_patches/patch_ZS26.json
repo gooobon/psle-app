@@ -1,0 +1,217 @@
+{
+ "setId": "ZS26",
+ "mcq": {
+  "ZS26_A1": {
+   "sentence_en": "When Dad comes home from work, he always walks in ___ (wearing) a smile.",
+   "hints": ["The blank + 着微笑 means to have a smile on your face. Which character means 'to carry along / bring with', not 'to wear an object'?"],
+   "keywords": [{"w":"带","py":"dài","en":"to carry along"},{"w":"微笑","py":"wēixiào","en":"smile"},{"w":"下班","py":"xiàbān","en":"to finish work"}],
+   "explanation_en": "带着微笑 is a set phrase meaning to have a smile on one's face, so 带 fits. All four are read dài; judge by meaning: 带 = to carry along; 戴 = to wear an object; 代 = to replace; 待 = to wait. A smile is not an object, so use 带."
+  },
+  "ZS26_A2": {
+   "sentence_en": "Mum was ill, and elder sister ___ (caringly) stayed by her bedside.",
+   "hints": ["The blank + 心 means to be concerned about someone. Which character (with a gate frame, guarding the heart inside) forms 关心 (to care)?"],
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"床边","py":"chuángbiān","en":"bedside"}],
+   "explanation_en": "关心 means to be concerned about and mind someone, and sister staying by the bed shows exactly this care, so 关 fits. 关 has a gate frame, the heart guarded inside - to 关心 someone is to hold them in your heart."
+  },
+  "ZS26_A3": {
+   "sentence_en": "Little brother is very ___ (naughty); he often throws toys all over the floor.",
+   "hints": ["The blank + 皮 describes a child who is mischievous and disobedient. Which character (with the water radical 氵) forms 淘气 (naughty)?"],
+   "keywords": [{"w":"淘气","py":"táoqì","en":"naughty"},{"w":"玩具","py":"wánjù","en":"toy"},{"w":"扔","py":"rēng","en":"to throw"}],
+   "explanation_en": "淘气 describes a mischievous, disobedient child, and throwing toys everywhere is exactly naughty behaviour, so 淘 fits. 淘 has the water radical 氵, like a child splashing about in water, so 淘气 = naughty."
+  },
+  "ZS26_A4": {
+   "sentence_en": "Grandpa goes to the park to ___ (take a walk) every morning, and comes back in good spirits.",
+   "hints": ["The blank + 步 means to walk slowly for a stroll. Which character (with the 攴 radical showing an action) forms 散步?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"精神","py":"jīngshén","en":"spirits; energy"}],
+   "explanation_en": "散步 means to walk slowly for a stroll, Grandpa's way of morning exercise, so 散 fits. 散 has the 攴 radical showing an action - 散步 is spreading your steps out to walk slowly."
+  },
+  "ZS26_A5": {
+   "sentence_en": "Grandma's hands are very ___ (deft); the dumplings she makes are both pretty and tasty.",
+   "hints": ["The blank + 巧 describes skilled, nimble movement. Which character means 'nimble / clever', forming 灵巧?"],
+   "keywords": [{"w":"灵巧","py":"língqiǎo","en":"deft; nimble"},{"w":"饺子","py":"jiǎozi","en":"dumpling"},{"w":"好看","py":"hǎokàn","en":"good-looking"}],
+   "explanation_en": "灵巧 describes skilled, nimble movement of the hands, matching Grandma making pretty dumplings, so 灵 fits. The four share the líng sound; judge by radical: 灵 = nimble, related to hand movement, so choose 灵."
+  },
+  "ZS26_B1": {
+   "sentence_en": "Elder brother 答应 (agreed) to go with me to the library to borrow books.",
+   "hints": ["应 is a polyphone: yīng in 应该 (should); yìng in 答应 (to agree). Which choice is dā + yìng?"],
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree; promise"},{"w":"图书馆","py":"túshūguǎn","en":"library"},{"w":"借书","py":"jièshū","en":"to borrow books"}],
+   "explanation_en": "答应 means to agree to a request; 应 is read yìng (4th tone) here, and 答 is dā (1st tone). 应: 应该 yīng (should); 答应 / 回应 yìng (to respond)."
+  },
+  "ZS26_B2": {
+   "sentence_en": "Mum 温柔 (gently) wakes me up every day.",
+   "hints": ["温 is 1st tone (wēn); 柔 is 2nd tone (róu). Which choice is wēn + róu?"],
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle"},{"w":"起床","py":"qǐchuáng","en":"to get up"},{"w":"每天","py":"měitiān","en":"every day"}],
+   "explanation_en": "温 is read wēn (1st tone) and 柔 is róu (2nd tone), together wēn róu. 温 (1st tone) is level like warm water; 柔 (2nd tone) rises gently, like softly waking you up."
+  },
+  "ZS26_B3": {
+   "sentence_en": "Dad 亲切 (kindly) asked me how my day at school had been.",
+   "hints": ["切 is a polyphone: qiē in 切菜 (cut vegetables); qiè in 亲切 (kind). Which choice is qīn + qiè?"],
+   "keywords": [{"w":"亲切","py":"qīnqiè","en":"kind; warm"},{"w":"问","py":"wèn","en":"to ask"},{"w":"学校","py":"xuéxiào","en":"school"}],
+   "explanation_en": "亲 is read qīn (1st tone) and 切 in 亲切 is qiè (4th tone), together qīn qiè. 切 is a polyphone: 切菜 qiē (cut); 亲切 qiè (kind). Remember the whole word 亲切 is qīn qiè."
+  },
+  "ZS26_B4": {
+   "sentence_en": "Between friends one should be 诚实 (honest) and must not lie.",
+   "hints": ["诚 has the back nasal -ng (chéng); 实 is retroflex sh (shí). Which choice is chéng + shí?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"朋友","py":"péngyou","en":"friend"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "诚 is read chéng (back nasal -ng, 2nd tone) and 实 is shí (retroflex sh, 2nd tone), together chéng shí. 诚 has the back nasal -ng; 实 is retroflex sh - both are 2nd tone, chéng shí."
+  },
+  "ZS26_C1": {
+   "sentence_en": "Mum bought ___ (a bunch of) bananas and put them on the table, telling us to eat them as a snack.",
+   "hints": ["Clue: bananas grow joined together in a bunch. Which measure word means 'a bunch / string'?"],
+   "keywords": [{"w":"串","py":"chuàn","en":"a bunch; string"},{"w":"香蕉","py":"xiāngjiāo","en":"banana"},{"w":"点心","py":"diǎnxin","en":"snack"}],
+   "explanation_en": "Bananas grow joined together into a bunch, so the measure word 串 is used. Bananas hang together like a string of beads, so use 串. 条, 粒 and 片 do not fit a bunch of bananas."
+  },
+  "ZS26_C2": {
+   "sentence_en": "Elder sister ___ (carefully) checked my homework and found several mistakes.",
+   "hints": ["Clue: checking homework means looking at each word closely. Which word means 'careful / meticulous'?"],
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"检查","py":"jiǎnchá","en":"to check"},{"w":"错误","py":"cuòwù","en":"mistake"}],
+   "explanation_en": "Checking homework means reading each word closely, so 仔细 (careful, meticulous) fits best. Checking must be 仔细 - looking word by word, missing no mistake. 努力, 开心 and 勇敢 do not fit checking."
+  },
+  "ZS26_C3": {
+   "sentence_en": "Grandpa ___ (tells) us to study hard, so we can help others in the future.",
+   "hints": ["Clue: an elder gently sharing a lesson. Which word means 'to tell', not 'to order' or 'to shout'?"],
+   "keywords": [{"w":"告诉","py":"gàosu","en":"to tell"},{"w":"读书","py":"dúshū","en":"to study"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "Grandpa gently shares a truth, so 告诉 (to tell) is most natural. An elder guiding a junior with a lesson uses 告诉; 命令 is too forceful, 叫喊 is shouting, 请求 is begging - none fit here."
+  },
+  "ZS26_C4": {
+   "sentence_en": "Xiaoming and Xiaohua are good friends; they go to school ___ (together) and go home together.",
+   "hints": ["Clue: the later clause also says '一起回家' (go home together). Which word means 'together'?"],
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"上学","py":"shàngxué","en":"to go to school"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "Good friends go to school as one, so 一起 (together) fits, and the later clause '一起回家' echoes it. Both clauses say 一起, showing inseparable friends. 分别 and 各自 are the opposite of 一起."
+  },
+  "ZS26_C5": {
+   "sentence_en": "Mum ___ (prepared) a rich dinner for the family, and everyone ate happily.",
+   "hints": ["Clue: it pairs with 晚餐 (dinner), getting the meal ready in advance. Which word means 'to prepare'?"],
+   "keywords": [{"w":"准备","py":"zhǔnbèi","en":"to prepare"},{"w":"丰盛","py":"fēngshèng","en":"rich; sumptuous"},{"w":"晚餐","py":"wǎncān","en":"dinner"}],
+   "explanation_en": "准备晚餐 is a fixed pairing meaning to get dinner ready in advance, so 准备 fits best. Fixed pairing: 准备 + a meal (dinner / breakfast). Seeing 'a meal', think 准备. 制造, 发明 and 生产 do not pair with 晚餐."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“分享”是把好东西、快乐一起分给别人，所以“分享快乐”就是把快乐分给大家一起感受。“道歉、照顾”都不是“分给别人”的意思。",
+   "explanation_en": "分享 (fēnxiǎng) means to share good things or joy with others, so 分享快乐 means to share happiness. 道歉 (apologize) and 照顾 (look after) do not mean 'to share out'.",
+   "stem_en": "to share happiness",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"快乐","py":"kuàilè","en":"happiness"}]
+  },
+  "2": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“向妈妈道歉”就是向妈妈承认错误、说对不起。“分享、体贴”都不是“说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向妈妈道歉 means to apologize to Mum. 分享 (share) and 体贴 (considerate) do not mean 'to say sorry'.",
+   "stem_en": "to apologize to Mum",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"妈妈","py":"māma","en":"Mum"}]
+  },
+  "3": {
+   "explanation": "“照顾”是留心料理、看护别人，所以“照顾生病的奶奶”就是看护、料理生病的奶奶。“道歉、陪伴”都不是“看护料理”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to look after and care for someone, so 照顾生病的奶奶 means to look after a sick grandma. 道歉 (apologize) and 陪伴 (accompany) do not mean 'to care for'.",
+   "stem_en": "to look after a sick grandma",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"生病","py":"shēngbìng","en":"to be ill"}]
+  },
+  "4": {
+   "explanation": "“体贴”是细心地为别人着想，所以“对家人体贴”就是对家人细心、处处替他们着想。“分享、陪伴”都不是“细心为别人着想”的意思。",
+   "explanation_en": "体贴 (tǐtiē) means to be thoughtful and considerate of others, so 对家人体贴 means to be considerate to one's family. 分享 (share) and 陪伴 (accompany) do not mean 'to be thoughtful of others'.",
+   "stem_en": "to be considerate to one's family",
+   "keywords": [{"w":"体贴","py":"tǐtiē","en":"considerate"},{"w":"家人","py":"jiārén","en":"family"}]
+  },
+  "5": {
+   "explanation": "“陪伴”是陪在别人身边，所以“陪伴在身边”就是一直陪在别人身旁、和他们在一起。“道歉、照顾”都不是“陪在身旁”的意思。",
+   "explanation_en": "陪伴 (péibàn) means to stay by someone's side, so 陪伴在身边 means to keep someone company at their side. 道歉 (apologize) and 照顾 (look after) do not mean 'to stay by someone's side'.",
+   "stem_en": "to keep company at one's side",
+   "keywords": [{"w":"陪伴","py":"péibàn","en":"to accompany"},{"w":"身边","py":"shēnbiān","en":"at one's side"}]
+  }
+ },
+ "craft": {
+  "ZS26_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Little brother is young.' and 'He knows well how to help others.'",
+   "answer_en": "Although little brother is young, he knows well how to help others.",
+   "tiles": ["虽然","弟弟年纪小，","但是","他很懂得帮助别人。"],
+   "explanation_en": "虽然……但是…… sets one situation against an opposite or unexpected result. '虽然弟弟年纪小' (although he is young) is the situation, '但是他很懂得帮助别人' (but he knows how to help) is the unexpected result."
+  },
+  "ZS26_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Mum is not feeling well today.' and 'Dad cooked dinner for everyone.'",
+   "answer_en": "Because Mum is not feeling well today, Dad cooked dinner for everyone.",
+   "tiles": ["因为","妈妈今天身体不舒服，","所以","爸爸做晚饭给大家吃。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为妈妈今天身体不舒服' (because Mum is unwell) is the cause, '所以爸爸做晚饭给大家吃' (so Dad cooked dinner) is the result. Say the why first, then what happened."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Xiaoyun's grandpa came from out of town to Singapore to ___ (visit) her family.",
+   "hint": "Clue: he came from far away to see the family. Which box word means 'to visit / call on'?",
+   "keywords": [{"w":"探望","py":"tànwàng","en":"to visit"},{"w":"外地","py":"wàidì","en":"out of town"}],
+   "explanation_en": "探望 means to go and see someone, and grandpa came from out of town to see the family, so 探望 fits best."
+  },
+  "2": {
+   "sentence_en": "Grandpa is very ___ (cheerful); every morning he takes Xiaoyun to the park to run.",
+   "hint": "Clue: he is lively and takes her out to exercise daily. Which box word means 'cheerful / outgoing'?",
+   "keywords": [{"w":"开朗","py":"kāilǎng","en":"cheerful"},{"w":"跑步","py":"pǎobù","en":"to run"}],
+   "explanation_en": "开朗 describes a lively, cheerful person, and taking Xiaoyun out to exercise every day shows this, so 开朗 fits best."
+  },
+  "3": {
+   "sentence_en": "One time Xiaoyun got tired running and wanted to stop, and Grandpa ___ (smilingly) encouraged her: 'Keep it up a bit more!'",
+   "hint": "Clue: he encourages her gently and kindly. Which box word means 'smilingly'?",
+   "keywords": [{"w":"笑着","py":"xiàozhe","en":"smilingly"},{"w":"鼓励","py":"gǔlì","en":"to encourage"}],
+   "explanation_en": "Grandpa gently encourages Xiaoyun, so 笑着 (smilingly) shows his kind, encouraging manner, which fits best."
+  },
+  "4": {
+   "sentence_en": "In the evening, the whole family sat ___ (together) in the living room, listening to Grandpa's childhood stories.",
+   "hint": "Clue: the whole family sits as one in the living room. Which box word means 'together'?",
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"客厅","py":"kètīng","en":"living room"}],
+   "explanation_en": "The whole family sits as one in the living room, so 一起 (together) fits best."
+  },
+  "5": {
+   "sentence_en": "Everyone listened very ___ (spellbound).",
+   "hint": "Clue: they listened so intently they were drawn in. Which box word means 'fascinated / spellbound'?",
+   "keywords": [{"w":"入迷","py":"rùmí","en":"spellbound"},{"w":"故事","py":"gùshi","en":"story"}],
+   "explanation_en": "入迷 means listening so intently as to be drawn in; Grandpa's stories had everyone spellbound, so 入迷 fits best."
+  }
+ },
+ "reading": {
+  "ZS26_G1": {
+   "stem_en": "How did the pencil box get broken?",
+   "answer_en": "Linwei carelessly knocked the pencil box to the floor and broke it.",
+   "keywords": [{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil box"},{"w":"碰","py":"pèng","en":"to knock"},{"w":"摔坏","py":"shuāihuài","en":"to break by dropping"}],
+   "explanation": "这是细节题。短文说“林伟不小心把陈明最喜欢的铅笔盒碰到地上，铅笔盒摔坏了”，直接说明是林伟不小心把铅笔盒碰到地上摔坏的，所以选(2)。(1)陈明自己扔坏、(3)太旧自己坏，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Linwei carelessly knocked Chenming's favourite pencil box to the floor and it broke', directly stating Linwei broke it, so (2). (1) Chenming threw it and (3) it was too old are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "林伟不小心把陈明最喜欢的铅笔盒碰到地上，铅笔盒摔坏了。"}
+  },
+  "ZS26_G2": {
+   "stem_en": "Chenming said 'It's okay, you didn't do it on purpose.' What does this show about Chenming?",
+   "answer_en": "He is someone who knows how to forgive a friend.",
+   "keywords": [{"w":"原谅","py":"yuánliàng","en":"to forgive"},{"w":"故意","py":"gùyì","en":"on purpose"},{"w":"朋友","py":"péngyou","en":"friend"}],
+   "explanation": "这是推断题。短文说陈明看到林伟很伤心，就说“没关系，你不是故意的”，说明他没有生气，还体谅林伟不是故意的，可以推断他是个懂得原谅朋友的人，所以选(3)。(1)容易生气、(2)不在乎铅笔盒，都和他的话不符。推断题要从人物说的话来判断他的性格。",
+   "explanation_en": "This is an inference question. The passage says Chenming, seeing Linwei upset, said 'It's okay, you didn't mean to', showing he was not angry and understood it was an accident, so he is someone who forgives a friend, so (3). (1) easily angered and (2) not caring about the pencil box do not fit his words. For inference, judge his character from what he says.",
+   "solution": {"evidence": "没关系，你不是故意的。"}
+  },
+  "ZS26_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Friends should help and forgive each other, so that friendship can last.",
+   "keywords": [{"w":"原谅","py":"yuánliàng","en":"to forgive"},{"w":"友谊","py":"yǒuyì","en":"friendship"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是主旨题。全文讲林伟弄坏了陈明的铅笔盒，真诚道歉，陈明原谅了他，林伟又买了新的送他，最后两人又和好如初。可见短文是要告诉我们朋友之间要互相帮助、原谅对方，友谊才能长久，所以选(1)。(2)铅笔盒易坏、(3)上学别忘文具都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Linwei breaking Chenming's pencil box, apologizing sincerely, Chenming forgiving him, Linwei giving him a new one, and the two becoming friendly again. So it tells us friends should help and forgive each other for friendship to last, so (1). (2) pencil boxes break easily and (3) don't forget stationery are minor points, not the main idea.",
+   "solution": {"evidence": "两个人又有说有笑地一起上课了。"}
+  },
+  "ZS26_H1": {
+   "stem_en": "Find a word in the passage close in meaning to the underlined phrase: 'Little brother helped wash the dishes, letting Mum do fewer chores.' (underlined: do fewer chores)",
+   "answer_en": "减轻工作 (lighten the workload)",
+   "keywords": [{"w":"减轻","py":"jiǎnqīng","en":"to lighten"},{"w":"工作","py":"gōngzuò","en":"work"},{"w":"洗碗","py":"xǐwǎn","en":"to wash dishes"}],
+   "explanation": "这是近义词题。例句里的“少做一些事情”指减少要做的活儿，短文中说小雅和表姐一起洗碗，“帮妈妈减轻工作”，“减轻工作”和“少做一些事情”意思相近，都是让妈妈做的事变少，所以答案是“减轻工作”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. In the example, 'do fewer chores' means having less work to do; in the passage Xiaoya and her cousin wash dishes to 'lighten Mum's workload'. 减轻工作 and 'do fewer chores' are close in meaning, both making Mum's work less, so the answer is 减轻工作. Find the closest phrase in the passage.",
+   "solution": {"evidence": "帮妈妈减轻工作"}
+  },
+  "ZS26_H2": {
+   "stem_en": "What two things did Xiaoya do before her cousin arrived?",
+   "answer_en": "Before her cousin arrived, Xiaoya helped Mum clean the house and tidied up the guest room.",
+   "keywords": [{"w":"打扫","py":"dǎsǎo","en":"to clean"},{"w":"客房","py":"kèfáng","en":"guest room"},{"w":"整理","py":"zhěnglǐ","en":"to tidy up"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“小雅很高兴，一早就帮妈妈把家里打扫干净，还把客房整理好”，说明表姐到来之前小雅做的两件事是打扫家里和整理客房。答“做了哪两件事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Xiaoya was happy and early in the morning helped Mum clean the house and tidied the guest room', naming the two things. When asked 'which two things', list both actions from the text.",
+   "solution": {"evidence": "一早就帮妈妈把家里打扫干净，还把客房整理好"}
+  },
+  "ZS26_H3": {
+   "stem_en": "Why did Mum say Xiaoya had 'really grown up'?",
+   "answer_en": "Because Xiaoya knew how to help clean the house, tidy the guest room, and wash the dishes for Mum - she was very sensible, so Mum said she had really grown up.",
+   "keywords": [{"w":"懂事","py":"dǒngshì","en":"sensible"},{"w":"洗碗","py":"xǐwǎn","en":"to wash dishes"},{"w":"长大","py":"zhǎngdà","en":"to grow up"}],
+   "explanation": "这是推断题。短文说小雅打扫家里、整理客房、和表姐一起洗碗帮妈妈减轻工作，最后“妈妈看了，满意地点点头，说小雅真的长大了”。可以推断妈妈这样说，是因为小雅懂得帮忙做家务、很懂事。推断题要把小雅做的事和妈妈的话连起来想。",
+   "explanation_en": "This is an inference question. The passage shows Xiaoya cleaning the house, tidying the guest room, and washing dishes to lighten Mum's work, and 'Mum nodded with satisfaction and said Xiaoya had really grown up'. We can infer Mum said this because Xiaoya knew how to help with chores and was sensible. Link Xiaoya's actions with Mum's words.",
+   "solution": {"evidence": "饭后，小雅和表姐一起洗碗，帮妈妈减轻工作。妈妈看了，满意地点点头，说小雅真的长大了。"}
+  }
+ }
+}

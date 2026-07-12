@@ -1,0 +1,217 @@
+{
+ "setId": "ZS34",
+ "mcq": {
+  "ZS34_A1": {
+   "sentence_en": "The kitten ___ (carried off in its mouth) the fish, and Mum was angry.",
+   "hints": ["The blank means to hold something in the mouth and walk off. Which character (with the mouth radical 口) means 'to hold in the mouth'?"],
+   "keywords": [{"w":"叼","py":"diāo","en":"to hold in the mouth"},{"w":"小猫","py":"xiǎomāo","en":"kitten"},{"w":"鱼","py":"yú","en":"fish"}],
+   "explanation_en": "叼 means to hold something in the mouth and walk off, matching the kitten carrying the fish, so it fits best. 叼 has the mouth radical 口 - holding something in the mouth. Seeing an animal carry off food, think 叼."
+  },
+  "ZS34_A2": {
+   "sentence_en": "The rabbit's fur is white and ___ (soft), nice to touch.",
+   "hints": ["The blank describes fur that feels comfortable, the opposite of 硬 (hard). Which character means 'soft'?"],
+   "keywords": [{"w":"软","py":"ruǎn","en":"soft"},{"w":"兔子","py":"tùzi","en":"rabbit"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "To describe fur that feels comfortable, 软 (soft) is the most exact, as it means a soft touch. The opposite of 软 is 硬 (hard); rabbit fur is not hard, so it is 软."
+  },
+  "ZS34_A3": {
+   "sentence_en": "In the zoo, the elephant ___ (curls) up water with its long trunk and sprays it on itself.",
+   "hints": ["The blank means the trunk bends and rolls up water. Which character means 'to roll / curl up'?"],
+   "keywords": [{"w":"卷","py":"juǎn","en":"to roll; curl"},{"w":"大象","py":"dàxiàng","en":"elephant"},{"w":"鼻子","py":"bízi","en":"trunk"}],
+   "explanation_en": "The elephant 卷 (curls) water up with its trunk, meaning the trunk bends to roll water up, a correct description. The shape of 卷 is like something bending - picture the trunk curling up water."
+  },
+  "ZS34_A4": {
+   "sentence_en": "The birds ___ (chirp) in the trees, and the sound is very pleasant.",
+   "hints": ["The blank means a bird making sound, forming 鸣叫. Which character (with the mouth radical 口 and 鸟 for bird) means 'to chirp'?"],
+   "keywords": [{"w":"鸣","py":"míng","en":"to chirp"},{"w":"鸟儿","py":"niǎo'ér","en":"bird"},{"w":"好听","py":"hǎotīng","en":"pleasant"}],
+   "explanation_en": "鸣 means a bird making sound, and 鸣叫 is a fixed word for birdsong, so it fits best. 鸣 has the mouth radical 口 - a bird making sound with its mouth is 鸣. All four are read míng, so judge by radical."
+  },
+  "ZS34_A5": {
+   "sentence_en": "We must ___ (protect) little animals and not harm them.",
+   "hints": ["The blank + 护 forms 保护, meaning to care for and keep from harm. Which character forms 保护 with 护?"],
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"小动物","py":"xiǎo dòngwù","en":"little animals"},{"w":"伤害","py":"shānghài","en":"to harm"}],
+   "explanation_en": "保护 is the fixed word for caring for something and keeping it from harm, so 保护小动物 (protect little animals) fits best. Note 护 already follows the blank, so find the character that pairs with 护 - 保护 is the fixed word."
+  },
+  "ZS34_B1": {
+   "sentence_en": "The way the puppy 摇尾 (wags its tail) is very cute.",
+   "hints": ["摇 is 2nd tone (yáo); 尾 is 3rd tone (wěi). Which choice is yáo + wěi?"],
+   "keywords": [{"w":"摇尾","py":"yáowěi","en":"to wag the tail"},{"w":"小狗","py":"xiǎogǒu","en":"puppy"},{"w":"可爱","py":"kě'ài","en":"cute"}],
+   "explanation_en": "摇 is read yáo (2nd tone) and 尾 is wěi (3rd tone), together yáo wěi. 摇 is 2nd tone (rising); 尾 is 3rd tone wěi (dip then rise) - the two tones differ."
+  },
+  "ZS34_B2": {
+   "sentence_en": "This 蝴蝶 (butterfly) has many beautiful colours on its wings.",
+   "hints": ["蝴 has initial h (hú); 蝶 has initial d (dié). Which choice is hú + dié?"],
+   "keywords": [{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"翅膀","py":"chìbǎng","en":"wings"},{"w":"颜色","py":"yánsè","en":"colour"}],
+   "explanation_en": "蝴 is read hú (initial h) and 蝶 is dié (initial d), together hú dié. 蝴蝶: h at the start (hú), d at the start (dié). Both characters have the insect radical 虫 - they are insects."
+  },
+  "ZS34_B3": {
+   "sentence_en": "The 青蛙 (frogs) in the pond croak all night long.",
+   "hints": ["青 is 1st tone (qīng); 蛙 is 1st tone (wā). Which choice is qīng + wā, both level?"],
+   "keywords": [{"w":"青蛙","py":"qīngwā","en":"frog"},{"w":"池塘","py":"chítáng","en":"pond"},{"w":"叫","py":"jiào","en":"to croak"}],
+   "explanation_en": "青 is read qīng (1st tone) and 蛙 is wā (1st tone), together qīng wā. Both characters of 青蛙 are 1st tone (level), so qīng wā is easy to remember - the same tone."
+  },
+  "ZS34_B4": {
+   "sentence_en": "Mum told me to go find the picture of the 长颈鹿 (giraffe).",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. A giraffe's neck is long, so read cháng. 颈 is jǐng, 鹿 is lù. Which is cháng jǐng lù?"],
+   "keywords": [{"w":"长颈鹿","py":"chángjǐnglù","en":"giraffe"},{"w":"图片","py":"túpiàn","en":"picture"},{"w":"脖子","py":"bózi","en":"neck"}],
+   "explanation_en": "In 长颈鹿, 长 is read cháng (2nd tone, length), not zhǎng (to grow); 颈 is jǐng (3rd tone); 鹿 is lù (4th tone), giving cháng jǐng lù. 长 is a polyphone: cháng = length (a long neck); zhǎng = to grow. Here it is long, so cháng."
+  },
+  "ZS34_C1": {
+   "sentence_en": "In the park Xiaoming found ___ (a group of) ants forming a long line to carry food.",
+   "hints": ["Clue: forming a long line means there are many. Which measure word means 'a group / swarm'?"],
+   "keywords": [{"w":"群","py":"qún","en":"a group; swarm"},{"w":"蚂蚁","py":"mǎyǐ","en":"ant"},{"w":"搬食物","py":"bān shíwù","en":"to carry food"}],
+   "explanation_en": "Forming a long line shows there are many ants, so the measure word 群 (a group/swarm) fits best. Ants always act in numbers, so use 群: 一群蚂蚁, 一群鸟, 一群羊. 条, 头 and 片 do not fit ants."
+  },
+  "ZS34_C2": {
+   "sentence_en": "The little bird is hurt; we ___ (hurriedly) took it to the vet.",
+   "hints": ["Clue: a hurt bird needs attention right away. Which word means 'hurriedly / at once'?"],
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"兽医","py":"shòuyī","en":"vet"}],
+   "explanation_en": "A hurt bird needs attention at once, and 连忙 means hurriedly and immediately, matching the urgency, so it fits best. An emergency plus an action -> 连忙. A hurt bird is an emergency, so hurry to the vet. 慢慢, 偶尔 and 忽然 do not fit."
+  },
+  "ZS34_C3": {
+   "sentence_en": "This puppy is very ___ (friendly); it even wags its tail at strangers.",
+   "hints": ["Clue: wagging its tail even at strangers shows it is kind and not fierce. Which word means 'friendly'?"],
+   "keywords": [{"w":"友善","py":"yǒushàn","en":"friendly"},{"w":"陌生人","py":"mòshēngrén","en":"stranger"},{"w":"摇尾巴","py":"yáo wěiba","en":"to wag the tail"}],
+   "explanation_en": "Wagging its tail even at strangers shows the puppy is kind to people and not fierce, so 友善 (friendly) fits best. Wagging the tail = a welcome, a friendly sign; doing so even to strangers -> 友善. 勇敢, 聪明 and 活泼 do not fit here."
+  },
+  "ZS34_C4": {
+   "sentence_en": "The owl ___ (often) comes out at night, and is rarely seen in the daytime.",
+   "hints": ["Clue: coming out at night is its regular habit. Which word means 'often / regularly'?"],
+   "keywords": [{"w":"经常","py":"jīngcháng","en":"often"},{"w":"猫头鹰","py":"māotóuyīng","en":"owl"},{"w":"夜晚","py":"yèwǎn","en":"night"}],
+   "explanation_en": "The owl's habit is to come out at night, which is a regular pattern, so 经常 (often, regularly) fits best. Habitual, regular behaviour -> 经常 or 常常. An owl coming out at night is a habit, so use 经常. 忽然, 已经 and 马上 do not fit."
+  },
+  "ZS34_C5": {
+   "sentence_en": "We went to the zoo to ___ (visit) and saw many different animals.",
+   "hints": ["The blank + 观 forms 参观, meaning to go and look around a place. Which character forms 参观 with 观?"],
+   "keywords": [{"w":"参观","py":"cānguān","en":"to visit"},{"w":"动物园","py":"dòngwùyuán","en":"zoo"},{"w":"动物","py":"dòngwù","en":"animal"}],
+   "explanation_en": "参观 is the fixed word for going to look around a place, so 参观动物园 (visit the zoo) fits best. Since 观 already follows the blank, fill in 参 to make 参观 - to go and look around a place."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“觅食”是寻找食物，所以“小鸟在草地上觅食”就是小鸟在草地上找东西吃。“奔跑、照顾”都不是“寻找食物”的意思。",
+   "explanation_en": "觅食 (mìshí) means to look for food, so 小鸟在草地上觅食 means the bird forages on the grass. 奔跑 (run) and 照顾 (look after) do not mean 'to look for food'.",
+   "stem_en": "the little bird forages on the grass",
+   "keywords": [{"w":"觅食","py":"mìshí","en":"to forage"},{"w":"草地","py":"cǎodì","en":"grass"}]
+  },
+  "2": {
+   "explanation": "“奔跑”是快速地跑，所以“马儿在草原上飞快地奔跑”就是马在草原上很快地跑。“觅食、温柔”都不是“快速地跑”的意思。",
+   "explanation_en": "奔跑 (bēnpǎo) means to run fast, so 马儿在草原上飞快地奔跑 means the horse gallops fast on the grassland. 觅食 (forage) and 温柔 (gentle) do not mean 'to run fast'.",
+   "stem_en": "the horse gallops fast on the grassland",
+   "keywords": [{"w":"奔跑","py":"bēnpǎo","en":"to run"},{"w":"草原","py":"cǎoyuán","en":"grassland"}]
+  },
+  "3": {
+   "explanation": "“温柔”是态度温和、动作轻柔，所以“妈妈温柔地抱着小猫”就是妈妈轻轻柔柔地抱着小猫。“觅食、照顾”都不是“温和轻柔”的意思。",
+   "explanation_en": "温柔 (wēnróu) means gentle in manner and soft in action, so 妈妈温柔地抱着小猫 means Mum gently cradles the kitten. 觅食 (forage) and 照顾 (look after) do not mean 'gentle and soft'.",
+   "stem_en": "Mum gently cradles the kitten",
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle"},{"w":"抱","py":"bào","en":"to hold"}]
+  },
+  "4": {
+   "explanation": "“照顾”是留心料理、看护，所以“好好照顾受伤的小鸟”就是细心地看护受伤的小鸟。“温柔、羽毛”都不是“看护料理”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to look after and care for, so 好好照顾受伤的小鸟 means to look after the injured bird well. 温柔 (gentle) and 羽毛 (feathers) do not mean 'to care for'.",
+   "stem_en": "to look after the injured bird well",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"受伤","py":"shòushāng","en":"injured"}]
+  },
+  "5": {
+   "explanation": "“羽毛”是鸟身上的毛，所以“孔雀的羽毛非常漂亮”就是孔雀身上的毛很好看。“觅食、奔跑”都不是“鸟身上的毛”。",
+   "explanation_en": "羽毛 (yǔmáo) means the feathers on a bird, so 孔雀的羽毛非常漂亮 means the peacock's feathers are very beautiful. 觅食 (forage) and 奔跑 (run) are not 'a bird's feathers'.",
+   "stem_en": "the peacock's feathers are very beautiful",
+   "keywords": [{"w":"羽毛","py":"yǔmáo","en":"feathers"},{"w":"孔雀","py":"kǒngquè","en":"peacock"}]
+  }
+ },
+ "craft": {
+  "ZS34_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The kitten is small in size.' and 'The kitten runs very fast.'",
+   "answer_en": "Although the kitten is small in size, it runs very fast.",
+   "tiles": ["虽然","小猫的个子很小，","但是","它跑得非常快。"],
+   "explanation_en": "虽然……但是…… sets the two clauses in a turn. The first says it is small, the second says it runs fast - the two contrast, joined by 虽然……但是……. Remember: 虽然 (a small drawback), 但是 (a big strength)."
+  },
+  "ZS34_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The rabbit is afraid of strangers.' and 'The rabbit hid in the corner of the cage.'",
+   "answer_en": "Because the rabbit is afraid of strangers, it hid in the corner of the cage.",
+   "tiles": ["因为","小兔子很害怕陌生人，","所以","它躲到笼子角落里去了。"],
+   "explanation_en": "因为……所以…… shows cause and result. Fear of strangers is the cause, hiding in the corner is the result, joined by 因为……所以……. Fear (cause) -> hiding (result)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Sunday, Dad took me to visit the zoo. We first came to the aviary and saw many ___ (brightly coloured) birds chirping in the trees.",
+   "hint": "Clue: it describes the birds' many bright colours. Which box word means 'brightly coloured'?",
+   "keywords": [{"w":"鲜艳","py":"xiānyàn","en":"brightly coloured"},{"w":"鸟儿","py":"niǎo'ér","en":"bird"}],
+   "explanation_en": "鲜艳 describes bright, vivid colours, matching the colourful birds, so it fits best."
+  },
+  "2": {
+   "sentence_en": "Next, we went to the elephant house, where an elephant was ___ (drawing up) water with its trunk to drink.",
+   "hint": "Clue: the trunk draws water in to drink. Which box word means 'to draw in / suck up'?",
+   "keywords": [{"w":"吸","py":"xī","en":"to draw in"},{"w":"鼻子","py":"bízi","en":"trunk"}],
+   "explanation_en": "The elephant 吸 (draws in) water with its trunk, meaning it sucks water into its trunk, an accurate description, so it fits best."
+  },
+  "3": {
+   "sentence_en": "My favourite were the monkeys; they leapt about ___ (lively) among the branches, very fun.",
+   "hint": "Clue: they leap about and love to move. Which box word means 'lively / active'?",
+   "keywords": [{"w":"活泼","py":"huópō","en":"lively"},{"w":"猴子","py":"hóuzi","en":"monkey"}],
+   "explanation_en": "The monkeys leap about and love to move, so 活泼 (lively, active) best describes their nature and behaviour, and it fits best."
+  },
+  "4": {
+   "sentence_en": "Dad told me we must ___ (protect) these animals and not harm them.",
+   "hint": "Clue: it pairs with 动物 (animals) and 'not harm'. Which box word means 'to protect'?",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"动物","py":"dòngwù","en":"animal"}],
+   "explanation_en": "保护动物 is a fixed pairing meaning to care for animals and not harm them, so 保护 fits best."
+  },
+  "5": {
+   "sentence_en": "Before leaving, I bought a book about animals, planning to read it ___ (slowly) at home.",
+   "hint": "Clue: reading it at home unhurriedly and carefully. Which box word means 'slowly'?",
+   "keywords": [{"w":"慢慢","py":"mànmàn","en":"slowly"},{"w":"阅读","py":"yuèdú","en":"to read"}],
+   "explanation_en": "Reading the book at home unhurriedly and carefully means 慢慢 (slowly), so it fits best."
+  }
+ },
+ "reading": {
+  "ZS34_G1": {
+   "stem_en": "What did Xiaohua do to help the stray dog?",
+   "answer_en": "He put his own bread in front of the dog.",
+   "keywords": [{"w":"面包","py":"miànbāo","en":"bread"},{"w":"流浪狗","py":"liúlànggǒu","en":"stray dog"},{"w":"书包","py":"shūbāo","en":"school bag"}],
+   "explanation": "这是细节题。短文说“小华从书包里拿出自己的面包，轻轻地放在狗的面前”，直接说明小华帮助流浪狗的做法是把自己的面包放在狗的面前，所以选(3)。(1)联系收容所是学校第二天做的、(2)帮狗洗毛文中没有提到。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaohua took his own bread from his bag and gently put it in front of the dog', directly stating how he helped, so (3). (1) contacting the shelter was done by the school next day, and (2) washing the dog's fur is not mentioned. Find the sentence that directly matches.",
+   "solution": {"evidence": "小华从书包里拿出自己的面包，轻轻地放在狗的面前"}
+  },
+  "ZS34_G2": {
+   "stem_en": "Why did the teacher remind the classmates to mind their safety?",
+   "answer_en": "Because the stray dog did not know the classmates, so getting close could be dangerous.",
+   "keywords": [{"w":"注意安全","py":"zhùyì ānquán","en":"to mind safety"},{"w":"靠近","py":"kàojìn","en":"to get close"},{"w":"危险","py":"wēixiǎn","en":"dangerous"}],
+   "explanation": "这是推断题。短文说老师说“你们爱护动物的心很好，但是我们也要注意安全，不能随便靠近不认识的狗”，可以推断老师提醒注意安全，是因为流浪狗不认识同学们，随便靠近可能有危险，所以选(1)。(2)狗没东西吃、(3)狗跑得快会撞人，文中都没有这样说。推断题要结合老师的话来想原因。",
+   "explanation_en": "This is an inference question. The teacher says 'your care for animals is good, but we must also mind our safety and not casually approach a dog we do not know', so the reason is that the stray dog did not know the students and getting close could be dangerous, so (1). (2) the dog having no food and (3) the dog being fast are not stated. Combine the teacher's words to reason out the cause.",
+   "solution": {"evidence": "但是我们也要注意安全，不能随便靠近不认识的狗。"}
+  },
+  "ZS34_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "We should care for animals, but also mind our safety.",
+   "keywords": [{"w":"爱护","py":"àihù","en":"to care for"},{"w":"动物","py":"dòngwù","en":"animal"},{"w":"安全","py":"ānquán","en":"safety"}],
+   "explanation": "这是主旨题。全文讲同学们爱护流浪狗、给它面包吃，老师提醒大家爱护动物的同时也要注意安全，不能随便靠近不认识的狗。可见短文是要告诉我们要爱护动物，但也要注意安全，所以选(2)。(1)把流浪狗带回家、(3)附近常有流浪动物都不符合文意或只是小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows the students caring for the stray dog and feeding it, and the teacher reminding them to care for animals while also minding safety, not approaching an unknown dog casually. So it tells us to care for animals but also mind safety, so (2). (1) taking the dog home and (3) strays being common are off-topic or minor, not the main idea.",
+   "solution": {"evidence": "你们爱护动物的心很好，但是我们也要注意安全，不能随便靠近不认识的狗。"}
+  },
+  "ZS34_H1": {
+   "stem_en": "Find a word in the passage that shows the state of Tiaotiao when Xiaowen found it: Tiaotiao ___ in the tree hollow and would not come out.",
+   "answer_en": "缩 (curled up)",
+   "keywords": [{"w":"缩","py":"suō","en":"to curl up"},{"w":"树洞","py":"shùdòng","en":"tree hollow"},{"w":"生病","py":"shēngbìng","en":"to be ill"}],
+   "explanation": "这是找词题。短文说“原来跳跳生病了，缩在树洞里不肯出来”，“缩”正好说明小文找到跳跳时它的状态——身体缩起来躲在树洞里，所以答案是“缩”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'it turned out Tiaotiao was ill, curled up in the tree hollow and unwilling to come out'; 缩 exactly describes its state when Xiaowen found it - body curled up hiding in the hollow, so the answer is 缩. Find the word that fits the situation.",
+   "solution": {"evidence": "缩在树洞里不肯出来"}
+  },
+  "ZS34_H2": {
+   "stem_en": "Why did Xiaowen name the squirrel 'Tiaotiao'?",
+   "answer_en": "Because Xiaowen saw this squirrel leaping about in the trees every day, so he named it 'Tiaotiao'.",
+   "keywords": [{"w":"松鼠","py":"sōngshǔ","en":"squirrel"},{"w":"跳来跳去","py":"tiàolái-tiàoqù","en":"to leap about"},{"w":"取名","py":"qǔmíng","en":"to name"}],
+   "explanation": "这是推断题。短文说“每天早上，小文都会看到一只松鼠在树上跳来跳去，找东西吃”，又说他给松鼠取名叫“跳跳”，可以推断小文取这个名字是因为松鼠总是在树上跳来跳去。推断题要把松鼠的样子和名字连起来想。",
+   "explanation_en": "This is an inference question. The passage says 'every morning Xiaowen saw a squirrel leaping about in the trees looking for food', and he named it 'Tiaotiao' (jump-jump). We can infer he chose the name because the squirrel was always leaping about. Link the squirrel's behaviour with the name.",
+   "solution": {"evidence": "每天早上，小文都会看到一只松鼠在树上跳来跳去"}
+  },
+  "ZS34_H3": {
+   "stem_en": "Mum told Xiaowen to contact the park keeper instead of touching the squirrel himself. What kind of person does this show Mum is?",
+   "answer_en": "It shows Mum is a wise person who knows how to protect wild animals, because she knows one should not touch wild animals casually and should use the right way to help them.",
+   "keywords": [{"w":"聪明","py":"cōngming","en":"wise"},{"w":"野生动物","py":"yěshēng dòngwù","en":"wild animal"},{"w":"管理员","py":"guǎnlǐyuán","en":"keeper"}],
+   "explanation": "这是推断题（评价人物）。短文说妈妈说“我们不能随便碰野生动物，但可以联系公园管理员来帮忙”，可以看出妈妈懂得不能随便碰野生动物，而要用正确的方法帮助它们，说明她是个聪明、懂得保护野生动物的人。答这类题要先说人物特点，再用文中的话作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. Mum says 'we cannot casually touch wild animals, but we can contact the park keeper for help', showing she knows not to touch wild animals carelessly but to help them the right way, so she is wise and knows how to protect wild animals. State the trait, then give her words as the reason.",
+   "solution": {"evidence": "我们不能随便碰野生动物，但可以联系公园管理员来帮忙。"}
+  }
+ }
+}

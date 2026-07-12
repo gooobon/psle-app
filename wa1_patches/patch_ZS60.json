@@ -1,0 +1,217 @@
+{
+ "setId": "ZS60",
+ "mcq": {
+  "ZS60_A1": {
+   "sentence_en": "Seeing a classmate fall, Xiaoming ___ (hurriedly) helped him pick up his books.",
+   "hints": ["连___ means to act at once without delay. Which character (with 心, the heart, in it) forms 连忙?"],
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"捡","py":"jiǎn","en":"to pick up"}],
+   "explanation_en": "连忙 means to act at once, matching Xiaoming going to help the moment he saw the fall. The four sound alike, but only 忙 joins 连 to make 连忙. Remember 忙 has 心 (the heart) in it - an anxious heart makes you hurry."
+  },
+  "ZS60_A2": {
+   "sentence_en": "Ahua ___ (lent) his own umbrella to a classmate caught in the rain, and walked home himself.",
+   "hints": ["The blank + 给 means to let someone use your thing. Which character (with the person radical 亻 plus 昔) means 'to lend'?"],
+   "keywords": [{"w":"借","py":"jiè","en":"to lend"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"淋雨","py":"línyǔ","en":"to be caught in the rain"}],
+   "explanation_en": "借 means to let someone use your own thing, so 借给 (lent to) fits giving the umbrella to a classmate. 借 has the person radical 亻 - lending is something between people. The four look alike; recognize 亻 + 昔 as 借."
+  },
+  "ZS60_A3": {
+   "sentence_en": "Xiaoli ___ (found) a wallet on the ground and handed it to the teacher at once.",
+   "hints": ["The blank + 到 means to take something up from the ground. Which character (with the hand radical 扌) means 'to pick up'?"],
+   "keywords": [{"w":"捡","py":"jiǎn","en":"to pick up"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"交给","py":"jiāogěi","en":"to hand to"}],
+   "explanation_en": "捡 means to take something up from the ground, so 捡到钱包 (found a wallet) makes sense. 捡 has the hand radical 扌 - taking something up from the ground with the hand. 检 has the wood radical and 验 the horse radical; neither is the action of picking up."
+  },
+  "ZS60_A4": {
+   "sentence_en": "Grandma is old and finds walking ___ (inconvenient), so Xiaoen helps her up and down the stairs every day.",
+   "hints": ["方___ means easy and handy. Which character (with the person radical 亻) forms 方便?"],
+   "keywords": [{"w":"方便","py":"fāngbiàn","en":"convenient"},{"w":"楼梯","py":"lóutī","en":"stairs"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "方便 is the fixed word for easy and handy, so 走路不方便 (finds walking hard) fits. The four sound alike; 便 has the person radical 亻 - what is convenient benefits people. Remember 便 = 人 + 更, making things easier for people."
+  },
+  "ZS60_A5": {
+   "sentence_en": "The classmates all ___ (praise) Xiaoen's spirit of gladly helping others.",
+   "hints": ["The blank + 扬 means to praise and commend. Which character (with the grain radical 禾) forms 称扬?"],
+   "keywords": [{"w":"称扬","py":"chēngyáng","en":"to praise"},{"w":"乐于助人","py":"lèyú-zhùrén","en":"glad to help others"},{"w":"精神","py":"jīngshén","en":"spirit"}],
+   "explanation_en": "称扬 means to praise and commend, matching everyone praising Xiaoen. 称 has the grain radical 禾 - like everyone praising together at harvest. The four look alike; recognize 禾 + 尔 as 称."
+  },
+  "ZS60_B1": {
+   "sentence_en": "Xiaoen 帮助 (helped) a classmate carry heavy boxes of books, working up a sweat.",
+   "hints": ["帮 has initial b (bāng), not p; 助 is retroflex zh (zhù), not flat z. Which choice is bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"书箱","py":"shūxiāng","en":"box of books"},{"w":"满头大汗","py":"mǎntóu-dàhàn","en":"dripping with sweat"}],
+   "explanation_en": "帮 is read bāng (initial b) and 助 is zhù (initial zh, 4th tone), together bāng zhù. Tell aspirated p from unaspirated b: 帮 bāng is unaspirated; 助 zhù is retroflex zh, not flat z."
+  },
+  "ZS60_B2": {
+   "sentence_en": "Xiaoli handed the wallet she had 拾到 (picked up) to the teacher, who praised her honesty.",
+   "hints": ["拾 is retroflex sh (shí), not flat s; 到 is dào (4th tone). Which choice is shí + dào?"],
+   "keywords": [{"w":"拾到","py":"shídào","en":"to pick up"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"诚实","py":"chéngshí","en":"honest"}],
+   "explanation_en": "拾 is read shí (retroflex sh, 2nd tone) and 到 is dào (4th tone), together shí dào. Tell retroflex sh from flat s: 拾 shí is retroflex - curl the tongue up."
+  },
+  "ZS60_B3": {
+   "sentence_en": "Grandma 感激 (gratefully) held Xiaoen's hand, with tears in her eyes.",
+   "hints": ["感 has initial g (gǎn, 3rd tone), not k; 激 has initial j (jī, 1st tone). Which choice is gǎn + jī?"],
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"握住","py":"wòzhù","en":"to hold"},{"w":"泪水","py":"lèishuǐ","en":"tears"}],
+   "explanation_en": "感 is read gǎn (3rd tone) and 激 is jī (1st tone), together gǎn jī. 感 gǎn is 3rd tone with initial g; 激 jī is 1st tone with initial j."
+  },
+  "ZS60_B4": {
+   "sentence_en": "This good deed 的确 (indeed) moved the whole class.",
+   "hints": ["的 is a polyphone: the light tone de as a particle; dí (2nd tone) in 的确. Which choice is dí + què?"],
+   "keywords": [{"w":"的确","py":"díquè","en":"indeed"},{"w":"好事","py":"hǎoshì","en":"good deed"},{"w":"感动","py":"gǎndòng","en":"moved"}],
+   "explanation_en": "In the word 的确, 的 is read dí (2nd tone), not the light tone de; 确 is què (4th tone), giving dí què. 的 is a polyphone: as a particle it is the light tone de (红色的); in 的确 it is dí (2nd tone). Watch out for 的确."
+  },
+  "ZS60_C1": {
+   "sentence_en": "Seeing the old granny carrying heavy things, Xiaoen ___ (of her own accord) stepped up to help her.",
+   "hints": ["Clue: no one asked her; she decided to help herself. Which word means 'on one's own initiative'?"],
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"老奶奶","py":"lǎonǎinai","en":"old granny"},{"w":"帮","py":"bāng","en":"to help"}],
+   "explanation_en": "No one asked Xiaoen; she decided to help herself, which is 主动. 主动 = doing it without being told; 主 means being one's own master, 动 means to act - together, deciding to act oneself. 随便, 勉强 and 故意 do not fit."
+  },
+  "ZS60_C2": {
+   "sentence_en": "Mum bought ___ (a basket of) apples and shared them with the neighbours' children.",
+   "hints": ["Clue: apples held in a basket. Which measure word means 'a basketful'?"],
+   "keywords": [{"w":"一篮","py":"yì lán","en":"a basket of"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"邻居","py":"línjū","en":"neighbour"}],
+   "explanation_en": "The apples are in a basket, so 一篮 (a basketful) fits best. Apples are round: a single one is 一个, but in a basket it is 一篮. Picture Mum carrying a full basket of apples. 一条, 一粒 and 一张 do not fit."
+  },
+  "ZS60_C3": {
+   "sentence_en": "Xiaoming picked up the eraser his classmate dropped and ___ (returned it) to him.",
+   "hints": ["Clue: the word is directly followed by a person (他). Which word means 'to give back to (someone)'?"],
+   "keywords": [{"w":"还给","py":"huángěi","en":"to return to"},{"w":"橡皮","py":"xiàngpí","en":"eraser"},{"w":"同学","py":"tóngxué","en":"classmate"}],
+   "explanation_en": "The eraser belongs to the classmate, and Xiaoming picks it up and gives it back to him; 还给 is the most natural, taking a person directly after it (还给他). 还给 + a person is the commonest spoken pairing: 还给他, 还给妈妈 - 给 is followed directly by a person."
+  },
+  "ZS60_C4": {
+   "sentence_en": "Ahua's one small act ___ (moved) the whole class.",
+   "hints": ["Clue: a kind act touches people's hearts. Which word means 'to move / touch (someone's heart)'?"],
+   "keywords": [{"w":"感动","py":"gǎndòng","en":"to move; touch"},{"w":"举动","py":"jǔdòng","en":"act"},{"w":"全班","py":"quánbān","en":"the whole class"}],
+   "explanation_en": "A kind act touches people's hearts, and 感动了全班同学 (moved the whole class) is the fixed pairing. A kind act warms the heart = 感动. Fixed pairing: 感动 + a person / everyone. 打动, 移动 and 推动 do not fit here."
+  },
+  "ZS60_C5": {
+   "sentence_en": "Xiaoen ___ (patiently) helped the old granny to the bus stop.",
+   "hints": ["Clue: helping an old person walk means going slowly without rushing. Which word means 'patient'?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"老奶奶","py":"lǎonǎinai","en":"old granny"},{"w":"公共汽车站","py":"gōnggòng qìchēzhàn","en":"bus stop"}],
+   "explanation_en": "Helping an old person walk means going slowly without rushing, so 耐心 (patient) fits best. 耐心 = able to wait without fretting. Helping an old person walk means going slowly - exactly what patience looks like. 认真, 仔细 and 小心 do not stress this calm, unhurried help."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“举手”是把手抬起来表示要发言或提问，所以“向老师举手”就是抬起手来请求发言。“道谢、帮忙”都不是“抬手请求发言”的意思。",
+   "explanation_en": "举手 (jǔshǒu) means to raise your hand to speak or ask, so 向老师举手 means to raise your hand to the teacher. 道谢 (thank) and 帮忙 (help) do not mean 'to raise a hand to speak'.",
+   "stem_en": "to raise one's hand to the teacher",
+   "keywords": [{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"老师","py":"lǎoshī","en":"teacher"}]
+  },
+  "2": {
+   "explanation": "“道谢”是对别人说谢谢、表示感激，所以“向同学道谢”就是向帮过自己的同学说谢谢。“举手、点头”都不是“说谢谢”的意思。",
+   "explanation_en": "道谢 (dàoxiè) means to say thank you, so 向同学道谢 means to thank a classmate. 举手 (raise hand) and 点头 (nod) do not mean 'to say thanks'.",
+   "stem_en": "to thank a classmate",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to say thanks"},{"w":"同学","py":"tóngxué","en":"classmate"}]
+  },
+  "3": {
+   "explanation": "“帮忙”是给别人做事出力，所以“请你帮忙我搬书箱”就是请你来出一份力，帮着把书箱搬走。“道谢、鼓励”都不是“出力做事”的意思。",
+   "explanation_en": "帮忙 (bāngmáng) means to help someone with a task, so 请你帮忙我搬书箱 means please help me carry the box of books. 道谢 (thank) and 鼓励 (encourage) do not mean 'to help with a task'.",
+   "stem_en": "please help me carry the box of books",
+   "keywords": [{"w":"帮忙","py":"bāngmáng","en":"to help"},{"w":"书箱","py":"shūxiāng","en":"box of books"}]
+  },
+  "4": {
+   "explanation": "“鼓励”是给别人打气、让他更有信心，所以“老师鼓励同学们继续努力”就是老师给同学加油，让他们有信心努力下去。“举手、温暖”都不是“打气加油”的意思。",
+   "explanation_en": "鼓励 (gǔlì) means to encourage and boost confidence, so 老师鼓励同学们继续努力 means the teacher encourages the students to keep trying. 举手 (raise hand) and 温暖 (warm) do not mean 'to boost someone's spirits'.",
+   "stem_en": "the teacher encourages the students to keep trying",
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"努力","py":"nǔlì","en":"to try hard"}]
+  },
+  "5": {
+   "explanation": "“温暖”是心里觉得暖暖的、很舒服，所以“心里感到温暖”就是心里觉得暖暖的、被感动。“帮忙、点头”都不是“心里暖暖的”的意思。",
+   "explanation_en": "温暖 (wēnnuǎn) means feeling warm and comforted inside, so 心里感到温暖 means to feel warmth in one's heart. 帮忙 (help) and 点头 (nod) do not mean 'a warm feeling inside'.",
+   "stem_en": "to feel warmth in one's heart",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"心里","py":"xīnlǐ","en":"in one's heart"}]
+  }
+ },
+ "craft": {
+  "ZS60_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'It is raining heavily.' and 'Xiaoen still lent her umbrella to a classmate.'",
+   "answer_en": "Although it is raining heavily, Xiaoen still lent her umbrella to a classmate.",
+   "tiles": ["虽然","天上下着大雨，","但是","小恩还是把雨伞借给了同学。"],
+   "explanation_en": "虽然……但是…… names a difficulty first, then something still done. '虽然下着大雨' (although it rains heavily) is the difficulty, '但是小恩还是借出雨伞' (but she still lent her umbrella) is the kind act done anyway."
+  },
+  "ZS60_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Ahua helped a classmate carry a box of books.' and 'Ahua helped a classmate clean the classroom.'",
+   "answer_en": "Ahua not only helped a classmate carry a box of books, but also helped clean the classroom.",
+   "tiles": ["阿华","不但","帮同学搬书箱，","还","帮同学打扫教室。"],
+   "explanation_en": "不但……还…… means on top of the first thing there is a second, a step-up. Ahua did not just one good deed but another as well, showing his willing spirit."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school, it suddenly rained heavily. Xiaoen saw her classmate Lin standing at the school gate with no umbrella, with an ___ (anxious) look on his face.",
+   "hint": "Clue: without an umbrella he worries about getting home. Which box word means 'anxious'?",
+   "keywords": [{"w":"着急","py":"zháojí","en":"anxious"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"}],
+   "explanation_en": "Classmate Lin has no umbrella and does not know how to get home, so his face shows 着急 (anxiety), which fits best after '露出……的表情'."
+  },
+  "2": {
+   "sentence_en": "Xiaoen stepped forward and ___ (at once) handed her own umbrella to Classmate Lin, saying: 'You use it first; I'll wait for the rain to stop.'",
+   "hint": "Clue: seeing he needs help, she acts without delay. Which box word means 'at once / hurriedly'?",
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"at once"},{"w":"递","py":"dì","en":"to hand over"}],
+   "explanation_en": "Seeing Classmate Lin anxious, Xiaoen steps forward and hands over the umbrella without delay, so 连忙 (at once) fits best."
+  },
+  "3": {
+   "sentence_en": "Classmate Lin took the umbrella and said thank you ___ (gratefully).",
+   "hint": "Clue: after being helped, his heart is full of thanks. Which box word means 'grateful'?",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"谢谢","py":"xièxie","en":"thanks"}],
+   "explanation_en": "Taking the umbrella, Classmate Lin is full of thanks toward Xiaoen, so 感激地说了声谢谢 (said thank you gratefully) fits best."
+  },
+  "4": {
+   "sentence_en": "Xiaoen stood under the eaves, yet felt ___ (happy) inside.",
+   "hint": "Clue: though she must wait for the rain to stop, she is glad to have helped. Which box word means 'happy'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"屋檐","py":"wūyán","en":"eaves"}],
+   "explanation_en": "Xiaoen helped her classmate and, though she must wait for the rain, feels joyful, so 感到高兴 (felt happy) fits best."
+  },
+  "5": {
+   "sentence_en": "The teacher later learned of this and ___ (praised) Xiaoen's spirit of gladly helping others in class.",
+   "hint": "Clue: the teacher commends Xiaoen's spirit in front of the class. Which box word means 'to praise'?",
+   "keywords": [{"w":"称赞","py":"chēngzàn","en":"to praise"},{"w":"精神","py":"jīngshén","en":"spirit"}],
+   "explanation_en": "The teacher commends Xiaoen's spirit in front of the class, and 称赞……精神 (praise someone's spirit) is a fixed pairing, so 称赞 fits best."
+  }
+ },
+ "reading": {
+  "ZS60_G1": {
+   "stem_en": "Why did Xiaowen almost shed tears?",
+   "answer_en": "Because she knocked over her lunch box, spilling food all over the floor, and did not know what to do.",
+   "keywords": [{"w":"饭盒","py":"fànhé","en":"lunch box"},{"w":"碰倒","py":"pèngdǎo","en":"to knock over"},{"w":"眼泪","py":"yǎnlèi","en":"tears"}],
+   "explanation": "这是细节题。短文说“小文……不小心把饭盒碰倒了，饭菜撒了一地。她急得不知道怎么办，眼泪差点儿掉下来”，直接说明她差点掉眼泪是因为饭盒碰倒、饭菜撒了一地、不知道怎么办，所以选(1)。(2)忘记带午饭、(3)阿明不肯帮她，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaowen accidentally knocked over her lunch box, spilling food all over the floor. She was so anxious she did not know what to do, and almost shed tears', directly stating the reason, so (1). (2) forgetting her lunch and (3) Aming refusing to help are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "不小心把饭盒碰倒了，饭菜撒了一地。她急得不知道怎么办，眼泪差点儿掉下来"}
+  },
+  "ZS60_G2": {
+   "stem_en": "From what Aming said, what kind of person can we tell he is?",
+   "answer_en": "Aming is someone who feels helping classmates is only right and is glad to help others.",
+   "keywords": [{"w":"互相帮助","py":"hùxiāng bāngzhù","en":"to help each other"},{"w":"应该","py":"yīnggāi","en":"only right"},{"w":"乐于助人","py":"lèyú-zhùrén","en":"glad to help"}],
+   "explanation": "这是推断题。短文说阿明帮小文擦干净地板、分午饭给她，还笑着说“没关系，大家是同班同学，互相帮助是应该的”。从他的话和行为可以推断，阿明是一个觉得帮助同学是应该的、乐于助人的人，所以选(2)。(1)骄傲爱表现、(3)只帮好朋友，都和他的话不符。推断题要从人物说的话来判断性格。",
+   "explanation_en": "This is an inference question. The passage says Aming helped Xiaowen clean the floor, shared his lunch, and smiled saying 'it's okay, we are classmates, helping each other is only right'. From his words and actions, he is someone who feels helping classmates is right and is glad to help, so (2). (1) proud and showy and (3) helping only close friends do not fit his words. Judge character from what he says.",
+   "solution": {"evidence": "没关系，大家是同班同学，互相帮助是应该的。"}
+  },
+  "ZS60_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "A small kind act can move others and make them want to help people too.",
+   "keywords": [{"w":"善举","py":"shànjǔ","en":"kind act"},{"w":"感动","py":"gǎndòng","en":"to move"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是主旨题。全文讲小文打翻饭盒不知所措，阿明主动帮她擦干净地板、分午饭给她，还说互相帮助是应该的；这件小事让小文记在心里，她决定以后也要像阿明一样乐于帮助别人。可见短文是要告诉我们一个小小的善举可以感动别人、让人也想去帮助他人，所以选(3)。(1)吃饭要小心、(2)同学之间不用说谢谢都只是情节里的小点或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaowen at a loss after spilling her food, Aming helping clean up and sharing his lunch, saying helping each other is only right; Xiaowen keeps this in mind and resolves to help others as Aming did. So it tells us a small kind act can move others and make them want to help too, so (3). (1) be careful eating and (2) no need to thank classmates are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "她决定以后也要像阿明一样，乐于帮助身边的人。"}
+  },
+  "ZS60_H1": {
+   "stem_en": "Find a word in the passage close in meaning to 迷惑 (puzzled).",
+   "answer_en": "迷茫 (bewildered)",
+   "keywords": [{"w":"迷茫","py":"mímáng","en":"bewildered"},{"w":"迷惑","py":"míhuò","en":"puzzled"},{"w":"张望","py":"zhāngwàng","en":"to look around"}],
+   "explanation": "这是近义词题。“迷惑”指心里不明白、不知所措，短文中说老爷爷“一脸迷茫地左右张望”，“迷茫”和“迷惑”意思相近，都是心里没有主意、不知怎么办，所以答案是“迷茫”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 迷惑 means puzzled and at a loss; in the passage the grandpa 'looked around with a bewildered face'. 迷茫 and 迷惑 are close in meaning, both being at a loss and unsure what to do, so the answer is 迷茫. Find the closest word in the passage.",
+   "solution": {"evidence": "一脸迷茫地左右张望"}
+  },
+  "ZS60_H2": {
+   "stem_en": "Why did the old grandpa not dare to cross the road by himself?",
+   "answer_en": "Because there was too much traffic on the road, the grandpa did not dare to walk across by himself.",
+   "keywords": [{"w":"车辆","py":"chēliàng","en":"vehicles"},{"w":"过马路","py":"guò mǎlù","en":"to cross the road"},{"w":"不敢","py":"bùgǎn","en":"to not dare"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“老爷爷说他想过马路，可是车辆太多，不敢走”，说明老爷爷不敢自己过马路是因为马路上车辆太多。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'the grandpa said he wanted to cross, but there were too many vehicles and he dared not walk', so he did not dare because of the heavy traffic. State the reason in a full sentence.",
+   "solution": {"evidence": "老爷爷说他想过马路，可是车辆太多，不敢走"}
+  },
+  "ZS60_H3": {
+   "stem_en": "Xiaojie was late because he helped the old grandpa, so why did he still feel it was worth it?",
+   "answer_en": "Because Xiaojie helped a grandpa who needed help and did a good deed, he felt happy inside, so he thought it was worth it.",
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"值得","py":"zhídé","en":"worth it"},{"w":"迟到","py":"chídào","en":"to be late"}],
+   "explanation": "这是推断题。短文最后说“虽然小杰因此迟到了几分钟，但他心里觉得这件事做得非常值得”，加上他扶老爷爷过马路、老爷爷感激地夸他是好孩子。可以推断他觉得值得，是因为帮助了有需要的老爷爷、做了一件好事，心里感到高兴。推断题要把他的善举和心里的感受连起来想。",
+   "explanation_en": "This is an inference question. The passage ends with 'although Xiaojie was a few minutes late, he felt it was very much worth doing', and he had helped the grandpa cross while the grandpa gratefully called him a good child. We can infer he felt it worth it because he helped someone in need and did a good deed, feeling happy inside. Link his kind act with his feeling.",
+   "solution": {"evidence": "虽然小杰因此迟到了几分钟，但他心里觉得这件事做得非常值得。"}
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "setId": "ZS40",
+ "mcq": {
+  "ZS40_A1": {
+   "sentence_en": "The old building in the estate ___ (became) a beautiful new one, and everyone was happy.",
+   "hints": ["The blank + 成 means to turn from one thing into another. Which character (top 亦, bottom 攴) means 'to change'?"],
+   "keywords": [{"w":"变","py":"biàn","en":"to change"},{"w":"旧楼","py":"jiù lóu","en":"old building"},{"w":"新楼","py":"xīn lóu","en":"new building"}],
+   "explanation_en": "变成 means to turn from one thing into another, matching the old building becoming a new one, so 变 fits. 变 has 亦 on top and 攴 (a light tap) below - a light tap makes it different, so 变. The four look alike, so judge by meaning."
+  },
+  "ZS40_A2": {
+   "sentence_en": "Dad ___ (encourages) me to study hard and contribute to the country in the future.",
+   "hints": ["The blank + 励 means to give confidence and drive. Which character shows a drum, used in 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"读书","py":"dúshū","en":"to study"},{"w":"贡献","py":"gòngxiàn","en":"to contribute"}],
+   "explanation_en": "鼓励 means to give someone confidence to do something, matching Dad encouraging me to study, so 鼓 fits. 鼓 is like a drum - beating a drum cheers people on, so 鼓励 = to give strength. Judge by radical, since the four sound alike."
+  },
+  "ZS40_A3": {
+   "sentence_en": "Mum ___ (cleaned) the home spotless, so we live in comfort.",
+   "hints": ["The blank names the action of cleaning a place. Which two-character word (with the hand radical 扌 and 扫 for sweeping) means 'to clean'?"],
+   "keywords": [{"w":"打扫","py":"dǎsǎo","en":"to clean"},{"w":"干净","py":"gānjìng","en":"clean"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "打扫 means to clean, so cleaning the home makes it clean, which fits. The 扫 of 打扫 is the 扫 of sweeping - to sweep the floor is to 打扫. Use the radical of the second character to help remember."
+  },
+  "ZS40_A4": {
+   "sentence_en": "Little brother used to be very ___ (timid); now he has become generous, surprising everyone.",
+   "hints": ["The blank describes someone unbrave and easily afraid, contrasting with 'generous'. Which word (with the flesh radical 月) means 'timid'?"],
+   "keywords": [{"w":"胆小","py":"dǎnxiǎo","en":"timid"},{"w":"大方","py":"dàfang","en":"generous"},{"w":"惊喜","py":"jīngxǐ","en":"pleasant surprise"}],
+   "explanation_en": "胆小 describes someone unbrave and easily afraid, contrasting with 'became generous', so it fits. 胆 has the flesh radical 月 - 胆 is an organ in the body, and a small 胆 means timid. Note the 月 radical."
+  },
+  "ZS40_A5": {
+   "sentence_en": "This empty plot was ___ (turned) into a beautiful garden, and everyone likes to come and play here.",
+   "hints": ["The blank + 成 means to change the place into a new form. Which character (left 己) means 'to change / alter'?"],
+   "keywords": [{"w":"改","py":"gǎi","en":"to change; alter"},{"w":"空地","py":"kòngdì","en":"empty plot"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation_en": "改成 means to turn a place into a new form, so 改成花园 (turned into a garden) makes sense. 改 has 己 on the left - changing oneself is 改. Note the difference from 概, 溉, 戒 by the radical: 改 has no water radical or 攴 radical."
+  },
+  "ZS40_B1": {
+   "sentence_en": "The small town underwent a great 变化 (change); the old houses are all gone.",
+   "hints": ["变 is 4th tone (biàn); 化 is 4th tone (huà). Which choice is biàn + huà, both falling?"],
+   "keywords": [{"w":"变化","py":"biànhuà","en":"change"},{"w":"小镇","py":"xiǎozhèn","en":"small town"},{"w":"旧房子","py":"jiù fángzi","en":"old house"}],
+   "explanation_en": "变 is read biàn (4th tone) and 化 is huà (4th tone), together biàn huà. Both characters of 变化 are 4th tone, falling like going down from a height."
+  },
+  "ZS40_B2": {
+   "sentence_en": "The teacher 称赞 (praised) Xiaowen for making great progress, and Xiaowen smiled happily.",
+   "hints": ["称 is retroflex ch (chēng, 1st tone); 赞 is flat z (zàn, 4th tone). Which choice is chēng + zàn?"],
+   "keywords": [{"w":"称赞","py":"chēngzàn","en":"to praise"},{"w":"进步","py":"jìnbù","en":"progress"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "称 is read chēng (retroflex ch, 1st tone) and 赞 is zàn (flat z, 4th tone), together chēng zàn. 称 is retroflex ch, 1st tone (level); 赞 is flat z, 4th tone (falling). Do not mix up ch and z."
+  },
+  "ZS40_B3": {
+   "sentence_en": "It is exciting to wonder what colour this flower will become after 长大 (growing up).",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"颜色","py":"yánsè","en":"colour"},{"w":"期待","py":"qīdài","en":"to look forward to"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), not cháng (length); 大 is dà. 长 is a polyphone: cháng = length (adjective); zhǎng = to grow (verb). Here it is a verb, so read zhǎng."
+  },
+  "ZS40_B4": {
+   "sentence_en": "Mum 整理 (tidied) the living room neatly, and the home looked much cleaner.",
+   "hints": ["整 is retroflex zh (zhěng, 3rd tone); 理 is lǐ (3rd tone). Which choice is zhěng + lǐ, both dipping?"],
+   "keywords": [{"w":"整理","py":"zhěnglǐ","en":"to tidy"},{"w":"客厅","py":"kètīng","en":"living room"},{"w":"整洁","py":"zhěngjié","en":"neat and clean"}],
+   "explanation_en": "整 is read zhěng (retroflex zh, 3rd tone) and 理 is lǐ (3rd tone), together zhěng lǐ. Both characters of 整理 are 3rd tone, a low bend that dips then rises. Note 整 is retroflex zh."
+  },
+  "ZS40_C1": {
+   "sentence_en": "After a month of practice, Xiaoming plays the piano ___ (with improvement), and the teacher is very pleased.",
+   "hints": ["Clue: after practice the teacher is pleased, so his level has risen. Which word means 'to improve / progress' - a result?"],
+   "keywords": [{"w":"进步","py":"jìnbù","en":"progress"},{"w":"钢琴","py":"gāngqín","en":"piano"},{"w":"满意","py":"mǎnyì","en":"pleased"}],
+   "explanation_en": "The blank after '弹得___了' needs a word for a result or level; after practice the teacher is pleased, so the level rose, and 进步 (progress) fits best. 进步 = a better result; 努力 / 认真 describe the process, not the result. 高兴 does not fit here."
+  },
+  "ZS40_C2": {
+   "sentence_en": "The garden is ___ (in full bloom) with colourful flowers, extremely beautiful.",
+   "hints": ["Clue: the flowers open lush and abundant. Which word means 'to bloom in full'?"],
+   "keywords": [{"w":"盛开","py":"shèngkāi","en":"to bloom fully"},{"w":"五颜六色","py":"wǔyánliùsè","en":"colourful"},{"w":"美丽","py":"měilì","en":"beautiful"}],
+   "explanation_en": "盛开 means the flowers bloom lush and abundant, so 盛开着五颜六色的花 (in full bloom with colourful flowers) is a natural pairing, and it fits best. 盛开 describes flowers blooming abundantly. Seeing 'colourful flowers', think 盛开. 生长, 飘落 and 枯萎 do not fit."
+  },
+  "ZS40_C3": {
+   "sentence_en": "This ___ (measure word) big tree has grown for a hundred years, with a very thick trunk.",
+   "hints": ["Clue: the measure word for a tree. Which one is used for trees and plants?"],
+   "keywords": [{"w":"棵","py":"kē","en":"measure word for trees"},{"w":"大树","py":"dàshù","en":"big tree"},{"w":"树干","py":"shùgàn","en":"trunk"}],
+   "explanation_en": "The measure word 棵 is used for trees and plants, so 一棵大树 is correct. Measure-word rhyme: 一棵树, 一条鱼, 一片叶, 一朵花. Seeing 'tree', use 棵. 条, 片 and 朵 do not fit a tree."
+  },
+  "ZS40_C4": {
+   "sentence_en": "Xiaohua ___ (carefully) tidied the old things in the room and arranged them neatly.",
+   "hints": ["Clue: arranging things neatly shows careful, attentive work. Which word means 'careful / meticulous'?"],
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"整理","py":"zhěnglǐ","en":"to tidy"},{"w":"整齐","py":"zhěngqí","en":"neat"}],
+   "explanation_en": "Arranging things neatly shows careful, attentive work, so 仔细 (careful, meticulous) fits best. Tidying neatly = working carefully = 仔细. 马虎 is the opposite; 懒洋洋 and 慢吞吞 describe a state, not the attitude."
+  },
+  "ZS40_C5": {
+   "sentence_en": "Little sister's interest ___ (in) drawing grows greater and greater; she draws one every day after school.",
+   "hints": ["This is the fixed pattern 对……的兴趣 (interest in something). Which character goes before 画画 to form this pattern?"],
+   "keywords": [{"w":"对","py":"duì","en":"toward; in"},{"w":"兴趣","py":"xìngqù","en":"interest"},{"w":"画画","py":"huàhuà","en":"to draw"}],
+   "explanation_en": "对……的兴趣 is a fixed pattern meaning interest in something, so 对画画的兴趣 (interest in drawing) makes sense. Fixed pattern: 对 + a thing + 的兴趣越来越大. Seeing 兴趣, think 对. 给, 跟 and 把 do not fit this pattern."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“保护”是爱护、不让它受破坏，所以“保护环境”就是爱护周围的环境，不让它变坏。“进步、发现”都不是“爱护不受破坏”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护环境 means to protect the environment. 进步 (progress) and 发现 (discover) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the environment",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}]
+  },
+  "2": {
+   "explanation": "“整洁”是干净又整齐，所以“房间整洁”就是房间干净整齐、不乱。“进步、发现”都不是“干净整齐”的意思。",
+   "explanation_en": "整洁 (zhěngjié) means clean and tidy, so 房间整洁 means the room is clean and tidy. 进步 (progress) and 发现 (discover) do not mean 'clean and tidy'.",
+   "stem_en": "the room is clean and tidy",
+   "keywords": [{"w":"整洁","py":"zhěngjié","en":"clean and tidy"},{"w":"房间","py":"fángjiān","en":"room"}]
+  },
+  "3": {
+   "explanation": "“发现”是找到、注意到原来没注意的东西，所以“发现新事物”就是注意到、找到了新的东西。“保护、努力”都不是“找到新东西”的意思。",
+   "explanation_en": "发现 (fāxiàn) means to find or notice something not noticed before, so 发现新事物 means to discover new things. 保护 (protect) and 努力 (effort) do not mean 'to find something new'.",
+   "stem_en": "to discover new things",
+   "keywords": [{"w":"发现","py":"fāxiàn","en":"to discover"},{"w":"新事物","py":"xīn shìwù","en":"new things"}]
+  },
+  "4": {
+   "explanation": "“努力”是用心用力去做，所以“努力学习”就是认认真真、用尽力气地学习。“保护、进步”都不是“用力去做”的意思。",
+   "explanation_en": "努力 (nǔlì) means to work with heart and strength, so 努力学习 means to study hard. 保护 (protect) and 进步 (progress) do not mean 'to put in effort'.",
+   "stem_en": "to study hard",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"学习","py":"xuéxí","en":"to study"}]
+  },
+  "5": {
+   "explanation": "“进步”是比以前做得更好，所以“取得进步”就是在学习或做事上比以前有了提高。“保护、发现”都不是“比以前更好”的意思。",
+   "explanation_en": "进步 (jìnbù) means doing better than before, so 取得进步 means to make progress. 保护 (protect) and 发现 (discover) do not mean 'to do better than before'.",
+   "stem_en": "to make progress",
+   "keywords": [{"w":"进步","py":"jìnbù","en":"progress"},{"w":"取得","py":"qǔdé","en":"to achieve"}]
+  }
+ },
+ "craft": {
+  "ZS40_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'This place used to be a wasteland.' and 'Now it has become a beautiful park.'",
+   "answer_en": "Although this place used to be a wasteland, now it has become a beautiful park.",
+   "tiles": ["这里","虽然","以前是一片荒地，","但是","现在已经变成了美丽的公园。"],
+   "explanation_en": "虽然……但是…… sets the two clauses in a turn. The first says it used to be wasteland, the second says now it is a park - the change contrasts, joined by 虽然……但是……. The two words are used together."
+  },
+  "ZS40_E2": {
+   "question_en": "Combine these two sentences using the connector 只要……就…… (as long as…, …): 'You keep practising every day.' and 'Your drawing will surely get better and better.'",
+   "answer_en": "As long as you keep practising every day, your drawing will surely get better and better.",
+   "tiles": ["只要","你每天坚持练习，","你的画画","就","一定会越来越好。"],
+   "explanation_en": "只要……就…… means when the condition is met, the result follows. '只要你每天坚持练习' (as long as you practise daily) is the condition, '就一定会越来越好' (it will get better) is the result. 只要 + condition, 就 + result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "There was an empty plot in the estate; it used to be overgrown with weeds, and everyone was ___ (unwilling) to go there.",
+   "hint": "Clue: the plot was overgrown and poor, so no one wanted to go. Which box word means 'unwilling'?",
+   "keywords": [{"w":"不愿","py":"búyuàn","en":"unwilling"},{"w":"空地","py":"kòngdì","en":"empty plot"}],
+   "explanation_en": "The plot was overgrown with weeds and poor, so everyone was naturally 不愿 (unwilling) to go there, which fits best."
+  },
+  "2": {
+   "sentence_en": "Later, the residents ___ (together, of one mind) cleaned the plot and planted all kinds of flowers and grass.",
+   "hint": "Clue: everyone worked with one heart to clean it. Which box word means 'of one mind / united'?",
+   "keywords": [{"w":"齐心","py":"qíxīn","en":"of one mind"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}],
+   "explanation_en": "齐心 means everyone working with one heart; the residents cleaned together as one, showing joint effort, so 齐心 fits best."
+  },
+  "3": {
+   "sentence_en": "After everyone's ___ (tending), the plot became a beautiful little garden.",
+   "hint": "Clue: after planting, the flowers and grass need looking after. Which box word means 'to tend / take care of'?",
+   "keywords": [{"w":"照料","py":"zhàoliào","en":"to tend"},{"w":"花草","py":"huācǎo","en":"flowers and grass"}],
+   "explanation_en": "After planting, the flowers and grass need 照料 (tending, looking after) before the plot can become a garden, so it fits best."
+  },
+  "4": {
+   "sentence_en": "The flowers in the garden bloom ___ (vying with one another), and their fragrance drifts everywhere.",
+   "hint": "Clue: it pairs with 盛开 - flowers competing to open. Which box word means 'vying / competing with one another'?",
+   "keywords": [{"w":"竞相","py":"jìngxiāng","en":"vying with one another"},{"w":"盛开","py":"shèngkāi","en":"to bloom fully"}],
+   "explanation_en": "竞相盛开 describes flowers competing to open, matching the beautiful scene with fragrance drifting, so 竞相 fits best."
+  },
+  "5": {
+   "sentence_en": "Every evening, everyone comes here to walk, with happy smiles ___ (worn) on their faces.",
+   "hint": "Clue: 脸上___着笑容 - a fixed way to say a smile shows on the face. Which box word means 'to hang / wear (a smile)'?",
+   "keywords": [{"w":"挂","py":"guà","en":"to hang; wear"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation_en": "脸上挂着笑容 is a fixed way of saying a smile shows on the face, so 挂 fits best."
+  }
+ },
+ "reading": {
+  "ZS40_G1": {
+   "stem_en": "What was Xiaowei's behaviour in class before?",
+   "answer_en": "He never raised his hand to answer questions.",
+   "keywords": [{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"回答","py":"huídá","en":"to answer"},{"w":"安静","py":"ānjìng","en":"quiet"}],
+   "explanation": "这是细节题。短文说小伟以前“上课从不举手回答问题，下课也一个人坐在角落里”，直接说明他以前上课从不举手回答问题，所以选(3)。(1)帮老师管理图书角是后来的事、(2)喜欢和同学说话也和“以前不爱说话”相反。做细节题要注意题目问的是“以前”。",
+   "explanation_en": "This is a detail question. The passage says Xiaowei used to 'never raise his hand to answer in class, and sat alone in a corner after class', directly stating he never raised his hand, so (3). (1) managing the reading corner came later, and (2) liking to talk contradicts 'used to be quiet'. Note the question asks about 'before'.",
+   "solution": {"evidence": "上课从不举手回答问题"}
+  },
+  "ZS40_G2": {
+   "stem_en": "Why did the teacher ask Xiaowei to help manage the reading corner?",
+   "answer_en": "Because the teacher wanted to help Xiaowei become more outgoing.",
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"开朗","py":"kāilǎng","en":"outgoing"},{"w":"图书角","py":"túshūjiǎo","en":"reading corner"}],
+   "explanation": "这是推断题。短文说“老师发现小伟很安静，便常常鼓励他，还请他帮忙管理班上的图书角”，可以推断老师请他管理图书角，是想帮助内向的小伟变得开朗，所以选(1)。(2)最聪明、(3)书太多需要人帮忙，文中都没有这样说。推断题要结合老师常常鼓励他这个背景来想。",
+   "explanation_en": "This is an inference question. The passage says 'the teacher noticed Xiaowei was very quiet, often encouraged him, and asked him to help manage the class reading corner', so the teacher gave him the task to help the quiet boy become more outgoing, so (1). (2) being the smartest and (3) too many books are not stated. Combine it with the teacher often encouraging him.",
+   "solution": {"evidence": "老师发现小伟很安静，便常常鼓励他，还请他帮忙管理班上的图书角。"}
+  },
+  "ZS40_G3": {
+   "stem_en": "What does this passage mainly want to tell us?",
+   "answer_en": "With others' help, a person can change.",
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"改变","py":"gǎibiàn","en":"to change"},{"w":"开朗","py":"kāilǎng","en":"outgoing"}],
+   "explanation": "这是主旨题。全文讲内向的小伟在新老师的鼓励和帮助下，认真管理图书角、主动和同学说话，一个月后变得开朗、敢举手回答问题。可见短文是要告诉我们在别人的帮助下，人是可以改变的，所以选(2)。(1)图书角很重要、(3)新老师比旧老师更关心学生都不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows the quiet Xiaowei, with the new teacher's encouragement and help, managing the reading corner and talking to classmates, and after a month becoming outgoing and daring to answer in class. So it tells us that with others' help, a person can change, so (2). (1) the reading corner is important and (3) the new teacher cares more are not the main idea.",
+   "solution": {"evidence": "一个月后，小伟变得开朗多了，上课也敢举手回答问题了。"}
+  },
+  "ZS40_H1": {
+   "stem_en": "Find a word in the passage that describes how the river looked after it became clean.",
+   "answer_en": "清澈 (clear)",
+   "keywords": [{"w":"清澈","py":"qīngchè","en":"clear"},{"w":"小河","py":"xiǎohé","en":"little river"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation": "这是找词题。短文说“经过大家的努力，小河慢慢变得清澈干净了”，“清澈”形容水又清又干净，正好说明小河变干净后的样子，所以答案是“清澈”。做找词题要回原文找出正好描写题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'after everyone's effort, the river slowly became clear and clean'; 清澈 describes water that is clear and clean, exactly how the river looked after cleaning, so the answer is 清澈. Find the word that describes the situation.",
+   "solution": {"evidence": "小河慢慢变得清澈干净了"}
+  },
+  "ZS40_H2": {
+   "stem_en": "How did the aunties and uncles make the river clean? Answer in your own words.",
+   "answer_en": "The aunties and uncles came to the riverside for several weekends in a row, took away the rubbish, and planted green grass and small flowers along the bank, making the river clean.",
+   "keywords": [{"w":"垃圾","py":"lājī","en":"rubbish"},{"w":"周末","py":"zhōumò","en":"weekend"},{"w":"种","py":"zhòng","en":"to plant"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“他们连续几个周末来到河边，把垃圾捡走，还在河边种上了绿草和小花”，说明叔叔阿姨们是连续几个周末来河边捡走垃圾、种上绿草小花，让小河变干净。答“怎样让小河变干净”要把文中的做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'they came to the riverside for several weekends in a row, took away the rubbish, and planted green grass and small flowers along the bank', so they cleaned the river over several weekends by removing rubbish and planting. State the method clearly from the text.",
+   "solution": {"evidence": "他们连续几个周末来到河边，把垃圾捡走，还在河边种上了绿草和小花"}
+  },
+  "ZS40_H3": {
+   "stem_en": "Why was Xiaoyu very happy inside as she looked at the clear river water?",
+   "answer_en": "Because the river used to be black and smelly, and after everyone's effort it became clear and clean, and Xiaoyu also took part in the cleaning, so seeing the river become beautiful made her very happy.",
+   "keywords": [{"w":"清澈","py":"qīngchè","en":"clear"},{"w":"努力","py":"nǔlì","en":"effort"},{"w":"参加","py":"cānjiā","en":"to take part"}],
+   "explanation": "这是推断题。短文说小河以前又黑又臭，经过大家的努力变得清澈干净，小雨也跟着爸爸参加了清理活动，最后“小雨看着清澈的河水，心里非常高兴”。可以推断她非常高兴，是因为小河变干净了，而且自己也出了一份力。推断题要把小河的变化和小雨的参与连起来想。",
+   "explanation_en": "This is an inference question. The passage says the river used to be black and smelly, became clear and clean after everyone's effort, and Xiaoyu joined the cleaning with her dad, and 'looking at the clear water, Xiaoyu felt very happy'. We can infer she was happy because the river became clean and she had helped. Link the river's change with Xiaoyu's part in it.",
+   "solution": {"evidence": "小雨看着清澈的河水，心里非常高兴"}
+  }
+ }
+}

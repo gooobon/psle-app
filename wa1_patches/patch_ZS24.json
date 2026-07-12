@@ -1,0 +1,217 @@
+{
+ "setId": "ZS24",
+ "mcq": {
+  "ZS24_A1": {
+   "sentence_en": "Seeing a classmate fall, Xiaoming hurried to ___ (run) over and help him up.",
+   "hints": ["The blank + 过去 means to move quickly over to help, matching 连忙 (hurriedly). Which character (foot radical ⻊) means 'to run'?"],
+   "keywords": [{"w":"跑","py":"pǎo","en":"to run"},{"w":"扶","py":"fú","en":"to help up"},{"w":"连忙","py":"liánmáng","en":"hurriedly"}],
+   "explanation_en": "跑过去 means to move quickly over to help, matching the urgency of 连忙. All four have the foot radical ⻊; 跑 = to move fast with the feet, which fits 连忙 most naturally."
+  },
+  "ZS24_A2": {
+   "sentence_en": "The teacher ___ (praised) Xiaohua, because he had helped a classmate in difficulty.",
+   "hints": ["The blank + 奖 means to commend someone. Which character is a stand-alone character (no radical), meaning 'to praise'?"],
+   "keywords": [{"w":"夸奖","py":"kuājiǎng","en":"to praise"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"困难","py":"kùnnan","en":"difficulty"}],
+   "explanation_en": "夸奖 means to commend someone, matching the teacher praising Xiaohua for a good deed. 夸 is a stand-alone character with no radical; 挎 and 跨 have radicals and mean something completely different from 夸奖."
+  },
+  "ZS24_A3": {
+   "sentence_en": "The auntie ___ (carefully) put the injured little bird into a paper box.",
+   "hints": ["The blank + 心 means doing something with care and gentleness. Which character means 'small', used in 小心 (careful)?"],
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"纸盒","py":"zhǐhé","en":"paper box"}],
+   "explanation_en": "小心 means acting with care and not carelessly, and 小心地放 (put it carefully) best matches gently handling a hurt bird. 小心地 + an action means doing that action with great care."
+  },
+  "ZS24_A4": {
+   "sentence_en": "He ___ (returned) the wallet he found to its owner, and everyone said he was honest.",
+   "hints": ["The blank + 还 means to give something back to the person it belongs to. Which character means 'to deliver / hand over'?"],
+   "keywords": [{"w":"送还","py":"sònghuán","en":"to return"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"失主","py":"shīzhǔ","en":"owner (of lost item)"}],
+   "explanation_en": "送还 means to give something back to the original person, best matching returning a found item to its owner. 送还 = to deliver back. Handing a found item back to its owner in person uses 送还 most naturally."
+  },
+  "ZS24_A5": {
+   "sentence_en": "Mum was ill, and elder sister ___ (patiently) looked after her, cooking congee for her every day.",
+   "hints": ["The blank + 心 means being patient, not impatient. Which character (with 而 on the left, 寸 on the right) forms 耐心?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"煮粥","py":"zhǔ zhōu","en":"to cook congee"}],
+   "explanation_en": "耐心 means being patient and not impatient, and caring for a patient needs patience, so it fits best. 耐 has 而 on the left and 寸 on the right; remember 耐心 = able to bear, not rushing."
+  },
+  "ZS24_B1": {
+   "sentence_en": "Xiaoli 帮助 (helped) a lost old granny, and the granny was very grateful.",
+   "hints": ["帮 has initial b (bāng), not p; 助 is retroflex zh (zhù), not flat z. Which choice is bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"迷路","py":"mílù","en":"to be lost"},{"w":"感谢","py":"gǎnxiè","en":"to thank"}],
+   "explanation_en": "帮 is read bāng (initial b, not p) and 助 is zhù (retroflex zh, not flat z), together bāng zhù. Both must be got right: 帮 begins with b; 助 is retroflex zh."
+  },
+  "ZS24_B2": {
+   "sentence_en": "He cried 难过 (sadly), because he had carelessly lost the gift his classmate gave him.",
+   "hints": ["难 is a polyphone: nán = difficult / sad; nàn = disaster. 难过 means sad, so which choice is nán + guò?"],
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"礼物","py":"lǐwù","en":"gift"},{"w":"弄丢","py":"nòngdiū","en":"to lose"}],
+   "explanation_en": "In 难过, 难 is read nán (2nd tone) and 过 is guò (4th tone), together nán guò. 难 is a polyphone: nán = difficult / sad (2nd tone); nàn = disaster (4th tone). 难过 uses nán."
+  },
+  "ZS24_B3": {
+   "sentence_en": "The classmates 主动 (on their own initiative) stayed behind to help the teacher move chairs.",
+   "hints": ["主 is retroflex zh (zhǔ), not flat z; 动 has initial d (dòng), not t. Which choice is zhǔ + dòng?"],
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"留下","py":"liúxià","en":"to stay behind"},{"w":"椅子","py":"yǐzi","en":"chair"}],
+   "explanation_en": "主 is read zhǔ (retroflex zh, 3rd tone) and 动 is dòng (4th tone), together zhǔ dòng. 主 is retroflex zh (not flat z); 动 begins with d (not t)."
+  },
+  "ZS24_B4": {
+   "sentence_en": "Although this gift is not 重 (heavy), it moved him very much.",
+   "hints": ["重 is a polyphone: zhòng = heavy (weight); chóng = again / to repeat. Here it means weight, so which choice is zhòng?"],
+   "keywords": [{"w":"重","py":"zhòng","en":"heavy"},{"w":"礼物","py":"lǐwù","en":"gift"},{"w":"感动","py":"gǎndòng","en":"moved"}],
+   "explanation_en": "The 重 of 不重 (not heavy), about weight, is read zhòng (4th tone). 重 is a polyphone: weight / heavy is zhòng; 重复 / 重新 (repeat / again) is chóng. Here it is weight, so zhòng."
+  },
+  "ZS24_C1": {
+   "sentence_en": "Xiaowen ___ (picked) up the pencil his classmate dropped on the floor and returned it to him.",
+   "hints": ["Clue: taking something up from the floor. Which word means 'to pick up', pairing with 起来?"],
+   "keywords": [{"w":"拾","py":"shí","en":"to pick up"},{"w":"铅笔","py":"qiānbǐ","en":"pencil"},{"w":"还给","py":"huángěi","en":"to return to"}],
+   "explanation_en": "拾起来 means to take something up from the floor, best matching a dropped pencil. 拾 = to pick up, used specially for lifting things off the ground; 拾起来 is a fixed pairing. 提, 举 and 搭 do not fit."
+  },
+  "ZS24_C2": {
+   "sentence_en": "Mum bought ___ (a basket of) apples and shared them with the neighbour's children.",
+   "hints": ["Clue: apples held in a basket, shared among many. Which measure phrase means 'a basketful'?"],
+   "keywords": [{"w":"一篮","py":"yì lán","en":"a basket of"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"邻居","py":"línjū","en":"neighbour"}],
+   "explanation_en": "Apples are fruit held in a basket, so 一篮 (a basketful) shows a large amount to share with many, which fits best. Measure words depend on shape and use: round fruit in a basket -> 一篮; 粒 is for small grains, 片 for thin slices, 张 for flat things."
+  },
+  "ZS24_C3": {
+   "sentence_en": "Seeing the old person carrying heavy things, he ___ (of his own accord) stepped forward to help.",
+   "hints": ["Clue: helping without being asked, willingly and eagerly. Which word means 'on one's own initiative'?"],
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"老人","py":"lǎorén","en":"old person"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "Helping the old person is willing and eager, and 主动 means doing it without waiting to be asked, which fits best. 主动 = doing it first, without being told. Seeing 'doing it without being asked', choose 主动. 懒洋洋, 勉强 and 随便 do not fit."
+  },
+  "ZS24_C4": {
+   "sentence_en": "Xiaoen helped a classmate find her lost school bag, and the classmate ___ (thanked) her endlessly.",
+   "hints": ["Clue: expressing thanks for being helped. Which word means 'to thank', as in 感谢不已 (thank endlessly)?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"丢失","py":"diūshī","en":"to lose"},{"w":"书包","py":"shūbāo","en":"school bag"}],
+   "explanation_en": "Being helped, one expresses thanks, so 感谢 (感谢不已 = thank endlessly) fits best. 感谢 = to thank someone for help; 感动 = to be moved inside. 对她感谢不已 means thanking her endlessly. 感觉 and 感冒 do not fit."
+  },
+  "ZS24_C5": {
+   "sentence_en": "Xiaoming ___ (without hesitation) lent his umbrella to a classmate who had forgotten one, and got rained on himself.",
+   "hints": ["Clue: he lent it at once without a second thought. Which four-character word means 'without the slightest hesitation'?"],
+   "keywords": [{"w":"毫不犹豫","py":"háobù-yóuyù","en":"without hesitation"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"淋雨","py":"línyǔ","en":"to be rained on"}],
+   "explanation_en": "Xiaoming lent the umbrella at once without a second thought, so 毫不犹豫 (without the slightest hesitation) best matches this kind act. 毫不犹豫 = not hesitating at all. Seeing 'did it at once, without thinking of himself', choose 毫不犹豫. 果然, 忽然 and 慢慢地 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道谢”是向别人说谢谢、表示感激，所以“向对方道谢”就是向帮助自己的人说谢谢。“温暖、主动”都不是“说谢谢”的意思。",
+   "explanation_en": "道谢 (dàoxiè) means to say thank you to someone, so 向对方道谢 means to thank the other person. 温暖 (warm) and 主动 (initiative) do not mean 'to say thanks'.",
+   "stem_en": "to thank the other person",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to say thanks"},{"w":"对方","py":"duìfāng","en":"the other person"}]
+  },
+  "2": {
+   "explanation": "“温暖”是心里觉得暖暖的、很舒服，所以“心里感到温暖”就是心里觉得暖暖的、被感动。“道谢、伤心”都不是“心里暖暖的”的意思。",
+   "explanation_en": "温暖 (wēnnuǎn) means feeling warm and comforted inside, so 心里感到温暖 means to feel warmth in one's heart. 道谢 (thank) and 伤心 (sad) do not mean 'a warm feeling inside'.",
+   "stem_en": "to feel warmth in one's heart",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"心里","py":"xīnlǐ","en":"in one's heart"}]
+  },
+  "3": {
+   "explanation": "“伤心”是心里非常难过，所以“非常伤心地哭了”就是因为很难过而哭了起来。“温暖、安慰”都不是“心里很难过”的意思。",
+   "explanation_en": "伤心 (shāngxīn) means to feel very sad inside, so 非常伤心地哭了 means to cry out of great sadness. 温暖 (warm) and 安慰 (comfort) do not mean 'very sad inside'.",
+   "stem_en": "to cry very sadly",
+   "keywords": [{"w":"伤心","py":"shāngxīn","en":"sad"},{"w":"哭","py":"kū","en":"to cry"}]
+  },
+  "4": {
+   "explanation": "“主动”是不等别人叫就自己去做，所以“主动地帮忙”就是自己先去帮忙，不用别人开口。“道谢、安慰”都不是“自己先去做”的意思。",
+   "explanation_en": "主动 (zhǔdòng) means doing something oneself without being asked, so 主动地帮忙 means to help on one's own initiative. 道谢 (thank) and 安慰 (comfort) do not mean 'to do it first oneself'.",
+   "stem_en": "to help on one's own initiative",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"帮忙","py":"bāngmáng","en":"to help"}]
+  },
+  "5": {
+   "explanation": "“安慰”是用温和的话让难过的人好受一些，所以“轻声安慰他”就是小声地说温和的话让他好受些。“主动、温暖”都不是“说温和的话让人好受”的意思。",
+   "explanation_en": "安慰 (ānwèi) means to use gentle words to ease a sad person, so 轻声安慰他 means to comfort him softly. 主动 (initiative) and 温暖 (warm) do not mean 'to soothe with gentle words'.",
+   "stem_en": "to comfort him softly",
+   "keywords": [{"w":"安慰","py":"ānwèi","en":"to comfort"},{"w":"轻声","py":"qīngshēng","en":"softly"}]
+  }
+ },
+ "craft": {
+  "ZS24_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'It was raining heavily.' and 'Xiaohua still lent his umbrella to a classmate.'",
+   "answer_en": "Although it was raining heavily, Xiaohua still lent his umbrella to a classmate.",
+   "tiles": ["虽然","天空下着大雨，","但是","小华还是把雨伞借给了同学。"],
+   "explanation_en": "虽然……但是…… names a difficulty or condition first, then an unexpected result. '虽然天空下着大雨' (although it rained heavily) is the difficulty, '但是小华还是把雨伞借给了同学' (but he still lent his umbrella) is the kind act. Put each word at the start of its clause."
+  },
+  "ZS24_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaoen helped the old granny carry heavy things.' and 'Xiaoen saw the old granny to her door.'",
+   "answer_en": "Xiaoen not only helped the old granny carry heavy things, but also saw her to her door.",
+   "tiles": ["小恩","不但","帮老婆婆提了重物，","还","把老婆婆送到了家门口。"],
+   "explanation_en": "不但……还…… means besides the first thing, one did a second thing too, showing more good deeds. '不但帮老婆婆提了重物' (not only carried the heavy things) is the first, '还把老婆婆送到了家门口' (but also saw her home) is the further one. 不但 and 还 are used as a pair."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school today, Xiaoming saw his classmate Aqiang sitting alone in the corridor, ___ (silently) hanging his head.",
+   "hint": "Clue: he hangs his head quietly, saying nothing, looking upset. Which box word means 'silently / quietly'?",
+   "keywords": [{"w":"默默","py":"mòmò","en":"silently"},{"w":"低头","py":"dītóu","en":"to hang one's head"}],
+   "explanation_en": "默默地低着头 means quietly hanging his head without a word, matching Aqiang sitting alone upset, so 默默 fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaoming went over and ___ (softly) asked him what had happened.",
+   "hint": "Clue: he asks gently and quietly, showing care. Which box word means 'in a soft voice'?",
+   "keywords": [{"w":"轻声","py":"qīngshēng","en":"softly"},{"w":"问","py":"wèn","en":"to ask"}],
+   "explanation_en": "轻声地问 means asking in a gentle, soft voice, showing Xiaoming's care, which fits the context, so 轻声 fits best."
+  },
+  "3": {
+   "sentence_en": "It turned out Aqiang could not find his way home, and felt very ___ (upset) inside.",
+   "hint": "Clue: not finding the way home makes the heart feel bad. Which box word means 'upset / sad in mood'?",
+   "keywords": [{"w":"难过","py":"nánguò","en":"upset"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "Not finding the way home makes one feel 难过 (upset). 难过 is about mood, while 难受 is about the body; not finding the way is a mood problem, so 难过 fits best."
+  },
+  "4": {
+   "sentence_en": "Hearing this, Xiaoming at once ___ (agreed) to walk Aqiang to the school gate and helped him phone his mother.",
+   "hint": "Clue: he says yes to helping. Which box word means 'to agree / say yes'?",
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree"},{"w":"校门口","py":"xiào ménkǒu","en":"school gate"}],
+   "explanation_en": "Hearing Aqiang's situation, Xiaoming 答应 (agreed) to walk him to the gate, meaning he consented to help, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Aqiang's mother came and thanked Xiaoming again and again (___).",
+   "hint": "Clue: the mother expresses thanks to Xiaoming. Which box word means 'to thank'?",
+   "keywords": [{"w":"道谢","py":"dàoxiè","en":"to thank"},{"w":"举手之劳","py":"jǔshǒuzhīláo","en":"a small effort"}],
+   "explanation_en": "Aqiang's mother came and wanted to express thanks to Xiaoming, so 道谢 (to say thanks) fits best."
+  }
+ },
+ "reading": {
+  "ZS24_G1": {
+   "stem_en": "Why could the little boy not reach the book on the shelf?",
+   "answer_en": "Because the shelf was too high and he was too short.",
+   "keywords": [{"w":"书架","py":"shūjià","en":"bookshelf"},{"w":"踮脚","py":"diǎnjiǎo","en":"to stand on tiptoe"},{"w":"够不到","py":"gòu bú dào","en":"cannot reach"}],
+   "explanation": "这是细节题。短文说小男孩“踮起脚尖想拿一本书，却怎么也够不到”，说明他够不到是因为书架高、他个子矮，所以选(1)。(2)没有想要的书、(3)图书馆不让拿书，文中都没有这样说。做细节题要回原文找出事情的确切原因。",
+   "explanation_en": "This is a detail question. The passage says the boy 'stood on tiptoe to reach a book but could not reach it at all', showing he could not reach because the shelf was high and he was short, so (1). (2) no book he wanted and (3) the library not allowing it are not stated. Find the exact reason in the passage.",
+   "solution": {"evidence": "踮起脚尖想拿一本书，却怎么也够不到"}
+  },
+  "ZS24_G2": {
+   "stem_en": "After Xiaoya helped the little boy, how did she feel inside?",
+   "answer_en": "She felt very warm inside.",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"背影","py":"bèiyǐng","en":"the back of someone"}],
+   "explanation": "这是细节题。短文最后说“小雅看着他的背影，心里感到非常温暖”，直接说明她帮助小男孩后心里感到温暖，所以选(2)。(1)骄傲、(3)难过，文中都没有这样说。做细节题要回原文找出表示感受的句子。",
+   "explanation_en": "This is a detail question. The passage ends with 'Xiaoya watched his back and felt very warm inside', directly stating she felt warm after helping the boy, so (2). (1) proud and (3) sad are not stated. Find the sentence expressing her feeling.",
+   "solution": {"evidence": "小雅看着他的背影，心里感到非常温暖。"}
+  },
+  "ZS24_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "A small kindness can make people feel warm.",
+   "keywords": [{"w":"善意","py":"shànyì","en":"kindness"},{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是主旨题。全文讲小雅帮小男孩取到够不到的书，男孩道谢，小雅心里感到温暖。可见短文是要告诉我们小小的善意能让人感到温暖，所以选(3)。(1)图书馆要安静、(2)低年级要多读书都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoya helping the boy reach a book he could not get, the boy thanking her, and Xiaoya feeling warm. So it tells us a small kindness can make people feel warm, so (3). (1) keep quiet in the library and (2) juniors should read more are minor points, not the main idea.",
+   "solution": {"evidence": "小雅走过去，微笑着把那本书取下来，递给了小男孩。"}
+  },
+  "ZS24_H1": {
+   "stem_en": "Find a word in the passage that shows how very embarrassed Awei was: His face turned as red as ___.",
+   "answer_en": "苹果 (an apple)",
+   "keywords": [{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"脸红","py":"liǎnhóng","en":"to blush"},{"w":"不好意思","py":"bù hǎoyìsi","en":"embarrassed"}],
+   "explanation": "这是找词题。短文说阿伟“脸红得像苹果一样”，用“苹果”来比喻他脸红的样子，说明他非常不好意思，所以答案是“苹果”。做找词题要回原文找出正好比喻题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says Awei's 'face turned as red as an apple', using 苹果 to picture how red his face was, showing he was very embarrassed, so the answer is 苹果. Find the word that pictures the situation.",
+   "solution": {"evidence": "脸红得像苹果一样"}
+  },
+  "ZS24_H2": {
+   "stem_en": "How did Xiaojie help Awei? Answer using content from the passage.",
+   "answer_en": "Xiaojie immediately went to fetch tissues and a mop and helped Awei clean up the food on the floor.",
+   "keywords": [{"w":"纸巾","py":"zhǐjīn","en":"tissue"},{"w":"拖把","py":"tuōbǎ","en":"mop"},{"w":"清理","py":"qīnglǐ","en":"to clean up"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“小杰二话不说，马上去拿了纸巾和拖把，帮阿伟把地上的饭菜清理干净”，说明小杰是拿纸巾和拖把帮阿伟清理地上的饭菜。答“怎样帮助”要把文中的具体做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'without a word, Xiaojie went to get tissues and a mop and helped Awei clean up the food on the floor', showing he fetched tissues and a mop to clean up. When asked 'how did he help', state the specific action from the text.",
+   "solution": {"evidence": "小杰二话不说，马上去拿了纸巾和拖把，帮阿伟把地上的饭菜清理干净。"}
+  },
+  "ZS24_H3": {
+   "stem_en": "What kind of person do you think Xiaojie is? Explain your reason.",
+   "answer_en": "I think Xiaojie is someone glad to help others, because when he saw Awei in trouble, he stepped up to help at once without needing to be asked.",
+   "keywords": [{"w":"乐于助人","py":"lèyú-zhùrén","en":"glad to help others"},{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"困难","py":"kùnnan","en":"difficulty"}],
+   "explanation": "这是推断题（评价人物）。短文说小杰“二话不说，马上去拿了纸巾和拖把”帮阿伟清理，还说“大家互相帮助才对”。从他看到同学有困难就主动帮忙，可以看出他乐于助人。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Xiaojie 'without a word went to get tissues and a mop' to help Awei, and said 'everyone should help one another'. From helping at once when he saw a classmate in trouble, we see he is glad to help others. State the trait, then give the action as the reason.",
+   "solution": {"evidence": "没关系，大家互相帮助才对。"}
+  }
+ }
+}

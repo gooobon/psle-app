@@ -1,0 +1,217 @@
+{
+ "setId": "ZS11",
+ "mcq": {
+  "ZS11_A1": {
+   "sentence_en": "On a rainy day, the students all wait for the school bus in the ___ (corridor).",
+   "hints": ["The blank + 走 names a covered passage. Which character has the 广 ('shelter') radical on top?"],
+   "keywords": [{"w":"走廊","py":"zǒuláng","en":"corridor"},{"w":"下雨天","py":"xiàyǔtiān","en":"rainy day"},{"w":"校车","py":"xiàochē","en":"school bus"}],
+   "explanation_en": "走廊 is a stairway or covered passage, so waiting there on a rainy day makes sense. 廊 has the shelter radical 广 on top - like a big roof over a passage, so a 走廊 is a covered place."
+  },
+  "ZS11_A2": {
+   "sentence_en": "The rain ___ (drenched) the field wet.",
+   "hints": ["The blank + 湿 means to be soaked by water. Which character has the water radical 氵?"],
+   "keywords": [{"w":"淋湿","py":"línshī","en":"to drench"},{"w":"雨水","py":"yǔshuǐ","en":"rainwater"},{"w":"操场","py":"cāochǎng","en":"field"}],
+   "explanation_en": "淋湿 means to be soaked through by water, so the rain drenching the field makes sense. 淋 has the water radical 氵 and relates to water; 淋雨 (get rained on) and 淋湿 (drench) both use 淋."
+  },
+  "ZS11_A3": {
+   "sentence_en": "Dark ___ (clouds) roll across the sky - it looks like it will rain soon.",
+   "hints": ["The blank + 乌 (dark) names the black clouds before rain. Which character (云) means 'cloud'?"],
+   "keywords": [{"w":"乌云","py":"wūyún","en":"dark clouds"},{"w":"天空","py":"tiānkōng","en":"sky"},{"w":"下雨","py":"xiàyǔ","en":"to rain"}],
+   "explanation_en": "乌云 are the black clouds that appear before rain, and 乌云滚滚 describes many dark clouds. 云 is up in the sky - the top '二' is like two layers of cloud, the bottom '厶' like a cloud's shape; 云 relates to weather."
+  },
+  "ZS11_A4": {
+   "sentence_en": "Dad opened the ___ (umbrella) and led me along the path in the rain.",
+   "hints": ["The blank + 雨 names the tool that shields you from rain. Which character looks like an opened umbrella?"],
+   "keywords": [{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"撑开","py":"chēngkāi","en":"to open up"},{"w":"小路","py":"xiǎolù","en":"path"}],
+   "explanation_en": "雨伞 is the tool used to keep off rain, so 撑开雨伞 (open the umbrella) makes sense. The character 伞 looks like an open umbrella - the top is the canopy, and the 人 below is the person holding it."
+  },
+  "ZS11_A5": {
+   "sentence_en": "After the rain, a beautiful ___ (rainbow) appeared at the edge of the sky.",
+   "hints": ["The blank + 彩 names the seven-coloured arc after rain. Which character has the insect radical 虫?"],
+   "keywords": [{"w":"彩虹","py":"cǎihóng","en":"rainbow"},{"w":"雨后","py":"yǔhòu","en":"after the rain"},{"w":"天边","py":"tiānbiān","en":"edge of the sky"}],
+   "explanation_en": "彩虹 is the seven-coloured arc of light in the sky after rain, so 一道彩虹 (a rainbow) is the correct pairing. 虹 has the insect radical 虫 - ancient people thought a rainbow was a creature in the sky. Remember 虹 has the insect radical."
+  },
+  "ZS11_B1": {
+   "sentence_en": "After class, we ran to the corridor and watched the heavy rain 窗外 (outside the window).",
+   "hints": ["窗 is chuāng (retroflex ch, final -uang, 1st tone), 外 is wài (final -ai). Which choice is chuāng + wài?"],
+   "keywords": [{"w":"窗外","py":"chuāngwài","en":"outside the window"},{"w":"下课","py":"xiàkè","en":"after class"},{"w":"大雨","py":"dàyǔ","en":"heavy rain"}],
+   "explanation_en": "窗 is read chuāng (initial ch, final -uang, 1st tone) and 外 is wài (4th tone), together chuāng wài. 窗 is a retroflex ch, not flat c; 外 is wài, with the final -ai, not -ei."
+  },
+  "ZS11_B2": {
+   "sentence_en": "Today's rain is very 大 (heavy), and a lot of water has pooled on the field.",
+   "hints": ["Here 大 is read dà (4th tone), meaning 'great / heavy'. Which choice is dà, not dǎ (打)?"],
+   "keywords": [{"w":"大","py":"dà","en":"big; heavy"},{"w":"积水","py":"jīshuǐ","en":"pooled water"},{"w":"操场","py":"cāochǎng","en":"field"}],
+   "explanation_en": "Here 大 is read dà, 4th tone, meaning a great degree. When 大 is used alone it is 4th tone dà - be careful not to confuse it with 打 (dǎ)."
+  },
+  "ZS11_B3": {
+   "sentence_en": "The rain stopped, and a beautiful 彩虹 (rainbow) appeared in the sky.",
+   "hints": ["彩 is cǎi (3rd tone), 虹 is hóng (2nd tone). Which choice is cǎi + hóng?"],
+   "keywords": [{"w":"彩虹","py":"cǎihóng","en":"rainbow"},{"w":"雨停","py":"yǔ tíng","en":"the rain stops"},{"w":"天空","py":"tiānkōng","en":"sky"}],
+   "explanation_en": "彩 is read cǎi (3rd tone) and 虹 is hóng (2nd tone), together cǎi hóng. 彩 (3rd tone) dips then rises; 虹 (2nd tone) rises upward."
+  },
+  "ZS11_B4": {
+   "sentence_en": "On a rainy day, Mum told me to 待 (stay) at home and not go out to play.",
+   "hints": ["When 待 means 'to stay / remain' (待在家里), it is dāi (1st tone); when it means 'to wait / treat' it is dài. Which reading fits 'stay at home'?"],
+   "keywords": [{"w":"待","py":"dāi","en":"to stay"},{"w":"家里","py":"jiālǐ","en":"at home"},{"w":"出去","py":"chūqù","en":"to go out"}],
+   "explanation_en": "When 待 means 'to stay / remain somewhere' (as in 待在家里), it is read dāi, 1st tone. Read as dài it means 'to wait / to treat', a different meaning. 待 has two readings: dāi = to stay (待在家); dài = to wait / to treat. Choose by meaning."
+  },
+  "ZS11_C1": {
+   "sentence_en": "The rain was heavy and Xiaoming had no umbrella, so his whole body got ___ (drenched).",
+   "hints": ["Clue: heavy rain, no umbrella - what happens to his body? Which word means 'soaked through by water'?"],
+   "keywords": [{"w":"淋湿","py":"línshī","en":"to drench"},{"w":"带伞","py":"dài sǎn","en":"to bring an umbrella"},{"w":"全身","py":"quánshēn","en":"whole body"}],
+   "explanation_en": "With heavy rain and no umbrella, the body gets soaked, so 淋湿 is the most exact word. Heavy rain + no umbrella -> the whole body 淋湿 (drenched). 淋 has the water radical 氵 and relates to water."
+  },
+  "ZS11_C2": {
+   "sentence_en": "It started to rain, and Mum ___ (hurriedly) ran out to bring in the clothes drying outside.",
+   "hints": ["Clue: rain will wet the clothes, so Mum must act at once. Which word means 'hurriedly / at once'?"],
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"晾","py":"liàng","en":"to hang out to dry"},{"w":"收","py":"shōu","en":"to take in"}],
+   "explanation_en": "The rain would wet the clothes, so Mum must act at once, and 连忙 ('hurriedly, immediately') fits best. In an emergency (rain, fire) -> do something 连忙 (hurriedly)."
+  },
+  "ZS11_C3": {
+   "sentence_en": "It was raining hard outside, so we had to stay in the classroom and ___ (continue) the lesson.",
+   "hints": ["Clue: they were already in a lesson and it goes on without stopping. Which word means 'to continue', not 'to start' or 'to stop'?"],
+   "keywords": [{"w":"继续","py":"jìxù","en":"to continue"},{"w":"教室","py":"jiàoshì","en":"classroom"},{"w":"大雨","py":"dàyǔ","en":"heavy rain"}],
+   "explanation_en": "They were already having a lesson, and the rain kept them from going out, so they 继续 (continue) the lesson, meaning the ongoing action does not break. For something already in progress that does not stop midway -> 继续."
+  },
+  "ZS11_C4": {
+   "sentence_en": "There was ___ (a) puddle on the field, and the students carefully went around it.",
+   "hints": ["The blank is the measure word for a puddle (a hole/pit). Which one goes with 水坑?"],
+   "keywords": [{"w":"一个","py":"yí gè","en":"one; a (measure word)"},{"w":"水坑","py":"shuǐkēng","en":"puddle"},{"w":"绕过","py":"ràoguò","en":"to go around"}],
+   "explanation_en": "A puddle is a pit, so it uses the measure word 个, and 一个水坑 is the correct pairing. A puddle is a round pit, so use 个. Remember: 一个坑 (a pit), 一个洞 (a hole), 一个洞穴 (a cave)."
+  },
+  "ZS11_C5": {
+   "sentence_en": "The rain stopped, the sky ___ (brightened), and the sun came out again.",
+   "hints": ["Clue: the sun comes out and the sky changes from dark to bright. Which choice means 'to brighten up'?"],
+   "keywords": [{"w":"亮起来","py":"liàng qǐlái","en":"to brighten"},{"w":"太阳","py":"tàiyáng","en":"sun"},{"w":"天空","py":"tiānkōng","en":"sky"}],
+   "explanation_en": "After the rain the sun comes out and the sky goes from dark to bright, so 亮起来 ('brighten up') describes the change best. Sun comes out -> the sky 亮起来 (brightens). 暗下去 (darken) contradicts the sun coming out; 冷起来 (get cold) is about temperature; 安静下来 (quieten) is about sound, not brightness."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“雨伞”是下雨时遮雨的工具，所以“撑起雨伞”表示把伞打开挡雨。“积水、雷声”都不是可以“撑起”的东西。",
+   "explanation_en": "雨伞 (yǔsǎn) is the tool for keeping off rain, so 撑起雨伞 means to put up an umbrella. 积水 (pooled water) or 雷声 (thunder) are not things you can 'put up'.",
+   "stem_en": "to put up an umbrella",
+   "keywords": [{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"撑起","py":"chēngqǐ","en":"to put up"}]
+  },
+  "2": {
+   "explanation": "“积水”是聚在一起的水，所以“地上积水”表示地面上聚了一片水。“雨伞、彩虹”都不是“地上聚的水”。",
+   "explanation_en": "积水 (jīshuǐ) means water gathered together, so 地上积水 means pooled water on the ground. 雨伞 (umbrella) or 彩虹 (rainbow) are not 'water gathered on the ground'.",
+   "stem_en": "pooled water on the ground",
+   "keywords": [{"w":"积水","py":"jīshuǐ","en":"pooled water"},{"w":"地上","py":"dìshàng","en":"on the ground"}]
+  },
+  "3": {
+   "explanation": "“雷声”是打雷发出的响声，所以“听到雷声”表示听见天上打雷的声音。“湿透、彩虹”都不是可以“听到”的声音。",
+   "explanation_en": "雷声 (léishēng) is the sound of thunder, so 听到雷声 means to hear thunder. 湿透 (soaked) or 彩虹 (rainbow) are not sounds you can 'hear'.",
+   "stem_en": "to hear thunder",
+   "keywords": [{"w":"雷声","py":"léishēng","en":"thunder"},{"w":"听到","py":"tīngdào","en":"to hear"}]
+  },
+  "4": {
+   "explanation": "“彩虹”是雨后天上出现的七色弧形，所以“雨后天边出现了一道彩虹”表示雨停后天边有一道彩色的弧。“积水、闪电”都不是“雨后的七色弧”。",
+   "explanation_en": "彩虹 (cǎihóng) is the seven-coloured arc in the sky after rain, so 雨后天边出现了一道彩虹 means a rainbow appears at the edge of the sky after rain. 积水 (pooled water) or 闪电 (lightning) are not 'a coloured arc after rain'.",
+   "stem_en": "a rainbow appears at the edge of the sky after rain",
+   "keywords": [{"w":"彩虹","py":"cǎihóng","en":"rainbow"},{"w":"天边","py":"tiānbiān","en":"edge of the sky"}]
+  },
+  "5": {
+   "explanation": "“湿透”是完全湿了，所以“衣服湿透”表示衣服全部被水浸湿。“雷声、雨伞”都不能形容“衣服被水浸湿”。",
+   "explanation_en": "湿透 (shītòu) means completely wet, so 衣服湿透 means clothes soaked through. 雷声 (thunder) or 雨伞 (umbrella) cannot describe 'clothes soaked with water'.",
+   "stem_en": "clothes soaked through",
+   "keywords": [{"w":"湿透","py":"shītòu","en":"soaked through"},{"w":"衣服","py":"yīfu","en":"clothes"}]
+  }
+ },
+ "craft": {
+  "ZS11_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'It is raining heavily outside.' and 'Xiaohua still gets to school on time for class.'",
+   "answer_en": "Although it is raining heavily outside, Xiaohua still gets to school on time for class.",
+   "tiles": ["虽然","外面下着大雨，","但是","小华还是按时到学校上课。"],
+   "explanation_en": "虽然……但是…… means the situation in front exists, but the result after is unaffected. '虽然外面下着大雨' (although it is raining hard) is the situation, '但是小华还是按时到学校上课' (but Xiaohua still comes on time) is the unaffected result. 虽然……但是…… = a difficulty first, an unaffected result after - a turn."
+  },
+  "ZS11_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'It rained today.' and 'We cannot play on the field.'",
+   "answer_en": "Because it rained today, we cannot play on the field.",
+   "tiles": ["因为","今天下雨了，","所以","我们不能在操场上玩。"],
+   "explanation_en": "因为……所以…… shows a cause-and-result relationship. '因为今天下雨了' (because it rained today) is the cause, '所以我们不能在操场上玩' (so we cannot play on the field) is the result. 因为 (cause), 所以 (result)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "This afternoon it suddenly began to pour. Xiaowen and his classmates stood in the corridor, waiting ___ (patiently) for the rain to stop.",
+   "hint": "Clue: they wait for the rain to stop without getting restless. Which box word means 'patient'?",
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"等待","py":"děngdài","en":"to wait"}],
+   "explanation_en": "Waiting for the rain to stop takes patience, so 耐心地等待 ('wait patiently') is a fixed collocation that fits."
+  },
+  "2": {
+   "sentence_en": "After a while, the rain gradually ___ (got lighter).",
+   "hint": "Clue: the rain goes from heavy to weak. Which box word means it 'got smaller / lighter'?",
+   "keywords": [{"w":"小了","py":"xiǎo le","en":"got smaller; lighter"},{"w":"雨","py":"yǔ","en":"rain"}],
+   "explanation_en": "The rain went from heavy to light, so 雨慢慢小了 ('the rain gradually got lighter') shows the rain weakening."
+  },
+  "3": {
+   "sentence_en": "Xiaowen saw a lot of ___ (pooled water) on the ground and walked carefully on tiptoe.",
+   "hint": "Clue: after the rain, water gathers on the ground, so he tiptoes. Which box word means 'pooled water'?",
+   "keywords": [{"w":"积水","py":"jīshuǐ","en":"pooled water"},{"w":"踮脚","py":"diǎnjiǎo","en":"to tiptoe"}],
+   "explanation_en": "After rain, water gathers on the ground, called 积水; he tiptoes because of the pooled water."
+  },
+  "4": {
+   "sentence_en": "After the rain, the air became very ___ (fresh), and Xiaowen took a deep breath.",
+   "hint": "Clue: the air after rain is clean and pleasant to breathe. Which box word means 'fresh' (as in 空气新鲜)?",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}],
+   "explanation_en": "The air after rain is fresh, so 新鲜 describes it; 空气新鲜 (fresh air) is a fixed collocation. 美丽 only describes appearance, not air."
+  },
+  "5": {
+   "sentence_en": "A ___ (beautiful) rainbow also appeared at the edge of the sky, and the classmates all cried out with joy.",
+   "hint": "Clue: the rainbow is lovely to look at. Which box word means 'beautiful'?",
+   "keywords": [{"w":"美丽","py":"měilì","en":"beautiful"},{"w":"彩虹","py":"cǎihóng","en":"rainbow"}],
+   "explanation_en": "A rainbow is lovely, so 美丽 describes it; 美丽的彩虹 (a beautiful rainbow) is a natural pairing. 彩色的彩虹 repeats the 彩 character and is unnatural."
+  }
+ },
+ "reading": {
+  "ZS11_G1": {
+   "stem_en": "Why was Xiaoli anxious standing in the corridor?",
+   "answer_en": "Because she did not bring an umbrella.",
+   "keywords": [{"w":"着急","py":"zháojí","en":"anxious"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"走廊","py":"zǒuláng","en":"corridor"}],
+   "explanation": "这是原因题。短文说“小丽没带雨伞，她站在走廊边……心里很着急”，说明她着急是因为没带伞、怕淋雨回不了家，所以选(2)。(1)忘带功课、(3)找不到阿明文中都没有提到。找原因要看“着急”前面的句子。",
+   "explanation_en": "This is a reason question. The passage says 'Xiaoli did not bring an umbrella, stood by the corridor... and felt anxious', so she was anxious because she had no umbrella, so (2). (1) forgetting homework and (3) not finding Aming are not in the text. For reasons, read the sentence before '着急'.",
+   "solution": {"evidence": "小丽没带雨伞，她站在走廊边，看着雨水一滴一滴地打在地上，心里很着急。"}
+  },
+  "ZS11_G2": {
+   "stem_en": "What kind of person is Aming?",
+   "answer_en": "A warm-hearted person.",
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"}],
+   "explanation": "这是推断题，要根据阿明的行为判断。阿明主动把多带的一把伞借给没带伞的小丽，妈妈还夸他是“热心的好同学”。可见他是个热心的人，所以选(3)。(1)勇敢、(2)聪明和借伞帮人没有直接关系。答“怎样的人”要从他的行为和文中评价找。",
+   "explanation_en": "This is an inference question - judge from Aming's actions. Aming lends his spare umbrella to Xiaoli, who had none, and Mum calls him a 'warm-hearted good classmate'. So he is warm-hearted, so (3). (1) brave and (2) clever are unrelated to lending an umbrella. Judge 'what kind of person' from his actions and the text's comment.",
+   "solution": {"evidence": "阿明真是一个热心的好同学。"}
+  },
+  "ZS11_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Classmates should help each other.",
+   "keywords": [{"w":"互相帮助","py":"hùxiāng bāngzhù","en":"to help each other"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"}],
+   "explanation": "这是主旨题。全文讲小丽没带伞很着急，阿明主动借伞给她，帮她平安回家，妈妈也称赞阿明热心。可见全文是要说同学之间要互相帮助。(2)带伞、(3)马上回家都只是情节里的小点；(1)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoli anxious without an umbrella, Aming lending her one on his own and helping her home safely, with Mum praising his warmth. So the point is that classmates should help each other. (2) bringing an umbrella and (3) going straight home are minor points; (1) sums up the whole.",
+   "solution": {"evidence": "“我妈妈带了两把伞来，你可以用一把。”"}
+  },
+  "ZS11_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaojie's feeling about Mum preparing the umbrella: Xiaojie said thank you to Mum ___.",
+   "answer_en": "感激 (gratefully)",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"谢谢","py":"xièxie","en":"thank you"}],
+   "explanation": "这题要找表示小杰对妈妈心情的词。短文说“小杰接过雨伞，感激地对妈妈说了声谢谢”，“感激”就是心里充满感谢的意思，所以答案是“感激”。做填词题要看清题目问的是哪种心情，再回原文找。",
+   "explanation_en": "This asks for a word showing Xiaojie's feeling toward Mum. The passage says 'Xiaojie took the umbrella and said thank you to Mum 感激地 (gratefully)'; 感激 means a heart full of thanks, so the answer is 感激. Read which feeling is asked, then find it in the passage.",
+   "solution": {"evidence": "小杰接过雨伞，感激地对妈妈说了声谢谢"}
+  },
+  "ZS11_H2": {
+   "stem_en": "Why did Mum prepare the umbrella for Xiaojie the night before?",
+   "answer_en": "Because Mum saw the weather forecast and knew it would rain today, so she prepared the umbrella the night before.",
+   "keywords": [{"w":"天气预报","py":"tiānqì yùbào","en":"weather forecast"},{"w":"下雨","py":"xiàyǔ","en":"to rain"},{"w":"准备","py":"zhǔnbèi","en":"to prepare"}],
+   "explanation": "这是因果题，答案用完整句子。妈妈说“今天天气预报说会下雨，妈妈昨晚就帮你准备好了”，说明她昨晚准备伞是因为看了天气预报，知道今天会下雨。答“为什么”要把原因写清楚，用完整句子。",
+   "explanation_en": "This is a cause question, answered in a full sentence. Mum says 'the forecast said it would rain today, so I got it ready last night', so she prepared the umbrella because the forecast told her it would rain. State the reason clearly in a full sentence.",
+   "solution": {"evidence": "今天天气预报说会下雨，妈妈昨晚就帮你准备好了。"}
+  },
+  "ZS11_H3": {
+   "stem_en": "How did Xiaojie feel walking in the rain? Where can you tell?",
+   "answer_en": "Xiaojie was in a good mood. I can tell from 'Xiaojie felt the sound of the rain on the umbrella was nice to hear', showing he was happy and did not find the rain annoying.",
+   "keywords": [{"w":"心情","py":"xīnqíng","en":"mood"},{"w":"好听","py":"hǎotīng","en":"pleasant to hear"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation": "这是推断题，要判断心情并找依据。短文说“雨水打在伞上，发出‘嗒嗒嗒’的声音，小杰觉得很好听”，觉得雨声好听说明他心情愉快、不嫌下雨麻烦。答“心情＋从哪里看出”要先说心情，再引用文中句子作依据。",
+   "explanation_en": "This is an inference question - judge the mood and give evidence. The passage says 'the rain went pattering on the umbrella, and Xiaojie thought it sounded nice'; finding the rain pleasant shows he was in a good mood and did not mind the rain. State the mood first, then quote the sentence as evidence.",
+   "solution": {"evidence": "雨水打在伞上，发出“嗒嗒嗒”的声音，小杰觉得很好听。"}
+  }
+ }
+}

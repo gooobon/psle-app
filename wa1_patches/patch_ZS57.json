@@ -1,0 +1,217 @@
+{
+ "setId": "ZS57",
+ "mcq": {
+  "ZS57_A1": {
+   "sentence_en": "Xiaoming broke the vase, and he decided to ___ (tell) Mum the truth.",
+   "hints": ["The blank + 实情 means to speak out the true situation. Which character (with the speech radical 讠) means 'to say'?"],
+   "keywords": [{"w":"说","py":"shuō","en":"to say"},{"w":"实情","py":"shíqíng","en":"the truth"},{"w":"花瓶","py":"huāpíng","en":"vase"}],
+   "explanation_en": "说实情 is a set way of saying to speak out the true situation, the most natural here. Set phrases: 说实情, 说真话. 说 has the speech radical 讠 - speaking should be honest."
+  },
+  "ZS57_A2": {
+   "sentence_en": "The teacher ___ (trusts) us, so we must not tell lies.",
+   "hints": ["相___ means to trust. Which character (with the person radical 亻, a person keeping his word) forms 相信?"],
+   "keywords": [{"w":"相信","py":"xiāngxìn","en":"to trust"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"},{"w":"老师","py":"lǎoshī","en":"teacher"}],
+   "explanation_en": "相信 means to trust; the teacher trusts us, so we must be honest and not lie. The four are read xìn or near; 信 has the person radical 亻 - a person who keeps his word is 信."
+  },
+  "ZS57_A3": {
+   "sentence_en": "Dad says being an ___ (honest) person matters more than getting good grades.",
+   "hints": ["The blank + 实 means not deceiving others in word or deed. Which character (with the speech radical 讠) forms 诚实?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"成绩","py":"chéngjì","en":"grades"},{"w":"重要","py":"zhòngyào","en":"important"}],
+   "explanation_en": "诚实 is the fixed word for not deceiving others in word or deed, so 诚 fits. 诚 has the speech radical 讠 - keeping your word is 诚实. The four sound alike, so judge by radical."
+  },
+  "ZS57_A4": {
+   "sentence_en": "Xiaohua ___ (admitted) his mistake, and everyone thought he was very brave.",
+   "hints": ["The blank + 认 means to accept and speak out one's mistake. Which character (like hands holding up responsibility) forms 承认?"],
+   "keywords": [{"w":"承认","py":"chéngrèn","en":"to admit"},{"w":"错误","py":"cuòwù","en":"mistake"},{"w":"勇敢","py":"yǒnggǎn","en":"brave"}],
+   "explanation_en": "承认 means to accept and speak out one's own mistake, and 承认错误 is a fixed pairing, so 承 fits. Fixed pairing: 承认 + 错误 / 失败. 承 has 了 on top and 手-like strokes below - holding up responsibility with the hands."
+  },
+  "ZS57_A5": {
+   "sentence_en": "Mum ___ (encourages) me to bravely own up when I do something wrong.",
+   "hints": ["The blank + 励 means to give confidence and drive. Which character (with the 支 part) forms 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"认错","py":"rèncuò","en":"to own up"},{"w":"勇敢","py":"yǒnggǎn","en":"brave"}],
+   "explanation_en": "鼓励 means to give confidence and drive, so 鼓励我认错 (encourages me to own up) fits. The four sound alike (gǔ); 鼓 has the 支 part - beating a drum to cheer someone on is 鼓励."
+  },
+  "ZS57_B1": {
+   "sentence_en": "Xiaowen did something wrong and 勇敢 (bravely) owned up to the teacher.",
+   "hints": ["勇 is 3rd tone (yǒng); 敢 is 3rd tone (gǎn). Which choice is yǒng + gǎn, both dipping?"],
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"认错","py":"rèncuò","en":"to own up"},{"w":"老师","py":"lǎoshī","en":"teacher"}],
+   "explanation_en": "勇 is read yǒng (3rd tone) and 敢 is gǎn (3rd tone), together yǒng gǎn. Both characters of 勇敢 are 3rd tone - do not choose 1st or 4th tone."
+  },
+  "ZS57_B2": {
+   "sentence_en": "His 诚实 (honest) attitude moved the teacher greatly.",
+   "hints": ["诚 is 2nd tone (chéng); 实 is retroflex sh, 2nd tone (shí). Which choice is chéng + shí, both rising?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"态度","py":"tàidù","en":"attitude"},{"w":"感动","py":"gǎndòng","en":"moved"}],
+   "explanation_en": "诚 is read chéng (2nd tone) and 实 is shí (retroflex, 2nd tone), together chéng shí. Both characters of 诚实 are 2nd tone - remember the tones."
+  },
+  "ZS57_B3": {
+   "sentence_en": "Mum says a child who 说谎 (lies) makes everyone sad.",
+   "hints": ["说 is retroflex sh (shuō), not flat s; 谎 is 3rd tone (huǎng). Which choice is shuō + huǎng?"],
+   "keywords": [{"w":"说谎","py":"shuōhuǎng","en":"to lie"},{"w":"孩子","py":"háizi","en":"child"},{"w":"伤心","py":"shāngxīn","en":"sad"}],
+   "explanation_en": "说 is read shuō (retroflex sh) and 谎 is huǎng (3rd tone), together shuō huǎng. 说 shuō is retroflex (sh); 谎 is 3rd tone huǎng. Do not write shuō as suō."
+  },
+  "ZS57_B4": {
+   "sentence_en": "This question has two 答案 (answers); the teacher wants us to pick the correct one.",
+   "hints": ["答 is a polyphone: dā in 答应 (1st tone); dá in 答案 (2nd tone). Which choice is dá + àn?"],
+   "keywords": [{"w":"答案","py":"dá'àn","en":"answer"},{"w":"正确","py":"zhèngquè","en":"correct"},{"w":"选出","py":"xuǎnchū","en":"to pick out"}],
+   "explanation_en": "In 答案, 答 is read dá (2nd tone), not dā (1st tone, as in 答应); 案 is àn (4th tone), giving dá àn. 答 is a polyphone: 答应 dā yìng (1st tone); 答案 dá àn (2nd tone). Remember 答案 uses the 2nd tone."
+  },
+  "ZS57_C1": {
+   "sentence_en": "Xiaoli ___ (bravely) admitted she had lost her classmate's eraser, without shifting the blame.",
+   "hints": ["Clue: owning up means overcoming one's unease inside. Which word means 'brave'?"],
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"承认","py":"chéngrèn","en":"to admit"},{"w":"推卸","py":"tuīxiè","en":"to shift (blame)"}],
+   "explanation_en": "Admitting a mistake means overcoming one's unease, so 勇敢 (brave) best shows her spirit in owning up. Admitting a mistake takes courage, so 勇敢 modifies 承认. 开心, 害羞 and 粗心 do not fit."
+  },
+  "ZS57_C2": {
+   "sentence_en": "The teacher ___ (reminds) us that only an honest person can win everyone's trust.",
+   "hints": ["Clue: the teacher kindly gets us to note something important. Which word means 'to remind', not 'to order' or 'to criticize'?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"信任","py":"xìnrèn","en":"trust"}],
+   "explanation_en": "提醒 means kindly getting someone to note something important, matching the teacher urging us to remember the value of honesty. 提醒 = a kind prompt; 命令 = a forceful demand; 批评 = pointing out faults. Choose by tone. 责怪 does not fit."
+  },
+  "ZS57_C3": {
+   "sentence_en": "He lowered his head ___ (in shame), because he knew he had told a lie.",
+   "hints": ["Clue: lowering the head after lying shows shame inside. Which word means 'ashamed'?"],
+   "keywords": [{"w":"惭愧","py":"cánkuì","en":"ashamed"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"},{"w":"低头","py":"dītóu","en":"to lower one's head"}],
+   "explanation_en": "Lowering the head after lying shows shame inside, so 惭愧 (ashamed) fits the context best. Doing wrong -> lowering the head -> feeling ashamed = 惭愧. Look for the emotional clues in the context. 高兴, 骄傲 and 好奇 do not fit."
+  },
+  "ZS57_C4": {
+   "sentence_en": "Mum bought ___ (a basket of) apples and put them on the table, telling us to finish them before going to play.",
+   "hints": ["Clue: many apples held in a basket. Which measure word means 'a basketful'?"],
+   "keywords": [{"w":"一篮","py":"yì lán","en":"a basket of"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"桌上","py":"zhuō shàng","en":"on the table"}],
+   "explanation_en": "The apples on the table are many, so 一篮 (a basketful) fits best. Apples are round fruit that can go into a basket, so use 一篮. 一粒, 一条 and 一张 do not fit apples."
+  },
+  "ZS57_C5": {
+   "sentence_en": "Xiaoqiang ___ (honestly) told Mum about breaking the cup, hiding nothing.",
+   "hints": ["Clue: 'hiding nothing' shows he told the truth. Which word means 'honest'?"],
+   "keywords": [{"w":"老实","py":"lǎoshí","en":"honest"},{"w":"打破","py":"dǎpò","en":"to break"},{"w":"隐瞒","py":"yǐnmán","en":"to hide"}],
+   "explanation_en": "老实 means honest and not deceiving, and 老实地告诉妈妈 echoes 'hiding nothing', so it fits best. 老实 = honest, not hiding. Seeing 'hiding nothing', choose the word for honesty. 马虎, 随便 and 着急 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“错误”是做得不对的地方，所以“承认错误”就是承认自己做错了。“秘密、勇气”都不是“做得不对的地方”。",
+   "explanation_en": "错误 (cuòwù) means the thing done wrong, so 承认错误 means to admit a mistake. 秘密 (secret) and 勇气 (courage) do not mean 'the thing done wrong'.",
+   "stem_en": "to admit a mistake",
+   "keywords": [{"w":"错误","py":"cuòwù","en":"mistake"},{"w":"承认","py":"chéngrèn","en":"to admit"}]
+  },
+  "2": {
+   "explanation": "“秘密”是不能随便告诉别人的事情，所以“保守秘密”就是把秘密守住、不说出去。“错误、借口”都不是“守住不说的事情”。",
+   "explanation_en": "秘密 (mìmì) means something that must not be told casually, so 保守秘密 means to keep a secret. 错误 (mistake) and 借口 (excuse) do not mean 'something kept unspoken'.",
+   "stem_en": "to keep a secret",
+   "keywords": [{"w":"秘密","py":"mìmì","en":"secret"},{"w":"保守","py":"bǎoshǒu","en":"to keep"}]
+  },
+  "3": {
+   "explanation": "“诺言”是答应别人一定做到的话，所以“遵守诺言”就是照着自己答应过的话去做，不失信。“错误、勇气”都不是“答应过的话”。",
+   "explanation_en": "诺言 (nuòyán) means a promise one has made, so 遵守诺言 means to keep one's promise. 错误 (mistake) and 勇气 (courage) do not mean 'a promise made'.",
+   "stem_en": "to keep one's promise",
+   "keywords": [{"w":"诺言","py":"nuòyán","en":"promise"},{"w":"遵守","py":"zūnshǒu","en":"to keep; abide by"}]
+  },
+  "4": {
+   "explanation": "“勇气”是敢去做事的胆量，所以“鼓起勇气”就是让自己有胆量去做原本不敢做的事。“秘密、借口”都不是“敢做事的胆量”。",
+   "explanation_en": "勇气 (yǒngqì) means the courage to do something, so 鼓起勇气 means to work up the courage. 秘密 (secret) and 借口 (excuse) do not mean 'the courage to act'.",
+   "stem_en": "to work up one's courage",
+   "keywords": [{"w":"勇气","py":"yǒngqì","en":"courage"},{"w":"鼓起","py":"gǔqǐ","en":"to work up"}]
+  },
+  "5": {
+   "explanation": "“借口”是为了推卸责任而编出来的理由，所以“找借口”就是编个理由来推掉自己的责任。“诺言、勇气”都不是“推卸责任的理由”。",
+   "explanation_en": "借口 (jièkǒu) means an excuse made up to avoid responsibility, so 找借口 means to make an excuse. 诺言 (promise) and 勇气 (courage) do not mean 'an excuse to dodge responsibility'.",
+   "stem_en": "to make an excuse",
+   "keywords": [{"w":"借口","py":"jièkǒu","en":"excuse"},{"w":"找","py":"zhǎo","en":"to look for; make"}]
+  }
+ },
+ "craft": {
+  "ZS57_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Telling the truth may upset people.' and 'We should still be honest.'",
+   "answer_en": "Although telling the truth may upset people, we should still be honest.",
+   "tiles": ["虽然","说实话可能会让人不高兴，","但是","我们还是要诚实。"],
+   "explanation_en": "虽然……但是…… makes a concession first, then stresses the more important conclusion. '虽然说实话可能会让人不高兴' (although the truth may upset people) is the concession, '但是我们还是要诚实' (but we should still be honest) is the stressed conclusion."
+  },
+  "ZS57_E2": {
+   "question_en": "Combine these two sentences using the connector 只有……才…… (only if…, then…): 'We live honestly.' and 'Everyone will trust us.'",
+   "answer_en": "Only if we live honestly will we win everyone's trust.",
+   "tiles": ["只有","我们诚实做人，","才","会得到大家的信任。"],
+   "explanation_en": "只有……才…… means the first is the sole condition, and only then does the result appear. '只有诚实做人' (only if we live honestly) is the sole condition, '才会得到大家的信任' (then we win trust) is the result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "In class, Xiaojie accidentally knocked his deskmate Wenwen's pencil case to the floor, and all the pencils spilled out. He felt very ___ (upset) inside and did not know what to do.",
+   "hint": "Clue: he spilled his deskmate's pencils and feels bad. Which box word means 'sad / upset'?",
+   "keywords": [{"w":"难过","py":"nánguò","en":"upset"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil case"}],
+   "explanation_en": "Xiaojie accidentally spilled Wenwen's pencils and feels bad inside, so 难过 (upset) fits best."
+  },
+  "2": {
+   "sentence_en": "He thought of not owning up, but he knew that lying is ___ (wrong).",
+   "hint": "Clue: lying is not right behaviour. Which box word means 'wrong / not right'?",
+   "keywords": [{"w":"不对","py":"búduì","en":"wrong"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "Lying is wrong behaviour, so 说谎是不对的 (lying is wrong) fits, and 不对 is the best choice."
+  },
+  "3": {
+   "sentence_en": "So he ___ (bravely) walked over to Wenwen.",
+   "hint": "Clue: he overcame his unease and went to own up. Which box word means 'brave'?",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"承认","py":"chéngrèn","en":"to admit"}],
+   "explanation_en": "Xiaojie overcame his unease and went to own up of his own accord, so 勇敢 (brave) best describes his action."
+  },
+  "4": {
+   "sentence_en": "He told her the ___ (course of events) of what had happened.",
+   "hint": "Clue: telling her how the whole thing happened, from start to end. Which box word means 'the course of events'?",
+   "keywords": [{"w":"经过","py":"jīngguò","en":"course of events"},{"w":"告诉","py":"gàosu","en":"to tell"}],
+   "explanation_en": "把事情的经过告诉了她 means telling her how the whole thing happened, and 经过 (the course of events) is the fixed pairing here, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Hearing this, Wenwen was not angry but ___ (smiling) said it was okay.",
+   "hint": "Clue: she was not angry and answered in a friendly way. Which box word means 'to smile'?",
+   "keywords": [{"w":"微笑","py":"wēixiào","en":"to smile"},{"w":"没关系","py":"méi guānxi","en":"it's okay"}],
+   "explanation_en": "Wenwen was not angry but answered kindly that it was okay, so 微笑 (smiling) best shows her gentle, friendly manner."
+  }
+ },
+ "reading": {
+  "ZS57_G1": {
+   "stem_en": "How did Aming hurt his knee?",
+   "answer_en": "Xiaoen bumped into him while running.",
+   "keywords": [{"w":"撞","py":"zhuàng","en":"to bump into"},{"w":"膝盖","py":"xīgài","en":"knee"},{"w":"擦破皮","py":"cāpò pí","en":"to scrape the skin"}],
+   "explanation": "这是细节题。短文开头说“小恩在跑步时不小心撞倒了班上的新同学阿明，阿明的膝盖擦破了皮”，直接说明阿明受伤是因为小恩跑步时撞到了他，所以选(1)。(2)自己跌倒是阿明后来说的假话、(3)在医务室受伤，文中都没有这样说。做细节题要回原文找出真实的经过。",
+   "explanation_en": "This is a detail question. The passage opens with 'Xiaoen accidentally knocked over the new classmate Aming while running, and Aming scraped his knee', directly stating the cause, so (1). (2) falling by himself was Aming's later untruth, and (3) getting hurt at the sick bay is not stated. Find the true account in the passage.",
+   "solution": {"evidence": "小恩在跑步时不小心撞倒了班上的新同学阿明，阿明的膝盖擦破了皮"}
+  },
+  "ZS57_G2": {
+   "stem_en": "Why did Aming say he had fallen by himself?",
+   "answer_en": "Because Aming wanted to help Xiaoen and did not want her to be blamed.",
+   "keywords": [{"w":"帮","py":"bāng","en":"to help"},{"w":"责怪","py":"zéguài","en":"to blame"},{"w":"真话","py":"zhēnhuà","en":"the truth"}],
+   "explanation": "这是推断题。短文说阿明“看了小恩一眼，说：‘我自己不小心跌倒的。’”，老师后来也说“阿明，你想帮朋友，心意是好的，但我们要说真话”。可以推断阿明这样说，是因为想帮小恩、不想让她被责怪，所以选(2)。(1)忘记是谁撞的、(3)害怕去医务室，文中都没有这样说。推断题要结合老师的话来想阿明的用意。",
+   "explanation_en": "This is an inference question. The passage says Aming 'glanced at Xiaoen and said: I fell by myself', and the teacher later said 'Aming, you wanted to help a friend, and your heart was good, but we must tell the truth'. So he said it to help Xiaoen and spare her blame, so (2). (1) forgetting and (3) fearing the sick bay are not stated. Use the teacher's words to reason out his intention.",
+   "solution": {"evidence": "阿明，你想帮朋友，心意是好的，但我们要说真话"}
+  },
+  "ZS57_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "No matter the situation, we must tell the truth.",
+   "keywords": [{"w":"真话","py":"zhēnhuà","en":"the truth"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"真相","py":"zhēnxiàng","en":"the truth"}],
+   "explanation": "这是主旨题。全文讲小恩撞倒阿明后没有逃跑，还主动说出真相；阿明想帮小恩而说了假话，老师夸小恩诚实，也提醒阿明“我们要说真话”。可见短文是要告诉我们不管什么情况都要说真话，所以选(3)。(1)跑步要小心、(2)好朋友不让对方受罚都只是情节里的小点或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoen not running away but telling the truth after knocking Aming over, Aming lying to help her, and the teacher praising Xiaoen's honesty while reminding Aming 'we must tell the truth'. So it tells us that no matter the situation, we must tell the truth, so (3). (1) be careful when running and (2) friends should spare each other punishment are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "小恩，你能说出真相，非常诚实，老师很高兴。"}
+  },
+  "ZS57_H1": {
+   "stem_en": "Find a word in the passage that shows how Classmate Li felt toward Xiaojun: Classmate Li said thank you ___.",
+   "answer_en": "感激 (gratefully)",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"零用钱","py":"língyòngqián","en":"pocket money"}],
+   "explanation": "这是找词题。短文说“失主李同学找到小俊，感激地说：‘谢谢你把钱包还给我’”，“感激”正好说明李同学对小俊的心情，所以答案是“感激”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'the owner, Classmate Li, found Xiaojun and said gratefully: thank you for returning my wallet'; 感激 exactly shows how he felt toward Xiaojun, so the answer is 感激. Find the word that fits the situation.",
+   "solution": {"evidence": "感激地说：“谢谢你把钱包还给我"}
+  },
+  "ZS57_H2": {
+   "stem_en": "Why did Xiaojun decide to hand the wallet to the duty teacher rather than keep it?",
+   "answer_en": "Because Xiaojun remembered Mum saying that things you find must be handed to the owner or the teacher, so he decided to give the wallet to the duty teacher.",
+   "keywords": [{"w":"失主","py":"shīzhǔ","en":"owner"},{"w":"值日老师","py":"zhírì lǎoshī","en":"duty teacher"},{"w":"交给","py":"jiāogěi","en":"to hand to"}],
+   "explanation": "这是细节题，答案用完整句子。短文说小俊本想用钱买零食，“但他马上想到妈妈常说的话：‘捡到别人的东西，一定要交给失主或老师。’于是，他把钱包交给了值日老师”，说明他这样决定是因为记起妈妈的话。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Xiaojun first thought of buying snacks, 'but he immediately recalled Mum's words: things you find must be handed to the owner or the teacher. So he gave the wallet to the duty teacher', showing he decided because he remembered Mum's words. State the reason in a full sentence.",
+   "solution": {"evidence": "捡到别人的东西，一定要交给失主或老师。"}
+  },
+  "ZS57_H3": {
+   "stem_en": "Why did Xiaojun feel very happy in the end?",
+   "answer_en": "Because Xiaojun did an honest deed and returned the wallet to its owner, feeling satisfied inside, so he was very happy.",
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"满足","py":"mǎnzú","en":"satisfied"}],
+   "explanation": "这是推断题。短文最后说“小俊听了，心里感到非常高兴，因为他做了一件诚实的事”，“因为”后面就是原因，说明他高兴是因为做了一件诚实的事、把钱包还给了失主，心里很满足。推断题要看“因为”引出的原因句。",
+   "explanation_en": "This is an inference question. The passage ends with 'Xiaojun felt very happy inside, because he had done an honest deed'; the reason follows '因为', so he was happy because he acted honestly and returned the wallet, feeling satisfied. Read the reason after '因为'.",
+   "solution": {"evidence": "小俊听了，心里感到非常高兴，因为他做了一件诚实的事"}
+  }
+ }
+}

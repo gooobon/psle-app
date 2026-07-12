@@ -1,0 +1,217 @@
+{
+ "setId": "ZS19",
+ "mcq": {
+  "ZS19_A1": {
+   "sentence_en": "The flowers in the park bloom very ___ (beautifully), attracting many visitors.",
+   "hints": ["The blank describes flowers that look lovely. Which two-character word (top of 美 is 羊, not 母) means 'beautiful'?"],
+   "keywords": [{"w":"美丽","py":"měilì","en":"beautiful"},{"w":"开花","py":"kāihuā","en":"to bloom"},{"w":"游客","py":"yóukè","en":"visitor"}],
+   "explanation_en": "美丽 is the correct word for flowers looking lovely: 美 means good-looking and 丽 also means pretty. 美 and 每 look alike, but 美 has 羊 on top while 每 has 母 on top - look carefully."
+  },
+  "ZS19_A2": {
+   "sentence_en": "In the park we ___ (discovered) many interesting little bugs.",
+   "hints": ["The blank means to notice something you had not seen before. Which word ends with 现 (with the 见 radical, 'to see appear')?"],
+   "keywords": [{"w":"发现","py":"fāxiàn","en":"to discover"},{"w":"有趣","py":"yǒuqù","en":"interesting"},{"w":"小虫子","py":"xiǎo chóngzi","en":"little bug"}],
+   "explanation_en": "发现 means to notice something you had not paid attention to, the correct word here. The 现 of 发现 is the 现 of 出现 (appear), with the 见 radical on the right, meaning to see something appear."
+  },
+  "ZS19_A3": {
+   "sentence_en": "Dad took us ___ (for a walk) in the park, and everyone was happy.",
+   "hints": ["The blank means to stroll about casually. Which word ends with 步 (with two 止, meaning to walk)?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "散步 means to stroll about casually, the correct word here. The 步 of 散步 is the 步 of footsteps, with two 止 below, showing walking."
+  },
+  "ZS19_A4": {
+   "sentence_en": "There is a ___ (little river) in the park where children can play in the water.",
+   "hints": ["The blank names a flowing body of water. Which word ends with 河 (with the water radical 氵)?"],
+   "keywords": [{"w":"小河","py":"xiǎohé","en":"little river"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"玩水","py":"wán shuǐ","en":"to play in water"}],
+   "explanation_en": "小河 is a place where water flows, the correct word here. 河 has the three-drops water radical 氵, showing it relates to water - a place where water flows."
+  },
+  "ZS19_A5": {
+   "sentence_en": "We ___ (spent) an afternoon in the park and had a great time.",
+   "hints": ["The blank + 一个下午 means to pass a period of time. Which word uses 度 (roof radical 广), not 渡 (water radical 氵)?"],
+   "keywords": [{"w":"度过","py":"dùguò","en":"to spend (time)"},{"w":"下午","py":"xiàwǔ","en":"afternoon"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "度过 means to pass a period of time, so 度过一个下午 (spent an afternoon) is the correct pairing. Time uses 度过 (roof radical 广); crossing a river uses 渡过 (water radical 氵). Remember: time cannot swim, so no water radical."
+  },
+  "ZS19_B1": {
+   "sentence_en": "After playing in the park all day, I felt very 快乐 (happy).",
+   "hints": ["快 has initial k (kuài), not g; 乐 has final e (lè), not uo. Which choice is kuài + lè?"],
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"一整天","py":"yì zhěng tiān","en":"all day"}],
+   "explanation_en": "快 is read kuài (initial k, 4th tone) and 乐 is lè (4th tone), together kuài lè. The initial of 快 is k (aspirated), not g (unaspirated); the final of 乐 is e, not uo."
+  },
+  "ZS19_B2": {
+   "sentence_en": "The 空气 (air) in the park is fresh and makes people feel relaxed.",
+   "hints": ["空 is 1st tone (kōng); 气 is 4th tone (qì). Which choice is kōng + qì?"],
+   "keywords": [{"w":"空气","py":"kōngqì","en":"air"},{"w":"清新","py":"qīngxīn","en":"fresh"},{"w":"舒畅","py":"shūchàng","en":"relaxed"}],
+   "explanation_en": "空 is read kōng (1st tone) and 气 is qì (4th tone), together kōng qì. In 空气, 空 is 1st tone (level) and 气 is 4th tone (falling)."
+  },
+  "ZS19_B3": {
+   "sentence_en": "Little sister ran ___ 着急 (anxiously) toward the swing, afraid someone would take it first.",
+   "hints": ["着 is a polyphone: here in 着急 it is read zháo (2nd tone); 急 is jí (2nd tone). Which choice is zháo + jí?"],
+   "keywords": [{"w":"着急","py":"zháojí","en":"anxious"},{"w":"秋千","py":"qiūqiān","en":"swing"},{"w":"抢先","py":"qiǎngxiān","en":"to rush ahead"}],
+   "explanation_en": "In 着急, 着 is read zháo (2nd tone) and 急 is jí (2nd tone), together zháo jí. 着 is a polyphone: 着急 zháo jí; 睡着 shuì zháo; 穿着 chuān zhuó. Remember 着急 is zháo."
+  },
+  "ZS19_B4": {
+   "sentence_en": "Xiaoming 仔细 (carefully) observed the ants on the grass.",
+   "hints": ["仔 is read zǐ (3rd tone) here, final i not ai; 细 is xì (4th tone). Which choice is zǐ + xì?"],
+   "keywords": [{"w":"仔细","py":"zǐxì","en":"careful"},{"w":"观察","py":"guānchá","en":"to observe"},{"w":"蚂蚁","py":"mǎyǐ","en":"ant"}],
+   "explanation_en": "In 仔细, 仔 is read zǐ (3rd tone) and 细 is xì (4th tone), together zǐ xì. Do not misread the final of 仔 as ai - it is i, zǐ."
+  },
+  "ZS19_C1": {
+   "sentence_en": "The trees in the park are ___ (lined up) along both sides of the path, which looks lovely.",
+   "hints": ["Clue: trees growing in order along both sides of the path. Which word means 'to arrange in a row / line up'?"],
+   "keywords": [{"w":"排列","py":"páiliè","en":"to line up"},{"w":"树木","py":"shùmù","en":"trees"},{"w":"小路","py":"xiǎolù","en":"path"}],
+   "explanation_en": "排列 means to arrange in an orderly row, best matching trees growing along both sides of the path. 排列 is a verb, so 排列两旁 works. 整齐 (neat), 摆放 (place) and 站立 (stand) do not fit trees lined along a path as well."
+  },
+  "ZS19_C2": {
+   "sentence_en": "In the park, little brother picked up ___ (a) feather and happily ran to show me.",
+   "hints": ["Clue: a feather is thin and long. Which measure word is used for thin, long things?"],
+   "keywords": [{"w":"根","py":"gēn","en":"measure word for thin long things"},{"w":"羽毛","py":"yǔmáo","en":"feather"},{"w":"捡","py":"jiǎn","en":"to pick up"}],
+   "explanation_en": "A feather is thin and long, so the measure word 根 is used: 一根羽毛. 根 is for thin, long things: 一根羽毛, 一根头发, 一根筷子. 条, 片 and 张 do not fit a feather."
+  },
+  "ZS19_C3": {
+   "sentence_en": "Mum told us not to ___ (run around) on the grass, to avoid trampling the flowers and grass.",
+   "hints": ["Clue: 'to avoid trampling the flowers' means a vigorous action. Which word means 'to run / dash'?"],
+   "keywords": [{"w":"奔跑","py":"bēnpǎo","en":"to run"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"踩坏","py":"cǎihuài","en":"to trample"}],
+   "explanation_en": "The sentence says 'to avoid trampling the flowers', suggesting a vigorous action, so 奔跑 (running) fits best because running easily tramples plants. Reading the result 'avoid trampling', pick the action most likely to trample - 奔跑. 散步, 行走 and 玩耍 are gentler."
+  },
+  "ZS19_C4": {
+   "sentence_en": "We played in the park a long time; everyone got ___ (tired) and sat on a bench to rest.",
+   "hints": ["Clue: they sit down to rest after playing long, so they must be tired. Which word means 'tired / weary'?"],
+   "keywords": [{"w":"疲倦","py":"píjuàn","en":"tired"},{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"椅子","py":"yǐzi","en":"bench; chair"}],
+   "explanation_en": "After playing a long time they need to sit and rest, showing they are tired, so 疲倦 (weary) fits best. Reading the following action 'sat down to rest', only being tired (疲倦) calls for rest. 高兴, 满意 and 着急 do not fit."
+  },
+  "ZS19_C5": {
+   "sentence_en": "The little birds ___ (sing) on the branches, and their calls are very pleasant.",
+   "hints": ["Clue: 'their calls are very pleasant', so the sound is sweet. Which word means 'to sing'?"],
+   "keywords": [{"w":"歌唱","py":"gēchàng","en":"to sing"},{"w":"树枝","py":"shùzhī","en":"branch"},{"w":"好听","py":"hǎotīng","en":"pleasant to hear"}],
+   "explanation_en": "The birds make pleasant sounds, so 歌唱 (to sing) fits best, echoing 'their calls are very pleasant'. A sweet sound = 歌唱. 喊叫 and 大叫 are harsh, unpleasant sounds, which do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“草地”是长满草的地方，所以“在草地上打滚”就是在长满草的地上翻滚玩耍。“欣赏、追赶”都不是“长草的地方”这类地点词。",
+   "explanation_en": "草地 (cǎodì) means a grassy place, so 在草地上打滚 means to roll about on the grass. 欣赏 (admire) and 追赶 (chase) are not place words like 'grassy ground'.",
+   "stem_en": "to roll about on the grass",
+   "keywords": [{"w":"草地","py":"cǎodì","en":"grass"},{"w":"打滚","py":"dǎgǔn","en":"to roll about"}]
+  },
+  "2": {
+   "explanation": "“欣赏”是用心地观看、品味美好的事物，所以“欣赏风景”就是用心观看美丽的景色。“凉爽、休息”都不是“用心观看”的意思。",
+   "explanation_en": "欣赏 (xīnshǎng) means to look at and appreciate something lovely, so 欣赏风景 means to enjoy the scenery. 凉爽 (cool) and 休息 (rest) do not mean 'to appreciate by looking'.",
+   "stem_en": "to enjoy the scenery",
+   "keywords": [{"w":"欣赏","py":"xīnshǎng","en":"to appreciate"},{"w":"风景","py":"fēngjǐng","en":"scenery"}]
+  },
+  "3": {
+   "explanation": "“凉爽”是天气凉凉的、很舒服，所以“天气凉爽”就是形容天气凉快舒服。“欣赏、追赶”都不是“天气凉快”的意思。",
+   "explanation_en": "凉爽 (liángshuǎng) means the weather is cool and comfortable, so 天气凉爽 means the weather is pleasantly cool. 欣赏 (admire) and 追赶 (chase) do not describe 'cool weather'.",
+   "stem_en": "the weather is cool",
+   "keywords": [{"w":"凉爽","py":"liángshuǎng","en":"cool"},{"w":"天气","py":"tiānqì","en":"weather"}]
+  },
+  "4": {
+   "explanation": "“追赶”是在后面快跑着要抓住前面的东西，所以“追赶蝴蝶”就是跟在蝴蝶后面跑着去追。“凉爽、草地”都不是“在后面快跑去追”的意思。",
+   "explanation_en": "追赶 (zhuīgǎn) means to run after something to catch it, so 追赶蝴蝶 means to chase butterflies. 凉爽 (cool) and 草地 (grass) do not mean 'to run after and chase'.",
+   "stem_en": "to chase butterflies",
+   "keywords": [{"w":"追赶","py":"zhuīgǎn","en":"to chase"},{"w":"蝴蝶","py":"húdié","en":"butterfly"}]
+  },
+  "5": {
+   "explanation": "“休息”是停下来让身体放松、恢复力气，所以“坐下休息”就是坐下来歇一歇。“欣赏、追赶”都不是“停下来歇息”的意思。",
+   "explanation_en": "休息 (xiūxi) means to stop and let the body rest, so 坐下休息 means to sit down and rest. 欣赏 (admire) and 追赶 (chase) do not mean 'to stop and rest'.",
+   "stem_en": "to sit down and rest",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"坐下","py":"zuòxià","en":"to sit down"}]
+  }
+ },
+ "craft": {
+  "ZS19_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'The weather is very hot today.' and 'We still went to the park to play.'",
+   "answer_en": "Although the weather is very hot today, we still went to the park to play.",
+   "tiles": ["虽然","今天天气很热，","但是","我们还是去公园玩了。"],
+   "explanation_en": "虽然……但是…… names an unfavourable condition first, then an action done anyway. '虽然今天天气很热' (although it is hot) is the unfavourable condition, '但是我们还是去公园玩了' (but we still went to play) is the result."
+  },
+  "ZS19_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'The flowers in the park bloom beautifully.' and 'Many people come to the park to take photos.'",
+   "answer_en": "Because the flowers in the park bloom beautifully, many people come to the park to take photos.",
+   "tiles": ["因为","公园里的花开得很漂亮，","所以","很多人来公园拍照。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为公园里的花开得很漂亮' (because the flowers are pretty) is the cause, '所以很多人来公园拍照' (so many people come to photograph them) is the result. Find the cause first, then the result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Saturday morning, Dad took my little sister and me to play in the park. The air in the park was very ___ (fresh), which put us in a good mood.",
+   "hint": "Clue: good park air that is clean and refreshing. Which box word means 'fresh'?",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}],
+   "explanation_en": "The park air is good, so 新鲜 describes clean, refreshing air that puts them in a good mood."
+  },
+  "2": {
+   "sentence_en": "We saw many beautiful butterflies on the grass, and little sister ___ (happily) chased after them.",
+   "hint": "Clue: she chases butterflies because she is joyful. Which box word describes a happy mood?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"蝴蝶","py":"húdié","en":"butterfly"}],
+   "explanation_en": "Little sister chases butterflies because she is joyful, so 开心地追 (happily chasing) shows her cheerful mood."
+  },
+  "3": {
+   "sentence_en": "Later, we found a ___ (cool) spot under a big tree and sat down to rest.",
+   "hint": "Clue: the shade of a big tree keeps the spot cool and comfortable. Which box word means 'cool / refreshing'?",
+   "keywords": [{"w":"凉快","py":"liángkuai","en":"cool"},{"w":"大树","py":"dàshù","en":"big tree"}],
+   "explanation_en": "Under the tree's shade the temperature is lower, so 凉快 describes the comfortable, cool spot where they chose to rest."
+  },
+  "4": {
+   "sentence_en": "Dad took out ___ (bread) from the bag, and we ate while chatting.",
+   "hint": "Clue: food taken from a bag to eat. Which box word names a food you can take out and eat?",
+   "keywords": [{"w":"面包","py":"miànbāo","en":"bread"},{"w":"袋子","py":"dàizi","en":"bag"}],
+   "explanation_en": "Dad takes food from the bag for everyone to eat while chatting, and 面包 (bread) is a food you can take out of a bag and eat."
+  },
+  "5": {
+   "sentence_en": "Toward evening, the sky slowly grew ___ (dark), so we went home reluctantly.",
+   "hint": "Clue: at dusk the sky turns dark. Which box word means 'dark'?",
+   "keywords": [{"w":"黑暗","py":"hēi'àn","en":"dark"},{"w":"傍晚","py":"bàngwǎn","en":"dusk"}],
+   "explanation_en": "At dusk the sky turns dark, so 黑暗 shows the sky slowly darkening, which is why they went home."
+  }
+ },
+ "reading": {
+  "ZS19_G1": {
+   "stem_en": "What did the classmates go to the park to do?",
+   "answer_en": "To take part in an environmental activity and pick up rubbish.",
+   "keywords": [{"w":"环保","py":"huánbǎo","en":"environmental protection"},{"w":"活动","py":"huódòng","en":"activity"},{"w":"捡垃圾","py":"jiǎn lājī","en":"to pick up rubbish"}],
+   "explanation": "这是细节题。短文说林老师带全班“去附近的公园参加环保活动”，还说“我们每人拿着一个袋子和一双手套，在公园里捡垃圾”，直接说明他们去公园是参加环保活动、捡垃圾，所以选(3)。(1)野餐、(2)运动比赛，文中都没有提到。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says Teacher Lin took the class 'to a nearby park for an environmental activity', and 'each of us held a bag and gloves and picked up rubbish in the park', directly stating they went to join an environmental activity and pick up rubbish, so (3). (1) a picnic and (2) a sports contest are not mentioned. Find the sentence that directly matches.",
+   "solution": {"evidence": "在公园里捡垃圾"}
+  },
+  "ZS19_G2": {
+   "stem_en": "Why did Teacher Lin give the classmates stickers?",
+   "answer_en": "Because the classmates did the activity very well.",
+   "keywords": [{"w":"贴纸","py":"tiēzhǐ","en":"sticker"},{"w":"奖励","py":"jiǎnglì","en":"reward"},{"w":"做得好","py":"zuò de hǎo","en":"did well"}],
+   "explanation": "这是推断题。短文说“活动结束后，林老师说我们做得很好，还给每个人发了一张环保贴纸作为奖励”，说明发贴纸是因为同学们把活动做得好，作为奖励，所以选(1)。(2)迟到、(3)带了手套，都不是发贴纸的原因。推断题要看“贴纸”前后的句子找出原因。",
+   "explanation_en": "This is an inference question. The passage says 'after the activity, Teacher Lin said we did very well and gave each person an eco sticker as a reward', so the stickers were because the students did the activity well, so (1). (2) being late and (3) bringing gloves are not the reason. For inference, look at the sentence around '贴纸' to find the cause.",
+   "solution": {"evidence": "林老师说我们做得很好，还给每个人发了一张环保贴纸作为奖励。"}
+  },
+  "ZS19_G3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "The account of the classmates taking part in an environmental activity in the park.",
+   "keywords": [{"w":"环保","py":"huánbǎo","en":"environmental protection"},{"w":"经过","py":"jīngguò","en":"account; process"},{"w":"爱护","py":"àihù","en":"to cherish"}],
+   "explanation": "这是主旨题。全文讲林老师带全班去公园参加环保活动，同学们分组捡垃圾，最后老师发贴纸奖励，“我”也觉得活动有意义。可见短文主要说的是同学们在公园参加环保活动的经过，所以选(2)。(1)认识各种垃圾、(3)玩游戏都只是个别细节或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells how Teacher Lin took the class to the park for an environmental activity, the students picked up rubbish in groups, the teacher gave stickers as a reward, and 'I' found it meaningful. So it is mainly about the account of the class joining an environmental activity, so (2). (1) learning about types of rubbish and (3) playing games are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "林老师带我们班去附近的公园参加环保活动"}
+  },
+  "ZS19_H1": {
+   "stem_en": "Find a word in the passage that shows how 'I' felt at first about not wanting to go to the park.",
+   "answer_en": "不情愿 (unwilling)",
+   "keywords": [{"w":"不情愿","py":"bù qíngyuàn","en":"unwilling"},{"w":"电视","py":"diànshì","en":"television"},{"w":"心情","py":"xīnqíng","en":"mood"}],
+   "explanation": "这是找词题。短文说“我有点不情愿，因为我想在家看电视”，“不情愿”指心里不愿意，正好说明“我”一开始不想去公园的心情，所以答案是“不情愿”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'I was a little unwilling, because I wanted to watch TV at home'; 不情愿 means being reluctant, exactly showing how 'I' first felt about not wanting to go, so the answer is 不情愿. Find the word in the passage that fits the situation asked about.",
+   "solution": {"evidence": "我有点不情愿"}
+  },
+  "ZS19_H2": {
+   "stem_en": "After 'I' arrived at the park, why did my mood get better?",
+   "answer_en": "Because 'I' saw flowers of all colours blooming very beautifully, so my mood got better at once.",
+   "keywords": [{"w":"颜色","py":"yánsè","en":"colour"},{"w":"漂亮","py":"piàoliang","en":"beautiful"},{"w":"心情","py":"xīnqíng","en":"mood"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“可是到了公园，我看到各种颜色的花开得非常漂亮，心情马上好起来了”，说明“我”心情变好是因为看到了漂亮的花。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'but when I got to the park, I saw flowers of all colours blooming beautifully, and my mood got better at once', so my mood improved because of the beautiful flowers. State the reason in a full sentence.",
+   "solution": {"evidence": "我看到各种颜色的花开得非常漂亮，心情马上好起来了。"}
+  },
+  "ZS19_H3": {
+   "stem_en": "What did 'I' and Mum do in the park?",
+   "answer_en": "'I' and Mum sat on a bench beside the flowers, drinking juice and chatting.",
+   "keywords": [{"w":"果汁","py":"guǒzhī","en":"juice"},{"w":"花丛","py":"huācóng","en":"flowers; flower cluster"},{"w":"聊天","py":"liáotiān","en":"to chat"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“妈妈给我买了一杯果汁，我们坐在花丛旁边的椅子上喝着果汁，聊着天”，说明“我”和妈妈在公园里坐着喝果汁、聊天。答“做了什么”要把文中的活动写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Mum bought me a cup of juice, and we sat on a bench beside the flowers, drinking juice and chatting', so 'I' and Mum sat drinking juice and chatting in the park. When asked 'what did they do', state the activities clearly from the text.",
+   "solution": {"evidence": "我们坐在花丛旁边的椅子上喝着果汁，聊着天。"}
+  }
+ }
+}

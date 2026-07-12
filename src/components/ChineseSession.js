@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   C, TTS, SpeakBtn, SFX,
   Wrap, ActionBtn, HintBox, FeedbackBox, RevealBox, WrongBanner,
@@ -45,7 +45,7 @@ function BianZiSection({items, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
+        <span style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
         <div style={{display:"flex",gap:4}}>
           {[0,1,2].map(i=><div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<attempts?C.red:"#E2E8F0"}}/>)}
         </div>
@@ -53,22 +53,22 @@ function BianZiSection({items, onDone}){
         <TagPill color={meta.color} bg={meta.color+"18"}>辨字测验</TagPill>
           {q.note==="verify-parent"&&(
             <span style={{background:"#FEF3C7",border:"1px solid #FDE68A",borderRadius:7,
-              padding:"2px 8px",fontSize:10,fontWeight:700,color:"#92400E",marginLeft:6}}>
+              padding:"2px 8px",fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#92400E",marginLeft:6}}>
               ⚠️ 请家长确认
             </span>
           )}
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:10}}>
             <SpeakBtn text={q.sentence.replace("___","空格")} lang="zh" style={{flexShrink:0}}/>
-            <div style={{fontSize:18,fontWeight:700,color:C.text,lineHeight:2,flex:1}}>
+            <div style={{fontSize:"calc(var(--fs) * 1.286)",fontWeight:700,color:C.text,lineHeight:2,flex:1}}>
           {parts[0]}
-          <span style={{display:"inline-block",background:solved?"#D1FAE5":revealed?"#FEE2E2":"#DBEAFE",border:`2px solid ${solved?C.green:revealed?C.red:meta.color}`,borderRadius:8,padding:"0 8px",minWidth:36,textAlign:"center",color:solved?"#065F46":revealed?C.red:meta.color,fontWeight:900,fontSize:20}}>
+          <span style={{display:"inline-block",background:solved?"#D1FAE5":revealed?"#FEE2E2":"#DBEAFE",border:`2px solid ${solved?C.green:revealed?C.red:meta.color}`,borderRadius:8,padding:"0 8px",minWidth:36,textAlign:"center",color:solved?"#065F46":revealed?C.red:meta.color,fontWeight:900,fontSize:"calc(var(--fs) * 1.429)"}}>
             {(solved||revealed) ? q.options[q.answer] : "？"}
           </span>
           {parts[1]}
         </div>
         </div>
         {(solved||revealed)&&(
-          <div style={{marginTop:8,fontSize:12,color:C.muted}}>
+          <div style={{marginTop:8,fontSize:"calc(var(--fs) * 0.857)",color:C.muted}}>
             拼音：<span style={{fontWeight:700,color:meta.color}}>{q.pinyin}</span>
           </div>
         )}
@@ -84,9 +84,9 @@ function BianZiSection({items, onDone}){
           const showMeaning=(solved||revealed);
           return(
             <div key={i} onClick={()=>handleSelect(i)} style={{background:bg,border:`2px solid ${border}`,borderRadius:14,padding:"13px 16px",marginBottom:10,cursor:(solved||revealed||isWrong)?"default":"pointer",display:"flex",alignItems:"center",gap:12,opacity:op,transition:"all .15s"}}>
-              <div style={{width:36,height:36,borderRadius:10,background:(selected===i&&!isWrong)?meta.color:"#EEF2F7",color:(selected===i&&!isWrong)?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,fontWeight:900,flexShrink:0}}>{opt}</div>
+              <div style={{width:36,height:36,borderRadius:10,background:(selected===i&&!isWrong)?meta.color:"#EEF2F7",color:(selected===i&&!isWrong)?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.429)",fontWeight:900,flexShrink:0}}>{opt}</div>
               <div style={{flex:1}}>
-                {showMeaning&&isAns&&<div style={{fontSize:11,color:"#065F46",fontStyle:"italic"}}>{q.meaning}</div>}
+                {showMeaning&&isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#065F46",fontStyle:"italic"}}>{q.meaning}</div>}
               </div>
               {(solved||revealed)&&isAns&&<span>✅</span>}
               {isWrong&&<span>❌</span>}
@@ -144,7 +144,7 @@ function CiYuSection({items, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
+        <span style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
         <div style={{display:"flex",gap:4}}>
           {[0,1,2].map(i=><div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<attempts?C.red:"#E2E8F0"}}/>)}
         </div>
@@ -152,7 +152,7 @@ function CiYuSection({items, onDone}){
       <div style={{background:C.card,borderRadius:18,padding:"18px 16px",marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,.07)"}}>
         <TagPill color={meta.color} bg={meta.color+"18"}>词语选择</TagPill>
         {q.sentence&&<div style={{marginTop:8}}><SpeakBtn text={q.sentence.replace(/_+/g,"空格")} lang="zh"/></div>}
-        <div style={{fontSize:16,fontWeight:700,color:C.text,lineHeight:2,marginTop:10}}>
+        <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:700,color:C.text,lineHeight:2,marginTop:10}}>
           {parts[0]}
           <span style={{display:"inline-block",background:solved?"#D1FAE5":revealed?"#FEE2E2":"#EDE9FE",border:`2px solid ${solved?C.green:revealed?C.red:meta.color}`,borderRadius:8,padding:"0 8px",color:solved?"#065F46":revealed?C.red:meta.color,fontWeight:900}}>
             {(solved||revealed) ? q.options[q.answer] : "______"}
@@ -171,11 +171,11 @@ function CiYuSection({items, onDone}){
           const showM=solved||revealed;
           return(
             <div key={i} onClick={()=>handleSelect(i)} style={{background:bg,border:`2px solid ${border}`,borderRadius:14,padding:"12px 16px",marginBottom:10,cursor:(solved||revealed||isWrong)?"default":"pointer",display:"flex",alignItems:"center",gap:12,opacity:op,transition:"all .15s"}}>
-              <div style={{width:28,height:28,borderRadius:"50%",background:(selected===i&&!isWrong)?meta.color:"#EEF2F7",color:(selected===i&&!isWrong)?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:12,fontWeight:800,flexShrink:0}}>{i+1}</div>
+              <div style={{width:28,height:28,borderRadius:"50%",background:(selected===i&&!isWrong)?meta.color:"#EEF2F7",color:(selected===i&&!isWrong)?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,flexShrink:0}}>{i+1}</div>
               <div style={{flex:1}}>
-                <span style={{fontSize:14,fontWeight:600,color:col}}>{opt}</span>
-                {showM&&isAns&&<div style={{fontSize:11,color:"#065F46",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
-                {showM&&!isAns&&<div style={{fontSize:11,color:"#94A3B8",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
+                <span style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:600,color:col}}>{opt}</span>
+                {showM&&isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#065F46",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
+                {showM&&!isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#94A3B8",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
               </div>
               {(solved||revealed)&&isAns&&<span>✅</span>}
               {isWrong&&<span>❌</span>}
@@ -233,12 +233,12 @@ function KanTuSection({set, onDone}){
 
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}> <div style={{background:C.lBlue,border:`1px solid ${meta.color}33`,borderRadius:14,padding:"10px 14px",marginBottom:16}}>
-        <div style={{fontSize:11,fontWeight:800,color:meta.color,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>词语库 Word Bank</div>
+        <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:meta.color,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>词语库 Word Bank</div>
         <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
           {set.wordBank.map(w=>{
             const used=usedWords.includes(w);
             return(
-              <span key={w} style={{background:used?"#E2E8F0":"#fff",border:`1.5px solid ${used?"#CBD5E1":meta.color}`,borderRadius:10,padding:"4px 14px",fontSize:14,fontWeight:700,color:used?C.muted:C.text,textDecoration:used?"line-through":"none",transition:"all .2s"}}>{w}</span>
+              <span key={w} style={{background:used?"#E2E8F0":"#fff",border:`1.5px solid ${used?"#CBD5E1":meta.color}`,borderRadius:10,padding:"4px 14px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:700,color:used?C.muted:C.text,textDecoration:used?"line-through":"none",transition:"all .2s"}}>{w}</span>
             );
           })}
         </div>
@@ -251,9 +251,9 @@ function KanTuSection({set, onDone}){
                 {item.emoji}
               </div>
               <div style={{flex:1}}>
-                <div style={{fontSize:12,color:C.muted,lineHeight:1.5,marginBottom:4}}>{item.emojiLabel}</div>
+                <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,lineHeight:1.5,marginBottom:4}}>{item.emojiLabel}</div>
                 {(isC||isR)&&(
-                  <div style={{fontWeight:900,fontSize:16,color:isC?"#065F46":C.red}}>
+                  <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.143)",color:isC?"#065F46":C.red}}>
                     {item.answer} {isC?"✅":"❌"}
                   </div>
                 )}
@@ -264,13 +264,13 @@ function KanTuSection({set, onDone}){
                   {set.wordBank.filter(w=>!usedWords.includes(w)||(answers[item.id]===w)).map(w=>{
                     const sel=answers[item.id]===w;
                     return(
-                      <div key={w} onClick={()=>selectWord(item.id,w)} style={{background:sel?meta.color:"#F1F5F9",border:`2px solid ${sel?meta.color:C.border}`,borderRadius:10,padding:"6px 14px",fontSize:14,fontWeight:700,cursor:"pointer",color:sel?"#fff":C.text,transition:"all .15s"}}>
+                      <div key={w} onClick={()=>selectWord(item.id,w)} style={{background:sel?meta.color:"#F1F5F9",border:`2px solid ${sel?meta.color:C.border}`,borderRadius:10,padding:"6px 14px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:700,cursor:"pointer",color:sel?"#fff":C.text,transition:"all .15s"}}>
                         {w}
                       </div>
                     );
                   })}
                 </div>
-                <button onClick={()=>checkItem(item)} disabled={!answers[item.id]} style={{background:answers[item.id]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 18px",fontSize:13,fontWeight:700,cursor:answers[item.id]?"pointer":"not-allowed"}}>
+                <button onClick={()=>checkItem(item)} disabled={!answers[item.id]} style={{background:answers[item.id]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 18px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:answers[item.id]?"pointer":"not-allowed"}}>
                   确认 ({3-att} 次)
                 </button>
               </>
@@ -324,11 +324,11 @@ function PeiDuiSection({set, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{background:C.lAmber,border:`1px solid ${meta.color}44`,borderRadius:14,padding:"10px 14px",marginBottom:16}}>
-        <div style={{fontSize:11,fontWeight:800,color:"#92400E",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>选项 Options (每个只用一次)</div>
+        <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#92400E",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>选项 Options (每个只用一次)</div>
         <div style={{display:"flex",gap:7,flexWrap:"wrap"}}>
           {set.options.map(opt=>{
             const used=usedOpts.includes(opt);
-            return <span key={opt} style={{background:used?"#E2E8F0":"#fff",border:`1.5px solid ${used?"#CBD5E1":"#D97706"}`,borderRadius:9,padding:"3px 12px",fontSize:13,fontWeight:700,color:used?C.muted:C.text,textDecoration:used?"line-through":"none"}}>{opt}</span>;
+            return <span key={opt} style={{background:used?"#E2E8F0":"#fff",border:`1.5px solid ${used?"#CBD5E1":"#D97706"}`,borderRadius:9,padding:"3px 12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:used?C.muted:C.text,textDecoration:used?"line-through":"none"}}>{opt}</span>;
           })}
         </div>
       </div>
@@ -340,10 +340,10 @@ function PeiDuiSection({set, onDone}){
         return(
           <div key={item.id} style={{background:C.card,borderRadius:16,padding:"14px 16px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:10}}>
-              <div style={{width:26,height:26,borderRadius:8,background:isC?C.lGreen:isR?"#FEE2E2":meta.color+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:800,color:isC?C.green:isR?C.red:meta.color,flexShrink:0}}>
+              <div style={{width:26,height:26,borderRadius:8,background:isC?C.lGreen:isR?"#FEE2E2":meta.color+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:isC?C.green:isR?C.red:meta.color,flexShrink:0}}>
                 {idx+1}
               </div>
-              <div style={{fontSize:16,fontWeight:700,color:C.text,lineHeight:1.8}}>
+              <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:700,color:C.text,lineHeight:1.8}}>
                 {blankParts[0]}（
                 <span style={{display:"inline-block",background:isC?"#D1FAE5":isR?"#FEE2E2":"#DBEAFE",border:`1.5px solid ${isC?C.green:isR?C.red:meta.color}`,borderRadius:7,padding:"0 8px",minWidth:40,textAlign:"center",color:isC?"#065F46":isR?C.red:meta.color,fontWeight:900}}>
                   {(isC||isR)?item.answer:"？"}
@@ -359,16 +359,16 @@ function PeiDuiSection({set, onDone}){
                 <div style={{display:"flex",flexWrap:"wrap",gap:7,marginBottom:8}}>
                   {set.options.filter(o=>!usedOpts.includes(o)||(answers[item.id]===o)).map(opt=>{
                     const sel=answers[item.id]===opt;
-                    return <div key={opt} onClick={()=>selectOpt(item.id,opt)} style={{background:sel?meta.color:"#F1F5F9",border:`2px solid ${sel?meta.color:C.border}`,borderRadius:9,padding:"5px 12px",fontSize:13,fontWeight:700,cursor:"pointer",color:sel?"#fff":C.text,transition:"all .15s"}}>{opt}</div>;
+                    return <div key={opt} onClick={()=>selectOpt(item.id,opt)} style={{background:sel?meta.color:"#F1F5F9",border:`2px solid ${sel?meta.color:C.border}`,borderRadius:9,padding:"5px 12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:"pointer",color:sel?"#fff":C.text,transition:"all .15s"}}>{opt}</div>;
                   })}
                 </div>
-                <button onClick={()=>checkItem(item)} disabled={!answers[item.id]} style={{background:answers[item.id]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:9,padding:"6px 16px",fontSize:12,fontWeight:700,cursor:answers[item.id]?"pointer":"not-allowed"}}>
+                <button onClick={()=>checkItem(item)} disabled={!answers[item.id]} style={{background:answers[item.id]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:9,padding:"6px 16px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,cursor:answers[item.id]?"pointer":"not-allowed"}}>
                   确认 ({3-att} 次剩)
                 </button>
               </>
             )}
-            {isC&&<div style={{fontSize:12,color:C.green,fontWeight:700}}>✅ 正确！</div>}
-            {isR&&<div style={{fontSize:12,color:C.red,fontWeight:700}}>📖 答案：{item.answer}</div>}
+            {isC&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.green,fontWeight:700}}>✅ 正确！</div>}
+            {isR&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.red,fontWeight:700}}>📖 答案：{item.answer}</div>}
           </div>
         );
       })}
@@ -441,29 +441,29 @@ function JuZiSection({items, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
-        <span style={{fontSize:13,fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
+        <span style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.muted}}>第 {qIdx+1} / {items.length} 题</span>
         <div style={{display:"flex",gap:4}}>
           {[0,1,2].map(i=><div key={i} style={{width:8,height:8,borderRadius:"50%",background:i<attempts?C.red:"#E2E8F0"}}/>)}
         </div>
       </div> <div style={{background:C.card,borderRadius:18,padding:"16px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
         <TagPill color={meta.color} bg={meta.color+"18"}>扩写句子</TagPill>
-        <div style={{marginTop:10,fontSize:12,fontWeight:700,color:C.muted,marginBottom:4}}>📋 任务</div>
-        <div style={{fontSize:14,fontWeight:700,color:C.navy}}>{q.instruction}</div>
+        <div style={{marginTop:10,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.muted,marginBottom:4}}>📋 任务</div>
+        <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:700,color:C.navy}}>{q.instruction}</div>
         {q.baseSentence&&(
-          <div style={{marginTop:8,background:"#F8FAFC",borderRadius:10,padding:"8px 12px",fontSize:13,color:C.muted}}>
+          <div style={{marginTop:8,background:"#F8FAFC",borderRadius:10,padding:"8px 12px",fontSize:"calc(var(--fs) * 0.929)",color:C.muted}}>
             原句：{q.baseSentence}
           </div>
         )}
       </div> {attempts>0&&!solved&&!revealed&&<HintBox text={q.hint}/>} <div style={{background:C.card,borderRadius:16,padding:"14px",marginBottom:14,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
-        <div style={{fontSize:11,fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
+        <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
           {solved?"✅ 完成！":revealed?"📖 正确答案":"👆 点击词语，按顺序排列"}
         </div> <div style={{minHeight:56,background:solved?"#D1FAE5":revealed?"#FEE2E2":"#F0F9FF",border:`2px dashed ${solved?C.green:revealed?C.red:meta.color}`,borderRadius:12,padding:"10px 10px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:6,alignItems:"center"}}>
           {revealed
-            ? <span style={{fontSize:15,fontWeight:700,color:C.red,lineHeight:1.8}}>{q.targetSentence}</span>
+            ? <span style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,color:C.red,lineHeight:1.8}}>{q.targetSentence}</span>
             : placed.length===0
-              ? <span style={{fontSize:13,color:C.muted,fontStyle:"italic"}}>在下方点击词语……</span>
+              ? <span style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,fontStyle:"italic"}}>在下方点击词语……</span>
               : placed.map((tile,i)=>(
-                  <div key={i} onClick={()=>tapTile(tile,true)} style={{background:solved?"#A7F3D0":"#DBEAFE",border:`1.5px solid ${solved?C.green:meta.color}`,borderRadius:9,padding:"6px 12px",fontSize:15,fontWeight:700,cursor:solved?"default":"pointer",color:solved?"#065F46":meta.color,transition:"all .15s"}}>
+                  <div key={i} onClick={()=>tapTile(tile,true)} style={{background:solved?"#A7F3D0":"#DBEAFE",border:`1.5px solid ${solved?C.green:meta.color}`,borderRadius:9,padding:"6px 12px",fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,cursor:solved?"default":"pointer",color:solved?"#065F46":meta.color,transition:"all .15s"}}>
                     {tile}
                   </div>
                 ))
@@ -471,14 +471,14 @@ function JuZiSection({items, onDone}){
         </div> {!solved&&!revealed&&(
           <div style={{display:"flex",flexWrap:"wrap",gap:7}}>
             {shuffledTiles.map((tile,i)=>(
-              <div key={i} onClick={()=>tapTile(tile,false)} style={{background:"#F1F5F9",border:`2px solid ${C.border}`,borderRadius:9,padding:"6px 12px",fontSize:15,fontWeight:700,cursor:"pointer",color:C.text,transition:"all .15s"}}>
+              <div key={i} onClick={()=>tapTile(tile,false)} style={{background:"#F1F5F9",border:`2px solid ${C.border}`,borderRadius:9,padding:"6px 12px",fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,cursor:"pointer",color:C.text,transition:"all .15s"}}>
                 {tile}
               </div>
             ))}
           </div>
         )}
       </div> {!solved&&!revealed&&placed.length>0&&(
-        <button onClick={resetTiles} style={{background:"none",border:`1.5px solid ${C.border}`,borderRadius:10,padding:"7px 14px",fontSize:12,fontWeight:700,cursor:"pointer",color:C.muted,marginBottom:10}}>
+        <button onClick={resetTiles} style={{background:"none",border:`1.5px solid ${C.border}`,borderRadius:10,padding:"7px 14px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,cursor:"pointer",color:C.muted,marginBottom:10}}>
           🔄 重新排列
         </button>
       )}
@@ -486,8 +486,8 @@ function JuZiSection({items, onDone}){
       {solved&&<FeedbackBox badge={badge} meaning={null}/>}
       {revealed&&(
         <div style={{background:C.lRed,border:`1.5px solid ${C.red}`,borderRadius:14,padding:"12px 14px",marginBottom:12}}>
-          <div style={{fontWeight:800,fontSize:13,color:C.red,marginBottom:4}}>📖 正确答案</div>
-          <div style={{fontSize:15,fontWeight:700,color:C.text,lineHeight:1.8}}>{q.targetSentence}</div>
+          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red,marginBottom:4}}>📖 正确答案</div>
+          <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,color:C.text,lineHeight:1.8}}>{q.targetSentence}</div>
         </div>
       )}
 
@@ -540,8 +540,8 @@ function ZuJuSection({set, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{background:"#F5F3FF",border:`1px solid #DDD6FE`,borderRadius:14,padding:"11px 14px",marginBottom:14}}>
-        <div style={{fontSize:12,fontWeight:800,color:"#4C1D95",marginBottom:4}}>📋 {set.setLabel}</div>
-        <div style={{fontSize:12,color:"#6D28D9",lineHeight:1.6}}>
+        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:"#4C1D95",marginBottom:4}}>📋 {set.setLabel}</div>
+        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#6D28D9",lineHeight:1.6}}>
           {solved||revealed ? "正确顺序如下：" : "点击句子，按正确顺序排列（点击已选的可以取消）"}
         </div>
       </div>
@@ -553,10 +553,10 @@ function ZuJuSection({set, onDone}){
         const isFirst=sentIdx===0; // first sentence is always labeled "1"
         return(
           <div key={sentIdx} onClick={()=>tapSentence(sentIdx)} style={{background:solved?"#D1FAE5":isSelected?C.lBlue:C.card,border:`2px solid ${solved?C.green:isSelected?meta.color:C.border}`,borderRadius:14,padding:"13px 14px",marginBottom:10,cursor:(solved||revealed)?"default":"pointer",display:"flex",alignItems:"flex-start",gap:12,transition:"all .15s"}}>
-            <div style={{width:30,height:30,borderRadius:"50%",background:solved?"#065F46":isSelected?meta.color:isFirst&&!order.length?"#1E3A6E":"#E2E8F0",color:solved||isSelected||isFirst?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:900,flexShrink:0,marginTop:1}}>
+            <div style={{width:30,height:30,borderRadius:"50%",background:solved?"#065F46":isSelected?meta.color:isFirst&&!order.length?"#1E3A6E":"#E2E8F0",color:solved||isSelected||isFirst?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 0.929)",fontWeight:900,flexShrink:0,marginTop:1}}>
               {solved ? displayPos+1 : isSelected ? selectedPos+1 : isFirst&&!order.length ? "1" : "○"}
             </div>
-            <div style={{fontSize:14,fontWeight:600,color:solved?"#065F46":C.text,lineHeight:1.7,flex:1}}>
+            <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:600,color:solved?"#065F46":C.text,lineHeight:1.7,flex:1}}>
               {sentence.text}
             </div>
           </div>
@@ -566,7 +566,7 @@ function ZuJuSection({set, onDone}){
       {solved&&<FeedbackBox badge={badge} meaning={null}/>}
       {revealed&&(
         <div style={{background:C.lRed,border:`1.5px solid ${C.red}`,borderRadius:14,padding:"12px 14px",marginBottom:12}}>
-          <div style={{fontWeight:800,fontSize:13,color:C.red}}>📖 正确顺序已显示</div>
+          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red}}>📖 正确顺序已显示</div>
         </div>
       )}
 
@@ -609,8 +609,8 @@ function YueReadSection({set, onDone}){
   }
 
   const passagePanel = (
-    <div style={{fontSize:15,color:C.text,lineHeight:2.2,whiteSpace:"pre-line",letterSpacing:"0.02em"}}>
-      <div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:2}}>
+    <div style={{fontSize:"calc(var(--fs) * 1.071)",color:C.text,lineHeight:2.2,whiteSpace:"pre-line",letterSpacing:"0.02em"}}>
+      <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:2}}>
         {set.setLabel}
       </div>
       {set.passage}
@@ -623,7 +623,7 @@ function YueReadSection({set, onDone}){
         const wa=attempts[q.id]||0, isC=correct[q.id], isR=revealed[q.id];
         return(
           <div key={q.id} style={{background:C.card,borderRadius:16,padding:"14px 16px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
-            <div style={{fontSize:13,fontWeight:700,color:C.navy,marginBottom:8}}>{qi+1}. {q.question}</div>
+            <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.navy,marginBottom:8}}>{qi+1}. {q.question}</div>
             {wa>0&&!isC&&!isR&&<HintBox text={q.hint}/>}
             <div>
               {q.options.map((opt,i)=>{
@@ -634,15 +634,15 @@ function YueReadSection({set, onDone}){
                 else if(answers[q.id]===i&&!isC&&!isR){bg=C.lBlue;border=meta.color;col=meta.color;}
                 return(
                   <div key={i} onClick={()=>selectAns(q.id,i)} style={{background:bg,border:`2px solid ${border}`,borderRadius:12,padding:"10px 14px",marginBottom:8,cursor,display:"flex",alignItems:"center",gap:10,opacity:op,transition:"all .15s"}}>
-                    <div style={{width:22,height:22,borderRadius:"50%",background:answers[q.id]===i&&!isC&&!isR?meta.color:"#EEF2F7",color:answers[q.id]===i&&!isC&&!isR?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:11,fontWeight:800,flexShrink:0}}>{i+1}</div>
-                    <span style={{fontSize:14,fontWeight:600,color:col,flex:1}}>{opt}</span>
+                    <div style={{width:22,height:22,borderRadius:"50%",background:answers[q.id]===i&&!isC&&!isR?meta.color:"#EEF2F7",color:answers[q.id]===i&&!isC&&!isR?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,flexShrink:0}}>{i+1}</div>
+                    <span style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:600,color:col,flex:1}}>{opt}</span>
                     {(isC||isR)&&i===q.answer&&<span>✅</span>}
                   </div>
                 );
               })}
             </div>
             {!isC&&!isR&&(
-              <button onClick={()=>checkQ(q)} disabled={answers[q.id]===undefined} style={{marginTop:4,background:answers[q.id]!==undefined?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 18px",fontSize:13,fontWeight:700,cursor:answers[q.id]!==undefined?"pointer":"not-allowed"}}>
+              <button onClick={()=>checkQ(q)} disabled={answers[q.id]===undefined} style={{marginTop:4,background:answers[q.id]!==undefined?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 18px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:answers[q.id]!==undefined?"pointer":"not-allowed"}}>
                 确认 ({3-wa} 次剩)
               </button>
             )}
@@ -684,13 +684,13 @@ function ZhSessionScreen({plan, onFinish, onBack}){
   return(
     <div style={{background:C.bg,minHeight:"100vh"}}> <div style={{background:`linear-gradient(135deg,${meta.color}dd,${meta.color})`,padding:"14px 20px 10px"}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:7}}>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:32,height:32,cursor:"pointer",color:"#fff",fontSize:15,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:32,height:32,cursor:"pointer",color:"#fff",fontSize:"calc(var(--fs) * 1.071)",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <div style={{flex:1}}>
-            <div style={{color:"#fff",fontSize:13,fontWeight:800}}>{meta.icon} {meta.label}</div>
-            <div style={{color:"rgba(255,255,255,0.7)",fontSize:10,marginTop:1}}>{meta.sub} · 第{secIdx+1}/{plan.length}节</div>
+            <div style={{color:"#fff",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800}}>{meta.icon} {meta.label}</div>
+            <div style={{color:"rgba(255,255,255,0.7)",fontSize:"calc(var(--fs) * 0.780)",marginTop:1}}>{meta.sub} · 第{secIdx+1}/{plan.length}节</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.2)",borderRadius:9,padding:"3px 10px"}}>
-            <span style={{color:"#fff",fontSize:11,fontWeight:700}}>{progress}%</span>
+            <span style={{color:"#fff",fontSize:"calc(var(--fs) * 0.786)",fontWeight:700}}>{progress}%</span>
           </div>
         </div>
         <div style={{background:"rgba(255,255,255,0.25)",borderRadius:8,height:4}}>

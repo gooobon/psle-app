@@ -1,0 +1,217 @@
+{
+ "setId": "ZS53",
+ "mcq": {
+  "ZS53_A1": {
+   "sentence_en": "In today's maths exam, Xiaoming got full ___ (marks), and the whole class clapped for him.",
+   "hints": ["满___ names the highest possible score. Which character means 'marks / points', forming 满分?"],
+   "keywords": [{"w":"满分","py":"mǎnfēn","en":"full marks"},{"w":"考试","py":"kǎoshì","en":"exam"},{"w":"鼓掌","py":"gǔzhǎng","en":"to clap"}],
+   "explanation_en": "满分 is the fixed word for the highest exam score, so 分 fits. The four are read fēn or fèn; judge by meaning: an exam gives 分数 (marks), so full marks is 满分."
+  },
+  "ZS53_A2": {
+   "sentence_en": "In class, the classmates all ___ (leaned their ears to) listen to the teacher.",
+   "hints": ["The blank + 耳 means to turn the ear over to listen intently. Which character (with the person radical 亻) forms 侧耳?"],
+   "keywords": [{"w":"侧耳","py":"cè'ěr","en":"to lean one's ear"},{"w":"倾听","py":"qīngtīng","en":"to listen attentively"},{"w":"讲课","py":"jiǎngkè","en":"to teach a lesson"}],
+   "explanation_en": "侧耳倾听 is a fixed pairing meaning to turn the ear over and listen intently, so 侧 fits. The four are read cè; 侧 has the person radical 亻 - a person turning the body sideways, so 侧耳 means leaning the ear over."
+  },
+  "ZS53_A3": {
+   "sentence_en": "Teacher Lin ___ (encourages) us to keep a diary every day.",
+   "hints": ["鼓___ means to give confidence and drive. Which character (with 力 on the right) forms 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"日记","py":"rìjì","en":"diary"}],
+   "explanation_en": "鼓励 is the fixed word for giving confidence and drive, so 励 fits. 励 has 力 (strength) on the right - to encourage is to give someone strength, so the whole character carries 力."
+  },
+  "ZS53_A4": {
+   "sentence_en": "In PE class, the classmates ran ___ (with all their might) on the field, everyone dripping with sweat.",
+   "hints": ["The blank + 力 means to put in full strength. Which character (with 大 on top) forms 奋力?"],
+   "keywords": [{"w":"奋力","py":"fènlì","en":"with all one's might"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"满头大汗","py":"mǎntóu-dàhàn","en":"dripping with sweat"}],
+   "explanation_en": "奋力 means to put in full strength, so 奋力跑步 (running with all their might) shows they ran hard, and 奋 fits. 奋 has 大 on top - putting in great strength is 奋力. Tell look-alike characters apart by radical and meaning."
+  },
+  "ZS53_A5": {
+   "sentence_en": "After class, the classmates ___ (one after another) walked out of the classroom to play on the field.",
+   "hints": ["The blank + 纷 means many people doing the same thing one after another. Which character (with the silk radical 纟) forms 纷纷?"],
+   "keywords": [{"w":"纷纷","py":"fēnfēn","en":"one after another"},{"w":"走出","py":"zǒuchū","en":"to walk out"},{"w":"教室","py":"jiàoshì","en":"classroom"}],
+   "explanation_en": "纷纷 means many people doing the same thing one after another, so 纷纷走出 (walked out one after another) fits, and 纷 is correct. 纷 has the silk radical 纟 - like many threads tangled together, showing many people acting at once."
+  },
+  "ZS53_B1": {
+   "sentence_en": "The teacher handed back our 作业 (homework) books.",
+   "hints": ["作 is 4th tone (zuò); 业 is 4th tone (yè). Which choice is zuò + yè, both falling?"],
+   "keywords": [{"w":"作业","py":"zuòyè","en":"homework"},{"w":"发下来","py":"fā xiàlái","en":"to hand back"},{"w":"本子","py":"běnzi","en":"notebook"}],
+   "explanation_en": "作 is read zuò (4th tone) and 业 is yè (4th tone), together zuò yè. Both characters of 作业 are 4th tone, falling together - zuò yè."
+  },
+  "ZS53_B2": {
+   "sentence_en": "Xiaowen 借阅 (borrowed) a book about space from the library.",
+   "hints": ["借 is 4th tone (jiè); 阅 is 4th tone (yuè). Which choice is jiè + yuè, both falling?"],
+   "keywords": [{"w":"借阅","py":"jièyuè","en":"to borrow and read"},{"w":"图书馆","py":"túshūguǎn","en":"library"},{"w":"太空","py":"tàikōng","en":"space"}],
+   "explanation_en": "借 is read jiè (4th tone) and 阅 is yuè (4th tone), together jiè yuè. Both characters of 借阅 are 4th tone; remember borrowing at the library, both tones fall."
+  },
+  "ZS53_B3": {
+   "sentence_en": "In class, the classmates listened 专心 (attentively) to the teacher's explanation.",
+   "hints": ["专 is retroflex zh (zhuān), not flat z; 心 is xīn (1st tone). Which choice is zhuān + xīn?"],
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"attentive"},{"w":"上课","py":"shàngkè","en":"class"},{"w":"讲解","py":"jiǎngjiě","en":"to explain"}],
+   "explanation_en": "专 is read zhuān (retroflex zh, 1st tone) and 心 is xīn (1st tone), together zhuān xīn. 专 is retroflex zh - do not confuse it with flat z; 心 is 1st tone xīn."
+  },
+  "ZS53_B4": {
+   "sentence_en": "This maths question was hard; Xiaohua 重新 (afresh) worked it out several times before getting it right.",
+   "hints": ["重 is a polyphone: chóng in 重新 (again); zhòng in 重量 (weight). Here it means again, so which choice is chóng + xīn?"],
+   "keywords": [{"w":"重新","py":"chóngxīn","en":"afresh; again"},{"w":"数学题","py":"shùxuétí","en":"maths question"},{"w":"好几遍","py":"hǎo jǐ biàn","en":"several times"}],
+   "explanation_en": "In 重新, 重 is read chóng (2nd tone, again) and 新 is xīn (1st tone), together chóng xīn. 重 is a polyphone: weight 重量 zhòng (4th tone); again 重新 chóng (2nd tone). Remember 重新 is read chóng."
+  },
+  "ZS53_C1": {
+   "sentence_en": "The teacher ___ (reminds) us to finish every question carefully and not be sloppy.",
+   "hints": ["Clue: the teacher kindly gets us to notice something. Which word means 'to remind', not 'to order'?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"认真","py":"rènzhēn","en":"careful"},{"w":"马虎","py":"mǎhu","en":"sloppy"}],
+   "explanation_en": "The teacher kindly gets us to notice and remember, which is 提醒 (to remind), so it fits best. A teacher telling students to be careful is 提醒 (kindly reminding), not 命令 (too forceful) or 请求 (too weak). 告别 does not fit."
+  },
+  "ZS53_C2": {
+   "sentence_en": "Xiaoming ___ (swept) the classroom floor spotless, and the teacher kept praising him.",
+   "hints": ["Clue: cleaning a floor with a broom. Which word means 'to sweep', pairing with 地板 (floor)?"],
+   "keywords": [{"w":"扫","py":"sǎo","en":"to sweep"},{"w":"地板","py":"dìbǎn","en":"floor"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "A floor is cleaned with a broom, which is 扫, and 扫地板 (sweep the floor) is a fixed pairing, so it fits best. Floor -> 扫; bowls -> 洗; teeth -> 刷. Match the verb to the object."
+  },
+  "ZS53_C3": {
+   "sentence_en": "At the school sports meet, our class won the championship of ___ (a) relay race.",
+   "hints": ["Clue: a race or contest. Which measure word is used for a match / race?"],
+   "keywords": [{"w":"一场","py":"yì chǎng","en":"one (match)"},{"w":"接力赛","py":"jiēlìsài","en":"relay race"},{"w":"冠军","py":"guànjūn","en":"championship"}],
+   "explanation_en": "A race or contest uses the measure word 场, so 一场接力赛 is correct. Matches and performances -> 一场; long thin things -> 一条; a short spell -> 一阵. 一回 does not fit a race here."
+  },
+  "ZS53_C4": {
+   "sentence_en": "Xiaohong ___ (eagerly) raised her hand to answer questions, and the teacher nodded and smiled at her.",
+   "hints": ["Clue: raising her hand to answer shows she takes part willingly. Which word means 'active / eager'?"],
+   "keywords": [{"w":"积极","py":"jījí","en":"active; eager"},{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"回答","py":"huídá","en":"to answer"}],
+   "explanation_en": "Raising her hand to answer shows she takes part willingly, so 积极 (active, eager) fits best. 积极 stresses taking part willingly; 害羞 (shy) means the opposite. 勇敢 and 自信 do not fit raising a hand to answer as well."
+  },
+  "ZS53_C5": {
+   "sentence_en": "The teacher stuck our ___ (measure word) painting on the notice board for everyone to admire.",
+   "hints": ["Clue: the measure word for a painting. Which one is used for pictures and paintings?"],
+   "keywords": [{"w":"一幅","py":"yì fú","en":"one (painting)"},{"w":"画","py":"huà","en":"painting"},{"w":"公告栏","py":"gōnggàolán","en":"notice board"}],
+   "explanation_en": "A painting uses the measure word 幅, so 一幅画 is correct. Pictures -> 一幅; paper -> 一张; books -> 一本; clothes -> 一件. Do not mix them up."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“专注”是把注意力集中在一件事上，所以“上课时要专注地听讲”就是上课时集中精神听老师讲。“整洁、讨论”都不是“集中注意力”的意思。",
+   "explanation_en": "专注 (zhuānzhù) means to focus attention on one thing, so 上课时要专注地听讲 means to listen with full attention in class. 整洁 (tidy) and 讨论 (discuss) do not mean 'to concentrate'.",
+   "stem_en": "In class you should listen with full attention and not be distracted.",
+   "keywords": [{"w":"专注","py":"zhuānzhù","en":"to focus"},{"w":"听讲","py":"tīngjiǎng","en":"to listen to a lesson"}]
+  },
+  "2": {
+   "explanation": "“整洁”是干净又整齐，所以“书桌非常整洁”就是书桌上东西干净整齐、摆得好。“专注、进步”都不是“干净整齐”的意思。",
+   "explanation_en": "整洁 (zhěngjié) means clean and tidy, so 书桌非常整洁 means the desk is very clean and tidy. 专注 (focus) and 进步 (progress) do not mean 'clean and tidy'.",
+   "stem_en": "Xiaohua's desk is very tidy, with everything placed neatly.",
+   "keywords": [{"w":"整洁","py":"zhěngjié","en":"clean and tidy"},{"w":"书桌","py":"shūzhuō","en":"desk"}]
+  },
+  "3": {
+   "explanation": "“讨论”是几个人一起商量、交换意见，所以“一起讨论这道难题”就是几个人一起研究、商量这道难题。“专注、表扬”都不是“一起商量”的意思。",
+   "explanation_en": "讨论 (tǎolùn) means to discuss and exchange ideas together, so 一起讨论这道难题 means to discuss the hard question together. 专注 (focus) and 表扬 (praise) do not mean 'to discuss together'.",
+   "stem_en": "The classmates split into groups to discuss this hard question together.",
+   "keywords": [{"w":"讨论","py":"tǎolùn","en":"to discuss"},{"w":"难题","py":"nántí","en":"hard question"}]
+  },
+  "4": {
+   "explanation": "“进步”是比以前做得更好，所以“中文写作有了很大的进步”就是中文写作比以前有了很大的提高。“讨论、准时”都不是“比以前更好”的意思。",
+   "explanation_en": "进步 (jìnbù) means doing better than before, so 写作有了很大的进步 means one's writing has improved greatly. 讨论 (discuss) and 准时 (on time) do not mean 'to do better than before'.",
+   "stem_en": "After hard practice, Xiaoming's Chinese writing has made great progress.",
+   "keywords": [{"w":"进步","py":"jìnbù","en":"progress"},{"w":"写作","py":"xiězuò","en":"writing"}]
+  },
+  "5": {
+   "explanation": "“表扬”是当众说出别人的好，加以赞许，所以“表扬了帮助同学的小红”就是在全班面前赞许帮助同学的小红。“进步、准时”都不是“当众赞许”的意思。",
+   "explanation_en": "表扬 (biǎoyáng) means to praise someone openly, so 表扬了帮助同学的小红 means to praise Xiaohong for helping a classmate. 进步 (progress) and 准时 (on time) do not mean 'to praise openly'.",
+   "stem_en": "The teacher praised Xiaohong, who helped a classmate, in front of the whole class.",
+   "keywords": [{"w":"表扬","py":"biǎoyáng","en":"to praise"},{"w":"帮助","py":"bāngzhù","en":"to help"}]
+  }
+ },
+ "craft": {
+  "ZS53_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'This maths question is very hard.' and 'Xiaohua did not give up and kept thinking hard.'",
+   "answer_en": "Although this maths question is very hard, Xiaohua did not give up and kept thinking hard.",
+   "tiles": ["虽然","这道数学题很难，","但是","小华没有放弃，一直努力思考。"],
+   "explanation_en": "虽然……但是…… names a difficulty first, then an opposite action. '虽然这道数学题很难' (although it is hard) is the difficulty, '但是小华没有放弃' (but Xiaohua did not give up) is the opposite. Write out both key words."
+  },
+  "ZS53_E2": {
+   "question_en": "Combine these two sentences using the connector 只要……就…… (as long as…, …): 'You keep practising writing every day.' and 'Your handwriting will surely get better and better.'",
+   "answer_en": "As long as you keep practising writing every day, your handwriting will surely get better and better.",
+   "tiles": ["只要","你每天坚持练习写字，","你的字","就","一定会越写越好。"],
+   "explanation_en": "只要……就…… means when the condition is met, the result follows. '只要你每天坚持练习写字' (as long as you practise daily) is the condition, '你的字就一定会越写越好' (your handwriting will improve) is the result. Both words are needed."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Today is the school's open day, and Mum and Dad came to visit our classroom. We cleaned the classroom very ___ (clean) and arranged the desks and chairs neatly.",
+   "hint": "Clue: after cleaning, the classroom has no dirt. Which box word means 'clean'?",
+   "keywords": [{"w":"干净","py":"gānjìng","en":"clean"},{"w":"教室","py":"jiàoshì","en":"classroom"}],
+   "explanation_en": "After cleaning, the classroom is free of dirt, so 干净 (clean) fits best."
+  },
+  "2": {
+   "sentence_en": "The teacher ___ (patiently) introduced our usual study situation to the parents.",
+   "hint": "Clue: introducing the situation takes care and no rushing. Which box word means 'patient'?",
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"介绍","py":"jièshào","en":"to introduce"}],
+   "explanation_en": "Introducing the situation to parents needs care and no rushing, so 耐心 (patient) fits best."
+  },
+  "3": {
+   "sentence_en": "Dad listened and nodded ___ (with satisfaction), a pleased smile on his face.",
+   "hint": "Clue: Dad feels the situation is good and approves. Which box word means 'satisfied'?",
+   "keywords": [{"w":"满意","py":"mǎnyì","en":"satisfied"},{"w":"点头","py":"diǎntóu","en":"to nod"}],
+   "explanation_en": "Dad nods after the introduction, feeling satisfied and approving, so 满意地点头 (nodded with satisfaction) fits best."
+  },
+  "4": {
+   "sentence_en": "Mum saw my workbook and found my handwriting getting more and more ___ (neat), and could not help praising me.",
+   "hint": "Clue: it pairs with 字 (handwriting) - written well and neatly. Which box word means 'neat and orderly (of writing)'?",
+   "keywords": [{"w":"工整","py":"gōngzhěng","en":"neat and orderly"},{"w":"作业本","py":"zuòyèběn","en":"workbook"}],
+   "explanation_en": "字写得工整 means handwriting that is neat and well-formed, a fixed pairing, so 工整 fits best."
+  },
+  "5": {
+   "sentence_en": "Hearing this, I felt very ___ (happy) inside and resolved to keep working hard.",
+   "hint": "Clue: being praised by Mum puts me in a good mood. Which box word means 'happy'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"夸奖","py":"kuājiǎng","en":"to praise"}],
+   "explanation_en": "After Mum's praise I feel joyful, so 高兴 (happy) best describes the feeling inside, and it fits best."
+  }
+ },
+ "reading": {
+  "ZS53_G1": {
+   "stem_en": "What was the book Xiaowen introduced about?",
+   "answer_en": "Sea animals.",
+   "keywords": [{"w":"海洋动物","py":"hǎiyáng dòngwù","en":"sea animals"},{"w":"介绍","py":"jièshào","en":"to introduce"},{"w":"图片","py":"túpiàn","en":"pictures"}],
+   "explanation": "这是细节题。短文说“轮到小文时，他介绍了一本关于海洋动物的书”，直接说明小文介绍的书是关于海洋动物的，所以选(2)。(1)太空探险、(3)学校生活，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'when it was Xiaowen's turn, he introduced a book about sea animals', directly stating the topic, so (2). (1) space adventure and (3) school life are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "他介绍了一本关于海洋动物的书"}
+  },
+  "ZS53_G2": {
+   "stem_en": "From the passage, what was the classmates' reaction as they listened to Xiaowen?",
+   "answer_en": "They listened intently and from time to time gave gasps of amazement.",
+   "keywords": [{"w":"入神","py":"rùshén","en":"engrossed"},{"w":"惊叹","py":"jīngtàn","en":"to gasp in amazement"},{"w":"生动","py":"shēngdòng","en":"vivid"}],
+   "explanation": "这是推断题。短文说小文“讲得非常生动，同学们听得入神，不时发出惊叹声”，可以推断同学们听介绍时听得很投入、不时发出惊叹声，所以选(3)。(1)感到无聊、(2)纷纷提问，都和“听得入神”不符。推断题要看描写同学们反应的句子。",
+   "explanation_en": "This is an inference question. The passage says Xiaowen 'spoke very vividly, and the classmates listened engrossed, giving gasps of amazement from time to time', so they listened intently and gasped, so (3). (1) feeling bored and (2) asking questions contradict 'listened engrossed'. Read the sentence describing their reaction.",
+   "solution": {"evidence": "同学们听得入神，不时发出惊叹声"}
+  },
+  "ZS53_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "The book-sharing session made the classmates love reading, and reading more can enrich one's knowledge.",
+   "keywords": [{"w":"分享会","py":"fēnxiǎnghuì","en":"sharing session"},{"w":"阅读","py":"yuèdú","en":"reading"},{"w":"知识","py":"zhīshi","en":"knowledge"}],
+   "explanation": "这是主旨题。全文讲班上举行读书分享会，小文生动地介绍了一本书，同学们听得入神，还向他借书，最后老师说“这次分享会让大家爱上了阅读，希望同学们以后多读好书，增长知识”。可见短文是要告诉我们读书分享会让同学们爱上阅读、多读书能增长知识，所以选(1)。(2)小文最会介绍书、(3)要把书借给别人都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells of a book-sharing session where Xiaowen vividly introduced a book, the classmates listened engrossed and borrowed it, and the teacher said 'this session made everyone love reading; read more good books to gain knowledge'. So it tells us the session made classmates love reading and reading enriches knowledge, so (1). (2) Xiaowen is best at introducing books and (3) lend books to others are minor points, not the main idea.",
+   "solution": {"evidence": "这次分享会让大家爱上了阅读，希望同学们以后多读好书，增长知识"}
+  },
+  "ZS53_H1": {
+   "stem_en": "Find a word in the passage close in meaning to the underlined word: 'The teacher told everyone that students who want to join may raise their hand.' (underlined: told)",
+   "answer_en": "宣布 (announced)",
+   "keywords": [{"w":"宣布","py":"xuānbù","en":"to announce"},{"w":"告诉","py":"gàosu","en":"to tell"},{"w":"值日班长","py":"zhírì bānzhǎng","en":"class monitor on duty"}],
+   "explanation": "这是近义词题。例句里的“告诉”指把事情说给大家听，短文中说“老师宣布班上要选出一位值日班长”，“宣布”和“告诉”意思相近，都是把消息说给大家知道，所以答案是“宣布”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. In the example, 告诉 means to say something for everyone to hear; in the passage 'the teacher announced that the class would choose a monitor on duty'. 宣布 and 告诉 are close in meaning, both making news known to all, so the answer is 宣布. Find the closest word in the passage.",
+   "solution": {"evidence": "老师宣布班上要选出一位值日班长"}
+  },
+  "ZS53_H2": {
+   "stem_en": "What three things did the teacher say the duty monitor must do?",
+   "answer_en": "The duty monitor must arrive at school on time, finish homework seriously, and also help classmates in difficulty.",
+   "keywords": [{"w":"准时","py":"zhǔnshí","en":"on time"},{"w":"作业","py":"zuòyè","en":"homework"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“值日班长要做到三件事：准时到校、认真完成作业，还要帮助有困难的同学”，直接说明这三件事是准时到校、认真完成作业、帮助有困难的同学。答“哪三件事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'the duty monitor must do three things: arrive at school on time, finish homework seriously, and help classmates in difficulty', directly naming the three. When asked 'which three things', list all from the text.",
+   "solution": {"evidence": "值日班长要做到三件事：准时到校、认真完成作业，还要帮助有困难的同学"}
+  },
+  "ZS53_H3": {
+   "stem_en": "What did Xiaowei decide to do to become a good monitor?",
+   "answer_en": "Xiaowei decided to start today to get rid of his bad habit of being late and to try hard to be a good monitor.",
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"迟到","py":"chídào","en":"to be late"},{"w":"班长","py":"bānzhǎng","en":"monitor"}],
+   "explanation": "这是推断题。短文说小伟有时候会迟到，心里有点担心，“不过，他决定从今天开始改掉迟到的坏习惯，努力做一个好班长”。可以看出小伟决定改掉迟到的坏习惯、努力做好班长，才能成为一个好班长。答这类题要抓住表示决定的句子。",
+   "explanation_en": "This is an inference question. The passage says Xiaowei sometimes came late and felt a little worried, 'but he decided to start today to get rid of his lateness habit and try hard to be a good monitor'. So Xiaowei decided to drop his lateness habit and try hard. Catch the sentence stating his decision.",
+   "solution": {"evidence": "他决定从今天开始改掉迟到的坏习惯，努力做一个好班长"}
+  }
+ }
+}

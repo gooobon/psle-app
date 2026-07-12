@@ -1,0 +1,217 @@
+{
+ "setId": "ZS41",
+ "mcq": {
+  "ZS41_A1": {
+   "sentence_en": "In class, the classmates all listen to the teacher ___ (attentively).",
+   "hints": ["The blank + 心 means to focus one's attention on one thing. Which character means 'sole / focused', forming 专心?"],
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"to concentrate"},{"w":"上课","py":"shàngkè","en":"class"},{"w":"讲课","py":"jiǎngkè","en":"to teach a lesson"}],
+   "explanation_en": "专心 is the fixed word for focusing attention on one thing, here listening in class, so 专 fits. 专 means single-minded - 专心 is putting the heart in one place, not scattered. The four sound alike, so judge by meaning."
+  },
+  "ZS41_A2": {
+   "sentence_en": "Teacher Lin ___ (encourages) us to read more books outside class and gain knowledge.",
+   "hints": ["The blank + 励 means to give confidence and drive. Which character shows a drum, used in 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"课外书","py":"kèwàishū","en":"books outside class"},{"w":"知识","py":"zhīshi","en":"knowledge"}],
+   "explanation_en": "鼓励 is the fixed word for giving confidence and drive, matching the teacher encouraging us to read, so 鼓 fits. All four are read gǔ; 鼓 has the drum radical - a drumbeat gives strength, so 鼓 = to give strength."
+  },
+  "ZS41_A3": {
+   "sentence_en": "At the sports meet, our classmates ___ (cheered) each other on, loudly shouting encouragement.",
+   "hints": ["The blank + 油 means to cheer someone on. Which character means 'to add', forming 加油 (to add fuel / cheer on)?"],
+   "keywords": [{"w":"加油","py":"jiāyóu","en":"to cheer on"},{"w":"运动会","py":"yùndònghuì","en":"sports meet"},{"w":"互相","py":"hùxiāng","en":"each other"}],
+   "explanation_en": "加油 means to cheer someone on, natural for shouting encouragement at a sports meet, so 加 fits. All four are read jiā; 加 means to add - 加油 is adding strength, helping others. Judge by meaning."
+  },
+  "ZS41_A4": {
+   "sentence_en": "Xiaoming left the homework the teacher told him to ___ (bring) at home, and was very anxious.",
+   "hints": ["The blank + 来 means to bring something along. Which character (with 巾 at the bottom, like a strap) means 'to bring / carry'?"],
+   "keywords": [{"w":"带","py":"dài","en":"to bring"},{"w":"作业","py":"zuòyè","en":"homework"},{"w":"着急","py":"zhāojí","en":"anxious"}],
+   "explanation_en": "带 means to bring something along, so homework the teacher told him to bring uses 带. All four are read dài; 带 has 巾 at the bottom - picture tying homework with a strap to bring it. Judge by meaning."
+  },
+  "ZS41_A5": {
+   "sentence_en": "The classmates lined up on the ___ (field), waiting for the sports meet to start.",
+   "hints": ["操___ names the place at school for exercise and lining up. Which character (with the earth radical 土) forms 操场?"],
+   "keywords": [{"w":"操场","py":"cāochǎng","en":"field"},{"w":"排队","py":"páiduì","en":"to line up"},{"w":"运动会","py":"yùndònghuì","en":"sports meet"}],
+   "explanation_en": "操场 is the place at school for sport and lining up, a fixed word, so 场 fits. 场 has the earth radical 土 - a ground is on the earth, so the field 操场 has the 土 radical."
+  },
+  "ZS41_B1": {
+   "sentence_en": "Today's 参观 (visit) activity taught us a lot of new knowledge.",
+   "hints": ["参 is 1st tone (cān); 观 is 1st tone (guān). Which choice is cān + guān, both level?"],
+   "keywords": [{"w":"参观","py":"cānguān","en":"to visit"},{"w":"活动","py":"huódòng","en":"activity"},{"w":"知识","py":"zhīshi","en":"knowledge"}],
+   "explanation_en": "参 is read cān (1st tone) and 观 is guān (1st tone), together cān guān. 参 is read cān, 1st tone, held long like a note - do not read it as 2nd or 4th tone."
+  },
+  "ZS41_B2": {
+   "sentence_en": "Xiaohua raised his hand 得意 (proudly), telling the teacher he had got it right.",
+   "hints": ["得 is a polyphone: dé (to get) in 得意; děi (must); de (a particle). Which choice is dé + yì?"],
+   "keywords": [{"w":"得意","py":"déyì","en":"proud; pleased with oneself"},{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"答对","py":"dáduì","en":"to answer correctly"}],
+   "explanation_en": "In 得意, 得 is read dé (2nd tone, to get) and 意 is yì (4th tone), not děi. 得 is a polyphone: 得到 dé; 必须 děi; the particle de. 得意 means pleased at getting something right, so read dé."
+  },
+  "ZS41_B3": {
+   "sentence_en": "The teacher asked us to 朗读 (read aloud) the text, with a loud voice.",
+   "hints": ["朗 is 3rd tone (lǎng); 读 is 2nd tone (dú). Which choice is lǎng + dú?"],
+   "keywords": [{"w":"朗读","py":"lǎngdú","en":"to read aloud"},{"w":"课文","py":"kèwén","en":"text"},{"w":"响亮","py":"xiǎngliàng","en":"loud and clear"}],
+   "explanation_en": "朗 is read lǎng (3rd tone) and 读 is dú (2nd tone), together lǎng dú. 朗 (3rd tone) dips then rises, like the rise and fall of reading aloud; 读 (2nd tone) rises."
+  },
+  "ZS41_B4": {
+   "sentence_en": "This maths question was hard; I thought a long time before I could 解答 (solve) it.",
+   "hints": ["解 is 3rd tone (jiě); 答 has initial d (dá), not t. Which choice is jiě + dá?"],
+   "keywords": [{"w":"解答","py":"jiědá","en":"to solve; answer"},{"w":"数学题","py":"shùxuétí","en":"maths question"},{"w":"很久","py":"hěn jiǔ","en":"a long time"}],
+   "explanation_en": "解 is read jiě (3rd tone) and 答 is dá (2nd tone), together jiě dá. 解 is jiě, 3rd tone, dipping then rising; 答 has initial d, not t - do not confuse them."
+  },
+  "ZS41_C1": {
+   "sentence_en": "The teacher told us to complete the exam paper ___ (carefully) and not be careless.",
+   "hints": ["Clue: it contrasts with 'not be careless'. Which word means 'earnest / careful', the opposite of careless?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest; careful"},{"w":"考卷","py":"kǎojuàn","en":"exam paper"},{"w":"粗心","py":"cūxīn","en":"careless"}],
+   "explanation_en": "Completing an exam paper carefully contrasts with 'not be careless', so 认真 (earnest, careful) fits best. Look at the following words 'not be careless'; the blank needs the opposite of careless = 认真. 高兴, 勇敢 and 热闹 do not fit."
+  },
+  "ZS41_C2": {
+   "sentence_en": "There are ___ (many) books in the library; I don't know which one to borrow.",
+   "hints": ["Clue: not knowing which to borrow shows there are lots of books. Which word means 'many'?"],
+   "keywords": [{"w":"许多","py":"xǔduō","en":"many"},{"w":"图书馆","py":"túshūguǎn","en":"library"},{"w":"借","py":"jiè","en":"to borrow"}],
+   "explanation_en": "Not knowing which to borrow shows there are many books, so 许多 (many) fits best. Read the context: not knowing which to borrow -> the books are many -> 许多. 一本, 一张 and 一间 each mean only one thing, which do not fit."
+  },
+  "ZS41_C3": {
+   "sentence_en": "Xiaowen borrowed three ___ (measure word) story books, planning to finish them this weekend.",
+   "hints": ["Clue: the measure word for books. Which one is used for books?"],
+   "keywords": [{"w":"本","py":"běn","en":"measure word for books"},{"w":"故事书","py":"gùshishū","en":"story book"},{"w":"周末","py":"zhōumò","en":"weekend"}],
+   "explanation_en": "The measure word for a book is 本, so 三本故事书 is correct. Books -> 本: 一本书, 两本书, 三本书. Remember 本 is the special measure word for books. 张, 条 and 块 do not fit."
+  },
+  "ZS41_C4": {
+   "sentence_en": "Every day after school, he ___ (diligently) finishes his homework before going to play.",
+   "hints": ["Clue: finishing homework before playing every day shows a good, serious attitude. Which word means 'earnest / diligent'?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest; diligent"},{"w":"功课","py":"gōngkè","en":"homework"},{"w":"玩耍","py":"wánshuǎ","en":"to play"}],
+   "explanation_en": "Finishing homework every day before playing shows a diligent, serious attitude, so 认真 fits best. The three wrong choices (懒惰 lazy, 马虎 careless, 粗心 sloppy) are all negative and contradict the good habit of finishing homework first."
+  },
+  "ZS41_C5": {
+   "sentence_en": "The teacher ___ (praised) my composition, saying it was very good, and asked me to read it to the class.",
+   "hints": ["Clue: the teacher thought it good and asked me to read it aloud - a positive judgement. Which word means 'to praise'?"],
+   "keywords": [{"w":"称赞","py":"chēngzàn","en":"to praise"},{"w":"作文","py":"zuòwén","en":"composition"},{"w":"读","py":"dú","en":"to read"}],
+   "explanation_en": "The teacher thought the composition good and asked me to read it to the class, a positive judgement, so 称赞 (to praise) fits best. Reading it to the class is a reward, so the judgement before it is positive -> 称赞. 批评, 命令 and 要求 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“整理”是把东西收拾得有条理，所以“整理书包”就是把书包里的东西收拾整齐。“参加、提问”都不是“收拾整齐”的意思。",
+   "explanation_en": "整理 (zhěnglǐ) means to put things in order, so 整理书包 means to tidy up the school bag. 参加 (take part) and 提问 (ask) do not mean 'to put in order'.",
+   "stem_en": "to tidy up the school bag",
+   "keywords": [{"w":"整理","py":"zhěnglǐ","en":"to tidy up"},{"w":"书包","py":"shūbāo","en":"school bag"}]
+  },
+  "2": {
+   "explanation": "“参加”是加入、投入某个活动，所以“参加比赛”就是加入比赛、上场竞争。“整理、安静”都不是“加入活动”的意思。",
+   "explanation_en": "参加 (cānjiā) means to take part in an activity, so 参加比赛 means to take part in a competition. 整理 (tidy) and 安静 (quiet) do not mean 'to take part in'.",
+   "stem_en": "to take part in a competition",
+   "keywords": [{"w":"参加","py":"cānjiā","en":"to take part"},{"w":"比赛","py":"bǐsài","en":"competition"}]
+  },
+  "3": {
+   "explanation": "“提问”是把不懂的问题提出来问，所以“向老师提问”就是把问题提出来问老师。“参加、努力”都不是“提出问题来问”的意思。",
+   "explanation_en": "提问 (tíwèn) means to raise a question to ask, so 向老师提问 means to ask the teacher a question. 参加 (take part) and 努力 (effort) do not mean 'to pose a question'.",
+   "stem_en": "to ask the teacher a question",
+   "keywords": [{"w":"提问","py":"tíwèn","en":"to ask a question"},{"w":"老师","py":"lǎoshī","en":"teacher"}]
+  },
+  "4": {
+   "explanation": "“安静”是没有吵闹的声音，所以“保持安静”就是让四周一直不吵不闹、保持没有声音。“提问、整理”都不是“不吵不闹”的意思。",
+   "explanation_en": "安静 (ānjìng) means without noise, so 保持安静 means to keep quiet. 提问 (ask) and 整理 (tidy) do not mean 'without noise'.",
+   "stem_en": "to keep quiet",
+   "keywords": [{"w":"安静","py":"ānjìng","en":"quiet"},{"w":"保持","py":"bǎochí","en":"to keep"}]
+  },
+  "5": {
+   "explanation": "“努力”是用心用力去做，所以“努力学习”就是认认真真、用尽力气地学习。“参加、安静”都不是“用力去做”的意思。",
+   "explanation_en": "努力 (nǔlì) means to work with heart and strength, so 努力学习 means to study hard. 参加 (take part) and 安静 (quiet) do not mean 'to put in effort'.",
+   "stem_en": "to study hard",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"学习","py":"xuéxí","en":"to study"}]
+  }
+ },
+ "craft": {
+  "ZS41_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'This maths question is very hard.' and 'Xiaoming still finished it carefully.'",
+   "answer_en": "Although this maths question is very hard, Xiaoming still finished it carefully.",
+   "tiles": ["虽然","这道数学题很难，","但是","小明还是认真地把它做完了。"],
+   "explanation_en": "虽然……但是…… admits one situation first, then a result that differs from expectation. '虽然这道题很难' (although it is hard) is the concession, '但是小明还是做完了' (but Xiaoming still finished it) is the turn."
+  },
+  "ZS41_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Xiaohua listens attentively in class.' and 'Xiaohua does well in every exam.'",
+   "answer_en": "Because Xiaohua listens attentively in class, he does well in every exam.",
+   "tiles": ["因为","小华上课时认真听讲，","所以","每次考试都考得很好。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小华上课时认真听讲' (because he listens attentively) is the cause, '所以每次考试都考得很好' (so he does well) is the result. Doing something leads to a result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Today is the school's open day; many parents came to visit. The classmates cleaned the classroom ___ (spotless) and stuck their work on the wall.",
+   "hint": "Clue: after cleaning, the classroom has no dirt. Which box word means 'clean'?",
+   "keywords": [{"w":"干净","py":"gānjìng","en":"clean"},{"w":"教室","py":"jiàoshì","en":"classroom"}],
+   "explanation_en": "After cleaning, the classroom is free of dirt, so 干净 (clean) fits best."
+  },
+  "2": {
+   "sentence_en": "Teacher Wang ___ (patiently) introduced the students' progress to the parents.",
+   "hint": "Clue: introducing the situation takes care and no rushing. Which box word means 'patient'?",
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"介绍","py":"jièshào","en":"to introduce"}],
+   "explanation_en": "Introducing the students' progress needs care and no rushing, so 耐心 (patient) fits best."
+  },
+  "3": {
+   "sentence_en": "Seeing this, the parents nodded ___ (with satisfaction), feeling the children had made much progress.",
+   "hint": "Clue: the parents felt the children improved and approved. Which box word means 'satisfied'?",
+   "keywords": [{"w":"满意","py":"mǎnyì","en":"satisfied"},{"w":"进步","py":"jìnbù","en":"progress"}],
+   "explanation_en": "The parents felt the children had improved and approved, so 满意地点头 (nodded with satisfaction) fits best."
+  },
+  "4": {
+   "sentence_en": "Xiaoming's mum said to him ___ (in a soft voice) that she hoped he would keep working hard.",
+   "hint": "Clue: speaking to Xiaoming quietly in school, not loudly. Which box word means 'in a soft voice'?",
+   "keywords": [{"w":"轻声","py":"qīngshēng","en":"softly"},{"w":"妈妈","py":"māma","en":"Mum"}],
+   "explanation_en": "Speaking to Xiaoming quietly at school, not loudly, so 轻声 (in a soft voice) fits best."
+  },
+  "5": {
+   "sentence_en": "She hoped Xiaoming would keep ___ (working hard) and aim for even better results.",
+   "hint": "Clue: Mum hopes he keeps studying diligently for better results. Which box word means 'to work hard'?",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"成绩","py":"chéngjì","en":"results"}],
+   "explanation_en": "Mum hopes Xiaoming keeps studying diligently for better results, so 努力 (to work hard) fits best."
+  }
+ },
+ "reading": {
+  "ZS41_G1_Q1": {
+   "stem_en": "What does Xiaoli do when she arrives early at school each day?",
+   "answer_en": "She helps the teacher wipe the blackboard and open the windows.",
+   "keywords": [{"w":"黑板","py":"hēibǎn","en":"blackboard"},{"w":"擦","py":"cā","en":"to wipe"},{"w":"窗户","py":"chuānghu","en":"window"}],
+   "explanation": "这是细节题。短文说小丽“每天早上都比同学早到学校，帮老师把黑板擦干净，再把课室的窗户打开”，直接说明她早到学校是帮老师擦黑板和开窗户，所以选(2)。(1)批改作业、(3)帮同学准备课本，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says Xiaoli 'arrives earlier than her classmates every morning, helps the teacher wipe the blackboard clean, then opens the classroom windows', directly stating what she does, so (2). (1) marking homework and (3) preparing textbooks are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "帮老师把黑板擦干净，再把课室的窗户打开"}
+  },
+  "ZS41_G1_Q2": {
+   "stem_en": "The teacher said 'did a good deed without leaving a name'. What does this mean?",
+   "answer_en": "Doing a good deed without telling others that you did it.",
+   "keywords": [{"w":"好事","py":"hǎoshì","en":"good deed"},{"w":"不留名","py":"bù liú míng","en":"without leaving a name"},{"w":"了不起","py":"liǎobuqǐ","en":"remarkable"}],
+   "explanation": "这是推断题。短文说老师夸“这位同学做了好事不留名，真的很了不起”，“做了好事不留名”是指做了好事却不告诉别人是自己做的，默默地做，所以选(3)。(1)忘记写名字、(2)不想要奖励，都不是“不留名”的准确意思。推断题要理解词语在句子里的真正含义。",
+   "explanation_en": "This is an inference question. The teacher praises 'this classmate did a good deed without leaving a name, truly remarkable'. 'Doing a good deed without leaving a name' means doing good without telling others it was you, quietly, so (3). (1) forgetting to write a name and (2) not wanting a reward are not the exact meaning. Understand the phrase's real meaning in context.",
+   "solution": {"evidence": "这位同学做了好事不留名，真的很了不起。"}
+  },
+  "ZS41_G1_Q3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Quietly helping others is a good quality worth praising.",
+   "keywords": [{"w":"默默","py":"mòmò","en":"quietly"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"品德","py":"pǐndé","en":"quality; virtue"}],
+   "explanation": "这是主旨题。全文讲小丽每天早到学校默默帮老师擦黑板、开窗户，做好事不留名，最后老师夸她是热心的好孩子。可见短文是要告诉我们默默帮助别人是值得称赞的好品德，所以选(1)。(2)上学要早到帮老师、(3)做好事要让大家知道都只是情节里的小点或与文意相反，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoli quietly helping the teacher wipe the blackboard and open the windows every day, doing good without leaving a name, and the teacher praising her as a warm-hearted child. So it tells us that quietly helping others is a good quality worth praising, so (1). (2) arrive early to help and (3) let everyone know are minor or contrary points, not the main idea.",
+   "solution": {"evidence": "谢谢你每天帮忙，你真是一个热心的好孩子。"}
+  },
+  "ZS41_H1_Q1": {
+   "stem_en": "Find a word in the passage close in meaning to 坚持 (to persist).",
+   "answer_en": "继续 (to continue)",
+   "keywords": [{"w":"继续","py":"jìxù","en":"to continue"},{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"放弃","py":"fàngqì","en":"to give up"}],
+   "explanation": "这是近义词题。“坚持”指一直做下去、不放弃，短文中说小强跌倒后“爬起来继续跑”，“继续”和“坚持”意思相近，都是一直做下去、不停下来，所以答案是“继续”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 坚持 means to keep going without giving up; in the passage Xiaoqiang 'got up and continued running' after falling. 继续 and 坚持 are close in meaning, both keeping going without stopping, so the answer is 继续. Find the closest word in the passage.",
+   "solution": {"evidence": "爬起来继续跑"}
+  },
+  "ZS41_H1_Q2": {
+   "stem_en": "After Xiaoqiang fell, what did he do?",
+   "answer_en": "After falling, Xiaoqiang got up and continued running, and did not give up the race.",
+   "keywords": [{"w":"跌倒","py":"diēdǎo","en":"to fall"},{"w":"继续","py":"jìxù","en":"to continue"},{"w":"放弃","py":"fàngqì","en":"to give up"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“他的膝盖很痛，但他没有放弃，爬起来继续跑”，说明小强跌倒后没有放弃，爬起来继续跑完比赛。答“怎么做”要把文中的动作写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'his knee hurt, but he did not give up, got up and continued running', so after falling Xiaoqiang did not give up but got up and kept running. State the actions clearly from the text.",
+   "solution": {"evidence": "他没有放弃，爬起来继续跑"}
+  },
+  "ZS41_H1_Q3": {
+   "stem_en": "Why did all the classmates and teachers applaud Xiaoqiang?",
+   "answer_en": "Because Xiaoqiang kept running to the end after falling and did not give up easily, so everyone thought he was very brave.",
+   "keywords": [{"w":"坚持到底","py":"jiānchí-dàodǐ","en":"to persist to the end"},{"w":"放弃","py":"fàngqì","en":"to give up"},{"w":"勇敢","py":"yǒnggǎn","en":"brave"}],
+   "explanation": "这是推断题。短文说“全场的同学和老师都为他鼓掌，因为他坚持到底，没有轻易放弃”，可以推断大家为小强鼓掌，是因为他跌倒了还坚持跑完，没有轻易放弃，很勇敢，所以理由就在“因为”后面。推断题要看“鼓掌”后面的原因句。",
+   "explanation_en": "This is an inference question. The passage says 'all the classmates and teachers applauded him, because he persisted to the end and did not give up easily', so they applauded because he kept running after falling and did not give up, being brave; the reason follows '因为'. Read the reason after 'applauded'.",
+   "solution": {"evidence": "因为他坚持到底，没有轻易放弃"}
+  }
+ }
+}

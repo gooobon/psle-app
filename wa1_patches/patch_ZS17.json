@@ -1,0 +1,217 @@
+{
+ "setId": "ZS17",
+ "mcq": {
+  "ZS17_A1": {
+   "sentence_en": "In today's maths exam I got a full ___ (mark), and Mum and Dad were very happy.",
+   "hints": ["满___ names the highest possible score. Which character means 'mark / points', forming 满分 (full marks)?"],
+   "keywords": [{"w":"满分","py":"mǎnfēn","en":"full marks"},{"w":"考试","py":"kǎoshì","en":"exam"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "满分 means the highest exam score, a fixed word, so 分 fits. All four are read fēn, but 分 has a knife under the bamboo top - marks are counted as if cut out with a knife."
+  },
+  "ZS17_A2": {
+   "sentence_en": "As soon as the bell rang, the classmates ___ (put away) their bags and sat at their seats waiting for the teacher.",
+   "hints": ["The blank + 好书包 means to tidy the bag away. Which character (with the hand radical 扌) means 'to gather / put away'?"],
+   "keywords": [{"w":"收","py":"shōu","en":"to put away"},{"w":"书包","py":"shūbāo","en":"school bag"},{"w":"座位","py":"zuòwèi","en":"seat"}],
+   "explanation_en": "收好书包 means to tidy the bag away ready for class, so 收 fits best. All four have the hand radical 扌; 收 = to gather and put away, most natural before class."
+  },
+  "ZS17_A3": {
+   "sentence_en": "Xiaoming carelessly knocked his classmate's pencil box ___ (off), and he apologized at once.",
+   "hints": ["碰___ means to knock something off. Which character (with the hand radical 扌) means 'to drop / fall off'?"],
+   "keywords": [{"w":"碰掉","py":"pèngdiào","en":"to knock off"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil box"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"}],
+   "explanation_en": "碰掉 means to knock something so it falls off, so 碰掉了铅笔盒 (knocked the pencil box off) makes sense. All four are read dào; 掉 has the hand radical 扌 - knock it with your hand and it drops."
+  },
+  "ZS17_A4": {
+   "sentence_en": "The teacher ___ (wrote) today's homework on the board, and the classmates copied it carefully.",
+   "hints": ["The blank + 下 means to put words down on the board. Which character means 'to write'?"],
+   "keywords": [{"w":"写下","py":"xiěxià","en":"to write down"},{"w":"黑板","py":"hēibǎn","en":"blackboard"},{"w":"作业","py":"zuòyè","en":"homework"}],
+   "explanation_en": "写下 means to put words down with a pen on the board, so it fits best. 写 has 冖 on top and 与 below - remember this shape for writing with a pen."
+  },
+  "ZS17_A5": {
+   "sentence_en": "As soon as the bell rang, the classmates went ___ (out of) the classroom to play on the field.",
+   "hints": ["走___教室 shows the direction from inside to outside. Which character means 'out', not 'in'?"],
+   "keywords": [{"w":"出","py":"chū","en":"out"},{"w":"教室","py":"jiàoshì","en":"classroom"},{"w":"操场","py":"cāochǎng","en":"field"}],
+   "explanation_en": "走出教室 means going from inside to outside, the right direction for leaving to play, so 出 fits. After class -> leaving the classroom -> the direction is 出, not 入 or 进. Direction words must match the situation."
+  },
+  "ZS17_B1": {
+   "sentence_en": "The teacher asks us to 朗读 (read aloud) the text with a loud voice.",
+   "hints": ["朗 is 3rd tone (lǎng); 读 is 2nd tone (dú). Which choice is lǎng + dú?"],
+   "keywords": [{"w":"朗读","py":"lǎngdú","en":"to read aloud"},{"w":"课文","py":"kèwén","en":"text"},{"w":"声音","py":"shēngyīn","en":"voice"}],
+   "explanation_en": "朗 is read lǎng (3rd tone) and 读 is dú (2nd tone), together lǎng dú. 朗 (3rd tone) dips then rises; 读 (2nd tone) rises like a question."
+  },
+  "ZS17_B2": {
+   "sentence_en": "Xiaohua wrote the answer on the 黑板 (blackboard) so everyone could see it clearly.",
+   "hints": ["黑 is 1st tone (hēi); 板 is 3rd tone (bǎn). Which choice is hēi + bǎn?"],
+   "keywords": [{"w":"黑板","py":"hēibǎn","en":"blackboard"},{"w":"答案","py":"dá'àn","en":"answer"},{"w":"清楚","py":"qīngchu","en":"clear"}],
+   "explanation_en": "黑 is read hēi (1st tone) and 板 is bǎn (3rd tone), together hēi bǎn. 黑 (1st tone) is flat and steady; 板 (3rd tone) dips then rises."
+  },
+  "ZS17_B3": {
+   "sentence_en": "In PE class, the classmates 跑步 (ran) very fast.",
+   "hints": ["跑 is 3rd tone (pǎo); 步 has initial b (bù), not p. Which choice is pǎo + bù?"],
+   "keywords": [{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"体育课","py":"tǐyùkè","en":"PE class"},{"w":"很快","py":"hěn kuài","en":"very fast"}],
+   "explanation_en": "跑 is read pǎo (3rd tone, final ao) and 步 is bù (4th tone), together pǎo bù. Note 步 has initial b (unaspirated), not p. 跑 pǎo, 步 bù."
+  },
+  "ZS17_B4": {
+   "sentence_en": "There are many 故事 (story) books in the library, and I borrow one every week.",
+   "hints": ["故 is 4th tone (gù); 事 is retroflex sh (shì), not flat s. Which choice is gù + shì?"],
+   "keywords": [{"w":"故事","py":"gùshi","en":"story"},{"w":"图书馆","py":"túshūguǎn","en":"library"},{"w":"借","py":"jiè","en":"to borrow"}],
+   "explanation_en": "故 is read gù (4th tone) and 事 is shì (4th tone, retroflex sh), together gù shì. 事 is retroflex shì - curl the tongue back; 故 is 4th tone, said with force."
+  },
+  "ZS17_C1": {
+   "sentence_en": "The teacher ___ (wrote out) a maths question on the board for us to solve.",
+   "hints": ["Clue: putting the question up on the board for all to see. Which word means 'to write out'?"],
+   "keywords": [{"w":"写出","py":"xiěchū","en":"to write out"},{"w":"数学题","py":"shùxuétí","en":"maths question"},{"w":"解答","py":"jiědá","en":"to solve"}],
+   "explanation_en": "写出 means to write and present the question on the board, so 在黑板上写出一道数学题 (wrote out a question) is most natural, matching a teacher setting a question. 画出 (draw), 出示 (show) and 写好 (finish writing) do not fit writing a question on the board."
+  },
+  "ZS17_C2": {
+   "sentence_en": "The classmates all listened ___ (attentively) to the teacher's story; not one person spoke.",
+   "hints": ["Clue: 'not one person spoke' means full attention on one thing. Which word means 'to concentrate / focus'?"],
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"to concentrate"},{"w":"听","py":"tīng","en":"to listen"},{"w":"故事","py":"gùshi","en":"story"}],
+   "explanation_en": "专心 means putting all one's attention on one thing without wandering. 'Not one person spoke' stresses that attention was fully focused, so 专心 is the most exact. 努力, 认真 and 用功 do not capture undivided attention here."
+  },
+  "ZS17_C3": {
+   "sentence_en": "The teacher rewarded the well-behaved classmates; each got ___ (a) sticker.",
+   "hints": ["Clue: a sticker is a thin sheet. Which measure word is used for thin sheets like paper and stickers?"],
+   "keywords": [{"w":"一张","py":"yì zhāng","en":"one (sheet)"},{"w":"贴纸","py":"tiēzhǐ","en":"sticker"},{"w":"奖励","py":"jiǎnglì","en":"to reward"}],
+   "explanation_en": "A sticker is a thin sheet of paper, so the measure word 张 is used: 一张贴纸. Thin paper or cloth -> 张; a sticker is thin paper, so 一张. 本, 块 and 条 do not fit."
+  },
+  "ZS17_C4": {
+   "sentence_en": "Xiaoli ___ (handed in) her workbook to the teacher for marking.",
+   "hints": ["Clue: passing the workbook up to the teacher. Which word means 'to hand in / submit'?"],
+   "keywords": [{"w":"交上","py":"jiāoshàng","en":"to hand in"},{"w":"作业本","py":"zuòyèběn","en":"workbook"},{"w":"批改","py":"pīgǎi","en":"to mark"}],
+   "explanation_en": "交上 means to hand the workbook to the teacher, the fixed way to say handing in work, so 交上作业本 is most natural. 送去 (deliver), 放下 (put down) and 带走 (take away) do not mean handing up to the teacher."
+  },
+  "ZS17_C5": {
+   "sentence_en": "Xiaoming forgot to bring his textbook today; he felt very ___ (embarrassed) and lowered his head, saying nothing.",
+   "hints": ["Clue: he made his own mistake and feels awkward, head down. Which word means 'embarrassed', not 'sad' or 'shy'?"],
+   "keywords": [{"w":"不好意思","py":"bù hǎoyìsi","en":"embarrassed"},{"w":"课本","py":"kèběn","en":"textbook"},{"w":"低头","py":"dītóu","en":"to lower one's head"}],
+   "explanation_en": "不好意思 means feeling awkward over one's own mistake, best matching forgetting the textbook and lowering his head. 难受 and 难过 mean sad, and 害羞 means shy toward others, which do not fit an embarrassing mistake."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“专心”是把注意力集中在一件事上，所以“上课时专心听讲”就是上课时集中精神听老师讲。“预习、提问”都不是“集中注意力”的意思。",
+   "explanation_en": "专心 (zhuānxīn) means to focus one's attention on one thing, so 上课时专心听讲 means to listen attentively in class. 预习 (preview) and 提问 (ask) do not mean 'to concentrate'.",
+   "stem_en": "to listen attentively in class",
+   "keywords": [{"w":"专心","py":"zhuānxīn","en":"to concentrate"},{"w":"听讲","py":"tīngjiǎng","en":"to listen to a lesson"}]
+  },
+  "2": {
+   "explanation": "“预习”是上课前先自己看一遍要学的内容，所以“上课前预习课文”就是提前先读一遍课文。“专心、借阅”都不是“课前先学”的意思。",
+   "explanation_en": "预习 (yùxí) means to study the coming lesson beforehand, so 上课前预习课文 means to preview the text before class. 专心 (concentrate) and 借阅 (borrow) do not mean 'to study in advance'.",
+   "stem_en": "to preview the text before class",
+   "keywords": [{"w":"预习","py":"yùxí","en":"to preview"},{"w":"课文","py":"kèwén","en":"text"}]
+  },
+  "3": {
+   "explanation": "“提问”是把不懂的问题提出来问，所以“向老师提问”就是把问题提出来问老师。“预习、举手”都不是“提出问题来问”的意思。",
+   "explanation_en": "提问 (tíwèn) means to raise a question to ask, so 向老师提问 means to ask the teacher a question. 预习 (preview) and 举手 (raise hand) do not mean 'to pose a question'.",
+   "stem_en": "to ask the teacher a question",
+   "keywords": [{"w":"提问","py":"tíwèn","en":"to ask a question"},{"w":"老师","py":"lǎoshī","en":"teacher"}]
+  },
+  "4": {
+   "explanation": "“借阅”是从图书馆把书借来看，所以“到图书馆借阅图书”就是去图书馆借书来读。“提问、专心”都不是“借书来看”的意思。",
+   "explanation_en": "借阅 (jièyuè) means to borrow books to read from a library, so 到图书馆借阅图书 means to borrow books at the library. 提问 (ask) and 专心 (concentrate) do not mean 'to borrow books to read'.",
+   "stem_en": "to borrow books at the library",
+   "keywords": [{"w":"借阅","py":"jièyuè","en":"to borrow and read"},{"w":"图书","py":"túshū","en":"books"}]
+  },
+  "5": {
+   "explanation": "“举手”是把手抬起来表示要发言，所以“回答问题时举手发言”就是抬起手来请求回答。“借阅、预习”都不是“抬手请求发言”的意思。",
+   "explanation_en": "举手 (jǔshǒu) means to raise your hand to ask to speak, so 回答问题时举手发言 means to raise your hand to answer. 借阅 (borrow) and 预习 (preview) do not mean 'to raise a hand to speak'.",
+   "stem_en": "to raise your hand to answer",
+   "keywords": [{"w":"举手","py":"jǔshǒu","en":"to raise one's hand"},{"w":"发言","py":"fāyán","en":"to speak up"}]
+  }
+ },
+ "craft": {
+  "ZS17_E1": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Xiaohua listens attentively in class.' and 'Xiaohua's results get better and better.'",
+   "answer_en": "Because Xiaohua listens attentively in class, his results get better and better.",
+   "tiles": ["因为","小华上课认真听讲，","所以","他的成绩越来越好。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小华上课认真听讲' (because he listens attentively) is the cause, '所以他的成绩越来越好' (so his results improve) is the result. Find the cause first, then the result."
+  },
+  "ZS17_E2": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'This question is very hard.' and 'Xiaoli still worked it out.'",
+   "answer_en": "Although this question is very hard, Xiaoli still worked it out.",
+   "tiles": ["虽然","这道题很难，","但是","小丽还是把它做出来了。"],
+   "explanation_en": "虽然……但是…… admits a fact first, then states an opposite result. '虽然这道题很难' (although it is hard) admits the difficulty, '但是小丽还是把它做出来了' (but Xiaoli solved it) is the opposite result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "The classmates came to the field early in the morning, all waiting ___ (excitedly) for the competition to begin.",
+   "hint": "Clue: the sports day is about to start, and their mood is stirred up. Which box word means 'excited'?",
+   "keywords": [{"w":"兴奋","py":"xīngfèn","en":"excited"},{"w":"比赛","py":"bǐsài","en":"competition"}],
+   "explanation_en": "With the sports day about to begin, the classmates' mood is stirred up, so 兴奋 (very happy, excited) fits best."
+  },
+  "2": {
+   "sentence_en": "Xiaowen took a deep breath and stood ___ (steadily) at the starting line.",
+   "hint": "Clue: he breathes deeply to calm down and stands firm, not nervous. Which box word means 'steadily / firmly'?",
+   "keywords": [{"w":"稳稳","py":"wěnwěn","en":"steadily"},{"w":"起跑线","py":"qǐpǎoxiàn","en":"starting line"}],
+   "explanation_en": "Xiaowen breathes deeply to calm himself, so 稳稳地站 (standing steadily, not nervous) fits best."
+  },
+  "3": {
+   "sentence_en": "When the gun fired, Xiaowen ran with all his might, and in the end ___ (smoothly) won first place.",
+   "hint": "Clue: the race went without a hitch and he won. Which box word means 'smoothly / without a hitch'?",
+   "keywords": [{"w":"顺利","py":"shùnlì","en":"smoothly"},{"w":"第一名","py":"dì-yī míng","en":"first place"}],
+   "explanation_en": "顺利得了第一名 means the race went without problems and he won first place, so 顺利 fits best."
+  },
+  "4": {
+   "sentence_en": "The classmates clapped ___ (warmly) for him.",
+   "hint": "Clue: it pairs with 鼓掌 (to clap) - clapping hard and with enthusiasm. Which box word means 'warmly / enthusiastically'?",
+   "keywords": [{"w":"热烈","py":"rèliè","en":"warmly; enthusiastically"},{"w":"鼓掌","py":"gǔzhǎng","en":"to clap"}],
+   "explanation_en": "热烈鼓掌 is a fixed pairing meaning to clap hard and enthusiastically, so 热烈 fits best."
+  },
+  "5": {
+   "sentence_en": "The teacher came over and ___ (praised) him, saying: 'You did very well today!'",
+   "hint": "Clue: saying 'you did well' is words of praise. Which box word means 'to praise'?",
+   "keywords": [{"w":"称赞","py":"chēngzàn","en":"to praise"},{"w":"表现","py":"biǎoxiàn","en":"performance"}],
+   "explanation_en": "The teacher says 'you did very well', which is praise, so 称赞 (to praise someone) is the most exact fit."
+  }
+ },
+ "reading": {
+  "ZS17_G1": {
+   "stem_en": "What does Xiaoen do when he arrives early at school each morning?",
+   "answer_en": "He arranges his textbooks and stationery, then waits for the teacher to start the lesson.",
+   "keywords": [{"w":"提前","py":"tíqián","en":"in advance"},{"w":"课本","py":"kèběn","en":"textbook"},{"w":"文具","py":"wénjù","en":"stationery"}],
+   "explanation": "这是细节题。短文说“他都会提前十分钟到学校，把课本和文具摆好，等老师来上课”，直接说明小恩早上到校是把课本文具摆好、等老师上课，所以选(2)。(1)和同学复习、(3)帮同学准备文具，文中都没有提到。做细节题要回原文找和题目直接对应的动作。",
+   "explanation_en": "This is a detail question. The passage says 'he arrives ten minutes early, arranges his textbooks and stationery, and waits for the teacher', directly stating what he does, so (2). (1) revising with classmates and (3) preparing stationery for others are not mentioned. Find the action that directly matches.",
+   "solution": {"evidence": "把课本和文具摆好，等老师来上课。"}
+  },
+  "ZS17_G2": {
+   "stem_en": "Why did the teacher praise Xiaoen in front of the class?",
+   "answer_en": "Because Xiaoen studies seriously and also helped a classmate.",
+   "keywords": [{"w":"表扬","py":"biǎoyáng","en":"to praise"},{"w":"认真","py":"rènzhēn","en":"serious"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是推断题。短文说“老师……在班上表扬了小恩，说他不但学习认真，而且乐于帮助同学”，说明老师表扬他是因为他学习认真又帮助了同学，所以选(3)。(1)提前到校、(2)借课本给同桌都只是其中一件小事，不能概括老师表扬的完整原因（其实借的是橡皮，不是课本）。推断题要看“表扬”后面老师说的话。",
+   "explanation_en": "This is an inference question. The passage says 'the teacher praised Xiaoen in class, saying he not only studies seriously but also gladly helps classmates', so the reason is both his serious study and his helping, so (3). (1) arriving early and (2) lending a textbook are single small points (and it was actually an eraser, not a textbook). For inference, read the teacher's words after '表扬'.",
+   "solution": {"evidence": "说他不但学习认真，而且乐于帮助同学。"}
+  },
+  "ZS17_G3": {
+   "stem_en": "What does this passage mainly want to tell us?",
+   "answer_en": "Be a good student who studies seriously and is glad to help others.",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"serious"},{"w":"助人","py":"zhùrén","en":"to help others"},{"w":"学生","py":"xuésheng","en":"student"}],
+   "explanation": "这是主旨题。全文讲小恩学习认真、乐于助人，最后老师在班上表扬他“不但学习认真，而且乐于帮助同学”。可见短文是要告诉我们要做一个学习认真又乐于助人的好学生，所以选(1)。(2)下课好好玩、(3)提前到校摆好东西都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoen studying seriously and helping others, and the teacher praises him for both. So it tells us to be a good student who studies seriously and gladly helps others, so (1). (2) play well after class and (3) arrive early to arrange things are minor points, not the main idea.",
+   "solution": {"evidence": "老师知道了，在班上表扬了小恩，说他不但学习认真，而且乐于帮助同学。"}
+  },
+  "ZS17_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaoyun cleaned the classroom very carefully, picking up even the small scraps of paper on the floor.",
+   "answer_en": "纸屑 (scraps of paper)",
+   "keywords": [{"w":"纸屑","py":"zhǐxiè","en":"paper scraps"},{"w":"捡","py":"jiǎn","en":"to pick up"},{"w":"仔细","py":"zǐxì","en":"careful"}],
+   "explanation": "这是找词题。短文说“小云却留下来把地上的纸屑捡起来”，“纸屑”指地上很小的纸片，说明她连小纸片都捡起来，打扫得很仔细，所以答案是“纸屑”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'Xiaoyun stayed to pick up the paper scraps on the floor'; 纸屑 means tiny bits of paper, showing she picked up even small scraps and cleaned carefully, so the answer is 纸屑. Find the word in the passage that fits the situation asked about.",
+   "solution": {"evidence": "把地上的纸屑捡起来"}
+  },
+  "ZS17_H2": {
+   "stem_en": "After class, everyone went to play, so why did Xiaoyun stay behind?",
+   "answer_en": "Because Xiaoyun was on duty, she stayed to pick up the paper scraps on the floor and clean the classroom.",
+   "keywords": [{"w":"值日生","py":"zhírìshēng","en":"student on duty"},{"w":"打扫","py":"dǎsǎo","en":"to clean"},{"w":"纸屑","py":"zhǐxiè","en":"paper scraps"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“同学们冲出去玩，小云却留下来把地上的纸屑捡起来”，加上开头说她是第一天当值日生，说明她留下来是因为身为值日生要把教室打扫干净。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'the classmates rushed out to play, but Xiaoyun stayed to pick up the paper scraps', and the start says she was on duty for the first day, so she stayed because a duty student must clean the classroom. State the reason in a full sentence.",
+   "solution": {"evidence": "小云却留下来把地上的纸屑捡起来"}
+  },
+  "ZS17_H3": {
+   "stem_en": "What kind of student do you think Xiaoyun is? Why?",
+   "answer_en": "I think Xiaoyun is a responsible student, because she seriously finished her duty work and cleaned the classroom spotless.",
+   "keywords": [{"w":"负责任","py":"fù zérèn","en":"responsible"},{"w":"值日","py":"zhírì","en":"to be on duty"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation": "这是推断题（评价人物）。短文说小云扫地、摆桌椅、放好粉笔黑板擦，还留下来捡纸屑，最后老师说她“是个负责任的值日生”。从她认真完成每一件值日工作，可以看出她是个负责任的学生。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage shows Xiaoyun sweeping, arranging the desks, setting out the chalk and duster, and staying to pick up scraps, and the teacher calls her 'a responsible duty student'. From carefully finishing every duty task, we see she is responsible. State the trait, then give the actions as the reason.",
+   "solution": {"evidence": "小云，你今天做得非常好，是个负责任的值日生。"}
+  }
+ }
+}

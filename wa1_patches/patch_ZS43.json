@@ -1,0 +1,217 @@
+{
+ "setId": "ZS43",
+ "mcq": {
+  "ZS43_A1": {
+   "sentence_en": "The flowers in the park bloom very ___ (brilliantly), drawing many visitors.",
+   "hints": ["The blank + 烂 describes flowers blooming dazzling and radiant. Which character (with the fire radical 火, like shining light) forms 灿烂?"],
+   "keywords": [{"w":"灿烂","py":"cànlàn","en":"brilliant; radiant"},{"w":"花","py":"huā","en":"flower"},{"w":"游客","py":"yóukè","en":"visitor"}],
+   "explanation_en": "灿烂 describes flowers blooming dazzling and radiant, drawing visitors, so 灿 fits. The four sound alike, but 灿 has the fire radical 火 - shining light is 灿烂, used to describe beautiful flowers."
+  },
+  "ZS43_A2": {
+   "sentence_en": "Little brother ___ (fell) on the grass and scraped his knee.",
+   "hints": ["The blank + 倒 means a person dropping to the ground. Which character (with the hand radical 扌) forms 摔倒?"],
+   "keywords": [{"w":"摔","py":"shuāi","en":"to fall"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"膝盖","py":"xīgài","en":"knee"}],
+   "explanation_en": "摔倒 means a person dropping to the ground, which scrapes the knee, so 摔 fits. 摔 has the hand radical 扌 - failing to hold on and dropping. Remember 摔 = to fall over."
+  },
+  "ZS43_A3": {
+   "sentence_en": "We took many photos beside the little ___ (pond) in the park.",
+   "hints": ["小___ names a small body of water. Which character (with the water radical 氵) forms 小池 (little pond)?"],
+   "keywords": [{"w":"小池","py":"xiǎochí","en":"little pond"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"照片","py":"zhàopiàn","en":"photo"}],
+   "explanation_en": "小池 means a small pond, natural for taking photos beside water, so 池 fits. The four are read chí, so judge by radical: a pond has water, so 池 has the water radical 氵."
+  },
+  "ZS43_A4": {
+   "sentence_en": "Mum ___ (carrying) a basket of fruit went with us to the park for a picnic.",
+   "hints": ["提___ shows a continuing action of holding. Which character marks an ongoing action, as in 提着 (carrying)?"],
+   "keywords": [{"w":"提","py":"tí","en":"to carry (by hand)"},{"w":"一篮子","py":"yì lánzi","en":"a basket of"},{"w":"野餐","py":"yěcān","en":"picnic"}],
+   "explanation_en": "着 marks an ongoing action, so 提着一篮子水果 (carrying a basket of fruit) shows the holding continuing, and 着 fits. 着 shows an action in progress: 提着, 拿着, 走着 all use 着."
+  },
+  "ZS43_A5": {
+   "sentence_en": "The birds in the park sound very ___ (pleasant); we all stopped to enjoy it.",
+   "hints": ["___听 describes a sound that is nice to hear. Which character means 'good', forming 好听 (pleasant to hear)?"],
+   "keywords": [{"w":"好听","py":"hǎotīng","en":"pleasant to hear"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"},{"w":"欣赏","py":"xīnshǎng","en":"to enjoy"}],
+   "explanation_en": "好听 describes a sound nice to hear, so people stop to enjoy it, and 好 fits. A sound that makes people stop to enjoy it must be 好听. 难听 (unpleasant) contradicts 'enjoy', so rule it out directly."
+  },
+  "ZS43_B1": {
+   "sentence_en": "We 散步 (took a walk) in the park and felt very relaxed.",
+   "hints": ["散 in 散步 is 4th tone (sàn); 步 is 4th tone (bù). Which choice is sàn + bù, both falling?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"轻松","py":"qīngsōng","en":"relaxed"}],
+   "explanation_en": "In 散步, 散 is read sàn (4th tone) and 步 is bù (4th tone), together sàn bù. Both characters of 散步 are 4th tone; walking takes firm strides, so both are the heavy 4th tone."
+  },
+  "ZS43_B2": {
+   "sentence_en": "Little brother 长得 (grows) tall and runs faster than me in the park.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长得高 is about growing, so which choice is zhǎng + de?"],
+   "keywords": [{"w":"长得","py":"zhǎng de","en":"to grow (to be)"},{"w":"高","py":"gāo","en":"tall"},{"w":"跑","py":"pǎo","en":"to run"}],
+   "explanation_en": "In 长得高, 长 is read zhǎng (3rd tone, to grow), not cháng (length). 长 is a polyphone: cháng = length; zhǎng = to grow. 长得高 is about growing tall, so read zhǎng."
+  },
+  "ZS43_B3": {
+   "sentence_en": "The grass in the park is 宽阔 (broad) and flat, good for playing ball.",
+   "hints": ["宽 has initial k (kuān), not g; 阔 has initial k (kuò). Which choice is kuān + kuò, both starting with k?"],
+   "keywords": [{"w":"宽阔","py":"kuānkuò","en":"broad"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"平整","py":"píngzhěng","en":"flat"}],
+   "explanation_en": "宽 is read kuān (initial k, final uān) and 阔 is kuò (initial k, final uò), together kuān kuò. Both characters of 宽阔 begin with k. k and g are easy to mix - remember 宽阔 both start with k."
+  },
+  "ZS43_B4": {
+   "sentence_en": "Little sister 好奇 (curiously) watched the goldfish in the pond, not blinking an eye.",
+   "hints": ["好 is a polyphone: hǎo (good) and hào (to be fond of). 好奇 (curious) uses hào. Which choice is hào + qí?"],
+   "keywords": [{"w":"好奇","py":"hàoqí","en":"curious"},{"w":"池塘","py":"chítáng","en":"pond"},{"w":"金鱼","py":"jīnyú","en":"goldfish"}],
+   "explanation_en": "好奇 means curious about new things; 好 here is read hào (4th tone, to be fond of), and 奇 is qí. 好: 好人 / 好吃 hǎo; 好奇 / 爱好 hào (4th tone)."
+  },
+  "ZS43_C1": {
+   "sentence_en": "In the park there is ___ (a) big tree; it is very cool in its shade.",
+   "hints": ["Clue: the measure word for a tree. Which one is used for plants?"],
+   "keywords": [{"w":"棵","py":"kē","en":"measure word for plants"},{"w":"大树","py":"dàshù","en":"big tree"},{"w":"树荫","py":"shùyīn","en":"tree shade"}],
+   "explanation_en": "The measure word 棵 is used for plants, so 一棵大树 is correct. Plants use 棵: 一棵树, 一棵草. 棵 has the wood radical 木, related to plants. 条, 张 and 片 do not fit a tree."
+  },
+  "ZS43_C2": {
+   "sentence_en": "Xiaoming ran a long time in the park and sat on the bench to rest, ___ (tired).",
+   "hints": ["Clue: after running a long time he needs to rest, showing he is tired. Which word means 'tired / weary'?"],
+   "keywords": [{"w":"疲倦","py":"píjuàn","en":"tired"},{"w":"长椅","py":"chángyǐ","en":"bench"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "After running a long time he needs to rest, showing he is tired, so 疲倦 (weary) fits best. Running a long time -> needs rest -> tired -> 疲倦. Infer the state from context. 高兴, 轻松 and 认真 do not fit."
+  },
+  "ZS43_C3": {
+   "sentence_en": "Dad ___ (took out) the camera to photograph us playing in the park.",
+   "hints": ["Clue: getting the camera out of the bag ready to use. Which word means 'to take out'?"],
+   "keywords": [{"w":"拿出","py":"náchū","en":"to take out"},{"w":"相机","py":"xiàngjī","en":"camera"},{"w":"拍","py":"pāi","en":"to photograph"}],
+   "explanation_en": "拿出相机 means taking the camera out of the bag ready to use, a natural pairing, so 拿出 fits best. 拿出 + a tool = taking the tool out to use it, as in 拿出相机, 拿出笔. 找出, 取走 and 带走 do not fit here."
+  },
+  "ZS43_C4": {
+   "sentence_en": "The fountain in the park ___ (twinkles) with colourful lights, very beautiful.",
+   "hints": ["Clue: lights flash on and off. Which word means 'to twinkle / flicker'?"],
+   "keywords": [{"w":"闪烁","py":"shǎnshuò","en":"to twinkle"},{"w":"喷水池","py":"pēnshuǐchí","en":"fountain"},{"w":"灯光","py":"dēngguāng","en":"lights"}],
+   "explanation_en": "Lights flashing on and off is 闪烁, which most exactly describes the state of the lights, so it fits best. Lights use 闪烁: 闪 = flashing, 烁 = shining. Seeing 'lights', think 闪烁. 出现, 流动 and 生长 do not fit."
+  },
+  "ZS43_C5": {
+   "sentence_en": "We played in the park all afternoon and went home ___ (to our heart's content).",
+   "hints": ["Clue: they played a whole afternoon, fully and joyfully, before going home. Which word means 'to one's heart's content'?"],
+   "keywords": [{"w":"尽兴","py":"jìnxìng","en":"to one's heart's content"},{"w":"下午","py":"xiàwǔ","en":"afternoon"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "Playing a whole afternoon fully and joyfully before going home is 尽兴, so it fits best. Going home after playing to the full uses 尽兴: 尽 = fully, 兴 = joy, 尽兴 = having enjoyed to the full. 满足, 满意地 and 努力地 do not fit as well."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“欣赏”是用心地观看、品味美好的事物，所以“在公园里欣赏风景”就是在公园里用心观看美丽的景色。“追赶、保护”都不是“用心观看”的意思。",
+   "explanation_en": "欣赏 (xīnshǎng) means to look at and appreciate something lovely, so 在公园里欣赏风景 means to enjoy the scenery in the park. 追赶 (chase) and 保护 (protect) do not mean 'to appreciate by looking'.",
+   "stem_en": "to enjoy the scenery in the park",
+   "keywords": [{"w":"欣赏","py":"xīnshǎng","en":"to appreciate"},{"w":"风景","py":"fēngjǐng","en":"scenery"}]
+  },
+  "2": {
+   "explanation": "“草地”是长满草的地方，所以“在草地上打滚”就是在长满草的地上翻滚玩耍。“欣赏、微风”都不是“长草的地方”这类地点词。",
+   "explanation_en": "草地 (cǎodì) means a grassy place, so 在草地上打滚 means to roll about on the grass. 欣赏 (admire) and 微风 (breeze) are not place words like 'grassy ground'.",
+   "stem_en": "to roll about on the grass",
+   "keywords": [{"w":"草地","py":"cǎodì","en":"grass"},{"w":"打滚","py":"dǎgǔn","en":"to roll about"}]
+  },
+  "3": {
+   "explanation": "“凉爽”是天气凉凉的、很舒服，所以“天气凉爽舒适”就是形容天气凉快、让人舒服。“欣赏、追赶”都不是“天气凉快”的意思。",
+   "explanation_en": "凉爽 (liángshuǎng) means the weather is cool and comfortable, so 天气凉爽舒适 means the weather is pleasantly cool. 欣赏 (admire) and 追赶 (chase) do not describe 'cool weather'.",
+   "stem_en": "the weather is cool and comfortable",
+   "keywords": [{"w":"凉爽","py":"liángshuǎng","en":"cool"},{"w":"天气","py":"tiānqì","en":"weather"}]
+  },
+  "4": {
+   "explanation": "“追赶”是在后面快跑着要抓住前面的东西，所以“追赶跑得很快的小狗”就是跟在小狗后面跑着去追它。“欣赏、微风”都不是“在后面快跑去追”的意思。",
+   "explanation_en": "追赶 (zhuīgǎn) means to run after something to catch it, so 追赶跑得很快的小狗 means to chase the fast-running puppy. 欣赏 (admire) and 微风 (breeze) do not mean 'to run after and chase'.",
+   "stem_en": "to chase the fast-running puppy",
+   "keywords": [{"w":"追赶","py":"zhuīgǎn","en":"to chase"},{"w":"小狗","py":"xiǎogǒu","en":"puppy"}]
+  },
+  "5": {
+   "explanation": "“保护”是爱护、不让它受破坏，所以“保护环境”就是爱护周围的环境，不让它变坏。“追赶、草地”都不是“爱护不受破坏”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护环境 means to protect the environment. 追赶 (chase) and 草地 (grass) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the environment",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}]
+  }
+ },
+ "craft": {
+  "ZS43_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The weather is very hot today.' and 'We still went happily to play in the park.'",
+   "answer_en": "Although the weather is very hot today, we still went happily to play in the park.",
+   "tiles": ["虽然","今天天气很热，","但是","我们还是高高兴兴地去公园玩。"],
+   "explanation_en": "虽然……但是…… means one situation exists, but the second is unaffected. '虽然今天天气很热' (although it is hot) is the premise, '但是我们还是高高兴兴地去公园玩' (but we still went happily) is the result; 虽然 goes before the first clause, 但是 before the second."
+  },
+  "ZS43_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The air in the park is fresh.' and 'We come here to walk every weekend.'",
+   "answer_en": "Because the air in the park is fresh, we come here to walk every weekend.",
+   "tiles": ["因为","公园里的空气很清新，","所以","我们每个周末都来这里散步。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为公园里的空气很清新' (because the air is fresh) is the cause, '所以我们每个周末都来这里散步' (so we walk here weekly) is the result; 因为 goes before the first clause, 所以 before the second."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Sunday morning, Dad took my little sister and me to a nearby park. The air in the park was ___ (very) fresh, making us feel comfortable.",
+   "hint": "Clue: it modifies 清新 (fresh), marking a high degree. Which box word means 'very / extremely'?",
+   "keywords": [{"w":"十分","py":"shífēn","en":"very"},{"w":"清新","py":"qīngxīn","en":"fresh"}],
+   "explanation_en": "十分 is an adverb of degree modifying 清新 (fresh), marking a high degree, so 空气十分清新 (the air is very fresh) reads smoothly, and it fits best."
+  },
+  "2": {
+   "sentence_en": "Seeing a group of birds on the branches, little sister ___ (excitedly) clapped her hands and scared them all away.",
+   "hint": "Clue: seeing the birds, she is stirred up with joy. Which box word means 'excited'?",
+   "keywords": [{"w":"兴奋","py":"xīngfèn","en":"excited"},{"w":"拍手","py":"pāishǒu","en":"to clap"}],
+   "explanation_en": "Seeing the birds stirred little sister up with joy, so 兴奋地拍着手 (excitedly clapping) shows she clapped out of excitement, which fits the scene, so it fits best."
+  },
+  "3": {
+   "sentence_en": "Walking along the path, we found a ___ (little) sign by the roadside that read 'Please do not step on the grass'.",
+   "hint": "Clue: it describes the sign as small in size. Which box word (a reduplicated form) means 'small / little'?",
+   "keywords": [{"w":"小小","py":"xiǎoxiǎo","en":"little"},{"w":"牌子","py":"páizi","en":"sign"}],
+   "explanation_en": "一个小小的牌子 describes a small sign; the reduplicated 小小 means very small, matching the little roadside sign, so it fits best."
+  },
+  "4": {
+   "sentence_en": "Dad said we should ___ (protect) the flowers and trees in the park.",
+   "hint": "Clue: it pairs with 花草树木 - caring for them and not letting them be harmed. Which box word means 'to protect'?",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"花草树木","py":"huācǎo-shùmù","en":"flowers and trees"}],
+   "explanation_en": "保护公园里的花草树木 is a fixed pairing meaning to care for the plants and not let them be harmed, matching Dad's teaching, so 保护 fits best."
+  },
+  "5": {
+   "sentence_en": "Toward evening, we went home ___ (happily), feeling the day had been very full.",
+   "hint": "Clue: it echoes 'the day had been very full' - going home in a joyful mood. Which box word means 'happy / pleasant'?",
+   "keywords": [{"w":"愉快","py":"yúkuài","en":"happy"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "愉快地回家 means going home in a joyful mood, echoing 'the day had been very full', so 愉快 fits best."
+  }
+ },
+ "reading": {
+  "ZS43_G1": {
+   "stem_en": "Why were the classmates surprised by the big banyan tree?",
+   "answer_en": "Because the tree was already a hundred years old.",
+   "keywords": [{"w":"榕树","py":"róngshù","en":"banyan tree"},{"w":"历史","py":"lìshǐ","en":"history"},{"w":"惊叫","py":"jīngjiào","en":"to cry out in surprise"}],
+   "explanation": "这是细节题。短文说“走到一棵大榕树旁边，李老师告诉大家，这棵树已经有一百年的历史了。同学们都惊叫起来”，可以看出同学们惊讶是因为那棵树已经有一百年的历史，所以选(3)。(1)长得高大、(2)花颜色漂亮，文中都没有作为惊讶的原因。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'beside a big banyan tree, Teacher Li told them the tree was already a hundred years old, and the classmates cried out in surprise', so they were surprised because the tree was a hundred years old, so (3). (1) being tall and (2) pretty flowers are not given as the reason. Find the sentence that directly matches.",
+   "solution": {"evidence": "这棵树已经有一百年的历史了"}
+  },
+  "ZS43_G2": {
+   "stem_en": "From the passage, what kind of teacher is Teacher Li?",
+   "answer_en": "A conscientious and responsible teacher who is willing to take students out to learn.",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"conscientious"},{"w":"负责","py":"fùzé","en":"responsible"},{"w":"介绍","py":"jièshào","en":"to introduce"}],
+   "explanation": "这是推断题。短文说李老师带同学去植物公园参观，一路上给同学介绍每一种植物的名字和特点，同学们也认真地听。可以推断李老师是个认真负责、愿意带学生学习的老师，所以选(1)。(2)不关心学生、(3)不喜欢教书，都和她带学生参观、认真讲解的行为不符。推断题要从老师的行为来判断她的特点。",
+   "explanation_en": "This is an inference question. The passage says Teacher Li took the class to the botanic park and introduced the name and features of each plant along the way, while the students listened attentively. We can infer she is conscientious, responsible, and willing to take students out to learn, so (1). (2) not caring for students and (3) not liking teaching contradict her taking them out and explaining carefully. Judge her character from her actions.",
+   "solution": {"evidence": "同学们一边走，一边认真地听李老师介绍每一种植物的名字和特点"}
+  },
+  "ZS43_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "The classmates visited the botanic park and learned a lot of knowledge about plants.",
+   "keywords": [{"w":"参观","py":"cānguān","en":"to visit"},{"w":"植物","py":"zhíwù","en":"plant"},{"w":"知识","py":"zhīshi","en":"knowledge"}],
+   "explanation": "这是主旨题。全文讲李老师带同学到植物公园参观，介绍各种植物，同学们看到百年榕树很惊讶，最后大家学到了很多关于植物的知识，觉得收获很大。可见短文主要说的是同学们到植物公园参观、学到了很多植物知识，所以选(2)。(1)吃午餐的经过、(3)教怎样种植物都只是情节里的小点或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells how Teacher Li took the class to the botanic park, introduced various plants, the students were surprised by the century-old banyan, and in the end they learned much about plants and felt they gained a lot. So it is mainly about the class visiting the park and learning about plants, so (2). (1) the lunch and (3) how to grow plants are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "这次参观让同学们学到了很多关于植物的知识，大家都觉得收获很大。"}
+  },
+  "ZS43_H1": {
+   "stem_en": "Find a word in the passage that describes little brother watching the fish swim very intently.",
+   "answer_en": "目不转睛 (without blinking)",
+   "keywords": [{"w":"目不转睛","py":"mùbùzhuǎnjīng","en":"without blinking"},{"w":"鱼儿","py":"yú'ér","en":"fish"},{"w":"专心","py":"zhuānxīn","en":"intent"}],
+   "explanation": "这是找词题。短文说弟弟“蹲在水池边，目不转睛地看着鱼儿游来游去，不肯离开”，“目不转睛”正好形容弟弟非常专心地看鱼，眼睛都不转一下，所以答案是“目不转睛”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says little brother 'crouched by the pond and watched the fish swim without blinking, unwilling to leave'; 目不转睛 exactly describes him watching intently without moving his eyes, so the answer is 目不转睛. Find the word that fits the situation.",
+   "solution": {"evidence": "目不转睛地看着鱼儿游来游去"}
+  },
+  "ZS43_H2": {
+   "stem_en": "Why did little brother laugh out loud?",
+   "answer_en": "Because as soon as the fish saw the bread, they rushed over to snatch the food, and little brother found it funny, so he laughed out loud.",
+   "keywords": [{"w":"面包","py":"miànbāo","en":"bread"},{"w":"抢食","py":"qiǎngshí","en":"to snatch food"},{"w":"有趣","py":"yǒuqù","en":"funny"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“鱼儿一看到面包，就争着游过来抢食，弟弟看了哈哈大笑”，说明弟弟哈哈大笑是因为鱼儿一看到面包就争着抢食，觉得很有趣。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'as soon as the fish saw the bread, they rushed over to snatch it, and little brother laughed out loud', so he laughed because the fish scrambled for the food, which he found funny. State the reason in a full sentence.",
+   "solution": {"evidence": "鱼儿一看到面包，就争着游过来抢食，弟弟看了哈哈大笑"}
+  },
+  "ZS43_H3": {
+   "stem_en": "Why did Mum say she would bring them to the park every Saturday from now on?",
+   "answer_en": "Because Mum felt that being active in nature is very good for the children's health, so she decided to bring them to the park every Saturday.",
+   "keywords": [{"w":"大自然","py":"dàzìrán","en":"nature"},{"w":"活动","py":"huódòng","en":"to be active"},{"w":"好处","py":"hǎochù","en":"benefit"}],
+   "explanation": "这是推断题。短文最后说“妈妈说，以后每个星期六都带我们来这里，因为她觉得在大自然里活动对我们的身体很有好处”，“因为”后面就是原因，说明妈妈这样决定是因为觉得在大自然里活动对孩子的身体有好处。推断题要看“因为”引出的原因句。",
+   "explanation_en": "This is an inference question. The passage ends with 'Mum said she would bring us here every Saturday from now on, because she felt being active in nature is very good for our health'; the reason follows '因为', so she decided this because being active in nature benefits the children's health. Read the reason after '因为'.",
+   "solution": {"evidence": "因为她觉得在大自然里活动对我们的身体很有好处"}
+  }
+ }
+}

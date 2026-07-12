@@ -1,0 +1,266 @@
+{
+ "seedId": "sap_p3a_bottleneck",
+ "school": "SAP_High_Chinese_3A",
+ "year": "L1234_liangci_duoyinzi",
+ "track": "HCL",
+ "sections": {
+  "PinyinMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "妈妈让我{u}发{/u}短信告诉阿姨。",
+     "options": [
+      "fā",
+      "fà",
+      "fàng",
+      "huà"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 1,
+     "skill": "duoyinzi",
+     "explain": {
+      "why": "“发短信”的“发”是送出、发出的意思，读 fā。",
+      "distractors": [
+       "✓ 正确答案：发短信的“发”读 fā（送出、发出）。",
+       "“发”读 fà 时指“头发”。",
+       "“fàng”是“放”的读音，不是“发”。",
+       "“huà”是“话、化”的读音，不是“发”。"
+      ],
+      "trapType": "duoyinzi",
+      "memoryTip": "“发”：发出、送出读 fā；头发读 fà。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "妹妹的头{u}发{/u}又黑又长。",
+     "options": [
+      "fā",
+      "fà",
+      "huī",
+      "fèn"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 2,
+     "skill": "duoyinzi",
+     "explain": {
+      "why": "“头发”的“发”指长在头上的毛，读 fà。",
+      "distractors": [
+       "“发”读 fā 时指“发出、送出”（发短信）。",
+       "✓ 正确答案：头发的“发”读 fà。",
+       "“huī”不是“发”的读音。",
+       "“fèn”是“分、份”的读音，不是“发”。"
+      ],
+      "trapType": "duoyinzi",
+      "memoryTip": "“发”：头发读 fà；发短信读 fā。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "我每天晚上九点就去睡{u}觉{/u}。",
+     "options": [
+      "jué",
+      "jiào",
+      "xué",
+      "zhào"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 3,
+     "skill": "duoyinzi",
+     "explain": {
+      "why": "“睡觉”的“觉”读 jiào。",
+      "distractors": [
+       "“觉”读 jué 时指“觉得、感觉”。",
+       "✓ 正确答案：睡觉的“觉”读 jiào。",
+       "“xué”是“学”的读音，不是“觉”。",
+       "“zhào”不是“觉”的读音。"
+      ],
+      "trapType": "duoyinzi",
+      "memoryTip": "“觉”：睡觉读 jiào；觉得读 jué。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "阿姨答应{u}教{/u}我数学。",
+     "options": [
+      "jiāo",
+      "jiào",
+      "jiǎo",
+      "xiào"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 1,
+     "skill": "duoyinzi",
+     "explain": {
+      "why": "作动词“教我数学”时，“教”读 jiāo。",
+      "distractors": [
+       "✓ 正确答案：动词“教（我数学）”读 jiāo。",
+       "“教”读 jiào 时用于“教育、教师”。",
+       "“jiǎo”是“脚、角”的读音，不是“教”。",
+       "“xiào”是“笑、校”的读音，不是“教”。"
+      ],
+      "trapType": "duoyinzi",
+      "memoryTip": "“教”：动词“教书、教我”读 jiāo；名词“教育”读 jiào。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "阿姨教我{u}数{/u}学。",
+     "options": [
+      "shǔ",
+      "shù",
+      "sù",
+      "shū"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 1,
+     "skill": "duoyinzi",
+     "explain": {
+      "why": "“数学”的“数”读 shù。",
+      "distractors": [
+       "“数”读 shǔ 时指“数数、点数”。",
+       "✓ 正确答案：数学的“数”读 shù。",
+       "“sù”是“速、宿”的读音，不是“数”。",
+       "“shū”是“书、输”的读音，不是“数”。"
+      ],
+      "trapType": "duoyinzi",
+      "memoryTip": "“数”：数学、数量读 shù；数数（点数）读 shǔ。"
+     }
+    }
+   ]
+  },
+  "VocabMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "妈妈给弟弟买了一（）新衣服。",
+     "options": [
+      "条",
+      "件",
+      "张",
+      "只"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 1,
+     "skill": "liangci",
+     "explain": {
+      "why": "衣服用量词“件”。",
+      "distractors": [
+       "“条”用于长条状的东西（一条裤子）。",
+       "✓ 正确答案：一件衣服（衣服用“件”）。",
+       "“张”用于纸、桌等有平面的东西。",
+       "“只”用于动物或成对东西的一个。"
+      ],
+      "trapType": "liangci",
+      "memoryTip": "衣服、事情用“件”：一件衣服、一件事。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "老师叫我们把课文朗读一（）。",
+     "options": [
+      "遍",
+      "只",
+      "张",
+      "件"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 1,
+     "skill": "liangci",
+     "explain": {
+      "why": "从头到尾读一次，用量词“遍”。",
+      "distractors": [
+       "✓ 正确答案：读一遍（一个动作从头到尾一次）。",
+       "“只”用于动物，不用于次数。",
+       "“张”用于有平面的东西，不用于次数。",
+       "“件”用于衣服、事情，不用于次数。"
+      ],
+      "trapType": "liangci",
+      "memoryTip": "一个动作从头到尾一次用“遍”：读一遍。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "小狗有两（）长长的后腿。",
+     "options": [
+      "条",
+      "件",
+      "遍",
+      "张"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 4,
+     "skill": "liangci",
+     "explain": {
+      "why": "长条状的东西（后腿）用量词“条”。",
+      "distractors": [
+       "✓ 正确答案：两条后腿（长条状用“条”）。",
+       "“件”用于衣服、事情。",
+       "“遍”用于动作次数。",
+       "“张”用于有平面的东西。"
+      ],
+      "trapType": "liangci",
+      "memoryTip": "又长又细的东西用“条”：一条腿、一条尾巴。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "小蝌蚪有一（）长长的尾巴。",
+     "options": [
+      "件",
+      "张",
+      "条",
+      "只"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 4,
+     "skill": "liangci",
+     "explain": {
+      "why": "尾巴是长条状，用量词“条”。",
+      "distractors": [
+       "“件”用于衣服、事情。",
+       "“张”用于有平面的东西。",
+       "✓ 正确答案：一条尾巴（长条状用“条”）。",
+       "“只”用于动物或成对东西的一个。"
+      ],
+      "trapType": "liangci",
+      "memoryTip": "长条状用“条”：一条尾巴、一条腿。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "这（）事情我一定会做好。",
+     "options": [
+      "件",
+      "条",
+      "遍",
+      "张"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 1,
+     "skill": "liangci",
+     "explain": {
+      "why": "事情用量词“件”。",
+      "distractors": [
+       "✓ 正确答案：一件事情（事情用“件”）。",
+       "“条”用于长条状的东西。",
+       "“遍”用于动作次数。",
+       "“张”用于有平面的东西。"
+      ],
+      "trapType": "liangci",
+      "memoryTip": "事情、衣服用“件”：一件事、一件衣服。"
+     }
+    }
+   ]
+  }
+ }
+}

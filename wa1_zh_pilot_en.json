@@ -1,0 +1,4142 @@
+[
+ {
+  "setId": "ZS01",
+  "theme": "wishes and dreams",
+  "track": "HCL",
+  "band": "easy",
+  "seedSources": [
+   "generated_v1"
+  ],
+  "plan": [
+   {
+    "type": "HanziMcq",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS01_A1",
+      "topic": "HanziMcq",
+      "sentence": "小明的______望是长大后当一名医生。",
+      "options": [
+       "愿",
+       "原",
+       "园",
+       "远"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“愿望”是固定词语，表示心里希望实现的事情，所以用“愿”。",
+       "distractors": [
+        "✓ 正确答案：愿望＝心里希望实现的事。",
+        "“原”是原来、原因的意思，“原望”不是词语。",
+        "“园”是花园、公园的意思，“园望”不通。",
+        "“远”是距离远的意思，“远望”是向远处看，和这里意思不同。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字都读 yuàn 或近似音。记住“愿”里有“心”字底，愿望是心里的希望。"
+      },
+      "explanation": "“愿望”是固定词语，表示心里希望实现的事情，所以用“愿”。 四个字都读 yuàn 或近似音。记住“愿”里有“心”字底，愿望是心里的希望。",
+      "explanation_en": "“愿望” (yuànwàng, 'wish') is a fixed word meaning something you hope for in your heart, so we use 愿. All four choices sound like yuàn. Remember 愿 has 心 ('heart') at the bottom — a wish comes from the heart."
+     },
+     {
+      "id": "ZS01_A2",
+      "topic": "HanziMcq",
+      "sentence": "她努力练______，希望有一天能登上大舞台表演。",
+      "options": [
+       "息",
+       "习",
+       "席",
+       "惜"
+      ],
+      "answer": 1,
+      "lesson": 2,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“练习”是反复学习、训练的意思，和“努力”搭配，表示认真训练。",
+       "distractors": [
+        "“息”是休息的意思，“练息”不通。",
+        "✓ 正确答案：练习＝反复训练。",
+        "“席”是席位、座位，“练席”不通。",
+        "“惜”是爱惜、可惜，“练惜”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "四个字读音相近。记住“习”是羽毛旁，小鸟反复扇动翅膀学飞＝练习。"
+      },
+      "explanation": "“练习”是反复学习、训练的意思，和“努力”搭配，表示认真训练。 四个字读音相近。记住“习”是羽毛旁，小鸟反复扇动翅膀学飞＝练习。",
+      "explanation_en": "“练习” (liànxí, 'practise') means to study and train again and again, and it fits with 努力 ('work hard'). The four choices sound alike. Remember 习 has the 'feather' part 羽 — a bird flapping its wings over and over to learn to fly = practise."
+     },
+     {
+      "id": "ZS01_A3",
+      "topic": "HanziMcq",
+      "sentence": "爸爸______励我要坚持，不要轻易放弃梦想。",
+      "options": [
+       "古",
+       "故",
+       "鼓",
+       "固"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“鼓励”是给人信心、让人加油的意思，和“坚持梦想”搭配最合适。",
+       "distractors": [
+        "“古”是古代的意思，“古励”不通。",
+        "“故”是故事、原故，“故励”不通。",
+        "✓ 正确答案：鼓励＝给人信心、加油。",
+        "“固”是坚固、固定，“固励”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "四个字都有“古”。记住“鼓”多了鼓字旁，敲鼓给人加油＝鼓励。"
+      },
+      "explanation": "“鼓励”是给人信心、让人加油的意思，和“坚持梦想”搭配最合适。 四个字都有“古”。记住“鼓”多了鼓字旁，敲鼓给人加油＝鼓励。",
+      "explanation_en": "“鼓励” (gǔlì, 'encourage') means to give someone confidence and cheer them on, and it fits best with 坚持梦想 ('hold on to a dream'). All four choices contain 古. Remember 鼓 has the 'drum' part — beating a drum to cheer someone on = encourage."
+     },
+     {
+      "id": "ZS01_A4",
+      "topic": "HanziMcq",
+      "sentence": "小华相______只要努力，梦想一定会实现。",
+      "options": [
+       "心",
+       "新",
+       "兴",
+       "信"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“相信”表示认为某件事是真的，“相信只要努力梦想会实现”意思通顺。",
+       "distractors": [
+        "“心”是心脏，“相心”不是词语。",
+        "“新”是新旧的新，“相新”不通。",
+        "“兴”是高兴的兴，“相兴”不通。",
+        "✓ 正确答案：相信＝认为是真的、不怀疑。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字读音相近（xīn/xìn）。记住“信”有单人旁，人说的话要相信。"
+      },
+      "explanation": "“相信”表示认为某件事是真的，“相信只要努力梦想会实现”意思通顺。 四个字读音相近（xīn/xìn）。记住“信”有单人旁，人说的话要相信。",
+      "explanation_en": "“相信” (xiāngxìn, 'believe') means to think something is true, so '相信只要努力梦想会实现' (believe that if you work hard your dream will come true) makes sense. The choices sound alike (xīn/xìn). Remember 信 has the 'person' part 亻 — you believe what a person says."
+     },
+     {
+      "id": "ZS01_A5",
+      "topic": "HanziMcq",
+      "sentence": "她把自己的梦想写在日______里，每天睡前都会看一看。",
+      "options": [
+       "记",
+       "计",
+       "既",
+       "纪"
+      ],
+      "answer": 0,
+      "lesson": 3,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“日记”是每天记录事情的本子，“写在日记里”意思通顺。",
+       "distractors": [
+        "✓ 正确答案：日记＝每天写下发生的事的本子。",
+        "“计”是计划、计算，“日计”不是词语。",
+        "“既”是既然、既然如此，“日既”不通。",
+        "“纪”是纪念、年纪，“日纪”不是词语。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字读音相近（jì）。记住“记”有言字旁，用语言文字记下来＝日记。"
+      },
+      "explanation": "“日记”是每天记录事情的本子，“写在日记里”意思通顺。 四个字读音相近（jì）。记住“记”有言字旁，用语言文字记下来＝日记。",
+      "explanation_en": "“日记” (rìjì, 'diary') is a book where you write things down every day, so '写在日记里' (write in a diary) makes sense. The choices sound alike (jì). Remember 记 has the 'speech' part 讠 — writing something down in words = diary."
+     }
+    ]
+   },
+   {
+    "type": "PinyinMcq",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS01_B1",
+      "topic": "PinyinMcq",
+      "sentence": "小文的{u}梦想{/u}是成为一名画家。",
+      "options": [
+       "méng xiǎng",
+       "mèng xiǎng",
+       "mèng xiàng",
+       "méng xiàng"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“梦”读 mèng（第四声），“想”读 xiǎng（第三声）。合起来是 mèng xiǎng。",
+       "distractors": [
+        "“梦”是第四声 mèng，不是第二声 méng。",
+        "✓ 正确答案：mèng xiǎng。",
+        "“想”是 xiǎng（第三声），不是 xiàng（第四声）。",
+        "“梦”声调错（méng），“想”声调也错（xiàng），两处都错。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "梦 mèng 第四声（往下降），想 xiǎng 第三声（先降再升）。"
+      },
+      "explanation": "“梦”读 mèng（第四声），“想”读 xiǎng（第三声）。合起来是 mèng xiǎng。 梦 mèng 第四声（往下降），想 xiǎng 第三声（先降再升）。",
+      "explanation_en": "梦 is read mèng (4th tone) and 想 is read xiǎng (3rd tone); together it is mèng xiǎng. 梦 mèng falls (4th tone); 想 xiǎng dips then rises (3rd tone)."
+     },
+     {
+      "id": "ZS01_B2",
+      "topic": "PinyinMcq",
+      "sentence": "小文{u}长大{/u}后想当一名科学家。",
+      "options": [
+       "zhāng dà",
+       "cháng dà",
+       "zhǎng dà",
+       "zhǎng tà"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "duoyinzi",
+      "explain": {
+       "why": "“长大”的“长”读 zhǎng（第三声），表示生长、变大，不是 cháng（长短的长）。“大”读 dà（第四声）。",
+       "distractors": [
+        "“长”是 zhǎng，不是 zhāng，声调和韵母都不同。",
+        "“长”在“长大”里读 zhǎng，不是 cháng（那是长短的读法）。",
+        "✓ 正确答案：zhǎng dà。",
+        "“大”读 dà，不是 tà，声母不同。"
+       ],
+       "trapType": "duoyinzi",
+       "memoryTip": "“长”是多音字：长短＝cháng；长大＝zhǎng。记住“长大”用 zhǎng，像植物生长（zhǎng）。"
+      },
+      "explanation": "“长大”的“长”读 zhǎng（第三声），表示生长、变大，不是 cháng（长短的长）。“大”读 dà（第四声）。 “长”是多音字：长短＝cháng；长大＝zhǎng。记住“长大”用 zhǎng，像植物生长（zhǎng）。",
+      "explanation_en": "In 长大 ('grow up'), 长 is read zhǎng (3rd tone), meaning to grow bigger — not cháng (as in 'long'). 大 is read dà (4th tone). 长 is a multi-reading character: 长短 = cháng; 长大 = zhǎng. Use zhǎng, like a plant growing."
+     },
+     {
+      "id": "ZS01_B3",
+      "topic": "PinyinMcq",
+      "sentence": "她{u}努力{/u}练舞，希望有一天能登上舞台。",
+      "options": [
+       "nú lì",
+       "nǔ lí",
+       "nù lì",
+       "nǔ lì"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“努”读 nǔ（第三声），“力”读 lì（第四声）。合起来是 nǔ lì。",
+       "distractors": [
+        "“努”是第三声 nǔ，不是第二声 nú。",
+        "“力”是第四声 lì，不是第二声 lí。",
+        "“努”是第三声 nǔ，不是第四声 nù。",
+        "✓ 正确答案：nǔ lì。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "努 nǔ 第三声（先降再升），力 lì 第四声（往下降）。两个字声调都要记准。"
+      },
+      "explanation": "“努”读 nǔ（第三声），“力”读 lì（第四声）。合起来是 nǔ lì。 努 nǔ 第三声（先降再升），力 lì 第四声（往下降）。两个字声调都要记准。",
+      "explanation_en": "努 is read nǔ (3rd tone) and 力 is read lì (4th tone); together it is nǔ lì. 努 nǔ dips then rises (3rd tone); 力 lì falls (4th tone). Learn both tones well."
+     },
+     {
+      "id": "ZS01_B4",
+      "topic": "PinyinMcq",
+      "sentence": "弟弟{u}快乐{/u}地说出自己的愿望。",
+      "options": [
+       "kuài lè",
+       "kuāi lè",
+       "kuài lé",
+       "kuài le"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "shengmu_yunmu",
+      "explain": {
+       "why": "“快”读 kuài（第四声），“乐”在“快乐”里读 lè（第四声）。合起来是 kuài lè。",
+       "distractors": [
+        "✓ 正确答案：kuài lè。",
+        "“快”是 kuài，不是 kuāi，声调不同。",
+        "“乐”是第四声 lè，不是第二声 lé。",
+        "“乐”在“快乐”里读 lè（有声调），不是轻声 le。"
+       ],
+       "trapType": "shengmu_yunmu",
+       "memoryTip": "“快乐”两字都是第四声：kuài lè。“乐”不要读成轻声 le，那是语气词。"
+      },
+      "explanation": "“快”读 kuài（第四声），“乐”在“快乐”里读 lè（第四声）。合起来是 kuài lè。 “快乐”两字都是第四声：kuài lè。“乐”不要读成轻声 le，那是语气词。",
+      "explanation_en": "快 is read kuài (4th tone), and 乐 in 快乐 is read lè (4th tone); together it is kuài lè. Both characters are 4th tone: kuài lè. Do not read 乐 as the light tone 'le', which is just a mood word."
+     }
+    ]
+   },
+   {
+    "type": "VocabMcq",
+    "marks": 5,
+    "variant": "mcq4",
+    "items": [
+     {
+      "id": "ZS01_C1",
+      "topic": "VocabMcq",
+      "sentence": "小华把自己的愿望告诉了妈妈，妈妈______地点了点头。",
+      "options": [
+       "伤心",
+       "开心",
+       "担心",
+       "小心"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "妈妈听到孩子的愿望后点头，表示高兴和支持，用“开心”最合适。",
+       "distractors": [
+        "“伤心”是难过的意思，和点头支持的情景不符。",
+        "✓ 正确答案：开心＝高兴、快乐。",
+        "“担心”是害怕出问题，和这里的情景不符。",
+        "“小心”是谨慎，不能形容点头的心情。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "读完整句找情绪：妈妈点头＝同意、高兴，所以选“开心”。"
+      },
+      "explanation": "妈妈听到孩子的愿望后点头，表示高兴和支持，用“开心”最合适。 读完整句找情绪：妈妈点头＝同意、高兴，所以选“开心”。",
+      "explanation_en": "After hearing the child's wish, the mother nods to show she is happy and supportive, so 开心 ('happy') fits best. Read the whole sentence for the feeling: mother nods = she agrees and is happy, so choose 开心."
+     },
+     {
+      "id": "ZS01_C2",
+      "topic": "VocabMcq",
+      "sentence": "他每天______练习，终于实现了当歌手的梦想。",
+      "options": [
+       "懒惰",
+       "马虎",
+       "认真",
+       "随便"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "jinyici",
+      "explain": {
+       "why": "每天认真练习才能实现梦想，“认真”表示用心、仔细，最符合语境。",
+       "distractors": [
+        "“懒惰”是不勤快，和“实现梦想”矛盾。",
+        "“马虎”是不仔细，和努力实现梦想矛盾。",
+        "✓ 正确答案：认真＝用心、仔细。",
+        "“随便”是不在乎，和努力练习矛盾。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "句子结果是“实现梦想”，原因一定是正面努力的词，只有“认真”是正面的。"
+      },
+      "explanation": "每天认真练习才能实现梦想，“认真”表示用心、仔细，最符合语境。 句子结果是“实现梦想”，原因一定是正面努力的词，只有“认真”是正面的。",
+      "explanation_en": "You can only reach your dream by practising carefully every day; 认真 ('careful, serious') means attentive and careful, which fits best. The result is '实现梦想' (make the dream come true), so the cause must be a positive, hard-working word — only 认真 is positive."
+     },
+     {
+      "id": "ZS01_C3",
+      "topic": "VocabMcq",
+      "sentence": "妈妈买了______新书送给我，让我好好学习。",
+      "options": [
+       "一张",
+       "一条",
+       "一块",
+       "一本"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "liangci",
+      "explain": {
+       "why": "书的量词是“本”，“一本新书”是正确搭配。",
+       "distractors": [
+        "“一张”用于纸、票等扁平的东西，不用于书。",
+        "“一条”用于鱼、绳子等细长的东西，不用于书。",
+        "“一块”用于糖、蛋糕等块状的东西，不用于书。",
+        "✓ 正确答案：一本书＝书的量词是本。"
+       ],
+       "trapType": "liangci",
+       "memoryTip": "书＝一本。记住：本子、书本都用“本”。"
+      },
+      "explanation": "书的量词是“本”，“一本新书”是正确搭配。 书＝一本。记住：本子、书本都用“本”。",
+      "explanation_en": "The measure word for books is 本, so '一本新书' (one new book) is correct. Book = 一本. Remember: 本子 (notebook) and 书本 (books) both use 本."
+     },
+     {
+      "id": "ZS01_C4",
+      "topic": "VocabMcq",
+      "sentence": "小丽下定______，要努力读书，将来当一名护士。",
+      "options": [
+       "决心",
+       "心情",
+       "心思",
+       "心意"
+      ],
+      "answer": 0,
+      "lesson": 2,
+      "skill": "dapei",
+      "explain": {
+       "why": "“下定决心”是固定搭配，表示坚定地做某件事的打算。",
+       "distractors": [
+        "✓ 正确答案：下定决心＝坚定地打算去做。",
+        "“心情”是情绪感受，“下定心情”不通。",
+        "“心思”是想法、念头，“下定心思”不是固定说法。",
+        "“心意”是心里的意思，“下定心意”不是固定搭配。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "固定搭配：下定＋决心。看到“下定”就想“决心”。"
+      },
+      "explanation": "“下定决心”是固定搭配，表示坚定地做某件事的打算。 固定搭配：下定＋决心。看到“下定”就想“决心”。",
+      "explanation_en": "“下定决心” ('make up one's mind') is a fixed phrase meaning to firmly decide to do something. Fixed match: 下定 + 决心. When you see 下定, think 决心."
+     },
+     {
+      "id": "ZS01_C5",
+      "topic": "VocabMcq",
+      "sentence": "弟弟______地说出自己的愿望，希望大家都能听到。",
+      "options": [
+       "轻轻",
+       "大声",
+       "慢慢",
+       "悄悄"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "句子说“希望大家都能听到”，所以要大声说，用“大声”最合适。",
+       "distractors": [
+        "“轻轻”是声音小，和“希望大家都能听到”矛盾。",
+        "✓ 正确答案：大声＝声音大，让大家都听到。",
+        "“慢慢”是速度慢，不能说明声音大小，和“希望大家都能听到”不符。",
+        "“悄悄”是偷偷地、声音很小，和“希望大家都能听到”矛盾。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "抓关键词“希望大家都能听到”，声音一定要大，选“大声”。"
+      },
+      "explanation": "句子说“希望大家都能听到”，所以要大声说，用“大声”最合适。 抓关键词“希望大家都能听到”，声音一定要大，选“大声”。",
+      "explanation_en": "The sentence says '希望大家都能听到' (hope everyone can hear), so you must speak loudly; 大声 ('loud') fits best. Catch the key words 'hope everyone can hear' — the voice must be loud, so choose 大声."
+     }
+    ]
+   },
+   {
+    "type": "VocabMatch",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS01_D",
+      "topic": "VocabMatch",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "实现",
+       "坚持",
+       "勇敢",
+       "愿望",
+       "加油",
+       "图书"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "______梦想",
+        "answer": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“实现梦想”搭配自然、意思通顺。",
+         "distractors": [
+          "✓ 正确答案：“实现梦想”搭配自然、意思通顺。",
+          "“坚持”与本题不搭配。",
+          "“勇敢”与本题不搭配。",
+          "“愿望”与本题不搭配。",
+          "“加油”与本题不搭配。",
+          "“图书”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：实现梦想、坚持练习、勇敢的心、心里的愿望、为他加油。"
+        },
+        "explanation": "“实现梦想”搭配自然、意思通顺。",
+        "explanation_en": "“实现梦想” ('make a dream come true') is a natural, sensible match."
+       },
+       {
+        "num": 2,
+        "stem": "______练习",
+        "answer": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“坚持练习”搭配自然、意思通顺。",
+         "distractors": [
+          "“实现”与本题不搭配。",
+          "✓ 正确答案：“坚持练习”搭配自然、意思通顺。",
+          "“勇敢”与本题不搭配。",
+          "“愿望”与本题不搭配。",
+          "“加油”与本题不搭配。",
+          "“图书”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：实现梦想、坚持练习、勇敢的心、心里的愿望、为他加油。"
+        },
+        "explanation": "“坚持练习”搭配自然、意思通顺。",
+        "explanation_en": "“坚持练习” ('keep practising') is a natural, sensible match."
+       },
+       {
+        "num": 3,
+        "stem": "______的心",
+        "answer": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“勇敢的心”搭配自然、意思通顺。",
+         "distractors": [
+          "“实现”与本题不搭配。",
+          "“坚持”与本题不搭配。",
+          "✓ 正确答案：“勇敢的心”搭配自然、意思通顺。",
+          "“愿望”与本题不搭配。",
+          "“加油”与本题不搭配。",
+          "“图书”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：实现梦想、坚持练习、勇敢的心、心里的愿望、为他加油。"
+        },
+        "explanation": "“勇敢的心”搭配自然、意思通顺。",
+        "explanation_en": "“勇敢的心” ('a brave heart') is a natural, sensible match."
+       },
+       {
+        "num": 4,
+        "stem": "心里的______",
+        "answer": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“心里的愿望”搭配自然、意思通顺。",
+         "distractors": [
+          "“实现”与本题不搭配。",
+          "“坚持”与本题不搭配。",
+          "“勇敢”与本题不搭配。",
+          "✓ 正确答案：“心里的愿望”搭配自然、意思通顺。",
+          "“加油”与本题不搭配。",
+          "“图书”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：实现梦想、坚持练习、勇敢的心、心里的愿望、为他加油。"
+        },
+        "explanation": "“心里的愿望”搭配自然、意思通顺。",
+        "explanation_en": "“心里的愿望” ('the wish in one's heart') is a natural, sensible match."
+       },
+       {
+        "num": 5,
+        "stem": "为他______",
+        "answer": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“为他加油”搭配自然、意思通顺。",
+         "distractors": [
+          "“实现”与本题不搭配。",
+          "“坚持”与本题不搭配。",
+          "“勇敢”与本题不搭配。",
+          "“愿望”与本题不搭配。",
+          "✓ 正确答案：“为他加油”搭配自然、意思通顺。",
+          "“图书”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：实现梦想、坚持练习、勇敢的心、心里的愿望、为他加油。"
+        },
+        "explanation": "“为他加油”搭配自然、意思通顺。",
+        "explanation_en": "“为他加油” ('cheer him on') is a natural, sensible match."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SentenceCraft",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS01_E1",
+      "subtype": "combine",
+      "connector": "虽然……但是",
+      "sentenceA": "实现梦想的路很难走。",
+      "sentenceB": "小文不打算放弃。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "虽然实现梦想的路很难走，但是小文不打算放弃。",
+      "marks": 2,
+      "lesson": 3,
+      "skill": "lianci",
+      "explain": {
+       "why": "“虽然……但是……”表示前面承认一个情况，后面说出相反或不同的结果。“虽然实现梦想的路很难走”是承认的情况，“但是小文不打算放弃”是相反的结果。",
+       "distractors": [
+        "不能只写“实现梦想的路很难走，小文不打算放弃”——少了“虽然……但是”，就体现不出转折的意思。",
+        "“虽然”要放在第一个分句前，“但是”要放在第二个分句前，位置不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“虽然……但是……”＝承认前面，转折后面。前面是困难，后面是坚持。"
+      },
+      "explanation": "“虽然……但是……”表示前面承认一个情况，后面说出相反或不同的结果。“虽然实现梦想的路很难走”是承认的情况，“但是小文不打算放弃”是相反的结果。 “虽然……但是……”＝承认前面，转折后面。前面是困难，后面是坚持。",
+      "explanation_en": "“虽然……但是……” ('although…, …') admits one situation first, then states the opposite result. '虽然实现梦想的路很难走' (although the road to the dream is hard) is admitted, and '但是小文不打算放弃' (but Xiaowen will not give up) is the opposite result. First the difficulty, then holding on."
+     },
+     {
+      "id": "ZS01_E2",
+      "subtype": "combine",
+      "connector": "只要……就",
+      "sentenceA": "你每天坚持练习。",
+      "sentenceB": "你的愿望一定能实现。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "只要你每天坚持练习，你的愿望就一定能实现。",
+      "marks": 2,
+      "lesson": 3,
+      "skill": "lianci",
+      "explain": {
+       "why": "“只要……就……”表示满足前面的条件，后面的结果一定会发生。“只要你每天坚持练习”是条件，“你的愿望就一定能实现”是结果。",
+       "distractors": [
+        "不能只写“你每天坚持练习，你的愿望一定能实现”——少了“只要……就”，就体现不出条件关系。",
+        "“只要”放在条件分句前，“就”放在结果分句前，两个词都要写出来。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“只要……就……”＝有这个条件，结果一定跟来。只要努力，就能成功。"
+      },
+      "explanation": "“只要……就……”表示满足前面的条件，后面的结果一定会发生。“只要你每天坚持练习”是条件，“你的愿望就一定能实现”是结果。 “只要……就……”＝有这个条件，结果一定跟来。只要努力，就能成功。",
+      "explanation_en": "“只要……就……” ('as long as…, …') means if the condition is met, the result is sure to happen. '只要你每天坚持练习' (as long as you keep practising every day) is the condition, and '你的愿望就一定能实现' (your wish will surely come true) is the result. As long as you work hard, you will succeed."
+     }
+    ]
+   },
+   {
+    "type": "PassageCloze",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS01_F",
+      "topic": "PassageCloze",
+      "passage": "小美的愿望是成为一名画家。她每天放学后都会(1) ___ 地练习画画，从不偷懒。有一次，她画的花朵被老师贴在班上的墙壁上，同学们都(2) ___ 地称赞她。小美听了，心里非常(3) ___。妈妈告诉她：“只要你(4) ___ 练习，梦想一定会实现。”小美点点头，下定(5) ___ 要更加努力。",
+      "wordBank": [
+       "认真",
+       "开心",
+       "决心",
+       "坚持",
+       "纷纷",
+       "害怕"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "认真",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "每天练习画画，从不偷懒，说明她很用心，用“认真”最合适。",
+         "distractors": [
+          "✓ 正确答案：认真＝用心、仔细。",
+          "开心：是心情，不能形容练习的态度。",
+          "决心：是名词，不能放在“地”前面修饰动词。",
+          "坚持：意思和“每天”重复，不如认真准确。",
+          "纷纷：是许多人一起做，不合一个人练习的语境。",
+          "害怕：是负面情绪，和“从不偷懒”矛盾。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“认真地＋动作”＝用心去做。“认真地练习”是常见搭配。"
+        },
+        "explanation": "每天练习画画，从不偷懒，说明她很用心，用“认真”最合适。",
+        "explanation_en": "She practises drawing every day and is never lazy, showing she is very attentive, so 认真 ('careful, serious') fits best."
+       },
+       {
+        "num": 2,
+        "answer": "纷纷",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“同学们都纷纷称赞”表示很多同学一起称赞，“纷纷”表示许多人同时做同一件事。",
+         "distractors": [
+          "认真：是态度，不能形容许多人一起称赞的样子。",
+          "开心：是心情，不能放在“地”前面说明称赞的方式。",
+          "决心：是名词，不能放在“地”前面修饰动词。",
+          "✓ 正确答案：纷纷＝许多人一起做同一件事。",
+          "坚持：是持续做，不合“称赞”的语境。",
+          "害怕：是负面情绪，和称赞矛盾。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“纷纷＋动作”表示很多人同时做。同学们纷纷称赞＝大家一起夸。"
+        },
+        "explanation": "“同学们都纷纷称赞”表示很多同学一起称赞，“纷纷”表示许多人同时做同一件事。",
+        "explanation_en": "'同学们都纷纷称赞' means many classmates praise her together; 纷纷 means many people doing the same thing at the same time."
+       },
+       {
+        "num": 3,
+        "answer": "开心",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "被老师贴画、被同学称赞，小美心里一定很高兴，用“开心”最合适。",
+         "distractors": [
+          "认真：是态度，不是心情。",
+          "决心：是名词，不能说“心里非常决心”。",
+          "坚持：是动词，不能说“心里非常坚持”。",
+          "纷纷：是形容许多人，不能形容心情。",
+          "✓ 正确答案：开心＝高兴、快乐。",
+          "害怕：是负面情绪，和被称赞的情景矛盾。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "被称赞→心里高兴→开心。找情绪词时想想那个情景是好事还是坏事。"
+        },
+        "explanation": "被老师贴画、被同学称赞，小美心里一定很高兴，用“开心”最合适。",
+        "explanation_en": "Getting a sticker from the teacher and praise from classmates, Xiaomei must feel very happy, so 开心 ('happy') fits best."
+       },
+       {
+        "num": 4,
+        "answer": "坚持",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“坚持练习”表示持续不断地练习，和后面“梦想一定会实现”的结果相呼应。",
+         "distractors": [
+          "认真：“只要你认真练习”也通顺，但是“坚持”更强调持续做，和“只要……就”的条件关系更配。",
+          "开心：是心情，不能说“只要你开心练习”。",
+          "决心：是名词，不能放在“只要你”后面修饰练习。",
+          "✓ 正确答案：坚持练习＝持续不断地练习。",
+          "纷纷：是许多人一起做，不合一个人练习的语境。",
+          "害怕：是负面情绪，和努力实现梦想矛盾。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“只要坚持，就能实现”是常见句型。坚持＝不停止地做。"
+        },
+        "explanation": "“坚持练习”表示持续不断地练习，和后面“梦想一定会实现”的结果相呼应。",
+        "explanation_en": "“坚持练习” ('keep practising') means to practise on and on without stopping, matching the later result '梦想一定会实现' (the dream will surely come true)."
+       },
+       {
+        "num": 5,
+        "answer": "决心",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“下定决心”是固定搭配，表示坚定地打算去做某件事。",
+         "distractors": [
+          "认真：是形容词，“下定认真”不通。",
+          "开心：是形容词，“下定开心”不通。",
+          "坚持：是动词，“下定坚持”不通。",
+          "纷纷：不合。",
+          "✓ 正确答案：下定决心＝坚定地打算去做。",
+          "害怕：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "固定搭配：下定＋决心。看到“下定”就填“决心”。"
+        },
+        "explanation": "“下定决心”是固定搭配，表示坚定地打算去做某件事。",
+        "explanation_en": "“下定决心” ('make up one's mind') is a fixed phrase meaning to firmly plan to do something."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingMcq",
+    "marks": 3,
+    "items": [
+     {
+      "id": "ZS01_G",
+      "topic": "ReadingMcq",
+      "passage": "小杰从小就有一个愿望——成为一名足球运动员。每天放学后，他都会到学校操场练习踢球。有一次，他在练习时不小心摔倒，膝盖受伤了。妈妈心疼地说：“你休息几天吧。”小杰摇了摇头，说：“我不想放弃，等伤好了我就继续练。”爸爸在旁边微笑着说：“好孩子，有梦想就要坚持。”几个星期后，小杰的伤好了，他又回到操场上认真练习。老师看到他这么努力，决定推荐他参加学校的足球队选拔。",
+      "questions": [
+       {
+        "id": "ZS01_G1",
+        "format": "mcq",
+        "stem": "小杰的愿望是什么？",
+        "options": [
+         "成为一名老师。",
+         "参加学校的足球队选拔。",
+         "成为一名足球运动员。"
+        ],
+        "answer": 2,
+        "lesson": 1,
+        "skill": "detail",
+        "explain": {
+         "why": "文中第一句说“小杰从小就有一个愿望——成为一名足球运动员”，答案在文章开头。",
+         "distractors": [
+          "文中没有说小杰想成为老师。",
+          "参加选拔是后来老师推荐的，不是小杰自己的愿望。",
+          "✓ 正确答案：成为一名足球运动员（文章第一句说明）。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回文章找答案。愿望在第一句，不要被后面的内容混淆。"
+        }
+       },
+       {
+        "id": "ZS01_G2",
+        "format": "mcq",
+        "stem": "小杰受伤后，他是怎么做的？",
+        "options": [
+         "他等伤好了之后继续练习。",
+         "他马上停止练习，再也不踢球了。",
+         "他请妈妈帮他向老师请假。"
+        ],
+        "answer": 0,
+        "lesson": 2,
+        "skill": "inference",
+        "explain": {
+         "why": "文中说小杰受伤后说“等伤好了我就继续练”，后来伤好了他又回到操场练习，说明他等伤好后继续练习。",
+         "distractors": [
+          "✓ 正确答案：等伤好了继续练习（文中有直接说明）。",
+          "文中说他不想放弃，没有停止踢球。",
+          "文中没有提到请假的事。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "推断题要找文中的行动和说话。小杰说“等伤好了就继续练”，后来也真的回去练了。"
+        }
+       },
+       {
+        "id": "ZS01_G3",
+        "format": "mcq",
+        "stem": "这篇短文主要告诉我们什么？",
+        "options": [
+         "踢足球很容易受伤，要小心。",
+         "有梦想就要坚持，努力才能成功。",
+         "爸爸妈妈要多关心孩子。"
+        ],
+        "answer": 1,
+        "lesson": 3,
+        "skill": "main_idea",
+        "explain": {
+         "why": "短文讲小杰受伤后不放弃，坚持练习，最终被推荐参加选拔，主要想说有梦想要坚持努力。",
+         "distractors": [
+          "文章重点不是提醒人小心受伤，而是讲坚持梦想。",
+          "✓ 正确答案：有梦想就要坚持，努力才能成功。",
+          "爸爸妈妈的关心只是故事的一部分，不是主要内容。"
+         ],
+         "trapType": "main_idea",
+         "memoryTip": "主旨题要看整篇文章的中心。爸爸说“有梦想就要坚持”，这就是主旨。"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingOpen",
+    "marks": 6,
+    "items": [
+     {
+      "id": "ZS01_H",
+      "topic": "ReadingOpen",
+      "passage": "小雯的愿望是成为一名作家。她喜欢在课余时间写故事，每次写完都会读给好朋友小芳听。小芳每次听完都会给她一些意见，告诉她哪里写得好，哪里可以改进。有一天，老师在班上举办了一个小小故事比赛。小雯把自己写的故事交上去。比赛结果出来了，小雯得了第一名。老师在全班面前表扬她，说她的故事写得生动有趣。小雯非常开心，她更加相信只要坚持努力，愿望一定能实现。",
+      "questions": [
+       {
+        "id": "ZS01_H1",
+        "format": "fill_word",
+        "stem": "从短文中找出与画线词语意思相近的词语：“他讲的故事非常好玩，大家都很喜欢听。”（画线：好玩）",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "answer": "有趣",
+        "explain": {
+         "why": "“好玩”和“有趣”都表示令人喜欢、吸引人的意思。短文中“故事写得生动有趣”里有“有趣”。",
+         "distractors": [],
+         "trapType": "jinyici",
+         "memoryTip": "好玩＝有趣，都是说让人喜欢、吸引人的意思。"
+        }
+       },
+       {
+        "id": "ZS01_H2",
+        "format": "open_sentence",
+        "stem": "小芳在小雯写完故事后会做什么？",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "detail",
+        "answer": "小芳每次听完小雯的故事后，都会给她一些意见，告诉她哪里写得好，哪里可以改进。"
+       },
+       {
+        "id": "ZS01_H3",
+        "format": "open_sentence",
+        "stem": "小雯得了第一名之后，她有什么感受？为什么？",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "inference",
+        "answer": "小雯得了第一名之后非常开心，因为她的努力得到了老师的表扬，她更加相信只要坚持努力，愿望一定能实现。"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "setId": "ZS02",
+  "theme": "family and friends",
+  "track": "HCL",
+  "band": "easy",
+  "seedSources": [
+   "generated_v1"
+  ],
+  "plan": [
+   {
+    "type": "HanziMcq",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS02_A1",
+      "topic": "HanziMcq",
+      "sentence": "爸爸每天下班回家，都会______着我们的头说几句笑话。",
+      "options": [
+       "模",
+       "摸",
+       "摹",
+       "膜"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“摸头”指用手轻轻碰头，表示爱护，是正确的词语。",
+       "distractors": [
+        "“模”是模样、模仿，不能“模头”。",
+        "✓ 正确答案：摸头＝用手轻碰头，表示爱护。",
+        "“摹”是描摹、临摹，不能“摹头”。",
+        "“膜”是薄膜，不能“膜头”。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "四个字读音相近，但“摸”有提手旁，用手去碰才是“摸”。"
+      },
+      "explanation": "“摸头”指用手轻轻碰头，表示爱护，是正确的词语。 四个字读音相近，但“摸”有提手旁，用手去碰才是“摸”。",
+      "explanation_en": "摸 means to touch lightly with the hand; '摸头' (pat the head) shows care and is correct. The four choices sound alike, but 摸 has the 'hand' part 扌 — touching with the hand is 摸."
+     },
+     {
+      "id": "ZS02_A2",
+      "topic": "HanziMcq",
+      "sentence": "妈妈______心地为我们准备了一桌好菜。",
+      "options": [
+       "晴",
+       "清",
+       "精",
+       "请"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“精心”表示用心、认真，妈妈认真准备好菜，用“精心”最合适。",
+       "distractors": [
+        "“晴”是天气晴朗，“晴心”不通。",
+        "“清”是清楚，“清心”意思不同，不合这里。",
+        "✓ 正确答案：精心＝用心认真地做。",
+        "“请”是邀请，“请心”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“精”有米字旁，精心就像把最好的米粮用心挑选，表示认真仔细。"
+      },
+      "explanation": "“精心”表示用心、认真，妈妈认真准备好菜，用“精心”最合适。 “精”有米字旁，精心就像把最好的米粮用心挑选，表示认真仔细。",
+      "explanation_en": "精心 ('with great care') means attentive and careful; mother carefully prepares good dishes, so 精心 fits best. 精 has the 'rice' part 米 — like carefully picking the best grains, meaning careful and attentive."
+     },
+     {
+      "id": "ZS02_A3",
+      "topic": "HanziMcq",
+      "sentence": "奶奶年纪大了，走路时需要______着拐杖。",
+      "options": [
+       "伏",
+       "服",
+       "副",
+       "扶"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“扶”指用手支撑帮助，“扶着拐杖”表示借助拐杖走路，意思正确。",
+       "distractors": [
+        "“伏”是趴下，“伏着拐杖”不通。",
+        "“服”是衣服或服从，“服着拐杖”不通。",
+        "“副”是量词，“副着拐杖”不通。",
+        "✓ 正确答案：扶着拐杖＝用手撑着拐杖走路。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "“扶”有提手旁，用手帮助支撑才是“扶”，和“伏、服、副”读音相近但意思不同。"
+      },
+      "explanation": "“扶”指用手支撑帮助，“扶着拐杖”表示借助拐杖走路，意思正确。 “扶”有提手旁，用手帮助支撑才是“扶”，和“伏、服、副”读音相近但意思不同。",
+      "explanation_en": "扶 means to support and help with the hand; '扶着拐杖' (hold a walking stick for support) means to walk with a stick's help, which is correct. 扶 has the 'hand' part 扌. It sounds like 伏, 服, 副 but means something different."
+     },
+     {
+      "id": "ZS02_A4",
+      "topic": "HanziMcq",
+      "sentence": "哥哥和我是好朋友，我们每天一______上学。",
+      "options": [
+       "起",
+       "齐",
+       "骑",
+       "奇"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“一起”表示共同、同时，“一起上学”意思通顺。",
+       "distractors": [
+        "✓ 正确答案：一起＝共同、同时。",
+        "“一齐”虽有近义，但此处考查字形，“起”才是“一起”的正确写法。",
+        "“一骑”是骑马一次，“一骑上学”不通。",
+        "“一奇”不是词语，不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "“起”有走字旁，“一起”就是大家一同走，记住走字旁的“起”。"
+      },
+      "explanation": "“一起”表示共同、同时，“一起上学”意思通顺。 “起”有走字旁，“一起”就是大家一同走，记住走字旁的“起”。",
+      "explanation_en": "一起 (yì qǐ, 'together') means doing something at the same time; '一起上学' (go to school together) makes sense. 起 has the 'walk' part 走 — 一起 means everyone walking together."
+     },
+     {
+      "id": "ZS02_A5",
+      "topic": "HanziMcq",
+      "sentence": "妹妹很______事，总是帮妈妈做家务。",
+      "options": [
+       "动",
+       "懂",
+       "洞",
+       "栋"
+      ],
+      "answer": 1,
+      "lesson": 2,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“懂事”指了解别人的想法、明白道理，妹妹帮妈妈做家务正说明她懂事。",
+       "distractors": [
+        "“动事”不是词语，不通。",
+        "✓ 正确答案：懂事＝明白道理、体贴大人。",
+        "“洞事”不是词语，不通。",
+        "“栋事”不是词语，不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“懂”有心字旁，用心去理解才是“懂”，懂事就是心里明白事理。"
+      },
+      "explanation": "“懂事”指了解别人的想法、明白道理，妹妹帮妈妈做家务正说明她懂事。 “懂”有心字旁，用心去理解才是“懂”，懂事就是心里明白事理。",
+      "explanation_en": "懂事 ('sensible') means understanding others' thoughts and knowing what is right; the little sister helping mother with housework shows she is 懂事. 懂 has the 'heart' part 忄 — understanding with your heart."
+     }
+    ]
+   },
+   {
+    "type": "PinyinMcq",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS02_B1",
+      "topic": "PinyinMcq",
+      "sentence": "爷爷{u}教导{/u}我们要尊重长辈。",
+      "options": [
+       "jiāo dǎo",
+       "jiāo dào",
+       "jiào dǎo",
+       "jiào dào"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“教”在“教导”里读 jiào（第四声），“导”读 dǎo（第三声），合起来是 jiào dǎo。",
+       "distractors": [
+        "“教”读 jiāo 是第一声，用于“教书”，这里“教导”读第四声 jiào。",
+        "“导”是 dǎo 第三声，不是 dào 第四声。",
+        "✓ 正确答案：jiào dǎo。",
+        "“教”声调错（应第四声），“导”声调也错。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“教”是多音字：教书 jiāo shū，教导 jiào dǎo。“导”记住第三声 dǎo。"
+      },
+      "explanation": "“教”在“教导”里读 jiào（第四声），“导”读 dǎo（第三声），合起来是 jiào dǎo。 “教”是多音字：教书 jiāo shū，教导 jiào dǎo。“导”记住第三声 dǎo。",
+      "explanation_en": "In 教导, 教 is read jiào (4th tone) and 导 is read dǎo (3rd tone); together it is jiào dǎo. 教 is a multi-reading character: 教书 jiāo shū (teach), 教导 jiào dǎo (guide). Remember 导 is 3rd tone, dǎo."
+     },
+     {
+      "id": "ZS02_B2",
+      "topic": "PinyinMcq",
+      "sentence": "妈妈{u}亲切{/u}地叫我们过来吃饭。",
+      "options": [
+       "qīng qiē",
+       "qīn qiē",
+       "qīng qiè",
+       "qīn qiè"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "shengmu_yunmu",
+      "explain": {
+       "why": "“亲”读 qīn（前鼻音 -n，第一声），“切”读 qiè（第四声），合起来是 qīn qiè。",
+       "distractors": [
+        "“亲”不是 qīng，没有后鼻音 -ng；“切”声调也错。",
+        "“亲”读 qīn 正确，但“切”读 qiē 第一声错，应是第四声 qiè。",
+        "“亲”错成 qīng（后鼻音），“切”声调也错。",
+        "✓ 正确答案：qīn qiè。"
+       ],
+       "trapType": "shengmu_yunmu",
+       "memoryTip": "分清前后鼻音：亲 qīn 是前鼻音 -n，不是后鼻音 -ng。切 qiè 是第四声。"
+      },
+      "explanation": "“亲”读 qīn（前鼻音 -n，第一声），“切”读 qiè（第四声），合起来是 qīn qiè。 分清前后鼻音：亲 qīn 是前鼻音 -n，不是后鼻音 -ng。切 qiè 是第四声。",
+      "explanation_en": "亲 is read qīn (front nasal -n, 1st tone) and 切 is read qiè (4th tone); together it is qīn qiè. Tell front and back nasals apart: 亲 qīn ends in -n, not -ng. 切 qiè is 4th tone."
+     },
+     {
+      "id": "ZS02_B3",
+      "topic": "PinyinMcq",
+      "sentence": "爸爸{u}答应{/u}带我们去游乐场玩。",
+      "options": [
+       "dā yìng",
+       "dā yīng",
+       "dá yīng",
+       "dá yìng"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "duoyinzi",
+      "explain": {
+       "why": "“答应”的“应”在这里读第四声 yìng（答应、回应），“答”读第一声 dā。合起来是 dā yìng。",
+       "distractors": [
+        "✓ 正确答案：dā yìng。“答应”的“应”是第四声。",
+        "“应”读 yīng 时用在“应该、应当”，不用在“答应”。",
+        "“答”在“答应”里读 dā，不读 dá。",
+        "“答”声调错，“答应”的“答”读第一声 dā。"
+       ],
+       "trapType": "duoyinzi",
+       "memoryTip": "“应”有两个读音：应该读 yīng（第一声），答应、回应读 yìng（第四声）。"
+      },
+      "explanation": "“答应”的“应”在这里读第四声 yìng（答应、回应），“答”读第一声 dā。合起来是 dā yìng。 “应”有两个读音：应该读 yīng（第一声），答应、回应读 yìng（第四声）。",
+      "explanation_en": "In 答应, 应 here is read 4th tone yìng (to answer, to agree), and 答 is read 1st tone dā; together it is dā yìng. 应 has two readings: 应该 yīng (1st tone), and 答应/回应 yìng (4th tone)."
+     },
+     {
+      "id": "ZS02_B4",
+      "topic": "PinyinMcq",
+      "sentence": "弟弟{u}高兴{/u}地跑来告诉我他得了第一名。",
+      "options": [
+       "gāo xīng",
+       "gāo xìng",
+       "gǎo xīng",
+       "gǎo xìng"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“高”读 gāo（第一声），“兴”在“高兴”里读 xìng（第四声），合起来是 gāo xìng。",
+       "distractors": [
+        "“兴”读 xīng 是第一声，用于“兴趣”；“高兴”里读 xìng 第四声。",
+        "✓ 正确答案：gāo xìng。",
+        "“高”读 gǎo 第三声错，应是第一声 gāo。",
+        "“高”声调错，“兴”声调也错。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“高”是第一声 gāo，“兴”在高兴里是第四声 xìng。高高兴兴，两个声调都要记清楚。"
+      },
+      "explanation": "“高”读 gāo（第一声），“兴”在“高兴”里读 xìng（第四声），合起来是 gāo xìng。 “高”是第一声 gāo，“兴”在高兴里是第四声 xìng。高高兴兴，两个声调都要记清楚。",
+      "explanation_en": "高 is read gāo (1st tone), and 兴 in 高兴 is read xìng (4th tone); together it is gāo xìng. Learn both tones of 高高兴兴 clearly."
+     }
+    ]
+   },
+   {
+    "type": "VocabMcq",
+    "marks": 5,
+    "variant": "mcq4",
+    "items": [
+     {
+      "id": "ZS02_C1",
+      "topic": "VocabMcq",
+      "sentence": "姐姐每次帮我检查功课，都非常______，一个字也不放过。",
+      "options": [
+       "开心",
+       "勇敢",
+       "认真",
+       "热闹"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "检查功课要仔细、不马虎，“认真”最符合“一个字也不放过”的意思。",
+       "distractors": [
+        "“开心”是高兴的心情，不形容做事的态度。",
+        "“勇敢”是不怕危险，不用来形容检查功课。",
+        "✓ 正确答案：认真＝仔细、不马虎。",
+        "“热闹”形容场面，不能形容检查功课的态度。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "形容做事态度用“认真”，形容心情用“开心”，两个意思不同。"
+      },
+      "explanation": "检查功课要仔细、不马虎，“认真”最符合“一个字也不放过”的意思。 形容做事态度用“认真”，形容心情用“开心”，两个意思不同。",
+      "explanation_en": "Checking homework must be careful and not sloppy; 认真 ('careful, serious') fits '一个字也不放过' (not missing a single word). Use 认真 for an attitude, and 开心 ('happy') for a mood — different meanings."
+     },
+     {
+      "id": "ZS02_C2",
+      "topic": "VocabMcq",
+      "sentence": "妈妈买回来一______香蕉，放在桌子上。",
+      "options": [
+       "张",
+       "本",
+       "条",
+       "串"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "liangci",
+      "explain": {
+       "why": "香蕉是一粒粒连在一起的，量词用“串”，“一串香蕉”是正确搭配。",
+       "distractors": [
+        "“张”用于纸、桌子等平面物，不用于香蕉。",
+        "“本”用于书本，不用于食物。",
+        "“条”用于细长的东西如鱼、路，不用于香蕉。",
+        "✓ 正确答案：一串香蕉＝一把连在一起的香蕉。"
+       ],
+       "trapType": "liangci",
+       "memoryTip": "香蕉一粒粒连在一起→用“串”。串＝穿在一起，像串珠子一样。"
+      },
+      "explanation": "香蕉是一粒粒连在一起的，量词用“串”，“一串香蕉”是正确搭配。 香蕉一粒粒连在一起→用“串”。串＝穿在一起，像串珠子一样。",
+      "explanation_en": "Bananas grow joined together in a bunch, so the measure word is 串; '一串香蕉' (a bunch of bananas) is correct. 串 means strung together, like stringing beads."
+     },
+     {
+      "id": "ZS02_C3",
+      "topic": "VocabMcq",
+      "sentence": "爸爸下班后觉得很______，坐在沙发上看报纸休息。",
+      "options": [
+       "轻松",
+       "勇敢",
+       "热闹",
+       "害怕"
+      ],
+      "answer": 0,
+      "lesson": 2,
+      "skill": "jinyici",
+      "explain": {
+       "why": "下班后休息，心情不再紧张，用“轻松”。",
+       "distractors": [
+        "✓ 正确答案：轻松＝不紧张、没有负担。",
+        "“勇敢”是不怕危险，与休息无关。",
+        "“热闹”形容场面人多热烈，不能形容人觉得怎样。",
+        "“害怕”是恐惧，与句意相反。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "休息、放松的感觉用“轻松”。"
+      },
+      "explanation": "下班后休息，心情不再紧张，用“轻松”。 休息、放松的感觉用“轻松”。",
+      "explanation_en": "After work you rest and no longer feel tense, so use 轻松 ('relaxed'). Use 轻松 for the feeling of resting and relaxing."
+     },
+     {
+      "id": "ZS02_C4",
+      "topic": "VocabMcq",
+      "sentence": "外婆______我们，叫我们好好读书，将来做个有用的人。",
+      "options": [
+       "帮助",
+       "鼓励",
+       "保护",
+       "打扰"
+      ],
+      "answer": 1,
+      "lesson": 3,
+      "skill": "dapei",
+      "explain": {
+       "why": "叫人好好读书、将来有出息，是给人信心和动力，用“鼓励”最合适。",
+       "distractors": [
+        "“帮助”是给予支持，但“叫我们好好读书”是激励，不是具体帮助。",
+        "✓ 正确答案：鼓励＝给人信心和动力。",
+        "“保护”是防止受伤害，不合这里的意思。",
+        "“打扰”是妨碍别人，意思相反，不合。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "鼓励＝鼓起勇气、激励别人向前。叫人好好读书→给动力→鼓励。"
+      },
+      "explanation": "叫人好好读书、将来有出息，是给人信心和动力，用“鼓励”最合适。 鼓励＝鼓起勇气、激励别人向前。叫人好好读书→给动力→鼓励。",
+      "explanation_en": "Telling someone to study well and have a good future gives them confidence and drive, so 鼓励 ('encourage') fits best. 鼓励 = build up courage and spur someone on."
+     },
+     {
+      "id": "ZS02_C5",
+      "topic": "VocabMcq",
+      "sentence": "小明和朋友们______地在操场上踢足球。",
+      "options": [
+       "伤心",
+       "担心",
+       "开心",
+       "粗心"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "和朋友一起踢足球是快乐的事，“开心”最符合这个情景。",
+       "distractors": [
+        "“伤心”是难过，踢球玩耍不会伤心。",
+        "“担心”是忧虑，踢球玩耍不会担心。",
+        "✓ 正确答案：开心＝高兴、快乐。",
+        "“粗心”是不仔细，不用来形容踢球时的心情。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "和朋友玩→高兴→开心。四个选项都有“心”，要看前面的字：开＝快乐，伤＝难过，担＝忧虑，粗＝不仔细。"
+      },
+      "explanation": "和朋友一起踢足球是快乐的事，“开心”最符合这个情景。 和朋友玩→高兴→开心。四个选项都有“心”，要看前面的字：开＝快乐，伤＝难过，担＝忧虑，粗＝不仔细。",
+      "explanation_en": "Playing football with friends is a happy thing, so 开心 ('happy') fits best. All four choices have 心 ('heart'); look at the first character: 开 = happy, 伤 = sad, 担 = worried, 粗 = careless."
+     }
+    ]
+   },
+   {
+    "type": "VocabMatch",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS02_D",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "道谢",
+       "照顾",
+       "分享",
+       "散步",
+       "举手",
+       "排队"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "向朋友（　）",
+        "answer": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“向朋友道谢”搭配自然、意思通顺。",
+         "distractors": [
+          "✓ 正确答案：“向朋友道谢”搭配自然、意思通顺。",
+          "“照顾”与本题不搭配。",
+          "“分享”与本题不搭配。",
+          "“散步”与本题不搭配。",
+          "“举手”与本题不搭配。",
+          "“排队”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：向朋友道谢、照顾生病的同学、分享快乐、出外散步、举手回答。"
+        },
+        "explanation": "“向朋友道谢”搭配自然、意思通顺。",
+        "explanation_en": "“向朋友道谢” ('thank a friend') is a natural, sensible match."
+       },
+       {
+        "num": 2,
+        "stem": "（　）生病的同学",
+        "answer": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“照顾生病的同学”搭配自然、意思通顺。",
+         "distractors": [
+          "“道谢”与本题不搭配。",
+          "✓ 正确答案：“照顾生病的同学”搭配自然、意思通顺。",
+          "“分享”与本题不搭配。",
+          "“散步”与本题不搭配。",
+          "“举手”与本题不搭配。",
+          "“排队”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：向朋友道谢、照顾生病的同学、分享快乐、出外散步、举手回答。"
+        },
+        "explanation": "“照顾生病的同学”搭配自然、意思通顺。",
+        "explanation_en": "“照顾生病的同学” ('take care of a sick classmate') is a natural, sensible match."
+       },
+       {
+        "num": 3,
+        "stem": "（　）快乐",
+        "answer": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“分享快乐”搭配自然、意思通顺。",
+         "distractors": [
+          "“道谢”与本题不搭配。",
+          "“照顾”与本题不搭配。",
+          "✓ 正确答案：“分享快乐”搭配自然、意思通顺。",
+          "“散步”与本题不搭配。",
+          "“举手”与本题不搭配。",
+          "“排队”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：向朋友道谢、照顾生病的同学、分享快乐、出外散步、举手回答。"
+        },
+        "explanation": "“分享快乐”搭配自然、意思通顺。",
+        "explanation_en": "“分享快乐” ('share happiness') is a natural, sensible match."
+       },
+       {
+        "num": 4,
+        "stem": "出外（　）",
+        "answer": 3,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“出外散步”搭配自然、意思通顺。",
+         "distractors": [
+          "“道谢”与本题不搭配。",
+          "“照顾”与本题不搭配。",
+          "“分享”与本题不搭配。",
+          "✓ 正确答案：“出外散步”搭配自然、意思通顺。",
+          "“举手”与本题不搭配。",
+          "“排队”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：向朋友道谢、照顾生病的同学、分享快乐、出外散步、举手回答。"
+        },
+        "explanation": "“出外散步”搭配自然、意思通顺。",
+        "explanation_en": "“出外散步” ('go out for a walk') is a natural, sensible match."
+       },
+       {
+        "num": 5,
+        "stem": "上课时（　）回答问题",
+        "answer": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“上课时举手回答问题”搭配自然、意思通顺。",
+         "distractors": [
+          "“道谢”与本题不搭配。",
+          "“照顾”与本题不搭配。",
+          "“分享”与本题不搭配。",
+          "“散步”与本题不搭配。",
+          "✓ 正确答案：“上课时举手回答问题”搭配自然、意思通顺。",
+          "“排队”与本题不搭配。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：向朋友道谢、照顾生病的同学、分享快乐、出外散步、举手回答。"
+        },
+        "explanation": "“上课时举手回答问题”搭配自然、意思通顺。",
+        "explanation_en": "“上课时举手回答问题” ('raise your hand to answer in class') is a natural, sensible match."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SentenceCraft",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS02_E1",
+      "subtype": "combine",
+      "connector": "虽然……但是",
+      "sentenceA": "爷爷年纪很大了。",
+      "sentenceB": "爷爷每天坚持去公园散步。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "虽然爷爷年纪很大了，但是他每天坚持去公园散步。",
+      "marks": 2,
+      "lesson": 3,
+      "skill": "lianci",
+      "explain": {
+       "why": "“虽然……但是……”表示转折，前半句说年纪大，后半句说还是坚持散步，两句意思相反，用这个关联词最合适。",
+       "distractors": [
+        "不能只写“爷爷年纪很大了，每天坚持去公园散步”——少了“虽然……但是”，转折的意思就不清楚了。",
+        "“虽然”要放在第一句前，“但是”要放在第二句前，位置不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“虽然……但是……”＝前面承认一件事，后面说出相反的结果。记住两个词要配对使用。"
+      },
+      "explanation": "“虽然……但是……”表示转折，前半句说年纪大，后半句说还是坚持散步，两句意思相反，用这个关联词最合适。 “虽然……但是……”＝前面承认一件事，后面说出相反的结果。记住两个词要配对使用。",
+      "explanation_en": "“虽然……但是……” ('although…, …') shows a turn: the first part says the person is old, the second says they still keep walking — opposite meanings, so this pair fits best. Remember the two words must be used together."
+     },
+     {
+      "id": "ZS02_E2",
+      "subtype": "combine",
+      "connector": "因为……所以",
+      "sentenceA": "妈妈今天生病了。",
+      "sentenceB": "爸爸早点回家做饭。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "因为妈妈今天生病了，所以爸爸早点回家做饭。",
+      "marks": 2,
+      "lesson": 2,
+      "skill": "lianci",
+      "explain": {
+       "why": "“因为……所以……”表示原因和结果，妈妈生病是原因，爸爸早回家做饭是结果，两句用这个关联词合并。",
+       "distractors": [
+        "不能只写“妈妈今天生病了，爸爸早点回家做饭”——少了“因为……所以”，原因和结果的关系就不清楚了。",
+        "“因为”放在原因句前，“所以”放在结果句前，不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“因为……所以……”＝原因在前，结果在后。看哪句是原因，哪句是结果，再填关联词。"
+      },
+      "explanation": "“因为……所以……”表示原因和结果，妈妈生病是原因，爸爸早回家做饭是结果，两句用这个关联词合并。 “因为……所以……”＝原因在前，结果在后。看哪句是原因，哪句是结果，再填关联词。",
+      "explanation_en": "“因为……所以……” ('because…, so…') shows cause and result: mother being sick is the cause, father coming home early to cook is the result. Cause first, result after."
+     }
+    ]
+   },
+   {
+    "type": "PassageCloze",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS02_F",
+      "passage": "小文有一个很好的朋友叫小华。每天放学后，他们都会 (1) ___ 回家。有一天，小华不小心摔倒了，脚受了伤。小文 (2) ___ 跑过去扶起小华，把他送回家。小华的妈妈看到了，连连向小文 (3) ___。小文笑着说：“我们是好朋友，好朋友就应该 (4) ___ 帮助。”小华听了，心里非常 (5) ___，更加珍惜这份友情。",
+      "wordBank": [
+       "一起",
+       "感动",
+       "互相",
+       "道谢",
+       "马上",
+       "帮忙"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "一起",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "两个好朋友每天一同走回家，“一起”表示共同、同时，最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“一起”＝共同、同时，好朋友一起回家。"
+        },
+        "explanation": "两个好朋友每天一同走回家，“一起”表示共同、同时，最合适。",
+        "explanation_en": "Two good friends walk home together every day; 一起 (yì qǐ, 'together') means doing something at the same time, which fits best."
+       },
+       {
+        "num": 2,
+        "answer": "马上",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "看到朋友摔倒，小文立刻跑过去，“马上”表示立刻、很快，最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“马上”＝立刻、很快，看到朋友受伤要马上帮忙。"
+        },
+        "explanation": "看到朋友摔倒，小文立刻跑过去，“马上”表示立刻、很快，最合适。",
+        "explanation_en": "Seeing his friend fall, Xiaowen runs over right away; 马上 ('at once') means immediately and quickly, which fits best."
+       },
+       {
+        "num": 3,
+        "answer": "道谢",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "小华妈妈感谢小文帮助儿子，“道谢”指说谢谢，最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“道谢”＝说谢谢，向人表示感谢。"
+        },
+        "explanation": "小华妈妈感谢小文帮助儿子，“道谢”指说谢谢，最合适。",
+        "explanation_en": "Xiaohua's mother thanks Xiaowen for helping her son; 道谢 ('say thank you') means to say thanks, which fits best."
+       },
+       {
+        "num": 4,
+        "answer": "互相",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "好朋友之间彼此帮助，“互相”表示双方都这样做，“互相帮助”是固定搭配。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“互相”＝双方都这样做，互相帮助就是你帮我我帮你。"
+        },
+        "explanation": "好朋友之间彼此帮助，“互相”表示双方都这样做，“互相帮助”是固定搭配。",
+        "explanation_en": "Good friends help each other; 互相 ('each other') means both sides do the same thing, and 互相帮助 ('help each other') is a fixed phrase."
+       },
+       {
+        "num": 5,
+        "answer": "感动",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "朋友真心帮助自己，小华心里很受触动，“感动”表示内心被打动，最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“感动”＝内心被真情打动，朋友真心帮忙让人感动。"
+        },
+        "explanation": "朋友真心帮助自己，小华心里很受触动，“感动”表示内心被打动，最合适。",
+        "explanation_en": "A friend truly helps him, and Xiaohua is deeply moved; 感动 ('moved, touched') means to be touched in your heart, which fits best."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingMcq",
+    "marks": 3,
+    "items": [
+     {
+      "id": "ZS02_G",
+      "passage": "小明家里有爸爸、妈妈和妹妹。每个周末，全家人都会一起去外婆家。外婆住的地方离小明家不远，走路只要十分钟。外婆每次看到他们来，都会高兴地笑。她会为大家准备很多好吃的饭菜。小明最喜欢外婆做的炒饭，每次都吃了一碗又一碗。吃完饭，爸爸帮外婆修理家里的东西，妈妈帮外婆洗碗，小明和妹妹则陪外婆在客厅里聊天。外婆说，每次看到他们来，她就不会觉得寂寞了。小明心里想，以后要更常来陪外婆。",
+      "questions": [
+       {
+        "id": "ZS02_G1",
+        "format": "mcq",
+        "stem": "小明一家人多久去一次外婆家？",
+        "options": [
+         "每天。",
+         "每个周末。",
+         "每个月。"
+        ],
+        "answer": 1,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“每个周末，全家人都会一起去外婆家”，所以是每个周末去一次。",
+         "distractors": [
+          "每天去不对，文中说的是每个周末。",
+          "✓ 正确答案：每个周末。",
+          "每个月去不对，文中说的是每个周末。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回原文找频率词：每个周末＝每星期去一次。"
+        }
+       },
+       {
+        "id": "ZS02_G2",
+        "format": "mcq",
+        "stem": "吃完饭后，小明和妹妹做了什么？",
+        "options": [
+         "帮外婆洗碗。",
+         "帮外婆修理东西。",
+         "陪外婆在客厅聊天。"
+        ],
+        "answer": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“小明和妹妹则陪外婆在客厅里聊天”，所以答案是陪外婆聊天。",
+         "distractors": [
+          "帮外婆洗碗的是妈妈，不是小明和妹妹。",
+          "帮外婆修理东西的是爸爸，不是小明和妹妹。",
+          "✓ 正确答案：陪外婆在客厅聊天。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题要注意谁做了什么：爸爸修东西，妈妈洗碗，小明和妹妹聊天。"
+        }
+       },
+       {
+        "id": "ZS02_G3",
+        "format": "mcq",
+        "stem": "这篇短文主要告诉我们什么？",
+        "options": [
+         "一家人经常去陪伴外婆，让外婆不寂寞。",
+         "外婆做的炒饭非常好吃。",
+         "走路去外婆家只要十分钟。"
+        ],
+        "answer": 0,
+        "lesson": 3,
+        "skill": "main_idea",
+        "explain": {
+         "why": "整篇短文讲的是小明一家每周去外婆家，陪伴外婆，让外婆不寂寞，这才是主要意思。",
+         "distractors": [
+          "✓ 正确答案：一家人经常去陪伴外婆，让外婆不寂寞。",
+          "炒饭好吃只是其中一个细节，不是主要意思。",
+          "走路十分钟只是一个细节，不是主要意思。"
+         ],
+         "trapType": "main_idea",
+         "memoryTip": "主旨题要看整篇文章说的是什么，不要只看一个细节。"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingOpen",
+    "marks": 6,
+    "items": [
+     {
+      "id": "ZS02_H",
+      "passage": "小丽的好朋友小芳搬家了，搬到了很远的地方。小丽很舍不得小芳，心里非常难过。小芳临走前，送给小丽一张卡片，上面写着：“虽然我们住得远了，但是我们的友情不会改变。”小丽把卡片放在书桌上，每天都会看一看。放假的时候，小丽的妈妈带她去小芳的新家玩。小芳看到小丽来了，高兴地跑出来迎接她。两个好朋友有说有笑，就像以前一样开心。小丽觉得，真正的朋友，不管住得多远，心里永远都是在一起的。",
+      "questions": [
+       {
+        "id": "ZS02_H1",
+        "format": "fill_word",
+        "stem": "从短文中找出一个词语，说明小丽不想和小芳分开的心情。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "answer": "舍不得",
+        "explain": {
+         "why": "文中说“小丽很舍不得小芳”，“舍不得”就是不想分开的意思，答案直接在文中。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“舍不得”＝不愿意放手、不想分开。"
+        }
+       },
+       {
+        "id": "ZS02_H2",
+        "format": "open_sentence",
+        "stem": "小丽为什么每天都会看卡片？",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "inference",
+        "answer": "因为卡片上有小芳写的话，小丽很想念小芳，所以每天都会看一看。"
+       },
+       {
+        "id": "ZS02_H3",
+        "format": "open_sentence",
+        "stem": "小丽在短文最后明白了什么道理？用自己的话说一说。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "main_idea",
+        "answer": "小丽明白了真正的朋友不管住得多远，友情都不会改变，心里永远在一起。"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "setId": "ZS03",
+  "theme": "my companions",
+  "track": "HCL",
+  "band": "easy",
+  "seedSources": [
+   "generated_v1"
+  ],
+  "plan": [
+   {
+    "type": "HanziMcq",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS03_A1",
+      "topic": "HanziMcq",
+      "sentence": "小明和我是好朋______，我们每天一起上学放学。",
+      "options": [
+       "有",
+       "右",
+       "友",
+       "又"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“朋友”是固定词语，指感情好的人，所以选“友”。",
+       "distractors": [
+        "“有”是有没有的“有”，“朋有”不是词语。",
+        "“右”是左右的“右”，与朋友无关。",
+        "✓ 正确答案：朋友＝感情好、常来往的人。",
+        "“又”是再、也的意思，“朋又”不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "“友”“有”“右”“又”读音相近，记住“朋友”的“友”上面是两横一撇。"
+      },
+      "explanation": "“朋友”是固定词语，指感情好的人，所以选“友”。 “友”“有”“右”“又”读音相近，记住“朋友”的“友”上面是两横一撇。",
+      "explanation_en": "“朋友” ('friend') is a fixed word meaning people who are close, so choose 友. 友, 有, 右, 又 sound alike; remember the 友 in 朋友 has two short strokes and a slant on top."
+     },
+     {
+      "id": "ZS03_A2",
+      "topic": "HanziMcq",
+      "sentence": "我和同学一起______树苗，为学校的花园出一份力。",
+      "options": [
+       "中",
+       "肿",
+       "重",
+       "种"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“种树苗”是把树苗栽进土里，动词“种”才合适。",
+       "distractors": [
+        "“中”是中间或射中，“中树苗”不通。",
+        "“肿”是身体肿起来，“肿树苗”不通。",
+        "“重”是重量，“重树苗”不通。",
+        "✓ 正确答案：种树苗＝把树苗栽进土里。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字都读 zhòng 或 zhǒng，要看偏旁：禾字旁的“种”和植物有关，所以种树用“种”。"
+      },
+      "explanation": "“种树苗”是把树苗栽进土里，动词“种”才合适。 四个字都读 zhòng 或 zhǒng，要看偏旁：禾字旁的“种”和植物有关，所以种树用“种”。",
+      "explanation_en": "种树苗 means putting a sapling into the soil, so the verb 种 (plant) fits. Look at the radical: 种 has the 'grain' part 禾 and is about plants, so use 种 for planting trees."
+     },
+     {
+      "id": "ZS03_A3",
+      "topic": "HanziMcq",
+      "sentence": "下课后，我们在操场上______跑步，玩得很开心。",
+      "options": [
+       "一起",
+       "一企",
+       "一气",
+       "一期"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“一起”表示共同、在一块儿，“一起跑步”意思通顺，是常用词。",
+       "distractors": [
+        "✓ 正确答案：一起＝共同、在一块儿。",
+        "“企”读 qǐ，但“一企”不是词语。",
+        "“一气”是一口气或一阵子，“一气跑步”不通。",
+        "“一期”是一个时期，“一期跑步”不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "说“和朋友一起做某事”用“一起”，“起”有“站起来一同走”的感觉，最常用。"
+      },
+      "explanation": "“一起”表示共同、在一块儿，“一起跑步”意思通顺，是常用词。 说“和朋友一起做某事”用“一起”，“起”有“站起来一同走”的感觉，最常用。",
+      "explanation_en": "一起 (yì qǐ, 'together') means doing something together; '一起跑步' (run together) makes sense and is common. 起 gives the feeling of standing up and walking together."
+     },
+     {
+      "id": "ZS03_A4",
+      "topic": "HanziMcq",
+      "sentence": "好朋友有困难，我们应该______他。",
+      "options": [
+       "邦",
+       "帮",
+       "棒",
+       "榜"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“帮”是帮助的意思，“帮他”表示给予帮助，最合适。",
+       "distractors": [
+        "“邦”是国家，“邦他”不通。",
+        "✓ 正确答案：帮他＝给予帮助。",
+        "“棒”是棍子或很好，“棒他”不通。",
+        "“榜”是榜单，“榜他”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "帮助的“帮”下面有“巾”字，想象用一块布帮人擦汗，就是帮助。"
+      },
+      "explanation": "“帮”是帮助的意思，“帮他”表示给予帮助，最合适。 帮助的“帮”下面有“巾”字，想象用一块布帮人擦汗，就是帮助。",
+      "explanation_en": "帮 means to help; '帮他' (help him) means to give help, which fits best. The 帮 for helping has 巾 ('cloth') below — imagine using a cloth to help wipe someone's sweat."
+     },
+     {
+      "id": "ZS03_A5",
+      "topic": "HanziMcq",
+      "sentence": "我的同______来自不同的国家，大家相处得很愉快。",
+      "options": [
+       "雪",
+       "觉",
+       "学",
+       "角"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“同学”指在同一所学校一起学习的人，“同学”是固定词语。",
+       "distractors": [
+        "“雪”是雪花，“同雪”不是词语。",
+        "“觉”是睡觉，“同觉”不通。",
+        "✓ 正确答案：同学＝一起上学的人。",
+        "“角”是角落，“同角”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“学”上面是个“爫”加“子”，想象小孩子在学校学习，所以同学是一起学习的人。"
+      },
+      "explanation": "“同学”指在同一所学校一起学习的人，“同学”是固定词语。 “学”上面是个“爫”加“子”，想象小孩子在学校学习，所以同学是一起学习的人。",
+      "explanation_en": "同学 ('classmate') means people who study together at the same school; it is a fixed word. 学 has 'claws' 爫 and 'child' 子 on top — imagine children studying at school."
+     }
+    ]
+   },
+   {
+    "type": "PinyinMcq",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS03_B1",
+      "topic": "PinyinMcq",
+      "sentence": "我和好朋友{u}分享{/u}零食，大家都很高兴。",
+      "options": [
+       "fēn xiàng",
+       "fèn xiǎng",
+       "fèn xiàng",
+       "fēn xiǎng"
+      ],
+      "answer": 3,
+      "lesson": 2,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“分”读 fēn（第一声），“享”读 xiǎng（第三声）。合起来是 fēn xiǎng。",
+       "distractors": [
+        "“享”是 xiǎng（第三声）不是 xiàng（第四声）。",
+        "“分”是 fēn（第一声）不是 fèn（第四声）。",
+        "“分”声调错，“享”声调也错，两处都不对。",
+        "✓ 正确答案：fēn xiǎng。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“分享”读 fēn xiǎng：分（第一声）＋享（第三声）。“享”字像一个人在屋里享用东西，轻轻往下读第三声。"
+      },
+      "explanation": "“分”读 fēn（第一声），“享”读 xiǎng（第三声）。合起来是 fēn xiǎng。 “分享”读 fēn xiǎng：分（第一声）＋享（第三声）。“享”字像一个人在屋里享用东西，轻轻往下读第三声。",
+      "explanation_en": "分 is read fēn (1st tone) and 享 is read xiǎng (3rd tone); together it is fēn xiǎng. 享 looks like a person enjoying something in a house — read it gently down in 3rd tone."
+     },
+     {
+      "id": "ZS03_B2",
+      "topic": "PinyinMcq",
+      "sentence": "小华{u}帮助{/u}同学找到了丢失的铅笔盒。",
+      "options": [
+       "bāng zhù",
+       "páng zhù",
+       "bāng zù",
+       "páng zù"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "shengmu_yunmu",
+      "explain": {
+       "why": "“帮”读 bāng（声母 b，韵母 ang），“助”读 zhù（声母 zh，韵母 u）。合起来 bāng zhù。",
+       "distractors": [
+        "✓ 正确答案：bāng zhù。",
+        "“帮”声母是 b 不是 p，páng 是“旁”的读音。",
+        "“助”韵母是 u，不能少，bāng zù 的 zù 声母错。",
+        "“帮”声母错，“助”韵母也错，两处都不对。"
+       ],
+       "trapType": "shengmu_yunmu",
+       "memoryTip": "帮 bāng：声母 b（双唇音）；助 zhù：声母 zh（翘舌音）。b 和 p 要分清，用嘴唇感受气流：b 不送气，p 送气。"
+      },
+      "explanation": "“帮”读 bāng（声母 b，韵母 ang），“助”读 zhù（声母 zh，韵母 u）。合起来 bāng zhù。 帮 bāng：声母 b（双唇音）；助 zhù：声母 zh（翘舌音）。b 和 p 要分清，用嘴唇感受气流：b 不送气，p 送气。",
+      "explanation_en": "帮 is read bāng (initial b, final ang) and 助 is read zhù (initial zh, final u); together it is bāng zhù. Tell b and p apart with your lips: b is unaspirated, p is aspirated (a puff of air)."
+     },
+     {
+      "id": "ZS03_B3",
+      "topic": "PinyinMcq",
+      "sentence": "这本故事书很{u}好看{/u}，我和朋友都喜欢读。",
+      "options": [
+       "hào kàn",
+       "hǎo kàn",
+       "hǎo kān",
+       "hào kān"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "duoyinzi",
+      "explain": {
+       "why": "“好看”在这里是形容词，表示书很吸引人，“好”读 hǎo（第三声），“看”读 kàn（第四声）。",
+       "distractors": [
+        "“好”在“好看”形容词里读 hǎo（第三声），不是 hào。hào 用在“好学”（喜欢学习）等词里。",
+        "✓ 正确答案：hǎo kàn（形容词，好看＝吸引人）。",
+        "“看”在这里读 kàn（第四声），kān 是“看守”的读音，意思不同。",
+        "“好”和“看”两个字的声调都错了。"
+       ],
+       "trapType": "duoyinzi",
+       "memoryTip": "“好”是多音字：形容词“好”读 hǎo（第三声），动词“好（学）”读 hào（第四声）。“看”也是多音字：看书 kàn，看守 kān。"
+      },
+      "explanation": "“好看”在这里是形容词，表示书很吸引人，“好”读 hǎo（第三声），“看”读 kàn（第四声）。 “好”是多音字：形容词“好”读 hǎo（第三声），动词“好（学）”读 hào（第四声）。“看”也是多音字：看书 kàn，看守 kān。",
+      "explanation_en": "Here 好看 ('nice to read') is an adjective meaning the book is very appealing; 好 is read hǎo (3rd tone) and 看 is read kàn (4th tone). 好 is multi-reading: adjective hǎo (3rd tone), verb 好(学) hào (4th tone). 看 is also multi-reading: 看书 kàn, 看守 kān."
+     },
+     {
+      "id": "ZS03_B4",
+      "topic": "PinyinMcq",
+      "sentence": "我和同学{u}快乐{/u}地在公园里玩耍。",
+      "options": [
+       "kuài lé",
+       "kuāi lè",
+       "kuài lè",
+       "kuāi lé"
+      ],
+      "answer": 2,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“快”读 kuài（第四声），“乐”在“快乐”里读 lè（第四声）。合起来 kuài lè。",
+       "distractors": [
+        "“乐”在“快乐”里读 lè（第四声），不是 lé（第二声）。",
+        "“快”读 kuài（第四声），不是 kuāi（第一声）。",
+        "✓ 正确答案：kuài lè。",
+        "“快”和“乐”两个字的声调都错了。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“快乐”两个字都是第四声：kuài lè。想象快快乐乐往下走，两个字都往下读。"
+      },
+      "explanation": "“快”读 kuài（第四声），“乐”在“快乐”里读 lè（第四声）。合起来 kuài lè。 “快乐”两个字都是第四声：kuài lè。想象快快乐乐往下走，两个字都往下读。",
+      "explanation_en": "快 is read kuài (4th tone), and 乐 in 快乐 is read lè (4th tone); together it is kuài lè. Both characters are 4th tone: kuài lè. Imagine going happily down — both read downward."
+     }
+    ]
+   },
+   {
+    "type": "VocabMcq",
+    "marks": 5,
+    "variant": "mcq4",
+    "items": [
+     {
+      "id": "ZS03_C1",
+      "topic": "VocabMcq",
+      "sentence": "我和好朋友每天放学后一起______作业，互相帮助。",
+      "options": [
+       "唱",
+       "画",
+       "读",
+       "做"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "dapei",
+      "explain": {
+       "why": "“做作业”是固定搭配，表示完成老师布置的功课。",
+       "distractors": [
+        "“唱作业”不通，作业不是用来唱的。",
+        "“画作业”不通，作业不是用来画的。",
+        "“读作业”不通，作业不是用来读的。",
+        "✓ 正确答案：做作业＝完成功课。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "固定搭配：做作业、做功课。“做”可以搭配很多任务，是最常用的动词。"
+      },
+      "explanation": "“做作业”是固定搭配，表示完成老师布置的功课。 固定搭配：做作业、做功课。“做”可以搭配很多任务，是最常用的动词。",
+      "explanation_en": "“做作业” ('do homework') is a fixed phrase meaning to finish the work the teacher gives. 做 can go with many tasks and is the most common verb."
+     },
+     {
+      "id": "ZS03_C2",
+      "topic": "VocabMcq",
+      "sentence": "同学们______地坐在一起，等待老师发下考卷。",
+      "options": [
+       "安静",
+       "热闹",
+       "认真",
+       "高兴"
+      ],
+      "answer": 0,
+      "lesson": 2,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "等待考卷发下来，大家应该保持安静，“安静”最符合考试前的情景。",
+       "distractors": [
+        "✓ 正确答案：安静＝没有声音、很平静。",
+        "“热闹”是声音多、气氛活跃，考试前不应热闹。",
+        "“认真”形容做事用心，不能说“认真地坐”。",
+        "“高兴”是心情好，“高兴地坐在一起等考卷”语气不自然。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "考试前的情景→安静。看情景选词：热闹配庆典，安静配考试或等待。"
+      },
+      "explanation": "等待考卷发下来，大家应该保持安静，“安静”最符合考试前的情景。 考试前的情景→安静。看情景选词：热闹配庆典，安静配考试或等待。",
+      "explanation_en": "While waiting for the exam papers, everyone should stay quiet; 安静 ('quiet') fits the scene before a test best. Choose the word by the scene: 热闹 (lively) goes with a celebration, 安静 (quiet) goes with a test."
+     },
+     {
+      "id": "ZS03_C3",
+      "topic": "VocabMcq",
+      "sentence": "我买了______新书包送给好朋友当生日礼物。",
+      "options": [
+       "一本",
+       "一个",
+       "一张",
+       "一双"
+      ],
+      "answer": 1,
+      "lesson": 2,
+      "skill": "liangci",
+      "explain": {
+       "why": "书包是一个容器，量词用“一个”。",
+       "distractors": [
+        "“一本”用于书、本子，不用于书包。",
+        "✓ 正确答案：一个书包＝书包的量词是“个”。",
+        "“一张”用于纸、桌子，不用于书包。",
+        "“一双”用于鞋子、袜子，不用于书包。"
+       ],
+       "trapType": "liangci",
+       "memoryTip": "书包是袋子形状，用“个”：一个书包。记住：书→一本书；书包→一个书包。"
+      },
+      "explanation": "书包是一个容器，量词用“一个”。 书包是袋子形状，用“个”：一个书包。记住：书→一本书；书包→一个书包。",
+      "explanation_en": "A schoolbag is a container, so the measure word is 个 ('one'). Remember: book → 一本书; schoolbag → 一个书包."
+     },
+     {
+      "id": "ZS03_C4",
+      "topic": "VocabMcq",
+      "sentence": "朋友难过的时候，我会______他，让他开心起来。",
+      "options": [
+       "批评",
+       "命令",
+       "安慰",
+       "打扰"
+      ],
+      "answer": 2,
+      "lesson": 3,
+      "skill": "jinyici",
+      "explain": {
+       "why": "朋友难过时，好朋友会说好话让他心情好起来，用“安慰”最合适。",
+       "distractors": [
+        "“批评”是指出错误，朋友难过时批评他会更难过。",
+        "“命令”是叫别人做事，不能让人开心。",
+        "✓ 正确答案：安慰＝说好话让人心情好起来。",
+        "“打扰”是妨碍别人，不合这里。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "朋友难过→安慰。安慰＝安（安心）＋慰（心情好），让对方心里安定下来。"
+      },
+      "explanation": "朋友难过的时候，好朋友会说好话让他心情好起来，用“安慰”最合适。 朋友难过→安慰。安慰＝安（安心）＋慰（心情好），让对方心里安定下来。",
+      "explanation_en": "When a friend is sad, a good friend says kind words to cheer them up, so 安慰 ('comfort') fits best. 安慰 = 安 (calm) + 慰 (soothe), settling the other person's heart."
+     },
+     {
+      "id": "ZS03_C5",
+      "topic": "VocabMcq",
+      "sentence": "我们班的同学______，大家都很喜欢来上学。",
+      "options": [
+       "吵架打架",
+       "互相害怕",
+       "互相生气",
+       "友好相处"
+      ],
+      "answer": 3,
+      "lesson": 3,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "大家都喜欢上学，说明同学之间关系好，“友好相处”表示大家和睦、关系好。",
+       "distractors": [
+        "“吵架打架”表示关系不好，与“喜欢上学”矛盾。",
+        "“互相害怕”表示害怕彼此，与“喜欢上学”矛盾。",
+        "“互相生气”表示互相生气，与“喜欢上学”矛盾。",
+        "✓ 正确答案：友好相处＝大家和睦、关系好。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "喜欢上学→同学关系好→友好相处。友好＝友（朋友）＋好（好的），大家合得来。"
+      },
+      "explanation": "大家都喜欢上学，说明同学之间关系好，“友好相处”表示大家和睦、关系好。 喜欢上学→同学关系好→友好相处。友好＝友（朋友）＋好（好的），大家合得来。",
+      "explanation_en": "Everyone likes going to school, showing classmates get along well; 友好相处 ('get along in a friendly way') means everyone is friendly and close. 友好 = 友 (friend) + 好 (good)."
+     }
+    ]
+   },
+   {
+    "type": "VocabMatch",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS03_D",
+      "topic": "VocabMatch",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "道歉",
+       "约好",
+       "关心",
+       "迟到",
+       "借用",
+       "送别"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "互相（　）",
+        "answer": 2,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "“互相关心”表示双方都关注对方的情况，搭配自然。",
+         "distractors": [
+          "道歉：互相道歉虽然说得通，但题目中另有更合适的搭配。",
+          "约好：互相约好不通顺。",
+          "✓ 正确答案：互相关心＝双方都关注对方。",
+          "“迟到”与本题不搭配。",
+          "借用：互相借用不如互相关心自然。",
+          "送别：互相送别不通顺。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“互相”后面跟表示双方行动的词：互相关心、互相帮助。"
+        },
+        "explanation": "“互相关心”表示双方都关注对方的情况，搭配自然。",
+        "explanation_en": "“互相关心” ('care for each other') means both sides pay attention to the other — a natural match."
+       },
+       {
+        "num": 2,
+        "stem": "向朋友（　）",
+        "answer": 0,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "做错了事要向朋友说对不起，“向朋友道歉”搭配正确。",
+         "distractors": [
+          "✓ 正确答案：向朋友道歉＝向朋友说对不起。",
+          "约好：向朋友约好不通顺。",
+          "关心：向朋友关心不通顺。",
+          "“迟到”与本题不搭配。",
+          "借用：向朋友借用虽然说得通，但“向朋友道歉”更自然且唯一。",
+          "送别：向朋友送别不通顺。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "道歉＝说对不起。“向某人道歉”是固定搭配。"
+        },
+        "explanation": "做错了事要向朋友说对不起，“向朋友道歉”搭配正确。",
+        "explanation_en": "You should say sorry to a friend when you do wrong; '向朋友道歉' (apologise to a friend) is correct."
+       },
+       {
+        "num": 3,
+        "stem": "（　）一起去图书馆",
+        "answer": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "事先说好一起去，用“约好”，“约好一起去图书馆”搭配自然。",
+         "distractors": [
+          "道歉：道歉一起去图书馆不通顺。",
+          "✓ 正确答案：约好一起去图书馆＝事先说好一起去。",
+          "关心：关心一起去图书馆不通顺。",
+          "“迟到”与本题不搭配。",
+          "借用：借用一起去图书馆不通顺。",
+          "送别：送别一起去图书馆不通顺。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“约好”＝事先说好，后面跟要做的事：约好一起去。"
+        },
+        "explanation": "事先说好一起去，用“约好”，“约好一起去图书馆”搭配自然。",
+        "explanation_en": "To agree in advance to go together is 约好; '约好一起去图书馆' (arrange to go to the library together) is a natural match."
+       },
+       {
+        "num": 4,
+        "stem": "（　）同学的橡皮",
+        "answer": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "暂时用别人的东西叫“借用”，“借用同学的橡皮”搭配正确。",
+         "distractors": [
+          "道歉：道歉同学的橡皮不通顺。",
+          "约好：约好同学的橡皮不通顺。",
+          "关心：关心同学的橡皮不通顺。",
+          "“迟到”与本题不搭配。",
+          "✓ 正确答案：借用同学的橡皮＝暂时用同学的橡皮。",
+          "送别：送别同学的橡皮不通顺。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“借用”＝暂时使用别人的东西，用完要还。"
+        },
+        "explanation": "暂时用别人的东西叫“借用”，“借用同学的橡皮”搭配正确。",
+        "explanation_en": "Using someone else's thing for a while is 借用; '借用同学的橡皮' (borrow a classmate's eraser) is correct."
+       },
+       {
+        "num": 5,
+        "stem": "在校门口（　）转学的朋友",
+        "answer": 5,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "朋友要离开了，在门口为他送行，叫“送别”，“送别转学的朋友”搭配自然。",
+         "distractors": [
+          "道歉：在校门口道歉转学的朋友不通顺。",
+          "约好：在校门口约好转学的朋友不通顺。",
+          "关心：在校门口关心转学的朋友意思不完整。",
+          "“迟到”与本题不搭配。",
+          "借用：在校门口借用转学的朋友不通顺。",
+          "✓ 正确答案：送别转学的朋友＝为离开的朋友送行。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“送别”＝为要离开的人送行，说再见。"
+        },
+        "explanation": "朋友要离开了，在门口为他送行，叫“送别”，“送别转学的朋友”搭配自然。",
+        "explanation_en": "When a friend is leaving, seeing them off at the door is 送别; '送别转学的朋友' (see off a friend changing schools) is a natural match."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SentenceCraft",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS03_E1",
+      "subtype": "combine",
+      "connector": "虽然……但是……",
+      "sentenceA": "小伟住得很远。",
+      "sentenceB": "小伟每天准时来上学。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "虽然小伟住得很远，但是他每天准时来上学。",
+      "marks": 2,
+      "lesson": 3,
+      "skill": "lianci",
+      "explain": {
+       "why": "“虽然……但是……”表示前一句是不利的情况，后一句是出乎意料的好结果。“虽然住得远”是不利情况，“但是每天准时来上学”是出乎意料的好结果。",
+       "distractors": [
+        "不能只写“小伟住得很远，每天准时来上学”——少了“虽然……但是……”，就体现不出转折的意思。",
+        "“虽然”放在第一句前，“但是”放在第二句前，位置不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“虽然……但是……”＝转折：前面说不好的，后面说好的。记住：虽然（不好）……但是（好）……"
+      },
+      "explanation": "“虽然……但是……”表示前一句是不利的情况，后一句是出乎意料的好结果。“虽然住得远”是不利情况，“但是每天准时来上学”是出乎意料的好结果。 “虽然……但是……”＝转折：前面说不好的，后面说好的。记住：虽然（不好）……但是（好）……",
+      "explanation_en": "“虽然……但是……” ('although…, …') means the first part is unfavourable and the second is a surprising good result. '虽然住得远' (although he lives far) is unfavourable, and '但是每天准时来上学' (but he comes to school on time every day) is the good result. First the bad, then the good."
+     },
+     {
+      "id": "ZS03_E2",
+      "subtype": "combine",
+      "connector": "因为……所以……",
+      "sentenceA": "小芳帮我找到了丢失的文具盒。",
+      "sentenceB": "我非常感谢小芳。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "因为小芳帮我找到了丢失的文具盒，所以我非常感谢小芳。",
+      "marks": 2,
+      "lesson": 2,
+      "skill": "lianci",
+      "explain": {
+       "why": "“因为……所以……”表示原因和结果。“因为小芳帮我找到文具盒”是原因，“所以我非常感谢小芳”是结果。",
+       "distractors": [
+        "不能只写“小芳帮我找到了文具盒，我非常感谢她”——少了“因为……所以……”，就体现不出因果关系。",
+        "“因为”放在原因句前，“所以”放在结果句前，顺序不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“因为……所以……”＝因果：因为（原因）……所以（结果）……。先说为什么，再说怎么了。"
+      },
+      "explanation": "“因为……所以……”表示原因和结果。“因为小芳帮我找到文具盒”是原因，“所以我非常感谢小芳”是结果。 “因为……所以……”＝因果：因为（原因）……所以（结果）……。先说为什么，再说怎么了。",
+      "explanation_en": "“因为……所以……” ('because…, so…') shows cause and result. '因为小芳帮我找到文具盒' (because Xiaofang helped me find my pencil case) is the cause, and '所以我非常感谢小芳' (so I thank Xiaofang very much) is the result."
+     }
+    ]
+   },
+   {
+    "type": "PassageCloze",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS03_F",
+      "topic": "PassageCloze",
+      "passage": "小明和小华是一对好朋友。每天放学后，他们会(1) ___ 在小区的花园里玩。有一天，小明不小心跌倒，膝盖(2) ___ 了。小华看见了，(3) ___ 跑过去扶起小明，还把自己的手帕递给他。小明(4) ___ 地说：“谢谢你！”小华笑着回答：“好朋友就应该(5) ___ 帮助。”",
+      "wordBank": [
+       "互相",
+       "一起",
+       "流血",
+       "感激",
+       "赶紧",
+       "生气"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "一起",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "两个朋友共同在花园玩，用“一起”表示共同行动。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“一起”＝共同、在一块儿。两个人一起做同一件事。"
+        },
+        "explanation": "两个朋友共同在花园玩，用“一起”表示共同行动。",
+        "explanation_en": "Two friends play together in the garden, so use 一起 ('together') for doing something together."
+       },
+       {
+        "num": 2,
+        "answer": "流血",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "跌倒后膝盖受伤，“流血”表示伤口出血，最符合语境。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "跌倒→膝盖受伤→流血。流血＝血从伤口流出来。"
+        },
+        "explanation": "跌倒后膝盖受伤，“流血”表示伤口出血，最符合语境。",
+        "explanation_en": "After falling, the knee is hurt; 流血 ('bleed') means the wound is bleeding, which fits best."
+       },
+       {
+        "num": 3,
+        "answer": "赶紧",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "看见朋友受伤，小华急忙跑过去，“赶紧”表示很快、不拖延，最合适。“感激”是感谢的意思，不能用在这里。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“赶紧”＝急忙、不拖延，用于动作前：赶紧跑过去。"
+        },
+        "explanation": "看见朋友受伤，小华急忙跑过去，“赶紧”表示很快、不拖延，最合适。",
+        "explanation_en": "Seeing a friend hurt, Xiaohua hurries over; 赶紧 ('hurry') means quickly, without delay, which fits best."
+       },
+       {
+        "num": 4,
+        "answer": "感激",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "小明受到帮助后说谢谢，心里充满感谢，“感激地说”表示说话时带着感谢的心情。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“感激”＝心里很感谢。感激地说＝带着感谢的心情说话。"
+        },
+        "explanation": "小明受到帮助后说谢谢，心里充满感谢，“感激地说”表示说话时带着感谢的心情。",
+        "explanation_en": "After getting help, Xiaoming says thank you, his heart full of thanks; 感激地说 ('say gratefully') means speaking with a thankful feeling."
+       },
+       {
+        "num": 5,
+        "answer": "互相",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "好朋友之间双方都帮助对方，“互相帮助”表示双方都给对方帮助，最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“互相”＝双方都做同一件事：互相帮助、互相关心。"
+        },
+        "explanation": "好朋友之间双方都帮助对方，“互相帮助”表示双方都给对方帮助，最合适。",
+        "explanation_en": "Good friends both help each other; 互相帮助 ('help each other') means both sides give help, which fits best."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingMcq",
+    "marks": 3,
+    "items": [
+     {
+      "id": "ZS03_G",
+      "topic": "ReadingMcq",
+      "passage": "小雯和小丽是同班同学，也是最好的朋友。每天早上，她们会在学校门口等对方，然后一起走进课室。有一次，小雯的铅笔盒掉在地上，里面的东西都散落出来。小丽看见了，马上蹲下来帮小雯把东西一件一件地捡起来，放回铅笔盒里。小雯感激地说：“谢谢你，小丽！”小丽笑着说：“我们是好朋友，应该互相帮助。”从那以后，她们的友情更加深厚了。",
+      "questions": [
+       {
+        "id": "ZS03_G1",
+        "format": "mcq",
+        "stem": "小雯和小丽每天早上在哪里等对方？",
+        "options": [
+         "学校门口。",
+         "课室里。",
+         "操场上。"
+        ],
+        "answer": 0,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“她们会在学校门口等对方”，所以是在学校门口。",
+         "distractors": [
+          "✓ 正确答案：学校门口（文中直接说明）。",
+          "课室是她们走进去的地方，不是等待的地方。",
+          "操场文中没有提到。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回原文找答案，“在学校门口等对方”是原文直接说的。"
+        }
+       },
+       {
+        "id": "ZS03_G2",
+        "format": "mcq",
+        "stem": "小丽帮小雯捡东西后，小雯的心情是怎样的？",
+        "options": [
+         "难过。",
+         "感激。",
+         "生气。"
+        ],
+        "answer": 1,
+        "lesson": 3,
+        "skill": "inference",
+        "explain": {
+         "why": "小雯说“谢谢你”，文中也用了“感激地说”，可以推断小雯心里很感谢小丽。",
+         "distractors": [
+          "难过是伤心，小雯受到帮助不会难过。",
+          "✓ 正确答案：感激（文中写“感激地说谢谢”）。",
+          "生气是愤怒，小雯受到帮助不会生气。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "推断心情题：找人物说的话和文中描写的词语。“感激地说谢谢”→心情是感激。"
+        }
+       },
+       {
+        "id": "ZS03_G3",
+        "format": "mcq",
+        "stem": "这篇短文主要告诉我们什么？",
+        "options": [
+         "上学要早点出门。",
+         "铅笔盒要放好，不要掉落。",
+         "好朋友之间应该互相帮助。"
+        ],
+        "answer": 2,
+        "lesson": 3,
+        "skill": "main_idea",
+        "explain": {
+         "why": "短文讲的是小雯和小丽互相帮助、友情更深厚，主要告诉我们好朋友要互相帮助。",
+         "distractors": [
+          "上学早点出门只是细节，不是主要意思。",
+          "铅笔盒放好只是故事里的一个小事件，不是主要意思。",
+          "✓ 正确答案：好朋友之间应该互相帮助（这是短文的中心意思）。"
+         ],
+         "trapType": "main_idea",
+         "memoryTip": "主旨题：找短文反复强调的内容。“互相帮助”和“友情”是这篇文章的核心。"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingOpen",
+    "marks": 6,
+    "items": [
+     {
+      "id": "ZS03_H",
+      "topic": "ReadingOpen",
+      "passage": "今天是星期六，我约了好朋友阿明来我家玩。阿明一到，我们就一起搭积木，把积木搭成一座高高的塔。可是搭到一半，塔突然倒下来了，积木散落一地。我有点失望，不想再搭了。阿明拍拍我的肩膀说：“没关系，我们重新再来！”他的话让我重新有了信心。我们再次合作，这一次终于把塔搭好了。我开心地跳了起来，阿明也笑得合不拢嘴。",
+      "questions": [
+       {
+        "id": "ZS03_H1",
+        "format": "fill_word",
+        "stem": "从短文中找出一个词语，说明“我”听了阿明的话之后的感受变化：原本失望，后来重新有了______。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "answer": "信心",
+        "explain": {
+         "why": "文中说“他的话让我重新有了信心”，“信心”就是答案，直接出现在短文里。",
+         "distractors": [],
+         "trapType": "detail",
+         "memoryTip": "填词题答案一定在短文里，找“重新有了”后面的词语。"
+        }
+       },
+       {
+        "id": "ZS03_H2",
+        "format": "open_sentence",
+        "stem": "积木塔第一次倒下后，“我”有什么感受？请用完整的句子回答。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "answer": "积木塔第一次倒下后，“我”感到有点失望，不想再搭了。"
+       },
+       {
+        "id": "ZS03_H3",
+        "format": "open_sentence",
+        "stem": "从这篇短文，你认为阿明是一个怎样的朋友？请用完整的句子回答。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "inference",
+        "answer": "阿明是一个鼓励朋友、不轻易放弃的好朋友，他用正面的话帮助“我”重新有了信心。"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "setId": "ZS04",
+  "theme": "wonderful changes",
+  "track": "HCL",
+  "band": "easy",
+  "seedSources": [
+   "generated_v1"
+  ],
+  "plan": [
+   {
+    "type": "HanziMcq",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS04_A1",
+      "topic": "HanziMcq",
+      "sentence": "春天来了，花园里的花都______放了。",
+      "options": [
+       "关",
+       "闻",
+       "问",
+       "开"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“开放”指花朵绽开，是描写春天花园最合适的词。",
+       "distractors": [
+        "“关”是关闭的意思，“关放”不通顺。",
+        "“闻”是用鼻子嗅，“闻放”不通顺。",
+        "“问”是提问，“问放”不通顺。",
+        "✓ 正确答案：开放＝花朵绽开。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“开”字里有“门”，门打开＝开，花开放就是花的门打开了。"
+      },
+      "explanation": "“开放”指花朵绽开，是描写春天花园最合适的词。 “开”字里有“门”，门打开＝开，花开放就是花的门打开了。",
+      "explanation_en": "开放 means flowers opening up; it is the best word to describe a garden in spring. 开 has 门 ('door') inside — a flower blooming is like its door opening."
+     },
+     {
+      "id": "ZS04_A2",
+      "topic": "HanziMcq",
+      "sentence": "小明每天认真练习，他的画画______力越来越强。",
+      "options": [
+       "能",
+       "熊",
+       "态",
+       "浓"
+      ],
+      "answer": 0,
+      "lesson": 2,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“能力”指做某件事的本领，“画画能力越来越强”意思通顺。",
+       "distractors": [
+        "✓ 正确答案：能力＝做事的本领。",
+        "“熊”是动物，“熊力”不通顺。",
+        "“态”是样子，“态力”不通顺。",
+        "“浓”是浓淡的意思，“浓力”不通顺。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“能”字下面有“月”，能力就像月亮一样可以慢慢变大变强。"
+      },
+      "explanation": "“能力”指做某件事的本领，“画画能力越来越强”意思通顺。 “能”字下面有“月”，能力就像月亮一样可以慢慢变大变强。",
+      "explanation_en": "能力 ('ability') means the skill to do something; '画画能力越来越强' (drawing ability getting stronger) makes sense. 能 has 月 ('moon') below — ability can slowly grow."
+     },
+     {
+      "id": "ZS04_A3",
+      "topic": "HanziMcq",
+      "sentence": "奶奶的菜园______了很多蔬菜，看起来生机勃勃。",
+      "options": [
+       "重",
+       "种",
+       "肿",
+       "众"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“种”（zhòng）是把植物种在土里，“种了很多蔬菜”意思通顺。",
+       "distractors": [
+        "“重”是分量大，“重了很多蔬菜”不通顺。",
+        "✓ 正确答案：种＝把植物种在土里。",
+        "“肿”是皮肤肿起来，“肿了很多蔬菜”不通顺。",
+        "“众”是许多人，“众了很多蔬菜”不通顺。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "种菜的“种”有禾字旁，和植物有关；重量的“重”没有禾字旁。"
+      },
+      "explanation": "“种”（zhòng）是把植物种在土里，“种了很多蔬菜”意思通顺。 种菜的“种”有禾字旁，和植物有关；重量的“重”没有禾字旁。",
+      "explanation_en": "种 (zhòng) means to plant in the soil; '种了很多蔬菜' (planted many vegetables) makes sense. The 种 for planting has the 'grain' part 禾; the 重 for weight has no 禾."
+     },
+     {
+      "id": "ZS04_A4",
+      "topic": "HanziMcq",
+      "sentence": "这条小河的水______得很清，可以看到河底的石头。",
+      "options": [
+       "留",
+       "刘",
+       "流",
+       "硫"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“流”是水移动的样子，“水流得很清”意思通顺。",
+       "distractors": [
+        "“留”是留下来，“水留得很清”不通顺。",
+        "“刘”是姓氏，“水刘得很清”不通顺。",
+        "✓ 正确答案：流＝水移动。",
+        "“硫”是化学元素，“水硫得很清”不通顺。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "“流”有三点水旁，和水有关；“留”有田字，和停留有关。"
+      },
+      "explanation": "“流”是水移动的样子，“水流得很清”意思通顺。 “流”有三点水旁，和水有关；“留”有田字，和停留有关。",
+      "explanation_en": "流 is the way water moves; '水流得很清' (the water flows clear) makes sense. 流 has the 'water' part 氵 and is about water; 留 has 田 and is about staying."
+     },
+     {
+      "id": "ZS04_A5",
+      "topic": "HanziMcq",
+      "sentence": "妈妈说这里的环境______化了很多，以前这里只有树林。",
+      "options": [
+       "边",
+       "便",
+       "辨",
+       "变"
+      ],
+      "answer": 3,
+      "lesson": 3,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“变化”指事物从一个样子变成另一个样子，符合题意。",
+       "distractors": [
+        "“边”是边缘，“边化”不通顺。",
+        "“便”是方便，“便化”不通顺。",
+        "“辨”是分辨，“辨化”不通顺。",
+        "✓ 正确答案：变化＝从一个样子变成另一个样子。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“变”字上面有“亦”，亦即“也”，变化就是也变了另一个样子。"
+      },
+      "explanation": "“变化”指事物从一个样子变成另一个样子，符合题意。 “变”字上面有“亦”，亦即“也”，变化就是也变了另一个样子。",
+      "explanation_en": "变化 ('change') means a thing turning from one look into another, which fits. 变 has 亦 ('also') on top — a change means it has 'also' become another look."
+     }
+    ]
+   },
+   {
+    "type": "PinyinMcq",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS04_B1",
+      "topic": "PinyinMcq",
+      "sentence": "小区里的旧楼被{u}拆除{/u}后，建起了一座美丽的公园。",
+      "options": [
+       "chāi chú",
+       "chāi cú",
+       "chǎi chú",
+       "chǎi cú"
+      ],
+      "answer": 0,
+      "lesson": 3,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“拆”读 chāi（第一声），“除”读 chú（第二声）。合起来是 chāi chú。",
+       "distractors": [
+        "✓ 正确答案：chāi chú。",
+        "“除”是 chú 不是 cú，声母是 ch 不是 c。",
+        "“拆”是 chāi（第一声）不是 chǎi（第三声）。",
+        "“拆”声调错，“除”声母也错，两处都错。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“拆”第一声，平平地读；“除”第二声，往上读。ch 是翘舌音，不要写成 c。"
+      },
+      "explanation": "“拆”读 chāi（第一声），“除”读 chú（第二声）。合起来是 chāi chú。 “拆”第一声，平平地读；“除”第二声，往上读。ch 是翘舌音，不要写成 c。",
+      "explanation_en": "拆 is read chāi (1st tone) and 除 is read chú (2nd tone); together it is chāi chú. 拆 is 1st tone, flat; 除 is 2nd tone, rising. ch is a curled-tongue sound — do not write it as c."
+     },
+     {
+      "id": "ZS04_B2",
+      "topic": "PinyinMcq",
+      "sentence": "爸爸说这棵大树已经{u}长大{/u}了很多年。",
+      "options": [
+       "zhāng dà",
+       "zhǎng dà",
+       "zhǎng tà",
+       "zhāng tà"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "duoyinzi",
+      "explain": {
+       "why": "“长”在“长大”中读 zhǎng（第三声，生长义），“大”读 dà（第四声）。合起来是 zhǎng dà。",
+       "distractors": [
+        "“长”读 zhāng 是“长相”的读法，不是生长义。",
+        "✓ 正确答案：zhǎng dà。“长”这里是生长，读 zhǎng。",
+        "“长”声调正确但“大”读成 tà 是错的，dà 才对。",
+        "“长”读 zhāng 且“大”读 tà，两处都错。"
+       ],
+       "trapType": "duoyinzi",
+       "memoryTip": "“长大”＝生长变大，读 zhǎng dà；“长相”＝外貌，读 zhǎng xiàng。两个都是 zhǎng，但注意“长”还有 cháng（长短）的读法。"
+      },
+      "explanation": "“长”在“长大”中读 zhǎng（第三声，生长义），“大”读 dà（第四声）。合起来是 zhǎng dà。 “长大”＝生长变大，读 zhǎng dà；“长相”＝外貌，读 zhǎng xiàng。两个都是 zhǎng，但注意“长”还有 cháng（长短）的读法。",
+      "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, meaning to grow) and 大 is read dà (4th tone); together it is zhǎng dà. 长大 = grow bigger (zhǎng dà); 长相 = looks (zhǎng xiàng). Note 长 also has the reading cháng (as in 'long')."
+     },
+     {
+      "id": "ZS04_B3",
+      "topic": "PinyinMcq",
+      "sentence": "同学们{u}整齐{/u}地站在操场上，等待校长讲话。",
+      "options": [
+       "zhèng qí",
+       "zhěng jí",
+       "zhěng qí",
+       "zhèng jí"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "shengmu_yunmu",
+      "explain": {
+       "why": "“整”读 zhěng（第三声），“齐”读 qí（第二声）。合起来是 zhěng qí。",
+       "distractors": [
+        "“整”是 zhěng（第三声）不是 zhèng（第四声）。",
+        "“整”声调正确但“齐”读成 jí 是错的，qí 才对。",
+        "✓ 正确答案：zhěng qí。",
+        "“整”读 zhèng 且“齐”读 jí，两处都错。"
+       ],
+       "trapType": "shengmu_yunmu",
+       "memoryTip": "“整”第三声，先降再升；“齐”第二声，往上读。“齐”的声母是 q 不是 j。"
+      },
+      "explanation": "“整”读 zhěng（第三声），“齐”读 qí（第二声）。合起来是 zhěng qí。 “整”第三声，先降再升；“齐”第二声，往上读。“齐”的声母是 q 不是 j。",
+      "explanation_en": "整 is read zhěng (3rd tone) and 齐 is read qí (2nd tone); together it is zhěng qí. 整 dips then rises (3rd tone); 齐 rises (2nd tone). The initial of 齐 is q, not j."
+     },
+     {
+      "id": "ZS04_B4",
+      "topic": "PinyinMcq",
+      "sentence": "小草在春雨后{u}发芽{/u}了，绿油油的很好看。",
+      "options": [
+       "fà yá",
+       "fā yà",
+       "fà yà",
+       "fā yá"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“发”在“发芽”中读 fā（第一声），“芽”读 yá（第二声）。合起来是 fā yá。",
+       "distractors": [
+        "“发”是 fā（第一声）不是 fà（第四声）。",
+        "“发”声调正确但“芽”读成 yà（第四声）是错的。",
+        "“发”读 fà 且“芽”读 yà，两处声调都错。",
+        "✓ 正确答案：fā yá。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“发芽”的“发”第一声，平平地读；“芽”第二声，往上读。想象小芽慢慢往上长。"
+      },
+      "explanation": "“发”在“发芽”中读 fā（第一声），“芽”读 yá（第二声）。合起来是 fā yá。 “发芽”的“发”第一声，平平地读；“芽”第二声，往上读。想象小芽慢慢往上长。",
+      "explanation_en": "In 发芽, 发 is read fā (1st tone) and 芽 is read yá (2nd tone); together it is fā yá. 发 is 1st tone, flat; 芽 is 2nd tone, rising. Imagine a little sprout slowly growing up."
+     }
+    ]
+   },
+   {
+    "type": "VocabMcq",
+    "marks": 5,
+    "variant": "mcq4",
+    "items": [
+     {
+      "id": "ZS04_C1",
+      "topic": "VocabMcq",
+      "sentence": "弟弟第一次学会骑自行车，高兴得______起来。",
+      "options": [
+       "欢呼",
+       "哭泣",
+       "发抖",
+       "叹气"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "学会骑车是开心的事，“欢呼”表示高兴地大声叫好，和“高兴”搭配最合适。",
+       "distractors": [
+        "✓ 正确答案：欢呼＝高兴地大声叫好。",
+        "“哭泣”是伤心时才做的事，和“高兴”矛盾。",
+        "“发抖”是害怕或冷时才有的动作，不合高兴的语境。",
+        "“叹气”表示失望或难过，和“高兴”矛盾。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "高兴→欢呼；难过→哭泣；害怕→发抖；失望→叹气。抓住情绪词就能选对。"
+      },
+      "explanation": "学会骑车是开心的事，“欢呼”表示高兴地大声叫好，和“高兴”搭配最合适。 高兴→欢呼；难过→哭泣；害怕→发抖；失望→叹气。抓住情绪词就能选对。",
+      "explanation_en": "Learning to ride a bike is a happy thing; 欢呼 ('cheer') means to shout happily, matching 高兴 ('happy') best. Happy → cheer; sad → cry; scared → tremble; disappointed → sigh."
+     },
+     {
+      "id": "ZS04_C2",
+      "topic": "VocabMcq",
+      "sentence": "妈妈买了______新衣服，准备过年穿。",
+      "options": [
+       "一张",
+       "一件",
+       "一本",
+       "一棵"
+      ],
+      "answer": 1,
+      "lesson": 2,
+      "skill": "liangci",
+      "explain": {
+       "why": "衣服的量词是“件”，所以用“一件新衣服”。",
+       "distractors": [
+        "“一张”用于纸、桌子等平面物，不用于衣服。",
+        "✓ 正确答案：一件＝衣服的量词。",
+        "“一本”用于书、本子，不用于衣服。",
+        "“一棵”用于植物，不用于衣服。"
+       ],
+       "trapType": "liangci",
+       "memoryTip": "衣服→件；书→本；纸→张；树→棵。量词要和物品配对记。"
+      },
+      "explanation": "衣服的量词是“件”，所以用“一件新衣服”。 衣服→件；书→本；纸→张；树→棵。量词要和物品配对记。",
+      "explanation_en": "The measure word for clothes is 件, so use '一件新衣服' (one new piece of clothing). Clothes → 件; book → 本; paper → 张; tree → 棵."
+     },
+     {
+      "id": "ZS04_C3",
+      "topic": "VocabMcq",
+      "sentence": "经过大家的努力，这片荒地______成了美丽的花园。",
+      "options": [
+       "变化",
+       "改变",
+       "变成",
+       "发现"
+      ],
+      "answer": 2,
+      "lesson": 3,
+      "skill": "dapei",
+      "explain": {
+       "why": "“变成”后面接结果，表示从一种状态转变为另一种状态，“变成了美丽的花园”搭配正确。",
+       "distractors": [
+        "“变化”是名词或不及物动词，后面不能直接接“美丽的花园”作宾语。",
+        "“改变”后面通常接抽象事物如习惯、想法，不说“改变成花园”。",
+        "✓ 正确答案：变成＝从一种状态转变为另一种状态。",
+        "“发现”是找到没注意的东西，不能说“发现成花园”。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "“变成＋（结果）”是固定搭配，后面接变化后的样子。"
+      },
+      "explanation": "“变成”后面接结果，表示从一种状态转变为另一种状态，“变成了美丽的花园”搭配正确。 “变成＋（结果）”是固定搭配，后面接变化后的样子。",
+      "explanation_en": "变成 ('turn into') is followed by a result, showing a change from one state to another; '变成了美丽的花园' (turned into a beautiful garden) is correct. 变成 + (result) is a fixed phrase."
+     },
+     {
+      "id": "ZS04_C4",
+      "topic": "VocabMcq",
+      "sentence": "同学们在老师的______下，学会了很多新知识。",
+      "options": [
+       "命令",
+       "批评",
+       "责备",
+       "帮助"
+      ],
+      "answer": 3,
+      "lesson": 1,
+      "skill": "jinyici",
+      "explain": {
+       "why": "老师让学生学到新知识，是正面的支持，用“帮助”最合适。",
+       "distractors": [
+        "“命令”是叫人必须做某事，语气强硬，不符合学到知识的温暖语境。",
+        "“批评”是指出错误，不是让人学到知识的方式。",
+        "“责备”是责怪，和学到新知识的正面语境矛盾。",
+        "✓ 正确答案：帮助＝给予支持让人学到东西。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "学到知识→帮助；做错事→批评／责备；必须做→命令。看语境的正负面。"
+      },
+      "explanation": "老师让学生学到新知识，是正面的支持，用“帮助”最合适。 学到知识→帮助；做错事→批评／责备；必须做→命令。看语境的正负面。",
+      "explanation_en": "The teacher helps students learn new knowledge — positive support, so 帮助 ('help') fits best. Learn knowledge → help; do wrong → criticise; must do → order. Look at whether the situation is positive or negative."
+     },
+     {
+      "id": "ZS04_C5",
+      "topic": "VocabMcq",
+      "sentence": "小花猫______地看着鱼缸里的金鱼，眼睛一眨也不眨。",
+      "options": [
+       "专心",
+       "认真",
+       "粗心",
+       "小心"
+      ],
+      "answer": 0,
+      "lesson": 2,
+      "skill": "jinyici",
+      "explain": {
+       "why": "眼睛一眨也不眨，说明注意力完全集中在金鱼上，用“专心”最合适。",
+       "distractors": [
+        "✓ 正确答案：专心＝注意力完全集中。",
+        "“认真”指做事仔细负责，通常用于做作业、工作等，不用来形容猫盯着鱼看。",
+        "“粗心”是不小心、容易出错，和眼睛一眨不眨的专注状态矛盾。",
+        "“小心”是谨慎，不是形容注意力集中盯着看。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "眼睛一眨不眨→注意力集中→专心。“专”字表示只做一件事，正好。"
+      },
+      "explanation": "眼睛一眨也不眨，说明注意力完全集中在金鱼上，用“专心”最合适。 眼睛一眨不眨→注意力集中→专心。“专”字表示只做一件事，正好。",
+      "explanation_en": "Eyes not blinking at all show full attention on the goldfish, so 专心 ('focused') fits best. 专 means doing only one thing, which fits exactly."
+     }
+    ]
+   },
+   {
+    "type": "VocabMatch",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS04_D",
+      "topic": "VocabMatch",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "进步",
+       "保护",
+       "惊喜",
+       "整洁",
+       "努力",
+       "危险"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "房间打扫得非常（）",
+        "answer": 3,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“整洁”形容地方干净整齐，“房间打扫得非常整洁”搭配自然。",
+         "distractors": [
+          "进步：房间打扫得非常进步，不通顺。",
+          "保护：房间打扫得非常保护，不通顺。",
+          "惊喜：房间打扫得非常惊喜，不通顺。",
+          "✓ 正确答案：房间打扫得非常整洁。",
+          "努力：房间打扫得非常努力，意思不对，努力形容人不形容房间。",
+          "危险：房间打扫得非常危险，意思矛盾。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“整洁”形容地方，打扫→整洁，记住这个搭配。"
+        },
+        "explanation": "“整洁”形容地方干净整齐，“房间打扫得非常整洁”搭配自然。",
+        "explanation_en": "整洁 ('neat and clean') describes a place that is clean and tidy; '房间打扫得非常整洁' (the room is cleaned very neatly) is a natural match."
+       },
+       {
+        "num": 2,
+        "stem": "收到礼物感到非常（）",
+        "answer": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“惊喜”指没想到的好事带来的高兴感，“收到礼物感到非常惊喜”搭配自然。",
+         "distractors": [
+          "进步：收到礼物感到非常进步，不通顺。",
+          "保护：收到礼物感到非常保护，不通顺。",
+          "✓ 正确答案：收到礼物感到非常惊喜。",
+          "整洁：收到礼物感到非常整洁，不通顺。",
+          "努力：收到礼物感到非常努力，不通顺。",
+          "危险：收到礼物感到非常危险，意思矛盾。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“惊喜”＝惊讶＋高兴，收到意外礼物正是这种感觉。"
+        },
+        "explanation": "“惊喜”指没想到的好事带来的高兴感，“收到礼物感到非常惊喜”搭配自然。",
+        "explanation_en": "惊喜 ('pleasant surprise') means the happy feeling from an unexpected good thing; '收到礼物感到非常惊喜' (feeling very surprised to get a gift) is a natural match."
+       },
+       {
+        "num": 3,
+        "stem": "学习上有很大的（）",
+        "answer": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“进步”指变得更好，“学习上有很大的进步”是固定搭配。",
+         "distractors": [
+          "✓ 正确答案：学习上有很大的进步。",
+          "保护：学习上有很大的保护，不通顺。",
+          "惊喜：学习上有很大的惊喜，搭配勉强，不如进步准确。",
+          "整洁：学习上有很大的整洁，不通顺。",
+          "努力：学习上有很大的努力，搭配不自然。",
+          "危险：学习上有很大的危险，意思矛盾。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“进步＋学习／成绩”是固定搭配，进步＝越来越好。"
+        },
+        "explanation": "“进步”指变得更好，“学习上有很大的进步”是固定搭配。",
+        "explanation_en": "进步 ('progress') means getting better; '学习上有很大的进步' (great progress in studies) is a fixed phrase."
+       },
+       {
+        "num": 4,
+        "stem": "大家要（）环境",
+        "answer": 1,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "“保护环境”是固定搭配，表示爱护、不破坏周围的自然环境。",
+         "distractors": [
+          "进步：大家要进步环境，不通顺。",
+          "✓ 正确答案：大家要保护环境。",
+          "惊喜：大家要惊喜环境，不通顺。",
+          "整洁：大家要整洁环境，不通顺。",
+          "努力：大家要努力环境，不通顺。",
+          "危险：大家要危险环境，意思矛盾。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“保护＋环境／动物／地球”，保护就是不让它受到伤害。"
+        },
+        "explanation": "“保护环境”是固定搭配，表示爱护、不破坏周围的自然环境。",
+        "explanation_en": "“保护环境” ('protect the environment') is a fixed phrase meaning to care for and not harm the nature around us."
+       },
+       {
+        "num": 5,
+        "stem": "认真（）练习",
+        "answer": 4,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“努力”表示用心用力去做，“认真努力练习”意思通顺自然。",
+         "distractors": [
+          "进步：认真进步练习，不通顺。",
+          "保护：认真保护练习，不通顺。",
+          "惊喜：认真惊喜练习，不通顺。",
+          "整洁：认真整洁练习，不通顺。",
+          "✓ 正确答案：认真努力练习。",
+          "危险：认真危险练习，意思矛盾。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“认真努力”常常一起用，形容做事的态度好。"
+        },
+        "explanation": "“努力”表示用心用力去做，“认真努力练习”意思通顺自然。",
+        "explanation_en": "努力 ('work hard') means to do something with heart and effort; '认真努力练习' (practise carefully and hard) makes natural sense."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SentenceCraft",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS04_E1",
+      "subtype": "combine",
+      "connector": "虽然……但是",
+      "sentenceA": "这里以前是一片荒地。",
+      "sentenceB": "现在已经变成了美丽的公园。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "虽然这里以前是一片荒地，但是现在已经变成了美丽的公园。",
+      "marks": 2,
+      "lesson": 3,
+      "skill": "lianci",
+      "explain": {
+       "why": "“虽然……但是……”表示前后两件事有转折关系，前面说不好的情况，后面说好的变化。“虽然这里以前是一片荒地”是前半句，“但是现在已经变成了美丽的公园”是后半句，合起来体现了奇妙的变化。",
+       "distractors": [
+        "不能只写“这里以前是荒地，现在是公园”——少了“虽然……但是”，就体现不出转折的意思。",
+        "“虽然”放在第一句前，“但是”放在第二句前，位置不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“虽然……但是……”＝前面说一件事，后面说相反或出乎意料的事。"
+      },
+      "explanation": "“虽然……但是……”表示前后两件事有转折关系，前面说不好的情况，后面说好的变化。“虽然这里以前是一片荒地”是前半句，“但是现在已经变成了美丽的公园”是后半句，合起来体现了奇妙的变化。 “虽然……但是……”＝前面说一件事，后面说相反或出乎意料的事。",
+      "explanation_en": "“虽然……但是……” ('although…, …') shows a turn between two things: the first says a bad situation, the second says a good change. '虽然这里以前是一片荒地' (although this used to be wasteland) turns to '但是现在已经变成了美丽的公园' (but now it is a beautiful park)."
+     },
+     {
+      "id": "ZS04_E2",
+      "subtype": "combine",
+      "connector": "只要……就",
+      "sentenceA": "我们每天给小树浇水。",
+      "sentenceB": "小树会慢慢长高。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "只要我们每天给小树浇水，小树就会慢慢长高。",
+      "marks": 2,
+      "lesson": 2,
+      "skill": "lianci",
+      "explain": {
+       "why": "“只要……就……”表示满足某个条件，结果就会发生。“只要我们每天给小树浇水”是条件，“小树就会慢慢长高”是结果，合起来说明只需做到这一点，小树就能长大。",
+       "distractors": [
+        "不能只写“我们每天给小树浇水，小树会长高”——少了“只要……就”，就体现不出条件关系。",
+        "“只要”放在条件句前，“就”放在结果句前，不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“只要……就……”＝有这个条件，结果一定发生。只要做到，就能得到。"
+      },
+      "explanation": "“只要……就……”表示满足某个条件，结果就会发生。“只要我们每天给小树浇水”是条件，“小树就会慢慢长高”是结果，合起来说明只需做到这一点，小树就能长大。 “只要……就……”＝有这个条件，结果一定发生。只要做到，就能得到。",
+      "explanation_en": "“只要……就……” ('as long as…, …') means if a condition is met, the result will happen. '只要我们每天给小树浇水' (as long as we water the tree every day) is the condition, and '小树就会慢慢长高' (the tree will slowly grow tall) is the result."
+     }
+    ]
+   },
+   {
+    "type": "PassageCloze",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS04_F",
+      "topic": "PassageCloze",
+      "passage": "小明家门口有一棵小树。春天到了，小树开始 (1) ___ 出嫩绿的叶子。爸爸说：“只要我们 (2) ___ 照顾它，它就会长得很好。”小明每天放学回家，都会给小树 (3) ___ 水。过了几个月，小树长高了很多，还开出了 (4) ___ 的小花。邻居们看了，都 (5) ___ 地说这棵树真美。",
+      "wordBank": [
+       "长出",
+       "认真",
+       "浇",
+       "漂亮",
+       "开心",
+       "跑步"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "长出",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“长出嫩绿的叶子”表示叶子从树上生长出来，“长出”最合适。",
+         "distractors": [
+          "✓ 正确答案：长出＝生长出来。",
+          "认真：认真出叶子，不通顺。",
+          "浇：浇出叶子，不通顺。",
+          "漂亮：漂亮出叶子，不通顺。",
+          "开心：开心出叶子，不通顺。",
+          "跑步：跑步出叶子，不通顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“长出＋（植物部分）”表示植物生长，如长出叶子、长出花朵。"
+        },
+        "explanation": "“长出嫩绿的叶子”表示叶子从树上生长出来，“长出”最合适。",
+        "explanation_en": "'长出嫩绿的叶子' means leaves growing out from the tree; 长出 ('grow out') fits best."
+       },
+       {
+        "num": 2,
+        "answer": "认真",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“认真照顾”表示用心地照顾，和后面“长得很好”的结果搭配自然。",
+         "distractors": [
+          "长出：认真照顾，长出照顾不通顺。",
+          "✓ 正确答案：认真照顾＝用心地照顾。",
+          "浇：浇照顾不通顺。",
+          "漂亮：漂亮照顾不通顺。",
+          "开心：开心照顾意思勉强，但这里强调的是认真用心，不是心情。",
+          "跑步：跑步照顾不通顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“认真”修饰做事的方式，认真＋（动作）表示用心去做。"
+        },
+        "explanation": "“认真照顾”表示用心地照顾，和后面“长得很好”的结果搭配自然。",
+        "explanation_en": "认真照顾 ('take care attentively') means to care with heart, matching the later result '长得很好' (grows well)."
+       },
+       {
+        "num": 3,
+        "answer": "浇",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“给小树浇水”是固定搭配，“浇”表示把水淋到植物上。",
+         "distractors": [
+          "长出：给小树长出水，不通顺。",
+          "认真：给小树认真水，不通顺。",
+          "✓ 正确答案：给小树浇水。",
+          "漂亮：给小树漂亮水，不通顺。",
+          "开心：给小树开心水，不通顺。",
+          "跑步：给小树跑步水，不通顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“浇水”有三点水旁，和水有关，给植物浇水是照顾它的方式。"
+        },
+        "explanation": "“给小树浇水”是固定搭配，“浇”表示把水淋到植物上。",
+        "explanation_en": "“给小树浇水” ('water the little tree') is a fixed phrase; 浇 means to pour water onto plants."
+       },
+       {
+        "num": 4,
+        "answer": "漂亮",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“开出了漂亮的小花”表示花很好看，“漂亮”修饰小花最合适。",
+         "distractors": [
+          "长出：开出了长出的小花，不通顺。",
+          "认真：开出了认真的小花，不通顺。",
+          "浇：开出了浇的小花，不通顺。",
+          "✓ 正确答案：开出了漂亮的小花。",
+          "开心：开出了开心的小花，不通顺。",
+          "跑步：开出了跑步的小花，不通顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“漂亮”形容外表好看，可以修饰花、衣服、房子等。"
+        },
+        "explanation": "“开出了漂亮的小花”表示花很好看，“漂亮”修饰小花最合适。",
+        "explanation_en": "'开出了漂亮的小花' means the flowers look nice; 漂亮 ('pretty') describes the little flowers best."
+       },
+       {
+        "num": 5,
+        "answer": "开心",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "邻居们看到美丽的树，心情好，“开心地说”表示高兴地说，搭配自然。",
+         "distractors": [
+          "长出：长出地说，不通顺。",
+          "认真：认真地说意思不对，这里强调的是心情高兴，不是认真。",
+          "浇：浇地说，不通顺。",
+          "漂亮：漂亮地说，不通顺。",
+          "✓ 正确答案：开心地说＝高兴地说。",
+          "跑步：跑步地说，不通顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“开心地说”＝高兴地说，心情好才会开心。"
+        },
+        "explanation": "邻居们看到美丽的树，心情好，“开心地说”表示高兴地说，搭配自然。",
+        "explanation_en": "Seeing the beautiful tree, the neighbours are in a good mood; 开心地说 ('say happily') means to speak happily — a natural match."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingMcq",
+    "marks": 3,
+    "items": [
+     {
+      "id": "ZS04_G",
+      "topic": "ReadingMcq",
+      "passage": "小华的学校旁边有一块空地，以前杂草丛生，没有人去。后来，学校的老师和同学们一起动手，把空地清理干净，种上了各种各样的花和蔬菜。同学们每天轮流给花和蔬菜浇水、施肥。几个月后，空地变成了一个美丽的小花园。花园里的花开得五颜六色，蔬菜也长得绿油油的。同学们看着自己种出来的东西，都非常高兴。校长说：“这个花园是大家努力的成果，我们要好好保护它。”",
+      "questions": [
+       {
+        "id": "ZS04_G1",
+        "format": "mcq",
+        "stem": "学校旁边的空地以前是什么样子的？",
+        "options": [
+         "种满了花和蔬菜。",
+         "是一个美丽的小花园。",
+         "长满了杂草，没有人去。"
+        ],
+        "answer": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“以前杂草丛生，没有人去”，所以空地以前长满了杂草。",
+         "distractors": [
+          "种满花和蔬菜是后来大家动手后的样子，不是以前。",
+          "变成美丽小花园是几个月后的结果，不是以前的样子。",
+          "✓ 正确答案：以前杂草丛生，没有人去。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题要找“以前”对应的句子，不要把“以前”和“后来”混淆。"
+        }
+       },
+       {
+        "id": "ZS04_G2",
+        "format": "mcq",
+        "stem": "同学们为什么感到非常高兴？",
+        "options": [
+         "因为他们看到自己种出来的东西长得很好。",
+         "因为校长表扬了他们。",
+         "因为他们不用再浇水了。"
+        ],
+        "answer": 0,
+        "lesson": 3,
+        "skill": "inference",
+        "explain": {
+         "why": "文中说“同学们看着自己种出来的东西，都非常高兴”，高兴的原因是看到自己的劳动成果。",
+         "distractors": [
+          "✓ 正确答案：看到自己种出来的东西长得很好，感到高兴。",
+          "校长的话是在同学们高兴之后说的，不是高兴的原因。",
+          "文中没有说不用再浇水，这是错误的推断。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "“为什么高兴”要找原因句，回原文找“高兴”前面的句子。"
+        }
+       },
+       {
+        "id": "ZS04_G3",
+        "format": "mcq",
+        "stem": "这篇短文主要讲什么？",
+        "options": [
+         "讲校长如何管理学校的故事。",
+         "讲同学们如何把空地变成美丽花园的故事。",
+         "讲同学们学习种菜的方法。"
+        ],
+        "answer": 1,
+        "lesson": 3,
+        "skill": "main_idea",
+        "explain": {
+         "why": "短文从头到尾讲的是大家一起把杂草丛生的空地变成美丽花园，主要内容是这个奇妙的变化过程。",
+         "distractors": [
+          "校长只在最后说了一句话，不是短文的主要内容。",
+          "✓ 正确答案：同学们把空地变成美丽花园的故事。",
+          "短文没有详细讲种菜的方法，只提到浇水施肥。"
+         ],
+         "trapType": "main_idea",
+         "memoryTip": "主旨题要看整篇短文讲的是什么，不要只看一个细节。"
+        }
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingOpen",
+    "marks": 6,
+    "items": [
+     {
+      "id": "ZS04_H",
+      "topic": "ReadingOpen",
+      "passage": "小玲家附近有一条小河，以前河水又黑又臭，大家都不喜欢靠近。后来，社区的叔叔阿姨们一起清理河里的垃圾，还在河边种上了花草。小玲每天上学经过这里，都会停下来看一看。现在，河水变得清澈了，河边的花开得非常美丽，还有小鸟飞来唱歌。小玲高兴地对妈妈说：“这条小河真的变了很多，现在好漂亮啊！”妈妈笑着说：“只要大家一起保护环境，我们的家园就会越来越美好。”",
+      "questions": [
+       {
+        "id": "ZS04_H1",
+        "format": "fill_word",
+        "stem": "从短文中找出一个词语，说明小河的水现在变得干净透明：河水变得______了。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "answer": "清澈",
+        "explain": {
+         "why": "短文中有“河水变得清澈了”，“清澈”表示水干净透明，正好符合题意。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“清澈”形容水干净透明，可以看到水底，是描写干净河水的词。"
+        }
+       },
+       {
+        "id": "ZS04_H2",
+        "format": "open_sentence",
+        "stem": "以前小河附近的环境是什么样子的？",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "answer": "以前小河的水又黑又臭，大家都不喜欢靠近。"
+       },
+       {
+        "id": "ZS04_H3",
+        "format": "open_sentence",
+        "stem": "妈妈说的话告诉我们什么道理？",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "inference",
+        "answer": "妈妈的话告诉我们，只要大家一起保护环境，我们的家园就会越来越美好。"
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "setId": "ZS05",
+  "theme": "school life",
+  "track": "HCL",
+  "band": "easy",
+  "seedSources": [
+   "generated_v1"
+  ],
+  "plan": [
+   {
+    "type": "HanziMcq",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS05_A1",
+      "topic": "HanziMcq",
+      "sentence": "上课时，老师叫我们______心听讲。",
+      "options": [
+       "专",
+       "转",
+       "砖",
+       "传"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“专心”是固定词语，表示集中注意力，上课要专心听讲。",
+       "distractors": [
+        "✓ 正确答案：专心＝集中注意力。",
+        "“转”是转动的意思，“转心”不通。",
+        "“砖”是建筑材料，“砖心”不通。",
+        "“传”是传递，“传心”不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字都读 zhuān 或相近音。“专”有“专注”的意思，上课要专心。"
+      },
+      "explanation": "“专心”是固定词语，表示集中注意力，上课要专心听讲。 四个字都读 zhuān 或相近音。“专”有“专注”的意思，上课要专心。",
+      "explanation_en": "专心 ('focused') is a fixed word meaning to gather your attention; you must be 专心 when listening in class. All four choices read zhuān or similar. 专 means 'to focus'."
+     },
+     {
+      "id": "ZS05_A2",
+      "topic": "HanziMcq",
+      "sentence": "小明把作业本______在书包里，找了很久都找不到。",
+      "options": [
+       "仿",
+       "放",
+       "访",
+       "防"
+      ],
+      "answer": 1,
+      "lesson": 2,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“放在书包里”表示把作业本置于书包中，“放”字最合适。",
+       "distractors": [
+        "“仿”是模仿，“仿在书包里”不通。",
+        "✓ 正确答案：放＝把东西置于某处。",
+        "“访”是拜访，“访在书包里”不通。",
+        "“防”是防止，“防在书包里”不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "四个字读音相近，都有 fàng 或 fǎng。“放”的部首是“攴”，表示动作，把东西放好。"
+      },
+      "explanation": "“放在书包里”表示把作业本置于书包中，“放”字最合适。 四个字读音相近，都有 fàng 或 fǎng。“放”的部首是“攴”，表示动作，把东西放好。",
+      "explanation_en": "放在书包里 means putting the workbook into the schoolbag; 放 ('put') fits best. The four choices sound alike. 放 has the radical 攴, showing an action — putting something in place."
+     },
+     {
+      "id": "ZS05_A3",
+      "topic": "HanziMcq",
+      "sentence": "今天体育课，我们在操______上跑步。",
+      "options": [
+       "扬",
+       "畅",
+       "场",
+       "肠"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“操场”是学校里跑步、做运动的地方，“场”字正确。",
+       "distractors": [
+        "“扬”是飞扬，“操扬”不通。",
+        "“畅”是畅快，“操畅”不通。",
+        "✓ 正确答案：操场＝学校运动的地方。",
+        "“肠”是肠子，“操肠”不通。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "“场”有土字旁，表示一块土地，操场就是做操的那块地。"
+      },
+      "explanation": "“操场”是学校里跑步、做运动的地方，“场”字正确。 “场”有土字旁，表示一块土地，操场就是做操的那块地。",
+      "explanation_en": "操场 ('playground') is the place at school for running and exercise; the character 场 is correct. 场 has the 'earth' part 土, meaning a piece of ground — the ground for doing exercises."
+     },
+     {
+      "id": "ZS05_A4",
+      "topic": "HanziMcq",
+      "sentence": "老师表______我回答问题回答得很好。",
+      "options": [
+       "杨",
+       "阳",
+       "洋",
+       "扬"
+      ],
+      "answer": 3,
+      "lesson": 3,
+      "skill": "xingjinzi",
+      "explain": {
+       "why": "“表扬”是称赞的意思，老师称赞学生回答得好，用“扬”字。",
+       "distractors": [
+        "“杨”是杨树，“表杨”不通。",
+        "“阳”是太阳，“表阳”不通。",
+        "“洋”是海洋，“表洋”不通。",
+        "✓ 正确答案：表扬＝称赞。"
+       ],
+       "trapType": "xingjinzi",
+       "memoryTip": "四个字都有“阝”或“木”旁，读音相近。“扬”有提手旁，表扬是把人“举起来”夸奖。"
+      },
+      "explanation": "“表扬”是称赞的意思，老师称赞学生回答得好，用“扬”字。 四个字都有“阝”或“木”旁，读音相近。“扬”有提手旁，表扬是把人“举起来”夸奖。",
+      "explanation_en": "表扬 ('praise') means to praise; the teacher praises the student for answering well, so use 扬. 扬 has the 'hand' part 扌 — 表扬 is like lifting someone up to praise them."
+     },
+     {
+      "id": "ZS05_A5",
+      "topic": "HanziMcq",
+      "sentence": "我们要爱______学校里的花草树木。",
+      "options": [
+       "护",
+       "互",
+       "沪",
+       "户"
+      ],
+      "answer": 0,
+      "lesson": 4,
+      "skill": "tongyinzi",
+      "explain": {
+       "why": "“爱护”表示关心保护，爱护花草树木是正确的做法。",
+       "distractors": [
+        "✓ 正确答案：爱护＝关心保护。",
+        "“互”是互相，“爱互”不通。",
+        "“沪”是上海的简称，“爱沪”在这里不通。",
+        "“户”是门户，“爱户”不通。"
+       ],
+       "trapType": "tongyinzi",
+       "memoryTip": "“护”有提手旁，用手保护就是“护”。爱护＝用心保护。"
+      },
+      "explanation": "“爱护”表示关心保护，爱护花草树木是正确的做法。 “护”有提手旁，用手保护就是“护”。爱护＝用心保护。",
+      "explanation_en": "爱护 ('cherish, protect') means to care for and protect; caring for flowers and trees is the right thing to do. 护 has the 'hand' part 扌 — protecting with the hand. 爱护 = protect with heart."
+     }
+    ]
+   },
+   {
+    "type": "PinyinMcq",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS05_B1",
+      "topic": "PinyinMcq",
+      "sentence": "小华每天早上都很{u}准时{/u}到学校。",
+      "options": [
+       "zhùn shí",
+       "zhǔn shí",
+       "zhǔn sí",
+       "zhùn sí"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“准”读 zhǔn（第三声），“时”读 shí（第二声）。合起来是 zhǔn shí。",
+       "distractors": [
+        "“准”是第三声 zhǔn，不是第四声 zhùn。",
+        "✓ 正确答案：zhǔn shí。",
+        "“时”是 shí，不是 sí，声母是 sh 不是 s。",
+        "“准”声调错，“时”声母也错，两处都不对。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“准”第三声，声音先低后高；“时”第二声，声音往上走。zhǔn shí。"
+      },
+      "explanation": "“准”读 zhǔn（第三声），“时”读 shí（第二声）。合起来是 zhǔn shí。 “准”第三声，声音先低后高；“时”第二声，声音往上走。zhǔn shí。",
+      "explanation_en": "准 is read zhǔn (3rd tone) and 时 is read shí (2nd tone); together it is zhǔn shí. 准 is 3rd tone, low then high; 时 is 2nd tone, rising. zhǔn shí."
+     },
+     {
+      "id": "ZS05_B2",
+      "topic": "PinyinMcq",
+      "sentence": "同学们在操场上{u}跑步{/u}，个个都很开心。",
+      "options": [
+       "páo bù",
+       "pǎo pù",
+       "pǎo bù",
+       "páo pù"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "shengdiao",
+      "explain": {
+       "why": "“跑”读 pǎo（第三声），“步”读 bù（第四声）。合起来是 pǎo bù。",
+       "distractors": [
+        "“跑”是第三声 pǎo，不是第二声 páo。",
+        "“步”是 bù，不是 pù，声母是 b 不是 p。",
+        "✓ 正确答案：pǎo bù。",
+        "“跑”声调错，“步”声母也错。"
+       ],
+       "trapType": "shengdiao",
+       "memoryTip": "“跑”第三声像跑步时弯腰的样子；“步”第四声，每步都踩实。pǎo bù。"
+      },
+      "explanation": "“跑”读 pǎo（第三声），“步”读 bù（第四声）。合起来是 pǎo bù。 “跑”第三声像跑步时弯腰的样子；“步”第四声，每步都踩实。pǎo bù。",
+      "explanation_en": "跑 is read pǎo (3rd tone) and 步 is read bù (4th tone); together it is pǎo bù. 跑 is 3rd tone, like bending while running; 步 is 4th tone, each step firm. pǎo bù."
+     },
+     {
+      "id": "ZS05_B3",
+      "topic": "PinyinMcq",
+      "sentence": "这道数学题很{u}难{/u}，我想了很久才做出来。",
+      "options": [
+       "nàn",
+       "láng",
+       "lán",
+       "nán"
+      ],
+      "answer": 3,
+      "lesson": 3,
+      "skill": "duoyinzi",
+      "explain": {
+       "why": "“难”在这里表示“不容易”，读 nán（第二声）。“难”还有另一个读音 nàn，表示“灾难”，这里不适用。",
+       "distractors": [
+        "nàn 是“难”的另一个读音，表示灾难，不适合这句话。",
+        "láng 不是“难”的读音，是别的字。",
+        "lán 也不是“难”的读音，是别的字。",
+        "✓ 正确答案：nán，表示不容易。"
+       ],
+       "trapType": "duoyinzi",
+       "memoryTip": "“难”有两个读音：nán（困难）和 nàn（灾难）。题目很难用 nán。"
+      },
+      "explanation": "“难”在这里表示“不容易”，读 nán（第二声）。“难”还有另一个读音 nàn，表示“灾难”，这里不适用。 “难”有两个读音：nán（困难）和 nàn（灾难）。题目很难用 nán。",
+      "explanation_en": "Here 难 means 'not easy' and is read nán (2nd tone). 难 also has another reading, nàn, meaning 'disaster', which does not fit here. A hard question uses nán."
+     },
+     {
+      "id": "ZS05_B4",
+      "topic": "PinyinMcq",
+      "sentence": "老师把我们的{u}作业{/u}本发下来了。",
+      "options": [
+       "zuò yè",
+       "zuó yè",
+       "zuò yé",
+       "zuó yé"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "shengmu_yunmu",
+      "explain": {
+       "why": "“作”读 zuò（第四声），“业”读 yè（第四声）。合起来是 zuò yè。",
+       "distractors": [
+        "✓ 正确答案：zuò yè。",
+        "“作”是第四声 zuò，不是第二声 zuó。",
+        "“业”是第四声 yè，不是第二声 yé。",
+        "“作”和“业”声调都错。"
+       ],
+       "trapType": "shengmu_yunmu",
+       "memoryTip": "“作业”两个字都是第四声，声音都往下走：zuò yè。"
+      },
+      "explanation": "“作”读 zuò（第四声），“业”读 yè（第四声）。合起来是 zuò yè。 “作业”两个字都是第四声，声音都往下走：zuò yè。",
+      "explanation_en": "作 is read zuò (4th tone) and 业 is read yè (4th tone); together it is zuò yè. Both characters are 4th tone, both reading downward: zuò yè."
+     }
+    ]
+   },
+   {
+    "type": "VocabMcq",
+    "marks": 5,
+    "variant": "mcq4",
+    "items": [
+     {
+      "id": "ZS05_C1",
+      "topic": "VocabMcq",
+      "sentence": "小丽把教室里的黑板______得干干净净。",
+      "options": [
+       "洗",
+       "擦",
+       "扫",
+       "刷"
+      ],
+      "answer": 1,
+      "lesson": 1,
+      "skill": "dapei",
+      "explain": {
+       "why": "黑板要用布或黑板擦来擦，“擦黑板”是固定搭配。",
+       "distractors": [
+        "“洗”是用水清洗，不能“洗黑板”。",
+        "✓ 正确答案：擦黑板＝用黑板擦把黑板弄干净。",
+        "“扫”是用扫把扫地，不能“扫黑板”。",
+        "“刷”是用刷子刷，不能“刷黑板”。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "记固定搭配：擦黑板、扫地板、洗碗。黑板要“擦”。"
+      },
+      "explanation": "黑板要用布或黑板擦来擦，“擦黑板”是固定搭配。 记固定搭配：擦黑板、扫地板、洗碗。黑板要“擦”。",
+      "explanation_en": "You wipe a blackboard with a cloth or eraser, so 擦黑板 ('wipe the blackboard') is a fixed phrase. Learn fixed matches: 擦黑板 (wipe the board), 扫地板 (sweep the floor), 洗碗 (wash dishes)."
+     },
+     {
+      "id": "ZS05_C2",
+      "topic": "VocabMcq",
+      "sentence": "上课时，同学们都______地听老师讲课。",
+      "options": [
+       "高兴",
+       "勇敢",
+       "认真",
+       "大声"
+      ],
+      "answer": 2,
+      "lesson": 2,
+      "skill": "vocab_in_context",
+      "explain": {
+       "why": "听老师讲课要用心，“认真”表示专注、不马虎，最合适。",
+       "distractors": [
+        "“高兴”是心情好，不能形容听讲的态度。",
+        "“勇敢”是不怕困难，不能形容听讲。",
+        "✓ 正确答案：认真＝专注、用心。",
+        "“大声”地听讲说法不通，听讲不需要大声。"
+       ],
+       "trapType": "vocab_in_context",
+       "memoryTip": "听讲要“认真”，表示用心专注。大声是说话的方式，不是听讲的态度。"
+      },
+      "explanation": "听老师讲课要用心，“认真”表示专注、不马虎，最合适。听讲要“认真”，表示用心专注。大声是说话的方式，不是听讲的态度。",
+      "explanation_en": "You must listen carefully to the teacher; 认真 ('careful, attentive') means focused and not sloppy, which fits best. 大声 (loud) is a way of speaking, not an attitude for listening."
+     },
+     {
+      "id": "ZS05_C3",
+      "topic": "VocabMcq",
+      "sentence": "老师送给我______故事书，我高兴极了。",
+      "options": [
+       "一张",
+       "一条",
+       "一块",
+       "一本"
+      ],
+      "answer": 3,
+      "lesson": 3,
+      "skill": "liangci",
+      "explain": {
+       "why": "书要用量词“本”，“一本故事书”是正确的搭配。",
+       "distractors": [
+        "“一张”用于纸、桌子等，不用于书。",
+        "“一条”用于鱼、绳子等，不用于书。",
+        "“一块”用于蛋糕、石头等，不用于书。",
+        "✓ 正确答案：一本故事书＝书的量词是“本”。"
+       ],
+       "trapType": "liangci",
+       "memoryTip": "书＝一本书；纸＝一张纸；鱼＝一条鱼。记住每样东西对应的量词。"
+      },
+      "explanation": "书要用量词“本”，“一本故事书”是正确的搭配。 书＝一本书；纸＝一张纸；鱼＝一条鱼。记住每样东西对应的量词。",
+      "explanation_en": "Books use the measure word 本, so '一本故事书' (one storybook) is correct. Book = 一本书; paper = 一张纸; fish = 一条鱼."
+     },
+     {
+      "id": "ZS05_C4",
+      "topic": "VocabMcq",
+      "sentence": "小文考试得了满分，心里______极了。",
+      "options": [
+       "高兴",
+       "难过",
+       "害怕",
+       "生气"
+      ],
+      "answer": 0,
+      "lesson": 1,
+      "skill": "jinyici",
+      "explain": {
+       "why": "考试得满分是好事，心里应该是“高兴”，表示开心快乐。",
+       "distractors": [
+        "✓ 正确答案：高兴＝开心快乐。",
+        "“难过”是伤心，考满分不会难过。",
+        "“害怕”是恐惧，考满分不会害怕。",
+        "“生气”是愤怒，考满分不会生气。"
+       ],
+       "trapType": "jinyici",
+       "memoryTip": "考满分是好事，好事让人“高兴”。看句子里的事情是好事还是坏事，再选心情词。"
+      },
+      "explanation": "考试得满分是好事，心里应该是“高兴”，表示开心快乐。 考满分是好事，好事让人“高兴”。看句子里的事情是好事还是坏事，再选心情词。",
+      "explanation_en": "Getting full marks is a good thing, so the feeling should be 高兴 ('happy'). Look at whether the thing in the sentence is good or bad, then choose the mood word."
+     },
+     {
+      "id": "ZS05_C5",
+      "topic": "VocabMcq",
+      "sentence": "我们要______同学，不可以欺负比自己小的同学。",
+      "options": [
+       "打扰",
+       "帮助",
+       "嘲笑",
+       "命令"
+      ],
+      "answer": 1,
+      "lesson": 4,
+      "skill": "dapei",
+      "explain": {
+       "why": "对同学要友好，“帮助同学”表示给同学提供支持，最合适。",
+       "distractors": [
+        "“打扰”是妨碍别人，不是正确对待同学的方式。",
+        "✓ 正确答案：帮助同学＝给同学提供支持。",
+        "“嘲笑”是取笑别人，和“不可以欺负”语境相反，不合题意。",
+        "“命令”是叫别人做事，态度不友好，不合题意。"
+       ],
+       "trapType": "dapei",
+       "memoryTip": "对同学要“帮助”，帮助＝给予支持。嘲笑和命令都是不友好的行为。"
+      },
+      "explanation": "对同学要友好，“帮助同学”表示给同学提供支持，最合适。对同学要“帮助”，帮助＝给予支持。嘲笑和命令都是不友好的行为。",
+      "explanation_en": "You should be friendly to classmates; 帮助同学 ('help classmates') means giving classmates support, which fits best. Mocking and ordering are unfriendly acts."
+     }
+    ]
+   },
+   {
+    "type": "VocabMatch",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS05_D",
+      "topic": "VocabMatch",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "举手",
+       "课室",
+       "用功",
+       "铅笔",
+       "下课",
+       "跳绳"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "认真（）读书",
+        "answer": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“用功读书”表示努力认真地学习，搭配自然。",
+         "distractors": [
+          "举手：认真举手读书不通。",
+          "课室：认真课室读书不通。",
+          "✓ 正确答案：认真用功读书。",
+          "铅笔：认真铅笔读书不通。",
+          "下课：认真下课读书不通。",
+          "跳绳：认真跳绳读书不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“用功”表示努力，用功读书＝努力学习。"
+        },
+        "explanation": "“用功读书”表示努力认真地学习，搭配自然。",
+        "explanation_en": "“用功读书” ('study hard') means to study hard and carefully — a natural match."
+       },
+       {
+        "num": 2,
+        "stem": "打扫（）",
+        "answer": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“课室”是教室，“打扫课室”表示把教室打扫干净，搭配正确。",
+         "distractors": [
+          "举手：打扫举手不通。",
+          "✓ 正确答案：打扫课室。",
+          "用功：打扫用功不通。",
+          "铅笔：打扫铅笔不通。",
+          "下课：打扫下课不通。",
+          "跳绳：打扫跳绳不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“打扫＋地方”，课室是地方，所以打扫课室。"
+        },
+        "explanation": "“课室”是教室，“打扫课室”表示把教室打扫干净，搭配正确。",
+        "explanation_en": "课室 is the classroom; '打扫课室' (clean the classroom) means to clean the classroom, which is correct."
+       },
+       {
+        "num": 3,
+        "stem": "（）回答问题",
+        "answer": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "回答问题前要先举手，“举手回答问题”是课堂上的固定做法。",
+         "distractors": [
+          "✓ 正确答案：举手回答问题。",
+          "课室：课室回答问题不通。",
+          "用功：用功回答问题搭配不自然。",
+          "铅笔：铅笔回答问题不通。",
+          "下课：下课回答问题不通。",
+          "跳绳：跳绳回答问题不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“举手”是课堂礼仪，举手才能回答问题。"
+        },
+        "explanation": "回答问题前要先举手，“举手回答问题”是课堂上的固定做法。",
+        "explanation_en": "You must raise your hand before answering; '举手回答问题' (raise your hand to answer) is the usual classroom rule."
+       },
+       {
+        "num": 4,
+        "stem": "用（）写字",
+        "answer": 3,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "“铅笔”是写字用的文具，“用铅笔写字”搭配正确。",
+         "distractors": [
+          "举手：用举手写字不通。",
+          "课室：用课室写字不通。",
+          "用功：用用功写字不通。",
+          "✓ 正确答案：用铅笔写字。",
+          "下课：用下课写字不通。",
+          "跳绳：用跳绳写字不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“用＋工具＋动作”，铅笔是工具，所以用铅笔写字。"
+        },
+        "explanation": "“铅笔”是写字用的文具，“用铅笔写字”搭配正确。",
+        "explanation_en": "铅笔 ('pencil') is a tool for writing; '用铅笔写字' (write with a pencil) is correct."
+       },
+       {
+        "num": 5,
+        "stem": "（）后在操场玩",
+        "answer": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“下课后在操场玩”表示课结束后去操场，搭配自然。",
+         "distractors": [
+          "举手：举手后在操场玩不通。",
+          "课室：课室后在操场玩不通。",
+          "用功：用功后在操场玩不通。",
+          "铅笔：铅笔后在操场玩不通。",
+          "✓ 正确答案：下课后在操场玩。",
+          "跳绳：跳绳后在操场玩搭配勉强，不如下课准确。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“下课”是时间节点，下课后才能去玩。"
+        },
+        "explanation": "“下课后在操场玩”表示课结束后去操场，搭配自然。",
+        "explanation_en": "“下课后在操场玩” ('play on the playground after class') means going to the playground after class — a natural match."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "SentenceCraft",
+    "marks": 4,
+    "items": [
+     {
+      "id": "ZS05_E1",
+      "subtype": "combine",
+      "connector": "因为……所以",
+      "sentenceA": "小华上课时认真听讲。",
+      "sentenceB": "小华每次考试都考得很好。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "因为小华上课时认真听讲，所以每次考试都考得很好。",
+      "marks": 2,
+      "lesson": 1,
+      "skill": "lianci",
+      "explain": {
+       "why": "“因为……所以……”表示原因和结果的关系。“因为小华上课时认真听讲”是原因，“所以每次考试都考得很好”是结果。",
+       "distractors": [
+        "不能只写“小华上课时认真听讲，每次考试都考得很好”——少了“因为……所以”，就看不出原因和结果的关系。",
+        "“因为”放在原因句前，“所以”放在结果句前，位置不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“因为……所以……”＝原因在前，结果在后。因为（原因），所以（结果）。"
+      },
+      "explanation": "“因为……所以……”表示原因和结果的关系。“因为小华上课时认真听讲”是原因，“所以每次考试都考得很好”是结果。 “因为……所以……”＝原因在前，结果在后。因为（原因），所以（结果）。",
+      "explanation_en": "“因为……所以……” ('because…, so…') shows cause and result. '因为小华上课时认真听讲' (because Xiaohua listens carefully in class) is the cause, and '所以每次考试都考得很好' (so he does well in every test) is the result."
+     },
+     {
+      "id": "ZS05_E2",
+      "subtype": "combine",
+      "connector": "虽然……但是",
+      "sentenceA": "这道数学题很难。",
+      "sentenceB": "小明没有放弃，一直努力做。",
+      "instruction": "用括号里的关联词把两个句子合并成一句。",
+      "answer": "虽然这道数学题很难，但是小明没有放弃，一直努力做。",
+      "marks": 2,
+      "lesson": 2,
+      "skill": "lianci",
+      "explain": {
+       "why": "“虽然……但是……”表示转折关系，前面说困难，后面说克服困难。“虽然这道数学题很难”是前提，“但是小明没有放弃”是转折。",
+       "distractors": [
+        "不能只写“这道数学题很难，小明没有放弃”——少了“虽然……但是”，就看不出转折的意思。",
+        "“虽然”放在前一句，“但是”放在后一句，不能颠倒。"
+       ],
+       "trapType": "lianci",
+       "memoryTip": "“虽然……但是……”＝前面是困难，后面是克服。虽然（困难），但是（努力）。"
+      },
+      "explanation": "“虽然……但是……”表示转折关系，前面说困难，后面说克服困难。“虽然这道数学题很难”是前提，“但是小明没有放弃”是转折。 “虽然……但是……”＝前面是困难，后面是克服。虽然（困难），但是（努力）。",
+      "explanation_en": "“虽然……但是……” ('although…, …') shows a turn: the first says a difficulty, the second says overcoming it. '虽然这道数学题很难' (although this maths problem is hard) turns to '但是小明没有放弃' (but Xiaoming did not give up)."
+     }
+    ]
+   },
+   {
+    "type": "PassageCloze",
+    "marks": 5,
+    "items": [
+     {
+      "id": "ZS05_F",
+      "topic": "PassageCloze",
+      "passage": "今天是学校的清洁日。老师叫同学们把课室打扫得 (1) ___ 。小文负责擦黑板，他擦得非常 (2) ___ 。小丽负责扫地，她 (3) ___ 地把每个角落都扫干净了。大家合力把课室整理好以后，都感到很 (4) ___ 。老师看了，笑着说同学们真的很 (5) ___ 。",
+      "wordBank": [
+       "干净",
+       "认真",
+       "仔细",
+       "高兴",
+       "勤劳",
+       "漂亮"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "干净",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "打扫课室的目的是让课室变得“干净”，没有脏东西。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "打扫＋干净，打扫是为了让地方干净。"
+        },
+        "explanation": "打扫课室的目的是让课室变得“干净”，没有脏东西。",
+        "explanation_en": "The purpose of cleaning the classroom is to make it 干净 ('clean'), with no dirt."
+       },
+       {
+        "num": 2,
+        "answer": "认真",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "擦黑板擦得好，说明小文做事用心，用“认真”形容最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "做事用心＝认真。擦得非常认真，说明很用心。"
+        },
+        "explanation": "擦黑板擦得好，说明小文做事用心，用“认真”形容最合适。",
+        "explanation_en": "Wiping the blackboard well shows Xiaowen does things attentively, so 认真 ('careful, serious') describes it best."
+       },
+       {
+        "num": 3,
+        "answer": "仔细",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "小丽把每个角落都扫干净，说明她做事细心，用“仔细”最合适。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“仔细”表示做事细心，每个角落都不放过，就是仔细。"
+        },
+        "explanation": "小丽把每个角落都扫干净，说明她做事细心，用“仔细”最合适。",
+        "explanation_en": "Xiaoli sweeps every corner clean, showing she does things carefully, so 仔细 ('careful, thorough') fits best."
+       },
+       {
+        "num": 4,
+        "answer": "高兴",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "大家合力完成了任务，心里感到开心，用“高兴”表示心情愉快。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "完成任务＝高兴。高兴表示心情好、开心。"
+        },
+        "explanation": "大家合力完成了任务，心里感到开心，用“高兴”表示心情愉快。",
+        "explanation_en": "Everyone finishes the task together and feels happy, so 高兴 ('happy') shows the joyful mood."
+       },
+       {
+        "num": 5,
+        "answer": "勤劳",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "同学们努力打扫课室，老师称赞他们“勤劳”，表示勤快努力。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“勤劳”表示勤快、努力工作。老师称赞同学们勤劳，因为他们认真打扫。"
+        },
+        "explanation": "同学们努力打扫课室，老师称赞他们“勤劳”，表示勤快努力。",
+        "explanation_en": "The classmates work hard to clean the classroom, and the teacher praises them as 勤劳 ('hardworking'), meaning diligent."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingMcq",
+    "marks": 3,
+    "items": [
+     {
+      "id": "ZS05_G",
+      "topic": "ReadingMcq",
+      "passage": "小明是三年级的学生。他每天早上七点半到学校，从不迟到。上课时，他认真听老师讲课，有问题就举手发问。下课后，他帮老师把作业本收好，再去操场和同学们一起玩。小明的同学都很喜欢他，因为他不只学习好，还很乐于帮助别人。老师也常常表扬他，说他是大家学习的好榜样。",
+      "questions": [
+       {
+        "id": "ZS05_G1",
+        "format": "mcq",
+        "stem": "小明每天几点到学校？",
+        "options": [
+         "七点。",
+         "七点半。",
+         "八点。"
+        ],
+        "answer": 1,
+        "lesson": 1,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“他每天早上七点半到学校”，所以是七点半。",
+         "distractors": [
+          "七点是干扰，文中没有提到七点。",
+          "✓ 正确答案：七点半（文中明确说明）。",
+          "八点是干扰，文中没有提到八点。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题要回原文找数字。文中写“七点半”，不要被七点或八点骗到。"
+        },
+        "explanation": "文中说“他每天早上七点半到学校”，所以是七点半。 细节题要回原文找数字。文中写“七点半”，不要被七点或八点骗到。",
+        "explanation_en": "The passage says '他每天早上七点半到学校' (he arrives at school at 7:30 every morning), so it is 7:30. For detail questions, go back to the passage to find the number — don't be tricked by 7:00 or 8:00."
+       },
+       {
+        "id": "ZS05_G2",
+        "format": "mcq",
+        "stem": "为什么同学们都喜欢小明？",
+        "options": [
+         "因为他每天都不迟到。",
+         "因为老师常常表扬他。",
+         "因为他学习好，也乐于帮助别人。"
+        ],
+        "answer": 2,
+        "lesson": 2,
+        "skill": "inference",
+        "explain": {
+         "why": "文中说“因为他不只学习好，还很乐于帮助别人”，这是同学喜欢他的原因。",
+         "distractors": [
+          "不迟到是他的好习惯，但不是同学喜欢他的原因。",
+          "老师表扬他是结果，不是同学喜欢他的原因。",
+          "✓ 正确答案：学习好＋乐于帮助别人（文中明确说明）。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "“为什么”题要找原因句，文中“因为”后面的内容就是答案。"
+        },
+        "explanation": "文中说“因为他不只学习好，还很乐于帮助别人”，这是同学喜欢他的原因。 “为什么”题要找原因句，文中“因为”后面的内容就是答案。",
+        "explanation_en": "The passage says '因为他不只学习好，还很乐于帮助别人' (because he not only studies well but also loves to help others) — this is why classmates like him. For 'why' questions, the words after 因为 ('because') are the answer."
+       },
+       {
+        "id": "ZS05_G3",
+        "format": "mcq",
+        "stem": "这篇短文主要说的是什么？",
+        "options": [
+         "小明是一个好学生，学习认真，也乐于助人。",
+         "小明每天帮老师收作业本。",
+         "老师喜欢表扬学生。"
+        ],
+        "answer": 0,
+        "lesson": 3,
+        "skill": "main_idea",
+        "explain": {
+         "why": "短文从头到尾都在说小明是好学生，学习认真、帮助别人，这是主要内容。",
+         "distractors": [
+          "✓ 正确答案：短文主要说小明是好学生，学习认真，也乐于助人。",
+          "帮老师收作业本只是短文中的一个细节，不是主要内容。",
+          "老师表扬学生只是短文的一个细节，不是主要内容。"
+         ],
+         "trapType": "main_idea",
+         "memoryTip": "主旨题要看整篇文章说的是谁、做了什么，不要只看一个细节。"
+        },
+        "explanation": "短文从头到尾都在说小明是好学生，学习认真、帮助别人，这是主要内容。 主旨题要看整篇文章说的是谁、做了什么，不要只看一个细节。",
+        "explanation_en": "From start to end the passage is about Xiaoming being a good student who studies hard and helps others — this is the main idea. For main-idea questions, look at who the whole passage is about, not just one detail."
+       }
+      ]
+     }
+    ]
+   },
+   {
+    "type": "ReadingOpen",
+    "marks": 6,
+    "items": [
+     {
+      "id": "ZS05_H",
+      "topic": "ReadingOpen",
+      "passage": "今天是星期五，学校举行了读书分享会。每个同学都带了一本自己最喜欢的书来介绍。轮到小芳时，她站起来，大声地把书里的故事说给大家听。她说得很清楚，同学们都听得入神。老师笑着说小芳说得非常好，叫大家为她鼓掌。小芳听了，脸红了，但心里非常高兴。她说，以后她要多读书，把更多好故事分享给大家。",
+      "questions": [
+       {
+        "id": "ZS05_H1",
+        "format": "fill_word",
+        "stem": "从短文中找出一个和“开心”意思相近的词语。",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "answer": "高兴",
+        "explain": {
+         "why": "“高兴”和“开心”都表示心情好、快乐，短文中有“心里非常高兴”。",
+         "distractors": [],
+         "trapType": "jinyici",
+         "memoryTip": "“高兴”＝“开心”，都表示快乐的心情。"
+        },
+        "explanation": "“高兴”和“开心”都表示心情好、快乐，短文中有“心里非常高兴”。 “高兴”＝“开心”，都表示快乐的心情。",
+        "explanation_en": "高兴 and 开心 both mean feeling good and happy; the passage has '心里非常高兴' (very happy inside). 高兴 = 开心, both a happy mood."
+       },
+       {
+        "id": "ZS05_H2",
+        "format": "open_sentence",
+        "stem": "同学们为什么听得入神？",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "detail",
+        "answer": "因为小芳把书里的故事说得很清楚，所以同学们都听得入神。",
+        "explain": {
+         "why": "文中说“她说得很清楚，同学们都听得入神”，说明是因为小芳说得清楚。",
+         "distractors": [],
+         "trapType": "detail",
+         "memoryTip": "找原因要看“因为”或前后句的关系，小芳说得清楚所以大家入神。"
+        },
+        "explanation": "文中说“她说得很清楚，同学们都听得入神”，说明是因为小芳说得清楚。",
+        "explanation_en": "The passage says '她说得很清楚，同学们都听得入神' (she spoke very clearly, and the classmates listened closely), showing it is because Xiaofang spoke clearly."
+       },
+       {
+        "id": "ZS05_H3",
+        "format": "open_sentence",
+        "stem": "小芳说以后她要做什么？",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "answer": "小芳说以后她要多读书，把更多好故事分享给大家。",
+        "explain": {
+         "why": "文中最后一句说“以后她要多读书，把更多好故事分享给大家”，这就是小芳的计划。",
+         "distractors": [],
+         "trapType": "detail",
+         "memoryTip": "细节题要回原文找，最后一句话就是答案。"
+        },
+        "explanation": "文中最后一句说“以后她要多读书，把更多好故事分享给大家”，这就是小芳的计划。",
+        "explanation_en": "The last sentence says '以后她要多读书，把更多好故事分享给大家' (from now on she will read more and share more good stories with everyone) — this is Xiaofang's plan."
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+]

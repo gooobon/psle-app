@@ -1,0 +1,217 @@
+{
+ "setId": "ZS46",
+ "mcq": {
+  "ZS46_A1": {
+   "sentence_en": "The puppy ___ (sniffed) the smell with its nose and found the bone hidden in the grass.",
+   "hints": ["The blank + 气味 means to sense a smell with the nose. Which character (with 耳 inside the gate 门) means 'to smell'?"],
+   "keywords": [{"w":"闻","py":"wén","en":"to smell"},{"w":"气味","py":"qìwèi","en":"smell"},{"w":"骨头","py":"gǔtou","en":"bone"}],
+   "explanation_en": "闻 means to sense a smell with the nose, so 闻气味 (smell the scent) is correct. The four sound alike; 闻 has 耳 inside the gate 门 - though it has 耳, it means to smell. Judge by radical: ear inside a gate = 闻."
+  },
+  "ZS46_A2": {
+   "sentence_en": "This kitten's fur is both ___ (fine) and soft, nice to touch.",
+   "hints": ["又___又软 (both ___ and soft) describes the feel of fur. Which character (an adjective, with the silk radical 纟) means 'fine / slender'?"],
+   "keywords": [{"w":"细","py":"xì","en":"fine; slender"},{"w":"猫毛","py":"māo máo","en":"cat fur"},{"w":"柔软","py":"róuruǎn","en":"soft"}],
+   "explanation_en": "又细又软 describes fur that is fine and soft, so 细 fits. 细 is an adjective, usable in 又___又软. 丝 and 绒 relate to fur but are nouns, which cannot go in 又___又."
+  },
+  "ZS46_A3": {
+   "sentence_en": "The bird stood on the branch, ceaselessly ___ (flapping) its wings, ready to fly off.",
+   "hints": ["The blank + 翅膀 means to move the wings up and down with force. Which character (with the hand radical 扌) means 'to flap / fan'?"],
+   "keywords": [{"w":"扇","py":"shān","en":"to flap; fan"},{"w":"翅膀","py":"chìbǎng","en":"wings"},{"w":"飞","py":"fēi","en":"to fly"}],
+   "explanation_en": "扇 (with the hand radical 扌) means to move something up and down with force, so 扇翅膀 (flapping wings) is correct. The four sound alike; 扇 has the hand radical 扌 - fanning with the hand or flapping wings. The hand radical shows a hand action."
+  },
+  "ZS46_A4": {
+   "sentence_en": "In the zoo, the elephant ___ (rolled) up a bucket of water with its long trunk and soaked itself.",
+   "hints": ["The blank means to bend and wind around. Which character (a verb with no radical) means 'to roll up'?"],
+   "keywords": [{"w":"卷","py":"juǎn","en":"to roll up"},{"w":"大象","py":"dàxiàng","en":"elephant"},{"w":"淋湿","py":"línshī","en":"to soak"}],
+   "explanation_en": "卷 means to bend and wind around, so the elephant's trunk 卷起 (rolling up) the bucket is correct. The four look alike; 卷 has no radical and is a verb, usable in 卷起来. 券 has the knife radical and means a ticket."
+  },
+  "ZS46_A5": {
+   "sentence_en": "The fish in the river ___ (swim) freely, and look very happy.",
+   "hints": ["The blank means to move in water. Which character (with the water radical 氵) means 'to swim', and can stand on its own?"],
+   "keywords": [{"w":"游","py":"yóu","en":"to swim"},{"w":"鱼儿","py":"yú'ér","en":"fish"},{"w":"自由自在","py":"zìyóu-zìzài","en":"free and easy"}],
+   "explanation_en": "游 means to move in water, so 游着 describes fish moving freely, which fits best. Fish move in water using 游, not 泳; 游 can stand alone, while 泳 must join 游 (游泳) to read smoothly."
+  },
+  "ZS46_B1": {
+   "sentence_en": "Xiaoming found a 蜥蜴 (lizard) on the grass and jumped up in fright.",
+   "hints": ["蜥 is 1st tone (xī); 蜴 is 4th tone (yì). Which choice is xī + yì?"],
+   "keywords": [{"w":"蜥蜴","py":"xīyì","en":"lizard"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"吓","py":"xià","en":"to frighten"}],
+   "explanation_en": "蜥 is read xī (1st tone) and 蜴 is yì (4th tone), together xī yì. 蜥蜴: the first character is 1st tone (xī), the second is 4th tone (yì) - one high, one low, like the darting rhythm of a lizard."
+  },
+  "ZS46_B2": {
+   "sentence_en": "This little 熊猫 (panda) eats a lot of bamboo every day.",
+   "hints": ["熊 has the final -iong (xióng); 猫 is 1st tone (māo). Which choice is xióng + māo?"],
+   "keywords": [{"w":"熊猫","py":"xióngmāo","en":"panda"},{"w":"竹子","py":"zhúzi","en":"bamboo"},{"w":"很多","py":"hěn duō","en":"a lot"}],
+   "explanation_en": "熊 is read xióng (final -iong, 2nd tone) and 猫 is māo (1st tone), together xióng māo. The final of 熊 is -iong - do not drop the i; 猫 is 1st tone māo, long and level like a cat's cry."
+  },
+  "ZS46_B3": {
+   "sentence_en": "The rooster 啼叫 (crows) every morning and wakes everyone up.",
+   "hints": ["啼 has initial t (tí), not d; 叫 is 4th tone (jiào). Which choice is tí + jiào?"],
+   "keywords": [{"w":"啼叫","py":"tíjiào","en":"to crow"},{"w":"公鸡","py":"gōngjī","en":"rooster"},{"w":"叫醒","py":"jiàoxǐng","en":"to wake up"}],
+   "explanation_en": "啼 is read tí (initial t, 2nd tone) and 叫 is jiào (4th tone), together tí jiào. t and d are both tongue-tip sounds; the difference is t is aspirated, d is not. 啼 is the aspirated t."
+  },
+  "ZS46_B4": {
+   "sentence_en": "This snake will 蜕皮 (shed its skin) and put on new skin.",
+   "hints": ["蜕 has only one reading, tuì (4th tone); 皮 is pí (2nd tone). Which choice is tuì + pí?"],
+   "keywords": [{"w":"蜕皮","py":"tuìpí","en":"to shed skin"},{"w":"蛇","py":"shé","en":"snake"},{"w":"皮肤","py":"pífū","en":"skin"}],
+   "explanation_en": "蜕 has one reading, tuì (4th tone), and 皮 is pí (2nd tone), together tuì pí. 蜕 is read tuì, 4th tone, like a snake pulling down as it sheds. Do not confuse it with 对 duì; 蜕 has the insect radical 虫."
+  },
+  "ZS46_C1": {
+   "sentence_en": "Seeing its owner come home, the puppy happily ___ (wagged) its tail and ran up.",
+   "hints": ["Clue: it pairs with 尾巴 (tail) - the tail swinging to and fro. Which word means 'to wag'?"],
+   "keywords": [{"w":"摇","py":"yáo","en":"to wag"},{"w":"尾巴","py":"wěiba","en":"tail"},{"w":"主人","py":"zhǔrén","en":"owner"}],
+   "explanation_en": "摇尾巴 is a fixed pairing meaning a tail swinging to and fro, the movement a dog makes when happy. Fixed pairing: 摇 + 尾巴 / 头. A happy dog 摇尾巴 (wags its tail); a person 摇头 (shakes the head) to disagree. 举, 拉 and 推 do not fit."
+  },
+  "ZS46_C2": {
+   "sentence_en": "We found ___ (a group of) ants on the grass, carrying food.",
+   "hints": ["Clue: 'carrying food' shows there are many ants. Which measure word means 'a group / swarm'?"],
+   "keywords": [{"w":"群","py":"qún","en":"a group; swarm"},{"w":"蚂蚁","py":"mǎyǐ","en":"ant"},{"w":"搬运","py":"bānyùn","en":"to carry"}],
+   "explanation_en": "Ants usually act in numbers, and 'carrying food' shows a whole swarm, so the measure word 群 fits best. Measure-word rhyme: 一匹马, 一条鱼, 一只鸟, 一群蚂蚁. Small animals acting in numbers use 群. 条, 只 and 匹 do not fit ants here."
+  },
+  "ZS46_C3": {
+   "sentence_en": "This little rabbit is hurt; we must ___ (look after) it well so it recovers soon.",
+   "hints": ["Clue: an injured rabbit needs daily feeding, dressing and tending. Which word means 'to look after / care for the injured'?"],
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"康复","py":"kāngfù","en":"to recover"}],
+   "explanation_en": "An injured rabbit needs feeding, dressing and tending, so 照顾 (to look after and nurse) fits best. Injured -> needs 照顾 (feeding + dressing + tending). 保护 is preventing injury; 照顾 is nursing after injury. 帮助 and 陪伴 are less exact here."
+  },
+  "ZS46_C4": {
+   "sentence_en": "The owl ___ (sleeps) during the day and only comes out to move about at night.",
+   "hints": ["Clue: an owl is a night animal, sleeping soundly in a hollow by day. Which word means 'to sleep', more specific than just 'to rest'?"],
+   "keywords": [{"w":"睡觉","py":"shuìjiào","en":"to sleep"},{"w":"猫头鹰","py":"māotóuyīng","en":"owl"},{"w":"夜晚","py":"yèwǎn","en":"night"}],
+   "explanation_en": "An owl is a night animal, sleeping soundly in a tree hollow by day, so 睡觉 (to sleep) best describes its daytime state. Owl: sleeps by day, active by night. 休息 and 睡觉 are similar, but 睡觉 is more specific, meaning actually asleep. 玩耍 and 躲藏 do not fit."
+  },
+  "ZS46_C5": {
+   "sentence_en": "The zoo staff must ___ (prepare) the animals' food every day to make sure they eat healthily.",
+   "hints": ["Clue: getting the food ready in advance. Which word means 'to prepare', pairing with 食物 (food)?"],
+   "keywords": [{"w":"准备","py":"zhǔnbèi","en":"to prepare"},{"w":"食物","py":"shíwù","en":"food"},{"w":"健康","py":"jiànkāng","en":"healthy"}],
+   "explanation_en": "准备食物 means getting the food ready in advance, a fixed pairing, so 准备 fits best. Fixed pairing: 准备 + food / homework / materials. 准备 covers buying, processing and portioning. 制作, 购买 and 检查 each cover only part, so 准备 is best."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“凶猛”是又凶又猛、让人害怕，所以“狮子是一种凶猛的动物”就是说狮子很凶、让人看了害怕。“温顺、皮毛”都不是“又凶又猛”的意思。",
+   "explanation_en": "凶猛 (xiōngměng) means fierce and frightening, so 狮子是一种凶猛的动物 means the lion is a fierce animal. 温顺 (gentle) and 皮毛 (fur) do not mean 'fierce'.",
+   "stem_en": "The lion is a fierce animal that frightens people.",
+   "keywords": [{"w":"凶猛","py":"xiōngměng","en":"fierce"},{"w":"狮子","py":"shīzi","en":"lion"}]
+  },
+  "2": {
+   "explanation": "“温顺”是性情温和、听话不凶，所以“兔子性格温顺”就是说兔子脾气温和、不会咬人。“凶猛、奔跑”都不是“性情温和”的意思。",
+   "explanation_en": "温顺 (wēnshùn) means gentle and docile, so 兔子性格温顺 means the rabbit is gentle in nature. 凶猛 (fierce) and 奔跑 (run) do not mean 'gentle in nature'.",
+   "stem_en": "The rabbit is gentle in nature; it does not bite, and children all like it.",
+   "keywords": [{"w":"温顺","py":"wēnshùn","en":"gentle; docile"},{"w":"兔子","py":"tùzi","en":"rabbit"}]
+  },
+  "3": {
+   "explanation": "“奔跑”是快速地跑，所以“猎豹在草原上快速奔跑”就是说猎豹在草原上飞快地跑着追猎物。“凶猛、皮毛”都不是“快速地跑”的意思。",
+   "explanation_en": "奔跑 (bēnpǎo) means to run fast, so 猎豹在草原上快速奔跑 means the cheetah runs fast on the grassland. 凶猛 (fierce) and 皮毛 (fur) do not mean 'to run fast'.",
+   "stem_en": "The cheetah runs fast on the grassland, chasing its prey.",
+   "keywords": [{"w":"奔跑","py":"bēnpǎo","en":"to run"},{"w":"猎豹","py":"lièbào","en":"cheetah"}]
+  },
+  "4": {
+   "explanation": "“皮毛”是动物身上的毛，所以“松鼠皮毛又厚又软”就是说松鼠身上的毛又厚又软，能保暖。“凶猛、奔跑”都不是“动物身上的毛”。",
+   "explanation_en": "皮毛 (pímáo) means an animal's fur, so 松鼠皮毛又厚又软 means the squirrel's fur is thick and soft. 凶猛 (fierce) and 奔跑 (run) are not 'an animal's fur'.",
+   "stem_en": "The squirrel's fur is thick and soft, keeping it warm in winter.",
+   "keywords": [{"w":"皮毛","py":"pímáo","en":"fur"},{"w":"松鼠","py":"sōngshǔ","en":"squirrel"}]
+  },
+  "5": {
+   "explanation": "“保护”是爱护、不让它受伤害，所以“保护野生动物”就是爱护野生动物、不去伤害它们。“温顺、皮毛”都不是“爱护不受伤害”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护野生动物 means to protect wild animals. 温顺 (gentle) and 皮毛 (fur) do not mean 'to protect from harm'.",
+   "stem_en": "We should protect wild animals and not harm them.",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"野生动物","py":"yěshēng dòngwù","en":"wild animal"}]
+  }
+ },
+ "craft": {
+  "ZS46_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The little tortoise walks very slowly.' and 'The little tortoise keeps practising swimming every day.'",
+   "answer_en": "Although the little tortoise walks very slowly, it keeps practising swimming every day.",
+   "tiles": ["虽然","小乌龟走路很慢，","但是","它每天都坚持练习游泳。"],
+   "explanation_en": "虽然……但是…… sets the two clauses in a turn. The first says it walks slowly (a weakness), the second says it keeps practising (a strength) - the two contrast, joined by 虽然……但是……."
+  },
+  "ZS46_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'This puppy can shake hands.' and 'This puppy can turn in circles.'",
+   "answer_en": "This puppy can not only shake hands, but also turn in circles.",
+   "tiles": ["这只小狗","不但","会握手，","还","会转圈。"],
+   "explanation_en": "不但……还…… means on top of the first thing there is a second, a step-up. The puppy can shake hands (first skill) and turn in circles (second skill), joined by 不但……还…… to show one thing after another."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Near the school there is a little pond where a few frogs live. Every morning, the frogs croak ___ (ceaselessly), and the sound rings across the whole campus.",
+   "hint": "Clue: it echoes 'rings across the whole campus' - croaking on and on. Which box word means 'ceaselessly / without stopping'?",
+   "keywords": [{"w":"不停","py":"bùtíng","en":"ceaselessly"},{"w":"青蛙","py":"qīngwā","en":"frog"}],
+   "explanation_en": "不停地叫着 means the frogs croak on and on, echoing 'rings across the whole campus', so 不停 fits best."
+  },
+  "2": {
+   "sentence_en": "One day, a little frog ___ (suddenly) jumped down from a lotus leaf and fell into the water.",
+   "hint": "Clue: it happened unexpectedly. Which box word means 'suddenly'?",
+   "keywords": [{"w":"突然","py":"tūrán","en":"suddenly"},{"w":"荷叶","py":"héyè","en":"lotus leaf"}],
+   "explanation_en": "突然 means happening unexpectedly, and the little frog jumping down 'suddenly' surprises everyone, so it fits best."
+  },
+  "3": {
+   "sentence_en": "Seeing this, the classmates all ___ (happily) laughed.",
+   "hint": "Clue: they found the frog falling in funny, so they laughed. Which box word means 'happily'?",
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"笑","py":"xiào","en":"to laugh"}],
+   "explanation_en": "The classmates found the frog falling in funny, so 快乐地笑了起来 (laughed happily) fits best."
+  },
+  "4": {
+   "sentence_en": "The teacher said frogs are our good friends; they help us ___ (get rid of) pests.",
+   "hint": "Clue: it pairs with 害虫 (pests) - frogs eat them to make them disappear. Which box word means 'to get rid of / wipe out'?",
+   "keywords": [{"w":"消灭","py":"xiāomiè","en":"to wipe out"},{"w":"害虫","py":"hàichóng","en":"pest"}],
+   "explanation_en": "Frogs eat pests and make them disappear, and 消灭害虫 (wipe out pests) is a fixed pairing, so 消灭 fits best."
+  },
+  "5": {
+   "sentence_en": "The teacher said frogs are good friends, so we should ___ (protect) them well.",
+   "hint": "Clue: it pairs with 它们 (them, the frogs), caring for and not harming them. Which box word means 'to protect'?",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"动物","py":"dòngwù","en":"animal"}],
+   "explanation_en": "The teacher said frogs are good friends we should protect and not harm, and 保护动物 (protect animals) is a fixed pairing, so 保护 fits best."
+  }
+ },
+ "reading": {
+  "ZS46_G1": {
+   "stem_en": "What is the elephant doing?",
+   "answer_en": "Spraying water onto its own back with its trunk.",
+   "keywords": [{"w":"大象","py":"dàxiàng","en":"elephant"},{"w":"鼻子","py":"bízi","en":"trunk"},{"w":"喷","py":"pēn","en":"to spray"}],
+   "explanation": "这是细节题。短文说“一只大象正用长鼻子把水喷向自己的背部”，直接说明大象在用鼻子把水喷向自己的背部，所以选(3)。(1)卷起游客食物、(2)站在水里洗澡，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'an elephant was spraying water onto its own back with its long trunk', directly stating what it does, so (3). (1) rolling up visitors' food and (2) standing in water to bathe are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "一只大象正用长鼻子把水喷向自己的背部"}
+  },
+  "ZS46_G2": {
+   "stem_en": "The uncle was 'both annoyed and amused'. Why?",
+   "answer_en": "Because the monkey snatched away his banana.",
+   "keywords": [{"w":"顽皮","py":"wánpí","en":"naughty"},{"w":"抢走","py":"qiǎngzǒu","en":"to snatch away"},{"w":"香蕉","py":"xiāngjiāo","en":"banana"}],
+   "explanation": "这是推断题。短文说“一只顽皮的猴子突然从树上跳下来，抢走了一位叔叔手里的香蕉”，接着说“叔叔又好气又好笑”，可以推断叔叔又好气又好笑，是因为猴子抢走了他的香蕉，所以选(1)。(2)把他推倒、(3)向他喷水，文中都没有这样说。推断题要看“又好气又好笑”前面发生的事。",
+   "explanation_en": "This is an inference question. The passage says 'a naughty monkey suddenly jumped down and snatched away an uncle's banana', then 'the uncle was both annoyed and amused', so he was annoyed and amused because the monkey took his banana, so (1). (2) pushing him over and (3) spraying him with water are not stated. Read what happened before 'both annoyed and amused'.",
+   "solution": {"evidence": "一只顽皮的猴子突然从树上跳下来，抢走了一位叔叔手里的香蕉"}
+  },
+  "ZS46_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Dad took 'me' to visit the zoo, and 'I' saw all kinds of interesting animals.",
+   "keywords": [{"w":"动物园","py":"dòngwùyuán","en":"zoo"},{"w":"参观","py":"cānguān","en":"to visit"},{"w":"有趣","py":"yǒuqù","en":"interesting"}],
+   "explanation": "这是主旨题。全文讲爸爸带“我”去动物园，先看鸟园的鸟儿，再看大象喷水，最让人难忘的是猴子抢香蕉，一路上看到各种有趣的动物。可见短文主要说的是爸爸带“我”去动物园参观、“我”看到了各种有趣的动物，所以选(2)。(1)动物很危险、(3)猴子最聪明都与文意不符或只是小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells how Dad took 'me' to the zoo, seeing the birds, the elephant spraying water, and the memorable monkey snatching a banana, meeting all kinds of interesting animals. So it is mainly about Dad taking 'me' to visit the zoo and seeing interesting animals, so (2). (1) animals are dangerous and (3) monkeys are smartest are off-topic or minor, not the main idea.",
+   "solution": {"evidence": "星期六下午，爸爸带我去动物园参观。"}
+  },
+  "ZS46_H1": {
+   "stem_en": "Find a word in the passage that describes how the kitten walked.",
+   "answer_en": "一瘸一拐 (limping)",
+   "keywords": [{"w":"一瘸一拐","py":"yìqué-yìguǎi","en":"limping"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"走路","py":"zǒulù","en":"to walk"}],
+   "explanation": "这是找词题。短文说“我发现它的左脚受伤了，走路一瘸一拐的”，“一瘸一拐”正好形容小猫脚受伤后走路一高一低、不平稳的样子，所以答案是“一瘸一拐”。做找词题要回原文找出正好描写题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'I found its left foot was hurt and it walked with a limp'; 一瘸一拐 exactly describes the kitten walking unevenly after hurting its foot, so the answer is 一瘸一拐. Find the word that describes the situation.",
+   "solution": {"evidence": "走路一瘸一拐的"}
+  },
+  "ZS46_H2": {
+   "stem_en": "What did 'I' and Mum each do to help the kitten?",
+   "answer_en": "Mum carefully bandaged the cat's wound, and 'I' gently soothed the cat beside her.",
+   "keywords": [{"w":"包扎","py":"bāozā","en":"to bandage"},{"w":"伤口","py":"shāngkǒu","en":"wound"},{"w":"安抚","py":"ānfǔ","en":"to soothe"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“妈妈小心地帮猫包扎伤口，我在旁边轻轻地安抚它”，说明妈妈帮猫包扎伤口，“我”在旁边轻轻安抚它。答“各自做了什么”要把两个人做的事都写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Mum carefully bandaged the cat's wound, and I gently soothed it beside her', so Mum bandaged the wound and 'I' soothed the cat. State what each person did clearly.",
+   "solution": {"evidence": "妈妈小心地帮猫包扎伤口，我在旁边轻轻地安抚它"}
+  },
+  "ZS46_H3": {
+   "stem_en": "What kind of person do you think the 'I' in the passage is? Use content from the passage to support your view.",
+   "answer_en": "I think the 'I' in the passage is a caring person, because when he saw the kitten was hurt he felt very upset, ran home to tell Mum, and brought food and gauze to help the kitten.",
+   "keywords": [{"w":"爱心","py":"àixīn","en":"caring; kindness"},{"w":"难受","py":"nánshòu","en":"upset"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是推断题（评价人物）。短文说“我发现它的左脚受伤了……我心里很难受，便跑回家告诉妈妈”，又和妈妈带食物、纱布去帮小猫。从他看到小猫受伤就难受、主动去帮忙，可以看出他是个有爱心的人。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says 'I found its left foot hurt... I felt very upset and ran home to tell Mum', and brought food and gauze to help the kitten. From feeling upset at the hurt cat and helping of his own accord, we see he is caring. State the trait, then give the events as the reason.",
+   "solution": {"evidence": "我心里很难受，便跑回家告诉妈妈"}
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "setId": "ZS03",
+ "mcq": {
+  "ZS03_A1": {
+   "sentence_en": "Xiaoming and I are good ___ (friends); we go to and from school together every day.",
+   "hints": ["The blank + 朋 forms the word for people who are close to you. Which character (友, not 有/右/又) means 'friend'?"],
+   "keywords": [{"w":"朋友","py":"péngyou","en":"friend"},{"w":"上学","py":"shàngxué","en":"to go to school"},{"w":"放学","py":"fàngxué","en":"to finish school"}],
+   "explanation_en": "朋友 (péngyou) is a fixed word for people with good feelings between them, so choose 友. 友/有/右/又 sound alike; remember the 友 in 朋友 has two horizontal strokes and a slanting stroke on top."
+  },
+  "ZS03_A2": {
+   "sentence_en": "My classmates and I ___ (plant) saplings together to do our part for the school garden.",
+   "hints": ["The blank is an action - putting a sapling into the soil. Which character has the grain radical 禾 and means 'to plant'?"],
+   "keywords": [{"w":"种","py":"zhòng","en":"to plant"},{"w":"树苗","py":"shùmiáo","en":"sapling"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation_en": "种树苗 means to plant a sapling into the soil, so the verb 种 fits. All four are read zhòng or zhǒng - look at the radical: 种 with the grain radical 禾 relates to plants, so use 种 for planting."
+  },
+  "ZS03_A3": {
+   "sentence_en": "After class, we run ___ (together) on the field and have great fun.",
+   "hints": ["The word means doing something jointly, in one group. Which one (一起, not 一企/一气/一期) means 'together'?"],
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"操场","py":"cāochǎng","en":"field; playground"},{"w":"跑步","py":"pǎobù","en":"to run"}],
+   "explanation_en": "一起 means jointly / in one place, so 一起跑步 (run together) makes sense and is a common word. For 'do something with friends' use 一起; 起 gives the feel of standing up and walking together, the most common choice."
+  },
+  "ZS03_A4": {
+   "sentence_en": "When a good friend is in trouble, we should ___ (help) him.",
+   "hints": ["The blank is what you do for a friend in trouble. Which character has 巾 ('cloth') at the bottom and means 'to help'?"],
+   "keywords": [{"w":"帮","py":"bāng","en":"to help"},{"w":"困难","py":"kùnnan","en":"difficulty"},{"w":"朋友","py":"péngyou","en":"friend"}],
+   "explanation_en": "帮 means to help, so 帮他 means to give him help - the best fit. The 帮 in 帮助 has 巾 ('cloth') at the bottom; imagine helping someone wipe sweat with a cloth - that is 帮助 (to help)."
+  },
+  "ZS03_A5": {
+   "sentence_en": "My ___ (classmates) come from different countries, and we all get along happily.",
+   "hints": ["The blank + 同 names people who study at the same school. Which character means 'to study / learn'?"],
+   "keywords": [{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"国家","py":"guójiā","en":"country"},{"w":"相处","py":"xiāngchǔ","en":"to get along"}],
+   "explanation_en": "同学 means people who study together at the same school; 同学 is a fixed word. 学 has 'claw' 爫 and 子 on top - picture a child studying at school, so 同学 are people who learn together."
+  },
+  "ZS03_B1": {
+   "sentence_en": "I 分享 (share) snacks with my good friends, and everyone is happy.",
+   "hints": ["Say 分享: 分 is high and level (1st tone), 享 dips then rises (3rd tone). Which choice is fēn + xiǎng?"],
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"}],
+   "explanation_en": "分 is read fēn (1st tone) and 享 is xiǎng (3rd tone), together fēn xiǎng. 分享 reads fēn xiǎng: 分 (1st tone) + 享 (3rd tone); 享 is like a person enjoying something at home, read gently with a dipping 3rd tone."
+  },
+  "ZS03_B2": {
+   "sentence_en": "Xiaohua 帮助 (helped) a classmate find a lost pencil case.",
+   "hints": ["帮 starts with b (lips, no puff) and 助 starts with zh (curled tongue). Which choice keeps both: bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil case"}],
+   "explanation_en": "帮 is read bāng (initial b, final -ang) and 助 is zhù (initial zh, final u), together bāng zhù. 帮 bāng: initial b (a lip sound); 助 zhù: initial zh (a retroflex sound). Tell b and p apart by the air: b has no puff, p puffs out."
+  },
+  "ZS03_B3": {
+   "sentence_en": "This story book is very 好看 (nice to read); my friend and I both like reading it.",
+   "hints": ["Here 好看 is an adjective ('nice-looking'), so 好 is hǎo (3rd tone), not the verb hào; and 看 is kàn (4th tone), not kān. Which choice is hǎo + kàn?"],
+   "keywords": [{"w":"好看","py":"hǎokàn","en":"nice-looking; interesting"},{"w":"故事书","py":"gùshishū","en":"story book"},{"w":"喜欢","py":"xǐhuan","en":"to like"}],
+   "explanation_en": "Here 好看 is an adjective meaning the book is appealing, so 好 is hǎo (3rd tone) and 看 is kàn (4th tone). 好 has two readings: adjective 好 hǎo (3rd tone), verb 好(学) hào (4th tone). 看 also has two: 看书 kàn, 看守 kān."
+  },
+  "ZS03_B4": {
+   "sentence_en": "My classmates and I play 快乐 (happily) in the park.",
+   "hints": ["Both syllables of 快乐 fall (4th tone): kuài lè. Which choice has both falling tones?"],
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"玩耍","py":"wánshuǎ","en":"to play"}],
+   "explanation_en": "快 is read kuài (4th tone) and 乐 in 快乐 is lè (4th tone), together kuài lè. Both characters of 快乐 are 4th tone: kuài lè - imagine going happily downhill, both syllables falling."
+  },
+  "ZS03_C1": {
+   "sentence_en": "After school every day my good friend and I ___ (do) our homework together and help each other.",
+   "hints": ["The blank + 作业 (homework) is a fixed pairing. Which verb means 'to do / complete' a task?"],
+   "keywords": [{"w":"做作业","py":"zuò zuòyè","en":"to do homework"},{"w":"互相","py":"hùxiāng","en":"each other"},{"w":"放学","py":"fàngxué","en":"after school"}],
+   "explanation_en": "做作业 is a fixed collocation meaning to finish the homework the teacher sets. Fixed pairings: 做作业, 做功课. 做 can pair with many tasks and is the most common verb."
+  },
+  "ZS03_C2": {
+   "sentence_en": "The students sit together ___ (quietly), waiting for the teacher to hand out the exam papers.",
+   "hints": ["Clue: they are waiting for exam papers - what atmosphere fits a test? Which word means 'quiet', not 'lively'?"],
+   "keywords": [{"w":"安静","py":"ānjìng","en":"quiet"},{"w":"等待","py":"děngdài","en":"to wait"},{"w":"考卷","py":"kǎojuàn","en":"exam paper"}],
+   "explanation_en": "As they wait for the exam papers, everyone should stay quiet, so 安静 fits the pre-exam scene best. Match word to scene: 热闹 (lively) suits a celebration, 安静 (quiet) suits an exam or waiting."
+  },
+  "ZS03_C3": {
+   "sentence_en": "I bought ___ (a) new schoolbag as a birthday present for my good friend.",
+   "hints": ["The blank is a measure word for a schoolbag (a bag-shaped object). Which one goes with 书包?"],
+   "keywords": [{"w":"一个","py":"yí gè","en":"one; a (measure word)"},{"w":"书包","py":"shūbāo","en":"schoolbag"},{"w":"礼物","py":"lǐwù","en":"gift"}],
+   "explanation_en": "A schoolbag is a container-like object, so its measure word is 个: 一个书包. A bag shape uses 个. Remember: 书 -> 一本书 (a book); 书包 -> 一个书包 (a schoolbag)."
+  },
+  "ZS03_C4": {
+   "sentence_en": "When a friend is sad, I ___ (comfort) him to cheer him up.",
+   "hints": ["Clue: your friend is sad and you help him feel better with kind words. Which word means 'to comfort', not 'to scold' or 'to command'?"],
+   "keywords": [{"w":"安慰","py":"ānwèi","en":"to comfort"},{"w":"难过","py":"nánguò","en":"sad"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "When a friend is sad, a good friend says kind words to lift their mood, so 安慰 ('to comfort') fits best. Friend is sad -> comfort. 安慰 = 安 (put at ease) + 慰 (soothe), settling the other person's heart."
+  },
+  "ZS03_C5": {
+   "sentence_en": "The students in our class ___ (get along well), and everyone loves coming to school.",
+   "hints": ["Clue: everyone loves coming to school, so classmates must have good relationships. Which choice means 'get along in a friendly way', not fighting or being angry?"],
+   "keywords": [{"w":"友好","py":"yǒuhǎo","en":"friendly"},{"w":"相处","py":"xiāngchǔ","en":"to get along"},{"w":"上学","py":"shàngxué","en":"to go to school"}],
+   "explanation_en": "Everyone loving school shows the classmates have a good relationship; 友好相处 means getting along harmoniously. Love school -> good ties -> 友好相处. 友好 = 友 (friend) + 好 (good), everyone gets on well."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“关心”是留意、在乎别人的情况，所以“互相关心”表示朋友之间彼此在乎、互相照应。“道歉、借用”都不能表示“在乎别人”。",
+   "explanation_en": "关心 (guānxīn) means to care about and pay attention to others, so 互相关心 means friends care for each other. 道歉 (apologize) or 借用 (borrow) cannot mean 'to care about someone'.",
+   "stem_en": "to care about each other",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"互相","py":"hùxiāng","en":"each other"}]
+  },
+  "2": {
+   "explanation": "“道歉”是做错事后向人说对不起，所以“向朋友道歉”表示向朋友认错、说对不起。“约好、送别”都不是“认错”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing something wrong, so 向朋友道歉 means to apologize to a friend. 约好 (arrange) or 送别 (see off) do not mean 'to apologize'.",
+   "stem_en": "to apologize to a friend",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "3": {
+   "explanation": "“约好”是事先说好一起做某事，所以“约好一起去图书馆”表示两人事先说好一同去。“关心、迟到”都不能表示“事先说好”。",
+   "explanation_en": "约好 (yuēhǎo) means to agree in advance to do something together, so 约好一起去图书馆 means to arrange to go to the library together. 关心 (care) or 迟到 (be late) cannot mean 'to arrange in advance'.",
+   "stem_en": "to arrange to go to the library together",
+   "keywords": [{"w":"约好","py":"yuēhǎo","en":"to arrange; to agree on"},{"w":"图书馆","py":"túshūguǎn","en":"library"}]
+  },
+  "4": {
+   "explanation": "“借用”是暂时用别人的东西，用完要还，所以“借用同学的橡皮”表示暂时用一下同学的橡皮。“送别、道歉”都不能表示“暂时用别人的东西”。",
+   "explanation_en": "借用 (jièyòng) means to use someone's thing temporarily and return it, so 借用同学的橡皮 means to borrow a classmate's eraser. 送别 (see off) or 道歉 (apologize) cannot mean 'to borrow'.",
+   "stem_en": "to borrow a classmate's eraser",
+   "keywords": [{"w":"借用","py":"jièyòng","en":"to borrow"},{"w":"橡皮","py":"xiàngpí","en":"eraser"}]
+  },
+  "5": {
+   "explanation": "“送别”是在别人离开时去送行、道别，所以“在校门口送别转学的朋友”表示在校门口为要转学的朋友送行。“借用、约好”都不是“送行道别”的意思。",
+   "explanation_en": "送别 (sòngbié) means to see someone off and say goodbye when they leave, so 在校门口送别转学的朋友 means to see off a friend transferring schools at the gate. 借用 (borrow) or 约好 (arrange) do not mean 'to see off'.",
+   "stem_en": "to see off a friend who is transferring schools",
+   "keywords": [{"w":"送别","py":"sòngbié","en":"to see off"},{"w":"转学","py":"zhuǎnxué","en":"to transfer schools"}]
+  }
+ },
+ "craft": {
+  "ZS03_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Xiaowei lives very far away.' and 'Xiaowei comes to school on time every day.'",
+   "answer_en": "Although Xiaowei lives very far away, he comes to school on time every day.",
+   "tiles": ["虽然","小伟住得很远，","但是","他每天准时来上学。"],
+   "explanation_en": "虽然……但是…… shows a turn: the first part is an unfavourable situation, the second is an unexpectedly good result. '虽然住得远' (although he lives far) is the drawback, '但是每天准时来上学' (but he comes on time every day) is the surprising good result. 虽然 (bad)…… 但是 (good)……"
+  },
+  "ZS03_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'Xiaofang helped me find my lost stationery case.' and 'I am very grateful to Xiaofang.'",
+   "answer_en": "Because Xiaofang helped me find my lost stationery case, I am very grateful to her.",
+   "tiles": ["因为","小芳帮我找到了丢失的文具盒，","所以","我非常感谢小芳。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小芳帮我找到文具盒' (because Xiaofang helped me find the case) is the cause, '所以我非常感谢小芳' (so I am very grateful) is the result. Say why first, then what happened."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Every day after school, they play ___ (together) in the estate garden.",
+   "hint": "Clue: two friends do this every day in the garden. Which box word means doing it jointly, 'together'?",
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation_en": "The two friends play together in the garden, so 一起 shows their joint action."
+  },
+  "2": {
+   "sentence_en": "One day Xiaoming tripped and fell, and his knee ___ (bled).",
+   "hint": "Clue: he fell and hurt his knee - what does an open wound do? Which box word means 'to bleed'?",
+   "keywords": [{"w":"流血","py":"liúxiě","en":"to bleed"},{"w":"跌倒","py":"diēdǎo","en":"to trip and fall"}],
+   "explanation_en": "After tripping, his knee was hurt; 流血 ('to bleed') means blood coming from the wound, fitting the context best."
+  },
+  "3": {
+   "sentence_en": "Seeing this, Xiaohua ___ (quickly) ran over, helped Xiaoming up, and handed him his own handkerchief.",
+   "hint": "Clue: he saw his friend hurt and acted without delay. Which box word means 'hurriedly / right away'?",
+   "keywords": [{"w":"赶紧","py":"gǎnjǐn","en":"hurriedly; at once"},{"w":"手帕","py":"shǒupà","en":"handkerchief"}],
+   "explanation_en": "Seeing his friend hurt, Xiaohua rushed over; 赶紧 means quickly and without delay, so it fits best."
+  },
+  "4": {
+   "sentence_en": "Xiaoming said ___ (gratefully), 'Thank you!'",
+   "hint": "Clue: he was just helped and says thank you - what feeling fills his words? Which box word means 'grateful'?",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"谢谢","py":"xièxie","en":"thank you"}],
+   "explanation_en": "After being helped, Xiaoming says thanks with a heart full of gratitude; 感激地说 means speaking with a grateful feeling."
+  },
+  "5": {
+   "sentence_en": "Xiaohua smiled and replied, 'Good friends should help ___ (each other).'",
+   "hint": "Clue: help that goes both ways between friends - you help me, I help you. Which box word means 'each other' (as in 互相帮助)?",
+   "keywords": [{"w":"互相","py":"hùxiāng","en":"each other"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "Good friends help each other both ways; 互相帮助 means each gives help to the other, so it fits best."
+  }
+ },
+ "reading": {
+  "ZS03_G1": {
+   "stem_en": "Where do Xiaowen and Xiaoli wait for each other every morning?",
+   "answer_en": "At the school gate.",
+   "keywords": [{"w":"门口","py":"ménkǒu","en":"gate; entrance"},{"w":"等","py":"děng","en":"to wait"},{"w":"同班","py":"tóngbān","en":"same class"}],
+   "explanation": "这是细节题。短文说“每天早上，她们会在学校门口等对方，然后一起走进课室”，直接说明等的地点是学校门口，所以选(1)。(2)课室是她们等到后才一起走进去的地方，(3)操场文中没有提到。做细节题要回原文找准确的地点。",
+   "explanation_en": "This is a detail question. The passage says every morning they wait for each other at the school gate, then walk into the classroom together, so (1). (2) the classroom is where they go after meeting; (3) the field is not mentioned. Go back and find the exact place.",
+   "solution": {"evidence": "她们会在学校门口等对方"}
+  },
+  "ZS03_G2": {
+   "stem_en": "How did Xiaowen feel after Xiaoli helped pick up her things?",
+   "answer_en": "Grateful.",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil case"},{"w":"心情","py":"xīnqíng","en":"mood"}],
+   "explanation": "这是推断题，要从人物的话和行动推断心情。小丽帮小雯把散落的东西一件件捡起来，小雯说“谢谢你，小丽！”，从“谢谢”和“感激地说”可以看出她心里充满感谢，所以选(2)。(1)难过、(3)生气都和“谢谢”的语气相反。",
+   "explanation_en": "This is an inference question - judge the mood from words and actions. Xiaoli picked up the scattered things one by one, and Xiaowen said 'Thank you, Xiaoli!'. The thanks and 'said gratefully' show she is full of gratitude, so (2). (1) sad and (3) angry are the opposite of saying thanks.",
+   "solution": {"evidence": "小雯感激地说：“谢谢你，小丽！”"}
+  },
+  "ZS03_G3": {
+   "stem_en": "What is the main idea of this passage?",
+   "answer_en": "Good friends should help each other.",
+   "keywords": [{"w":"互相帮助","py":"hùxiāng bāngzhù","en":"to help each other"},{"w":"友情","py":"yǒuqíng","en":"friendship"},{"w":"主旨","py":"zhǔzhǐ","en":"main idea"}],
+   "explanation": "这是主旨题，要抓全文中心。全文讲小雯和小丽互相等待、小丽帮小雯捡东西，小丽还说“我们是好朋友，应该互相帮助”，最后友情更深。(1)早出门、(2)放好铅笔盒都只是小细节；(3)“好朋友应该互相帮助”才是全文要说的道理。",
+   "explanation_en": "This is a main-idea question - grasp the centre. The passage shows the two waiting for each other, Xiaoli helping pick things up, and her words 'we are good friends and should help each other', ending with deeper friendship. (1) leaving early and (2) keeping the pencil case safe are small details; (3) good friends should help each other is the point.",
+   "solution": {"evidence": "我们是好朋友，应该互相帮助。"}
+  },
+  "ZS03_H1": {
+   "stem_en": "Find a word in the passage that shows how 'I' felt after hearing Aming's words: at first disappointed, then regaining ___.",
+   "answer_en": "信心 (confidence)",
+   "keywords": [{"w":"信心","py":"xìnxīn","en":"confidence"},{"w":"失望","py":"shīwàng","en":"disappointed"},{"w":"重新","py":"chóngxīn","en":"again; anew"}],
+   "explanation": "这题要在文中找出表示“重新有了”什么的词。短文说“他的话让我重新有了信心”，“信心”就是相信自己能做到的心情，和前面的“失望”相反，所以答案是“信心”。做这种题先看清空格前后的意思，再回原文找那个词。",
+   "explanation_en": "This asks for the word for what 'I' regained. The passage says 'his words made me regain confidence'; 信心 is the feeling of believing you can do it, the opposite of the earlier 失望 (disappointment), so the answer is 信心. Read around the blank, then find the word in the text.",
+   "solution": {"evidence": "他的话让我重新有了信心。"}
+  },
+  "ZS03_H2": {
+   "stem_en": "How did 'I' feel after the block tower fell the first time? Answer in a full sentence.",
+   "answer_en": "After the block tower fell the first time, 'I' felt a little disappointed and did not want to build any more.",
+   "keywords": [{"w":"失望","py":"shīwàng","en":"disappointed"},{"w":"积木","py":"jīmù","en":"building blocks"},{"w":"倒","py":"dǎo","en":"to topple over"}],
+   "explanation": "这是细节题，要用完整句子回答。短文说“塔突然倒下来了……我有点失望，不想再搭了”，直接说明塔倒后“我”的感受是失望。答题时要把感受说清楚，并用完整的句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says the tower suddenly fell and 'I felt a little disappointed and did not want to build any more', stating the feeling directly. State the feeling clearly in a complete sentence.",
+   "solution": {"evidence": "我有点失望，不想再搭了。"}
+  },
+  "ZS03_H3": {
+   "stem_en": "From this passage, what kind of friend do you think Aming is? Answer in a full sentence.",
+   "answer_en": "Aming is a good friend who encourages others and does not give up easily; his positive words helped 'me' regain confidence.",
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"放弃","py":"fàngqì","en":"to give up"},{"w":"信心","py":"xìnxīn","en":"confidence"}],
+   "explanation": "这是推断题，要根据阿明的言行来判断他是怎样的人。塔倒了，“我”想放弃，阿明却拍拍我的肩膀说“没关系，我们重新再来”，还和我再次合作把塔搭好。可见他会鼓励朋友、不轻易放弃。答“怎样的朋友”要先给出评价（如鼓励、不放弃），再用文中的行为作依据。",
+   "explanation_en": "This is an inference question - judge Aming's character from his words and actions. When the tower fell and 'I' wanted to give up, Aming patted my shoulder and said 'never mind, let's start again', then rebuilt it with me. So he encourages friends and does not give up easily. State a judgement (encouraging, never giving up) and back it with actions from the text.",
+   "solution": {"evidence": "阿明拍拍我的肩膀说：“没关系，我们重新再来！”"}
+  }
+ }
+}

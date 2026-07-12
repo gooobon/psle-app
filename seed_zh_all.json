@@ -1,0 +1,6844 @@
+{
+ "generatedAt": "2026-07-07",
+ "seeds": [
+  {
+   "seedId": "tao_nan_2021_hcl_test1",
+   "school": "Tao Nan",
+   "year": 2021,
+   "track": "HCL",
+   "raw": {
+    "seedId": "tao_nan_2021_hcl_test1",
+    "school": "Tao Nan",
+    "year": 2021,
+    "track": "HCL",
+    "term": "Test 1 (test juan 2)",
+    "sourcePages": "hc_1..hc_9",
+    "verified": "rasterized hc_3/hc_4(260dpi)/hc_5(200dpi); answer key hc_9 cross-checked",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字测验",
+      "variant": "list",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "林老师讲的故事很有______，我们听了都拍手叫好。",
+        "options": [
+         "赶",
+         "趣",
+         "越",
+         "起"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“有趣”是固定词语，表示故事好玩、吸引人，所以大家才拍手叫好。",
+         "distractors": [
+          "“赶”是追赶的意思，不能和“有”搭配。",
+          "✓ 正确答案：有趣＝好玩、吸引人。",
+          "“越”多用在“越来越”，不能说“有越”。",
+          "“起”是起来的意思，“有起”不通顺。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“趣”里有“取”，故事取得大家的欢心＝有趣。四个字都有“走”字旁，要看整个字义。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "自从明文______家后，我就再也没见过他。",
+        "options": [
+         "提",
+         "打",
+         "推",
+         "搬"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“搬家”指把家从一个地方迁到另一个地方，所以之后就见不到他了。",
+         "distractors": [
+          "“提”是用手拿，“提家”不通。",
+          "“打”是击打，“打家”不通。",
+          "“推”是向前用力，“推家”不通。",
+          "✓ 正确答案：搬家＝换地方住。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "四个字都是提手旁。记住“搬”＝般＋手，搬东西要用手把一般（很多）东西挪走。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "妈妈让我把电______的声音关小，不要吵到午睡的妹妹。",
+        "options": [
+         "室",
+         "视",
+         "市",
+         "适"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "有声音、可以关小声的是“电视”，所以选“视”。",
+         "distractors": [
+          "“室”是房间，“电室”不是词。",
+          "✓ 正确答案：电视＝看节目的机器，有声音。",
+          "“市”是市场、城市，“电市”不通。",
+          "“适”是合适，“电适”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“视”是“看”的意思（示＋见），电视是用来看的，所以是“视”。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "爸爸今天穿了一件______色的上衣去上班。",
+        "options": [
+         "蓝",
+         "盒",
+         "盘",
+         "盖"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "能和“色”组成颜色的是“蓝”，蓝色是一种颜色。",
+         "distractors": [
+          "✓ 正确答案：蓝色是颜色。",
+          "“盒”是盒子，“盒色”不通。",
+          "“盘”是盘子，“盘色”不通。",
+          "“盖”是盖子，“盖色”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“蓝”是草字头（跟植物染料有关的颜色）；后三个都是“皿”字底（跟器皿有关）。看字头就能分开。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "妹妹向爸爸妈妈道别后，便______着书包去上学。",
+        "options": [
+         "举",
+         "挂",
+         "背",
+         "披"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "书包是放在后背上带去上学的，这个动作叫“背”。",
+         "distractors": [
+          "“举”是往上抬，“举着书包”不合常理。",
+          "“挂”是挂在钩子上，不是带去上学的样子。",
+          "✓ 正确答案：背书包＝把书包放在背上。",
+          "“披”是披在肩上（如披风），书包不用披。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“背”上面是“北”，下面是“月（肉）”，指身体的后背；书包放后背＝背书包。"
+        }
+       }
+      ]
+     },
+     "PinyinMcq": {
+      "sectionLabel": "汉语拼音（看句子选音节）",
+      "variant": "list",
+      "items": [
+       {
+        "num": 6,
+        "sentence": "文文是一个懂事的孩子，我{u}相信{/u}他是不会打弟弟的。",
+        "options": [
+         "xiān xìn",
+         "xiān xìng",
+         "xiāng xìn",
+         "xiāng xìng"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "shengmu_yunmu",
+        "target": "相信",
+        "explain": {
+         "why": "“相”读 xiāng（有 ng），“信”读 xìn（第四声）。合起来是 xiāng xìn。",
+         "distractors": [
+          "“相”不是 xiān，少了 ng；“信”声调也错。",
+          "“相”少了 ng，“信”xìng 也错。",
+          "✓ 正确答案：xiāng xìn。",
+          "“信”读 xìn 不是 xìng，多了 g。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "分清前鼻音 -n 和后鼻音 -ng：相 xiāng 有 ng（后鼻音），信 xìn 是 n（前鼻音）。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "小安的书包是{u}绿色{/u}的。",
+        "options": [
+         "lǜ sè",
+         "lǜ shè",
+         "lù sè",
+         "lù shè"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "shengdiao",
+        "target": "绿色",
+        "explain": {
+         "why": "“绿”读 lǜ（有 ü 两点、第四声），“色”读 sè（平舌 s、第四声）。合起来 lǜ sè。",
+         "distractors": [
+          "✓ 正确答案：lǜ sè。",
+          "“色”是 sè 不是 shè，不要加 h。",
+          "“绿”是 lǜ（有两点ü）不是 lù。",
+          "“绿”少了两点、“色”多了 h，两处都错。"
+         ],
+         "trapType": "shengdiao",
+         "memoryTip": "“绿”的 ü 要写两点（lǜ）；“色”是平舌音 sè，不是翘舌 shè。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "sectionLabel": "词语选择",
+      "variant": "list",
+      "items": [
+       {
+        "num": 8,
+        "sentence": "妹妹把书架上的书排得非常______。",
+        "options": [
+         "干净",
+         "整齐",
+         "明亮",
+         "美丽"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "书“排”得好，指摆放有秩序，用“整齐”最合适。",
+         "distractors": [
+          "“干净”指没有脏东西，不是形容排列。",
+          "✓ 正确答案：整齐＝摆得有条理。",
+          "“明亮”形容光线，不能形容排书。",
+          "“美丽”形容外表漂亮，不用来说排列。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "看动词搭配：“排／摆”东西→整齐；“擦／洗”→干净。抓句子里的动词就能选对。"
+        }
+       },
+       {
+        "num": 9,
+        "sentence": "我要努力读书，才能______当老师的愿望。",
+        "options": [
+         "改变",
+         "实现",
+         "变化",
+         "发现"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“愿望”要靠努力去达成，固定搭配是“实现愿望”。",
+         "distractors": [
+          "“改变”是使不同，不能“改变愿望”达成目标。",
+          "✓ 正确答案：实现愿望＝让愿望成真。",
+          "“变化”是名词/自身改变，不能带“愿望”做宾语。",
+          "“发现”是找到没注意的东西，不搭配“愿望”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "固定搭配记整组：实现＋愿望／梦想／目标。看到“愿望”就想“实现”。"
+        }
+       },
+       {
+        "num": 10,
+        "sentence": "妈妈见小明不是故意打破杯子的，便决定______他。",
+        "options": [
+         "原谅",
+         "要求",
+         "答应",
+         "陪伴"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "不是故意做错事，妈妈不再责怪，这叫“原谅”。",
+         "distractors": [
+          "✓ 正确答案：原谅＝不再怪罪。",
+          "“要求”是提出条件，与“不是故意”的语境不合。",
+          "“答应”是同意请求，这里没有人提请求。",
+          "“陪伴”是陪在身边，和打破杯子无关。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "抓关键词“不是故意的”＝做错但情有可原→原谅。"
+        }
+       },
+       {
+        "num": 11,
+        "sentence": "吃过早餐后，我们可以去海边散步______骑脚踏车。",
+        "options": [
+         "只要",
+         "可能",
+         "还是",
+         "或者"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "lianci",
+        "explain": {
+         "why": "散步和骑脚踏车是两个可以选择的活动，表示选择用“或者”。",
+         "distractors": [
+          "“只要”表示条件（只要…就…），这里不是条件。",
+          "“可能”表示也许，不能连接两个并列活动。",
+          "“还是”多用在疑问句里选择（…还是…？），这是陈述句。",
+          "✓ 正确答案：或者＝二者选一（陈述句）。"
+         ],
+         "trapType": "lianci",
+         "memoryTip": "陈述句里选择用“或者”；疑问句里选择用“还是”。看句末是不是问号。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2_readingOpen": {
+     "sectionLabel": "理解问答",
+     "note": "Phase 2 free-response. Passage + questions + model answers preserved.",
+     "passage": "小丽是我的同学，也是我的好朋友。每天放学后，我们都会手拉手，有说有笑地走路回家。有一天，老师让同学们完成一份作业，我有很多题不会做，心里很着急。我想了一下，轻声叫小丽把她的答案给我看一看。小丽摇摇头，还把作业本合上。下课后，小丽走过来对我说：“小文，我们去食堂吃饭吧。”我生气地看了她一眼，就自己一个人走去了食堂。放学时，我飞快地收拾好书包就走出校门，小丽静静地跟在我后面。我回过头对她大喊：“我再也不要和你做朋友了，你不要跟着我！”小丽听了，伤心地哭了。第二天早上，我走在上学的路上，一直想着昨天的事，一不小心跌倒了。小丽刚好经过，马上跑过来扶我，还关心地问：“小文，你没事吧？要不要去看医生？”我小声地说：“谢谢你，我没事。我不和你做朋友，你为什么还要帮我呢？”小丽笑着说：“老师常常告诉我们，做人要诚实，我不让你看我的答案是为了你好。”听了小丽的话，我红着脸不好意思地笑了。",
+     "questions": [
+      {
+       "num": 12,
+       "format": "fill_word",
+       "stem": "文中形容“整理”的词语是：",
+       "answer": "收拾"
+      },
+      {
+       "num": 13,
+       "format": "fill_word",
+       "stem": "文中形容“立刻”的词语是：",
+       "answer": "马上"
+      },
+      {
+       "num": 14,
+       "format": "open_sentence",
+       "stem": "作者为什么心里很着急？",
+       "answer": "老师让同学们完成一份作业，但是作者有很多题不会做。"
+      },
+      {
+       "num": 15,
+       "format": "open_sentence",
+       "stem": "作者想看小丽的答案时，小丽有什么反应？",
+       "answer": "小丽摇摇头，还把作业本合上。"
+      },
+      {
+       "num": 16,
+       "format": "open_sentence",
+       "stem": "走出校门后，小丽为什么哭了？",
+       "answer": "因为作者回过头，告诉小丽自己再也不要和她做朋友了，小丽不要跟着作者，所以小丽伤心地哭了。"
+      },
+      {
+       "num": 17,
+       "format": "open_sentence",
+       "stem": "如果你是小丽，你看到同学在做作业时看别人的答案，你会怎么做？为什么？",
+       "answer": "我会阻止同学，告诉他那样做是不对的。因为我们做人要诚实，我阻止他是为了他好。"
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seedId": "nanyang_2021_hcl_mock1",
+   "school": "Nanyang",
+   "year": 2021,
+   "track": "HCL",
+   "raw": {
+    "seedId": "nanyang_2021_hcl_mock1",
+    "school": "Nanyang",
+    "year": 2021,
+    "track": "HCL",
+    "term": "EOY Mock Paper 1 (Paper 2)",
+    "sourcePages": "hc_10..hc_22",
+    "verified": "answer key hc_22 (attached doc index-3 rendering authoritative); question pages hc_12..hc_20 cross-checked against attached rendering",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字测验",
+      "variant": "inline",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "姐姐叫我______她买了什么礼物给妈妈。",
+        "options": [
+         "情",
+         "请",
+         "猜"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "让别人去推测、想一想，用“猜”。“猜一猜她买了什么”意思通顺。",
+         "distractors": [
+          "“情”是感情、事情，“情她买了什么”不通。",
+          "“请”是请求、邀请，句意是要对方去想，不是请求。",
+          "✓ 正确答案：猜＝推测、想一想。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“猜”是反犬旁＋青，表示动脑筋去推想。情（竖心旁，跟心情有关）、请（言字旁，跟说话有关），看偏旁分意思。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "小明受伤了，妈妈担心______了。",
+        "options": [
+         "极",
+         "及",
+         "级"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“担心极了”表示非常担心，“极了”是表示程度很深的固定说法。",
+         "distractors": [
+          "✓ 正确答案：极了＝程度很深。",
+          "“及”是达到、来得及，“担心及了”不通。",
+          "“级”是年级、等级，“担心级了”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“…极了”表示“非常…”，是固定搭配。木字旁的“极”才能这样用。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "明文被爸爸骂了一顿后，眼______都红了。",
+        "options": [
+         "图",
+         "圈",
+         "圆"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "眼睛周围一圈叫“眼圈”，哭或难过时眼圈会发红。",
+         "distractors": [
+          "“图”是图画，“眼图”不是词。",
+          "✓ 正确答案：眼圈＝眼睛四周的部分。",
+          "“圆”是圆形，“眼圆”不是这里要的词。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "三个字都是“囗”（大口框）。眼圈的“圈”里面是“卷”，指围成一圈。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "这头大象有三千多公______重呢！",
+        "options": [
+         "巾",
+         "斤",
+         "今"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "重量单位是“公斤”，所以选“斤”。",
+         "distractors": [
+          "“巾”是毛巾的巾，不是重量单位。",
+          "✓ 正确答案：公斤是重量单位。",
+          "“今”是今天的今，与重量无关。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "称重量用“斤／公斤”。记住量词跟单位有关的字：斤。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "上华文课时，李老师让我们分______玩游戏。",
+        "options": [
+         "且",
+         "姐",
+         "组"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "把人分成几队叫“分组”，所以选“组”。",
+         "distractors": [
+          "“且”是而且的且，“分且”不通。",
+          "“姐”是姐姐，“分姐”不通。",
+          "✓ 正确答案：分组＝分成小队。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“组”是绞丝旁＋且，跟把人／物编在一起有关（如小组、组织）。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "sectionLabel": "词语搭配",
+      "instruction": "选出最适合的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "散步",
+       "周围",
+       "起点",
+       "谜语",
+       "竖起",
+       "任务"
+      ],
+      "items": [
+       {
+        "num": 10,
+        "stem": "出外______",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“出外散步”指到外面走一走，搭配自然。",
+         "distractors": [
+          "✓ 正确答案：出外散步。",
+          "周围：出外周围不通。",
+          "起点：出外起点不通。",
+          "谜语：出外谜语不通。",
+          "竖起：出外竖起不通。",
+          "任务：出外任务不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“出外＋散步”＝到外面走走。动词短语搭配要看意思是否连贯。"
+        }
+       },
+       {
+        "num": 11,
+        "stem": "回到______",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "比赛或路程从头开始的地方叫“起点”，“回到起点”意思通顺。",
+         "distractors": [
+          "散步：回到散步不通。",
+          "周围：回到周围搭配勉强、不如起点准确。",
+          "✓ 正确答案：回到起点。",
+          "谜语：回到谜语不通。",
+          "竖起：回到竖起不通。",
+          "任务：回到任务不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“回到＋（地点）”。起点是一个地点名词，能跟“回到”搭配。"
+        }
+       },
+       {
+        "num": 12,
+        "stem": "眼睛______",
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "眼睛看的是四面八方，“眼睛周围”指眼睛附近，搭配合适。",
+         "distractors": [
+          "散步：眼睛散步不通。",
+          "✓ 正确答案：眼睛周围。",
+          "起点：眼睛起点不通。",
+          "谜语：眼睛谜语不通。",
+          "竖起：眼睛竖起不通。",
+          "任务：眼睛任务不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“周围”指四面附近，可以说眼睛周围、房子周围。"
+        }
+       },
+       {
+        "num": 13,
+        "stem": "______拇指",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "夸奖人时把大拇指立起来，叫“竖起拇指”。",
+         "distractors": [
+          "散步：散步拇指不通。",
+          "周围：周围拇指不通。",
+          "起点：起点拇指不通。",
+          "谜语：谜语拇指不通。",
+          "✓ 正确答案：竖起拇指。",
+          "任务：任务拇指不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“竖起拇指”是表扬别人的动作，整组记住。"
+        }
+       },
+       {
+        "num": 14,
+        "stem": "完成______",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "要做完的工作叫“任务”，“完成任务”是固定搭配。",
+         "distractors": [
+          "散步：完成散步不通。",
+          "周围：完成周围不通。",
+          "起点：完成起点不通。",
+          "谜语：完成谜语搭配勉强、不如任务。",
+          "竖起：完成竖起不通。",
+          "✓ 正确答案：完成任务。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“完成＋任务／作业／目标”。看到“完成”就想能被做完的事。"
+        }
+       }
+      ]
+     },
+     "VocabMcqPool": {
+      "sectionLabel": "词语选择（词语盒）",
+      "note": "Nanyang 词语选择 uses a shared pool of 6 words for 5 questions (each used once). Treated as VocabMatch structure (variant pool).",
+      "instruction": "选出正确的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "贴",
+       "有趣",
+       "设计",
+       "挖",
+       "野餐",
+       "咬断"
+      ],
+      "items": [
+       {
+        "num": 15,
+        "stem": "姐姐______了一张生日卡送给妈妈。",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "生日卡是动手做出来、想出样式的，用“设计”最合适。",
+         "distractors": [
+          "贴：贴一张卡＝把卡贴上，但句子是“送给妈妈”，应是做出这张卡。",
+          "有趣：是形容词，不能带“了一张卡”。",
+          "✓ 正确答案：设计了一张生日卡。",
+          "挖：挖是往下掏，不能挖卡。",
+          "野餐：是活动，不能带“一张卡”。",
+          "咬断：是咬的动作，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“设计＋（作品）”＝动脑想出样子做出来。卡片、图案都可以设计。"
+        }
+       },
+       {
+        "num": 16,
+        "stem": "老师把丽丽的作文______在布告板上。",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "把纸放到板上固定，用“贴”。“贴在布告板上”意思通顺。",
+         "distractors": [
+          "✓ 正确答案：贴在布告板上。",
+          "有趣：形容词，不合。",
+          "设计：作文已写好，是展示不是设计。",
+          "挖：不能挖作文。",
+          "野餐：活动，不合。",
+          "咬断：不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“贴＋在…上”＝把东西粘到表面。海报、作文都可以贴在板上。"
+        }
+       },
+       {
+        "num": 17,
+        "stem": "熊猫一张口就把竹子______了。",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "用牙齿把竹子咬成两段，叫“咬断”。",
+         "distractors": [
+          "贴：不合。",
+          "有趣：形容词，不合。",
+          "设计：不合。",
+          "挖：不合。",
+          "野餐：不合。",
+          "✓ 正确答案：咬断竹子。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“一张口／用牙”＝咬。把东西弄成两截＝咬断。"
+        }
+       },
+       {
+        "num": 18,
+        "stem": "今天是周末，爸爸说要带我们去海边______。",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "到户外带食物一起吃叫“野餐”，海边正适合野餐。",
+         "distractors": [
+          "贴：不合。",
+          "有趣：形容词，不合。",
+          "设计：不合。",
+          "挖：海边可以挖沙，但句子说“去海边＿”作活动名，野餐更合。",
+          "✓ 正确答案：去海边野餐。",
+          "咬断：不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“去＋（地点）＋野餐”＝到户外吃东西游玩。周末、海边常搭配野餐。"
+        }
+       },
+       {
+        "num": 19,
+        "stem": "林阿姨讲的故事很______，小朋友们都很喜欢听。",
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "故事好玩、吸引人，用形容词“有趣”。",
+         "distractors": [
+          "贴：动词，不合。",
+          "✓ 正确答案：故事很有趣。",
+          "设计：动词，不合。",
+          "挖：动词，不合。",
+          "野餐：名词/活动，不合。",
+          "咬断：动词，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "空格前有“很”，后面要跟形容词。六个词里只有“有趣”是形容词。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "sectionLabel": "阅读理解一",
+      "passage": "星期天早上，我们一家人到咖啡店吃了早餐后，一起去公园散步。公园里空气很好，我们有说有笑地走着。来到一棵大树下，我们看到有一只长得很可爱的小猫，一动也不动。我们走上前一看，原来小猫的右脚受伤了。妹妹看了，对大家说：“不如我们把小猫带回家照顾吧！”我听了，笑着说：“好吧。”爸爸妈妈也笑着同意了。我小心地抱起小猫，把它带回家去。一回到家，我和妹妹就马上帮小猫清洗伤口。每天放学回家，我们就一起照顾小猫。过了几天，小猫的伤口好起来了，我和妹妹请求爸爸妈妈让小猫留下来和我们一起生活。爸爸妈妈却告诉我们：“今天早上，我们在组屋楼下看到小猫的主人在找它。我们应该把小猫还给主人。”我和妹妹听了，点了点头。",
+      "questions": [
+       {
+        "num": 30,
+        "stem": "作者一家人在哪里发现小猫？",
+        "options": [
+         "公园。",
+         "咖啡店。",
+         "组屋楼下。"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“一起去公园散步……来到一棵大树下，我们看到有一只小猫”，发现地点是公园。",
+         "distractors": [
+          "✓ 正确答案：公园（在公园的大树下发现）。",
+          "咖啡店是吃早餐的地方，不是发现小猫的地方。",
+          "组屋楼下是后来主人找猫的地方，不是发现的地方。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题要回原文找“在哪里”。咖啡店、组屋楼下都是干扰，回文对照地点最保险。"
+        }
+       },
+       {
+        "num": 31,
+        "stem": "为什么作者把小猫带回家？",
+        "options": [
+         "因为小猫的样子非常可爱。",
+         "因为小猫弄伤了它的右脚。",
+         "因为小猫的主人请他帮忙。"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 3,
+        "skill": "inference",
+        "explain": {
+         "why": "小猫右脚受伤、一动也不动，妹妹提议带回家照顾，所以是因为小猫受伤了。",
+         "distractors": [
+          "可爱只是小猫的样子，不是带回家的原因。",
+          "✓ 正确答案：因为小猫的右脚受伤了，需要照顾。",
+          "主人是后来才出现的，一开始并没有请他帮忙。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "“为什么”题要找原因句：受伤→需要照顾→带回家。别被“可爱”这种表面信息骗到。"
+        }
+       },
+       {
+        "num": 32,
+        "stem": "小猫为什么不可以和作者一起生活？",
+        "options": [
+         "因为小猫想念它的主人。",
+         "因为小猫的伤已经好了。",
+         "因为小猫的主人在找它。"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "爸爸妈妈说看到小猫的主人在找它，应该把小猫还给主人，所以不能留下。",
+         "distractors": [
+          "文中没说小猫想念主人。",
+          "伤好了是事实，但那是可以生活的理由，不是不能留下的原因。",
+          "✓ 正确答案：因为主人在找它，要还给主人。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "问“为什么不可以”，要找爸爸妈妈说的话（主人在找它）。选项2虽是事实，但答非所问。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2": {
+     "filixiezici_note": "填写字词 Q6-Q9 (pinyin->hanzi): Q6 饿/喂, Q7 急忙, Q8 嘴巴, Q9 国旗 -> CharWrite (Phase 2)",
+     "kuoxie_note": "扩写句子 Q20-Q24 -> SentenceCraft expand (Phase 2)",
+     "readingOpen": {
+      "sectionLabel": "阅读理解二",
+      "passage": "袋鼠刚搬到湖边的山洞里。它很久没看见好朋友熊猫和山羊了，想请它们来庆祝它的生日。袋鼠就画了一张卡片和地图寄给它们。熊猫和山羊收到卡片时非常高兴。袋鼠住的地方离它们很远。当天，熊猫和山羊一早就拿着地图，想要一边看地图，一边讨论怎么走。怎么知道，一个说应该沿着小路走，一个却说应该先穿过森林。吵了半天，谁也不肯让谁。最后，它们只好各走各的，看谁会先到袋鼠家。熊猫先沿着小路往前走，看到左边有个山坡，它走上山坡，看到有个山洞。熊猫笑着说道：“我找到了。”山羊先穿过森林，看到左边有个大湖，湖边有个山洞。山羊非常兴奋，心想：一定在这里！袋鼠一大早就煮了很多好吃的食物请它们吃。当它听到门铃响时，立刻跑过去开门，只看到……",
+      "questions": [
+       {
+        "num": 33,
+        "format": "mcq",
+        "stem": "袋鼠为什么要请朋友到它的家去？",
+        "options": [
+         "因为袋鼠刚搬了新家。",
+         "因为袋鼠要请朋友吃饭。",
+         "因为袋鼠要庆祝它的生日。"
+        ],
+        "answerKey": 3,
+        "answer0": 2
+       },
+       {
+        "num": 34,
+        "format": "fill_word",
+        "stem": "文中形容“马上”的词语是：",
+        "answer": "立刻"
+       },
+       {
+        "num": 35,
+        "format": "fill_table",
+        "stem": "根据短文，完成下面的表格。",
+        "statements": [
+         "熊猫（找到山洞后的感受）",
+         "山羊（找到山洞后的感受）"
+        ],
+        "answer": [
+         "开心",
+         "非常兴奋"
+        ]
+       },
+       {
+        "num": 36,
+        "format": "open_sentence",
+        "stem": "从哪里可以看出袋鼠喜欢朋友到它家去？",
+        "answer": "袋鼠一大早就准备了很多好吃的食物请朋友吃，从这里可以看出袋鼠喜欢朋友到它家去。"
+       },
+       {
+        "num": 37,
+        "format": "open_sentence",
+        "stem": "你觉得哪一只动物会先到袋鼠家？为什么？",
+        "answer": "我觉得山羊会先到袋鼠家。因为袋鼠的家在湖边的山洞里，山羊找对了地方，熊猫找错了地方，所以山羊会先到袋鼠家。"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "rulang_2024_cl_minitest1",
+   "school": "Rulang",
+   "year": 2024,
+   "track": "CL",
+   "raw": {
+    "seedId": "rulang_2024_cl_minitest1",
+    "school": "Rulang",
+    "year": 2024,
+    "track": "CL",
+    "bandHint": "easy",
+    "term": "Mini-Test 1 (Chinese Language, /15)",
+    "sourcePages": "hc_23..hc_28",
+    "verified": "question pages hc_24/hc_25 + answer key page (attached doc index-3 rendering authoritative)",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "note": "CL (not HCL) mini-test; used as easy-band seed per policy #6.",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字测验",
+      "variant": "inline",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "妹妹会帮妈妈______衣服。",
+        "options": [
+         "近",
+         "所",
+         "折",
+         "听"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "把衣服叠好、弄整齐的动作是“折”（折衣服）。",
+         "distractors": [
+          "“近”是远近的近，不能折衣服。",
+          "“所”是处所，不合。",
+          "✓ 正确答案：折衣服＝把衣服叠好。",
+          "“听”是用耳朵听，不合。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“折”是提手旁＋斤，用手把衣服对叠＝折。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "小文坐在沙发上______书。",
+        "options": [
+         "买",
+         "卖",
+         "续",
+         "读"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "坐在沙发上看书、念书，用“读”（读书）。",
+         "distractors": [
+          "“买”是花钱得到东西，坐着看书不是买。",
+          "“卖”是把东西给别人换钱，不合。",
+          "“续”是接着、继续，“续书”不通。",
+          "✓ 正确答案：读书＝看书、念书。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“读”是言字旁，跟出声念、看书有关。买／卖跟钱有关（贝字），不要混。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "小云跟着爷爷去买面______。",
+        "options": [
+         "先",
+         "线",
+         "现",
+         "鲜"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "买做面用的“面线”（一种细面条），所以选“线”。",
+         "distractors": [
+          "“先”是先后的先，“面先”不通。",
+          "✓ 正确答案：面线＝一种细面条。",
+          "“现”是现在的现，不合。",
+          "“鲜”是新鲜的鲜，“面鲜”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“线”是绞丝旁，像细细的丝／条。面线细得像线，所以用“线”。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "sectionLabel": "词语选择",
+      "variant": "inline",
+      "items": [
+       {
+        "num": 4,
+        "sentence": "妈妈每天给家人______早餐。",
+        "options": [
+         "参观",
+         "准备",
+         "躲开",
+         "共用"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "把早餐做好、弄好，用“准备”（准备早餐）。",
+         "distractors": [
+          "“参观”是去看展览、场所，不能参观早餐。",
+          "✓ 正确答案：准备早餐＝把早餐弄好。",
+          "“躲开”是避开，不合。",
+          "“共用”是一起用，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“准备＋（食物／东西）”＝事先弄好。准备早餐、准备礼物。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "我______什么事情都难不倒奶奶。",
+        "options": [
+         "复习",
+         "收拾",
+         "争取",
+         "相信"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "对某件事有把握、认为一定是这样，用“相信”。",
+         "distractors": [
+          "“复习”是温习功课，不合句意。",
+          "“收拾”是整理东西，不合。",
+          "“争取”是努力去得到，不合。",
+          "✓ 正确答案：相信＝认为确实如此。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "表示“心里认定、有把握”用“相信”。后面常跟一句想法（相信…）。"
+        }
+       },
+       {
+        "num": 6,
+        "sentence": "他不是故意撞你的，你应该______他。",
+        "options": [
+         "原谅",
+         "欺负",
+         "合作",
+         "争吵"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "别人不是故意做错，就不再怪他，这叫“原谅”。",
+         "distractors": [
+          "✓ 正确答案：原谅＝不再怪罪。",
+          "“欺负”是仗势对付人，正好相反。",
+          "“合作”是一起做事，不合。",
+          "“争吵”是吵架，正好相反。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "看到“不是故意的……应该……”就想到“原谅”。这类情境固定。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "快迟到了，我们______出门吧。",
+        "options": [
+         "赶快",
+         "刚刚",
+         "经常",
+         "安静"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "快迟到了要快点，用“赶快”（赶快出门）。",
+         "distractors": [
+          "✓ 正确答案：赶快＝快一点。",
+          "“刚刚”指不久前，时间方向不对。",
+          "“经常”是常常，不合“快迟到”的紧急语境。",
+          "“安静”是不吵，不合。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "“快迟到了”＝要抓紧→赶快。表示催促、加快用“赶快／赶紧”。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "sectionLabel": "短文填空",
+      "passage": "一天傍晚，小乐从外面回来。她洗完手，没关上水龙头，就跑去客厅看电视。姐姐看到了，(8) ___ 像一阵风一样冲过去，关好水龙头。她对小乐说：“水对我们很重要，你这么做是不对的，一定要 (9) ___ 这个坏习惯。”小乐听了，不好意思地低下了头。",
+      "wordBank": [
+       "摆动",
+       "已经",
+       "改掉",
+       "连忙"
+      ],
+      "blanks": [
+       {
+        "num": 8,
+        "answer": "连忙",
+        "hint": "表示动作很快、马上",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "姐姐看到水龙头没关，很快冲过去，“连忙”表示急忙、马上，最合适。",
+         "distractors": [
+          "摆动：是来回晃动，不合“冲过去”的意思。",
+          "已经：表示事情完成，不能形容“冲过去”的样子。",
+          "改掉：是去除，不合这里。",
+          "✓ 正确答案：连忙＝急忙、马上。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“连忙＋（动作）”＝马上就去做。像一阵风冲过去，正是连忙。"
+        }
+       },
+       {
+        "num": 9,
+        "answer": "改掉",
+        "hint": "把坏习惯去除",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "坏习惯要去除、不再犯，用“改掉”（改掉坏习惯）。",
+         "distractors": [
+          "摆动：不合。",
+          "已经：不合。",
+          "✓ 正确答案：改掉坏习惯＝把坏习惯去除。",
+          "连忙：是急忙，不能“连忙这个坏习惯”。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“改掉＋坏习惯／毛病”是固定搭配。掉＝去除。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2": {
+     "sentenceCraft_note": "句子变变变 Q10-Q11 -> SentenceCraft (Phase 2)",
+     "sentenceCraft": [
+      {
+       "num": 10,
+       "subtype": "combine",
+       "connector": "或者",
+       "sentenceA": "弟弟可以玩游戏。",
+       "sentenceB": "弟弟可以下楼跑步。",
+       "instruction": "利用括号里的词语，写出一个完整的句子。",
+       "answer": "弟弟可以玩游戏或者楼下跑步。",
+       "marks": 2,
+       "lesson": 1
+      },
+      {
+       "num": 11,
+       "subtype": "combine",
+       "connector": "只要……就",
+       "sentenceA": "我做完功课。",
+       "sentenceB": "我能去海边游泳。",
+       "instruction": "利用括号里的词语，写出一个完整的句子。",
+       "answer": "只要我做完功课，就能去海边游泳。",
+       "marks": 2,
+       "lesson": 1
+      }
+     ]
+    }
+   }
+  },
+  {
+   "seedId": "rgps_2024_cl_wa2",
+   "school": "Raffles Girls",
+   "year": 2024,
+   "track": "CL",
+   "raw": {
+    "seedId": "rgps_2024_cl_wa2",
+    "school": "Raffles Girls",
+    "year": 2024,
+    "track": "CL",
+    "bandHint": "easy",
+    "term": "WA2 (Chinese Language, /15)",
+    "sourcePages": "hc_31..hc_39",
+    "verified": "question pages hc_32..hc_37 rasterized; passage hc_36 OCR-confirmed; answer key hc_39 (attached doc index-3 rendering authoritative)",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "note": "CL WA2 mini-paper; easy-band seed per policy #6. Reading passage has a sequence(paixu) question -> seeds ReadingMcq sequence format.",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字",
+      "variant": "list",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "妈妈让妹妹把玩具放进______子里。",
+        "options": [
+         "和",
+         "盒",
+         "河"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "装玩具的是“盒子”，所以选“盒”。",
+         "distractors": [
+          "“和”是和平、和好，“和子”不是词。",
+          "✓ 正确答案：盒子＝装东西的容器。",
+          "“河”是河流，“河子”不是这里要的词。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "和／河／盒读音相近（hé）。装东西的容器有“皿”类字义，盒子上面是“合”，合起来盖住东西。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "这是我喜欢的______子，上面有青蛙的图案。",
+        "options": [
+         "衣",
+         "装",
+         "袋"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "上面有图案、可以装东西的是“袋子”，所以选“袋”。",
+         "distractors": [
+          "“衣”是衣服，“衣子”不是词（衣服不说衣子）。",
+          "“装”是装东西的动作，“装子”不是词。",
+          "✓ 正确答案：袋子＝装东西的口袋。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“袋”下面是“衣”，上面是“代”，指用布做的口袋。袋子、书包袋。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "爸爸______起大拇指，夸我是个懂事的孩子。",
+        "options": [
+         "术",
+         "竖",
+         "树"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "把大拇指立起来表扬人，叫“竖起大拇指”。",
+         "distractors": [
+          "“术”是技术、本领，不合。",
+          "✓ 正确答案：竖起大拇指＝把拇指立起来表扬。",
+          "“树”是树木，“树起大拇指”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“竖”是把东西直立起来。竖起大拇指＝夸奖的动作，整组记住。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "sectionLabel": "词语选择",
+      "variant": "list",
+      "items": [
+       {
+        "num": 4,
+        "sentence": "我们不要在墙上乱画，会______环境。",
+        "options": [
+         "破坏",
+         "溜走",
+         "浪费"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "在墙上乱画会弄坏、损害环境，用“破坏”（破坏环境）。",
+         "distractors": [
+          "✓ 正确答案：破坏环境＝损害环境。",
+          "“溜走”是偷偷走掉，不合。",
+          "“浪费”是白白用掉（钱、时间、水），乱画不是浪费环境。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“破坏＋环境／东西”＝弄坏。浪费搭配钱／水／时间，别混。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "奶奶______跟爷爷一起去上电脑课。",
+        "options": [
+         "复习",
+         "决定",
+         "满意"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "jinyici",
+        "explain": {
+         "why": "拿定主意要去做某事，用“决定”（决定去上课）。",
+         "distractors": [
+          "“复习”是温习功课，不合。",
+          "✓ 正确答案：决定＝拿定主意。",
+          "“满意”是觉得好、满足，不能带“跟爷爷去上课”。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "“决定＋（要做的事）”＝下定决心去做。决定去、决定买。"
+        }
+       },
+       {
+        "num": 6,
+        "sentence": "小乐很喜欢妈妈______的衣服，因为上面有亮晶晶的星星。",
+        "options": [
+         "实现",
+         "保护",
+         "设计"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "衣服的样式是想出来、做出来的，用“设计”（设计的衣服）。",
+         "distractors": [
+          "“实现”搭配愿望／梦想，不能实现衣服。",
+          "“保护”是使不受伤害，不合。",
+          "✓ 正确答案：设计的衣服＝想出样式做的衣服。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“设计＋（作品）”＝动脑想出样子。衣服、卡片、图案都能设计。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "sectionLabel": "阅读理解",
+      "passage": "大象明明跟小羊乐乐是邻居。一天，它们在附近的森林里玩，乐乐不小心掉进了水里。乐乐不会游泳，连忙大喊：“救救我！”明明一听到乐乐的喊声，就赶快跑过去，把鼻子伸进水里，把乐乐拉上来。乐乐对明明说：“谢谢你救了我！”有一天晚上，明明生病了。它急忙去找乐乐，想让它陪自己去看医生。乐乐正在睡觉，听到明明在拍门请求它帮忙，便起床去开门。明明一进门，就吐了。乐乐看见了，就赶快陪它去看医生。看了医生，明明的病好多了。它不好意思地说：“我把你家里的地板弄脏了，你不会生气吗？”乐乐说：“好邻居互相帮助是应该的，我怎么会生气呢？”明明听了，走过去抱住乐乐。",
+      "questions": [
+       {
+        "num": 10,
+        "format": "sequence",
+        "stem": "根据短文内容，把下面的句子排一排。",
+        "sequenceItems": [
+         "乐乐掉进水里，明明赶快跑过去救它。",
+         "明明的病好多了，它感谢乐乐帮了它。",
+         "明明晚上生病了，想乐乐陪它看医生。",
+         "明明跟乐乐是邻居，它们去了森林玩。"
+        ],
+        "answerKeyOrder": [
+         4,
+         1,
+         3,
+         2
+        ],
+        "answer": [
+         3,
+         0,
+         2,
+         1
+        ],
+        "lesson": 3,
+        "skill": "sequence",
+        "explain": {
+         "why": "按故事发生的先后：先是邻居去森林玩→乐乐掉水里被救→明明晚上生病要乐乐陪→看完医生病好了道谢。",
+         "distractors": [
+          "（排序题：按时间顺序排列，无单一干扰项。）"
+         ],
+         "trapType": "sequence",
+         "memoryTip": "排序题按“时间／因果”先后排。抓住表示时间的词：一天、有一天晚上、看了医生之后。"
+        }
+       },
+       {
+        "num": 11,
+        "format": "mcq",
+        "stem": "乐乐为什么会大喊起来？",
+        "options": [
+         "因为它不小心掉进水里。",
+         "因为它听到了拍门的声音。",
+         "因为它在森林里找不到明明。"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说乐乐不小心掉进水里、不会游泳，才连忙大喊救命。",
+         "distractors": [
+          "✓ 正确答案：因为它掉进水里，不会游泳。",
+          "拍门是后来明明生病时的事，不是乐乐大喊的原因。",
+          "文中没有说乐乐找不到明明。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "“为什么大喊”回原文找紧接着的句子：掉进水里→不会游泳→大喊。"
+        }
+       },
+       {
+        "num": 12,
+        "format": "mcq",
+        "stem": "以下哪一个句子是对的？",
+        "options": [
+         "乐乐去森林里玩，因为它想在水里学会怎么游泳。",
+         "乐乐很感谢明明，因为明明跳进水里把它救上来。",
+         "明明感到不好意思，因为它弄脏了乐乐家的地板。"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "明明看完医生后说“我把你家里的地板弄脏了”，觉得不好意思，所以第三句对。",
+         "distractors": [
+          "乐乐去森林是玩，不是为了学游泳，说反了。",
+          "明明是把鼻子伸进水里把乐乐拉上来，不是“跳进水里”，细节不符。",
+          "✓ 正确答案：明明因为弄脏地板而不好意思。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "判断对错题要逐句回原文核对细节。注意“跳进水里”和“把鼻子伸进水里”的差别。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2_phase3": {
+     "kantuxuanci_note": "看图选词 Q7-Q9 (image) -> PictureVocabMcq (Phase 3): Q7 垃圾桶, Q8 购物, Q9 国旗",
+     "readingOpen": {
+      "sectionLabel": "阅读理解（问答部分）",
+      "note": "same 明明/乐乐 passage; open questions Q13-Q14 -> ReadingOpen (Phase 2)",
+      "questions": [
+       {
+        "num": 13,
+        "format": "open_sentence",
+        "stem": "从哪里可以看出乐乐会帮助别人？",
+        "answer": "乐乐正在睡觉，听到明明在拍门请求它帮忙，便起床去开门，明明一进门就吐了，乐乐看见了，就赶快陪它去看医生，从这里可以看出。"
+       },
+       {
+        "num": 14,
+        "format": "open_sentence",
+        "stem": "为什么明明会抱住乐乐？",
+        "answer": "因为明明把家里的地板弄脏，乐乐没有生气，还说好邻居互相帮助是应该的，明明很感动，所以他会抱住乐乐。"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "nanyang_2024_hcl_wa2",
+   "school": "Nanyang",
+   "year": 2024,
+   "track": "HCL",
+   "raw": {
+    "seedId": "nanyang_2024_hcl_wa2",
+    "school": "Nanyang",
+    "year": 2024,
+    "track": "HCL",
+    "bandHint": "hard",
+    "term": "WA2 (Language Paper, /42)",
+    "sourcePages": "hc_42..hc_53",
+    "verified": "answer key page (attached doc index-3 rendering authoritative: NANYANG P3 HCL 2024 WA2); question pages hc_43..hc_50 cross-checked against attached rendering + OCR; 短文填空 Q25-Q29 added from hc_47 OCR + attached-doc answer key",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "note": "HCL WA2 -> hard-band seed per policy #2/#6. Reading passage (Xiaoli/Wenyun, misunderstanding over chess) distinct from Tao Nan passage.",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字测验",
+      "variant": "inline",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "中秋节的月亮是______的。",
+        "options": [
+         "元",
+         "圆",
+         "园"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "月亮的形状是圆的，用“圆”（圆形）。",
+         "distractors": [
+          "“元”是元旦、元气的元，不表示形状。",
+          "✓ 正确答案：圆＝圆形。",
+          "“园”是公园、花园的园，不表示形状。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "元／圆／园读音都是 yuán。表示形状（圆圆的）用“圆”，里面有“员”外面是“囗”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "牙齿是身体最______的部分。",
+        "options": [
+         "更",
+         "硬",
+         "便"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "牙齿又坚又结实，形容坚固用“硬”（坚硬）。",
+         "distractors": [
+          "“更”是更加的更，不能说“最更”。",
+          "✓ 正确答案：硬＝坚固、不软。",
+          "“便”是方便、便宜的便，不合。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“硬”是石字旁，跟石头一样坚固。牙齿硬＝像石头一样结实。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "妹妹的生日愿望______现了。",
+        "options": [
+         "头",
+         "空",
+         "实"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "愿望成真叫“实现”，所以选“实”。",
+         "distractors": [
+          "“头”是头部，“头现”不是词。",
+          "“空”是空的、天空，“空现”不通。",
+          "✓ 正确答案：实现＝愿望成真。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "固定搭配“实现＋愿望”。看到“愿望……现了”就填“实”。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "姐姐做了蛋糕请我品______。",
+        "options": [
+         "学",
+         "常",
+         "尝"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "吃一点试试味道叫“品尝”，所以选“尝”。",
+         "distractors": [
+          "“学”是学习，“品学”不是这里要的词。",
+          "“常”是常常，“品常”不通。",
+          "✓ 正确答案：品尝＝尝尝味道。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“尝”下面有“云”样的部分，本义是用口辨味。品尝食物＝尝味道。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "军人叔叔保______我们的国家。",
+        "options": [
+         "为",
+         "卫",
+         "位"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "军人守护、保护国家叫“保卫”，所以选“卫”。",
+         "distractors": [
+          "“为”是为了的为，“保为”不是词。",
+          "✓ 正确答案：保卫＝保护、守护。",
+          "“位”是位置、座位的位，不合。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "为／卫／位读音相近（wèi）。守护国家用“保卫”，卫＝守卫、保护。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "sectionLabel": "词语搭配",
+      "instruction": "选出正确的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "准时",
+       "问题",
+       "改掉",
+       "原谅",
+       "跌倒",
+       "连忙"
+      ],
+      "items": [
+       {
+        "num": 10,
+        "stem": "______受伤",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "摔倒了会受伤，“跌倒受伤”意思连贯。",
+         "distractors": [
+          "准时：准时受伤不通。",
+          "问题：问题受伤不通。",
+          "改掉：改掉受伤不通。",
+          "原谅：原谅受伤不通。",
+          "✓ 正确答案：跌倒受伤。",
+          "连忙：连忙受伤不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“跌倒”＝摔倒，摔倒后常“受伤”，两个动作前后相关。"
+        }
+       },
+       {
+        "num": 11,
+        "stem": "回答______",
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "对提出的“问题”给出答复，叫“回答问题”。",
+         "distractors": [
+          "准时：回答准时不通。",
+          "✓ 正确答案：回答问题。",
+          "改掉：回答改掉不通。",
+          "原谅：回答原谅不通。",
+          "跌倒：回答跌倒不通。",
+          "连忙：回答连忙不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“回答＋问题”是固定搭配。有问才有答。"
+        }
+       },
+       {
+        "num": 12,
+        "stem": "______认错",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "做错事马上承认，“连忙认错”表示急忙承认错误。",
+         "distractors": [
+          "准时：准时认错不通。",
+          "问题：问题认错不通。",
+          "改掉：改掉认错搭配勉强、不如连忙。",
+          "原谅：原谅是别人做的，不是自己认错前的动作。",
+          "跌倒：跌倒认错不通。",
+          "✓ 正确答案：连忙认错。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“连忙＋（动作）”＝急忙去做。连忙认错＝赶快承认错误。"
+        }
+       },
+       {
+        "num": 13,
+        "stem": "请求______",
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "做错事后请别人不要怪自己，叫“请求原谅”。",
+         "distractors": [
+          "准时：请求准时不通。",
+          "问题：请求问题搭配勉强、不如原谅。",
+          "改掉：请求改掉不通。",
+          "✓ 正确答案：请求原谅。",
+          "跌倒：请求跌倒不通。",
+          "连忙：请求连忙不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“请求＋原谅”＝求别人不再怪罪。做错事就请求原谅。"
+        }
+       },
+       {
+        "num": 14,
+        "stem": "______上学",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "按规定时间到校叫“准时上学”，不迟到。",
+         "distractors": [
+          "✓ 正确答案：准时上学。",
+          "问题：问题上学不通。",
+          "改掉：改掉上学不通。",
+          "原谅：原谅上学不通。",
+          "跌倒：跌倒上学不通。",
+          "连忙：连忙上学搭配勉强、不如准时。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“准时＋（做事）”＝按规定时间。准时上学＝不迟到。"
+        }
+       }
+      ]
+     },
+     "VocabMcqPool": {
+      "sectionLabel": "词语选择（词语盒）",
+      "note": "5 questions share a 6-word pool, each used once -> VocabMatch structure (variant pool).",
+      "instruction": "选出正确的答案，把代表它的号码写在括号里。",
+      "pool": [
+       "聪明",
+       "能干",
+       "摆动",
+       "参观",
+       "努力",
+       "花展"
+      ],
+      "items": [
+       {
+        "num": 15,
+        "stem": "妹妹听着动听的音乐，还不时______着身体。",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "随着音乐来回晃动身体，用“摆动”（摆动身体）。",
+         "distractors": [
+          "聪明：形容脑子好，不能带“身体”。",
+          "能干：形容有本事，不合。",
+          "✓ 正确答案：摆动身体＝身体来回晃动。",
+          "参观：是去看，不合。",
+          "努力：是用心做事，不合。",
+          "花展：是名词，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“摆动＋（身体／树枝）”＝来回晃。听音乐摆动身体。"
+        }
+       },
+       {
+        "num": 16,
+        "stem": "国外的学生和老师们明天来______南洋小学。",
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "到学校去看、访问，叫“参观”（参观学校）。",
+         "distractors": [
+          "聪明：形容词，不合。",
+          "能干：形容词，不合。",
+          "摆动：不合。",
+          "✓ 正确答案：参观南洋小学＝到学校去看。",
+          "努力：不合。",
+          "花展：名词，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“参观＋（地方）”＝去某处看。参观学校、参观展览。"
+        }
+       },
+       {
+        "num": 17,
+        "stem": "只要我______学习，将来就能成为一名医生。",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "用心、下功夫地学习叫“努力学习”。",
+         "distractors": [
+          "聪明：形容词，不能说“聪明学习”。",
+          "能干：形容词，不合。",
+          "摆动：不合。",
+          "参观：不合。",
+          "✓ 正确答案：努力学习＝用心下功夫学。",
+          "花展：名词，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“努力＋（做事）”＝用心去做。努力学习、努力工作。"
+        }
+       },
+       {
+        "num": 18,
+        "stem": "我早上一个人把课室打扫干净，老师说我真______。",
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "jinyici",
+        "explain": {
+         "why": "一个人能把事情做好，形容有本事、会做事，用“能干”。",
+         "distractors": [
+          "聪明：偏重脑子灵，这里强调会做事，用能干更准。",
+          "✓ 正确答案：能干＝会做事、有本事。",
+          "摆动：动词，不合。",
+          "参观：动词，不合。",
+          "努力：这里是称赞结果（做好了），能干更合。",
+          "花展：名词，不合。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "“聪明”指脑子好，“能干”指会做事。老师夸打扫干净＝会做事＝能干。"
+        }
+       },
+       {
+        "num": 19,
+        "stem": "今年的______好看极了，五颜六色，有很多人前来。",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "五颜六色、很多人来看的是“花展”（展出花的活动）。",
+         "distractors": [
+          "聪明：形容词，不合。",
+          "能干：形容词，不合。",
+          "摆动：动词，不合。",
+          "参观：动词，不合。",
+          "努力：不合。",
+          "✓ 正确答案：花展＝展出花的活动，五颜六色。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“五颜六色”“很多人前来看”＝展览。展出花的叫花展。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "sectionLabel": "阅读理解（选择部分）",
+      "passage": "小丽上了三年级，转到了家旁边的学校。到了新学校，为了让小丽更好地适应学校生活，老师让文云做小丽的小伙伴。在文云的照顾下，小丽很快就适应了，还认识了很多的小伙伴，这让她喜欢上了新学校。过了几天，小丽回家之后不爱说话了。妈妈看到了，问小丽发生了什么事。小丽伤心地说：“我一直以为文云是我最好的朋友，她每天休息时间陪我吃饭，陪我去图书馆读书，还和我玩我喜欢的跳飞机。可谁知今天她叫我去下棋，我不喜欢下棋，她就去找小明下棋了。她不是我好朋友了。”那天傍晚，小丽和妈妈来到游乐场，看到不远处有一棵大树，树上还有很多小鸟。妈妈问小丽：“树上为什么会有这么多小鸟？”“小鸟要帮大树捉虫子啊！”小丽马上回答。妈妈笑着说：“是啊，有了小鸟，大树才能长得高大。可如果没有了大树，小鸟就没有家了。”小丽听了，点点头。妈妈又说：“那你有没有和文云做她想做的事啊？”这时，小丽大声说：“妈妈，我明白了，我和文云要像小鸟和大树一样互相照顾，这才是好朋友啊！”说完，小丽和妈妈都笑了起来。",
+      "questions": [
+       {
+        "num": 30,
+        "stem": "老师为什么让文云做小丽的小伙伴？",
+        "options": [
+         "为了让小丽交很多的朋友。",
+         "为了让小丽适应学校生活。",
+         "为了让小丽喜欢上新学校。"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 3,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“为了让小丽更好地适应学校生活，老师让文云做小丽的小伙伴”。",
+         "distractors": [
+          "交很多朋友是后来的结果，不是老师的原因。",
+          "✓ 正确答案：为了让小丽适应学校生活。",
+          "喜欢上新学校也是结果，不是原因。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "“为什么”题回原文找“为了……”那句。结果（交朋友、喜欢学校）常做干扰项。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "sectionLabel": "短文填空",
+      "passage": "下课了，教室里热闹起来。大卫的桌子旁围着一群同学。“我昨天过生日，妈妈给我做了一个汽车 (25) ___ 的蛋糕，好吃极了！”大卫还没说完，小月又说：“我也是 (26) ___ 才过完生日，爸爸做了一桌子好吃的呢！”同学们说得正开心时，哈山听了，为了 (27) ___ 大家，便跑出了课室。哈山的好友文明看到了，便告诉同学们哈山的父母忙着工作，(28) ___ 出国，没时间陪他。听了文明的话，同学们准备送给哈山一个 (29) ___ 的生日礼物。",
+      "wordBank": [
+       "经常",
+       "刚刚",
+       "后退",
+       "特别",
+       "图案",
+       "躲开"
+      ],
+      "blanks": [
+       {
+        "num": 25,
+        "answer": "图案",
+        "hint": "蛋糕上的花样",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "汽车样子的花样、图形叫“图案”，蛋糕上有汽车图案。",
+         "distractors": [
+          "经常：是常常，不能形容蛋糕。",
+          "刚刚：是时间词，不合。",
+          "后退：是往后退，不合。",
+          "特别：是与众不同，但空格前是“汽车”，指汽车样子的花样，用图案更准。",
+          "✓ 正确答案：图案＝花样、图形。",
+          "躲开：是避开，不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“（东西）＋图案”＝上面的花样。汽车图案、花朵图案。"
+        }
+       },
+       {
+        "num": 26,
+        "answer": "刚刚",
+        "hint": "表示不久前",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“我也是刚刚才过完生日”表示不久前刚过生日，用“刚刚”。",
+         "distractors": [
+          "经常：是常常发生，生日一年一次，不合。",
+          "✓ 正确答案：刚刚＝不久前。",
+          "后退：不合。",
+          "特别：不合。",
+          "图案：不合。",
+          "躲开：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“刚刚＋才……”＝不久前刚做完。看到“才过完”就想“刚刚”。"
+        }
+       },
+       {
+        "num": 27,
+        "answer": "躲开",
+        "hint": "避开、离开",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "哈山听了不开心，为了避开大家而跑出课室，用“躲开”。",
+         "distractors": [
+          "经常：不合。",
+          "刚刚：不合。",
+          "后退：只是往后退几步，不是离开大家。",
+          "特别：不合。",
+          "图案：不合。",
+          "✓ 正确答案：躲开大家＝避开大家。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“躲开＋（人／东西）”＝避开。为了不面对大家→躲开大家。"
+        }
+       },
+       {
+        "num": 28,
+        "answer": "经常",
+        "hint": "常常、时常",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "父母忙着工作、时常出国，用“经常”表示常常。",
+         "distractors": [
+          "✓ 正确答案：经常出国＝常常出国。",
+          "刚刚：只指一次，不合“忙着工作”的长期状态。",
+          "后退：不合。",
+          "特别：不合。",
+          "图案：不合。",
+          "躲开：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“经常＋（做某事）”＝常常。经常出国、经常迟到。"
+        }
+       },
+       {
+        "num": 29,
+        "answer": "特别",
+        "hint": "与众不同的",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "同学们想送哈山一份与众不同、用心的礼物，用“特别”。",
+         "distractors": [
+          "经常：不合。",
+          "刚刚：不合。",
+          "后退：不合。",
+          "✓ 正确答案：特别的礼物＝与众不同的礼物。",
+          "图案：是名词，不能说“图案的礼物”。",
+          "躲开：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“特别的＋（东西）”＝与众不同的。特别的礼物＝很用心、不一样的礼物。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2_phase3": {
+     "tianxiezici_note": "填写字词 Q6-Q9: Q6 阿姨, Q7 眼睛, Q8 希望, Q9 强壮 -> CharWrite (Phase 2)",
+     "kuoxie_note": "扩写句子 Q20-Q24 -> SentenceCraft expand (Phase 2)",
+     "readingOpen": {
+      "sectionLabel": "阅读理解（问答部分）",
+      "note": "same Xiaoli/Wenyun passage; Q31-Q34 -> ReadingOpen (Phase 2)",
+      "questions": [
+       {
+        "num": 31,
+        "format": "open_sentence",
+        "stem": "文云每天和小丽做什么？",
+        "answer": "文云每天休息时间陪小丽吃饭，去图书馆读书，还和小丽玩她喜欢的跳飞机。"
+       },
+       {
+        "num": 32,
+        "format": "open_sentence",
+        "stem": "为什么小丽觉得文云不是自己的好朋友？",
+        "answer": "因为文云叫小丽陪她下棋，小丽不喜欢下棋，文云就去找小明下棋了，让小丽觉得文云不喜欢她了，所以小丽觉得文云不是自己的好朋友。"
+       },
+       {
+        "num": 33,
+        "format": "fill_table",
+        "stem": "根据短文，完成下面的表格。",
+        "statements": [
+         "去游乐场前（小丽的感受）",
+         "去游乐场后（小丽的感受）"
+        ],
+        "answer": [
+         "感到伤心",
+         "感到开心"
+        ]
+       },
+       {
+        "num": 34,
+        "format": "open_sentence",
+        "stem": "从哪里可以看出小鸟和大树是好朋友？",
+        "answer": "小鸟帮大树捉虫子，让大树长得高大；大树是小鸟的家，小鸟和大树互相照顾，从这里可以看出小鸟和大树是好朋友。"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "daonan_2024_hcl_supplement1",
+   "school": "Dao Nan (supplement, Red Swastika cover)",
+   "year": 2024,
+   "track": "HCL",
+   "raw": {
+    "seedId": "daonan_2024_hcl_supplement1",
+    "school": "Dao Nan (supplement, Red Swastika cover)",
+    "year": 2024,
+    "track": "HCL",
+    "bandHint": "mid",
+    "term": "HCL Supplementary Exercise (1), Lessons 1-2",
+    "sourcePages": "old PDF p49..p62",
+    "verified": "images verified: pinyin Q6-7, cloze passage+box+Q21-24, reading Q25-28, hanzi Q1-2/Q4-5, vocab Q10-11, match Q12-16; answer key p62 image cross-checked; ALL answers consistent with context (no key mismatch)",
+    "explainRubric": "why/distractors(len=options)/trapType/memoryTip; student-facing Chinese; P3 level",
+    "note": "Full 8-section HCL completion. Fills PINYIN + CLOZE + READING bottlenecks in one paper. mid-band.",
+    "sections": {
+     "HanziMcq": {
+      "sectionLabel": "辨字测验",
+      "variant": "list",
+      "items": [
+       {
+        "num": 1,
+        "sentence": "姐姐______望长大后可以成为一名护士。",
+        "options": [
+         "西",
+         "希",
+         "息",
+         "吸"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "心里盼望做某事叫“希望”，所以选“希”。",
+         "distractors": [
+          "“西”是方向西，“西望”不是词。",
+          "✓ 正确答案：希望＝盼望。",
+          "“息”是休息、消息，“息望”不通。",
+          "“吸”是吸气、吸管，“吸望”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "固定搭配“希望＋（做某事）”。看到“……望长大后……”就填“希”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "我相______你可以学会游泳。",
+        "options": [
+         "位",
+         "像",
+         "住",
+         "信"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "对别人有把握、认为一定行，叫“相信”，所以选“信”。",
+         "distractors": [
+          "“位”是位置、座位，“相位”不合。",
+          "“像”是好像、图像，“相像”意思是长得像，与句意不合。",
+          "“住”是居住，“相住”不是词。",
+          "✓ 正确答案：相信＝认为一定行。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“相信”＝心里认定。信是言字旁（人言为信），表示可信、认定。"
+        }
+       }
+      ]
+     },
+     "HanziMcqB": {
+      "sectionLabel": "辨字测验（续，动词辨析）",
+      "note": "Q4-Q5 also in 辨字 section on same paper.",
+      "variant": "list",
+      "items": [
+       {
+        "num": 4,
+        "sentence": "妈妈每天都来学校______妹妹放学。",
+        "options": [
+         "报",
+         "打",
+         "捉",
+         "接"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "放学时到学校把妹妹带回家，叫“接”（接妹妹）。",
+         "distractors": [
+          "“报”是报告、报纸，不合。",
+          "“打”是击打、打电话，“打妹妹放学”不合。",
+          "“捉”是抓、捉住，不合。",
+          "✓ 正确答案：接妹妹放学＝去把妹妹带回。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“接＋（人）”＝去把人带回来。接妹妹、接客人。四个都是提手旁，看字义。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "王老师叫同学们把课本______到第十页。",
+        "options": [
+         "开",
+         "翻",
+         "张",
+         "拿"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "把书页一页页掀到某页叫“翻”（翻到第十页）。",
+         "distractors": [
+          "“开”是打开，“开到第十页”不准确。",
+          "✓ 正确答案：翻到第十页＝把书翻开到那一页。",
+          "“张”是量词/张开，“张到”不通。",
+          "“拿”是用手拿，“拿到第十页”不合。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“翻＋到第X页”＝掀书页。翻书、翻页。"
+        }
+       }
+      ]
+     },
+     "PinyinMcq": {
+      "sectionLabel": "汉语拼音（看句子选音节）",
+      "variant": "list",
+      "items": [
+       {
+        "num": 6,
+        "sentence": "叔叔不但长得高，身体也很{u}强壮{/u}。",
+        "options": [
+         "qiáng chuàn",
+         "qiáng zhuàn",
+         "qiáng chuàng",
+         "qiáng zhuàng"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "shengmu_yunmu",
+        "target": "强壮",
+        "explain": {
+         "why": "“强”读 qiáng，“壮”读 zhuàng（翘舌 zh、有 ng、第四声）。合起来 qiáng zhuàng。",
+         "distractors": [
+          "“壮”是 zhuàng 不是 chuàn：声母该是 zh，韵母要有 ng。",
+          "“壮”少了 ng（zhuàn 错），应是 zhuàng。",
+          "“壮”声母该是 zh 不是 ch（chuàng 错）。",
+          "✓ 正确答案：qiáng zhuàng。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“壮”＝翘舌 zh＋后鼻音 ang＝zhuàng。别读成平舌 ch 或漏掉 ng。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "欢欢每天{u}努力{/u}练习唱歌，终于在歌唱比赛中得了第一名。",
+        "options": [
+         "lǔ lì",
+         "lǔ nì",
+         "nǔ lì",
+         "nǔ nì"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "shengmu_yunmu",
+        "target": "努力",
+        "explain": {
+         "why": "“努”读 nǔ（声母 n、第三声），“力”读 lì（声母 l、第四声）。合起来 nǔ lì。",
+         "distractors": [
+          "“努”声母是 n 不是 l（lǔ 错）；“力”声调也要看。",
+          "“努”声母是 n 不是 l，“力”是 lì 不是 nì。",
+          "✓ 正确答案：nǔ lì。",
+          "“力”声母是 l 不是 n（nì 错）。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "分清 n 和 l：努 nǔ 用鼻音 n，力 lì 用边音 l。两个字声母正好相反，别对调。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "sectionLabel": "词语选择",
+      "variant": "list",
+      "items": [
+       {
+        "num": 10,
+        "sentence": "为了______我的愿望，我每天都认真学习。",
+        "options": [
+         "现在",
+         "现实",
+         "实现",
+         "实在"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "让愿望成真叫“实现”，固定搭配“实现愿望”。",
+         "distractors": [
+          "“现在”是时间词，不能带“愿望”。",
+          "“现实”指真实情况，是名词，不合。",
+          "✓ 正确答案：实现愿望＝让愿望成真。",
+          "“实在”是的确、真实，不合。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“实现”和“现实”字一样、顺序不同，意思完全不同。愿望要“实现”（动词）。"
+        }
+       },
+       {
+        "num": 11,
+        "sentence": "当老师提问的时候，小光______第一个举手回答。",
+        "options": [
+         "不但",
+         "从来",
+         "也许",
+         "总是"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "每次提问都第一个举手，表示一直如此，用“总是”。",
+         "distractors": [
+          "“不但”后面要接“而且”，这里不搭。",
+          "“从来”多用于否定（从来不），这里是肯定，不合。",
+          "“也许”表示可能，不合“每次都”的意思。",
+          "✓ 正确答案：总是＝每次都、一直。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "表示“每一次、一直”用“总是”。从来常跟“不／没”，注意区别。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "sectionLabel": "词语搭配",
+      "instruction": "从所提供的词语中，选出可以和各题搭配成合理词组的词语，然后把代表它的数字（1-6）填写在括号里。",
+      "pool": [
+       "写字",
+       "懂事",
+       "华文",
+       "成为",
+       "国家",
+       "争取"
+      ],
+      "items": [
+       {
+        "num": 12,
+        "stem": "保卫______",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "军人守护、保卫的是“国家”，“保卫国家”是固定搭配。",
+         "distractors": [
+          "写字：保卫写字不通。",
+          "懂事：保卫懂事不通。",
+          "华文：保卫华文不通。",
+          "成为：保卫成为不通。",
+          "✓ 正确答案：保卫国家。",
+          "争取：保卫争取不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“保卫＋国家／家园”＝守护。军人保卫国家。"
+        }
+       },
+       {
+        "num": 13,
+        "stem": "（　）歌手",
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "长大后当上歌手叫“成为歌手”，“成为＋（身份）”。",
+         "distractors": [
+          "写字：写字歌手不通。",
+          "懂事：懂事歌手不通。",
+          "华文：华文歌手搭配勉强、不如成为。",
+          "✓ 正确答案：成为歌手。",
+          "国家：国家歌手不通。",
+          "争取：争取歌手不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“成为＋（身份）”＝当上。成为歌手、成为医生。"
+        }
+       },
+       {
+        "num": 14,
+        "stem": "复习（　）",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "温习功课科目，“复习华文”指温习华文这一科。",
+         "distractors": [
+          "写字：复习写字搭配勉强、不如华文。",
+          "懂事：复习懂事不通。",
+          "✓ 正确答案：复习华文。",
+          "成为：复习成为不通。",
+          "国家：复习国家不通。",
+          "争取：复习争取不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“复习＋（科目／功课）”＝温习。复习华文、复习功课。"
+        }
+       },
+       {
+        "num": 15,
+        "stem": "（　）时间",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "努力去挤出、抓紧时间叫“争取时间”。",
+         "distractors": [
+          "写字：写字时间搭配勉强、不如争取。",
+          "懂事：懂事时间不通。",
+          "华文：华文时间不通。",
+          "成为：成为时间不通。",
+          "国家：国家时间不通。",
+          "✓ 正确答案：争取时间。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“争取＋时间／机会”＝努力去得到。争取时间＝抓紧时间。"
+        }
+       },
+       {
+        "num": 16,
+        "stem": "用心（　）",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "认真地练写字叫“用心写字”，“用心＋（做事）”。",
+         "distractors": [
+          "✓ 正确答案：用心写字。",
+          "懂事：用心懂事不通。",
+          "华文：用心华文搭配勉强、不如写字。",
+          "成为：用心成为不通。",
+          "国家：用心国家不通。",
+          "争取：用心争取不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“用心＋（做某事）”＝认真去做。用心写字、用心学习。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "sectionLabel": "短文填空",
+      "passage": "弟弟不喜欢做运动。他平时只喜欢坐在沙发上一面看电视节目，一面吃东西，(21) ___ 越来越胖。我们一家人看了都非常担心。一天，上体育课时，弟弟只跑了一会儿就要坐下来休息。他脸色发白，还一直说头疼。老师看见了，(22) ___ 打电话叫妈妈来带弟弟去看医生。医生为弟弟检查身体后，对妈妈说：“他太胖了，又不运动。(23) ___ 再这样下去，他的身体会越来越多毛病的。”弟弟听了，非常害怕。从那天起，弟弟每个星期天都会和爸爸到公园去做运动，身体也 (24) ___ 变得强壮了。我们见了，都为他感到开心。",
+      "wordBank": [
+       "常常",
+       "结果",
+       "如果",
+       "开始",
+       "排队",
+       "连忙"
+      ],
+      "blanks": [
+       {
+        "num": 21,
+        "answer": "结果",
+        "hint": "表示后来出现的情况",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "又坐着又吃东西，最后就越来越胖，“结果”表示由此产生的后果。",
+         "distractors": [
+          "常常：是经常，不能表示“因此……”的结果。",
+          "✓ 正确答案：结果＝由此产生的后果。",
+          "如果：是假设，这里是已发生的事实。",
+          "开始：是起头，不合。",
+          "排队：不合。",
+          "连忙：是急忙，不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "前因后果：做了某事→“结果”怎样了。表示后来出现的情况用“结果”。"
+        }
+       },
+       {
+        "num": 22,
+        "answer": "连忙",
+        "hint": "表示动作很快",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "老师看到弟弟脸色发白，很快打电话叫妈妈，“连忙”表示急忙、马上。",
+         "distractors": [
+          "常常：是经常，不合这里的紧急。",
+          "结果：不合。",
+          "如果：是假设，不合。",
+          "开始：不合。",
+          "排队：不合。",
+          "✓ 正确答案：连忙＝急忙、马上。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看到紧急情况“马上就……”＝连忙。连忙打电话、连忙跑过去。"
+        }
+       },
+       {
+        "num": 23,
+        "answer": "如果",
+        "hint": "表示假设",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "医生假设“要是继续这样”会怎样，用表示假设的“如果”。",
+         "distractors": [
+          "常常：不合。",
+          "结果：这里是假设，不是已发生的结果。",
+          "✓ 正确答案：如果……会……＝假设。",
+          "开始：不合。",
+          "排队：不合。",
+          "连忙：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“如果……就／会……”＝假设还没发生的事。看到“再这样下去……会……”用如果。"
+        }
+       },
+       {
+        "num": 24,
+        "answer": "开始",
+        "hint": "表示起头、逐渐",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "坚持运动后，身体一点点变强壮，“开始变得强壮”表示从此起变化。",
+         "distractors": [
+          "常常：不合。",
+          "结果：这里强调变化的起头，用开始更准。",
+          "如果：是假设，不合。",
+          "✓ 正确答案：开始变得强壮＝从此逐渐变强壮。",
+          "排队：不合。",
+          "连忙：不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“开始＋（变化）”＝从此起、逐渐。开始变好、开始下雨。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "sectionLabel": "阅读理解",
+      "passage": "从前，有个卖肉的老人，心地很好。老人自己一个人住，便养了一只小狗帮他看门。有一天，老人卖完肉回家，在路上发现一只快要饿死的小狼，就把小狼抱回家。不久，小狗和小狼都长大了。它们天天跟老人去卖肉。一天，老人卖完肉，像平时一样带着它们回家。当他们走到一棵大树下时，老人坐下来休息，没想到一会儿就睡着了。天黑了，老人还没有醒来。这时，狗和狼都饿了。狼想吃掉主人，可是狗不同意。它一边保护主人，一边大声叫，把老人给吵醒了。狼看见主人醒了，就马上逃走了。",
+      "questions": [
+       {
+        "num": 25,
+        "stem": "有一天，老人在路上发现了什么？",
+        "options": [
+         "一只会看门的小狗。",
+         "一只大声叫的小狗。",
+         "一只快饿死的小狼。",
+         "一只会卖肉的小狼。"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“在路上发现一只快要饿死的小狼”，所以答案是快饿死的小狼。",
+         "distractors": [
+          "看门的小狗是老人本来就养的，不是路上发现的。",
+          "大声叫的小狗是后来救主人的情节，不是发现的。",
+          "✓ 正确答案：一只快饿死的小狼。",
+          "小狼不会卖肉，是跟着老人去而已。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回原文找“发现了……”那句。把小狗（原有）和小狼（路上捡的）分清楚。"
+        }
+       },
+       {
+        "num": 26,
+        "stem": "小狗和小狼长大后做什么？",
+        "options": [
+         "天天帮老人看门。",
+         "天天在树下睡觉。",
+         "天天吃老人卖的肉。",
+         "天天跟老人去卖肉。"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 2,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“它们天天跟老人去卖肉”，所以答案是跟老人去卖肉。",
+         "distractors": [
+          "看门只是小狗最初的任务，不是长大后两只一起做的。",
+          "树下睡觉的是老人，不是狗和狼天天做的事。",
+          "文中没说它们吃老人卖的肉。",
+          "✓ 正确答案：天天跟老人去卖肉。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "抓“长大后……天天……”那句。别把某个细节（看门、睡觉）当成日常。"
+        }
+       },
+       {
+        "num": 27,
+        "stem": "狼为什么想吃掉主人？",
+        "options": [
+         "它想吃肉。",
+         "它不想睡。",
+         "它非常饿。",
+         "它长大了。"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "inference",
+        "explain": {
+         "why": "文中说“天黑了……这时，狗和狼都饿了。狼想吃掉主人”，原因是狼非常饿。",
+         "distractors": [
+          "“想吃肉”不如“饿”准确，文中点明是饿了。",
+          "睡不睡和想吃主人无关。",
+          "✓ 正确答案：因为它非常饿。",
+          "长大是事实，但不是想吃主人的原因。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "“为什么”题找紧挨着的原因句。这里“都饿了”正是狼想吃主人的原因。"
+        }
+       },
+       {
+        "num": 28,
+        "stem": "从哪里可以看出老人的心地很好？",
+        "options": [
+         "他把快要饿死的小狼卖掉。",
+         "他把快要饿死的小狼抱回家。",
+         "他让快要饿死的小狼吃掉主人。",
+         "他让快要饿死的小狼在树下休息。"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "inference",
+        "explain": {
+         "why": "老人看到快饿死的小狼，把它抱回家救活，这体现了他心地好。",
+         "distractors": [
+          "老人没有卖掉小狼，说反了。",
+          "✓ 正确答案：他把快饿死的小狼抱回家（救助它）。",
+          "老人没有让狼吃主人，是狗阻止了狼。",
+          "文中没有让狼在树下休息这回事。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "“从哪里看出……好／善良”＝找他做的善事。收留、救助快死的动物＝心地好。"
+        }
+       }
+      ]
+     }
+    },
+    "phase2": {
+     "gaixie_note": "五 改写句子 Q17-Q18 -> SentenceCraft (Phase 2)",
+     "readingOpen_note": "八 理解问答 (校车 passage, Q29-Q33) -> ReadingOpen (Phase 2). Answers on key: Q29a 非常, Q29b 告诉; Q30-Q33 model sentences captured for later.",
+     "readingOpen": {
+      "sectionLabel": "理解问答",
+      "passage": "“校车来了！校车来了！”同学们一面大声喊叫，一面向校车冲去。老师在后面提醒道：（校车相关短文，学生上下校车要注意安全的故事）。",
+      "questions": [
+       {
+        "num": 31,
+        "format": "open_sentence",
+        "stem": "美华跌倒的原因是什么？",
+        "answer": "一些同学互相推挤，结果把美华推倒了。"
+       },
+       {
+        "num": 32,
+        "format": "open_sentence",
+        "stem": "为什么同学们听了老师的话后会脸红？",
+        "answer": "因为同学们听了老师的话后，知道自己不好好排队，结果害得同学美华跌倒受伤，所以脸红了。"
+       },
+       {
+        "num": 33,
+        "format": "open_sentence",
+        "stem": "（如果你看到同学跌倒受伤，你会怎么做？）",
+        "answer": "我会上前把她扶起来，再把她扶到办公室清洗伤口。"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "mgs_2023_cl_wa2",
+   "school": "Methodist Girls (Primary)",
+   "year": "2023 WA2",
+   "track": "CL",
+   "raw": {
+    "seedId": "mgs_2023_cl_wa2",
+    "school": "Methodist Girls (Primary)",
+    "year": "2023 WA2",
+    "track": "CL",
+    "bandHint": "easy",
+    "seedSources": [
+     "mgs_2023_cl_wa2"
+    ],
+    "sections": {
+     "SentenceOrder": {
+      "instruction": "把下面的句子排一排，然后把序号写在括号里，以组成一篇合理的短文。",
+      "sentences": [
+       "同学们听了都点点头，表示自己也想回家种绿豆。",
+       "这时，有同学举手问科学老师要怎么照顾好绿豆。",
+       "早上，科学老师带我们到学校的花园看植物。",
+       "科学老师说绿豆喜欢生长在又湿又暗的地方，是一种非常容易照顾的植物。",
+       "花园里的植物很多，有木瓜树、香蕉树、香草，还有几盆绿豆。",
+       "老师请同学看一看那几盆绿豆，大家发现绿豆都发芽了。"
+      ],
+      "answerKey": [
+       6,
+       4,
+       1,
+       5,
+       2,
+       3
+      ],
+      "answer0": [
+       2,
+       4,
+       5,
+       1,
+       3,
+       0
+      ],
+      "explain": {
+       "why": "首句必须是交代时间地点的'早上，科学老师带我们到花园看植物'；接着按'看到绿豆 -> 老师看绿豆 -> 讲解特点 -> 同学提问 -> 同学响应'的因果顺序展开。",
+       "distractors": [
+        "常见错误是把结尾'同学们点头也想种绿豆'提前，但那是听完讲解后的反应，必须放最后。",
+        "把'科学老师说绿豆喜欢...'放在提问前也错：先有同学问'怎么照顾'，老师才解答。",
+        "'这时'是承接上文的时间词，不能放开头。"
+       ],
+       "trapType": "sequence",
+       "memoryTip": "排序先找'时间/地点开头句'，再顺'起因 -> 经过 -> 结果'；看到'这时、都、也'等词就知道它们不能放开头。"
+      },
+      "lesson": 1
+     },
+     "ReadingMcq": {
+      "passage": "小马和妈妈住在美丽的河边，生活得很快乐。\n时间过得很快，小马也长大了。有一天，妈妈把小马叫到身边说：“小马，你已经长大了，可以帮我做事。今天就请你把这包苹果送给住在河对面的大象叔叔。”\n小马高兴地答应了，飞快地背着苹果到河边。谁知道河没有桥，小马得自己游过去。这时，小马有点儿害怕便赶快问路过的小猴子：“小猴子，请问河水深吗？”小猴子听了，摇摇头然后叫小马千万不能下水。\n小马便难过地回家，把事情一五一十地告诉妈妈。妈妈听了后，陪小马来到河边，笑着要它自己进到河里。小马小心地走进河里，结果发现水一点儿也不深！\n小马成功地过了河，明白了做什么事都要先试一试才知道自己能不能做到。",
+      "questions": [
+       {
+        "num": 7,
+        "format": "mcq",
+        "stem": "妈妈要小马帮忙做什么？",
+        "options": [
+         "妈妈要小马自己游过那条河。",
+         "妈妈要小马看河上有没有桥。",
+         "妈妈要小马问小猴子河水有多深。",
+         "妈妈要小马把苹果送到大象叔叔的家。"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 2,
+        "skill": "detail",
+        "explain": {
+         "why": "妈妈说“请你把这包苹果送给住在河对面的大象叔叔”，所以是送苹果。",
+         "distractors": [
+          "自己游过河是送苹果时遇到的困难，不是妈妈交代的事。",
+          "妈妈没有要小马看有没有桥。",
+          "问小猴子河水深不深是小马自己害怕时做的，不是妈妈交代的。",
+          "✓ 正确答案：把苹果送到大象叔叔家（妈妈的原话）。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "“要……做什么”回原文找那个人说的话，妈妈说的是“送苹果”。"
+        }
+       },
+       {
+        "num": 8,
+        "format": "mcq",
+        "stem": "小猴子为什么叫小马不能下水？",
+        "options": [
+         "因为小猴子觉得小马怕水。",
+         "因为小猴子觉得河水很深。",
+         "因为小猴子要小马用桥过河。",
+         "因为小猴子要小马和妈妈一起过河。"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "inference",
+        "explain": {
+         "why": "小猴子摇摇头、叫小马不能下水，是因为它以为河水很深、危险。",
+         "distractors": [
+          "文中没说小猴子觉得小马怕水。",
+          "✓ 正确答案：小猴子以为河水很深，所以叫小马别下水。",
+          "文中说河没有桥，不是用桥过河。",
+          "文中没提到和妈妈一起过河。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "原因藏在“摇摇头、不能下水”的动作里——它判断河水深才阻止小马。"
+        }
+       },
+       {
+        "num": "9a",
+        "format": "fill_word",
+        "stem": "文中形容“事情完成或时间过去”的词语是：",
+        "answer": "已经",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“你已经长大了”里的“已经”表示时间已过、事情已完成。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“已经”＝到现在为止已完成；找词题回原文圈出这个词。"
+        }
+       },
+       {
+        "num": "9b",
+        "format": "fill_word",
+        "stem": "文中形容“马上行动”的词语是：",
+        "answer": "赶快",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“便赶快问路过的小猴子”里的“赶快”表示马上、立刻行动。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“赶快／连忙”＝马上行动；找词题看谁表示“立刻”。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "peichun_hcl_t3",
+   "school": "Pei Chun Public School",
+   "year": "T3",
+   "track": "HCL",
+   "raw": {
+    "seedId": "peichun_hcl_t3",
+    "school": "Pei Chun Public School",
+    "year": "T3",
+    "track": "HCL",
+    "bandHint": "hard",
+    "seedSources": [
+     "peichun_hcl_t3"
+    ],
+    "sections": {
+     "SentenceOrder": {
+      "instruction": "根据所提供的短句，把下面的句子重新排列，组成合理的段落，然后把数目字填写在括号里。",
+      "sentences": [
+       "妹妹听了哥哥的话，马上就拿起扫把来扫地。",
+       "哥哥也去拿了一块抹布把家里的桌子都抹干净了。",
+       "一个周末的下午，哥哥看到家里又脏又乱。",
+       "爸爸妈妈回来后，看到家里这么干净，开心极了。",
+       "哥哥就对妹妹说：“我们一起帮爸爸妈妈收拾房间吧！”"
+      ],
+      "answerKey": [
+       3,
+       4,
+       1,
+       5,
+       2
+      ],
+      "answer0": [
+       2,
+       4,
+       0,
+       1,
+       3
+      ],
+      "explain": {
+       "why": "首句是交代时间场景的'一个周末的下午，哥哥看到家里又脏又乱'；接着'哥哥提议 -> 妹妹扫地 -> 哥哥抹桌子 -> 爸妈回来开心'。关键线索：'妹妹听了哥哥的话'说明哥哥的提议在前；'哥哥也去拿'的'也'字说明哥哥的动作在妹妹之后。",
+       "distractors": [
+        "把'爸爸妈妈回来...开心极了'往前放是错的：那是收拾完成后的结果，必须放最后。",
+        "忽略'哥哥也去拿'的'也'字，把哥哥抹桌子放在妹妹扫地之前也错：'也'表示跟随妹妹的动作。",
+        "'妹妹听了哥哥的话'必须在哥哥说话（提议）之后，不能放在提议前。"
+       ],
+       "trapType": "sequence",
+       "memoryTip": "排序抓两类线索：①'时间/场景开头句'定第一句；②'也、听了...的话、于是'等关联词定动作先后。"
+      },
+      "lesson": 1
+     },
+     "VocabMatch": {
+      "instruction": "从所提供的词语中，选出可以和各题的词语搭配成合理的词组的词语，然后把代表它的数目字填写在括号里。每个词语只能用一次。",
+      "pool": [
+       "引来",
+       "招呼",
+       "利用",
+       "保护",
+       "浪费",
+       "清洗",
+       "环保",
+       "环境"
+      ],
+      "items": [
+       {
+        "num": 2,
+        "stem": "破坏______",
+        "answerKey": 8,
+        "answer0": 7,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "破坏的对象是“环境”，“破坏环境”是常见搭配。",
+         "distractors": [
+          "引来：破坏引来不通。",
+          "招呼：破坏招呼不通。",
+          "利用：破坏利用不通。",
+          "保护：保护与破坏意思相反，不搭。",
+          "浪费：破坏浪费不通。",
+          "清洗：破坏清洗不通。",
+          "环保：破坏环保不通（环保是名词性）。",
+          "✓ 正确答案：破坏环境。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "破坏＋环境；“环保”和“环境”别混，破坏的是“环境”。"
+        }
+       },
+       {
+        "num": 3,
+        "stem": "______厕所",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "把厕所弄干净是“清洗厕所”。",
+         "distractors": [
+          "引来：引来厕所不通。",
+          "招呼：招呼厕所不通。",
+          "利用：题意是弄干净，不是利用。",
+          "保护：保护厕所不合常理。",
+          "浪费：浪费厕所不通。",
+          "✓ 正确答案：清洗厕所。",
+          "环保：环保是名词，不作动作。",
+          "环境：清洗对象是厕所，不是环境。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "把某处弄干净＝清洗（清洗厕所、清洗碗筷）。"
+        }
+       },
+       {
+        "num": 4,
+        "stem": "废物______",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "把没用的东西再拿来用，是“废物利用”，固定说法。",
+         "distractors": [
+          "引来：废物引来不通。",
+          "招呼：废物招呼不通。",
+          "✓ 正确答案：废物利用。",
+          "保护：废物保护不通。",
+          "浪费：废物浪费语意重复且不搭。",
+          "清洗：废物清洗不是这里的意思。",
+          "环保：废物环保不成词组。",
+          "环境：废物环境不搭。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“废物利用”＝把没用的东西再用起来，是固定四字词。"
+        }
+       },
+       {
+        "num": 5,
+        "stem": "______水电",
+        "answerKey": 5,
+        "answer0": 4,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "用水用电不节省是“浪费水电”。",
+         "distractors": [
+          "引来：引来水电不通。",
+          "招呼：招呼水电不通。",
+          "利用：利用水电偏中性，题意指不节省。",
+          "保护：保护水电不常说。",
+          "✓ 正确答案：浪费水电。",
+          "清洗：清洗水电不通。",
+          "环保：环保是名词，不作动作。",
+          "环境：环境水电不搭。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "用水用电不节省＝浪费水电；节省的反义就是“浪费”。"
+        }
+       },
+       {
+        "num": 6,
+        "stem": "______蚊虫",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "招来蚊子虫子是“引来蚊虫”。",
+         "distractors": [
+          "✓ 正确答案：引来蚊虫。",
+          "招呼：招呼蚊虫不通。",
+          "利用：利用蚊虫不合句意。",
+          "保护：保护蚊虫不合常理。",
+          "浪费：浪费蚊虫不通。",
+          "清洗：清洗蚊虫不通。",
+          "环保：环保蚊虫不成词。",
+          "环境：环境蚊虫不搭。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“引来”＝招来（引来蚊虫、引来客人）。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "peichun_hcl_t2",
+   "school": "Pei Chun Public School",
+   "year": "T2",
+   "track": "HCL",
+   "raw": {
+    "seedId": "peichun_hcl_t2",
+    "school": "Pei Chun Public School",
+    "year": "T2",
+    "track": "HCL",
+    "bandHint": "hard",
+    "seedSources": [
+     "peichun_hcl_t2"
+    ],
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "小时候的事______，我还记在心里。",
+        "options": [
+         "晴",
+         "请",
+         "情",
+         "青"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“事情”指发生过的事，“记在心里”说明是难忘的往事，所以填“情”。",
+         "distractors": [
+          "“晴”指天气好（晴天），与“事”不搭配。",
+          "“请”是邀请、请求，不能组成“事请”。",
+          "✓ 正确答案：事情＝经历过的事。",
+          "“青”是青色，“事青”不成词。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "晴请情青读音相近，要靠词义分辨：跟“心、感觉”有关的是“情”（事情、心情）。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "上学快迟到了，我来不______吃早餐。",
+        "options": [
+         "急",
+         "及",
+         "机",
+         "己"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“来不及”是固定词语，表示时间不够、赶不上，所以填“及”。",
+         "distractors": [
+          "“急”是着急，“来不急”不是正确写法。",
+          "✓ 正确答案：来不及＝时间不够。",
+          "“机”是机器、机会，与“来不”不搭配。",
+          "“己”是自己，“来不己”不通。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "“来不及／来得及”一律用“及”（表示赶得上），记住这个固定搭配就不会错。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "这辆车开得很快，______上了路边的大树。",
+        "options": [
+         "懂",
+         "撞",
+         "理",
+         "章"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "车快速碰上大树，用“撞”（用力碰上）最准确。",
+         "distractors": [
+          "“懂”是明白，与“上了大树”不搭配。",
+          "✓ 正确答案：撞＝用力碰上。",
+          "“理”是道理、整理，不能形容车碰树。",
+          "“章”是文章、图章，与句意无关。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“撞”有“扌”（手/动作）旁，表示用力的动作；这类字先看偏旁再看意思。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "回到家，妹妹先把鞋子______掉，才去冲凉。",
+        "options": [
+         "脱",
+         "推",
+         "改",
+         "退"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“脱掉鞋子”指把穿的鞋子拿下来，所以填“脱”。",
+         "distractors": [
+          "✓ 正确答案：脱掉＝把穿的东西拿下来。",
+          "“推”是往前用力，“推掉鞋子”不合。",
+          "“改”是改正、修改，与鞋子无关。",
+          "“退”多指退货、退票，不用于脱鞋。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“脱”有“月”（肉）旁，和身体、穿戴有关（脱衣、脱鞋）；脱退推形近，看偏旁和意思。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 5,
+        "sentence": "哥哥正在房里做功课，没想到爸爸______走了进来。",
+        "options": [
+         "刚刚",
+         "一直",
+         "经常",
+         "突然"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“没想到”说明事情出乎意料，用“突然”（一下子、出乎意料）最合适。",
+         "distractors": [
+          "“刚刚”指时间上不久前，不能表达“出乎意料”。",
+          "“一直”表示持续不停，与“走了进来”这一动作不合。",
+          "“经常”指常常、多次，句中是一次意外的动作。",
+          "✓ 正确答案：突然＝一下子、出乎意料。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看提示词：“没想到”后面常配“突然／竟然”，抓住关联词就能选对。"
+        }
+       },
+       {
+        "num": 6,
+        "sentence": "小华______了生日礼物，送给外婆。",
+        "options": [
+         "希望",
+         "准备",
+         "争取",
+         "庆祝"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "先“准备”好礼物，才能送给外婆，用“准备”最合逻辑。",
+         "distractors": [
+          "“希望”是心里想要，不能直接接“了礼物”。",
+          "✓ 正确答案：准备＝事先弄好。",
+          "“争取”是努力去得到（争取时间／机会），不用于礼物。",
+          "“庆祝”是为高兴的事举行活动，“庆祝了礼物”不通。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看动词能不能接“礼物”这个宾语：准备礼物✓；庆祝生日✓但不庆祝礼物。搭配对象要合。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "这张桌子很重，要几个人一起才能______。",
+        "options": [
+         "碰到",
+         "溜走",
+         "搬动",
+         "拿走"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "桌子很重、要几个人一起，说明是费力地移动，用“搬动”最合适。",
+         "distractors": [
+          "“碰到”是接触、遇到，不表示移动重物。",
+          "“溜走”是偷偷走掉，用于人或动物，不用于桌子。",
+          "✓ 正确答案：搬动＝把重的东西移开。",
+          "“拿走”多指用手拿轻的东西，重桌子几个人一起是“搬”。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看轻重：轻的“拿”，重的“搬”。句中“很重、几个人一起”就是选“搬动”的线索。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "passage": "生日那天，叔叔送了我一台游戏机，我高兴极了！妈妈说：“只要你把功课做完，就可以玩游戏机。”从那天起，我一回到家，就很快把功课完成，然后拿起游戏机玩。\n这一天，我在房间玩游戏机时，妈妈走了进来。她生气地说：“老师告诉我，你最近的功课做得很不认真，上课也常常睡觉。我会把游戏机收起来，这样你才能专心学习。”\n听了妈妈的话，我低下了头，说：“对不起，妈妈。我知道错了。从今天起，我一定会好好学习。”",
+      "questions": [
+       {
+        "num": 8,
+        "stem": "谁送了“我”一台游戏机？",
+        "options": [
+         "妈妈。",
+         "叔叔。",
+         "爸爸。",
+         "老师。"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "detail",
+        "explain": {
+         "why": "文中第一句说“叔叔送了我一台游戏机”，所以是叔叔。",
+         "distractors": [
+          "妈妈是提出“做完功课才能玩”的人，不是送游戏机的人。",
+          "✓ 正确答案：叔叔（文中明说“叔叔送了我一台游戏机”）。",
+          "文中没有提到爸爸送游戏机。",
+          "老师是告诉妈妈“我”功课不认真的人，不是送礼物的人。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回原文找关键词“送……游戏机”，第一句就有答案，别被后面出现的人物干扰。"
+        }
+       },
+       {
+        "num": 9,
+        "stem": "妈妈为什么很生气？",
+        "options": [
+         "“我”没有做功课。",
+         "“我”在玩游戏机。",
+         "“我”在房里睡觉。",
+         "“我”学习不认真。"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "inference",
+        "explain": {
+         "why": "妈妈生气是因为“老师告诉我，你最近功课做得很不认真，上课也常常睡觉”，概括起来就是学习不认真。",
+         "distractors": [
+          "“我”其实有做功课（一回家就做完），不是没做。",
+          "玩游戏机本身妈妈是允许的（做完功课就能玩），不是生气的原因。",
+          "睡觉是“上课”睡觉，不是“在房里”睡觉，选项说法不准。",
+          "✓ 正确答案：学习不认真（功课不认真＋上课睡觉的概括）。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "原因题要把原文的几点（功课不认真、上课睡觉）概括成一句，选最全面的那项。"
+        }
+       },
+       {
+        "num": 10,
+        "stem": "“我”为什么低下了头？",
+        "options": [
+         "“我”知道自己错了。",
+         "“我”正在玩游戏机。",
+         "“我”要把功课做完。",
+         "“我”把游戏机收好。"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "inference",
+        "explain": {
+         "why": "“我低下了头”后面接着说“对不起，我知道错了”，低头表示认错。",
+         "distractors": [
+          "✓ 正确答案：知道自己错了（低头＋说“对不起、我知道错了”）。",
+          "低头时“我”已经停下，不是在玩游戏机。",
+          "“把功课做完”是以前每天做的事，不是低头的原因。",
+          "收游戏机的是妈妈，不是“我”，也不是低头的原因。"
+         ],
+         "trapType": "inference",
+         "memoryTip": "动作＋语言一起看：“低下头”配“对不起、我知道错了”，就是认错。抓住紧跟其后的话。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "redswastika_2024_hcl_review1",
+   "school": "Red Swastika",
+   "year": "2024",
+   "track": "HCL",
+   "raw": {
+    "seedId": "redswastika_2024_hcl_review1",
+    "school": "Red Swastika",
+    "year": "2024",
+    "track": "HCL",
+    "bandHint": "easy",
+    "sourceNote": "Red Swastika review compilation, 复习(一) 第一课至第三课; pinyin section (一)看汉字选拼音 5题5分; answers cross-checked against answer key (2,2,2,4,3).",
+    "sections": {
+     "PinyinMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "林老师说：“如果你们不明白就要{u}举手{/u}问老师。”",
+        "options": [
+         "jù shǒu",
+         "jǔ shǒu",
+         "qǔ shǒu",
+         "qú shǒu"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "shengdiao",
+        "target": "举手",
+        "explain": {
+         "why": "“举”读 jǔ（声母 j、第三声），“手”读 shǒu（第三声）。合起来 jǔ shǒu。",
+         "distractors": [
+          "“举”是第三声 jǔ，不是第四声 jù，声调错了。",
+          "✓ 正确答案：jǔ shǒu。",
+          "“举”的声母是 j 不是 q，不能读 qǔ。",
+          "“举”声母 j→q、声调也错，两处都不对。"
+         ],
+         "trapType": "shengdiao",
+         "memoryTip": "“举手”两个字都是第三声：jǔ shǒu，先降后升，读的时候都要往下再上扬。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "我{u}希望{/u}妈妈能带我出去玩。",
+        "options": [
+         "xī wǎng",
+         "xī wàng",
+         "xǐ wǎng",
+         "xǐ wàng"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "shengdiao",
+        "target": "希望",
+        "explain": {
+         "why": "“希”读 xī（第一声），“望”读 wàng（第四声）。合起来 xī wàng。",
+         "distractors": [
+          "“望”是第四声 wàng，不是第三声 wǎng，声调错了。",
+          "✓ 正确答案：xī wàng。",
+          "“希”是第一声 xī、“望”是第四声 wàng，这里两个声调都标错了。",
+          "“希”是第一声 xī 不是第三声 xǐ，声调错了。"
+         ],
+         "trapType": "shengdiao",
+         "memoryTip": "“希”平平的第一声 xī；“望”是从高往下的第四声 wàng（盼望的心情往前冲）。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "姐姐有一个{u}蓝色{/u}的书包。",
+        "options": [
+         "rán sè",
+         "lán sè",
+         "rán shè",
+         "lán shè"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "shengmu_yunmu",
+        "target": "蓝色",
+        "explain": {
+         "why": "“蓝”读 lán（声母 l），“色”读 sè（平舌 s、第四声）。合起来 lán sè。",
+         "distractors": [
+          "“蓝”的声母是 l 不是 r，不能读 rán。",
+          "✓ 正确答案：lán sè。",
+          "“蓝”声母 l→r、“色”平舌 s→翘舌 sh，两处都错。",
+          "“色”是平舌 sè 不是翘舌 shè，不要加 h。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“蓝”声母是 l（舌尖抵上牙），不是 r；“色”是平舌 sè，舌头别翘起来。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "妹妹的{u}愿望{/u}是成为一名歌手。",
+        "options": [
+         "yàn wǎng",
+         "yàn wàng",
+         "yuàn wǎng",
+         "yuàn wàng"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 3,
+        "skill": "shengmu_yunmu",
+        "target": "愿望",
+        "explain": {
+         "why": "“愿”读 yuàn（韵母里有介音 u，第四声），“望”读 wàng（第四声）。合起来 yuàn wàng。",
+         "distractors": [
+          "“愿”是 yuàn，中间有 u，不是 yàn；而且“望”声调也错。",
+          "“愿”是 yuàn，中间少了 u 就成了 yàn，韵母错了。",
+          "“望”是第四声 wàng，不是第三声 wǎng，声调错了。",
+          "✓ 正确答案：yuàn wàng。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“愿”读 yuàn，y 后面有 u（yu-àn），别丢了中间的 u 读成 yàn。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "妈妈要姐姐努力{u}争取{/u}考到好成绩。",
+        "options": [
+         "zhēn qǔ",
+         "zhēn qù",
+         "zhēng qǔ",
+         "zhēng qù"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 3,
+        "skill": "shengmu_yunmu",
+        "target": "争取",
+        "explain": {
+         "why": "“争”读 zhēng（后鼻韵母 -eng，第一声），“取”读 qǔ（第三声）。合起来 zhēng qǔ。",
+         "distractors": [
+          "“争”是后鼻音 zhēng，少了 g 就成了前鼻音 zhēn，韵母错了。",
+          "“争”少了 g（zhēn）、“取”声调也错（第四声），两处都错。",
+          "✓ 正确答案：zhēng qǔ。",
+          "“取”是第三声 qǔ，不是第四声 qù，声调错了。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“争”是后鼻音 zhēng，鼻音拖长带 -ng；“取”是第三声 qǔ，往下再上扬。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "redswastika_2024_hcl_review3",
+   "school": "Red Swastika",
+   "year": "2024",
+   "track": "HCL",
+   "raw": {
+    "seedId": "redswastika_2024_hcl_review3",
+    "school": "Red Swastika",
+    "year": "2024",
+    "track": "HCL",
+    "bandHint": "mid",
+    "sourceNote": "Red Swastika review compilation, 复习(三) 第八课至第十一课 -- OUTSIDE WA1 lesson window (1-4). Included per user decision (option A): lessons clamped to WA1 boundary (4) with provenance noted. Pinyin targets (线/往/摘/环/品) are basic P3 characters and the tested discriminations (q/x, zh/z/ch/c, an/ang, in/ing, tones) are curriculum-independent. Answers cross-checked against answer key (4,4,3,2,2).",
+    "sections": {
+     "PinyinMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "在明亮的光{u}线{/u}下看书，对眼睛好。",
+        "options": [
+         "qiān",
+         "qiàn",
+         "xiān",
+         "xiàn"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 4,
+        "skill": "shengmu_yunmu",
+        "target": "线",
+        "explain": {
+         "why": "“线”读 xiàn：声母是 x（不是 q），第四声。",
+         "distractors": [
+          "声母错（x→q），声调也错（第四声→第一声）。",
+          "声母错了：“线”是 x 开头，不是 q（qiàn）。",
+          "声调错了：“线”是第四声 xiàn，不是第一声 xiān。",
+          "✓ 正确答案：xiàn。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“线”声母是 x（像微笑时舌面贴近上颚），不是 q；读第四声 xiàn，从高往下。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "小猴子不停地{u}往{/u}坑里倒水，想要救小鸭。",
+        "options": [
+         "wán",
+         "wǎn",
+         "wáng",
+         "wǎng"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 4,
+        "skill": "shengmu_yunmu",
+        "target": "往",
+        "explain": {
+         "why": "“往”在这里读 wǎng：后鼻韵母 -ang（不是 -an），第三声。",
+         "distractors": [
+          "韵母错（ang→an），声调也错（第三声→第二声）。",
+          "韵母错了：“往”是后鼻音 -ang，不是 -an（wǎn）。",
+          "声调错了：“往”是第三声 wǎng，不是第二声 wáng。",
+          "✓ 正确答案：wǎng。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“往”是后鼻音 wǎng，鼻音要拖长带 -ng；第三声，先降后升。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "我觉得{u}摘{/u}花是不对的，我们应该爱护花草。",
+        "options": [
+         "chāi",
+         "cāi",
+         "zhāi",
+         "zāi"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 4,
+        "skill": "shengmu_yunmu",
+        "target": "摘",
+        "explain": {
+         "why": "“摘”读 zhāi：翘舌音 zh，第一声。",
+         "distractors": [
+          "声母错了：“摘”是 zh（不送气），不是 ch（送气）。",
+          "声母错了：“摘”是翘舌 zh，不是平舌 c。",
+          "✓ 正确答案：zhāi。",
+          "声母错了：“摘”是翘舌 zh，不是平舌 z。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“摘”是翘舌音 zh（舌尖翘起抵上颚），舌头别放平读成 z/c。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "我们应该为保护{u}环{/u}境尽一份力。",
+        "options": [
+         "huān",
+         "huán",
+         "huāng",
+         "huáng"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 4,
+        "skill": "shengmu_yunmu",
+        "target": "环",
+        "explain": {
+         "why": "“环”读 huán：前鼻韵母 -an（不是 -ang），第二声。",
+         "distractors": [
+          "声调错了：“环”是第二声 huán，不是第一声 huān。",
+          "✓ 正确答案：huán。",
+          "韵母错（an→ang），声调也错（第二声→第一声）。",
+          "韵母错了：“环”是前鼻音 -an，不是后鼻音 -ang（huáng）。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“环”是前鼻音 huán，舌尖抵上牙收音，别拖成后鼻音 -ang。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "我和妈妈一起去超市买日用{u}品{/u}。",
+        "options": [
+         "pín",
+         "pǐn",
+         "píng",
+         "pǐng"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 4,
+        "skill": "shengmu_yunmu",
+        "target": "品",
+        "explain": {
+         "why": "“品”读 pǐn：前鼻韵母 -in（不是 -ing），第三声。",
+         "distractors": [
+          "声调错了：“品”是第三声 pǐn，不是第二声 pín。",
+          "✓ 正确答案：pǐn。",
+          "韵母错（in→ing），声调也错（第三声→第二声）。",
+          "韵母错了：“品”是前鼻音 -in，不是后鼻音 -ing（pǐng）。"
+         ],
+         "trapType": "shengmu_yunmu",
+         "memoryTip": "“品”是前鼻音 pǐn（三个口，舌尖抵上牙），别读成后鼻音 pǐng。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "aitong_2025_hcl",
+   "school": "Ai Tong School",
+   "year": "2025",
+   "track": "HCL",
+   "raw": {
+    "seedId": "aitong_2025_hcl",
+    "school": "Ai Tong School",
+    "year": "2025",
+    "track": "HCL",
+    "bandHint": "hard",
+    "seedSources": [
+     "aitong_2025_hcl"
+    ],
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "这个红色的文具______是表姐送给我的。",
+        "options": [
+         "盖",
+         "盒",
+         "盆",
+         "盘"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "装文具的东西是“文具盒”，所以填“盒”。",
+         "distractors": [
+          "“盖”是盖子（锅盖），不是装东西的盒。",
+          "✓ 正确答案：文具盒＝装文具的盒子。",
+          "“盆”是脸盆、花盆，口大而浅。",
+          "“盘”是盘子，扁平的，不用来装文具。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "盖盒盆盘都有“皿”字底，要看上半部分和用途：装文具、有盖的小方物是“盒”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "他们在食堂里跑，______到一个低年级的学生。",
+        "options": [
+         "撞",
+         "状",
+         "壮",
+         "装"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "跑步时碰上别人，用“撞”（碰上），所以填“撞到”。",
+         "distractors": [
+          "✓ 正确答案：撞到＝跑动时碰上。",
+          "“状”是形状、样子，不能说“状到”。",
+          "“壮”是强壮，与碰上无关。",
+          "“装”是装东西、假装，“装到”不合句意。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "撞状壮装读音相近，表示“碰上”的动作用带“扌”旁的“撞”。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "太阳每天从东边______上来，从西边落下。",
+        "options": [
+         "身",
+         "声",
+         "升",
+         "伸"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "太阳向上出来叫“升”（升起），与后面“落下”相对，所以填“升”。",
+         "distractors": [
+          "“身”是身体，与太阳无关。",
+          "“声”是声音，不能形容太阳。",
+          "✓ 正确答案：升＝向上起来（升起）。",
+          "“伸”是伸手、伸开，不用于太阳上来。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "身声升伸读音相近；和“上、起”有关、跟“落下”相对的是“升”。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "这件事做起来一点儿也不难，太______易了！",
+        "options": [
+         "空",
+         "客",
+         "容",
+         "穿"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "_keyNote": "印刷答案键为2(客)，但文意为“容易”＝容(选项3)。采纳文意3，记录不一致（sgexam键疑似排版错）。",
+        "explain": {
+         "why": "“不难”就是“容易”，所以填“容”，组成“容易”。",
+         "distractors": [
+          "“空”是空的、天空，“空易”不成词。",
+          "“客”是客人、做客，“客易”不通。",
+          "✓ 正确答案：容易＝不难做。",
+          "“穿”是穿衣、穿过，与“易”不搭配。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "空客容穿上半形近，要看整词：跟“不难”同义的是“容易”的“容”。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 5,
+        "sentence": "看到小华跌倒了，我______走上前扶他起来。",
+        "options": [
+         "一直",
+         "连忙",
+         "然后",
+         "正在"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "看到有人跌倒，要赶快去扶，用“连忙”（急忙、马上）最合适。",
+         "distractors": [
+          "“一直”表示持续不停，不能表达“赶快”。",
+          "✓ 正确答案：连忙＝急忙、马上。",
+          "“然后”表示先后次序，句中缺少前一个动作。",
+          "“正在”表示动作进行中，不表示反应快。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看到突发情况（跌倒、着火）要“连忙／急忙”去处理，抓住紧急的语气。"
+        }
+       },
+       {
+        "num": 6,
+        "sentence": "为了实现当医生的______，小晴从小就努力学习。",
+        "options": [
+         "练习",
+         "愿望",
+         "事情",
+         "部分"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "心里想达到的目标叫“愿望”，“实现愿望”是固定搭配，所以填“愿望”。",
+         "distractors": [
+          "“练习”是反复做以求熟练，不能“实现练习”。",
+          "✓ 正确答案：愿望＝心里想达到的目标。",
+          "“事情”太笼统，不能和“实现……当医生”搭配。",
+          "“部分”指整体中的一块，与句意无关。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“实现”后面常配“愿望／梦想／目标”，看固定搭配就能选对。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "妹妹很______，看到爸爸累了，就不去吵他。",
+        "options": [
+         "懂事",
+         "聪明",
+         "热情",
+         "能干"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "体谅爸爸累、不去打扰，是“懂事”（明白事理、体贴）的表现。",
+         "distractors": [
+          "✓ 正确答案：懂事＝明白事理、体贴别人。",
+          "“聪明”指脑子灵，不等于体贴人。",
+          "“热情”指对人亲切主动，与“不去吵他”不对应。",
+          "“能干”指做事能力强，句中说的是体贴，不是能力。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看行为：体谅、替别人着想＝懂事；脑子快＝聪明。抓住句子描述的是什么行为。"
+        }
+       },
+       {
+        "num": 8,
+        "sentence": "下个星期一，老师会带我们全班去______动物园。",
+        "options": [
+         "陪伴",
+         "碰见",
+         "参观",
+         "保护"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "到动物园去看、去游览，用“参观”最合适，“参观动物园”是常见搭配。",
+         "distractors": [
+          "“陪伴”是陪在身边，用于人，不用于动物园。",
+          "“碰见”是偶然遇到，不是有计划地去看。",
+          "✓ 正确答案：参观＝有组织地去看、游览。",
+          "“保护”是使不受伤害，与“去动物园”这一动作不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“参观”＝到场所去看（参观学校、博物馆、动物园）；有计划地去看展览、场所就用它。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "passage": "小熊豆豆在森林学校上学。\n一天，上美术课时，豆豆不小心打翻了水壶，弄坏了小兔米米的画。豆豆害怕极了，赶快跑回座位，好像什么事也没发生过一样。\n不久，米米走进教室，看到自己的画被弄坏了，难过地哭了起来。老师问是谁做的，豆豆低下头，一句话也不说。\n晚上，豆豆心里很不安，一口饭也吃不下。妈妈问它发生了什么事，豆豆只好说出实话。妈妈轻轻地抱住它，说：“孩子，认错改过比什么都重要啊！”\n第二天，豆豆一早就走向米米和老师，说：“对不起，是我弄坏了米米的画。”米米原谅了它，老师也笑着点头说：“谢谢你说出来，以后小心点儿就好了。”\n这时，豆豆才放下了心头大石。",
+      "questions": [
+       {
+        "num": 9,
+        "stem": "豆豆弄坏了谁的画？",
+        "options": [
+         "妈妈。",
+         "老师。",
+         "自己。",
+         "米米。"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "detail",
+        "explain": {
+         "why": "文中说“豆豆……弄坏了小兔米米的画”，弄坏的是米米的画。",
+         "distractors": [
+          "妈妈是晚上安慰豆豆的人，不是画被弄坏的人。",
+          "老师是问“是谁做的”的人，画不是老师的。",
+          "“自己”指豆豆，弄坏的不是豆豆自己的画。",
+          "✓ 正确答案：米米（文中明说弄坏了小兔米米的画）。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "细节题回原文找“弄坏了……的画”，直接对上人名，别被其他角色干扰。"
+        }
+       },
+       {
+        "num": 10,
+        "stem": "妈妈希望豆豆做什么事情？",
+        "options": [
+         "把饭吃完。",
+         "做事小心。",
+         "认错改过。",
+         "原谅别人。"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "detail",
+        "explain": {
+         "why": "妈妈抱住豆豆说“认错改过比什么都重要”，就是希望它认错改过。",
+         "distractors": [
+          "吃饭只是当时的情形（豆豆吃不下），不是妈妈的希望。",
+          "“做事小心”是老师最后说的话，不是妈妈说的。",
+          "✓ 正确答案：认错改过（妈妈原话“认错改过比什么都重要”）。",
+          "原谅别人是米米做的（原谅豆豆），不是妈妈对豆豆的希望。"
+         ],
+         "trapType": "detail",
+         "memoryTip": "“希望做什么”回原文找那个人说的话；妈妈的话里“比什么都重要”后面就是答案。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "mgs_2023_cl_wa1",
+   "school": "Methodist Girls (Primary)",
+   "year": "2023 WA1",
+   "track": "CL",
+   "raw": {
+    "seedId": "mgs_2023_cl_wa1",
+    "school": "Methodist Girls (Primary)",
+    "year": "2023 WA1",
+    "track": "CL",
+    "bandHint": "easy",
+    "seedSources": [
+     "mgs_2023_cl_wa1"
+    ],
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "月美有一个______色的水壶，是妈妈买给她的。",
+        "options": [
+         "盖",
+         "篮",
+         "蓝",
+         "盒"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "表示颜色的是“蓝”（蓝色），所以填“蓝”。",
+         "distractors": [
+          "“盖”是盖子，不是颜色。",
+          "“篮”是篮子（竹字头），不是颜色。",
+          "✓ 正确答案：蓝色＝一种颜色。",
+          "“盒”是盒子，不是颜色。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "表示颜色的“蓝”是草字头；篮（竹）是篮子，别混。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "妈妈为弟弟______上大衣，所以他不觉得冷了。",
+        "options": [
+         "皮",
+         "披",
+         "坡",
+         "被"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "把衣服搭在身上是“披上”，所以填“披”。",
+         "distractors": [
+          "“皮”是皮肤、皮毛，不能“皮上大衣”。",
+          "✓ 正确答案：披上＝把衣服搭在身上。",
+          "“坡”是山坡，与穿衣无关。",
+          "“被”是被子，“被上大衣”不通。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“披”有“扌”旁，是把衣物搭上的动作（披上外套）。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 3,
+        "sentence": "爸爸妈妈______关心我的健康，要我多做运动。",
+        "options": [
+         "将来",
+         "总是",
+         "已经",
+         "以前"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "父母一直、常常关心健康，用“总是”（一直、常常）最合适。",
+         "distractors": [
+          "“将来”指以后，与“要我多做运动”这一现在的关心不合。",
+          "✓ 正确答案：总是＝一直、常常。",
+          "“已经”表示完成，不能形容持续的关心。",
+          "“以前”指过去，与句意的持续关心不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "表示“一直、常常”用“总是”；看句子说的是持续的行为。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "奶奶要哥哥______大声说话的坏习惯。",
+        "options": [
+         "改掉",
+         "努力",
+         "争取",
+         "忘记"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "坏习惯要去除，用“改掉”（改正、去掉）最合适。",
+         "distractors": [
+          "✓ 正确答案：改掉＝改正、去掉（坏习惯）。",
+          "“努力”是用心去做，不用于去除习惯。",
+          "“争取”是努力得到，坏习惯不用争取。",
+          "“忘记”是记不住，不等于主动改正习惯。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“坏习惯”要“改掉／改正”；抓住宾语“坏习惯”配的动词。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "instruction": "从所提供的词语中，选出可以和各题搭配成合理词组的词语，然后把代表它的数字填写在括号里。",
+      "pool": [
+       "上学",
+       "摆动",
+       "特别",
+       "强壮",
+       "学校",
+       "保卫"
+      ],
+      "items": [
+       {
+        "num": 5,
+        "stem": "______国家",
+        "answerKey": 6,
+        "answer0": 5,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "守护国家是“保卫国家”，固定搭配。",
+         "distractors": [
+          "上学：上学国家不通。",
+          "摆动：摆动国家不通。",
+          "特别：特别国家不通。",
+          "强壮：强壮国家不通。",
+          "学校：学校国家不搭。",
+          "✓ 正确答案：保卫国家。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“保卫＋国家／家园”＝守护。"
+        }
+       },
+       {
+        "num": 6,
+        "stem": "准时______",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "按时到校是“准时上学”。",
+         "distractors": [
+          "✓ 正确答案：准时上学。",
+          "摆动：准时摆动不通。",
+          "特别：准时特别不通。",
+          "强壮：准时强壮不通。",
+          "学校：准时学校不成词组。",
+          "保卫：准时保卫不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“准时＋上学／上课／到”＝按时。"
+        }
+       },
+       {
+        "num": 7,
+        "stem": "身体______",
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "身体结实有力是“身体强壮”。",
+         "distractors": [
+          "上学：身体上学不搭。",
+          "摆动：身体摆动偏动作，题意指身体状况。",
+          "特别：身体特别语意不清。",
+          "✓ 正确答案：身体强壮。",
+          "学校：身体学校不通。",
+          "保卫：身体保卫不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "形容身体好、有力气＝强壮（身体强壮）。"
+        }
+       },
+       {
+        "num": 8,
+        "stem": "______尾巴",
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "尾巴左右摇是“摆动尾巴”。",
+         "distractors": [
+          "上学：上学尾巴不通。",
+          "✓ 正确答案：摆动尾巴。",
+          "特别：特别尾巴不通。",
+          "强壮：强壮尾巴不搭。",
+          "学校：学校尾巴不通。",
+          "保卫：保卫尾巴不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“摆动”＝来回摇（摆动尾巴、摆动手臂）。"
+        }
+       },
+       {
+        "num": 9,
+        "stem": "形状______",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "样子与众不同是“形状特别”。",
+         "distractors": [
+          "上学：形状上学不通。",
+          "摆动：形状摆动不搭。",
+          "✓ 正确答案：形状特别。",
+          "强壮：形状强壮不通。",
+          "学校：形状学校不通。",
+          "保卫：形状保卫不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“特别”＝与众不同（形状特别、味道特别）。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "passage": "开学了，丽丽班上来了一位新同学。她姓陈，名叫乐文。乐文的 (1) ___ 不高，眼睛大大的，长得很可爱。她喜欢画画， (2) ___ 以后能当一名画家。上课时，老师叫大家拿出小白板 (3) ___ 写字，可是乐文忘了怎么写“乌龟”两个字，所以哭了起来。丽丽看到后，走上前，说她能当小老师，教乐文怎么写“乌龟”这两个字。从那天起，丽丽和乐文常常一起复习学过的字，成为了很要好的学习 (4) ___ 。",
+      "wordBank": [
+       "希望",
+       "愿望",
+       "个子",
+       "伙伴",
+       "练习",
+       "邻居"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "个子",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“个子不高”指身高不高，所以填“个子”。",
+         "distractors": [
+          "希望",
+          "愿望",
+          "✓ 正确答案：个子（身高）。",
+          "伙伴",
+          "练习",
+          "邻居"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“个子”＝身高（个子高／不高）。"
+        }
+       },
+       {
+        "num": 2,
+        "answer": "希望",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "喜欢画画、想以后当画家，是心里的“希望”。",
+         "distractors": [
+          "✓ 正确答案：希望（想以后当画家）。",
+          "愿望",
+          "个子",
+          "伙伴",
+          "练习",
+          "邻居"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“希望＋以后能……”表示心里想达到的事。"
+        }
+       },
+       {
+        "num": 3,
+        "answer": "练习",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "拿出小白板反复写字是“练习写字”。",
+         "distractors": [
+          "希望",
+          "愿望",
+          "个子",
+          "伙伴",
+          "✓ 正确答案：练习（写字）。",
+          "邻居"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "反复做以求熟练＝练习（练习写字、练习唱歌）。"
+        }
+       },
+       {
+        "num": 4,
+        "answer": "伙伴",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "一起复习、很要好，是“学习伙伴”。",
+         "distractors": [
+          "希望",
+          "愿望",
+          "个子",
+          "✓ 正确答案：伙伴（一起学习的朋友）。",
+          "练习",
+          "邻居"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "一起做事的朋友＝伙伴（学习伙伴、好伙伴）。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "acs_2023_cl_wa",
+   "school": "Anglo-Chinese School (Primary)",
+   "year": "2023 WA",
+   "track": "CL",
+   "raw": {
+    "seedId": "acs_2023_cl_wa",
+    "school": "Anglo-Chinese School (Primary)",
+    "year": "2023 WA",
+    "track": "CL",
+    "bandHint": "easy",
+    "seedSources": [
+     "acs_2023_cl_wa"
+    ],
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "妈妈不______我一个人到游乐场玩。",
+        "options": [
+         "谁",
+         "准",
+         "难"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“不准”表示不允许，妈妈不允许我一个人去，所以填“准”。",
+         "distractors": [
+          "“谁”是疑问词，“不谁”不通。",
+          "✓ 正确答案：不准＝不允许。",
+          "“难”是困难，“不难”意思相反，不合句意。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "表示“不允许”用“不准”；准难形近，看句意是“允许”还是“困难”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "弟弟长大后想成为军人，保______国家。",
+        "options": [
+         "为",
+         "位",
+         "卫"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "军人守护国家是“保卫”，所以填“卫”。",
+         "distractors": [
+          "“为”是为了、因为，“保为”不成词。",
+          "“位”是位置、座位，“保位”不合。",
+          "✓ 正确答案：保卫＝守护。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "“保卫国家／家园”＝守护；为位卫读音相近，靠词义分辨。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "弟弟弄______了我的书，连忙跟我说对不起。",
+        "options": [
+         "坡",
+         "破",
+         "披"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "书被弄坏、有破损是“弄破”，所以填“破”。",
+         "distractors": [
+          "“坡”是山坡，与书无关。",
+          "✓ 正确答案：弄破＝弄坏、有破损。",
+          "“披”是披上（衣物），不用于书。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“破”＝破损、坏了（弄破、打破）。坡破披形近，看偏旁和意思。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "妹妹跌倒了，妈妈______她起来。",
+        "options": [
+         "扶",
+         "付",
+         "服"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "用手把跌倒的人拉起来是“扶”，所以填“扶”。",
+         "distractors": [
+          "✓ 正确答案：扶＝用手把人拉/托起来。",
+          "“付”是付钱、交付，与扶人无关。",
+          "“服”是衣服、服从，不用于扶人。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“扶”有“扌”旁，是用手托起的动作（扶起、搀扶）。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "小光把美美的笔弄丢了，只好______钱给她。",
+        "options": [
+         "赔",
+         "陪",
+         "部"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "弄丢别人的东西要补偿，用“赔”（赔钱、赔偿），所以填“赔”。",
+         "distractors": [
+          "✓ 正确答案：赔钱＝补偿别人损失。",
+          "“陪”是陪伴，“陪钱”不通。",
+          "“部”是部分、部门，与赔偿无关。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“赔”有“贝”（钱财）旁，和钱、补偿有关（赔钱、赔偿）。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 6,
+        "sentence": "妈妈______我长大后一定能成为一个有用的人。",
+        "options": [
+         "希望",
+         "请求",
+         "相信",
+         "实现"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“一定能……”表示很有把握，用“相信”（认为一定是真的）最合适。",
+         "distractors": [
+          "“希望”是心里想要，语气不如“相信”肯定。",
+          "“请求”是恳求别人，句中不是求人。",
+          "✓ 正确答案：相信＝认为一定是真的。",
+          "“实现”是使愿望成真，不能直接接“我……成为”。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "看语气：“一定能”配“相信”（很有把握）；只是想要用“希望”。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "老师要小光改掉迟到的______。",
+        "options": [
+         "问题",
+         "习惯",
+         "决定",
+         "办法"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "经常迟到、长期形成的行为叫“习惯”，“改掉坏习惯”是常见搭配。",
+         "distractors": [
+          "“问题”偏指困难或毛病，“改掉迟到的问题”不如“习惯”自然。",
+          "✓ 正确答案：习惯＝长期形成的行为。",
+          "“决定”是拿定主意，迟到不是决定。",
+          "“办法”是方法，迟到不是办法。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“改掉＋（坏）习惯”是固定搭配；长期反复的行为叫习惯。"
+        }
+       },
+       {
+        "num": 8,
+        "sentence": "看到爸爸回来了，小狗高兴得一直______尾巴。",
+        "options": [
+         "举起",
+         "伸出",
+         "摆动",
+         "张开"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "狗开心时尾巴来回摇，是“摆动尾巴”，所以填“摆动”。",
+         "distractors": [
+          "“举起”是往上抬，尾巴不用“举”。",
+          "“伸出”是往外伸，不表示来回摇。",
+          "✓ 正确答案：摆动尾巴＝来回摇。",
+          "“张开”是打开、分开，用于嘴、翅膀，不用于摇尾巴。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "尾巴的动作是“摆动／摇”；来回摆就用“摆动”。"
+        }
+       },
+       {
+        "num": 9,
+        "sentence": "妈妈说前面有条河，小月照着她的话往前走，______看到了一条河。",
+        "options": [
+         "果然",
+         "已经",
+         "连忙",
+         "反正"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "妈妈说有河，结果真的看到河，事情和预料一致，用“果然”。",
+         "distractors": [
+          "✓ 正确答案：果然＝和预料的一样。",
+          "“已经”表示完成，不表达“和预料一致”。",
+          "“连忙”是赶快，与句意不合。",
+          "“反正”表示无论如何，语气不对。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“妈妈说……，果然……”＝事情和说的一样；表示预料成真用“果然”。"
+        }
+       }
+      ]
+     },
+     "ReadingMcq": {
+      "passage": "放学时，突然下起了大雨。小安没带雨伞，他站在校门口等雨停。这时，他看到明光拿着伞走过来，就对他说：“我可以和你一起共用伞吗？”明光看着他摇了摇头。小安见时间不早了，只好淋雨跑回家，结果全身都湿了。\n第二天休息时，小安看见明光坐在一旁哭。他觉得很奇怪，立刻走上前问：“明光，发生了什么事？”明光回答：“我忘了带东西来吃，所以现在很饿。”小安听了，拿出一包饼干给明光。\n见小安没有因为自己昨天没借伞给他的事生气，明光低下了头，他知道自己错了。",
+      "questions": [
+       {
+        "num": 15,
+        "format": "fill_word",
+        "stem": "从文中找出代表“马上”意思的词语。",
+        "answer": "立刻",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“立刻走上前问”里的“立刻”表示马上、一下子。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“立刻／马上／连忙”都表示很快行动；找词题圈出表示“马上”的那个词。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "peihwa_hcl_wa2",
+   "school": "Pei Hwa Presbyterian Primary",
+   "year": "WA2",
+   "track": "HCL",
+   "raw": {
+    "seedId": "peihwa_hcl_wa2",
+    "school": "Pei Hwa Presbyterian Primary",
+    "year": "WA2",
+    "track": "HCL",
+    "bandHint": "hard",
+    "seedSources": [
+     "peihwa_hcl_wa2"
+    ],
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "小华的爸爸______张，我叫他张叔叔。",
+        "options": [
+         "形",
+         "信",
+         "姓"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "表示姓氏用“姓”，“姓张”，所以填“姓”。",
+         "distractors": [
+          "“形”是形状，与姓氏无关。",
+          "“信”是书信、相信，不表示姓氏。",
+          "✓ 正确答案：姓张（姓氏）。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "表示姓氏的“姓”有“女”旁；形信姓形近，看意思。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "欢欢吐了，妈妈______她去看医生。",
+        "options": [
+         "倍",
+         "培",
+         "陪"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "跟着一起去是“陪”，“陪她去看医生”，所以填“陪”。",
+         "distractors": [
+          "“倍”是加倍、两倍，与陪同无关。",
+          "“培”是培养、栽培，不用于陪人。",
+          "✓ 正确答案：陪＝跟着一起（陪她去）。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“陪”有“阝”旁，表示陪伴（陪你去、陪伴）。倍培陪形近。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "姐姐的家______近有一所学校。",
+        "options": [
+         "附",
+         "付",
+         "咐"
+        ],
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "表示离得近是“附近”，所以填“附”。",
+         "distractors": [
+          "✓ 正确答案：附近（离得近的地方）。",
+          "“付”是付钱、交付，与位置无关。",
+          "“咐”只用于“吩咐”，不能单用表示近。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“附近”＝旁边、离得近；附付咐形近，看词义。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 4,
+        "sentence": "这次画画比赛，我想要______拿到第一名。",
+        "options": [
+         "安排",
+         "学习",
+         "争取",
+         "取得"
+        ],
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "努力去得到名次是“争取”，“争取拿到第一名”，所以填“争取”。",
+         "distractors": [
+          "“安排”是布置、计划，不用于拿名次。",
+          "“学习”是学知识，不能直接接“拿到第一名”。",
+          "✓ 正确答案：争取＝努力去得到。",
+          "“取得”后面直接接“第一名”，但前面已有“拿到”，用“争取……拿到”更顺。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“想要＋争取＋拿到……”＝努力去得到；争取常配名次、机会。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "小明已养成睡前整理书包的好______。",
+        "options": [
+         "朋友",
+         "习惯",
+         "练习",
+         "帮手"
+        ],
+        "answerKey": 2,
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "长期坚持的好行为是“好习惯”，“养成好习惯”是固定搭配。",
+         "distractors": [
+          "“朋友”是人，不能“养成朋友”。",
+          "✓ 正确答案：习惯（养成的好行为）。",
+          "“练习”是反复做，不能“养成练习”。",
+          "“帮手”是帮忙的人，不合句意。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“养成＋（好）习惯”是固定搭配；长期坚持的行为叫习惯。"
+        }
+       },
+       {
+        "num": 6,
+        "sentence": "哥哥长大后想当军人，______国家。",
+        "options": [
+         "安全",
+         "认识",
+         "庆祝",
+         "保卫"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "军人守护国家是“保卫国家”，所以填“保卫”。",
+         "distractors": [
+          "“安全”是形容词，不能“安全国家”。",
+          "“认识”是知道、了解，与守护无关。",
+          "“庆祝”是为高兴的事举行活动，不合。",
+          "✓ 正确答案：保卫国家（守护）。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“保卫＋国家／家园”＝守护，是固定搭配。"
+        }
+       },
+       {
+        "num": 7,
+        "sentence": "弟弟向爸爸认错，爸爸______了他。",
+        "options": [
+         "改正",
+         "弄坏",
+         "忘记",
+         "原谅"
+        ],
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "弟弟认错后，爸爸不再怪他，是“原谅”，所以填“原谅”。",
+         "distractors": [
+          "“改正”是自己改错，主语应是弟弟，不是爸爸。",
+          "“弄坏”是使损坏，与句意相反。",
+          "“忘记”是记不住，不等于原谅。",
+          "✓ 正确答案：原谅＝不再责怪。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“认错”后别人“原谅”；看动作是谁做的——爸爸原谅弟弟。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "instruction": "从所提供的词语中，选出可以和各题搭配成合理词组的词语，然后把代表它的数字填写在括号里。",
+      "pool": [
+       "认真",
+       "意思",
+       "跌倒",
+       "脚步"
+      ],
+      "items": [
+       {
+        "num": 12,
+        "stem": "停下______",
+        "answerKey": 4,
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "停下走路的动作是“停下脚步”。",
+         "distractors": [
+          "认真：停下认真不通。",
+          "意思：停下意思不通。",
+          "跌倒：停下跌倒不搭。",
+          "✓ 正确答案：停下脚步。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“脚步”＝走路的动作（停下脚步、加快脚步）。"
+        }
+       },
+       {
+        "num": 13,
+        "stem": "______受伤",
+        "answerKey": 3,
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "摔倒而受伤是“跌倒受伤”。",
+         "distractors": [
+          "认真：认真受伤不通。",
+          "意思：意思受伤不通。",
+          "✓ 正确答案：跌倒受伤。",
+          "脚步：脚步受伤不搭。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“跌倒”＝摔倒，容易“跌倒受伤”。"
+        }
+       },
+       {
+        "num": 14,
+        "stem": "______复习",
+        "answerKey": 1,
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "用心、不马虎地复习是“认真复习”。",
+         "distractors": [
+          "✓ 正确答案：认真复习。",
+          "意思：意思复习不通。",
+          "跌倒：跌倒复习不搭。",
+          "脚步：脚步复习不通。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "“认真＋复习／听课／做事”＝用心不马虎。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "redswastika_2024_hcl_review1_craft",
+   "school": "Red Swastika",
+   "year": "2024",
+   "track": "HCL",
+   "raw": {
+    "seedId": "redswastika_2024_hcl_review1_craft",
+    "school": "Red Swastika",
+    "year": "2024",
+    "track": "HCL",
+    "bandHint": "easy",
+    "sourceNote": "Red Swastika review compilation, 复习(一) 第一课至第三课; section (六) 仿写句子 (combine two given sentences with the provided connective). Phase-2 free-production type (SentenceCraft), brought forward to train lianci (connectives). Model answers cross-checked against the answer key (p41: Q25 一...就, Q26 只要...就, Q27 因为).",
+    "sections": {
+     "SentenceCraft": {
+      "items": [
+       {
+        "num": 25,
+        "subtype": "combine",
+        "connector": "一……就",
+        "sentenceA": "我回到家。",
+        "sentenceB": "我给妈妈打电话。",
+        "instruction": "用括号里的关联词把两个句子合并成一句。",
+        "answer": "我一回到家，就给妈妈打电话。",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "lianci",
+        "explain": {
+         "why": "“一……就……”表示前一个动作刚发生，后一个动作紧接着发生。“一回到家”是前一个动作，“就给妈妈打电话”是紧接着的动作，所以合并为“我一回到家，就给妈妈打电话”。",
+         "distractors": [
+          "不能只写“我回到家给妈妈打电话”——少了“一……就”，就体现不出“紧接着、马上”的意思。",
+          "“一”要放在第一个动作前（一回到家），“就”要放在第二个动作前（就给妈妈打电话），位置不能颠倒。"
+         ],
+         "trapType": "lianci",
+         "memoryTip": "“一……就……”＝“刚一……马上就……”：前面动作一发生，后面动作立刻跟上。"
+        }
+       },
+       {
+        "num": 26,
+        "subtype": "combine",
+        "connector": "只要……就……",
+        "sentenceA": "姐姐把功课做完。",
+        "sentenceB": "姐姐可以去公园玩。",
+        "instruction": "用括号里的关联词把两个句子合并成一句。",
+        "answer": "姐姐只要把功课做完，就可以去公园玩。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "lianci",
+        "explain": {
+         "why": "“只要……就……”表示条件：满足前面的条件，后面的结果就成立。“做完功课”是条件，“可以去公园玩”是结果，所以是“只要把功课做完，就可以去公园玩”。",
+         "distractors": [
+          "不能用“因为……所以……”——那是因果，不是条件；这里强调“做完功课”这个条件一满足就能去玩。",
+          "“只要”放条件前、“就”放结果前，两个都要出现，缺一个句子就不完整。"
+         ],
+         "trapType": "lianci",
+         "memoryTip": "“只要……就……”＝“满足这个条件，结果就发生”：只要 A，就 B。"
+        }
+       },
+       {
+        "num": 27,
+        "subtype": "combine",
+        "connector": "因为",
+        "sentenceA": "弟弟怕被妈妈骂。",
+        "sentenceB": "弟弟忘了做功课。",
+        "instruction": "用括号里的关联词把两个句子合并成一句。",
+        "answer": "弟弟怕被妈妈骂，因为他忘了做功课。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "lianci",
+        "explain": {
+         "why": "“因为”引出原因。“怕被妈妈骂”是结果，“忘了做功课”是原因，所以用“因为”连接：结果在前、原因在后也可以——“弟弟怕被妈妈骂，因为他忘了做功课”。",
+         "distractors": [
+          "不能用“只要……就”——这两件事是因果关系（忘了做功课→怕被骂），不是条件关系。",
+          "第二句可把重复的“弟弟”换成“他”，读起来更通顺：因为他忘了做功课。"
+         ],
+         "trapType": "lianci",
+         "memoryTip": "“因为”后面跟原因。找因果：先问“为什么”，答案就是“因为”后面的部分。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "sap_p3a_L1",
+   "school": "SAP_High_Chinese_3A",
+   "year": "L1_meilideyuanwang",
+   "track": "HCL",
+   "raw": {
+    "seedId": "sap_p3a_L1",
+    "school": "SAP_High_Chinese_3A",
+    "year": "L1_meilideyuanwang",
+    "track": "HCL",
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "我一回到家，便开始______功课。",
+        "options": [
+         "作",
+         "做",
+         "坐",
+         "造"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“做功课”指完成作业，动作用“做”。",
+         "distractors": [
+          "“作”读音相同，但多用于“作文、作业”等书面词。",
+          "✓ 正确答案：做功课＝完成作业。",
+          "“坐”是坐下的意思，与写功课无关。",
+          "“造”是制造，不能和“功课”搭配。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "动手去“做”，人字旁；“作”常用在“作文、作业”。同音要看词义。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "哥哥喜欢飞行，长大后想______飞机师。",
+        "options": [
+         "担",
+         "挡",
+         "当",
+         "党"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“当飞机师”指担任、成为飞机师，用“当”。",
+         "distractors": [
+          "“担”是担心、担任的“担”，字形相近，但“担飞机师”不通顺。",
+          "“挡”是阻挡，与做某种职业无关。",
+          "✓ 正确答案：当＝担任、成为某种身份。",
+          "“党”指政党，读音相近但意思完全不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“当老师、当医生、当飞机师”都用“当”＝做某种工作。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "老师讲完了课，要我们把课文朗读一______。",
+        "options": [
+         "编",
+         "篇",
+         "遍",
+         "偏"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“一遍”是量词，表示从头到尾读一次，所以用“遍”。",
+         "distractors": [
+          "“编”是编写，如“编故事”，不是量词。",
+          "“篇”是文章的量词（一篇作文），不表示“一次”。",
+          "✓ 正确答案：遍＝一个动作从开始到结束的整个过程。",
+          "“偏”是偏向、偏差，与量词无关。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“遍”有走之底，从头走到尾＝一遍；编、篇、偏都不是次数量词。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "上课时，我______起手，抢着回答问题。",
+        "options": [
+         "居",
+         "举",
+         "据",
+         "具"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“举手”指把手往上抬，回答问题前要举手，所以用“举”。",
+         "distractors": [
+          "“居”是居住的“居”，字形相近，但“居手”不成词。",
+          "✓ 正确答案：举手＝把手抬起来。",
+          "“据”是根据、占据，与抬手无关。",
+          "“具”是工具、家具的“具”，意思不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“举”＝往上抬；上课要“举手”发言。别和居、据、具混。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "哥哥每天都会下楼______习跑步。",
+        "options": [
+         "炼",
+         "恋",
+         "练",
+         "链"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 1,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“练习”指反复学习、训练，用绞丝旁的“练”。",
+         "distractors": [
+          "“炼”是火字旁（冶炼、锻炼），但“炼习”不成词。",
+          "“恋”是恋爱的“恋”，读音相同，意思不同。",
+          "✓ 正确答案：练习＝反复学习，用绞丝旁“练”。",
+          "“链”是链条的“链”，金字旁，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "“练习”像用丝线一遍遍地缠＝绞丝旁“练”；“炼”是火字旁。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "他终于______了小时候的梦想。",
+        "options": [
+         "出现",
+         "实现",
+         "发现",
+         "表现"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“实现梦想”指让梦想变成现实，用“实现”。",
+         "distractors": [
+          "“出现”是显现、露面，梦想不能“出现”。",
+          "✓ 正确答案：实现梦想＝使梦想成真。",
+          "“发现”是找到原本不知道的事物，与梦想成真不同。",
+          "“表现”指表演、显示行为，不能搭配“梦想”。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "梦想要“实”实在在地做到＝实现；四个“现”结尾的词意思各不同。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "妈妈______我长大后做一个有用的人。",
+        "options": [
+         "愿望",
+         "希望",
+         "失望",
+         "绝望"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "句中要一个动词并带“我长大后……”，“希望”可作动词，表示心里想要。",
+         "distractors": [
+          "“愿望”是名词，不能说“愿望我……”，这正是原句的错误。",
+          "✓ 正确答案：希望＝心里想要，可带“我长大后……”作宾语。",
+          "“失望”是希望落空，意思相反。",
+          "“绝望”是完全没有希望，与句意不合。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "“希望”能接一句话作动词；“愿望”是名词，只能说“一个愿望”。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "老师要更多学生勇敢______回答问题。",
+        "options": [
+         "伸手",
+         "举手",
+         "招手",
+         "摆手"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "上课回答问题前要“举手”，“举手回答”是固定搭配。",
+         "distractors": [
+          "“伸手”是把手向前伸，常用于要东西，不用于课堂发言。",
+          "✓ 正确答案：举手回答＝把手举起来请求发言。",
+          "“招手”是挥手打招呼或叫人过来，不是发言。",
+          "“摆手”表示拒绝或再见，与回答问题相反。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "课堂发言＝“举手回答”；伸手、招手、摆手都是别的动作。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "姐姐______护士之前，必须接受护理课程的训练。",
+        "options": [
+         "以为",
+         "成为",
+         "作为",
+         "认为"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“成为护士”指变成护士这种身份，用“成为”。",
+         "distractors": [
+          "“以为”是原来这样想（后来发现不对），不能接“护士之前”。",
+          "✓ 正确答案：成为护士＝变成护士。",
+          "“作为”是“以……身份”，“作为护士之前”语意不顺。",
+          "“认为”是觉得、判断，不能表示身份的转变。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "身份的转变用“成为”；以为、认为是想法，作为是身份介词。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "林叔叔______工作，想多赚一点钱养家。",
+        "options": [
+         "出力",
+         "用力",
+         "努力",
+         "无力"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“努力工作”指下功夫、认真做，是固定搭配。",
+         "distractors": [
+          "“出力”指出体力帮忙，不表示长期认真地做。",
+          "“用力”指一时使出力气，不表示长期认真。",
+          "✓ 正确答案：努力工作＝认真、下功夫地做。",
+          "“无力”是没有力气，意思相反。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "长期认真做事＝“努力”；用力、出力是一时的力气。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "instruction": "把左右两边的词语连起来，搭配合理的词组。",
+      "pool": [
+       "一遍",
+       "愿望",
+       "练习",
+       "国家",
+       "回答"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "努力（　）",
+        "answer0": 2,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“努力练习”指认真反复地练，是常见搭配。",
+         "distractors": [
+          "“努力一遍”不通，“一遍”表次数。",
+          "“努力愿望”不成词。",
+          "✓ 努力练习：认真反复地练。",
+          "“努力国家”不成词。",
+          "“回答”本题配“举手”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：努力练习、举手回答、读了一遍、实现愿望、保卫国家。"
+        }
+       },
+       {
+        "num": 2,
+        "stem": "举手（　）",
+        "answer0": 4,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“举手回答”指举手请求发言并作答。",
+         "distractors": [
+          "“举手一遍”不通。",
+          "“举手愿望”不成词。",
+          "“练习”本题配“努力”。",
+          "“举手国家”不成词。",
+          "✓ 举手回答：举手请求发言并作答。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：努力练习、举手回答、读了一遍、实现愿望、保卫国家。"
+        }
+       },
+       {
+        "num": 3,
+        "stem": "读了（　）",
+        "answer0": 0,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“读了一遍”指从头到尾读一次。",
+         "distractors": [
+          "✓ 读了一遍：从头到尾读一次。",
+          "“读了愿望”不成词。",
+          "“练习”本题配“努力”。",
+          "“读了国家”不成词。",
+          "“回答”本题配“举手”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：努力练习、举手回答、读了一遍、实现愿望、保卫国家。"
+        }
+       },
+       {
+        "num": 4,
+        "stem": "实现（　）",
+        "answer0": 1,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“实现愿望”指让愿望成真。",
+         "distractors": [
+          "“实现一遍”不通。",
+          "✓ 实现愿望：让愿望成真。",
+          "“练习”本题配“努力”。",
+          "“实现国家”不成词。",
+          "“回答”本题配“举手”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：努力练习、举手回答、读了一遍、实现愿望、保卫国家。"
+        }
+       },
+       {
+        "num": 5,
+        "stem": "保卫（　）",
+        "answer0": 3,
+        "lesson": 1,
+        "skill": "dapei",
+        "explain": {
+         "why": "“保卫国家”指保护国家不受侵害。",
+         "distractors": [
+          "“保卫一遍”不通。",
+          "“保卫愿望”不常用。",
+          "“练习”本题配“努力”。",
+          "✓ 保卫国家：保护国家不受侵害。",
+          "“回答”本题配“举手”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：努力练习、举手回答、读了一遍、实现愿望、保卫国家。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "passage": "弟弟很爱吃，不管什么食物，他 (1) ___ 抢先放进口里，不让别人吃。由于他胃口好，食量大，所以越吃越胖，(2) ___ 一个小胖子。弟弟每天放学回家，(3) ___ 事就是吃东西。一天，他看见桌上有一个苹果，便立刻拿起来放进口里。他吃了几口，才发现苹果坏了，味道怪怪的。傍晚，弟弟按着肚子对妈妈说：“我肚子好痛！”妈妈听了，连忙带他去看医生。医生给弟弟 (4) ___ 检查后说：“你因为吃了不干净的食物才会肚子痛。吃过了药，休息几天就会好的。”回家后，妈妈 (5) ___ 弟弟以后别这么贪吃，更别乱吃东西。",
+      "wordBank": [
+       "做了",
+       "成为",
+       "总是",
+       "第一件",
+       "希望",
+       "实现"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "总是",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______抢先放进口里”表示每次都这样，用“总是”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“总是”＝每次都、一直。"
+        }
+       },
+       {
+        "num": 2,
+        "answer": "成为",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“越吃越胖，______一个小胖子”表示变成，用“成为”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“成为”＝变成。"
+        }
+       },
+       {
+        "num": 3,
+        "answer": "第一件",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“放学回家，______事就是吃东西”指最先做的那件事。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“第一件事”＝最先做的事。"
+        }
+       },
+       {
+        "num": 4,
+        "answer": "做了",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“医生给弟弟______检查后说”指做过检查。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“做了检查”＝进行了检查。"
+        }
+       },
+       {
+        "num": 5,
+        "answer": "希望",
+        "lesson": 1,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“妈妈______弟弟以后别这么贪吃”指心里想要弟弟改。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“希望＋某人＋做某事”。"
+        }
+       }
+      ]
+     },
+     "ReadingOpen": {
+      "passage": "今天学校给我们提早半个小时回家，因为有一些学生要留下来参加校庆的演出彩排，老师要参与演出的学生早点吃午餐，没有演出的学生可以提早回家。我回到家里，却没看见妈妈。妈妈去了哪儿呢？我吃过午饭，要到外婆家做功课。阿姨今天没上班，她答应教我数学。我会在外婆家吃了晚饭才回来。为了不让妈妈担心，便写了一张便条留给妈妈，告诉妈妈说如果有事找我，可以打电话或发短信给阿姨。阿姨说我每次发的手机短信都太简单，有时候看不懂，所以我也要叫阿姨教我怎样写手机短信。",
+      "questions": [
+       {
+        "format": "fill_word",
+        "stem": "从短文中找出与画线词语意思相近或相同的词语：“要是你想参加比赛，可以向王老师报名。”（画线：要是）",
+        "answer": "如果",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“要是”和“如果”都表示假设，短文中有“如果有事找我”。",
+         "distractors": [],
+         "trapType": "jinyici",
+         "memoryTip": "“要是＝如果”，都表示假设。"
+        }
+       },
+       {
+        "format": "open_sentence",
+        "stem": "“我”为什么要写便条给妈妈？",
+        "answer": "因为“我”要让妈妈知道“我”去了哪里，不让妈妈担心。",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "“我”为什么要到外婆家？",
+        "answer": "因为阿姨答应教“我”数学，“我”要到外婆家做功课。",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "妈妈要找“我”，可以怎么做？",
+        "answer": "妈妈可以打电话或发短信给阿姨。",
+        "marks": 2,
+        "lesson": 1,
+        "skill": "detail"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "sap_p3a_L2",
+   "school": "SAP_High_Chinese_3A",
+   "year": "L2_wodepengyouhejiaren",
+   "track": "HCL",
+   "raw": {
+    "seedId": "sap_p3a_L2",
+    "school": "SAP_High_Chinese_3A",
+    "year": "L2_wodepengyouhejiaren",
+    "track": "HCL",
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "我只知道他叫小文，不知道他______什么。",
+        "options": [
+         "姓",
+         "性",
+         "生",
+         "星"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 2,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“姓什么”问的是家族的姓氏，用“姓”。",
+         "distractors": [
+          "✓ 正确答案：姓＝家族的姓氏。",
+          "“性”读音相同，但指性别、性格。",
+          "“生”是出生、生活，意思不同。",
+          "“星”是星星，与姓氏无关。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "问家族称呼用“姓”；性、生、星虽近音，义不同。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "爸爸常常运动，身体一点也不______。",
+        "options": [
+         "伴",
+         "拌",
+         "胖",
+         "判"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 2,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“身体一点也不胖”指不肥，用月字旁的“胖”。",
+         "distractors": [
+          "“伴”是同伴、陪伴，与身体胖瘦无关。",
+          "“拌”是搅拌，意思不同。",
+          "✓ 正确答案：胖＝身体肉多，月字旁。",
+          "“判”是判断，意思不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "四字都含“半”，看部首：身体胖瘦用月字旁“胖”。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "弟弟又______明又听话，不会给爸妈添烦恼。",
+        "options": [
+         "总",
+         "匆",
+         "聪",
+         "葱"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 2,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“又聪明又听话”，“聪明”指头脑好，用耳字旁的“聪”。",
+         "distractors": [
+          "“总”是总是、总共，不能组成“总明”。",
+          "“匆”是匆忙，意思不同。",
+          "✓ 正确答案：聪明＝头脑灵活。",
+          "“葱”是蔬菜大葱，意思不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "“聪”有耳朵，耳聪目明＝聪明。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "我听不______你说什么，请你说清楚一点！",
+        "options": [
+         "董",
+         "懂",
+         "动",
+         "洞"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 2,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“听不懂”指不明白，用竖心旁的“懂”。",
+         "distractors": [
+          "“董”是姓氏或董事，读音相同但义不同。",
+          "✓ 正确答案：懂＝明白、了解。",
+          "“动”是动作，意思不同。",
+          "“洞”是洞穴，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "心里“懂”了＝竖心旁“懂”；董、动、洞不表明白。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "小朋友，你叫什么______字？",
+        "options": [
+         "明",
+         "鸣",
+         "名",
+         "命"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 2,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“叫什么名字”问的是名字，用“名”。",
+         "distractors": [
+          "“明”是明白、明亮，读音相同但义不同。",
+          "“鸣”是鸟叫，意思不同。",
+          "✓ 正确答案：名＝名字、名称。",
+          "“命”是生命，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "名字用“名”；明、鸣、命虽近音，义不同。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "他没出声，______是不同意你的说法。",
+        "options": [
+         "因为",
+         "一些",
+         "意思",
+         "聪明"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______是不同意”指他的用意是不同意，用“意思”。",
+         "distractors": [
+          "“因为”表示原因，不能作“是不同意”的主语。",
+          "“一些”表示数量，与句意不合。",
+          "✓ 正确答案：意思＝用意、含义。",
+          "“聪明”指头脑好，与句意不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“意思”＝用意、含义。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "______工作关系，他在香港住了一年。",
+        "options": [
+         "因为",
+         "意思",
+         "一定",
+         "相信"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______工作关系”表示原因，用“因为”。",
+         "distractors": [
+          "✓ 正确答案：因为＝表示原因。",
+          "“意思”指含义，不表示原因。",
+          "“一定”表示肯定，与原因无关。",
+          "“相信”是信任，与句意不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "表示原因用“因为”。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "这里有______旧衣服，准备送给人。",
+        "options": [
+         "一定",
+         "聪明",
+         "意思",
+         "一些"
+        ],
+        "answer0": 3,
+        "answerKey": 4,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“有______旧衣服”指数量不多，用“一些”。",
+         "distractors": [
+          "“一定”表示肯定，不表示数量。",
+          "“聪明”与衣服无关。",
+          "“意思”指含义，与句意不合。",
+          "✓ 正确答案：一些＝若干、不多的数量。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "表示不确定的数量用“一些”。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "如果你要提高学业成绩，______要好好学习。",
+        "options": [
+         "一些",
+         "一定",
+         "因为",
+         "相信"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______要好好学习”表示必须、肯定，用“一定”。",
+         "distractors": [
+          "“一些”表示数量，与句意不合。",
+          "✓ 正确答案：一定＝必定、必须。",
+          "“因为”表示原因，句中不需要。",
+          "“相信”是信任，与句意不合。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "表示必须、肯定用“一定”。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "快要比赛了，我一点也不紧张，因为我______自己的能力。",
+        "options": [
+         "相信",
+         "聪明",
+         "意思",
+         "一定"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“我______自己的能力”指信任自己，用“相信”。",
+         "distractors": [
+          "✓ 正确答案：相信＝信任、认为可靠。",
+          "“聪明”指头脑好，不能带宾语“自己的能力”。",
+          "“意思”指含义，与句意不合。",
+          "“一定”表示肯定，不能说“一定自己的能力”。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "信任某人某事用“相信”。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "instruction": "把左右两边的词语连起来，搭配合理的词组。",
+      "pool": [
+       "不矮",
+       "成真",
+       "自己",
+       "卷卷",
+       "不瘦"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "梦想（　）",
+        "answer0": 1,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“梦想成真”指梦想变成现实。",
+         "distractors": [
+          "“梦想不矮”不成词。",
+          "✓ 梦想成真：梦想变成现实。",
+          "“自己”本题配“相信”。",
+          "“卷卷”本题配“头发”。",
+          "“不瘦”本题配“不胖”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+        }
+       },
+       {
+        "num": 2,
+        "stem": "相信（　）",
+        "answer0": 2,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“相信自己”指信任自己。",
+         "distractors": [
+          "“相信不矮”不成词。",
+          "“成真”本题配“梦想”。",
+          "✓ 相信自己：信任自己。",
+          "“卷卷”本题配“头发”。",
+          "“不瘦”本题配“不胖”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+        }
+       },
+       {
+        "num": 3,
+        "stem": "不胖（　）",
+        "answer0": 4,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“不胖不瘦”指胖瘦适中。",
+         "distractors": [
+          "“不矮”本题配“不高”。",
+          "“成真”本题配“梦想”。",
+          "“自己”本题配“相信”。",
+          "“卷卷”本题配“头发”。",
+          "✓ 不胖不瘦：胖瘦适中。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+        }
+       },
+       {
+        "num": 4,
+        "stem": "不高（　）",
+        "answer0": 0,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“不高不矮”指高矮适中。",
+         "distractors": [
+          "✓ 不高不矮：高矮适中。",
+          "“成真”本题配“梦想”。",
+          "“自己”本题配“相信”。",
+          "“卷卷”本题配“头发”。",
+          "“不瘦”本题配“不胖”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+        }
+       },
+       {
+        "num": 5,
+        "stem": "头发（　）",
+        "answer0": 3,
+        "lesson": 2,
+        "skill": "dapei",
+        "explain": {
+         "why": "“头发卷卷”指头发弯曲成卷。",
+         "distractors": [
+          "“不矮”本题配“不高”。",
+          "“成真”本题配“梦想”。",
+          "“自己”本题配“相信”。",
+          "✓ 头发卷卷：头发弯曲成卷。",
+          "“不瘦”本题配“不胖”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：梦想成真、相信自己、不胖不瘦、不高不矮、头发卷卷。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "passage": "外婆六十岁了，从没上过学。最近，她却做了一件 (1) ___ 的事——要我教她写字。于是每天下午，我放学后便当起小老师。她戴上老花镜，我一笔一划地教。外婆很 (2) ___，每个字的 (3) ___，她一听就懂。(4) ___ 过了几天，外婆的进步很慢，我认为 (5) ___ 是我教得不好，可是外婆却说我教得很好，是她自己太笨了。",
+      "wordBank": [
+       "一连",
+       "相信",
+       "一定",
+       "聪明",
+       "奇怪",
+       "意思"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "奇怪",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "外婆要“我”教她写字，这是一件出乎意料的事，用“奇怪”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“奇怪”＝出乎意料、难理解。"
+        }
+       },
+       {
+        "num": 2,
+        "answer": "聪明",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“外婆很______，每个字一听就懂”表示她头脑好，用“聪明”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“聪明”＝头脑灵活。"
+        }
+       },
+       {
+        "num": 3,
+        "answer": "意思",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“每个字的______，她一听就懂”指字的含义，用“意思”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“意思”＝含义。"
+        }
+       },
+       {
+        "num": 4,
+        "answer": "一连",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______过了几天”表示接连几天，用“一连”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“一连”＝接连不断。"
+        }
+       },
+       {
+        "num": 5,
+        "answer": "一定",
+        "lesson": 2,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“我认为______是我教得不好”表示肯定的猜测，用“一定”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“一定”＝必定、肯定。"
+        }
+       }
+      ]
+     },
+     "ReadingOpen": {
+      "passage": "许多动物有一种超越人类的本领，它们能够分辨方向，即使到很远的地方，也可以认路回家。小小的蜜蜂，在离开蜂房很远的地方去采花蜜，回家时很少会迷路。曾经有人从蜂房里取出一些蜜蜂，把它们带到较远的地方放出来。这些蜜蜂在空中转了几圈后，很快便飞回原来的蜂房里。鸟类远游的本领也很惊人。飞得最远的鸽子，曾经从法国飞到越南。这只鸽子当时被关在船舱里，由主人从越南带到陌生的法国，一天后，竟然神奇地飞回越南的老家。可是，一些没人饲养的燕子，没有经过训练，认路回家的本领也不差。有人在德国捉了七只燕子，用飞机送到英国，再把它们放出去，没多久，有五只燕子飞回了德国的老家。这些奇怪的现象，生物学家百思不解，到现在还没找到答案呢！",
+      "questions": [
+       {
+        "format": "open_sentence",
+        "stem": "试解释下面短语在文中的意思：“生物学家百思不解”。",
+        "answer": "意思是生物学家反复思索，对一些动物认路回家的本领仍然不能理解。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "vocab_in_context"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "许多动物有“超越人类的本领”，指的是什么？",
+        "answer": "指的是它们认路回家的本领；许多动物即使离开到很远的地方，也能很快回到老家。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "鸽子认路的本领强不强？试简单说明。",
+        "answer": "很强。有人把鸽子关在船舱里，从越南带到陌生的法国，一天后，鸽子竟然神奇地飞回越南的老家。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "inference"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "让科学家一直找不到答案的是什么？",
+        "answer": "蜜蜂、鸽子和燕子等动物认路回家的本领，科学家无法解释，找不到答案。",
+        "marks": 2,
+        "lesson": 2,
+        "skill": "detail"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "sap_p3a_L3",
+   "school": "SAP_High_Chinese_3A",
+   "year": "L3_wodehaohuoban",
+   "track": "HCL",
+   "raw": {
+    "seedId": "sap_p3a_L3",
+    "school": "SAP_High_Chinese_3A",
+    "year": "L3_wodehaohuoban",
+    "track": "HCL",
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "我手上戴着的这只手______是外公给我的。",
+        "options": [
+         "衣",
+         "表",
+         "袋",
+         "标"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 3,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“手表”是戴在手腕上的计时器，用“表”。",
+         "distractors": [
+          "“衣”是衣服，“手衣”不成词。",
+          "✓ 正确答案：手表＝戴在手上的计时器。",
+          "“袋”是袋子，意思不同。",
+          "“标”是标志、目标，与手表无关。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "计时用“手表”；“表”的下半是“衣”，别只写“衣”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "姐姐的校服是白色的上衣和______色的裙子。",
+        "options": [
+         "篮",
+         "揽",
+         "蓝",
+         "览"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 3,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“蓝色”指天空、大海的颜色，用草字头的“蓝”。",
+         "distractors": [
+          "“篮”是竹字头的篮子（篮球），不是颜色。",
+          "“揽”是提手旁，指招揽、搂抱。",
+          "✓ 正确答案：蓝＝蓝色（草字头）。",
+          "“览”是观览、浏览。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "颜色“蓝”是草字头；篮球的“篮”是竹字头。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "墙上的时______坏了，爸爸要拿去修理。",
+        "options": [
+         "种",
+         "钟",
+         "忠",
+         "肿"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 3,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“时钟”是报时的钟，用金字旁的“钟”。",
+         "distractors": [
+          "“种”是禾字旁，指种子、种植。",
+          "✓ 正确答案：钟＝时钟（金字旁）。",
+          "“忠”是忠心，意思不同。",
+          "“肿”是月字旁，指肿胀。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "钟表的“钟”是金字旁；种子的“种”是禾字旁。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "今天，小红______我去办公室见老师。",
+        "options": [
+         "倍",
+         "培",
+         "陪",
+         "剖"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 3,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“陪我去”指陪伴我一起去，用双耳旁的“陪”。",
+         "distractors": [
+          "“倍”是人字旁，指加倍、倍数。",
+          "“培”是土字旁，指培养、栽培。",
+          "✓ 正确答案：陪＝陪伴（双耳旁）。",
+          "“剖”是立刀旁，指剖开。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "陪伴的“陪”是双耳旁；四字都含“咅”，看部首。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "小明今天上学又______到了。",
+        "options": [
+         "尺",
+         "迟",
+         "齿",
+         "持"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 3,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“迟到”指到得比规定时间晚，用走之底的“迟”。",
+         "distractors": [
+          "“尺”是量长度的尺，不表示“晚”。",
+          "✓ 正确答案：迟＝晚（走之底）。",
+          "“齿”是牙齿，意思不同。",
+          "“持”是提手旁，指拿着、坚持。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "迟到的“迟”是走之底，里面是“尺”，别只写“尺”。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "星期天早上，晴朗的天空突然变了______，一片黑暗。",
+        "options": [
+         "颜色",
+         "彩色",
+         "特色",
+         "彩虹"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 3,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“天空突然变了______，一片黑暗”指天色变暗，用“颜色”。",
+         "distractors": [
+          "✓ 正确答案：颜色＝色彩，天色变了。",
+          "“彩色”指多种颜色、鲜艳，与“一片黑暗”矛盾。",
+          "“特色”指特点，与句意不合。",
+          "“彩虹”是雨后的虹，与句意不合。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "天色变化用“颜色”；彩色指鲜艳，与黑暗矛盾。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "闹钟是我的好______，它每天准时叫我起床。",
+        "options": [
+         "陪伴",
+         "陪同",
+         "伙伴",
+         "伴随"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 3,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“我的好______”需要名词，“伙伴”指同伴、朋友。",
+         "distractors": [
+          "“陪伴”是动词（陪着），不能说“我的好陪伴”。",
+          "“陪同”是动词，指陪着一起。",
+          "✓ 正确答案：伙伴＝同伴、朋友（名词）。",
+          "“伴随”是动词，指跟随。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "“我的好伙伴”用名词“伙伴”；陪伴、陪同是动词。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "只要按一按电梯的开关按钮，电梯门就会______或关上。",
+        "options": [
+         "打开",
+         "放开",
+         "松开",
+         "散开"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "电梯门与“关上”相对，用“打开”。",
+         "distractors": [
+          "✓ 正确答案：打开↔关上，门的开启。",
+          "“放开”指松手放掉，不用于门的开启。",
+          "“松开”指使不紧，不用于电梯门。",
+          "“散开”指分散，与门无关。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "门“打开”对“关上”；放开、松开是松手。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "这些积木有各种各样的______，大小也不一样。",
+        "options": [
+         "形式",
+         "形容",
+         "形状",
+         "形象"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 3,
+        "skill": "jinyici",
+        "explain": {
+         "why": "积木看得见的外形，与“大小”并列，用“形状”。",
+         "distractors": [
+          "“形式”指抽象的样式（如活动形式），不指外形。",
+          "“形容”是动词，指描述。",
+          "✓ 正确答案：形状＝物体的外形。",
+          "“形象”指人或事物的样子、印象。"
+         ],
+         "trapType": "jinyici",
+         "memoryTip": "看得见的外形用“形状”；形式是抽象样式。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "小蜗牛______大大的房子在草地上爬行。",
+        "options": [
+         "推着",
+         "抬着",
+         "背着",
+         "顶着"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 3,
+        "skill": "dapei",
+        "explain": {
+         "why": "蜗牛的壳在背上，用“背着”。",
+         "distractors": [
+          "“推着”指向前用力推，蜗牛的壳不是推的。",
+          "“抬着”指两人以上合力抬，不合。",
+          "✓ 正确答案：背着＝把东西放在背上。",
+          "“顶着”指用头顶，不合。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "东西在背上用“背着”；蜗牛背着壳。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "passage": "小蚂蚁长得一点也不好看，黑黑的 (1) ___，细细的脚，拖着一个圆圆的肚子，头上还顶着两根不停摆动的触须，像两支探照灯。妈妈说，别看蚂蚁长得细小，它们的 (2) ___ 可了不起呢！有一次，妈妈 (3) ___ 把一些饼干屑放在蚂蚁洞外，被一只蚂蚁发现了，便立刻使出全身的力量去推那些饼干屑，可是饼干屑太“重”了，小蚂蚁怎么推也推不动，它只好放弃，急急地钻进洞里找 (4) ___。没多久，一大群蚂蚁从洞里钻了出来，围着饼干屑。就这样，大家你一口，我一口地把饼干屑咬得细碎，然后便一点一点地把饼干屑搬进洞里。妈妈说，小蚂蚁懂得 (5) ___，有福一起享，它们比人类还团结呢！",
+      "wordBank": [
+       "本领",
+       "伙伴",
+       "身体",
+       "陪伴",
+       "故意",
+       "分工合作"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "身体",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“黑黑的______，细细的脚”描述蚂蚁的外形，用“身体”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“身体”＝躯干等身体部分。"
+        }
+       },
+       {
+        "num": 2,
+        "answer": "本领",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“它们的______可了不起”指蚂蚁的能耐，用“本领”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“本领”＝能耐、能力。"
+        }
+       },
+       {
+        "num": 3,
+        "answer": "故意",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "下文一只蚂蚁发现饼干屑，可见妈妈是有意放的，用“故意”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“故意”＝有意、特意。"
+        }
+       },
+       {
+        "num": 4,
+        "answer": "伙伴",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "蚂蚁推不动，钻进洞里找同伴帮忙，用“伙伴”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“伙伴”＝同伴。"
+        }
+       },
+       {
+        "num": 5,
+        "answer": "分工合作",
+        "lesson": 3,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "一群蚂蚁一起把饼干屑搬回，体现“分工合作”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“分工合作”＝分工并合力完成。"
+        }
+       }
+      ]
+     },
+     "ReadingOpen": {
+      "passage": "周老师：我刚刚到办公室找您，想告诉您我发烧，要请假去看医生。可是您不在，坐在您旁边的刘老师说您在会客室和家长见面。周老师，我不能等您了，因为我很不舒服，很想快些去看医生，妈妈已经给我挂号，我要赶快去医院，不然就要等到下午了。周老师，这是今天要交的习字作业，已经放在您的桌上。如果我的病好了，明天会回来上课。我写下妈妈的手机号码，有事可以找我妈妈！学生：何小扬",
+      "questions": [
+       {
+        "format": "fill_word",
+        "stem": "从便条中找出与画线词语意思相近或相同的词语：“如果你要来我家，请先通知我一声。”（画线：通知）",
+        "answer": "告诉",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "jinyici",
+        "explain": {
+         "why": "“通知”和“告诉”都指把消息说给别人；便条里有“想告诉您”。",
+         "distractors": [],
+         "trapType": "jinyici",
+         "memoryTip": "“通知＝告诉”，把消息让人知道。"
+        }
+       },
+       {
+        "format": "open_sentence",
+        "stem": "何小扬为什么要写这张便条？",
+        "answer": "因为他要向周老师请假，却见不到周老师，只好写便条留给老师。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "为什么何小扬不想等老师？",
+        "answer": "因为他发烧，很不舒服，急着去看医生。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "文中提到的“挂号”（第二段），意思是什么？",
+        "answer": "意思是领取号码，等着看医生。",
+        "marks": 2,
+        "lesson": 3,
+        "skill": "vocab_in_context"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "sap_p3a_L4",
+   "school": "SAP_High_Chinese_3A",
+   "year": "L4_qimiaodebianhua",
+   "track": "HCL",
+   "raw": {
+    "seedId": "sap_p3a_L4",
+    "school": "SAP_High_Chinese_3A",
+    "year": "L4_qimiaodebianhua",
+    "track": "HCL",
+    "sections": {
+     "HanziMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "题目______是困难，他反而更有信心去解答。",
+        "options": [
+         "约",
+         "悦",
+         "越",
+         "阅"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 4,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“越是困难，他反而越有信心”，表示程度加深，用“越”。",
+         "distractors": [
+          "“约”是大约、约定，与程度无关。",
+          "“悦”是喜悦，意思不同。",
+          "✓ 正确答案：越＝表示程度随着情况发展（越……越……）。",
+          "“阅”是阅读，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "“越是……越……”表示程度加深，用“越”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "豆芽的根长得很______。",
+        "options": [
+         "吸",
+         "系",
+         "细",
+         "洗"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 4,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“根长得很细”指又长又瘦，用“细”。",
+         "distractors": [
+          "“吸”是吸气、吸收，与粗细无关。",
+          "“系”是系鞋带的“系”，意思不同。",
+          "✓ 正确答案：细＝直径小、瘦长。",
+          "“洗”是洗涤，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "又长又瘦用“细”；细细的根。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "那个戴眼镜的男生，是李阿______的孩子。",
+        "options": [
+         "咦",
+         "姨",
+         "移",
+         "宜"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 4,
+        "skill": "tongyinzi",
+        "explain": {
+         "why": "“阿姨”是称呼年纪和母亲相近的女性，用女字旁的“姨”。",
+         "distractors": [
+          "“咦”是表示惊讶的语气词，不能称呼人。",
+          "✓ 正确答案：阿姨＝对女性长辈的称呼。",
+          "“移”是移动，读音相同但义不同。",
+          "“宜”是适宜，意思不同。"
+         ],
+         "trapType": "tongyinzi",
+         "memoryTip": "称呼女性长辈用“阿姨”的“姨”（女字旁）。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "小蝌蚪摆动______长长的尾巴，在水里游来游去。",
+        "options": [
+         "看",
+         "着",
+         "者",
+         "首"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 4,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "“摆动着”表示动作正在进行，助词用“着”。",
+         "distractors": [
+          "“看”是看见，“摆动看”不通顺。",
+          "✓ 正确答案：着＝助词，表示动作正在进行。",
+          "“者”是……的人，如“作者”，不作助词。",
+          "“首”是头、首先，意思不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "动词后表示正在进行用助词“着”。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "弟弟，你把我的文具盒放到______里了？",
+        "options": [
+         "那",
+         "拿",
+         "哪",
+         "娜"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 4,
+        "skill": "xingjinzi",
+        "explain": {
+         "why": "句子在问放到什么地方，是疑问，用口字旁的“哪”。",
+         "distractors": [
+          "“那”指较远的人或物（那里），不用于提问。",
+          "“拿”是拿取，意思不同。",
+          "✓ 正确答案：哪＝疑问，问什么地方（哪里）。",
+          "“娜”多用于人名，意思不同。"
+         ],
+         "trapType": "xingjinzi",
+         "memoryTip": "提问“哪里”用口字旁的“哪”；“那里”指较远的地方。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "弟弟很高兴，说他会自己穿______了。",
+        "options": [
+         "尾巴",
+         "衣服",
+         "肚皮",
+         "变化"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“穿______”指穿在身上的物品，用“衣服”。",
+         "distractors": [
+          "“尾巴”是动物身体末端，人不穿尾巴。",
+          "✓ 正确答案：衣服＝穿在身上的物品。",
+          "“肚皮”是肚子表面，不是穿的。",
+          "“变化”指改变，不能“穿变化”。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "穿在身上的用“衣服”。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "牛的______不停地摆动，可以赶走蚊子。",
+        "options": [
+         "衣服",
+         "尾巴",
+         "结果",
+         "大喊"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "牛用来赶蚊子、会摆动的是“尾巴”。",
+         "distractors": [
+          "“衣服”是人穿的，牛没有衣服。",
+          "✓ 正确答案：尾巴＝动物身体末端突出的部分。",
+          "“结果”指最后的情形，与句意不合。",
+          "“大喊”是大声叫，与摆动无关。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "动物身后会摆动的是“尾巴”。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "大华突然______一声，吓了我一跳。",
+        "options": [
+         "变化",
+         "大喊",
+         "尾巴",
+         "肚皮"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“______一声，吓了我一跳”指突然大声叫，用“大喊”。",
+         "distractors": [
+          "“变化”指改变，不能“变化一声”。",
+          "✓ 正确答案：大喊＝大声叫。",
+          "“尾巴”与叫声无关。",
+          "“肚皮”与叫声无关。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "突然大声叫用“大喊”。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "水加热后会有什么______呢？",
+        "options": [
+         "结果",
+         "肚皮",
+         "变化",
+         "衣服"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "水加热后形态会改变，用“变化”。",
+         "distractors": [
+          "“结果”指最后情形，此处问的是过程中的改变。",
+          "“肚皮”与水无关。",
+          "✓ 正确答案：变化＝形态或本质产生新状况。",
+          "“衣服”与水加热无关。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "事物产生新状况用“变化”。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "荷叶上有一只青蛙，露着白白的______。",
+        "options": [
+         "尾巴",
+         "衣服",
+         "大喊",
+         "肚皮"
+        ],
+        "answer0": 3,
+        "answerKey": 4,
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "青蛙露出的、白白的部分是“肚皮”。",
+         "distractors": [
+          "“尾巴”青蛙成体没有明显尾巴。",
+          "“衣服”青蛙没有衣服。",
+          "“大喊”是叫声，不是身体部分。",
+          "✓ 正确答案：肚皮＝肚子表面。"
+         ],
+         "trapType": "vocab_in_context",
+         "memoryTip": "肚子表面用“肚皮”。"
+        }
+       }
+      ]
+     },
+     "VocabMatch": {
+      "instruction": "把左右两边的词语连起来，搭配合理的词组。",
+      "pool": [
+       "变强",
+       "变长",
+       "变宽",
+       "变瘦",
+       "变深"
+      ],
+      "items": [
+       {
+        "num": 1,
+        "stem": "由浅（　）",
+        "answer0": 4,
+        "lesson": 4,
+        "skill": "dapei",
+        "explain": {
+         "why": "“浅”的反义是“深”，由浅变深。",
+         "distractors": [
+          "“浅”对“深”，不对“强”。",
+          "“浅”对“深”，不对“长”。",
+          "“浅”对“深”，不对“宽”。",
+          "“浅”对“深”，不对“瘦”。",
+          "✓ 由浅变深：由浅到深（反义）。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：由浅变深、由弱变强、由短变长、由窄变宽、由胖变瘦（前后意思相反）。"
+        }
+       },
+       {
+        "num": 2,
+        "stem": "由弱（　）",
+        "answer0": 0,
+        "lesson": 4,
+        "skill": "dapei",
+        "explain": {
+         "why": "“弱”的反义是“强”，由弱变强。",
+         "distractors": [
+          "✓ 由弱变强：由弱到强（反义）。",
+          "“弱”对“强”，不对“长”。",
+          "“弱”对“强”，不对“宽”。",
+          "“弱”对“强”，不对“瘦”。",
+          "“弱”对“强”，不对“深”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：由浅变深、由弱变强、由短变长、由窄变宽、由胖变瘦（前后意思相反）。"
+        }
+       },
+       {
+        "num": 3,
+        "stem": "由短（　）",
+        "answer0": 1,
+        "lesson": 4,
+        "skill": "dapei",
+        "explain": {
+         "why": "“短”的反义是“长”，由短变长。",
+         "distractors": [
+          "“短”对“长”，不对“强”。",
+          "✓ 由短变长：由短到长（反义）。",
+          "“短”对“长”，不对“宽”。",
+          "“短”对“长”，不对“瘦”。",
+          "“短”对“长”，不对“深”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：由浅变深、由弱变强、由短变长、由窄变宽、由胖变瘦（前后意思相反）。"
+        }
+       },
+       {
+        "num": 4,
+        "stem": "由窄（　）",
+        "answer0": 2,
+        "lesson": 4,
+        "skill": "dapei",
+        "explain": {
+         "why": "“窄”的反义是“宽”，由窄变宽。",
+         "distractors": [
+          "“窄”对“宽”，不对“强”。",
+          "“窄”对“宽”，不对“长”。",
+          "✓ 由窄变宽：由窄到宽（反义）。",
+          "“窄”对“宽”，不对“瘦”。",
+          "“窄”对“宽”，不对“深”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：由浅变深、由弱变强、由短变长、由窄变宽、由胖变瘦（前后意思相反）。"
+        }
+       },
+       {
+        "num": 5,
+        "stem": "由胖（　）",
+        "answer0": 3,
+        "lesson": 4,
+        "skill": "dapei",
+        "explain": {
+         "why": "“胖”的反义是“瘦”，由胖变瘦。",
+         "distractors": [
+          "“胖”对“瘦”，不对“强”。",
+          "“胖”对“瘦”，不对“长”。",
+          "“胖”对“瘦”，不对“宽”。",
+          "✓ 由胖变瘦：由胖到瘦（反义）。",
+          "“胖”对“瘦”，不对“深”。"
+         ],
+         "trapType": "dapei",
+         "memoryTip": "记搭配：由浅变深、由弱变强、由短变长、由窄变宽、由胖变瘦（前后意思相反）。"
+        }
+       }
+      ]
+     },
+     "PassageCloze": {
+      "passage": "有一只鹿瞎了一只眼，正在海边吃草。它用瞎了的那只眼对着大海，认为猎人不会从海上过来，应该很 (1) ___。它用好的那只眼盯着地面，很小心地提防着，万一猎人 (2) ___，它可以随时逃命。鹿万万没料到，有个猎人 (3) ___ 坐船经过，看见鹿在海边吃草，马上搭箭，一箭就把鹿射倒。鹿受伤倒地，痛苦地呻吟着。这时候，它懊悔极了，没想到大海才是最 (4) ___ 的地方，如果它当时用好的那只眼看大海，也许下场就不是 (5) ___ 了！",
+      "wordBank": [
+       "这样",
+       "安全",
+       "刚好",
+       "出现",
+       "危险",
+       "一旦"
+      ],
+      "blanks": [
+       {
+        "num": 1,
+        "answer": "安全",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "鹿以为海上不会来猎人，所以觉得那边很______，用“安全”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“安全”＝没有危险。"
+        }
+       },
+       {
+        "num": 2,
+        "answer": "出现",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“万一猎人______，它可以随时逃命”指猎人现身，用“出现”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“出现”＝显现、露面。"
+        }
+       },
+       {
+        "num": 3,
+        "answer": "刚好",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“有个猎人______坐船经过”表示凑巧，用“刚好”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“刚好”＝正巧、凑巧。"
+        }
+       },
+       {
+        "num": 4,
+        "answer": "危险",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "鹿被海上来的猎人射中，说明大海才是最______的地方，用“危险”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“危险”＝有危险，与“安全”相反。"
+        }
+       },
+       {
+        "num": 5,
+        "answer": "这样",
+        "lesson": 4,
+        "skill": "vocab_in_context",
+        "explain": {
+         "why": "“下场就不是______了”指不会是现在这种结局，用“这样”。",
+         "distractors": [],
+         "trapType": "vocab_in_context",
+         "memoryTip": "“这样”＝像现在这种情形。"
+        }
+       }
+      ]
+     },
+     "ReadingOpen": {
+      "passage": "有钱人在城里开了一家名店，卖的都是一些值钱的古董和名画。前来光顾的不是名人就是富商。这一天是富商张先生的生日，有钱人为了讨好这位大客户，便到乐器店里选了一台钢琴，准备送给张先生。乐器店的主人说：“先生，这是城里最好的一台钢琴，它所发出的琴音，可以让听者永远记得你这位送钢琴的人。”有钱人开心地说：“太好了，以后张先生就会常常来买我的名画了。”有钱人决定买下这台钢琴。在付钱的时候，他忽然想到一个问题，便问店主：“请问这么好的一台钢琴，是什么时候制造的？”“1900年。”店主回答。“制造钢琴的人还活着吗？”“他已经死了。即使还活着，他也一百多岁了。”有钱人听了，连忙摇头说：“我不买了，万一这台钢琴坏了，找谁来修理呀！”",
+      "questions": [
+       {
+        "format": "open_sentence",
+        "stem": "试解释下面短语在文中的意思：“有钱人为了讨好这位大客户”。",
+        "answer": "意思是有钱人为了迎合这位大客户，取得他的欢心。",
+        "marks": 2,
+        "lesson": 4,
+        "skill": "vocab_in_context"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "有钱人的名店卖的是什么东西？前来买东西的是哪些人？",
+        "answer": "名店卖的是一些值钱的古董和名画；前来买东西的多数是名人和富商。",
+        "marks": 2,
+        "lesson": 4,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "有钱人看上的那台钢琴，有什么特色？",
+        "answer": "它发出的琴音，可以让听者永远记得送钢琴的人。",
+        "marks": 2,
+        "lesson": 4,
+        "skill": "detail"
+       },
+       {
+        "format": "open_sentence",
+        "stem": "为什么有钱人最后放弃了这台钢琴？",
+        "answer": "因为制造钢琴的人已经死了，有钱人担心钢琴坏了没有人会修理。",
+        "marks": 2,
+        "lesson": 4,
+        "skill": "inference"
+       }
+      ]
+     }
+    }
+   }
+  },
+  {
+   "seedId": "sap_p3a_bottleneck",
+   "school": "SAP_High_Chinese_3A",
+   "year": "L1234_liangci_duoyinzi",
+   "track": "HCL",
+   "raw": {
+    "seedId": "sap_p3a_bottleneck",
+    "school": "SAP_High_Chinese_3A",
+    "year": "L1234_liangci_duoyinzi",
+    "track": "HCL",
+    "sections": {
+     "PinyinMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "妈妈让我{u}发{/u}短信告诉阿姨。",
+        "options": [
+         "fā",
+         "fà",
+         "fàng",
+         "huà"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 1,
+        "skill": "duoyinzi",
+        "explain": {
+         "why": "“发短信”的“发”是送出、发出的意思，读 fā。",
+         "distractors": [
+          "✓ 正确答案：发短信的“发”读 fā（送出、发出）。",
+          "“发”读 fà 时指“头发”。",
+          "“fàng”是“放”的读音，不是“发”。",
+          "“huà”是“话、化”的读音，不是“发”。"
+         ],
+         "trapType": "duoyinzi",
+         "memoryTip": "“发”：发出、送出读 fā；头发读 fà。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "妹妹的头{u}发{/u}又黑又长。",
+        "options": [
+         "fā",
+         "fà",
+         "huī",
+         "fèn"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 2,
+        "skill": "duoyinzi",
+        "explain": {
+         "why": "“头发”的“发”指长在头上的毛，读 fà。",
+         "distractors": [
+          "“发”读 fā 时指“发出、送出”（发短信）。",
+          "✓ 正确答案：头发的“发”读 fà。",
+          "“huī”不是“发”的读音。",
+          "“fèn”是“分、份”的读音，不是“发”。"
+         ],
+         "trapType": "duoyinzi",
+         "memoryTip": "“发”：头发读 fà；发短信读 fā。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "我每天晚上九点就去睡{u}觉{/u}。",
+        "options": [
+         "jué",
+         "jiào",
+         "xué",
+         "zhào"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 3,
+        "skill": "duoyinzi",
+        "explain": {
+         "why": "“睡觉”的“觉”读 jiào。",
+         "distractors": [
+          "“觉”读 jué 时指“觉得、感觉”。",
+          "✓ 正确答案：睡觉的“觉”读 jiào。",
+          "“xué”是“学”的读音，不是“觉”。",
+          "“zhào”不是“觉”的读音。"
+         ],
+         "trapType": "duoyinzi",
+         "memoryTip": "“觉”：睡觉读 jiào；觉得读 jué。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "阿姨答应{u}教{/u}我数学。",
+        "options": [
+         "jiāo",
+         "jiào",
+         "jiǎo",
+         "xiào"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 1,
+        "skill": "duoyinzi",
+        "explain": {
+         "why": "作动词“教我数学”时，“教”读 jiāo。",
+         "distractors": [
+          "✓ 正确答案：动词“教（我数学）”读 jiāo。",
+          "“教”读 jiào 时用于“教育、教师”。",
+          "“jiǎo”是“脚、角”的读音，不是“教”。",
+          "“xiào”是“笑、校”的读音，不是“教”。"
+         ],
+         "trapType": "duoyinzi",
+         "memoryTip": "“教”：动词“教书、教我”读 jiāo；名词“教育”读 jiào。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "阿姨教我{u}数{/u}学。",
+        "options": [
+         "shǔ",
+         "shù",
+         "sù",
+         "shū"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "duoyinzi",
+        "explain": {
+         "why": "“数学”的“数”读 shù。",
+         "distractors": [
+          "“数”读 shǔ 时指“数数、点数”。",
+          "✓ 正确答案：数学的“数”读 shù。",
+          "“sù”是“速、宿”的读音，不是“数”。",
+          "“shū”是“书、输”的读音，不是“数”。"
+         ],
+         "trapType": "duoyinzi",
+         "memoryTip": "“数”：数学、数量读 shù；数数（点数）读 shǔ。"
+        }
+       }
+      ]
+     },
+     "VocabMcq": {
+      "items": [
+       {
+        "num": 1,
+        "sentence": "妈妈给弟弟买了一（）新衣服。",
+        "options": [
+         "条",
+         "件",
+         "张",
+         "只"
+        ],
+        "answer0": 1,
+        "answerKey": 2,
+        "lesson": 1,
+        "skill": "liangci",
+        "explain": {
+         "why": "衣服用量词“件”。",
+         "distractors": [
+          "“条”用于长条状的东西（一条裤子）。",
+          "✓ 正确答案：一件衣服（衣服用“件”）。",
+          "“张”用于纸、桌等有平面的东西。",
+          "“只”用于动物或成对东西的一个。"
+         ],
+         "trapType": "liangci",
+         "memoryTip": "衣服、事情用“件”：一件衣服、一件事。"
+        }
+       },
+       {
+        "num": 2,
+        "sentence": "老师叫我们把课文朗读一（）。",
+        "options": [
+         "遍",
+         "只",
+         "张",
+         "件"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 1,
+        "skill": "liangci",
+        "explain": {
+         "why": "从头到尾读一次，用量词“遍”。",
+         "distractors": [
+          "✓ 正确答案：读一遍（一个动作从头到尾一次）。",
+          "“只”用于动物，不用于次数。",
+          "“张”用于有平面的东西，不用于次数。",
+          "“件”用于衣服、事情，不用于次数。"
+         ],
+         "trapType": "liangci",
+         "memoryTip": "一个动作从头到尾一次用“遍”：读一遍。"
+        }
+       },
+       {
+        "num": 3,
+        "sentence": "小狗有两（）长长的后腿。",
+        "options": [
+         "条",
+         "件",
+         "遍",
+         "张"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 4,
+        "skill": "liangci",
+        "explain": {
+         "why": "长条状的东西（后腿）用量词“条”。",
+         "distractors": [
+          "✓ 正确答案：两条后腿（长条状用“条”）。",
+          "“件”用于衣服、事情。",
+          "“遍”用于动作次数。",
+          "“张”用于有平面的东西。"
+         ],
+         "trapType": "liangci",
+         "memoryTip": "又长又细的东西用“条”：一条腿、一条尾巴。"
+        }
+       },
+       {
+        "num": 4,
+        "sentence": "小蝌蚪有一（）长长的尾巴。",
+        "options": [
+         "件",
+         "张",
+         "条",
+         "只"
+        ],
+        "answer0": 2,
+        "answerKey": 3,
+        "lesson": 4,
+        "skill": "liangci",
+        "explain": {
+         "why": "尾巴是长条状，用量词“条”。",
+         "distractors": [
+          "“件”用于衣服、事情。",
+          "“张”用于有平面的东西。",
+          "✓ 正确答案：一条尾巴（长条状用“条”）。",
+          "“只”用于动物或成对东西的一个。"
+         ],
+         "trapType": "liangci",
+         "memoryTip": "长条状用“条”：一条尾巴、一条腿。"
+        }
+       },
+       {
+        "num": 5,
+        "sentence": "这（）事情我一定会做好。",
+        "options": [
+         "件",
+         "条",
+         "遍",
+         "张"
+        ],
+        "answer0": 0,
+        "answerKey": 1,
+        "lesson": 1,
+        "skill": "liangci",
+        "explain": {
+         "why": "事情用量词“件”。",
+         "distractors": [
+          "✓ 正确答案：一件事情（事情用“件”）。",
+          "“条”用于长条状的东西。",
+          "“遍”用于动作次数。",
+          "“张”用于有平面的东西。"
+         ],
+         "trapType": "liangci",
+         "memoryTip": "事情、衣服用“件”：一件事、一件衣服。"
+        }
+       }
+      ]
+     }
+    }
+   }
+  }
+ ]
+}

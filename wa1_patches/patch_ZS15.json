@@ -1,0 +1,217 @@
+{
+ "setId": "ZS15",
+ "mcq": {
+  "ZS15_A1": {
+   "sentence_en": "Xiaoming and I are good ___ (friends); we go to school together every day.",
+   "hints": ["好___友 names a close companion. Which character, made of two 月 side by side (like two people walking together), forms 朋友 (friend)?"],
+   "keywords": [{"w":"朋友","py":"péngyou","en":"friend"},{"w":"一起","py":"yìqǐ","en":"together"},{"w":"上学","py":"shàngxué","en":"to go to school"}],
+   "explanation_en": "好朋友 is the fixed word for a close companion, so 朋 fits. 朋 is two 月 side by side - two people walking abreast are friends."
+  },
+  "ZS15_A2": {
+   "sentence_en": "Playing games together with my ___ (companions) is really fun.",
+   "hints": ["同___们 names those who act alongside you. Which character (with the person radical 亻) means 'companion'?"],
+   "keywords": [{"w":"同伴","py":"tóngbàn","en":"companion"},{"w":"游戏","py":"yóuxì","en":"game"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "同伴 means companions who act together, so 伴 fits. 伴 has the person radical 亻 - one person keeping another company is a companion."
+  },
+  "ZS15_A3": {
+   "sentence_en": "Xiaohua and I ___ (encourage) each other and study hard together.",
+   "hints": ["互相___励 means to spur each other on. Which character (with the strength radical 力) forms 鼓励 (to encourage)?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"互相","py":"hùxiāng","en":"each other"},{"w":"努力","py":"nǔlì","en":"to work hard"}],
+   "explanation_en": "The 励 of 鼓励 means to encourage and spur on, so 励 fits. 励 has the strength radical 力 - to encourage someone is to give them strength."
+  },
+  "ZS15_A4": {
+   "sentence_en": "We ___ (joined hands and) made a greeting card together for the teacher.",
+   "hints": ["___手 means to work together. Which character (with the ear radical 耳) means 'to unite / join'?"],
+   "keywords": [{"w":"联手","py":"liánshǒu","en":"to join hands"},{"w":"贺卡","py":"hèkǎ","en":"greeting card"},{"w":"老师","py":"lǎoshī","en":"teacher"}],
+   "explanation_en": "联手 means to cooperate and do something together, so 联 fits. 联 has the ear radical 耳 - ears leaning close together, like uniting as one."
+  },
+  "ZS15_A5": {
+   "sentence_en": "Xiaoli is a ___ (warm-hearted) classmate who often helps others.",
+   "hints": ["热___ describes someone glad to help others. Which character means 'heart', used in 热心 (warm-hearted)?"],
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "热心 means glad to help others, so 心 fits. The 心 in 热心 is the heart - when the heart is warm, one is 热心."
+  },
+  "ZS15_B1": {
+   "sentence_en": "I 分享 (share) snacks with my good friends, and everyone is happy.",
+   "hints": ["分 is 1st tone (fēn); 享 is 3rd tone (xiǎng). Which choice is fēn + xiǎng?"],
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "分 is read fēn (1st tone) and 享 is xiǎng (3rd tone), together fēn xiǎng. 分 (1st tone) is flat, like dividing evenly; 享 (3rd tone) dips then rises."
+  },
+  "ZS15_B2": {
+   "sentence_en": "The classmates 帮助 (helped) Xiaowen find his lost pencil case.",
+   "hints": ["帮 has initial b (bāng); 助 is retroflex zh (zhù). Which choice is bāng + zhù, not p or flat z?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"文具盒","py":"wénjùhé","en":"pencil case"},{"w":"丢失","py":"diūshī","en":"to lose"}],
+   "explanation_en": "帮 is read bāng (initial b, back nasal -ang) and 助 is zhù (retroflex zh, 4th tone), together bāng zhù. 帮 uses b, not p; 助 is retroflex zh, not flat z."
+  },
+  "ZS15_B3": {
+   "sentence_en": "Xiaojie has many 好朋友 (good friends), and everyone likes to play with him.",
+   "hints": ["好 is a polyphone: hǎo = good; hào = to be fond of. 好朋友 means good friends, so which choice is hǎo + péng + yǒu?"],
+   "keywords": [{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"很多","py":"hěn duō","en":"many"},{"w":"喜欢","py":"xǐhuan","en":"to like"}],
+   "explanation_en": "The 好 in 好朋友 means good and close, read hǎo (3rd tone), not hào (to be fond of, as in 好奇). 好: 好人 / 好朋友 hǎo; 好奇 / 爱好 hào."
+  },
+  "ZS15_B4": {
+   "sentence_en": "We go to the field 一起 (together) to play ball, and have a great time.",
+   "hints": ["一 alone is read yī (1st tone); 起 is qǐ (3rd tone, initial q). Which choice is yī + qǐ?"],
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"操场","py":"cāochǎng","en":"field"},{"w":"踢球","py":"tī qiú","en":"to play ball"}],
+   "explanation_en": "一 is read yī (1st tone) and 起 is qǐ (3rd tone, initial q), together yī qǐ. 起 uses initial q (not j); when 一 stands alone in pinyin it is marked 1st tone yī."
+  },
+  "ZS15_C1": {
+   "sentence_en": "Xiaofang and I play ___ (harmoniously) together and never quarrel.",
+   "hints": ["Clue: the sentence says 'never quarrel', so the two get along well. Which word means 'harmonious / getting along well'?"],
+   "keywords": [{"w":"和睦","py":"hémù","en":"harmonious"},{"w":"玩耍","py":"wánshuǎ","en":"to play"},{"w":"吵架","py":"chǎojià","en":"to quarrel"}],
+   "explanation_en": "和睦 means getting along peacefully without quarrels, matching 'never quarrel'. 争吵 (quarrel), 害怕 (afraid) and 安静 (quiet) do not describe two friends getting along."
+  },
+  "ZS15_C2": {
+   "sentence_en": "Xiaoming lent me his new ___ (measure word) to read, and I was very happy.",
+   "hints": ["The blank is the measure word for a book. Which one is used for books and notebooks?"],
+   "keywords": [{"w":"本","py":"běn","en":"measure word for books"},{"w":"借","py":"jiè","en":"to lend"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "The measure word 本 is used for books and notebooks, so 一本书 is correct. Books -> 本; paper -> 张; fish -> 条; beads -> 颗. Match each item with its measure word."
+  },
+  "ZS15_C3": {
+   "sentence_en": "Between good friends one should be ___ (honest) and should not tell lies.",
+   "hints": ["Clue: the sentence says 'should not tell lies'. Which word is the opposite of lying?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "The sentence mentions 'should not tell lies', so good friends must be 诚实 (honest), the opposite of lying. 勇敢 (brave), 聪明 (clever) and 努力 (hardworking) are not the opposite of lying."
+  },
+  "ZS15_C4": {
+   "sentence_en": "The classmates waited ___ (patiently) for the teacher to announce the sports-day results.",
+   "hints": ["Clue: it pairs with 等 (to wait) - waiting calmly, not rushing. Which word means 'patient'?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"宣布","py":"xuānbù","en":"to announce"},{"w":"成绩","py":"chéngjì","en":"results"}],
+   "explanation_en": "耐心地等 means to wait calmly and attentively, the natural pairing with 等 (waiting). 着急 (anxious), 难过 (sad) and 安心 (at ease) do not fit calm waiting here."
+  },
+  "ZS15_C5": {
+   "sentence_en": "Xiaohua ___ (generously) lent her eraser to her deskmate.",
+   "hints": ["Clue: lending your things to others shows you are not stingy. Which word means 'generous'?"],
+   "keywords": [{"w":"大方","py":"dàfang","en":"generous"},{"w":"橡皮擦","py":"xiàngpícā","en":"eraser"},{"w":"同桌","py":"tóngzhuō","en":"deskmate"}],
+   "explanation_en": "Lending your things to others shows you are not stingy, so 大方 (generous) fits best. 伤心 (sad), 害羞 (shy) and 生气 (angry) do not describe generous lending; the opposite of 大方 is 小气 (stingy)."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“向朋友道歉”就是向朋友承认错误、说对不起。“关心、帮忙”都不是“认错说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向朋友道歉 means to apologize to a friend. 关心 (care) and 帮忙 (help) do not mean 'to say sorry'.",
+   "stem_en": "to apologize to a friend",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "2": {
+   "explanation": "“关心”是留意、在乎别人，所以“关心朋友的感受”就是在乎朋友心里的感觉。“道歉、一起”都不是“在乎别人感受”的意思。",
+   "explanation_en": "关心 (guānxīn) means to care about others, so 关心朋友的感受 means to care about a friend's feelings. 道歉 (apologize) and 一起 (together) do not mean 'to care about someone's feelings'.",
+   "stem_en": "to care about a friend's feelings",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"感受","py":"gǎnshòu","en":"feelings"}]
+  },
+  "3": {
+   "explanation": "“帮忙”是给别人做事出力，所以“请你来帮忙”就是请你来出一份力、帮着做事。“关心、吵架”都不是“出力做事”的意思。",
+   "explanation_en": "帮忙 (bāngmáng) means to help someone with a task, so 请你来帮忙 means please come and help. 关心 (care) and 吵架 (quarrel) do not mean 'to help with a task'.",
+   "stem_en": "please come and help",
+   "keywords": [{"w":"帮忙","py":"bāngmáng","en":"to help"},{"w":"请","py":"qǐng","en":"to invite; please"}]
+  },
+  "4": {
+   "explanation": "“一起”是几个人共同去做，所以“一起做功课”就是几个人合在一块儿写作业。“帮忙、道歉”都不是“共同一块儿做”的意思。",
+   "explanation_en": "一起 (yìqǐ) means to do something together, so 一起做功课 means to do homework together. 帮忙 (help) and 道歉 (apologize) do not mean 'to do something jointly'.",
+   "stem_en": "to do homework together",
+   "keywords": [{"w":"一起","py":"yìqǐ","en":"together"},{"w":"功课","py":"gōngkè","en":"homework"}]
+  },
+  "5": {
+   "explanation": "“吵架”是意见不合大声争执，所以“和朋友吵架”就是和朋友大声争吵、闹别扭。“关心、一起”都不是“争执闹别扭”的意思。",
+   "explanation_en": "吵架 (chǎojià) means to argue loudly when opinions differ, so 和朋友吵架 means to quarrel with a friend. 关心 (care) and 一起 (together) do not mean 'to argue'.",
+   "stem_en": "to quarrel with a friend",
+   "keywords": [{"w":"吵架","py":"chǎojià","en":"to quarrel"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  }
+ },
+ "craft": {
+  "ZS15_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Xiaowen and I had a quarrel.' and 'We are still good friends.'",
+   "answer_en": "Although Xiaowen and I had a quarrel, we are still good friends.",
+   "tiles": ["虽然","小文和我吵了一架，","但是","我们还是好朋友。"],
+   "explanation_en": "虽然……但是…… names one thing that seems bad, then turns to an unexpected result. '虽然小文和我吵了一架' (although we quarrelled) is the first thing, '但是我们还是好朋友' (but we are still friends) is the turn."
+  },
+  "ZS15_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaohua helped me move the table.' and 'Xiaohua helped me find my lost pencil.'",
+   "answer_en": "Xiaohua not only helped me move the table, but also helped me find my lost pencil.",
+   "tiles": ["小华","不但","帮我搬桌子，","还","帮我找到了丢失的铅笔。"],
+   "explanation_en": "不但……还…… means on top of the first thing there is a second, further thing. '不但帮我搬桌子' (not only helped move the table) is the first, '还帮我找到了丢失的铅笔' (but also found my pencil) is the added help - a step-up relationship."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "One time, I carelessly fell at school and my knee ___ (hurt) a lot.",
+   "hint": "Clue: after falling and hurting your knee, what do you feel? Which box word means 'to hurt / ache'?",
+   "keywords": [{"w":"疼","py":"téng","en":"to hurt; ache"},{"w":"膝盖","py":"xīgài","en":"knee"}],
+   "explanation_en": "After falling and injuring the knee, one feels 疼 (pain), the most natural description."
+  },
+  "2": {
+   "sentence_en": "Seeing me, Xiaoming ___ (hurriedly) ran over to help me up.",
+   "hint": "Clue: he sees his friend fall and acts at once. Which box word means 'hurriedly / at once'?",
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "Seeing his friend fall, Xiaoming runs over at once, so 连忙 (hurriedly, immediately) fits best."
+  },
+  "3": {
+   "sentence_en": "He also took a tissue from his bag and ___ (carefully) cleaned my wound.",
+   "hint": "Clue: cleaning a wound must be done gently so it does not hurt. Which box word means 'carefully'?",
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"carefully"},{"w":"伤口","py":"shāngkǒu","en":"wound"}],
+   "explanation_en": "Cleaning a wound must be done gently without hurting the person, so 小心地 (carefully) fits best."
+  },
+  "4": {
+   "sentence_en": "The teacher said we are true good ___ (companions).",
+   "hint": "Clue: the teacher praises the two friends who help each other. Which box word means 'companions / buddies'?",
+   "keywords": [{"w":"伙伴","py":"huǒbàn","en":"companion"},{"w":"真正","py":"zhēnzhèng","en":"true"}],
+   "explanation_en": "The teacher praises the two as true 伙伴 (companions), friends who help one another, so it fits the sentence."
+  },
+  "5": {
+   "sentence_en": "From then on, our friendship became even more ___ (deep).",
+   "hint": "Clue: after this event the friendship grew stronger and firmer. Which box word means 'deep / profound'?",
+   "keywords": [{"w":"深厚","py":"shēnhòu","en":"deep"},{"w":"友情","py":"yǒuqíng","en":"friendship"}],
+   "explanation_en": "After this event the friendship grew firmer, so 深厚 (deep and solid) fits best to describe 友情 (friendship)."
+  }
+ },
+ "reading": {
+  "ZS15_G1": {
+   "stem_en": "Where did Dawei sprain his foot?",
+   "answer_en": "During PE class.",
+   "keywords": [{"w":"扭伤","py":"niǔshāng","en":"to sprain"},{"w":"体育课","py":"tǐyùkè","en":"PE class"},{"w":"脚","py":"jiǎo","en":"foot"}],
+   "explanation": "这是细节题。短文说“大为在体育课上扭伤了脚，走路很不方便”，直接说明扭伤脚的地点是体育课上，所以选(1)。(2)走路上学、(3)回家路上都是他们平常一起走的时候，不是扭伤脚的地方。做细节题要回原文找出事情发生的确切地点。",
+   "explanation_en": "This is a detail question. The passage says 'Dawei sprained his foot during PE class and had trouble walking', directly stating the place is PE class, so (1). (2) walking to school and (3) the way home are ordinary times they walk together, not where he sprained his foot. Find the exact place in the passage.",
+   "solution": {"evidence": "大为在体育课上扭伤了脚"}
+  },
+  "ZS15_G2": {
+   "stem_en": "Why did Xiaojie tell jokes to Dawei after school?",
+   "answer_en": "Because Xiaojie wanted Dawei to forget the pain in his foot and feel a little happier.",
+   "keywords": [{"w":"讲笑话","py":"jiǎng xiàohua","en":"to tell jokes"},{"w":"疼痛","py":"téngtòng","en":"pain"},{"w":"逗","py":"dòu","en":"to amuse"}],
+   "explanation": "这是推断题。短文说“小杰又陪大为走回家，一路上讲笑话逗大为开心”，大为脚扭伤了很疼，小杰讲笑话是想逗他开心、让他忘记疼痛，所以选(2)。(1)说这是小杰的爱好、(3)说是妈妈要求的，文中都没有这样的意思。推断题要结合前文大为受伤的处境来想小杰的用意。",
+   "explanation_en": "This is an inference question. The passage says 'Xiaojie walked Dawei home and told jokes all the way to cheer him up'. Dawei's sprained foot hurt, so Xiaojie told jokes to amuse him and take his mind off the pain, so (2). (1) saying it is Xiaojie's hobby and (3) saying Mum asked him are not implied. For inference, combine Dawei's injured state with Xiaojie's purpose.",
+   "solution": {"evidence": "一路上讲笑话逗大为开心。"}
+  },
+  "ZS15_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Good friends should help one another.",
+   "keywords": [{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"互相","py":"hùxiāng","en":"one another"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation": "这是主旨题。全文讲小杰在大为扭伤脚后帮他拿书包、扶他走、陪他回家、逗他开心，最后小杰说“我们是好朋友，互相帮助是应该的”。可见短文是要告诉我们好朋友之间应该互相帮助，所以选(3)。(1)上体育课要小心、(2)邻居要互相认识都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaojie carrying Dawei's bag, helping him walk, seeing him home, and cheering him up after the sprain, ending with 'we are good friends, helping each other is only right'. So it tells us good friends should help one another, so (3). (1) be careful in PE and (2) neighbours should get to know each other are minor points, not the main idea.",
+   "solution": {"evidence": "我们是好朋友，互相帮助是应该的。"}
+  },
+  "ZS15_H1": {
+   "stem_en": "Find a word in the passage close in meaning to 感谢 (to thank).",
+   "answer_en": "感激 (grateful)",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"点头","py":"diǎntóu","en":"to nod"}],
+   "explanation": "这是近义词题。“感谢”指对别人的帮助表示谢意，短文中说“小雨感激地点点头”，“感激”和“感谢”意思相近，都是心里充满谢意，所以答案是“感激”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 感谢 means to express thanks for help; in the passage 'Xiaoyu nodded gratefully'. 感激 and 感谢 are close in meaning, both being full of thanks, so the answer is 感激. Find the closest word in the passage.",
+   "solution": {"evidence": "小雨感激地点点头"}
+  },
+  "ZS15_H2": {
+   "stem_en": "How did Sisi help Xiaoyu? Answer using content from the passage.",
+   "answer_en": "Sisi shared half of her own colour pens with Xiaoyu so they could finish the art-class painting together.",
+   "keywords": [{"w":"彩色笔","py":"cǎisèbǐ","en":"colour pens"},{"w":"分一半","py":"fēn yíbàn","en":"to share half"},{"w":"合作","py":"hézuò","en":"to cooperate"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“思思看见了，马上把自己的彩色笔分一半给小雨用”，说明思思是把自己的彩色笔分一半给小雨，让两人一起完成画。答“怎样帮助”要把文中的具体做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Sisi saw it and at once shared half her colour pens with Xiaoyu', showing she gave half her pens so the two could finish the painting together. When asked 'how did she help', state the specific action from the text.",
+   "solution": {"evidence": "马上把自己的彩色笔分一半给小雨用"}
+  },
+  "ZS15_H3": {
+   "stem_en": "What kind of person do you think Sisi is? Why?",
+   "answer_en": "I think Sisi is a warm-hearted and generous person, because when she saw Xiaoyu had forgotten her colour pens, she at once shared her own with her and comforted her not to worry.",
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"大方","py":"dàfang","en":"generous"},{"w":"安慰","py":"ānwèi","en":"to comfort"}],
+   "explanation": "这是推断题（评价人物）。短文说思思“马上把自己的彩色笔分一半给小雨用，还轻声说：‘别担心，我们一起用。’”，从她主动分东西、安慰朋友，可以看出她热心、大方。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Sisi 'at once shared half her colour pens with Xiaoyu and softly said: don't worry, we'll share'. From actively sharing and comforting her friend, we see she is warm-hearted and generous. For such questions, state the trait, then give the action in the text as the reason.",
+   "solution": {"evidence": "马上把自己的彩色笔分一半给小雨用，还轻声说：“别担心，我们一起用。”"}
+  }
+ }
+}

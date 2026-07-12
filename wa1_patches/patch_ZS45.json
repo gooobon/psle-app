@@ -1,0 +1,217 @@
+{
+ "setId": "ZS45",
+ "mcq": {
+  "ZS45_A1": {
+   "sentence_en": "Xiaoming did something wrong but did not ___ (lie); he bravely told the teacher.",
+   "hints": ["The blank names telling untrue words. Which two-character word (with 谎, whose right side is 皇) means 'to tell a lie'?"],
+   "keywords": [{"w":"说谎","py":"shuōhuǎng","en":"to lie"},{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"诚实","py":"chéngshí","en":"honest"}],
+   "explanation_en": "说谎 is the fixed word for telling untrue words; not lying shows Xiaoming is honest, so it fits. 谎 has 皇 on the right - a lie struts about like an emperor but is false. Remember 谎 is the character for 说谎."
+  },
+  "ZS45_A2": {
+   "sentence_en": "The teacher ___ (tells) us to be honest people and not deceive others.",
+   "hints": ["The blank names saying something so others know. Which two-character word (with 诉, which has the speech radical 讠) means 'to tell'?"],
+   "keywords": [{"w":"告诉","py":"gàosu","en":"to tell"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"骗","py":"piàn","en":"to deceive"}],
+   "explanation_en": "告诉 is the fixed word for saying something so others know it, so it fits. 诉 has the speech radical 讠 on the left - telling uses words, so 告诉 uses 诉."
+  },
+  "ZS45_A3": {
+   "sentence_en": "He ___ (admitted) that he broke the vase, without pushing the blame onto his little brother.",
+   "hints": ["The blank names owning up to a fault. Which two-character word (with 认, whose speech radical 讠 shows speaking) means 'to admit'?"],
+   "keywords": [{"w":"承认","py":"chéngrèn","en":"to admit"},{"w":"花瓶","py":"huāpíng","en":"vase"},{"w":"推","py":"tuī","en":"to push (blame)"}],
+   "explanation_en": "承认 is the fixed word for owning up to a fault, here honestly saying he did it, so it fits. The 认 of 承认 has the speech radical 讠 - you own up by speaking, so 承认."
+  },
+  "ZS45_A4": {
+   "sentence_en": "Mum says one must be ___ (honest) in life and must not deceive others.",
+   "hints": ["The blank + 实 means telling the truth without cheating. Which character (with the speech radical 讠) forms 诚实?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"做人","py":"zuòrén","en":"to conduct oneself"},{"w":"欺骗","py":"qīpiàn","en":"to deceive"}],
+   "explanation_en": "诚实 means telling the truth without cheating, and 诚 has the speech radical 讠, related to speech, so 诚 fits. Speaking the truth is 诚实, so choose 诚, which has the speech radical 讠."
+  },
+  "ZS45_A5": {
+   "sentence_en": "Xiaohua ___ (sincerely) apologized to Dad, saying he should not have lied.",
+   "hints": ["The blank + 心 means genuinely from the heart, not pretending. Which character means 'true / real', forming 真心?"],
+   "keywords": [{"w":"真心","py":"zhēnxīn","en":"sincere"},{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "真心 means genuinely from the heart, so Xiaohua apologizing sincerely, not pretending, fits. The four sound alike, but only 真 joins 心 to make 真心 (sincere)."
+  },
+  "ZS45_B1": {
+   "sentence_en": "Xiaoli 诚实 (honestly) told the teacher that she had carelessly broken the classmate's pencil case.",
+   "hints": ["诚 has the back nasal -ng (chéng); 实 is retroflex sh (shí). Which choice is chéng + shí?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"弄坏","py":"nònghuài","en":"to break"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil case"}],
+   "explanation_en": "诚 is read chéng (back nasal -ng, 2nd tone) and 实 is shí (retroflex sh, 2nd tone), together chéng shí. 诚 has the back nasal -ng; 实 is retroflex sh, not flat s."
+  },
+  "ZS45_B2": {
+   "sentence_en": "He 承认 (admitted) his mistake, and the teacher praised him as an honest child.",
+   "hints": ["承 has the back nasal -ng (chéng); 认 has the front nasal -n (rèn). Which choice is chéng + rèn?"],
+   "keywords": [{"w":"承认","py":"chéngrèn","en":"to admit"},{"w":"错误","py":"cuòwù","en":"mistake"},{"w":"表扬","py":"biǎoyáng","en":"to praise"}],
+   "explanation_en": "承 is read chéng (back nasal -ng, 2nd tone) and 认 is rèn (4th tone), together chéng rèn. 承 has the back nasal -ng; 认 is 4th tone rèn, the tone falling."
+  },
+  "ZS45_B3": {
+   "sentence_en": "Mum 教导 (teaches and guides) us that one must be honest and not lie.",
+   "hints": ["教 is a polyphone: jiào in 教导 (to guide); jiāo in 教书 (to teach a subject). Which choice is jiào + dǎo?"],
+   "keywords": [{"w":"教导","py":"jiàodǎo","en":"to teach and guide"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "In 教导, 教 is read jiào (4th tone, to guide) and 导 is dǎo (3rd tone), together jiào dǎo. 教 is a polyphone: 教导 jiào (4th tone); 教书 jiāo (1st tone). 教导 uses the 4th tone."
+  },
+  "ZS45_B4": {
+   "sentence_en": "The classmates all 相信 (believe) Xiaowen, because he never lies.",
+   "hints": ["相 has the back nasal -ng (xiāng); 信 has the front nasal -n (xìn). Which choice is xiāng + xìn?"],
+   "keywords": [{"w":"相信","py":"xiāngxìn","en":"to believe"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "相 is read xiāng (back nasal -ng, 1st tone) and 信 is xìn (front nasal -n, 4th tone), together xiāng xìn. Tell front from back nasal: 相 xiāng has -ng; 信 xìn has -n."
+  },
+  "ZS45_C1": {
+   "sentence_en": "Xiaoming ___ (honestly) admitted to the teacher that he had forgotten to hand in his homework, not lost it.",
+   "hints": ["Clue: telling the truth without hiding, pairing with 承认. Which word means 'honest / truthful'?"],
+   "keywords": [{"w":"老实","py":"lǎoshí","en":"honest"},{"w":"承认","py":"chéngrèn","en":"to admit"},{"w":"作业","py":"zuòyè","en":"homework"}],
+   "explanation_en": "老实 means telling the truth without hiding, pairing naturally with 承认, which fits the honest sense. 老实 and 诚实 are close in meaning, both telling the truth. When admitting a mistake, use 老实地承认. 努力, 害羞 and 小心 do not fit."
+  },
+  "ZS45_C2": {
+   "sentence_en": "Dad has always ___ (taught and guided) us to be honest people.",
+   "hints": ["Clue: an elder educating and guiding the children. Which word means 'to teach and guide', taking a person as object?"],
+   "keywords": [{"w":"教导","py":"jiàodǎo","en":"to teach and guide"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"做人","py":"zuòrén","en":"to conduct oneself"}],
+   "explanation_en": "教导 means to educate and guide, and 教导我们 (teaches us) is a fixed pairing meaning Dad guides us to be good, so it fits best. 教导 + a person = to educate someone. Seeing '一直______我们', a verb is needed, so choose 教导. 教室, 教书 and 教练 do not fit."
+  },
+  "ZS45_C3": {
+   "sentence_en": "The teacher bought ___ (a pile of) story books for the reading corner for us to borrow.",
+   "hints": ["Clue: many books piled together. Which measure word means 'a pile / heap'?"],
+   "keywords": [{"w":"一堆","py":"yì duī","en":"a pile of"},{"w":"故事书","py":"gùshishū","en":"story book"},{"w":"借阅","py":"jièyuè","en":"to borrow and read"}],
+   "explanation_en": "一堆 is a measure word for many things heaped together, so 一堆故事书 means many books in a pile, which fits. Match measure words to nouns: books -> 一本, or 一堆 for many piled up; fish -> 一条; paper -> 一张. 一匹 is for horses."
+  },
+  "ZS45_C4": {
+   "sentence_en": "After Xiaohua's lie was found out, his face ___ (went red) and he lowered his head.",
+   "hints": ["Clue: after being caught lying, he feels ashamed and his face changes. Which word means 'to turn red', matching shame?"],
+   "keywords": [{"w":"发红","py":"fāhóng","en":"to turn red"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"},{"w":"低头","py":"dītóu","en":"to lower one's head"}],
+   "explanation_en": "After being caught lying, one feels ashamed and the face turns red, so 发红 (to turn red, as in blushing with shame) fits best. Shame -> face turns red 发红; joy -> face lights up 发亮; fear -> face turns pale 发白. Choose by the emotion. 发冷 and 发声 do not fit."
+  },
+  "ZS45_C5": {
+   "sentence_en": "Mum ___ (reminds) me to tell the truth and not hide things when I meet a problem in future.",
+   "hints": ["Clue: Mum gets me to notice and remember to tell the truth. Which word means 'to remind'?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"实话","py":"shíhuà","en":"the truth"},{"w":"隐瞒","py":"yǐnmán","en":"to hide"}],
+   "explanation_en": "提醒 means to make someone notice and remember something, matching Mum reminding me to tell the truth, so it fits best. 提醒 = to get someone to remember something to note. Mum earnestly making me remember to tell the truth = 提醒. 告别, 告示 and 告状 mean quite different things."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“说声对不起，向同学道歉”就是向同学承认错误、说对不起。“信任、保证”都不是“说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向同学道歉 means to apologize to a classmate. 信任 (trust) and 保证 (guarantee) do not mean 'to say sorry'.",
+   "stem_en": "say sorry and apologize to a classmate",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"对不起","py":"duìbuqǐ","en":"sorry"}]
+  },
+  "2": {
+   "explanation": "“信任”是相信、放心地依靠，所以“得到大家的信任”就是让大家都相信你、放心地依靠你。“道歉、后悔”都不是“让大家相信”的意思。",
+   "explanation_en": "信任 (xìnrèn) means to trust and rely on, so 得到大家的信任 means to win everyone's trust. 道歉 (apologize) and 后悔 (regret) do not mean 'to make everyone trust you'.",
+   "stem_en": "to win everyone's trust",
+   "keywords": [{"w":"信任","py":"xìnrèn","en":"trust"},{"w":"得到","py":"dédào","en":"to gain"}]
+  },
+  "3": {
+   "explanation": "“勇气”是敢去做事的胆量，所以“鼓起勇气说实话”就是让自己有胆量去说出真话。“信任、保证”都不是“敢做事的胆量”。",
+   "explanation_en": "勇气 (yǒngqì) means the courage to do something, so 鼓起勇气说实话 means to work up the courage to tell the truth. 信任 (trust) and 保证 (guarantee) do not mean 'the courage to act'.",
+   "stem_en": "to work up the courage to tell the truth",
+   "keywords": [{"w":"勇气","py":"yǒngqì","en":"courage"},{"w":"实话","py":"shíhuà","en":"the truth"}]
+  },
+  "4": {
+   "explanation": "“保证”是认真地答应一定做到，所以“保证以后不再说谎”就是很认真地答应以后一定不说谎。“道歉、后悔”都不是“认真答应做到”的意思。",
+   "explanation_en": "保证 (bǎozhèng) means to promise seriously that you will do it, so 保证以后不再说谎 means to promise not to lie again. 道歉 (apologize) and 后悔 (regret) do not mean 'to promise seriously'.",
+   "stem_en": "to promise not to lie again",
+   "keywords": [{"w":"保证","py":"bǎozhèng","en":"to promise"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}]
+  },
+  "5": {
+   "explanation": "“后悔”是做错事后心里懊恼、觉得不该这样做，所以“感到非常后悔”就是心里很懊悔、责怪自己。“道歉、信任”都不是“心里懊悔”的意思。",
+   "explanation_en": "后悔 (hòuhuǐ) means feeling regret after doing wrong, so 感到非常后悔 means to feel very regretful. 道歉 (apologize) and 信任 (trust) do not mean 'to feel regret'.",
+   "stem_en": "to feel very regretful",
+   "keywords": [{"w":"后悔","py":"hòuhuǐ","en":"to regret"},{"w":"非常","py":"fēicháng","en":"very"}]
+  }
+ },
+ "craft": {
+  "ZS45_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Telling the truth would make Xiaowen embarrassed.' and 'Xiaowen still decided to tell the teacher the truth.'",
+   "answer_en": "Although telling the truth would make Xiaowen embarrassed, he still decided to tell the teacher the truth.",
+   "tiles": ["虽然","说实话会让小文感到难为情，","但是","小文还是决定告诉老师真相。"],
+   "explanation_en": "虽然……但是…… names an unfavourable thing first, then an opposite result. '虽然说实话会让小文感到难为情' (although the truth is embarrassing) is the difficulty, '但是小文还是决定告诉老师真相' (but he still told the truth) is the turn."
+  },
+  "ZS45_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'Xiaohua told a lie and was found out by Mum.' and 'Xiaohua felt very regretful.'",
+   "answer_en": "Because Xiaohua told a lie and was found out by Mum, he felt very regretful.",
+   "tiles": ["因为","小华说了谎，被妈妈发现了，","所以","小华感到非常后悔。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小华说了谎，被妈妈发现了' (because he lied and was caught) is the cause, '所以小华感到非常后悔' (so he felt regretful) is the result. Find which clause is the cause and which the result."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "In class, Xiaojie accidentally broke his deskmate Wenwen's colour pen. He felt very ___ (upset) inside and did not know what to do.",
+   "hint": "Clue: he broke his deskmate's pen and feels bad. Which box word means 'sad / upset'?",
+   "keywords": [{"w":"难过","py":"nánguò","en":"upset"},{"w":"彩色笔","py":"cǎisèbǐ","en":"colour pen"}],
+   "explanation_en": "Xiaojie broke his deskmate's pen and feels bad inside, so 难过 (upset) fits best."
+  },
+  "2": {
+   "sentence_en": "After class, he ___ (worked up the courage) to walk over to Wenwen and said: 'Sorry, I broke your colour pen.'",
+   "hint": "Clue: admitting a mistake takes courage. Which box phrase means 'to work up the courage'?",
+   "keywords": [{"w":"鼓起勇气","py":"gǔqǐ yǒngqì","en":"to work up courage"},{"w":"承认","py":"chéngrèn","en":"to admit"}],
+   "explanation_en": "Admitting the mistake takes courage, so 鼓起勇气地走到文文面前 (worked up the courage to go over) shows he steeled himself to own up, which fits best."
+  },
+  "3": {
+   "sentence_en": "Hearing this, Wenwen first ___ (was stunned), then smiled and said: 'It's okay; you told the truth, and I trust you.'",
+   "hint": "Clue: Wenwen did not expect the apology, so she was startled for a moment. Which box word means 'to be stunned / dazed'?",
+   "keywords": [{"w":"愣","py":"lèng","en":"to be stunned"},{"w":"文文","py":"Wénwen","en":"Wenwen (name)"}],
+   "explanation_en": "Wenwen did not expect Xiaojie to own up, so she was 愣 (stunned, startled) for a moment before smiling, which fits best."
+  },
+  "4": {
+   "sentence_en": "Wenwen said that because Xiaojie could tell the truth, she really ___ (trusts) him.",
+   "hint": "Clue: because he told the truth, she believes he is honest. Which box word means 'to trust'?",
+   "keywords": [{"w":"信任","py":"xìnrèn","en":"to trust"},{"w":"实话","py":"shíhuà","en":"the truth"}],
+   "explanation_en": "Because Xiaojie told the truth, Wenwen 信任 (trusts) him, meaning she believes he is honest, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Xiaojie felt much more relaxed, and he ___ (promised) to be more careful in future.",
+   "hint": "Clue: he solemnly gives his word to be careful. Which box word means 'to promise / guarantee'?",
+   "keywords": [{"w":"保证","py":"bǎozhèng","en":"to promise"},{"w":"小心","py":"xiǎoxīn","en":"careful"}],
+   "explanation_en": "Xiaojie solemnly gives his word to be more careful, so 保证 (a serious promise) fits best."
+  }
+ },
+ "reading": {
+  "ZS45_G1": {
+   "stem_en": "Where did Xiaoen pick up the wallet?",
+   "answer_en": "In the school corridor.",
+   "keywords": [{"w":"走廊","py":"zǒuláng","en":"corridor"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"捡到","py":"jiǎndào","en":"to pick up"}],
+   "explanation": "这是细节题。短文说“她在学校走廊上捡到了一个钱包，里面有五十元钱”，直接说明捡到钱包的地点是学校走廊，所以选(1)。(2)教室里、(3)学校门口，文中都没有这样说。做细节题要回原文找出事情发生的确切地点。",
+   "explanation_en": "This is a detail question. The passage says 'she picked up a wallet in the school corridor, with fifty dollars inside', directly stating the place, so (1). (2) the classroom and (3) the school gate are not stated. Find the exact place in the passage.",
+   "solution": {"evidence": "她在学校走廊上捡到了一个钱包"}
+  },
+  "ZS45_G2": {
+   "stem_en": "Why did Xiaoen finally decide to hand the wallet to the teacher?",
+   "answer_en": "Because she remembered Mum saying that found things must be returned to the owner.",
+   "keywords": [{"w":"失主","py":"shīzhǔ","en":"owner"},{"w":"还给","py":"huángěi","en":"to return"},{"w":"妈妈","py":"māma","en":"Mum"}],
+   "explanation": "这是推断题。短文说小恩本想用钱买零食，“可是，她马上想起妈妈说过的话：‘捡到别人的东西，一定要还给失主。’”，可以推断她决定交给老师，是因为记起妈妈的话，所以选(2)。(1)怕被骂、(3)小林请她保管，文中都没有这样说。推断题要看“想起妈妈说过的话”这个原因。",
+   "explanation_en": "This is an inference question. The passage says Xiaoen first wanted to buy snacks, 'but she suddenly remembered Mum's words: found things must be returned to the owner', so she handed it in because she remembered Mum's words, so (2). (1) fear of being scolded and (3) Xiaolin asking her to keep it are not stated. Read the reason 'remembered Mum's words'.",
+   "solution": {"evidence": "捡到别人的东西，一定要还给失主。"}
+  },
+  "ZS45_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "An honest person wins everyone's trust and respect.",
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"信任","py":"xìnrèn","en":"trust"},{"w":"尊重","py":"zūnzhòng","en":"respect"}],
+   "explanation": "这是主旨题。全文讲小恩捡到钱包，虽然想过买零食，但还是诚实地交给老师，失主小林感激地夸她诚实，最后同学们都很信任小恩。可见短文是要告诉我们诚实的人会得到大家的信任和尊重，所以选(3)。(1)捡到钱包马上花掉、(2)常帮老师做事都与文意不符或只是小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoen picking up a wallet and, though tempted, honestly handing it in, being praised by the owner Xiaolin for her honesty, and the classmates all trusting her. So it tells us an honest person wins everyone's trust and respect, so (3). (1) spend found money at once and (2) often help the teacher are off-topic or minor, not the main idea.",
+   "solution": {"evidence": "从那天起，同学们都很信任小恩。"}
+  },
+  "ZS45_H1": {
+   "stem_en": "Find a word in the passage that shows Xiaoming told the teacher every detail of what happened.",
+   "answer_en": "一五一十 (in full detail)",
+   "keywords": [{"w":"一五一十","py":"yīwǔ-yīshí","en":"in full detail"},{"w":"经过","py":"jīngguò","en":"the course of events"},{"w":"告诉","py":"gàosu","en":"to tell"}],
+   "explanation": "这是找词题。短文说“小明……把事情的经过一五一十地告诉了老师”，“一五一十”正好说明小明把事情的每一个细节都告诉了老师，一点也没有隐瞒，所以答案是“一五一十”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'Xiaoming told the teacher the course of events in full detail'; 一五一十 exactly shows he told every detail without hiding anything, so the answer is 一五一十. Find the word that fits the situation.",
+   "solution": {"evidence": "把事情的经过一五一十地告诉了老师"}
+  },
+  "ZS45_H2": {
+   "stem_en": "Why was Aqiang unwilling to go and tell the teacher with Xiaoming?",
+   "answer_en": "Because Aqiang was afraid of being scolded by the teacher, so he was unwilling to go and tell, and chose to run off first.",
+   "keywords": [{"w":"害怕","py":"hàipà","en":"to be afraid"},{"w":"被骂","py":"bèi mà","en":"to be scolded"},{"w":"跑走","py":"pǎozǒu","en":"to run off"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“阿强害怕被骂，拉着小明说：‘我们快跑，没有人看见！’……阿强不肯，自己先跑走了”，说明阿强不肯去告诉老师，是因为害怕被骂。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Aqiang, afraid of being scolded, pulled Xiaoming and said: let's run, no one saw!... Aqiang refused and ran off first', so he was unwilling because he feared being scolded. State the reason in a full sentence.",
+   "solution": {"evidence": "阿强害怕被骂"}
+  },
+  "ZS45_H3": {
+   "stem_en": "After the teacher praised Xiaoming, how did he feel inside? Why?",
+   "answer_en": "Xiaoming felt much more relaxed, because he honestly told the teacher the truth and no longer needed to hide anything, so his worry disappeared.",
+   "keywords": [{"w":"轻松","py":"qīngsōng","en":"relaxed"},{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"隐瞒","py":"yǐnmán","en":"to hide"}],
+   "explanation": "这是推断题。短文说小明诚实地告诉老师后，老师没有骂他反而表扬他，最后“小明听了，心里感到轻松多了”。可以推断他感到轻松，是因为诚实说出真相后，不用再隐瞒、担心，心里的负担消失了。推断题要把诚实认错和心里轻松连起来想。",
+   "explanation_en": "This is an inference question. The passage says after Xiaoming honestly told the teacher, she praised rather than scolded him, and 'Xiaoming felt much more relaxed'. We can infer he felt relaxed because, having told the truth, he no longer had to hide or worry, so the burden lifted. Link his honest admission with feeling relaxed.",
+   "solution": {"evidence": "小明听了，心里感到轻松多了。"}
+  }
+ }
+}

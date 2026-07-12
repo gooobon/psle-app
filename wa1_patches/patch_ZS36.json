@@ -1,0 +1,217 @@
+{
+ "setId": "ZS36",
+ "mcq": {
+  "ZS36_A1": {
+   "sentence_en": "Seeing the old granny carrying a very heavy bag, Xiaoming ___ (thereupon) hurried forward to help her.",
+   "hints": ["The blank here means 'then / thereupon', showing he went to help at once. Which character means 'then / thereupon'?"],
+   "keywords": [{"w":"便","py":"biàn","en":"then; thereupon"},{"w":"老婆婆","py":"lǎopópo","en":"old granny"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "Here 便 means 'then / thereupon', so 便忙上前 (thereupon hurried forward) shows he went to help at once, which fits. The four sound alike, so judge by meaning: 便 = then; 变 = to change; 辨 = to distinguish; 辩 = to argue."
+  },
+  "ZS36_A2": {
+   "sentence_en": "A classmate fell, and Xiaofang ___ (quickly) helped him up.",
+   "hints": ["The blank + 紧 means to hurry and not waste time. Which character means 'to rush / hasten', forming 赶紧?"],
+   "keywords": [{"w":"赶紧","py":"gǎnjǐn","en":"quickly"},{"w":"跌倒","py":"diēdǎo","en":"to fall"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "赶紧 means to hurry without wasting time, matching Xiaofang helping the classmate up at once, so 赶 fits. All four are read gǎn, so judge by meaning: 赶紧 = to hurry."
+  },
+  "ZS36_A3": {
+   "sentence_en": "Ahua ___ (honestly) returned the wallet he found to its owner.",
+   "hints": ["The blank + 实 means telling the truth without deceiving. Which character (with the speech radical 讠) forms 诚实?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"失主","py":"shīzhǔ","en":"owner"}],
+   "explanation_en": "诚实 means telling the truth without deceiving, so 诚实地还给失主 (honestly returned it) means he gave it back honestly, which fits. The four share the 成 part; judge by radical: 诚 has the speech radical 讠, related to honest speech."
+  },
+  "ZS36_A4": {
+   "sentence_en": "Xiaoling ___ (carefully) put the injured little bird into a paper box.",
+   "hints": ["The blank + 心 means doing something carefully, not carelessly. Which character means 'small', used in 小心 (careful)?"],
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"纸盒","py":"zhǐhé","en":"paper box"}],
+   "explanation_en": "小心 means doing something carefully and not carelessly, so placing a hurt bird 小心地 (carefully) fits. The four are read xiào or xiǎo, so judge by meaning: 小心 = careful, not careless."
+  },
+  "ZS36_A5": {
+   "sentence_en": "Mum was ill, and Xiaowen ___ (caringly) brought her a cup of hot water to drink.",
+   "hints": ["The blank + 心 means to be concerned about and look after someone. Which character means 'to care', used in 关心?"],
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"热水","py":"rèshuǐ","en":"hot water"}],
+   "explanation_en": "关心 means to be concerned about and look after someone, so Xiaowen 关心地 (caringly) bringing water fits. 关, 官, 管, 惯 sound alike, so judge by meaning: 关心 = to care about someone."
+  },
+  "ZS36_B1": {
+   "sentence_en": "Xiaohua 帮助 (helped) a classmate find the pencil that fell on the floor.",
+   "hints": ["帮 has initial b (bāng), not p; 助 is retroflex zh (zhù), not flat z. Which choice is bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"同学","py":"tóngxué","en":"classmate"},{"w":"铅笔","py":"qiānbǐ","en":"pencil"}],
+   "explanation_en": "帮 is read bāng (initial b) and 助 is zhù (retroflex zh, 4th tone), together bāng zhù. Note the difference between b and p, and between zh and z: 帮 is b, 助 is retroflex zh."
+  },
+  "ZS36_B2": {
+   "sentence_en": "The old granny 感谢 (thanked) the child for helping her pick up the things that had dropped.",
+   "hints": ["感 is 3rd tone (gǎn); 谢 is 4th tone (xiè). Which choice is gǎn + xiè, both without a level tone?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"小朋友","py":"xiǎopéngyǒu","en":"child"},{"w":"捡","py":"jiǎn","en":"to pick up"}],
+   "explanation_en": "感 is read gǎn (3rd tone) and 谢 is xiè (4th tone), together gǎn xiè. 感 is 3rd tone (gǎn); 谢 is 4th tone (xiè) - both go down, not level."
+  },
+  "ZS36_B3": {
+   "sentence_en": "Little brother is 乐于 (glad to) help others, and everyone likes him.",
+   "hints": ["乐 is a polyphone: lè (happy / glad) and yuè (music). In 乐于 it means 'glad to', so read lè. 于 is yú. Which is lè + yú?"],
+   "keywords": [{"w":"乐于","py":"lèyú","en":"glad to"},{"w":"助人","py":"zhùrén","en":"to help others"},{"w":"喜欢","py":"xǐhuan","en":"to like"}],
+   "explanation_en": "In 乐于, 乐 means happy / glad, read lè (4th tone), not yuè (music); 于 is yú (2nd tone), giving lè yú. Polyphone 乐: music = yuè; happy / glad = lè. Judge by meaning."
+  },
+  "ZS36_B4": {
+   "sentence_en": "Xiaoling 温柔 (gently) picked up the kitten and stroked it softly.",
+   "hints": ["温 is 1st tone (wēn), final en; 柔 has initial r (róu), not l. Which choice is wēn + róu?"],
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle"},{"w":"小猫","py":"xiǎomāo","en":"kitten"},{"w":"抚摸","py":"fǔmō","en":"to stroke"}],
+   "explanation_en": "温 is read wēn (1st tone, final en) and 柔 is róu (initial r, final ou), together wēn róu. 温 is wēn (1st tone); 柔 has initial r, not l."
+  },
+  "ZS36_C1": {
+   "sentence_en": "Seeing a classmate crying, Xiaohua walked over ___ (gently) to ask what was wrong.",
+   "hints": ["Clue: comforting a crying classmate needs a soft, caring manner. Which word means 'gentle'?"],
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle"},{"w":"哭","py":"kū","en":"to cry"},{"w":"关心","py":"guānxīn","en":"to care"}],
+   "explanation_en": "Comforting a crying classmate needs a soft, caring manner, so 温柔 (gentle) fits best. Caring for others should be gentle and thoughtful, so choose 温柔. 勇敢, 热闹 and 认真 do not fit here."
+  },
+  "ZS36_C2": {
+   "sentence_en": "Xiaowen ___ (handed over) the wallet he found to the policeman.",
+   "hints": ["Clue: giving a found thing to someone to return to its owner. Which word means 'to hand over / return'?"],
+   "keywords": [{"w":"交还","py":"jiāohuán","en":"to hand over; return"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"警察","py":"jǐngchá","en":"policeman"}],
+   "explanation_en": "Giving a found thing to someone so it can go back to its owner is 交还 (hand over to return), so 交还给警察 fits best. 交还 = to give something back. Finding something, you 交还 it - a fixed pairing. 送走, 带来 and 放下 do not fit."
+  },
+  "ZS36_C3": {
+   "sentence_en": "Mum bought ___ (a bag of) sweets and shared them with the whole class.",
+   "hints": ["Clue: many sweets shared with the whole class. Which measure word means 'a bag / packet'?"],
+   "keywords": [{"w":"一包","py":"yì bāo","en":"a bag of"},{"w":"糖果","py":"tángguǒ","en":"sweets"},{"w":"分给","py":"fēngěi","en":"to share out"}],
+   "explanation_en": "There are many sweets to share with the whole class, so 一包 (a bag/packet) fits best. Match measure words to items: sweets - one is 一粒, a whole bag is 一包. To share with the class, use 一包. 一张 and 一条 do not fit."
+  },
+  "ZS36_C4": {
+   "sentence_en": "Xiaofang ___ (carefully) took the injured little bird to the vet.",
+   "hints": ["Clue: carrying a hurt bird must be done with a gentle, careful touch. Which word means 'careful (in handling)', not 'careful (in observing)'?"],
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"兽医","py":"shòuyī","en":"vet"}],
+   "explanation_en": "Carrying a hurt bird needs a gentle, careful touch so as not to hurt it, so 小心 fits best. 仄细 (仔细) is for observing carefully, not for carrying a hurt animal. 小心 = a gentle touch; 仔细 = careful observation. Carrying a hurt bird uses 小心, not 仔细."
+  },
+  "ZS36_C5": {
+   "sentence_en": "The classmates all ___ (thank) the teacher for the effort she puts in for everyone every day.",
+   "hints": ["Clue: expressing thanks for the teacher's effort. Which word means 'to thank'?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"老师","py":"lǎoshī","en":"teacher"},{"w":"付出","py":"fùchū","en":"to give; put in effort"}],
+   "explanation_en": "To express thanks for the teacher's effort, 感谢 (to thank) is the fixed pairing, so 感谢老师 fits best. Fixed pairing: 感谢 + a person / effort. Seeing 'thanks', think 感谢. 感动, 感觉 and 感冒 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“礼貌”是懂规矩、待人客气，所以“说话很礼貌”就是说话客气、有分寸，让人听着舒服。“主动、帮助”都不是“待人客气”的意思。",
+   "explanation_en": "礼貌 (lǐmào) means being polite and courteous, so 说话很礼貌 means to speak politely. 主动 (initiative) and 帮助 (help) do not mean 'to be courteous'.",
+   "stem_en": "to speak very politely",
+   "keywords": [{"w":"礼貌","py":"lǐmào","en":"polite"},{"w":"说话","py":"shuōhuà","en":"to speak"}]
+  },
+  "2": {
+   "explanation": "“主动”是不等别人叫就自己去做，所以“主动地站出来”就是自己先站出来，不用别人开口。“礼貌、温暖”都不是“自己先站出来”的意思。",
+   "explanation_en": "主动 (zhǔdòng) means doing something oneself without being asked, so 主动地站出来 means to step forward on one's own initiative. 礼貌 (polite) and 温暖 (warm) do not mean 'to step forward oneself'.",
+   "stem_en": "to step forward on one's own initiative",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"站出来","py":"zhàn chūlái","en":"to step forward"}]
+  },
+  "3": {
+   "explanation": "“温暖”是心里觉得暖暖的、很舒服，所以“心里感到温暖”就是心里觉得暖暖的、被感动。“礼貌、帮助”都不是“心里暖暖的”的意思。",
+   "explanation_en": "温暖 (wēnnuǎn) means feeling warm and comforted inside, so 心里感到温暖 means to feel warmth in one's heart. 礼貌 (polite) and 帮助 (help) do not mean 'a warm feeling inside'.",
+   "stem_en": "to feel warmth in one's heart",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"心里","py":"xīnlǐ","en":"in one's heart"}]
+  },
+  "4": {
+   "explanation": "“微笑”是轻轻地笑，所以“微笑着说谢谢”就是脸上带着笑容对别人说谢谢。“主动、帮助”都不是“带着笑容”的意思。",
+   "explanation_en": "微笑 (wēixiào) means a gentle smile, so 微笑着说谢谢 means to say thanks with a smile. 主动 (initiative) and 帮助 (help) do not mean 'with a smile'.",
+   "stem_en": "to say thanks with a smile",
+   "keywords": [{"w":"微笑","py":"wēixiào","en":"to smile"},{"w":"谢谢","py":"xièxie","en":"thanks"}]
+  },
+  "5": {
+   "explanation": "“帮助”是替别人做事、给别人出力，所以“帮助同学做功课”就是帮同学一起完成功课。“微笑、温暖”都不是“替别人出力”的意思。",
+   "explanation_en": "帮助 (bāngzhù) means to do something for someone, so 帮助同学做功课 means to help a classmate with homework. 微笑 (smile) and 温暖 (warm) do not mean 'to do something for someone'.",
+   "stem_en": "to help a classmate with homework",
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"功课","py":"gōngkè","en":"homework"}]
+  }
+ },
+ "craft": {
+  "ZS36_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Xiaoming is very tired.' and 'Xiaoming still helped the old granny carry her bag.'",
+   "answer_en": "Although Xiaoming is very tired, he still helped the old granny carry her bag.",
+   "tiles": ["虽然","小明很累，","但是","他还是帮老婆婆提袋子。"],
+   "explanation_en": "虽然……但是…… names a difficulty first, then something done despite it. '虽然小明很累' (although he is tired) is the difficulty, '但是他还是帮老婆婆提袋子' (but he still helped) is what he did anyway. 虽然 comes first, 但是 after."
+  },
+  "ZS36_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'Xiaofang saw a classmate fall.' and 'Xiaofang quickly ran over to help him up.'",
+   "answer_en": "Because Xiaofang saw a classmate fall, she quickly ran over to help him up.",
+   "tiles": ["因为","小芳看见同学跌倒了，","所以","她赶紧跑过去扶他。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小芳看见同学跌倒了' (because she saw the fall) is the cause, '所以她赶紧跑过去扶他' (so she ran to help) is the result. Cause first, result after."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school, Xiaoling saw an old grandpa in the corridor holding many things and walking with much ___ (difficulty).",
+   "hint": "Clue: holding many things makes walking hard and laboured. Which box word means 'strenuous / with difficulty'?",
+   "keywords": [{"w":"吃力","py":"chīlì","en":"strenuous"},{"w":"东西","py":"dōngxi","en":"things"}],
+   "explanation_en": "The grandpa holds many things, so he walks with difficulty and effort, and 吃力 (strenuous, laboured) fits best."
+  },
+  "2": {
+   "sentence_en": "She hurried over and ___ (politely) said: 'Grandpa, let me carry them for you!'",
+   "hint": "Clue: she steps up to help and speaks in a courteous way. Which box word means 'polite'?",
+   "keywords": [{"w":"有礼貌","py":"yǒu lǐmào","en":"polite"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "Xiaoling steps up to help of her own accord and speaks courteously, so 有礼貌地说 (politely said) fits best."
+  },
+  "3": {
+   "sentence_en": "The grandpa looked at her and smiled ___ (happily).",
+   "hint": "Clue: getting help puts the grandpa in a good mood. Which box word describes a happy mood?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"笑","py":"xiào","en":"to smile"}],
+   "explanation_en": "Getting help puts the grandpa in a good mood, so 开心地笑了起来 (smiled happily) fits best."
+  },
+  "4": {
+   "sentence_en": "Xiaoling carried the things to the door for the grandpa, and only ___ (then) went home.",
+   "hint": "Clue: she finished helping first, and only after that went home. Which box word means 'then / only after'?",
+   "keywords": [{"w":"才","py":"cái","en":"then; only after"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "才 means doing one thing only after finishing another, so 送到门口，才回家 (only went home after seeing them to the door) fits, showing she finished helping before going home."
+  },
+  "5": {
+   "sentence_en": "The grandpa called out behind her: 'Thank you, child! You are so ___ (kind)!'",
+   "hint": "Clue: the grandpa praises the helpful, warm-hearted girl. Which box word here means 'gentle / kind-hearted'?",
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle; kind"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "The grandpa praises Xiaoling, saying she is 温柔 (gentle, kind-hearted), which matches helping others, so it fits best."
+  }
+ },
+ "reading": {
+  "ZS36_G1": {
+   "stem_en": "Why was the little boy sitting on the ground crying?",
+   "answer_en": "Because he could not find his own class.",
+   "keywords": [{"w":"班级","py":"bānjí","en":"class"},{"w":"迷路","py":"mílù","en":"to be lost"},{"w":"哭","py":"kū","en":"to cry"}],
+   "explanation": "这是细节题。短文说“小弟弟说他找不到班级，一个人迷路了”，直接说明他坐在地上哭是因为找不到自己的班级、迷路了，所以选(1)。(2)跌倒脚痛、(3)找不到回家的路，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'the little boy said he could not find his class and was lost alone', directly stating he cried because he could not find his class, so (1). (2) falling and hurting his foot and (3) not finding the way home are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "小弟弟说他找不到班级，一个人迷路了"}
+  },
+  "ZS36_G2": {
+   "stem_en": "Why could Xiaojie understand the little boy's frightened feeling?",
+   "answer_en": "Because Xiaojie was also very frightened on his own first day of school.",
+   "keywords": [{"w":"害怕","py":"hàipà","en":"frightened"},{"w":"第一天","py":"dì-yī tiān","en":"first day"},{"w":"上学","py":"shàngxué","en":"to go to school"}],
+   "explanation": "这是推断题。短文说“小杰想起自己第一天上学时也很害怕，心里很明白那种感觉”，可以推断小杰能明白小弟弟害怕的感觉，是因为自己第一天上学时也很害怕，所以选(2)。(1)小杰的弟弟迷路过、(3)小杰经常帮助迷路的同学，文中都没有这样说。推断题要看“想起自己……”这个句子。",
+   "explanation_en": "This is an inference question. The passage says 'Xiaojie remembered he too was very frightened on his own first day and understood that feeling well', so he understood the boy's fear because he had felt it himself, so (2). (1) his brother getting lost and (3) often helping lost classmates are not stated. Read the 'remembered himself' sentence.",
+   "solution": {"evidence": "小杰想起自己第一天上学时也很害怕，心里很明白那种感觉"}
+  },
+  "ZS36_G3": {
+   "stem_en": "What does this passage mainly want to tell us?",
+   "answer_en": "Taking the initiative to help people in need is a good thing.",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"需要","py":"xūyào","en":"to need"}],
+   "explanation": "这是主旨题。全文讲小杰看见迷路的小弟弟，主动拉着他一间一间教室地找，帮他找到了班级，老师夸他是好孩子。可见短文是要告诉我们主动帮助有需要的人是一件好事，所以选(3)。(1)第一天容易迷路、(2)遇到困难要大声哭都只是情节里的小点或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaojie seeing a lost little boy, taking his hand to search classroom by classroom, helping him find his class, and being praised as a good child. So it tells us that taking the initiative to help people in need is a good thing, so (3). (1) getting lost on the first day and (2) crying loudly when in trouble are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "他拉着小弟弟的手，一间一间教室地找，终于帮他找到了班级。"}
+  },
+  "ZS36_H1": {
+   "stem_en": "Find a word in the passage close in meaning to 高兴 (happy).",
+   "answer_en": "温暖 (warm)",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"文具盒","py":"wénjùhé","en":"pencil case"}],
+   "explanation": "这是近义词题。“高兴”指心情愉快，短文中说“小恩心里也感到非常温暖”，这里的“温暖”指心里暖暖的、愉快满足，和“高兴”意思相近，都是心里舒服快乐，所以答案是“温暖”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 高兴 means feeling happy; in the passage 'Xiaoen also felt very warm inside'. Here 温暖 means a warm, glad, satisfied feeling, close in meaning to 高兴, both a pleasant, happy feeling inside, so the answer is 温暖. Find the closest word in the passage.",
+   "solution": {"evidence": "小恩心里也感到非常温暖"}
+  },
+  "ZS36_H2": {
+   "stem_en": "Why did Xiaoen hand the pencil case to the librarian auntie?",
+   "answer_en": "Because Xiaoen found an unclaimed pencil case on the table and, after waiting a long time with no one coming back for it, she handed it to the librarian auntie.",
+   "keywords": [{"w":"文具盒","py":"wénjùhé","en":"pencil case"},{"w":"管理员","py":"guǎnlǐyuán","en":"librarian"},{"w":"没有人","py":"méiyǒu rén","en":"no one"}],
+   "explanation": "这是细节题，答案用完整句子。短文说小恩发现桌上有没有人坐的文具盒，“小恩等了很久，还是没有人回来拿。她把文具盒交给了图书馆的管理员阿姨”，说明她交给管理员是因为等了很久也没有人回来拿。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Xiaoen found a pencil case no one was sitting near, and 'after waiting a long time with no one coming back, she handed it to the librarian auntie', so she handed it in because no one came back for it. State the reason in a full sentence.",
+   "solution": {"evidence": "小恩等了很久，还是没有人回来拿。"}
+  },
+  "ZS36_H3": {
+   "stem_en": "What kind of person do you think Xiaoen is? Use events from the passage to explain.",
+   "answer_en": "I think Xiaoen is an honest person who is glad to help, because after finding someone else's pencil case, she did not keep it for herself but took the initiative to hand it to the librarian auntie, helping the owner get it back.",
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"乐于助人","py":"lèyú-zhùrén","en":"glad to help"},{"w":"据为己有","py":"jùwéi-jǐyǒu","en":"to keep for oneself"}],
+   "explanation": "这是推断题（评价人物）。短文说小恩发现别人的文具盒后，没有据为己有，而是“把文具盒交给了图书馆的管理员阿姨”，帮失主找回文具盒。从她诚实交还、主动帮忙，可以看出她是个诚实、乐于助人的人。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says after finding someone else's pencil case, Xiaoen did not keep it but 'handed it to the librarian auntie', helping the owner get it back. From honestly returning it and helping of her own accord, we see she is honest and glad to help. State the trait, then give the event as the reason.",
+   "solution": {"evidence": "她把文具盒交给了图书馆的管理员阿姨。"}
+  }
+ }
+}

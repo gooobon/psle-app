@@ -1,0 +1,382 @@
+{
+ "seedId": "sap_p3a_L3",
+ "school": "SAP_High_Chinese_3A",
+ "year": "L3_wodehaohuoban",
+ "track": "HCL",
+ "sections": {
+  "HanziMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "我手上戴着的这只手______是外公给我的。",
+     "options": [
+      "衣",
+      "表",
+      "袋",
+      "标"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 3,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "“手表”是戴在手腕上的计时器，用“表”。",
+      "distractors": [
+       "“衣”是衣服，“手衣”不成词。",
+       "✓ 正确答案：手表＝戴在手上的计时器。",
+       "“袋”是袋子，意思不同。",
+       "“标”是标志、目标，与手表无关。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "计时用“手表”；“表”的下半是“衣”，别只写“衣”。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "姐姐的校服是白色的上衣和______色的裙子。",
+     "options": [
+      "篮",
+      "揽",
+      "蓝",
+      "览"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 3,
+     "skill": "tongyinzi",
+     "explain": {
+      "why": "“蓝色”指天空、大海的颜色，用草字头的“蓝”。",
+      "distractors": [
+       "“篮”是竹字头的篮子（篮球），不是颜色。",
+       "“揽”是提手旁，指招揽、搂抱。",
+       "✓ 正确答案：蓝＝蓝色（草字头）。",
+       "“览”是观览、浏览。"
+      ],
+      "trapType": "tongyinzi",
+      "memoryTip": "颜色“蓝”是草字头；篮球的“篮”是竹字头。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "墙上的时______坏了，爸爸要拿去修理。",
+     "options": [
+      "种",
+      "钟",
+      "忠",
+      "肿"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 3,
+     "skill": "tongyinzi",
+     "explain": {
+      "why": "“时钟”是报时的钟，用金字旁的“钟”。",
+      "distractors": [
+       "“种”是禾字旁，指种子、种植。",
+       "✓ 正确答案：钟＝时钟（金字旁）。",
+       "“忠”是忠心，意思不同。",
+       "“肿”是月字旁，指肿胀。"
+      ],
+      "trapType": "tongyinzi",
+      "memoryTip": "钟表的“钟”是金字旁；种子的“种”是禾字旁。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "今天，小红______我去办公室见老师。",
+     "options": [
+      "倍",
+      "培",
+      "陪",
+      "剖"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 3,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "“陪我去”指陪伴我一起去，用双耳旁的“陪”。",
+      "distractors": [
+       "“倍”是人字旁，指加倍、倍数。",
+       "“培”是土字旁，指培养、栽培。",
+       "✓ 正确答案：陪＝陪伴（双耳旁）。",
+       "“剖”是立刀旁，指剖开。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "陪伴的“陪”是双耳旁；四字都含“咅”，看部首。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "小明今天上学又______到了。",
+     "options": [
+      "尺",
+      "迟",
+      "齿",
+      "持"
+     ],
+     "answer0": 1,
+     "answerKey": 2,
+     "lesson": 3,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "“迟到”指到得比规定时间晚，用走之底的“迟”。",
+      "distractors": [
+       "“尺”是量长度的尺，不表示“晚”。",
+       "✓ 正确答案：迟＝晚（走之底）。",
+       "“齿”是牙齿，意思不同。",
+       "“持”是提手旁，指拿着、坚持。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "迟到的“迟”是走之底，里面是“尺”，别只写“尺”。"
+     }
+    }
+   ]
+  },
+  "VocabMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "星期天早上，晴朗的天空突然变了______，一片黑暗。",
+     "options": [
+      "颜色",
+      "彩色",
+      "特色",
+      "彩虹"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 3,
+     "skill": "jinyici",
+     "explain": {
+      "why": "“天空突然变了______，一片黑暗”指天色变暗，用“颜色”。",
+      "distractors": [
+       "✓ 正确答案：颜色＝色彩，天色变了。",
+       "“彩色”指多种颜色、鲜艳，与“一片黑暗”矛盾。",
+       "“特色”指特点，与句意不合。",
+       "“彩虹”是雨后的虹，与句意不合。"
+      ],
+      "trapType": "jinyici",
+      "memoryTip": "天色变化用“颜色”；彩色指鲜艳，与黑暗矛盾。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "闹钟是我的好______，它每天准时叫我起床。",
+     "options": [
+      "陪伴",
+      "陪同",
+      "伙伴",
+      "伴随"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 3,
+     "skill": "jinyici",
+     "explain": {
+      "why": "“我的好______”需要名词，“伙伴”指同伴、朋友。",
+      "distractors": [
+       "“陪伴”是动词（陪着），不能说“我的好陪伴”。",
+       "“陪同”是动词，指陪着一起。",
+       "✓ 正确答案：伙伴＝同伴、朋友（名词）。",
+       "“伴随”是动词，指跟随。"
+      ],
+      "trapType": "jinyici",
+      "memoryTip": "“我的好伙伴”用名词“伙伴”；陪伴、陪同是动词。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "只要按一按电梯的开关按钮，电梯门就会______或关上。",
+     "options": [
+      "打开",
+      "放开",
+      "松开",
+      "散开"
+     ],
+     "answer0": 0,
+     "answerKey": 1,
+     "lesson": 3,
+     "skill": "dapei",
+     "explain": {
+      "why": "电梯门与“关上”相对，用“打开”。",
+      "distractors": [
+       "✓ 正确答案：打开↔关上，门的开启。",
+       "“放开”指松手放掉，不用于门的开启。",
+       "“松开”指使不紧，不用于电梯门。",
+       "“散开”指分散，与门无关。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "门“打开”对“关上”；放开、松开是松手。"
+     }
+    },
+    {
+     "num": 4,
+     "sentence": "这些积木有各种各样的______，大小也不一样。",
+     "options": [
+      "形式",
+      "形容",
+      "形状",
+      "形象"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 3,
+     "skill": "jinyici",
+     "explain": {
+      "why": "积木看得见的外形，与“大小”并列，用“形状”。",
+      "distractors": [
+       "“形式”指抽象的样式（如活动形式），不指外形。",
+       "“形容”是动词，指描述。",
+       "✓ 正确答案：形状＝物体的外形。",
+       "“形象”指人或事物的样子、印象。"
+      ],
+      "trapType": "jinyici",
+      "memoryTip": "看得见的外形用“形状”；形式是抽象样式。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "小蜗牛______大大的房子在草地上爬行。",
+     "options": [
+      "推着",
+      "抬着",
+      "背着",
+      "顶着"
+     ],
+     "answer0": 2,
+     "answerKey": 3,
+     "lesson": 3,
+     "skill": "dapei",
+     "explain": {
+      "why": "蜗牛的壳在背上，用“背着”。",
+      "distractors": [
+       "“推着”指向前用力推，蜗牛的壳不是推的。",
+       "“抬着”指两人以上合力抬，不合。",
+       "✓ 正确答案：背着＝把东西放在背上。",
+       "“顶着”指用头顶，不合。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "东西在背上用“背着”；蜗牛背着壳。"
+     }
+    }
+   ]
+  },
+  "PassageCloze": {
+   "passage": "小蚂蚁长得一点也不好看，黑黑的 (1) ___，细细的脚，拖着一个圆圆的肚子，头上还顶着两根不停摆动的触须，像两支探照灯。妈妈说，别看蚂蚁长得细小，它们的 (2) ___ 可了不起呢！有一次，妈妈 (3) ___ 把一些饼干屑放在蚂蚁洞外，被一只蚂蚁发现了，便立刻使出全身的力量去推那些饼干屑，可是饼干屑太“重”了，小蚂蚁怎么推也推不动，它只好放弃，急急地钻进洞里找 (4) ___。没多久，一大群蚂蚁从洞里钻了出来，围着饼干屑。就这样，大家你一口，我一口地把饼干屑咬得细碎，然后便一点一点地把饼干屑搬进洞里。妈妈说，小蚂蚁懂得 (5) ___，有福一起享，它们比人类还团结呢！",
+   "wordBank": [
+    "本领",
+    "伙伴",
+    "身体",
+    "陪伴",
+    "故意",
+    "分工合作"
+   ],
+   "blanks": [
+    {
+     "num": 1,
+     "answer": "身体",
+     "lesson": 3,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“黑黑的______，细细的脚”描述蚂蚁的外形，用“身体”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“身体”＝躯干等身体部分。"
+     }
+    },
+    {
+     "num": 2,
+     "answer": "本领",
+     "lesson": 3,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "“它们的______可了不起”指蚂蚁的能耐，用“本领”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“本领”＝能耐、能力。"
+     }
+    },
+    {
+     "num": 3,
+     "answer": "故意",
+     "lesson": 3,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "下文一只蚂蚁发现饼干屑，可见妈妈是有意放的，用“故意”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“故意”＝有意、特意。"
+     }
+    },
+    {
+     "num": 4,
+     "answer": "伙伴",
+     "lesson": 3,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "蚂蚁推不动，钻进洞里找同伴帮忙，用“伙伴”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“伙伴”＝同伴。"
+     }
+    },
+    {
+     "num": 5,
+     "answer": "分工合作",
+     "lesson": 3,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "一群蚂蚁一起把饼干屑搬回，体现“分工合作”。",
+      "distractors": [],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“分工合作”＝分工并合力完成。"
+     }
+    }
+   ]
+  },
+  "ReadingOpen": {
+   "passage": "周老师：我刚刚到办公室找您，想告诉您我发烧，要请假去看医生。可是您不在，坐在您旁边的刘老师说您在会客室和家长见面。周老师，我不能等您了，因为我很不舒服，很想快些去看医生，妈妈已经给我挂号，我要赶快去医院，不然就要等到下午了。周老师，这是今天要交的习字作业，已经放在您的桌上。如果我的病好了，明天会回来上课。我写下妈妈的手机号码，有事可以找我妈妈！学生：何小扬",
+   "questions": [
+    {
+     "format": "fill_word",
+     "stem": "从便条中找出与画线词语意思相近或相同的词语：“如果你要来我家，请先通知我一声。”（画线：通知）",
+     "answer": "告诉",
+     "marks": 2,
+     "lesson": 3,
+     "skill": "jinyici",
+     "explain": {
+      "why": "“通知”和“告诉”都指把消息说给别人；便条里有“想告诉您”。",
+      "distractors": [],
+      "trapType": "jinyici",
+      "memoryTip": "“通知＝告诉”，把消息让人知道。"
+     }
+    },
+    {
+     "format": "open_sentence",
+     "stem": "何小扬为什么要写这张便条？",
+     "answer": "因为他要向周老师请假，却见不到周老师，只好写便条留给老师。",
+     "marks": 2,
+     "lesson": 3,
+     "skill": "detail"
+    },
+    {
+     "format": "open_sentence",
+     "stem": "为什么何小扬不想等老师？",
+     "answer": "因为他发烧，很不舒服，急着去看医生。",
+     "marks": 2,
+     "lesson": 3,
+     "skill": "detail"
+    },
+    {
+     "format": "open_sentence",
+     "stem": "文中提到的“挂号”（第二段），意思是什么？",
+     "answer": "意思是领取号码，等着看医生。",
+     "marks": 2,
+     "lesson": 3,
+     "skill": "vocab_in_context"
+    }
+   ]
+  }
+ }
+}

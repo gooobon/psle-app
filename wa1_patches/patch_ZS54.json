@@ -1,0 +1,217 @@
+{
+ "setId": "ZS54",
+ "mcq": {
+  "ZS54_A1": {
+   "sentence_en": "Seeing the old granny carrying a very heavy bag, Xiaoming hurried to ___ (run) forward to help her carry it.",
+   "hints": ["The blank + 上前 means to move quickly forward to help, matching 连忙. Which character (with the foot radical ⻊) means 'to run'?"],
+   "keywords": [{"w":"跑","py":"pǎo","en":"to run"},{"w":"老奶奶","py":"lǎonǎinai","en":"old granny"},{"w":"连忙","py":"liánmáng","en":"hurriedly"}],
+   "explanation_en": "跑上前 means to move quickly forward to help, pairing naturally with 连忙 (hurriedly), showing the urge to help at once. All four have the foot radical ⻊; judge by the whole meaning: 连忙 pairs with 跑, showing a quick, hurried movement."
+  },
+  "ZS54_A2": {
+   "sentence_en": "The classmates worked with one heart and joined ___ (forces), cleaning the classroom spotless.",
+   "hints": ["齐心___力 means everyone using strength together. Which character means 'to join together', forming 合力?"],
+   "keywords": [{"w":"合","py":"hé","en":"to join together"},{"w":"齐心","py":"qíxīn","en":"of one heart"},{"w":"打扫","py":"dǎsǎo","en":"to clean"}],
+   "explanation_en": "齐心合力 is a fixed word meaning everyone using strength together, and 合 means to join together, so it fits. The four sound like hé; 合力 = joining strength together, so remember 合 has 人 on top - people joining as one."
+  },
+  "ZS54_A3": {
+   "sentence_en": "Dad ___ (encourages) me, saying that as long as you work hard to help others, you will feel happy too.",
+   "hints": ["The blank + 励 means to give confidence and courage. Which character shows a drum, used in 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"快乐","py":"kuàilè","en":"happy"}],
+   "explanation_en": "鼓励 means to give someone confidence and courage, a fixed word, so 鼓 fits. The 鼓 of 鼓励 has 支 (a striking action) on the right - like beating a drum by hand to cheer someone on. Remember 鼓 has the 支 part."
+  },
+  "ZS54_A4": {
+   "sentence_en": "Xiaohua ___ (carefully) put the injured little bird into a paper box and took it to the vet to check.",
+   "hints": ["The blank + 心 means doing something with care and attention. Which character (with the silk radical 糸) forms 细心?"],
+   "keywords": [{"w":"细心","py":"xìxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"兽医","py":"shòuyī","en":"vet"}],
+   "explanation_en": "细心 means doing something carefully with attention to detail, best matching looking after a hurt bird, so 细 fits. 细 means fine; 细心 is minding even the small details. 细 has 糸 (thread) on the left - thread is fine, so handling it needs 细心."
+  },
+  "ZS54_A5": {
+   "sentence_en": "Xiaoli donated all her ___ (pocket) money to help children in need.",
+   "hints": ["零___钱 names the small money you use for little things. Which character (with the grass radical 艹) forms 零花钱?"],
+   "keywords": [{"w":"花","py":"huā","en":"to spend"},{"w":"捐","py":"juān","en":"to donate"},{"w":"零花钱","py":"línghuāqián","en":"pocket money"}],
+   "explanation_en": "零花钱 is the fixed word for the small money used to buy little things, so 花 fits. 花钱 means to spend money, so 零花钱 = the loose money for spending. 花 has the grass radical 艹, like scattering money out."
+  },
+  "ZS54_B1": {
+   "sentence_en": "Teacher Li 帮助 (helped) the classmates solve many difficulties.",
+   "hints": ["帮 has initial b (bāng), not p; 助 is retroflex zh (zhù). Which choice is bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"解决","py":"jiějué","en":"to solve"},{"w":"困难","py":"kùnnan","en":"difficulty"}],
+   "explanation_en": "帮 is read bāng (initial b) and 助 is zhù (retroflex zh, 4th tone), together bāng zhù. 帮 begins with b (unaspirated); 助 is retroflex zh. Remember 助 has 且 - curl the tongue back to read it."
+  },
+  "ZS54_B2": {
+   "sentence_en": "Seeing a classmate fall, Xiaowen 立刻 (immediately) ran over to help him up.",
+   "hints": ["立 is 4th tone (lì); 刻 is 4th tone (kè). Which choice is lì + kè, both falling?"],
+   "keywords": [{"w":"立刻","py":"lìkè","en":"immediately"},{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"扶","py":"fú","en":"to help up"}],
+   "explanation_en": "立 is read lì (4th tone) and 刻 is kè (4th tone), together lì kè. Both characters of 立刻 are 4th tone (falling), read forcefully like acting at once - lì kè, both going down."
+  },
+  "ZS54_B3": {
+   "sentence_en": "Mum is 乐于 (glad to) help others, and the neighbours all like her.",
+   "hints": ["乐 is a polyphone: lè (happy / glad) and yuè (music). In 乐于助人 it means 'glad to', so read lè. 于 is yú. Which is lè + yú?"],
+   "keywords": [{"w":"乐于","py":"lèyú","en":"glad to"},{"w":"助人","py":"zhùrén","en":"to help others"},{"w":"邻居","py":"línjū","en":"neighbour"}],
+   "explanation_en": "In 乐于助人, 乐 means happy / glad, read lè (4th tone), not yuè (music); 于 is yú (2nd tone), giving lè yú. Polyphone 乐: 快乐 lè; 音乐 yuè. 乐于助人 means gladly helping, so read lè."
+  },
+  "ZS54_B4": {
+   "sentence_en": "Classmate Wang 热心 (warm-heartedly) helped the teacher carry books, and everyone praised him.",
+   "hints": ["热 is rè (4th tone); 心 has the front nasal -n (xīn), not -ng. Which choice is rè + xīn?"],
+   "keywords": [{"w":"热心","py":"rèxīn","en":"warm-hearted"},{"w":"搬书","py":"bān shū","en":"to carry books"},{"w":"称赞","py":"chēngzàn","en":"to praise"}],
+   "explanation_en": "热 is read rè (4th tone) and 心 is xīn (front nasal -n, 1st tone), together rè xīn. Tell front from back nasal: 心 xīn has -n (front nasal); 星 xīng has -ng (back nasal). The 心 of 热心 is the heart, read xīn."
+  },
+  "ZS54_C1": {
+   "sentence_en": "Xiaofang ___ (of her own accord) lent her umbrella to a classmate who had forgotten one.",
+   "hints": ["Clue: helping without being asked, doing it first oneself. Which word means 'on one's own initiative'?"],
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"同学","py":"tóngxué","en":"classmate"}],
+   "explanation_en": "主动 means doing something oneself without waiting to be asked, best describing Xiaofang lending the umbrella of her own accord. The 主 of 主动 means being one's own master - acting first oneself is 主动. 自动 is mostly for machines (自动门, 自动扶梯)."
+  },
+  "ZS54_C2": {
+   "sentence_en": "The classmates prepared ___ (a) performance for the grandpas and grandmas at the old folks' home, and they watched happily.",
+   "hints": ["Clue: the measure word for a performance / show. Which one is used for a show or programme?"],
+   "keywords": [{"w":"一场","py":"yì chǎng","en":"one (show)"},{"w":"节目","py":"jiémù","en":"programme; show"},{"w":"老人院","py":"lǎorényuàn","en":"old folks' home"}],
+   "explanation_en": "The measure word for 节目 (a show) is 场, so 一场节目 is a fixed pairing. Measure words: 场 + performance / show / match; 次 + a count of times; 套 + a set; 段 + a stretch of road or speech. Seeing 节目, think 场."
+  },
+  "ZS54_C3": {
+   "sentence_en": "Seeing a stranger faint on the road, he stepped up to help ___ (without hesitation).",
+   "hints": ["Clue: acting at once with no hesitation. Which word forms 毫不犹豫 (without the slightest hesitation)?"],
+   "keywords": [{"w":"犹豫","py":"yóuyù","en":"to hesitate"},{"w":"陌生人","py":"mòshēngrén","en":"stranger"},{"w":"帮忙","py":"bāngmáng","en":"to help"}],
+   "explanation_en": "毫不犹豫 is a fixed phrase meaning acting at once with no hesitation, matching his decisive help. 毫不犹豫 = not hesitating at all; 犹豫 = hesitating. Seeing '毫不___地 (doing something)', think 犹豫. 退缩, 担心 and 难过 do not fit."
+  },
+  "ZS54_C4": {
+   "sentence_en": "Xiaoqiang ___ (picked) up the pencil his classmate dropped on the floor and returned it to him.",
+   "hints": ["Clue: lifting something up from the floor. Which word means 'to pick up', pairing with 掉在地上?"],
+   "keywords": [{"w":"拣","py":"jiǎn","en":"to pick up"},{"w":"铅笔","py":"qiānbǐ","en":"pencil"},{"w":"还给","py":"huángěi","en":"to return"}],
+   "explanation_en": "拣起来 means to lift something up from the floor, pairing naturally with 'dropped on the floor', so 拣 fits best. 拣 and 捡 mean the same, both taking something up from the ground. Seeing 'dropped on the floor', think 拣 / 捡起来. 选, 挑 and 抢 do not fit."
+  },
+  "ZS54_C5": {
+   "sentence_en": "Teacher Lin ___ (reminds) the classmates to care more for people around them who are in difficulty.",
+   "hints": ["Clue: the teacher kindly gets us to notice something. Which word means 'to remind', not 'to order'?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"关心","py":"guānxīn","en":"to care"},{"w":"困难","py":"kùnnan","en":"difficulty"}],
+   "explanation_en": "The teacher kindly gets us to notice something, which is 提醒 (to remind), matching a teacher's caring tone. 提醒 = to prompt someone to become aware, with a caring sense. A teacher urging students uses 提醒, not 命令 (to order). 提问 and 叮嘱 are less exact here."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“照顾”是留心料理、看护，所以“照顾老人”就是看护、料理老人的生活。“勇敢、分享”都不是“看护料理”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to look after and care for, so 照顾老人 means to look after the elderly. 勇敢 (brave) and 分享 (share) do not mean 'to care for'.",
+   "stem_en": "to look after the elderly",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"老人","py":"lǎorén","en":"the elderly"}]
+  },
+  "2": {
+   "explanation": "“勇敢”是不怕困难、有胆量，所以“勇敢地帮助别人”就是有胆量、不怕麻烦地去帮别人。“照顾、感谢”都不是“有胆量”的意思。",
+   "explanation_en": "勇敢 (yǒnggǎn) means brave and unafraid, so 勇敢地帮助别人 means to help others bravely. 照顾 (look after) and 感谢 (thank) do not mean 'brave'.",
+   "stem_en": "to help others bravely",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"帮助","py":"bāngzhù","en":"to help"}]
+  },
+  "3": {
+   "explanation": "“分享”是把好东西、快乐一起分给别人，所以“分享快乐”就是把快乐分给大家一起感受。“勇敢、温暖”都不是“分给别人”的意思。",
+   "explanation_en": "分享 (fēnxiǎng) means to share good things or joy with others, so 分享快乐 means to share happiness. 勇敢 (brave) and 温暖 (warm) do not mean 'to share out'.",
+   "stem_en": "to share happiness",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"快乐","py":"kuàilè","en":"happiness"}]
+  },
+  "4": {
+   "explanation": "“温暖”是心里觉得暖暖的、很舒服，所以“心里很温暖”就是心里觉得暖暖的、被感动。“照顾、感谢”都不是“心里暖暖的”的意思。",
+   "explanation_en": "温暖 (wēnnuǎn) means feeling warm and comforted inside, so 心里很温暖 means to feel warmth in one's heart. 照顾 (look after) and 感谢 (thank) do not mean 'a warm feeling inside'.",
+   "stem_en": "to feel warm in one's heart",
+   "keywords": [{"w":"温暖","py":"wēnnuǎn","en":"warm"},{"w":"心里","py":"xīnlǐ","en":"in one's heart"}]
+  },
+  "5": {
+   "explanation": "“感谢”是对别人的帮助表示谢意，所以“向老师感谢”就是向老师表示谢意、说谢谢。“照顾、勇敢”都不是“表示谢意”的意思。",
+   "explanation_en": "感谢 (gǎnxiè) means to express thanks for help, so 向老师感谢 means to thank the teacher. 照顾 (look after) and 勇敢 (brave) do not mean 'to express thanks'.",
+   "stem_en": "to thank the teacher",
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"老师","py":"lǎoshī","en":"teacher"}]
+  }
+ },
+ "craft": {
+  "ZS54_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Helping others takes a lot of time.' and 'Xiaohua still insists on tutoring classmates every day.'",
+   "answer_en": "Although helping others takes a lot of time, Xiaohua still insists on tutoring classmates every day.",
+   "tiles": ["虽然","帮助别人很花时间，","但是","小华还是每天坚持帮同学补习。"],
+   "explanation_en": "虽然……但是…… names a difficulty first, then something done anyway. '虽然帮助别人很花时间' (although it takes time) is the difficulty, '但是小华还是每天坚持帮同学补习' (but he still insists on tutoring) is what he does. Write out both key words."
+  },
+  "ZS54_E2": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaoli helped Mum wash the dishes.' and 'Xiaoli helped Mum mop the floor.'",
+   "answer_en": "Xiaoli not only helped Mum wash the dishes, but also helped her mop the floor.",
+   "tiles": ["小丽","不但","帮妈妈洗碗，","还","帮妈妈拖地。"],
+   "explanation_en": "不但……还…… shows one did the first thing and a second thing too. '不但帮妈妈洗碗' (not only washed the dishes) is the first, '还帮妈妈拖地' (but also mopped the floor) is the extra, showing Xiaoli's active help. 不但 goes first, 还 after."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Last week, the school held a charity sale. The classmates brought their old books and toys to ___ (give) to children in need.",
+   "hint": "Clue: giving the books and toys to others. Which box word means 'to give (to someone)'?",
+   "keywords": [{"w":"送","py":"sòng","en":"to give"},{"w":"旧书","py":"jiù shū","en":"old books"}],
+   "explanation_en": "送给有需要的小朋友 means giving the books and toys to others, so 送 (to give) fits best."
+  },
+  "2": {
+   "sentence_en": "Everyone was very ___ (earnest); after setting up their stalls, they warmly introduced the items to visiting parents and classmates.",
+   "hint": "Clue: it echoes 'warmly introduced' - doing it seriously and with care. Which box word means 'earnest'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"摊位","py":"tānwèi","en":"stall"}],
+   "explanation_en": "非常认真 describes the classmates setting up stalls and introducing items warmly, echoing 'warmly introduced', so 认真 fits best."
+  },
+  "3": {
+   "sentence_en": "Teacher Wang looked and nodded ___ (with satisfaction), praising everyone for doing well.",
+   "hint": "Clue: it goes with 'praising everyone for doing well', feeling pleased. Which box word means 'satisfied'?",
+   "keywords": [{"w":"满意","py":"mǎnyì","en":"satisfied"},{"w":"点头","py":"diǎntóu","en":"to nod"}],
+   "explanation_en": "满意地点头 means Teacher Wang feels pleased and approving of the students, going with 'praising everyone for doing well', so 满意 fits best."
+  },
+  "4": {
+   "sentence_en": "After the event, the classmates ___ (donated) the money raised to a charity to help more families in difficulty.",
+   "hint": "Clue: giving the money away to a charity to help others. Which box word means 'to donate'?",
+   "keywords": [{"w":"捐出","py":"juānchū","en":"to donate"},{"w":"慈善机构","py":"císhàn jīgòu","en":"charity"}],
+   "explanation_en": "把钱捐出给慈善机构 means giving the money away to a charity to help others, so 捐出 (to donate) fits best."
+  },
+  "5": {
+   "sentence_en": "This activity made everyone understand that helping others is a very ___ (happy) thing.",
+   "hint": "Clue: it sums up the passage - helping others makes people feel joyful. Which box word means 'happy'?",
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "帮助别人是一件很快乐的事 sums up the passage, showing helping others makes people feel joyful, so 快乐 (happy) fits best."
+  }
+ },
+ "reading": {
+  "ZS54_G1": {
+   "stem_en": "Why was Xiaowen crying in the corridor?",
+   "answer_en": "Because he could not find his workbook.",
+   "keywords": [{"w":"作业本","py":"zuòyèběn","en":"workbook"},{"w":"哭泣","py":"kūqì","en":"to cry"},{"w":"担心","py":"dānxīn","en":"worried"}],
+   "explanation": "这是细节题。短文说“小文告诉老师，他的作业本不见了，明天要交，他很担心”，直接说明小文哭泣是因为找不到自己的作业本，所以选(1)。(2)忘记完成作业、(3)被同学欺负，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaowen told the teacher his workbook was missing, due tomorrow, and he was worried', directly stating he cried because he could not find his workbook, so (1). (2) forgetting the homework and (3) being bullied are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "他的作业本不见了，明天要交，他很担心"}
+  },
+  "ZS54_G2": {
+   "stem_en": "Where was the workbook finally found?",
+   "answer_en": "At the very bottom of the school bag.",
+   "keywords": [{"w":"书包","py":"shūbāo","en":"school bag"},{"w":"底层","py":"dǐcéng","en":"bottom layer"},{"w":"找到","py":"zhǎodào","en":"to find"}],
+   "explanation": "这是细节题。短文说“陈老师带着小文回到教室，帮他在书包里仔细找了一遍，终于在书包最底层找到了作业本”，直接说明作业本是在书包最底层找到的，所以选(2)。(1)教室的地上、(3)走廊的角落里，文中都没有这样说。做细节题要回原文找出确切的地点。",
+   "explanation_en": "This is a detail question. The passage says 'Teacher Chen took Xiaowen back to the classroom, searched his bag carefully, and finally found the workbook at the very bottom of the bag', directly stating where it was found, so (2). (1) the classroom floor and (3) the corridor corner are not stated. Find the exact place in the passage.",
+   "solution": {"evidence": "终于在书包最底层找到了作业本"}
+  },
+  "ZS54_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "A teacher helps a student in difficulty, and the student should know how to be grateful.",
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"感恩","py":"gǎn'ēn","en":"to be grateful"},{"w":"感激","py":"gǎnjī","en":"grateful"}],
+   "explanation": "这是主旨题。全文讲陈老师看见小文哭泣，安慰他并帮他找到了作业本，小文破涕为笑、连声道谢，心里对老师充满了感激。可见短文是要告诉我们老师帮助有困难的学生，学生要懂得感恩，所以选(3)。(1)同学要互相帮助、(2)做作业要认真都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Teacher Chen seeing Xiaowen cry, comforting him and helping find his workbook, with Xiaowen smiling through tears, thanking her, and feeling grateful. So it tells us a teacher helps a student in difficulty and the student should be grateful, so (3). (1) classmates help each other and (2) do homework carefully are minor points, not the main idea.",
+   "solution": {"evidence": "小文用力点头，心里对陈老师充满了感激。"}
+  },
+  "ZS54_H1": {
+   "stem_en": "Find a word in the passage that describes how the old grandpa walked: The grandpa walked slowly with a ___ back.",
+   "answer_en": "弯 (bent)",
+   "keywords": [{"w":"弯","py":"wān","en":"bent"},{"w":"腰","py":"yāo","en":"waist; back"},{"w":"很慢","py":"hěn màn","en":"very slowly"}],
+   "explanation": "这是找词题。短文说老爷爷“手里拿着很多袋子，弯着腰，走得很慢”，“弯”正好说明老爷爷走路时腰是弯的、走得慢的样子，所以答案是“弯”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says the grandpa 'held many bags, with a bent back, and walked slowly'; 弯 exactly describes his bent back as he walked slowly, so the answer is 弯. Find the word that fits the situation.",
+   "solution": {"evidence": "弯着腰，走得很慢"}
+  },
+  "ZS54_H2": {
+   "stem_en": "How did Xiaoen help the grandpa pick up the apples?",
+   "answer_en": "Xiaoen crouched down and picked up the apples one by one, putting them back into the bag.",
+   "keywords": [{"w":"蹲","py":"dūn","en":"to crouch"},{"w":"苹果","py":"píngguǒ","en":"apple"},{"w":"袋子","py":"dàizi","en":"bag"}],
+   "explanation": "这是细节题，答案用完整句子。短文说小恩“立刻跑过去，蹲下来把苹果一个一个地捡起来，放回袋子里”，说明她是蹲下来把苹果一个一个捡起来放回袋子里。答“怎样帮忙捡苹果”要把文中的具体做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Xiaoen 'ran over at once, crouched down and picked up the apples one by one, putting them back into the bag', so she crouched and picked them up one by one back into the bag. State the specific action from the text.",
+   "solution": {"evidence": "蹲下来把苹果一个一个地捡起来，放回袋子里"}
+  },
+  "ZS54_H3": {
+   "stem_en": "What kind of child do you think Xiaoen is? Why?",
+   "answer_en": "I think Xiaoen is a caring child who is glad to help, because when she saw the grandpa in trouble, she ran over of her own accord to help pick up the apples.",
+   "keywords": [{"w":"爱心","py":"àixīn","en":"caring; kindness"},{"w":"乐于助人","py":"lèyú-zhùrén","en":"glad to help"},{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"}],
+   "explanation": "这是推断题（评价人物）。短文说小恩看见老爷爷的苹果掉了一地，“立刻跑过去，蹲下来把苹果一个一个地捡起来”，还帮老爷爷提袋子。从她看见老爷爷有困难就主动跑过去帮忙，可以看出她是个有爱心、乐于助人的孩子。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says when the grandpa's apples spilled, Xiaoen 'ran over at once, crouched down and picked up the apples one by one', and helped carry his bag. From running over to help of her own accord when she saw him in trouble, we see she is caring and glad to help. State the trait, then give the events as the reason.",
+   "solution": {"evidence": "小恩立刻跑过去，蹲下来把苹果一个一个地捡起来"}
+  }
+ }
+}

@@ -1,0 +1,217 @@
+{
+ "setId": "ZS56",
+ "mcq": {
+  "ZS56_A1": {
+   "sentence_en": "The doctor says drinking enough water every day is very good for the ___ (body).",
+   "hints": ["身___ names a person's physical self. Which character (with the person radical 亻) forms 身体?"],
+   "keywords": [{"w":"身体","py":"shēntǐ","en":"body"},{"w":"足够","py":"zúgòu","en":"enough"},{"w":"好处","py":"hǎochù","en":"benefit"}],
+   "explanation_en": "身体 is the fixed word for a person's physical self, and drinking water is good for it, so 体 fits. 体 has the person radical 亻 - the body belongs to a person, so 体 is the right character."
+  },
+  "ZS56_A2": {
+   "sentence_en": "Xiaoming ___ (keeps up) rising early every day, going to the park to run and exercise.",
+   "hints": ["坚___ means to keep doing without giving up. Which character (with the hand radical 扌) forms 坚持?"],
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"早起","py":"zǎoqǐ","en":"to rise early"},{"w":"锻炼","py":"duànliàn","en":"to exercise"}],
+   "explanation_en": "坚持 means to keep doing something without giving up, so 坚持早起 (keeps rising early) fits. 持 has the hand radical 扌 - holding on with the hand and not letting go is 坚持."
+  },
+  "ZS56_A3": {
+   "sentence_en": "Mum ___ (reminds) us not to eat too much before bed.",
+   "hints": ["提___ means to make someone notice or remember. Which character (with the wine radical 酉, relating to waking) forms 提醒?"],
+   "keywords": [{"w":"提醒","py":"tíxǐng","en":"to remind"},{"w":"睡前","py":"shuìqián","en":"before bed"},{"w":"东西","py":"dōngxi","en":"things (to eat)"}],
+   "explanation_en": "提醒 means to make someone notice or remember something, so 提醒我们 (reminds us) fits. 醒 has the wine radical 酉 - waking up brings clarity, so 提醒 is rousing someone to notice."
+  },
+  "ZS56_A4": {
+   "sentence_en": "Dad says you must ___ (wash) your hands clean before eating.",
+   "hints": ["The blank + 干净 means to remove dirt with water. Which character (with the water radical 氵) means 'to wash'?"],
+   "keywords": [{"w":"洗","py":"xǐ","en":"to wash"},{"w":"吃饭","py":"chīfàn","en":"to eat"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "洗干净 means to remove dirt with water, and washing hands before eating is a healthy habit, so 洗 fits. 洗 has the water radical 氵 - washing hands needs water, so look for the water radical."
+  },
+  "ZS56_A5": {
+   "sentence_en": "Teacher Li ___ (encourages) the classmates to exercise more and stay healthy.",
+   "hints": ["The blank + 励 means to give confidence and drive. Which character shows a drum, used in 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"运动","py":"yùndòng","en":"to exercise"},{"w":"健康","py":"jiànkāng","en":"healthy"}],
+   "explanation_en": "鼓励 means to give confidence and drive, so 鼓励同学们 (encourages the classmates) fits. 鼓 is a drum - beating a drum cheers people on, so remember 鼓 and you will choose right."
+  },
+  "ZS56_B1": {
+   "sentence_en": "Doctor Wang says 健康 (healthy) living habits should be formed from young.",
+   "hints": ["健 is 4th tone (jiàn); 康 is 1st tone (kāng). Which choice is jiàn + kāng?"],
+   "keywords": [{"w":"健康","py":"jiànkāng","en":"healthy"},{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"养成","py":"yǎngchéng","en":"to form"}],
+   "explanation_en": "健 is read jiàn (4th tone) and 康 is kāng (1st tone), together jiàn kāng. 健 (4th tone) falls like a firm step down; 康 (1st tone) is said level."
+  },
+  "ZS56_B2": {
+   "sentence_en": "Xiaohua 运动 (exercises) for half an hour every day, and his body gets better and better.",
+   "hints": ["运 is 4th tone (yùn); 动 has initial d (dòng), not t. Which choice is yùn + dòng?"],
+   "keywords": [{"w":"运动","py":"yùndòng","en":"to exercise"},{"w":"半小时","py":"bàn xiǎoshí","en":"half an hour"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "运 is read yùn (4th tone) and 动 is dòng (4th tone), together yùn dòng. 运 (4th tone) falls; the initial of 动 is d, not t - do not confuse them."
+  },
+  "ZS56_B3": {
+   "sentence_en": "This dish is 好吃 (tasty), but it has too much salt, which is bad for the body.",
+   "hints": ["好 is a polyphone: hǎo (good) and hào (to be fond of). 好吃 means tasty, so read hǎo. 吃 is chī. Which is hǎo + chī?"],
+   "keywords": [{"w":"好吃","py":"hǎochī","en":"tasty"},{"w":"盐","py":"yán","en":"salt"},{"w":"身体","py":"shēntǐ","en":"body"}],
+   "explanation_en": "In 好吃, 好 is read hǎo (3rd tone, meaning good) and 吃 is chī (1st tone), together hǎo chī. 好 is a polyphone: hǎo (good or bad) and hào (to be fond of, as in 爱好). 好吃 says the taste is good, so read hǎo."
+  },
+  "ZS56_B4": {
+   "sentence_en": "Mum always drinks a cup of warm water before 睡觉 (sleeping).",
+   "hints": ["睡 is retroflex sh (shuì), not flat s; in 睡觉, 觉 is read jiào (4th tone), not jiāo. Which choice is shuì + jiào?"],
+   "keywords": [{"w":"睡觉","py":"shuìjiào","en":"to sleep"},{"w":"温水","py":"wēnshuǐ","en":"warm water"},{"w":"总会","py":"zǒnghuì","en":"always"}],
+   "explanation_en": "睡 is read shuì (retroflex sh, 4th tone) and 觉 in 睡觉 is jiào (4th tone), together shuì jiào. 睡 is retroflex shuì - curl the tongue; 觉 is jiào in 睡觉 but jué in 感觉."
+  },
+  "ZS56_C1": {
+   "sentence_en": "Every day after school, Xiaoli ___ (attends) an hour of PE class to exercise.",
+   "hints": ["Clue: it pairs with 体育课 (PE class) - going to take part in it. Which word means 'to attend / take part in'?"],
+   "keywords": [{"w":"参加","py":"cānjiā","en":"to attend; take part"},{"w":"体育课","py":"tǐyùkè","en":"PE class"},{"w":"锻炼","py":"duànliàn","en":"to exercise"}],
+   "explanation_en": "参加 pairs most naturally with 体育课, meaning going to take part in that activity. Fixed pairing: 参加 + a class / activity / competition. Seeing 体育课, think 参加. 参与, 加入 and 进行 do not pair as naturally."
+  },
+  "ZS56_C2": {
+   "sentence_en": "Dad drinks ___ (a) cup of milk every morning to get nutrition.",
+   "hints": ["Clue: milk is a liquid. Which measure word is used for liquids?"],
+   "keywords": [{"w":"一杯","py":"yì bēi","en":"one cup"},{"w":"牛奶","py":"niúnǎi","en":"milk"},{"w":"营养","py":"yíngyǎng","en":"nutrition"}],
+   "explanation_en": "Milk is a liquid, counted with the measure word 杯, so 一杯牛奶 is correct. Liquids (water, milk, juice) use 杯 or 瓶. Seeing a liquid, think 杯. 一条, 一张 and 一片 do not fit."
+  },
+  "ZS56_C3": {
+   "sentence_en": "He brushes his teeth ___ (earnestly), brushing a full two minutes each time.",
+   "hints": ["Clue: brushing with focus and care. Which word means 'earnest / attentive (in attitude)'?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"刷牙","py":"shuāyá","en":"to brush teeth"},{"w":"两分钟","py":"liǎng fēnzhōng","en":"two minutes"}],
+   "explanation_en": "Brushing with focus and care shows a serious attitude, so 认真 fits best. Use 认真 to describe doing something carefully and attentively; use 努力 for putting great strength into something hard. 开心 and 小心 do not fit."
+  },
+  "ZS56_C4": {
+   "sentence_en": "The doctor ___ (advises) us to eat more vegetables and less fried food.",
+   "hints": ["Clue: the doctor offers a good idea for us to consider. Which word means 'to advise / suggest', not 'to order'?"],
+   "keywords": [{"w":"建议","py":"jiànyì","en":"to advise"},{"w":"蔬菜","py":"shūcài","en":"vegetables"},{"w":"油炸","py":"yóuzhá","en":"fried"}],
+   "explanation_en": "The doctor offers a healthy idea for us to consider, which is 建议 (to advise), so it fits best. A doctor's advice is gentle -> 建议; a teacher requiring students to do something -> 要求. 告知 and 命令 do not fit."
+  },
+  "ZS56_C5": {
+   "sentence_en": "Xiaoan ___ (got rid of) the bad habit of eating snacks, and his body became healthier.",
+   "hints": ["Clue: it pairs with 坏习惯 - removing a bad habit for good. Which word means 'to get rid of'?"],
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"零食","py":"língshí","en":"snacks"},{"w":"坏习惯","py":"huài xíguàn","en":"bad habit"}],
+   "explanation_en": "改掉坏习惯 is a fixed pairing meaning to remove a bad habit for good, so 改掉 fits best. Fixed pairing: 改掉 + bad habit / fault. Seeing 坏习惯, think 改掉. 去除, 放弃 and 减少 do not pair with 坏习惯 as naturally."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“养成”是慢慢培养出来、变成习惯，所以“养成好习惯”就是把好的做法慢慢培养成习惯。“均衡、充足”都不是“慢慢培养成习惯”的意思。",
+   "explanation_en": "养成 (yǎngchéng) means to build something up into a habit, so 养成好习惯 means to form good habits. 均衡 (balanced) and 充足 (sufficient) do not mean 'to build into a habit'.",
+   "stem_en": "to form good habits",
+   "keywords": [{"w":"养成","py":"yǎngchéng","en":"to form"},{"w":"习惯","py":"xíguàn","en":"habit"}]
+  },
+  "2": {
+   "explanation": "“均衡”是各方面都合适、不偏多不偏少，所以“均衡饮食”就是各种食物都吃、营养平衡。“养成、避免”都不是“各样都吃、不偏食”的意思。",
+   "explanation_en": "均衡 (jūnhéng) means well-balanced with nothing in excess, so 均衡饮食 means a balanced diet. 养成 (form) and 避免 (avoid) do not mean 'eating a balanced variety'.",
+   "stem_en": "a balanced diet",
+   "keywords": [{"w":"均衡","py":"jūnhéng","en":"balanced"},{"w":"饮食","py":"yǐnshí","en":"diet"}]
+  },
+  "3": {
+   "explanation": "“充足”是数量够、不缺少，所以“睡眠充足”就是睡的时间够、休息足够。“保护、避免”都不是“数量够、不缺少”的意思。",
+   "explanation_en": "充足 (chōngzú) means enough, not lacking, so 睡眠充足 means enough sleep. 保护 (protect) and 避免 (avoid) do not mean 'enough in amount'.",
+   "stem_en": "enough sleep",
+   "keywords": [{"w":"充足","py":"chōngzú","en":"sufficient"},{"w":"睡眠","py":"shuìmián","en":"sleep"}]
+  },
+  "4": {
+   "explanation": "“保护”是爱护、不让它受伤害，所以“保护眼睛”就是爱护眼睛、不让它受损。“养成、消化”都不是“爱护不受伤害”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护眼睛 means to protect the eyes. 养成 (form) and 消化 (digest) do not mean 'to protect from harm'.",
+   "stem_en": "to protect the eyes",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"眼睛","py":"yǎnjing","en":"eyes"}]
+  },
+  "5": {
+   "explanation": "“避免”是设法不让某件坏事发生，所以“避免生病”就是想办法让自己不生病。“充足、消化”都不是“设法不让坏事发生”的意思。",
+   "explanation_en": "避免 (bìmiǎn) means to keep something bad from happening, so 避免生病 means to avoid falling ill. 充足 (sufficient) and 消化 (digest) do not mean 'to keep a bad thing from happening'.",
+   "stem_en": "to avoid falling ill",
+   "keywords": [{"w":"避免","py":"bìmiǎn","en":"to avoid"},{"w":"生病","py":"shēngbìng","en":"to fall ill"}]
+  }
+ },
+ "craft": {
+  "ZS56_E1": {
+   "question_en": "Combine these two sentences using the connector 不但……而且 (not only…, but also…): 'Xiaoming drinks a lot of water every day.' and 'Xiaoming eats a lot of vegetables every day.'",
+   "answer_en": "Xiaoming not only drinks a lot of water every day, but also eats a lot of vegetables every day.",
+   "tiles": ["小明","不但","每天喝很多水，","而且","每天吃很多蔬菜。"],
+   "explanation_en": "不但……而且…… shows two good things done, one adding to the other. '不但每天喝很多水' (not only drinks water) is the first, '而且每天吃很多蔬菜' (but also eats vegetables) is the second, a step-up. 不但 comes first, 而且 after."
+  },
+  "ZS56_E2": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Running is tiring.' and 'Running is very good for the body.'",
+   "answer_en": "Although running is tiring, it is very good for the body.",
+   "tiles": ["虽然","跑步很累，","但是","对身体很有好处。"],
+   "explanation_en": "虽然……但是…… admits one fact first, then turns to an opposite one. '虽然跑步很累' (although running is tiring) admits the hardship, '但是对身体很有好处' (but it is good for the body) is the turn. 虽然 comes first, 但是 after."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Teacher Lin told the classmates that to stay healthy, one must ___ (pay attention to) several things.",
+   "hint": "Clue: it pairs with 几件事 - to be mindful of these things. Which box word means 'to pay attention to'?",
+   "keywords": [{"w":"注意","py":"zhùyì","en":"to pay attention"},{"w":"健康","py":"jiànkāng","en":"health"}],
+   "explanation_en": "必须注意几件事 means one must be mindful of these things, and 注意 pairs naturally with 几件事, so it fits best."
+  },
+  "2": {
+   "sentence_en": "First, drink enough water every day so the body feels ___ (comfortable).",
+   "hint": "Clue: with enough water, the body feels good and free of discomfort. Which box word means 'comfortable'?",
+   "keywords": [{"w":"舒服","py":"shūfu","en":"comfortable"},{"w":"足够","py":"zúgòu","en":"enough"}],
+   "explanation_en": "With enough water the body feels good, and 舒服 means feeling comfortable and free of discomfort, so it fits best."
+  },
+  "3": {
+   "sentence_en": "Next, chew slowly when eating, so the food is easier to ___ (digest).",
+   "hint": "Clue: chewing slowly helps the body take in the food. Which box word means 'to digest'?",
+   "keywords": [{"w":"消化","py":"xiāohuà","en":"to digest"},{"w":"细嚼慢咽","py":"xìjiáo-mànyàn","en":"to chew slowly"}],
+   "explanation_en": "Chewing slowly helps the body take in food more easily, and 食物容易消化 (food is easy to digest) is a fixed pairing, so 消化 fits best."
+  },
+  "4": {
+   "sentence_en": "Do not play with your phone before sleeping; let your eyes have a good ___ (rest).",
+   "hint": "Clue: not using the phone before bed is so the eyes can stop working. Which box word means 'to rest'?",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"眼睛","py":"yǎnjing","en":"eyes"}],
+   "explanation_en": "Not using the phone before bed is so the eyes can 休息 (rest), meaning stop working for a while, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Finally, keep exercising every day so the body becomes stronger and ___ (sturdier).",
+   "hint": "Clue: the result of daily exercise is a firm, strong body. Which box word means 'strong and sturdy'?",
+   "keywords": [{"w":"强壮","py":"qiángzhuàng","en":"strong"},{"w":"运动","py":"yùndòng","en":"exercise"}],
+   "explanation_en": "The result of keeping up daily exercise is a body that becomes 强壮 (strong and sturdy), so it fits best."
+  }
+ },
+ "reading": {
+  "ZS56_G1": {
+   "stem_en": "What does Xiaowen do first after getting up each morning?",
+   "answer_en": "He goes to the park to run.",
+   "keywords": [{"w":"起床","py":"qǐchuáng","en":"to get up"},{"w":"跑步","py":"pǎobù","en":"to run"},{"w":"公园","py":"gōngyuán","en":"park"}],
+   "explanation": "这是细节题。短文说“每天早上，他六点半就起床，到楼下的公园跑步二十分钟。回家后，他会喝一杯温水”，说明起床后第一件事是到公园跑步，所以选(2)。(1)喝温水是回家后的事、(3)吃早餐是跑步后的事。做细节题要注意动作的先后顺序。",
+   "explanation_en": "This is a detail question. The passage says 'every morning he gets up at 6:30 and runs for twenty minutes in the park downstairs. After returning home, he drinks a cup of warm water', so the first thing is running in the park, so (2). (1) warm water comes after returning home and (3) breakfast comes after the run. Note the order of actions.",
+   "solution": {"evidence": "他六点半就起床，到楼下的公园跑步二十分钟"}
+  },
+  "ZS56_G2": {
+   "stem_en": "Why does Xiaowen rarely fall ill?",
+   "answer_en": "Because he has many good living habits.",
+   "keywords": [{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"生病","py":"shēngbìng","en":"to fall ill"},{"w":"精神","py":"jīngshén","en":"spirits"}],
+   "explanation": "这是推断题。短文说小文早起跑步、喝温水、吃有营养的早餐、坐姿端正、先做功课、准时睡觉，最后妈妈说“小文的好习惯让他很少生病”。可以推断他很少生病是因为有很多好的生活习惯，所以选(3)。(1)每天吃很多药、(2)睡很长时间，文中都没有这样说。推断题要把他的好习惯和妈妈的话连起来想。",
+   "explanation_en": "This is an inference question. The passage lists Xiaowen's habits - rising early to run, warm water, a nutritious breakfast, sitting upright, homework first, sleeping on time - and Mum says 'Xiaowen's good habits keep him from falling ill'. So he rarely falls ill because of his many good habits, so (3). (1) taking medicine and (2) sleeping long are not stated. Link his habits with Mum's words.",
+   "solution": {"evidence": "小文的好习惯让他很少生病"}
+  },
+  "ZS56_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "Forming good habits is very important for health.",
+   "keywords": [{"w":"养成","py":"yǎngchéng","en":"to form"},{"w":"习惯","py":"xíguàn","en":"habit"},{"w":"健康","py":"jiànkāng","en":"health"}],
+   "explanation": "这是主旨题。全文讲小文每天早起跑步、喝温水、吃营养早餐、坐姿端正、先做功课、准时睡觉，妈妈说他的好习惯让他很少生病、精神饱满。可见短文是要告诉我们养成好习惯对健康很重要，所以选(1)。(2)生活忙碌、(3)跑步是最好的运动都只是情节里的小点或与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaowen's daily habits and Mum saying his good habits keep him from falling ill and full of energy. So it tells us that forming good habits is very important for health, so (1). (2) a busy life and (3) running is the best exercise are minor or off-topic, not the main idea.",
+   "solution": {"evidence": "小文是一个很注重健康的小学生。"}
+  },
+  "ZS56_H1": {
+   "stem_en": "Find a phrase in the passage that explains what caused Chenming's stomach ache.",
+   "answer_en": "饮食不规律 (an irregular diet)",
+   "keywords": [{"w":"饮食","py":"yǐnshí","en":"diet"},{"w":"不规律","py":"bù guīlǜ","en":"irregular"},{"w":"肚子疼","py":"dùzi téng","en":"stomach ache"}],
+   "explanation": "这是找词题。短文说“医生检查后说，陈明的肚子疼是因为饮食不规律造成的”，“饮食不规律”正好说明陈明肚子疼的原因，所以答案是“饮食不规律”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'after examining him, the doctor said Chenming's stomach ache was caused by an irregular diet'; 饮食不规律 exactly explains the cause, so the answer is 饮食不规律. Find the phrase that fits the situation.",
+   "solution": {"evidence": "陈明的肚子疼是因为饮食不规律造成的"}
+  },
+  "ZS56_H2": {
+   "stem_en": "After Mum learned of Chenming's situation, what two things did she do to help him?",
+   "answer_en": "Mum prepared a nutritious breakfast for Chenming every morning, and stopped giving him pocket money to buy snacks.",
+   "keywords": [{"w":"早餐","py":"zǎocān","en":"breakfast"},{"w":"营养","py":"yíngyǎng","en":"nutrition"},{"w":"零花钱","py":"línghuāqián","en":"pocket money"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“妈妈每天早上为陈明准备营养丰富的早餐，也不再给他零花钱买零食”，说明妈妈做的两件事是准备营养早餐、不再给零花钱买零食。答“哪两件事”要把文中提到的事都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Mum prepared a nutritious breakfast for Chenming every morning and stopped giving him pocket money for snacks', naming the two things. When asked 'two things', list both from the text.",
+   "solution": {"evidence": "妈妈每天早上为陈明准备营养丰富的早餐，也不再给他零花钱买零食"}
+  },
+  "ZS56_H3": {
+   "stem_en": "What changes did Chenming have after getting rid of his bad habits? Answer in a complete sentence.",
+   "answer_en": "After Chenming got rid of his bad habits, his stomach no longer hurt, and he was more attentive in class than before.",
+   "keywords": [{"w":"改掉","py":"gǎidiào","en":"to get rid of"},{"w":"肚子","py":"dùzi","en":"stomach"},{"w":"专心","py":"zhuānxīn","en":"attentive"}],
+   "explanation": "这是推断题。短文说“两个星期后，他的肚子不再疼了，上课也比以前更专心了”，说明陈明改掉坏习惯后的变化是肚子不再疼、上课更专心。答“有什么变化”要把前后的不同写清楚。",
+   "explanation_en": "This is an inference question. The passage says 'two weeks later, his stomach no longer hurt and he was more attentive in class than before', so the changes were no more stomach ache and better attention in class. State the before-and-after difference clearly.",
+   "solution": {"evidence": "他的肚子不再疼了，上课也比以前更专心了"}
+  }
+ }
+}

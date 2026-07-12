@@ -1,0 +1,217 @@
+{
+ "setId": "ZS06",
+ "mcq": {
+  "ZS06_A1": {
+   "sentence_en": "Seeing the old lady carrying very heavy things, Xiaoming hurried over to ___ (help).",
+   "hints": ["The blank + 忙 forms the word for giving someone help. Which character has 巾 ('cloth') at the bottom?"],
+   "keywords": [{"w":"帮忙","py":"bāngmáng","en":"to help"},{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"老婆婆","py":"lǎopópo","en":"old lady"}],
+   "explanation_en": "帮忙 is a fixed word meaning to give someone help, so choose 帮. 帮 has 巾 ('cloth') at the bottom - using a cloth/hand to help do a task is 帮忙. The four sound alike, so judge by meaning."
+  },
+  "ZS06_A2": {
+   "sentence_en": "My little brother fell, and my elder sister ___ (grasped) his hand tightly and pulled him up.",
+   "hints": ["The blank means to hold tightly with the hand. Which character has the hand radical 扌?"],
+   "keywords": [{"w":"握","py":"wò","en":"to grasp; to hold"},{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"扶起","py":"fúqǐ","en":"to help up"}],
+   "explanation_en": "握 means to hold tightly with the hand, so 握紧手 (grip the hand tightly) fits the action of helping the brother up. 握 has the hand radical 扌 - the hand gripping firmly is 握. When you see the hand radical, think of an action done with the hand."
+  },
+  "ZS06_A3": {
+   "sentence_en": "Teacher Wang was ill, so the students ___ (made) a card for her, wishing her a quick recovery.",
+   "hints": ["The blank means to make something by hand. Which character (with the knife radical 刂) means 'to make / produce'?"],
+   "keywords": [{"w":"制作","py":"zhìzuò","en":"to make"},{"w":"卡片","py":"kǎpiàn","en":"card"},{"w":"康复","py":"kāngfù","en":"to recover"}],
+   "explanation_en": "制作 means to make something by hand, so 制了一张卡片 (made a card) makes sense. All four are read zhì; 制 has the knife radical 刂 - cutting material with a knife to make things is 制作."
+  },
+  "ZS06_A4": {
+   "sentence_en": "Xiaohua ___ (gave up) his seat to a classmate with an injured leg and stood himself.",
+   "hints": ["The blank + 座 means to offer your seat to someone. Which character has the speech radical 讠?"],
+   "keywords": [{"w":"让座","py":"ràngzuò","en":"to give up one's seat"},{"w":"座位","py":"zuòwèi","en":"seat"},{"w":"受伤","py":"shòushāng","en":"injured"}],
+   "explanation_en": "让座 means giving your seat to someone else, so 让 fits best. 让 has the speech radical 讠 - using words to yield something to another. 让座 = saying 'please sit' and giving your place away."
+  },
+  "ZS06_A5": {
+   "sentence_en": "Xiaoli looks after her sick mother ___ (patiently), staying by her side all day.",
+   "hints": ["The blank + 心 means being patient and not impatient. Which character (with 寸) means 'to endure / be patient'?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"生病","py":"shēngbìng","en":"ill"}],
+   "explanation_en": "耐心 means being patient and not impatient, so 耐心地照顾 (look after patiently) makes sense. 耐 has 寸 - a steady heart that does not give up is 耐心. Remember 耐心 = unhurried, persevering."
+  },
+  "ZS06_B1": {
+   "sentence_en": "Xiaowei 帮助 (helped) a classmate clean the classroom, and the teacher praised him for doing well.",
+   "hints": ["帮 starts with b (no puff), 助 is retroflex zh (4th tone). Which choice is bāng + zhù?"],
+   "keywords": [{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"打扫","py":"dǎsǎo","en":"to clean"},{"w":"教室","py":"jiàoshì","en":"classroom"}],
+   "explanation_en": "帮 is read bāng (initial b, final -ang) and 助 is zhù (retroflex zh, 4th tone), together bāng zhù. Tell b and p apart: b has no puff, p puffs. 帮 uses b, no puff; 助 is retroflex zhù."
+  },
+  "ZS06_B2": {
+   "sentence_en": "Mum told me to throw the 垃圾 (rubbish) into the bin and not litter.",
+   "hints": ["Both syllables of 垃圾 are 1st tone (high and level): lā jī. Which choice has both flat tones?"],
+   "keywords": [{"w":"垃圾","py":"lājī","en":"rubbish"},{"w":"桶","py":"tǒng","en":"bin; bucket"},{"w":"乱扔","py":"luàn rēng","en":"to litter"}],
+   "explanation_en": "垃 is read lā (1st tone) and 圾 is jī (1st tone), together lā jī. Both characters of 垃圾 are 1st tone (high level): lā jī. Remember: rubbish is thrown away, the tones stay flat and even."
+  },
+  "ZS06_B3": {
+   "sentence_en": "Xiaohua cried 难过 (sadly), and a good friend came over to comfort him.",
+   "hints": ["In 难过, 难 is nán (2nd tone, 'sad/hard'), not nàn ('disaster'), and 过 is guò (4th tone). Which choice is nán + guò?"],
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"哭","py":"kū","en":"to cry"},{"w":"安慰","py":"ānwèi","en":"to comfort"}],
+   "explanation_en": "In 难过, 难 is read nán (2nd tone) and 过 is guò (4th tone), together nán guò. 难 has two readings: nán = hard/sad; nàn = disaster/mishap. 难过 means feeling bad inside, read nán."
+  },
+  "ZS06_B4": {
+   "sentence_en": "The teacher patiently 教 (teaches) me to do maths problems, and I am very grateful.",
+   "hints": ["As a verb ('to teach me'), 教 is jiāo (1st tone); as a noun (教育/教师) it is jiào. Which reading is the verb here?"],
+   "keywords": [{"w":"教","py":"jiāo","en":"to teach"},{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"感激","py":"gǎnjī","en":"grateful"}],
+   "explanation_en": "In 教我做题, 教 is a verb and read jiāo (1st tone). 教 has two readings: jiào is used for 'education/teacher'. Verb 教书/教我 -> jiāo; noun 教育/教师 -> jiào."
+  },
+  "ZS06_C1": {
+   "sentence_en": "Xiaoli ___ (lent) her umbrella to a classmate who had none, and walked home in the rain herself.",
+   "hints": ["The blank + 给 means letting someone use your own thing for a while. Which verb means 'to lend'?"],
+   "keywords": [{"w":"借","py":"jiè","en":"to lend; to borrow"},{"w":"雨伞","py":"yǔsǎn","en":"umbrella"},{"w":"淋雨","py":"lín yǔ","en":"to get rained on"}],
+   "explanation_en": "借 means letting someone use your own thing, so 借给同学 (lend to a classmate) fits the scene of helping others. 借 + 给 = letting someone use your thing temporarily. 借伞, 借书, 借笔 all mean lending for a while."
+  },
+  "ZS06_C2": {
+   "sentence_en": "Mum was ill, and Dad looked after her ___ (attentively), cooking and giving medicine every day.",
+   "hints": ["Clue: he cooks and gives medicine every day - careful, devoted care. Which word means 'earnest / attentive', not a mood?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest; attentive"},{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"喂药","py":"wèi yào","en":"to give medicine"}],
+   "explanation_en": "Cooking and giving medicine every day shows Dad cares carefully and devotedly, so 认真 fits best. Describing careful, devoted work = 认真. 认真照顾 = doing every task well each day."
+  },
+  "ZS06_C3": {
+   "sentence_en": "Xiaowen wrote ___ (a) letter to the children at the orphanage, hoping to bring them joy.",
+   "hints": ["The blank is the measure word for a letter. Which one goes with 信?"],
+   "keywords": [{"w":"一封","py":"yì fēng","en":"a (measure word for letters)"},{"w":"信","py":"xìn","en":"letter"},{"w":"孤儿院","py":"gū'éryuàn","en":"orphanage"}],
+   "explanation_en": "The measure word for a letter is 封, so 一封信 is the correct pairing. Measure words: letter -> 封; paper -> 张; book -> 本; fish -> 条. Remember 一封信 and you won't get it wrong."
+  },
+  "ZS06_C4": {
+   "sentence_en": "Seeing the old man fall, Xiaoqiang ___ (immediately) stepped forward and helped him up.",
+   "hints": ["Clue: an old man has fallen and needs help right away. Which word means 'at once', not 'slowly' or 'occasionally'?"],
+   "keywords": [{"w":"马上","py":"mǎshàng","en":"at once"},{"w":"跌倒","py":"diēdǎo","en":"to fall"},{"w":"扶起","py":"fúqǐ","en":"to help up"}],
+   "explanation_en": "A fallen old man needs help right away, so 马上 ('at once, without hesitation') fits best. 马上 = immediately = quickly. In an emergency you help at once, not 慢慢 (slowly)."
+  },
+  "ZS06_C5": {
+   "sentence_en": "Xiaohua ___ (returned) the wallet he found to its owner, who was very grateful to him.",
+   "hints": ["Clue: he gives a found wallet back to its owner honestly. Which word means 'to return (something to its owner)'?"],
+   "keywords": [{"w":"送还","py":"sònghuán","en":"to return"},{"w":"钱包","py":"qiánbāo","en":"wallet"},{"w":"失主","py":"shīzhǔ","en":"owner of a lost item"}],
+   "explanation_en": "送还 means to give someone's thing back to them, so 送还给失主 (return it to the owner) fits the honest, helpful scene. '送还 + (thing) + 给 (person)' = returning something to its rightful owner. Return what you find - honest and helpful."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“照顾”是关心、看护，所以“每天照顾生病同学的饮食”表示天天关心他吃得好不好。“主动、分享”都不能表示“看护饮食”。",
+   "explanation_en": "照顾 (zhàogù) means to care for and look after, so 每天照顾生病同学的饮食 means caring for a sick classmate's meals every day. 主动 (take initiative) or 分享 (share) cannot mean 'to look after meals'.",
+   "stem_en": "to take care of a sick classmate's meals every day",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to take care of"},{"w":"饮食","py":"yǐnshí","en":"diet; meals"}]
+  },
+  "2": {
+   "explanation": "“主动”是不用别人叫、自己先去做，所以“主动向老师寻求帮助”表示自己先开口请老师帮忙。“照顾、安慰”都不能表示“自己先去做”。",
+   "explanation_en": "主动 (zhǔdòng) means doing something on your own without being told, so 主动向老师寻求帮助 means taking the initiative to ask the teacher for help. 照顾 (take care) or 安慰 (comfort) cannot mean 'to act on one's own initiative'.",
+   "stem_en": "to take the initiative to seek the teacher's help",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"寻求","py":"xúnqiú","en":"to seek"}]
+  },
+  "3": {
+   "explanation": "“分享”是把好东西和别人一起享受，所以“把零食分享给大家”表示把零食分给大家一起吃。“感激、主动”都不能和“零食”这样搭配。",
+   "explanation_en": "分享 (fēnxiǎng) means enjoying something good together with others, so 把零食分享给大家 means to share snacks with everyone. 感激 (grateful) or 主动 (initiative) cannot pair with 零食 this way.",
+   "stem_en": "to share snacks with everyone",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"}]
+  },
+  "4": {
+   "explanation": "“安慰”是用好话让难过的人心里好受些，所以“安慰哭泣的小弟弟”表示劝哭着的弟弟别难过。“照顾、欣赏”都不是“劝人别难过”的意思。",
+   "explanation_en": "安慰 (ānwèi) means using kind words to ease a sad person's heart, so 安慰哭泣的小弟弟 means to comfort a crying little boy. 照顾 (take care) or 欣赏 (appreciate) do not mean 'to console'.",
+   "stem_en": "to comfort a crying little boy",
+   "keywords": [{"w":"安慰","py":"ānwèi","en":"to comfort"},{"w":"哭泣","py":"kūqì","en":"to cry; to weep"}]
+  },
+  "5": {
+   "explanation": "“感激”是心里充满感谢，所以“对帮助过自己的人感到感激”表示对帮过自己的人满怀谢意。“分享、主动”都不能表示“心里的感谢”。",
+   "explanation_en": "感激 (gǎnjī) means a heart full of thanks, so 对帮助过自己的人感到感激 means feeling grateful toward those who helped you. 分享 (share) or 主动 (initiative) cannot mean 'gratitude in the heart'.",
+   "stem_en": "to feel grateful toward those who have helped you",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"帮助","py":"bāngzhù","en":"to help"}]
+  }
+ },
+ "craft": {
+  "ZS06_E1": {
+   "question_en": "Combine these two sentences using the connector 不但……还…… (not only…, but also…): 'Xiaohua helped the teacher carry books.' and 'Xiaohua helped the teacher wipe the blackboard.'",
+   "answer_en": "Xiaohua not only helped the teacher carry books, but also helped wipe the blackboard.",
+   "tiles": ["小华","不但帮老师搬书，","还","帮老师擦黑板。"],
+   "explanation_en": "不但……还…… means besides doing the first thing, one also does a second, showing Xiaohua did even more. '不但帮老师搬书' (not only carried books) is the first, '还帮老师擦黑板' (also wiped the board) is the second. 不但……还…… = 'besides…, also…': the first is already good, doing the second is even better."
+  },
+  "ZS06_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Xiaomei saw a classmate fall down.' and 'Xiaomei hurried over to help him up.'",
+   "answer_en": "Because Xiaomei saw a classmate fall down, she hurried over to help him up.",
+   "tiles": ["因为","小美看到同学摔倒了，","所以","连忙跑过去扶他。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小美看到同学摔倒了' (because Xiaomei saw a classmate fall) is the cause, '所以连忙跑过去扶他' (so she hurried to help him up) is the result. Say why first (因为), then what happened (所以)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "After school, Xiaowei saw his classmate Aming sitting ___ (alone) in the corridor, head lowered.",
+   "hint": "Clue: Aming sits by himself, no one with him. Which box word means 'alone / on one's own'?",
+   "keywords": [{"w":"独自","py":"dúzì","en":"alone; on one's own"},{"w":"走廊","py":"zǒuláng","en":"corridor"}],
+   "explanation_en": "Aming sits by himself, so 独自 ('alone, on one's own') fits best."
+  },
+  "2": {
+   "sentence_en": "Aming said he could not find his way home and felt very ___ (sad).",
+   "hint": "Clue: he is lost and cannot get home - a bad feeling inside. Which box word means 'sad / upset'?",
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"找不到","py":"zhǎobudào","en":"cannot find"}],
+   "explanation_en": "Not being able to find the way home makes him feel bad inside, so 难过 ('sad, upset') fits best."
+  },
+  "3": {
+   "sentence_en": "Xiaowei said ___ (softly), 'Don't worry, let me take you home!'",
+   "hint": "Clue: he is comforting Aming, speaking gently. Which box word means 'in a soft, low voice'?",
+   "keywords": [{"w":"轻声","py":"qīngshēng","en":"in a low voice"},{"w":"安慰","py":"ānwèi","en":"to comfort"}],
+   "explanation_en": "Comforting Aming, Xiaowei speaks gently, so 轻声地说 ('said softly') fits best."
+  },
+  "4": {
+   "sentence_en": "'Don't worry, I'll ___ (go with) you home!'",
+   "hint": "Clue: 我 ___ 你回家 - going home together with him. Which box word means 'to accompany / go with'?",
+   "keywords": [{"w":"陪","py":"péi","en":"to accompany"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "Xiaowei wants to walk home together with Aming, so 陪你回家 ('accompany you home') fits best."
+  },
+  "5": {
+   "sentence_en": "Hearing this, Aming showed a ___ (happy) smile on his face.",
+   "hint": "Clue: Aming just got help - his smile shows a good mood. Which box word means 'happy / glad'?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation_en": "Getting Xiaowei's help lifts Aming's mood, so 开心的笑容 ('a happy smile') fits best."
+  }
+ },
+ "reading": {
+  "ZS06_G1": {
+   "stem_en": "What was the old grandpa doing standing by the road?",
+   "answer_en": "Waiting for someone to help him cross the road.",
+   "keywords": [{"w":"马路","py":"mǎlù","en":"road"},{"w":"提","py":"tí","en":"to carry (in hand)"},{"w":"过马路","py":"guò mǎlù","en":"to cross the road"}],
+   "explanation": "这是细节题。短文说老爷爷“手里提着很多东西，不知道怎么过马路”，说明他因为拿着东西、不知怎么过马路而站在路边等人帮忙，所以选(1)。(2)他自己不知怎么过，不是单纯等绿灯；(3)他不认识小芳，不可能在等她们买菜。",
+   "explanation_en": "This is a detail question. The passage says the grandpa 'was holding many things and did not know how to cross the road', so he stands waiting for help, so (1). (2) he did not simply wait for the green light on his own; (3) he does not know Xiaofang, so he was not waiting for them to finish shopping.",
+   "solution": {"evidence": "手里提着很多东西，不知道怎么过马路。"}
+  },
+  "ZS06_G2": {
+   "stem_en": "What did Xiaofang do when she took the grandpa across the road?",
+   "answer_en": "She took the bag and led him across by the hand.",
+   "keywords": [{"w":"接过","py":"jiēguò","en":"to take over"},{"w":"牵","py":"qiān","en":"to lead by the hand"},{"w":"袋子","py":"dàizi","en":"bag"}],
+   "explanation": "这是细节题，要看清小芳的具体动作。短文说“小芳接过老爷爷手里的袋子，牵着他的手……才带他慢慢走过马路”，所以选(2)。(1)拿袋子的是小芳自己，不是妈妈；(3)她没让老爷爷自己过，而是牵着他一起过。",
+   "explanation_en": "This is a detail question - note Xiaofang's exact actions. The passage says 'Xiaofang took the grandpa's bag, held his hand... and led him slowly across', so (2). (1) it was Xiaofang, not Mum, who took the bag; (3) she did not let him cross alone but led him by the hand.",
+   "solution": {"evidence": "小芳接过老爷爷手里的袋子，牵着他的手"}
+  },
+  "ZS06_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "We should take the initiative to help those in need.",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"有需要","py":"yǒu xūyào","en":"in need"}],
+   "explanation": "这是主旨题。全文讲小芳主动上前帮不方便过马路的老爷爷拿东西、牵手过马路，最后受到夸奖，中心是要主动帮助有需要的人。(1)等绿灯、(2)买菜都只是情节里的细节，不是主旨；(3)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaofang stepping forward on her own to help a grandpa who could not cross the road, and being praised - the point is to help those in need on your own initiative. (1) waiting for the green light and (2) shopping are just details; (3) sums up the whole.",
+   "solution": {"evidence": "小芳走上前，对老爷爷说：“爷爷，我帮您拿东西，带您过马路吧。”"}
+  },
+  "ZS06_H1": {
+   "stem_en": "Find a word in the passage that shows Li Hua's gratitude toward Xiaoming: Li Hua said thank you to Xiaoming ___.",
+   "answer_en": "感激 (gratefully)",
+   "keywords": [{"w":"感激","py":"gǎnjī","en":"grateful"},{"w":"谢谢","py":"xièxie","en":"thank you"},{"w":"谢意","py":"xièyì","en":"gratitude"}],
+   "explanation": "这题要找表示“心存谢意”的词。短文说“李华感激地对小明说了声谢谢”，“感激”就是心里充满感谢的意思，所以答案是“感激”。做填词题先看清要找的意思，再回原文找那个词。",
+   "explanation_en": "This asks for a word showing thankfulness. The passage says 'Li Hua said thank you to Xiaoming 感激地 (gratefully)'; 感激 means a heart full of thanks, so the answer is 感激. Read the meaning wanted, then find the word in the passage.",
+   "solution": {"evidence": "李华感激地对小明说了声谢谢"}
+  },
+  "ZS06_H2": {
+   "stem_en": "After Li Hua's pencil case fell on the floor, what did Xiaoming do?",
+   "answer_en": "Xiaoming immediately crouched down and helped Li Hua pick up the pencils and erasers one by one and put them back in the pencil case.",
+   "keywords": [{"w":"蹲下","py":"dūn xià","en":"to crouch down"},{"w":"捡起","py":"jiǎnqǐ","en":"to pick up"},{"w":"铅笔盒","py":"qiānbǐhé","en":"pencil case"}],
+   "explanation": "这是细节题，要用完整句子回答。短文说“小明看到了，马上蹲下来，帮李华把铅笔和橡皮一支一支地捡起来，放回铅笔盒里”，直接说明了小明的动作。答题时把“蹲下、一支一支捡、放回盒里”都写出来。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Xiaoming saw it, immediately crouched down, and helped Li Hua pick up the pencils and erasers one by one and put them back', stating his actions. Include crouching, picking up one by one, and putting them back.",
+   "solution": {"evidence": "小明看到了，马上蹲下来，帮李华把铅笔和橡皮一支一支地捡起来，放回铅笔盒里。"}
+  },
+  "ZS06_H3": {
+   "stem_en": "What kind of person do you think Xiaoming is? Why?",
+   "answer_en": "I think Xiaoming is a helpful person, because when he saw a classmate in need he took the initiative to help right away, without being told.",
+   "keywords": [{"w":"乐于助人","py":"lèyú zhùrén","en":"glad to help others"},{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"需要","py":"xūyào","en":"to need"}],
+   "explanation": "这是推断题，要根据小明的行为来评价他，并说出理由。李华的东西掉了，小明没等别人叫，就马上蹲下帮忙捡，老师还表扬他“主动伸出援手”。可见他是个乐于助人的人。答“怎样的人＋为什么”要先给评价，再用文中行为作依据。",
+   "explanation_en": "This is an inference question - judge Xiaoming from his actions and give a reason. When Li Hua's things fell, Xiaoming did not wait to be told but crouched to help at once, and the teacher praised him for 'reaching out on his own'. So he is helpful. For 'what kind of person + why', give a judgement, then support it with actions from the text.",
+   "solution": {"evidence": "在同学有需要的时候，主动伸出援手。"}
+  }
+ }
+}

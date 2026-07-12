@@ -95,3 +95,7 @@ realtest*.js
 _*.js
 fmt4_*.js
 comp60_review.html
+
+# python scratch
+__pycache__/
+*.pyc

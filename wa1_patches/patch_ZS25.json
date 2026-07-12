@@ -1,0 +1,217 @@
+{
+ "setId": "ZS25",
+ "mcq": {
+  "ZS25_A1": {
+   "sentence_en": "Xiaoming's ___ (wish) is to become a doctor when he grows up.",
+   "hints": ["The blank + 望 names something hoped for. Which character (top 原, bottom 心) forms 愿望 (wish)?"],
+   "keywords": [{"w":"愿望","py":"yuànwàng","en":"wish"},{"w":"医生","py":"yīshēng","en":"doctor"},{"w":"长大","py":"zhǎngdà","en":"to grow up"}],
+   "explanation_en": "愿望 is the fixed word for something hoped for in the heart, so 愿 fits. 愿 has 原 on top and 心 below - a hope in the heart is a 愿望. The four sound alike, so judge by meaning."
+  },
+  "ZS25_A2": {
+   "sentence_en": "Every day she practises drawing ___ (hard), hoping to join a competition one day.",
+   "hints": ["The blank + 力 means to put in effort. Which character has 力 (strength) at the bottom, not 心?"],
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"练习","py":"liànxí","en":"to practise"},{"w":"比赛","py":"bǐsài","en":"competition"}],
+   "explanation_en": "努力 is the fixed word for putting heart and strength into something, so 努 fits. 努 and 怒 look alike, but 努 has 力 (strength) below while 怒 has 心 (heart). 努力 = using strength."
+  },
+  "ZS25_A3": {
+   "sentence_en": "Dad ___ (encourages) me to keep pursuing my own dream.",
+   "hints": ["The blank + 励 means to give confidence and courage. Which character shows a drum, used in 鼓励?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"梦想","py":"mèngxiǎng","en":"dream"}],
+   "explanation_en": "鼓励 is the fixed word for giving confidence and courage, so 鼓 fits. The 鼓 of 鼓励 is like the sound of a drum - a drumbeat lifts people's spirits, so 鼓励 = to cheer on."
+  },
+  "ZS25_A4": {
+   "sentence_en": "Little brother ___ (worries) that his painting is not good enough, and dares not join the school competition.",
+   "hints": ["The blank + 心 means being afraid something bad will happen. Which character (with the hand radical 扌) forms 担心 (to worry)?"],
+   "keywords": [{"w":"担心","py":"dānxīn","en":"to worry"},{"w":"画","py":"huà","en":"painting"},{"w":"比赛","py":"bǐsài","en":"competition"}],
+   "explanation_en": "担心 means being afraid something will go wrong, a fixed word, so 担 fits. 担 has the hand radical 扌 - worrying is like carrying a heart on a pole you cannot put down. The four sound like dān."
+  },
+  "ZS25_A5": {
+   "sentence_en": "The teacher says that as long as we ___ (keep up) practising, we can surely sing well.",
+   "hints": ["The blank + 持 means to keep doing without giving up. Which character (left 臤, right 土) forms 坚持?"],
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"练习","py":"liànxí","en":"to practise"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation_en": "坚持 means to keep doing something without giving up, a fixed word, so 坚 fits. 坚 has 臤 on the left and 土 below - persisting is being as firm as the earth, unshaken."
+  },
+  "ZS25_B1": {
+   "sentence_en": "Xiaohua's 梦想 (dream) is to one day set foot on the moon.",
+   "hints": ["梦 is 4th tone (mèng); 想 is 3rd tone (xiǎng). Which choice is mèng + xiǎng?"],
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"月球","py":"yuèqiú","en":"the moon"},{"w":"登上","py":"dēngshàng","en":"to set foot on"}],
+   "explanation_en": "梦 is read mèng (4th tone) and 想 is xiǎng (3rd tone), together mèng xiǎng. 梦 (4th tone) falls like suddenly dropping in a dream; 想 (3rd tone) dips then rises, like thinking hard."
+  },
+  "ZS25_B2": {
+   "sentence_en": "After 长大 (growing up), she wants to be a nurse and help sick people.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"护士","py":"hùshi","en":"nurse"},{"w":"生病","py":"shēngbìng","en":"to be ill"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), not cháng (length); 大 is dà (4th tone). 长 is a polyphone: length = cháng; grow up = zhǎng. Remember: 长 (zhǎng) big, 长 (cháng) hair."
+  },
+  "ZS25_B3": {
+   "sentence_en": "We must study 努力 (hard) to make our wishes come true.",
+   "hints": ["努 is 3rd tone (nǔ); 力 is 4th tone (lì). Which choice is nǔ + lì?"],
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"学习","py":"xuéxí","en":"to study"},{"w":"愿望","py":"yuànwàng","en":"wish"}],
+   "explanation_en": "努 is read nǔ (3rd tone) and 力 is lì (4th tone), together nǔ lì. 努 (3rd tone) dips then rises, like gritting your teeth; 力 (4th tone) falls, like pressing down with strength."
+  },
+  "ZS25_B4": {
+   "sentence_en": "Dad 相信 (believes) that as long as I keep practising, I can surely play the piano well.",
+   "hints": ["相 is 1st tone with back nasal -ng (xiāng), not 想 (3rd tone); 信 is xìn (4th tone). Which choice is xiāng + xìn?"],
+   "keywords": [{"w":"相信","py":"xiāngxìn","en":"to believe"},{"w":"练习","py":"liànxí","en":"to practise"},{"w":"钢琴","py":"gāngqín","en":"piano"}],
+   "explanation_en": "相 is read xiāng (1st tone, back nasal -ng) and 信 is xìn (4th tone), together xiāng xìn. Tell 相 xiāng (1st tone, level) from 想 xiǎng (3rd tone, dip then rise). 相信 = xiāng xìn."
+  },
+  "ZS25_C1": {
+   "sentence_en": "Xiaoyu wrote her dream in her diary, hoping that one day it could ___ (come true).",
+   "hints": ["Clue: a dream is achieved through effort. Which word pairs with 梦想 to mean 'to make it real'?"],
+   "keywords": [{"w":"实现","py":"shíxiàn","en":"to come true"},{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"日记","py":"rìjì","en":"diary"}],
+   "explanation_en": "A dream is reached through effort, and the fixed pairing is 实现梦想 (to make a dream come true). Seeing 梦想, think 实现. 发现 (discover), 出现 (appear) and 表现 (perform) do not pair with 梦想."
+  },
+  "ZS25_C2": {
+   "sentence_en": "Mum gave me ___ (a) diary book, so I could write down my mood each day.",
+   "hints": ["Clue: the measure word for a diary book with pages. Which one is used for books and notebooks?"],
+   "keywords": [{"w":"一本","py":"yì běn","en":"one (book)"},{"w":"日记本","py":"rìjìběn","en":"diary book"},{"w":"心情","py":"xīnqíng","en":"mood"}],
+   "explanation_en": "The measure word 本 is used for books, notebooks and diaries with pages, so 一本日记本 is correct. 本 pairs with books; 张 with paper and tables; 份 with documents and meals."
+  },
+  "ZS25_C3": {
+   "sentence_en": "The teacher ___ (tells) us that as long as we study attentively, everyone can improve.",
+   "hints": ["Clue: the teacher gently passes on a truth. Which word means 'to tell', not 'to order'?"],
+   "keywords": [{"w":"告诉","py":"gàosu","en":"to tell"},{"w":"用心","py":"yòngxīn","en":"attentively"},{"w":"进步","py":"jìnbù","en":"to improve"}],
+   "explanation_en": "告诉 means saying a truth to someone, most natural when the teacher gently shares a lesson. Teacher speaking gently -> 告诉; ordering firmly -> 命令. Choose by tone. 要求 and 回答 do not fit."
+  },
+  "ZS25_C4": {
+   "sentence_en": "His painting won the teacher's ___ (praise), and he smiled happily.",
+   "hints": ["Clue: 'he smiled happily' means he got something good. Which word means 'praise / commendation'?"],
+   "keywords": [{"w":"称赞","py":"chēngzàn","en":"praise"},{"w":"画","py":"huà","en":"painting"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "Only praise makes one smile happily, so 称赞 (commendation) echoes 'he smiled happily'. Read the result: 'smiled happily' -> must be a good thing -> 称赞. 批评 (criticism) is bad and would not make him happy; 帮助 and 注意 do not fit."
+  },
+  "ZS25_C5": {
+   "sentence_en": "Xiaowen practised dancing ___ (earnestly), never resting each day, and finally won first place in the competition.",
+   "hints": ["Clue: practising without rest shows he put his heart into it. Which word describes an earnest, careful attitude?"],
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"练习","py":"liànxí","en":"to practise"},{"w":"比赛","py":"bǐsài","en":"competition"}],
+   "explanation_en": "Practising without rest every day shows he was very devoted, so 认真 (earnest) best describes his attitude. To describe doing things attentively, not carelessly -> 认真. 开心 is a mood, 安静 is about surroundings, 清楚 is about understanding - none is an attitude word."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“勇气”是敢去做事的胆量，所以“鼓起勇气”就是让自己有胆量去做原本不敢做的事。“实现、放弃”都不是“敢做事的胆量”。",
+   "explanation_en": "勇气 (yǒngqì) means the courage to do something, so 鼓起勇气 means to work up the courage. 实现 (realize) and 放弃 (give up) do not mean 'the courage to act'.",
+   "stem_en": "to work up one's courage",
+   "keywords": [{"w":"勇气","py":"yǒngqì","en":"courage"},{"w":"鼓起","py":"gǔqǐ","en":"to work up"}]
+  },
+  "2": {
+   "explanation": "“实现”是让愿望变成真的，所以“实现愿望”就是把心里的愿望变成事实。“勇气、坚持”都不是“让愿望成真”的意思。",
+   "explanation_en": "实现 (shíxiàn) means to make a wish become real, so 实现愿望 means to make a wish come true. 勇气 (courage) and 坚持 (persist) do not mean 'to make a wish real'.",
+   "stem_en": "to make a wish come true",
+   "keywords": [{"w":"实现","py":"shíxiàn","en":"to realize"},{"w":"愿望","py":"yuànwàng","en":"wish"}]
+  },
+  "3": {
+   "explanation": "“将来”指以后、未来的时间，所以“将来的职业”就是以后要从事的工作。“实现、放弃”都不是表示“以后的时间”的词。",
+   "explanation_en": "将来 (jiānglái) means the future, so 将来的职业 means one's future profession. 实现 (realize) and 放弃 (give up) do not refer to 'a future time'.",
+   "stem_en": "one's future profession",
+   "keywords": [{"w":"将来","py":"jiānglái","en":"future"},{"w":"职业","py":"zhíyè","en":"profession"}]
+  },
+  "4": {
+   "explanation": "“放弃”是中途停下、不再做，所以“不肯放弃”就是不愿意停下来、一定要坚持做下去。“勇气、将来”都不是“中途停下”的意思。",
+   "explanation_en": "放弃 (fàngqì) means to stop halfway and quit, so 不肯放弃 means being unwilling to give up. 勇气 (courage) and 将来 (future) do not mean 'to stop halfway'.",
+   "stem_en": "unwilling to give up",
+   "keywords": [{"w":"放弃","py":"fàngqì","en":"to give up"},{"w":"不肯","py":"bùkěn","en":"unwilling"}]
+  },
+  "5": {
+   "explanation": "“坚持”是一直做下去、不半途而废，所以“坚持练习”就是每天不断地练习，不停下来。“勇气、实现”都不是“一直做下去”的意思。",
+   "explanation_en": "坚持 (jiānchí) means to keep going without stopping halfway, so 坚持练习 means to keep practising. 勇气 (courage) and 实现 (realize) do not mean 'to keep going'.",
+   "stem_en": "to keep practising",
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"练习","py":"liànxí","en":"to practise"}]
+  }
+ },
+ "craft": {
+  "ZS25_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'Learning to dance is very hard.' and 'Xiaofang does not want to give up her dream.'",
+   "answer_en": "Although learning to dance is very hard, Xiaofang does not want to give up her dream.",
+   "tiles": ["虽然","学跳舞很辛苦，","但是","小芳不想放弃自己的梦想。"],
+   "explanation_en": "虽然……但是…… acknowledges one situation, then states an opposite or unaffected result. '虽然学跳舞很辛苦' (although dancing is hard) is the acknowledged situation, '但是小芳不想放弃' (but she won't give up) is the opposite result. Remember: 虽然 (a hardship), 但是 (still does it)."
+  },
+  "ZS25_E2": {
+   "question_en": "Combine these two sentences using the connector 只要……就…… (as long as…, …): 'We practise attentively every day.' and 'We can surely make our wishes come true.'",
+   "answer_en": "As long as we practise attentively every day, we can surely make our wishes come true.",
+   "tiles": ["只要","我们每天认真练习，","就","一定能实现愿望。"],
+   "explanation_en": "只要……就…… means when the condition is met, the result surely follows. '只要我们每天认真练习' (as long as we practise daily) is the condition, '就一定能实现愿望' (then wishes come true) is the result. Remember: 只要 (do this), 就 (get that)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Since he was young, Xiaoming has had a ___ (dream): he hopes to become a painter when he grows up.",
+   "hint": "Clue: something held in his heart since young, to be a painter. Which box word means 'dream'?",
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"画家","py":"huàjiā","en":"painter"}],
+   "explanation_en": "'Since young he hopes to become a painter' shows this is a wish in his heart, so 梦想 (dream) fits best."
+  },
+  "2": {
+   "sentence_en": "Every day after school, he draws ___ (earnestly) and never slacks off.",
+   "hint": "Clue: it pairs with 'never slacks off', showing he is very devoted. Which box word means 'earnest'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"画画","py":"huàhuà","en":"to draw"}],
+   "explanation_en": "'Never slacks off' shows he is very devoted, so 认真 describes his earnest attitude to drawing, and it fits best."
+  },
+  "3": {
+   "sentence_en": "Sometimes when he draws badly, he does not ___ (give up), but draws it again.",
+   "hint": "Clue: instead of giving up he draws again. Which box word means 'to give up'?",
+   "keywords": [{"w":"放弃","py":"fàngqì","en":"to give up"},{"w":"重新","py":"chóngxīn","en":"again"}],
+   "explanation_en": "Drawing badly but 'drawing again' shows he does not stop, so 放弃 (to give up) fits best - he does not give up."
+  },
+  "4": {
+   "sentence_en": "Seeing this, Mum nodded ___ (with satisfaction) and said he would surely succeed.",
+   "hint": "Clue: Mum sees him working so hard and feels pleased and approving. Which box word means 'satisfied'?",
+   "keywords": [{"w":"满意","py":"mǎnyì","en":"satisfied"},{"w":"点头","py":"diǎntóu","en":"to nod"}],
+   "explanation_en": "Seeing Xiaoming work so hard, Mum feels pleased, so 满意地点点头 (nodded with satisfaction) shows her approval, and it fits best."
+  },
+  "5": {
+   "sentence_en": "Xiaoming heard this and his heart filled with ___ (confidence); he decided to work even harder.",
+   "hint": "Clue: Mum says he will succeed, so he believes he can do it. Which box word means 'confidence'?",
+   "keywords": [{"w":"信心","py":"xìnxīn","en":"confidence"},{"w":"努力","py":"nǔlì","en":"to work hard"}],
+   "explanation_en": "Mum says he will succeed, so Xiaoming, encouraged, is 充满了信心 (full of confidence), meaning he believes he can do it, so it fits best."
+  }
+ },
+ "reading": {
+  "ZS25_G1": {
+   "stem_en": "What problem does Xiaowen have each time she sings in front of classmates?",
+   "answer_en": "She gets so nervous that her voice trembles.",
+   "keywords": [{"w":"紧张","py":"jǐnzhāng","en":"nervous"},{"w":"发抖","py":"fādǒu","en":"to tremble"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation": "这是细节题。短文说“每次站在同学面前唱歌，她都会紧张得声音发抖”，直接说明她的问题是一唱歌就紧张得声音发抖，所以选(3)。(1)忘记歌词、(2)不喜欢唱歌，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'every time she sings in front of classmates, she gets so nervous her voice trembles', directly stating her problem, so (3). (1) forgetting the lyrics and (2) not liking singing are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "每次站在同学面前唱歌，她都会紧张得声音发抖"}
+  },
+  "ZS25_G2": {
+   "stem_en": "Why did the teacher stay behind every day after school to be with Xiaowen?",
+   "answer_en": "Because the teacher wanted to help Xiaowen overcome her nerves and sing well.",
+   "keywords": [{"w":"克服","py":"kèfú","en":"to overcome"},{"w":"紧张","py":"jǐnzhāng","en":"nervous"},{"w":"练习","py":"liànxí","en":"to practise"}],
+   "explanation": "这是推断题。短文说“老师发现了，就每天放学后留下来陪她练习”，又说老师告诉她“只要多练习，你一定会越来越好”，可以推断老师留下来是想帮小雯克服紧张、练好唱歌，所以选(1)。(2)老师想参加比赛、(3)觉得歌声不好听，文中都没有这样说。推断题要结合老师的话来想她的用意。",
+   "explanation_en": "This is an inference question. The passage says 'the teacher noticed and stayed behind every day after school to practise with her', and told her 'as long as you practise more, you will get better'. We can infer the teacher stayed to help Xiaowen overcome her nerves and sing well, so (1). (2) the teacher wanting to compete and (3) thinking her singing bad are not stated. Combine the teacher's words with her intention.",
+   "solution": {"evidence": "老师发现了，就每天放学后留下来陪她练习。"}
+  },
+  "ZS25_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "As long as you persist and work hard, you can make your wish come true step by step.",
+   "keywords": [{"w":"坚持","py":"jiānchí","en":"to persist"},{"w":"愿望","py":"yuànwàng","en":"wish"},{"w":"实现","py":"shíxiàn","en":"to realize"}],
+   "explanation": "这是主旨题。全文讲小雯本来一唱歌就紧张，在老师帮助下每天认真练习，终于鼓起勇气参加比赛，唱完整首歌。最后她明白“只要坚持，愿望就能一步一步地实现”。可见短文是要告诉我们只要坚持努力就能一步一步实现愿望，所以选(2)。(1)每个人都要参加比赛、(3)老师比父母更了解学生都不符合文意，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaowen, once nervous when singing, practising earnestly with the teacher's help, finally working up the courage to compete and finishing the whole song, and realizing 'as long as you persist, wishes come true step by step'. So it tells us that persistence and effort make wishes come true, so (2). (1) everyone must compete and (3) teachers know students better than parents are off-topic, not the main idea.",
+   "solution": {"evidence": "只要坚持，愿望就能一步一步地实现。"}
+  },
+  "ZS25_H1": {
+   "stem_en": "Find a word in the passage that shows Ajie did not cry after getting hurt: He ___ his tears and stood up to keep practising.",
+   "answer_en": "忍住 (held back)",
+   "keywords": [{"w":"忍住","py":"rěnzhù","en":"to hold back"},{"w":"眼泪","py":"yǎnlèi","en":"tears"},{"w":"继续","py":"jìxù","en":"to continue"}],
+   "explanation": "这是找词题。短文说“他忍住眼泪，站起来继续练习”，“忍住”正好说明阿杰受伤后没有哭出来，把眼泪忍了下去，所以答案是“忍住”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'he held back his tears and stood up to keep practising'; 忍住 exactly shows that Ajie did not cry after being hurt but held back his tears, so the answer is 忍住. Find the word that fits the situation.",
+   "solution": {"evidence": "他忍住眼泪，站起来继续练习"}
+  },
+  "ZS25_H2": {
+   "stem_en": "Why did Dad say Ajie was very brave?",
+   "answer_en": "Because Ajie fell and was hurt, but he held back his tears, stood up and kept practising without giving up, so Dad said he was very brave.",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"受伤","py":"shòushāng","en":"to be hurt"},{"w":"放弃","py":"fàngqì","en":"to give up"}],
+   "explanation": "这是细节题，答案用完整句子。短文说爸爸对他说“阿杰，你真勇敢，受伤了还不放弃”，加上前面说他摔倒受伤后忍住眼泪继续练习，说明爸爸说他勇敢是因为他受伤了还坚持不放弃。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Dad told him 'Ajie, you are really brave, still not giving up after getting hurt', and earlier he held back tears and kept practising after falling, so Dad called him brave because he persisted despite the injury. State the reason in a full sentence.",
+   "solution": {"evidence": "阿杰，你真勇敢，受伤了还不放弃"}
+  },
+  "ZS25_H3": {
+   "stem_en": "What kind of child do you think Ajie is? Why?",
+   "answer_en": "I think Ajie is a brave child who does not give up, because he kept practising even after getting hurt and worked hard to pursue his dream.",
+   "keywords": [{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"不放弃","py":"bù fàngqì","en":"not giving up"},{"w":"梦想","py":"mèngxiǎng","en":"dream"}],
+   "explanation": "这是推断题（评价人物）。短文说阿杰摔倒受伤后“忍住眼泪，站起来继续练习”，还说“我一定要实现自己的梦想”。从他受伤了还坚持练习、努力追梦，可以看出他是个勇敢、不放弃的孩子。答这类题要先说人物特点，再用文中的行为作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says after falling and getting hurt Ajie 'held back his tears and stood up to keep practising', and said 'I will surely make my dream come true'. From practising despite injury and chasing his dream, we see he is a brave child who does not give up. State the trait, then give the actions as the reason.",
+   "solution": {"evidence": "他忍住眼泪，站起来继续练习。"}
+  }
+ }
+}

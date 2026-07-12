@@ -1,0 +1,218 @@
+{
+ "setId": "ZS58",
+ "mcq": {
+  "ZS58_A1": {
+   "sentence_en": "The puppy ___ (sniffed) out the bone hidden in the grass with its nose.",
+   "hints": ["The blank + 到 means to detect a smell with the nose. Which character (with the mouth radical 口 plus 臭) means 'to sniff'?"],
+   "keywords": [{"w":"嗅","py":"xiù","en":"to sniff"},{"w":"骨头","py":"gǔtou","en":"bone"},{"w":"草丛","py":"cǎocóng","en":"grass"}],
+   "explanation_en": "嗅 means to smell with the nose, so the puppy 嗅到 (sniffed out) the bone is correct. 嗅 has 口 on the left plus 臭 - remember, using the nose to detect a smell is 嗅."
+  },
+  "ZS58_A2": {
+   "sentence_en": "The kitten quietly ___ (stared) at the bird in the tree, wanting to catch it.",
+   "hints": ["The blank means to watch fixedly without blinking. Which character (with the eye radical 目) means 'to stare'?"],
+   "keywords": [{"w":"盯","py":"dīng","en":"to stare"},{"w":"小猫","py":"xiǎomāo","en":"kitten"},{"w":"抓住","py":"zhuāzhù","en":"to catch"}],
+   "explanation_en": "盯 means to watch fixedly without blinking, so the kitten 盯着 (staring at) the bird shows intense focus, which fits best. The four sound alike, but 盯 has the eye radical 目, relating to the eyes - it means to watch with the eyes."
+  },
+  "ZS58_A3": {
+   "sentence_en": "The rabbit's ears are long and can ___ (hear) sounds from far away.",
+   "hints": ["The blank + 到 means to take in sound with the ears. Which character (with the mouth radical 口, relating to sound) means 'to hear'?"],
+   "keywords": [{"w":"听","py":"tīng","en":"to hear"},{"w":"耳朵","py":"ěrduo","en":"ears"},{"w":"声音","py":"shēngyīn","en":"sound"}],
+   "explanation_en": "听 means to take in sound with the ears, so 听到声音 (hear sounds) is correct. 听 has the mouth radical 口, relating to speech and sound; the other three lack it and mean quite different things."
+  },
+  "ZS58_A4": {
+   "sentence_en": "The little goldfish swims about in the tank, looking very ___ (lively).",
+   "hints": ["The blank describes something full of life and movement. Which two-character word (with 活, meaning alive) means 'lively'?"],
+   "keywords": [{"w":"活泼","py":"huópō","en":"lively"},{"w":"金鱼","py":"jīnyú","en":"goldfish"},{"w":"鱼缸","py":"yúgāng","en":"fish tank"}],
+   "explanation_en": "活泼 describes something full of life and movement, the right word for a goldfish swimming about. Remember 活泼: 活 = alive; 泼 = water splashing with force. Together they mean full of life."
+  },
+  "ZS58_A5": {
+   "sentence_en": "The zoo staff ___ (feed) food to the elephants every day.",
+   "hints": ["The blank + 食物 means to give food to an animal to eat. Which character (with the mouth radical 口) means 'to feed'?"],
+   "keywords": [{"w":"喂","py":"wèi","en":"to feed"},{"w":"食物","py":"shíwù","en":"food"},{"w":"大象","py":"dàxiàng","en":"elephant"}],
+   "explanation_en": "喂 is used specially for giving food to animals or people, so 喂食物给大象 (feed food to the elephants) is a fixed pairing. 喂 has the mouth radical 口 - used for putting food into the mouth. Remember: feeding animals is 喂."
+  },
+  "ZS58_B1": {
+   "sentence_en": "The bird stands on the branch 鸣叫 (chirping), and the sound is very pleasant.",
+   "hints": ["鸣 has the back nasal -ng (míng); 叫 is 4th tone (jiào). Which choice is míng + jiào?"],
+   "keywords": [{"w":"鸣叫","py":"míngjiào","en":"to chirp"},{"w":"树枝","py":"shùzhī","en":"branch"},{"w":"好听","py":"hǎotīng","en":"pleasant"}],
+   "explanation_en": "鸣 is read míng (back nasal -ng, 2nd tone) and 叫 is jiào (4th tone), together míng jiào. Tell front from back nasal: 鸣 míng has -ng; 叫 jiào is 4th tone, not 1st."
+  },
+  "ZS58_B2": {
+   "sentence_en": "This 长颈鹿 (giraffe) has a long neck and can eat leaves high up.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. Here the neck is long, so read cháng. 颈 is jǐng, 鹿 is lù. Which is cháng jǐng lù?"],
+   "keywords": [{"w":"长颈鹿","py":"chángjǐnglù","en":"giraffe"},{"w":"脖子","py":"bózi","en":"neck"},{"w":"树叶","py":"shùyè","en":"leaves"}],
+   "explanation_en": "In 长颈鹿, 长 is read cháng (2nd tone, length), not zhǎng (to grow); 颈 is jǐng (3rd tone) and 鹿 is lù (4th tone). 长 is a polyphone: cháng = length (长颈鹿, 长短); zhǎng = to grow (长大, 成长). Here it refers to the length of the neck, so read cháng."
+  },
+  "ZS58_B3": {
+   "sentence_en": "The children sat 安静 (quietly) on the grass at the zoo, waiting for the peacock to spread its tail.",
+   "hints": ["安 is 1st tone (ān); 静 is 4th tone (jìng). Which choice is ān + jìng?"],
+   "keywords": [{"w":"安静","py":"ānjìng","en":"quiet"},{"w":"孔雀","py":"kǒngquè","en":"peacock"},{"w":"草地","py":"cǎodì","en":"grass"}],
+   "explanation_en": "安 is read ān (1st tone) and 静 is jìng (4th tone), together ān jìng. 安 ān is 1st tone (level); 静 jìng is 4th tone (falling). Do not read 安 as 4th tone."
+  },
+  "ZS58_B4": {
+   "sentence_en": "Mum bought a 金鱼 (goldfish) home and put it in the tank in the living room.",
+   "hints": ["金 is 1st tone (jīn); 鱼 is 2nd tone (yú). Which choice is jīn + yú?"],
+   "keywords": [{"w":"金鱼","py":"jīnyú","en":"goldfish"},{"w":"鱼缸","py":"yúgāng","en":"fish tank"},{"w":"客厅","py":"kètīng","en":"living room"}],
+   "explanation_en": "金 is read jīn (1st tone) and 鱼 is yú (2nd tone), together jīn yú. 金 jīn is 1st tone (high and level); 鱼 yú is 2nd tone (rising) - neither is a falling tone."
+  },
+  "ZS58_C1": {
+   "sentence_en": "The zoo staff ___ (keep and tend) the injured bird in a special cage so it can slowly recover.",
+   "hints": ["Clue: it echoes 'so it can slowly recover' - looking after it over time. Which word means 'to keep and care for'?"],
+   "keywords": [{"w":"养","py":"yǎng","en":"to keep and care for"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"康复","py":"kāngfù","en":"to recover"}],
+   "explanation_en": "养 here means to look after and tend an animal, so 养在笼子里 (keeping it in a cage) so it can recover fits the stated purpose best. 养 = caring for over time, matching the purpose 'so it can slowly recover'. 关, 放 and 救 do not express this ongoing care."
+  },
+  "ZS58_C2": {
+   "sentence_en": "Seeing an elephant for the first time, little brother opened his mouth wide ___ (in amazement), unable to speak.",
+   "hints": ["Clue: an open mouth and no words show a strong shock. Which word means 'amazed / astonished'?"],
+   "keywords": [{"w":"惊讶","py":"jīngyà","en":"amazed"},{"w":"大象","py":"dàxiàng","en":"elephant"},{"w":"张大嘴巴","py":"zhāngdà zuǐba","en":"to open the mouth wide"}],
+   "explanation_en": "Opening the mouth wide and being unable to speak is the reaction to a great shock, so 惊讶 (amazed, astonished) fits best. Seeing 'mouth wide open, unable to speak', think 惊讶 - the classic reaction to astonishment. 认真, 努力 and 高兴 do not fit."
+  },
+  "ZS58_C3": {
+   "sentence_en": "On the grass there is ___ (a) butterfly flying about among the flowers.",
+   "hints": ["Clue: a butterfly is a small creature. Which measure word is used for small animals and insects?"],
+   "keywords": [{"w":"一只","py":"yì zhī","en":"one (small animal)"},{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"花丛","py":"huācóng","en":"flowers"}],
+   "explanation_en": "A butterfly is a creature, and animals (insects, birds, fish) use the measure word 只, so 一只蝴蝶 is correct. Small animals use 只: 一只狗, 一只猫, 一只蝴蝶. Long slender animals use 条: 一条鱼, 一条蛇."
+  },
+  "ZS58_C4": {
+   "sentence_en": "The kitten crouches by the window, waiting ___ (patiently) for its owner to come home.",
+   "hints": ["Clue: it pairs with 等 (to wait) - waiting quietly without fretting. Which word means 'patient'?"],
+   "keywords": [{"w":"耐心","py":"nàixīn","en":"patient"},{"w":"等","py":"děng","en":"to wait"},{"w":"主人","py":"zhǔrén","en":"owner"}],
+   "explanation_en": "耐心 means being able to wait quietly without fretting, and 耐心地等 is a fixed pairing, so it fits best. 耐心 + 等 is fixed, meaning waiting calmly. 小心 and 细心 describe doing things, not waiting. 开心 does not fit."
+  },
+  "ZS58_C5": {
+   "sentence_en": "Xiaoming ___ (held) a photo of his puppy and introduced it to the classmates.",
+   "hints": ["Clue: holding a photo in the hand to show others. Which word means 'to hold (in the hand)', pairing with 照片?"],
+   "keywords": [{"w":"拿","py":"ná","en":"to hold"},{"w":"照片","py":"zhàopiàn","en":"photo"},{"w":"介绍","py":"jièshào","en":"to introduce"}],
+   "explanation_en": "拿着照片 means holding a photo in the hand to show others, the most natural pairing. 拿 + a photo / book / pen is the commonest pairing. 握 is for handles or shaking hands, 提 for heavy things, 捧 for holding in both hands."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“鸣叫”是鸟发出叫声，所以“小鸟在树枝上鸣叫”就是小鸟站在树枝上发出好听的叫声。“奔跑、照顾”都不是“发出叫声”的意思。",
+   "explanation_en": "鸣叫 (míngjiào) means a bird making its call, so 小鸟在树枝上鸣叫 means the bird chirps on the branch. 奔跑 (run) and 照顾 (look after) do not mean 'to make a call'.",
+   "stem_en": "The little bird chirps on the branch.",
+   "keywords": [{"w":"鸣叫","py":"míngjiào","en":"to chirp"},{"w":"树枝","py":"shùzhī","en":"branch"}]
+  },
+  "2": {
+   "explanation": "“奔跑”是快速地跑，所以“猎豹在草原上奔跑”就是猎豹在草原上飞快地跑。“鸣叫、温柔”都不是“快速地跑”的意思。",
+   "explanation_en": "奔跑 (bēnpǎo) means to run fast, so 猎豹在草原上奔跑 means the cheetah runs on the grassland. 鸣叫 (chirp) and 温柔 (gentle) do not mean 'to run fast'.",
+   "stem_en": "The cheetah runs on the grassland.",
+   "keywords": [{"w":"奔跑","py":"bēnpǎo","en":"to run"},{"w":"猎豹","py":"lièbào","en":"cheetah"}]
+  },
+  "3": {
+   "explanation": "“温柔”是声音、态度轻柔和缓，所以“用温柔的声音哄小狗”就是用轻轻柔柔的声音安抚小狗。“奔跑、保护”都不是“声音轻柔”的意思。",
+   "explanation_en": "温柔 (wēnróu) means gentle and soft in voice or manner, so 用温柔的声音哄小狗 means to soothe the puppy in a gentle voice. 奔跑 (run) and 保护 (protect) do not mean 'gentle in voice'.",
+   "stem_en": "Mum soothes the puppy in a gentle voice.",
+   "keywords": [{"w":"温柔","py":"wēnróu","en":"gentle"},{"w":"哄","py":"hǒng","en":"to soothe"}]
+  },
+  "4": {
+   "explanation": "“保护”是爱护、不让它受伤害，所以“保护野生动物”就是爱护野生动物、不去伤害它们。“鸣叫、照顾”都不是“爱护不受伤害”的意思。",
+   "explanation_en": "保护 (bǎohù) means to protect from harm, so 保护野生动物 means to protect wild animals. 鸣叫 (chirp) and 照顾 (look after) do not mean 'to protect from harm'.",
+   "stem_en": "We should protect wild animals.",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"野生动物","py":"yěshēng dòngwù","en":"wild animal"}]
+  },
+  "5": {
+   "explanation": "“照顾”是每天喂食、看护，所以“每天照顾家里的小乌龟”就是每天喂养、看护小乌龟。“鸣叫、温柔”都不是“喂食看护”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to feed and look after day by day, so 每天照顾家里的小乌龟 means to care for the pet tortoise every day. 鸣叫 (chirp) and 温柔 (gentle) do not mean 'to feed and tend'.",
+   "stem_en": "Elder brother looks after the little tortoise at home every day.",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"小乌龟","py":"xiǎo wūguī","en":"little tortoise"}]
+  }
+ },
+ "craft": {
+  "ZS58_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The puppy is hurt.' and 'The puppy still wags its tail to welcome its owner.'",
+   "answer_en": "Although the puppy is hurt, it still wags its tail to welcome its owner.",
+   "tiles": ["虽然","小狗受伤了，","但是","还是摇着尾巴迎接主人。"],
+   "explanation_en": "虽然……但是…… means the first situation does not stop the second, forming a turn. '虽然小狗受伤了' (although it is hurt) is the premise, '但是还是摇着尾巴迎接主人' (but it still wags its tail) is the unexpected result. Both words are needed."
+  },
+  "ZS58_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The rabbit is very afraid of strangers.' and 'The rabbit hides in the corner of the cage.'",
+   "answer_en": "Because the rabbit is very afraid of strangers, it hides in the corner of the cage.",
+   "tiles": ["因为","小兔子很怕陌生人，","所以","躲到笼子角落里。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小兔子很怕陌生人' (because it fears strangers) is the cause, '所以躲到笼子角落里' (so it hides in the corner) is the result. Seeing 'fear', think 因为怕，所以…….",
+   "keywords": []
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Last Sunday, Dad took me to visit the zoo. We first came to the aviary, with many ___ (brightly coloured) birds singing on the branches, sounding lovely.",
+   "hint": "Clue: it describes the birds' bright, beautiful colours. Which box word means 'brightly coloured'?",
+   "keywords": [{"w":"鲜艳","py":"xiānyàn","en":"brightly coloured"},{"w":"鸟儿","py":"niǎo'ér","en":"bird"}],
+   "explanation_en": "鲜艳 describes bright, beautiful colours, and 颜色鲜艳的鸟儿 (brightly coloured birds) fits the aviary scene naturally, so it fits best."
+  },
+  "2": {
+   "sentence_en": "Next, we went to the elephant house, where an elephant was ___ (drawing up) water to drink with its long trunk.",
+   "hint": "Clue: the elephant's own way of drinking - taking water into its trunk. Which box word means 'to draw in / suck up'?",
+   "keywords": [{"w":"吸","py":"xī","en":"to draw in"},{"w":"鼻子","py":"bízi","en":"trunk"}],
+   "explanation_en": "An elephant 吸 (draws up) water with its trunk is its own characteristic action, meaning taking water into the trunk to drink, so it fits best."
+  },
+  "3": {
+   "sentence_en": "Seeing this, I found it very ___ (wonderful).",
+   "hint": "Clue: seeing the elephant use its trunk feels amazing and hard to believe. Which box word means 'wonderful / amazing'?",
+   "keywords": [{"w":"神奇","py":"shénqí","en":"wonderful"},{"w":"大象","py":"dàxiàng","en":"elephant"}],
+   "explanation_en": "神奇 means finding something wonderful and hard to believe; seeing the elephant draw water with its trunk felt 非常神奇, so it fits the context best."
+  },
+  "4": {
+   "sentence_en": "Later we saw a group of monkeys leaping about in the trees ___ (livelily), looking very cute.",
+   "hint": "Clue: it describes their lively, energetic movement. Which box word means 'lively'?",
+   "keywords": [{"w":"活泼","py":"huópō","en":"lively"},{"w":"猴子","py":"hóuzi","en":"monkey"}],
+   "explanation_en": "活泼 describes lively, energetic movement, and 猴子活泼地在树上跳来跳去 (the monkeys leap about livelily) is a natural pairing, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Before leaving, Dad bought me a book about animals so I could ___ (learn) more about them.",
+   "hint": "Clue: reading the book to gain more knowledge about animals. Which box word means 'to learn about / understand'?",
+   "keywords": [{"w":"了解","py":"liǎojiě","en":"to learn about"},{"w":"知识","py":"zhīshi","en":"knowledge"}],
+   "explanation_en": "了解动物的知识 means gaining more knowledge of animals through reading, and 多了解 is the right pairing, so 了解 fits best."
+  }
+ },
+ "reading": {
+  "ZS58_G1": {
+   "stem_en": "Why did Xiaoming take the little bird home?",
+   "answer_en": "Because the bird's wing was hurt and it needed care.",
+   "keywords": [{"w":"翅膀","py":"chìbǎng","en":"wing"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"照顾","py":"zhàogù","en":"to look after"}],
+   "explanation": "这是细节题。短文说“小明发现其中一只小鸟掉在地上，翅膀好像受伤了。小明轻轻地把小鸟捧起来，带回家给妈妈看”，又说妈妈要好好照顾它。可以看出小明带小鸟回家是因为它翅膀受伤、需要照顾，所以选(3)。(1)当宠物养、(2)妈妈叫他带回家，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'Xiaoming found one of the birds on the ground with what looked like an injured wing. He gently picked it up and brought it home to Mum', and Mum said they should look after it well. So he took it home because its wing was hurt and it needed care, so (3). (1) keeping it as a pet and (2) Mum telling him to are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "小明发现其中一只小鸟掉在地上，翅膀好像受伤了"}
+  },
+  "ZS58_G2": {
+   "stem_en": "The bird sang on the branch. What does this show?",
+   "answer_en": "The bird's wing had healed, and it was very happy.",
+   "keywords": [{"w":"翅膀","py":"chìbǎng","en":"wing"},{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation": "这是推断题。短文说“过了一个星期，小鸟的翅膀好了，能飞了”，小明把它放回树枝后，“小鸟站在树枝上，快乐地唱起歌来，好像在向小明道谢”。可以推断小鸟唱歌说明它的翅膀好了、而且很快乐，所以选(1)。(2)不喜欢小明想离开、(3)呼唤同伴帮忙，都和“快乐地唱”不符。推断题要结合小鸟康复和“快乐地唱”来判断。",
+   "explanation_en": "This is an inference question. The passage says 'after a week, the bird's wing healed and it could fly', and after Xiaoming put it back on the branch, 'the bird stood on the branch and sang happily, as if thanking him'. So the singing shows its wing had healed and it was happy, so (1). (2) disliking Xiaoming and (3) calling for help contradict 'sang happily'. Combine the recovery with the happy singing.",
+   "solution": {"evidence": "小鸟站在树枝上，快乐地唱起歌来，好像在向小明道谢。"}
+  },
+  "ZS58_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "We should care for and help injured animals.",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care"},{"w":"帮助","py":"bāngzhù","en":"to help"},{"w":"受伤","py":"shòushāng","en":"injured"}],
+   "explanation": "这是主旨题。全文讲小明发现受伤的小鸟，把它带回家，每天喂食换水，一个星期后小鸟康复，他又把小鸟放回大树，小鸟快乐地唱歌道谢。可见短文是要告诉我们应该关心和帮助受伤的动物，所以选(2)。(1)大树是小鸟的家、(3)每天喂食很重要都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaoming finding an injured bird, taking it home, feeding it and changing its water daily, and after a week returning the recovered bird to the tree, where it sang happily in thanks. So it tells us we should care for and help injured animals, so (2). (1) the tree is the bird's home and (2) daily feeding is important are minor points, not the main idea.",
+   "solution": {"evidence": "我们要好好照顾它，等它好了再放回大树上。"}
+  },
+  "ZS58_H1": {
+   "stem_en": "Find a word in the passage that shows the staff's attitude toward the animals: The staff look after the injured animals ___.",
+   "answer_en": "细心 (attentively)",
+   "keywords": [{"w":"细心","py":"xìxīn","en":"attentive; careful"},{"w":"工作人员","py":"gōngzuò rényuán","en":"staff"},{"w":"照顾","py":"zhàogù","en":"to look after"}],
+   "explanation": "这是找词题。短文说“中心里有很多受伤的动物，工作人员每天细心地照顾它们”，“细心”正好说明工作人员对待动物的态度——注意每个细节、认真照顾，所以答案是“细心”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage says 'the centre has many injured animals, and the staff look after them attentively every day'; 细心 exactly describes their attitude - minding every detail in their care, so the answer is 细心. Find the word that fits the situation.",
+   "solution": {"evidence": "工作人员每天细心地照顾它们"}
+  },
+  "ZS58_H2": {
+   "stem_en": "How did the little deer come to the animal rescue centre?",
+   "answer_en": "The little deer was hurt in the forest, was found by someone, and was then sent to the animal rescue centre.",
+   "keywords": [{"w":"森林","py":"sēnlín","en":"forest"},{"w":"发现","py":"fāxiàn","en":"to find"},{"w":"送来","py":"sònglái","en":"to be sent here"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“工作人员说，小鹿是在森林里被发现的，受伤后被送来这里”，说明小鹿是在森林里受伤后被人发现，然后被送到救助中心的。答“怎么来的”要把文中的经过写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'the staff said the little deer was found in the forest and, after being hurt, was sent here', so it was hurt in the forest, found by someone, and sent to the centre. State the course of events clearly from the text.",
+   "solution": {"evidence": "小鹿是在森林里被发现的，受伤后被送来这里"}
+  },
+  "ZS58_H3": {
+   "stem_en": "After visiting the animal rescue centre, what thoughts and decision did 'I' have?",
+   "answer_en": "After hearing Teacher Lin's words, 'I' was deeply moved and decided to become a person who cherishes and protects animals from now on.",
+   "keywords": [{"w":"感动","py":"gǎndòng","en":"moved"},{"w":"爱护","py":"àihù","en":"to cherish"},{"w":"责任","py":"zérèn","en":"responsibility"}],
+   "explanation": "这是推断题。短文最后说“林老师告诉我们，保护动物是每个人的责任……我听了，心里非常感动，决定以后也要做一个爱护动物的人”，说明“我”参观后的感想是非常感动，决定以后要做一个爱护动物的人。答这类题要抓住结尾表示感想和决定的句子。",
+   "explanation_en": "This is an inference question. The passage ends with 'Teacher Lin told us that protecting animals is everyone's responsibility... I was deeply moved and decided to become a person who cherishes animals'. So after the visit, 'I' was moved and resolved to cherish animals. Catch the closing sentence stating the feeling and decision.",
+   "solution": {"evidence": "我听了，心里非常感动，决定以后也要做一个爱护动物的人。"}
+  }
+ }
+}

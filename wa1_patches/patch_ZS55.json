@@ -1,0 +1,217 @@
+{
+ "setId": "ZS55",
+ "mcq": {
+  "ZS55_A1": {
+   "sentence_en": "Autumn came, and the leaves turned ___ (colourful), very lovely.",
+   "hints": ["五___ describes many beautiful colours. Which character (with 彡, three slanting strokes, showing bright colour) forms 五彩?"],
+   "keywords": [{"w":"五彩","py":"wǔcǎi","en":"colourful"},{"w":"树叶","py":"shùyè","en":"leaves"},{"w":"颜色","py":"yánsè","en":"colour"}],
+   "explanation_en": "五彩 describes many beautiful colours, so 彩 (the 彩 of colour) fits. The four are read cǎi, but 彩 has 彡 (three slanting strokes), showing bright colour - for colours, look for 彡."
+  },
+  "ZS55_A2": {
+   "sentence_en": "Little brother ___ (both) ran ___ (and) jumped on the grass, playing happily.",
+   "hints": ["The pattern ___跑___跳 means doing two things at once. Which character fills 又……又…… (both… and…)?"],
+   "keywords": [{"w":"又","py":"yòu","en":"both; again"},{"w":"草地","py":"cǎodì","en":"grass"},{"w":"开心","py":"kāixīn","en":"happy"}],
+   "explanation_en": "又跑又跳 means doing two things at once, using the 又……又…… pattern, so fill 又. The four are read yǒu, but 又……又…… is a fixed pattern showing two actions at the same time. Remember 又 has two strokes."
+  },
+  "ZS55_A3": {
+   "sentence_en": "We walked slowly along the little ___ (path), enjoying the lovely scenery in the park.",
+   "hints": ["小___ names a small road. Which character (with the double-person radical 彳) forms 小径 (a path)?"],
+   "keywords": [{"w":"小径","py":"xiǎojìng","en":"path"},{"w":"欣赏","py":"xīnshǎng","en":"to enjoy"},{"w":"美景","py":"měijǐng","en":"lovely scenery"}],
+   "explanation_en": "小径 means a small road, so walking along it to enjoy the scenery fits, and 径 is correct. 径 has the double-person radical 彳 - a place for walking, so 小径 is a small path."
+  },
+  "ZS55_A4": {
+   "sentence_en": "Mum ___ (held) my hand, and we walked into the park together.",
+   "hints": ["The blank + 手 means to grip firmly with the hand. Which character (with the hand radical 扌 and 屋 inside) means 'to hold / grip'?"],
+   "keywords": [{"w":"握","py":"wò","en":"to hold; grip"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"一起","py":"yìqǐ","en":"together"}],
+   "explanation_en": "握手 means to grip firmly with the hand, so Mum 握着 (holding) my hand to walk together is natural. All four have the hand radical 扌; 握 has 屋 inside - gripping tightly in the 'house' of the hand. Remember gripping needs force."
+  },
+  "ZS55_A5": {
+   "sentence_en": "The branches and leaves of the trees in the park are ___ (dense), shading us from the sun.",
+   "hints": ["The blank + 密 means many and thick. Which character (with the silk radical 糸) means 'many / luxuriant', forming 繁密?"],
+   "keywords": [{"w":"繁密","py":"fánmì","en":"dense"},{"w":"枝叶","py":"zhīyè","en":"branches and leaves"},{"w":"阳光","py":"yángguāng","en":"sunlight"}],
+   "explanation_en": "繁密 describes branches and leaves that are many and thick, and 繁 means many and luxuriant, so it fits. The four are read fán, but 繁 has 糸 (silk) in it, showing many and thick, like many threads tangled together."
+  },
+  "ZS55_B1": {
+   "sentence_en": "The air in the park is very 清新 (fresh), which feels very comfortable.",
+   "hints": ["清 is 1st tone (qīng); 新 is 1st tone (xīn). Which choice is qīng + xīn, both level?"],
+   "keywords": [{"w":"清新","py":"qīngxīn","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "清 is read qīng (1st tone) and 新 is xīn (1st tone), together qīng xīn. Both characters of 清新 are 1st tone (level), read lightly, just like fresh air."
+  },
+  "ZS55_B2": {
+   "sentence_en": "The birds are 唱歌 (singing) in the trees, and the sound is very pleasant.",
+   "hints": ["唱 is 4th tone (chàng); 歌 is 1st tone (gē). Which choice is chàng + gē?"],
+   "keywords": [{"w":"唱歌","py":"chànggē","en":"to sing"},{"w":"小鸟","py":"xiǎoniǎo","en":"bird"},{"w":"好听","py":"hǎotīng","en":"pleasant"}],
+   "explanation_en": "唱 is read chàng (4th tone) and 歌 is gē (1st tone), together chàng gē. 唱 (4th tone) falls; 歌 (1st tone) is level - one falling, one level."
+  },
+  "ZS55_B3": {
+   "sentence_en": "We sat down to rest on a 长椅 (bench) in the park.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. A 长椅 is a long chair, so read cháng. 椅 is yǐ. Which is cháng + yǐ?"],
+   "keywords": [{"w":"长椅","py":"chángyǐ","en":"bench"},{"w":"公园","py":"gōngyuán","en":"park"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "In 长椅, 长 is read cháng (2nd tone, length), not zhǎng (to grow); 椅 is yǐ (3rd tone), giving cháng yǐ. 长 has two readings: cháng (length) and zhǎng (to grow). A bench is a long chair, so read cháng."
+  },
+  "ZS55_B4": {
+   "sentence_en": "After Dad came back from his 散步 (walk), he had a satisfied smile on his face.",
+   "hints": ["散 is flat s (sàn, 4th tone), not retroflex sh; 步 is bù (4th tone). Which choice is sàn + bù?"],
+   "keywords": [{"w":"散步","py":"sànbù","en":"to take a walk"},{"w":"回来","py":"huílái","en":"to come back"},{"w":"满足","py":"mǎnzú","en":"satisfied"}],
+   "explanation_en": "The 散 of 散步 is read sàn (flat s, 4th tone) and 步 is bù (4th tone), together sàn bù. 散 is a flat-s sound (not retroflex sh); the 散 of 散步 is 4th tone sàn, meaning to spread out one's steps."
+  },
+  "ZS55_C1": {
+   "sentence_en": "In the park there is ___ (a) big banyan tree; its shade covers the whole path.",
+   "hints": ["Clue: the measure word for a tree. Which one is used specially for plants?"],
+   "keywords": [{"w":"棵","py":"kē","en":"measure word for plants"},{"w":"大榕树","py":"dà róngshù","en":"big banyan tree"},{"w":"树荫","py":"shùyīn","en":"tree shade"}],
+   "explanation_en": "The measure word 棵 is used specially for plants (trees, grass), so 一棵大榕树 is correct. Plants use 棵: 一棵树, 一棵草. 棵 has 木 in it, reminding you it counts plants (wood). 条, 张 and 块 do not fit a tree."
+  },
+  "ZS55_C2": {
+   "sentence_en": "Little sister ran a long time in the park and was ___ (sweating) with a red face.",
+   "hints": ["Clue: after running one gets hot and sweaty, with a red face. Which word means 'to sweat'?"],
+   "keywords": [{"w":"流汗","py":"liúhàn","en":"to sweat"},{"w":"满脸通红","py":"mǎnliǎn-tōnghóng","en":"face all red"},{"w":"跑步","py":"pǎobù","en":"to run"}],
+   "explanation_en": "After running one easily sweats, so 流汗得满脸通红 describes the state after exercise, and it fits best. After exercise: 流汗 (sweating) plus a red face is a fixed way to describe it. 喘气, 发热 and 呼吸 do not fit this description as well."
+  },
+  "ZS55_C3": {
+   "sentence_en": "In the park, we ___ (ran into) Uncle Wang, whom we had not seen for a long time, and everyone was happy.",
+   "hints": ["Clue: coming across someone by chance. Which word means 'to run into / meet by chance', stressing the unexpected?"],
+   "keywords": [{"w":"遇见","py":"yùjiàn","en":"to run into"},{"w":"久未见面","py":"jiǔ wèi jiànmiàn","en":"not seen for long"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "遇见 means to come across someone by chance, stressing the unexpected, best matching meeting Uncle Wang after a long time, so it fits best. 遇见 stresses a chance, unexpected meeting; 看见 only means to see with the eyes. Meeting after a long absence uses 遇见."
+  },
+  "ZS55_C4": {
+   "sentence_en": "Elder brother ___ (carefully) put the injured little bird back into the nest, afraid of hurting it again.",
+   "hints": ["Clue: putting a hurt bird back must be done gently so as not to hurt it. Which word means 'careful (in handling), gentle'?"],
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"鸟巢","py":"niǎocháo","en":"bird's nest"}],
+   "explanation_en": "Putting a hurt bird back must be done gently so as not to hurt it, so 小心 (careful, gentle) fits best. Handling a hurt animal -> be 小心 (gentle, cautious). 努力, 认真 and 用心 do not stress the gentle touch needed here."
+  },
+  "ZS55_C5": {
+   "sentence_en": "In the park there are three ___ (measure word) wooden chairs for everyone to rest on.",
+   "hints": ["Clue: a chair has a back or arms you can grip. Which measure word is used for chairs?"],
+   "keywords": [{"w":"把","py":"bǎ","en":"measure word for chairs"},{"w":"木椅子","py":"mù yǐzi","en":"wooden chair"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation_en": "A chair has a back or arms you can grip, so the measure word 把 is used: 一把椅子, a fixed pairing. A chair -> 把 (一把椅子); a table -> 张 (一张桌子). 把 and 椅子 go together. 张, 条 and 个 do not fit a chair."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“欣赏”是用心地观看、品味美好的事物，所以“欣赏美景”就是用心观看美丽的景色。“微风、追赶”都不是“用心观看”的意思。",
+   "explanation_en": "欣赏 (xīnshǎng) means to look at and appreciate something lovely, so 欣赏美景 means to enjoy the beautiful scenery. 微风 (breeze) and 追赶 (chase) do not mean 'to appreciate by looking'.",
+   "stem_en": "to enjoy the beautiful scenery",
+   "keywords": [{"w":"欣赏","py":"xīnshǎng","en":"to appreciate"},{"w":"美景","py":"měijǐng","en":"beautiful scenery"}]
+  },
+  "2": {
+   "explanation": "“微风”是轻轻吹的风，所以“轻轻的微风”就是柔柔地吹过来的小风。“欣赏、休息”都不是“轻轻吹的风”的意思。",
+   "explanation_en": "微风 (wēifēng) means a gentle breeze, so 轻轻的微风 means a soft, light breeze. 欣赏 (admire) and 休息 (rest) do not mean 'a gently blowing wind'.",
+   "stem_en": "a gentle breeze",
+   "keywords": [{"w":"微风","py":"wēifēng","en":"breeze"},{"w":"轻轻","py":"qīngqīng","en":"gently"}]
+  },
+  "3": {
+   "explanation": "“蝴蝶”是一种翅膀有花纹的昆虫，所以“蝴蝶飞过花丛”就是蝴蝶从花丛上面飞过去。“欣赏、茂盛”都不是“会飞的昆虫”。",
+   "explanation_en": "蝴蝶 (húdié) is a winged insect with patterned wings, so 蝴蝶飞过花丛 means butterflies fly over the flowers. 欣赏 (admire) and 茂盛 (lush) are not 'a flying insect'.",
+   "stem_en": "butterflies fly over the flowers",
+   "keywords": [{"w":"蝴蝶","py":"húdié","en":"butterfly"},{"w":"花丛","py":"huācóng","en":"cluster of flowers"}]
+  },
+  "4": {
+   "explanation": "“茂盛”是花草树木长得又多又壮，所以“树木茂盛”就是树长得很茂密、很旺盛。“微风、追赶”都不是“草木长得旺盛”的意思。",
+   "explanation_en": "茂盛 (màoshèng) means plants growing thick and strong, so 树木茂盛 means the trees grow lush. 微风 (breeze) and 追赶 (chase) do not mean 'plants growing lush'.",
+   "stem_en": "the trees grow lush",
+   "keywords": [{"w":"茂盛","py":"màoshèng","en":"lush"},{"w":"树木","py":"shùmù","en":"trees"}]
+  },
+  "5": {
+   "explanation": "“休息”是停下来让身体放松、恢复力气，所以“坐下来休息”就是坐下来歇一歇。“欣赏、追赶”都不是“停下来歇息”的意思。",
+   "explanation_en": "休息 (xiūxi) means to stop and let the body rest, so 坐下来休息 means to sit down and rest. 欣赏 (admire) and 追赶 (chase) do not mean 'to stop and rest'.",
+   "stem_en": "to sit down and rest",
+   "keywords": [{"w":"休息","py":"xiūxi","en":"to rest"},{"w":"坐下","py":"zuòxià","en":"to sit down"}]
+  }
+ },
+ "craft": {
+  "ZS55_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The weather is very hot today.' and 'We still went happily to play in the park.'",
+   "answer_en": "Although the weather is very hot today, we still went happily to play in the park.",
+   "tiles": ["虽然","今天天气很热，","但是","我们还是高高兴兴地去公园玩。"],
+   "explanation_en": "虽然……但是…… names an unfavourable situation first, then an action done anyway. '虽然今天天气很热' (although it is hot) is the unfavourable situation, '但是我们还是高高兴兴地去公园玩' (but we still went happily) is what we did - a turn."
+  },
+  "ZS55_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The flowers in the park bloom beautifully.' and 'We took many photos beside the flowers.'",
+   "answer_en": "Because the flowers in the park bloom beautifully, we took many photos beside the flowers.",
+   "tiles": ["因为","公园里的花开得很美，","所以","我们在花丛旁边拍了很多照片。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为公园里的花开得很美' (because the flowers are pretty) is the cause, '所以我们在花丛旁边拍了很多照片' (so we took many photos) is the result. Seeing 因为, expect 所以 to follow."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "On Saturday morning, my parents and I went to walk in the nearby park. The air in the park was very ___ (fresh), which put us in a good mood.",
+   "hint": "Clue: it pairs with 空气 (air) - clean air that lifts the mood. Which box word means 'fresh'?",
+   "keywords": [{"w":"新鲜","py":"xīnxiān","en":"fresh"},{"w":"空气","py":"kōngqì","en":"air"}],
+   "explanation_en": "空气新鲜 means good, clean air that puts people in a good mood, so 新鲜 fits best."
+  },
+  "2": {
+   "sentence_en": "We walked along the path and saw the trees growing very ___ (lush), their shade covering the path.",
+   "hint": "Clue: the trees grow so well their shade covers the path. Which box word means 'lush / luxuriant'?",
+   "keywords": [{"w":"茂盛","py":"màoshèng","en":"lush"},{"w":"树荫","py":"shùyīn","en":"tree shade"}],
+   "explanation_en": "树木茂盛 describes trees growing so well their shade covers the path, so 茂盛 fits best."
+  },
+  "3": {
+   "sentence_en": "After a while, we ___ (stopped) by the lake and saw a few white ducks swimming in the water.",
+   "hint": "Clue: while walking, they paused by the lake to look. Which box phrase means 'to stop'?",
+   "keywords": [{"w":"停下来","py":"tíng xiàlái","en":"to stop"},{"w":"湖边","py":"húbiān","en":"lakeside"}],
+   "explanation_en": "While walking, they paused by the lake to watch the ducks, so 停下来 (to stop) fits the sequence of actions best."
+  },
+  "4": {
+   "sentence_en": "Seeing the ducks, little sister ___ (excitedly) clapped her hands.",
+   "hint": "Clue: seeing the cute ducks stirs her up with joy. Which box word means 'excited'?",
+   "keywords": [{"w":"兴奋","py":"xīngfèn","en":"excited"},{"w":"鸭子","py":"yāzi","en":"duck"}],
+   "explanation_en": "Seeing the cute ducks stirs little sister up with joy, so 兴奋地拍起手来 (excitedly clapped) fits best."
+  },
+  "5": {
+   "sentence_en": "We played in the park all morning, and everyone was extremely ___ (tired).",
+   "hint": "Clue: it echoes 'played all morning' - worn out. Which box word means 'tired'?",
+   "keywords": [{"w":"疲倦","py":"píjuàn","en":"tired"},{"w":"上午","py":"shàngwǔ","en":"morning"}],
+   "explanation_en": "疲倦极了 means being worn out, matching 'played all morning', so 疲倦 fits best."
+  }
+ },
+ "reading": {
+  "ZS55_G1": {
+   "stem_en": "After little sister fell, what did Mingming do first?",
+   "answer_en": "He quickly ran over and helped little sister up.",
+   "keywords": [{"w":"摔倒","py":"shuāidǎo","en":"to fall"},{"w":"扶","py":"fú","en":"to help up"},{"w":"连忙","py":"liánmáng","en":"hurriedly"}],
+   "explanation": "这是细节题。短文说“明明连忙跑过去，轻轻地扶起妹妹，用纸巾帮她擦去眼泪”，“连忙跑过去，轻轻地扶起妹妹”说明明明首先做的是跑过去扶起妹妹，所以选(3)。(1)擦眼泪、(2)拿药水都是后来的事。做细节题要注意动作的先后顺序。",
+   "explanation_en": "This is a detail question. The passage says 'Mingming quickly ran over, gently helped little sister up, and wiped her tears with a tissue'. The first action was running over to help her up, so (3). (1) wiping tears and (2) taking out medicine came later. Note the order of the actions.",
+   "solution": {"evidence": "明明连忙跑过去，轻轻地扶起妹妹"}
+  },
+  "ZS55_G2": {
+   "stem_en": "From the passage, what kind of child can we tell Mingming is?",
+   "answer_en": "A child who cares about his family and knows how to look after others.",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care"},{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"家人","py":"jiārén","en":"family"}],
+   "explanation": "这是推断题。短文说妹妹摔倒后，“明明连忙跑过去，轻轻地扶起妹妹，用纸巾帮她擦去眼泪”，可以推断明明是一个关心家人、懂得照顾别人的孩子，所以选(1)。(2)爱玩游戏不喜欢读书、(3)胆子很小，文中都没有这样说。推断题要从人物的行为来判断性格。",
+   "explanation_en": "This is an inference question. The passage says after little sister fell, 'Mingming quickly ran over, gently helped her up, and wiped her tears with a tissue', so we can infer he is a child who cares about his family and knows how to look after others, so (1). (2) loving games and disliking study and (3) being timid are not stated. Judge character from actions.",
+   "solution": {"evidence": "明明连忙跑过去，轻轻地扶起妹妹，用纸巾帮她擦去眼泪"}
+  },
+  "ZS55_G3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "The things that happened to Mingming's family in the park.",
+   "keywords": [{"w":"公园","py":"gōngyuán","en":"park"},{"w":"一家人","py":"yìjiārén","en":"the whole family"},{"w":"事情","py":"shìqing","en":"things; events"}],
+   "explanation": "这是主旨题。全文讲明明一家人去大公园，孩子玩游戏、爸爸钓鱼、妈妈看书，妹妹摔倒后明明和妈妈一起帮她处理伤口，然后一家人继续开心玩耍。可见短文主要讲的是明明一家人在公园里发生的事情，所以选(2)。(1)湖和柳树美丽、(3)妈妈帮妹妹处理伤口都只是其中一个情节，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage tells how Mingming's family went to the big park - the children playing, Dad fishing, Mum reading, and after little sister fell, Mingming and Mum helping treat her wound, then the family continuing to play happily. So it is mainly about the things that happened to the family in the park, so (2). (1) the lake and willows being beautiful and (3) Mum treating the wound are single scenes, not the main idea.",
+   "solution": {"evidence": "上个星期天，明明和家人去了家附近的大公园。"}
+  },
+  "ZS55_H1": {
+   "stem_en": "Find a word in the passage that describes today's weather.",
+   "answer_en": "晴朗 (fine and clear)",
+   "keywords": [{"w":"晴朗","py":"qínglǎng","en":"fine and clear"},{"w":"天气","py":"tiānqì","en":"weather"},{"w":"星期六","py":"xīngqīliù","en":"Saturday"}],
+   "explanation": "这是找词题。短文开头说“今天是星期六，天气晴朗”，“晴朗”正好说明今天的天气状况——天气好、阳光明亮，所以答案是“晴朗”。做找词题要回原文找出正好说明题目情况的词语。",
+   "explanation_en": "This is a find-the-word question. The passage opens with 'today is Saturday, the weather is fine and clear'; 晴朗 exactly describes today's weather - fine and sunny, so the answer is 晴朗. Find the word that fits the situation.",
+   "solution": {"evidence": "今天是星期六，天气晴朗"}
+  },
+  "ZS55_H2": {
+   "stem_en": "Why did Xiaohua stop Xiaowen from picking a flower?",
+   "answer_en": "Because the flowers in the park belong to everyone, and Xiaowen must not pick them.",
+   "keywords": [{"w":"公园","py":"gōngyuán","en":"park"},{"w":"大家的","py":"dàjiā de","en":"everyone's"},{"w":"摘","py":"zhāi","en":"to pick"}],
+   "explanation": "这是细节题，答案用完整句子。短文说小华连忙拉住小雯说“公园里的花是大家的，我们不可以摘”，说明小华阻止小雯摘花，是因为公园里的花是大家的，不可以摘。答“为什么”要把原因写成完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says Xiaohua quickly pulled Xiaowen back and said 'the flowers in the park belong to everyone, we must not pick them', so Xiaohua stopped her because the flowers belong to everyone. State the reason in a full sentence.",
+   "solution": {"evidence": "公园里的花是大家的，我们不可以摘"}
+  },
+  "ZS55_H3": {
+   "stem_en": "From the passage, what kind of child do you think Xiaohua is? Explain in one or two sentences.",
+   "answer_en": "Xiaohua is a sensible child who protects the shared environment, because she stopped Xiaowen from picking a flower and reminded everyone to protect the flowers and trees in the park.",
+   "keywords": [{"w":"懂事","py":"dǒngshì","en":"sensible"},{"w":"爱护","py":"àihù","en":"to protect"},{"w":"公共环境","py":"gōnggòng huánjìng","en":"public environment"}],
+   "explanation": "这是推断题（评价人物）。短文说小华连忙拉住小雯说“公园里的花是大家的，我们不可以摘”，还让小雯明白要保护公园里的花草树木。从她阻止小雯摘花、提醒大家保护公共环境，可以看出她是个懂事、爱护公共环境的孩子。答这类题要先说人物特点，再用文中的事作理由。",
+   "explanation_en": "This is an inference (character-judgement) question. The passage says Xiaohua quickly stopped Xiaowen, saying 'the flowers belong to everyone, we must not pick them', and made her see that the park's flowers and trees should be protected. From stopping Xiaowen and reminding everyone to protect the public environment, we see she is sensible and protects shared spaces. State the trait, then give the events as the reason.",
+   "solution": {"evidence": "小华连忙拉住她说：“公园里的花是大家的，我们不可以摘。”"}
+  }
+ }
+}

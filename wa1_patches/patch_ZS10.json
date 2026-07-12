@@ -1,0 +1,217 @@
+{
+ "setId": "ZS10",
+ "mcq": {
+  "ZS10_A1": {
+   "sentence_en": "Seeing its owner come back, the puppy happily ___ (wags) its tail.",
+   "hints": ["The blank means the tail moving back and forth. Which character has the hand radical 扌 (an action)?"],
+   "keywords": [{"w":"摇尾巴","py":"yáo wěiba","en":"to wag the tail"},{"w":"主人","py":"zhǔrén","en":"owner"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "摇尾巴 means the tail swinging back and forth, a puppy's happy action, so 摇 is correct. 摇 has the hand radical 扌 - shaking with the hand or body uses 摇. Remember 摇 + hand radical = an action."
+  },
+  "ZS10_A2": {
+   "sentence_en": "The little rabbit's fur is soft and ___ (smooth); it feels nice to touch.",
+   "hints": ["The blank pairs with 软 (soft) to describe smooth fur. Which character has the water radical 氵?"],
+   "keywords": [{"w":"滑","py":"huá","en":"smooth; slippery"},{"w":"毛","py":"máo","en":"fur"},{"w":"舒服","py":"shūfu","en":"comfortable"}],
+   "explanation_en": "软 pairs with 滑 to describe the smooth feel of the rabbit's fur, and 又软又滑 (soft and smooth) is a natural expression. 滑 has the water radical 氵 - ice is slippery because of water, and smooth things also use 滑."
+  },
+  "ZS10_A3": {
+   "sentence_en": "At the zoo we saw a big ___ (tabby) cat, and it was sleeping.",
+   "hints": ["The blank + 猫 names a cat with patterns on its coat. Which character (花) means 'patterned / colourful'?"],
+   "keywords": [{"w":"花猫","py":"huāmāo","en":"tabby cat"},{"w":"动物园","py":"dòngwùyuán","en":"zoo"},{"w":"睡觉","py":"shuìjiào","en":"to sleep"}],
+   "explanation_en": "花猫 means a cat with patterns on its body, so 花 is correct. 花 means colour and pattern; 花猫 (tabby cat) and 花布 (patterned cloth) both use this 花."
+  },
+  "ZS10_A4": {
+   "sentence_en": "A little bird stands on the tree ___ (branch), singing a pleasant song.",
+   "hints": ["The blank + 树 names the branch of a tree. Which character has the wood radical 木?"],
+   "keywords": [{"w":"树枝","py":"shùzhī","en":"tree branch"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"},{"w":"唱歌","py":"chànggē","en":"to sing"}],
+   "explanation_en": "A tree's branch is called 树枝, so a bird standing on 树枝 makes sense; 枝 is correct. 枝 has the wood radical 木 - parts of a tree relate to wood, so 树枝 (branch) and 树干 (trunk) both use the wood radical."
+  },
+  "ZS10_A5": {
+   "sentence_en": "My little brother ___ (caught by fishing) a fish for the first time and jumped for joy.",
+   "hints": ["The blank means to catch fish with a rod. Which character has the metal radical 钅 (the hook is metal)?"],
+   "keywords": [{"w":"钓鱼","py":"diàoyú","en":"to fish"},{"w":"小鱼","py":"xiǎoyú","en":"little fish"},{"w":"高兴","py":"gāoxìng","en":"happy"}],
+   "explanation_en": "Catching fish with a rod is 钓鱼, so 钓到小鱼 (caught a fish) makes sense; 钓 is correct. 钓 has the metal radical 钅 - a fishing hook is made of metal, so 钓 has the metal radical."
+  },
+  "ZS10_B1": {
+   "sentence_en": "There is a 长颈鹿 (giraffe) at the zoo, with a very tall neck.",
+   "hints": ["In 长颈鹿, 长 means 'long', read cháng (2nd tone), not zhǎng ('to grow'); 颈 is jǐng (3rd tone), 鹿 is lù (4th tone). Which choice is cháng + jǐng + lù?"],
+   "keywords": [{"w":"长颈鹿","py":"chángjǐnglù","en":"giraffe"},{"w":"脖子","py":"bózi","en":"neck"},{"w":"动物园","py":"dòngwùyuán","en":"zoo"}],
+   "explanation_en": "In 长颈鹿, 长 is read cháng (2nd tone), meaning length, not zhǎng (to grow); 颈 is jǐng (3rd tone) and 鹿 is lù (4th tone). 长 has two readings: cháng = length (长颈鹿, 很长); zhǎng = to grow (长大, 成长)."
+  },
+  "ZS10_B2": {
+   "sentence_en": "The kitten came over 轻轻 (softly), without a sound.",
+   "hints": ["轻 is read qīng (1st tone); 轻轻 is both 1st tone. Which choice has both flat tones?"],
+   "keywords": [{"w":"轻轻","py":"qīngqīng","en":"softly; gently"},{"w":"走过来","py":"zǒu guòlái","en":"to come over"},{"w":"声音","py":"shēngyīn","en":"sound"}],
+   "explanation_en": "轻 is read qīng (1st tone); both characters of 轻轻 are 1st tone, showing a very gentle action. 轻 is 1st tone qīng, a flat, even tone - steady like walking softly."
+  },
+  "ZS10_B3": {
+   "sentence_en": "This puppy is very 聪明 (clever) and quickly learned a new trick.",
+   "hints": ["聪 is cōng (1st tone), 明 is míng (2nd tone, with back nasal -ng). Which choice is cōng + míng, keeping the -ng?"],
+   "keywords": [{"w":"聪明","py":"cōngmíng","en":"clever"},{"w":"小狗","py":"xiǎogǒu","en":"puppy"},{"w":"动作","py":"dòngzuò","en":"movement; trick"}],
+   "explanation_en": "聪 is read cōng (1st tone) and 明 is míng (2nd tone, back nasal -ng), together cōng míng. 明 has the back nasal -ng (míng) - don't drop the g; 聪 is 1st tone cōng."
+  },
+  "ZS10_B4": {
+   "sentence_en": "A few 青蛙 (frogs) live in the pond near my home.",
+   "hints": ["青 is qīng (1st tone), 蛙 is wā (1st tone). Both 1st tone. Which choice is qīng + wā?"],
+   "keywords": [{"w":"青蛙","py":"qīngwā","en":"frog"},{"w":"池塘","py":"chítáng","en":"pond"},{"w":"附近","py":"fùjìn","en":"nearby"}],
+   "explanation_en": "青 is read qīng (1st tone) and 蛙 is wā (1st tone), together qīng wā. Both characters of 青蛙 are 1st tone: qīng wā, same tone - easy to remember!"
+  },
+  "ZS10_C1": {
+   "sentence_en": "Every morning the little bird ___ (sings) in the tree, and its voice is lovely.",
+   "hints": ["The blank describes a bird making a pleasant sound. Which word means 'to sing', not 'to shout' or 'to chat'?"],
+   "keywords": [{"w":"唱歌","py":"chànggē","en":"to sing"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"},{"w":"好听","py":"hǎotīng","en":"pleasant to hear"}],
+   "explanation_en": "A bird making a lovely sound is 唱歌 (singing) - most natural; 小鸟唱歌 (a bird sings) is a common expression. 小鸟 + 唱歌 is a fixed pairing; 叫喊 (to shout) carries a loud, unpleasant sense, contradicting 好听 (pleasant)."
+  },
+  "ZS10_C2": {
+   "sentence_en": "Mum bought ___ (a) goldfish and put it in the tank.",
+   "hints": ["The blank is the measure word for a long, thin fish. Which one goes with 金鱼?"],
+   "keywords": [{"w":"一条","py":"yì tiáo","en":"a (measure word for long things)"},{"w":"金鱼","py":"jīnyú","en":"goldfish"},{"w":"鱼缸","py":"yúgāng","en":"fish tank"}],
+   "explanation_en": "Long, thin fish use the measure word 条, so 一条金鱼 is the correct pairing. Long, thin creatures use 条: fish, snakes, worms all use 条."
+  },
+  "ZS10_C3": {
+   "sentence_en": "Seeing a stranger, the puppy immediately started barking ___ (alertly).",
+   "hints": ["Clue: it barks at a stranger, noticing someone unfamiliar. Which word means 'alert / watchful'?"],
+   "keywords": [{"w":"警觉","py":"jǐngjué","en":"alert; watchful"},{"w":"陌生人","py":"mòshēngrén","en":"stranger"},{"w":"叫","py":"jiào","en":"to bark"}],
+   "explanation_en": "The puppy barks when it sees a stranger, showing it is very 警觉 (alert), noticing an unfamiliar person has come. Stranger comes + starts barking = 警觉. 警觉 means noticing something wrong and staying watchful."
+  },
+  "ZS10_C4": {
+   "sentence_en": "Xiaoming ___ (carefully) put the injured little bird into the cardboard box.",
+   "hints": ["Clue: the bird is hurt, so it must be handled gently and with care. Which word means 'carefully / gently', not 'roughly' or 'quickly'?"],
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"careful"},{"w":"受伤","py":"shòushāng","en":"injured"},{"w":"纸箱","py":"zhǐxiāng","en":"cardboard box"}],
+   "explanation_en": "The bird is hurt, so putting it in the box must be gentle and careful, and 小心 fits best. An injured animal must be handled 小心 (carefully); 小心 = careful and gentle, causing no further harm."
+  },
+  "ZS10_C5": {
+   "sentence_en": "The elephant is one of the land animals with the greatest ___ (body weight).",
+   "hints": ["The blank + 最大 (greatest) compares how heavy an animal is. Which word means 'body weight'?"],
+   "keywords": [{"w":"体重","py":"tǐzhòng","en":"body weight"},{"w":"大象","py":"dàxiàng","en":"elephant"},{"w":"陆地","py":"lùdì","en":"land"}],
+   "explanation_en": "体重最大 means the heaviest in weight, the correct way to describe an elephant, and 体重 pairs naturally with 最大. To compare an animal's size and weight use 体重; 体重 = the weight of the body."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“鸣叫”是鸟兽或虫发出叫声，所以“小鸟在树上鸣叫”表示小鸟在树上啼叫。“保护、喂食”都不是“发出叫声”的意思。",
+   "explanation_en": "鸣叫 (míngjiào) means the sound a bird, animal, or insect makes, so 小鸟在树上鸣叫 means a bird chirps in the tree. 保护 (protect) or 喂食 (feed) do not mean 'to make a call'.",
+   "stem_en": "a bird chirps in the tree",
+   "keywords": [{"w":"鸣叫","py":"míngjiào","en":"to chirp; to call"},{"w":"小鸟","py":"xiǎoniǎo","en":"little bird"}]
+  },
+  "2": {
+   "explanation": "“保护”是爱护、使不受伤害，所以“保护野生动物”表示爱护野生动物、不让它们受害。“喂食、觅食”都不能表示“使不受伤害”。",
+   "explanation_en": "保护 (bǎohù) means to look after and keep from harm, so 保护野生动物 means to protect wild animals. 喂食 (feed) or 觅食 (forage) cannot mean 'to keep from harm'.",
+   "stem_en": "to protect wild animals",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"野生动物","py":"yěshēng dòngwù","en":"wild animals"}]
+  },
+  "3": {
+   "explanation": "“喂食”是给动物东西吃，所以“喂食小动物”表示给小动物喂东西吃。“保护、奔跑”都不是“给东西吃”的意思。",
+   "explanation_en": "喂食 (wèishí) means to give animals food, so 喂食小动物 means to feed small animals. 保护 (protect) or 奔跑 (run) do not mean 'to give food'.",
+   "stem_en": "to feed small animals",
+   "keywords": [{"w":"喂食","py":"wèishí","en":"to feed"},{"w":"小动物","py":"xiǎo dòngwù","en":"small animals"}]
+  },
+  "4": {
+   "explanation": "“奔跑”是很快地跑，所以“马儿在草原上奔跑”表示马在草原上飞快地跑。“觅食、鸣叫”都不是“快跑”的意思。",
+   "explanation_en": "奔跑 (bēnpǎo) means to run fast, so 马儿在草原上奔跑 means horses galloping on the grassland. 觅食 (forage) or 鸣叫 (chirp) do not mean 'to run fast'.",
+   "stem_en": "horses gallop on the grassland",
+   "keywords": [{"w":"奔跑","py":"bēnpǎo","en":"to gallop; to run fast"},{"w":"草原","py":"cǎoyuán","en":"grassland"}]
+  },
+  "5": {
+   "explanation": "“觅食”是寻找食物，所以“松鼠出来觅食”表示松鼠出来找东西吃。“保护、毛皮”都不是“找食物”的意思。",
+   "explanation_en": "觅食 (mìshí) means to look for food, so 松鼠出来觅食 means the squirrel comes out to forage. 保护 (protect) or 毛皮 (fur) do not mean 'to search for food'.",
+   "stem_en": "the squirrel comes out to forage",
+   "keywords": [{"w":"觅食","py":"mìshí","en":"to forage"},{"w":"松鼠","py":"sōngshǔ","en":"squirrel"}]
+  }
+ },
+ "craft": {
+  "ZS10_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是…… (although…, …): 'The little turtle walks very slowly.' and 'The little turtle keeps practising every day.'",
+   "answer_en": "Although the little turtle walks very slowly, it keeps practising every day.",
+   "tiles": ["虽然","小乌龟走路很慢，","但是","它每天都坚持练习。"],
+   "explanation_en": "虽然……但是…… means the first clause states a situation and the second an opposite or different one. '虽然小乌龟走路很慢' (although the turtle walks slowly) is the first, '但是它每天都坚持练习' (but it keeps practising) is the contrasting one, forming a complete meaning. 虽然……但是…… = a turn: a situation first, then a different one."
+  },
+  "ZS10_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以…… (because…, so…): 'The puppy is ill.' and 'The owner takes the puppy to see the doctor.'",
+   "answer_en": "Because the puppy is ill, the owner takes it to see the doctor.",
+   "tiles": ["因为","小狗生病了，","所以","主人带它去看医生。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为小狗生病了' (because the puppy is ill) is the cause, '所以主人带它去看医生' (so the owner takes it to the doctor) is the result, making the cause-and-effect clear. 因为 (cause), 所以 (result)."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "In the pond live a few frogs; every night they croak ___ (loudly), and the sound carries far.",
+   "hint": "Clue: their call carries far, so it must be loud. Which box word means 'loudly'?",
+   "keywords": [{"w":"大声","py":"dàshēng","en":"loudly"},{"w":"青蛙","py":"qīngwā","en":"frog"}],
+   "explanation_en": "Frogs croak loudly, so 大声地叫 fits their trait, and 'the sound carries far' also shows it is loud."
+  },
+  "2": {
+   "sentence_en": "Xiaoming ___ (likes) these frogs very much and comes to see them after school every day.",
+   "hint": "Clue: he visits them every day - what feeling drives that? Which box word means 'to like'?",
+   "keywords": [{"w":"喜欢","py":"xǐhuan","en":"to like"},{"w":"放学","py":"fàngxué","en":"after school"}],
+   "explanation_en": "Coming to see the frogs every day shows Xiaoming likes them, so 喜欢这些青蛙 makes sense."
+  },
+  "3": {
+   "sentence_en": "One day, Xiaoming noticed a lot of rubbish beside the pond, and he ___ (hurriedly) picked it up and put it in the bin.",
+   "hint": "Clue: he saw the rubbish and acted at once. Which box word means 'hurriedly / at once'?",
+   "keywords": [{"w":"连忙","py":"liánmáng","en":"hurriedly"},{"w":"垃圾","py":"lājī","en":"rubbish"}],
+   "explanation_en": "Xiaoming picked up the rubbish as soon as he saw it, so 连忙 ('hurriedly, at once') fits best."
+  },
+  "4": {
+   "sentence_en": "He also told his classmates that everyone should ___ (protect) the pond's environment.",
+   "hint": "Clue: caring for the environment and not spoiling it. Which box word means 'to protect' (as in 保护环境)?",
+   "keywords": [{"w":"保护","py":"bǎohù","en":"to protect"},{"w":"环境","py":"huánjìng","en":"environment"}],
+   "explanation_en": "Caring for the pond's environment without damaging it is 保护; 保护环境 (protect the environment) is a fixed collocation."
+  },
+  "5": {
+   "sentence_en": "This way the frogs can live ___ (happily).",
+   "hint": "Clue: with a good environment, the frogs live joyfully. Which box word means 'happily'?",
+   "keywords": [{"w":"快乐","py":"kuàilè","en":"happy"},{"w":"生活","py":"shēnghuó","en":"to live"}],
+   "explanation_en": "With a good environment, the frogs can live joyfully, so 快乐地生活 ('live happily') makes sense."
+  }
+ },
+ "reading": {
+  "ZS10_G1_Q1": {
+   "stem_en": "What does the little squirrel do every morning?",
+   "answer_en": "It looks for food in the garden.",
+   "keywords": [{"w":"松鼠","py":"sōngshǔ","en":"squirrel"},{"w":"找东西吃","py":"zhǎo dōngxi chī","en":"to look for food"},{"w":"花园","py":"huāyuán","en":"garden"}],
+   "explanation": "这是细节题。短文说“每天早上，小松鼠都会从树上跳下来，在花园里找东西吃”，直接说明它早上在花园找吃的，所以选(3)。(1)在树洞睡觉、(2)和同学玩文中都没有说是每天早上做的事。做细节题回原文找准确的动作。",
+   "explanation_en": "This is a detail question. The passage says 'every morning the squirrel jumps down from the tree and looks for food in the garden', directly stating what it does, so (3). (1) sleeping in the tree hole and (2) playing with the students are not said to be its morning activity. Find the exact action in the passage.",
+   "solution": {"evidence": "在花园里找东西吃。"}
+  },
+  "ZS10_G1_Q2": {
+   "stem_en": "Why did the squirrel not come out that day?",
+   "answer_en": "Because it was looking after its babies in the tree hole.",
+   "keywords": [{"w":"树洞","py":"shùdòng","en":"tree hole"},{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"宝宝","py":"bǎobao","en":"baby"}],
+   "explanation": "这是原因题。短文说“小松鼠生了几只小宝宝，正在树洞里照顾它们，所以没有出来”，“所以”前面就是原因，所以选(1)。(2)生病、(3)不喜欢同学文中都没有提到。找原因要看“所以”前面的话。",
+   "explanation_en": "This is a reason question. The passage says 'the squirrel had a few babies and was looking after them in the tree hole, so it did not come out'; the reason is before '所以', so (1). (2) being ill and (3) disliking the students are not mentioned. For reasons, read what comes before '所以'.",
+   "solution": {"evidence": "小松鼠生了几只小宝宝，正在树洞里照顾它们，所以没有出来。"}
+  },
+  "ZS10_G1_Q3": {
+   "stem_en": "What is this passage mainly about?",
+   "answer_en": "The students care about the little squirrel in the garden.",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"松鼠","py":"sōngshǔ","en":"squirrel"},{"w":"担心","py":"dānxīn","en":"to worry"}],
+   "explanation": "这是主旨题。全文讲同学们喜欢花园里的小松鼠，喂它坚果，松鼠不见了大家担心，知道它照顾宝宝后又松了口气。可见全文围绕同学们关心小松鼠。(1)种花、(3)老师教怎样照顾动物都不是全文重点；(2)才概括全文。",
+   "explanation_en": "This is a main-idea question. The passage shows the students liking the squirrel, feeding it nuts, worrying when it disappeared, and being relieved on learning it was caring for its babies. So the passage centres on the students caring about the squirrel. (1) planting flowers and (3) the teacher teaching how to care for animals are not the focus; (2) sums up the whole.",
+   "solution": {"evidence": "同学们很喜欢它，常常带一些坚果来喂它。"}
+  },
+  "ZS10_H1_Q1": {
+   "stem_en": "Find a word in the passage that shows the little rabbit dislikes being disturbed: the rabbit is very ___.",
+   "answer_en": "胆小 (timid)",
+   "keywords": [{"w":"胆小","py":"dǎnxiǎo","en":"timid"},{"w":"打扰","py":"dǎrǎo","en":"to disturb"},{"w":"小兔子","py":"xiǎo tùzi","en":"little rabbit"}],
+   "explanation": "这题要找说明小兔子“不喜欢被打扰”的词。短文说“小兔子很胆小，不喜欢大声说话的人”，“胆小”就是胆子小、容易害怕的意思，所以答案是“胆小”。做填词题要看清题目要什么意思，再回原文找。",
+   "explanation_en": "This asks for a word showing the rabbit dislikes being disturbed. The passage says 'the little rabbit is very 胆小 (timid) and does not like loud people'; 胆小 means timid and easily frightened, so the answer is 胆小. Read the meaning wanted, then find it in the passage.",
+   "solution": {"evidence": "小兔子很胆小，不喜欢大声说话的人。"}
+  },
+  "ZS10_H1_Q2": {
+   "stem_en": "How did 'I' stroke the little rabbit?",
+   "answer_en": "'I' carefully reached out my hand and gently stroked the little rabbit's back.",
+   "keywords": [{"w":"小心","py":"xiǎoxīn","en":"carefully"},{"w":"轻轻","py":"qīngqīng","en":"gently"},{"w":"摸","py":"mō","en":"to stroke"}],
+   "explanation": "这是细节题，要用完整句子回答。短文说“我小心地伸出手，轻轻地摸了摸它的背”，直接说明了“我”摸兔子的方式。答题时把“小心伸手、轻轻摸背”都写出来，用完整句子。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'I carefully reached out my hand and gently stroked its back', stating how 'I' stroked the rabbit. Include 'carefully reached out' and 'gently stroked its back' in a complete sentence.",
+   "solution": {"evidence": "我小心地伸出手，轻轻地摸了摸它的背"}
+  },
+  "ZS10_H1_Q3": {
+   "stem_en": "What lesson did Dad tell 'me'?",
+   "answer_en": "Dad told 'me' to cherish small animals and not to disturb them carelessly.",
+   "keywords": [{"w":"爱护","py":"àihù","en":"to cherish"},{"w":"打扰","py":"dǎrǎo","en":"to disturb"},{"w":"小动物","py":"xiǎo dòngwù","en":"small animals"}],
+   "explanation": "这是道理题，答案在文章后面。短文说“爸爸说，我们要爱护这些小动物，不能随便打扰它们”，直接说明了爸爸讲的道理。答“什么道理”要把“爱护小动物、不随便打扰”说清楚。",
+   "explanation_en": "This is a lesson question; the answer is near the end. The passage says 'Dad said we should cherish these small animals and not disturb them carelessly', stating the lesson. State 'cherish small animals and do not disturb them' clearly.",
+   "solution": {"evidence": "我们要爱护这些小动物，不能随便打扰它们。"}
+  }
+ }
+}

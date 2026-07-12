@@ -1,0 +1,217 @@
+{
+ "setId": "ZS37",
+ "mcq": {
+  "ZS37_A1": {
+   "sentence_en": "Xiaoming's ___ (wish) is to become a scientist when he grows up.",
+   "hints": ["The blank + 望 names something hoped for. Which character (with 心, the heart, at the bottom) forms 愿望?"],
+   "keywords": [{"w":"愿望","py":"yuànwàng","en":"wish"},{"w":"科学家","py":"kēxuéjiā","en":"scientist"},{"w":"长大","py":"zhǎngdà","en":"to grow up"}],
+   "explanation_en": "愿望 is the fixed word for something hoped for in the heart, so 愿 fits. 愿 has 心 (the heart) at the bottom - a hope in the heart is a 愿望. The four sound alike, so judge by radical and meaning."
+  },
+  "ZS37_A2": {
+   "sentence_en": "Elder sister studies (努力___) hard, hoping to get into the secondary school she likes.",
+   "hints": ["努力___ means to study diligently. Which character (top 爪, bottom 子) forms 学习 (to study)?"],
+   "keywords": [{"w":"学习","py":"xuéxí","en":"to study"},{"w":"努力","py":"nǔlì","en":"hard; diligent"},{"w":"中学","py":"zhōngxué","en":"secondary school"}],
+   "explanation_en": "努力学习 is a fixed pairing meaning to study diligently, so 学 fits. 学 has a claw top and 子 below - remember the shape of 学, and do not confuse it with 觉."
+  },
+  "ZS37_A3": {
+   "sentence_en": "Little brother ___ (dreamed) he became a superhero and helped many people.",
+   "hints": ["梦___ means to see or experience something in a dream. Which character means 'to see', forming 梦见 (to dream of)?"],
+   "keywords": [{"w":"梦见","py":"mèngjiàn","en":"to dream of"},{"w":"超级英雄","py":"chāojí yīngxióng","en":"superhero"},{"w":"帮助","py":"bāngzhù","en":"to help"}],
+   "explanation_en": "梦见 means to see or experience something in a dream, a fixed word, so 见 fits. 梦见 is a fixed word; 见 means seeing something in the dream."
+  },
+  "ZS37_A4": {
+   "sentence_en": "She ___ (made up) her mind to master the piano.",
+   "hints": ["下___决心 means to firmly resolve to do something. Which character (with the roof radical 宀) forms 下定决心?"],
+   "keywords": [{"w":"下定决心","py":"xiàdìng-juéxīn","en":"to make up one's mind"},{"w":"钢琴","py":"gāngqín","en":"piano"},{"w":"决心","py":"juéxīn","en":"resolve"}],
+   "explanation_en": "下定决心 is a fixed pairing meaning to firmly resolve to do something, so 定 fits. 定 has the roof radical 宀 (a house) - the heart settling down is like a steady house. 下定决心 = to settle the heart firmly."
+  },
+  "ZS37_A5": {
+   "sentence_en": "Xiaohua writes his dream in his ___ (diary) and reads it every day.",
+   "hints": ["日___ names the book for recording each day. Which character (with the speech radical 讠) forms 日记 (diary)?"],
+   "keywords": [{"w":"日记","py":"rìjì","en":"diary"},{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"翻出来","py":"fān chūlái","en":"to flip out"}],
+   "explanation_en": "日记 is the book for recording things each day, a fixed word, so 记 fits. 记 has the speech radical 讠 - recording things in words, so a diary uses 记."
+  },
+  "ZS37_B1": {
+   "sentence_en": "Xiaoli's 梦想 (dream) is to become a painter.",
+   "hints": ["梦 is 4th tone (mèng); 想 is 3rd tone (xiǎng). Which choice is mèng + xiǎng?"],
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"画家","py":"huàjiā","en":"painter"},{"w":"成为","py":"chéngwéi","en":"to become"}],
+   "explanation_en": "梦 is read mèng (4th tone) and 想 is xiǎng (3rd tone), together mèng xiǎng. 梦 (4th tone) falls, like dropping in a dream; 想 (3rd tone) dips then rises."
+  },
+  "ZS37_B2": {
+   "sentence_en": "After 长大 (growing up), he wants to be a doctor.",
+   "hints": ["长 is a polyphone: cháng = length; zhǎng = to grow. 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"以后","py":"yǐhòu","en":"afterward"},{"w":"医生","py":"yīshēng","en":"doctor"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), and 大 is dà (4th tone). 长 read zhǎng means growth; do not confuse it with 长城's 长 (cháng, length) - it is a polyphone. 长大 is about growing, so zhǎng."
+  },
+  "ZS37_B3": {
+   "sentence_en": "Mum 鼓励 (encourages) me to pursue my dream diligently.",
+   "hints": ["鼓 has initial g (gǔ), not k; 励 is lì (4th tone). Which choice is gǔ + lì?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"追求","py":"zhuīqiú","en":"to pursue"},{"w":"梦想","py":"mèngxiǎng","en":"dream"}],
+   "explanation_en": "鼓 is read gǔ (initial g, 3rd tone) and 励 is lì (4th tone), together gǔ lì. g and k are both velar sounds; the difference is g is unaspirated, k is aspirated. 鼓 uses g, unaspirated."
+  },
+  "ZS37_B4": {
+   "sentence_en": "Xiaoqiang is 好强 (competitive), wanting to come first in every contest.",
+   "hints": ["好 is a polyphone: hǎo (good) and hào (to be fond of). 好强 means eager to outdo others, so read hào. 强 is qiáng. Which is hào + qiáng?"],
+   "keywords": [{"w":"好强","py":"hàoqiáng","en":"competitive"},{"w":"比赛","py":"bǐsài","en":"contest"},{"w":"第一名","py":"dì-yī míng","en":"first place"}],
+   "explanation_en": "In 好强, 好 is read hào (4th tone, fond of a quality) and 强 is qiáng (2nd tone), together hào qiáng. 好 is a polyphone: hǎo (good/bad); hào (to be fond of, 爱好, 好强). 好强 means eager to outdo others, so read hào."
+  },
+  "ZS37_C1": {
+   "sentence_en": "Xiaofang ___ (longs) to become a dancer, and practises seriously every day.",
+   "hints": ["Clue: her wish is so strong that she practises seriously every day. Which word means 'to long for / yearn' - the strongest form of hoping?"],
+   "keywords": [{"w":"渴望","py":"kěwàng","en":"to long for"},{"w":"舞蹈家","py":"wǔdǎojiā","en":"dancer"},{"w":"练习","py":"liànxí","en":"to practise"}],
+   "explanation_en": "渴望 means to hope urgently and strongly, the strongest of the choices, matching her serious daily practice, so it fits best. 渴 is like being thirsty - 渴望 is the most urgent hoping. 希望 < 盼望 < 渴望, growing deeper."
+  },
+  "ZS37_C2": {
+   "sentence_en": "Dad ___ (encourages) me, saying that as long as I work hard I can make my dream come true.",
+   "hints": ["Clue: giving confidence and spurring someone on, not praising a result. Which word means 'to encourage'?"],
+   "keywords": [{"w":"鼓励","py":"gǔlì","en":"to encourage"},{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"梦想","py":"mèngxiǎng","en":"dream"}],
+   "explanation_en": "鼓励 means to give confidence and spur someone on, matching 'saying that hard work makes the dream come true', so it fits best. 鼓励 = giving confidence to act; 表扬 / 称赞 / 夸奖 = praising after something is done well. Judge whether it is spurring on or praising."
+  },
+  "ZS37_C3": {
+   "sentence_en": "The teacher gave us ___ (a) saying: as long as you have a dream, chase it bravely.",
+   "hints": ["Clue: the measure word for a spoken remark. Which one is used for a sentence or saying?"],
+   "keywords": [{"w":"一句","py":"yí jù","en":"one (sentence)"},{"w":"话","py":"huà","en":"words; saying"},{"w":"梦想","py":"mèngxiǎng","en":"dream"}],
+   "explanation_en": "The measure word 句 is used for spoken words, so 一句话 (a saying) is correct. Count 话 with 句: 一句话, 两句话. 一条, 一本 and 一段 do not fit a single saying."
+  },
+  "ZS37_C4": {
+   "sentence_en": "He moves toward his goal ___ (firmly), never giving up.",
+   "hints": ["Clue: 'never giving up' shows an unshaken will. Which word means 'firm / resolute (in will)'?"],
+   "keywords": [{"w":"坚定","py":"jiāndìng","en":"firm; resolute"},{"w":"目标","py":"mùbiāo","en":"goal"},{"w":"放弃","py":"fàngqì","en":"to give up"}],
+   "explanation_en": "坚定 means a firm, unshaken will, matching 'never giving up', so it fits best. Look at 'never giving up' - it describes a firm will, so choose 坚定. 努力, 认真 and 小心 do not describe an unshaken will."
+  },
+  "ZS37_C5": {
+   "sentence_en": "I ___ (write down) my dream on paper and stick it by my desk to remind myself.",
+   "hints": ["Clue: putting the dream on paper with a pen. Which word means 'to write down', pairing with 在纸上?"],
+   "keywords": [{"w":"写下","py":"xiěxià","en":"to write down"},{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"书桌","py":"shūzhuō","en":"desk"}],
+   "explanation_en": "写下 means to record something on paper with a pen, matching 'stick it by the desk', so it fits best. 写下 pairs with 在纸上, meaning the result stays on the paper. Seeing 纸 (paper), think 写. 记得, 画出 and 想到 do not fit."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“梦想”是心里最希望实现的愿望，所以“他的梦想是成为一名医生”就是他最想实现的愿望是当医生。“实现、勇气”都不是“心里的愿望”的意思。",
+   "explanation_en": "梦想 (mèngxiǎng) means the wish one most hopes to realize, so 他的梦想是成为一名医生 means his dream is to become a doctor. 实现 (realize) and 勇气 (courage) do not mean 'a wish in the heart'.",
+   "stem_en": "His dream is to become a doctor.",
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"医生","py":"yīshēng","en":"doctor"}]
+  },
+  "2": {
+   "explanation": "“实现”是让愿望变成真的，所以“实现愿望”就是把心里的愿望变成事实。“梦想、目标”都不是“让愿望成真”的意思。",
+   "explanation_en": "实现 (shíxiàn) means to make a wish become real, so 实现愿望 means to make a wish come true. 梦想 (dream) and 目标 (goal) do not mean 'to make a wish real'.",
+   "stem_en": "to make a wish come true",
+   "keywords": [{"w":"实现","py":"shíxiàn","en":"to realize"},{"w":"愿望","py":"yuànwàng","en":"wish"}]
+  },
+  "3": {
+   "explanation": "“勇气”是敢去做事的胆量，所以“鼓起勇气”就是让自己有胆量去做原本不敢做的事。“梦想、目标”都不是“敢做事的胆量”。",
+   "explanation_en": "勇气 (yǒngqì) means the courage to do something, so 鼓起勇气 means to work up the courage. 梦想 (dream) and 目标 (goal) do not mean 'the courage to act'.",
+   "stem_en": "to work up one's courage",
+   "keywords": [{"w":"勇气","py":"yǒngqì","en":"courage"},{"w":"鼓起","py":"gǔqǐ","en":"to work up"}]
+  },
+  "4": {
+   "explanation": "“目标”是想要达到的方向或成果，所以“定下目标”就是定好自己要努力达到的方向。“实现、努力”都不是“要达到的方向”的意思。",
+   "explanation_en": "目标 (mùbiāo) means the direction or result one wants to reach, so 定下目标 means to set a goal. 实现 (realize) and 努力 (effort) do not mean 'the direction to reach'.",
+   "stem_en": "to set a goal",
+   "keywords": [{"w":"目标","py":"mùbiāo","en":"goal"},{"w":"定下","py":"dìngxià","en":"to set"}]
+  },
+  "5": {
+   "explanation": "“努力”是用心用力去做，所以“认真努力”就是认认真真、用尽力气地去做事。“梦想、勇气”都不是“用力去做”的意思。",
+   "explanation_en": "努力 (nǔlì) means to work with heart and strength, so 认真努力 means to work seriously and hard. 梦想 (dream) and 勇气 (courage) do not mean 'to put in effort'.",
+   "stem_en": "to work seriously and hard",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"认真","py":"rènzhēn","en":"serious"}]
+  }
+ },
+ "craft": {
+  "ZS37_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'The road to realizing a dream is hard to walk.' and 'Xiaoming never gives up.'",
+   "answer_en": "Although the road to realizing a dream is hard to walk, Xiaoming never gives up.",
+   "tiles": ["虽然","实现梦想的路很难走，","但是","小明从来不放弃。"],
+   "explanation_en": "虽然……但是…… names a difficulty first, then a turn showing persistence despite it. '虽然实现梦想的路很难走' (although the road is hard) is the difficulty, '但是小明从来不放弃' (but Xiaoming never gives up) is the turn."
+  },
+  "ZS37_E2": {
+   "question_en": "Combine these two sentences using the connector 只要……就 (as long as…, …): 'You keep practising every day.' and 'Your dream will surely come true.'",
+   "answer_en": "As long as you keep practising every day, your dream will surely come true.",
+   "tiles": ["只要","你每天坚持练习，","你的梦想","就","一定能实现。"],
+   "explanation_en": "只要……就…… means when the condition is met, the result follows. '只要你每天坚持练习' (as long as you practise daily) is the condition, '你的梦想就一定能实现' (your dream will come true) is the result. Effort -> success."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Since young, Xiaoyu has had a ___ (dream): she wants to become a painter.",
+   "hint": "Clue: the wish she most hopes to realize, held since young. Which box word means 'dream'?",
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"画家","py":"huàjiā","en":"painter"}],
+   "explanation_en": "梦想 means the wish one most hopes to realize, matching 'since young she wants to become a painter', so it fits best."
+  },
+  "2": {
+   "sentence_en": "After school every day, she practises drawing ___ (attentively).",
+   "hint": "Clue: it describes doing something carefully and with focus. Which box word means 'earnest / attentive'?",
+   "keywords": [{"w":"认真","py":"rènzhēn","en":"earnest"},{"w":"练习","py":"liànxí","en":"to practise"}],
+   "explanation_en": "认真 means doing something carefully and with focus, matching 'every day after school she practises', so it fits best."
+  },
+  "3": {
+   "sentence_en": "Sometimes when she draws badly, she does not ___ (give up) either.",
+   "hint": "Clue: 'also not ___' shows she keeps going even when drawing badly. Which box word means 'to give up'?",
+   "keywords": [{"w":"放弃","py":"fàngqì","en":"to give up"},{"w":"坚持","py":"jiānchí","en":"to persist"}],
+   "explanation_en": "放弃 means to stop persisting; '也不放弃' shows she keeps going even when drawing badly, so it fits best."
+  },
+  "4": {
+   "sentence_en": "Seeing her work so hard, Mum felt very ___ (happy) inside.",
+   "hint": "Clue: Mum sees her daughter working hard and is pleased. Which box word means 'happy'?",
+   "keywords": [{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"用功","py":"yònggōng","en":"hardworking"}],
+   "explanation_en": "高兴 means a joyful mood; Mum sees her daughter work hard and feels happy, so it fits best."
+  },
+  "5": {
+   "sentence_en": "Mum said to her: 'As long as you keep going, you can surely ___ (realize) your wish.'",
+   "hint": "Clue: it pairs with 愿望 (wish) - making the wish become real. Which box word means 'to realize / make come true'?",
+   "keywords": [{"w":"实现","py":"shíxiàn","en":"to realize"},{"w":"愿望","py":"yuànwàng","en":"wish"}],
+   "explanation_en": "实现愿望 is a fixed pairing meaning to make a wish become real, matching Mum's encouragement, so 实现 fits best."
+  }
+ },
+ "reading": {
+  "ZS37_G1": {
+   "stem_en": "What is Xiaojie's dream?",
+   "answer_en": "To become a football player.",
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"足球运动员","py":"zúqiú yùndòngyuán","en":"football player"},{"w":"踢球","py":"tī qiú","en":"to play football"}],
+   "explanation": "这是细节题。短文开头就说“他的梦想是成为一名足球运动员”，直接说明小杰的梦想是当足球运动员，所以选(3)。(1)老师、(2)医生，文中都没有提到。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage opens with 'his dream is to become a football player', directly stating Xiaojie's dream, so (3). (1) teacher and (2) doctor are not mentioned. Find the sentence that directly matches.",
+   "solution": {"evidence": "他的梦想是成为一名足球运动员"}
+  },
+  "ZS37_G2": {
+   "stem_en": "Why did the teacher tell Xiaojie to rest first?",
+   "answer_en": "Because the body is more important than the competition.",
+   "keywords": [{"w":"身体","py":"shēntǐ","en":"body"},{"w":"比赛","py":"bǐsài","en":"competition"},{"w":"休息","py":"xiūxi","en":"to rest"}],
+   "explanation": "这是推断题。短文说老师对小杰说“身体比比赛更重要，先好好休息，伤好了再练习”，可以推断老师叫他先休息，是因为身体比比赛更重要，所以选(1)。(2)比赛已经结束、(3)不喜欢踢球，文中都没有这样说。推断题要看老师说的话找原因。",
+   "explanation_en": "This is an inference question. The teacher tells Xiaojie 'the body is more important than the competition; rest well first, and practise once the injury heals', so he told him to rest because the body matters more than the competition, so (1). (2) the competition being over and (3) not liking football are not stated. Read the teacher's words for the reason.",
+   "solution": {"evidence": "身体比比赛更重要，先好好休息"}
+  },
+  "ZS37_G3": {
+   "stem_en": "What lesson does this passage mainly tell us?",
+   "answer_en": "When pursuing a dream, you must also take good care of your body.",
+   "keywords": [{"w":"梦想","py":"mèngxiǎng","en":"dream"},{"w":"身体","py":"shēntǐ","en":"body"},{"w":"照顾","py":"zhàogù","en":"to take care of"}],
+   "explanation": "这是主旨题。全文讲小杰为了梦想天天练球，受伤后还想坚持，老师告诉他“身体比比赛更重要，先好好休息，伤好了再练习，才能更好地追求梦想”。可见短文是要告诉我们追求梦想时也要照顾好自己的身体，所以选(2)。(1)踢足球最好、(3)比赛最重要都与文意不符，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Xiaojie practising daily for his dream and wanting to persist even after injury, and the teacher saying 'the body is more important than the competition; rest first, then practise to better pursue your dream'. So it tells us that in pursuing a dream, one must also care for the body, so (2). (1) football is best and (3) the competition matters most are off-topic, not the main idea.",
+   "solution": {"evidence": "身体比比赛更重要，先好好休息，伤好了再练习，才能更好地追求梦想。"}
+  },
+  "ZS37_H1": {
+   "stem_en": "Find a word in the passage close in meaning to 害怕 (afraid).",
+   "answer_en": "紧张 (nervous)",
+   "keywords": [{"w":"紧张","py":"jǐnzhāng","en":"nervous"},{"w":"害怕","py":"hàipà","en":"afraid"},{"w":"上台","py":"shàngtái","en":"to go on stage"}],
+   "explanation": "这是近义词题。“害怕”指心里恐惧、不安，短文中说“比赛那天，小恩有些紧张”，“紧张”和“害怕”意思相近，都是心里不安、担心，所以答案是“紧张”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 害怕 means fearful and uneasy; in the passage 'on contest day, Xiaoen was a bit nervous'. 紧张 and 害怕 are close in meaning, both uneasy and worried inside, so the answer is 紧张. Find the closest word in the passage.",
+   "solution": {"evidence": "小恩有些紧张"}
+  },
+  "ZS37_H2": {
+   "stem_en": "How did Xiaoen overcome her nervousness and finish singing?",
+   "answer_en": "Xiaoen took a deep breath, and then bravely stood on stage and sang the whole song.",
+   "keywords": [{"w":"深呼吸","py":"shēnhūxī","en":"to take a deep breath"},{"w":"勇敢","py":"yǒnggǎn","en":"brave"},{"w":"唱完","py":"chàngwán","en":"to finish singing"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“小恩有些紧张，但她深呼吸了一下，勇敢地站在台上唱完了整首歌”，说明她是先深呼吸、再勇敢地站上台唱完整首歌，克服了紧张。答“怎样克服”要把文中的做法写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Xiaoen was a bit nervous, but she took a deep breath and bravely stood on stage to finish the whole song', so she took a deep breath and then bravely sang, overcoming her nerves. State the method clearly from the text.",
+   "solution": {"evidence": "她深呼吸了一下，勇敢地站在台上唱完了整首歌"}
+  },
+  "ZS37_H3": {
+   "stem_en": "What lesson do Mum's words tell us?",
+   "answer_en": "Mum's words tell us that as long as you work hard, your wish can come true.",
+   "keywords": [{"w":"努力","py":"nǔlì","en":"to work hard"},{"w":"愿望","py":"yuànwàng","en":"wish"},{"w":"实现","py":"shíxiàn","en":"to realize"}],
+   "explanation": "这是主旨题。短文最后妈妈笑着说“只要努力，愿望就能实现”，结合小恩努力练习、成功加入合唱团的情节，可以看出妈妈的话告诉我们：只要努力去做，愿望就能实现。答这类题要抓住结尾的关键话，再结合故事概括道理。",
+   "explanation_en": "This is a main-idea question. At the end, Mum smiles and says 'as long as you work hard, your wish can come true'; combined with Xiaoen practising hard and successfully joining the choir, Mum's words tell us that hard work makes wishes come true. Catch the key closing line and sum up the lesson with the story.",
+   "solution": {"evidence": "只要努力，愿望就能实现。"}
+  }
+ }
+}

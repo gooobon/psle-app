@@ -1,0 +1,257 @@
+{
+ "seedId": "peihwa_hcl_wa2",
+ "school": "Pei Hwa Presbyterian Primary",
+ "year": "WA2",
+ "track": "HCL",
+ "bandHint": "hard",
+ "seedSources": [
+  "peihwa_hcl_wa2"
+ ],
+ "sections": {
+  "HanziMcq": {
+   "items": [
+    {
+     "num": 1,
+     "sentence": "小华的爸爸______张，我叫他张叔叔。",
+     "options": [
+      "形",
+      "信",
+      "姓"
+     ],
+     "answerKey": 3,
+     "answer0": 2,
+     "lesson": 1,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "表示姓氏用“姓”，“姓张”，所以填“姓”。",
+      "distractors": [
+       "“形”是形状，与姓氏无关。",
+       "“信”是书信、相信，不表示姓氏。",
+       "✓ 正确答案：姓张（姓氏）。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "表示姓氏的“姓”有“女”旁；形信姓形近，看意思。"
+     }
+    },
+    {
+     "num": 2,
+     "sentence": "欢欢吐了，妈妈______她去看医生。",
+     "options": [
+      "倍",
+      "培",
+      "陪"
+     ],
+     "answerKey": 3,
+     "answer0": 2,
+     "lesson": 1,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "跟着一起去是“陪”，“陪她去看医生”，所以填“陪”。",
+      "distractors": [
+       "“倍”是加倍、两倍，与陪同无关。",
+       "“培”是培养、栽培，不用于陪人。",
+       "✓ 正确答案：陪＝跟着一起（陪她去）。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "“陪”有“阝”旁，表示陪伴（陪你去、陪伴）。倍培陪形近。"
+     }
+    },
+    {
+     "num": 3,
+     "sentence": "姐姐的家______近有一所学校。",
+     "options": [
+      "附",
+      "付",
+      "咐"
+     ],
+     "answerKey": 1,
+     "answer0": 0,
+     "lesson": 1,
+     "skill": "xingjinzi",
+     "explain": {
+      "why": "表示离得近是“附近”，所以填“附”。",
+      "distractors": [
+       "✓ 正确答案：附近（离得近的地方）。",
+       "“付”是付钱、交付，与位置无关。",
+       "“咐”只用于“吩咐”，不能单用表示近。"
+      ],
+      "trapType": "xingjinzi",
+      "memoryTip": "“附近”＝旁边、离得近；附付咐形近，看词义。"
+     }
+    }
+   ]
+  },
+  "VocabMcq": {
+   "items": [
+    {
+     "num": 4,
+     "sentence": "这次画画比赛，我想要______拿到第一名。",
+     "options": [
+      "安排",
+      "学习",
+      "争取",
+      "取得"
+     ],
+     "answerKey": 3,
+     "answer0": 2,
+     "lesson": 1,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "努力去得到名次是“争取”，“争取拿到第一名”，所以填“争取”。",
+      "distractors": [
+       "“安排”是布置、计划，不用于拿名次。",
+       "“学习”是学知识，不能直接接“拿到第一名”。",
+       "✓ 正确答案：争取＝努力去得到。",
+       "“取得”后面直接接“第一名”，但前面已有“拿到”，用“争取……拿到”更顺。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“想要＋争取＋拿到……”＝努力去得到；争取常配名次、机会。"
+     }
+    },
+    {
+     "num": 5,
+     "sentence": "小明已养成睡前整理书包的好______。",
+     "options": [
+      "朋友",
+      "习惯",
+      "练习",
+      "帮手"
+     ],
+     "answerKey": 2,
+     "answer0": 1,
+     "lesson": 1,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "长期坚持的好行为是“好习惯”，“养成好习惯”是固定搭配。",
+      "distractors": [
+       "“朋友”是人，不能“养成朋友”。",
+       "✓ 正确答案：习惯（养成的好行为）。",
+       "“练习”是反复做，不能“养成练习”。",
+       "“帮手”是帮忙的人，不合句意。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“养成＋（好）习惯”是固定搭配；长期坚持的行为叫习惯。"
+     }
+    },
+    {
+     "num": 6,
+     "sentence": "哥哥长大后想当军人，______国家。",
+     "options": [
+      "安全",
+      "认识",
+      "庆祝",
+      "保卫"
+     ],
+     "answerKey": 4,
+     "answer0": 3,
+     "lesson": 1,
+     "skill": "dapei",
+     "explain": {
+      "why": "军人守护国家是“保卫国家”，所以填“保卫”。",
+      "distractors": [
+       "“安全”是形容词，不能“安全国家”。",
+       "“认识”是知道、了解，与守护无关。",
+       "“庆祝”是为高兴的事举行活动，不合。",
+       "✓ 正确答案：保卫国家（守护）。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "“保卫＋国家／家园”＝守护，是固定搭配。"
+     }
+    },
+    {
+     "num": 7,
+     "sentence": "弟弟向爸爸认错，爸爸______了他。",
+     "options": [
+      "改正",
+      "弄坏",
+      "忘记",
+      "原谅"
+     ],
+     "answerKey": 4,
+     "answer0": 3,
+     "lesson": 1,
+     "skill": "vocab_in_context",
+     "explain": {
+      "why": "弟弟认错后，爸爸不再怪他，是“原谅”，所以填“原谅”。",
+      "distractors": [
+       "“改正”是自己改错，主语应是弟弟，不是爸爸。",
+       "“弄坏”是使损坏，与句意相反。",
+       "“忘记”是记不住，不等于原谅。",
+       "✓ 正确答案：原谅＝不再责怪。"
+      ],
+      "trapType": "vocab_in_context",
+      "memoryTip": "“认错”后别人“原谅”；看动作是谁做的——爸爸原谅弟弟。"
+     }
+    }
+   ]
+  },
+  "VocabMatch": {
+   "instruction": "从所提供的词语中，选出可以和各题搭配成合理词组的词语，然后把代表它的数字填写在括号里。",
+   "pool": [
+    "认真",
+    "意思",
+    "跌倒",
+    "脚步"
+   ],
+   "items": [
+    {
+     "num": 12,
+     "stem": "停下______",
+     "answerKey": 4,
+     "answer0": 3,
+     "lesson": 1,
+     "skill": "dapei",
+     "explain": {
+      "why": "停下走路的动作是“停下脚步”。",
+      "distractors": [
+       "认真：停下认真不通。",
+       "意思：停下意思不通。",
+       "跌倒：停下跌倒不搭。",
+       "✓ 正确答案：停下脚步。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "“脚步”＝走路的动作（停下脚步、加快脚步）。"
+     }
+    },
+    {
+     "num": 13,
+     "stem": "______受伤",
+     "answerKey": 3,
+     "answer0": 2,
+     "lesson": 1,
+     "skill": "dapei",
+     "explain": {
+      "why": "摔倒而受伤是“跌倒受伤”。",
+      "distractors": [
+       "认真：认真受伤不通。",
+       "意思：意思受伤不通。",
+       "✓ 正确答案：跌倒受伤。",
+       "脚步：脚步受伤不搭。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "“跌倒”＝摔倒，容易“跌倒受伤”。"
+     }
+    },
+    {
+     "num": 14,
+     "stem": "______复习",
+     "answerKey": 1,
+     "answer0": 0,
+     "lesson": 1,
+     "skill": "dapei",
+     "explain": {
+      "why": "用心、不马虎地复习是“认真复习”。",
+      "distractors": [
+       "✓ 正确答案：认真复习。",
+       "意思：意思复习不通。",
+       "跌倒：跌倒复习不搭。",
+       "脚步：脚步复习不通。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "“认真＋复习／听课／做事”＝用心不马虎。"
+     }
+    }
+   ]
+  }
+ }
+}

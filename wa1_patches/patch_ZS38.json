@@ -1,0 +1,217 @@
+{
+ "setId": "ZS38",
+ "mcq": {
+  "ZS38_A1": {
+   "sentence_en": "After work every day, Dad ___ (spends) time helping us with our homework.",
+   "hints": ["The blank + 时间 means to use up time on something. Which character (same as the 花 of spending money) means 'to spend'?"],
+   "keywords": [{"w":"花","py":"huā","en":"to spend"},{"w":"时间","py":"shíjiān","en":"time"},{"w":"功课","py":"gōngkè","en":"homework"}],
+   "explanation_en": "花时间 is a fixed pairing meaning to use up time on something, so 花 fits. The four are read the same, so judge by meaning: 花时间 = to use up time, just like 花钱 (to spend money)."
+  },
+  "ZS38_A2": {
+   "sentence_en": "Elder sister ___ (swept) the room spotless, and Mum was very pleased to see it.",
+   "hints": ["The blank + 得干干净净 means to clean the room. Which character (with the hand radical 扌) means 'to sweep'?"],
+   "keywords": [{"w":"扫","py":"sǎo","en":"to sweep"},{"w":"房间","py":"fángjiān","en":"room"},{"w":"干净","py":"gānjìng","en":"clean"}],
+   "explanation_en": "扫 is the cleaning action, so 扫得干干净净 (swept spotless) makes sense. All four have the hand radical 扌, so judge by meaning: 扫 = to clean, pairing most naturally with 干净."
+  },
+  "ZS38_A3": {
+   "sentence_en": "Little brother was ill, and Mum ___ (devotedly) looked after him, not sleeping all night.",
+   "hints": ["The blank + 心 means with one's whole heart and care. Which character (with 心 inside) forms 悉心?"],
+   "keywords": [{"w":"悉心","py":"xīxīn","en":"devotedly; with full care"},{"w":"生病","py":"shēngbìng","en":"to be ill"},{"w":"照顾","py":"zhàogù","en":"to look after"}],
+   "explanation_en": "悉心 means with one's whole heart and care, and 悉心照顾 (devotedly looked after) is a fixed pairing, so 悉 fits. 悉 has 心 inside - 悉心 = doing something with your whole heart."
+  },
+  "ZS38_A4": {
+   "sentence_en": "Good friends should ___ (respect) each other and not make fun of one another casually.",
+   "hints": ["The blank + 重 means to value and not look down on someone. Which character (top 酋, bottom 寸) forms 尊重?"],
+   "keywords": [{"w":"尊重","py":"zūnzhòng","en":"to respect"},{"w":"互相","py":"hùxiāng","en":"each other"},{"w":"取笑","py":"qǔxiào","en":"to make fun of"}],
+   "explanation_en": "尊重 is the fixed word for valuing and not belittling someone, so 尊 fits. 尊 has 酋 on top and 寸 below; remember the whole word 尊重. The four sound alike, so judge by meaning."
+  },
+  "ZS38_A5": {
+   "sentence_en": "Grandpa is old, and when walking he needs to ___ (lean on) a cane.",
+   "hints": ["The blank + 着拐杖 means to use a cane for support. Which character (with the hand radical 扌) means 'to support with the hand'?"],
+   "keywords": [{"w":"扶","py":"fú","en":"to support; lean on"},{"w":"外公","py":"wàigōng","en":"grandpa"},{"w":"拐杖","py":"guǎizhàng","en":"cane"}],
+   "explanation_en": "扶 means to support with the hand, so 扶着拐杖 (leaning on a cane) means relying on the cane to walk, which is correct. 扶 has the hand radical 扌 - using the hand to steady oneself or others is 扶."
+  },
+  "ZS38_B1": {
+   "sentence_en": "Mum said 亲切 (kindly) to me that I can tell her if I have any difficulty.",
+   "hints": ["切 is a polyphone: qiē in 切菜 (cut vegetables); qiè in 亲切 (kind). Which choice is qīn + qiè?"],
+   "keywords": [{"w":"亲切","py":"qīnqiè","en":"kind; warm"},{"w":"困难","py":"kùnnan","en":"difficulty"},{"w":"告诉","py":"gàosu","en":"to tell"}],
+   "explanation_en": "亲切 means warm and approachable in manner; 切 is read qiè (4th tone) here, and 亲 is qīn (1st tone). 切: 切菜 qiē (1st tone, to cut); 亲切 / 切实 qiè (4th tone)."
+  },
+  "ZS38_B2": {
+   "sentence_en": "Dad says one must be 诚实 (honest) in life and not tell lies.",
+   "hints": ["诚 has the back nasal -ng (chéng); 实 is retroflex sh (shí). Which choice is chéng + shí?"],
+   "keywords": [{"w":"诚实","py":"chéngshí","en":"honest"},{"w":"做人","py":"zuòrén","en":"to conduct oneself"},{"w":"说谎","py":"shuōhuǎng","en":"to lie"}],
+   "explanation_en": "诚 is read chéng (back nasal -ng, 2nd tone) and 实 is shí (retroflex sh, 2nd tone), together chéng shí. 诚 has the back nasal -ng; 实 is retroflex sh, not flat s."
+  },
+  "ZS38_B3": {
+   "sentence_en": "Elder brother wants to be a doctor after 长大 (growing up).",
+   "hints": ["长 is a polyphone: zhǎng = to grow; zhāng = length (as in 长度). 长大 is about growing, so which choice is zhǎng + dà?"],
+   "keywords": [{"w":"长大","py":"zhǎngdà","en":"to grow up"},{"w":"以后","py":"yǐhòu","en":"afterward"},{"w":"医生","py":"yīshēng","en":"doctor"}],
+   "explanation_en": "In 长大, 长 is read zhǎng (3rd tone, to grow), and 大 is dà (4th tone). 长 has two readings: zhǎng = to grow (长大, 成长); zhāng = length (长短, 校长). Here it is growing, so zhǎng."
+  },
+  "ZS38_B4": {
+   "sentence_en": "Little sister cried 难过 (sadly), because she could not find her toy.",
+   "hints": ["难 is a polyphone: nán = difficult / sad; nàn = disaster. 难过 means sad, so which choice is nán + guò?"],
+   "keywords": [{"w":"难过","py":"nánguò","en":"sad"},{"w":"哭","py":"kū","en":"to cry"},{"w":"玩具","py":"wánjù","en":"toy"}],
+   "explanation_en": "In 难过, 难 is read nán (2nd tone) and 过 is guò (4th tone), together nán guò. The 难 of 难过 is 2nd tone nán; 难 read as 4th tone nàn means disaster - keep them apart."
+  },
+  "ZS38_C1": {
+   "sentence_en": "Grandma is old and walks with difficulty, so every time we go out we ___ (support) her.",
+   "hints": ["Clue: it pairs with 'walks with difficulty' - holding her by the hand to walk. Which word means 'to support someone by the hand'?"],
+   "keywords": [{"w":"搀扶","py":"chānfú","en":"to support by the hand"},{"w":"方便","py":"fāngbiàn","en":"convenient"},{"w":"出门","py":"chūmén","en":"to go out"}],
+   "explanation_en": "搀扶 means holding someone by the hand to help them walk, which most exactly matches 'walks with difficulty'. Walking with difficulty -> needs someone to 搀扶. 搀扶 is holding by the hand, used specially for helping someone walk. 陪伴, 保护 and 帮助 are less exact here."
+  },
+  "ZS38_C2": {
+   "sentence_en": "Xiaoming and Xiaohua are good friends; they ___ (often) go to school and go home together.",
+   "hints": ["Clue: it describes a regular, everyday habit. Which word means 'often / frequently'?"],
+   "keywords": [{"w":"常常","py":"chángcháng","en":"often"},{"w":"上学","py":"shàngxué","en":"to go to school"},{"w":"回家","py":"huíjiā","en":"to go home"}],
+   "explanation_en": "常常 means often, matching the everyday habit of good friends going to and from school together. For a habitual action, use 常常. 忽然 = suddenly, 已经 = already, 到底 = after all - none fit here."
+  },
+  "ZS38_C3": {
+   "sentence_en": "Mum bought ___ (a) new dress, which looks very pretty on.",
+   "hints": ["Clue: a dress worn on the lower body. Which measure word is used for dresses and trousers?"],
+   "keywords": [{"w":"一条","py":"yì tiáo","en":"one (dress/skirt)"},{"w":"新裙子","py":"xīn qúnzi","en":"new dress"},{"w":"好看","py":"hǎokàn","en":"pretty"}],
+   "explanation_en": "A dress is worn on the lower body, and its measure word is 条: 一条裙子. Dresses, trousers, scarves -> 条; tops and coats -> 件; shoes and socks -> 双."
+  },
+  "ZS38_C4": {
+   "sentence_en": "Dad works very hard, so we should ___ (thank) him for his efforts.",
+   "hints": ["Clue: expressing thanks for Dad's efforts. Which word means 'to thank', as in 感谢他的付出?"],
+   "keywords": [{"w":"感谢","py":"gǎnxiè","en":"to thank"},{"w":"辛苦","py":"xīnkǔ","en":"hard-working; toilsome"},{"w":"付出","py":"fùchū","en":"to give; put in effort"}],
+   "explanation_en": "感谢 means to express thanks for someone's help or effort, and 感谢他的付出 (thank him for his efforts) is a fixed pairing, so it fits best. 感谢 + a person's effort / help is the fixed pattern. 感动, 感觉 and 感受 cannot be used this way."
+  },
+  "ZS38_C5": {
+   "sentence_en": "Grandma tells stories very ___ (wonderfully); none of us want to go to sleep.",
+   "hints": ["Clue: the stories are so good and engaging that no one wants to sleep. Which word means 'wonderful / brilliant'?"],
+   "keywords": [{"w":"精彩","py":"jīngcǎi","en":"wonderful"},{"w":"故事","py":"gùshi","en":"story"},{"w":"睡觉","py":"shuìjiào","en":"to sleep"}],
+   "explanation_en": "精彩 describes stories that are good and engaging, so no one wants to sleep, which fits best. To describe stories, shows or matches as good, use 精彩. 认真, 努力 and 仔细 describe an attitude to doing things, not how good a story is."
+  }
+ },
+ "match": {
+  "1": {
+   "explanation": "“道歉”是做错事后向别人说对不起，所以“向朋友道歉”就是向朋友承认错误、说对不起。“答应、关心”都不是“说对不起”的意思。",
+   "explanation_en": "道歉 (dàoqiàn) means to say sorry after doing wrong, so 向朋友道歉 means to apologize to a friend. 答应 (agree) and 关心 (care) do not mean 'to say sorry'.",
+   "stem_en": "to apologize to a friend",
+   "keywords": [{"w":"道歉","py":"dàoqiàn","en":"to apologize"},{"w":"朋友","py":"péngyou","en":"friend"}]
+  },
+  "2": {
+   "explanation": "“答应”是同意别人的请求，所以“答应弟弟的请求”就是同意弟弟提出的要求。“道歉、照顾”都不是“同意请求”的意思。",
+   "explanation_en": "答应 (dāying) means to agree to someone's request, so 答应弟弟的请求 means to agree to little brother's request. 道歉 (apologize) and 照顾 (look after) do not mean 'to agree to a request'.",
+   "stem_en": "to agree to little brother's request",
+   "keywords": [{"w":"答应","py":"dāying","en":"to agree"},{"w":"请求","py":"qǐngqiú","en":"request"}]
+  },
+  "3": {
+   "explanation": "“照顾”是留心料理、看护，所以“照顾生病的外公”就是看护、料理生病的外公。“道歉、分享”都不是“看护料理”的意思。",
+   "explanation_en": "照顾 (zhàogù) means to look after and care for, so 照顾生病的外公 means to look after a sick grandpa. 道歉 (apologize) and 分享 (share) do not mean 'to care for'.",
+   "stem_en": "to look after a sick grandpa",
+   "keywords": [{"w":"照顾","py":"zhàogù","en":"to look after"},{"w":"生病","py":"shēngbìng","en":"to be ill"}]
+  },
+  "4": {
+   "explanation": "“分享”是把好东西分给别人一起用，所以“把零食分享给同学”就是把零食分给同学一起吃。“道歉、关心”都不是“分给别人”的意思。",
+   "explanation_en": "分享 (fēnxiǎng) means to share good things with others, so 把零食分享给同学 means to share snacks with classmates. 道歉 (apologize) and 关心 (care) do not mean 'to share out'.",
+   "stem_en": "to share snacks with classmates",
+   "keywords": [{"w":"分享","py":"fēnxiǎng","en":"to share"},{"w":"零食","py":"língshí","en":"snacks"}]
+  },
+  "5": {
+   "explanation": "“关心”是留意、在乎别人，所以“互相关心对方”就是彼此留意、在乎对方的情况。“道歉、分享”都不是“在乎别人”的意思。",
+   "explanation_en": "关心 (guānxīn) means to care about others, so 互相关心对方 means to care about each other. 道歉 (apologize) and 分享 (share) do not mean 'to care about someone'.",
+   "stem_en": "to care about each other",
+   "keywords": [{"w":"关心","py":"guānxīn","en":"to care about"},{"w":"互相","py":"hùxiāng","en":"each other"}]
+  }
+ },
+ "craft": {
+  "ZS38_E1": {
+   "question_en": "Combine these two sentences using the connector 虽然……但是 (although…, …): 'Elder brother is very busy.' and 'Elder brother helps me with homework every day.'",
+   "answer_en": "Although elder brother is very busy, he helps me with homework every day.",
+   "tiles": ["虽然","哥哥很忙，","但是","他每天都陪我做功课。"],
+   "explanation_en": "虽然……但是…… makes a concession first, then a turn. '虽然哥哥很忙' (although he is busy) is the concession, '但是他每天都陪我做功课' (but he still helps me daily) is the turn. Remember 虽然 at the start, 但是 for the turn."
+  },
+  "ZS38_E2": {
+   "question_en": "Combine these two sentences using the connector 因为……所以 (because…, so…): 'Little sister's birthday is today.' and 'The whole family went to a restaurant to celebrate together.'",
+   "answer_en": "Because it is little sister's birthday today, the whole family went to a restaurant to celebrate together.",
+   "tiles": ["因为","妹妹今天生日，","所以","全家人一起去餐馆庆祝。"],
+   "explanation_en": "因为……所以…… shows cause and result. '因为妹妹今天生日' (because it is her birthday) is the cause, '所以全家人一起去餐馆庆祝' (so the family celebrated) is the result. Seeing 'why', answer with 因为……所以."
+  }
+ },
+ "cloze": {
+  "1": {
+   "sentence_en": "Xiaowei's grandpa came from China to Singapore to visit them. It was Grandpa's first time here, and he found everything very ___ (novel).",
+   "hint": "Clue: first time here, everything is fresh and unfamiliar. Which box word means 'novel / fresh and curious'?",
+   "keywords": [{"w":"新奇","py":"xīnqí","en":"novel"},{"w":"探望","py":"tànwàng","en":"to visit"}],
+   "explanation_en": "It was Grandpa's first time, so everything felt fresh and curious, and 新奇 (novel) fits best."
+  },
+  "2": {
+   "sentence_en": "After school every day, Xiaowei ___ (on his own initiative) took Grandpa for a walk in the nearby park.",
+   "hint": "Clue: he did it himself without being asked, showing his devotion. Which box word means 'on one's own initiative'?",
+   "keywords": [{"w":"主动","py":"zhǔdòng","en":"on one's own initiative"},{"w":"散步","py":"sànbù","en":"to take a walk"}],
+   "explanation_en": "主动 means doing something oneself without being asked; Xiaowei took Grandpa for a walk every day of his own accord, showing his devotion, so 主动 fits best."
+  },
+  "3": {
+   "sentence_en": "Seeing the many flowers and plants in the park, Grandpa ___ (happily) said it was really beautiful here.",
+   "hint": "Clue: he speaks with joy after seeing the pretty flowers. Which box word means 'happily'?",
+   "keywords": [{"w":"高兴地","py":"gāoxìng de","en":"happily"},{"w":"花草","py":"huācǎo","en":"flowers and plants"}],
+   "explanation_en": "Grandpa speaks with joy after seeing the pretty flowers, so 高兴地说 (happily said) fits best."
+  },
+  "4": {
+   "sentence_en": "Hearing this, Xiaowei felt very ___ (happy) inside.",
+   "hint": "Clue: Grandpa praised the park, and Xiaowei feels glad inside. Which box word describes joy in the heart?",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"称赞","py":"chēngzàn","en":"to praise"}],
+   "explanation_en": "Grandpa praised the park, and Xiaowei feels glad inside, so 开心 (happy) best expresses the joy in his heart."
+  },
+  "5": {
+   "sentence_en": "On the weekend, Mum and Dad went out too, and the whole family walked ___ (chatting and laughing) in the park, with laughter all around.",
+   "hint": "Clue: it echoes 'laughter all around' - talking and laughing together. Which box word means 'chatting and laughing'?",
+   "keywords": [{"w":"有说有笑","py":"yǒushuō-yǒuxiào","en":"chatting and laughing"},{"w":"散步","py":"sànbù","en":"to take a walk"}],
+   "explanation_en": "有说有笑 describes talking and laughing together in a lively way, echoing 'laughter all around' as the whole family walks, so it fits best."
+  }
+ },
+ "reading": {
+  "ZS38_G1": {
+   "stem_en": "Where did Linxiao and Chenmei get to know each other?",
+   "answer_en": "In the same HDB block.",
+   "keywords": [{"w":"组屋","py":"zǔwū","en":"HDB flat"},{"w":"认识","py":"rènshi","en":"to know"},{"w":"从小","py":"cóngxiǎo","en":"since young"}],
+   "explanation": "这是细节题。短文说“两人从小就住在同一栋组屋里，每天一起上学、一起回家”，直接说明她们是在同一栋组屋里认识的，所以选(2)。(1)学校、(3)公园，文中都没有这样说。做细节题要回原文找和题目直接对应的句子。",
+   "explanation_en": "This is a detail question. The passage says 'the two had lived in the same HDB block since young, going to and from school together', directly stating they knew each other in the same block, so (2). (1) school and (3) park are not stated. Find the sentence that directly matches.",
+   "solution": {"evidence": "两人从小就住在同一栋组屋里"}
+  },
+  "ZS38_G2": {
+   "stem_en": "What did Chenmei say that made Linxiao smile?",
+   "answer_en": "She said she would often phone and would come to play with Linxiao.",
+   "keywords": [{"w":"打电话","py":"dǎ diànhuà","en":"to phone"},{"w":"好朋友","py":"hǎo péngyou","en":"good friend"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation": "这是细节题。短文说陈美连忙说“我们还是好朋友，我会常常打电话给你，也会来找你玩的”，林晓听了才露出笑容，所以选(3)。(1)送礼物、(2)不会搬家了，文中都没有这样说。做细节题要回原文找和题目直接对应的话。",
+   "explanation_en": "This is a detail question. The passage says Chenmei quickly said 'we are still good friends, I will often phone you and come to play with you', and Linxiao then smiled, so (3). (1) giving a gift and (2) not moving are not stated. Find the exact words in the passage.",
+   "solution": {"evidence": "我们还是好朋友，我会常常打电话给你，也会来找你玩的。"}
+  },
+  "ZS38_G3": {
+   "stem_en": "What does this passage mainly tell us?",
+   "answer_en": "True friendship does not change because of distance.",
+   "keywords": [{"w":"友情","py":"yǒuqíng","en":"friendship"},{"w":"距离","py":"jùlí","en":"distance"},{"w":"改变","py":"gǎibiàn","en":"to change"}],
+   "explanation": "这是主旨题。全文讲陈美要搬家，林晓很难过，陈美说会常常打电话、来找她玩，两人约好每个周末见面继续一起玩。可见短文是要告诉我们真正的友情不会因为距离而改变，所以选(1)。(2)搬家很难过、(3)好朋友要住同一栋组屋都只是情节里的小点，不是全文主旨。",
+   "explanation_en": "This is a main-idea question. The passage shows Chenmei about to move and Linxiao being sad, Chenmei promising to phone and visit, and the two agreeing to meet each weekend. So it tells us true friendship does not change with distance, so (1). (2) moving is sad and (3) good friends should live in the same block are minor points, not the main idea.",
+   "solution": {"evidence": "两人约好每个周末见面，继续一起玩耍。"}
+  },
+  "ZS38_H1": {
+   "stem_en": "Find a word in the passage close in meaning to 高兴 (happy).",
+   "answer_en": "开心 (happy)",
+   "keywords": [{"w":"开心","py":"kāixīn","en":"happy"},{"w":"高兴","py":"gāoxìng","en":"happy"},{"w":"笑容","py":"xiàoróng","en":"smile"}],
+   "explanation": "这是近义词题。“高兴”指心情愉快，短文中说外婆见到他们，“脸上露出了开心的笑容”，“开心”和“高兴”意思相近，都是心情愉快，所以答案是“开心”。做近义词题要回原文找意思最接近的词语。",
+   "explanation_en": "This is a synonym question. 高兴 means feeling happy; in the passage Grandma 'showed a happy smile' on seeing them. 开心 and 高兴 are close in meaning, both feeling joyful, so the answer is 开心. Find the closest word in the passage.",
+   "solution": {"evidence": "脸上露出了开心的笑容"}
+  },
+  "ZS38_H2": {
+   "stem_en": "What is Grandma's daily life like? Answer using content from the passage.",
+   "answer_en": "Grandma usually lives alone and rarely has anyone to talk to, so her life is rather lonely.",
+   "keywords": [{"w":"一个人","py":"yí gè rén","en":"alone"},{"w":"说话","py":"shuōhuà","en":"to talk"},{"w":"寂寞","py":"jìmò","en":"lonely"}],
+   "explanation": "这是细节题，答案用完整句子。短文说“外婆一个人住，平时很少有人陪她说话”，说明外婆平时一个人住、很少有人陪她说话，生活比较寂寞。答“生活怎样”要把文中的情况写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Grandma lives alone and usually rarely has anyone to talk to', so her daily life is living alone with little company, rather lonely. State the situation clearly from the text.",
+   "solution": {"evidence": "外婆一个人住，平时很少有人陪她说话"}
+  },
+  "ZS38_H3": {
+   "stem_en": "What did Wang Ming promise Grandma before leaving?",
+   "answer_en": "Wang Ming promised Grandma that he would come to keep her company every weekend from now on.",
+   "keywords": [{"w":"答应","py":"dāying","en":"to promise"},{"w":"周末","py":"zhōumò","en":"weekend"},{"w":"陪","py":"péi","en":"to keep company"}],
+   "explanation": "这是细节题，答案用完整句子。短文最后说“临走前，王明答应外婆，以后每个周末都来陪她”，直接说明王明答应外婆以后每个周末都来陪她。答“答应了什么”要把承诺的内容写清楚。",
+   "explanation_en": "This is a detail question, answered in a full sentence. The passage ends with 'before leaving, Wang Ming promised Grandma to come and keep her company every weekend from now on', directly stating his promise. State the content of the promise clearly.",
+   "solution": {"evidence": "王明答应外婆，以后每个周末都来陪她。"}
+  }
+ }
+}
