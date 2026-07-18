@@ -71,27 +71,18 @@ function _saveToLS(key, val){
   try { localStorage.setItem(key, JSON.stringify(val)); } catch(e){}
 }
 
-// ── One-time progress reset ──────────────────────────────────
-// A deploy does NOT clear a student's localStorage. To hand out a clean slate
-// with the reworked question bank (all 60 sets fixed + hinted), bump this
-// version string: on the next load every student's answer history, mistakes and
-// session counters are wiped ONCE, while their account (id/password/name/school)
-// is left untouched. Bump it again whenever a future release must reset progress.
-const LS_RESET_KEY = "genius_progress_reset_version";
-const PROGRESS_RESET_VERSION = "2026-07-12_wa1_hints";
-
-// Load persisted data
+// ── Progress persists across logins ──────────────────────────
+// A student's answer history, mistakes and session counter are stored in
+// localStorage and are NEVER wiped on load. On the next login the student
+// resumes from `nextSession` (= history length + 1) - i.e. the session AFTER
+// the last one they finished, not session 1.
+//
+// NOTE: do NOT reintroduce a "one-time reset" block here. An earlier build
+// cleared progress on load, which made students restart from session 1 every
+// time. If a future release ever needs a deliberate wipe, do it as an explicit
+// admin action, never automatically on page load.
 const _persistedUsers = _loadFromLS(LS_USERS_KEY, {});
-let _persistedProgress = _loadFromLS(LS_PROGRESS_KEY, {});
-
-try {
-  if (typeof window !== "undefined" &&
-      localStorage.getItem(LS_RESET_KEY) !== PROGRESS_RESET_VERSION) {
-    _persistedProgress = {};                 // 문제 풀이 기록만 비운다
-    _saveToLS(LS_PROGRESS_KEY, {});          // 계정(genius_users_v2)은 그대로 둔다
-    localStorage.setItem(LS_RESET_KEY, PROGRESS_RESET_VERSION);
-  }
-} catch (e) {}
+const _persistedProgress = _loadFromLS(LS_PROGRESS_KEY, {});
 
 // Build in-memory store seeded from localStorage
 const STORE = {
