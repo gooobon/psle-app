@@ -151,8 +151,8 @@ function VocabPopup({ word, x, y, onClose }) {
         <span onClick={onClose} style={{ cursor: "pointer", color: "#9ca3af", fontSize: 18, lineHeight: 1 }}>×</span>
       </div>
       <div style={{ fontSize: 14, color: "#1f2937", marginTop: 6 }}>{e.en || ""}</div>
-      {(e.syn && e.syn.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>동의어 </span>{e.syn.map((s, i) => <span key={i} style={chip("#0f9d6b", "#e7f6ef")}>{s}</span>)}</div> : null}
-      {(e.ant && e.ant.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>반대어 </span>{e.ant.map((s, i) => <span key={i} style={chip("#e0533d", "#fdece8")}>{s}</span>)}</div> : null}
+      {(e.syn && e.syn.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>Synonym </span>{e.syn.map((s, i) => <span key={i} style={chip("#0f9d6b", "#e7f6ef")}>{s}</span>)}</div> : null}
+      {(e.ant && e.ant.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>Antonym </span>{e.ant.map((s, i) => <span key={i} style={chip("#e0533d", "#fdece8")}>{s}</span>)}</div> : null}
       {e.ex ? <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px dashed #e5e7eb" }}>
         <div style={{ fontFamily: ZH_FONT, fontSize: 15 }}>{e.ex.zh}</div>
         <div style={{ fontSize: 12, color: "#2563eb" }}>{e.ex.py}</div>
@@ -321,11 +321,11 @@ function EnExp({ en }) {
   );
 }
 
-function KeyWords({ list }) {
+function KeyWords({ list, isZh }) {
   if (!list || !list.length) return null;
   return (
     <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px dashed #cbd5e1" }}>
-      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>Key words</div>
+      <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#0f172a", marginBottom: 4 }}>{isZh ? "关键词" : "Key words"}</div>
       {list.map((k, i) => (
         <div key={i} style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#0f172a", lineHeight: 1.6 }}>
           <span style={{ fontWeight: 700 }}>{k.w}</span>
@@ -379,7 +379,7 @@ function ExpContent({ q }) {
       )}
       <Expl text={q.explanation} />
       <EnExp en={q.explanation_en} />
-      <KeyWords list={q.keywords} />
+      <KeyWords list={q.keywords} isZh={isZh} />
     </div>
   );
 }
@@ -833,7 +833,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
         {hasWordBank && !hasBrackets && !submitted && (
           <div style={{ marginBottom: 14 }}>
             <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#64748b", marginBottom: 8 }}>
-              Tap a word to fill the next blank:
+              {isZh ? "点击词语，填入下一个空格：" : "Tap a word to fill the next blank:"}
             </div>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
               {wordBank.map((w, i) => {
@@ -893,7 +893,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                   borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
                   fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6,
                 }}>
-                  <TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} />
+                  <TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} isZh={isZh} />
                 </div>
               )}
 
@@ -942,7 +942,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                     {isRetryCorrect ? (isZh ? "\u2713 \u518D\u6B21\u9009\u5BF9\u4E86\uFF01" : "V Correct on retry!") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A" : "X Correct answer: ") + b.answer}
                   </div>
                   {showExp && b.explanation && (
-                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6, marginTop: 6 }}><TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} /></div>
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6, marginTop: 6 }}><TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} isZh={isZh} /></div>
                   )}
                 </div>
               )}
@@ -973,9 +973,9 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
               color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
               cursor: allAnswered ? "pointer" : "not-allowed",
             }}>
-            Submit
+            {isZh ? "提交" : "Submit"}
             {!allAnswered && <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 400, display: "block" }}>
-              Fill in all blanks first
+              {isZh ? "请先填完所有空格" : "Fill in all blanks first"}
             </span>}
           </button>
         ) : allRetriedOrCorrect ? (
@@ -985,7 +985,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer",
             }}>
-            Next Section
+            {isZh ? "下一节" : "Next Section"}
           </button>
         ) : (
           <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: "calc(var(--fs) * 1.000)" }}>
@@ -1224,7 +1224,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
-            Next Section
+            {isZh ? "下一节" : "Next Section"}
           </button>
         ) : (
           <div style={{ textAlign: "center", padding: "12px", color: "#6b7280", fontSize: "calc(var(--fs) * 1.000)" }}>
@@ -1460,7 +1460,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {bad && q.answer && (
                 <div style={{ marginTop: 4 }}>
                   <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
-                    color: '#16A34A', marginRight: 6 }}>Answer:</span>
+                    color: '#16A34A', marginRight: 6 }}>{isZh ? "答案：" : "Answer:"}</span>
                   <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
                     border: '1px solid #16A34A', color: '#14532D' }}>
@@ -1499,7 +1499,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {bad && q.answer && (
                 <div style={{ marginTop: 4 }}>
                   <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
-                    color: '#16A34A', marginRight: 6 }}>Answer:</span>
+                    color: '#16A34A', marginRight: 6 }}>{isZh ? "答案：" : "Answer:"}</span>
                   <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                     background: '#DCFCE7', padding: '3px 10px', borderRadius: 4,
                     border: '1px solid #16A34A', color: '#14532D' }}>
@@ -1544,7 +1544,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             </tbody>
           </table>
           <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", marginTop: 6 }}>
-            Answer:{' '}
+            {isZh ? "答案：" : "Answer:"}{' '}
             <span style={{ display: 'inline-block', minWidth: 42, border: EX.thin,
               padding: '2px 10px', textAlign: 'center', fontWeight: 700 }}>
               {chosen !== undefined ? '(' + (chosen + 1) + ')' : '(  )'}
@@ -1555,7 +1555,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
               {verdictBadge(chosen === corr)}
               {chosen !== corr && (
                 <div style={{ marginTop: 4 }}>
-                  <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+                  <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>{isZh ? "正确答案：" : "Correct answer:"}</span>
                   <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
                     ({corr + 1}) {opts[corr]}
                   </span>
@@ -1580,7 +1580,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
           {verdictBadge(abOk)}
           {!abOk && (
             <div style={{ marginTop: 4 }}>
-              <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>Correct answer:</span>
+              <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: '#16A34A', marginRight: 6 }}>{isZh ? "正确答案：" : "Correct answer:"}</span>
               <span style={{ fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, background: '#DCFCE7', padding: '3px 10px', borderRadius: 4, border: '1px solid #16A34A', color: '#14532D' }}>
                 ({q.answer}){abAnswerWord ? ' ' + abAnswerWord : ''}
               </span>
@@ -1659,11 +1659,11 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
                   fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 54 }}></th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', textAlign: 'left' }}>Statement</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', textAlign: 'left' }}>{isZh ? "句子" : "Statement"}</th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>True</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>{isZh ? "对" : "True"}</th>
                 <th style={{ border: EX.thin, background: '#f0f0f0', fontFamily: EX.sans,
-                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>False</th>
+                  fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, padding: '7px 6px', width: 64, textAlign: 'center' }}>{isZh ? "错" : "False"}</th>
               </tr>
             </thead>
             <tbody>
@@ -1813,7 +1813,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <div>
               <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
                 textTransform: 'uppercase', letterSpacing: '.5px', color: EX.muted, marginBottom: 3 }}>
-                Your reason
+                {isZh ? "你的理由" : "Your reason"}
               </div>
               <div style={{ border: EX.thin, padding: '8px 12px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)", minHeight: 40 }}>
                 {reason || '(no reason given)'}
@@ -1904,7 +1904,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} /></div>
           </div>
         ) : null}
-        <KeyWords list={q.keywords} />
+        <KeyWords list={q.keywords} isZh={isZh} />
       </div>
     );
   }
@@ -1970,7 +1970,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                 "{evidence}"
               </div>
               <div style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: '#7C3AED', fontWeight: 600 }}>
-                Tap to highlight in the passage
+                {isZh ? "点击可在短文中标出" : "Tap to highlight in the passage"}
               </div>
             </div>
           ),
@@ -2024,13 +2024,13 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <span style={{ borderBottom: '2px solid #1a1a1a', fontWeight: 700, marginRight: 4 }}>
               evidence
             </span>
-            Evidence
+            {isZh ? "依据" : "Evidence"}
           </span>
           <span>
             <span style={{ borderBottom: '1px dashed #999', fontStyle: 'italic', marginRight: 4 }}>
               trap
             </span>
-            Trap to avoid
+            {isZh ? "要避开的陷阱" : "Trap to avoid"}
           </span>
         </div>
       )}
@@ -2110,7 +2110,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
           style={{ width: '100%', padding: '13px', fontFamily: EX.sans,
             background: EX.ink, color: '#fff', border: 'none',
             fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, cursor: 'pointer' }}>
-          Next Section
+          {isZh ? "下一节" : "Next Section"}
         </button>
       )}
     </div>
@@ -2138,7 +2138,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   );
 }
 
-function ExamSummary({ results, duration, onHome, onRetry }) {
+function ExamSummary({ results, duration, onHome, onRetry, isZh }) {
   const _scored = results.filter(r => r.scored !== false);
   const total = _scored.length;
   const correct = _scored.filter(r => r.correct).length;
@@ -2170,7 +2170,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
         {/* Section breakdown */}
         <div style={{ border: "1px solid #e2e8f0", borderRadius: 12, padding: "16px", marginBottom: 16 }}>
           <div style={{ fontWeight: 800, fontSize: "calc(var(--fs) * 1.000)", marginBottom: 12, fontFamily: EXAM_BODY }}>
-            Section Breakdown
+            {isZh ? "各节得分" : "Section Breakdown"}
           </div>
           {Object.entries(bySection).map(([type, data]) => {
             const p = Math.round(data.correct / data.total * 100);
@@ -2205,7 +2205,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
             borderRadius: 12, padding: "15px 0", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
             cursor: "pointer", fontFamily: EXAM_BODY, marginBottom: 10,
           }}>
-           Back to Home
+           {isZh ? "返回主页" : "Back to Home"}
         </button>
         <button onClick={onRetry}
           style={{
@@ -2213,7 +2213,7 @@ function ExamSummary({ results, duration, onHome, onRetry }) {
             border: "2px solid #1e3a6e", borderRadius: 12, padding: "13px 0",
             fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer", fontFamily: EXAM_BODY,
           }}>
-           New Session
+           {isZh ? "新一轮" : "New Session"}
         </button>
       </div>
     </div>
@@ -2570,7 +2570,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                   {it.explanation && (
                     <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6 }}>{it.explanation}<EnExp en={it.explanation_en} /></div>
                   )}
-                  <KeyWords list={it.keywords} />
+                  <KeyWords list={it.keywords} isZh={isZh} />
                 </div>
               )}
               {idx < items.length - 1 && <div style={{ borderTop: "1px solid #ccc", margin: "14px 0" }} />}
@@ -2597,7 +2597,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8", color: "#fff", border: "none",
               fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: allAnswered ? "pointer" : "not-allowed" }}>
-            Submit
+            {isZh ? "\u63D0\u4EA4" : "Submit"}
             {!allAnswered && <span style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 400, display: "block" }}>{isZh ? "\u8BF7\u5148\u56DE\u7B54\u5168\u90E8 " : "Answer all "}{items.length}{isZh ? " \u9898" : " questions first"}</span>}
           </button>
         ) : (
@@ -2605,7 +2605,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
               fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
-            Next Section
+            {isZh ? "下一节" : "Next Section"}
           </button>
         )}
       </div>
@@ -2695,6 +2695,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         duration={Date.now() - startRef.current}
         onHome={() => onFinish(allResults)}
         onRetry={() => { setSecIdx(0); setPageIdx(0); setAllResults([]); setDone(false); }}
+        isZh={isZh}
       />
     );
   }
