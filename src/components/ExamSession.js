@@ -6,6 +6,13 @@ import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
 import ZH_SEG from "@/data/p3/chinese/zh_seg.json";
+import ZhReviewGate from "@/components/ZhReviewGate";
+import { addUnknown as zhAddUnknown, getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from "@/lib/zhReview";
+
+// Function words never worth pushing into the review gate (too common to be a
+// "word the student didn't know"). Tapping them still shows the popup; they are
+// only filtered out of the end-of-session review set.
+const ZH_REVIEW_STOP = new Set("的了是我你他她它们在有和就也都不这那个吗呢吧与及或把被让从向对为之地得着过很太最会要能可把跟给还又再只等啊呀哦嗯".split(""));
 
 // 
 //  EXAM MODE - Looks & feels like a real Singapore P3 exam paper
@@ -133,6 +140,7 @@ function VocabPopup({ word, x, y, onClose }) {
   const e = ZH_VOCAB[word] || {};
   useEffect(() => {
     recordUnknownWord(word);
+    try { zhAddUnknown(word); } catch (_) {}  // collect for the end-of-session review gate
     const h = () => onClose();
     const t = setTimeout(() => window.addEventListener("click", h), 0);
     window.addEventListener("keydown", onClose);
@@ -2625,7 +2633,26 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const [allResults, setAllResults] = useState([]);
   const [pageResults, setPageResults] = useState([]); // buffered until next page
   const [done, setDone] = useState(false);
+  // P4 review gate: null = not yet assembled, [] = nothing to review, [...] = words due.
+  const [gateWords, setGateWords] = useState(null);
+  const [gatePassed, setGatePassed] = useState(false);
   const startRef = useRef(Date.now());
+
+  // When a Chinese session finishes, assemble the review gate ONCE from the
+  // words the student tapped ("didn't know") + the core words of questions
+  // they got wrong. Pure review — no new words are ever introduced here.
+  useEffect(() => {
+    if (!done || !isZh || reviewMode || gateWords !== null) return;
+    let words = [];
+    try {
+      const tapped = zhGetSessionUnknown();
+      const wrongCore = zhCoreWordsFromWrong(allResults, plan, ZH_VOCAB, ZH_REVIEW_STOP);
+      const collected = [...tapped, ...wrongCore].filter((w) => w && !ZH_REVIEW_STOP.has(w));
+      words = zhAssembleGate(collected, ZH_VOCAB, 10);
+      zhClearSessionUnknown();
+    } catch (_) { words = []; }
+    setGateWords(words);
+  }, [done, isZh, reviewMode]);
 
   // Build pages for current section
   const section = plan[secIdx];
@@ -2689,12 +2716,26 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   }
 
   if (done) {
+    // Chinese sessions: run the spaced-review gate before revealing the summary.
+    if (isZh && !reviewMode && !gatePassed) {
+      if (gateWords === null) return null;           // assembling (effect will fill it in)
+      if (gateWords.length > 0) {
+        return (
+          <ZhReviewGate
+            words={gateWords}
+            dict={ZH_VOCAB}
+            onDone={() => setGatePassed(true)}
+          />
+        );
+      }
+      // no words due -> fall through to the summary
+    }
     return (
       <ExamSummary
         results={allResults}
         duration={Date.now() - startRef.current}
         onHome={() => onFinish(allResults)}
-        onRetry={() => { setSecIdx(0); setPageIdx(0); setAllResults([]); setDone(false); }}
+        onRetry={() => { setSecIdx(0); setPageIdx(0); setAllResults([]); setDone(false); setGateWords(null); setGatePassed(false); }}
         isZh={isZh}
       />
     );
