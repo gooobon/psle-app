@@ -5,6 +5,7 @@ import { C } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
+import ZH_SEG from "@/data/p3/chinese/zh_seg.json";
 
 // 
 //  EXAM MODE - Looks & feels like a real Singapore P3 exam paper
@@ -167,28 +168,42 @@ function ClickableZh({ text, isZh }) {
   const [pop, setPop] = useState(null);
   const str = String(text || "");
   if (!isZh || !str) return renderWithUnderline(text);
-  const parts = [];
-  const re = /\{u\}([\s\S]*?)\{\/u\}/g;
-  let last = 0, m;
-  while ((m = re.exec(str)) !== null) {
-    if (m.index > last) parts.push({ marked: false, text: str.slice(last, m.index) });
-    parts.push({ marked: true, text: m[1] });
-    last = m.index + m[0].length;
+  // Strip {u}..{/u} markers; remember the char ranges that were underlined (in the stripped string).
+  let plain = "";
+  const marks = [];
+  {
+    const re = /\{u\}([\s\S]*?)\{\/u\}/g;
+    let last = 0, m;
+    while ((m = re.exec(str)) !== null) {
+      plain += str.slice(last, m.index);
+      const s0 = plain.length;
+      plain += m[1];
+      marks.push([s0, plain.length]);
+      last = m.index + m[0].length;
+    }
+    plain += str.slice(last);
   }
-  if (last < str.length) parts.push({ marked: false, text: str.slice(last) });
-  const nodes = [];
-  let key = 0;
-  parts.forEach((p) => {
-    segZh(p.text).forEach((tk) => {
-      if (tk.clk) {
-        nodes.push(
-          <span key={key++} onClick={(ev) => { ev.stopPropagation(); setPop({ word: tk.t, x: ev.clientX, y: ev.clientY }); }}
-            style={{ ...(p.marked ? U_MARK : {}), cursor: "pointer", borderBottom: "1.5px dotted #9db2d4", borderRadius: 2 }}>{tk.t}</span>
-        );
-      } else {
-        nodes.push(<span key={key++} style={p.marked ? U_MARK : undefined}>{tk.t}</span>);
-      }
-    });
+  const inMark = (a, b) => marks.some(([ms, me]) => a < me && b > ms);
+  // Prefer the pre-computed (jieba) segmentation map for accurate word boundaries;
+  // fall back to dictionary longest-match for any string not in the map.
+  let toks;
+  const pre = ZH_SEG[plain];
+  if (pre) {
+    let pos = 0;
+    toks = pre.map((t) => { const o = { t, s: pos, clk: ZH_HAN_RE.test(t[0]) && !!ZH_VOCAB[t] }; pos += t.length; return o; });
+  } else {
+    let pos = 0;
+    toks = segZh(plain).map((o) => { const r = { t: o.t, s: pos, clk: o.clk }; pos += o.t.length; return r; });
+  }
+  const nodes = toks.map((tk, i) => {
+    const marked = inMark(tk.s, tk.s + tk.t.length);
+    if (tk.clk) {
+      return (
+        <span key={i} onClick={(ev) => { ev.stopPropagation(); setPop({ word: tk.t, x: ev.clientX, y: ev.clientY }); }}
+          style={{ ...(marked ? U_MARK : {}), cursor: "pointer", borderBottom: "1.5px dotted #9db2d4", borderRadius: 2 }}>{tk.t}</span>
+      );
+    }
+    return <span key={i} style={marked ? U_MARK : undefined}>{tk.t}</span>;
   });
   return (
     <>
@@ -675,7 +690,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       const num = parseInt(match[1]);
       const blank = blanks.find(b => b.num === num);
       if (!blank) continue;
-      parts.push(passage.slice(last, match.index));
+      parts.push(<ClickableZh key={"zt" + match.index} text={passage.slice(last, match.index)} isZh={isZh} />);
       const chosen = answers[num];
       const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
@@ -698,7 +713,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       );
       last = match.index + match[0].length;
     }
-    parts.push(passage.slice(last));
+    parts.push(<ClickableZh key="ztend" text={passage.slice(last)} isZh={isZh} />);
     return parts;
   }
 
@@ -713,7 +728,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       const options = match[2].split(/\s*[\/,]\s*/).map(s => s.trim()).filter(Boolean);
       const blank = blanks.find(b => b.num === num);
       if (!blank || options.length < 2) continue;
-      parts.push(passage.slice(last, match.index));
+      parts.push(<ClickableZh key={"zt" + match.index} text={passage.slice(last, match.index)} isZh={isZh} />);
       const chosen = answers[num];
       const isCorrect = submitted && cmp(chosen, blank.answer);
       parts.push(
@@ -750,7 +765,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       );
       last = match.index + match[0].length;
     }
-    parts.push(passage.slice(last));
+    parts.push(<ClickableZh key="ztend" text={passage.slice(last)} isZh={isZh} />);
     return parts;
   }
 
@@ -1058,11 +1073,11 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
                     const sent = item.sentence || '';
                     const w = item.wrongWord || '';
                     const at = w ? sent.indexOf(w) : -1;
-                    if (at < 0) return sent;
+                    if (at < 0) return <ClickableZh text={sent} isZh={isZh} />;
                     return (<>
-                      {sent.slice(0, at)}
+                      <ClickableZh text={sent.slice(0, at)} isZh={isZh} />
                       <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)", background: "#fef08a", padding: "0 5px", borderRadius: 4 }}>[{w}]</span>
-                      {sent.slice(at + w.length)}
+                      <ClickableZh text={sent.slice(at + w.length)} isZh={isZh} />
                     </>);
                   })()}
                 </span>
@@ -1521,7 +1536,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
                     </td>
                     <td style={{ border: EX.thin, padding: '7px 14px', fontFamily: EX.font, fontSize: "calc(var(--fs) * 1.000)",
                       cursor: submitted ? 'default' : 'pointer' }}>
-                      {opt}
+                      <ClickableZh text={opt} isZh={isZh} />
                     </td>
                   </tr>
                 );
@@ -2066,7 +2081,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             {/* Stem */}
             <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.55, whiteSpace: 'pre-line',
               fontFamily: EX.font }}>
-              {q.stem || q.question || ''}
+              <ClickableZh text={q.stem || q.question || ''} isZh={isZh} />
             </div>
 
             {/* Format-specific input */}
@@ -2324,8 +2339,8 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
                 <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.7, flex: 1, fontWeight: 600 }}>{q.instruction}</span>
               </div>
               <div style={{ marginLeft: 32, marginBottom: 10 }}>
-                <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}>{q.sentenceA}</div>
-                {q.sentenceB ? <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}>{q.sentenceB}</div> : null}
+                <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}><ClickableZh text={q.sentenceA} isZh={isZh} /></div>
+                {q.sentenceB ? <div style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.8 }}><ClickableZh text={q.sentenceB} isZh={isZh} /></div> : null}
                 {q.starter ? (
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#6b7280", marginTop: 4 }}>
                     {L("\u5F00\u5934\uFF1A", "Begin: ")}<span style={{ fontWeight: 700 }}>{q.starter}</span>
@@ -2473,7 +2488,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
           }}>{chosenIdx !== undefined && chosenIdx !== null ? "(" + (chosenIdx + 1) + ")" : "\u00A0\u00A0"}</span>
         );
       }
-      out.push(<span key={"t" + i}>{part}</span>);
+      out.push(<span key={"t" + i}><ClickableZh text={part} isZh={isZh} /></span>);
     });
     return out;
   }
