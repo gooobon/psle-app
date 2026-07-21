@@ -21917,10 +21917,14 @@
 "小了": {
 "py": "xiǎo le",
 "pos": "",
-"en": "got smaller; (rain) lightened",
+"en": "got smaller; (rain) lessened",
 "syn": [],
 "ant": [],
-"ex": null,
+"ex": {
+"zh": "雨渐渐小了。",
+"py": "yǔ jiànjiàn xiǎo le。",
+"en": "The rain gradually lessened."
+},
 "src": "authored",
 "stop": false,
 "needs_content": false
@@ -58528,6 +58532,36 @@
 "zh": "大家齐心把事情做好。",
 "py": "dàjiā qíxīn bǎ shìqing zuòhǎo。",
 "en": "Everyone worked as one to do it well."
+},
+"src": "authored",
+"stop": false,
+"needs_content": false
+},
+"所以": {
+"py": "suǒyǐ",
+"pos": "",
+"en": "so; therefore",
+"syn": [],
+"ant": [],
+"ex": {
+"zh": "天下雨了，所以我带了伞。",
+"py": "tiān xiàyǔ le， suǒyǐ wǒ dài le sǎn。",
+"en": "It was raining, so I brought an umbrella."
+},
+"src": "authored",
+"stop": false,
+"needs_content": false
+},
+"已经": {
+"py": "yǐjīng",
+"pos": "",
+"en": "already",
+"syn": [],
+"ant": [],
+"ex": {
+"zh": "他已经做完作业了。",
+"py": "tā yǐjīng zuòwánzuòyè le。",
+"en": "He has already finished his homework."
 },
 "src": "authored",
 "stop": false,

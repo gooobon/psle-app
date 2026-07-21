@@ -794,7 +794,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                   padding: "2px 4px",
                   textDecoration: !submitted && isUsed ? "line-through" : "none",
                 }}>
-                  ({letter}) {w}
+                  ({letter}) <ClickableZh text={w} isZh={isZh} />
                 </div>
               );
             })}
@@ -2515,7 +2515,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                 padding: "2px 4px",
                 opacity: submitted ? 1 : (used ? 0.4 : 1),
                 textDecoration: !submitted && used ? "line-through" : "none",
-              }}>({i + 1}) {w}</div>
+              }}>({i + 1}) <ClickableZh text={w} isZh={isZh} /></div>
             );
           })}
         </div>
