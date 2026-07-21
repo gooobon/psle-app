@@ -1,8 +1,10 @@
 "use client";
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { C } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
+import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
 
 // 
 //  EXAM MODE - Looks & feels like a real Singapore P3 exam paper
@@ -86,7 +88,118 @@ function renderWithUnderline(text) {
   return parts;
 }
 
-//  Shared exam styles 
+// ---------------------------------------------------------------
+//  Chinese vocab pop-up: tap any known word in stimulus text to
+//  see pinyin / meaning / synonyms / antonyms / example.
+//  Words come from ZH_VOCAB (authored dictionary). Longest-match
+//  segmentation against the dictionary; unknown text stays plain.
+// ---------------------------------------------------------------
+const ZH_HAN_RE = /[一-鿿]/;
+function segZh(text) {
+  const out = [];
+  let i = 0;
+  const n = text.length;
+  const MAXLEN = 6;
+  while (i < n) {
+    if (!ZH_HAN_RE.test(text[i])) {
+      let j = i;
+      while (j < n && !ZH_HAN_RE.test(text[j])) j++;
+      out.push({ t: text.slice(i, j), clk: false });
+      i = j;
+      continue;
+    }
+    let matched = null;
+    const maxL = Math.min(MAXLEN, n - i);
+    for (let L = maxL; L >= 1; L--) {
+      const cand = text.slice(i, i + L);
+      if (ZH_VOCAB[cand]) { matched = cand; break; }
+    }
+    if (matched) { out.push({ t: matched, clk: true }); i += matched.length; }
+    else { out.push({ t: text[i], clk: false }); i++; }
+  }
+  return out;
+}
+
+function recordUnknownWord(word) {
+  try {
+    const k = "genius_zh_unknown_v1";
+    const s = JSON.parse(localStorage.getItem(k) || "[]");
+    if (!s.includes(word)) { s.push(word); localStorage.setItem(k, JSON.stringify(s)); }
+  } catch (_) {}
+}
+
+function VocabPopup({ word, x, y, onClose }) {
+  const e = ZH_VOCAB[word] || {};
+  useEffect(() => {
+    recordUnknownWord(word);
+    const h = () => onClose();
+    const t = setTimeout(() => window.addEventListener("click", h), 0);
+    window.addEventListener("keydown", onClose);
+    return () => { clearTimeout(t); window.removeEventListener("click", h); window.removeEventListener("keydown", onClose); };
+  }, [word]);
+  const W = 300;
+  const left = Math.max(8, Math.min(x - W / 2, (typeof window !== "undefined" ? window.innerWidth : 360) - W - 8));
+  const top = y + 18;
+  const chip = (c, bg) => ({ display: "inline-block", fontFamily: ZH_FONT, fontSize: 13, padding: "2px 8px", borderRadius: 999, background: bg, color: c, marginRight: 5, marginTop: 4 });
+  return (
+    <div onClick={(ev) => ev.stopPropagation()} style={{ position: "fixed", left, top, width: W, zIndex: 9999,
+      background: "#fff", border: "1px solid #e5e7eb", borderRadius: 14, boxShadow: "0 12px 32px rgba(15,23,42,.22)", padding: "13px 15px" }}>
+      <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between" }}>
+        <div><span style={{ fontFamily: ZH_FONT, fontSize: 26, fontWeight: 700 }}>{word}</span>
+          <span style={{ color: "#2563eb", fontWeight: 700, fontSize: 14, marginLeft: 8 }}>{e.py || ""}</span></div>
+        <span onClick={onClose} style={{ cursor: "pointer", color: "#9ca3af", fontSize: 18, lineHeight: 1 }}>×</span>
+      </div>
+      <div style={{ fontSize: 14, color: "#1f2937", marginTop: 6 }}>{e.en || ""}</div>
+      {(e.syn && e.syn.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>동의어 </span>{e.syn.map((s, i) => <span key={i} style={chip("#0f9d6b", "#e7f6ef")}>{s}</span>)}</div> : null}
+      {(e.ant && e.ant.length) ? <div><span style={{ fontSize: 11, color: "#6b7280", fontWeight: 700 }}>반대어 </span>{e.ant.map((s, i) => <span key={i} style={chip("#e0533d", "#fdece8")}>{s}</span>)}</div> : null}
+      {e.ex ? <div style={{ marginTop: 8, paddingTop: 8, borderTop: "1px dashed #e5e7eb" }}>
+        <div style={{ fontFamily: ZH_FONT, fontSize: 15 }}>{e.ex.zh}</div>
+        <div style={{ fontSize: 12, color: "#2563eb" }}>{e.ex.py}</div>
+        <div style={{ fontSize: 12, color: "#6b7280" }}>{e.ex.en}</div>
+      </div> : null}
+    </div>
+  );
+}
+
+// Render a Chinese stimulus string with tappable dictionary words.
+// Falls back to renderWithUnderline for English (or when isZh is false).
+function ClickableZh({ text, isZh }) {
+  const [pop, setPop] = useState(null);
+  const str = String(text || "");
+  if (!isZh || !str) return renderWithUnderline(text);
+  const parts = [];
+  const re = /\{u\}([\s\S]*?)\{\/u\}/g;
+  let last = 0, m;
+  while ((m = re.exec(str)) !== null) {
+    if (m.index > last) parts.push({ marked: false, text: str.slice(last, m.index) });
+    parts.push({ marked: true, text: m[1] });
+    last = m.index + m[0].length;
+  }
+  if (last < str.length) parts.push({ marked: false, text: str.slice(last) });
+  const nodes = [];
+  let key = 0;
+  parts.forEach((p) => {
+    segZh(p.text).forEach((tk) => {
+      if (tk.clk) {
+        nodes.push(
+          <span key={key++} onClick={(ev) => { ev.stopPropagation(); setPop({ word: tk.t, x: ev.clientX, y: ev.clientY }); }}
+            style={{ ...(p.marked ? U_MARK : {}), cursor: "pointer", borderBottom: "1.5px dotted #9db2d4", borderRadius: 2 }}>{tk.t}</span>
+        );
+      } else {
+        nodes.push(<span key={key++} style={p.marked ? U_MARK : undefined}>{tk.t}</span>);
+      }
+    });
+  });
+  return (
+    <>
+      {nodes}
+      {pop && typeof document !== "undefined" && createPortal(
+        <VocabPopup word={pop.word} x={pop.x} y={pop.y} onClose={() => setPop(null)} />, document.body)}
+    </>
+  );
+}
+
+//  Shared exam styles
 const S = {
   page: {
     background: "#fff",
@@ -358,7 +471,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
             <div key={q.id} style={{ marginBottom: 20 }}>
               <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
                 <span style={{ fontWeight: "bold", fontSize: "calc(var(--fs) * 1.000)", minWidth: 24 }}>{qNum}.</span>
-                <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 2.0, flex: 1 }}>{renderWithUnderline(q.sentence || q.question || "")}</span>
+                <span style={{ fontSize: "calc(var(--fs) * 1.000)", lineHeight: 2.0, flex: 1 }}><ClickableZh text={q.sentence || q.question || ""} isZh={isZh} /></span>
               </div>
 
               {(q.options || []).map((opt, i) => {
@@ -378,7 +491,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                       fontSize: "calc(var(--fs) * 1.000)", lineHeight: 1.6, color, fontWeight,
                       background: bg, borderRadius: 4, padding: "1px 4px" }}>
                     <span style={{ minWidth: 28 }}>({i + 1})</span>
-                    <span>{opt}</span>
+                    <span><ClickableZh text={String(opt)} isZh={isZh} /></span>
                     {submitted && isAns && (isFirstCorrect || hasRetried) && <span style={{ color: "#16a34a", marginLeft: 4 }}>V</span>}
                     {submitted && isSel && !isAns && <span style={{ color: "#dc2626", marginLeft: 4 }}>X</span>}
                   </div>
@@ -1268,7 +1381,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
     const evidence = aq?.solution?.evidence || null;
     const trap     = aq?.solution?.trap     || null;
     if (!evidence && !trap) {
-      return <span style={{ whiteSpace: 'pre-line', lineHeight: 2.05 }}>{passage}</span>;
+      return <span style={{ whiteSpace: 'pre-line', lineHeight: 2.05 }}><ClickableZh text={passage} isZh={isZh} /></span>;
     }
     let segs = [{ text: passage, type: 'plain' }];
     function applyHl(segArr, target, type) {
@@ -1291,7 +1404,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       <span style={{ whiteSpace: 'pre-line', lineHeight: 2.05 }}>
         {segs.map((seg, i) => {
           if (seg.type === 'plain')
-            return <span key={i}>{seg.text}</span>;
+            return <span key={i}><ClickableZh text={seg.text} isZh={isZh} /></span>;
           if (seg.type === 'evidence')
             return <span key={i} style={{ background: '#EDE9FE', color: '#6D28D9', fontWeight: 700, borderRadius: 3, padding: '0 3px' }}>{qn ? <sup style={{ background: '#6D28D9', color: '#fff', borderRadius: 8, padding: '0 5px', fontSize: "calc(var(--fs) * 0.780)", marginRight: 3, fontFamily: EX.sans }}>{qn}</sup> : null}{seg.text}</span>;
           return <span key={i} style={{ borderBottom: '1px dashed #999', fontStyle: 'italic' }}>{seg.text}</span>;
