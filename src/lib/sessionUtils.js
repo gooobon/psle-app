@@ -16,9 +16,15 @@ function fmtTime(ms){
   if(s<60) return `${s}s`;
   return `${Math.floor(s/60)}m ${s%60}s`;
 }
+// P5 (찍기방지): flag ONLY answers given faster than a child could physically
+// read the item — i.e. an obvious mash / pre-decided tap. Tuned deliberately far
+// below normal solving time so a student who actually knew the answer is never
+// flagged (minimal false positives = the locked priority). Dial DOWN to flag
+// even less. Previous thresholds (4–8s) flagged normal fast solving and nagged
+// good students; these floors only catch the impossible-speed case.
 function guessFlag(ms,type){
-  const t={GrammarMCQ:4000,VocabMCQ:4000,GrammarCloze:5000,VocabCloze:5000,Editing:4000,Comprehension:8000};
-  return ms<(t[type]||4000);
+  const t={GrammarMCQ:1500,VocabMCQ:1500,GrammarCloze:1800,VocabCloze:1800,Editing:1500,Comprehension:2500};
+  return ms<(t[type]||1500);
 }
 function todayStr(){ return new Date().toLocaleDateString("en-SG",{day:"2-digit",month:"short",year:"numeric"}); }
 function dateLabel(ds){

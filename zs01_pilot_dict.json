@@ -1,0 +1,724 @@
+{
+ "愿": {
+  "py": "yuàn",
+  "pos": "v",
+  "en": "willing; to wish",
+  "syn": [
+   "愿意",
+   "情愿"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "我愿意帮妈妈做家务。",
+   "py": "wǒ yuànyì bāng māma zuò jiāwù。",
+   "en": "I am willing to help Mum with housework."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "原": {
+  "py": "yuán",
+  "pos": "adj/n",
+  "en": "original; former",
+  "syn": [
+   "本来"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他原来住在这里。",
+   "py": "tā yuánlái zhù zài zhèlǐ。",
+   "en": "He originally lived here."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "园": {
+  "py": "yuán",
+  "pos": "n",
+  "en": "garden; park",
+  "syn": [
+   "公园",
+   "花园"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "周末我们去公园玩。",
+   "py": "zhōumò wǒmen qù gōngyuán wán。",
+   "en": "On weekends we go to the park."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "远": {
+  "py": "yuǎn",
+  "pos": "adj",
+  "en": "far; distant",
+  "syn": [
+   "遥远"
+  ],
+  "ant": [
+   "近"
+  ],
+  "ex": {
+   "zh": "学校离我家很远。",
+   "py": "xuéxiào lí wǒjiā hěnyuǎn。",
+   "en": "The school is far from my home."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "信": {
+  "py": "xìn",
+  "pos": "v/n",
+  "en": "to believe; a letter",
+  "syn": [
+   "相信"
+  ],
+  "ant": [
+   "怀疑"
+  ],
+  "ex": {
+   "zh": "我给奶奶写了一封信。",
+   "py": "wǒ gěi nǎinai xiě le yì fēng xìn。",
+   "en": "I wrote a letter to Grandma."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "心": {
+  "py": "xīn",
+  "pos": "n",
+  "en": "heart; mind",
+  "syn": [
+   "心里"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他心里很开心。",
+   "py": "tā xīnlǐ hěn kāixīn。",
+   "en": "He is very happy in his heart."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "新": {
+  "py": "xīn",
+  "pos": "adj",
+  "en": "new",
+  "syn": [
+   "崭新"
+  ],
+  "ant": [
+   "旧"
+  ],
+  "ex": {
+   "zh": "我买了一本新书。",
+   "py": "wǒ mǎi le yì běn xīnshū。",
+   "en": "I bought a new book."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "星": {
+  "py": "xīng",
+  "pos": "n",
+  "en": "star",
+  "syn": [
+   "星星"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "晚上天上有很多星星。",
+   "py": "wǎnshàng tiānshàng yǒu hěn duō xīngxīng。",
+   "en": "At night there are many stars in the sky."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "愿望": {
+  "py": "yuànwàng",
+  "pos": "n",
+  "en": "a wish; something you hope for",
+  "syn": [
+   "心愿",
+   "梦想"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "我的愿望是当医生。",
+   "py": "wǒ de yuànwàng shì dāng yīshēng。",
+   "en": "My wish is to become a doctor."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "梦想": {
+  "py": "mèngxiǎng",
+  "pos": "n",
+  "en": "dream; aspiration",
+  "syn": [
+   "理想",
+   "愿望"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "当画家是她的梦想。",
+   "py": "dāng huàjiā shì tā de mèngxiǎng。",
+   "en": "Being a painter is her dream."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "实现": {
+  "py": "shíxiàn",
+  "pos": "v",
+  "en": "to come true; to achieve",
+  "syn": [
+   "达成"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "只要努力，梦想会实现。",
+   "py": "zhǐyào nǔlì， mèngxiǎng huì shíxiàn。",
+   "en": "With hard work, dreams will come true."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "坚持": {
+  "py": "jiānchí",
+  "pos": "v",
+  "en": "to persist; to keep going",
+  "syn": [
+   "持续"
+  ],
+  "ant": [
+   "放弃"
+  ],
+  "ex": {
+   "zh": "他坚持每天练习跑步。",
+   "py": "tā jiānchí měitiān liànxí pǎobù。",
+   "en": "He persists in practising running every day."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "勇敢": {
+  "py": "yǒnggǎn",
+  "pos": "adj",
+  "en": "brave; courageous",
+  "syn": [
+   "大胆",
+   "英勇"
+  ],
+  "ant": [
+   "胆小"
+  ],
+  "ex": {
+   "zh": "他勇敢地站了出来。",
+   "py": "tā yǒnggǎn dìzhàn le chūlai。",
+   "en": "He bravely stood up."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "努力": {
+  "py": "nǔlì",
+  "pos": "v/adj",
+  "en": "to work hard; diligent",
+  "syn": [
+   "用功"
+  ],
+  "ant": [
+   "懒惰"
+  ],
+  "ex": {
+   "zh": "我们要努力学习。",
+   "py": "wǒmen yào nǔlì xuéxí。",
+   "en": "We must study hard."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "认真": {
+  "py": "rènzhēn",
+  "pos": "adj",
+  "en": "careful; serious (in doing)",
+  "syn": [
+   "仔细"
+  ],
+  "ant": [
+   "马虎"
+  ],
+  "ex": {
+   "zh": "她认真地做每一道题。",
+   "py": "tā rènzhēn dì zuò měi yī dàotí。",
+   "en": "She does every question carefully."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "放弃": {
+  "py": "fàngqì",
+  "pos": "v",
+  "en": "to give up",
+  "syn": [
+   "舍弃"
+  ],
+  "ant": [
+   "坚持"
+  ],
+  "ex": {
+   "zh": "遇到困难也不要放弃。",
+   "py": "yùdàokùnnán yě búyào fàngqì。",
+   "en": "Don't give up even when you meet difficulties."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "继续": {
+  "py": "jìxù",
+  "pos": "v",
+  "en": "to continue; to carry on",
+  "syn": [
+   "接着"
+  ],
+  "ant": [
+   "停止"
+  ],
+  "ex": {
+   "zh": "休息后我们继续画画。",
+   "py": "xiūxi hòu wǒmen jìxù huàhuà。",
+   "en": "After resting we continue drawing."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "决心": {
+  "py": "juéxīn",
+  "pos": "n",
+  "en": "determination; resolve",
+  "syn": [
+   "恒心"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他下定决心要成功。",
+   "py": "tā xiàdìng juéxīn yào chénggōng。",
+   "en": "He is determined to succeed."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "成功": {
+  "py": "chénggōng",
+  "pos": "v/n",
+  "en": "to succeed; success",
+  "syn": [
+   "成就"
+  ],
+  "ant": [
+   "失败"
+  ],
+  "ex": {
+   "zh": "努力练习才能成功。",
+   "py": "nǔlì liànxí cáinéng chénggōng。",
+   "en": "Only by practising hard can you succeed."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "表扬": {
+  "py": "biǎoyáng",
+  "pos": "v",
+  "en": "to praise; to commend",
+  "syn": [
+   "称赞",
+   "夸奖"
+  ],
+  "ant": [
+   "批评"
+  ],
+  "ex": {
+   "zh": "老师表扬了这个好孩子。",
+   "py": "lǎoshī biǎoyáng le zhège hǎo háizi。",
+   "en": "The teacher praised this good child."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "鼓励": {
+  "py": "gǔlì",
+  "pos": "v",
+  "en": "to encourage",
+  "syn": [
+   "激励"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "妈妈鼓励我勇敢一点。",
+   "py": "māma gǔlì wǒ yǒnggǎn yìdiǎn。",
+   "en": "Mum encourages me to be braver."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "懒惰": {
+  "py": "lǎnduò",
+  "pos": "adj",
+  "en": "lazy",
+  "syn": [
+   "偷懒"
+  ],
+  "ant": [
+   "勤劳"
+  ],
+  "ex": {
+   "zh": "懒惰的人不会成功。",
+   "py": "lǎnduò de rén búhuì chénggōng。",
+   "en": "A lazy person will not succeed."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "马虎": {
+  "py": "mǎhu",
+  "pos": "adj",
+  "en": "careless; sloppy",
+  "syn": [
+   "粗心"
+  ],
+  "ant": [
+   "认真"
+  ],
+  "ex": {
+   "zh": "做作业不能马虎。",
+   "py": "zuò zuòyè bùnéng mǎhu。",
+   "en": "You can't be careless with homework."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "偷懒": {
+  "py": "tōulǎn",
+  "pos": "v",
+  "en": "to slack off; to be lazy",
+  "syn": [
+   "懒惰"
+  ],
+  "ant": [
+   "勤快"
+  ],
+  "ex": {
+   "zh": "他从不偷懒。",
+   "py": "tā cóngbù tōulǎn。",
+   "en": "He never slacks off."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "选拔": {
+  "py": "xuǎnbá",
+  "pos": "v",
+  "en": "to select (the best)",
+  "syn": [
+   "挑选"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "学校选拔足球队员。",
+   "py": "xuéxiào xuǎnbá zúqiúduì yuán。",
+   "en": "The school selects football team players."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "推荐": {
+  "py": "tuījiàn",
+  "pos": "v",
+  "en": "to recommend",
+  "syn": [
+   "介绍"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "老师推荐他参加比赛。",
+   "py": "lǎoshī tuījiàn tā cānjiā bǐsài。",
+   "en": "The teacher recommended him to join the contest."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "请假": {
+  "py": "qǐngjià",
+  "pos": "v",
+  "en": "to ask for leave",
+  "syn": [
+   "休假"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他生病了，向老师请假。",
+   "py": "tā shēngbìng le， xiàng lǎoshī qǐngjià。",
+   "en": "He was ill and asked the teacher for leave."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "举办": {
+  "py": "jǔbàn",
+  "pos": "v",
+  "en": "to hold (an event)",
+  "syn": [
+   "举行"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "学校举办了运动会。",
+   "py": "xuéxiào jǔbàn le yùndònghuì。",
+   "en": "The school held a sports meet."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "容易": {
+  "py": "róngyì",
+  "pos": "adj",
+  "en": "easy",
+  "syn": [
+   "简单"
+  ],
+  "ant": [
+   "困难"
+  ],
+  "ex": {
+   "zh": "这道题很容易。",
+   "py": "zhèdàotí hěn róngyì。",
+   "en": "This question is very easy."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "主要": {
+  "py": "zhǔyào",
+  "pos": "adj",
+  "en": "main; primary",
+  "syn": [
+   "重要"
+  ],
+  "ant": [
+   "次要"
+  ],
+  "ex": {
+   "zh": "这篇短文主要写友谊。",
+   "py": "zhèpiān duǎnwén zhǔyào xiě yǒuyì。",
+   "en": "This passage is mainly about friendship."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "小明": {
+  "py": "xiǎomíng",
+  "pos": "name",
+  "en": "Xiao Ming (a boy's name)",
+  "syn": [],
+  "ant": [],
+  "ex": {
+   "zh": "小明是我的好朋友。",
+   "py": "xiǎomíng shì wǒ de hǎo péngyou。",
+   "en": "Xiao Ming is my good friend."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "小美": {
+  "py": "xiǎoměi",
+  "pos": "name",
+  "en": "Xiao Mei (a girl's name)",
+  "syn": [],
+  "ant": [],
+  "ex": {
+   "zh": "小美每天练习画画。",
+   "py": "xiǎoměi měitiān liànxí huàhuà。",
+   "en": "Xiao Mei practises drawing every day."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "练习": {
+  "py": "liànxí",
+  "pos": "v",
+  "en": "to practise",
+  "syn": [
+   "训练"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "她每天练习画画。",
+   "py": "tā měitiān liànxí huàhuà。",
+   "en": "She practises drawing every day."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "参加": {
+  "py": "cānjiā",
+  "pos": "v",
+  "en": "to take part in; to join",
+  "syn": [
+   "加入"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "我想参加唱歌比赛。",
+   "py": "wǒ xiǎng cānjiā chànggē bǐsài。",
+   "en": "I want to take part in the singing contest."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "摔倒": {
+  "py": "shuāidǎo",
+  "pos": "v",
+  "en": "to fall down",
+  "syn": [
+   "跌倒"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他跑步时不小心摔倒了。",
+   "py": "tā pǎobù shí bù xiǎoxīn shuāidǎo le。",
+   "en": "He accidentally fell while running."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "受伤": {
+  "py": "shòushāng",
+  "pos": "v",
+  "en": "to get hurt; to be injured",
+  "syn": [
+   "负伤"
+  ],
+  "ant": [],
+  "ex": {
+   "zh": "他摔倒后膝盖受伤了。",
+   "py": "tā shuāidǎo hòu xīgài shòushāng le。",
+   "en": "After falling, he hurt his knee."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "害怕": {
+  "py": "hàipà",
+  "pos": "v/adj",
+  "en": "to be afraid; frightened",
+  "syn": [
+   "恐惧"
+  ],
+  "ant": [
+   "勇敢"
+  ],
+  "ex": {
+   "zh": "妹妹害怕黑暗。",
+   "py": "mèimei hàipà hēi'àn。",
+   "en": "My little sister is afraid of the dark."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "担心": {
+  "py": "dānxīn",
+  "pos": "v",
+  "en": "to worry",
+  "syn": [
+   "忧虑"
+  ],
+  "ant": [
+   "放心"
+  ],
+  "ex": {
+   "zh": "妈妈担心我的身体。",
+   "py": "māma dānxīn wǒ de shēntǐ。",
+   "en": "Mum worries about my health."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "希望": {
+  "py": "xīwàng",
+  "pos": "v/n",
+  "en": "to hope; hope",
+  "syn": [
+   "盼望"
+  ],
+  "ant": [
+   "失望"
+  ],
+  "ex": {
+   "zh": "我希望明天是晴天。",
+   "py": "wǒ xīwàng míngtiān shì qíngtiān。",
+   "en": "I hope tomorrow is sunny."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ },
+ "相信": {
+  "py": "xiāngxìn",
+  "pos": "v",
+  "en": "to believe; to trust",
+  "syn": [
+   "信任"
+  ],
+  "ant": [
+   "怀疑"
+  ],
+  "ex": {
+   "zh": "我相信他能做到。",
+   "py": "wǒ xiāngxìn tā néng zuòdào。",
+   "en": "I believe he can do it."
+  },
+  "src": "pilot",
+  "stop": false,
+  "needs_content": false
+ }
+}

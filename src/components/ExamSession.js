@@ -8,11 +8,24 @@ import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
 import ZH_SEG from "@/data/p3/chinese/zh_seg.json";
 import ZhReviewGate from "@/components/ZhReviewGate";
 import { addUnknown as zhAddUnknown, getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from "@/lib/zhReview";
+import { detectPageGuesses } from "@/lib/antiGuess";
 
 // Function words never worth pushing into the review gate (too common to be a
 // "word the student didn't know"). Tapping them still shows the popup; they are
 // only filtered out of the end-of-session review set.
 const ZH_REVIEW_STOP = new Set("的了是我你他她它们在有和就也都不这那个吗呢吧与及或把被让从向对为之地得着过很太最会要能可把跟给还又再只等啊呀哦嗯".split(""));
+
+// P5: when a correct answer is flagged as a likely fast-guess, quietly route its
+// core word(s) into the end-of-session review gate so a lucky tap is re-checked
+// (never mastered on luck). No score penalty, no inline interruption.
+function routeGuessWords(q) {
+  try {
+    const add = (w) => { if (w && ZH_HAN_RE.test(w[0]) && ZH_VOCAB[w] && !ZH_REVIEW_STOP.has(w)) zhAddUnknown(w); };
+    if (Array.isArray(q.options) && typeof q.answer === "number") add(q.options[q.answer]);
+    else if (typeof q.answer === "string") add(q.answer);
+    (q.keywords || []).forEach((k) => add(k && k.w));
+  } catch (_) {}
+}
 
 // 
 //  EXAM MODE - Looks & feels like a real Singapore P3 exam paper
@@ -377,7 +390,7 @@ function Expl({ text }) {
   );
 }
 
-function ExpContent({ q }) {
+function ExpContent({ q, isZh }) {
   return (
     <div style={{ marginTop: 6 }}>
       {q.sentence_en && (
@@ -425,9 +438,12 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   const [retriedCorrect, setRetriedCorrect] = useState({});
   const [showExplanation, setShowExplanation] = useState(_rev ? Object.fromEntries(items.map(q => [q.id, true])) : {});
   const startRef = useRef(Date.now());
+  const answeredAtRef = useRef({});        // P5: ms-from-page-start when each item was (last) answered
+  const [flaggedIds, setFlaggedIds] = useState(null); // P5: fast-guess ids (Set)
 
   function handleSelect(id, i) {
     if (submitted) return;
+    answeredAtRef.current[id] = Date.now() - startRef.current;
     setAnswers(a => ({ ...a, [id]: i }));
   }
 
@@ -450,6 +466,14 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
     const auto = {};
     items.forEach(q => { if (answers[q.id] === q.answer) auto[q.id] = true; });
     setShowExplanation(auto);
+    // P5: ultra-conservative fast-guess detection (correct answers only).
+    if (!reviewMode) {
+      const correctMap = {};
+      items.forEach(q => { correctMap[q.id] = answers[q.id] === q.answer; });
+      const flagged = detectPageGuesses(items.map(q => q.id), answeredAtRef.current, correctMap);
+      setFlaggedIds(flagged);
+      if (isZh) items.forEach(q => { if (flagged.has(q.id)) routeGuessWords(q); });
+    }
   }
 
   function handleFinishPage() {
@@ -458,6 +482,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
       id: q.id, topic: q.topic, sectionType: q.topic, userAnswer: answers[q.id],
       skill: q.skill, trapType: q.explain && q.explain.trapType,
       correct: answers[q.id] === q.answer,
+      guessed: !!(flaggedIds && flaggedIds.has(q.id)),
       solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
       timeTaken: Math.round(t / items.length),
@@ -564,7 +589,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                     color: isRetryCorrect ? "#16a34a" : "#dc2626" }}>
                     {isRetryCorrect ? (isZh ? "\u2713 \u518D\u6B21\u9009\u5BF9\u4E86\uFF01" : "V Correct on retry!") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A" : "X Correct answer: ") + q.options[q.answer]}
                   </div>
-                  {showExp && q.explanation && (<ExpContent q={q} />)}
+                  {showExp && q.explanation && (<ExpContent q={q} isZh={isZh} />)}
                 </div>
               )}
 
@@ -573,7 +598,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                   borderLeft: "3px solid #16a34a", paddingLeft: 10,
                   background: "#f0fdf4", borderRadius: "0 8px 8px 0",
                   padding: "8px 10px 8px 14px" }}>
-                  <ExpContent q={q} />
+                  <ExpContent q={q} isZh={isZh} />
                 </div>
               )}
 
@@ -584,6 +609,15 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                     padding: "2px 8px", cursor: "pointer" }}>
                   {isZh ? "\u67E5\u770B\u89E3\u6790" : "Show explanation"}
                 </button>
+              )}
+
+              {submitted && flaggedIds && flaggedIds.has(q.id) && (
+                <div style={{ marginLeft: 28, marginTop: 6, fontSize: "calc(var(--fs) * 0.86)",
+                  color: "#0369a1", background: "#eff6ff", border: "1px solid #dbeafe",
+                  borderRadius: 8, padding: "4px 10px", display: "inline-block" }}>
+                  {isZh ? "\u9009\u5F97\u5F88\u5FEB\uFF01\u8FD9\u4E2A\u8BCD\u6700\u540E\u518D\u786E\u8BA4\u4E00\u6B21 \u2713"
+                        : "That was quick \u2014 we'll double-check this one at the end \u2713"}
+                </div>
               )}
 
               {qi < items.length - 1 && <div style={{ borderTop: "1px solid #ccc", margin: "14px 0" }} />}
@@ -2633,26 +2667,14 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const [allResults, setAllResults] = useState([]);
   const [pageResults, setPageResults] = useState([]); // buffered until next page
   const [done, setDone] = useState(false);
-  // P4 review gate: null = not yet assembled, [] = nothing to review, [...] = words due.
-  const [gateWords, setGateWords] = useState(null);
-  const [gatePassed, setGatePassed] = useState(false);
   const startRef = useRef(Date.now());
 
-  // When a Chinese session finishes, assemble the review gate ONCE from the
-  // words the student tapped ("didn't know") + the core words of questions
-  // they got wrong. Pure review — no new words are ever introduced here.
-  useEffect(() => {
-    if (!done || !isZh || reviewMode || gateWords !== null) return;
-    let words = [];
-    try {
-      const tapped = zhGetSessionUnknown();
-      const wrongCore = zhCoreWordsFromWrong(allResults, plan, ZH_VOCAB, ZH_REVIEW_STOP);
-      const collected = [...tapped, ...wrongCore].filter((w) => w && !ZH_REVIEW_STOP.has(w));
-      words = zhAssembleGate(collected, ZH_VOCAB, 10);
-      zhClearSessionUnknown();
-    } catch (_) { words = []; }
-    setGateWords(words);
-  }, [done, isZh, reviewMode]);
+  // NOTE: the P4 review gate is NOT shown here. A Chinese "problem set" is
+  // completed one section-type at a time (home -> start section -> home ...),
+  // so this screen finishing only means ONE section is done, not the whole set.
+  // The gate must appear exactly once, after the WHOLE set is complete — that
+  // point is only known to the parent (ChineseApp.recordDaily, when every
+  // section type has been recorded). The gate is therefore triggered there.
 
   // Build pages for current section
   const section = plan[secIdx];
@@ -2693,6 +2715,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
       setAllResults(newAll);
       setPageResults([]);
       // Persist this section right away so progress survives backing out mid-run.
+      // (The whole-set review gate is triggered by the parent, not here.)
       if (!reviewMode && onSectionDone) onSectionDone(sectionType, latestResults);
       // Single-section mode: finish after completing just this one section
       if (singleSection) {
@@ -2716,26 +2739,12 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   }
 
   if (done) {
-    // Chinese sessions: run the spaced-review gate before revealing the summary.
-    if (isZh && !reviewMode && !gatePassed) {
-      if (gateWords === null) return null;           // assembling (effect will fill it in)
-      if (gateWords.length > 0) {
-        return (
-          <ZhReviewGate
-            words={gateWords}
-            dict={ZH_VOCAB}
-            onDone={() => setGatePassed(true)}
-          />
-        );
-      }
-      // no words due -> fall through to the summary
-    }
     return (
       <ExamSummary
         results={allResults}
         duration={Date.now() - startRef.current}
         onHome={() => onFinish(allResults)}
-        onRetry={() => { setSecIdx(0); setPageIdx(0); setAllResults([]); setDone(false); setGateWords(null); setGatePassed(false); }}
+        onRetry={() => { setSecIdx(0); setPageIdx(0); setAllResults([]); setDone(false); }}
         isZh={isZh}
       />
     );

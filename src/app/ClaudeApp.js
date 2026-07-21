@@ -26,6 +26,12 @@ import { WA1_ZH_PRACTICE } from '@/data/p3/chinese/wa1_practice';
 import { pickNextWa1Set, buildRemediationDrill } from '@/lib/zhRemediation';
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
+import ZhReviewGate from '@/components/ZhReviewGate';
+import ZH_VOCAB from '@/data/p3/chinese/zh_vocab.json';
+import { getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from '@/lib/zhReview';
+
+// Function words never worth pushing into the whole-set review gate.
+const ZH_GATE_STOP = new Set("的了是我你他她它们在有和就也都不这那个吗呢吧与及或把被让从向对为之地得着过很太最会要能可跟给还又再只等啊呀哦嗯".split(""));
 
 import { StudentResultScreen, ZhResultScreen } from '@/components/ResultScreen';
 
@@ -199,6 +205,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const [sessionResult,setSessionResult] = useState(null);
   const [startFromSection, setStartFromSection] = useState(null);
   const [reviewSection, setReviewSection] = useState(null);
+  const [zhGate, setZhGate] = useState(null); // words[] when the whole-set review gate is showing
   const [sectionResults, setSectionResults] = useState(() => {
     const p0 = getProgress(grade, subject);
     return (p0.sessionSections && p0.sessionSections.sessionNum === p0.nextSession)
@@ -246,13 +253,38 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     return sessionNum;
   }
   // Daily practice = the 60 generated sets (flagged mock every 10th session).
-  function recordDaily(results){ saveEntry(results, isMockDue); setExamMode(false); setScreen("home"); }
+  // The WHOLE set is now finished (every section type recorded) -> this is the
+  // ONE point where the spaced-review gate should appear. Assemble it from the
+  // words the student tapped ("didn't know") across the whole set + the core
+  // words of wrong answers; if any are due, show the gate before going home.
+  function goHomeAfterDaily(){ setZhGate(null); setExamMode(false); setStartFromSection(null); setScreen("home"); }
+  function recordDaily(results){
+    saveEntry(results, isMockDue);
+    let words = [];
+    try {
+      const tapped = zhGetSessionUnknown();
+      const wrongCore = zhCoreWordsFromWrong(results, zhPlan, ZH_VOCAB, ZH_GATE_STOP);
+      const collected = [...tapped, ...wrongCore].filter((w) => w && !ZH_GATE_STOP.has(w));
+      words = zhAssembleGate(collected, ZH_VOCAB, 10);
+      zhClearSessionUnknown();
+    } catch (_) { words = []; }
+    if (words.length > 0) { setZhGate(words); return; }   // gate screen takes over; goHomeAfterDaily on finish
+    goHomeAfterDaily();
+  }
   // Mock = real school past paper -> shows the result screen.
   function handleSessionDone(results){
     const sessionNum=saveEntry(results, true);
     setSessionResult({results,sessionNum});
     setInSession(false); setScreen("result");
   }
+
+  // Whole-set review gate — shown once, after every section type of the set is
+  // done (triggered by recordDaily). Takes priority over every other screen.
+  if(zhGate) return(
+    <Wrap>
+      <ZhReviewGate words={zhGate} dict={ZH_VOCAB} onDone={goHomeAfterDaily} />
+    </Wrap>
+  );
 
   if(reviewSection) return(
     <Wrap>

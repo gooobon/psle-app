@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZS01 단어 팝업 파일럿</title>
+<style>
+  :root{
+    --bg:#eef2f7; --card:#ffffff; --ink:#1f2937; --sub:#6b7280;
+    --line:#e5e7eb; --brand:#2563eb; --brand-soft:#eff6ff;
+    --green:#0f9d6b; --green-soft:#e7f6ef; --red:#e0533d; --red-soft:#fdece8;
+    --amber:#b45309; --amber-soft:#fef3e2; --shadow:0 10px 30px rgba(15,23,42,.14);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"Noto Sans KR","Noto Sans SC",system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.6}
+  .wrap{max-width:880px;margin:0 auto;padding:22px 16px 120px}
+  header h1{font-size:20px;margin:0 0 4px}
+  header p{margin:0;color:var(--sub);font-size:13px}
+  .tag{display:inline-block;background:var(--brand-soft);color:var(--brand);
+    font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;margin-bottom:10px}
+  .sec{background:var(--card);border:1px solid var(--line);border-radius:16px;
+    padding:18px;margin-top:16px;box-shadow:0 1px 2px rgba(15,23,42,.04)}
+  .sec h2{font-size:14px;margin:0 0 4px;letter-spacing:.01em}
+  .sec .hint{color:var(--sub);font-size:12px;margin:0 0 14px}
+  /* question demo */
+  .q{background:#fafbfc;border:1px solid var(--line);border-radius:12px;padding:16px 14px;margin-bottom:10px}
+  .zh{font-family:"Noto Sans SC",sans-serif;font-size:23px;line-height:2.15;color:#111827}
+  .w{cursor:pointer;border-bottom:2px dotted #9db2d4;padding:0 1px;border-radius:3px;transition:background .12s}
+  .w:hover,.w:active{background:var(--brand-soft)}
+  .w.no{border-bottom-color:#d6d3cf;color:#4b5563}
+  .plain{color:#111827}
+  .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--sub);margin-top:4px}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .dot{width:22px;border-bottom:2px dotted #9db2d4;display:inline-block}
+  .dot.no{border-bottom-color:#d6d3cf}
+  /* grid of cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+  .card{border:1px solid var(--line);border-radius:14px;padding:13px 14px;background:#fff}
+  .card .hw{font-family:"Noto Sans SC",sans-serif;font-size:22px;font-weight:700;line-height:1.1}
+  .card .py{color:var(--brand);font-size:13px;font-weight:600;margin-top:2px}
+  .pos{display:inline-block;font-size:10px;color:var(--amber);background:var(--amber-soft);
+    padding:1px 7px;border-radius:6px;margin-left:7px;vertical-align:middle;font-weight:700}
+  .card .en{font-size:13.5px;margin-top:6px}
+  .rel{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+  .chip{font-size:11.5px;padding:2px 8px;border-radius:999px;font-family:"Noto Sans SC",sans-serif}
+  .chip.syn{background:var(--green-soft);color:var(--green)}
+  .chip.ant{background:var(--red-soft);color:var(--red)}
+  .lbl{font-size:10px;color:var(--sub);font-weight:700;margin-right:2px;align-self:center}
+  .ex{margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .ex .exzh{font-family:"Noto Sans SC",sans-serif;font-size:14px;color:#111827}
+  .ex .expy{font-size:11.5px;color:var(--brand);margin-top:1px}
+  .ex .exen{font-size:12px;color:var(--sub);margin-top:1px}
+  /* bottom sheet popup */
+  .scrim{position:fixed;inset:0;background:rgba(15,23,42,.38);opacity:0;pointer-events:none;transition:opacity .2s;z-index:40}
+  .scrim.on{opacity:1;pointer-events:auto}
+  .sheet{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(105%);
+    transition:transform .26s cubic-bezier(.2,.7,.2,1);}
+  .sheet.on{transform:translateY(0)}
+  .sheetin{max-width:520px;margin:0 auto;background:#fff;border-radius:22px 22px 0 0;
+    padding:8px 20px 26px;box-shadow:var(--shadow)}
+  .grab{width:40px;height:4px;background:#d1d5db;border-radius:999px;margin:8px auto 12px}
+  .sh-hw{font-family:"Noto Sans SC",sans-serif;font-size:34px;font-weight:800;line-height:1}
+  .sh-py{color:var(--brand);font-size:16px;font-weight:700;margin-top:6px}
+  .sh-en{font-size:15px;margin-top:10px}
+  .sh-note{font-size:12.5px;color:var(--amber);background:var(--amber-soft);
+    padding:8px 10px;border-radius:10px;margin-top:10px}
+  .saudio{float:right;border:1px solid var(--line);background:#fff;border-radius:10px;
+    width:38px;height:38px;font-size:17px;cursor:pointer;margin-top:2px}
+  @media(max-width:560px){.zh{font-size:21px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="tag">P1→P2 파일럿 · ZS01 · 정책 B</div>
+    <h1>중국어 단어 팝업 — 톤·품질 확인</h1>
+    <p>아래 문장에서 <b>밑줄 친 단어를 탭</b>하면 실제 팝업이 뜹니다. 아래쪽에는 저작한 40개 엔트리 전체가 있습니다.</p>
+  </header>
+
+  <div class="sec">
+    <h2>1. 실제 팝업 미리보기 (인터랙티브)</h2>
+    <p class="hint">문제를 풀다 모르는 단어를 탭 → 발음·뜻·동의어·반대어·예문. 탭한 단어는 "몰랐음"으로 수집됩니다.</p>
+    <div id="demos"></div>
+    <div class="legend">
+      <span><i class="dot"></i> 저작 완료(탭 가능)</span>
+      <span><i class="dot no"></i> P2에서 저작 예정</span>
+    </div>
+  </div>
+
+  <div class="sec">
+    <h2>2. 저작한 40개 엔트리 (품질 스캔용)</h2>
+    <p class="hint">형근자·동음자 낱글자 8 · 핵심 주제어 12 · 신규 저작어 10 · 인명 2 · 동사/정서 8. 동의어(초록)·반대어(빨강)는 각 1~2개, P3 수준.</p>
+    <div class="grid" id="grid"></div>
+  </div>
+</div>
+
+<div class="scrim" id="scrim" onclick="closeSheet()"></div>
+<div class="sheet" id="sheet">
+  <div class="sheetin" id="sheetin"></div>
+</div>
+
+<script>
+const DATA = {"dict": {"愿": {"py": "yuàn", "pos": "v", "en": "willing; to wish", "syn": ["愿意", "情愿"], "ant": [], "ex": {"zh": "我愿意帮妈妈做家务。", "py": "wǒ yuànyì bāng māma zuò jiāwù。", "en": "I am willing to help Mum with housework."}, "src": "pilot", "stop": false, "needs_content": false}, "原": {"py": "yuán", "pos": "adj/n", "en": "original; former", "syn": ["本来"], "ant": [], "ex": {"zh": "他原来住在这里。", "py": "tā yuánlái zhù zài zhèlǐ。", "en": "He originally lived here."}, "src": "pilot", "stop": false, "needs_content": false}, "园": {"py": "yuán", "pos": "n", "en": "garden; park", "syn": ["公园", "花园"], "ant": [], "ex": {"zh": "周末我们去公园玩。", "py": "zhōumò wǒmen qù gōngyuán wán。", "en": "On weekends we go to the park."}, "src": "pilot", "stop": false, "needs_content": false}, "远": {"py": "yuǎn", "pos": "adj", "en": "far; distant", "syn": ["遥远"], "ant": ["近"], "ex": {"zh": "学校离我家很远。", "py": "xuéxiào lí wǒjiā hěnyuǎn。", "en": "The school is far from my home."}, "src": "pilot", "stop": false, "needs_content": false}, "信": {"py": "xìn", "pos": "v/n", "en": "to believe; a letter", "syn": ["相信"], "ant": ["怀疑"], "ex": {"zh": "我给奶奶写了一封信。", "py": "wǒ gěi nǎinai xiě le yì fēng xìn。", "en": "I wrote a letter to Grandma."}, "src": "pilot", "stop": false, "needs_content": false}, "心": {"py": "xīn", "pos": "n", "en": "heart; mind", "syn": ["心里"], "ant": [], "ex": {"zh": "他心里很开心。", "py": "tā xīnlǐ hěn kāixīn。", "en": "He is very happy in his heart."}, "src": "pilot", "stop": false, "needs_content": false}, "新": {"py": "xīn", "pos": "adj", "en": "new", "syn": ["崭新"], "ant": ["旧"], "ex": {"zh": "我买了一本新书。", "py": "wǒ mǎi le yì běn xīnshū。", "en": "I bought a new book."}, "src": "pilot", "stop": false, "needs_content": false}, "星": {"py": "xīng", "pos": "n", "en": "star", "syn": ["星星"], "ant": [], "ex": {"zh": "晚上天上有很多星星。", "py": "wǎnshàng tiānshàng yǒu hěn duō xīngxīng。", "en": "At night there are many stars in the sky."}, "src": "pilot", "stop": false, "needs_content": false}, "愿望": {"py": "yuànwàng", "pos": "n", "en": "a wish; something you hope for", "syn": ["心愿", "梦想"], "ant": [], "ex": {"zh": "我的愿望是当医生。", "py": "wǒ de yuànwàng shì dāng yīshēng。", "en": "My wish is to become a doctor."}, "src": "pilot", "stop": false, "needs_content": false}, "梦想": {"py": "mèngxiǎng", "pos": "n", "en": "dream; aspiration", "syn": ["理想", "愿望"], "ant": [], "ex": {"zh": "当画家是她的梦想。", "py": "dāng huàjiā shì tā de mèngxiǎng。", "en": "Being a painter is her dream."}, "src": "pilot", "stop": false, "needs_content": false}, "实现": {"py": "shíxiàn", "pos": "v", "en": "to come true; to achieve", "syn": ["达成"], "ant": [], "ex": {"zh": "只要努力，梦想会实现。", "py": "zhǐyào nǔlì， mèngxiǎng huì shíxiàn。", "en": "With hard work, dreams will come true."}, "src": "pilot", "stop": false, "needs_content": false}, "坚持": {"py": "jiānchí", "pos": "v", "en": "to persist; to keep going", "syn": ["持续"], "ant": ["放弃"], "ex": {"zh": "他坚持每天练习跑步。", "py": "tā jiānchí měitiān liànxí pǎobù。", "en": "He persists in practising running every day."}, "src": "pilot", "stop": false, "needs_content": false}, "勇敢": {"py": "yǒnggǎn", "pos": "adj", "en": "brave; courageous", "syn": ["大胆", "英勇"], "ant": ["胆小"], "ex": {"zh": "他勇敢地站了出来。", "py": "tā yǒnggǎn dìzhàn le chūlai。", "en": "He bravely stood up."}, "src": "pilot", "stop": false, "needs_content": false}, "努力": {"py": "nǔlì", "pos": "v/adj", "en": "to work hard; diligent", "syn": ["用功"], "ant": ["懒惰"], "ex": {"zh": "我们要努力学习。", "py": "wǒmen yào nǔlì xuéxí。", "en": "We must study hard."}, "src": "pilot", "stop": false, "needs_content": false}, "认真": {"py": "rènzhēn", "pos": "adj", "en": "careful; serious (in doing)", "syn": ["仔细"], "ant": ["马虎"], "ex": {"zh": "她认真地做每一道题。", "py": "tā rènzhēn dì zuò měi yī dàotí。", "en": "She does every question carefully."}, "src": "pilot", "stop": false, "needs_content": false}, "放弃": {"py": "fàngqì", "pos": "v", "en": "to give up", "syn": ["舍弃"], "ant": ["坚持"], "ex": {"zh": "遇到困难也不要放弃。", "py": "yùdàokùnnán yě búyào fàngqì。", "en": "Don't give up even when you meet difficulties."}, "src": "pilot", "stop": false, "needs_content": false}, "继续": {"py": "jìxù", "pos": "v", "en": "to continue; to carry on", "syn": ["接着"], "ant": ["停止"], "ex": {"zh": "休息后我们继续画画。", "py": "xiūxi hòu wǒmen jìxù huàhuà。", "en": "After resting we continue drawing."}, "src": "pilot", "stop": false, "needs_content": false}, "决心": {"py": "juéxīn", "pos": "n", "en": "determination; resolve", "syn": ["恒心"], "ant": [], "ex": {"zh": "他下定决心要成功。", "py": "tā xiàdìng juéxīn yào chénggōng。", "en": "He is determined to succeed."}, "src": "pilot", "stop": false, "needs_content": false}, "成功": {"py": "chénggōng", "pos": "v/n", "en": "to succeed; success", "syn": ["成就"], "ant": ["失败"], "ex": {"zh": "努力练习才能成功。", "py": "nǔlì liànxí cáinéng chénggōng。", "en": "Only by practising hard can you succeed."}, "src": "pilot", "stop": false, "needs_content": false}, "表扬": {"py": "biǎoyáng", "pos": "v", "en": "to praise; to commend", "syn": ["称赞", "夸奖"], "ant": ["批评"], "ex": {"zh": "老师表扬了这个好孩子。", "py": "lǎoshī biǎoyáng le zhège hǎo háizi。", "en": "The teacher praised this good child."}, "src": "pilot", "stop": false, "needs_content": false}, "鼓励": {"py": "gǔlì", "pos": "v", "en": "to encourage", "syn": ["激励"], "ant": [], "ex": {"zh": "妈妈鼓励我勇敢一点。", "py": "māma gǔlì wǒ yǒnggǎn yìdiǎn。", "en": "Mum encourages me to be braver."}, "src": "pilot", "stop": false, "needs_content": false}, "懒惰": {"py": "lǎnduò", "pos": "adj", "en": "lazy", "syn": ["偷懒"], "ant": ["勤劳"], "ex": {"zh": "懒惰的人不会成功。", "py": "lǎnduò de rén búhuì chénggōng。", "en": "A lazy person will not succeed."}, "src": "pilot", "stop": false, "needs_content": false}, "马虎": {"py": "mǎhu", "pos": "adj", "en": "careless; sloppy", "syn": ["粗心"], "ant": ["认真"], "ex": {"zh": "做作业不能马虎。", "py": "zuò zuòyè bùnéng mǎhu。", "en": "You can't be careless with homework."}, "src": "pilot", "stop": false, "needs_content": false}, "偷懒": {"py": "tōulǎn", "pos": "v", "en": "to slack off; to be lazy", "syn": ["懒惰"], "ant": ["勤快"], "ex": {"zh": "他从不偷懒。", "py": "tā cóngbù tōulǎn。", "en": "He never slacks off."}, "src": "pilot", "stop": false, "needs_content": false}, "选拔": {"py": "xuǎnbá", "pos": "v", "en": "to select (the best)", "syn": ["挑选"], "ant": [], "ex": {"zh": "学校选拔足球队员。", "py": "xuéxiào xuǎnbá zúqiúduì yuán。", "en": "The school selects football team players."}, "src": "pilot", "stop": false, "needs_content": false}, "推荐": {"py": "tuījiàn", "pos": "v", "en": "to recommend", "syn": ["介绍"], "ant": [], "ex": {"zh": "老师推荐他参加比赛。", "py": "lǎoshī tuījiàn tā cānjiā bǐsài。", "en": "The teacher recommended him to join the contest."}, "src": "pilot", "stop": false, "needs_content": false}, "请假": {"py": "qǐngjià", "pos": "v", "en": "to ask for leave", "syn": ["休假"], "ant": [], "ex": {"zh": "他生病了，向老师请假。", "py": "tā shēngbìng le， xiàng lǎoshī qǐngjià。", "en": "He was ill and asked the teacher for leave."}, "src": "pilot", "stop": false, "needs_content": false}, "举办": {"py": "jǔbàn", "pos": "v", "en": "to hold (an event)", "syn": ["举行"], "ant": [], "ex": {"zh": "学校举办了运动会。", "py": "xuéxiào jǔbàn le yùndònghuì。", "en": "The school held a sports meet."}, "src": "pilot", "stop": false, "needs_content": false}, "容易": {"py": "róngyì", "pos": "adj", "en": "easy", "syn": ["简单"], "ant": ["困难"], "ex": {"zh": "这道题很容易。", "py": "zhèdàotí hěn róngyì。", "en": "This question is very easy."}, "src": "pilot", "stop": false, "needs_content": false}, "主要": {"py": "zhǔyào", "pos": "adj", "en": "main; primary", "syn": ["重要"], "ant": ["次要"], "ex": {"zh": "这篇短文主要写友谊。", "py": "zhèpiān duǎnwén zhǔyào xiě yǒuyì。", "en": "This passage is mainly about friendship."}, "src": "pilot", "stop": false, "needs_content": false}, "小明": {"py": "xiǎomíng", "pos": "name", "en": "Xiao Ming (a boy's name)", "syn": [], "ant": [], "ex": {"zh": "小明是我的好朋友。", "py": "xiǎomíng shì wǒ de hǎo péngyou。", "en": "Xiao Ming is my good friend."}, "src": "pilot", "stop": false, "needs_content": false}, "小美": {"py": "xiǎoměi", "pos": "name", "en": "Xiao Mei (a girl's name)", "syn": [], "ant": [], "ex": {"zh": "小美每天练习画画。", "py": "xiǎoměi měitiān liànxí huàhuà。", "en": "Xiao Mei practises drawing every day."}, "src": "pilot", "stop": false, "needs_content": false}, "练习": {"py": "liànxí", "pos": "v", "en": "to practise", "syn": ["训练"], "ant": [], "ex": {"zh": "她每天练习画画。", "py": "tā měitiān liànxí huàhuà。", "en": "She practises drawing every day."}, "src": "pilot", "stop": false, "needs_content": false}, "参加": {"py": "cānjiā", "pos": "v", "en": "to take part in; to join", "syn": ["加入"], "ant": [], "ex": {"zh": "我想参加唱歌比赛。", "py": "wǒ xiǎng cānjiā chànggē bǐsài。", "en": "I want to take part in the singing contest."}, "src": "pilot", "stop": false, "needs_content": false}, "摔倒": {"py": "shuāidǎo", "pos": "v", "en": "to fall down", "syn": ["跌倒"], "ant": [], "ex": {"zh": "他跑步时不小心摔倒了。", "py": "tā pǎobù shí bù xiǎoxīn shuāidǎo le。", "en": "He accidentally fell while running."}, "src": "pilot", "stop": false, "needs_content": false}, "受伤": {"py": "shòushāng", "pos": "v", "en": "to get hurt; to be injured", "syn": ["负伤"], "ant": [], "ex": {"zh": "他摔倒后膝盖受伤了。", "py": "tā shuāidǎo hòu xīgài shòushāng le。", "en": "After falling, he hurt his knee."}, "src": "pilot", "stop": false, "needs_content": false}, "害怕": {"py": "hàipà", "pos": "v/adj", "en": "to be afraid; frightened", "syn": ["恐惧"], "ant": ["勇敢"], "ex": {"zh": "妹妹害怕黑暗。", "py": "mèimei hàipà hēi'àn。", "en": "My little sister is afraid of the dark."}, "src": "pilot", "stop": false, "needs_content": false}, "担心": {"py": "dānxīn", "pos": "v", "en": "to worry", "syn": ["忧虑"], "ant": ["放心"], "ex": {"zh": "妈妈担心我的身体。", "py": "māma dānxīn wǒ de shēntǐ。", "en": "Mum worries about my health."}, "src": "pilot", "stop": false, "needs_content": false}, "希望": {"py": "xīwàng", "pos": "v/n", "en": "to hope; hope", "syn": ["盼望"], "ant": ["失望"], "ex": {"zh": "我希望明天是晴天。", "py": "wǒ xīwàng míngtiān shì qíngtiān。", "en": "I hope tomorrow is sunny."}, "src": "pilot", "stop": false, "needs_content": false}, "相信": {"py": "xiāngxìn", "pos": "v", "en": "to believe; to trust", "syn": ["信任"], "ant": ["怀疑"], "ex": {"zh": "我相信他能做到。", "py": "wǒ xiāngxìn tā néng zuòdào。", "en": "I believe he can do it."}, "src": "pilot", "stop": false, "needs_content": false}}, "demos": [{"s": "小明的愿望是当一名医生。", "toks": [{"t": "小明", "clk": true, "has": true}, {"t": "的", "clk": true, "has": false}, {"t": "愿望", "clk": true, "has": true}, {"t": "是", "clk": true, "has": false}, {"t": "当", "clk": true, "has": false}, {"t": "一名", "clk": true, "has": false}, {"t": "医生", "clk": true, "has": false}, {"t": "。", "clk": false, "has": false}]}, {"s": "只要坚持努力，梦想一定会实现。", "toks": [{"t": "只要", "clk": true, "has": false}, {"t": "坚持", "clk": true, "has": true}, {"t": "努力", "clk": true, "has": true}, {"t": "，", "clk": false, "has": false}, {"t": "梦想", "clk": true, "has": true}, {"t": "一定", "clk": true, "has": false}, {"t": "会", "clk": true, "has": false}, {"t": "实现", "clk": true, "has": true}, {"t": "。", "clk": false, "has": false}]}, {"s": "她认真练习，从不马虎，也不偷懒。", "toks": [{"t": "她", "clk": true, "has": false}, {"t": "认真", "clk": true, "has": true}, {"t": "练习", "clk": true, "has": true}, {"t": "，", "clk": false, "has": false}, {"t": "从不", "clk": true, "has": false}, {"t": "马虎", "clk": true, "has": true}, {"t": "，", "clk": false, "has": false}, {"t": "也", "clk": true, "has": false}, {"t": "不", "clk": true, "has": false}, {"t": "偷懒", "clk": true, "has": true}, {"t": "。", "clk": false, "has": false}]}, {"s": "小美勇敢地参加比赛，摔倒受伤也不放弃。", "toks": [{"t": "小美", "clk": true, "has": true}, {"t": "勇敢", "clk": true, "has": true}, {"t": "地", "clk": true, "has": false}, {"t": "参加", "clk": true, "has": true}, {"t": "比赛", "clk": true, "has": false}, {"t": "，", "clk": false, "has": false}, {"t": "摔倒", "clk": true, "has": true}, {"t": "受伤", "clk": true, "has": true}, {"t": "也", "clk": true, "has": false}, {"t": "不放弃", "clk": true, "has": false}, {"t": "。", "clk": false, "has": false}]}]};
+const D = DATA.dict;
+
+function posBadge(p){ return p ? '<span class="pos">'+p+'</span>' : ''; }
+function relRow(e){
+  let h='';
+  if(e.syn && e.syn.length){ h+='<div class="rel"><span class="lbl">동의어</span>'+e.syn.map(x=>'<span class="chip syn">'+x+'</span>').join('')+'</div>'; }
+  if(e.ant && e.ant.length){ h+='<div class="rel"><span class="lbl">반대어</span>'+e.ant.map(x=>'<span class="chip ant">'+x+'</span>').join('')+'</div>'; }
+  return h;
+}
+function exRow(e){
+  if(!e.ex) return '';
+  return '<div class="ex"><div class="exzh">'+e.ex.zh+'</div><div class="expy">'+e.ex.py+'</div><div class="exen">'+e.ex.en+'</div></div>';
+}
+
+// demo sentences
+const dc=document.getElementById('demos');
+DATA.demos.forEach(function(dm){
+  const q=document.createElement('div'); q.className='q';
+  const line=document.createElement('div'); line.className='zh';
+  dm.toks.forEach(function(t){
+    if(!t.clk){ const s=document.createElement('span'); s.className='plain'; s.textContent=t.t; line.appendChild(s); return; }
+    const s=document.createElement('span');
+    s.className='w'+(t.has?'':' no'); s.textContent=t.t;
+    s.onclick=function(){ openSheet(t.t, t.has); };
+    line.appendChild(s);
+  });
+  q.appendChild(line); dc.appendChild(q);
+});
+
+// grid of all entries
+const g=document.getElementById('grid');
+Object.keys(D).forEach(function(w){
+  const e=D[w];
+  const c=document.createElement('div'); c.className='card';
+  c.innerHTML='<div class="hw">'+w+posBadge(e.pos)+'</div>'+
+    '<div class="py">'+e.py+'</div>'+
+    '<div class="en">'+e.en+'</div>'+ relRow(e)+ exRow(e);
+  g.appendChild(c);
+});
+
+// bottom sheet
+const scrim=document.getElementById('scrim'), sheet=document.getElementById('sheet'), sin=document.getElementById('sheetin');
+function openSheet(w, has){
+  if(has && D[w]){
+    const e=D[w];
+    sin.innerHTML='<div class="grab"></div>'+
+      '<button class="saudio" title="발음 듣기">🔊</button>'+
+      '<div class="sh-hw">'+w+posBadge(e.pos)+'</div>'+
+      '<div class="sh-py">'+e.py+'</div>'+
+      '<div class="sh-en">'+e.en+'</div>'+
+      relRow(e)+ exRow(e);
+  } else {
+    sin.innerHTML='<div class="grab"></div>'+
+      '<div class="sh-hw">'+w+'</div>'+
+      '<div class="sh-note">이 단어는 <b>P2 콘텐츠 저작 예정</b>입니다. (클릭 대상으로는 이미 100% 등록됨 — 파일럿은 40개만 내용 채움)</div>';
+  }
+  scrim.classList.add('on'); sheet.classList.add('on');
+}
+function closeSheet(){ scrim.classList.remove('on'); sheet.classList.remove('on'); }
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeSheet(); });
+</script>
+</body>
+</html>

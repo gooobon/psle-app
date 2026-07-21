@@ -2,7 +2,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import {
   C, TTS, SpeakBtn, SFX,
-  Wrap, ActionBtn, HintBox, FeedbackBox, RevealBox, WrongBanner,
+  Wrap, TagPill, ActionBtn, HintBox, FeedbackBox, RevealBox, WrongBanner,
 } from "@/lib/uiShared";
 import { ZH_SECTIONS, ZH_CHAR_DICT, shuffle, seededShuffle } from "@/lib/quizMeta";
 import { scoreBadge, OptionsGlossary } from "@/lib/sessionUtils";
