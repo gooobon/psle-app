@@ -461,7 +461,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   }
 
   function handleSubmit() {
-    if (submitted) return;
+    if (submitted || !allAnswered) return; // STEP3C_SUBMIT_GUARD
     setSubmitted(true);
     const auto = {};
     items.forEach(q => { if (answers[q.id] === q.answer) auto[q.id] = true; });
@@ -638,7 +638,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
         )}
 
         {!submitted ? (
-          <button onClick={handleSubmit}
+          <button onClick={handleSubmit} disabled={!allAnswered}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
               color: "#fff", border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700,
@@ -698,7 +698,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
     setShowExplanation(e => ({ ...e, [b.num]: true }));
   }
   function handleSubmit() {
-    if (submitted) return;
+    if (submitted || !allAnswered) return; // STEP3C_SUBMIT_GUARD
     setSubmitted(true);
     const auto = {};
     blanks.forEach(b => { if (cmp(answers[b.num], b.answer)) auto[b.num] = true; });
@@ -1008,7 +1008,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
         )}
 
         {!submitted ? (
-          <button onClick={handleSubmit}
+          <button onClick={handleSubmit} disabled={!allAnswered}
             style={{
               width: "100%", padding: "14px", borderRadius: 10,
               background: allAnswered ? "#1e3a6e" : "#94a3b8",
@@ -1048,9 +1048,10 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
   const [submitted, setSubmitted] = useState(!!reviewMode);
   const [retried, setRetried] = useState({});
   const startRef = useRef(Date.now());
+  const allAnswered = items.every(it => String(answers[it.id] ?? '').trim().length > 0); // STEP3C_SUBMIT_GUARD
 
   function handleSubmit() {
-    if (submitted) return;
+    if (submitted || !allAnswered) return; // STEP3C_SUBMIT_GUARD
     setSubmitted(true);
   }
 
@@ -1255,11 +1256,11 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
         )}
 
         {!submitted ? (
-          <button onClick={handleSubmit}
+          <button onClick={handleSubmit} disabled={!allAnswered}
             style={{ width: "100%", padding: "14px", borderRadius: 10,
               background: "#1e3a6e", color: "#fff", border: "none",
-              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer" }}>
-            Submit
+              fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: allAnswered ? "pointer" : "not-allowed", background: allAnswered ? "#1e3a6e" : "#94a3b8" }}>
+            {allAnswered ? "Submit" : (isZh ? "\u8BF7\u5148\u5199\u5B8C\u6240\u6709\u7B54\u6848" : "Write all answers first")}
           </button>
         ) : (allRetriedWrong || reviewMode) ? (
           <button onClick={handleFinish}

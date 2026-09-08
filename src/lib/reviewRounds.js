@@ -62,10 +62,14 @@ export function indexSets(sets) {
 }
 
 // Per-round stats from a history entry (mistakes carry the result objects).
-export function roundStats(entry) {
+export function roundStats(entry, trials) {
   const m = (entry && entry.mistakes) || [];
   let hinted = 0, guessed = 0;
-  m.forEach((r) => { if (r.solvedAfterHint) hinted += 1; if (r.guessed) guessed += 1; });
+  m.forEach((r) => { if (r.solvedAfterHint) hinted += 1; });
+  // Guessed-but-correct items are not in mistakes; count them from trials (Step 1).
+  (trials || []).forEach((t) => {
+    if (t.sessionNum === (entry && entry.sessionNum) && (t.mode === 'exam' || t.mode === 'mock') && t.guessed && t.correct) guessed += 1;
+  });
   return { wrong: m.length, hinted, guessed };
 }
 
@@ -150,7 +154,7 @@ function countMarks(c) {
 }
 
 // Which past rounds can be reviewed at all (have >=1 resolvable wrong item).
-export function listReviewableRounds(history, index) {
+export function listReviewableRounds(history, index, trials) {
   return (history || []).map((entry) => {
     const built = buildRoundReviewPlan(entry, index);
     return {
@@ -158,7 +162,7 @@ export function listReviewableRounds(history, index) {
       date: entry.date,
       totalPct: entry.totalPct,
       isMockExam: !!entry.isMockExam,
-      stats: roundStats(entry),
+      stats: roundStats(entry, trials),
       reviewable: built.plan.length > 0,
       unresolved: built.unresolved.length,
     };
@@ -271,6 +275,24 @@ const VOCAB_SECTIONS = {
   zh: { answer: ['HanziMcq', 'VocabMcq', 'VocabMatch', 'PassageCloze'], fillWord: ['ReadingMcq', 'ReadingOpen'],
         keywordsOnly: ['SentenceCraft', 'ReadingMcq', 'ReadingOpen'] },
 };
+const FUNCTION_WORDS = new Set(('a an the is are was were be been being has have had do does did to of in on at for with by from as than then that this these those there their they them he she it its his her we our you your i me my '
+  + 'and but or so because if when while who whom whose which what where why how not no yes can could will would shall should may might must').split(' '));
+function editDistance(a, b) {
+  a = String(a || '').toLowerCase(); b = String(b || '').toLowerCase();
+  const dp = Array.from({ length: a.length + 1 }, (_, i) => [i]);
+  for (let j = 1; j <= b.length; j++) dp[0][j] = j;
+  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++)
+    dp[i][j] = Math.min(dp[i - 1][j] + 1, dp[i][j - 1] + 1, dp[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+  return dp[a.length][b.length];
+}
+// Editing sections mix spelling and grammar targets; only spelling targets are vocabulary.
+export function isSpellingTarget(item) {
+  const w = String(item.wrongWord || '').toLowerCase(), a = String(item.answer || '').toLowerCase();
+  if (!w || !a) return false;
+  if (FUNCTION_WORDS.has(a) || FUNCTION_WORDS.has(w)) return false;
+  return editDistance(w, a) <= 3 && Math.abs(w.length - a.length) <= 2;
+}
+
 export function roundVocabCandidates(entry, index, limit, lang) {
   const cap = limit || 10;
   const L = lang || ((entry && (entry.mistakes || [])[0] && /^ZS/.test(String(entry.mistakes[0].id))) ? 'zh' : 'en');
@@ -294,6 +316,7 @@ export function roundVocabCandidates(entry, index, limit, lang) {
         || (c.items || []).find((it) => it && (it.num === num || it.id === m.id)) || null;
     }
     const d = describeMistake(m, index);
+    if (st === 'Editing' && leaf && !isSpellingTarget(leaf)) return;   // grammar edits (was->were) are not vocabulary
     if (rules.answer.indexOf(st) !== -1 && d && d.correctAnswer) push(d.correctAnswer, null, m.id);
     else if (rules.fillWord.indexOf(st) !== -1 && leaf && String(leaf.format || '') === 'fill_word' && d && d.correctAnswer) push(d.correctAnswer, null, m.id);
     if (rules.answer.indexOf(st) !== -1 || rules.fillWord.indexOf(st) !== -1 || rules.keywordsOnly.indexOf(st) !== -1) {

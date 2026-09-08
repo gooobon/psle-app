@@ -26,7 +26,7 @@ import { WA1_ZH_PRACTICE } from '@/data/p3/chinese/wa1_practice';
 import { pickNextWa1Set, buildRemediationDrill } from '@/lib/zhRemediation';
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
-import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE } from '@/lib/trialLedger'; // STEP1_TRIAL_LEDGER
+import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE, firstTryStats } from '@/lib/trialLedger'; // STEP1_TRIAL_LEDGER // STEP3A_KPI_HEADER
 import ZhReviewGate from '@/components/ZhReviewGate';
 import ZH_VOCAB from '@/data/p3/chinese/zh_vocab.json';
 import { getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from '@/lib/zhReview';
@@ -35,6 +35,7 @@ import { getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClea
 const ZH_GATE_STOP = new Set("的了是我你他她它们在有和就也都不这那个吗呢吧与及或把被让从向对为之地得着过很太最会要能可跟给还又再只等啊呀哦嗯".split(""));
 
 import { StudentResultScreen, ZhResultScreen } from '@/components/ResultScreen';
+import ZhWa1ResultScreen from '@/components/ZhWa1ResultScreen'; // STEP3B_ZH_RESULT
 
 import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
 
@@ -214,6 +215,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const [startFromSection, setStartFromSection] = useState(null);
   const [reviewSection, setReviewSection] = useState(null);
   const [zhGate, setZhGate] = useState(null); // words[] when the whole-set review gate is showing
+  const [dailyResult, setDailyResult] = useState(null); // {results, sessionNum} for the end-of-round summary (after the gate)
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
   function startRoundReview(sessionNum){
     const entry=(prog.history||[]).find(h=>h.sessionNum===sessionNum);
@@ -280,8 +282,11 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   // words the student tapped ("didn't know") across the whole set + the core
   // words of wrong answers; if any are due, show the gate before going home.
   function goHomeAfterDaily(){ setZhGate(null); setExamMode(false); setStartFromSection(null); setScreen("home"); }
+  // After the gate (or directly when no words are due) show the round summary, then home.
+  function showDailyResult(){ setZhGate(null); setExamMode(false); setStartFromSection(null); setScreen("dailyResult"); }
   function recordDaily(results){
-    saveEntry(results, isMockDue);
+    const sessionNum=saveEntry(results, isMockDue);
+    setDailyResult({results, sessionNum});
     let words = [];
     try {
       const tapped = zhGetSessionUnknown();
@@ -290,8 +295,8 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       words = zhAssembleGate(collected, ZH_VOCAB, 10);
       zhClearSessionUnknown();
     } catch (_) { words = []; }
-    if (words.length > 0) { setZhGate(words); return; }   // gate screen takes over; goHomeAfterDaily on finish
-    goHomeAfterDaily();
+    if (words.length > 0) { setZhGate(words); return; }   // gate screen takes over; showDailyResult on finish
+    showDailyResult();
   }
   // Mock = real school past paper -> shows the result screen.
   function handleSessionDone(results){
@@ -304,7 +309,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   // done (triggered by recordDaily). Takes priority over every other screen.
   if(zhGate) return(
     <Wrap>
-      <ZhReviewGate words={zhGate} dict={ZH_VOCAB} onDone={goHomeAfterDaily} />
+      <ZhReviewGate words={zhGate} dict={ZH_VOCAB} onDone={showDailyResult} />
     </Wrap>
   );
 
@@ -375,6 +380,18 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     </Wrap>
   );
 
+  if(screen==="dailyResult"&&dailyResult) return(
+    <Wrap>
+      <ZhWa1ResultScreen
+        results={dailyResult.results}
+        sessionNum={dailyResult.sessionNum}
+        onHome={()=>{ setDailyResult(null); setScreen("home"); }}
+        onNext={()=>{ setDailyResult(null); setScreen("home"); startSession(); }}
+        onReview={()=>{ setDailyResult(null); setScreen("mistakes"); }}
+      />
+    </Wrap>
+  );
+
   if(screen==="result"&&sessionResult) return(
     <Wrap>
       <ZhResultScreen
@@ -409,7 +426,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
             </div>
           )}
           <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}
-            rounds={listReviewableRounds(prog.history||[], ZH_ROUND_INDEX)} reviewedRounds={prog.reviewedRounds||{}}
+            rounds={listReviewableRounds(prog.history||[], ZH_ROUND_INDEX, prog.trials||[])} reviewedRounds={prog.reviewedRounds||{}} trials={prog.trials||[]}
             onReviewRound={startRoundReview} isZh={true} roundIndex={ZH_ROUND_INDEX} history={prog.history||[]}/>
         </>
       ) : screen==="review" ? (
@@ -1178,7 +1195,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}
-          rounds={listReviewableRounds(prog.history||[], EN_ROUND_INDEX)} reviewedRounds={prog.reviewedRounds||{}}
+          rounds={listReviewableRounds(prog.history||[], EN_ROUND_INDEX, prog.trials||[])} reviewedRounds={prog.reviewedRounds||{}} trials={prog.trials||[]}
           onReviewRound={startRoundReview} isZh={false} roundIndex={EN_ROUND_INDEX} history={prog.history||[]}/>
       ) : screen==="review" ? (
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
@@ -1465,7 +1482,9 @@ function VocabQuizByRound({history, roundIndex, isZh}){
   );
 }
 
-function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], reviewedRounds={}, onReviewRound, isZh=false, roundIndex=null, history=[]}){
+function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], reviewedRounds={}, onReviewRound, isZh=false, roundIndex=null, history=[], trials=[]}){
+  const kpi = React.useMemo(()=>firstTryStats({trials}),[trials]);
+  const L = (zh,en)=> isZh?zh:en;
   // Results from ExamSession carry ids only; resolve question/options/answers for display.
   const mistakes = React.useMemo(()=>enrichMistakes(rawMistakes||[], roundIndex),[rawMistakes, roundIndex]);
   const [filter, setFilter] = React.useState("all");
@@ -1502,16 +1521,18 @@ function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], rev
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",
           fontWeight:700,marginBottom:10}}> Back</button>
-        <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.286)",fontWeight:900}}> Mistakes Log</div>
+        <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.286)",fontWeight:900}}> {L("\u9519\u9898\u672C","Mistakes Log")}</div>
         <div style={{color:"rgba(255,255,255,.6)",fontSize:"calc(var(--fs) * 0.857)",marginTop:2}}>
-          {filtered.length} wrong answer{filtered.length!==1?"s":""}
-          {mistakes.length>0&&` . ${Math.round((1-filtered.length/Math.max(mistakes.length,1))*100)}% accuracy`}
+          {isZh ? `\u9519\u9898 ${filtered.length}` : `${filtered.length} wrong answer${filtered.length!==1?"s":""}`}
+          {kpi.n>0 && (isZh
+            ? ` \u00B7 \u9996\u6B21\u7B54\u5BF9\u7387 ${kpi.firstTryRate}%\uFF08\u770B\u63D0\u793A\u540E\u7B54\u5BF9 ${kpi.hinted} \u00B7 \u731C\u5BF9 ${kpi.guessed}\uFF09`
+            : ` \u00B7 first-try ${kpi.firstTryRate}% (after hint ${kpi.hinted} \u00B7 guessed ${kpi.guessed})`)}
         </div>
       </div>
 
       {/* Sub-tabs: mistakes list / vocab quiz */}
       <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2E8F0"}}>
-        {[["list"," Mistakes"],["quiz"," Vocab Quiz"],["rounds", isZh?" \u6309\u8F6E\u590D\u4E60":" By Round"]].map(([v,l])=>(
+        {[["list", isZh?" \u9519\u9898":" Mistakes"],["quiz", isZh?" \u8BCD\u8BED\u7EC3\u4E60":" Vocab Quiz"],["rounds", isZh?" \u6309\u8F6E\u590D\u4E60":" By Round"]].map(([v,l])=>(
           <button key={v} onClick={()=>setView(v)}
             style={{flex:1,background:"none",border:"none",cursor:"pointer",padding:"12px 8px",
               fontSize:"calc(var(--fs) * 0.929)",fontWeight:view===v?800:500,color:view===v?"#7C2D12":"#64748B",
@@ -1524,7 +1545,7 @@ function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], rev
       {/* Filter pills */}
       <div style={{display:"flex",gap:8,padding:"12px 16px",background:"#fff",
         borderBottom:"1px solid #E2E8F0"}}>
-        {[["all","All"],["today","Today"],["week","This Week"]].map(([v,l])=>(
+        {[["all", L("\u5168\u90E8","All")],["today", L("\u4ECA\u5929","Today")],["week", L("\u672C\u5468","This Week")]].map(([v,l])=>(
           <button key={v} onClick={()=>setFilter(v)}
             style={{background:filter===v?"#DC2626":"#F1F5F9",color:filter===v?"#fff":"#64748B",
               border:"none",borderRadius:20,padding:"5px 14px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,cursor:"pointer"}}>
@@ -1547,7 +1568,7 @@ function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], rev
           <div style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:14,
             boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#64748B",marginBottom:10,
-              textTransform:"uppercase",letterSpacing:.8}}>Weak Topics</div>
+              textTransform:"uppercase",letterSpacing:.8}}>{L("\u8584\u5F31\u9898\u578B","Weak Topics")}</div>
             {Object.entries(byTopic).sort((a,b)=>b[1].length-a[1].length).map(([topic,items])=>{
               const col = topicColors[topic]||"#64748B";
               const pct = Math.round(items.length/filtered.length*100);
@@ -1555,7 +1576,7 @@ function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], rev
                 <div key={topic} style={{marginBottom:8}}>
                   <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
                     <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:col}}>{topic}</span>
-                    <span style={{fontSize:"calc(var(--fs) * 0.786)",color:"#64748B"}}>{items.length} mistake{items.length>1?"s":""}</span>
+                    <span style={{fontSize:"calc(var(--fs) * 0.786)",color:"#64748B"}}>{isZh?`\u9519 ${items.length} \u9898`:`${items.length} mistake${items.length>1?"s":""}`}</span>
                   </div>
                   <div style={{background:"#F1F5F9",borderRadius:6,height:6}}>
                     <div style={{background:col,borderRadius:6,height:6,width:pct+"%",transition:"width .4s"}}/>

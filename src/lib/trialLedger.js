@@ -58,10 +58,20 @@ export function isFirstTryCorrect(r) {
   return !!r && r.correct === true && !r.solvedAfterHint && !r.guessed;
 }
 
+// Skill key: item skill tag when present (Chinese 60-set track), else the
+// section type (English items carry no skill tag yet - see P18). A section-
+// level key still yields per-section first-try / re-error rates.
+export function skillKeyOf(r) {
+  if (!r) return null;
+  if (typeof r.skill === 'string' && r.skill) return r.skill;
+  if (typeof r.trapType === 'string' && r.trapType && r.trapType.length <= 24) return r.trapType;
+  return r.sectionType ? 'sec:' + r.sectionType : null;
+}
+
 export function normalizeTrial(r, meta) {
   return {
     itemId: r.id,
-    skill: (typeof r.skill === 'string' && r.skill) || (typeof r.trapType === 'string' && r.trapType) || null,
+    skill: skillKeyOf(r),
     sectionType: r.sectionType || null,
     setId: meta.setId || null,
     correct: r.correct === true,
@@ -140,6 +150,24 @@ export function ensureLedgerFields(p) {
   if (!Array.isArray(p.trials)) p.trials = [];
   if (!p.skillLedger || typeof p.skillLedger !== 'object') p.skillLedger = {};
   return p;
+}
+
+// Headline KPIs from trials (exam/mock modes only). Used by the Mistakes log
+// header instead of the old "(1 - filtered/total) accuracy" pseudo-metric.
+export function firstTryStats(prog, opts) {
+  const trials = (prog && prog.trials) || [];
+  const modes = (opts && opts.modes) || [MODE.EXAM, MODE.MOCK];
+  const since = (opts && opts.sinceSession) || 0;
+  let n = 0, ft = 0, hinted = 0, guessed = 0, wrong = 0;
+  trials.forEach((t) => {
+    if (modes.indexOf(t.mode) === -1 || (t.sessionNum || 0) < since) return;
+    n += 1;
+    if (t.firstTry) ft += 1;
+    else if (t.solvedAfterHint) hinted += 1;
+    else if (t.guessed && t.correct) guessed += 1;
+    else wrong += 1;
+  });
+  return { n, firstTry: ft, hinted, guessed, wrong, firstTryRate: n ? Math.round(ft / n * 100) : null };
 }
 
 // Read-only summary for a future KPI card (Step 6). Safe to call now.

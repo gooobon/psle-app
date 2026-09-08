@@ -24,12 +24,20 @@ function shuffle(arr, seed) {
 }
 function hash(str) { let h = 7; for (let i = 0; i < str.length; i++) h = (h * 31 + str.charCodeAt(i)) % 1000003; return h + 1; }
 function head(en) { return String(en || "").split(/[;,/(]/)[0].trim().toLowerCase(); }
+// P22: two definitions are "too similar" when they share most content words
+const STOP = new Set("a an the to of in on at for with by from and or is are be very not something someone".split(" "));
+function words(s) { return new Set(String(s || "").toLowerCase().replace(/[^a-z\u4e00-\u9fff ]/g, " ").split(/\s+/).filter((w) => w && !STOP.has(w))); }
+function tooSimilar(a, b) {
+  const A = words(a), B = words(b); if (!A.size || !B.size) return false;
+  let inter = 0; A.forEach((w) => { if (B.has(w)) inter += 1; });
+  return inter / Math.min(A.size, B.size) >= 0.6;
+}
 
 // ---- normalise a dict entry into { word, py, def, ex, pos } -----------------
 function entryOf(dict, w, lang) {
   const e = dict && dict[w]; if (!e) return null;
-  if (lang === "zh") return { word: w, py: e.py || "", def: e.en || "", ex: (e.ex && e.ex.zh) || "", exEn: (e.ex && e.ex.en) || "", pos: "zh", base: w };
-  return { word: w, py: "", def: e.def || "", ex: e.ex || "", exEn: "", pos: e.pos || "", base: e.base || w };
+  if (lang === "zh") return { word: w, py: e.py || "", def: e.en || "", ex: (e.ex && e.ex.zh) || "", exEn: (e.ex && e.ex.en) || "", pos: "zh", base: w, syn: [] };
+  return { word: w, py: "", def: e.def || "", ex: e.ex || "", exEn: "", pos: e.pos || "", base: e.base || w, syn: Array.isArray(e.syn) ? e.syn.map((x) => String(x).toLowerCase()) : [] };
 }
 
 // ---- English: find the inflected form of `word` inside `ex` to blank it ----
@@ -62,8 +70,9 @@ function buildQuestions(words, dict, lang, limit) {
     const used = new Set([head(e.def)]);
     const samePos = shuffle(pool.filter((p) => p.word !== e.word && (lang === "zh" || p.pos === e.pos)), seedBase + i);
     const distractors = [];
-    for (const p of samePos) { if (distractors.length >= 3) break; const h = head(p.def); if (!h || used.has(h)) continue; used.add(h); distractors.push(p.def); }
-    if (distractors.length < 3) for (const p of shuffle(pool, seedBase + 99 + i)) { if (distractors.length >= 3) break; const h = head(p.def); if (p.word === e.word || used.has(h)) continue; used.add(h); distractors.push(p.def); }
+    const okDef = (p) => { const h = head(p.def); if (!h || used.has(h)) return false; if (tooSimilar(p.def, e.def)) return false; if (distractors.some((d) => tooSimilar(d, p.def))) return false; return true; };
+    for (const p of samePos) { if (distractors.length >= 3) break; if (!okDef(p)) continue; used.add(head(p.def)); distractors.push(p.def); }
+    if (distractors.length < 3) for (const p of shuffle(pool, seedBase + 99 + i)) { if (distractors.length >= 3) break; if (p.word === e.word || !okDef(p)) continue; used.add(head(p.def)); distractors.push(p.def); }
     return { kind: "rec", word: e.word, py: e.py, prompt: e.word, correct: e.def, options: shuffle([e.def, ...distractors], seedBase + 7 * i + 3), ex: e.ex, exEn: e.exEn };
   });
 
@@ -72,8 +81,10 @@ function buildQuestions(words, dict, lang, limit) {
     if (!blanked) return null;
     const near = shuffle(pool.filter((p) => p.word !== e.word && (lang === "zh" ? p.word.length === e.word.length : (p.pos === e.pos && Math.abs(p.word.length - e.word.length) <= 3))), seedBase + 500 + i);
     const distractors = []; const used = new Set([e.word]);
-    for (const p of near) { if (distractors.length >= 3) break; if (used.has(p.word)) continue; used.add(p.word); distractors.push(p.word); }
-    if (distractors.length < 3) for (const p of shuffle(pool, seedBase + 900 + i)) { if (distractors.length >= 3) break; if (used.has(p.word)) continue; used.add(p.word); distractors.push(p.word); }
+    // P21: never offer a synonym (or a word whose definition matches) as a distractor
+    const isSyn = (p) => e.syn.indexOf(p.word) !== -1 || p.syn.indexOf(e.word) !== -1 || tooSimilar(p.def, e.def);
+    for (const p of near) { if (distractors.length >= 3) break; if (used.has(p.word) || isSyn(p)) continue; used.add(p.word); distractors.push(p.word); }
+    if (distractors.length < 3) for (const p of shuffle(pool, seedBase + 900 + i)) { if (distractors.length >= 3) break; if (used.has(p.word) || isSyn(p)) continue; used.add(p.word); distractors.push(p.word); }
     return { kind: "rcl", word: e.word, py: e.py, prompt: blanked, correct: e.word, options: shuffle([e.word, ...distractors], seedBase + 11 * i + 5), def: e.def, exEn: e.exEn };
   }).filter(Boolean);
 
