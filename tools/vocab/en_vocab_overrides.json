@@ -1,0 +1,45 @@
+{
+ "_doc": "Human-written entries merged LAST by gen_vocab_defs.py. null = drop the word (not a vocabulary item).",
+ "colourless": {
+  "base": "colourless",
+  "pos": "adjective",
+  "def": "having no colour at all, like clear water",
+  "ex": "Clean water is colourless, so you can see through it.",
+  "syn": [
+   "clear"
+  ]
+ },
+ "fierce": {
+  "base": "fierce",
+  "pos": "adjective",
+  "def": "very angry and strong, ready to attack",
+  "ex": "The fierce dog barked loudly at the stranger by the gate.",
+  "syn": [
+   "savage"
+  ]
+ },
+ "fiercely": {
+  "base": "fierce",
+  "pos": "adverb",
+  "def": "in a very angry and strong way",
+  "ex": "The two cats fought fiercely over the last piece of fish.",
+  "syn": []
+ },
+ "performers": {
+  "base": "performer",
+  "pos": "noun",
+  "def": "people who sing, dance or act for an audience",
+  "ex": "The performers bowed when the audience clapped at the end.",
+  "syn": []
+ },
+ "wicked": {
+  "base": "wicked",
+  "pos": "adjective",
+  "def": "very bad and cruel to others",
+  "ex": "The wicked witch in the story locked the children in a tower.",
+  "syn": [
+   "evil"
+  ]
+ },
+ "youre": null
+}

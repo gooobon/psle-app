@@ -99,3 +99,5 @@ comp60_review.html
 # python scratch
 __pycache__/
 *.pyc
+
+vocab_out/

@@ -1,0 +1,34 @@
+{
+  "_doc": [
+    "Vocabulary source registry for tools/vocab/extract_vocab.py.",
+    "Add one entry per data file (language x grade x exam stage). The extractor",
+    "reads shapes by FIELD NAME (sentence/options/answer, blanks/wordBank, items[],",
+    "questions[].format, keywords[].w), so new files need no code as long as they",
+    "follow the WA1 schemas. vocab_sections lists the section types whose answers",
+    "are vocabulary (grammar sections are excluded on purpose)."
+  ],
+  "dictionaries": {
+    "en": "src/data/p3/english/en_vocab.json",
+    "zh": "src/data/p3/chinese/zh_vocab.json"
+  },
+  "sources": [
+    {
+      "id": "en_p3_wa1",
+      "lang": "en", "grade": "P3", "stage": "WA1",
+      "file": "src/data/p3/english/wa1_practice.ts",
+      "format": "ts_const", "const": "WA1_PRACTICE_SETS",
+      "vocab_sections": ["VocabMCQ", "VocabCloze", "Editing", "Comprehension"],
+      "comp_formats": ["fill_word", "vocab", "vocab_in_context"],
+      "audits": ["past_perfect"]
+    },
+    {
+      "id": "zh_p3_wa1",
+      "lang": "zh", "grade": "P3", "stage": "WA1",
+      "file": "src/data/p3/chinese/wa1_practice.ts",
+      "format": "ts_marked", "begin": "/* WA1_ZH_JSON_BEGIN */", "end": "/* WA1_ZH_JSON_END */",
+      "vocab_sections": ["HanziMcq", "VocabMcq", "VocabMatch", "PassageCloze", "ReadingMcq", "ReadingOpen", "SentenceCraft"],
+      "comp_formats": ["fill_word"],
+      "audits": []
+    }
+  ]
+}
