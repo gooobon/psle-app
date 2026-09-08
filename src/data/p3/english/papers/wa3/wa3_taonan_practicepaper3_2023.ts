@@ -811,8 +811,7 @@ const sectionD: PassageSet = {
 // ════════════════════════════════════════════════════════════
 // SECTION E — Comprehension Cloze  (Q25–Q28)
 // Answer key: B C G F  (Q25=B=blind, Q26=C=chores, Q27=G=inform... 
-// Official key: Q25=H(tasks)? Let's re-check from key: Q21=B Q22=C Q23=G Q24=E Q25=H Q26=F Q27=D Q28=A
-// Wait - the answer key shows Q21-Q28: B C G E H F D A
+// Answer key Q21-Q28: B C G E H F D A
 // So for Section E (Q25-Q28): H, F, D, A
 // H=tasks, F=guiding, D=deaf, A=alert
 // ════════════════════════════════════════════════════════════

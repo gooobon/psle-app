@@ -28,7 +28,11 @@ function normWord(answer, wb) {
 function sentenceContaining(passage, word) {
   if (!word) return '';
   const parts = String(passage).split(/(?<=[.!?])\s+/);
-  return parts.find(p => p.includes(word)) || '';
+  // P16: prefer the sentence where the target word carries its "(n)" marker;
+  // the same word may occur earlier in the passage without being the target.
+  const esc = String(word).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const marked = parts.find(p => new RegExp('(^|[^A-Za-z])' + esc + '\\s*\\(\\d+\\)').test(p));
+  return marked || parts.find(p => p.includes(word)) || '';
 }
 
 /* ---------- per-set converter -> { type -> PlanSection } ---------- */

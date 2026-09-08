@@ -2698,7 +2698,12 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
     // Save results if provided
     let latestResults = pageResults;
     if (results) {
-      latestResults = [...pageResults, ...results];
+      // STEP2_SECTIONTYPE_RETAG (P15): Cloze/Comp pages hardcode a generic
+      // sectionType (GrammarCloze / Comprehension). Re-tag with the section
+      // actually running so PassageCloze/ReadingMcq/ReadingOpen/VocabCloze
+      // score per section and trials carry the right sectionType.
+      const tagged = results.map(r => (r && r.sectionType !== sectionType) ? { ...r, sectionType, topic: sectionType } : r);
+      latestResults = [...pageResults, ...tagged];
       setPageResults(latestResults);
     }
     if (advance) {

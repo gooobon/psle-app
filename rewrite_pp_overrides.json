@@ -1,0 +1,193 @@
+{
+  "_doc": "Applied by rewrite_past_perfect.py --apply-only after rewrite_pp_ok.json. 'items': locate the ORIGINAL string by its item location (from the scan) and apply each [old, new] substring once (must match exactly once). 'global': substring replacement in ANY string of the source JSONs (used for hints that explain the removed 'had').",
+  "items": [
+    {
+      "where": "S01/S01_G",
+      "replace": [
+        [
+          "what had happened",
+          "what happened"
+        ]
+      ]
+    },
+    {
+      "where": "S27/S27_E_S27_E2",
+      "replace": [
+        [
+          "had left there",
+          "left there"
+        ]
+      ]
+    },
+    {
+      "where": "S33/S33_C",
+      "replace": [
+        [
+          "she had first practised",
+          "she first practised"
+        ],
+        [
+          "speech had won the class competition",
+          "speech won the class competition"
+        ]
+      ]
+    },
+    {
+      "where": "S50/S50_G",
+      "replace": [
+        [
+          "had lasted forty-three",
+          "lasted forty-three"
+        ],
+        [
+          "who had taught him",
+          "who taught him"
+        ],
+        [
+          "his grandfather had shown him",
+          "his grandfather showed him"
+        ],
+        [
+          "had already left",
+          "were already gone"
+        ],
+        [
+          "the tops had spun",
+          "the tops spun"
+        ]
+      ]
+    },
+    {
+      "where": "S01/S01_D",
+      "replace": [
+        [
+          "Amy had (2)",
+          "Amy (2)"
+        ],
+        [
+          "she had helped",
+          "she helped"
+        ]
+      ]
+    },
+    {
+      "where": "S07/S07_D",
+      "replace": [
+        [
+          "our team had been (2)",
+          "our team was (2)"
+        ]
+      ]
+    },
+    {
+      "where": "S07/q6_41",
+      "replace": [
+        [
+          "Priya had trained",
+          "Priya trained"
+        ]
+      ]
+    },
+    {
+      "where": "S11/S11_D",
+      "replace": [
+        [
+          "our plane had been (2)",
+          "our plane was (2)"
+        ]
+      ]
+    },
+    {
+      "where": "S13/S13_D",
+      "replace": [
+        [
+          "every single visit had been deeply",
+          "every single visit was deeply"
+        ]
+      ]
+    },
+    {
+      "where": "S14/S14_D",
+      "replace": [
+        [
+          "that had taken him",
+          "that took him"
+        ],
+        [
+          "he had first (4)",
+          "he first (4)"
+        ],
+        [
+          "that was what had (5)",
+          "that was what (5)"
+        ]
+      ]
+    },
+    {
+      "where": "S17/S17_C",
+      "replace": [
+        [
+          "Someone had left a banana",
+          "Someone left a banana"
+        ]
+      ]
+    },
+    {
+      "where": "S41/S41_C",
+      "replace": [
+        [
+          "the last box had been loaded",
+          "the last box was loaded"
+        ],
+        [
+          "We had lived in the same block (4)________ I was five years old, so leaving it felt strange.",
+          "This has been our home (4)________ I was five years old, so leaving it felt strange."
+        ],
+        [
+          "When I came downstairs at seven, she had (7)________ arranged all the kitchen cupboards.",
+          "By seven the next morning, she was (7)________ done with all the kitchen cupboards."
+        ],
+        [
+          "Father, however, had not found his reading glasses (8)________",
+          "Father, however, could not find his reading glasses (8)________"
+        ]
+      ]
+    },
+    {
+      "where": "S47/q46_41",
+      "replace": [
+        [
+          "Jess had moved to",
+          "Jess moved to"
+        ]
+      ]
+    },
+    {
+      "where": "S50/q49_41",
+      "replace": [
+        [
+          "had lasted",
+          "lasted"
+        ]
+      ]
+    }
+  ],
+  "global": [
+    [
+      "It must be a past verb, because 'had first' comes in front of it.",
+      "It must be a past-tense verb, because the story is told in the past."
+    ],
+    [
+      "It follows 'had', so use the past participle.",
+      "The sentence is in the past, so use the past-tense form."
+    ],
+    [
+      "Father HAD NOT FOUND his READING GLASSES",
+      "Father COULD NOT FIND his READING GLASSES"
+    ],
+    [
+      "The cupboards were done WHEN I CAME DOWNSTAIRS AT SEVEN",
+      "The cupboards were done BY SEVEN THE NEXT MORNING"
+    ]
+  ]
+}

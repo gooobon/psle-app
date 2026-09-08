@@ -551,7 +551,7 @@ Adapted from Friendship`,
       question:
         "Put these events in the right sequence. Write 1, 2, 3 and 4.\n___ Alan remembered Miss Joy's advice.\n___ Alan decided to help Jack.\n___ Alan saw Jack looking worried.\n___ Alan and his friends went to the library.",
       answer:
-        "2 — Alan remembered Miss Joy's advice.\n3 — Alan decided to help Jack.\n1 — Alan saw Jack looking worried.\n... Actually:\n1 — Alan and his friends went to the library.\n2 — Alan saw Jack looking worried.\n3 — Alan remembered Miss Joy's advice.\n4 — Alan decided to help Jack.",
+        "1 - Alan and his friends went to the library.\n2 - Alan saw Jack looking worried.\n3 - Alan remembered Miss Joy's advice.\n4 - Alan decided to help Jack.",
       solution: {
         method: "Sequencing events from paragraph 2 and 3",
         steps: [

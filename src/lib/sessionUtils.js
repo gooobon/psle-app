@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { C, TTS } from "@/lib/uiShared";
+import { C, TTS, SpeakBtn } from "@/lib/uiShared";
 import { WORD_DICT, SYN_ANT, ZH_CHAR_DICT } from "@/lib/quizMeta";
 
 function reviewDays(a){ return a>=3?3:a===2?5:7; }

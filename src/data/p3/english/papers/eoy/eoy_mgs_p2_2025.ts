@@ -974,7 +974,7 @@ const paper: ExamPaper = {
           marks: 1,
           questionNumber: 37,
           stem: 'Put the following events in the right sequence, according to the story. Write 1, 2 and 3 in the lines. [1m]\n\n___ Stacy met a young woman and helped her.\n___ Stacy weaved beautiful creations for the villagers.\n___ Stacy was not appreciated for her kindness.',
-          answer: 'Stacy weaved → 3 | Stacy met young woman → 1 | Stacy was not appreciated → 2\n(Correct order: "Stacy weaved beautiful creations" = 3, "Stacy met a young woman" = 1... Wait: let me re-read.)',
+          answer: 'Stacy was not appreciated for her kindness. = 1 | Stacy met a young woman and helped her. = 2 | Stacy weaved beautiful creations for the villagers. = 3',
           correctSequence: {
             'Stacy met a young woman and helped her.': 2,
             'Stacy weaved beautiful creations for the villagers.': 3,

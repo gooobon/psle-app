@@ -222,7 +222,6 @@ const eoy_mgs_p2b_2023: QuestionSet = {
         method: "Prepositions/conjunctions – examining something post-event",
         steps: [
           "'Looking after the cage' in this context means examining it in retrospect.",
-          "Actually: 'Looking _____ the cage she was trapped in' = looking at the cage from a distance after consideration.",
           "Answer key: (C) after. 'Looking after the cage' = considering the cage she was in after (i.e., reflecting on it).",
           "→ Answer: (C) after",
         ],

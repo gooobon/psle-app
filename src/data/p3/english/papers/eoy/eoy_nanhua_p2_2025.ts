@@ -559,14 +559,12 @@ const paper: ExamPaper = {
               marks: 1,
               questionNumber: 21,
               stem: 'When (21) ___ spotted tracks in the snow, she followed (22) ___.',
-              answer: 'L (she) — Wait: L already used. Correct: M (them)',
-              note: 'Q21 subject = she (but L used); correct answer based on answer key = M (them) for Q22; Q21 = she → but L used. Re-reading: Q21 = "When ___ spotted tracks" = she (subject). Since L=she already used in Q20, and answer key says Q21=M… Re-check: answer key: Q19=J, Q20=L, Q21=M, Q22=H',
+              answer: 'M',
+              _keyNote: 'UNVERIFIED: printed key Q21=M(them) but stem as transcribed needs a subject (she). Confirm stem and key against source PDF.',
               actualAnswer: 'M (them)',
               solution: {
                 method: 'Pronoun — subject of "spotted", referring to the Gruffalo\'s child',
                 steps: [
-                  'Wait — answer key says Q21 = M (them). Re-reading: "When (21) ___ spotted tracks in the snow, (22) ___ followed them (23) ___."',
-                  'Revised reading: blank 21 is the subject who spotted tracks = she (the child). But answer key = M(them).',
                   'Most likely Q21 subject = she, and the word box assigns she=L (already used). So Q21 must take a different pronoun.',
                   'Re-reading passage: "When (21) ___ spotted tracks, (22) ___ followed (23) ___, hoping to find the Mouse." Q23=them (the tracks). Q21=she/child. But she=L (used). Answer key Q21=M(them)? Likely the passage continuation means Q21 = "them" referring to the tracks being spotted. Adjust: "When them spotted" doesn\'t work. Most natural reading: Q21=she but that\'s L already. Based on answer key: Q21=M.',
                   'The answer key assigns: Q21=M(them). This likely refers to the child spotting "them" (the tracks) in a different sentence structure than expected.',
@@ -794,7 +792,7 @@ const paper: ExamPaper = {
             steps: [
               'Correct spelling: m-i-s-c-h-i-e-v-o-u-s.',
               'Common error: adding an extra "i" → "mischievious" (wrong).',
-              'The word has 4 syllables: mis-chie-vous (3 syllables actually: mis-CHIE-vous).',
+              'The word has 3 syllables: mis-chie-vous.',
             ],
             tip: '"Mischievous" — remember: no extra "i". It\'s mis-CHIE-vous, not mis-chie-VI-ous.',
           },

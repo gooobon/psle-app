@@ -63,6 +63,16 @@ export interface ZhExplain {
   memoryTip: string;      // short mnemonic the student should retain
 }
 
+// ---------- learning layer (post-submit, English) ----------
+// STEP1B_LEARNING_LAYER
+// Present on enriched sets; rendered only after submission. Optional so
+// non-enriched sets still type-check.
+export interface ZhKeyword { w: string; py: string; en: string; }
+export interface ZhLearningLayer {
+  explanation_en?: string;   // English explanation
+  keywords?: ZhKeyword[];    // core words with tone-marked pinyin + English
+}
+
 // Skill / trap taxonomy (ASCII ids; used by adaptive engine remediation).
 export type ZhSkillTag =
   | 'xingjinzi'      // visually similar characters
@@ -87,10 +97,12 @@ export const ZH_LESSON_MAX = 4;
 
 // ---------- MCQ family: HanziMcq / PinyinMcq / VocabMcq / SentenceMcq ----------
 // Rendered by MCQPage unchanged.
-export interface ZhMcqItem {
+export interface ZhMcqItem extends ZhLearningLayer {
   id: string;
   topic: ZhSectionType;
   sentence: string;          // blank shown as ______ ; underlined target as {u}word{/u}
+  sentence_en?: string;      // learning layer: translation of the sentence
+  hints?: string[];          // retry hint shown after a first wrong answer (never names the answer)
   options: string[];         // length 3..4 (varies by school style)
   answer: number;            // 0-based index
   explanation?: string;      // composed from explain; consumed by ExplanationBox
@@ -102,9 +114,10 @@ export interface ZhMcqItem {
 
 // ---------- pool matching: VocabMatch (and pool-variant VocabMcq) ----------
 // New small renderer (MatchPage) in Phase 1.
-export interface ZhMatchItem {
+export interface ZhMatchItem extends ZhLearningLayer {
   num: number;
   stem: string;              // blank marked with parentheses in stem
+  stem_en?: string;
   answer: number;            // index into pool
   explanation?: string;
   explain: ZhExplain;
@@ -113,6 +126,7 @@ export interface ZhMatchItem {
 }
 export interface ZhMatchSet {
   id: string;
+  topic?: ZhSectionType;
   instruction: string;
   pool: string[];            // options box; each entry used at most once
   items: ZhMatchItem[];
@@ -120,10 +134,11 @@ export interface ZhMatchSet {
 
 // ---------- passage cloze: PassageCloze ----------
 // Identical shape to English ClozeSet; rendered by ClozePage unchanged.
-export interface ZhClozeBlank {
+export interface ZhClozeBlank extends ZhLearningLayer {
   num: number;
   answer: string;            // must exist in wordBank
-  hint?: string;
+  hint?: string;             // meaning-based clue: which surrounding word to look at
+  sentence_en?: string;
   explanation?: string;
   explain: ZhExplain;
   lesson: number;
@@ -131,6 +146,7 @@ export interface ZhClozeBlank {
 }
 export interface ZhClozeSet {
   id: string;
+  topic?: ZhSectionType;
   passage: string;           // blanks marked as (n) ___ (3+ underscores)
   wordBank: string[];
   blanks: ZhClozeBlank[];
@@ -146,12 +162,14 @@ export type ZhCompFormat =
   | 'open_sentence'  // free-text answer (wenda)
   | 'fill_table';    // complete the table (tianbiao) - Phase 2 renderer
 
-export interface ZhCompQuestion {
+export interface ZhCompQuestion extends ZhLearningLayer {
   id: string;
   questionNo?: string | number;
   format: ZhCompFormat;
   marks?: number;
   stem: string;
+  stem_en?: string;
+  answer_en?: string;
   answer: any;               // mcq: number | sequence: number[] |
                              // fill_word: string | open_sentence: string (model answer) |
                              // fill_table: string[] (one per row)
@@ -167,6 +185,7 @@ export interface ZhCompQuestion {
 }
 export interface ZhCompSet {
   id: string;
+  topic?: ZhSectionType;
   passage: string;
   questions: ZhCompQuestion[];
 }
@@ -174,9 +193,13 @@ export interface ZhCompSet {
 // ---------- free production: SentenceCraft (Phase 2) ----------
 // Field names mirror English SynthItem; rendered by SynthesisPage.
 export type ZhCraftSubtype = 'combine' | 'expand' | 'rewrite' | 'make_sentence';
-export interface ZhCraftItem {
+export interface ZhCraftItem extends ZhLearningLayer {
   id: string;
+  topic?: ZhSectionType;
   subtype: ZhCraftSubtype;
+  tiles?: string[];          // tile-builder: shuffled chunks that concatenate to `answer`
+  question_en?: string;
+  answer_en?: string;
   connector?: string;        // e.g. a paired connective to be used
   sentenceA: string;
   sentenceB?: string;        // present for combine

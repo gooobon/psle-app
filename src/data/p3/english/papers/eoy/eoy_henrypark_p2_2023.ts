@@ -451,7 +451,6 @@ const eoy_henrypark_p2_2023: QuestionSet = {
         steps: [
           "Subject: Cindy and her elder sister = two people = 'we' (when the narrator is one of them).",
           "The passage is told from a close perspective; 'we' refers to Cindy and her sister.",
-          "Wait – actually the passage uses third person ('they'). Let's re-check: 'Cindy and her elder sister' = they/we.",
           "The blank is the subject of 'were taking'. Looking at the context: the passage alternates perspective but 'Cindy and her sister' are together, so 'we' fits as a first-person collective.",
           "Answer key confirms: (A) we",
         ],
@@ -810,7 +809,6 @@ const eoy_henrypark_p2_2023: QuestionSet = {
           '"surpporters" has a wrong vowel and a double-p error.',
           "Correct spelling: sup-port-ers.",
           "The prefix is 'sup-' (not 'surp-'), and 'port' has ONE 'p' only after 'sup'.",
-          "Actually: support = sup + port; supporters = support + ers.",
           "Correct: s-u-p-p-o-r-t-e-r-s (the double-p comes from 'sup' + 'port').",
         ],
         tip: "SUPPORTERS = support + ers. 'Support' = SUP + PORT (double-p between sup and port).",

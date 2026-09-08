@@ -32,7 +32,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S01_B_S01_B1",
             "topic": "GrammarMCQ",
-            "sentence": "Nobody in our class ________ the answers to the surprise quiz — the teacher had not given any hints.",
+            "sentence": "Nobody in our class ________ the answers to the surprise quiz - the teacher did not give any hints.",
             "options": [
               "know",
               "knows",
@@ -214,7 +214,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S01_A_S01_A4",
             "topic": "VocabMCQ",
-            "sentence": "When Amy found out she had passed all her exams, she was ________ — she jumped for joy.",
+            "sentence": "When Amy found out she passed all her exams, she was ________ - she jumped for joy.",
             "options": [
               "over the moon",
               "under the weather",
@@ -251,7 +251,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S01_C",
-            "passage": "Last Monday, my class went on a field trip to the Singapore Botanic Gardens. Our form teacher, Ms Tan, led (1)___ there by bus. When we arrived, (2)___ told everyone to stay together and not wander off. My friend Raju was very excited. (3)___ kept pointing at the different flowers. Ms Tan smiled at (4)___ and explained that the gardens had more than two thousand types of plants. Raju wrote the names of the flowers in (5)___ notebook. Later, we met two gardeners. (6)___ showed us how to plant a small cutting. (7)___ all tried it and got our hands dirty! At the end of the day, we thanked Ms Tan and gave (8)___ a card to say how much we had enjoyed the trip.",
+            "passage": "Last Monday, my class went on a field trip to the Singapore Botanic Gardens. Our form teacher, Ms Tan, led (1)___ there by bus. When we arrived, (2)___ told everyone to stay together and not wander off. My friend Raju was very excited. (3)___ kept pointing at the different flowers. Ms Tan smiled at (4)___ and explained that the gardens had more than two thousand types of plants. Raju wrote the names of the flowers in (5)___ notebook. Later, we met two gardeners. (6)___ showed us how to plant a small cutting. (7)___ all tried it and got our hands dirty! At the end of the day, we thanked Ms Tan and gave (8)___ a card to say how much we enjoyed the trip.",
             "wordBank": [
               "her",
               "him",
@@ -321,7 +321,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S01_D",
-            "passage": "One afternoon, Mei found a pink water bottle near the school gate. She looked at it (1)___ and saw the name 'Amy' written on the side. Mei was worried that Amy had (2)___ her bottle. She picked it up and walked (3)___ to the school office to hand it in. The teacher smiled and said, 'Well done for being honest!' The next morning, Amy ran up to Mei and said, 'Thank you! I was looking everywhere for it!' Mei felt (4)___ that she had helped a classmate. That same afternoon, the office teacher (5)___ the bottle to Amy.",
+            "passage": "One afternoon, Mei found a pink water bottle near the school gate. She looked at it (1)___ and saw the name 'Amy' written on the side. Mei was worried that Amy (2)___ her bottle. She picked it up and walked (3)___ to the school office to hand it in. The teacher smiled and said, 'Well done for being honest!' The next morning, Amy ran up to Mei and said, 'Thank you! I was looking everywhere for it!' Mei felt (4)___ that she helped a classmate. That same afternoon, the office teacher (5)___ the bottle to Amy.",
             "wordBank": [
               "angry",
               "carefully",
@@ -467,7 +467,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S01_G",
-            "passage": "It was a warm Friday morning. Eight-year-old Benny was walking to school with his bag on his back. Just as he turned the corner, he saw an elderly woman standing still on the pavement. She was holding a heavy bag of groceries and looking at the busy road with a worried face.\n\nBenny stopped. He looked at his watch — he had just enough time before school started. He walked up to her and said politely, 'Excuse me, may I help you cross the road?'\n\nThe woman looked at him in surprise. Then she smiled and said, 'Oh, how kind! Yes, please.'\n\nBenny waited for the green man to appear. He took the woman's bag and held her hand gently as they crossed the road together. On the other side, the woman thanked him again and again.\n\nBenny arrived at school just as the bell rang. His teacher, Mr Aziz, noticed that he was slightly out of breath. When Benny explained what had happened, Mr Aziz nodded and said, 'You made a good choice this morning, Benny. Being kind is never a waste of time.'",
+            "passage": "It was a warm Friday morning. Eight-year-old Benny was walking to school with his bag on his back. Just as he turned the corner, he saw an elderly woman standing still on the pavement. She was holding a heavy bag of groceries and looking at the busy road with a worried face.\n\nBenny stopped. He looked at his watch — he had just enough time before school started. He walked up to her and said politely, 'Excuse me, may I help you cross the road?'\n\nThe woman looked at him in surprise. Then she smiled and said, 'Oh, how kind! Yes, please.'\n\nBenny waited for the green man to appear. He took the woman's bag and held her hand gently as they crossed the road together. On the other side, the woman thanked him again and again.\n\nBenny arrived at school just as the bell rang. His teacher, Mr Aziz, noticed that he was slightly out of breath. When Benny explained what happened, Mr Aziz nodded and said, 'You made a good choice this morning, Benny. Being kind is never a waste of time.'",
             "questions": [
               {
                 "id": "q0_41",
@@ -907,7 +907,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S02_A_S02_A4",
             "topic": "VocabMCQ",
-            "sentence": "When Nina found her lost cat Biscuit alive and well after two days, she was ________ - she had been so worried.",
+            "sentence": "When Nina found her lost cat Biscuit alive and well after two days, she was ________ - she was so worried before.",
             "options": [
               "over the moon",
               "under the weather",
@@ -944,7 +944,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S02_C",
-            "passage": "Our school visited the aquarium last week. We watched a sea otter (1)___ in a big tank. It kept (2)___ in circles because it was so playful. The sign on the glass says that this otter (3)___ for more than five hours every day. Last winter, it even (4)___ in the chilly outdoor pool. While we were standing there, a fish darted past and the otter quickly (5)___ it. An otter always (6)___ its food with its front paws, never with its mouth. The hungry otter kept (7)___ more fish until the keeper's bucket was empty. We waited to see it (8)___ one last fish, but it had already curled up for a nap.",
+            "passage": "Our school visited the aquarium last week. We watched a sea otter (1)___ in a big tank. It kept (2)___ in circles because it was so playful. The sign on the glass says that this otter (3)___ for more than five hours every day. Last winter, it even (4)___ in the chilly outdoor pool. While we were standing there, a fish darted past and the otter quickly (5)___ it. An otter always (6)___ its food with its front paws, never with its mouth. The hungry otter kept (7)___ more fish until the keeper's bucket was empty. We waited to see it (8)___ one last fish, but it already curled up for a nap.",
             "wordBank": [
               "catch",
               "caught",
@@ -1615,7 +1615,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S03_A_S03_A5",
             "topic": "VocabMCQ",
-            "sentence": "Sarah was ________ that her little brother had eaten the last piece of cake she was saving.",
+            "sentence": "Sarah was ________ that her little brother ate the last piece of cake she was saving.",
             "options": [
               "pleased",
               "upset",
@@ -1808,7 +1808,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "their",
                 "questionNumber": 37,
                 "wrongWord": "there",
-                "sentence": "We all heard Grandma whisper to Mother that there (37) home had never looked so clean.",
+                "sentence": "We all heard Grandma whisper to Mother that there (37) home never looked so clean.",
                 "hints": [
                   "The HOME belongs to the family Grandma is talking about. Ask: does the underlined spelling mean 'at that place', or 'belonging to them'? The two sound alike, so choose by meaning."
                 ],
@@ -2206,7 +2206,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S04_B_S04_B7",
             "topic": "GrammarMCQ",
-            "sentence": "Father drove ________ to the hospital because Tom had hurt his knee.",
+            "sentence": "Father drove ________ to the hospital because Tom hurt his knee.",
             "options": [
               "slow",
               "slowly",
@@ -2546,7 +2546,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S04_G",
-            "passage": "On a stormy Wednesday, heavy rain flooded the market near Greenwood Estate. Water rose quickly to ankle level, and some stalls had to close. Mrs Chen, who ran a fruit stall, was packing up her unsold mangoes in a hurry.\n\nSuddenly, she heard a splash behind her. She turned around and saw an elderly man called Mr Siva sitting on the wet ground. He had slipped on the flooded floor. His groceries were scattered everywhere.\n\nMrs Chen called for help loudly. Three young men who were nearby rushed over. Two of them helped Mr Siva to his feet while the third picked up his groceries. They found a dry spot under a stall roof and sat Mr Siva down there.\n\nMr Siva rubbed his knee and said he was all right. One of the young men offered to take him home in a taxi. At first, Mr Siva said it was not necessary. But they insisted, and he finally agreed.\n\nThe next day, Mr Siva returned to the market. He went to the fruit stall and left a bag of oranges for Mrs Chen with a note that said: 'Thank you for shouting for help. You saved me from sitting in the rain alone.'",
+            "passage": "On a stormy Wednesday, heavy rain flooded the market near Greenwood Estate. Water rose quickly to ankle level, and some stalls had to close. Mrs Chen, who ran a fruit stall, was packing up her unsold mangoes in a hurry.\n\nSuddenly, she heard a splash behind her. She turned around and saw an elderly man called Mr Siva sitting on the wet ground. He slipped on the flooded floor. His groceries were scattered everywhere.\n\nMrs Chen called for help loudly. Three young men who were nearby rushed over. Two of them helped Mr Siva to his feet while the third picked up his groceries. They found a dry spot under a stall roof and sat Mr Siva down there.\n\nMr Siva rubbed his knee and said he was all right. One of the young men offered to take him home in a taxi. At first, Mr Siva said it was not necessary. But they insisted, and he finally agreed.\n\nThe next day, Mr Siva returned to the market. He went to the fruit stall and left a bag of oranges for Mrs Chen with a note that said: 'Thank you for shouting for help. You saved me from sitting in the rain alone.'",
             "questions": [
               {
                 "id": "q3_41",
@@ -2855,7 +2855,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S05_B_S05_B4",
             "topic": "GrammarMCQ",
-            "sentence": "Mr Lim's fishball noodles are far ________ than anything Sam had ever tasted from a restaurant.",
+            "sentence": "Mr Lim's fishball noodles are far ________ than anything Sam ever tasted from a restaurant.",
             "options": [
               "delicious",
               "most delicious",
@@ -2989,7 +2989,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S05_A_S05_A4",
             "topic": "VocabMCQ",
-            "sentence": "When Sam tasted Mr Lim's famous fishball noodles for the first time, he was ________ — it was the most delicious thing he had ever eaten.",
+            "sentence": "When Sam tasted Mr Lim's famous fishball noodles for the first time, he was ________ - it was the most delicious thing he ever ate.",
             "options": [
               "over the moon",
               "under the weather",
@@ -3242,7 +3242,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S05_G",
-            "passage": "Every morning, Mr Lim arrived at his stall at five o'clock, long before the rest of the hawker centre opened. He boiled the fishball soup for at least two hours to get the right taste. Mr Lim sold fishball noodles at Tampines Food Centre for over twenty years.\n\nOne rainy Tuesday, a young boy came to the stall alone. He looked at the menu and counted his coins carefully. 'Uncle,' he said quietly, 'I only have one dollar and fifty cents. Is that enough for a small bowl?'\n\nMr Lim looked at the boy. He knew the price was two dollars. But the boy's wet uniform and tired eyes told him the boy had come a long way in the rain. 'Of course,' said Mr Lim with a smile. 'One dollar fifty is enough today.'\n\nHe served the boy a full bowl — not a small one. He even added extra fishballs. The boy ate every bit of it and looked up at Mr Lim with bright eyes. 'Thank you, Uncle. This is the best I have ever eaten.'\n\nMr Lim waved his hand. 'Come back any time,' he said. And he meant it.",
+            "passage": "Every morning, Mr Lim arrived at his stall at five o'clock, long before the rest of the hawker centre opened. He boiled the fishball soup for at least two hours to get the right taste. Mr Lim sold fishball noodles at Tampines Food Centre for over twenty years.\n\nOne rainy Tuesday, a young boy came to the stall alone. He looked at the menu and counted his coins carefully. 'Uncle,' he said quietly, 'I only have one dollar and fifty cents. Is that enough for a small bowl?'\n\nMr Lim looked at the boy. He knew the price was two dollars. But the boy's wet uniform and tired eyes told him the boy came a long way in the rain. 'Of course,' said Mr Lim with a smile. 'One dollar fifty is enough today.'\n\nHe served the boy a full bowl - not a small one. He even added extra fishballs. The boy ate every bit of it and looked up at Mr Lim with bright eyes. 'Thank you, Uncle. This is the best I have ever eaten.'\n\nMr Lim waved his hand. 'Come back any time,' he said. And he meant it.",
             "questions": [
               {
                 "id": "q4_41",
@@ -3340,7 +3340,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "44",
                 "format": "fill_word",
                 "marks": 1,
-                "stem": "Which word in paragraph 3 means very tired or exhausted, showing the boy had worked hard to get there?",
+                "stem": "Which word in paragraph 3 means very tired or exhausted, showing the boy worked hard to get there?",
                 "answer": "tired",
                 "acceptableAnswers": [
                   "tired"
@@ -3435,7 +3435,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "Mr Lim had been selling fishball noodles at Tampines Food Centre for a long time. True or False? Give a reason for your answer.",
+                "stem": "Mr Lim sold fishball noodles at Tampines Food Centre for a long time. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "Mr Lim sold fishball noodles at Tampines Food Centre for over twenty years, which is a very long time.",
@@ -3550,7 +3550,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S06_B_S06_B4",
             "topic": "GrammarMCQ",
-            "sentence": "After the storm, the river was far ________ than before — it had swallowed the lower path completely.",
+            "sentence": "After the storm, the river was far ________ than before - it swallowed the lower path completely.",
             "options": [
               "wide",
               "widest",
@@ -3791,7 +3791,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S06_D",
-            "passage": "Last Sunday, the weather (1)________ on television warned of heavy rain in the afternoon. My brother and I ignored it and cycled to the park anyway. When the first drops fell, we ran to take (2)________ under the roof of the bus stop. Our shirts were already (3)________ and water dripped from our hair. Ten minutes later the rain stopped, a cool (4)________ blew across the field, and the sun came out again. On the way home, we cycled around the (5)________ that had formed along the path.",
+            "passage": "Last Sunday, the weather (1)________ on television warned of heavy rain in the afternoon. My brother and I ignored it and cycled to the park anyway. When the first drops fell, we ran to take (2)________ under the roof of the bus stop. Our shirts were already (3)________ and water dripped from our hair. Ten minutes later the rain stopped, a cool (4)________ blew across the field, and the sun came out again. On the way home, we cycled around the (5)________ that formed along the path.",
             "wordBank": [
               "breeze",
               "forecast",
@@ -3893,7 +3893,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "neighbours'",
                 "questionNumber": 5,
                 "wrongWord": "neighbours",
-                "sentence": "Later that evening, we read the neighbours (5) group chat and saw that several trees had fallen across the road.",
+                "sentence": "Later that evening, we read the neighbours (5) group chat and saw that several trees fell across the road.",
                 "hints": [
                   "The GROUP CHAT belongs to the neighbours - more than one neighbour. Ask: does a plain -s show ownership, or only make a plural? Where does the apostrophe go when the owners are many?"
                 ],
@@ -3935,7 +3935,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S06_G",
-            "passage": "It rained for three days without stopping. The river near Kai's village began to rise higher and higher. On the third morning, Kai woke up to find that water had seeped under the front door of their house.\n\n'We have to leave now,' said Grandfather. He was a farmer who lived in the village all his life and saw floods before. 'Take only what you need,' he told the family.\n\nKai quickly grabbed his schoolbag and packed it with his books, a change of clothes and his grandmother's old photo album. His little sister Maya carried her favourite toy rabbit. Mother packed some food and medicine.\n\nThe family waded through ankle-deep water to reach higher ground. Neighbours helped each other along the way. At the community hall, volunteers were handing out blankets and hot drinks.\n\nThree days later, the rain stopped and the water went down. When the family returned home, they found mud on the floors and some furniture damaged. But Grandfather looked around and smiled. 'We are safe. We can clean and fix the rest,' he said.",
+            "passage": "It rained for three days without stopping. The river near Kai's village began to rise higher and higher. On the third morning, Kai woke up to find that water seeped under the front door of their house.\n\n'We have to leave now,' said Grandfather. He was a farmer who lived in the village all his life and saw floods before. 'Take only what you need,' he told the family.\n\nKai quickly grabbed his schoolbag and packed it with his books, a change of clothes and his grandmother's old photo album. His little sister Maya carried her favourite toy rabbit. Mother packed some food and medicine.\n\nThe family waded through ankle-deep water to reach higher ground. Neighbours helped each other along the way. At the community hall, volunteers were handing out blankets and hot drinks.\n\nThree days later, the rain stopped and the water went down. When the family returned home, they found mud on the floors and some furniture damaged. But Grandfather looked around and smiled. 'We are safe. We can clean and fix the rest,' he said.",
             "questions": [
               {
                 "id": "q5_41",
@@ -3974,7 +3974,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Why did Grandfather tell the family to leave the house?",
                 "options": [
                   "The roof was broken and unsafe.",
-                  "Water had seeped under the front door.",
+                  "Water seeped under the front door.",
                   "A neighbour asked them to leave.",
                   "The community hall was calling for them."
                 ],
@@ -4487,7 +4487,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S07_D",
-            "passage": "The school basketball final was the most exciting game of the year. Thousands of (1)________ filled the stands, cheering loudly for their favourite teams. In the same final last year, our team had been (2)________ by eight points, so few people expected us to win. At half-time, our captain Reza looked calm but (3)________. He told everyone to believe in themselves and keep fighting. In the second half, one of our players got (4)________ when he twisted his ankle. Even so, the remaining players pushed on and won the match. Reza held up the trophy as our school's (5)________ for the very first time.",
+            "passage": "The school basketball final was the most exciting game of the year. Thousands of (1)________ filled the stands, cheering loudly for their favourite teams. In the same final last year, our team was (2)________ by eight points, so few people expected us to win. At half-time, our captain Reza looked calm but (3)________. He told everyone to believe in themselves and keep fighting. In the second half, one of our players got (4)________ when he twisted his ankle. Even so, the remaining players pushed on and won the match. Reza held up the trophy as our school's (5)________ for the very first time.",
             "wordBank": [
               "champion",
               "cheered",
@@ -4631,14 +4631,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S07_G",
-            "passage": "It was the final race of the year — the 1500-metre run. Twelve-year-old Priya stood at the starting line, her heart beating fast. She had trained for months for this moment.\n\nThe race began. For the first two laps, Priya stayed in third place, pacing herself carefully. Her coach, Mr Rajan, had always told her: 'Save your energy for the last lap.'\n\nOn the third lap, the girl in first place stumbled and fell. She got up quickly, but she lost precious time. Priya pushed forward and moved into second place.\n\nWith one lap to go, Priya's legs felt heavy. She thought about giving up. But then she heard the crowd cheering and she remembered why she started running — not to win, but to prove to herself that she could finish.\n\nShe crossed the finish line in second place. As she caught her breath, she felt a deep sense of pride. Mr Rajan ran over and shook her hand. 'That,' he said, 'was your best race ever.'",
+            "passage": "It was the final race of the year - the 1500-metre run. Twelve-year-old Priya stood at the starting line, her heart beating fast. She trained for months for this moment.\n\nThe race began. For the first two laps, Priya stayed in third place, pacing herself carefully. Her coach, Mr Rajan, always told her: 'Save your energy for the last lap.'\n\nOn the third lap, the girl in first place stumbled and fell. She got up quickly, but she lost precious time. Priya pushed forward and moved into second place.\n\nWith one lap to go, Priya's legs felt heavy. She thought about giving up. But then she heard the crowd cheering and she remembered why she started running - not to win, but to prove to herself that she could finish.\n\nShe crossed the finish line in second place. As she caught her breath, she felt a deep sense of pride. Mr Rajan ran over and shook her hand. 'That,' he said, 'was your best race ever.'",
             "questions": [
               {
                 "id": "q6_41",
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Priya had trained for ______ for the final race.",
+                "stem": "Priya trained for ______ for the final race.",
                 "answer": "months",
                 "acceptableAnswers": [
                   "months",
@@ -5773,7 +5773,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S09_A_S09_A4",
             "topic": "VocabMCQ",
-            "sentence": "When the old tree that the students had worked so hard to save finally survived and bloomed again in spring, everyone was ________ — all their effort was worth it.",
+            "sentence": "When the old tree that the students worked so hard to save finally survived and bloomed again in spring, everyone was ________ - all their effort was worth it.",
             "options": [
               "over the moon",
               "under the weather",
@@ -6347,7 +6347,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S10_B_S10_B5",
             "topic": "GrammarMCQ",
-            "sentence": "The noodles tasted very bland ________ no one had added any seasoning at all.",
+            "sentence": "The noodles tasted very bland ________ no one added any seasoning at all.",
             "options": [
               "so",
               "but",
@@ -6572,7 +6572,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S10_D",
-            "passage": "Last Saturday, Grandma taught me how to cook her famous curry. She took out an old (1)________ card that she had written by hand many years ago. The first (2)________ we needed was fresh turmeric, which gives the dish its golden colour. Grandma said that each of us should take only a small (3)________ at first, so that there would be enough for everyone. When the curry was finally served, it looked so (4)________ that my cousins wanted to start eating straight away. Only my little brother complained that his rice tasted (5)________, but that was because he had forgotten to spoon any curry over it.",
+            "passage": "Last Saturday, Grandma taught me how to cook her famous curry. She took out an old (1)________ card that she wrote by hand many years ago. The first (2)________ we needed was fresh turmeric, which gives the dish its golden colour. Grandma said that each of us should take only a small (3)________ at first, so that there would be enough for everyone. When the curry was finally served, it looked so (4)________ that my cousins wanted to start eating straight away. Only my little brother complained that his rice tasted (5)________, but that was because he forgot to spoon any curry over it.",
             "wordBank": [
               "appetising",
               "bland",
@@ -6981,7 +6981,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S11_B_S11_B1",
             "topic": "GrammarMCQ",
-            "sentence": "Nobody on the crowded platform ________ which train to take — the announcement board had stopped working.",
+            "sentence": "Nobody on the crowded platform ________ which train to take - the announcement board stopped working.",
             "options": [
               "know",
               "knows",
@@ -7270,7 +7270,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S11_D",
-            "passage": "Our family flight to Tokyo did not begin smoothly. We reached the airport a full two hours before (1)________, only to find that our plane had been (2)________ by another three hours because of a thunderstorm. We waited near the gate until the (3)________ announcement finally called us to walk onto the plane. Once we were in the air, sudden (4)________ made the plane shake so badly that the crew asked everyone to fasten their seatbelts. Even so, we reached our (5)________ safely and stepped out into the busy streets of Tokyo.",
+            "passage": "Our family flight to Tokyo did not begin smoothly. We reached the airport a full two hours before (1)________, only to find that our plane was (2)________ by another three hours because of a thunderstorm. We waited near the gate until the (3)________ announcement finally called us to walk onto the plane. Once we were in the air, sudden (4)________ made the plane shake so badly that the crew asked everyone to fasten their seatbelts. Even so, we reached our (5)________ safely and stepped out into the busy streets of Tokyo.",
             "wordBank": [
               "arrival",
               "boarding",
@@ -7421,7 +7421,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Zara had spent three weeks with her grandparents in ______.",
+                "stem": "Zara spent three weeks with her grandparents in ______.",
                 "answer": "Kuala Lumpur",
                 "acceptableAnswers": [
                   "Kuala Lumpur",
@@ -7454,7 +7454,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "options": [
                   "She was excited to see her father.",
                   "She was travelling alone for the first time.",
-                  "She had lost her backpack.",
+                  "She lost her backpack.",
                   "She missed her grandparents."
                 ],
                 "answer": 1,
@@ -8034,7 +8034,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "invited",
                 "questionNumber": 2,
                 "wrongWord": "inivted",
-                "sentence": "When we stepped inside, we found that she had inivted (2) twenty neighbours from our block.",
+                "sentence": "When we stepped inside, we found that she inivted (2) twenty neighbours from our block.",
                 "hints": [
                   "She had TWENTY NEIGHBOURS at her home, so the verb is right in meaning but wrong in spelling. Ask: in this word, does the -v- really come after the -i-? Say the base word slowly: in - vite."
                 ],
@@ -8045,7 +8045,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "arrived",
                 "questionNumber": 3,
                 "wrongWord": "arived",
-                "sentence": "Every corner of the living room had been decorated with tiny oil lamps, and we all arived (3) in our brightest clothes.",
+                "sentence": "Every corner of the living room was decorated with tiny oil lamps, and we all arived (3) in our brightest clothes.",
                 "hints": [
                   "The family came in their BRIGHTEST CLOTHES - the verb itself is right, but a letter has gone missing. Ask: how many times does -r- appear in the base word? Keep every letter of the base word when you add the ending."
                 ],
@@ -8659,7 +8659,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S13_D",
-            "passage": "Last term, a group of students from our school (1)________ to spend every Saturday at the old folks' home. Giving up their weekend to feed the residents and chat with them was a truly (2)________ act, for they were paid nothing at all. The nurses were extremely (3)________ and told us that they could never have coped on their own. Our teacher explained that even a few hours of company can have a huge (4)________ on someone who lives alone. On the last day, the residents made cards to show that every single visit had been deeply (5)________.",
+            "passage": "Last term, a group of students from our school (1)________ to spend every Saturday at the old folks' home. Giving up their weekend to feed the residents and chat with them was a truly (2)________ act, for they were paid nothing at all. The nurses were extremely (3)________ and told us that they could never have coped on their own. Our teacher explained that even a few hours of company can have a huge (4)________ on someone who lives alone. On the last day, the residents made cards to show that every single visit was deeply (5)________.",
             "wordBank": [
               "appreciated",
               "donated",
@@ -9350,7 +9350,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S14_D",
-            "passage": "Last month, our art teacher (1)________ the paintings of a local artist in the school hall for everyone to see. His work was so (2)________ that no two paintings looked the same. Visitors stood longest in front of his (3)________ - a huge canvas of the river at sunrise that had taken him two whole years to finish. He told us that he had first (4)________ that scene in pencil in a small notebook while he sat on the riverbank. The river reminded him of his happiest childhood memories, and that was what had (5)________ him to paint it.",
+            "passage": "Last month, our art teacher (1)________ the paintings of a local artist in the school hall for everyone to see. His work was so (2)________ that no two paintings looked the same. Visitors stood longest in front of his (3)________ - a huge canvas of the river at sunrise that took him two whole years to finish. He told us that he first (4)________ that scene in pencil in a small notebook while he sat on the riverbank. The river reminded him of his happiest childhood memories, and that was what (5)________ him to paint it.",
             "wordBank": [
               "creative",
               "exhibited",
@@ -9383,13 +9383,13 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
               {
                 "num": 4,
                 "answer": "sketched",
-                "hint": "The clue is IN PENCIL, in a small NOTEBOOK, before the real painting existed. Ask: which box word means to make a quick, rough drawing? It must be a past verb, because 'had first' comes in front of it.",
+                "hint": "The clue is IN PENCIL, in a small NOTEBOOK, before the real painting existed. Ask: which box word means to make a quick, rough drawing? It must be a past-tense verb, because the story is told in the past.",
                 "explanation": "SKETCHED = made a quick, rough drawing. Artists SKETCH an idea in a notebook before starting a full painting."
               },
               {
                 "num": 5,
                 "answer": "inspired",
-                "hint": "The RIVER REMINDED him of his HAPPIEST CHILDHOOD MEMORIES, and that is what made him want to paint. Ask: which box word means to fill someone with the urge to create? It follows 'had', so use the past participle.",
+                "hint": "The RIVER REMINDED him of his HAPPIEST CHILDHOOD MEMORIES, and that is what made him want to paint. Ask: which box word means to fill someone with the urge to create? The sentence is in the past, so use the past-tense form.",
                 "explanation": "INSPIRED = gave someone the desire, enthusiasm or ideas to create something. The river INSPIRED him to paint."
               }
             ]
@@ -10626,7 +10626,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S16_A_S16_A4",
             "topic": "VocabMCQ",
-            "sentence": "When the young chef's dish won first prize at the competition, she was ________ — all her late nights of practice had paid off.",
+            "sentence": "When the young chef's dish won first prize at the competition, she was ________ - all her late nights of practice paid off.",
             "options": [
               "on cloud nine",
               "under the weather",
@@ -11362,7 +11362,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S17_C",
-            "passage": "Our class arrived (1)________ the zoo entrance at eight o'clock sharp. The first animals we saw were the flamingos, which stood (2)________ a shallow pool with their long legs hidden under the water. We then walked (3)________ a winding path that followed the edge of the lake all the way to the monkey house. To reach the butterfly garden, we had to pass (4)________ a dark tunnel and come out at the other end. On the way back, we walked (5)________ the reptile house without going in, because a few of us were afraid of snakes. At lunchtime, my brother sat (6)________ me on the same wooden bench and shared his sandwiches. Someone had left a banana (7)________ the ground, and a cheeky monkey snatched it up. It peeled the banana and popped it (8)________ its mouth in one quick movement.",
+            "passage": "Our class arrived (1)________ the zoo entrance at eight o'clock sharp. The first animals we saw were the flamingos, which stood (2)________ a shallow pool with their long legs hidden under the water. We then walked (3)________ a winding path that followed the edge of the lake all the way to the monkey house. To reach the butterfly garden, we had to pass (4)________ a dark tunnel and come out at the other end. On the way back, we walked (5)________ the reptile house without going in, because a few of us were afraid of snakes. At lunchtime, my brother sat (6)________ me on the same wooden bench and shared his sandwiches. Someone left a banana (7)________ the ground, and a cheeky monkey snatched it up. It peeled the banana and popped it (8)________ its mouth in one quick movement.",
             "wordBank": [
               "at",
               "in",
@@ -11432,7 +11432,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S17_D",
-            "passage": "At the zoo's safari section, we saw animals that live in the wild in Africa. The zebras and giraffes (1)________ freely across a wide open area that looked like their natural (2)________. The zookeeper explained that some of these animals are (3)________ because their numbers in the wild are very low. One of the tigers was in a large (4)________ surrounded by thick glass so visitors could watch it safely. During the visit, we also (5)________ a rare white lion resting in the shade. It was the first time I had ever seen one.",
+            "passage": "At the zoo's safari section, we saw animals that live in the wild in Africa. The zebras and giraffes (1)________ freely across a wide open area that looked like their natural (2)________. The zookeeper explained that some of these animals are (3)________ because their numbers in the wild are very low. One of the tigers was in a large (4)________ surrounded by thick glass so visitors could watch it safely. During the visit, we also (5)________ a rare white lion resting in the shade. It was the first time I ever saw one.",
             "wordBank": [
               "enclosure",
               "endangered",
@@ -11799,7 +11799,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "48",
                 "format": "open_sentence",
                 "marks": 2,
-                "stem": "Why did Faiz say he had learned more than anyone else that day?",
+                "stem": "Why did Faiz say he learned more than anyone else that day?",
                 "answer": "Faiz said he had learned more than anyone else because he spent the whole time quietly observing one cheetah closely, noticing details like its spotted coat, long tail and the black lines on its face.",
                 "solution": {
                   "evidence": "I learned more than anyone else today",
@@ -12307,7 +12307,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Why did Aiden's mother smile as she watched him care for Scout?",
                 "options": [
-                  "She was happy that Scout had grown bigger.",
+                  "She was happy that Scout grew bigger.",
                   "She was proud that Aiden was becoming more confident.",
                   "She was glad Aiden remembered to feed Scout.",
                   "She was pleased that Scout liked the rain."
@@ -12316,7 +12316,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "solution": {
                   "evidence": "Her shy, quiet boy was growing more confident every day",
                   "evidenceParagraph": 2,
-                  "trap": "She was happy that Scout had grown bigger.",
+                  "trap": "She was happy that Scout grew bigger.",
                   "trapExplanation": "The passage says nothing about Scout's size making her smile; she smiled because Aiden was growing more confident.",
                   "keywords": [
                     "confident",
@@ -13845,7 +13845,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "'Dr Ariff had met many students like Priya before.' Is this True or False? Give a reason from the passage.",
+                "stem": "'Dr Ariff met many students like Priya before.' Is this True or False? Give a reason from the passage.",
                 "answer": "False",
                 "acceptableAnswers": [
                   "Dr Ariff said he had never met a student quite like Priya even after visiting schools for fifteen years.",
@@ -13961,7 +13961,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S21_B_S21_B4",
             "topic": "GrammarMCQ",
-            "sentence": "Mei's watercolour painting was far ________ than any work she had produced before — the colours blended perfectly.",
+            "sentence": "Mei's watercolour painting was far ________ than any work she produced before - the colours blended perfectly.",
             "options": [
               "beautiful",
               "most beautiful",
@@ -14720,12 +14720,12 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
               "put away",
               "to put away",
               "putting away",
-              "had put away"
+              "puts away"
             ],
             "answer": 1,
             "explanation": "'Told someone TO + base verb': told the students TO PUT AWAY their instruments. After 'told + object', use the infinitive with 'to'.",
             "hints": [
-              "The teacher TOLD the students what they had to do before leaving. Ask: after 'told + someone', which form follows - the plain verb, the -ing form, the past perfect, or the infinitive with its little partner word in front?"
+              "The teacher TOLD the students what they had to do before leaving. Ask: after 'told + someone', which form follows - the plain verb, the -ing form, the -s form, or the infinitive with its little partner word in front?"
             ]
           }
         ],
@@ -15259,7 +15259,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "48",
                 "format": "open_sentence",
                 "marks": 2,
-                "stem": "Why did Mr Chua call Jamal's performance 'the bravest thing' he had seen on the stage?",
+                "stem": "Why did Mr Chua call Jamal's performance 'the bravest thing' he saw on the stage?",
                 "answer": "Mr Chua called Jamal's performance the bravest because Jamal did not stop after making a mistake but steadied himself and carried on playing, which Mr Chua believed showed true musicianship.",
                 "solution": {
                   "evidence": "Anyone can play a perfect piece. But only a true musician carries on after making a mistake",
@@ -17114,7 +17114,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S25_G",
-            "passage": "Nobody in the neighbourhood threw anything away without asking Nadia first. Toasters, fans, radios — if it was broken, they brought it to her. Nadia was eleven years old and her workshop was the corner of her bedroom, but she could fix almost anything with a screwdriver and a lot of patience.\n\nOne afternoon, her grandmother brought in an old clock that had stopped working. 'My father gave me this when I was young,' Grandma said. 'I thought it was lost forever.'\n\nNadia opened the back of the clock and peered inside. The spring was broken. She spent two hours bending and adjusting a replacement spring she made from a piece of wire. When she wound the clock up and placed it on the table, it began to tick again — slowly at first, then with a steady rhythm.\n\nGrandma held the clock with two hands and was quiet for a long time. 'How do you know how to do all this?' she asked.\n\n'I take things apart,' Nadia said simply. 'And then I figure out how to put them back together.'\n\nThat evening, Nadia sat in her corner and thought about what she wanted to do when she grew up. She did not think about fame or money. She thought about the sound of a clock ticking again. She thought about her grandmother's face.",
+            "passage": "Nobody in the neighbourhood threw anything away without asking Nadia first. Toasters, fans, radios - if it was broken, they brought it to her. Nadia was eleven years old and her workshop was the corner of her bedroom, but she could fix almost anything with a screwdriver and a lot of patience.\n\nOne afternoon, her grandmother brought in an old clock that stopped working. 'My father gave me this when I was young,' Grandma said. 'I thought it was lost forever.'\n\nNadia opened the back of the clock and peered inside. The spring was broken. She spent two hours bending and adjusting a replacement spring she made from a piece of wire. When she wound the clock up and placed it on the table, it began to tick again - slowly at first, then with a steady rhythm.\n\nGrandma held the clock with two hands and was quiet for a long time. 'How do you know how to do all this?' she asked.\n\n'I take things apart,' Nadia said simply. 'And then I figure out how to put them back together.'\n\nThat evening, Nadia sat in her corner and thought about what she wanted to do when she grew up. She did not think about fame or money. She thought about the sound of a clock ticking again. She thought about her grandmother's face.",
             "questions": [
               {
                 "id": "q24_41",
@@ -17152,16 +17152,16 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "What was wrong with Grandma's clock?",
                 "options": [
-                  "The batteries had run out.",
+                  "The batteries ran out.",
                   "The spring was broken.",
                   "A screw was missing.",
-                  "The hands had fallen off."
+                  "The hands fell off."
                 ],
                 "answer": 1,
                 "solution": {
                   "evidence": "The spring was broken",
                   "evidenceParagraph": 3,
-                  "trap": "The batteries had run out.",
+                  "trap": "The batteries ran out.",
                   "trapExplanation": "The passage specifically says the spring was broken, not that batteries were the problem.",
                   "keywords": [
                     "spring",
@@ -17768,7 +17768,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "nurses'",
                 "questionNumber": 5,
                 "wrongWord": "nurses",
-                "sentence": "At the end of the week, the two school nurses (5) report showed that almost everyone had improved their understanding of good health.",
+                "sentence": "At the end of the week, the two school nurses (5) report showed that almost everyone improved their understanding of good health.",
                 "hints": [
                   "The REPORT belongs to the TWO SCHOOL nurses - two owners, not one. Ask: does a plain -s show ownership, or only make a plural? When the owners are many, does the apostrophe go before the -s, or after it?"
                 ],
@@ -17810,7 +17810,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S26_G",
-            "passage": "It started as a dare. During lunch on Monday, Kai bet his friend Omar that he could go an entire week without eating any sugar. Omar laughed. 'You won't last a day,' he said.\n\nTuesday was the hardest. Kai walked past the canteen snack corner without buying anything. He counted the gummy bears in his pencil case and put them back without eating a single one. By afternoon, he had a headache.\n\nOn Wednesday, Kai found that drinking water helped when he felt the urge for something sweet. He also ate an apple after lunch, which surprised him — he did not usually like apples much, but it tasted better than he remembered.\n\nBy Thursday, the headaches were gone. Kai noticed he felt more alert in class and did not fall asleep during afternoon lessons the way he sometimes did.\n\nFriday arrived, and Kai succeeded. When he told Omar, Omar looked genuinely impressed. 'I honestly thought you would give up on day one,' he said.\n\nKai smiled. He did not say anything about the packet of sweets he had already bought for Saturday. But he also knew something had changed. He did not crave sugar the way he once did.",
+            "passage": "It started as a dare. During lunch on Monday, Kai bet his friend Omar that he could go an entire week without eating any sugar. Omar laughed. 'You won't last a day,' he said.\n\nTuesday was the hardest. Kai walked past the canteen snack corner without buying anything. He counted the gummy bears in his pencil case and put them back without eating a single one. By afternoon, he had a headache.\n\nOn Wednesday, Kai found that drinking water helped when he felt the urge for something sweet. He also ate an apple after lunch, which surprised him - he did not usually like apples much, but it tasted better than he remembered.\n\nBy Thursday, the headaches were gone. Kai noticed he felt more alert in class and did not fall asleep during afternoon lessons the way he sometimes did.\n\nFriday arrived, and Kai succeeded. When he told Omar, Omar looked genuinely impressed. 'I honestly thought you would give up on day one,' he said.\n\nKai smiled. He did not say anything about the packet of sweets he already bought for Saturday. But he also knew something changed. He did not crave sugar the way he once did.",
             "questions": [
               {
                 "id": "q25_41",
@@ -18033,7 +18033,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "48",
                 "format": "open_sentence",
                 "marks": 2,
-                "stem": "Why do you think Kai did not tell Omar about the packet of sweets he had bought for Saturday?",
+                "stem": "Why do you think Kai did not tell Omar about the packet of sweets he bought for Saturday?",
                 "answer": "Kai did not tell Omar about the sweets because he did not want Omar to think he had failed the dare or given up on eating less sugar.",
                 "solution": {
                   "evidence": "He did not say anything about the packet of sweets he had already bought for Saturday",
@@ -18119,7 +18119,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S27_B_S27_B4",
             "topic": "GrammarMCQ",
-            "sentence": "The dinosaur skeleton on display is far ________ than any model Ivan had ever seen in a shop.",
+            "sentence": "The dinosaur skeleton on display is far ________ than any model Ivan ever saw in a shop.",
             "options": [
               "impressive",
               "most impressive",
@@ -18429,7 +18429,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "their",
                 "questionNumber": 2,
                 "wrongWord": "there",
-                "sentence": "Inside the first gallery, some pupils from another school had left there (2) bags on the floor.",
+                "sentence": "Inside the first gallery, some pupils from another school left there (2) bags on the floor.",
                 "hints": [
                   "The BAGS belong to the PUPILS FROM ANOTHER SCHOOL. Ask: does the underlined spelling mean 'at that place', or 'belonging to them'? The two sound alike, so choose by meaning, never by sound."
                 ],
@@ -18440,7 +18440,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "knives",
                 "questionNumber": 3,
                 "wrongWord": "knifes",
-                "sentence": "The curator showed us two ancient knifes (3) that had been found in a riverbed.",
+                "sentence": "The curator showed us two ancient knifes (3) that were found in a riverbed.",
                 "hints": [
                   "KNIFES is the trap: nouns ending in -f or -fe rarely take a plain -s. Ask: how do you write more than one leaf, or more than one wolf? Apply that same change here."
                 ],
@@ -19891,7 +19891,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S29_G",
-            "passage": "When the principal of Greenfield Primary announced that an unused rooftop would be turned into a garden, the students were curious but unconvinced. 'What is the point of growing vegetables at school?' one student asked.\n\nBy the end of the year, those same students could not imagine school without it.\n\nThe project began in January with the students digging compost into large planters and sowing seeds of spinach, chilli and cherry tomatoes. At first, progress was slow and some seeds did not sprout at all. But by March, the rooftop had green shoots pushing upward from every planter.\n\nThe garden changed the way many students thought about food. Before the project, several admitted they had never thought about where vegetables came from. After growing them, they paid more attention to what they ate and wasted far less food at lunch.\n\nThe garden also brought students together. Children from different classes worked side by side during gardening sessions, learning each other's names. A boy named Darren, who had previously kept to himself, became one of the most active gardeners. By the end of the year, he made three close friends through the garden.\n\nIn December, the students organised a small harvest festival. They cooked a simple vegetable soup using everything they grew, and invited parents and teachers to join them.",
+            "passage": "When the principal of Greenfield Primary announced that an unused rooftop would be turned into a garden, the students were curious but unconvinced. 'What is the point of growing vegetables at school?' one student asked.\n\nBy the end of the year, those same students could not imagine school without it.\n\nThe project began in January with the students digging compost into large planters and sowing seeds of spinach, chilli and cherry tomatoes. At first, progress was slow and some seeds did not sprout at all. But by March, the rooftop had green shoots pushing upward from every planter.\n\nThe garden changed the way many students thought about food. Before the project, several admitted they never thought about where vegetables came from. After growing them, they paid more attention to what they ate and wasted far less food at lunch.\n\nThe garden also brought students together. Children from different classes worked side by side during gardening sessions, learning each other's names. A boy named Darren, who had previously kept to himself, became one of the most active gardeners. By the end of the year, he made three close friends through the garden.\n\nIn December, the students organised a small harvest festival. They cooked a simple vegetable soup using everything they grew, and invited parents and teachers to join them.",
             "questions": [
               {
                 "id": "q28_41",
@@ -19933,7 +19933,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "Ripe vegetables ready to harvest",
                   "Green shoots pushing upward",
                   "Flowers blooming brightly",
-                  "Seeds that had not sprouted"
+                  "Seeds that did not sprout"
                 ],
                 "answer": 1,
                 "solution": {
@@ -20370,7 +20370,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S30_C",
-            "passage": "In the fairy tale, the hero told (1)________ that he was brave enough to face the dragon alone. The princess locked (2)________ in the tower and refused to cry. The dragon stretched (3)________ out on the pile of treasure and fell asleep. The frightened villagers hid (4)________ in the forest until the beast had flown away. The king said to his knights, 'Prepare (5)________ for battle!' Then he turned to the youngest knight and added, 'Do not blame (6)________ if you feel afraid.' 'I will ride out with you (7)________,' the king promised, 'for a king must share the danger.' At last the beast was gone, and we villagers promised (8)________ that we would never forget that day.",
+            "passage": "In the fairy tale, the hero told (1)________ that he was brave enough to face the dragon alone. The princess locked (2)________ in the tower and refused to cry. The dragon stretched (3)________ out on the pile of treasure and fell asleep. The frightened villagers hid (4)________ in the forest until the beast flew away. The king said to his knights, 'Prepare (5)________ for battle!' Then he turned to the youngest knight and added, 'Do not blame (6)________ if you feel afraid.' 'I will ride out with you (7)________,' the king promised, 'for a king must share the danger.' At last the beast was gone, and we villagers promised (8)________ that we would never forget that day.",
             "wordBank": [
               "myself",
               "yourself",
@@ -20584,7 +20584,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S30_G",
-            "passage": "Long ago, a poor fisherman caught a golden fish in his net. The fish spoke in a clear, calm voice. 'Release me,' it said, 'and I will grant you one wish.'\n\nThe fisherman thought carefully. His family needed many things — a better boat, a larger house, enough food for winter. But instead, he made a simple request. 'I wish for my daughter to be healed,' he said, 'for she has been unwell for three years.'\n\nThe golden fish was quiet for a moment. Then it said, 'Your wish is granted.' The fish slipped back into the sea and disappeared.\n\nWhen the fisherman returned home, his daughter was sitting up in bed, her cheeks pink and her eyes bright. She smiled when she saw him and said she felt better since noon.\n\nThe fisherman's neighbours were astonished. They asked him how he had managed it. He told them about the golden fish.\n\n'You wasted the wish!' one neighbour said. 'You could have asked for gold, or a palace!'\n\nThe fisherman simply shook his head. He had no regrets.\n\nYears later, when his daughter grew up to be a kind and generous woman, everyone in the village agreed that the fisherman made the wisest choice of all.",
+            "passage": "Long ago, a poor fisherman caught a golden fish in his net. The fish spoke in a clear, calm voice. 'Release me,' it said, 'and I will grant you one wish.'\n\nThe fisherman thought carefully. His family needed many things - a better boat, a larger house, enough food for winter. But instead, he made a simple request. 'I wish for my daughter to be healed,' he said, 'for she has been unwell for three years.'\n\nThe golden fish was quiet for a moment. Then it said, 'Your wish is granted.' The fish slipped back into the sea and disappeared.\n\nWhen the fisherman returned home, his daughter was sitting up in bed, her cheeks pink and her eyes bright. She smiled when she saw him and said she felt better since noon.\n\nThe fisherman's neighbours were astonished. They asked him how he managed it. He told them about the golden fish.\n\n'You wasted the wish!' one neighbour said. 'You could have asked for gold, or a palace!'\n\nThe fisherman simply shook his head. He had no regrets.\n\nYears later, when his daughter grew up to be a kind and generous woman, everyone in the village agreed that the fisherman made the wisest choice of all.",
             "questions": [
               {
                 "id": "q29_41",
@@ -20621,7 +20621,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "42",
                 "format": "mcq",
                 "marks": 1,
-                "stem": "Why did the fisherman's neighbours think he had wasted his wish?",
+                "stem": "Why did the fisherman's neighbours think he wasted his wish?",
                 "options": [
                   "They wanted him to heal his daughter too.",
                   "They thought he should have asked for gold or a palace.",
@@ -21064,7 +21064,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S31_C",
-            "passage": "Every week, students at our school (1)________ their lost items at the general office. Our school secretary always (2)________ a way to return almost every one of them. Yesterday, a girl (3)________ a blue pencil case near the library door. She spent the whole of Tuesday (4)________ its owner, class by class. While the secretary (5)________ it hard to fit all the umbrellas onto one shelf, a boy walked in with a lost violin. At the same moment, two Primary 3 boys (6)________ it hard to describe the glasses they had lost. The most common item (7)________ at school is an umbrella - dozens are left behind on rainy days. Right now, Siti (8)________ out who owns a football that appeared last Friday.",
+            "passage": "Every week, students at our school (1)________ their lost items at the general office. Our school secretary always (2)________ a way to return almost every one of them. Yesterday, a girl (3)________ a blue pencil case near the library door. She spent the whole of Tuesday (4)________ its owner, class by class. While the secretary (5)________ it hard to fit all the umbrellas onto one shelf, a boy walked in with a lost violin. At the same moment, two Primary 3 boys (6)________ it hard to describe the glasses they lost. The most common item (7)________ at school is an umbrella - dozens are left behind on rainy days. Right now, Siti (8)________ out who owns a football that appeared last Friday.",
             "wordBank": [
               "find",
               "finds",
@@ -21474,7 +21474,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "The young man had been searching for the notebook for more than one week. Is this True or False? Give a reason for your answer.",
+                "stem": "The young man was searching for the notebook for more than one week. Is this True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "This is True because the young man said he had looked for the notebook for two weeks.",
@@ -21972,7 +21972,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S32_G",
-            "passage": "On a Tuesday afternoon, eleven-year-old Dani received a message on the class group chat. It said that the science test on Friday was cancelled. She felt a wave of relief — she had not started studying yet.\n\nBut something felt off. The message was sent by an account she did not recognise. She checked with her friend Lena, who had not seen any official notice from the teacher.\n\nDani decided to check with Mr Woo directly. She sent him a polite message asking whether the test was still on. His reply came within minutes: the test was very much on.\n\nThe next day at school, Dani told her classmates. Several of them had already stopped studying, believing the false message. They were upset — but also relieved that Dani found out in time.\n\nMr Woo addressed the class about the incident. 'This is exactly why we must check the source of every message before we believe it,' he said. 'A single unverified message caused five students to waste a study night.'\n\nDani felt grateful she trusted her instincts. She learned something that no classroom lesson could fully teach: the importance of questioning what you read.",
+            "passage": "On a Tuesday afternoon, eleven-year-old Dani received a message on the class group chat. It said that the science test on Friday was cancelled. She felt a wave of relief - she did not start studying yet.\n\nBut something felt off. The message was sent by an account she did not recognise. She checked with her friend Lena, who did not see any official notice from the teacher.\n\nDani decided to check with Mr Woo directly. She sent him a polite message asking whether the test was still on. His reply came within minutes: the test was very much on.\n\nThe next day at school, Dani told her classmates. Several of them already stopped studying, believing the false message. They were upset - but also relieved that Dani found out in time.\n\nMr Woo addressed the class about the incident. 'This is exactly why we must check the source of every message before we believe it,' he said. 'A single unverified message caused five students to waste a study night.'\n\nDani felt grateful she trusted her instincts. She learned something that no classroom lesson could fully teach: the importance of questioning what you read.",
             "questions": [
               {
                 "id": "q31_41",
@@ -22012,8 +22012,8 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "options": [
                   "The message was sent very late at night.",
                   "The message was sent by an account she did not recognise.",
-                  "Lena had already told her the test was cancelled.",
-                  "Mr Woo had warned the class about fake messages."
+                  "Lena already told her the test was cancelled.",
+                  "Mr Woo warned the class about fake messages before."
                 ],
                 "answer": 1,
                 "solution": {
@@ -22396,7 +22396,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S33_A_S33_A3",
             "topic": "VocabMCQ",
-            "sentence": "The coach ________ the nervous swimmer, telling her she had trained hard and was ready.",
+            "sentence": "The coach ________ the nervous swimmer, telling her she trained hard and was ready.",
             "options": [
               "criticised",
               "scolded",
@@ -22449,7 +22449,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S33_C",
-            "passage": "Before her first public speech, Nora asked herself (1)________ the worst thing that could happen was. She also asked herself (2)________ she was so afraid, and realised the fear was simply about being judged by others. She thought about (3)________ in the audience she trusted and decided to focus on their friendly faces. She remembered (4)________ she had first practised — her bedroom, standing in front of the mirror. She also remembered (5)________ her teacher first told her she had a gift for public speaking. As she walked to the podium, she focused only on (6)________ she would deliver her opening line with confidence. Midway through, she paused to decide (7)________ of her two prepared endings she would use. At the end, the teacher announced (8)________ speech had won the class competition — and it was Nora's.",
+            "passage": "Before her first public speech, Nora asked herself (1)________ the worst thing that could happen was. She also asked herself (2)________ she was so afraid, and realised the fear was simply about being judged by others. She thought about (3)________ in the audience she trusted and decided to focus on their friendly faces. She remembered (4)________ she first practised — her bedroom, standing in front of the mirror. She also remembered (5)________ her teacher first told her she had a gift for public speaking. As she walked to the podium, she focused only on (6)________ she would deliver her opening line with confidence. Midway through, she paused to decide (7)________ of her two prepared endings she would use. At the end, the teacher announced (8)________ speech won the class competition — and it was Nora's.",
             "wordBank": [
               "who",
               "what",
@@ -22621,7 +22621,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "coaches'",
                 "questionNumber": 5,
                 "wrongWord": "coaches",
-                "sentence": "After the show, the coaches (5) warm feedback helped everyone feel proud of what they had achieved.",
+                "sentence": "After the show, the coaches (5) warm feedback helped everyone feel proud of what they achieved.",
                 "hints": [
                   "The WARM FEEDBACK came from more than one coach - the whole coaching team. Ask: does a plain -s show ownership, or only number? Where does the apostrophe belong when the owners are many?"
                 ],
@@ -22662,7 +22662,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S33_G",
-            "passage": "Class 3F arrived at the adventure camp on a Monday morning. Their first challenge was a six-metre climbing wall. From the ground, it looked enormous.\n\nMost students cheered and lined up eagerly. But a boy named Wei stood at the back. His palms were sweating. He had never liked heights.\n\nWhen it was his turn, Wei put on his harness and approached the wall. He placed his hands on the first holds. Then he stopped. His feet felt glued to the ground.\n\n'Take one step,' said the instructor quietly.\n\nWei looked up. The wall seemed impossibly high. He looked down at the instructor. Then he looked up again and took one step.\n\nAnd then another. And another.\n\nHe did not reach the top. He stopped about halfway up. But when he came down, his classmates — even those who had reached the top — clapped for him.\n\n'Why are they clapping?' Wei asked the instructor. 'I didn't make it to the top.'\n\nThe instructor smiled. 'They're clapping because they saw what it took for you to get even halfway.'",
+            "passage": "Class 3F arrived at the adventure camp on a Monday morning. Their first challenge was a six-metre climbing wall. From the ground, it looked enormous.\n\nMost students cheered and lined up eagerly. But a boy named Wei stood at the back. His palms were sweating. He never liked heights.\n\nWhen it was his turn, Wei put on his harness and approached the wall. He placed his hands on the first holds. Then he stopped. His feet felt glued to the ground.\n\n'Take one step,' said the instructor quietly.\n\nWei looked up. The wall seemed impossibly high. He looked down at the instructor. Then he looked up again and took one step.\n\nAnd then another. And another.\n\nHe did not reach the top. He stopped about halfway up. But when he came down, his classmates - even those who reached the top - clapped for him.\n\n'Why are they clapping?' Wei asked the instructor. 'I didn't make it to the top.'\n\nThe instructor smiled. 'They're clapping because they saw what it took for you to get even halfway.'",
             "questions": [
               {
                 "id": "q32_41",
@@ -22852,7 +22852,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 1,
-                "stem": "The instructor thought Wei had done something worth clapping for. Is this True or False? Give a reason for your answer.",
+                "stem": "The instructor thought Wei did something worth clapping for. Is this True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "The instructor said the classmates clapped because they saw what it took for Wei to get even halfway up the wall.",
@@ -23352,7 +23352,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S34_G",
-            "passage": "Every morning at six, Uncle Beng opened the shutters of his coffee stall in Tanjong Pagar. He ran the stall for over forty years. The stall was not much to look at — four plastic chairs, two wooden tables, a blackboard menu and a battered aluminium kettle. But the coffee was famous.\n\nPeople came from different parts of Singapore just to have a cup of Uncle Beng's kopi. Some were regulars who started coming when they were children. Others came after reading about the stall online.\n\nOne Tuesday morning, a journalist arrived. She was writing an article about the last of Singapore's traditional kopi stallholders.\n\n'Do you worry the old ways will disappear?' she asked.\n\nUncle Beng poured coffee with a steady hand. 'Everything changes,' he said. 'But kopi — real kopi — will always find its people.'\n\nHe placed two cups on the counter. 'Have a seat,' he said.\n\nThe journalist drank her coffee slowly. It was unlike anything she had tasted in a modern café. It was strong and dark, with a sweetness that crept in at the end.\n\n'Will you teach someone to take over?' she asked.\n\n'My daughter is learning,' he said simply. 'She starts at five every morning.'",
+            "passage": "Every morning at six, Uncle Beng opened the shutters of his coffee stall in Tanjong Pagar. He ran the stall for over forty years. The stall was not much to look at - four plastic chairs, two wooden tables, a blackboard menu and a battered aluminium kettle. But the coffee was famous.\n\nPeople came from different parts of Singapore just to have a cup of Uncle Beng's kopi. Some were regulars who started coming when they were children. Others came after reading about the stall online.\n\nOne Tuesday morning, a journalist arrived. She was writing an article about the last of Singapore's traditional kopi stallholders.\n\n'Do you worry the old ways will disappear?' she asked.\n\nUncle Beng poured coffee with a steady hand. 'Everything changes,' he said. 'But kopi - real kopi - will always find its people.'\n\nHe placed two cups on the counter. 'Have a seat,' he said.\n\nThe journalist drank her coffee slowly. It was unlike anything she tasted in a modern café. It was strong and dark, with a sweetness that crept in at the end.\n\n'Will you teach someone to take over?' she asked.\n\n'My daughter is learning,' he said simply. 'She starts at five every morning.'",
             "questions": [
               {
                 "id": "q33_41",
@@ -24049,14 +24049,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S35_G",
-            "passage": "Twelve-year-old Clara studied the cello for three years. She was good — her teacher said so — but she could never quite believe it. Every time she made a mistake in class, she felt certain everyone was judging her.\n\nThe school's annual music recital was in three weeks. This year, Clara was asked to perform a solo. She had never performed alone in front of an audience before.\n\nFor the next three weeks, she practised every evening after dinner. She played the piece hundreds of times. She made mistakes, corrected them, and made them again. Slowly, the piece became part of her.\n\nOn the night of the recital, Clara sat in the wings backstage, listening to the other performers. Her hands were cold. When her name was called, she walked to the centre of the stage.\n\nShe closed her eyes, placed her bow on the strings and played the opening note. It was long and clear. Everything else — the audience, the lights, the cold hands — seemed to fall away.\n\nWhen the last note ended, there was a pause. Then the hall filled with applause.\n\nAfterwards, her teacher came backstage. 'You played every note,' she said. 'But what I heard tonight was more than the notes.'",
+            "passage": "Twelve-year-old Clara studied the cello for three years. She was good - her teacher said so - but she could never quite believe it. Every time she made a mistake in class, she felt certain everyone was judging her.\n\nThe school's annual music recital was in three weeks. This year, Clara was asked to perform a solo. She never performed alone in front of an audience before.\n\nFor the next three weeks, she practised every evening after dinner. She played the piece hundreds of times. She made mistakes, corrected them, and made them again. Slowly, the piece became part of her.\n\nOn the night of the recital, Clara sat in the wings backstage, listening to the other performers. Her hands were cold. When her name was called, she walked to the centre of the stage.\n\nShe closed her eyes, placed her bow on the strings and played the opening note. It was long and clear. Everything else - the audience, the lights, the cold hands - seemed to fall away.\n\nWhen the last note ended, there was a pause. Then the hall filled with applause.\n\nAfterwards, her teacher came backstage. 'You played every note,' she said. 'But what I heard tonight was more than the notes.'",
             "questions": [
               {
                 "id": "q34_41",
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Clara had been studying the cello for ______.",
+                "stem": "Clara studied the cello for ______.",
                 "answer": "three years",
                 "acceptableAnswers": [
                   "3 years"
@@ -24086,7 +24086,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Why was the school recital especially nerve-wracking for Clara this year?",
                 "options": [
-                  "She had forgotten how to play her piece.",
+                  "She forgot how to play her piece.",
                   "She was asked to perform a solo for the first time.",
                   "Her teacher was not going to watch her perform.",
                   "She had only practised for one week."
@@ -24095,7 +24095,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "solution": {
                   "evidence": "She had never performed alone in front of an audience before",
                   "evidenceParagraph": 2,
-                  "trap": "She had forgotten how to play her piece.",
+                  "trap": "She forgot how to play her piece.",
                   "trapExplanation": "The passage says she practised the piece hundreds of times, so she had not forgotten it.",
                   "keywords": [
                     "solo",
@@ -24741,7 +24741,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S36_G",
-            "passage": "It was eleven minutes past ten when eleven-year-old Sam looked up at the departure board and felt his stomach drop. The last train to Boon Lay departed three minutes ago. He was stranded at City Hall station with an empty EZ-Link card and his phone showing four percent battery.\n\nSam pressed himself against the wall near the exit, trying to think. He stayed too long at his cousin's birthday party and ignored the two messages his mother sent reminding him to leave early.\n\nA station officer in a green vest noticed him and walked over. 'Are you alright, young man?' she asked.\n\nSam explained his situation. The officer's name tag read 'Chloe'. She did not scold him. Instead, she led him to the station control room and helped him call his mother using the station's phone.\n\nHis mother arrived forty minutes later. She was not angry — she looked more worried than upset. 'Next time, you read my messages,' she said quietly.\n\nOn the drive home, Sam stared out of the window. He thought about how a single choice — staying just a little longer — had led to this entire situation. He resolved never to miss the last train again.",
+            "passage": "It was eleven minutes past ten when eleven-year-old Sam looked up at the departure board and felt his stomach drop. The last train to Boon Lay departed three minutes ago. He was stranded at City Hall station with an empty EZ-Link card and his phone showing four percent battery.\n\nSam pressed himself against the wall near the exit, trying to think. He stayed too long at his cousin's birthday party and ignored the two messages his mother sent reminding him to leave early.\n\nA station officer in a green vest noticed him and walked over. 'Are you alright, young man?' she asked.\n\nSam explained his situation. The officer's name tag read 'Chloe'. She did not scold him. Instead, she led him to the station control room and helped him call his mother using the station's phone.\n\nHis mother arrived forty minutes later. She was not angry - she looked more worried than upset. 'Next time, you read my messages,' she said quietly.\n\nOn the drive home, Sam stared out of the window. He thought about how a single choice - staying just a little longer - led to this entire situation. He resolved never to miss the last train again.",
             "questions": [
               {
                 "id": "q35_41",
@@ -24933,7 +24933,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "Sam's mother had tried to warn him before he missed the train. True or False? Give a reason for your answer.",
+                "stem": "Sam's mother tried to warn him before he missed the train. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "His mother had sent him two messages reminding him to leave early, but he ignored them.",
@@ -25220,7 +25220,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S37_C",
-            "passage": "(1)________ Liam was nervous about his dentist appointment, he walked in calmly and sat down in the waiting room. His heart beat faster (2)________ the dentist switched on the drill. Liam counted the ceiling tiles (3)________ the dentist was working carefully on his tooth. He could not feel any pain (4)________ the anaesthetic had numbed the area around his gum. The dentist has treated Liam (5)________ he was six years old, so she knows exactly how nervous he gets and always speaks to him in a calm, steady voice. She told him to raise his hand (6)________ he felt any discomfort during the procedure. She warned him that the decay would spread further (7)________ the filling was done that day. (8)________ the minutes passed, the tightness in his shoulders slowly eased, and by the time he left the clinic he felt a wave of relief.",
+            "passage": "(1)________ Liam was nervous about his dentist appointment, he walked in calmly and sat down in the waiting room. His heart beat faster (2)________ the dentist switched on the drill. Liam counted the ceiling tiles (3)________ the dentist was working carefully on his tooth. He could not feel any pain (4)________ the anaesthetic numbed the area around his gum. The dentist has treated Liam (5)________ he was six years old, so she knows exactly how nervous he gets and always speaks to him in a calm, steady voice. She told him to raise his hand (6)________ he felt any discomfort during the procedure. She warned him that the decay would spread further (7)________ the filling was done that day. (8)________ the minutes passed, the tightness in his shoulders slowly eased, and by the time he left the clinic he felt a wave of relief.",
             "wordBank": [
               "since",
               "unless",
@@ -25434,14 +25434,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S37_G",
-            "passage": "Nine-year-old Priya had not been to the dentist in two years. Every time her mother suggested a visit, Priya found a reason to postpone it — a school project, a family outing, a stomach ache that appeared just in time.\n\nBut one Tuesday morning, Priya woke up with a sharp pain in her lower left molar. It throbbed steadily, like a tiny hammer tapping from the inside. She tried to ignore it, but by lunchtime, she could not chew her food properly.\n\nHer mother made an appointment for that same afternoon. The clinic was small and brightly lit. Dr Nair, a tall woman with a gentle voice, welcomed Priya without any fuss. She examined the tooth quickly and explained that there was a cavity that needed to be filled.\n\n'Will it hurt?' Priya asked.\n\n'There will be a small pinch,' said Dr Nair. 'After that, you will feel nothing.'\n\nShe was right. The injection stung for two seconds. Then the whole left side of Priya's mouth felt like a thick cushion. The filling itself took twelve minutes.\n\nWalking out, Priya felt something she had not expected: relief. Not just because it was over, but because it was so much smaller than the fear she carried for two years.\n\n'You should have come sooner,' her mother said.\n\nPriya nodded. She already knew.",
+            "passage": "Nine-year-old Priya did not go to the dentist for two years. Every time her mother suggested a visit, Priya found a reason to postpone it - a school project, a family outing, a stomach ache that appeared just in time.\n\nBut one Tuesday morning, Priya woke up with a sharp pain in her lower left molar. It throbbed steadily, like a tiny hammer tapping from the inside. She tried to ignore it, but by lunchtime, she could not chew her food properly.\n\nHer mother made an appointment for that same afternoon. The clinic was small and brightly lit. Dr Nair, a tall woman with a gentle voice, welcomed Priya without any fuss. She examined the tooth quickly and explained that there was a cavity that needed to be filled.\n\n'Will it hurt?' Priya asked.\n\n'There will be a small pinch,' said Dr Nair. 'After that, you will feel nothing.'\n\nShe was right. The injection stung for two seconds. Then the whole left side of Priya's mouth felt like a thick cushion. The filling itself took twelve minutes.\n\nWalking out, Priya felt something she did not expect: relief. Not just because it was over, but because it was so much smaller than the fear she carried for two years.\n\n'You should have come sooner,' her mother said.\n\nPriya nodded. She already knew.",
             "questions": [
               {
                 "id": "q36_41",
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Priya had not been to the dentist for ______.",
+                "stem": "Priya did not go to the dentist for ______.",
                 "answer": "two years",
                 "acceptableAnswers": [
                   "2 years",
@@ -25845,7 +25845,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S38_A_S38_A2",
             "topic": "VocabMCQ",
-            "sentence": "Grandfather's stories of life in the kampung ________ the children, who had never seen a village like that.",
+            "sentence": "Grandfather's stories of life in the kampung ________ the children, who never saw a village like that.",
             "options": [
               "bored",
               "frightened",
@@ -26086,7 +26086,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "oldest",
                 "questionNumber": 5,
                 "wrongWord": "older",
-                "sentence": "Uncle Rajan, who is the older (5) of the four brothers, led everyone in singing a song that Grandma had taught them as children.",
+                "sentence": "Uncle Rajan, who is the older (5) of the four brothers, led everyone in singing a song that Grandma taught them as children.",
                 "hints": [
                   "Count them: FOUR BROTHERS, not two. Ask: does a comparative or a superlative pick the top one out of a group of four? Uncle Rajan is being ranked against all of them at once."
                 ],
@@ -26128,7 +26128,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S38_G",
-            "passage": "Every Saturday morning, without fail, nine-year-old Nora took the bus to her grandfather's flat in Toa Payoh. It was a fifteen-minute ride she made so many times that she could close her eyes and know exactly when to pull the bell.\n\nGrandpa Lin was always at the door before she knocked. He had a habit of watching for the bus from his kitchen window, and the moment he spotted her yellow school bag through the glass, he would shuffle towards the door.\n\nTheir Saturday mornings followed a comfortable routine. Grandpa made kaya toast and soft-boiled eggs while Nora set the table. They ate slowly, and Grandpa told stories — about growing up in a kampung, about his first job at the docks, about the time he cycled from Toa Payoh to Changi just to impress a girl.\n\n'Was that girl Grandma?' Nora always asked.\n\n'Every time,' Grandpa always replied, with a smile that had not changed in forty years.\n\nOne Saturday, Nora arrived to find Grandpa asleep in his armchair. She let herself in quietly with the spare key and made the kaya toast herself. When Grandpa woke, he looked at the table and then at her, and something moved across his face that sat between a smile and sadness — something in between.\n\n'You are more like your grandmother every day,' he said.",
+            "passage": "Every Saturday morning, without fail, nine-year-old Nora took the bus to her grandfather's flat in Toa Payoh. It was a fifteen-minute ride she made so many times that she could close her eyes and know exactly when to pull the bell.\n\nGrandpa Lin was always at the door before she knocked. He had a habit of watching for the bus from his kitchen window, and the moment he spotted her yellow school bag through the glass, he would shuffle towards the door.\n\nTheir Saturday mornings followed a comfortable routine. Grandpa made kaya toast and soft-boiled eggs while Nora set the table. They ate slowly, and Grandpa told stories - about growing up in a kampung, about his first job at the docks, about the time he cycled from Toa Payoh to Changi just to impress a girl.\n\n'Was that girl Grandma?' Nora always asked.\n\n'Every time,' Grandpa always replied, with a smile that did not change in forty years.\n\nOne Saturday, Nora arrived to find Grandpa asleep in his armchair. She let herself in quietly with the spare key and made the kaya toast herself. When Grandpa woke, he looked at the table and then at her, and something moved across his face that sat between a smile and sadness - something in between.\n\n'You are more like your grandmother every day,' he said.",
             "questions": [
               {
                 "id": "q37_41",
@@ -26164,7 +26164,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "42",
                 "format": "mcq",
                 "marks": 1,
-                "stem": "How did Grandpa Lin know when Nora had arrived?",
+                "stem": "How did Grandpa Lin know when Nora arrived?",
                 "options": [
                   "He heard her knock on the door.",
                   "He watched for the bus from his kitchen window.",
@@ -26322,7 +26322,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "Grandpa Lin had never changed his feelings for Grandma over the years. Is this True or False? Give a reason for your answer.",
+                "stem": "Grandpa Lin never changed his feelings for Grandma over the years. Is this True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "It is True because the passage says Grandpa replied with a smile that had not changed in forty years.",
@@ -27130,17 +27130,17 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S40_B_S40_B4",
             "topic": "GrammarMCQ",
-            "sentence": "The PE teacher saw that the students ________ their stretches by the time the first event started.",
+            "sentence": "The PE teacher watched as the students ________ their stretches before the first event.",
             "options": [
               "complete",
               "completed",
-              "had completed",
+              "completes",
               "are completing"
             ],
-            "answer": 2,
-            "explanation": "BY THE TIME + past = the other action must be PAST PERFECT (had + past participle). The stretches were finished BEFORE the first event started.",
+            "answer": 1,
+            "explanation": "WATCHED = past. The stretching happened at that same past moment, so use the simple past: COMPLETED. 'Complete' and 'completes' are present; 'are completing' is present continuous.",
             "hints": [
-              "Two past moments: the STRETCHES finished first, and only afterwards did THE FIRST EVENT start. Ask: which form shows the earlier of two past actions? BY THE TIME is the phrase that demands it."
+              "The teacher WATCHED - that is already in the past. Ask: which form of the verb matches a past moment?"
             ]
           },
           {
@@ -27515,7 +27515,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S40_G",
-            "passage": "The score between Red House and Blue House was tied at forty-eight points each going into the final event: the 4x100 metre relay. Whoever won this race would win the Sports Day championship.\n\nRed House had the fastest individual sprinter in the school — a girl named Aisha. But the relay is not just about individual speed. The baton must be passed cleanly, and the team must run as one.\n\nBlue House got off to a strong start. Their first two runners built a three-metre lead. By the third leg, the gap had widened to five metres.\n\nThen Aisha stepped onto the track for the final leg. She ran not just with her legs but with everything she had. The crowd went quiet first — then erupted as she closed the gap metre by metre.\n\nWith twenty metres to go, she pulled level. With ten, she was ahead.\n\nRed House crossed the finish line first by a fraction of a second.\n\nIn the changing room afterwards, Aisha sat quietly. Her teammates expected her to be celebrating. Instead, she said, 'I almost didn't catch up. We need to work on the third handover.'\n\nThat is what made her a leader.",
+            "passage": "The score between Red House and Blue House was tied at forty-eight points each going into the final event: the 4x100 metre relay. Whoever won this race would win the Sports Day championship.\n\nRed House had the fastest individual sprinter in the school - a girl named Aisha. But the relay is not just about individual speed. The baton must be passed cleanly, and the team must run as one.\n\nBlue House got off to a strong start. Their first two runners built a three-metre lead. By the third leg, the gap widened to five metres.\n\nThen Aisha stepped onto the track for the final leg. She ran not just with her legs but with everything she had. The crowd went quiet first - then erupted as she closed the gap metre by metre.\n\nWith twenty metres to go, she pulled level. With ten, she was ahead.\n\nRed House crossed the finish line first by a fraction of a second.\n\nIn the changing room afterwards, Aisha sat quietly. Her teammates expected her to be celebrating. Instead, she said, 'I almost didn't catch up. We need to work on the third handover.'\n\nThat is what made her a leader.",
             "questions": [
               {
                 "id": "q39_41",
@@ -27997,7 +27997,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S41_C",
-            "passage": "Moving day was full of surprises. We said goodbye to our neighbours (1)________ the removal lorry arrived; when it finally pulled up at eight, the farewells were over. (2)________ the last box had been loaded, we took a final photograph of the empty flat. (3)________ the long journey to the new estate, I stared out of the window and counted the lorries we passed. We had lived in the same block (4)________ I was five years old, so leaving it felt strange. The workers carried boxes from early evening (5)________ midnight, without stopping once for a meal. Mother wanted every box unpacked (6)________ nine o'clock the next morning, and not a minute later. When I came downstairs at seven, she had (7)________ arranged all the kitchen cupboards. Father, however, had not found his reading glasses (8)________ - they were in the very last box.",
+            "passage": "Moving day was full of surprises. We said goodbye to our neighbours (1)________ the removal lorry arrived; when it finally pulled up at eight, the farewells were over. (2)________ the last box was loaded, we took a final photograph of the empty flat. (3)________ the long journey to the new estate, I stared out of the window and counted the lorries we passed. This has been our home (4)________ I was five years old, so leaving it felt strange. The workers carried boxes from early evening (5)________ midnight, without stopping once for a meal. Mother wanted every box unpacked (6)________ nine o'clock the next morning, and not a minute later. By seven the next morning, she was (7)________ done with all the kitchen cupboards. Father, however, could not find his reading glasses (8)________ - they were in the very last box.",
             "wordBank": [
               "before",
               "after",
@@ -28048,13 +28048,13 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
               {
                 "num": 7,
                 "answer": "already",
-                "hint": "The cupboards were done WHEN I CAME DOWNSTAIRS AT SEVEN - sooner than anyone expected, and the sentence is positive. Ask: which adverb reports that something happened earlier than expected?",
+                "hint": "The cupboards were done BY SEVEN THE NEXT MORNING - sooner than anyone expected, and the sentence is positive. Ask: which adverb reports that something happened earlier than expected?",
                 "explanation": "ALREADY = sooner than expected, in positive sentences. She had ALREADY arranged the cupboards by seven."
               },
               {
                 "num": 8,
                 "answer": "yet",
-                "hint": "Father HAD NOT FOUND his READING GLASSES - the sentence is negative and the search is still unfinished. Ask: which little word means 'up to now' and lives in negatives and questions?",
+                "hint": "Father COULD NOT FIND his READING GLASSES - the sentence is negative and the search is still unfinished. Ask: which little word means 'up to now' and lives in negatives and questions?",
                 "explanation": "YET = up to now, in negatives and questions. He had NOT found them YET = he expected to, but so far had not."
               }
             ]
@@ -28211,7 +28211,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S41_G",
-            "passage": "The removal lorry pulled away at seven in the evening, leaving the family of four standing in a flat full of boxes. Ten-year-old Zara had not said a word since they arrived.\n\nHer mother noticed. 'It will feel like home soon,' she said.\n\nZara said nothing. She went to what was now her bedroom and sat on the bare mattress. The walls were white. There were no drawings pinned to them, no shelves of books, no familiar shadows.\n\nHer father appeared in the doorway with a box in his arms. It was labelled 'ZARA — IMPORTANT'. He placed it gently on the floor and left without speaking.\n\nZara opened it slowly. Inside were her drawing pads, her coloured pencils, her stack of library books and — at the very bottom — a small framed photograph of her and her best friend Chloe, taken at the school garden on the last day of term.\n\nShe picked up a pencil and began drawing. First the outline of the window. Then the tree she could see outside. Then, slowly, the room itself.\n\nBy nine o'clock, there were three drawings pinned to the white wall.\n\nWhen her mother came to say goodnight, Zara looked up and said, 'I think I can make this work.'",
+            "passage": "The removal lorry pulled away at seven in the evening, leaving the family of four standing in a flat full of boxes. Ten-year-old Zara did not say a word since they arrived.\n\nHer mother noticed. 'It will feel like home soon,' she said.\n\nZara said nothing. She went to what was now her bedroom and sat on the bare mattress. The walls were white. There were no drawings pinned to them, no shelves of books, no familiar shadows.\n\nHer father appeared in the doorway with a box in his arms. It was labelled 'ZARA - IMPORTANT'. He placed it gently on the floor and left without speaking.\n\nZara opened it slowly. Inside were her drawing pads, her coloured pencils, her stack of library books and - at the very bottom - a small framed photograph of her and her best friend Chloe, taken at the school garden on the last day of term.\n\nShe picked up a pencil and began drawing. First the outline of the window. Then the tree she could see outside. Then, slowly, the room itself.\n\nBy nine o'clock, there were three drawings pinned to the white wall.\n\nWhen her mother came to say goodnight, Zara looked up and said, 'I think I can make this work.'",
             "questions": [
               {
                 "id": "q40_41",
@@ -28865,7 +28865,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "better",
                 "questionNumber": 5,
                 "wrongWord": "gooder",
-                "sentence": "By the end of term, most of us agreed that our calligraphy was gooder (5) than our regular handwriting had ever looked.",
+                "sentence": "By the end of term, most of us agreed that our calligraphy was gooder (5) than our regular handwriting ever looked.",
                 "hints": [
                   "'Good' refuses the -er ending, exactly as 'bad' does. Ask: what is the comparative of 'good'? It is an irregular word that changes shape completely, and GOODER is never English."
                 ],
@@ -29955,7 +29955,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S44_B_S44_B7",
             "topic": "GrammarMCQ",
-            "sentence": "The winning cake at the bakery competition ________ by a fourteen-year-old who had been baking for only two years.",
+            "sentence": "The winning cake at the bakery competition ________ by a fourteen-year-old who baked for only two years.",
             "options": [
               "baked",
               "was baked",
@@ -30483,7 +30483,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "47",
                 "format": "tf_reason",
                 "marks": 2,
-                "stem": "Dev's grandmother knew he had tried to bake bread even though he did not tell her. True or False? Give a reason for your answer.",
+                "stem": "Dev's grandmother knew he tried to bake bread even though he did not tell her. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
                   "It is True because his grandmother noticed something was wrong and said 'You tried the bread' after dinner, even though Dev had not told her.",
@@ -30983,7 +30983,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S45_G",
-            "passage": "Every year on the first day of Hari Raya, Mdm Aisha opened her door to everyone on the floor — regardless of race or religion. She was doing this.\n\nThis year, her new neighbour, a forty-year-old man named Mr Tan, hesitated at the entrance. He moved in only three weeks before and felt unsure about intruding on a family occasion.\n\n'Come in, come in,' said Mdm Aisha, waving him forward. 'There is more than enough.'\n\nMr Tan removed his shoes and stepped inside. On the table were dishes he had never tasted before — rendang, lemang and pineapple tarts. Mdm Aisha's daughter, Rina, handed him a plate and showed him what each dish was.\n\nBy the end of the afternoon, Mr Tan had laughed more than he had in months. As he stood to leave, he turned to Mdm Aisha and said, 'I did not expect to feel so at home.'\n\nMdm Aisha smiled. 'That is what an open house is for,' she said.\n\nAt the end of the afternoon, Mr Tan lingered by the door. The table was cleared, but the warmth in the room remained. He thought about how long he had hesitated at the entrance. Next year, he told himself, he would bring something — perhaps a tin of cookies, or some mooncakes for a different celebration. He was not sure of the customs yet. But he was learning.",
+            "passage": "Every year on the first day of Hari Raya, Mdm Aisha opened her door to everyone on the floor - regardless of race or religion. She was doing this.\n\nThis year, her new neighbour, a forty-year-old man named Mr Tan, hesitated at the entrance. He moved in only three weeks before and felt unsure about intruding on a family occasion.\n\n'Come in, come in,' said Mdm Aisha, waving him forward. 'There is more than enough.'\n\nMr Tan removed his shoes and stepped inside. On the table were dishes he never tasted before - rendang, lemang and pineapple tarts. Mdm Aisha's daughter, Rina, handed him a plate and showed him what each dish was.\n\nBy the end of the afternoon, Mr Tan laughed more than he did in months. As he stood to leave, he turned to Mdm Aisha and said, 'I did not expect to feel so at home.'\n\nMdm Aisha smiled. 'That is what an open house is for,' she said.\n\nAt the end of the afternoon, Mr Tan lingered by the door. The table was cleared, but the warmth in the room remained. He thought about how long he hesitated at the entrance earlier. Next year, he told himself, he would bring something - perhaps a tin of cookies, or some mooncakes for a different celebration. He was not sure of the customs yet. But he was learning.",
             "questions": [
               {
                 "id": "q44_41",
@@ -31679,7 +31679,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S46_G",
-            "passage": "It was the last Saturday of the June holidays. The Sentosa Beach Festival had organised a sandcastle competition, and eight-year-old Kai planned his design for two weeks.\n\nHis plan was ambitious — a four-towered castle with a moat, a drawbridge made of driftwood and tiny flags made from paper clips and scraps of cloth. He had even drawn a blueprint on a piece of paper, which he kept folded in his pocket.\n\nWhen the starting whistle blew, Kai's older sister Priya dug the foundations while Kai shaped the towers. They worked without stopping for an hour and a half.\n\nWith fifteen minutes left, disaster struck. A large wave slid up the beach and collapsed one entire wall of the castle.\n\nKai stared at the damage. Then, without a word, he began rebuilding.\n\nThey did not win first prize. A twelve-year-old boy named Sam built a replica of the Merlion that was judged the most creative entry. But Kai's castle won the special prize for Most Improved — because the judges watched him rebuild the fallen wall without complaint.\n\nAs the sky turned orange over the cable car station, Kai's father took a photograph of the battered castle standing proud in the late light. It was lopsided, shorter than planned and missing one tower entirely. But in the photograph, it looked exactly right.",
+            "passage": "It was the last Saturday of the June holidays. The Sentosa Beach Festival organised a sandcastle competition, and eight-year-old Kai planned his design for two weeks.\n\nHis plan was ambitious - a four-towered castle with a moat, a drawbridge made of driftwood and tiny flags made from paper clips and scraps of cloth. He even drew a blueprint on a piece of paper, which he kept folded in his pocket.\n\nWhen the starting whistle blew, Kai's older sister Priya dug the foundations while Kai shaped the towers. They worked without stopping for an hour and a half.\n\nWith fifteen minutes left, disaster struck. A large wave slid up the beach and collapsed one entire wall of the castle.\n\nKai stared at the damage. Then, without a word, he began rebuilding.\n\nThey did not win first prize. A twelve-year-old boy named Sam built a replica of the Merlion that was judged the most creative entry. But Kai's castle won the special prize for Most Improved - because the judges watched him rebuild the fallen wall without complaint.\n\nAs the sky turned orange over the cable car station, Kai's father took a photograph of the battered castle standing proud in the late light. It was lopsided, shorter than planned and missing one tower entirely. But in the photograph, it looked exactly right.",
             "questions": [
               {
                 "id": "q45_41",
@@ -32036,7 +32036,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S47_B_S47_B7",
             "topic": "GrammarMCQ",
-            "sentence": "The friendship award at the school assembly ________ to a student who had helped a classmate every day for a term.",
+            "sentence": "The friendship award at the school assembly ________ to a student who helped a classmate every day for a term.",
             "options": [
               "gave",
               "was given",
@@ -32052,7 +32052,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S47_B_S47_B8",
             "topic": "GrammarMCQ",
-            "sentence": "The teacher told the students ________ their snacks with classmates who had forgotten theirs.",
+            "sentence": "The teacher told the students ________ their snacks with classmates who forgot theirs.",
             "options": [
               "share",
               "to share",
@@ -32373,14 +32373,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S47_G",
-            "passage": "On the first day of school after the June holidays, twelve-year-old Anya sat down and noticed that the seat next to her was empty. Her best friend Jess moved to Australia.\n\nThe teacher introduced a new student. Her name was Clara, and she stood at the front with her eyes fixed on her shoes. Anya remembered her own first day at this school — how long the classroom had seemed, and how nobody had spoken to her for the entire morning.\n\nShe moved her bag off the chair beside her.\n\n'You can sit here,' she said.\n\nClara looked up. She hesitated, then walked over and sat down.\n\nThey did not speak much for the first week. But Anya made sure to save the seat every day. On Friday, Clara brought two rice crispy treats wrapped in foil. She placed one quietly on Anya's desk.\n\nAnya looked at the treat, then at Clara.\n\n'Thank you,' she said.\n\nClara smiled — the first real smile Anya saw from her all week. 'Thank you for the seat,' Clara said.\n\nBy the end of the second week, they had discovered they both liked the same author. Anya lent Clara three books in a single afternoon. Clara returned them all the following Monday with tiny sticky notes inside marking her favourite lines. Neither of them mentioned the empty seat or the rice crispy treat again. They did not need to.",
+            "passage": "On the first day of school after the June holidays, twelve-year-old Anya sat down and noticed that the seat next to her was empty. Her best friend Jess moved to Australia.\n\nThe teacher introduced a new student. Her name was Clara, and she stood at the front with her eyes fixed on her shoes. Anya remembered her own first day at this school - how long the classroom seemed, and how nobody spoke to her for the entire morning.\n\nShe moved her bag off the chair beside her.\n\n'You can sit here,' she said.\n\nClara looked up. She hesitated, then walked over and sat down.\n\nThey did not speak much for the first week. But Anya made sure to save the seat every day. On Friday, Clara brought two rice crispy treats wrapped in foil. She placed one quietly on Anya's desk.\n\nAnya looked at the treat, then at Clara.\n\n'Thank you,' she said.\n\nClara smiled - the first real smile Anya saw from her all week. 'Thank you for the seat,' Clara said.\n\nBy the end of the second week, they discovered they both liked the same author. Anya lent Clara three books in a single afternoon. Clara returned them all the following Monday with tiny sticky notes inside marking her favourite lines. Neither of them mentioned the empty seat or the rice crispy treat again. They did not need to.",
             "questions": [
               {
                 "id": "q46_41",
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Anya's best friend Jess had moved to ______.",
+                "stem": "Anya's best friend Jess moved to ______.",
                 "answer": "Australia",
                 "acceptableAnswers": [
                   "Australia"
@@ -33001,7 +33001,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "weird",
                 "questionNumber": 3,
                 "wrongWord": "wierd",
-                "sentence": "The sky had turned a wierd (3) yellow-green colour before the rain began.",
+                "sentence": "The sky turned a wierd (3) yellow-green colour before the rain began.",
                 "hints": [
                   "This one is the famous exception to the rhyme. Ask: does 'I before E, except after C' really work here, when there is no C anywhere in the word? The two vowels in 'WIERD' must swap places - simply memorise it."
                 ],
@@ -33050,7 +33050,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S48_F2",
             "sentenceA": "The storm knocked down an old tree.",
-            "sentenceB": "The old tree had stood at the corner of the road for fifty years.",
+            "sentenceB": "The old tree stood at the corner of the road for fifty years.",
             "instruction": "Rewrite as one sentence using the relative pronoun 'which'.",
             "answer": "The storm knocked down an old tree, which had stood at the corner of the road for fifty years.",
             "hint": "The OLD TREE appears in both facts. Ask: which fact is the main news, and which is extra background that can be tucked into a clause after a comma? The relative pronoun already stands for the tree, so do not repeat 'it'.",
@@ -33392,7 +33392,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S49_B_S49_B5",
             "topic": "GrammarMCQ",
-            "sentence": "There was ________ smoke coming from the roof when the crew arrived — they had caught it early.",
+            "sentence": "There was ________ smoke coming from the roof when the crew arrived - they caught it early.",
             "options": [
               "a few",
               "little",
@@ -33761,7 +33761,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S49_G",
-            "passage": "The alarm sounded at 2.47 in the afternoon. By 2.48, Senior Station Inspector Ravi had already led his team out of the station.\n\nThe call was for a kitchen fire in a third-floor flat on Clementi Avenue. When the engine arrived, smoke was pouring from an open window. Ravi's team pulled on their breathing masks and went in.\n\nThe fire was small — a forgotten pan on the stove. They put it out in under two minutes. But in the corridor outside, they found an elderly man who could not walk. He was trying to reach the staircase when the smoke overcame him.\n\nRavi lifted the man onto his back and carried him down three flights of stairs without stopping.\n\nThe paramedics were waiting outside. The man, who was seventy-eight years old, was taken to hospital and later confirmed to be in stable condition.\n\nAt the debrief that evening, Ravi reminded his team: 'The fire was the easy part. It is always the person who needs the most time.'\n\nRavi did not speak on the way back to the station. At the debrief, he set his helmet on the table and looked at his team. Each of them knew what the other was thinking: the man in the corridor could have been anyone's grandfather. That thought did not make the work harder. It made it more important.",
+            "passage": "The alarm sounded at 2.47 in the afternoon. By 2.48, Senior Station Inspector Ravi already led his team out of the station.\n\nThe call was for a kitchen fire in a third-floor flat on Clementi Avenue. When the engine arrived, smoke was pouring from an open window. Ravi's team pulled on their breathing masks and went in.\n\nThe fire was small - a forgotten pan on the stove. They put it out in under two minutes. But in the corridor outside, they found an elderly man who could not walk. He was trying to reach the staircase when the smoke overcame him.\n\nRavi lifted the man onto his back and carried him down three flights of stairs without stopping.\n\nThe paramedics were waiting outside. The man, who was seventy-eight years old, was taken to hospital and later confirmed to be in stable condition.\n\nAt the debrief that evening, Ravi reminded his team: 'The fire was the easy part. It is always the person who needs the most time.'\n\nRavi did not speak on the way back to the station. At the debrief, he set his helmet on the table and looked at his team. Each of them knew what the other was thinking: the man in the corridor could have been anyone's grandfather. That thought did not make the work harder. It made it more important.",
             "questions": [
               {
                 "id": "q48_41",
@@ -34452,14 +34452,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S50_G",
-            "passage": "It was the final round of the gasing competition, and nine-year-old Arif had one chance left.\n\nAll morning, he watched the older boys launch their tops with a single, practiced flick of the wrist. Their tops spun for minutes at a time, gliding slowly across the smooth concrete pad. Arif's best spin so far had lasted forty-three seconds.\n\nHis grandfather, who had taught him everything he knew about gasing, sat in the third row of the plastic chairs. He did not wave or call out. He simply watched.\n\nArif stepped to the line. He wound the rope around the top slowly, the way his grandfather had shown him — tight, even, patient.\n\nHe threw.\n\nThe top landed perfectly and spun without wobbling. Arif did not watch it. He watched his grandfather's face instead.\n\nAt sixty seconds, the crowd began to count. At seventy, some stood up. At eighty-three seconds, the judge raised the green flag.\n\nArif looked at his grandfather. The old man pressed his lips together and nodded once — the same nod he gave when something was done correctly.\n\nThat was enough.\n\nOutside, the other competitors had already left. Arif stayed a little longer, watching the empty concrete pad where the tops had spun. He wanted to remember exactly how the rope felt in his hands.",
+            "passage": "It was the final round of the gasing competition, and nine-year-old Arif had one chance left.\n\nAll morning, he watched the older boys launch their tops with a single, practiced flick of the wrist. Their tops spun for minutes at a time, gliding slowly across the smooth concrete pad. Arif's best spin so far lasted forty-three seconds.\n\nHis grandfather, who taught him everything he knew about gasing, sat in the third row of the plastic chairs. He did not wave or call out. He simply watched.\n\nArif stepped to the line. He wound the rope around the top slowly, the way his grandfather showed him — tight, even, patient.\n\nHe threw.\n\nThe top landed perfectly and spun without wobbling. Arif did not watch it. He watched his grandfather's face instead.\n\nAt sixty seconds, the crowd began to count. At seventy, some stood up. At eighty-three seconds, the judge raised the green flag.\n\nArif looked at his grandfather. The old man pressed his lips together and nodded once — the same nod he gave when something was done correctly.\n\nThat was enough.\n\nOutside, the other competitors were already gone. Arif stayed a little longer, watching the empty concrete pad where the tops spun. He wanted to remember exactly how the rope felt in his hands.",
             "questions": [
               {
                 "id": "q49_41",
                 "questionNo": "41",
                 "format": "fill_blank",
                 "marks": 1,
-                "stem": "Arif's best spin before the final round had lasted ______.",
+                "stem": "Arif's best spin before the final round lasted ______.",
                 "answer": "forty-three seconds",
                 "acceptableAnswers": [
                   "43 seconds",
@@ -34677,7 +34677,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "48",
                 "format": "open_sentence",
                 "marks": 2,
-                "stem": "Why did Arif stay behind after the competition had ended?",
+                "stem": "Why did Arif stay behind after the competition ended?",
                 "answer": "Arif stayed behind because he wanted to remember exactly how the rope felt in his hands.",
                 "solution": {
                   "evidence": "He wanted to remember exactly how the rope felt in his hands",
@@ -35540,7 +35540,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S52_A_S52_A1",
             "topic": "VocabMCQ",
-            "sentence": "Early in the morning, the farm was as ________ as a library — not a single animal had woken up yet.",
+            "sentence": "Early in the morning, the farm was as ________ as a library - not a single animal woke up yet.",
             "options": [
               "loud",
               "busy",
@@ -35839,7 +35839,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S52_G",
-            "passage": "Eleven-year-old Priya grew up in a flat in Ang Mo Kio. She never visited a farm before.\n\nOn the first morning, she woke at five to help her aunt milk the cows. It was still dark. Everything smelled of earth and animals. She held the bucket so tightly her knuckles went white.\n\nHer aunt did not explain. She simply showed her — slow, even strokes, the same rhythm again and again. Priya tried. The cow shifted, and she spilled half the bucket.\n\n'Again,' said her aunt. There was no irritation in her voice. Just the word.\n\nOn the second morning, Priya woke at four-thirty — half an hour early. She was already in the barn when her aunt arrived.\n\n'You came back,' said her aunt.\n\n'I spilled,' said Priya.\n\nHer aunt handed her the bucket. 'That is why you came back.'\n\nBy seven o'clock, the milk was done and the cows were calm. Priya's arms ached, but she did not mention it.\n\nOn the bus home, Priya sat without speaking. Her arms still ached. She looked at her hands and thought about the rhythm her aunt had shown her — slow, even, patient. She realised she could still feel the motion, like a small muscle memory she had not owned before that morning.",
+            "passage": "Eleven-year-old Priya grew up in a flat in Ang Mo Kio. She never visited a farm before.\n\nOn the first morning, she woke at five to help her aunt milk the cows. It was still dark. Everything smelled of earth and animals. She held the bucket so tightly her knuckles went white.\n\nHer aunt did not explain. She simply showed her - slow, even strokes, the same rhythm again and again. Priya tried. The cow shifted, and she spilled half the bucket.\n\n'Again,' said her aunt. There was no irritation in her voice. Just the word.\n\nOn the second morning, Priya woke at four-thirty - half an hour early. She was already in the barn when her aunt arrived.\n\n'You came back,' said her aunt.\n\n'I spilled,' said Priya.\n\nHer aunt handed her the bucket. 'That is why you came back.'\n\nBy seven o'clock, the milk was done and the cows were calm. Priya's arms ached, but she did not mention it.\n\nOn the bus home, Priya sat without speaking. Her arms still ached. She looked at her hands and thought about the rhythm her aunt showed her - slow, even, patient. She realised she could still feel the motion, like a small muscle memory she did not own before that morning.",
             "questions": [
               {
                 "id": "q51_41",
@@ -37158,7 +37158,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "niece",
                 "questionNumber": 3,
                 "wrongWord": "neice",
-                "sentence": "She told us that her own neice (3) had inspired her to become a doctor after recovering from a serious illness as a child.",
+                "sentence": "She told us that her own neice (3) inspired her to become a doctor after recovering from a serious illness as a child.",
                 "hints": [
                   "The underlined word 'neice' names the girl in the doctor's family, and its two vowels have been swapped. Ask: with no C in front, does the I lead or does the E lead? Compare: field, brief, chief."
                 ],
@@ -37222,7 +37222,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S54_G",
-            "passage": "Marcus worked as a cleaner at Changi Airport for eleven years. He worked the night shift — from ten at night until six in the morning — when the terminals were quieter and the floors could be cleaned properly.\n\nMost passengers did not notice him. They were tired, or rushing, or looking at their phones. A woman once walked straight through his wet-mopped section without pausing, leaving footprints across the section he had just finished.\n\nMarcus did not say anything. He mopped it again.\n\nThere was a boy, perhaps nine or ten, who watched him one night from a seat near Gate C12. The boy's family was waiting for a late flight. He watched Marcus work for almost twenty minutes.\n\nThen the boy walked over.\n\n'Why do you clean at night?' he asked.\n\nMarcus stopped and thought about it. 'Because when the sun comes up,' he said, 'I want everything to be ready.'\n\nThe boy looked around at the gleaming floor. 'I never thought about who cleans,' he said.\n\nMarcus smiled. 'Not many people do,' he said. 'But someone has to.'\n\nMarcus picked up his mop and cart and moved on to Gate C13. There were still four more sections to finish before six.",
+            "passage": "Marcus worked as a cleaner at Changi Airport for eleven years. He worked the night shift - from ten at night until six in the morning - when the terminals were quieter and the floors could be cleaned properly.\n\nMost passengers did not notice him. They were tired, or rushing, or looking at their phones. A woman once walked straight through his wet-mopped section without pausing, leaving footprints across the section he just finished.\n\nMarcus did not say anything. He mopped it again.\n\nThere was a boy, perhaps nine or ten, who watched him one night from a seat near Gate C12. The boy's family was waiting for a late flight. He watched Marcus work for almost twenty minutes.\n\nThen the boy walked over.\n\n'Why do you clean at night?' he asked.\n\nMarcus stopped and thought about it. 'Because when the sun comes up,' he said, 'I want everything to be ready.'\n\nThe boy looked around at the gleaming floor. 'I never thought about who cleans,' he said.\n\nMarcus smiled. 'Not many people do,' he said. 'But someone has to.'\n\nMarcus picked up his mop and cart and moved on to Gate C13. There were still four more sections to finish before six.",
             "questions": [
               {
                 "id": "q53_41",
@@ -37444,7 +37444,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "questionNo": "48",
                 "format": "open_sentence",
                 "marks": 2,
-                "stem": "Why did Marcus smile when the boy said he had never thought about who cleans?",
+                "stem": "Why did Marcus smile when the boy said he never thought about who cleans?",
                 "answer": "Marcus smiled because the boy's honest words showed that most people never notice cleaners, and Marcus understood this was simply how things were, but he was glad the boy had taken the time to see his work.",
                 "solution": {
                   "evidence": "Not many people do,",
@@ -37546,7 +37546,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S55_B_S55_B5",
             "topic": "GrammarMCQ",
-            "sentence": "There was ________ information about the animal's injuries in the rescue report — the vet could not tell what had happened.",
+            "sentence": "There was ________ information about the animal's injuries in the rescue report - the vet could not tell what happened.",
             "options": [
               "few",
               "a few",
@@ -37562,7 +37562,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S55_B_S55_B6",
             "topic": "GrammarMCQ",
-            "sentence": "The wild boar rescue operation was the most dangerous mission the team had ever attempted, ________ it?",
+            "sentence": "The wild boar rescue operation was the most dangerous mission the team ever attempted, ________ it?",
             "options": [
               "was",
               "wasn't",
@@ -37915,7 +37915,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
         "items": [
           {
             "id": "S55_G",
-            "passage": "Ten-year-old Mei had never seen a pangolin before. She was cycling home from school when she spotted the creature by the drain — curled into a ball, completely still.\n\nShe knew enough not to touch it. Instead, she took a photograph with her mother's phone and called the wildlife rescue number on a poster at the library.\n\nThe officer who answered was calm and asked her clear questions: Where exactly was she? Was the animal breathing? Was there any blood? Mei answered each one carefully, keeping her eyes on the pangolin.\n\nThirty minutes later, a rescue van arrived. The officer — a tall woman named Dr Farah — crouched down beside the pangolin. 'It's dehydrated and frightened,' she said, 'but it will be fine.'\n\nShe lifted the pangolin gently into a ventilated box lined with dry leaves, then turned to Mei.\n\n'You did exactly the right thing,' she said. 'Most people either run away or try to pick it up. You stayed calm and called for help.'\n\nMei watched the van drive away. She thought about the pangolin — one of the world's most trafficked animals — and decided, right there on the pavement, that she wanted to work with animals one day.",
+            "passage": "Ten-year-old Mei never saw a pangolin before. She was cycling home from school when she spotted the creature by the drain - curled into a ball, completely still.\n\nShe knew enough not to touch it. Instead, she took a photograph with her mother's phone and called the wildlife rescue number on a poster at the library.\n\nThe officer who answered was calm and asked her clear questions: Where exactly was she? Was the animal breathing? Was there any blood? Mei answered each one carefully, keeping her eyes on the pangolin.\n\nThirty minutes later, a rescue van arrived. The officer - a tall woman named Dr Farah - crouched down beside the pangolin. 'It's dehydrated and frightened,' she said, 'but it will be fine.'\n\nShe lifted the pangolin gently into a ventilated box lined with dry leaves, then turned to Mei.\n\n'You did exactly the right thing,' she said. 'Most people either run away or try to pick it up. You stayed calm and called for help.'\n\nMei watched the van drive away. She thought about the pangolin - one of the world's most trafficked animals - and decided, right there on the pavement, that she wanted to work with animals one day.",
             "questions": [
               {
                 "id": "q54_41",
@@ -39627,7 +39627,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
           {
             "id": "S58_B_S58_B5",
             "topic": "GrammarMCQ",
-            "sentence": "There were ________ mangoes left at the fruit stall by noon — the morning crowd had bought them all within an hour.",
+            "sentence": "There were ________ mangoes left at the fruit stall by noon - the morning crowd bought them all within an hour.",
             "options": [
               "little",
               "a little",
@@ -39921,7 +39921,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "here",
                 "questionNumber": 2,
                 "wrongWord": "hear",
-                "sentence": "'The freshest prawns are sold hear (2), not at the supermarket!' Grandma said, pointing at a crate of prawns that had been landed at the old peir (3) that very morning.",
+                "sentence": "'The freshest prawns are sold hear (2), not at the supermarket!' Grandma said, pointing at a crate of prawns that landed at the old peir (3) that very morning.",
                 "hints": [
                   "'HEAR' is what you do with your EARS, but Grandma is pointing at a spot - this stall, NOT AT THE SUPERMARKET. Ask: which spelling means 'at this place'? Choose by meaning, never by sound."
                 ],
@@ -39932,7 +39932,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "pier",
                 "questionNumber": 3,
                 "wrongWord": "peir",
-                "sentence": "'The freshest prawns are sold hear (2), not at the supermarket!' Grandma said, pointing at a crate of prawns that had been landed at the old peir (3) that very morning.",
+                "sentence": "'The freshest prawns are sold hear (2), not at the supermarket!' Grandma said, pointing at a crate of prawns that landed at the old peir (3) that very morning.",
                 "hints": [
                   "'PEIR' has its two vowels the wrong way round. Ask: which letter comes first in this word, the I or the E? The rule is I before E, except after C - the same order as in belief, niece and thief."
                 ],
