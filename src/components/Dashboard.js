@@ -4,6 +4,7 @@ import {
   C, Wrap, AnimNumber, AnimProgressBar,
 } from "@/lib/uiShared";
 import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
+import KpiCard from "@/components/KpiCard"; // STEP6_KPI_CARD
 //  App-wide constants 
 export const GRADES = ["P3", "P4", "P5", "P6"];
 // 대시보드 상단 학년 탭. 등록 폼(GRADES)과 달리 마지막 단계인 PSLE 까지 보여준다.
@@ -271,6 +272,8 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
           ))}
         </div>
       </div>
+
+      <KpiCard prog={prog} isZh={isZh} accent={ACCENT}/>
 
       <div style={{padding:"16px 16px 0"}}> {prog.nextSession>=11&&(
           <div style={{background:HG,borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(15,23,42,0.35)"}}>
