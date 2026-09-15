@@ -117,6 +117,15 @@ function applyToLedger(ledger, t) {
   }
   if (t.firstTry && t.sectionType) pushCapped(L.sections, t.sectionType);
 
+  // theta (Step 9 scheduler): bounded 0..1, updated per attempt
+  const th = typeof L.theta === 'number' ? L.theta : 0.5;
+  const delayedWin = hadPriorFail && !seenBefore && t.firstTry && L.lastFailSes != null && t.sessionNum - L.lastFailSes >= 1;
+  if (delayedWin) L.theta = th + 0.25 * (1 - th);
+  else if (t.firstTry) L.theta = th + 0.15 * (1 - th);
+  else if (t.guessed && t.correct) L.theta = th;
+  else L.theta = th - 0.25 * th;
+  L.theta = Math.max(0, Math.min(1, L.theta));
+
   if (!t.firstTry && !t.guessed) { L.lastFailSes = t.sessionNum; pushCapped(L.failedItems, t.itemId); }
   pushCapped(L.itemsSeen, t.itemId);
 }

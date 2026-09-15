@@ -177,12 +177,12 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
       boxShadow:"0 4px 16px rgba(123,104,238,0.35)"
     }}>
       <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>*</span>
-      AI Adaptive Practice
+      Question Generator (teacher tool)
       <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,background:"rgba(255,255,255,0.2)",
         padding:"2px 8px",borderRadius:20}}>NEW</span>
     </button>
     <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#94A3B8",textAlign:"center",marginTop:6}}>
-      Personalised questions based on your performance
+      Generates draft questions for review - not the student adaptive round
     </div>
   </div>
 
@@ -237,7 +237,7 @@ function ComingSoonScreen({grade,subject}){
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, availableSections, completedSections, onMistakes, onReview, onReviewSection}){
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, onStartAdaptive, availableSections, completedSections, onMistakes, onReview, onReviewSection}){ // STEP9_ADAPTIVE
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
   const mockH    = history.filter(h=>h.isMockExam);
@@ -324,6 +324,13 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
             ))}
           </div>
         </div>
+        {onStartAdaptive && (prog.trials||[]).length > 0 && (
+          <button onClick={onStartAdaptive} style={{width:"100%",background:"linear-gradient(135deg,#0F766E,#14B8A6)",color:"#fff",border:"none",borderRadius:18,padding:"16px 20px",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 24px rgba(15,118,110,0.28)",textAlign:"left",fontFamily:isZh?"'KaiTi','STKaiti','LXGW WenKai',serif":"inherit"}}>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{isZh?"\u81EA\u9002\u5E94 \u00B7 10 \u9898":"Adaptive \u00B7 10 questions"}</div>
+            <div style={{fontSize:"calc(var(--fs) * 1.214)",fontWeight:900,color:"#fff",marginBottom:4}}>{isZh?"\u81EA\u9002\u5E94\u7EC3\u4E60":"Adaptive round"}</div>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)"}}>{isZh?"\u5148\u8865\u5F31\u9879\uFF0C\u518D\u5DE9\u56FA\u5FEB\u638C\u63E1\u7684\uFF0C\u90FD\u662F\u65B0\u9898\u76EE":"Fix weak spots first, then sharpen the nearly-mastered - all new questions"}</div>
+          </button>
+        )}
         {onStartMock && (
           <button onClick={onStartMock} style={{width:"100%",background:"linear-gradient(135deg,#7C3AED,#8B5CF6)",color:"#fff",border:"none",borderRadius:18,padding:"16px 20px",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 24px rgba(124,58,237,0.28)",textAlign:"left",fontFamily:CFONT}}>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{isZh?"\u6A21\u62DF\u8003 \u00B7 \u771F\u9898":"Mock Exam \u00B7 Past Papers"}</div>

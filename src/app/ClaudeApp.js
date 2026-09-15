@@ -52,6 +52,7 @@ import { indexSets, buildRoundReviewPlan, listReviewableRounds, markRoundReviewe
 const ZH_ROUND_INDEX = indexSets(WA1_ZH_PRACTICE);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
+import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 
 
 
@@ -225,6 +226,32 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const [reviewSection, setReviewSection] = useState(null);
   const [zhGate, setZhGate] = useState(null); // words[] when the whole-set review gate is showing
   const [dailyResult, setDailyResult] = useState(null); // {results, sessionNum} for the end-of-round summary (after the gate)
+  const [adaptive, setAdaptive] = useState(null); // {plan, ids, parts} while an adaptive round is running
+  function startAdaptive(){
+    const sch = scheduleRound(prog, ZH_BANK, prog.nextSession, { n: 10 });
+    if(!sch.ids.length) return;
+    const plan = buildRoundReviewPlan({ mistakes: sch.ids.map(id=>({id})) }, ZH_ROUND_INDEX).plan;
+    setAdaptive({ plan, ids: sch.ids, parts: sch.parts });
+  }
+  function finishAdaptive(results){
+    const ses = prog.nextSession;
+    let next = recordTrials(prog, results, { mode: TRIAL_MODE.EXAM, sessionNum: ses, setId: 'ZS_ADAPT' });
+    next = gradeTicketsFromDrill(next, results, ses);        // wins on different items close tickets
+    next = openTicketsFromResults(next, results, ses);       // new failures open tickets
+    setProgress(grade, subject, next);
+    setAdaptive(null);
+    setDailyResult({ results, sessionNum: ses - 1 });
+    let words = [];
+    try {
+      const tapped = zhGetSessionUnknown();
+      const wrongCore = zhCoreWordsFromWrong(results, adaptive.plan, ZH_VOCAB, ZH_GATE_STOP);
+      const collected = [...tapped, ...wrongCore].filter((w) => w && !ZH_GATE_STOP.has(w));
+      words = zhAssembleGate(collected, ZH_VOCAB, 10);
+      zhClearSessionUnknown();
+    } catch (_) { words = []; }
+    if (words.length > 0) { setZhGate(words); return; }
+    setScreen("dailyResult");
+  }
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
   function startRoundReview(sessionNum){
     const entry=(prog.history||[]).find(h=>h.sessionNum===sessionNum);
@@ -320,6 +347,18 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   if(zhGate) return(
     <Wrap>
       <ZhReviewGate words={zhGate} dict={ZH_VOCAB} onDone={showDailyResult} />
+    </Wrap>
+  );
+
+  if(adaptive) return(
+    <Wrap>
+      <ExamSessionScreen
+        plan={adaptive.plan}
+        isMockExam
+        mockInfo={{school:"\u81EA\u9002\u5E94\u7EC3\u4E60 \u00B7 \u5F85\u5DE9\u56FA "+adaptive.parts.tickets+" \u00B7 \u63A5\u8FD1\u638C\u63E1 "+adaptive.parts.adjacent+" \u00B7 \u5DE9\u56FA "+adaptive.parts.maintain+" \u00B7 \u65B0\u9898\u578B "+adaptive.parts.explore}}
+        onFinish={finishAdaptive}
+        onBack={()=>setAdaptive(null)}
+      />
     </Wrap>
   );
 
@@ -441,7 +480,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       ) : screen==="review" ? (
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : (
-        <StudentHome user={user} prog={prog} grade={grade} subject={subject}
+        <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startAdaptive}
           isMockDue={isMockDue}
           onStart={()=>startSession()}
           onStartFrom={(sec)=>startSession(sec)}
@@ -1026,6 +1065,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
   const [enGate, setEnGate] = useState(null); // words[] while the English end-of-round word review is showing
   const [enDrillMode, setEnDrillMode] = useState(false);
+  const [enAdaptive, setEnAdaptive] = useState(null);
+  function startEnAdaptive(){
+    const sch = scheduleRound(prog, EN_BANK, prog.nextSession, { n: 10 });
+    if(!sch.ids.length) return;
+    setEnAdaptive({ plan: buildRoundReviewPlan({ mistakes: sch.ids.map(id=>({id})) }, EN_ROUND_INDEX).plan, ids: sch.ids, parts: sch.parts });
+  }
   const enDrillPicks = pickDrillItems(prog, EN_BANK, prog.nextSession, { max: 10, perSkill: 3 });
   const enDrill = enDrillPicks.length ? { plan: buildRoundReviewPlan({ mistakes: enDrillPicks.map(x=>({id:x.itemId})) }, EN_ROUND_INDEX).plan } : null;
   const enTickets = ticketSummary(prog);
@@ -1189,6 +1234,27 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     </Wrap>
   );
 
+  if(enAdaptive) return(
+    <Wrap>
+      <ExamSessionScreen
+        plan={enAdaptive.plan}
+        isMockExam
+        mockInfo={{school:"Adaptive round \u00B7 fix "+enAdaptive.parts.tickets+" \u00B7 nearly there "+enAdaptive.parts.adjacent+" \u00B7 keep sharp "+enAdaptive.parts.maintain+" \u00B7 new "+enAdaptive.parts.explore}}
+        onFinish={(results)=>{
+          const ses = prog.nextSession;
+          let next = recordTrials(prog, results, { mode: TRIAL_MODE.EXAM, sessionNum: ses, setId: 'EN_ADAPT' });
+          next = gradeTicketsFromDrill(next, results, ses);
+          next = openTicketsFromResults(next, results, ses);
+          setProgress(grade, subject, next);
+          setEnAdaptive(null);
+          setSessionResult({ results, sessionNum: ses - 1, isMock: false });
+          setScreen("result");
+        }}
+        onBack={()=>setEnAdaptive(null)}
+      />
+    </Wrap>
+  );
+
   if(enDrillMode && enDrill) return(
     <Wrap>
       <ExamSessionScreen
@@ -1239,7 +1305,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <>
           {enDrill && (
