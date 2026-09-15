@@ -49,7 +49,8 @@ import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
 import VocabQuiz from '@/components/VocabQuiz'; // STEP2F_VOCAB_QUIZ_V2
 import EN_VOCAB from '@/data/p3/english/en_vocab.json';
 import { indexSets, buildRoundReviewPlan, listReviewableRounds, markRoundReviewed, REVIEW_SET_ID, enrichMistakes, roundVocabCandidates } from '@/lib/reviewRounds'; // STEP2D_VOCAB_BY_ROUND // STEP2B_MISTAKE_ENRICH
-const ZH_ROUND_INDEX = indexSets(WA1_ZH_PRACTICE);
+import WA1_ZH_DRILL from '@/data/p3/chinese/wa1_drill'; // STEP10_DRILL_INDEX
+const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE

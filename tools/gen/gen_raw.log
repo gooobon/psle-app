@@ -1,0 +1,425 @@
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "弟弟______这道数学题想了很久，终于找到了答案。",
+    "options": ["对", "把", "跟", "给"],
+    "answer": 1,
+    "lesson": 2,
+    "skill": "yufa",
+    "explain": {
+      "why": ""把这道数学题想了很久"是"把"字句，把后面接承受动作的东西，再接动词，句子通顺。",
+      "distractors": [
+        ""对这道数学题想了很久"不通，"对"不用来引出动作的对象在这里。",
+        "✓ 正确答案：把＋事物＋动词，是"把"字句的固定用法。",
+        ""跟这道数学题想了很久"不通，"跟"表示和谁一起，不合这里。",
+        ""给这道数学题想了很久"不通，"给"表示给予，不合这里。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：把＋（事物）＋动词。后面接动作承受的东西就用"把"。"
+    },
+    "explanation": ""把"字句的结构是：把＋事物＋动词（＋补语）。这里"把这道数学题想了很久"意思是对这道题进行了很长时间的思考，句子通顺。\n其余三个都不对：对后面一般接态度或看法的对象（对……的兴趣）；跟表示和谁一起做某事（跟我去）；给表示给予（给他一本书）。\n【语法的方法】看到句子里有"事物＋动词＋时间"的结构，前面常用"把"字引出。",
+    "sentence_en": "Little brother ___ (took) this maths problem and thought about it for a long time, and finally found the answer.",
+    "hints": ["This sentence uses the 把 pattern: 把 + object + verb. Which character introduces the thing being acted on?"],
+    "keywords": [
+      {"w": "把", "py": "bǎ", "en": "a word that puts the object before the verb"},
+      {"w": "数学题", "py": "shùxuétí", "en": "maths problem"},
+      {"w": "答案", "py": "dáàn", "en": "answer"}
+    ],
+    "explanation_en": "The 把 sentence pattern is: 把 + object + verb. '把这道数学题想了很久' means he spent a long time thinking about the problem. 对, 跟 and 给 do not fit this grammar pattern here."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "妈妈______我们说，做事情要认真，不能马虎。",
+    "options": ["把", "对", "跟", "被"],
+    "answer": 2,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""跟我们说"是固定说法，"跟"在这里表示"向、对（某人）说话"，句子通顺。",
+      "distractors": [
+        ""把我们说"不通，"把"字句后面要接动作的对象（物），不用在这里。",
+        ""对我们说"也常见，但本题语境更强调妈妈和我们一起交流，选"跟"最自然。",
+        "✓ 正确答案：跟＋人＋说，表示向某人讲话，是口语中最自然的说法。",
+        ""被我们说"不通，"被"字句表示被动，不合这里的意思。"
+      ],
+      "trapType": "近义虚词",
+      "memoryTip": "口语中"跟某人说"最自然：跟＋人＋说。听到有人说话，就想"跟"。"
+    },
+    "explanation": "这里要选一个介词引出说话的对象"我们"，"跟我们说"是口语中最自然的说法，表示妈妈向我们讲话。\n"对我们说"在书面语中也正确，但四个选项中只有"跟"在这里最通顺。"把"字句后面要接事物再接动词；"被"字句表示被动，意思完全相反。\n【语法的方法】"跟＋人＋说"是固定口语搭配，表示向某人讲话。",
+    "sentence_en": "Mum told ___ (us), saying that we must be careful in everything and must not be careless.",
+    "hints": ["Which character means 'to' or 'with' when talking to someone? Think: Mum spoke ___ us."],
+    "keywords": [
+      {"w": "跟", "py": "gēn", "en": "with; to (someone)"},
+      {"w": "认真", "py": "rènzhēn", "en": "careful; serious"},
+      {"w": "马虎", "py": "mǎhu", "en": "careless; sloppy"}
+    ],
+    "explanation_en": "跟……说 is a fixed spoken pattern meaning 'to tell / speak to someone'. 跟我们说 means mum spoke to us. 把 introduces an object before a verb action; 被 shows passive meaning; these do not fit here."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "这本书______同学们的喜爱，大家都争着去借。",
+    "options": ["对", "受到", "给予", "经过"],
+    "answer": 1,
+    "lesson": 3,
+    "skill": "yufa",
+    "explain": {
+      "why": ""受到同学们的喜爱"是固定搭配，"受
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "弟弟______妈妈学做饭，每次都做得很香。",
+    "options": ["跟", "把", "对", "给"],
+    "answer": 0,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""跟……学"是固定句式，表示向某人学习，"跟妈妈学做饭"意思通顺。",
+      "distractors": [
+        "✓ 正确答案：跟＋人＋学，是固定搭配，表示向某人学习。",
+        ""把妈妈学做饭"不通，"把"字句用来处置东西，不合这里。",
+        ""对妈妈学做饭"不通，"对"表示朝向某事，不用在"学"的前面接人。",
+        ""给妈妈学做饭"不通，"给"表示给予，不合这里。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：跟＋（人）＋学。看到"学"字前面接的是人，就想"跟"。"
+    },
+    "explanation": ""跟……学"是固定说法：向某个人学习，中间要用"跟"。\n其余三个都不对：把后面要接承受动作的东西（把书拿来）；对后面接事情而非人（对画画的兴趣）；给后面接接受东西的人（给我一本书）。汉语里只说"跟妈妈学"，不说"对妈妈学"。\n【语法的方法】遇到"学、说话、商量"这类词，前面表示学习对象的介词固定用"跟"。",
+    "sentence_en": "Little brother learned to cook ___ (from) mum, and every time the food was delicious.",
+    "hints": ["This is the fixed pattern 跟……学 (learn from someone). Which character goes before 妈妈 to show who you are learning from?"],
+    "keywords": [
+      {"w": "跟", "py": "gēn", "en": "from; with"},
+      {"w": "学", "py": "xué", "en": "to learn"},
+      {"w": "做饭", "py": "zuòfàn", "en": "to cook"}
+    ],
+    "explanation_en": "跟……学 is a fixed pattern meaning 'learn from someone', so 跟妈妈学做饭 (learn to cook from mum) makes sense. Fixed pattern: 跟 + a person + 学. Seeing 学 with a person after it, think 跟. 把, 对 and 给 do not fit this pattern."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "他______书包放在椅子旁边，然后走进教室。",
+    "options": ["对", "给", "把", "跟"],
+    "answer": 2,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""把"字句用来处置某样东西，"把书包放在椅子旁边"表示对书包做了某个动作，意思通顺。",
+      "distractors": [
+        ""对书包放在椅子旁边"不通，"对"表示朝向某事，不用在处置动作前。",
+        ""给书包放在椅子旁边"不通，"给"表示给予，不合这里。",
+        "✓ 正确答案：把＋东西＋动词，是"把"字句固定结构，表示对东西做动作。",
+        ""跟书包放在椅子旁边"不通，"跟"表示和谁一起，不合这里。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：把＋（东西）＋动作。看到句子里对某样东西做动作，就想"把"。"
+    },
+    "explanation": ""把"字句是固定说法：把＋东西＋动作，表示对某样东西做了某件事。"把书包放在椅子旁边"就是对书包做"放"这个动作。\n其余三个都不对：对后面接事情（对画画感兴趣）；给后面接人（给我一本书）；跟表示和谁一起（跟我来）。\n【语法的方法】遇到对某样东西做动作，句式是"把＋东西＋动作"，固定用"把"。",
+    "sentence_en": "He ___ his school bag placed beside the chair, then walked into the classroom.",
+    "hints": ["The sentence shows doing an action to an object (the school bag). Which character starts the fixed pattern 把＋object＋action?"],
+    "keywords": [
+      {"w": "把", "py": "bǎ", "en": "disposal marker (bǎ-sentence)"},
+      {"w": "书包", "py": "shūbāo", "en": "school bag"},
+      {"w": "放", "py": "fàng", "en": "to place; to put"}
+    ],
+    "explanation_en": "The 把-sentence pattern is 把 + object + action verb, meaning you do something to that object. So 把书包放在椅子旁边 (put the school bag beside the chair) is correct. Seeing an action done to a thing, think 把. 对, 给 and 跟 do not fit this pattern."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "姐姐______同学们分享了她在乡村看到的美丽风景。",
+    "options": ["把", "对", "跟", "给"],
+    "answer": 2,
+    "lesson": 2,
+    "skill": "yufa",
+
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "爸爸______我们讲了一个很有趣的故事。",
+    "options": ["把", "给", "对", "跟"],
+    "answer": 1,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""给我们讲"是固定说法，"给"在这里表示为对方做某件事，即"为我们讲故事"，意思通顺。",
+      "distractors": [
+        ""把我们讲"不通，"把"字句要接被处置的东西，不能接人作宾语再讲故事。",
+        "✓ 正确答案：给＋对象＋动词，表示为某人做某件事。",
+        ""对我们讲"虽然有时可用，但"给我们讲了一个故事"是更自然的口语固定搭配。",
+        ""跟我们讲"表示和我们一起讲，不是为我们讲，语气不同且不如"给"自然。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：给＋（人）＋动词，表示为某人做某件事。看到"讲故事、唱歌、买东西"，想为谁做就用"给"。"
+    },
+    "explanation": ""给我们讲"是固定搭配，"给"放在动词前面表示为对方做某件事（给我们讲故事＝为我们讲故事）。\n其余三个都不合：把字句后面要接被处置的东西，不能说"把我们讲"；对在这里语气偏向"朝着、面对"，较书面；跟表示和谁一起做，不是为谁做。\n【语法的方法】遇到"讲、唱、买、做"这类动词，想清楚是"为谁做"还是"和谁做"，为谁做用"给"，和谁做用"跟"。",
+    "sentence_en": "Dad told ___ us a very interesting story.",
+    "hints": ["Dad is doing something FOR us — telling a story. Which word means 'for someone' when placed before a verb?"],
+    "keywords": [
+      {"w": "给", "py": "gěi", "en": "for; to give"},
+      {"w": "故事", "py": "gùshì", "en": "story"},
+      {"w": "有趣", "py": "yǒuqù", "en": "interesting"}
+    ],
+    "explanation_en": "给 + person + verb is a fixed pattern meaning 'to do something for someone'. 给我们讲 means 'told us (for our benefit)'. 把 is used for handling objects, 跟 means 'together with', and 对 means 'facing/toward', so none of them fit here."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "小明______书包放在椅子上，然后跑出去玩了。",
+    "options": ["对", "给", "跟", "把"],
+    "answer": 3,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""把书包放在椅子上"是典型的"把"字句，把后面接被处置的东西，再说对它做什么动作，句子意思通顺。",
+      "distractors": [
+        ""对书包放在椅子上"不通，"对"不用来处置物品。",
+        ""给书包放在椅子上"不通，"给"后面接的是人，不是物品。",
+        ""跟书包放在椅子上"不通，"跟"表示和谁一起，书包不能一起放东西。",
+        "✓ 正确答案：把＋物品＋动词＋地点，是"把"字句的固定结构。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "看到"放、拿、带、推"这类处置动作，前面先说"把＋东西"，再说动作结果。"
+    },
+    "explanation": ""把"字句的结构是：把＋物品＋动词＋结果/地点。这里"把书包放在椅子上"完全符合这个结构。\n另外三个都不对：对后接事情或话题（对我说）；给后接接受的人（给妈妈）；跟表示和谁一起（跟同学）。\n【语法的方法】句子里有"放、移、拿、推"等处置动作，又说了动作的结果或地点，就要用"把"字句。",
+    "sentence_en": "Xiao Ming ___ his school bag on the chair, then ran outside to play.",
+    "hints": ["The sentence describes moving or placing an object somewhere. Which word introduces the object being acted upon in that special sentence pattern?"],
+    "keywords": [
+      {"w": "把", "py": "bǎ", "en": "particle for disposal sentences"},
+      {"w": "书包", "py": "shūbāo", "en": "school bag"},
+      {"w": "椅子", "py": "yǐzi", "en": "chair"}
+    ],
+    "explanation_en": "The 把 sentence pattern is: 把 + object + verb + result/place. Here, 把书包放在椅子上 means 'put the school bag on the chair'. 对, 给, and 跟 do not work in this disposal pattern."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "天气______来越热，同学们都换上了夏天的衣服。",
+    "options": ["越", "更", "再", "还"],
+    "answer": 0,
+    "lesson": 2,
+    "skill": "yufa",
+    "explain": {
+      "why": ""越来越热"是固定句式
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "爸爸______我们讲了一个非常有趣的故事。",
+    "options": ["对", "给", "把", "跟"],
+    "answer": 1,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""给我们讲故事"是固定说法，"给"在这里表示为某人做某事，意思是"为我们、向我们讲"，最通顺。",
+      "distractors": [
+        ""对我们讲故事"虽然有时可用，但"给"在这里更自然，表示"为某人"做某事。",
+        "✓ 正确答案：给＋人＋动词，表示为某人做某事，是固定搭配。",
+        ""把我们讲故事"不通，"把"字句后面要接承受动作的东西，不是人。",
+        ""跟我们讲故事"可表示"和我们一起讲"，但不表示"为我们讲"，不符合语境。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：给＋人＋动词，表示为某人做某事。看到"为谁做"就想"给"。"
+    },
+    "explanation": ""给我们讲故事"是固定说法：给＋人＋动词，表示"为某人做某件事"。\n其余三个都不对：对后面多接态度、看法（对我们说）；把后面要接承受动作的东西（把书拿来），不能接人；跟表示和某人一起做，语义不同。\n【语法的方法】看到句子里有"为谁做某事"的意思，就用介词"给"。",
+    "sentence_en": "Dad told ___ us a very interesting story.",
+    "hints": ["Dad is doing something for the benefit of 'us'. Which character means 'for someone' before the person receiving the action?"],
+    "keywords": [
+      { "w": "给", "py": "gěi", "en": "for; to give" },
+      { "w": "故事", "py": "gùshì", "en": "story" },
+      { "w": "有趣", "py": "yǒuqù", "en": "interesting" }
+    ],
+    "explanation_en": "给 + person + verb means 'do something for someone'. So 给我们讲故事 means 'told a story for us / to us'. 把 cannot be followed by a person here. 跟 means 'together with', not 'for'. 对 usually pairs with attitude words."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "小明______书包放在椅子上，然后跑出去玩了。",
+    "options": ["对", "给", "把", "跟"],
+    "answer": 2,
+    "lesson": 2,
+    "skill": "yufa",
+    "explain": {
+      "why": ""把书包放在椅子上"是"把"字句，表示对某物进行处置，"把"后面接被处置的东西（书包），语序正确。",
+      "distractors": [
+        ""对书包放在椅子上"不通，"对"不能引出被处置的东西。",
+        ""给书包放在椅子上"不通，"给"后面接的是受益的人，不是物品处置。",
+        "✓ 正确答案：把＋物＋动词短语，表示处置某物，是"把"字句的固定格式。",
+        ""跟书包放在椅子上"不通，"跟"表示和谁一起，不用于处置物品。"
+      ],
+      "trapType": "ba_sentence",
+      "memoryTip": "固定句式：把＋（物品）＋放在／拿走……，看到"处置物品的动作"就想"把"。"
+    },
+    "explanation": ""把"字句的格式是：把＋物品＋动词短语，表示对这个物品进行某种处置。\n这里处置的对象是"书包"，动作是"放在椅子上"，所以用"把"最正确。\n对、给、跟都不能引导被处置的物品，放进去句子都不通。\n【语法的方法】看到句子里有"把某物怎么样"的结构，就确认用"把"。",
+    "sentence_en": "Xiao Ming ___ his schoolbag on the chair and then ran out to play.",
+    "hints": ["The sentence is about doing something to an object (the schoolbag). Which character introduces the object being acted upon in a disposal sentence?"],
+    "keywords": [
+      { "w": "把", "py": "bǎ", "en": "disposal marker (bǎ-sentence)" },
+      { "w": "书包", "py": "shūbāo", "en": "schoolbag" },
+      { "w": "椅子", "py": "yǐzi", "en": "chair" }
+    ],
+    "explanation_en": "把 + object + verb phrase is the 把-sentence pattern, used when someone does something to an object. Here, Xiao Ming acts on his schoolbag (puts it on the chair), so 把 is correct. 对, 给, and 跟 cannot introduce an object being disposed of."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "姐姐______唱歌很感兴趣，每个周末都去学唱歌。",
+    "options": ["跟", "把", "给", "对"],
+    "answer": 3,
+    "lesson": 1,
+    "skill": "yufa",
+    
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "弟弟______妈妈借了一本故事书，放在书包里带去学校。",
+    "options": ["向", "给", "把", "跟"],
+    "answer": 0,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""向妈妈借"是固定句式，"向"表示动作的对象方向，"向……借"意思通顺。",
+      "distractors": [
+        "✓ 正确答案：向＋人＋借，是固定搭配，表示朝某人提出借的动作。",
+        ""给妈妈借"不通，"给"表示给予，不能引出借的对象。",
+        ""把妈妈借"不通，"把"字句处置的是物，不是人。",
+        ""跟妈妈借"在口语中偶尔出现，但正式书面语固定用"向"。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：向＋人＋借／问／学。看到"借"就想"向"。"
+    },
+    "explanation": ""向……借"是固定说法：借的动作朝着某个人，中间要用介词"向"。\n另外三个都不对：给后面接接受东西的人（给我一本书）；把后面接承受动作的物（把书放好）；跟表示和谁一起（跟我来）。书面汉语里只说"向妈妈借"，不说"给妈妈借"。\n【语法的方法】遇到"借、问、学"这类动词，引出对象的介词固定用"向"。",
+    "sentence_en": "Little brother ___ (from) Mum borrowed a storybook and put it in his schoolbag to bring to school.",
+    "hints": ["This is the fixed pattern 向＋person＋借 (borrow from someone). Which character goes before 妈妈 to form this pattern?"],
+    "keywords": [
+      { "w": "向", "py": "xiàng", "en": "from; toward" },
+      { "w": "借", "py": "jiè", "en": "to borrow" },
+      { "w": "故事书", "py": "gùshishū", "en": "storybook" }
+    ],
+    "explanation_en": "向……借 is a fixed pattern meaning 'borrow from someone', so 向妈妈借 (borrow from Mum) makes sense. Fixed pattern: 向 + a person + 借. Seeing 借, think 向. 给, 把 and 跟 do not fit this borrowing pattern."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "爸爸______我们解释了这道数学题的做法，我们都听懂了。",
+    "options": ["把", "对", "向", "跟"],
+    "answer": 2,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""向我们解释"是固定句式，"向"引出解释动作的对象，意思通顺。",
+      "distractors": [
+        ""把我们解释"不通，"把"字句处置的是物，不是人。",
+        ""对我们解释"虽然接近，但"向"才是"解释"最常见的固定搭配介词。",
+        "✓ 正确答案：向＋人＋解释，是固定搭配。",
+        ""跟我们解释"在口语中偶尔出现，但书面语固定用"向"。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：向＋人＋解释／说明／汇报。看到"解释"就想"向"。"
+    },
+    "explanation": ""向……解释"是固定说法：解释的动作朝着某个人，中间要用介词"向"。\n另外三个都不对：把后面接承受动作的物（把书拿来）；对虽可以接人，但"向……解释"是书面固定说法；跟表示和谁一起（跟我去）。汉语里只说"向我们解释"，不说"把我们解释"。\n【语法的方法】遇到"解释、说明、汇报"，引出对象的介词固定用"向"。",
+    "sentence_en": "Dad explained ___ (to) us how to do this maths problem, and we all understood.",
+    "hints": ["This is the fixed pattern 向＋person＋解释 (explain to someone). Which character goes before 我们 to form this pattern?"],
+    "keywords": [
+      { "w": "向", "py": "xiàng", "en": "to; toward" },
+      { "w": "解释", "py": "jiěshì", "en": "to explain" },
+      { "w": "数学题", "py": "shùxuétí", "en": "maths problem" }
+    ],
+    "explanation_en": "向……解释 is a fixed pattern meaning 'explain to someone', so 向我们解释 (explain to us) makes sense. Fixed pattern: 向 + a person + 解释. Seeing 解释, think 向. 把, 对 and 跟 do not fit this standard written pattern."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "她______认真______仔细地完成了老师布置的功课。",
+    "options": ["不但……而且……", "虽然……但是……", "因为……所以……", "如果……就……"],
+    "answer": 0,
+    "lesson": 2,
+    "skill": "yufa",
+    "explain": {
+      "why": ""认真"和"仔细"都是正面的态度
+
+=== NON-JSON ===
+[
+  {
+    "id": "ZD01_C1",
+    "topic": "VocabMcq",
+    "sentence": "弟弟______妈妈借了一本关于恐龙的书，高兴地跑回房间看。",
+    "options": ["对", "向", "把", "被"],
+    "answer": 1,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""向妈妈借"是固定说法，"向"表示动作的对象或方向，借东西要用"向"。",
+      "distractors": [
+        ""对妈妈借"不通，"对"后面不接借的对象。",
+        "✓ 正确答案：向＋人＋借，表示从某人那里借东西。",
+        ""把妈妈借"不通，"把"字句处置的是东西，不是人。",
+        ""被妈妈借"不通，"被"表示被动，意思完全相反。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：向＋人＋借。看到"借东西给谁"，找动作来源的人，用"向"。"
+    },
+    "explanation": ""向……借"是固定搭配，"向"表示动作朝向的对象，即从谁那里得到某物。\n其余三个均不适用："对"用于"对……感兴趣/对……说"等固定句式；"把"字句要处置东西（把书还给妈妈）；"被"表示被动，表示动作承受者。\n【语法的方法】遇到"借、学、问"这类动词，表示从某人那里获取，前面固定用介词"向"。",
+    "sentence_en": "Little brother ___ (from) his mother borrowed a book about dinosaurs and ran happily back to his room to read it.",
+    "hints": ["You are getting something FROM someone. Which word shows the direction 'from a person'? (It is not 对, 把, or 被.)"],
+    "keywords": [
+      {"w": "向", "py": "xiàng", "en": "from; toward (a person)"},
+      {"w": "借", "py": "jiè", "en": "to borrow"},
+      {"w": "高兴", "py": "gāoxìng", "en": "happy"}
+    ],
+    "explanation_en": "向……借 is a fixed pattern meaning 'to borrow FROM someone'. 向 points to where the action is directed — the person you borrow from. 对, 把 and 被 do not fit this pattern."
+  },
+  {
+    "id": "ZD01_C2",
+    "topic": "VocabMcq",
+    "sentence": "小明______同学们分享了他在农村过节的有趣经历。",
+    "options": ["被", "把", "跟", "对"],
+    "answer": 2,
+    "lesson": 1,
+    "skill": "yufa",
+    "explain": {
+      "why": ""跟同学们分享"表示和一群人一起做某事，"跟"引出一起分享的对象，最符合语境。",
+      "distractors": [
+        ""被同学们分享"不通，"被"表示被动，主语不是承受者。",
+        ""把同学们分享"不通，"把"后面应接被处置的东西，不是人。",
+        "✓ 正确答案：跟＋人＋分享，表示和某人一起做某事。",
+        ""对同学们分享"不符合"分享"的搭配习惯，"分享"用"跟/和"引出对象。"
+      ],
+      "trapType": "dapei",
+      "memoryTip": "固定句式：跟＋人＋分享。"分享"像"一起做"，所以用表示"和"的"跟"。"
+    },
+    "explanation": ""分享"意思是和别人一起享有，所以要用"跟/和"引出共同参与的对象。\n"被"表示被动（被老师表扬）；"把"处置具体物品（把蛋糕吃掉）；"对"用于"对……说、对……感兴趣"等固定结构。三个都不能引出"一起分享"的对象。\n【语法的方法】"分享、合作、讨论"这类互动动词，前面引出伙伴时固定用"跟"或"和"。",
+    "sentence_en": "Xiao Ming ___ (with) his classmates shared his interesting experience of celebrating the festival in the countryside.",
+    "hints": ["Sharing means doing something together WITH someone. Which word means 'with' or 'together with'?"],
+    "keywords": [
+      {"w": "跟", "py": "gēn", "en": "with; together with"},
+      {"w": "分享", "py": "fēnxiǎng", "en": "to share"},
+      {"w": "经历", "py": "jīnglì", "en": "experience"}
+    ],
+    "explanation_en": "跟……分享 is a fixed pattern meaning 'to share WITH someone'. 跟 introduces the partner in the action. 被, 把 and 对 do not fit here because sharing is something you do together with others."
+  },
+  {
+    "id": "ZD01_C3",
+    "topic": "VocabMcq",
+    "sentence": "奶奶______慢慢地走下楼梯，爸爸在旁边扶着她。",
+    "options": ["把", "让", "被", "正在"],
+    "answer": 3,
+    "lesson": 2,
+    "skill": "yufa",
+    "explain": {
+      "why": ""正在慢慢地走"表示动作正在进行中，"正在"是进行时标志词，与后面的动作搭配最通顺。",
+ 

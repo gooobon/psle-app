@@ -23,10 +23,16 @@ def norm_text(s):
 
 def main():
     data = json.load(io.open(SRC, encoding="utf-8"))
+    # STEP10: drill-only sets (generated + validated) join the bank, tagged source='drill'
+    DRILL = os.path.join(ROOT, "wa1_zh_drill.json")
+    drill = json.load(io.open(DRILL, encoding="utf-8")) if os.path.exists(DRILL) else []
+    for d in drill: d["_source"] = "drill"
+    data = data + drill
     bank, meta, groups = {}, {}, {}
     def add(iid, skill, set_id, st, band, graded=True, cid=None, text=None):
         if not iid: return
         meta[iid] = {"skill": skill, "setId": set_id, "sectionType": st, "graded": graded, "band": band}
+        if str(set_id).startswith("ZD"): meta[iid]["source"] = "drill"
         if cid: meta[iid]["containerId"] = cid
         if skill and graded: bank.setdefault(skill, []).append(iid)
         if text:

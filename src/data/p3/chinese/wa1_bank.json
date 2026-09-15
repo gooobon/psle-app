@@ -1704,7 +1704,35 @@
   ],
   "yufa": [
    "ZS35_A4",
-   "ZS40_C5"
+   "ZS40_C5",
+   "ZD01_C1",
+   "ZD01_C2",
+   "ZD01_C3",
+   "ZD01_C4",
+   "ZD01_C5",
+   "ZD01_C6",
+   "ZD01_C7",
+   "ZD01_C8",
+   "ZD01_C9",
+   "ZD01_C10",
+   "ZD01_C11",
+   "ZD01_C12"
+  ],
+  "lianci": [
+   "ZD02_C1",
+   "ZD02_C2",
+   "ZD02_C3",
+   "ZD02_C4",
+   "ZD02_C5",
+   "ZD02_C6",
+   "ZD02_C7",
+   "ZD02_C8",
+   "ZD02_C9",
+   "ZD02_C10",
+   "ZD02_C11",
+   "ZD02_C12",
+   "ZD02_C13",
+   "ZD02_C14"
   ]
  },
  "dupOf": {
@@ -17973,6 +18001,214 @@
    "graded": false,
    "band": "hard",
    "containerId": "ZS60_H"
+  },
+  "ZD01_C1": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C2": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C3": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C4": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C5": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C6": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C7": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C8": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C9": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C10": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C11": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD01_C12": {
+   "skill": "yufa",
+   "setId": "ZD01",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C1": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C2": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C3": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C4": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C5": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C6": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C7": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C8": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C9": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C10": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C11": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C12": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C13": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
+  },
+  "ZD02_C14": {
+   "skill": "lianci",
+   "setId": "ZD02",
+   "sectionType": "VocabMcq",
+   "graded": true,
+   "band": "mid",
+   "source": "drill"
   }
  },
  "stats": {
@@ -17982,6 +18218,7 @@
    "duoyinzi": 62,
    "inference": 45,
    "jinyici": 95,
+   "lianci": 14,
    "liangci": 63,
    "main_idea": 60,
    "shengdiao": 103,
@@ -17989,10 +18226,10 @@
    "tongyinzi": 109,
    "vocab_in_context": 395,
    "xingjinzi": 189,
-   "yufa": 2
+   "yufa": 14
   },
-  "items": 1920,
-  "graded": 1680,
+  "items": 1946,
+  "graded": 1706,
   "dupItems": 180,
   "dupGroups": 56,
   "missingSkill": []
