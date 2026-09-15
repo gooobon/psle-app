@@ -36,6 +36,9 @@ const ZH_GATE_STOP = new Set("的了是我你他她它们在有和就也都不�
 
 import { StudentResultScreen, ZhResultScreen } from '@/components/ResultScreen';
 import ZhWa1ResultScreen from '@/components/ZhWa1ResultScreen'; // STEP3B_ZH_RESULT
+import EnReviewGate from '@/components/EnReviewGate'; // STEP4_EN_GATE
+import { makeReviewStore } from '@/lib/vocabReview';
+const EN_REVIEW = makeReviewStore('en');
 
 import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
 
@@ -1015,6 +1018,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const _wa1Len = WA1_PRACTICE_SETS.length;
   const wa1Plan = WA1_PRACTICE_SETS[(((prog.nextSession - 1) % _wa1Len) + _wa1Len) % _wa1Len].plan;
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
+  const [enGate, setEnGate] = useState(null); // words[] while the English end-of-round word review is showing
   function startRoundReview(sessionNum){
     const entry=(prog.history||[]).find(h=>h.sessionNum===sessionNum);
     if(!entry) return;
@@ -1087,6 +1091,16 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     setProgress(grade, subject, { ...withTrials, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
+    // Step 4: end-of-round word review (Leitner) before the result screen.
+    let gateWords = [];
+    try {
+      const cand = roundVocabCandidates({ sessionNum, mistakes: [...graded.filter(r=>!r.correct), ...graded.filter(r=>r.correct && r.guessed)] }, EN_ROUND_INDEX, 30, 'en')
+        .map(x => x.w);
+      const looked = allLookedUp.map(w => String(w).toLowerCase());
+      const collected = [...new Set([...cand, ...looked])].filter(w => EN_VOCAB[w]);
+      gateWords = EN_REVIEW.assembleGate(collected, EN_VOCAB, 10);
+    } catch (_) { gateWords = []; }
+    if (gateWords.length > 0) { setEnGate(gateWords); return; }
     setScreen("result");
   }
 
@@ -1161,6 +1175,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         onSelect={(sub)=>{ setSubject(sub); setSubjectSelected(true); }}
         onGradeChange={(g)=>{ setGrade(g); setSubjectSelected(false); }}
       />
+    </Wrap>
+  );
+
+  if(enGate) return(
+    <Wrap>
+      <EnReviewGate words={enGate} dict={EN_VOCAB} store={EN_REVIEW} onDone={()=>{ setEnGate(null); setScreen("result"); }} />
     </Wrap>
   );
 
