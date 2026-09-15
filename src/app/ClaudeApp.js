@@ -39,6 +39,8 @@ import ZhWa1ResultScreen from '@/components/ZhWa1ResultScreen'; // STEP3B_ZH_RES
 import EnReviewGate from '@/components/EnReviewGate'; // STEP4_EN_GATE
 import { makeReviewStore } from '@/lib/vocabReview';
 const EN_REVIEW = makeReviewStore('en');
+import ZH_BANK from '@/data/p3/chinese/wa1_bank.json'; // STEP7_TICKETS
+import { openTicketsFromResults, gradeTicketsFromDrill, pickDrillItems, pickNextSet, bankFromIndex, ticketSummary } from '@/lib/tickets';
 
 import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
 
@@ -49,6 +51,7 @@ import EN_VOCAB from '@/data/p3/english/en_vocab.json';
 import { indexSets, buildRoundReviewPlan, listReviewableRounds, markRoundReviewed, REVIEW_SET_ID, enrichMistakes, roundVocabCandidates } from '@/lib/reviewRounds'; // STEP2D_VOCAB_BY_ROUND // STEP2B_MISTAKE_ENRICH
 const ZH_ROUND_INDEX = indexSets(WA1_ZH_PRACTICE);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
+const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 
 
 
@@ -206,9 +209,12 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const prog = getProgress(grade, subject);
   // Remediation: bias next WA1 mock toward the student's weakest traps
   // (falls back to sequential progression when there is nothing to remediate).
-  const wa1Idx = pickNextWa1Set(WA1_ZH_PRACTICE, prog.mistakes, ((prog.nextSession-1)%60+60)%60);
+  const wa1Idx = pickNextSet(WA1_ZH_PRACTICE, prog, ((prog.nextSession-1)%60+60)%60);
   // Item-level drill: only the student's weak MCQ items (null when none).
-  const drill = buildRemediationDrill(WA1_ZH_PRACTICE, prog.mistakes, { maxItems: 12 });
+  // Ticket drill: different items of the skills the student keeps missing (never the seed item)
+  const drillPicks = pickDrillItems(prog, ZH_BANK, prog.nextSession, { max: 10, perSkill: 2 });
+  const drill = drillPicks.length ? { plan: buildRoundReviewPlan({ mistakes: drillPicks.map(x=>({id:x.itemId})) }, ZH_ROUND_INDEX).plan } : null;
+  const zhTickets = ticketSummary(prog);
 
   const [screen,setScreen] = useState("home");   // home | session | result
   const [inSession,setInSession] = useState(false);
@@ -276,7 +282,8 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const newEntry={sessionNum,date:todayStr(),scores:bySection,totalPct,isMockExam:!!isMock,mistakes:missed.map(r=>({...r}))};
     const newMistakes=[...(prog.mistakes||[]),...missed.map(r=>({...r,date:todayStr()}))];
     const withTrials=recordTrials(prog, results, { mode: isMock?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: WA1_ZH_PRACTICE[wa1Idx].setId });
-    setProgress(grade,subject,{...withTrials,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
+    const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
+    setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
     return sessionNum;
   }
   // Daily practice = the 60 generated sets (flagged mock every 10th session).
@@ -363,9 +370,8 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
         isMockExam
         mockInfo={{school:"\u534E\u6587 \u5F31\u9879\u8BAD\u7EC3"}}
         onFinish={(results)=>{
-          const missed=(results||[]).filter(r=>r.scored!==false && r.correct===false).map(r=>({...r,date:todayStr()}));
           const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'ZS_DRILL' });
-          setProgress(grade,subject,{...withTrials,mistakes:[...(prog.mistakes||[]),...missed]});
+          setProgress(grade,subject, gradeTicketsFromDrill(withTrials, results, prog.nextSession));
           setDrillMode(false); setScreen("home");
         }}
         onBack={()=>setDrillMode(false)}
@@ -423,7 +429,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
           {drill && (
             <div style={{padding:"14px 16px 0"}}>
               <button onClick={()=>setDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#B91C1C,#EF4444)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",fontFamily:"\'KaiTi\',\'STKaiti\',\'LXGW WenKai\',serif",boxShadow:"0 4px 14px rgba(185,28,28,0.25)"}}>
-                <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{"\u5F31\u9879\u8BAD\u7EC3 (\u9519\u9898)"}</div>
+                <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{"\u5F31\u9879\u8BAD\u7EC3 (\u9519\u9898)"}<span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,marginLeft:8,opacity:.85}}>{"\u5F85\u5DE9\u56FA "+zhTickets.open+" \u9879 \u00B7 \u5DF2\u638C\u63E1 "+zhTickets.closed}</span></div>
                 <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",marginTop:2}}>{"\u53EA\u7EC3\u4F60\u6700\u5BB9\u6613\u9519\u7684\u9898\u578B"}</div>
               </button>
             </div>
@@ -1019,6 +1025,10 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const wa1Plan = WA1_PRACTICE_SETS[(((prog.nextSession - 1) % _wa1Len) + _wa1Len) % _wa1Len].plan;
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
   const [enGate, setEnGate] = useState(null); // words[] while the English end-of-round word review is showing
+  const [enDrillMode, setEnDrillMode] = useState(false);
+  const enDrillPicks = pickDrillItems(prog, EN_BANK, prog.nextSession, { max: 10, perSkill: 3 });
+  const enDrill = enDrillPicks.length ? { plan: buildRoundReviewPlan({ mistakes: enDrillPicks.map(x=>({id:x.itemId})) }, EN_ROUND_INDEX).plan } : null;
+  const enTickets = ticketSummary(prog);
   function startRoundReview(sessionNum){
     const entry=(prog.history||[]).find(h=>h.sessionNum===sessionNum);
     if(!entry) return;
@@ -1088,7 +1098,8 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const newVocab    = [...prevVocab];
     vocabWords.forEach(w=>{ if(!newVocab.find(v=>v.word===w)) newVocab.push({word:w,def:WORD_DICT[w]||"",addedDate:todayStr(),fromMistake:wrongWords.includes(w)}); });
     const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: newEntry.school||null });
-    setProgress(grade, subject, { ...withTrials, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
+    const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
+    setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
     // Step 4: end-of-round word review (Leitner) before the result screen.
@@ -1178,6 +1189,22 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     </Wrap>
   );
 
+  if(enDrillMode && enDrill) return(
+    <Wrap>
+      <ExamSessionScreen
+        plan={enDrill.plan}
+        isMockExam
+        mockInfo={{school:"Weak-spot drill"}}
+        onFinish={(results)=>{
+          const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'EN_DRILL' });
+          setProgress(grade, subject, gradeTicketsFromDrill(withTrials, results, prog.nextSession));
+          setEnDrillMode(false); setScreen("home");
+        }}
+        onBack={()=>setEnDrillMode(false)}
+      />
+    </Wrap>
+  );
+
   if(enGate) return(
     <Wrap>
       <EnReviewGate words={enGate} dict={EN_VOCAB} store={EN_REVIEW} onDone={()=>{ setEnGate(null); setScreen("result"); }} />
@@ -1214,9 +1241,19 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <>
       <StudentHome user={user} prog={prog} grade={grade} subject={subject} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
+        <>
+          {enDrill && (
+            <div style={{padding:"14px 16px 0"}}>
+              <button onClick={()=>setEnDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#0F172A,#1E3A6E)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",boxShadow:"0 4px 14px rgba(15,23,42,0.25)"}}>
+                <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>Weak-spot drill<span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,marginLeft:8,opacity:.85}}>{"to fix "+enTickets.open+" \u00B7 mastered "+enTickets.closed}</span></div>
+                <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",marginTop:2}}>New questions on the skills you keep missing. Never the same question again.</div>
+              </button>
+            </div>
+          )}
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}
           rounds={listReviewableRounds(prog.history||[], EN_ROUND_INDEX, prog.trials||[])} reviewedRounds={prog.reviewedRounds||{}} trials={prog.trials||[]}
           onReviewRound={startRoundReview} isZh={false} roundIndex={EN_ROUND_INDEX} history={prog.history||[]}/>
+        </>
       ) : screen==="review" ? (
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : null}
