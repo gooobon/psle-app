@@ -6,6 +6,16 @@ import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
 import ZH_SEG from "@/data/p3/chinese/zh_seg.json";
+// STEP4B_TYPED_NORMALISE: typed answers from iPad/iOS keyboards contain curly quotes/apostrophes
+// (smart punctuation). Compare on a normalised form so "Teacher's" typed with U+2019
+// is not marked wrong. Never changes what the student sees.
+export function normTyped(s) {
+  return String(s == null ? '' : s).normalize('NFC')
+    .replace(/[\u2018\u2019\u02BC\u2032\uFF07\u00B4\u0060]/g, "'")
+    .replace(/[\u201C\u201D\uFF02]/g, '"')
+    .replace(/[\u2010-\u2015\u2212]/g, '-')
+    .replace(/\u00A0/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+}
 import ZhReviewGate from "@/components/ZhReviewGate";
 import { addUnknown as zhAddUnknown, getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from "@/lib/zhReview";
 import { detectPageGuesses } from "@/lib/antiGuess";
@@ -667,7 +677,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
 
 
 function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
-  const cmp = (a, b) => (a || "").toString().toLowerCase() === (b || "").toString().toLowerCase();
+  const cmp = (a, b) => normTyped(a) === normTyped(b);
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
   const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [parseInt(String(r.id).split("_").pop(), 10), r.userAnswer])) : null;
@@ -1065,18 +1075,18 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
     const t = Date.now() - startRef.current;
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing", userAnswer: answers[item.id],
-      correct: (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase(),
+      correct: normTyped(answers[item.id]) === normTyped(item.answer),
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results, true);
   }
 
   const score = submitted ? items.filter(item =>
-    (answers[item.id] || '').trim().toLowerCase() === (item.answer || '').toLowerCase()
+    normTyped(answers[item.id]) === normTyped(item.answer)
   ).length : 0;
 
   const allRetriedWrong = submitted && items
-    .filter(item => (answers[item.id] || '').trim().toLowerCase() !== (item.answer || '').toLowerCase())
+    .filter(item => normTyped(answers[item.id]) !== normTyped(item.answer))
     .every(item => retried[item.id]);
 
   return (
@@ -1094,11 +1104,11 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
         {items.map((item, idx) => {
           const qNum = item.questionNumber || idx + 1;
           const typed = answers[item.id] || '';
-          const isCorrect = submitted && typed.trim().toLowerCase() === (item.answer || '').toLowerCase();
+          const isCorrect = submitted && normTyped(typed) === normTyped(item.answer);
           const isWrong = submitted && !isCorrect;
           const retryTyped = retryAnswers[item.id] || '';
           const hasRetried = retried[item.id];
-          const retryIsCorrect = hasRetried && hasRetried.toLowerCase() === (item.answer || '').toLowerCase();
+          const retryIsCorrect = hasRetried && normTyped(hasRetried) === normTyped(item.answer);
           // The correction stays hidden until the student has had one hinted retry
           // (or is simply reviewing a finished paper).
           const answerRevealed = !!hasRetried || reviewMode;
@@ -1325,7 +1335,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
   }
 
   function norm(s) {
-    return String(s || '').trim().toLowerCase().replace(/[.,!?'"]/g, '');
+    return normTyped(s).replace(/[.,!?'"]/g, '');
   }
 
   // Colored CORRECT / INCORRECT pill shown after submit.
