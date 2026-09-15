@@ -170,8 +170,9 @@ function checkCraftItem(q, fails, counts, opts) {
   if (!Number.isInteger(q.marks) || q.marks <= 0) fails.push(id + ': marks bad');
   if (!Number.isInteger(q.lesson) || q.lesson < LESSON_MIN || q.lesson > LESSON_MAX)
     fails.push(id + ': lesson out of WA1 range: ' + q.lesson);
-  if (q.skill != null && !SKILLS.includes(q.skill))
-    fails.push(id + ': skill invalid: ' + q.skill);
+  // STEP5: skill is REQUIRED on every reading question (was: only validated when present)
+  if (q.skill == null) fails.push(id + ': skill missing');
+  else if (!SKILLS.includes(q.skill)) fails.push(id + ': skill invalid: ' + q.skill);
   // Connective-usage gate: when a connector is specified (guanlian ci zao ju),
   // the model answer must actually use every part of it. This is what makes the
   // item a real lianci-training item, so it is a hard rule here, not a warning.

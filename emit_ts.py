@@ -34,3 +34,7 @@ end = out.index("\n/* WA1_ZH_JSON_END */")
 parsed = json.loads(out[begin:end])
 assert len(parsed) == 60, f"round-trip set count {len(parsed)}"
 print(f"emitted wa1_practice.ts  sets=60  enriched={len(done)} ({rng})  round-trip OK")
+# STEP5_BANK: rebuild the skill item bank whenever the data is re-emitted
+import importlib.util as _ilu
+_spec = _ilu.spec_from_file_location("build_zh_bank", os.path.join(HERE, "tools", "bank", "build_zh_bank.py"))
+_m = _ilu.module_from_spec(_spec); _spec.loader.exec_module(_m); _m.main()

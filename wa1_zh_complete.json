@@ -52486,7 +52486,8 @@
         "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Xiaoen was a bit nervous, but she took a deep breath and bravely stood on stage to finish the whole song', so she took a deep breath and then bravely sang, overcoming her nerves. State the method clearly from the text.",
         "solution": {
          "evidence": "她深呼吸了一下，勇敢地站在台上唱完了整首歌"
-        }
+        },
+        "skill": "detail"
        },
        {
         "id": "ZS37_H3",
@@ -52523,7 +52524,8 @@
         "explanation_en": "This is a main-idea question. At the end, Mum smiles and says 'as long as you work hard, your wish can come true'; combined with Xiaoen practising hard and successfully joining the choir, Mum's words tell us that hard work makes wishes come true. Catch the key closing line and sum up the lesson with the story.",
         "solution": {
          "evidence": "只要努力，愿望就能实现。"
-        }
+        },
+        "skill": "main_idea"
        }
       ]
      }
@@ -53928,7 +53930,8 @@
         "explanation_en": "This is a detail question, answered in a full sentence. The passage says 'Grandma lives alone and usually rarely has anyone to talk to', so her daily life is living alone with little company, rather lonely. State the situation clearly from the text.",
         "solution": {
          "evidence": "外婆一个人住，平时很少有人陪她说话"
-        }
+        },
+        "skill": "detail"
        },
        {
         "id": "ZS38_H3",
@@ -53965,7 +53968,8 @@
         "explanation_en": "This is a detail question, answered in a full sentence. The passage ends with 'before leaving, Wang Ming promised Grandma to come and keep her company every weekend from now on', directly stating his promise. State the content of the promise clearly.",
         "solution": {
          "evidence": "王明答应外婆，以后每个周末都来陪她。"
-        }
+        },
+        "skill": "detail"
        }
       ]
      }
