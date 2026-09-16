@@ -668,7 +668,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "Being kind is never a waste of time",
                   "evidenceParagraph": 5,
                   "trap": "True",
-                  "trapExplanation": "Although Benny was out of breath and had rushed, Mr Aziz praised him and said being kind is never a waste of time, showing he was not unhappy.",
+                  "trapExplanation": "Although Benny was out of breath and rushed, Mr Aziz praised him and said being kind is never a waste of time, showing he was not unhappy.",
                   "keywords": [
                     "good choice",
                     "kind"
@@ -1287,7 +1287,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Number the events in the order they happened.",
                 "sequenceItems": [
                   "Nina and her father put up posters around the neighbourhood.",
-                  "A neighbour called to say she had seen Biscuit.",
+                  "A neighbour called to say she saw Biscuit.",
                   "Nina came home and could not find Biscuit."
                 ],
                 "answer": [
@@ -2591,7 +2591,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ],
                 "answer": 1,
                 "solution": {
-                  "evidence": "He had slipped on the flooded floor",
+                  "evidence": "He slipped on the flooded floor",
                   "evidenceParagraph": 2,
                   "trap": "He was tired from carrying his groceries.",
                   "trapExplanation": "The passage clearly states he slipped on the flooded floor, not that he was tired.",
@@ -2683,7 +2683,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   2
                 ],
                 "solution": {
-                  "evidence": "He had slipped on the flooded floor",
+                  "evidence": "He slipped on the flooded floor",
                   "evidenceParagraph": 2,
                   "trap": "Putting Mrs Chen calling for help before Mr Siva falling.",
                   "trapExplanation": "Mr Siva fell first, then Mrs Chen called for help, and finally the taxi offer was made.",
@@ -3405,8 +3405,8 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the statements below. Write True or False.",
                 "statements": [
-                  "Mr Lim gave the boy a small bowl as he had asked for.",
-                  "The boy said the food was the best he had ever eaten."
+                  "Mr Lim gave the boy a small bowl as he asked for.",
+                  "The boy said the food was the best he ever ate."
                 ],
                 "answer": [
                   "False",
@@ -3439,7 +3439,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "True",
                 "acceptableAnswers": [
                   "Mr Lim sold fishball noodles at Tampines Food Centre for over twenty years, which is a very long time.",
-                  "The passage says he had been there for over twenty years, so he had been selling for a long time."
+                  "The passage says he was there for over twenty years, so he sold for a long time."
                 ],
                 "solution": {
                   "evidence": "Mr Lim sold fishball noodles at Tampines Food Centre for over twenty years",
@@ -3453,7 +3453,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "answerFormat": "Write True or False and give a reason using evidence from the passage",
                   "tip": "Use the exact number of years from paragraph 1 in your reason.",
                   "steps": [
-                    "Read paragraph 1 to find how long Mr Lim had been selling.",
+                    "Read paragraph 1 to find how long Mr Lim was selling.",
                     "Decide if over twenty years counts as a long time.",
                     "Write your reason using evidence from the passage."
                   ]
@@ -3467,7 +3467,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Why did Mr Lim decide to charge the boy only one dollar and fifty cents instead of two dollars?",
                 "answer": "Mr Lim decided to charge the boy only one dollar and fifty cents because he could see that the boy had walked a long way in the rain and looked tired, and he felt sorry for him.",
                 "solution": {
-                  "evidence": "the boy's wet uniform and tired eyes told him the boy had come a long way in the rain",
+                  "evidence": "the boy's wet uniform and tired eyes told him the boy came a long way in the rain",
                   "evidenceParagraph": 3,
                   "trap": "Because the boy asked nicely",
                   "trapExplanation": "While the boy was polite, Mr Lim's decision was based on seeing the boy's wet uniform and tired eyes, not just politeness.",
@@ -3980,7 +3980,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ],
                 "answer": 1,
                 "solution": {
-                  "evidence": "water had seeped under the front door of their house",
+                  "evidence": "water seeped under the front door of their house",
                   "evidenceParagraph": 1,
                   "trap": "The roof was broken and unsafe.",
                   "trapExplanation": "The passage mentions water coming under the door, not a broken roof.",
@@ -4073,7 +4073,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   2
                 ],
                 "solution": {
-                  "evidence": "water had seeped under the front door of their house",
+                  "evidence": "water seeped under the front door of their house",
                   "evidenceParagraph": 1,
                   "trap": "Putting the community hall scene first.",
                   "trapExplanation": "The water under the door happened first, then the community hall, then returning home.",
@@ -4098,7 +4098,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the two statements below. Write True or False.",
                 "statements": [
-                  "Grandfather had seen floods before in the village.",
+                  "Grandfather saw floods before in the village.",
                   "Maya packed food and medicine for the family."
                 ],
                 "answer": [
@@ -4646,7 +4646,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "several months"
                 ],
                 "solution": {
-                  "evidence": "She had trained for months for this moment",
+                  "evidence": "She trained for months for this moment",
                   "evidenceParagraph": 1,
                   "trap": "years",
                   "trapExplanation": "The passage says 'months', not 'years'.",
@@ -8238,7 +8238,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Number the events in the order they happened in the story.",
                 "sequenceItems": [
                   "Aiman's first attempt at making ketupat came apart.",
-                  "An uncle said the ketupat was the best he had ever eaten.",
+                  "An uncle said the ketupat was the best he ever ate.",
                   "Grandma called Aiman to sit beside her in the kitchen."
                 ],
                 "answer": [
@@ -8250,7 +8250,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "'Come, Aiman,' she called. Aiman sat beside her",
                   "evidenceParagraph": 3,
                   "trap": "Placing the uncle's comment before Aiman's attempts",
-                  "trapExplanation": "The uncle only tasted the ketupat after the guests arrived, which was after Aiman had already made his attempts.",
+                  "trapExplanation": "The uncle only tasted the ketupat after the guests arrived, which was after Aiman already made his attempts.",
                   "keywords": [
                     "called",
                     "first attempt",
@@ -8273,7 +8273,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Read the two statements below. Write True or False.",
                 "statements": [
                   "Aiman succeeded in making ketupat on his very first try.",
-                  "By noon, Aiman and Grandma had made over fifty pieces of ketupat."
+                  "By noon, Aiman and Grandma made over fifty pieces of ketupat."
                 ],
                 "answer": [
                   "False",
@@ -10313,7 +10313,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Number the events in the order they happened in the passage.",
                 "sequenceItems": [
-                  "Siti showed the photographs she had taken.",
+                  "Siti showed the photographs she took.",
                   "Siti noticed the ants carrying tiny white eggs.",
                   "Maya read about ants in a library book."
                 ],
@@ -13086,7 +13086,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Number the events in the order they happened.",
                 "sequenceItems": [
-                  "Nora explained to her mother what had happened.",
+                  "Nora explained to her mother what happened.",
                   "Nora noticed the elderly man struggling to cross the road.",
                   "Nora held the old man's arm and guided him across."
                 ],
@@ -13848,14 +13848,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "'Dr Ariff met many students like Priya before.' Is this True or False? Give a reason from the passage.",
                 "answer": "False",
                 "acceptableAnswers": [
-                  "Dr Ariff said he had never met a student quite like Priya even after visiting schools for fifteen years.",
-                  "Dr Ariff told Priya he had never met a student quite like her in fifteen years of visiting schools."
+                  "Dr Ariff said he never met a student quite like Priya even after visiting schools for fifteen years.",
+                  "Dr Ariff told Priya he never met a student quite like her in fifteen years of visiting schools."
                 ],
                 "solution": {
                   "evidence": "I have never met a student quite like you",
                   "evidenceParagraph": 5,
                   "trap": "True, because Dr Ariff visits many schools.",
-                  "trapExplanation": "Although Dr Ariff visits many schools, he said he had NEVER met a student quite like Priya, making the statement false.",
+                  "trapExplanation": "Although Dr Ariff visits many schools, he said he NEVER met a student quite like Priya, making the statement false.",
                   "keywords": [
                     "never",
                     "quite like you",
@@ -15778,7 +15778,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "The playground would be demolished the following week",
                   "evidenceParagraph": 2,
                   "trap": "She was excited about the new fitness area.",
-                  "trapExplanation": "The tightness in her chest shows sadness, not excitement. The new fitness area had not opened yet.",
+                  "trapExplanation": "The tightness in her chest shows sadness, not excitement. The new fitness area did not open yet.",
                   "keywords": [
                     "demolished",
                     "tightness"
@@ -17251,7 +17251,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   2
                 ],
                 "solution": {
-                  "evidence": "her grandmother brought in an old clock that had stopped working",
+                  "evidence": "her grandmother brought in an old clock that stopped working",
                   "evidenceParagraph": 2,
                   "trap": "Placing the clock ticking before Nadia made the spring.",
                   "trapExplanation": "Nadia first received the clock, then made the spring, and only then did the clock tick again.",
@@ -17877,7 +17877,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "format": "ab_circle",
                 "marks": 1,
                 "stem": "Which word tells us that Omar was truly amazed by Kai's success?",
-                "abSentence": "Omar looked (A) pleased ... (B) genuinely impressed when Kai told him he had succeeded.",
+                "abSentence": "Omar looked (A) pleased ... (B) genuinely impressed when Kai told him he succeeded.",
                 "abChoices": {
                   "A": "pleased",
                   "B": "genuinely impressed"
@@ -18036,7 +18036,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Why do you think Kai did not tell Omar about the packet of sweets he bought for Saturday?",
                 "answer": "Kai did not tell Omar about the sweets because he did not want Omar to think he had failed the dare or given up on eating less sugar.",
                 "solution": {
-                  "evidence": "He did not say anything about the packet of sweets he had already bought for Saturday",
+                  "evidence": "He did not say anything about the packet of sweets he already bought for Saturday",
                   "evidenceParagraph": 6,
                   "trap": "Because he was ashamed of buying sweets.",
                   "trapExplanation": "Shame alone is too simple; the deeper reason involves not wanting to spoil his achievement or Omar's impression of him.",
@@ -19276,7 +19276,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "barely visible under decades of old white paint",
                   "evidenceParagraph": 1,
                   "trap": "B",
-                  "trapExplanation": "'Very different' describes how the neighbourhood had changed, not how hard the map was to see.",
+                  "trapExplanation": "'Very different' describes how the neighbourhood changed, not how hard the map was to see.",
                   "keywords": [
                     "barely",
                     "visible"
@@ -19394,7 +19394,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "True",
                 "acceptableAnswers": [
                   "Priya's grandmother once lived in this neighbourhood since she was a child, so she would know about it.",
-                  "It is true because Priya's grandmother had lived in the neighbourhood since she was a child and would have knowledge of the area."
+                  "It is true because Priya's grandmother lived in the neighbourhood since she was a child and would have knowledge of the area."
                 ],
                 "solution": {
                   "evidence": "her grandmother once lived in this neighbourhood since she was a child",
@@ -19995,7 +19995,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "admitted"
                 ],
                 "solution": {
-                  "evidence": "several admitted they had never thought about where vegetables came from",
+                  "evidence": "several admitted they never thought about where vegetables came from",
                   "evidenceParagraph": 4,
                   "trap": "thought",
                   "trapExplanation": "'Thought' means to have an idea in the mind, not to confess or acknowledge something.",
@@ -20062,10 +20062,10 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "True"
                 ],
                 "solution": {
-                  "evidence": "several admitted they had never thought about where vegetables came from",
+                  "evidence": "several admitted they never thought about where vegetables came from",
                   "evidenceParagraph": 4,
                   "trap": "Marking the first statement as True",
-                  "trapExplanation": "The passage says students admitted they had never thought about where vegetables came from, so the first statement is False.",
+                  "trapExplanation": "The passage says students admitted they never thought about where vegetables came from, so the first statement is False.",
                   "keywords": [
                     "never thought",
                     "three close friends"
@@ -20714,7 +20714,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "sequenceItems": [
                   "The fisherman released the golden fish into the sea.",
                   "The fisherman's daughter smiled and said she felt better.",
-                  "The neighbours told the fisherman he had wasted his wish."
+                  "The neighbours told the fisherman he wasted his wish."
                 ],
                 "answer": [
                   1,
@@ -20748,7 +20748,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Read the two statements and write True or False.",
                 "statements": [
                   "The golden fish granted the fisherman three wishes.",
-                  "The fisherman's daughter had been unwell for three years."
+                  "The fisherman's daughter was unwell for three years."
                 ],
                 "answer": [
                   "False",
@@ -20767,7 +20767,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "tip": "Do not confuse the number three — it refers to years of illness, not the number of wishes.",
                   "steps": [
                     "Check how many wishes the fish offered the fisherman.",
-                    "Find how long the daughter had been unwell.",
+                    "Find how long the daughter was unwell.",
                     "Decide True or False for each statement."
                   ]
                 }
@@ -21477,7 +21477,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "The young man was searching for the notebook for more than one week. Is this True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "This is True because the young man said he had looked for the notebook for two weeks.",
+                  "This is True because the young man said he looked for the notebook for two weeks.",
                   "This is True because the passage states 'I looked for this for two weeks', which is more than one week."
                 ],
                 "solution": {
@@ -22134,7 +22134,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the two statements and write True or False.",
                 "statements": [
-                  "All of Dani's classmates had stopped studying because of the false message.",
+                  "All of Dani's classmates already stopped studying because of the false message.",
                   "Mr Woo spoke to the class about checking the source of messages."
                 ],
                 "answer": [
@@ -22142,7 +22142,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "True"
                 ],
                 "solution": {
-                  "evidence": "Several of them had already stopped studying",
+                  "evidence": "Several of them already stopped studying",
                   "evidenceParagraph": 4,
                   "trap": "Marking the first statement as True.",
                   "trapExplanation": "The passage says 'several' classmates stopped studying, not all of them.",
@@ -22167,11 +22167,11 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Dani felt relieved when she first read the message about the test being cancelled. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "She felt a wave of relief because she had not started studying yet.",
-                  "Dani felt relieved because she had not begun studying for the test."
+                  "She felt a wave of relief because she did not start studying yet.",
+                  "Dani felt relieved because she did not begin studying for the test."
                 ],
                 "solution": {
-                  "evidence": "She felt a wave of relief — she had not started studying yet",
+                  "evidence": "She felt a wave of relief - she did not start studying yet",
                   "evidenceParagraph": 1,
                   "trap": "False",
                   "trapExplanation": "The passage clearly states she felt a wave of relief, so the answer is True, not False.",
@@ -22706,10 +22706,10 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ],
                 "answer": 2,
                 "solution": {
-                  "evidence": "His palms were sweating. He had never liked heights.",
+                  "evidence": "His palms were sweating. He never liked heights.",
                   "evidenceParagraph": 2,
                   "trap": "He wanted to watch his friends climb first.",
-                  "trapExplanation": "The passage says his palms were sweating because he had never liked heights, not because he wanted to watch.",
+                  "trapExplanation": "The passage says his palms were sweating because he never liked heights, not because he wanted to watch.",
                   "keywords": [
                     "palms",
                     "heights"
@@ -22823,7 +22823,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Read the two statements. Write True or False.",
                 "statements": [
                   "Wei reached the top of the climbing wall.",
-                  "Some of Wei's classmates had reached the top of the wall."
+                  "Some of Wei's classmates already reached the top of the wall."
                 ],
                 "answer": [
                   "False",
@@ -23517,7 +23517,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the statements below. Write True or False.",
                 "statements": [
-                  "All the people who visited Uncle Beng's stall had been coming since they were children.",
+                  "All the people who visited Uncle Beng's stall came since they were children.",
                   "Uncle Beng's stall had four plastic chairs and two wooden tables."
                 ],
                 "answer": [
@@ -23528,7 +23528,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "Some were regulars who started coming when they were children. Others came after reading about the stall online.",
                   "evidenceParagraph": 2,
                   "trap": "Marking the first statement as True",
-                  "trapExplanation": "Only 'some' regulars had come since childhood. Others came after reading about the stall online, so not ALL visitors came as children.",
+                  "trapExplanation": "Only 'some' regulars came since childhood. Others came after reading about the stall online, so not ALL visitors came as children.",
                   "keywords": [
                     "some",
                     "others",
@@ -24071,7 +24071,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                     "three years"
                   ],
                   "answerFormat": "number + noun",
-                  "tip": "Look for how long Clara had been playing in the first paragraph.",
+                  "tip": "Look for how long Clara was playing in the first paragraph.",
                   "steps": [
                     "Read paragraph 1 carefully.",
                     "Find the sentence about how long Clara studied.",
@@ -24093,10 +24093,10 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ],
                 "answer": 1,
                 "solution": {
-                  "evidence": "She had never performed alone in front of an audience before",
+                  "evidence": "She never performed alone in front of an audience before",
                   "evidenceParagraph": 2,
                   "trap": "She forgot how to play her piece.",
-                  "trapExplanation": "The passage says she practised the piece hundreds of times, so she had not forgotten it.",
+                  "trapExplanation": "The passage says she practised the piece hundreds of times, so she did not forget it.",
                   "keywords": [
                     "solo",
                     "never performed alone"
@@ -24870,7 +24870,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "sequenceItems": [
                   "A station officer helped Sam call his mother.",
                   "Sam ignored the messages his mother sent him.",
-                  "Sam noticed the last train had already left."
+                  "Sam noticed the last train already left."
                 ],
                 "answer": [
                   3,
@@ -24881,7 +24881,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "felt his stomach drop. The last train to Boon Lay departed three minutes ago",
                   "evidenceParagraph": 1,
                   "trap": "Placing the phone call first",
-                  "trapExplanation": "Sam first saw that the train had left, then it was revealed he ignored the messages, and only after that did the officer help him call.",
+                  "trapExplanation": "Sam first saw that the train left, then it was revealed he ignored the messages, and only after that did the officer help him call.",
                   "keywords": [
                     "last train",
                     "messages",
@@ -24936,7 +24936,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Sam's mother tried to warn him before he missed the train. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "His mother had sent him two messages reminding him to leave early, but he ignored them.",
+                  "His mother sent him two messages earlier reminding him to leave early, but he ignored them.",
                   "Sam ignored the two messages his mother sent reminding him to leave early."
                 ],
                 "solution": {
@@ -24966,7 +24966,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Why did Sam resolve never to miss the last train again?",
                 "answer": "Sam resolved never to miss the last train again because he realised that staying just a little longer at the party had caused him to be stranded, and he did not want to worry his mother or face the same situation again.",
                 "solution": {
-                  "evidence": "a single choice — staying just a little longer — had led to this entire situation",
+                  "evidence": "a single choice - staying just a little longer - led to this entire situation",
                   "evidenceParagraph": 6,
                   "trap": "Because the station officer told him not to.",
                   "trapExplanation": "The passage does not say the officer told him this; Sam came to this realisation himself while thinking on the drive home.",
@@ -25448,7 +25448,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "two years"
                 ],
                 "solution": {
-                  "evidence": "had not been to the dentist in two years",
+                  "evidence": "did not go to the dentist in two years",
                   "evidenceParagraph": 1,
                   "trap": "one year",
                   "trapExplanation": "The passage clearly states two years, not one year.",
@@ -25460,7 +25460,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "tip": "Look for exact numbers mentioned in the passage.",
                   "steps": [
                     "Read paragraph 1 carefully.",
-                    "Find how long Priya had not visited the dentist.",
+                    "Find how long Priya did not visit the dentist.",
                     "Copy the exact duration mentioned."
                   ]
                 }
@@ -25630,15 +25630,15 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Priya was surprised by how she felt after leaving the clinic. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "Priya felt something she had not expected: relief.",
-                  "She had not expected to feel relief after the visit.",
-                  "The passage says she felt something she had not expected."
+                  "Priya felt something she did not expect: relief.",
+                  "She did not expect to feel relief after the visit.",
+                  "The passage says she felt something she did not expect."
                 ],
                 "solution": {
-                  "evidence": "Priya felt something she had not expected: relief",
+                  "evidence": "Priya felt something she did not expect: relief",
                   "evidenceParagraph": 7,
                   "trap": "False, because she was happy it was over.",
-                  "trapExplanation": "Being happy it was over is not the same as being surprised. The passage says she felt something she had not expected, showing she was surprised.",
+                  "trapExplanation": "Being happy it was over is not the same as being surprised. The passage says she felt something she did not expect, showing she was surprised.",
                   "keywords": [
                     "unexpected",
                     "relief"
@@ -26325,14 +26325,14 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Grandpa Lin never changed his feelings for Grandma over the years. Is this True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "It is True because the passage says Grandpa replied with a smile that had not changed in forty years.",
-                  "It is True because Grandpa always smiled the same way when he talked about Grandma, showing his feelings had not changed."
+                  "It is True because the passage says Grandpa replied with a smile that did not change in forty years.",
+                  "It is True because Grandpa always smiled the same way when he talked about Grandma, showing his feelings did not change."
                 ],
                 "solution": {
-                  "evidence": "a smile that had not changed in forty years",
+                  "evidence": "a smile that did not change in forty years",
                   "evidenceParagraph": 5,
                   "trap": "False",
-                  "trapExplanation": "The passage clearly states his smile had not changed in forty years, which shows his feelings for Grandma remained the same.",
+                  "trapExplanation": "The passage clearly states his smile did not change in forty years, which shows his feelings for Grandma remained the same.",
                   "keywords": [
                     "smile",
                     "forty years",
@@ -27584,17 +27584,17 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "format": "ab_circle",
                 "marks": 1,
                 "stem": "How large was the gap between Blue House and Red House by the third leg of the race?",
-                "abSentence": "By the third leg, the gap had widened to (A) three metres ... (B) five metres.",
+                "abSentence": "By the third leg, the gap widened to (A) three metres ... (B) five metres.",
                 "abChoices": {
                   "A": "three metres",
                   "B": "five metres"
                 },
                 "answer": "B",
                 "solution": {
-                  "evidence": "By the third leg, the gap had widened to five metres.",
+                  "evidence": "By the third leg, the gap widened to five metres.",
                   "evidenceParagraph": 3,
                   "trap": "A — three metres",
-                  "trapExplanation": "Three metres was the lead after the first two runners. By the third leg, it had grown to five metres.",
+                  "trapExplanation": "Three metres was the lead after the first two runners. By the third leg, it grew to five metres.",
                   "keywords": [
                     "third leg",
                     "widened",
@@ -28375,7 +28375,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Read the two statements and write True or False.",
                 "statements": [
                   "Zara's best friend Chloe was photographed with Zara at the school garden.",
-                  "Zara had pinned drawings to the walls before she opened the box."
+                  "Zara pinned drawings to the walls before she opened the box."
                 ],
                 "answer": [
                   "True",
@@ -28409,11 +28409,11 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Zara felt unhappy about moving to the new flat at the start of the story. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "Zara had not said a word since they arrived, which shows she was upset about the move.",
+                  "Zara did not say a word since they arrived, which shows she was upset about the move.",
                   "She sat alone on the bare mattress and said nothing to her mother, showing she was unhappy."
                 ],
                 "solution": {
-                  "evidence": "Zara had not said a word since they arrived",
+                  "evidence": "Zara did not say a word since they arrived",
                   "evidenceParagraph": 1,
                   "trap": "False, because she later said she could make it work",
                   "trapExplanation": "Her positive comment comes at the end; at the start she was clearly unhappy and silent.",
@@ -29827,7 +29827,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "something ancient and unstoppable — that he found more impressive",
                   "evidenceParagraph": 9,
                   "trap": "Because it was the biggest fish in the tank",
-                  "trapExplanation": "The passage does not say Theo was impressed by its size. He was impressed by its ancient, unstoppable quality and the fact that it had survived for two hundred million years.",
+                  "trapExplanation": "The passage does not say Theo was impressed by its size. He was impressed by its ancient, unstoppable quality and the fact that it survived for two hundred million years.",
                   "keywords": [
                     "ancient",
                     "unstoppable",
@@ -30369,7 +30369,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "her handwriting, faded but legible",
                   "evidenceParagraph": 2,
                   "trap": "A",
-                  "trapExplanation": "'Faded' means the writing had grown dim, not that it could be read. 'Legible' means it could still be read.",
+                  "trapExplanation": "'Faded' means the writing grew dim, not that it could be read. 'Legible' means it could still be read.",
                   "keywords": [
                     "legible",
                     "read"
@@ -30486,7 +30486,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Dev's grandmother knew he tried to bake bread even though he did not tell her. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "It is True because his grandmother noticed something was wrong and said 'You tried the bread' after dinner, even though Dev had not told her.",
+                  "It is True because his grandmother noticed something was wrong and said 'You tried the bread' after dinner, even though Dev did not tell her.",
                   "It is True because the passage says 'his grandmother noticed' and she told Dev 'You tried the bread' without him saying anything."
                 ],
                 "solution": {
@@ -31006,7 +31006,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                     "three weeks"
                   ],
                   "answerFormat": "A number and time word",
-                  "tip": "Look for how long Mr Tan had lived there before the open house.",
+                  "tip": "Look for how long Mr Tan lived there before the open house.",
                   "steps": [
                     "Read paragraph 2 carefully.",
                     "Find the exact number of weeks mentioned.",
@@ -32542,7 +32542,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "False"
                 ],
                 "solution": {
-                  "evidence": "By the end of the second week, they had discovered they both liked the same author",
+                  "evidence": "By the end of the second week, they already discovered they both liked the same author",
                   "evidenceParagraph": 9,
                   "trap": "True for the second statement",
                   "trapExplanation": "The passage says Clara returned the books the following Monday, not the same day she borrowed them.",
@@ -32567,18 +32567,18 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Anya understood how Clara felt on her first day at the new school. True or False? Give a reason for your answer.",
                 "answer": "True",
                 "acceptableAnswers": [
-                  "True. Anya remembered her own first day at the school when nobody had spoken to her for the entire morning, so she knew how lonely and uncomfortable Clara must have felt.",
-                  "True. The passage says Anya remembered how long the classroom had seemed and how nobody had spoken to her, which shows she knew what Clara was going through."
+                  "True. Anya remembered her own first day at the school when nobody spoke to her for the entire morning, so she knew how lonely and uncomfortable Clara must have felt.",
+                  "True. The passage says Anya remembered how long the classroom seemed and how nobody spoke to her, which shows she knew what Clara was going through."
                 ],
                 "solution": {
-                  "evidence": "Anya remembered her own first day at this school — how long the classroom had seemed, and how nobody had spoken to her for the entire morning",
+                  "evidence": "Anya remembered her own first day at this school - how long the classroom seemed, and how nobody spoke to her for the entire morning",
                   "evidenceParagraph": 2,
                   "trap": "False, because Anya did not say anything to Clara about her feelings.",
                   "trapExplanation": "Understanding someone's feelings does not require saying it aloud. Anya's actions show she understood because she remembered her own experience.",
                   "keywords": [
                     "remembered",
                     "first day",
-                    "nobody had spoken"
+                    "nobody spoke"
                   ],
                   "answerFormat": "write True or False and give a reason using the passage",
                   "tip": "Look for evidence that Anya had a similar experience to Clara's.",
@@ -34466,7 +34466,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "forty-three seconds"
                 ],
                 "solution": {
-                  "evidence": "Arif's best spin so far had lasted forty-three seconds",
+                  "evidence": "Arif's best spin so far lasted forty-three seconds",
                   "evidenceParagraph": 2,
                   "trap": "eighty-three seconds",
                   "trapExplanation": "Eighty-three seconds was the time of his final winning spin, not his best spin before the competition.",
@@ -34520,7 +34520,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "format": "ab_circle",
                 "marks": 1,
                 "stem": "Which word tells us how Arif wound the rope around the top?",
-                "abSentence": "He wound the rope around the top slowly, the way his grandfather had shown him — (A) tight , even, patient.",
+                "abSentence": "He wound the rope around the top slowly, the way his grandfather showed him - (A) tight , even, patient.",
                 "abChoices": {
                   "A": "tight, even, patient",
                   "B": "quickly and loosely"
@@ -34617,7 +34617,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "stem": "Read the statements below. Write True or False.",
                 "statements": [
                   "Arif watched his top carefully while it was spinning during the final round.",
-                  "Some members of the crowd stood up when the top had been spinning for seventy seconds."
+                  "Some members of the crowd stood up after the top spun for seventy seconds."
                 ],
                 "answer": [
                   "False",
@@ -35943,7 +35943,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "muscle memory"
                 ],
                 "solution": {
-                  "evidence": "a small muscle memory she had not owned before that morning",
+                  "evidence": "a small muscle memory she did not own before that morning",
                   "evidenceParagraph": 9,
                   "trap": "motion",
                   "trapExplanation": "Motion means movement, but muscle memory means the body's ability to remember a movement automatically.",
@@ -36002,7 +36002,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the two statements below. Write True or False.",
                 "statements": [
-                  "Priya had visited a farm many times before this trip.",
+                  "Priya visited a farm many times before this trip.",
                   "On the second morning, Priya woke up earlier than the first morning."
                 ],
                 "answer": [
@@ -36067,7 +36067,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "I spilled,' said Priya. Her aunt handed her the bucket. 'That is why you came back.'",
                   "evidenceParagraph": 6,
                   "trap": "She came back because her aunt told her to.",
-                  "trapExplanation": "The passage does not say the aunt ordered her to return; Priya chose to come back on her own because she had spilled.",
+                  "trapExplanation": "The passage does not say the aunt ordered her to return; Priya chose to come back on her own because she spilled.",
                   "keywords": [
                     "spilled",
                     "came back"
@@ -36693,7 +36693,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "marks": 1,
                 "stem": "Read the two statements and write True or False.",
                 "statements": [
-                  "Jonas had borrowed the difficult book from the library before.",
+                  "Jonas borrowed the difficult book from the library before.",
                   "The librarian told Jonas the book would be back in three weeks."
                 ],
                 "answer": [
@@ -36758,7 +36758,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "'It will be back in three weeks,' she said. Jonas nodded. 'I'll be here,' he said.",
                   "evidenceParagraph": 7,
                   "trap": "Jonas was just being polite to the librarian.",
-                  "trapExplanation": "Jonas's words show his strong attachment to the book, not just politeness — he had been visiting it every Saturday for a long time.",
+                  "trapExplanation": "Jonas's words show his strong attachment to the book, not just politeness - he visited it every Saturday for a long time.",
                   "keywords": [
                     "I'll be here",
                     "three weeks"
@@ -38626,17 +38626,17 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   "evidence": "Zara never flew on a plane before this trip",
                   "evidenceParagraph": 1,
                   "trap": "flown many times",
-                  "trapExplanation": "The passage says she had never flown before, not that she was experienced.",
+                  "trapExplanation": "The passage says she never flew before, not that she was experienced.",
                   "keywords": [
                     "never",
                     "before"
                   ],
                   "answerFormat": "Short phrase describing her experience",
-                  "tip": "Look for the word 'never' to find what Zara had not done.",
+                  "tip": "Look for the word 'never' to find what Zara did not do.",
                   "steps": [
                     "Read paragraph 1 carefully.",
                     "Find the sentence about Zara and flying.",
-                    "Write what she had never done before."
+                    "Write what she never did before."
                   ]
                 }
               },

@@ -869,7 +869,7 @@ export default function GeniusAdaptiveEngine() {
       const userPrompt = buildUserPromptForSections(ctx, perf, curriculum, sectionTargets, sections, nextSession);
       const resp = await fetch("/api/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", ...(process.env.NEXT_PUBLIC_GENERATE_TOKEN ? { "x-genius-token": process.env.NEXT_PUBLIC_GENERATE_TOKEN } : {}) }, // CLEANUP2_TOKEN
         body: JSON.stringify({
           model: "claude-sonnet-4-6",
           max_tokens: 8000,

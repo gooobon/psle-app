@@ -101,6 +101,18 @@ def extract(src):
                     for o in it.get("options") or []: audit_past_perfect(o, where + ".option", hits)
                     for q in it.get("questions") or []:
                         audit_past_perfect(q.get("stem"), sid + "/" + str(q.get("id")) + ".stem", hits)
+                        # CLEANUP2: helper fields
+                        qid = sid + "/" + str(q.get("id"))
+                        audit_past_perfect(q.get("abSentence"), qid + ".abSentence", hits)
+                        for k in ("sequenceItems", "statements", "acceptableAnswers"):
+                            for x in q.get(k) or []: audit_past_perfect(x, qid + "." + k, hits)
+                        for v in (q.get("abChoices") or {}).values(): audit_past_perfect(v, qid + ".abChoices", hits)
+                        sol = q.get("solution") or {}
+                        if isinstance(sol, dict):
+                            for k, v in sol.items():
+                                if isinstance(v, str): audit_past_perfect(v, qid + ".solution." + k, hits)
+                                elif isinstance(v, list):
+                                    for x in v: audit_past_perfect(x, qid + ".solution." + k, hits)
                         for o in q.get("options") or []: audit_past_perfect(o, sid + "/" + str(q.get("id")) + ".option", hits)
                     for sub in it.get("items") or []: audit_past_perfect(sub.get("sentence"), sid + "/" + str(sub.get("id")) + ".sentence", hits)
                 if st not in vs: continue

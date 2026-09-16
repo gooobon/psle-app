@@ -77,6 +77,18 @@ def scan():
                     if isinstance(o, str) and PP_RE.search(o): option_hits.append((sid, iid, oi, o, it.get("answer")))
                 for q in it.get("questions") or []:
                     note(q.get("stem"), sid + "/" + str(q.get("id")), "stem")
+                    # CLEANUP2: helper fields shown to the student
+                    qid = sid + "/" + str(q.get("id"))
+                    for k in ("abSentence",): note(q.get(k), qid + "." + k, k)
+                    for k in ("sequenceItems", "statements", "acceptableAnswers"):
+                        for i2, x in enumerate(q.get(k) or []): note(x, qid + "." + k + "[" + str(i2) + "]", k)
+                    for v in (q.get("abChoices") or {}).values(): note(v, qid + ".abChoices", "abChoices")
+                    sol = q.get("solution") or {}
+                    if isinstance(sol, dict):
+                        for k, v in sol.items():
+                            if isinstance(v, str): note(v, qid + ".solution." + k, "solution")
+                            elif isinstance(v, list):
+                                for i2, x in enumerate(v): note(x, qid + ".solution." + k + "[" + str(i2) + "]", "solution")
                     for oi, o in enumerate(q.get("options") or []):   # comprehension MCQ: tense change keeps truth value -> auto
                         note(o, sid + "/" + str(q.get("id")) + "[" + str(oi) + "]", "option")
                 for sub in it.get("items") or []: note(sub.get("sentence"), sid + "/" + str(sub.get("id")), "sentence")

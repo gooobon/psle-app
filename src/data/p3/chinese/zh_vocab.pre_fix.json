@@ -7030,7 +7030,7 @@
  },
  "硫": {
   "py": "liú",
-  "en": "sulphur",
+  "en": "sulphur (distractor char)",
   "ex": {
    "zh": "这是一种叫硫的物质。",
    "py": "zhèshì yīzhǒng jiào liú de wùzhì。",
@@ -8843,7 +8843,7 @@
  },
  "幄": {
   "py": "wò",
-  "en": "(as in 帷幄) tent"
+  "en": "(as in 帷幄) tent (distractor char)"
  },
  "座位": {
   "py": "zuòwèi",
@@ -9091,6 +9091,10 @@
    "en": "Li Hua was embarrassed and blushed."
   }
  },
+ "柰": {
+  "py": "nài",
+  "en": "(distractor char, same sound as 奈)"
+ },
  "欣赏": {
   "py": "xīnshǎng",
   "en": "to appreciate; to enjoy",
@@ -9126,7 +9130,7 @@
  },
  "渥": {
   "py": "wò",
-  "en": "to moisten; rich"
+  "en": "to moisten; rich (distractor char)"
  },
  "煮饭": {
   "py": "zhǔfàn",
@@ -9316,6 +9320,10 @@
    "py": "xīngqīliù zǎoshang， xiǎofāng hé māma qù càishìchǎng mǎicài。",
    "en": "On Saturday morning, Xiao Fang and Mum went to the market to buy groceries."
   }
+ },
+ "萘": {
+  "py": "nài",
+  "en": "(distractor char, same sound as 奈)"
  },
  "藏起": {
   "py": "cángqǐ",
@@ -9925,7 +9933,7 @@
  },
  "坎": {
   "py": "kǎn",
-  "en": "a ridge; a threshold"
+  "en": "a ridge; a threshold (distractor char)"
  },
  "坐下": {
   "py": "zuòxià",
@@ -10727,7 +10735,7 @@
  },
  "销": {
   "py": "xiāo",
-  "en": "to sell; to cancel",
+  "en": "to sell; to cancel (distractor char)",
   "syn": [
    "销售"
   ],
@@ -11582,7 +11590,7 @@
  },
  "疏": {
   "py": "shū",
-  "en": "sparse; to dredge",
+  "en": "sparse; to dredge (distractor char)",
   "ex": {
    "zh": "这片树林很稀疏。",
    "py": "zhèpiàn shùlín hěn xīshū。",
@@ -13386,7 +13394,7 @@
  },
  "瑶": {
   "py": "yáo",
-  "en": "fine jade"
+  "en": "fine jade (distractor char)"
  },
  "生": {
   "py": "shēng",
@@ -13576,7 +13584,7 @@
  },
  "谣": {
   "py": "yáo",
-  "en": "rumour; ballad",
+  "en": "rumour; ballad (distractor char)",
   "ex": {
    "zh": "我们不要相信谣言。",
    "py": "wǒmen búyào xiāngxìn yáoyán。",
@@ -13618,7 +13626,7 @@
  },
  "遥": {
   "py": "yáo",
-  "en": "distant; far",
+  "en": "distant; far (distractor char)",
   "syn": [
    "遥远"
   ],
@@ -13681,7 +13689,7 @@
  },
  "雕": {
   "py": "diāo",
-  "en": "to carve; eagle",
+  "en": "to carve; eagle (distractor char)",
   "ex": {
    "zh": "他在木头上雕花。",
    "py": "tā zài mù tóushàng diāohuā。",
@@ -14045,7 +14053,7 @@
  },
  "宏": {
   "py": "hóng",
-  "en": "grand; great",
+  "en": "grand; great (distractor char)",
   "syn": [
    "宏大"
   ],
@@ -14360,7 +14368,7 @@
  },
  "洪": {
   "py": "hóng",
-  "en": "flood",
+  "en": "flood (distractor char)",
   "syn": [
    "洪水"
   ],
@@ -14372,7 +14380,7 @@
  },
  "浪": {
   "py": "làng",
-  "en": "wave",
+  "en": "wave (distractor char)",
   "syn": [
    "海浪"
   ],
@@ -14645,7 +14653,7 @@
  },
  "郎": {
   "py": "láng",
-  "en": "young man",
+  "en": "young man (distractor char)",
   "ex": {
    "zh": "他是个热心的少年郎。",
    "py": "tā shì gè rèxīn de shàoniánláng。",
@@ -15140,7 +15148,7 @@
  },
  "栏": {
   "py": "lán",
-  "en": "fence; column",
+  "en": "fence; column (distractor char)",
   "syn": [
    "栏杆"
   ],
@@ -15176,7 +15184,7 @@
  },
  "湾": {
   "py": "wān",
-  "en": "bay; gulf",
+  "en": "bay; gulf (distractor char)",
   "syn": [
    "海湾"
   ],
@@ -15269,7 +15277,7 @@
  },
  "蓝": {
   "py": "lán",
-  "en": "blue",
+  "en": "blue (distractor char)",
   "syn": [
    "蓝色"
   ],
@@ -15380,7 +15388,7 @@
  },
  "颂": {
   "py": "sòng",
-  "en": "to praise; to eulogize",
+  "en": "to praise; to eulogize (distractor char)",
   "syn": [
    "歌颂"
   ],
@@ -15893,7 +15901,7 @@
  },
  "监": {
   "py": "jiān",
-  "en": "to supervise; prison",
+  "en": "to supervise; prison (distractor char)",
   "syn": [
    "监督"
   ],
@@ -16370,7 +16378,7 @@
  },
  "炎": {
   "py": "yán",
-  "en": "hot; inflammation",
+  "en": "hot; inflammation (distractor char)",
   "ex": {
    "zh": "夏天天气炎热。",
    "py": "xiàtiān tiānqìyánrè。",
@@ -16379,7 +16387,7 @@
  },
  "烈": {
   "py": "liè",
-  "en": "intense; strong",
+  "en": "intense; strong (distractor char)",
   "syn": [
    "强烈"
   ],
@@ -16400,7 +16408,7 @@
  },
  "燃": {
   "py": "rán",
-  "en": "to burn",
+  "en": "to burn (distractor char)",
   "syn": [
    "燃烧"
   ],
@@ -16505,7 +16513,7 @@
  },
  "贲": {
   "py": "bēn",
-  "en": "energetic; a surname"
+  "en": "energetic; a surname (distractor char)"
  },
  "贴心": {
   "py": "tiēxīn",
@@ -16668,7 +16676,7 @@
  },
  "判": {
   "py": "pàn",
-  "en": "to judge; to sentence",
+  "en": "to judge; to sentence (distractor char)",
   "syn": [
    "判断"
   ],
@@ -16680,7 +16688,7 @@
  },
  "历": {
   "py": "lì",
-  "en": "to experience; calendar",
+  "en": "to experience; calendar (distractor char)",
   "syn": [
    "经历"
   ],
@@ -16692,7 +16700,7 @@
  },
  "厉": {
   "py": "lì",
-  "en": "stern; severe",
+  "en": "stern; severe (distractor char)",
   "syn": [
    "厉害"
   ],
@@ -16873,7 +16881,7 @@
  },
  "拌": {
   "py": "bàn",
-  "en": "to mix; to stir",
+  "en": "to mix; to stir (distractor char)",
   "ex": {
    "zh": "妈妈把菜拌好了。",
    "py": "māma bǎ cài bàn hǎo le。",
@@ -16891,7 +16899,7 @@
  },
  "棚": {
   "py": "péng",
-  "en": "shed; shelter",
+  "en": "shed; shelter (distractor char)",
   "ex": {
    "zh": "雨天我们在棚子里避雨。",
    "py": "yǔtiān wǒmen zài péngzi lǐ bìyǔ。",
@@ -16967,7 +16975,7 @@
  },
  "绊": {
   "py": "bàn",
-  "en": "to trip; to stumble",
+  "en": "to trip; to stumble (distractor char)",
   "ex": {
    "zh": "他被石头绊了一下。",
    "py": "tā bèi shítou bàn le yīxià。",
@@ -16985,7 +16993,7 @@
  },
  "联": {
   "py": "lián",
-  "en": "to join; to connect",
+  "en": "to join; to connect (distractor char)",
   "syn": [
    "联合"
   ],
@@ -16997,7 +17005,7 @@
  },
  "蓬": {
   "py": "péng",
-  "en": "fluffy; disheveled",
+  "en": "fluffy; disheveled (distractor char)",
   "ex": {
    "zh": "小草长得很蓬松。",
    "py": "xiǎocǎo zhǎng de hěn péngsōng。",
@@ -17087,7 +17095,7 @@
  },
  "陈": {
   "py": "chén",
-  "en": "(a surname) Chen; old",
+  "en": "(a surname) Chen; old (distractor char)",
   "ex": {
    "zh": "他姓陈，叫陈明。",
    "py": "tā xìng chén， jiào chénmíng。",
@@ -17105,7 +17113,7 @@
  },
  "鹏": {
   "py": "péng",
-  "en": "roc; great bird",
+  "en": "roc; great bird (distractor char, used in names)",
   "ex": {
    "zh": "他叫李鹏。",
    "py": "tā jiào lǐpéng。",
@@ -17219,7 +17227,7 @@
  },
  "壮": {
   "py": "zhuàng",
-  "en": "strong; sturdy",
+  "en": "strong; sturdy (distractor char)",
   "syn": [
    "强壮"
   ],
@@ -17279,7 +17287,7 @@
  },
  "布": {
   "py": "bù",
-  "en": "cloth; to spread",
+  "en": "cloth; to spread (distractor char)",
   "ex": {
    "zh": "她用布擦桌子。",
    "py": "tā yòngbù cā zhuōzi。",
@@ -17309,7 +17317,7 @@
  },
  "惑": {
   "py": "huò",
-  "en": "to confuse; doubt",
+  "en": "to confuse; doubt (distractor char)",
   "syn": [
    "疑惑"
   ],
@@ -17321,7 +17329,7 @@
  },
  "或": {
   "py": "huò",
-  "en": "or; either",
+  "en": "or; either (distractor char)",
   "syn": [
    "或者"
   ],
@@ -17378,7 +17386,7 @@
  },
  "状": {
   "py": "zhuàng",
-  "en": "shape; form",
+  "en": "shape; form (distractor char)",
   "syn": [
    "形状"
   ],
@@ -17420,7 +17428,7 @@
  },
  "祸": {
   "py": "huò",
-  "en": "disaster; misfortune",
+  "en": "disaster; misfortune (distractor char)",
   "ant": [
    "福"
   ],
@@ -17453,7 +17461,7 @@
  },
  "置": {
   "py": "zhì",
-  "en": "to place; to set up",
+  "en": "to place; to set up (distractor char)",
   "syn": [
    "布置"
   ],
@@ -17477,7 +17485,7 @@
  },
  "获": {
   "py": "huò",
-  "en": "to obtain; to reap",
+  "en": "to obtain; to reap (distractor char)",
   "syn": [
    "获得"
   ],
@@ -17489,7 +17497,7 @@
  },
  "补": {
   "py": "bǔ",
-  "en": "to mend; to make up",
+  "en": "to mend; to make up (distractor char)",
   "ex": {
    "zh": "妈妈帮我补衣服。",
    "py": "māma bāng wǒ bǔ yīfu。",
@@ -17537,7 +17545,7 @@
  },
  "部": {
   "py": "bù",
-  "en": "part; section",
+  "en": "part; section (distractor char)",
   "syn": [
    "部分"
   ],
@@ -17549,7 +17557,7 @@
  },
  "键": {
   "py": "jiàn",
-  "en": "key",
+  "en": "key (distractor char)",
   "syn": [
    "钥匙"
   ],
@@ -17699,7 +17707,7 @@
  },
  "入": {
   "py": "rù",
-  "en": "to enter",
+  "en": "to enter (distractor char)",
   "syn": [
    "进入"
   ],
@@ -18029,7 +18037,7 @@
  },
  "泄": {
   "py": "xiè",
-  "en": "to leak; to let out",
+  "en": "to leak; to let out (distractor char)",
   "ex": {
    "zh": "他不小心泄露了秘密。",
    "py": "tā bù xiǎoxīn xièlòu le mìmì。",
@@ -18038,7 +18046,7 @@
  },
  "泻": {
   "py": "xiè",
-  "en": "to flow down; to have diarrhoea",
+  "en": "to flow down; to have diarrhoea (distractor char)",
   "ex": {
    "zh": "瀑布的水直泻而下。",
    "py": "pùbù de shuǐzhí xiè ér xià。",
@@ -18137,7 +18145,7 @@
  },
  "纷": {
   "py": "fēn",
-  "en": "numerous; in confusion",
+  "en": "numerous; in confusion (distractor char)",
   "syn": [
    "纷纷"
   ],
@@ -18167,7 +18175,7 @@
  },
  "芬": {
   "py": "fēn",
-  "en": "fragrant",
+  "en": "fragrant (distractor char, used in names)",
   "ex": {
    "zh": "她叫小芬。",
    "py": "tā jiào xiǎofēn。",
@@ -18524,7 +18532,7 @@
  },
  "检": {
   "py": "jiǎn",
-  "en": "to examine; to check",
+  "en": "to examine; to check (distractor char)",
   "syn": [
    "检查"
   ],
@@ -18668,7 +18676,7 @@
  },
  "验": {
   "py": "yàn",
-  "en": "to test; to examine",
+  "en": "to test; to examine (distractor char)",
   "syn": [
    "检验"
   ],
@@ -19376,7 +19384,7 @@
  },
  "冼": {
   "py": "xiǎn",
-  "en": "(a surname) Xian",
+  "en": "(a surname) Xian (distractor char)",
   "ex": {
    "zh": "她姓冼，叫冼芳。",
    "py": "tā xìng xiǎn， jiào xiǎnfāng。",
@@ -19385,7 +19393,7 @@
  },
  "剧": {
   "py": "jù",
-  "en": "play; drama; intense",
+  "en": "play; drama; intense (distractor char)",
   "syn": [
    "戏剧"
   ],
@@ -19406,7 +19414,7 @@
  },
  "叮": {
   "py": "dīng",
-  "en": "to sting; to remind",
+  "en": "to sting; to remind (distractor char)",
   "ex": {
    "zh": "蚊子叮了他一口。",
    "py": "wénzi dīng le tā yīkǒu。",
@@ -19424,7 +19432,7 @@
  },
  "嘱": {
   "py": "zhǔ",
-  "en": "to urge; to enjoin",
+  "en": "to urge; to enjoin (distractor char)",
   "syn": [
    "嘱咐"
   ],
@@ -19698,7 +19706,7 @@
  },
  "钉": {
   "py": "dīng",
-  "en": "nail; to nail",
+  "en": "nail; to nail (distractor char)",
   "ex": {
    "zh": "墙上钉着一颗钉子。",
    "py": "qiángshàng dīng zhe yì kē dīngzi。",
@@ -19707,7 +19715,7 @@
  },
  "顶": {
   "py": "dǐng",
-  "en": "top; to carry on the head",
+  "en": "top; to carry on the head (distractor char)",
   "ex": {
    "zh": "山顶上有一座亭子。",
    "py": "shāndǐng shàng yǒu yīzuò tíngzi。",
@@ -19956,7 +19964,7 @@
  },
  "侦": {
   "py": "zhēn",
-  "en": "to detect; scout",
+  "en": "to detect; scout (distractor char)",
   "ex": {
    "zh": "警察在侦查这个案子。",
    "py": "jǐngchá zài zhēnchá zhège ànzi。",
@@ -20145,7 +20153,7 @@
  },
  "即": {
   "py": "jí",
-  "en": "namely; at once",
+  "en": "namely; at once (distractor char)",
   "ex": {
    "zh": "下课后我即回家。",
    "py": "xiàkè hòu wǒ jí huíjiā。",
@@ -20376,7 +20384,7 @@
  },
  "奋": {
   "py": "fèn",
-  "en": "to exert; rouse",
+  "en": "to exert; rouse (distractor char)",
   "ex": {
    "zh": "我们要奋力向前跑。",
    "py": "wǒmen yào fènlì xiàngqián pǎo。",
@@ -20490,7 +20498,7 @@
  },
  "巧": {
   "py": "qiǎo",
-  "en": "skillful; coincidental",
+  "en": "skillful; coincidental (distractor char)",
   "ex": {
    "zh": "她的手真巧。",
    "py": "tā de shǒu zhēnqiǎo。",
@@ -20499,7 +20507,7 @@
  },
  "帖": {
   "py": "tiē",
-  "en": "invitation card",
+  "en": "invitation card (distractor char)",
   "ex": {
    "zh": "他送来一张请帖。",
    "py": "tā sònglái yì zhāng qǐngtiě。",
@@ -20508,7 +20516,7 @@
  },
  "帽": {
   "py": "mào",
-  "en": "hat; cap",
+  "en": "hat; cap (distractor char)",
   "ex": {
    "zh": "他戴着一顶帽子。",
    "py": "tā dài zhe yīdǐng màozi。",
@@ -20517,7 +20525,7 @@
  },
  "幻": {
   "py": "huàn",
-  "en": "illusion; fantasy",
+  "en": "illusion; fantasy (distractor char)",
   "ex": {
    "zh": "这是一个美丽的幻想。",
    "py": "zhèshì yí gè měilì de huànxiǎng。",
@@ -20526,7 +20534,7 @@
  },
  "延": {
   "py": "yán",
-  "en": "to extend; delay",
+  "en": "to extend; delay (distractor char)",
   "ex": {
    "zh": "比赛延到明天举行。",
    "py": "bǐsài yándào míngtiān jǔxíng。",
@@ -20571,7 +20579,7 @@
  },
  "径": {
   "py": "jìng",
-  "en": "path; directly",
+  "en": "path; directly (distractor char)",
   "ex": {
    "zh": "小径通向花园。",
    "py": "xiǎojìng tōngxiàng huāyuán。",
@@ -20580,7 +20588,7 @@
  },
  "微": {
   "py": "wēi",
-  "en": "tiny; slight",
+  "en": "tiny; slight (distractor char)",
   "ex": {
    "zh": "她微微一笑。",
    "py": "tā wēiwēiyīxiào。",
@@ -20636,6 +20644,15 @@
    "zh": "听到这消息我很惊讶。",
    "py": "tīngdào zhè xiāoxī wǒ hěn jīngyà。",
    "en": "I was amazed to hear the news."
+  }
+ },
+ "惺": {
+  "py": "xīng",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "他睡眼惺忪地起床。",
+   "py": "tā shuìyǎnxīngsōng dì qǐchuáng。",
+   "en": "He got up with sleepy eyes."
   }
  },
  "慢吞吞": {
@@ -20751,7 +20768,7 @@
  },
  "捲": {
   "py": "juǎn",
-  "en": "to roll up",
+  "en": "to roll up (distractor char)",
   "ex": {
    "zh": "风把纸捲了起来。",
    "py": "fēng bǎ zhǐ juǎn le qǐlai。",
@@ -20874,7 +20891,7 @@
  },
  "旅": {
   "py": "lǚ",
-  "en": "to travel",
+  "en": "to travel (distractor char)",
   "ex": {
    "zh": "我们全家去旅行。",
    "py": "wǒmen quánjiā qù lǚxíng。",
@@ -20895,7 +20912,7 @@
  },
  "明": {
   "py": "míng",
-  "en": "bright; clear",
+  "en": "bright; clear (distractor char)",
   "ant": [
    "暗"
   ],
@@ -20907,7 +20924,7 @@
  },
  "晶": {
   "py": "jīng",
-  "en": "crystal; sparkling",
+  "en": "crystal; sparkling (distractor char)",
   "ex": {
    "zh": "露珠晶莹透亮。",
    "py": "lùzhū jīngyíng tòuliàng。",
@@ -21000,7 +21017,7 @@
  },
  "气": {
   "py": "qì",
-  "en": "air; angry",
+  "en": "air; angry (distractor char)",
   "ex": {
    "zh": "气球飞上了天。",
    "py": "qì qiúfēi shàng le tiān。",
@@ -21009,7 +21026,7 @@
  },
  "池": {
   "py": "chí",
-  "en": "pond; pool",
+  "en": "pond; pool (distractor char)",
   "ex": {
    "zh": "池里有很多小鱼。",
    "py": "chílǐ yǒu hěn duō xiǎoyú。",
@@ -21093,7 +21110,7 @@
  },
  "溜": {
   "py": "liū",
-  "en": "to slide; slip away",
+  "en": "to slide; slip away (distractor char)",
   "ex": {
    "zh": "他悄悄溜出了教室。",
    "py": "tā qiāoqiāo liūchū le jiàoshì。",
@@ -21150,7 +21167,7 @@
  },
  "燥": {
   "py": "zào",
-  "en": "dry",
+  "en": "dry (distractor char)",
   "ant": [
    "湿"
   ],
@@ -21411,7 +21428,7 @@
  },
  "缰": {
   "py": "jiāng",
-  "en": "rein; bridle",
+  "en": "rein; bridle (distractor char)",
   "ex": {
    "zh": "他拉住马的缰绳。",
    "py": "tā lāzhù mǎ de jiāngshéng。",
@@ -21444,7 +21461,7 @@
  },
  "耙": {
   "py": "bà",
-  "en": "rake",
+  "en": "rake (distractor char)",
   "ex": {
    "zh": "农夫用耙子松土。",
    "py": "nóngfū yòng pázi sōngtǔ。",
@@ -21453,7 +21470,7 @@
  },
  "胆": {
   "py": "dǎn",
-  "en": "gall; courage",
+  "en": "gall; courage (distractor char)",
   "ex": {
    "zh": "他的胆子很大。",
    "py": "tā de dǎnzi hěndà。",
@@ -21501,7 +21518,7 @@
  },
  "蚊": {
   "py": "wén",
-  "en": "mosquito",
+  "en": "mosquito (distractor char)",
   "ex": {
    "zh": "夏天蚊子很多。",
    "py": "xiàtiān wénzi hěn duō。",
@@ -21510,7 +21527,7 @@
  },
  "蝶": {
   "py": "dié",
-  "en": "butterfly",
+  "en": "butterfly (distractor char)",
   "ex": {
    "zh": "花丛中有一只蝴蝶。",
    "py": "huācóng zhōngyǒu yì zhī húdié。",
@@ -21609,7 +21626,7 @@
  },
  "贸": {
   "py": "mào",
-  "en": "trade",
+  "en": "trade (distractor char)",
   "ex": {
    "zh": "两国的贸易越来越多。",
    "py": "liǎngguó de màoyì yuèláiyuè duō。",
@@ -21681,7 +21698,7 @@
  },
  "较": {
   "py": "jiào",
-  "en": "comparatively; more",
+  "en": "comparatively; more (distractor char)",
   "ex": {
    "zh": "今天比昨天较冷。",
    "py": "jīntiān bǐ zuótiān jiào lěng。",
@@ -21897,7 +21914,7 @@
  },
  "驰": {
   "py": "chí",
-  "en": "to gallop; speed",
+  "en": "to gallop; speed (distractor char)",
   "ex": {
    "zh": "骏马在草原上奔驰。",
    "py": "jùnmǎ zài cǎoyuán shàng bēnchí。",
@@ -22302,7 +22319,7 @@
  },
  "功": {
   "py": "gōng",
-  "en": "achievement; effort",
+  "en": "achievement; effort (distractor char)",
   "ex": {
    "zh": "这是一个叫功的字。",
    "py": "zhèshì yí gè jiàogōng de zì。",
@@ -22419,7 +22436,7 @@
  },
  "告": {
   "py": "gào",
-  "en": "to tell; to report",
+  "en": "to tell; to report (distractor char)",
   "ex": {
    "zh": "这是一个叫告的字。",
    "py": "zhèshì yí gè jiàogào de zì。",
@@ -22428,7 +22445,7 @@
  },
  "员": {
   "py": "yuán",
-  "en": "member",
+  "en": "member (distractor char)",
   "ex": {
    "zh": "这是一个叫员的字。",
    "py": "zhèshì yí gè jiàoyuán de zì。",
@@ -22581,7 +22598,7 @@
  },
  "孝": {
   "py": "xiào",
-  "en": "filial piety",
+  "en": "filial piety (distractor char)",
   "ex": {
    "zh": "这是一个叫孝的字。",
    "py": "zhèshì yí gè jiào xiào de zì。",
@@ -22590,7 +22607,7 @@
  },
  "官": {
   "py": "guān",
-  "en": "official",
+  "en": "official (distractor char)",
   "ex": {
    "zh": "这是一个叫官的字。",
    "py": "zhèshì yí gè jiàoguān de zì。",
@@ -22650,7 +22667,7 @@
  },
  "巨": {
   "py": "jù",
-  "en": "huge",
+  "en": "huge (distractor char)",
   "ex": {
    "zh": "这是一个叫巨的字。",
    "py": "zhèshì yí gè jiào jù de zì。",
@@ -22677,7 +22694,7 @@
  },
  "廷": {
   "py": "tíng",
-  "en": "court",
+  "en": "court (distractor char)",
   "ex": {
    "zh": "这是一个叫廷的字。",
    "py": "zhèshì yí gè jiàotíng de zì。",
@@ -22752,7 +22769,7 @@
  },
  "悉": {
   "py": "xī",
-  "en": "to know; all",
+  "en": "to know; all (distractor char)",
   "ex": {
    "zh": "这是一个叫悉的字。",
    "py": "zhèshì yí gè jiàoxī de zì。",
@@ -23061,7 +23078,7 @@
  },
  "机": {
   "py": "jī",
-  "en": "machine",
+  "en": "machine (distractor char)",
   "ex": {
    "zh": "这是一个叫机的字。",
    "py": "zhèshì yí gè jiàojī de zì。",
@@ -23070,7 +23087,7 @@
  },
  "板": {
   "py": "bǎn",
-  "en": "board; plank",
+  "en": "board; plank (distractor char)",
   "ex": {
    "zh": "这是一个叫板的字。",
    "py": "zhèshì yí gè jiàobǎn de zì。",
@@ -23097,7 +23114,7 @@
  },
  "檐": {
   "py": "yán",
-  "en": "eaves",
+  "en": "eaves (distractor char)",
   "ex": {
    "zh": "这是一个叫檐的字。",
    "py": "zhèshì yí gè jiào yán de zì。",
@@ -23367,7 +23384,7 @@
  },
  "碌": {
   "py": "lù",
-  "en": "busy",
+  "en": "busy (distractor char)",
   "ex": {
    "zh": "这是一个叫碌的字。",
    "py": "zhèshì yí gè jiàolù de zì。",
@@ -23421,7 +23438,7 @@
  },
  "符": {
   "py": "fú",
-  "en": "symbol; charm",
+  "en": "symbol; charm (distractor char)",
   "ex": {
    "zh": "这是一个叫符的字。",
    "py": "zhèshì yí gè jiàofú de zì。",
@@ -23430,7 +23447,7 @@
  },
  "简": {
   "py": "jiǎn",
-  "en": "simple",
+  "en": "simple (distractor char)",
   "ex": {
    "zh": "这是一个叫简的字。",
    "py": "zhèshì yí gè jiào jiǎn de zì。",
@@ -23439,7 +23456,7 @@
  },
  "粉": {
   "py": "fěn",
-  "en": "powder; pink",
+  "en": "powder; pink (distractor char)",
   "ex": {
    "zh": "这是一个叫粉的字。",
    "py": "zhèshì yí gè jiàofěn de zì。",
@@ -23457,7 +23474,7 @@
  },
  "繁": {
   "py": "fán",
-  "en": "numerous; complex",
+  "en": "numerous; complex (distractor char)",
   "ex": {
    "zh": "这是一个叫繁的字。",
    "py": "zhèshì yí gè jiàofán de zì。",
@@ -23475,7 +23492,7 @@
  },
  "绒": {
   "py": "róng",
-  "en": "fluff; velvet",
+  "en": "fluff; velvet (distractor char)",
   "ex": {
    "zh": "这是一个叫绒的字。",
    "py": "zhèshì yí gè jiàoróng de zì。",
@@ -23517,7 +23534,7 @@
  },
  "耳": {
   "py": "ěr",
-  "en": "ear",
+  "en": "ear (distractor char)",
   "ex": {
    "zh": "这是一个叫耳的字。",
    "py": "zhèshì yí gè jiào ěr de zì。",
@@ -23730,7 +23747,7 @@
  },
  "辩": {
   "py": "biàn",
-  "en": "to argue; to debate",
+  "en": "to argue; to debate (distractor char)",
   "ex": {
    "zh": "这是一个叫辩的字。",
    "py": "zhèshì yí gè jiào biàn de zì。",
@@ -23781,7 +23798,7 @@
  },
  "遵": {
   "py": "zūn",
-  "en": "to obey; to follow",
+  "en": "to obey; to follow (distractor char)",
   "ex": {
    "zh": "这是一个叫遵的字。",
    "py": "zhèshì yí gè jiào zūn de zì。",
@@ -25566,7 +25583,7 @@
  },
  "率": {
   "py": "lǜ",
-  "en": "rate",
+  "en": "rate (distractor char)",
   "ex": {
    "zh": "做事要讲效率。",
    "py": "zuòshì yào jiǎng xiàolǜ。",
@@ -26514,7 +26531,7 @@
  },
  "休": {
   "py": "xiū",
-  "en": "to rest",
+  "en": "to rest (distractor char)",
   "syn": [
    "歇"
   ],
@@ -26522,6 +26539,15 @@
    "zh": "老师让我们休息一下。",
    "py": "lǎoshī ràng wǒmen xiūxi yīxià。",
    "en": "The teacher let us rest for a while."
+  }
+ },
+ "伦": {
+  "py": "lún",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "伦敦是一座大城市。",
+   "py": "lúndūn shì yīzuò dàchéngshì。",
+   "en": "London is a big city."
   }
  },
  "住院": {
@@ -26574,7 +26600,7 @@
  },
  "僵": {
   "py": "jiāng",
-  "en": "stiff",
+  "en": "stiff (distractor char)",
   "ex": {
    "zh": "天冷得他的手都僵了。",
    "py": "tiānlěng dé tā de shǒu dōu jiāng le。",
@@ -26649,7 +26675,7 @@
  },
  "凡": {
   "py": "fán",
-  "en": "ordinary",
+  "en": "ordinary (distractor char)",
   "ex": {
    "zh": "他是个平凡的人。",
    "py": "tā shì gè píngfán de rén。",
@@ -26739,7 +26765,7 @@
  },
  "参": {
   "py": "cān",
-  "en": "to join; participate",
+  "en": "to join; participate (distractor char)",
   "ex": {
    "zh": "我们参加了比赛。",
    "py": "wǒmen cānjiā le bǐsài。",
@@ -27006,7 +27032,7 @@
  },
  "密": {
   "py": "mì",
-  "en": "dense; close",
+  "en": "dense; close (distractor char)",
   "ant": [
    "疏"
   ],
@@ -27030,7 +27056,7 @@
  },
  "居": {
   "py": "jū",
-  "en": "to live; reside",
+  "en": "to live; reside (distractor char)",
   "syn": [
    "住"
   ],
@@ -27042,7 +27068,7 @@
  },
  "岩": {
   "py": "yán",
-  "en": "rock",
+  "en": "rock (distractor char)",
   "ex": {
    "zh": "山上有一块大岩石。",
    "py": "shānshàng yǒu yí kuài dà yánshí。",
@@ -27156,7 +27182,7 @@
  },
  "忠": {
   "py": "zhōng",
-  "en": "loyal",
+  "en": "loyal (distractor char)",
   "ex": {
    "zh": "狗对主人很忠诚。",
    "py": "gǒu duì zhǔrén hěn zhōngchéng。",
@@ -27180,7 +27206,7 @@
  },
  "情": {
   "py": "qíng",
-  "en": "feeling; emotion",
+  "en": "feeling; emotion (distractor char)",
   "ex": {
    "zh": "他们的感情很好。",
    "py": "tāmen de gǎnqíng hěn hǎo。",
@@ -27189,7 +27215,7 @@
  },
  "惯": {
   "py": "guàn",
-  "en": "used to; habit",
+  "en": "used to; habit (distractor char)",
   "ex": {
    "zh": "我已经习惯早起了。",
    "py": "wǒ yǐjīng xíguàn zǎoqǐ le。",
@@ -27264,7 +27290,7 @@
  },
  "报": {
   "py": "bào",
-  "en": "to report; newspaper",
+  "en": "to report; newspaper (distractor char)",
   "ex": {
    "zh": "爸爸在看报纸。",
    "py": "bàbà zài kàn bàozhǐ。",
@@ -27294,7 +27320,7 @@
  },
  "挎": {
   "py": "kuà",
-  "en": "to carry on the arm",
+  "en": "to carry on the arm (distractor char)",
   "ex": {
    "zh": "她挎着一个包。",
    "py": "tā kuàzhe yígèbāo。",
@@ -27402,7 +27428,7 @@
  },
  "文": {
   "py": "wén",
-  "en": "writing; language",
+  "en": "writing; language (distractor char)",
   "ex": {
    "zh": "我喜欢读这篇文章。",
    "py": "wǒ xǐhuan dú zhè piānwénzhāng。",
@@ -27429,7 +27455,7 @@
  },
  "旦": {
   "py": "dàn",
-  "en": "dawn; day",
+  "en": "dawn; day (distractor char)",
   "ex": {
    "zh": "元旦是一月一日。",
    "py": "yuándàn shì yíyuè yīrì。",
@@ -27471,7 +27497,7 @@
  },
  "木": {
   "py": "mù",
-  "en": "wood",
+  "en": "wood (distractor char)",
   "ex": {
    "zh": "这张桌子是木做的。",
    "py": "zhèzhāng zhuōzi shì mù zuò de。",
@@ -27480,7 +27506,7 @@
  },
  "杆": {
   "py": "gān",
-  "en": "pole; rod",
+  "en": "pole; rod (distractor char)",
   "ex": {
    "zh": "操场上的旗杆很高。",
    "py": "cāochǎng shàng de qígān hěn gāo。",
@@ -27525,7 +27551,7 @@
  },
  "此": {
   "py": "cǐ",
-  "en": "this",
+  "en": "this (distractor char)",
   "ex": {
    "zh": "从此他更加努力了。",
    "py": "cóngcǐ tā gèngjiā nǔlì le。",
@@ -27543,11 +27569,20 @@
  },
  "沿": {
   "py": "yán",
-  "en": "along",
+  "en": "along (distractor char)",
   "ex": {
    "zh": "我们沿着小路走。",
    "py": "wǒmen yánzhe xiǎolù zǒu。",
    "en": "We walked along the small path."
+  }
+ },
+ "泽": {
+  "py": "zé",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "湖泽里有很多鱼。",
+   "py": "húzé lǐ yǒu hěn duō yú。",
+   "en": "There are many fish in the lake."
   }
  },
  "流下": {
@@ -27684,7 +27719,7 @@
  },
  "疆": {
   "py": "jiāng",
-  "en": "border; boundary",
+  "en": "border; boundary (distractor char)",
   "ex": {
    "zh": "新疆在中国的西部。",
    "py": "xīnjiāng zài zhōngguó de xībù。",
@@ -27825,7 +27860,7 @@
  },
  "系": {
   "py": "xì",
-  "en": "to tie",
+  "en": "to tie (distractor char)",
   "ex": {
    "zh": "他系好了鞋带。",
    "py": "tāxì hǎo le xiédài。",
@@ -27931,9 +27966,18 @@
    "en": "We should not be too selfish."
   }
  },
+ "芒": {
+  "py": "máng",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "我爱吃芒果。",
+   "py": "wǒ ài chī mángguǒ。",
+   "en": "I love eating mangoes."
+  }
+ },
  "茂": {
   "py": "mào",
-  "en": "lush",
+  "en": "lush (distractor char)",
   "ex": {
    "zh": "公园里的树木很茂盛。",
    "py": "gōngyuán lǐ de shùmù hěn màoshèng。",
@@ -28002,7 +28046,7 @@
  },
  "认": {
   "py": "rèn",
-  "en": "to recognise",
+  "en": "to recognise (distractor char)",
   "ex": {
    "zh": "我认识这个字。",
    "py": "wǒ rènshi zhège zì。",
@@ -28065,7 +28109,7 @@
  },
  "越": {
   "py": "yuè",
-  "en": "the more",
+  "en": "the more (distractor char)",
   "ex": {
    "zh": "你的字一定会越写越好。",
    "py": "nǐdezì yídìng huìyuè xiěyuè hǎo。",
@@ -28182,7 +28226,7 @@
  },
  "邻": {
   "py": "lín",
-  "en": "neighbour",
+  "en": "neighbour (distractor char)",
   "ex": {
    "zh": "我的邻居很友好。",
    "py": "wǒ de línjū hěn yǒuhǎo。",
@@ -28191,7 +28235,7 @@
  },
  "钟": {
   "py": "zhōng",
-  "en": "clock; bell",
+  "en": "clock; bell (distractor char)",
   "ex": {
    "zh": "墙上挂着一个钟。",
    "py": "qiángshàng guà zhe yí gè zhōng。",
@@ -28293,7 +28337,7 @@
  },
  "骨": {
   "py": "gǔ",
-  "en": "bone",
+  "en": "bone (distractor char)",
   "ex": {
    "zh": "小狗在啃骨头。",
    "py": "xiǎogǒu zài kěngǔtou。",
@@ -28302,7 +28346,7 @@
  },
  "鲜": {
   "py": "xiān",
-  "en": "fresh",
+  "en": "fresh (distractor char)",
   "ex": {
    "zh": "这些花很新鲜。",
    "py": "zhèxiē huā hěn xīnxiān。",
@@ -28490,6 +28534,15 @@
    "zh": "这是他亲口告诉我的。",
    "py": "zhèshì tā qīnkǒu gàosu wǒ de。",
    "en": "He told me this himself."
+  }
+ },
+ "仑": {
+  "py": "lún",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "昆仑的仑字很少单独用。",
+   "py": "kūnlún de lún zì hěnshǎo dāndú yòng。",
+   "en": "The character 'lun' is rarely used alone."
   }
  },
  "会来": {
@@ -31080,6 +31133,15 @@
    "en": "His handwriting is very neat."
   }
  },
+ "巴": {
+  "py": "bā",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "小狗有一条长尾巴。",
+   "py": "xiǎogǒu yǒu yì tiáo zhǎngwěiba。",
+   "en": "The puppy has a long tail."
+  }
+ },
  "并且": {
   "py": "bìngqiě",
   "en": "and; moreover",
@@ -31118,7 +31180,7 @@
  },
  "彼": {
   "py": "bǐ",
-  "en": "that; the other",
+  "en": "that; the other (distractor char)",
   "ex": {
    "zh": "我们彼此都是好朋友。",
    "py": "wǒmen bǐcǐ dōu shì hǎo péngyou。",
@@ -31644,7 +31706,7 @@
  },
  "特": {
   "py": "tè",
-  "en": "especially",
+  "en": "especially (distractor char)",
   "ex": {
    "zh": "今天天气特别好。",
    "py": "jīntiān tiānqì tèbié hǎo。",
@@ -31728,7 +31790,7 @@
  },
  "眠": {
   "py": "mián",
-  "en": "sleep",
+  "en": "sleep (distractor char)",
   "ex": {
    "zh": "冬天青蛙会冬眠。",
    "py": "dōngtiān qīngwā huì dōngmián。",
@@ -31737,7 +31799,7 @@
  },
  "睛": {
   "py": "jīng",
-  "en": "eye",
+  "en": "eye (distractor char)",
   "ex": {
    "zh": "我的眼睛很明亮。",
    "py": "wǒ de yǎnjing hěn míngliàng。",
@@ -31760,6 +31822,15 @@
    "zh": "我喜欢上科学课。",
    "py": "wǒ xǐhuan shàng kēxuékè。",
    "en": "I like science class."
+  }
+ },
+ "程": {
+  "py": "chéng",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "这段路程很远。",
+   "py": "zhè duànlù chéng hěnyuǎn。",
+   "en": "This journey is very far."
   }
  },
  "窗边": {
@@ -31917,7 +31988,7 @@
  },
  "茫": {
   "py": "máng",
-  "en": "vast; blank",
+  "en": "vast; blank (distractor char)",
   "ex": {
    "zh": "他一脸茫然地看着我。",
    "py": "tā yīliǎnmángrán dìkàn zhe wǒ。",
@@ -31926,7 +31997,7 @@
  },
  "藉": {
   "py": "jí",
-  "en": "to rely on; a mat"
+  "en": "to rely on; a mat (distractor char)"
  },
  "蜕皮": {
   "py": "tuìpí",
@@ -31935,6 +32006,15 @@
    "zh": "蛇长大时会蜕皮。",
    "py": "shé zhǎngdà shíhuì tuìpí。",
    "en": "A snake sheds its skin as it grows."
+  }
+ },
+ "衬": {
+  "py": "chèn",
+  "en": "(distractor char)",
+  "ex": {
+   "zh": "他穿着白衬衫。",
+   "py": "tā chuānzhe báichènshān。",
+   "en": "He is wearing a white shirt."
   }
  },
  "要交": {
@@ -31948,7 +32028,7 @@
  },
  "觅": {
   "py": "mì",
-  "en": "to seek",
+  "en": "to seek (distractor char)",
   "ex": {
    "zh": "小鸟出来觅食。",
    "py": "xiǎoniǎo chūlai mìshí。",
@@ -32002,7 +32082,7 @@
  },
  "购": {
   "py": "gòu",
-  "en": "to buy",
+  "en": "to buy (distractor char)",
   "ex": {
    "zh": "妈妈去商店购物。",
    "py": "māma qù shāngdiàn gòuwù。",
@@ -32020,7 +32100,7 @@
  },
  "趣": {
   "py": "qù",
-  "en": "interest; fun",
+  "en": "interest; fun (distractor char)",
   "ex": {
    "zh": "这本书很有趣。",
    "py": "zhèběn shū hěn yǒuqù。",
@@ -32203,7 +32283,7 @@
  },
  "青": {
   "py": "qīng",
-  "en": "green; blue",
+  "en": "green; blue (distractor char)",
   "ex": {
    "zh": "山上长满了青草。",
    "py": "shānshàng zhǎngmǎn le qīngcǎo。",
@@ -32503,7 +32583,7 @@
  },
  "何": {
   "py": "hé",
-  "en": "what; how",
+  "en": "what; how (distractor char)",
   "ex": {
    "zh": "你为何这么晚才来？",
    "py": "nǐ wèihé zhèmewǎn cái lái？",
@@ -32866,7 +32946,7 @@
  },
  "备": {
   "py": "bèi",
-  "en": "to prepare",
+  "en": "to prepare (distractor char)",
   "syn": [
    "准备"
   ],
@@ -33079,7 +33159,7 @@
  },
  "庭": {
   "py": "tíng",
-  "en": "courtyard",
+  "en": "courtyard (distractor char)",
   "syn": [
    "庭院"
   ],
@@ -33149,7 +33229,7 @@
  },
  "忌": {
   "py": "jì",
-  "en": "to avoid; taboo",
+  "en": "to avoid; taboo (distractor char)",
   "ex": {
    "zh": "病人忌吃太甜的东西。",
    "py": "bìngrén jì chī tài tián de dōngxi。",
@@ -33200,7 +33280,7 @@
  },
  "愤": {
   "py": "fèn",
-  "en": "angry; indignant",
+  "en": "angry; indignant (distractor char)",
   "syn": [
    "愤怒"
   ],
@@ -33212,7 +33292,7 @@
  },
  "所": {
   "py": "suǒ",
-  "en": "measure word for buildings",
+  "en": "measure word for buildings (distractor char)",
   "ex": {
    "zh": "这是一所学校。",
    "py": "zhèshì yīsuǒ xuéxiào。",
@@ -33314,7 +33394,7 @@
  },
  "据": {
   "py": "jù",
-  "en": "according to",
+  "en": "according to (distractor char)",
   "ex": {
    "zh": "据说明天会下雨。",
    "py": "jùshuō míngtiān huì xiàyǔ。",
@@ -33554,7 +33634,7 @@
  },
  "概": {
   "py": "gài",
-  "en": "general; approximate",
+  "en": "general; approximate (distractor char)",
   "syn": [
    "大概"
   ],
@@ -33614,7 +33694,7 @@
  },
  "注": {
   "py": "zhù",
-  "en": "to pour; to concentrate",
+  "en": "to pour; to concentrate (distractor char)",
   "syn": [
    "注意"
   ],
@@ -33719,7 +33799,7 @@
  },
  "焕": {
   "py": "huàn",
-  "en": "shining; glowing",
+  "en": "shining; glowing (distractor char)",
   "ex": {
    "zh": "公园焕然一新。",
    "py": "gōngyuán huànrányìxīn。",
@@ -33767,7 +33847,7 @@
  },
  "珍": {
   "py": "zhēn",
-  "en": "precious; treasure",
+  "en": "precious; treasure (distractor char)",
   "syn": [
    "珍惜"
   ],
@@ -33845,7 +33925,7 @@
  },
  "眷": {
   "py": "juàn",
-  "en": "to care for; family",
+  "en": "to care for; family (distractor char)",
   "ex": {
    "zh": "他眷念着家乡。",
    "py": "tā juànniàn zhe jiāxiāng。",
@@ -33854,7 +33934,7 @@
  },
  "睬": {
   "py": "cǎi",
-  "en": "to pay attention to",
+  "en": "to pay attention to (distractor char)",
   "syn": [
    "理睬"
   ],
@@ -33875,7 +33955,7 @@
  },
  "秘": {
   "py": "mì",
-  "en": "secret",
+  "en": "secret (distractor char)",
   "syn": [
    "秘密"
   ],
@@ -33938,7 +34018,7 @@
  },
  "粪": {
   "py": "fèn",
-  "en": "dung; manure",
+  "en": "dung; manure (distractor char)",
   "ex": {
    "zh": "农夫用粪给菜施肥。",
    "py": "nóngfū yòng fèn gěi cài shīféi。",
@@ -33977,7 +34057,7 @@
  },
  "编": {
   "py": "biān",
-  "en": "to weave; to compile",
+  "en": "to weave; to compile (distractor char)",
   "ex": {
    "zh": "奶奶会编竹篮。",
    "py": "nǎinai huìbiān zhúlán。",
@@ -34001,7 +34081,7 @@
  },
  "而": {
   "py": "ér",
-  "en": "and; but",
+  "en": "and; but (distractor char)",
   "ex": {
    "zh": "他年纪小而懂事。",
    "py": "tā niánjì xiǎoér dǒngshì。",
@@ -34034,7 +34114,7 @@
  },
  "腥": {
   "py": "xīng",
-  "en": "fishy smell",
+  "en": "fishy smell (distractor char)",
   "ex": {
    "zh": "这条鱼有股腥味。",
    "py": "zhètiáo yúyǒu gǔ xīngwèi。",
@@ -34085,7 +34165,7 @@
  },
  "蜜": {
   "py": "mì",
-  "en": "honey",
+  "en": "honey (distractor char)",
   "syn": [
    "蜂蜜"
   ],
@@ -34097,7 +34177,7 @@
  },
  "衰": {
   "py": "shuāi",
-  "en": "to decline; weak",
+  "en": "to decline; weak (distractor char)",
   "ant": [
    "盛"
   ],
@@ -34166,7 +34246,7 @@
  },
  "谧": {
   "py": "mì",
-  "en": "quiet; tranquil",
+  "en": "quiet; tranquil (distractor char)",
   "syn": [
    "宁静"
   ],
@@ -34445,7 +34525,7 @@
  },
  "食": {
   "py": "shí",
-  "en": "to eat; food",
+  "en": "to eat; food (distractor char)",
   "syn": [
    "食物"
   ],
@@ -34649,7 +34729,7 @@
  },
  "丽": {
   "py": "lì",
-  "en": "beautiful",
+  "en": "beautiful (distractor char)",
   "ex": {
    "zh": "这个字念丽。",
    "py": "zhège zìniànlì。",
@@ -34745,7 +34825,7 @@
  },
  "供": {
   "py": "gōng",
-  "en": "to supply; provide",
+  "en": "to supply; provide (distractor char)",
   "ex": {
    "zh": "这里供大家休息。",
    "py": "zhèlǐ gōng dàjiā xiūxi。",
@@ -34769,7 +34849,7 @@
  },
  "倾": {
   "py": "qīng",
-  "en": "to lean; pour",
+  "en": "to lean; pour (distractor char)",
   "ex": {
    "zh": "那棵大树向左倾。",
    "py": "nàkē dàshù xiàng zuǒqīng。",
@@ -34865,7 +34945,7 @@
  },
  "利": {
   "py": "lì",
-  "en": "sharp",
+  "en": "sharp (distractor char)",
   "ex": {
    "zh": "这把刀很利。",
    "py": "zhè bǎ dāo hěnlì。",
@@ -34874,7 +34954,7 @@
  },
  "券": {
   "py": "quàn",
-  "en": "ticket; voucher",
+  "en": "ticket; voucher (distractor char)",
   "ex": {
    "zh": "我有一张优惠券。",
    "py": "wǒ yǒu yì zhāng yōuhuìquàn。",
@@ -34883,7 +34963,7 @@
  },
  "办": {
   "py": "bàn",
-  "en": "to handle; do",
+  "en": "to handle; do (distractor char)",
   "ex": {
    "zh": "这件事我来办。",
    "py": "zhèjiàn shì wǒlái bàn。",
@@ -34892,7 +34972,7 @@
  },
  "勇": {
   "py": "yǒng",
-  "en": "brave",
+  "en": "brave (distractor char)",
   "ex": {
    "zh": "我们要勇敢面对困难。",
    "py": "wǒmen yào yǒnggǎn miànduì kùnnan。",
@@ -34910,7 +34990,7 @@
  },
  "南": {
   "py": "nán",
-  "en": "south",
+  "en": "south (distractor char)",
   "ex": {
    "zh": "太阳从南边照进来。",
    "py": "tàiyáng cóng nánbiān zhàojìnlái。",
@@ -34928,7 +35008,7 @@
  },
  "及": {
   "py": "jí",
-  "en": "to reach; and",
+  "en": "to reach; and (distractor char)",
   "ex": {
    "zh": "我及时赶到了。",
    "py": "wǒ jíshí gǎndào le。",
@@ -35045,7 +35125,7 @@
  },
  "嘎": {
   "py": "gā",
-  "en": "creak (onomatopoeia)",
+  "en": "creak (onomatopoeia) (distractor char)",
   "ex": {
    "zh": "门嘎的一声开了。",
    "py": "mén gā de yīshēng kāi le。",
@@ -35093,7 +35173,7 @@
  },
  "够": {
   "py": "gòu",
-  "en": "enough",
+  "en": "enough (distractor char)",
   "ex": {
    "zh": "这些钱不够买玩具。",
    "py": "zhèxiē qián bùgòu mǎi wánjù。",
@@ -35162,7 +35242,7 @@
  },
  "存": {
   "py": "cún",
-  "en": "to save; store",
+  "en": "to save; store (distractor char)",
   "ex": {
    "zh": "我把钱存进银行。",
    "py": "wǒ bǎ qián cúnjìn yínháng。",
@@ -35252,7 +35332,7 @@
  },
  "希": {
   "py": "xī",
-  "en": "to hope",
+  "en": "to hope (distractor char)",
   "ex": {
    "zh": "我希望明天不下雨。",
    "py": "wǒ xīwàng míngtiān bù xiàyǔ。",
@@ -35300,7 +35380,7 @@
  },
  "弛": {
   "py": "chí",
-  "en": "to relax; slacken",
+  "en": "to relax; slacken (distractor char)",
   "ex": {
    "zh": "这根橡皮筋松弛了。",
    "py": "zhègēn xiàngpíjīn sōngchí le。",
@@ -35309,7 +35389,7 @@
  },
  "归": {
   "py": "guī",
-  "en": "to return",
+  "en": "to return (distractor char)",
   "ex": {
    "zh": "天黑了，小鸟归巢了。",
    "py": "tiānhēi le， xiǎoniǎo guīcháo le。",
@@ -35360,7 +35440,7 @@
  },
  "恶": {
   "py": "è",
-  "en": "evil; fierce",
+  "en": "evil; fierce (distractor char)",
   "ex": {
    "zh": "那个坏人很凶恶。",
    "py": "nàge huàirén hěn xiōngè。",
@@ -35435,7 +35515,7 @@
  },
  "抚": {
   "py": "fǔ",
-  "en": "to stroke; comfort",
+  "en": "to stroke; comfort (distractor char)",
   "ex": {
    "zh": "妈妈轻轻抚摸我的头。",
    "py": "māma qīngqīng fǔmō wǒ de tóu。",
@@ -35576,7 +35656,7 @@
  },
  "效": {
   "py": "xiào",
-  "en": "effect; imitate",
+  "en": "effect; imitate (distractor char)",
   "ex": {
    "zh": "这种药很有效。",
    "py": "zhèzhǒng yào hěn yǒuxiào。",
@@ -35615,7 +35695,7 @@
  },
  "旁": {
   "py": "páng",
-  "en": "side; beside",
+  "en": "side; beside (distractor char)",
   "ex": {
    "zh": "他坐在我旁边。",
    "py": "tā zuòzài wǒ pángbiān。",
@@ -35696,7 +35776,7 @@
  },
  "柬": {
   "py": "jiǎn",
-  "en": "card; note",
+  "en": "card; note (distractor char)",
   "ex": {
    "zh": "我收到一张请柬。",
    "py": "wǒ shōudào yì zhāng qǐngjiǎn。",
@@ -35705,7 +35785,7 @@
  },
  "桃": {
   "py": "táo",
-  "en": "peach",
+  "en": "peach (distractor char)",
   "ex": {
    "zh": "这个桃子很甜。",
    "py": "zhège táozi hěntián。",
@@ -35714,7 +35794,7 @@
  },
  "樽": {
   "py": "zūn",
-  "en": "bottle; goblet",
+  "en": "bottle; goblet (distractor char)",
   "ex": {
    "zh": "桌上放着一樽花瓶。",
    "py": "zhuō shàng fàngzhe yī zūn huāpíng。",
@@ -35822,7 +35902,7 @@
  },
  "溉": {
   "py": "gài",
-  "en": "to irrigate",
+  "en": "to irrigate (distractor char)",
   "ex": {
    "zh": "农民给田地灌溉。",
    "py": "nóngmín gěi tiándì guàngài。",
@@ -35852,7 +35932,7 @@
  },
  "炼": {
   "py": "liàn",
-  "en": "to refine; temper",
+  "en": "to refine; temper (distractor char)",
   "ex": {
    "zh": "我们要多锻炼身体。",
    "py": "wǒmen yào duō duànliàn shēntǐ。",
@@ -35882,7 +35962,7 @@
  },
  "爵": {
   "py": "jué",
-  "en": "noble rank",
+  "en": "noble rank (distractor char)",
   "ex": {
    "zh": "他是一位公爵。",
    "py": "tā shì yīwèi gōngjué。",
@@ -36005,7 +36085,7 @@
  },
  "秤": {
   "py": "chèng",
-  "en": "scales; balance",
+  "en": "scales; balance (distractor char)",
   "ex": {
    "zh": "用秤称一称水果。",
    "py": "yòng chèng chēng yīchēng shuǐguǒ。",
@@ -36035,7 +36115,7 @@
  },
  "笔": {
   "py": "bǐ",
-  "en": "pen",
+  "en": "pen (distractor char)",
   "ex": {
    "zh": "我用笔写字。",
    "py": "wǒ yòngbǐ xiězì。",
@@ -36077,7 +36157,7 @@
  },
  "紫": {
   "py": "zǐ",
-  "en": "purple",
+  "en": "purple (distractor char)",
   "ex": {
    "zh": "天空变成了紫色。",
    "py": "tiānkōng biànchéng le zǐsè。",
@@ -36086,7 +36166,7 @@
  },
  "纳": {
   "py": "nà",
-  "en": "to receive; accept",
+  "en": "to receive; accept (distractor char)",
   "ex": {
    "zh": "我们要按时交纳费用。",
    "py": "wǒmen yào ànshí jiāonà fèiyòng。",
@@ -36152,7 +36232,7 @@
  },
  "胯": {
   "py": "kuà",
-  "en": "hip; crotch",
+  "en": "hip; crotch (distractor char)",
   "ex": {
    "zh": "他的胯部受伤了。",
    "py": "tā de kuàbù shòushāng le。",
@@ -36233,7 +36313,7 @@
  },
  "见": {
   "py": "jiàn",
-  "en": "to see",
+  "en": "to see (distractor char)",
   "ex": {
    "zh": "我看见了一只小猫。",
    "py": "wǒ kànjiàn le yì zhī xiǎomāo。",
@@ -36284,7 +36364,7 @@
  },
  "谷": {
   "py": "gǔ",
-  "en": "valley; grain",
+  "en": "valley; grain (distractor char)",
   "ex": {
    "zh": "山谷里很安静。",
    "py": "shāngǔ lǐ hěn ānjìng。",
@@ -36293,7 +36373,7 @@
  },
  "贵": {
   "py": "guì",
-  "en": "expensive",
+  "en": "expensive (distractor char)",
   "ex": {
    "zh": "这件衣服很贵。",
    "py": "zhèjiàn yīfu hěnguì。",
@@ -36338,7 +36418,7 @@
  },
  "躁": {
   "py": "zào",
-  "en": "restless; irritable",
+  "en": "restless; irritable (distractor char)",
   "ex": {
    "zh": "天太热，让人心里烦躁。",
    "py": "tiāntàirè， ràng rén xīnlǐ fánzào。",
@@ -36386,7 +36466,7 @@
  },
  "迟": {
   "py": "chí",
-  "en": "late",
+  "en": "late (distractor char)",
   "ex": {
    "zh": "他上学迟到了。",
    "py": "tā shàngxué chídào le。",
@@ -36413,7 +36493,7 @@
  },
  "遛": {
   "py": "liú",
-  "en": "to stroll; walk (a pet)",
+  "en": "to stroll; walk (a pet) (distractor char)",
   "ex": {
    "zh": "爷爷每天去遛狗。",
    "py": "yéye měitiān qù liúgǒu。",
@@ -36443,7 +36523,7 @@
  },
  "量": {
   "py": "liàng",
-  "en": "to measure; quantity",
+  "en": "to measure; quantity (distractor char)",
   "ex": {
    "zh": "我们量一量身高。",
    "py": "wǒmen liàng yīliàng shēngāo。",

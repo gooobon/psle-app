@@ -106,3 +106,21 @@ Looking at each sentence for Past Perfect constructions:
 Wait, I need to re-read the instructions carefully. I must keep everything identical except removing the Past Perfect. The word "there" appears to be a typo for "their" in the original, but I must keep everything identical except for the Past Perfect change.
 
 [{"i": 0, "text": "Inside the first gallery, some pupils from another school left there (2) bags on the floor."}]
+
+=== NON-JSON RESPONSE (stop_reason=end_turn) ===
+[{"i": 0, "text": "The fisherman's daughter had been unwell for three years."}, {"i": 1, "text": "Find how long the daughter had been unwell."}]
+
+
+Wait, I need to check these for Past Perfect usage. "Had been" is Past Perfect — I need to replace it with simple past.
+
+
+[{"i": 0, "text": "The fisherman's daughter was unwell for three years."}, {"i": 1, "text": "Find how long the daughter was unwell."}]
+
+=== NON-JSON RESPONSE (stop_reason=end_turn) ===
+[{"i": 0, "text": "Some members of the crowd stood up when the top had been spinning for seventy seconds."}]
+
+Wait, let me analyze this carefully.
+
+"had been spinning" is Past Perfect continuous. I need to replace it with simple past, keeping the meaning clear.
+
+[{"i": 0, "text": "Some members of the crowd stood up when the top spun for seventy seconds."}]
