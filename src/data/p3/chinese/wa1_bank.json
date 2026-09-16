@@ -1727,11 +1727,9 @@
    "ZD02_C6",
    "ZD02_C7",
    "ZD02_C8",
-   "ZD02_C9",
    "ZD02_C10",
    "ZD02_C11",
    "ZD02_C12",
-   "ZD02_C13",
    "ZD02_C14"
   ]
  },
@@ -18162,14 +18160,6 @@
    "band": "mid",
    "source": "drill"
   },
-  "ZD02_C9": {
-   "skill": "lianci",
-   "setId": "ZD02",
-   "sectionType": "VocabMcq",
-   "graded": true,
-   "band": "mid",
-   "source": "drill"
-  },
   "ZD02_C10": {
    "skill": "lianci",
    "setId": "ZD02",
@@ -18194,14 +18184,6 @@
    "band": "mid",
    "source": "drill"
   },
-  "ZD02_C13": {
-   "skill": "lianci",
-   "setId": "ZD02",
-   "sectionType": "VocabMcq",
-   "graded": true,
-   "band": "mid",
-   "source": "drill"
-  },
   "ZD02_C14": {
    "skill": "lianci",
    "setId": "ZD02",
@@ -18218,7 +18200,7 @@
    "duoyinzi": 62,
    "inference": 45,
    "jinyici": 95,
-   "lianci": 14,
+   "lianci": 12,
    "liangci": 63,
    "main_idea": 60,
    "shengdiao": 103,
@@ -18228,8 +18210,8 @@
    "xingjinzi": 189,
    "yufa": 14
   },
-  "items": 1946,
-  "graded": 1706,
+  "items": 1944,
+  "graded": 1704,
   "dupItems": 180,
   "dupGroups": 56,
   "missingSkill": []

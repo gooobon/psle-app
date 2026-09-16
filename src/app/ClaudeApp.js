@@ -23,7 +23,7 @@ import { SessionScreen }   from '@/components/EnglishSession';
 import { ExamSessionScreen } from '@/components/ExamSession';
 import { WA1_PRACTICE_SETS } from '@/data/p3/english/wa1_practice';
 import { WA1_ZH_PRACTICE } from '@/data/p3/chinese/wa1_practice';
-import { pickNextWa1Set, buildRemediationDrill } from '@/lib/zhRemediation';
+// CLEANUP1: zhRemediation.js retired (replaced by src/lib/tickets.js)
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
 import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE, firstTryStats } from '@/lib/trialLedger'; // STEP1_TRIAL_LEDGER // STEP3A_KPI_HEADER
@@ -1126,7 +1126,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       if(items.length) scores[type]=Math.round(items.filter(r=>r.correct).length/items.length*100);
     });
     const totalPct=graded.length?Math.round(graded.filter(r=>r.correct).length/graded.length*100):0;
-    const isPastPaper = sessionNum >= 11;
+    const isPastPaper = false; // CLEANUP1_NO_PASTPAPER: daily sessions always run WA1 sets (S1..S60)
     const paperInfo = isPastPaper ? selectPastPaper(user.school) : null;
     const newEntry={ sessionNum, date:todayStr(), scores, totalPct,
       mistakes: graded.filter(r=>!r.correct).map(r=>({...r})),

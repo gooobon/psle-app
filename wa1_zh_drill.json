@@ -603,7 +603,7 @@
   "plan": [
    {
     "type": "VocabMcq",
-    "marks": 14,
+    "marks": 12,
     "items": [
      {
       "id": "ZD02_C1",
@@ -990,54 +990,6 @@
       ]
      },
      {
-      "id": "ZD02_C9",
-      "topic": "VocabMcq",
-      "sentence": "天空乌云密布，______要下大雨了，我们快回家吧。",
-      "options": [
-       "因为",
-       "虽然",
-       "看来",
-       "不管"
-      ],
-      "answer": 2,
-      "lesson": 1,
-      "skill": "lianci",
-      "explain": {
-       "why": "乌云密布是看到的现象，说话人根据这个现象推断”要下大雨了”，用”看来”表示根据眼前情况作出判断，最符合语境。",
-       "distractors": [
-        "“因为”引出原因，后面要跟”所以”，句子结构不符。",
-        "“虽然”表示转折，和后面”要下大雨了”没有转折关系。",
-        "✓ 正确答案：看来＝根据眼前情况作出判断。",
-        "“不管”表示无论什么条件，后面要跟”都”，句子结构不符。"
-       ],
-       "trapType": "lianci",
-       "memoryTip": "看到现象→作出推断，用”看来”。乌云密布→看来要下雨了。"
-      },
-      "explanation": "说话人看到”乌云密布”这个现象，推断”要下大雨了”。”看来”表示根据眼前情况作出判断，最合适。\n”因为”引出原因，需要配合”所以”；”虽然”表示转折，需要配合”但是”；”不管”表示无论条件如何，需要配合”都”。这三个连词放在这里，句子结构都说不通。\n【找连词的方法】先弄清楚两件事的关系：是推断、转折、原因还是条件，再选对应的连词。",
-      "explanation_en": "The speaker sees dark clouds and concludes it is going to rain. 看来 means 'it seems / it looks like', used when you make a judgement based on what you observe. The other three connectives need different partner words and do not fit the sentence structure here.",
-      "sentence_en": "The sky is covered with dark clouds. ___ (It looks like) it is going to rain heavily. Let us hurry home.",
-      "hints": [
-       "The speaker is making a guess based on what they can see. Which word means 'it seems' or 'it looks like'?"
-      ],
-      "keywords": [
-       {
-        "w": "看来",
-        "py": "kànlái",
-        "en": "it seems; it looks like"
-       },
-       {
-        "w": "乌云",
-        "py": "wūyún",
-        "en": "dark clouds"
-       },
-       {
-        "w": "密布",
-        "py": "mìbù",
-        "en": "to cover thickly"
-       }
-      ]
-     },
-     {
       "id": "ZD02_C10",
       "topic": "VocabMcq",
       "sentence": "弟弟______年纪小，______懂得关心家人。",
@@ -1178,54 +1130,6 @@
         "w": "晨练",
         "py": "chénliàn",
         "en": "morning exercise"
-       }
-      ]
-     },
-     {
-      "id": "ZD02_C13",
-      "topic": "VocabMcq",
-      "sentence": "小明忘记带雨伞，______天突然下起雨来，他的衣服全湿了。",
-      "options": [
-       "所以",
-       "虽然",
-       "只要",
-       "不管"
-      ],
-      "answer": 0,
-      "lesson": 1,
-      "skill": "lianci",
-      "explain": {
-       "why": "前半句”忘记带雨伞”是原因，后半句”衣服全湿了”是结果，用”所以”连接因果关系最合适。",
-       "distractors": [
-        "✓ 正确答案：所以＝表示结果，前面的原因导致了这个结果。",
-        "“虽然”表示转折，需要配合”但是”，句子结构不符。",
-        "“只要”表示条件，需要配合”就”，句子结构不符。",
-        "“不管”表示无论什么情况，需要配合”都”，句子结构不符。"
-       ],
-       "trapType": "lianci",
-       "memoryTip": "忘带伞→淋湿了，是因果关系，用”所以”表示结果。"
-      },
-      "explanation": "句子前半部分说了两个原因：忘记带雨伞，天又突然下雨，后半部分是这两个原因造成的结果——衣服全湿了。”所以”连接原因和结果，放在结果前面，最合适。\n”虽然”需要配合”但是”一起用；”只要”需要配合”就”一起用；”不管”需要配合”都”一起用。这三个连词单独放在这里，句子都说不通。\n【单个连词的方法】看空格前后有没有搭档连词，没有的话就选可以单独使用的”所以”。",
-      "explanation_en": "The first part gives two reasons (forgot umbrella + sudden rain) and the second part gives the result (clothes all wet). 所以 ('so; therefore') connects a cause to its result and can be used alone here. The other three connectives each need a partner word and do not fit on their own.",
-      "sentence_en": "Xiao Ming forgot to bring his umbrella, and it suddenly started to rain, so his clothes got completely wet.",
-      "hints": [
-       "The first part tells us what went wrong. The second part tells us what happened as a result. Which word means 'so' or 'therefore' and introduces a result?"
-      ],
-      "keywords": [
-       {
-        "w": "所以",
-        "py": "suǒyǐ",
-        "en": "so; therefore"
-       },
-       {
-        "w": "忘记",
-        "py": "wàngjì",
-        "en": "to forget"
-       },
-       {
-        "w": "突然",
-        "py": "tūrán",
-        "en": "suddenly"
        }
       ]
      },

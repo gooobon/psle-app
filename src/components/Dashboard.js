@@ -275,7 +275,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
 
       <KpiCard prog={prog} isZh={isZh} accent={ACCENT}/>
 
-      <div style={{padding:"16px 16px 0"}}> {prog.nextSession>=11&&(
+      <div style={{padding:"16px 16px 0"}}> {false&&( /* CLEANUP1: past-paper banner retired */
           <div style={{background:HG,borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(15,23,42,0.35)"}}>
             <div style={{display:"flex",alignItems:"center",gap:10}}>
               <span style={{fontSize:28}}></span>
@@ -299,10 +299,10 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
         )} <div role="button" tabIndex={0} onClick={onStart} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onStart&&onStart();}}} style={{width:"100%",background:HG,color:"#fff",border:"none",borderRadius:18,padding:"0",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 28px "+HSHADOW,overflow:"hidden",textAlign:"left",fontFamily:CFONT}}>
           <div style={{padding:"18px 20px"}}>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.6)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>
-              {grade} {subject} · {prog.nextSession>=11?"Past Paper #"+(prog.nextSession-10):isMockDue?"Mock Exam":"Session #"+prog.nextSession}
+              {grade} {subject} · {isMockDue?"Mock Exam":"Session #"+prog.nextSession}
             </div>
             <div style={{fontSize:"calc(var(--fs) * 1.286)",fontWeight:900,color:"#fff",marginBottom:4}}>
-              {isZh?"\u2192 \u5F00\u59CB\u4ECA\u5929\u7684\u7EC3\u4E60 \u2192":prog.nextSession>=11?" Start Past Paper \u2192":isMockDue?" Start Mock Exam \u2192":"\u2192 Start Practice for Today \u2192"}
+              {isZh?"\u2192 \u5F00\u59CB\u4ECA\u5929\u7684\u7EC3\u4E60 \u2192":isMockDue?" Start Mock Exam \u2192":"\u2192 Start Practice for Today \u2192"}
             </div>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.5)"}}>{isZh?"\u8FA8\u5B57 \u00B7 \u62FC\u97F3 \u00B7 \u8BCD\u8BED \u00B7 \u642D\u914D \u00B7 \u9020\u53E5 \u00B7 \u77ED\u6587\u586B\u7A7A \u00B7 \u9605\u8BFB \u00B7 ~30 min":prog.nextSession>=11?" Real school past paper \u00B7 ~35 min":isMockDue?"Nanyang Primary WA1 style \u00B7 ~30 min":"Grammar \u00B7 Vocabulary \u00B7 Comprehension \u00B7 ~35 min"+(user.school?" \u00B7 "+user.school+" style":"")}</div>
           </div>

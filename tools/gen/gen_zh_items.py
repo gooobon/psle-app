@@ -81,6 +81,7 @@ SYSTEM = ("You write Singapore MOE Primary 3 Higher Chinese WA1 practice items (
           "Rules: answer is a 0-based index; options length 4; distractors length 4 aligned with options; explain.why quotes the context clue; "
           "explanation_en/sentence_en in simple English; hints[0] never names the answer; keywords 2-3 real words from the sentence with tone-marked pinyin; "
           "lesson 1-4; do NOT copy exemplar sentences; each new sentence must be a fresh, natural P3 sentence; ids use the given prefix. "
+          "Diversity: within one batch the same answer word/connective may appear at most twice and the same sentence pattern at most twice; for connectives (lianci) the answer must be a true connective, not an adverb (no 幸好/看来/总是). "
           "STRICT JSON: inside any string value use Chinese quotation marks \u201c \u201d only - NEVER the ASCII double-quote character; no trailing commas.")
 
 def call_api(key, skill, section, exs, n, prefix):

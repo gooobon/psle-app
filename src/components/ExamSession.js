@@ -2299,7 +2299,9 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
   }, []);
 
   function norm(s) { return String(s || "").replace(/[\s\u3000,.!?;:()"'\uFF0C\u3002\uFF01\uFF1F\u3001\uFF1B\uFF1A\u201C\u201D\u2018\u2019\uFF08\uFF09]/g, ""); }
-  function handleSubmit() { if (!submitted) setSubmitted(true); }
+  // CLEANUP1_SYNTH_GUARD: every item needs an answer (typed text or a built tile sentence)
+  const allAnswered = qs.every(q => String((answers && answers[q.id]) || '').trim().length > 0 || (built && Array.isArray(built[q.id]) && built[q.id].length > 0));
+  function handleSubmit() { if (!submitted && allAnswered) setSubmitted(true); }
   function handleFinish() {
     const t = Date.now() - startRef.current;
     const results = qs.map(q => ({
@@ -2468,7 +2470,7 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
         })}
 
         {!submitted ? (
-          <button onClick={handleSubmit}
+          <button onClick={handleSubmit} disabled={!allAnswered}
             style={{ width: "100%", padding: "14px", borderRadius: 10, background: "#1e3a6e", color: "#fff",
               border: "none", fontSize: "calc(var(--fs) * 1.071)", fontWeight: 700, cursor: "pointer", fontFamily: F }}>{L("\u63D0\u4EA4", "Submit")}</button>
         ) : (

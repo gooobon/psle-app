@@ -101,3 +101,8 @@ __pycache__/
 *.pyc
 
 vocab_out/
+
+# generator scratch
+tools/gen/_tmp_validate.json
+tools/gen/gen_raw.log
+rewrite_pp_raw.log
