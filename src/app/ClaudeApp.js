@@ -54,7 +54,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, importLocalOnce } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, importLocalOnce, logActivity } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 
 
 
@@ -261,6 +261,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     next = gradeTicketsFromDrill(next, results, ses);        // wins on different items close tickets
     next = openTicketsFromResults(next, results, ses);       // new failures open tickets
     setProgress(grade, subject, next);
+    logActivity("Chinese", results);
     setAdaptive(null);
     setDailyResult({ results, sessionNum: ses - 1 });
     let words = [];
@@ -333,6 +334,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const withTrials=recordTrials(prog, results, { mode: isMock?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: WA1_ZH_PRACTICE[wa1Idx].setId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
+    logActivity("Chinese", results);
     return sessionNum;
   }
   // Daily practice = the 60 generated sets (flagged mock every 10th session).
@@ -433,6 +435,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
         onFinish={(results)=>{
           const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'ZS_DRILL' });
           setProgress(grade,subject, gradeTicketsFromDrill(withTrials, results, prog.nextSession));
+          logActivity("Chinese", results);
           setDrillMode(false); setScreen("home");
         }}
         onBack={()=>setDrillMode(false)}
@@ -816,6 +819,7 @@ function SchoolDropdown({value, onChange}){
 async function serverLogin(role, idOrEmail, pw){
   if(role==="parent"){
     const r = await serverPost("/api/auth/login",{email:idOrEmail,password:pw});
+    if(r.code==="email_not_confirmed") return {unconfirmed:true};
     if(!r.ok) return null;
     const kids = (r.children||[]).map(c=>mirrorServerUser(c));
     return mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
@@ -841,6 +845,7 @@ function LoginForm({onLogin, onGoSignup}){
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
+  const [claim, setClaim] = useState(null); // legacy parent (no email yet) -> add-email step
 
   function fillDemo(){
     if(role==="student"){ setId("demo_student"); setPw("demo123"); }
@@ -856,7 +861,13 @@ function LoginForm({onLogin, onGoSignup}){
     setErr("");
     if(id.trim().toLowerCase()==="admin" && await adminLogin(pw)){ onLogin("admin", ADMIN_USER); return; }
     if(SERVER_AUTH && !id.trim().startsWith("demo_")){
+      // Legacy parent (local id + password, no email): ask for an email and create/link the server account.
+      if(role==="parent" && !id.includes("@")){
+        const local = STORE.users[id.trim()];
+        if(local && local.role==="parent" && local.password===pw && !local.serverId){ setClaim({local,pw}); return; }
+      }
       const r = await serverLogin(role, id.trim(), pw);
+      if(r && r.unconfirmed){ setErr("Please confirm your email first: open the link we sent you, then log in."); return; }
       if(r) { onLogin(role, r); return; }
       setErr(role==="parent" ? "Wrong email or password." : "Wrong ID or password. Please check and try again.");
       return;
@@ -865,6 +876,8 @@ function LoginForm({onLogin, onGoSignup}){
     if(user){ onLogin(role, user); return; }
     setErr("Wrong ID or password. Please check and try again.");
   }
+
+  if(claim) return <LegacyParentEmailForm local={claim.local} pw={claim.pw} onLogin={onLogin} onBack={()=>setClaim(null)}/>;
 
   return(
     <div>
@@ -993,6 +1006,46 @@ function SignupStudentForm({onSignup, onBack}){
 
       {err&&<ErrorBox msg={err}/>}
       <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account </BigBtn>
+    </div>
+  );
+}
+
+// Server mode: an existing parent (local account, no email) adds an email to get a server account.
+// Children from the local record are linked (or created) on the server; local data is never touched.
+function LegacyParentEmailForm({local, pw, onLogin, onBack}){
+  const [email, setEmail] = useState("");
+  const [newPw, setNewPw] = useState(pw.length>=8?"":"");
+  const [err, setErr] = useState("");
+  const [info, setInfo] = useState("");
+  const [busy, setBusy] = useState(false);
+  const reuse = pw.length>=8;
+  async function submit(){
+    setErr("");
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) return setErr("Please enter a valid email.");
+    const password = reuse ? pw : newPw;
+    if(password.length<8) return setErr("Password must be at least 8 characters.");
+    const children = (local.childIds||[]).map(cid=>STORE.users[cid]).filter(c=>c&&c.role==="student")
+      .map(c=>({username:c.id,password:c.password,name:c.name,grade:c.grade,school:c.school}));
+    setBusy(true);
+    const r = await serverPost("/api/auth/parent/legacy-claim",{name:local.name,email:email.trim(),password,children});
+    setBusy(false);
+    if(!r.ok) return setErr(r.error||"Could not create your account.");
+    if(r.needsConfirmation) return setInfo("Check your email: we sent a confirmation link to "+email.trim()+". After you confirm, log in with your email"+(reuse?" and your current password":" and the new password")+".");
+    const kids = (r.children||[]).map(c=>mirrorServerUser(c));
+    onLogin("parent", mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)}));
+  }
+  return(
+    <div>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
+      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Add your email</div>
+      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Parent accounts now log in with an email so you can check progress from any device.</div>
+      {!info&&<>
+        <InputField label="Email" value={email} onChange={setEmail} placeholder="you@example.com"/>
+        {!reuse&&<InputField label="New password (min 8 chars)" value={newPw} onChange={setNewPw} type="password" placeholder="Choose a password" onEnter={submit}/>}
+        {err&&<ErrorBox msg={err}/>}
+        <BigBtn color="#7C3AED" onClick={busy?()=>{}:submit}>{busy?"Saving...":"Continue"}</BigBtn>
+      </>}
+      {info&&<div style={{background:"#F0FDF4",borderRadius:10,padding:"9px 13px",fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:600}}>{info}</div>}
     </div>
   );
 }
@@ -1231,6 +1284,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: newEntry.school||null });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
+    logActivity("English", results);
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
     // Step 4: end-of-round word review (Leitner) before the result screen.
@@ -1332,6 +1386,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
           next = gradeTicketsFromDrill(next, results, ses);
           next = openTicketsFromResults(next, results, ses);
           setProgress(grade, subject, next);
+          logActivity("English", results);
           setEnAdaptive(null);
           setSessionResult({ results, sessionNum: ses - 1, isMock: false });
           setScreen("result");
@@ -1350,6 +1405,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         onFinish={(results)=>{
           const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'EN_DRILL' });
           setProgress(grade, subject, gradeTicketsFromDrill(withTrials, results, prog.nextSession));
+          logActivity("English", results);
           setEnDrillMode(false); setScreen("home");
         }}
         onBack={()=>setEnDrillMode(false)}

@@ -63,3 +63,27 @@ export async function createStudent(admin, { username, password, name, grade, sc
   }
   return { id };
 }
+
+// Parent sign-up shared by /api/auth/parent/signup and /api/auth/parent/legacy-claim.
+// Returns { error, status } or { id, profile, session }. With email confirmation ON, session is null.
+export async function signUpParent({ email, password, name }) {
+  const sb = await sessionClient();
+  const { data, error } = await sb.auth.signUp({ email, password, options: { data: { role: "parent" } } });
+  if (error || !data?.user) return { error: error?.message || "sign-up failed", status: 400 };
+  // Supabase returns an obfuscated user (no identities) when the email is already registered.
+  if (!data.user.identities?.length) return { error: "could not sign up with this email", status: 400 };
+  const admin = adminClient();
+  const id = data.user.id;
+  const p = await admin.from("profiles").insert({ id, role: "parent", display_name: name, email }).select().single();
+  if (p.error) return { error: p.error.code === "23505" ? "could not sign up with this email" : "profile failed", status: p.error.code === "23505" ? 400 : 500 };
+  await admin.from("parent_settings").insert({ parent_id: id, alert_email: email }); // daily target defaults to 1 set/subject
+  await admin.from("parent_alert_channels").insert({ parent_id: id, channel: "email", address: email });
+  return { id, profile: p.data, session: data.session };
+}
+
+// Verify a child's username+password WITHOUT touching the caller's cookie session.
+export async function verifyStudentPassword(username, password) {
+  const c = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY, { auth: { autoRefreshToken: false, persistSession: false } });
+  const { data, error } = await c.auth.signInWithPassword({ email: kidEmail(username), password });
+  return !error && !!data?.user;
+}

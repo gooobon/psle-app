@@ -5,8 +5,9 @@
 //
 // TODO(owner): this trusts the client's claim that a local record exists, so anyone could claim an
 // UNUSED username. Impact is limited (they only get an empty account under that name), but consider
-// an allow-list of legacy usernames exported once from known devices, plus rate limiting.
+// an allow-list of legacy usernames exported once from known devices. (Basic per-IP/per-username rate limiting is in place: src/lib/rateLimit.js.)
 import { sessionClient, adminClient, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
+import { allowAuthAttempt } from "@/lib/rateLimit";
 import { kidEmail, normUsername, USERNAME_RE, RESERVED_USERNAMES } from "@/lib/supabase/config";
 
 export const runtime = "nodejs";
@@ -17,6 +18,7 @@ export async function POST(request) {
   const username = normUsername(b.username);
   const password = String(b.password || "");
   const name = String(b.name || "").trim().slice(0, 80);
+  if (!allowAuthAttempt("legacy-migrate", request, username)) return jerr("too many attempts, try again later", 429);
   if (!USERNAME_RE.test(username) || RESERVED_USERNAMES.includes(username) || username.startsWith("demo_")) return jerr("cannot migrate this username", 400);
   if (password.length < 6) return jerr("invalid credentials", 401); // legacy minimum was 6
   if (!name) return jerr("name required", 400);

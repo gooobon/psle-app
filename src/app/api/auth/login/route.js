@@ -11,6 +11,7 @@ export async function POST(request) {
   if (!email || !password) return jerr("invalid credentials", 401);
   const sb = await sessionClient();
   const { data, error } = await sb.auth.signInWithPassword({ email, password });
+  if (error?.code === "email_not_confirmed" || /not confirmed/i.test(error?.message || "")) return Response.json({ error: "email not confirmed", code: "email_not_confirmed" }, { status: 403 });
   if (error || !data?.user) return jerr("invalid credentials", 401);
   const admin = adminClient();
   const { data: profile } = await admin.from("profiles").select("*").eq("id", data.user.id).maybeSingle();

@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
-import { SERVER_AUTH, serverPost } from "@/lib/serverClient";
+import { SERVER_AUTH, serverPost, serverGet } from "@/lib/serverClient";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 
 // ── Parent: Mistakes review tab ───────────────────────────────
@@ -545,6 +545,82 @@ function AddChildForm({onCreated}){
   );
 }
 
+// Server mode only: "Did they do it today?" for every linked child. Reads from the server (not
+// localStorage) so it is correct from any device. Targets come from parent_settings (default 1 set/subject).
+function DidTheyDoItToday(){
+  const [data, setData] = useState(null);
+  const [err, setErr] = useState("");
+  useEffect(()=>{
+    let live = true;
+    serverGet("/api/parent/activity").then(r=>{ if(!live) return; if(r.ok) setData(r); else setErr("Could not load today's activity."); });
+    return ()=>{ live=false; };
+  },[]);
+  if(err) return <div style={{color:"#B91C1C",fontSize:12,marginBottom:12}}>{err}</div>;
+  if(!data || !data.children.length) return null;
+  const dow = (iso)=>["S","M","T","W","T","F","S"][new Date(iso+"T00:00:00Z").getUTCDay()];
+  return(
+    <div style={{marginBottom:14}}>
+      {data.children.map(c=>(
+        <div key={c.id} style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:10}}>
+          <div style={{fontWeight:800,fontSize:14,color:"#0F172A",marginBottom:8}}>Did {c.name} do it today?</div>
+          <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:8}}>
+            {c.subjects.map(s=>(
+              <div key={s.subject} style={{flex:"1 1 110px",background:s.done?"#F0FDF4":"#FEF2F2",borderRadius:10,padding:"8px 10px"}}>
+                <div style={{fontSize:12,fontWeight:800,color:"#0F172A"}}>{s.done?"✅":"❌"} {s.subject}</div>
+                <div style={{fontSize:11,color:C.muted}}>{s.sets} / {s.target} set{s.target===1?"":"s"}</div>
+              </div>
+            ))}
+          </div>
+          <div style={{fontSize:12,color:C.muted,marginBottom:8}}>
+            {c.questions} question{c.questions===1?"":"s"} answered today · accuracy {c.accuracy==null?"–":c.accuracy+"%"}
+          </div>
+          <div style={{display:"flex",gap:4}} aria-label="Last 7 days">
+            {c.streak.map(d=>(
+              <div key={d.date} title={d.date} style={{width:26,height:26,borderRadius:7,display:"flex",alignItems:"center",justifyContent:"center",fontSize:10,fontWeight:800,background:d.active?"#22C55E":"#E2E8F0",color:d.active?"#fff":C.muted}}>{dow(d.date)}</div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// Server mode only: link another parent (by email) to a child of this parent.
+function LinkParentForm({children}){
+  const [open, setOpen] = useState(false);
+  const [childId, setChildId] = useState(children[0]?.id||"");
+  const [email, setEmail] = useState("");
+  const [msg, setMsg] = useState("");
+  const [err, setErr] = useState("");
+  const [busy, setBusy] = useState(false);
+  if(!children.length) return null;
+  const serverId = (c)=>c.serverId||c.id;
+  async function submit(){
+    setErr(""); setMsg(""); setBusy(true);
+    const r = await serverPost("/api/parent/link-parent",{childId:childId||serverId(children[0]),email:email.trim()});
+    setBusy(false);
+    if(!r.ok) return setErr(r.error||"Could not link.");
+    setMsg(r.message); setEmail("");
+  }
+  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
+  return(
+    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add another parent</button>
+      {open&&(
+        <div style={{marginTop:10}}>
+          <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>
+            {children.map(c=><option key={serverId(c)} value={serverId(c)}>{c.name}</option>)}
+          </select>
+          <input style={inp} placeholder="Other parent's email (must already have a parent account)" value={email} onChange={e=>setEmail(e.target.value)}/>
+          {err&&<div style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>{err}</div>}
+          {msg&&<div style={{color:"#065F46",fontSize:12,marginBottom:8}}>{msg}</div>}
+          <button disabled={busy} onClick={submit} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>{busy?"Linking...":"Link parent"}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated}){
   const [selectedId, setSelectedId] = useState(linkedStudents[0]?.id||null);
   const [grade,   setGrade]   = useState("P3");
@@ -630,7 +706,9 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
       </div>
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
+        {SERVER_AUTH&&onChildCreated&&<DidTheyDoItToday/>}
         {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
+        {SERVER_AUTH&&onChildCreated&&<LinkParentForm children={linkedStudents}/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>

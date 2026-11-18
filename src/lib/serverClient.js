@@ -40,3 +40,32 @@ export async function importLocalOnce(username) {
   if (r.ok) { try { localStorage.setItem(IMPORT_MARKER, JSON.stringify({ ...marker(), [username]: new Date().toISOString() })); } catch {} }
   return r;
 }
+
+// ── Daily activity log (flag on, server-logged-in students only) ─────────────────────────────
+// Called at set/round completion. Fire-and-forget; never throws, never touches progress data.
+// Each call carries a unique event id so the server applies it exactly once even if retried.
+// Failed sends are kept in a small queue (genius_activity_queue_v1) and retried on the next call.
+const ACT_QUEUE = "genius_activity_queue_v1";
+function uuid() {
+  try { if (crypto?.randomUUID) return crypto.randomUUID(); } catch {}
+  const h = () => Math.floor(Math.random() * 65536).toString(16).padStart(4, "0");
+  return `${h()}${h()}-${h()}-4${h().slice(1)}-a${h().slice(1)}-${h()}${h()}${h()}`;
+}
+export async function logActivity(subject, results, minutes) {
+  if (!SERVER_AUTH || typeof window === "undefined") return;
+  try {
+    const graded = (results || []).filter(r => r && r.scored !== false);
+    const entry = {
+      event: uuid(), subject, sets: 1,
+      questions: graded.length, correct: graded.filter(r => r.correct).length, minutes: Math.round(minutes || 0),
+    };
+    const queue = [...lsJson(ACT_QUEUE, []), entry].slice(-50);
+    const left = [];
+    for (const e of queue) {
+      const r = await serverPost("/api/activity", e);
+      // 401/404 = not a server student (demo/legacy local user) or server off: drop. Network/5xx: keep.
+      if (!r.ok && (r.status === 0 || r.status >= 500 || r.status === 429)) left.push(e);
+    }
+    localStorage.setItem(ACT_QUEUE, JSON.stringify(left));
+  } catch {}
+}
