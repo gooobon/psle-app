@@ -54,7 +54,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 
 
 
@@ -335,6 +335,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
     reportActivity(subject, 'set-'+sessionNum, results);
+    reportWrongAnswers(subject, grade, sessionNum, missed, WA1_ZH_PRACTICE[wa1Idx].setId);
     return sessionNum;
   }
   // Daily practice = the 60 generated sets (flagged mock every 10th session).
@@ -834,6 +835,7 @@ async function serverLogin(role, idOrEmail, pw){
   }
   const user = mirrorServerUser(r.profile);
   importLocalOnce(user.id); // fire-and-forget; never blocks or alters local data
+  syncLocalWrongAnswersOnce(user.id); // flagged, copy-only, idempotent
   return user;
 }
 
@@ -1272,6 +1274,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     reportActivity(subject, 'set-'+sessionNum, results);
+    reportWrongAnswers(subject, grade, sessionNum, graded.filter(r=>!r.correct), newEntry.school);
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
     // Step 4: end-of-round word review (Leitner) before the result screen.
