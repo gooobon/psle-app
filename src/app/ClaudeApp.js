@@ -46,6 +46,7 @@ import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn 
 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook from '@/components/MistakeNotebook';
+import ParentHomework from '@/components/ParentHomework';
 import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId } from '@/lib/wrongNotebook';
 import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
 import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
@@ -302,7 +303,18 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
+  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Not written to trials/mastery. TODO(owner): count toward mastery?
+  const [hwKey,setHwKey]=useState(0);
+  function startHomework(ids){
+    const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
+    if(!built.plan.length) return;
+    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
+  }
   function finishRoundReview(results){
+    if(roundReview.homework){
+      serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     if(roundReview.similar){
       const {key:mk, ids}=roundReview.similar, now=new Date().toISOString();
       const m0=findMistake(prog, mk)?.m;
@@ -426,7 +438,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
-        mockInfo={{school:roundReview.similar?"\u7C7B\u4F3C\u9898\u7EC3\u4E60":"\u9519\u9898\u590D\u4E60 \u7B2C "+roundReview.sessionNum+" \u8F6E"}}
+        mockInfo={{school:roundReview.homework?"Homework from Parent":roundReview.similar?"\u7C7B\u4F3C\u9898\u7EC3\u4E60":"\u9519\u9898\u590D\u4E60 \u7B2C "+roundReview.sessionNum+" \u8F6E"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
       />
@@ -525,6 +537,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       />
       {screen==="mistakes" ? (
         <>
+          <ParentHomework subject="Chinese" refreshKey={hwKey} onStart={startHomework}/>
           {drill && (
             <div style={{padding:"14px 16px 0"}}>
               <button onClick={()=>setDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#B91C1C,#EF4444)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",fontFamily:"\'KaiTi\',\'STKaiti\',\'LXGW WenKai\',serif",boxShadow:"0 4px 14px rgba(185,28,28,0.25)"}}>
@@ -1273,7 +1286,18 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
+  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Not written to trials/mastery. TODO(owner): count toward mastery?
+  const [hwKey,setHwKey]=useState(0);
+  function startHomework(ids){
+    const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
+    if(!built.plan.length) return;
+    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
+  }
   function finishRoundReview(results){
+    if(roundReview.homework){
+      serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     if(roundReview.similar){
       const {key:mk, ids}=roundReview.similar, now=new Date().toISOString();
       const m0=findMistake(prog, mk)?.m;
@@ -1425,7 +1449,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
-        mockInfo={{school:roundReview.similar?"Similar questions":"Round "+roundReview.sessionNum+" review"}}
+        mockInfo={{school:roundReview.homework?"Homework from Parent":roundReview.similar?"Similar questions":"Round "+roundReview.sessionNum+" review"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
       />
@@ -1580,6 +1604,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length, dailyTarget ? dailyTarget.English : undefined)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <>
+          <ParentHomework subject="English" refreshKey={hwKey} onStart={startHomework}/>
           {enDrill && (
             <div style={{padding:"14px 16px 0"}}>
               <button onClick={()=>setEnDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#0F172A,#1E3A6E)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",boxShadow:"0 4px 14px rgba(15,23,42,0.25)"}}>
@@ -2243,6 +2268,7 @@ function App(){
       getProgress={getProgress}
       setProgress={(uid,g,s,d)=>{ setProgress(uid,g,s,d); refresh(); }}
       refresh={refresh}
+      homeworkSimilarFor={(subj,m)=>pickSimilar(getTagIndex(), subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX, {id:m.id}, similarQuestions)}
       onChildCreated={SERVER_AUTH ? (c)=>{
         const kid = mirrorServerUser(c);
         const par = STORE.users[user.id];

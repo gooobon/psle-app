@@ -3,11 +3,34 @@ import React, { useState, useEffect } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
-import { SERVER_AUTH, WRONG_ANSWERS_SYNC, serverPost, serverGet } from "@/lib/serverClient";
+import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, serverPost, serverGet } from "@/lib/serverClient";
+import { HOMEWORK_DAILY_CAP, HOMEWORK_PER_MISTAKE } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 
+// ── Parent: homework status (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off) ──
+function HomeworkStatus({child, refreshKey}){
+  const [st,setSt]=React.useState(null);
+  React.useEffect(()=>{
+    setSt(null); let alive=true;
+    serverGet(`/api/parent/homework?child=${encodeURIComponent(child.serverId)}`).then(r=>{ if(alive&&r.ok) setSt(r); });
+    return ()=>{ alive=false; };
+  },[child?.serverId, refreshKey]);
+  if(!st) return null;
+  const t=(st.days||[]).find(d=>d.date===st.today)||{assigned:0,solved:0,remaining:0,correct:0};
+  const box=(n,l,c)=>(<div style={{flex:1,textAlign:"center"}}><div style={{fontSize:20,fontWeight:900,color:c}}>{n}</div><div style={{fontSize:10,fontWeight:700,color:"#64748B"}}>{l}</div></div>);
+  return(
+    <div style={{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:14,padding:"12px 14px",marginBottom:14}}>
+      <div style={{fontSize:13,fontWeight:800,color:"#92400E",marginBottom:8}}>📚 Homework today · {st.usedToday}/{st.cap} used</div>
+      <div style={{display:"flex",gap:6}}>{box(t.assigned,"Assigned","#0F172A")}{box(t.solved,"Solved","#059669")}{box(t.remaining,"Remaining","#DC2626")}{box(t.correct,"Correct","#2563EB")}</div>
+      {(st.days||[]).filter(d=>d.date!==st.today).slice(0,6).map(d=>(
+        <div key={d.date} style={{fontSize:11,color:"#64748B",marginTop:6}}>{d.date}: {d.solved}/{d.assigned} solved, {d.correct} correct{d.remaining?`, ${d.remaining} not done`:""}</div>
+      ))}
+    </div>
+  );
+}
+
 // ── Parent: Mistakes review tab ───────────────────────────────
-function ParentMistakesTab({child, history, grade, subject}){
+function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor}){
   const [filterSession, setFilterSession] = React.useState("all");
   const [expanded, setExpanded] = React.useState(null);
 
@@ -24,6 +47,19 @@ function ParentMistakesTab({child, history, grade, subject}){
       .then(r=>{ if(alive && r.ok && Array.isArray(r.items)) setSrv(r.items); });
     return ()=>{ alive=false; };
   },[useServer, child?.serverId, subject]);
+
+  // Homework (flag off => none of this renders). Needs the server child id and the server-backed mistake list.
+  const hwOn = SERVER_AUTH && PARENT_HOMEWORK && !!child?.serverId && !!homeworkSimilarFor;
+  const [hwKey,setHwKey]=React.useState(0);
+  const [hwMsg,setHwMsg]=React.useState({});
+  async function assignHomework(m){
+    const sim=homeworkSimilarFor(subject,m);
+    if(!sim||!sim.ids.length){ setHwMsg(x=>({...x,[m.id]:"No similar questions available for this mistake yet."})); return; }
+    setHwMsg(x=>({...x,[m.id]:"Assigning…"}));
+    const r=await serverPost("/api/parent/homework",{child:child.serverId,subject,grade,sourceQuestionId:m.id,questionIds:sim.ids.slice(0,HOMEWORK_PER_MISTAKE)});
+    setHwMsg(x=>({...x,[m.id]:r.ok?(r.message||"Assigned."):(r.error||"Could not assign.")}));
+    if(r.ok||r.code==="cap") setHwKey(k=>k+1);
+  }
 
   const allMistakes = [];
   if(useServer && srv){
@@ -61,6 +97,7 @@ function ParentMistakesTab({child, history, grade, subject}){
 
   return(
     <div style={{padding:"4px 0"}}>
+      {hwOn&&<HomeworkStatus child={child} refreshKey={hwKey}/>}
       <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:14,
         padding:"12px 14px",marginBottom:14}}>
         <div style={{fontSize:13,fontWeight:800,color:"#1D4ED8",marginBottom:4}}>
@@ -140,6 +177,15 @@ function ParentMistakesTab({child, history, grade, subject}){
 
                     {isOpen && (
                       <div style={{padding:"0 14px 14px"}}>
+                        {hwOn&&useServer&&srv&&(
+                          <div style={{marginBottom:10}}>
+                            <button onClick={()=>assignHomework(m)} style={{background:"#D97706",color:"#fff",border:"none",borderRadius:10,padding:"8px 12px",fontSize:12,fontWeight:800,cursor:"pointer"}}>
+                              📚 Assign {HOMEWORK_PER_MISTAKE} similar as homework
+                            </button>
+                            <span style={{fontSize:11,color:"#64748B",marginLeft:8}}>max {HOMEWORK_DAILY_CAP}/day</span>
+                            {hwMsg[m.id]&&<div style={{fontSize:12,color:"#92400E",marginTop:6}}>{hwMsg[m.id]}</div>}
+                          </div>
+                        )}
                         {(m.q||m.sentence) && (
                           <div style={{background:"#F8FAFC",borderRadius:10,padding:"10px 12px",
                             marginBottom:10,fontSize:13,fontWeight:600,color:"#0F172A",lineHeight:1.6}}>
@@ -671,7 +717,7 @@ function AlertSettings(){
   );
 }
 
-function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated}){
+function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated, homeworkSimilarFor}){
   const [selectedId, setSelectedId] = useState(linkedStudents[0]?.id||null);
   const [grade,   setGrade]   = useState("P3");
   const [subject, setSubject] = useState("English");
@@ -770,7 +816,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {parentToast&&<ComingSoonToast message={parentToast} onDone={()=>setParentToast(null)}/>}
         {child&&!LIVE_CONTENT[`${grade}_${subject}`]&&<ComingSoonScreen grade={grade} subject={subject}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject}/>}
+        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
