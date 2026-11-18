@@ -1,0 +1,47 @@
+// All parent-email wording lives here so it can be translated later: edit COPY (or add another locale object).
+// TODO(owner): final wording / translations (e.g. Chinese). English is the default.
+export const COPY = {
+  en: {
+    subject: (p) => (p.anyMissing ? `Not done yet today: ${p.names}` : `All done today: ${p.names}`),
+    greeting: (p) => `Hi ${p.parentName},`,
+    notDone: (names) => `NOT DONE YET today: ${names}`,
+    allDone: "All subjects are done for today. 🎉",
+    childHeading: (c) => `${c.name}${c.grade ? ` (${c.grade})` : ""}`,
+    subjectLine: (s) => `${s.done ? "✅ Done" : "❌ Not done"} – ${s.name}: ${s.sets}/${s.target} set${s.target === 1 ? "" : "s"}`,
+    noSubjects: "No subjects with a daily target.",
+    stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes}`,
+    streak: (c) => `Streak: ${c.streak} day${c.streak === 1 ? "" : "s"} · Active ${c.activeDays} of the last 7 days`,
+    dashboard: "Open the parent dashboard",
+    footer: "You get this because daily email alerts are on for your parent account.",
+  },
+};
+
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+
+// payload: { parentName, date, dashboardUrl, children: [{ name, grade, subjects:[{name,sets,target,done}],
+//            questions, accuracy|null, minutes, streak, activeDays, missing:[subject names] }] }
+export function renderDailyEmail(payload, locale = "en") {
+  const t = COPY[locale] || COPY.en;
+  const kids = payload.children || [];
+  const missingKids = kids.filter((c) => c.missing.length);
+  const ctx = { ...payload, anyMissing: missingKids.length > 0, names: kids.map((c) => c.name).join(", ") };
+  const banner = missingKids.map((c) => t.notDone(`${c.name} – ${c.missing.join(", ")}`));
+
+  const textBlocks = kids.map((c) => [
+    t.childHeading(c),
+    ...(c.subjects.length ? c.subjects.map(t.subjectLine) : [t.noSubjects]),
+    t.stats(c),
+    t.streak(c),
+  ].join("\n"));
+  const text = [t.greeting(ctx), "", ...(banner.length ? [...banner, ""] : [t.allDone, ""]), textBlocks.join("\n\n"), "", `${t.dashboard}: ${payload.dashboardUrl}`, "", t.footer].join("\n");
+
+  const html = `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0F172A">
+<p>${esc(t.greeting(ctx))}</p>
+${banner.length ? banner.map((b) => `<p style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;padding:10px;font-weight:bold">${esc(b)}</p>`).join("") : `<p style="background:#D1FAE5;border-radius:8px;padding:10px;font-weight:bold">${esc(t.allDone)}</p>`}
+${kids.map((c) => `<h3 style="margin:16px 0 6px">${esc(t.childHeading(c))}</h3>
+<ul style="padding-left:18px;margin:0">${(c.subjects.length ? c.subjects.map((s) => `<li>${esc(t.subjectLine(s))}</li>`) : [`<li>${esc(t.noSubjects)}</li>`]).join("")}</ul>
+<p style="margin:6px 0">${esc(t.stats(c))}<br>${esc(t.streak(c))}</p>`).join("")}
+<p><a href="${esc(payload.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">${esc(t.dashboard)}</a></p>
+<p style="font-size:12px;color:#64748B">${esc(t.footer)}</p></div>`;
+  return { subject: t.subject(ctx), text, html };
+}

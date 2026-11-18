@@ -586,17 +586,34 @@ function GuardianTools({linkedStudents,onChildLinked}){
   const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   const btn={background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
-  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); }
+  const [inv,setInv]=useState({sent:[],received:[]});
+  const loadInv=()=>serverGet("/api/parent/co-parents").then(r=>{ if(r.ok) setInv({sent:r.sent||[],received:r.received||[]}); });
+  useEffect(()=>{ loadInv(); },[]);
+  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setEmail(""); loadInv(); } }
+  async function revokeInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/revoke",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); loadInv(); }
+  async function acceptInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/accept",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setTimeout(()=>{ try{ window.location.reload(); }catch{} },800); } else loadInv(); }
   async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Link another parent / existing child</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
+      {inv.received.length>0&&(<div style={{marginTop:10,background:"#FEF3C7",border:"1px solid #F59E0B",borderRadius:10,padding:10}}>
+        <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Invitations for you</div>
+        {inv.received.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:13,marginBottom:4}}>
+          <span>{i.inviterName||"A parent"} invited you to follow <b>{i.childName||"a child"}</b></span>
+          <button disabled={busy} style={{...btn,marginBottom:0,padding:"6px 12px"}} onClick={()=>acceptInvite(i.id)}>Accept</button></div>))}
+      </div>)}
       {open&&(<div style={{marginTop:10}}>
         {linkedStudents.length>0&&(<>
           <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Add another parent to a child</div>
           <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>{linkedStudents.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select>
-          <input style={inp} placeholder="Other parent's email (they must have signed up)" value={email} onChange={e=>setEmail(e.target.value)}/>
-          <button disabled={busy} style={btn} onClick={linkParent}>Link parent</button>
+          <input style={inp} placeholder="Other parent's email (they log in or sign up with it, then accept)" value={email} onChange={e=>setEmail(e.target.value)}/>
+          <button disabled={busy} style={btn} onClick={linkParent}>Send invite</button>
+          {inv.sent.length>0&&(<div style={{marginBottom:12}}>
+            <div style={{fontSize:12,fontWeight:700,marginBottom:4}}>Pending invites (expire after 7 days)</div>
+            {inv.sent.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:12,marginBottom:4}}>
+              <span>{i.email} → {i.childName} · expires {String(i.expiresAt).slice(0,10)}</span>
+              <button disabled={busy} style={{background:"none",border:`1px solid ${C.border}`,borderRadius:8,padding:"4px 10px",cursor:"pointer",fontSize:12}} onClick={()=>revokeInvite(i.id)}>Revoke</button></div>))}
+          </div>)}
         </>)}
         <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Link an existing child account</div>
         <input style={inp} placeholder="Child's username" value={lu} onChange={e=>setLu(e.target.value)}/>
