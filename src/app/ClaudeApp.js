@@ -47,6 +47,7 @@ import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook from '@/components/MistakeNotebook';
 import ParentHomework from '@/components/ParentHomework';
+import { StickerShelf, WeeklyReviewCard } from '@/components/Rewards'; // step 9 (flag NEXT_PUBLIC_REWARDS_ENABLED, default off)
 import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId } from '@/lib/wrongNotebook';
 import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
 import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
@@ -58,7 +59,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget } from '@/lib/activity';
 
 
@@ -310,7 +311,18 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
   }
+  // Saturday Weekly Review (flag NEXT_PUBLIC_REWARDS_ENABLED, default off). Like homework: not written to trials/mastery.
+  const [wrKey,setWrKey]=useState(0);
+  function startWeekly(ids){
+    const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
+    if(!built.plan.length) return;
+    setRoundReview({plan:built.plan, sessionNum:0, weekly:{items:ids.length}});
+  }
   function finishRoundReview(results){
+    if(roundReview.weekly){
+      reportWeeklyReview(subject, roundReview.weekly.items).then(()=>setWrKey(k=>k+1));
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     if(roundReview.homework){
       serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
       setRoundReview(null); setScreen("mistakes"); return;
@@ -538,6 +550,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       {screen==="mistakes" ? (
         <>
           <ParentHomework subject="Chinese" refreshKey={hwKey} onStart={startHomework}/>
+          <WeeklyReviewCard subject="Chinese" prog={prog} roundIndex={ZH_ROUND_INDEX} refreshKey={wrKey} onStart={startWeekly}/>
           {drill && (
             <div style={{padding:"14px 16px 0"}}>
               <button onClick={()=>setDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#B91C1C,#EF4444)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",fontFamily:"\'KaiTi\',\'STKaiti\',\'LXGW WenKai\',serif",boxShadow:"0 4px 14px rgba(185,28,28,0.25)"}}>
@@ -1293,7 +1306,18 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
   }
+  // Saturday Weekly Review (flag NEXT_PUBLIC_REWARDS_ENABLED, default off). Like homework: not written to trials/mastery.
+  const [wrKey,setWrKey]=useState(0);
+  function startWeekly(ids){
+    const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
+    if(!built.plan.length) return;
+    setRoundReview({plan:built.plan, sessionNum:0, weekly:{items:ids.length}});
+  }
   function finishRoundReview(results){
+    if(roundReview.weekly){
+      reportWeeklyReview(subject, roundReview.weekly.items).then(()=>setWrKey(k=>k+1));
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     if(roundReview.homework){
       serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
       setRoundReview(null); setScreen("mistakes"); return;
@@ -1524,6 +1548,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         onMistakes={(key)=>openSubject(key, "mistakes")}
         onMore={(key)=>openSubject(key, "home")}
       />
+      <StickerShelf/>
       {studentToast && <ComingSoonToast message={studentToast} onDone={()=>setStudentToast(null)}/>}
     </Wrap>
   );
@@ -1605,6 +1630,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       ) : screen==="mistakes" ? (
         <>
           <ParentHomework subject="English" refreshKey={hwKey} onStart={startHomework}/>
+          <WeeklyReviewCard subject="English" prog={prog} roundIndex={EN_ROUND_INDEX} refreshKey={wrKey} onStart={startWeekly}/>
           {enDrill && (
             <div style={{padding:"14px 16px 0"}}>
               <button onClick={()=>setEnDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#0F172A,#1E3A6E)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",boxShadow:"0 4px 14px rgba(15,23,42,0.25)"}}>

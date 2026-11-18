@@ -1,8 +1,8 @@
 // Browser-side helpers for the optional Supabase server (only used when NEXT_PUBLIC_SERVER_AUTH=true).
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
-export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK } from "@/lib/supabase/config";
-import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA } from "@/lib/supabase/config";
+export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS } from "@/lib/supabase/config";
+import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW } from "@/lib/supabase/config";
 
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 
@@ -21,6 +21,7 @@ async function call(path, method, body) {
 }
 export const serverPost = (p, b) => call(p, "POST", b || {});
 export const serverGet = (p) => call(p, "GET");
+export const serverPut = (p, b) => call(p, "PUT", b || {});
 
 function lsJson(key, fallback) { try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; } }
 function pick(obj, prefix) {
@@ -80,6 +81,12 @@ export function reportActivity(subject, key, results, minutes) {
     serverPost("/api/activity", {
       subject, key: String(key),
       questions: graded.length, correct: graded.filter(r => r.correct).length, minutes,
+    }).then(() => {
+      // Rewards (flag NEXT_PUBLIC_REWARDS_ENABLED, default off): ask the server whether today's target is now met. Idempotent.
+      if (!_RW) return;
+      serverPost("/api/student/rewards/claim", {}).then(r => {
+        if (r && r.ok && typeof window !== "undefined") window.dispatchEvent(new Event("genius-rewards-changed"));
+      });
     });
   } catch {}
 }
@@ -137,4 +144,12 @@ export async function syncLocalWrongAnswersOnce(username) {
 export function updateWrongAnswer(subject, questionId, attemptKey, patch) {
   if (!_SA || !_WA || questionId == null || !attemptKey) return;
   try { serverPost("/api/wrong-answers/update", { subject, questionId: String(questionId), attemptKey, ...patch }); } catch {}
+}
+
+// Rewards: report a finished Saturday weekly review (flag NEXT_PUBLIC_REWARDS_ENABLED, default off). Server checks it is Saturday (SGT).
+export async function reportWeeklyReview(subject, items) {
+  if (!_SA || !_RW) return { skipped: true };
+  const r = await serverPost("/api/student/rewards/weekly", { subject, items });
+  if (typeof window !== "undefined") window.dispatchEvent(new Event("genius-rewards-changed"));
+  return r;
 }
