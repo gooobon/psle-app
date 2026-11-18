@@ -74,6 +74,12 @@ const finish = (admin, parentId, date, channel, status, detail) =>
   admin.from("alert_log").update({ status, detail: detail ? String(detail).slice(0, 200) : null, updated_at: new Date().toISOString() })
     .eq("parent_id", parentId).eq("date", date).eq("channel", channel);
 
+async function emailConfirmed(admin, id) {
+  const { data, error } = await admin.auth.admin.getUserById(id);
+  if (error) throw new Error("auth lookup failed");
+  return !!data?.user?.email_confirmed_at;
+}
+
 export async function runDailyAlerts(admin, { env = process.env, now = new Date() } = {}) {
   const { data: parents } = await admin.from("profiles").select("id,display_name,email").eq("role", "parent");
   const summary = { date: sgtDate(now), parents: 0, sent: 0, dryRun: 0, alreadyDone: 0, skipped: 0, errors: 0 };
@@ -82,6 +88,8 @@ export async function runDailyAlerts(admin, { env = process.env, now = new Date(
       const { payload, settings } = await buildParentPayload(admin, parent, now);
       const emailCh = channelsFor(parent, settings).filter((c) => c.type === "email" && c.enabled);
       if (!emailCh.length || !payload.children.length) { summary.skipped++; continue; }
+      // Email is on by default but only for a CONFIRMED address (Supabase email_confirmed_at).
+      if (!(await emailConfirmed(admin, parent.id))) { summary.skipped++; continue; }
       summary.parents++;
       if (!CHANNELS.email.isEnabled(env)) {
         // Dry run: render only, log counts (no addresses, no bodies), no alert_log row so enabling later still sends today.

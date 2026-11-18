@@ -627,14 +627,15 @@ function GuardianTools({linkedStudents,onChildLinked}){
 
 // Alert settings: WhatsApp number + opt-in (stored only; sending is disabled server-side until the owner enables it).
 function AlertSettings(){
-  const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState("");
-  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
-  async function save(){ setMsg(""); const r=await serverPost("/api/parent/settings",{whatsapp:{number:num.trim(),optIn:opt}}); setMsg(r.ok?"Saved.":(r.error||"Failed.")); }
+  const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState(""); const [em,setEm]=useState(true);
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
+  async function save(){ setMsg(""); const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}}); setMsg(r.ok?"Saved.":(r.error||"Failed.")); }
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
       <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alert settings</button>
       {open&&(<div style={{marginTop:10}}>
+        <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
         <button onClick={save} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
