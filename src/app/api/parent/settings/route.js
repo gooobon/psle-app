@@ -39,7 +39,13 @@ export async function POST(request) {
     const list = Array.isArray(cur?.alert_channels) ? cur.alert_channels : [];
     const old = list.find(c => c.type === "email");
     const addr = old?.address || cur?.alert_email || g.me.profile.email || null;
-    patch.alert_channels = [...list.filter(c => c.type !== "email"), { type: "email", enabled: b.email.enabled, address: addr }];
+    // No entry yet (older account) = enabled by default, but only for a confirmed address. Explicit false is always stored.
+    let enabled = b.email.enabled;
+    if (!old && enabled) {
+      const { data: u } = await admin.auth.admin.getUserById(g.me.profile.id);
+      enabled = !!u?.user?.email_confirmed_at;
+    }
+    patch.alert_channels = [...list.filter(c => c.type !== "email"), { type: "email", enabled, address: addr }];
   }
   if (b.whatsapp && typeof b.whatsapp === "object") {
     const number = String(b.whatsapp.number || "").trim();

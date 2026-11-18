@@ -628,7 +628,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
 // Alert settings: WhatsApp number + opt-in (stored only; sending is disabled server-side until the owner enables it).
 function AlertSettings(){
   const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState(""); const [em,setEm]=useState(true);
-  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(!!(e&&e.enabled)); const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
   async function save(){ setMsg(""); const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}}); setMsg(r.ok?"Saved.":(r.error||"Failed.")); }
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   return(
