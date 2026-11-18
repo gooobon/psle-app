@@ -54,6 +54,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
+import { SERVER_AUTH, serverPost, importLocalOnce } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 
 
 
@@ -131,6 +132,19 @@ function persistProgressLS(key, data){
 }
 
 function allUsers(){ return Object.values(STORE.users); }
+
+// Server auth (flag on): mirror a server profile into the local store WITHOUT a password, so the
+// existing app (which reads STORE.users) keeps working. Existing local records are never replaced.
+function mirrorServerUser(p, extra){
+  const id = p.role==="parent" ? p.id : p.username;
+  const prev = STORE.users[id] || {};
+  STORE.users[id] = {
+    ...prev, id, role:p.role, name:p.name, grade:p.grade||prev.grade, school:p.school||prev.school,
+    serverId:p.id, ...(extra||{}),
+  };
+  persistUsers();
+  return STORE.users[id];
+}
 
 // Admin auth is server-side only: see /api/admin/{login,logout,session}.
 const ADMIN_USER = { id:"admin", name:"Admin", role:"admin" };
@@ -520,7 +534,7 @@ function AuthScreen({onLogin, onSignup}){
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
           {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
           {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("login")}/>}
-          {mode==="signup_parent"  && <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>}
+          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("login")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>)}
         </div>
       </div>
     </Wrap>
@@ -798,6 +812,29 @@ function SchoolDropdown({value, onChange}){
   );
 }
 
+// Server login (flag on). Returns the local user record on success, or null.
+async function serverLogin(role, idOrEmail, pw){
+  if(role==="parent"){
+    const r = await serverPost("/api/auth/login",{email:idOrEmail,password:pw});
+    if(!r.ok) return null;
+    const kids = (r.children||[]).map(c=>mirrorServerUser(c));
+    return mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
+  }
+  const username = idOrEmail.toLowerCase();
+  let r = await serverPost("/api/auth/student/login",{username,password:pw});
+  if(!r.ok){
+    // Legacy path: no server account yet, but the local record matches -> create it with the same password.
+    const local = STORE.users[username];
+    if(local && local.role==="student" && local.password===pw){
+      r = await serverPost("/api/auth/legacy-migrate",{username,password:pw,name:local.name,grade:local.grade,school:local.school});
+    }
+    if(!r.ok) return null;
+  }
+  const user = mirrorServerUser(r.profile);
+  importLocalOnce(user.id); // fire-and-forget; never blocks or alters local data
+  return user;
+}
+
 function LoginForm({onLogin, onGoSignup}){
   const [role, setRole] = useState("student");
   const [id,   setId]   = useState("");
@@ -817,9 +854,15 @@ function LoginForm({onLogin, onGoSignup}){
 
   async function handleLogin(){
     setErr("");
+    if(id.trim().toLowerCase()==="admin" && await adminLogin(pw)){ onLogin("admin", ADMIN_USER); return; }
+    if(SERVER_AUTH && !id.trim().startsWith("demo_")){
+      const r = await serverLogin(role, id.trim(), pw);
+      if(r) { onLogin(role, r); return; }
+      setErr(role==="parent" ? "Wrong email or password." : "Wrong ID or password. Please check and try again.");
+      return;
+    }
     const user = allUsers().find(u=>u.id===id.trim()&&u.password===pw&&u.role===role);
     if(user){ onLogin(role, user); return; }
-    if(id.trim().toLowerCase()==="admin" && await adminLogin(pw)){ onLogin("admin", ADMIN_USER); return; }
     setErr("Wrong ID or password. Please check and try again.");
   }
 
@@ -840,7 +883,7 @@ function LoginForm({onLogin, onGoSignup}){
         <span style={{color:"#3B82F6",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700}}>Fill </span>
       </div>
 
-      <InputField label="ID" value={id} onChange={setId} placeholder="Your login ID"/>
+      <InputField label={SERVER_AUTH&&role==="parent"?"Email":"ID"} value={id} onChange={setId} placeholder={SERVER_AUTH&&role==="parent"?"Your email":"Your login ID"}/>
       <div style={{position:"relative",marginBottom:16}}>
         <InputField label="Password" value={pw} onChange={setPw} type={showPw?"text":"password"} placeholder="Your password" onEnter={handleLogin}/>
         <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
@@ -853,9 +896,9 @@ function LoginForm({onLogin, onGoSignup}){
       <div style={{marginTop:20,textAlign:"center"}}>
         <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:12}}>Don't have an account?</div>
         <div style={{display:"flex",gap:10}}>
-          <button onClick={()=>onGoSignup("signup_student")} style={{flex:1,background:"none",border:`2px solid ${C.navy}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:C.navy}}>
+          {!SERVER_AUTH&&<button onClick={()=>onGoSignup("signup_student")} style={{flex:1,background:"none",border:`2px solid ${C.navy}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:C.navy}}>
              Student Sign Up
-          </button>
+          </button>}
           <button onClick={()=>onGoSignup("signup_parent")} style={{flex:1,background:"none",border:`2px solid #7C3AED`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:"#7C3AED"}}>
              Parent Sign Up
           </button>
@@ -950,6 +993,42 @@ function SignupStudentForm({onSignup, onBack}){
 
       {err&&<ErrorBox msg={err}/>}
       <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account </BigBtn>
+    </div>
+  );
+}
+
+// Server mode: parent signs up with a real email (children are then created from the dashboard).
+function SignupParentServerForm({onLogin, onBack}){
+  const [form, setForm] = useState({name:"",email:"",password:"",confirm:""});
+  const [err, setErr] = useState("");
+  const [info, setInfo] = useState("");
+  const [busy, setBusy] = useState(false);
+  function f(k,v){ setForm(p=>({...p,[k]:v})); }
+  async function submit(){
+    setErr(""); setInfo("");
+    if(!form.name.trim()) return setErr("Please enter your name.");
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) return setErr("Please enter a valid email.");
+    if(form.password.length<8) return setErr("Password must be at least 8 characters.");
+    if(form.password!==form.confirm) return setErr("Passwords do not match.");
+    setBusy(true);
+    const r = await serverPost("/api/auth/parent/signup",{name:form.name.trim(),email:form.email.trim(),password:form.password});
+    setBusy(false);
+    if(!r.ok) return setErr(r.error||"Sign-up failed.");
+    if(r.needsConfirmation) return setInfo("Check your email to confirm your address, then log in.");
+    onLogin("parent", mirrorServerUser(r.profile,{childIds:[]}));
+  }
+  return(
+    <div>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
+      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Create Parent Account</div>
+      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>After signing up you can add your child's account from the dashboard.</div>
+      <InputField label="Your Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mrs Lee"/>
+      <InputField label="Email" value={form.email} onChange={v=>f("email",v)} placeholder="you@example.com"/>
+      <InputField label="Password (min 8 chars)" value={form.password} onChange={v=>f("password",v)} type="password" placeholder="Create a password"/>
+      <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={submit}/>
+      {err&&<ErrorBox msg={err}/>}
+      {info&&<div style={{background:"#F0FDF4",borderRadius:10,padding:"9px 13px",marginBottom:12,fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:600}}>{info}</div>}
+      <BigBtn color="#7C3AED" onClick={busy?()=>{}:submit}>{busy?"Creating...":"Create Parent Account"}</BigBtn>
     </div>
   );
 }
@@ -1947,6 +2026,7 @@ function App(){
   }
   function handleLogout(){
     if(auth && auth.role==="admin") fetch("/api/admin/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
+    if(SERVER_AUTH && auth && auth.role!=="admin") serverPost("/api/auth/logout");
     setAuth(null);
   }
 
@@ -1972,6 +2052,12 @@ function App(){
       getProgress={getProgress}
       setProgress={(uid,g,s,d)=>{ setProgress(uid,g,s,d); refresh(); }}
       refresh={refresh}
+      onChildCreated={SERVER_AUTH ? (c)=>{
+        const kid = mirrorServerUser(c);
+        const par = STORE.users[user.id];
+        par.childIds = [...new Set([...(par.childIds||[]), kid.id])];
+        persistUsers(); refresh();
+      } : null}
     />;
   }
 

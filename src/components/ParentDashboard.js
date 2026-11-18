@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
+import { SERVER_AUTH, serverPost } from "@/lib/serverClient";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 
 // ── Parent: Mistakes review tab ───────────────────────────────
@@ -507,7 +508,44 @@ function ParentAdviceTab({advice, child, onApply}){
 }
 
 // ── Parent App (main container) ───────────────────────────────
-function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh}){
+// Server mode only: parent creates a child account (username + password the parent chooses).
+function AddChildForm({onCreated}){
+  const [open, setOpen] = useState(false);
+  const [f, setF] = useState({username:"",name:"",grade:"P3",school:"",password:""});
+  const [err, setErr] = useState("");
+  const [ok, setOk] = useState("");
+  const [busy, setBusy] = useState(false);
+  const set=(k,v)=>setF(p=>({...p,[k]:v}));
+  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
+  async function submit(){
+    setErr(""); setOk(""); setBusy(true);
+    const r = await serverPost("/api/parent/children",{...f,username:f.username.trim().toLowerCase()});
+    setBusy(false);
+    if(!r.ok) return setErr(r.error||"Could not create child.");
+    onCreated&&onCreated(r.child);
+    setOk(`Created. ${r.child.name} logs in with username "${r.child.username}" and the password you set.`);
+    setF({username:"",name:"",grade:"P3",school:"",password:""});
+  }
+  return(
+    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add child</button>
+      {open&&(
+        <div style={{marginTop:10}}>
+          <input style={inp} placeholder="Child's username (a-z, 0-9, _)" value={f.username} onChange={e=>set("username",e.target.value)}/>
+          <input style={inp} placeholder="Display name" value={f.name} onChange={e=>set("name",e.target.value)}/>
+          <select style={inp} value={f.grade} onChange={e=>set("grade",e.target.value)}>{GRADES.map(g=><option key={g} value={g}>{g}</option>)}</select>
+          <input style={inp} placeholder="School" value={f.school} onChange={e=>set("school",e.target.value)}/>
+          <input style={inp} type="password" placeholder="Child's password (min 6 chars)" value={f.password} onChange={e=>set("password",e.target.value)}/>
+          {err&&<div style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>{err}</div>}
+          {ok&&<div style={{color:"#065F46",fontSize:12,marginBottom:8}}>{ok}</div>}
+          <button disabled={busy} onClick={submit} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>{busy?"Creating...":"Create child account"}</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated}){
   const [selectedId, setSelectedId] = useState(linkedStudents[0]?.id||null);
   const [grade,   setGrade]   = useState("P3");
   const [subject, setSubject] = useState("English");
@@ -592,6 +630,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
       </div>
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
+        {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>
