@@ -22,7 +22,7 @@ export async function GET() {
   return jok(view(data));
 }
 
-// Body: { dailyTarget?: {English:1,...}, whatsapp?: { number: "+65...", optIn: boolean } }
+// Body: { dailyTarget?: {English:1,...}, email?: { enabled: boolean }, whatsapp?: { number: "+65...", optIn: boolean } }
 export async function POST(request) {
   const g = await guard(); if (g.err) return g.err;
   const b = await readJson(request);
@@ -34,12 +34,19 @@ export async function POST(request) {
     for (const s of SUBJECT_KEYS) if (b.dailyTarget[s] != null) t[s] = Math.max(0, Math.min(10, Math.round(Number(b.dailyTarget[s]) || 0)));
     patch.daily_target = t;
   }
+  if (b.email && typeof b.email === "object" && typeof b.email.enabled === "boolean") {
+    // Opt out / back in. Address falls back to the account email; stored per parent in alert_channels.
+    const list = Array.isArray(cur?.alert_channels) ? cur.alert_channels : [];
+    const old = list.find(c => c.type === "email");
+    const addr = old?.address || cur?.alert_email || g.me.profile.email || null;
+    patch.alert_channels = [...list.filter(c => c.type !== "email"), { type: "email", enabled: b.email.enabled, address: addr }];
+  }
   if (b.whatsapp && typeof b.whatsapp === "object") {
     const number = String(b.whatsapp.number || "").trim();
     const optIn = !!b.whatsapp.optIn;
     if (number && !isE164(number)) return jerr("WhatsApp number must be in international format, e.g. +6591234567", 400);
     if (optIn && !number) return jerr("enter a WhatsApp number to opt in", 400);
-    const rest = (Array.isArray(cur?.alert_channels) ? cur.alert_channels : []).filter(c => c.type !== "whatsapp");
+    const rest = (Array.isArray(patch.alert_channels) ? patch.alert_channels : Array.isArray(cur?.alert_channels) ? cur.alert_channels : []).filter(c => c.type !== "whatsapp");
     // Stored even while WHATSAPP_ENABLED is off; nothing is sent until the owner enables the provider.
     rest.push({ type: "whatsapp", enabled: optIn, address: number || null, opt_in: optIn });
     patch.alert_channels = rest;
