@@ -56,6 +56,8 @@ Details and numbers: `CLAUDE.md` §6.
 ## 6. Roadmap
 Authoritative order in `CLAUDE.md` §9: docs -> security + minimal server (parent daily check/alerts, server-side mistakes history) -> concept/trap taxonomy -> wrong-answer notebook redesign -> real past-paper mocks -> exam calendar -> final explanation/answer QA.
 
+Concept / trap taxonomy **v1 is a DRAFT** in `docs/taxonomy.md` (catalogue: `src/data/taxonomy/taxonomy.json`). It is not wired into the student UI. Owner approval is still required before the wrong-answer notebook uses the ids.
+
 ## 7. Root scripts (do not move; pipelines depend on paths)
 **Build / emit (generators)**
 `build_wa1_practice.js` (EN), `emit_ts.py` (ZH), `build_wa1_practice_zh.js` (ZH convert/validate/emit), `generate_wa1_zh.js` (ZH API generator, needs key), `build_seed_all.js`, `build_zh_dict.py`, `build_duoyinzi.js`, `write_engine.js`, `translate_korean.js`; subfolder tools: `tools/bank/build_zh_bank.py`, `tools/gen/*`, `tools/vocab/*`.
@@ -76,7 +78,7 @@ Authoritative order in `CLAUDE.md` §9: docs -> security + minimal server (paren
 Source of truth: `20260622_WA1_complete.json`, `wa1_zh_complete.json`. Seeds: `seed_*.json`, `seed_zh_all.json`. Patches: `en_patch_S01..S60.json`, `wa1_patches/`, `wa1_expl/`. Chinese dict/segments: `zh_dict.json`, `zh_segments.json`, `zh_stoplist.json`, `zh_overrides.json`, `wa1_zh_dict/`. Other: `wa1_zh_drill.json`, `wa1_zh_pilot_en.json`, `comp60_*.json`, `rewrite_pp_*`, `*_backup.json`, `*.pp_backup.json`, `outputs_bak_*.json`, `zh_wa1_ocr_pages.json`, `duoyinzi_cursor.json`. Schemas: `types.ts`, `zh_wa1_schema.ts`. Review mockups: `*_popup.html`.
 
 ## 8. Document map
-Current: `CLAUDE.md`, this file, `EN_WA1_HANDOFF_v1.md`, `ZH_WA1_HANDOFF_v10.md`, `DECISIONS_FOR_REVIEW.md`, `RESUME_STATE.md`, `ZH_P4_REVIEW_GATE_DESIGN.md`, `ZH_P5_ANTIGUESS_DESIGN.md`, `ZH_EXPANSION_RULES.md`, `ZH_VOCAB_POPUP_PLAN_v1.md`, `ZH_WA1_EXPL_QUALITY_PLAN.md`, `P3_AUDIT_REPORT.md` and report files (`P1_*`, `P2_*`, `zh_vocab_incon_report.md`, `duoyinzi_cursor_notes.md`).
+Current: `CLAUDE.md`, this file, `docs/taxonomy.md` (concept/trap taxonomy v1 DRAFT), `EN_WA1_HANDOFF_v1.md`, `ZH_WA1_HANDOFF_v10.md`, `DECISIONS_FOR_REVIEW.md`, `RESUME_STATE.md`, `ZH_P4_REVIEW_GATE_DESIGN.md`, `ZH_P5_ANTIGUESS_DESIGN.md`, `ZH_EXPANSION_RULES.md`, `ZH_VOCAB_POPUP_PLAN_v1.md`, `ZH_WA1_EXPL_QUALITY_PLAN.md`, `P3_AUDIT_REPORT.md` and report files (`P1_*`, `P2_*`, `zh_vocab_incon_report.md`, `duoyinzi_cursor_notes.md`).
 Archived in `docs/archive/`: `ZH_WA1_HANDOFF.md` (v2), `_v3`, `_v4`, `_v5`, `_v7`, `_v8`, `_v9`, `NEW_CHAT_PROMPT.txt`, `NEW_CHAT_PROMPT_v3.txt`. (There is no v6 file.) Archived files may still mention old paths and rules; trust `CLAUDE.md` and v10 instead.
 
 ## 9. English hint rules (core asset, kept here for quick reference)

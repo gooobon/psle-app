@@ -63,7 +63,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "only then"
        }
       ],
-      "explanation_en": "This is a 把-sentence: 把 + object (作业) + verb + result (写完了). It shows that the homework was dealt with and finished. 对, 跟 and 给 do not fit this pattern."
+      "explanation_en": "This is a 把-sentence: 把 + object (作业) + verb + result (写完了). It shows that the homework was dealt with and finished. 对, 跟 and 给 do not fit this pattern.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C2",
@@ -111,7 +115,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "fresh"
        }
       ],
-      "explanation_en": "跟……一起 is a fixed pattern meaning 'together with someone'. So 跟妈妈一起去 means 'went with mum'. When you see 一起, look for 跟 before the person."
+      "explanation_en": "跟……一起 is a fixed pattern meaning 'together with someone'. So 跟妈妈一起去 means 'went with mum'. When you see 一起, look for 跟 before the person.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C3",
@@ -159,7 +167,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "storybook"
        }
       ],
-      "explanation_en": "是……的 is a fixed pattern used to emphasise the source or background of something that already happened. 是老师借给小明的 explains where the book came from. 把, 跟 and 对 do not work here."
+      "explanation_en": "是……的 is a fixed pattern used to emphasise the source or background of something that already happened. 是老师借给小明的 explains where the book came from. 把, 跟 and 对 do not work here.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C4",
@@ -207,7 +219,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "little bird"
        }
       ],
-      "explanation_en": "被 is the passive marker. 小鸟被风吹走了 means the bird was blown away by the wind — the bird did not act, it was acted upon. 把 is for active sentences where the subject does something to an object."
+      "explanation_en": "被 is the passive marker. 小鸟被风吹走了 means the bird was blown away by the wind — the bird did not act, it was acted upon. 把 is for active sentences where the subject does something to an object.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C5",
@@ -255,7 +271,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "to say; to speak"
        }
       ],
-      "explanation_en": "对……说 is a fixed pattern meaning 'to say to someone'. 爸爸对我说 means Dad said to me. 被 is passive, 把 needs a result complement, and 跟 is less formal here."
+      "explanation_en": "对……说 is a fixed pattern meaning 'to say to someone'. 爸爸对我说 means Dad said to me. 被 is passive, 把 needs a result complement, and 跟 is less formal here.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C6",
@@ -303,7 +323,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "playground"
        }
       ],
-      "explanation_en": "把-sentence: subject + 把 + object + verb + result/location. Xiao Wen actively puts the bag somewhere, so use 把. 被 is passive, 对 shows direction or attitude, 跟 means 'together with'."
+      "explanation_en": "把-sentence: subject + 把 + object + verb + result/location. Xiao Wen actively puts the bag somewhere, so use 把. 被 is passive, 对 shows direction or attitude, 跟 means 'together with'.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C7",
@@ -351,7 +375,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "classmate"
        }
       ],
-      "explanation_en": "被 marks a passive sentence. 这幅画被同学们称赞 means the painting was praised by the classmates. The painting received the action, it did not do it. Use 被 when the subject is acted upon."
+      "explanation_en": "被 marks a passive sentence. 这幅画被同学们称赞 means the painting was praised by the classmates. The painting received the action, it did not do it. Use 被 when the subject is acted upon.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C8",
@@ -399,7 +427,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "health"
        }
       ],
-      "explanation_en": "对……关心 is a fixed pattern meaning 'to be concerned about something'. 奶奶对健康非常关心 means grandmother is very concerned about health. When you see 关心, 重视 or 感兴趣, the preposition before the topic is almost always 对."
+      "explanation_en": "对……关心 is a fixed pattern meaning 'to be concerned about something'. 奶奶对健康非常关心 means grandmother is very concerned about health. When you see 关心, 重视 or 感兴趣, the preposition before the topic is almost always 对.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C9",
@@ -447,7 +479,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "answer"
        }
       ],
-      "explanation_en": "对……感到 is a fixed pattern meaning 'to feel something about something', so 对这道数学题感到很困难 (feels very troubled by this maths question) makes sense. Fixed pattern: 对 + a thing + 感到 + a feeling. Seeing 感到, think 对. 把, 给 and 跟 do not fit this pattern."
+      "explanation_en": "对……感到 is a fixed pattern meaning 'to feel something about something', so 对这道数学题感到很困难 (feels very troubled by this maths question) makes sense. Fixed pattern: 对 + a thing + 感到 + a feeling. Seeing 感到, think 对. 把, 给 and 跟 do not fit this pattern.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C10",
@@ -495,7 +531,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "to achieve; to come true"
        }
       ],
-      "explanation_en": "对……说 is a fixed pattern meaning 'to say to someone', so 对我说 (said to me) makes sense. When someone speaks toward another person, use 对 + person + 说. 把, 被 and 让 all change the meaning or structure and do not fit."
+      "explanation_en": "对……说 is a fixed pattern meaning 'to say to someone', so 对我说 (said to me) makes sense. When someone speaks toward another person, use 对 + person + 说. 把, 被 and 让 all change the meaning or structure and do not fit.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C11",
@@ -543,7 +583,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "careless; sloppy"
        }
       ],
-      "explanation_en": "The sentence describes a regular habit — finishing homework carefully and never being sloppy. 总是 means 'always' and shows a repeated habit, which fits perfectly. 虽然 needs a 但是 (but) to complete the pattern, and 因为 needs a 所以 (so); neither of those linking words appears here."
+      "explanation_en": "The sentence describes a regular habit — finishing homework carefully and never being sloppy. 总是 means 'always' and shows a repeated habit, which fits perfectly. 虽然 needs a 但是 (but) to complete the pattern, and 因为 needs a 所以 (so); neither of those linking words appears here.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD01_C12",
@@ -591,7 +635,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "en": "to set off"
        }
       ],
-      "explanation_en": "The second half of the sentence has 还是 (still), which is a signal for contrast. 虽然……还是…… is a fixed pattern meaning 'although … still …', so 虽然 fits perfectly at the start. 因为 pairs with 所以 (so) for cause and effect, not contrast. 总是 and 对于 cannot link two clauses this way."
+      "explanation_en": "The second half of the sentence has 还是 (still), which is a signal for contrast. 虽然……还是…… is a fixed pattern meaning 'although … still …', so 虽然 fits perfectly at the start. 因为 pairs with 所以 (so) for cause and effect, not contrast. 总是 and 对于 cannot link two clauses this way.",
+      "conceptIds": [
+       "zh.yufa.word_order"
+      ],
+      "taxonomyStatus": "certain"
      }
     ]
    }
@@ -656,7 +704,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "línshī",
         "en": "to get soaked"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C2",
@@ -704,7 +756,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "chuān yīfu",
         "en": "to put on clothes"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C3",
@@ -752,7 +808,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "chéngjì",
         "en": "results; marks"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C4",
@@ -800,7 +860,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "zuò zuòyè",
         "en": "to do homework"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C5",
@@ -848,7 +912,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "shēngbìng",
         "en": "to be sick"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C6",
@@ -896,7 +964,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "tiānqì",
         "en": "weather"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C7",
@@ -944,7 +1016,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "xiǎngshòu",
         "en": "to enjoy"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C8",
@@ -992,7 +1068,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "hòuhuǐ",
         "en": "to regret"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C10",
@@ -1040,7 +1120,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "niánjì",
         "en": "age"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C11",
@@ -1088,7 +1172,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "liànxí",
         "en": "to practise"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C12",
@@ -1136,7 +1224,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "chénliàn",
         "en": "morning exercise"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      },
      {
       "id": "ZD02_C14",
@@ -1184,7 +1276,11 @@ export const WA1_ZH_DRILL: ZhPracticeSet[] =
         "py": "jiānchí",
         "en": "to insist; to persist"
        }
-      ]
+      ],
+      "conceptIds": [
+       "zh.yufa.lianci"
+      ],
+      "taxonomyStatus": "certain"
      }
     ]
    }
