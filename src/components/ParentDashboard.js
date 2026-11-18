@@ -1,9 +1,9 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
-import { SERVER_AUTH, serverPost } from "@/lib/serverClient";
+import { SERVER_AUTH, serverPost, serverGet } from "@/lib/serverClient";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 
 // ── Parent: Mistakes review tab ───────────────────────────────
@@ -545,6 +545,88 @@ function AddChildForm({onCreated}){
   );
 }
 
+// ── Server mode only ──────────────────────────────────────────
+// "Did they do it today?": read from the server (daily_activity), so it works from any device.
+function TodayCard({linkedStudents}){
+  const [data,setData]=useState(null); const [err,setErr]=useState("");
+  useEffect(()=>{ let off=false; serverGet("/api/parent/today").then(r=>{ if(off) return; if(r.ok) setData(r); else setErr("Could not load today's activity."); }); return ()=>{off=true}; },[linkedStudents.length]);
+  if(err) return <div style={{fontSize:12,color:C.muted,marginBottom:14}}>{err}</div>;
+  if(!data||!data.children.length) return null;
+  return(
+    <div style={{marginBottom:14}}>
+      {data.children.map(c=>{
+        const subs=Object.entries(c.subjects).filter(([k,v])=>v.target>0&&LIVE_CONTENT[`${c.grade||"P3"}_${k}`]);
+        const allDone=subs.length>0&&subs.every(([,v])=>v.sets>=v.target);
+        return(
+          <div key={c.id} style={{background:"#fff",border:`2px solid ${allDone?"#10B981":"#F59E0B"}`,borderRadius:14,padding:14,marginBottom:10}}>
+            <div style={{fontWeight:900,fontSize:14,color:"#0F172A",marginBottom:8}}>Did {c.name} do it today? {allDone?"🎉":""}</div>
+            {subs.map(([k,v])=>(
+              <div key={k} style={{display:"flex",justifyContent:"space-between",fontSize:13,padding:"3px 0"}}>
+                <span>{SUBJECTS[k]?.icon} {k}</span><span style={{fontWeight:800}}>{v.sets>=v.target?"✅":"❌"} {v.sets}/{v.target} set{v.target===1?"":"s"}</span>
+              </div>
+            ))}
+            <div style={{fontSize:12,color:C.muted,marginTop:8}}>Questions today: <b>{c.questions}</b> · Accuracy: <b>{c.accuracy==null?"–":c.accuracy+"%"}</b></div>
+            <div style={{display:"flex",gap:4,marginTop:8}} title="Last 7 days">
+              {c.strip.map(d=>(<div key={d.date} style={{flex:1,textAlign:"center"}}>
+                <div style={{height:14,borderRadius:4,background:d.sets>0?"#10B981":"#E2E8F0"}}/>
+                <div style={{fontSize:9,color:C.muted,marginTop:2}}>{d.date.slice(8)}</div></div>))}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+// Link another parent (by their registered email) to one of my children, or link an existing child account.
+function GuardianTools({linkedStudents,onChildLinked}){
+  const [open,setOpen]=useState(false);
+  const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.id||"");
+  const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
+  const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
+  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
+  const btn={background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
+  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); }
+  async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
+  return(
+    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Link another parent / existing child</button>
+      {open&&(<div style={{marginTop:10}}>
+        {linkedStudents.length>0&&(<>
+          <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Add another parent to a child</div>
+          <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>{linkedStudents.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select>
+          <input style={inp} placeholder="Other parent's email (they must have signed up)" value={email} onChange={e=>setEmail(e.target.value)}/>
+          <button disabled={busy} style={btn} onClick={linkParent}>Link parent</button>
+        </>)}
+        <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Link an existing child account</div>
+        <input style={inp} placeholder="Child's username" value={lu} onChange={e=>setLu(e.target.value)}/>
+        <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
+        <button disabled={busy} style={btn} onClick={linkChild}>Link child</button>
+        {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
+      </div>)}
+    </div>
+  );
+}
+
+// Alert settings: WhatsApp number + opt-in (stored only; sending is disabled server-side until the owner enables it).
+function AlertSettings(){
+  const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState("");
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
+  async function save(){ setMsg(""); const r=await serverPost("/api/parent/settings",{whatsapp:{number:num.trim(),optIn:opt}}); setMsg(r.ok?"Saved.":(r.error||"Failed.")); }
+  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
+  return(
+    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alert settings</button>
+      {open&&(<div style={{marginTop:10}}>
+        <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
+        <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
+        <button onClick={save} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
+        {msg&&<span style={{fontSize:12,color:C.muted,marginLeft:10}}>{msg}</span>}
+      </div>)}
+    </div>
+  );
+}
+
 function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated}){
   const [selectedId, setSelectedId] = useState(linkedStudents[0]?.id||null);
   const [grade,   setGrade]   = useState("P3");
@@ -630,7 +712,10 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
       </div>
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
+        {SERVER_AUTH&&onChildCreated&&<TodayCard linkedStudents={linkedStudents}/>}
         {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
+        {SERVER_AUTH&&onChildCreated&&<GuardianTools linkedStudents={linkedStudents} onChildLinked={onChildCreated}/>}
+        {SERVER_AUTH&&onChildCreated&&<AlertSettings/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>

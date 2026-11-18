@@ -54,7 +54,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, importLocalOnce } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 
 
 
@@ -261,6 +261,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     next = gradeTicketsFromDrill(next, results, ses);        // wins on different items close tickets
     next = openTicketsFromResults(next, results, ses);       // new failures open tickets
     setProgress(grade, subject, next);
+    reportActivity(subject, 'adapt-'+ses, results);
     setAdaptive(null);
     setDailyResult({ results, sessionNum: ses - 1 });
     let words = [];
@@ -333,6 +334,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const withTrials=recordTrials(prog, results, { mode: isMock?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: WA1_ZH_PRACTICE[wa1Idx].setId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
+    reportActivity(subject, 'set-'+sessionNum, results);
     return sessionNum;
   }
   // Daily practice = the 60 generated sets (flagged mock every 10th session).
@@ -816,7 +818,7 @@ function SchoolDropdown({value, onChange}){
 async function serverLogin(role, idOrEmail, pw){
   if(role==="parent"){
     const r = await serverPost("/api/auth/login",{email:idOrEmail,password:pw});
-    if(!r.ok) return null;
+    if(!r.ok) return r.error==="email not confirmed" ? {needsConfirmation:true} : null;
     const kids = (r.children||[]).map(c=>mirrorServerUser(c));
     return mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
   }
@@ -835,12 +837,42 @@ async function serverLogin(role, idOrEmail, pw){
   return user;
 }
 
+// Server mode: an existing local parent (no email) adds an email + password to create a server account.
+// Nothing local is changed or deleted. With "Confirm email" ON they must click the emailed link, then log in.
+function LegacyParentEmailPrompt({local, onBack}){
+  const [email,setEmail]=useState(""); const [pw,setPw]=useState(""); const [err,setErr]=useState(""); const [done,setDone]=useState(false); const [busy,setBusy]=useState(false);
+  async function submit(){
+    setErr("");
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email.trim())) return setErr("Please enter a valid email.");
+    if(pw.length<8) return setErr("Password must be at least 8 characters.");
+    setBusy(true);
+    const r = await serverPost("/api/auth/parent/signup",{name:local.name||"Parent",email:email.trim(),password:pw});
+    setBusy(false);
+    if(!r.ok) return setErr(r.error||"Could not create the account.");
+    setDone(true);
+  }
+  if(done) return(<div>
+    <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:8}}>Check your email 📧</div>
+    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in, use "Link existing child" on the dashboard to connect your child's account.</div>
+    <BigBtn color="#7C3AED" onClick={onBack}>Back to login</BigBtn></div>);
+  return(<div>
+    <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:6}}>Add your email</div>
+    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>Parent accounts now use an email so you can see progress from any device. Your existing data on this device is kept.</div>
+    <InputField label="Email" value={email} onChange={setEmail} placeholder="you@example.com"/>
+    <InputField label="New password (min 8 chars)" value={pw} onChange={setPw} type="password" placeholder="Choose a password" onEnter={submit}/>
+    {err&&<ErrorBox msg={err}/>}
+    <BigBtn color="#7C3AED" onClick={busy?()=>{}:submit}>{busy?"Creating...":"Create server account"}</BigBtn>
+    <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontWeight:700,marginTop:10}}>Cancel</button>
+  </div>);
+}
+
 function LoginForm({onLogin, onGoSignup}){
   const [role, setRole] = useState("student");
   const [id,   setId]   = useState("");
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
+  const [legacyParent, setLegacyParent] = useState(null);
 
   function fillDemo(){
     if(role==="student"){ setId("demo_student"); setPw("demo123"); }
@@ -852,11 +884,19 @@ function LoginForm({onLogin, onGoSignup}){
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
+  if(legacyParent) return <LegacyParentEmailPrompt local={legacyParent} onBack={()=>setLegacyParent(null)}/>;
+
   async function handleLogin(){
     setErr("");
     if(id.trim().toLowerCase()==="admin" && await adminLogin(pw)){ onLogin("admin", ADMIN_USER); return; }
     if(SERVER_AUTH && !id.trim().startsWith("demo_")){
+      // Legacy parent (local account without an email): ask for an email, then create the server account.
+      if(role==="parent" && !id.includes("@")){
+        const lp = STORE.users[id.trim()];
+        if(lp && lp.role==="parent" && lp.password===pw){ setLegacyParent(lp); return; }
+      }
       const r = await serverLogin(role, id.trim(), pw);
+      if(r && r.needsConfirmation){ setErr("Please confirm your email first: open the link we sent you, then log in."); return; }
       if(r) { onLogin(role, r); return; }
       setErr(role==="parent" ? "Wrong email or password." : "Wrong ID or password. Please check and try again.");
       return;
@@ -1231,6 +1271,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: newEntry.school||null });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
+    reportActivity(subject, 'set-'+sessionNum, results);
     setSessionResult({results, sessionNum, isMock});
     setInSession(false);
     // Step 4: end-of-round word review (Leitner) before the result screen.
@@ -1332,6 +1373,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
           next = gradeTicketsFromDrill(next, results, ses);
           next = openTicketsFromResults(next, results, ses);
           setProgress(grade, subject, next);
+          reportActivity(subject, 'adapt-'+ses, results);
           setEnAdaptive(null);
           setSessionResult({ results, sessionNum: ses - 1, isMock: false });
           setScreen("result");
