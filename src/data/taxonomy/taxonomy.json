@@ -1,0 +1,293 @@
+{
+  "version": "v1-draft",
+  "status": "DRAFT",
+  "needsOwnerApproval": true,
+  "syllabusNotes": [
+    "English leaves follow the MOE Primary English Language Syllabus 2020 grammar and vocabulary items that the PSLE English paper still tests, plus the paper sections (editing, synthesis, visual text, comprehension).",
+    "Chinese leaves keep the 14 skill ids already stored on the P3 Higher Chinese bank, grouped under 字 / 拼音 / 词语 / 语法 / 阅读 / 写话. Antonym, idiom, and composition leaves are syllabus neighbours with no items yet.",
+    "Mathematics leaves follow the MOE 2021 Primary Mathematics Syllabus content strands (Number and Algebra, Measurement and Geometry, Statistics). Ratio and algebra are the P6 standard sub-strands. Speed is not a separate 2021 topic.",
+    "Science leaves follow MOE Primary Science Syllabus 2023 Table 2 (updated Jan 2026): Diversity, Cycles, Systems, Energy, Interactions, from the P3 topic through the P6 topic.",
+    "Current question banks are P3 English and P3 Higher Chinese only. Mathematics and Science have no items in this repo yet."
+  ],
+  "notebookCauses": [
+    { "id": "cause.concept_unknown", "label": "Concept unknown", "studentPrompt": "I did not know the concept" },
+    { "id": "cause.misread_question", "label": "Misread the question", "studentPrompt": "I misread the question" },
+    { "id": "cause.calculation_slip", "label": "Calculation slip", "studentPrompt": "I made a calculation slip" },
+    { "id": "cause.fell_for_trap", "label": "Fell for a trap", "studentPrompt": "I fell for a trap" },
+    { "id": "cause.ran_out_of_time", "label": "Ran out of time", "studentPrompt": "I ran out of time" },
+    { "id": "cause.guessed", "label": "Guessed", "studentPrompt": "I guessed" }
+  ],
+  "traps": [
+    {
+      "id": "trap.misread_question",
+      "label": "Misread the question",
+      "description": "The usual mark loss is answering a nearby question (who, when, before/after, which person) instead of the one that was asked.",
+      "notebookCause": "cause.misread_question",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.negation",
+      "label": "Which is NOT / except",
+      "description": "The stem asks for the false option, the exception, or the one that is NOT true. Students answer the true statement.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.keyword_lift",
+      "label": "Keyword lift",
+      "description": "A word or phrase copied from the passage or stem is a distractor. The item records that distractor as its trap.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.unit_conversion",
+      "label": "Unit or conversion slip",
+      "description": "Marks are lost by forgetting a unit, converting the wrong way, or mixing cm and m, g and kg, min and h, ml and l.",
+      "notebookCause": "cause.calculation_slip",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.multi_step_omission",
+      "label": "Multi-step omission",
+      "description": "A later step is dropped: the student stops after the first number that appears.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.diagram_misread",
+      "label": "Diagram, table, or graph misread",
+      "description": "The mark is lost on a figure, table, graph, or picture (wrong bar, wrong angle, wrong label) rather than on the calculation.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.lookalike",
+      "label": "Lookalike form",
+      "description": "Two forms look or sound alike: 形近字, 同音字, their/there, hear/here, its/it's, or a near number.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.sequence_order",
+      "label": "Order swapped",
+      "description": "Events, steps, or a sequence are put in the wrong order.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.rule_overgeneralise",
+      "label": "Rule applied too widely",
+      "description": "A real rule is used outside its condition (more bigger, double comparative, a spelling rule that does not fit this word).",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.literal_idiom",
+      "label": "Idiom read word by word",
+      "description": "A fixed expression or idiom is taken literally.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": true
+    },
+    {
+      "id": "trap.extra_number",
+      "label": "Unused number",
+      "description": "A number printed in the question is not needed, and using it changes the answer.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.sign_direction",
+      "label": "Sign or direction reversed",
+      "description": "Increase/decrease, before/after a change, or the sign of a value is reversed.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": false
+    },
+    {
+      "id": "trap.partial_answer",
+      "label": "Partial answer",
+      "description": "A two-part question is only half answered.",
+      "notebookCause": "cause.fell_for_trap",
+      "autoTagged": false
+    }
+  ],
+  "zhSkillToConcept": {
+    "xingjinzi": "zh.hanzi.xingjinzi",
+    "tongyinzi": "zh.hanzi.tongyinzi",
+    "duoyinzi": "zh.hanzi.duoyinzi",
+    "shengdiao": "zh.pinyin.shengdiao",
+    "shengmu_yunmu": "zh.pinyin.shengmu_yunmu",
+    "vocab_in_context": "zh.ciyu.vocab_in_context",
+    "jinyici": "zh.ciyu.jinyici",
+    "liangci": "zh.ciyu.liangci",
+    "dapei": "zh.ciyu.dapei",
+    "yufa": "zh.yufa.word_order",
+    "lianci": "zh.yufa.lianci",
+    "detail": "zh.reading.detail",
+    "inference": "zh.reading.inference",
+    "sequence": "zh.reading.sequence",
+    "main_idea": "zh.reading.main_idea"
+  },
+  "zhLookalikeSkills": ["xingjinzi", "tongyinzi"],
+  "zhTopicDefaults": {
+    "PinYin": { "conceptIds": ["zh.pinyin"], "taxonomyStatus": "uncertain" },
+    "BianZi": { "conceptIds": ["zh.hanzi"], "taxonomyStatus": "uncertain", "trapIds": ["trap.lookalike"] },
+    "CiYu": { "conceptIds": ["zh.ciyu"], "taxonomyStatus": "uncertain" },
+    "KanTu": { "conceptIds": ["zh.writing.picture"], "taxonomyStatus": "uncertain" },
+    "PeiDui": { "conceptIds": ["zh.ciyu.dapei"], "taxonomyStatus": "certain" },
+    "TianKong": { "conceptIds": ["zh.ciyu"], "taxonomyStatus": "uncertain" },
+    "JuZi": { "conceptIds": ["zh.writing.sentence"], "taxonomyStatus": "certain" },
+    "ZuJu": { "conceptIds": ["zh.writing.paragraph"], "taxonomyStatus": "uncertain" },
+    "YueReadMCQ": { "conceptIds": ["zh.reading"], "taxonomyStatus": "uncertain" },
+    "YueReadOpen": { "conceptIds": ["zh.reading"], "taxonomyStatus": "uncertain" }
+  },
+  "concepts": [
+    { "id": "en.grammar", "subject": "english", "parent": null, "topic": "Grammar", "skill": "", "label": "Grammar", "level": "P3–P6" },
+    { "id": "en.grammar.noun", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Nouns", "label": "Nouns (including collective and abstract)", "level": "P3–P6" },
+    { "id": "en.grammar.pronoun", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Pronouns", "label": "Pronouns (subject, object, possessive, reflexive, demonstrative)", "level": "P3–P6" },
+    { "id": "en.grammar.possessive", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Possessives", "label": "Possessive determiners and pronouns", "level": "P3–P6" },
+    { "id": "en.grammar.article_determiner", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Articles and determiners", "label": "Articles and determiners", "level": "P3–P6" },
+    { "id": "en.grammar.quantifier", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Quantifiers", "label": "Quantifiers (much/many, little/few)", "level": "P3–P6" },
+    { "id": "en.grammar.subject_verb_agreement", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Subject–verb agreement", "label": "Subject–verb agreement", "level": "P3–P6" },
+    { "id": "en.grammar.simple_present", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Simple present", "label": "Simple present", "level": "P3–P6" },
+    { "id": "en.grammar.simple_past", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Simple past", "label": "Simple past, including irregular verbs", "level": "P3–P6" },
+    { "id": "en.grammar.simple_future", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Simple future", "label": "Simple future (will / going to)", "level": "P3–P6" },
+    { "id": "en.grammar.present_continuous", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Present continuous", "label": "Present continuous", "level": "P3–P6" },
+    { "id": "en.grammar.past_continuous", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Past continuous", "label": "Past continuous", "level": "P3–P6" },
+    { "id": "en.grammar.present_perfect", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Present perfect", "label": "Present perfect", "level": "P3–P6" },
+    { "id": "en.grammar.past_perfect", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Past perfect", "label": "Past perfect", "level": "P5–P6" },
+    { "id": "en.grammar.passive", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Passive", "label": "Passive voice", "level": "P4–P6" },
+    { "id": "en.grammar.modals", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Modals", "label": "Modals and base form after auxiliaries", "level": "P3–P6" },
+    { "id": "en.grammar.gerund_infinitive", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Gerunds and infinitives", "label": "Gerunds and infinitives", "level": "P4–P6" },
+    { "id": "en.grammar.question_tag", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Question tags", "label": "Question tags", "level": "P3–P6" },
+    { "id": "en.grammar.adjective", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Adjectives", "label": "Adjectives", "level": "P3–P6" },
+    { "id": "en.grammar.adverb", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Adverbs", "label": "Adverbs", "level": "P3–P6" },
+    { "id": "en.grammar.comparative", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Comparison", "label": "Comparatives and superlatives", "level": "P3–P6" },
+    { "id": "en.grammar.preposition", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Prepositions", "label": "Prepositions", "level": "P3–P6" },
+    { "id": "en.grammar.connector", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Connectors", "label": "Connectors and conjunctions", "level": "P3–P6" },
+    { "id": "en.grammar.conditional", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Conditionals", "label": "Conditionals (if / unless / as long as)", "level": "P4–P6" },
+    { "id": "en.grammar.reported_speech", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Reported speech", "label": "Reported speech", "level": "P5–P6" },
+    { "id": "en.grammar.relative_clause", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Relative clauses", "label": "Relative clauses (who / which / that)", "level": "P4–P6" },
+    { "id": "en.grammar.word_form", "subject": "english", "parent": "en.grammar", "topic": "Grammar", "skill": "Word forms", "label": "Word forms (noun / verb / adjective / adverb family)", "level": "P4–P6" },
+
+    { "id": "en.vocab", "subject": "english", "parent": null, "topic": "Vocabulary", "skill": "", "label": "Vocabulary", "level": "P3–P6" },
+    { "id": "en.vocab.in_context", "subject": "english", "parent": "en.vocab", "topic": "Vocabulary", "skill": "Vocabulary in context", "label": "Vocabulary in context", "level": "P3–P6" },
+    { "id": "en.vocab.phrasal_verb", "subject": "english", "parent": "en.vocab", "topic": "Vocabulary", "skill": "Phrasal verbs", "label": "Phrasal verbs", "level": "P3–P6" },
+    { "id": "en.vocab.idiom", "subject": "english", "parent": "en.vocab", "topic": "Vocabulary", "skill": "Idioms", "label": "Idioms and fixed expressions", "level": "P3–P6" },
+    { "id": "en.vocab.figurative", "subject": "english", "parent": "en.vocab", "topic": "Vocabulary", "skill": "Figurative language", "label": "Figurative language (simile and metaphor)", "level": "P3–P6" },
+    { "id": "en.vocab.collocation", "subject": "english", "parent": "en.vocab", "topic": "Vocabulary", "skill": "Collocation", "label": "Collocation", "level": "P3–P6" },
+
+    { "id": "en.language", "subject": "english", "parent": null, "topic": "Language use tasks", "skill": "", "label": "Language-use tasks", "level": "P3–P6" },
+    { "id": "en.language.editing", "subject": "english", "parent": "en.language", "topic": "Editing", "skill": "", "label": "Editing for spelling and grammar", "level": "P3–P6" },
+    { "id": "en.language.editing_spelling", "subject": "english", "parent": "en.language.editing", "topic": "Editing", "skill": "Spelling", "label": "Editing — spelling", "level": "P3–P6" },
+    { "id": "en.language.editing_grammar", "subject": "english", "parent": "en.language.editing", "topic": "Editing", "skill": "Grammar editing", "label": "Editing — grammar point not yet split", "level": "P3–P6" },
+    { "id": "en.language.synthesis", "subject": "english", "parent": "en.language", "topic": "Synthesis and transformation", "skill": "", "label": "Synthesis and transformation", "level": "P3–P6" },
+
+    { "id": "en.reading", "subject": "english", "parent": null, "topic": "Reading", "skill": "", "label": "Reading comprehension", "level": "P3–P6" },
+    { "id": "en.reading.detail", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Stated detail", "label": "Stated detail", "level": "P3–P6" },
+    { "id": "en.reading.inference", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Inference", "label": "Inference", "level": "P3–P6" },
+    { "id": "en.reading.vocab_in_context", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Word meaning in the passage", "label": "Vocabulary in the passage", "level": "P3–P6" },
+    { "id": "en.reading.sequence", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Sequence", "label": "Sequence of events", "level": "P3–P6" },
+    { "id": "en.reading.main_idea", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Main idea", "label": "Main idea or lesson", "level": "P3–P6" },
+    { "id": "en.reading.true_false", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "True or false", "label": "True / false statements", "level": "P3–P6" },
+    { "id": "en.reading.reference", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Reference", "label": "Reference (who or what a pronoun points to)", "level": "P3–P6" },
+    { "id": "en.reading.visual_text", "subject": "english", "parent": "en.reading", "topic": "Visual text", "skill": "", "label": "Visual text comprehension", "level": "P3–P6" },
+    { "id": "en.reading.open", "subject": "english", "parent": "en.reading", "topic": "Reading", "skill": "Open-ended", "label": "Open-ended comprehension", "level": "P3–P6" },
+
+    { "id": "en.writing", "subject": "english", "parent": null, "topic": "Writing", "skill": "", "label": "Writing", "level": "P5–P6" },
+    { "id": "en.writing.situational", "subject": "english", "parent": "en.writing", "topic": "Writing", "skill": "Situational writing", "label": "Situational writing", "level": "P5–P6" },
+    { "id": "en.writing.continuous", "subject": "english", "parent": "en.writing", "topic": "Writing", "skill": "Continuous writing", "label": "Continuous writing", "level": "P5–P6" },
+
+    { "id": "zh.hanzi", "subject": "chinese", "parent": null, "topic": "汉字", "skill": "", "label": "汉字 (characters)", "level": "P3–P6" },
+    { "id": "zh.hanzi.xingjinzi", "subject": "chinese", "parent": "zh.hanzi", "topic": "汉字", "skill": "形近字", "label": "形近字 — visually similar characters", "level": "P3–P6" },
+    { "id": "zh.hanzi.tongyinzi", "subject": "chinese", "parent": "zh.hanzi", "topic": "汉字", "skill": "同音字", "label": "同音字 — same or similar sound", "level": "P3–P6" },
+    { "id": "zh.hanzi.duoyinzi", "subject": "chinese", "parent": "zh.hanzi", "topic": "汉字", "skill": "多音字", "label": "多音字 — more than one reading", "level": "P3–P6" },
+
+    { "id": "zh.pinyin", "subject": "chinese", "parent": null, "topic": "汉语拼音", "skill": "", "label": "汉语拼音", "level": "P3–P6" },
+    { "id": "zh.pinyin.shengdiao", "subject": "chinese", "parent": "zh.pinyin", "topic": "汉语拼音", "skill": "声调", "label": "声调 — tone", "level": "P3–P6" },
+    { "id": "zh.pinyin.shengmu_yunmu", "subject": "chinese", "parent": "zh.pinyin", "topic": "汉语拼音", "skill": "声母韵母", "label": "声母 / 韵母 — initial or final", "level": "P3–P6" },
+
+    { "id": "zh.ciyu", "subject": "chinese", "parent": null, "topic": "词语", "skill": "", "label": "词语", "level": "P3–P6" },
+    { "id": "zh.ciyu.vocab_in_context", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "语境选词", "label": "词语 in context", "level": "P3–P6" },
+    { "id": "zh.ciyu.jinyici", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "近义词", "label": "近义词 — near synonyms", "level": "P3–P6" },
+    { "id": "zh.ciyu.fanyici", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "反义词", "label": "反义词 — antonyms", "level": "P3–P6" },
+    { "id": "zh.ciyu.liangci", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "量词", "label": "量词 — measure words", "level": "P3–P6" },
+    { "id": "zh.ciyu.dapei", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "搭配", "label": "词语搭配 — collocation", "level": "P3–P6" },
+    { "id": "zh.ciyu.chengyu", "subject": "chinese", "parent": "zh.ciyu", "topic": "词语", "skill": "成语", "label": "成语", "level": "P4–P6" },
+
+    { "id": "zh.yufa", "subject": "chinese", "parent": null, "topic": "语法", "skill": "", "label": "语法", "level": "P3–P6" },
+    { "id": "zh.yufa.word_order", "subject": "chinese", "parent": "zh.yufa", "topic": "语法", "skill": "句式与语序", "label": "句式与语序 (把字句 and word order)", "level": "P3–P6" },
+    { "id": "zh.yufa.lianci", "subject": "chinese", "parent": "zh.yufa", "topic": "语法", "skill": "关联词", "label": "关联词 — paired connectives", "level": "P3–P6" },
+
+    { "id": "zh.reading", "subject": "chinese", "parent": null, "topic": "阅读", "skill": "", "label": "阅读", "level": "P3–P6" },
+    { "id": "zh.reading.detail", "subject": "chinese", "parent": "zh.reading", "topic": "阅读", "skill": "细节", "label": "阅读 — stated detail", "level": "P3–P6" },
+    { "id": "zh.reading.inference", "subject": "chinese", "parent": "zh.reading", "topic": "阅读", "skill": "推断", "label": "阅读 — inference", "level": "P3–P6" },
+    { "id": "zh.reading.main_idea", "subject": "chinese", "parent": "zh.reading", "topic": "阅读", "skill": "主旨", "label": "阅读 — main idea", "level": "P3–P6" },
+    { "id": "zh.reading.sequence", "subject": "chinese", "parent": "zh.reading", "topic": "阅读", "skill": "顺序", "label": "阅读 — sequence", "level": "P3–P6" },
+
+    { "id": "zh.writing", "subject": "chinese", "parent": null, "topic": "写话", "skill": "", "label": "写话 / 作文", "level": "P3–P6" },
+    { "id": "zh.writing.sentence", "subject": "chinese", "parent": "zh.writing", "topic": "写话", "skill": "句子", "label": "造句、仿写、扩写、连句", "level": "P3–P6" },
+    { "id": "zh.writing.paragraph", "subject": "chinese", "parent": "zh.writing", "topic": "写话", "skill": "组段", "label": "组段 / 排序成段", "level": "P3–P6" },
+    { "id": "zh.writing.picture", "subject": "chinese", "parent": "zh.writing", "topic": "写话", "skill": "看图", "label": "看图", "level": "P3–P6" },
+    { "id": "zh.writing.composition", "subject": "chinese", "parent": "zh.writing", "topic": "写话", "skill": "作文", "label": "作文", "level": "P5–P6" },
+
+    { "id": "math.number", "subject": "math", "parent": null, "topic": "Number and algebra", "skill": "", "label": "Number and algebra", "level": "P1–P6" },
+    { "id": "math.number.whole", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Whole numbers", "label": "Whole numbers, factors, multiples, order of operations", "level": "P1–P6" },
+    { "id": "math.number.fractions", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Fractions", "label": "Fractions", "level": "P2–P6" },
+    { "id": "math.number.decimals", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Decimals", "label": "Decimals", "level": "P4–P6" },
+    { "id": "math.number.percentage", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Percentage", "label": "Percentage, including discount, GST, interest, increase and decrease", "level": "P5–P6" },
+    { "id": "math.number.ratio", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Ratio", "label": "Ratio", "level": "P6" },
+    { "id": "math.number.rate", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Rate", "label": "Rate", "level": "P5–P6" },
+    { "id": "math.number.algebra", "subject": "math", "parent": "math.number", "topic": "Number and algebra", "skill": "Algebra", "label": "Simple algebraic expressions and equations", "level": "P6" },
+
+    { "id": "math.measure", "subject": "math", "parent": null, "topic": "Measurement", "skill": "", "label": "Measurement", "level": "P1–P6" },
+    { "id": "math.measure.units", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Length, mass, volume", "label": "Length, mass, volume and capacity, including unit conversion", "level": "P2–P6" },
+    { "id": "math.measure.time", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Time", "label": "Time", "level": "P1–P6" },
+    { "id": "math.measure.money", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Money", "label": "Money", "level": "P1–P6" },
+    { "id": "math.measure.area_perimeter", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Area and perimeter", "label": "Area and perimeter of squares, rectangles, triangles, and composites", "level": "P3–P6" },
+    { "id": "math.measure.volume", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Volume of solids", "label": "Volume of cube and cuboid", "level": "P5–P6" },
+    { "id": "math.measure.circle", "subject": "math", "parent": "math.measure", "topic": "Measurement", "skill": "Circle", "label": "Area and circumference of circle, semicircle, and quarter circle", "level": "P6" },
+
+    { "id": "math.geometry", "subject": "math", "parent": null, "topic": "Geometry", "skill": "", "label": "Geometry", "level": "P1–P6" },
+    { "id": "math.geometry.angles", "subject": "math", "parent": "math.geometry", "topic": "Geometry", "skill": "Angles", "label": "Angles (point, straight line, vertically opposite)", "level": "P4–P6" },
+    { "id": "math.geometry.triangles", "subject": "math", "parent": "math.geometry", "topic": "Geometry", "skill": "Triangles", "label": "Properties of triangles and unknown angles", "level": "P5–P6" },
+    { "id": "math.geometry.quadrilaterals", "subject": "math", "parent": "math.geometry", "topic": "Geometry", "skill": "Quadrilaterals", "label": "Squares, rectangles, parallelograms, rhombuses, trapeziums", "level": "P4–P6" },
+    { "id": "math.geometry.symmetry", "subject": "math", "parent": "math.geometry", "topic": "Geometry", "skill": "Symmetry", "label": "Line symmetry", "level": "P4" },
+    { "id": "math.geometry.nets", "subject": "math", "parent": "math.geometry", "topic": "Geometry", "skill": "Nets", "label": "Nets of cubes, cuboids, prisms, and pyramids", "level": "P4" },
+
+    { "id": "math.stats", "subject": "math", "parent": null, "topic": "Statistics", "skill": "", "label": "Statistics", "level": "P1–P6" },
+    { "id": "math.stats.graphs", "subject": "math", "parent": "math.stats", "topic": "Statistics", "skill": "Data representation", "label": "Tables, bar graphs, line graphs, and pie charts", "level": "P1–P6" },
+    { "id": "math.stats.average", "subject": "math", "parent": "math.stats", "topic": "Statistics", "skill": "Average", "label": "Average", "level": "P6" },
+
+    { "id": "sci.diversity", "subject": "science", "parent": null, "topic": "Diversity", "skill": "", "label": "Diversity", "level": "P3" },
+    { "id": "sci.diversity.living", "subject": "science", "parent": "sci.diversity", "topic": "Diversity", "skill": "Living and non-living things", "label": "Diversity of living and non-living things", "level": "P3" },
+    { "id": "sci.diversity.materials", "subject": "science", "parent": "sci.diversity", "topic": "Diversity", "skill": "Materials", "label": "Diversity of materials", "level": "P3" },
+
+    { "id": "sci.cycles", "subject": "science", "parent": null, "topic": "Cycles", "skill": "", "label": "Cycles", "level": "P3–P5" },
+    { "id": "sci.cycles.life_cycles", "subject": "science", "parent": "sci.cycles", "topic": "Cycles", "skill": "Life cycles", "label": "Life cycles of plants and animals", "level": "P3" },
+    { "id": "sci.cycles.reproduction_plants", "subject": "science", "parent": "sci.cycles", "topic": "Cycles", "skill": "Plant reproduction", "label": "Reproduction in plants", "level": "P5" },
+    { "id": "sci.cycles.reproduction_humans", "subject": "science", "parent": "sci.cycles", "topic": "Cycles", "skill": "Human reproduction", "label": "Reproduction in humans", "level": "P5" },
+    { "id": "sci.cycles.matter", "subject": "science", "parent": "sci.cycles", "topic": "Cycles", "skill": "Matter", "label": "Matter and its states", "level": "P4" },
+    { "id": "sci.cycles.water", "subject": "science", "parent": "sci.cycles", "topic": "Cycles", "skill": "Water", "label": "Water and the water cycle", "level": "P5" },
+
+    { "id": "sci.systems", "subject": "science", "parent": null, "topic": "Systems", "skill": "", "label": "Systems", "level": "P4–P5" },
+    { "id": "sci.systems.plant_parts", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Plant parts", "label": "Plant parts and their functions", "level": "P4" },
+    { "id": "sci.systems.plant_transport", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Plant transport", "label": "Plant respiratory and water/food-carrying tubes", "level": "P5" },
+    { "id": "sci.systems.digestive", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Digestive system", "label": "Human digestive system", "level": "P4" },
+    { "id": "sci.systems.respiratory", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Respiratory system", "label": "Human respiratory system", "level": "P5" },
+    { "id": "sci.systems.circulatory", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Circulatory system", "label": "Human circulatory system", "level": "P5" },
+    { "id": "sci.systems.electrical", "subject": "science", "parent": "sci.systems", "topic": "Systems", "skill": "Electrical system", "label": "Electrical systems", "level": "P5" },
+
+    { "id": "sci.energy", "subject": "science", "parent": null, "topic": "Energy", "skill": "", "label": "Energy", "level": "P4–P6" },
+    { "id": "sci.energy.light", "subject": "science", "parent": "sci.energy", "topic": "Energy", "skill": "Light", "label": "Light", "level": "P4" },
+    { "id": "sci.energy.heat", "subject": "science", "parent": "sci.energy", "topic": "Energy", "skill": "Heat", "label": "Heat", "level": "P4" },
+    { "id": "sci.energy.photosynthesis", "subject": "science", "parent": "sci.energy", "topic": "Energy", "skill": "Photosynthesis", "label": "Photosynthesis", "level": "P6" },
+    { "id": "sci.energy.conversion", "subject": "science", "parent": "sci.energy", "topic": "Energy", "skill": "Energy conversion", "label": "Energy conversion", "level": "P6" },
+
+    { "id": "sci.interactions", "subject": "science", "parent": null, "topic": "Interactions", "skill": "", "label": "Interactions", "level": "P3–P6" },
+    { "id": "sci.interactions.magnets", "subject": "science", "parent": "sci.interactions", "topic": "Interactions", "skill": "Magnets", "label": "Magnets", "level": "P3" },
+    { "id": "sci.interactions.friction", "subject": "science", "parent": "sci.interactions", "topic": "Interactions", "skill": "Friction", "label": "Frictional force", "level": "P6" },
+    { "id": "sci.interactions.gravity", "subject": "science", "parent": "sci.interactions", "topic": "Interactions", "skill": "Gravity", "label": "Gravitational force", "level": "P6" },
+    { "id": "sci.interactions.elastic_spring", "subject": "science", "parent": "sci.interactions", "topic": "Interactions", "skill": "Elastic spring force", "label": "Elastic spring force (standard course)", "level": "P6" },
+    { "id": "sci.interactions.environment", "subject": "science", "parent": "sci.interactions", "topic": "Interactions", "skill": "Environment", "label": "Interactions within the environment (adaptations, habitats, food chains)", "level": "P6" }
+  ]
+}

@@ -73,6 +73,14 @@ export interface ZhLearningLayer {
   keywords?: ZhKeyword[];    // core words with tone-marked pinyin + English
 }
 
+// Optional concept/trap tags (taxonomy v1 DRAFT). Absent on untagged items.
+// conceptIds / trapIds are stable ids from src/data/taxonomy/taxonomy.json.
+export interface TaxonomyTagFields {
+  conceptIds?: string[];
+  trapIds?: string[];
+  taxonomyStatus?: 'certain' | 'uncertain';
+}
+
 // Skill / trap taxonomy (ASCII ids; used by adaptive engine remediation).
 export type ZhSkillTag =
   | 'xingjinzi'      // visually similar characters
@@ -97,7 +105,7 @@ export const ZH_LESSON_MAX = 4;
 
 // ---------- MCQ family: HanziMcq / PinyinMcq / VocabMcq / SentenceMcq ----------
 // Rendered by MCQPage unchanged.
-export interface ZhMcqItem extends ZhLearningLayer {
+export interface ZhMcqItem extends ZhLearningLayer, TaxonomyTagFields {
   id: string;
   topic: ZhSectionType;
   sentence: string;          // blank shown as ______ ; underlined target as {u}word{/u}
@@ -114,7 +122,7 @@ export interface ZhMcqItem extends ZhLearningLayer {
 
 // ---------- pool matching: VocabMatch (and pool-variant VocabMcq) ----------
 // New small renderer (MatchPage) in Phase 1.
-export interface ZhMatchItem extends ZhLearningLayer {
+export interface ZhMatchItem extends ZhLearningLayer, TaxonomyTagFields {
   num: number;
   stem: string;              // blank marked with parentheses in stem
   stem_en?: string;
@@ -134,7 +142,7 @@ export interface ZhMatchSet {
 
 // ---------- passage cloze: PassageCloze ----------
 // Identical shape to English ClozeSet; rendered by ClozePage unchanged.
-export interface ZhClozeBlank extends ZhLearningLayer {
+export interface ZhClozeBlank extends ZhLearningLayer, TaxonomyTagFields {
   num: number;
   answer: string;            // must exist in wordBank
   hint?: string;             // meaning-based clue: which surrounding word to look at
@@ -162,7 +170,7 @@ export type ZhCompFormat =
   | 'open_sentence'  // free-text answer (wenda)
   | 'fill_table';    // complete the table (tianbiao) - Phase 2 renderer
 
-export interface ZhCompQuestion extends ZhLearningLayer {
+export interface ZhCompQuestion extends ZhLearningLayer, TaxonomyTagFields {
   id: string;
   questionNo?: string | number;
   format: ZhCompFormat;
@@ -193,7 +201,7 @@ export interface ZhCompSet {
 // ---------- free production: SentenceCraft (Phase 2) ----------
 // Field names mirror English SynthItem; rendered by SynthesisPage.
 export type ZhCraftSubtype = 'combine' | 'expand' | 'rewrite' | 'make_sentence';
-export interface ZhCraftItem extends ZhLearningLayer {
+export interface ZhCraftItem extends ZhLearningLayer, TaxonomyTagFields {
   id: string;
   topic?: ZhSectionType;
   subtype: ZhCraftSubtype;
@@ -229,7 +237,7 @@ export interface ZhOrderSet {
 }
 
 // ---------- error correction: ErrorCorrection (Phase 2) ----------
-export interface ZhErrorItem {
+export interface ZhErrorItem extends TaxonomyTagFields {
   num: number;
   sentence: string;          // contains exactly one wrong character
   wrongChar: string;
