@@ -46,7 +46,7 @@ import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn 
 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook from '@/components/MistakeNotebook';
-import { setMistakeCause, applySimilarRetry, pickSimilar } from '@/lib/wrongNotebook';
+import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId } from '@/lib/wrongNotebook';
 import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
 import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
 import VocabQuiz from '@/components/VocabQuiz'; // STEP2F_VOCAB_QUIZ_V2
@@ -289,26 +289,26 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   }
   // Notebook v1: cause + "Try 3 similar" (additive fields on prog.mistakes[i]; nothing is deleted)
   const notebook = {
-    onCause:(i,cause)=>{
-      const m=(prog.mistakes||[])[i]; if(!m) return;
-      setProgress(grade, subject, setMistakeCause(prog, i, cause, new Date().toISOString()));
-      updateWrongAnswer(subject, m.id, m.sessionNum!=null?"set-"+m.sessionNum:null, {cause});
+    onCause:(key,cause)=>{
+      const f=findMistake(prog, key); if(!f) return;
+      setProgress(grade, subject, setMistakeCause(prog, key, cause, new Date().toISOString()));
+      updateWrongAnswer(subject, f.m.id, attemptKeyFor(prog, f.m), {cause});
     },
     similarFor:(m)=>pickSimilar(getTagIndex(), ZH_ROUND_INDEX, m, similarQuestions),
-    onTrySimilar:(i,ids)=>{
+    onTrySimilar:(key,ids)=>{
       const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
       if(!built.plan.length) return;
-      setRoundReview({plan:built.plan, sessionNum:(prog.mistakes||[])[i]?.sessionNum||0, similar:{idx:i, ids}});
+      setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
   function finishRoundReview(results){
     if(roundReview.similar){
-      const {idx:mi, ids}=roundReview.similar, now=new Date().toISOString();
-      const m0=(prog.mistakes||[])[mi];
+      const {key:mk, ids}=roundReview.similar, now=new Date().toISOString();
+      const m0=findMistake(prog, mk)?.m;
       const t=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'SIMILAR_RETRY' });
-      const r=applySimilarRetry(t, mi, ids, results, now);
+      const r=applySimilarRetry(t, mk, ids, results, now);
       setProgress(grade, subject, r.prog);
-      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, m0.sessionNum!=null?"set-"+m0.sessionNum:null, {resolved:true});
+      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, attemptKeyFor(prog, m0), {resolved:true});
       setRoundReview(null); setScreen("mistakes"); return;
     }
     const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.REVIEW, sessionNum: roundReview.sessionNum, setId: REVIEW_SET_ID });
@@ -363,7 +363,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const totalPct=graded.length?Math.round(graded.filter(r=>r.correct).length/graded.length*100):0;
     const missed=graded.filter(r=>!r.correct);
     const newEntry={sessionNum,date:todayStr(),scores:bySection,totalPct,isMockExam:!!isMock,mistakes:missed.map(r=>({...r}))};
-    const newMistakes=[...(prog.mistakes||[]),...missed.map(r=>({...r,date:todayStr(),sessionNum}))];
+    const newMistakes=[...(prog.mistakes||[]),...missed.map((r,n)=>({...r,date:todayStr(),sessionNum,mid:newMistakeId(sessionNum,r.id,n)}))];
     const withTrials=recordTrials(prog, results, { mode: isMock?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: WA1_ZH_PRACTICE[wa1Idx].setId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
@@ -1248,26 +1248,26 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   }
   // Notebook v1: cause + "Try 3 similar" (additive fields on prog.mistakes[i]; nothing is deleted)
   const notebook = {
-    onCause:(i,cause)=>{
-      const m=(prog.mistakes||[])[i]; if(!m) return;
-      setProgress(grade, subject, setMistakeCause(prog, i, cause, new Date().toISOString()));
-      updateWrongAnswer(subject, m.id, m.sessionNum!=null?"set-"+m.sessionNum:null, {cause});
+    onCause:(key,cause)=>{
+      const f=findMistake(prog, key); if(!f) return;
+      setProgress(grade, subject, setMistakeCause(prog, key, cause, new Date().toISOString()));
+      updateWrongAnswer(subject, f.m.id, attemptKeyFor(prog, f.m), {cause});
     },
     similarFor:(m)=>pickSimilar(getTagIndex(), EN_ROUND_INDEX, m, similarQuestions),
-    onTrySimilar:(i,ids)=>{
+    onTrySimilar:(key,ids)=>{
       const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
       if(!built.plan.length) return;
-      setRoundReview({plan:built.plan, sessionNum:(prog.mistakes||[])[i]?.sessionNum||0, similar:{idx:i, ids}});
+      setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
   function finishRoundReview(results){
     if(roundReview.similar){
-      const {idx:mi, ids}=roundReview.similar, now=new Date().toISOString();
-      const m0=(prog.mistakes||[])[mi];
+      const {key:mk, ids}=roundReview.similar, now=new Date().toISOString();
+      const m0=findMistake(prog, mk)?.m;
       const t=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'SIMILAR_RETRY' });
-      const r=applySimilarRetry(t, mi, ids, results, now);
+      const r=applySimilarRetry(t, mk, ids, results, now);
       setProgress(grade, subject, r.prog);
-      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, m0.sessionNum!=null?"set-"+m0.sessionNum:null, {resolved:true});
+      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, attemptKeyFor(prog, m0), {resolved:true});
       setRoundReview(null); setScreen("mistakes"); return;
     }
     const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.REVIEW, sessionNum: roundReview.sessionNum, setId: REVIEW_SET_ID });
@@ -1377,7 +1377,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       isMockExam: isMock||isPastPaper,
       school: isMock?"Nanyang Primary": isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
       examType: isMock?"WA1": isPastPaper?"Past Paper #"+(sessionNum-10):undefined };
-    const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map(r=>({...r,date:todayStr(),sessionNum}))];
+    const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map((r,n)=>({...r,date:todayStr(),sessionNum,mid:newMistakeId(sessionNum,r.id,n)}))];
     const allLookedUp = [...new Set(results.flatMap(r=>r.lookedUpWords||[]))];
     const wrongWords  = [...new Set(graded.filter(r=>!r.correct).flatMap(r=>{
       const sentence=r.sentence||"";
@@ -1871,7 +1871,7 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
   const kpi = React.useMemo(()=>firstTryStats({trials}),[trials]);
   const L = (zh,en)=> isZh?zh:en;
   // Results from ExamSession carry ids only; resolve question/options/answers for display.
-  const mistakes = React.useMemo(()=>enrichMistakes(rawMistakes||[], roundIndex).map((m,i)=>({...m,_i:i})),[rawMistakes, roundIndex]);
+  const mistakes = React.useMemo(()=>(()=>{const ks=mistakeKeys(rawMistakes||[]); return enrichMistakes(rawMistakes||[], roundIndex).map((m,i)=>({...m,_k:ks[i]}));})(),[rawMistakes, roundIndex]);
   const [filter, setFilter] = React.useState("all");
   const [view, setView]     = React.useState("list"); // list | quiz
   const [expanded, setExpanded] = React.useState(null);

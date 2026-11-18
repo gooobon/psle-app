@@ -50,26 +50,54 @@ export function pickSimilar(tagIndex, runnableIndex, mistake, similarQuestionsFn
   return { ids, reason: ids.length >= want ? 'ok' : 'few' };
 }
 
-// Additive update of one mistake in prog.mistakes (by array index). Returns a new prog; never removes records.
-function patchMistake(prog, idx, patch) {
+// Stable identity for a mistake record. New records carry `mid` (written once, never changed).
+// Legacy records (no mid) get a derived key id|sessionNum|date plus an ordinal among identical legacy keys;
+// the list is append-only, so that ordinal does not move when other entries are added. Nothing is rewritten.
+export function mistakeKeys(list) {
+  const seen = {};
+  return (list || []).map((m) => {
+    if (m && m.mid) return String(m.mid);
+    const base = 'legacy|' + (m && m.id) + '|' + (m && m.sessionNum != null ? m.sessionNum : '') + '|' + ((m && m.date) || '');
+    seen[base] = (seen[base] || 0) + 1;
+    return base + '|' + seen[base];
+  });
+}
+export function newMistakeId(sessionNum, id, n) {
+  return sessionNum + '|' + id + '|' + n + '|' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+export function findMistake(prog, key) {
   const list = Array.isArray(prog && prog.mistakes) ? prog.mistakes : [];
-  if (idx < 0 || idx >= list.length) return prog;
-  const next = list.slice();
-  next[idx] = { ...list[idx], ...patch };
+  const i = mistakeKeys(list).indexOf(key);
+  return i < 0 ? null : { idx: i, m: list[i] };
+}
+// Server attempt_key ('set-N') of a mistake: its own sessionNum, else the history entry (same date, contains the id). null if unknown.
+export function attemptKeyFor(prog, m) {
+  if (!m) return null;
+  if (m.sessionNum != null) return 'set-' + m.sessionNum;
+  const h = ((prog && prog.history) || []).find((e) => e && e.date === m.date && (e.mistakes || []).some((x) => x && x.id === m.id));
+  return h && h.sessionNum != null ? 'set-' + h.sessionNum : null;
+}
+
+// Additive update of one mistake in prog.mistakes, found by stable key. Returns a new prog; never removes records.
+function patchMistake(prog, key, patch) {
+  const f = findMistake(prog, key);
+  if (!f) return prog;
+  const next = prog.mistakes.slice();
+  next[f.idx] = { ...f.m, ...patch };
   return { ...prog, mistakes: next };
 }
-export function setMistakeCause(prog, idx, cause, nowIso) {
+export function setMistakeCause(prog, key, cause, nowIso) {
   if (!isCause(cause)) return prog;
-  return patchMistake(prog, idx, { cause, cause_at: nowIso });
+  return patchMistake(prog, key, { cause, cause_at: nowIso });
 }
 // results: graded results of the similar retry. Resolves only when ALL `ids` were answered correctly.
-export function applySimilarRetry(prog, idx, ids, results, nowIso) {
+export function applySimilarRetry(prog, key, ids, results, nowIso) {
   const byId = {}; (results || []).forEach((r) => { if (r && r.id != null) byId[r.id] = r; });
   const correct = ids.filter((id) => byId[id] && byId[id].correct === true).length;
-  const m = (prog.mistakes || [])[idx] || {};
+  const m = (findMistake(prog, key) || {}).m || {};
   const retries = (Array.isArray(m.retries) ? m.retries : []).concat([{ at: nowIso, ids: ids.slice(), correct, total: ids.length }]);
   const resolved = ids.length >= SIMILAR_COUNT && correct === ids.length; // fewer than 3 available: practise only, no resolve (TODO(owner))
   const patch = { retries };
   if (resolved && !m.resolved_at) patch.resolved_at = nowIso;
-  return { prog: patchMistake(prog, idx, patch), resolved, correct };
+  return { prog: patchMistake(prog, key, patch), resolved, correct };
 }

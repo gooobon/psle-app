@@ -133,8 +133,8 @@ export async function syncLocalWrongAnswersOnce(username) {
 }
 
 // Update cause / resolved on an existing server row (never deletes). Flag-gated, fire-and-forget.
-// patch: { cause?: string, resolved?: true }. attemptKey optional; without it the latest row for the question is used.
+// patch: { cause?: string, resolved?: true }. attemptKey is required (row = student+subject+question+attempt_key); without it nothing is sent, so a wrong row is never touched.
 export function updateWrongAnswer(subject, questionId, attemptKey, patch) {
-  if (!_SA || !_WA || questionId == null) return;
-  try { serverPost("/api/wrong-answers/update", { subject, questionId: String(questionId), attemptKey: attemptKey || undefined, ...patch }); } catch {}
+  if (!_SA || !_WA || questionId == null || !attemptKey) return;
+  try { serverPost("/api/wrong-answers/update", { subject, questionId: String(questionId), attemptKey, ...patch }); } catch {}
 }

@@ -10,7 +10,7 @@ const REASON_TEXT = {
   none: 'No confident similar questions found.',
 };
 
-// items: enriched mistakes, each with _i (index in prog.mistakes)
+// items: enriched mistakes, each with _k (stable key, see mistakeKeys)
 // similarFor(m) -> { ids, reason }
 export default function MistakeNotebook({ items, onCause, onTrySimilar, similarFor }) {
   const [open, setOpen] = React.useState(null);
@@ -22,12 +22,12 @@ export default function MistakeNotebook({ items, onCause, onTrySimilar, similarF
         Notebook
       </div>
       {shown.map((m) => {
-        const isOpen = open === m._i;
+        const isOpen = open === m._k;
         const sim = isOpen ? similarFor(m) : null;
         const cause = CAUSES.find((c) => c.value === m.cause);
         return (
-          <div key={m._i} style={{ background: '#fff', borderRadius: 14, padding: 12, marginBottom: 8, boxShadow: '0 1px 6px rgba(0,0,0,.06)' }}>
-            <button onClick={() => setOpen(isOpen ? null : m._i)}
+          <div key={m._k} style={{ background: '#fff', borderRadius: 14, padding: 12, marginBottom: 8, boxShadow: '0 1px 6px rgba(0,0,0,.06)' }}>
+            <button onClick={() => setOpen(isOpen ? null : m._k)}
               style={{ width: '100%', textAlign: 'left', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
               <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 700, color: '#0F172A' }}>
                 {String(m.q || m.id).slice(0, 140)}
@@ -49,7 +49,7 @@ export default function MistakeNotebook({ items, onCause, onTrySimilar, similarF
                 <div style={{ fontSize: 'calc(var(--fs) * 0.786)', fontWeight: 800, color: '#64748B', marginBottom: 6 }}>Why did you get it wrong?</div>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 10 }}>
                   {CAUSES.map((c) => (
-                    <button key={c.value} onClick={() => onCause(m._i, c.value)}
+                    <button key={c.value} onClick={() => onCause(m._k, c.value)}
                       style={{ border: m.cause === c.value ? '2px solid #DC2626' : '1px solid #CBD5E1', background: m.cause === c.value ? '#FEE2E2' : '#fff',
                         borderRadius: 16, padding: '5px 10px', cursor: 'pointer', fontSize: 'calc(var(--fs) * 0.786)', fontWeight: 700, color: '#0F172A' }}>
                       {c.en} <span style={{ fontWeight: 500, color: '#64748B' }}>({c.ko})</span>
@@ -63,7 +63,7 @@ export default function MistakeNotebook({ items, onCause, onTrySimilar, similarF
                         Only {sim.ids.length} confident similar question{sim.ids.length > 1 ? 's' : ''} available (not {SIMILAR_COUNT}). This one can be practised but won&apos;t mark the mistake resolved.
                       </div>
                     )}
-                    <button onClick={() => onTrySimilar(m._i, sim.ids)}
+                    <button onClick={() => onTrySimilar(m._k, sim.ids)}
                       style={{ background: '#2563EB', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
                       Try {sim.ids.length === SIMILAR_COUNT ? SIMILAR_COUNT : sim.ids.length} similar
                     </button>

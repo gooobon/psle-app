@@ -18,7 +18,7 @@ export async function POST(request) {
   const subject = String(b.subject || "");
   const qid = b.questionId == null ? "" : String(b.questionId).slice(0, 200);
   const key = b.attemptKey == null ? "" : String(b.attemptKey).slice(0, 120);
-  if (!SUBJECT_KEYS.includes(subject) || !qid) return jerr("bad request", 400);
+  if (!SUBJECT_KEYS.includes(subject) || !qid || !key) return jerr("bad request", 400);
   const patch = { updated_at: new Date().toISOString() };
   if (b.cause !== undefined) {
     if (!CAUSES.includes(b.cause)) return jerr("invalid cause", 400);
@@ -27,9 +27,8 @@ export async function POST(request) {
   if (b.resolved === true) patch.resolved_at = patch.updated_at;
   if (Object.keys(patch).length === 1) return jerr("nothing to update", 400);
   const admin = adminClient();
-  let q = admin.from("wrong_answers").select("id").eq("student_id", me.profile.id).eq("subject", subject).eq("question_id", qid);
-  if (key) q = q.eq("attempt_key", key);
-  const { data: row } = await q.order("attempted_at", { ascending: false }).limit(1).maybeSingle();
+  let q = admin.from("wrong_answers").select("id").eq("student_id", me.profile.id).eq("subject", subject).eq("question_id", qid).eq("attempt_key", key);
+  const { data: row } = await q.maybeSingle();
   if (!row) return jerr("record not found", 404);
   const { error } = await admin.from("wrong_answers").update(patch).eq("id", row.id).eq("student_id", me.profile.id);
   if (error) return jerr("could not update", 500);
