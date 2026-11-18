@@ -607,7 +607,7 @@ function TodayCard({linkedStudents}){
 // Link another parent (by their registered email) to one of my children, or link an existing child account.
 function GuardianTools({linkedStudents,onChildLinked}){
   const [open,setOpen]=useState(false);
-  const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.id||"");
+  const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.serverId||"");
   const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
   const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
@@ -615,7 +615,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
   const [inv,setInv]=useState({sent:[],received:[]});
   const loadInv=()=>serverGet("/api/parent/co-parents").then(r=>{ if(r.ok) setInv({sent:r.sent||[],received:r.received||[]}); });
   useEffect(()=>{ loadInv(); },[]);
-  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setEmail(""); loadInv(); } }
+  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.serverId}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setEmail(""); loadInv(); } }
   async function revokeInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/revoke",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); loadInv(); }
   async function acceptInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/accept",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setTimeout(()=>{ try{ window.location.reload(); }catch{} },800); } else loadInv(); }
   async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
@@ -631,7 +631,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
       {open&&(<div style={{marginTop:10}}>
         {linkedStudents.length>0&&(<>
           <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Add another parent to a child</div>
-          <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>{linkedStudents.map(s=><option key={s.id} value={s.id}>{s.name}</option>)}</select>
+          <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>{linkedStudents.map(s=><option key={s.id} value={s.serverId||""} disabled={!s.serverId}>{s.name}</option>)}</select>
           <input style={inp} placeholder="Other parent's email (they log in or sign up with it, then accept)" value={email} onChange={e=>setEmail(e.target.value)}/>
           <button disabled={busy} style={btn} onClick={linkParent}>Send invite</button>
           {inv.sent.length>0&&(<div style={{marginBottom:12}}>

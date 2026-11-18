@@ -4,6 +4,8 @@
 export { SERVER_AUTH, WRONG_ANSWERS_SYNC } from "@/lib/supabase/config";
 import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA } from "@/lib/supabase/config";
 
+import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
+
 const IMPORT_MARKER = "genius_server_import_v1";
 
 async function call(path, method, body) {
@@ -94,7 +96,7 @@ function waItem(m, subject, grade, attemptKey, attemptedAt, sourceId) {
     studentAnswer: asText(pick(m.userAnswer !== undefined ? m.userAnswer : m.yourAnswer !== undefined ? m.yourAnswer : m.studentAnswer)),
     correctAnswer: asText(pick(m.correctAnswer !== undefined ? m.correctAnswer : m.answer)),
     questionText: asText(m.q || m.sentence || m.word), sectionType: m.sectionType || m.topic,
-    taxonomyIds: m.conceptIds, // TODO(owner): results do not carry taxonomy ids yet; filled when present
+    taxonomyIds: m.conceptIds || taxonomyIdsFor(m.id) || undefined, // only confident tags (null/undefined otherwise)
   };
 }
 // Live path: call right after the session is saved locally. Fire-and-forget.
@@ -128,4 +130,11 @@ export async function syncLocalWrongAnswersOnce(username) {
   }
   if (ok) { try { localStorage.setItem(WA_MARKER, JSON.stringify({ ...mk, [username]: new Date().toISOString() })); } catch {} }
   return { ok, count: items.length };
+}
+
+// Update cause / resolved on an existing server row (never deletes). Flag-gated, fire-and-forget.
+// patch: { cause?: string, resolved?: true }. attemptKey is required (row = student+subject+question+attempt_key); without it nothing is sent, so a wrong row is never touched.
+export function updateWrongAnswer(subject, questionId, attemptKey, patch) {
+  if (!_SA || !_WA || questionId == null || !attemptKey) return;
+  try { serverPost("/api/wrong-answers/update", { subject, questionId: String(questionId), attemptKey, ...patch }); } catch {}
 }
