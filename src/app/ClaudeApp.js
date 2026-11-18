@@ -59,14 +59,12 @@ import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 
 
 
-//  Seed accounts - always present after any artifact reload 
+//  Seed accounts - always present after any artifact reload
+// DEMO ACCOUNTS ONLY (public by design). Real users must never be listed here:
+// they sign up in the app and live in localStorage (genius_users_v2). Progress is
+// keyed by user id (<id>_<grade>_<subject> in genius_progress_v2), independent of
+// the user record, so re-registering an existing id restores its progress.
 const SEED_USERS = {
-  "joonhee2018": {
-    id:"joonhee2018", password:"002323", role:"student",
-    name:"Joonhee", grade:"P3",
-    school:"Ai Tong Primary School",
-    childIds:[], createdAt:"2026-05-01"
-  },
   "demo_student": {
     id:"demo_student", password:"demo123", role:"student",
     name:"Demo Student", grade:"P3",
@@ -134,11 +132,20 @@ function persistProgressLS(key, data){
 
 function allUsers(){ return Object.values(STORE.users); }
 
-const ADMIN_ACCOUNTS = [
-  { id:"genius_admin", password:"GeniusAdmin2026!", name:"Genius Project Admin", role:"admin" },
-  { id:"admin",        password:"admin123",          name:"Admin",               role:"admin" },
-];
-function isAdmin(id, pw){ return ADMIN_ACCOUNTS.find(a=>a.id===id&&a.password===pw)||null; }
+// Admin auth is server-side only: see /api/admin/{login,logout,session}.
+const ADMIN_USER = { id:"admin", name:"Admin", role:"admin" };
+async function adminLogin(pw){
+  try{
+    const r = await fetch("/api/admin/login",{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/json"},body:JSON.stringify({password:pw})});
+    return r.ok;
+  }catch(e){ return false; }
+}
+async function adminSessionValid(){
+  try{
+    const r = await fetch("/api/admin/session",{credentials:"same-origin",cache:"no-store"});
+    return r.ok && (await r.json()).admin===true;
+  }catch(e){ return false; }
+}
 
 function getProgress(userId, grade, subject){
   const key = userId+"_"+grade+"_"+subject;
@@ -808,13 +815,12 @@ function LoginForm({onLogin, onGoSignup}){
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
-  function handleLogin(){
+  async function handleLogin(){
     setErr("");
-    const adminUser = isAdmin(id.trim(), pw);
-    if(adminUser){ onLogin("admin", adminUser); return; }
     const user = allUsers().find(u=>u.id===id.trim()&&u.password===pw&&u.role===role);
-    if(user) onLogin(role, user);
-    else setErr("Wrong ID or password. Please check and try again.");
+    if(user){ onLogin(role, user); return; }
+    if(id.trim().toLowerCase()==="admin" && await adminLogin(pw)){ onLogin("admin", ADMIN_USER); return; }
+    setErr("Wrong ID or password. Please check and try again.");
   }
 
   return(
@@ -828,7 +834,7 @@ function LoginForm({onLogin, onGoSignup}){
         ))}
       </div> <div onClick={fillDemo} style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"10px 14px",marginBottom:18,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <div>
-          <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account</div>
+          <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account (demo only)</div>
           <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#3B82F6"}}>{role==="student"?"ID: demo_student / PW: demo123":"ID: demo_parent / PW: demo456"}</div>
         </div>
         <span style={{color:"#3B82F6",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700}}>Fill </span>
@@ -1922,6 +1928,13 @@ function App(){
 
   function refresh(){ setTick(t=>t+1); }
 
+  // Restore admin mode only if the server confirms a valid session cookie
+  useEffect(()=>{
+    let alive = true;
+    adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); });
+    return ()=>{ alive = false; };
+  },[]);
+
   function handleSignup(role, userData){
     STORE.users[userData.id] = {...userData, role};
     persistUsers();
@@ -1932,7 +1945,10 @@ function App(){
     if(!window._GENIUS_STORE) window._GENIUS_STORE = {users:{},progress:{}};
     window._GENIUS_STORE._currentUser = user.id;
   }
-  function handleLogout(){ setAuth(null); }
+  function handleLogout(){
+    if(auth && auth.role==="admin") fetch("/api/admin/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
+    setAuth(null);
+  }
 
   if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup}/>;
 
@@ -1960,6 +1976,7 @@ function App(){
   }
 
   if(auth.role==="admin"){
+    // Admin UI is only reachable after a server-verified session (login route or session check)
     return <AdminApp
       adminUser={auth.user}
       onLogout={handleLogout}

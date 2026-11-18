@@ -1,6 +1,10 @@
+import { isAdminRequest } from "@/lib/adminSession";
+
 export const maxDuration = 60; // Vercel Pro: 60s timeout
 
 export async function POST(request) {
+  // Admin session required (fails closed if ADMIN_SESSION_SECRET is unset)
+  if (!isAdminRequest(request)) return Response.json({ error: { message: "unauthorised" } }, { status: 401 });
   try {
     const body = await request.json();
     // STEP10_GUARD: this route only serves the app's own generator; block arbitrary payloads
@@ -8,8 +12,6 @@ export async function POST(request) {
     if (!body || !ALLOWED_MODELS.includes(body.model)) return Response.json({ error: { message: "model not allowed" } }, { status: 400 });
     if (typeof body.max_tokens !== "number" || body.max_tokens > 8000) body.max_tokens = 4000;
     if (!Array.isArray(body.messages) || body.messages.length > 4) return Response.json({ error: { message: "bad request" } }, { status: 400 });
-    const secret = process.env.GENERATE_ROUTE_TOKEN;
-    if (secret && request.headers.get("x-genius-token") !== secret) return Response.json({ error: { message: "unauthorised" } }, { status: 401 });
 
     const apiKey = process.env.ANTHROPIC_API_KEY;
     if (!apiKey) {
