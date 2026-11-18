@@ -15,8 +15,8 @@ import {
 
 import {
   SUBJECTS, GRADES, LIVE_CONTENT,
-  ComingSoonToast, SubjectSelectScreen, ComingSoonScreen,
-  StudentHome, ZhHome, StudentShell,
+  ComingSoonToast, ComingSoonScreen,
+  StudentHome, StudentShell, TodayScreen, todaySetStatus,
 } from '@/components/Dashboard';
 
 import { SessionScreen }   from '@/components/EnglishSession';
@@ -226,7 +226,7 @@ function makeSeedHistory(userId){
 
 
 
-function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubjectChange, onGradeChange}){
+function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubjectChange, onGradeChange, initialAction}){
 
   const grade="P3", subject="Chinese";
   const prog = getProgress(grade, subject);
@@ -239,7 +239,8 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const drill = drillPicks.length ? { plan: buildRoundReviewPlan({ mistakes: drillPicks.map(x=>({id:x.itemId})) }, ZH_ROUND_INDEX).plan } : null;
   const zhTickets = ticketSummary(prog);
 
-  const [screen,setScreen] = useState("home");   // home | session | result
+  const [screen,setScreen] = useState(initialAction==="mistakes"||initialAction==="review"?initialAction:"home");   // home | session | result
+  const zhBoot = useRef(initialAction||null);
   const [inSession,setInSession] = useState(false);
   const [examMode,setExamMode] = useState(false); // Chinese WA1 60-set mock (coexists with adaptive)
   const [drillMode,setDrillMode] = useState(false); // item-level weak-trap remediation drill
@@ -303,6 +304,12 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     setStartFromSection(typeof fromSection === "string" ? fromSection : null);
     setExamMode(true);
   }
+  useEffect(() => {
+    if (zhBoot.current === "start") {
+      zhBoot.current = null;
+      startSession();
+    }
+  }, []);
   function exitSession(){ setExamMode(false); setStartFromSection(null); }
   function recordSection(type, results){
     if(!type) return;
@@ -457,7 +464,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ZhWa1ResultScreen
         results={dailyResult.results}
         sessionNum={dailyResult.sessionNum}
-        onHome={()=>{ setDailyResult(null); setScreen("home"); }}
+        onHome={()=>{ setDailyResult(null); setScreen("home"); onBack && onBack(); }}
         onNext={()=>{ setDailyResult(null); setScreen("home"); startSession(); }}
         onReview={()=>{ setDailyResult(null); setScreen("mistakes"); }}
       />
@@ -469,7 +476,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ZhResultScreen
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}
-        onHome={()=>setScreen("home")}
+        onHome={()=>{ onBack && onBack(); }}
         onNext={()=>{ setInSession(true); setScreen("home"); }}
       />
     </Wrap>
@@ -484,6 +491,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
         onGradeChange={(g)=>{ onGradeChange && onGradeChange(g); }}
         onSubjectChange={(key, live)=>{ if(key!=="Chinese"){ onSubjectChange ? onSubjectChange(key, live) : onBack(); } }}
         onLogout={onLogout||onBack}
+        onToday={onBack}
         toastMsg={null}
         onToastDone={()=>{}}
       />
@@ -506,6 +514,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       ) : (
         <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startAdaptive}
           isMockDue={isMockDue}
+          today={todaySetStatus(prog, zhPlan.length)}
           onStart={()=>startSession()}
           onStartFrom={(sec)=>startSession(sec)}
           onStartMock={()=>setInSession(true)}
@@ -516,7 +525,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
           onReviewSection={(sec)=>setReviewSection(sec)}
         />
       )}
-      <StudentBottomNav screen={screen} setScreen={setScreen} mistakeCount={(prog.mistakes||[]).filter(m=>m.date===todayStr()).length}/>
+      <StudentBottomNav screen={screen==="home"?"":screen} setScreen={(s)=>{ if(s==="home"){ onBack && onBack(); } else setScreen(s); }} mistakeCount={(prog.mistakes||[]).filter(m=>m.date===todayStr()).length}/>
     </Wrap>
   );
 }
@@ -1160,6 +1169,8 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [grade,           setGrade]           = useState(user.grade||"P3");
   const [subject,         setSubject]         = useState("English");
   const [subjectSelected, setSubjectSelected] = useState(false);
+  const [hub,             setHub]             = useState(true); // today overview until a subject is opened
+  const [zhAction,        setZhAction]        = useState(null);
   const [screen,          setScreen]          = useState("home");
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
@@ -1220,6 +1231,63 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     setStartFromSection(typeof fromSection === "string" ? fromSection : null);
     setInSession(true);
   }
+
+  function leaveToHub(){
+    setHub(true);
+    setSubjectSelected(false);
+    setScreen("home");
+    setZhAction(null);
+    setInSession(false);
+    setMockSession(false);
+    setStartFromSection(null);
+    setReviewSection(null);
+    setStudentToast(null);
+  }
+
+  function openSubject(key, action){
+    if(!LIVE_CONTENT[`${grade}_${key}`]){
+      setStudentToast("Coming soon");
+      return;
+    }
+    setStudentToast(null);
+    setHub(false);
+    setSubject(key);
+    setSubjectSelected(true);
+    setScreen(action==="mistakes"||action==="review" ? action : "home");
+    if(key==="English"){
+      setZhAction(null);
+      const p = getProgress(grade, "English");
+      const partial = (p.sessionSections && p.sessionSections.sessionNum === p.nextSession) ? (p.sessionSections.results||{}) : {};
+      setSectionResults(partial);
+      setStartFromSection(null);
+      setInSession(action==="start");
+    } else {
+      setInSession(false);
+      setZhAction(action==="start"||action==="mistakes"||action==="review" ? action : null);
+    }
+  }
+
+  const todaySubjects = ["English","Chinese","Math","Science"].map((key)=>{
+    const meta = SUBJECTS[key] || {};
+    const live = !!LIVE_CONTENT[`${grade}_${key}`];
+    if(!live) return { key, label: meta.label || key, color: meta.color, live, status:null, mistakesToday:0, isMockDue:false };
+    const p = getProgress(grade, key);
+    let sections = 0;
+    if(key==="English"){
+      const n = WA1_PRACTICE_SETS.length || 1;
+      const idx = (((p.nextSession-1)%n)+n)%n;
+      sections = ((WA1_PRACTICE_SETS[idx] && WA1_PRACTICE_SETS[idx].plan) || []).length;
+    } else if(key==="Chinese"){
+      const idx = pickNextSet(WA1_ZH_PRACTICE, p, ((p.nextSession-1)%60+60)%60);
+      sections = ((WA1_ZH_PRACTICE[idx] && WA1_ZH_PRACTICE[idx].plan) || []).length;
+    }
+    return {
+      key, label: meta.label || key, color: meta.color, live,
+      status: todaySetStatus(p, sections),
+      mistakesToday: (p.mistakes||[]).filter(m=>m.date===todayStr()).length,
+      isMockDue: p.nextSession>1 && (p.nextSession-1)%10===0,
+    };
+  });
 
   // Persist a single section's results the moment it is completed (works for
   // both the full "Start Practice" run and single-section chips). This is what
@@ -1344,20 +1412,29 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       user={user}
       getProgress={getProgress}
       setProgress={setProgress}
-      onBack={()=>setSubjectSelected(false)}
+      onBack={leaveToHub}
       onLogout={onLogout}
       onGradeChange={(g)=>{ setGrade(g); }}
-      onSubjectChange={(key, live)=>{ setSubject(key); setScreen("home"); if(!live) setStudentToast("Coming Soon"); else setStudentToast(null); }}
+      onSubjectChange={(key, live)=>{ setZhAction(null); setSubject(key); setScreen("home"); setHub(false); setSubjectSelected(true); if(!live) setStudentToast("Coming soon"); else setStudentToast(null); }}
+      initialAction={zhAction}
     />
   );
 
 
-  if(!subjectSelected) return(
+  if(hub || !subjectSelected) return(
     <Wrap>
-      <SubjectSelectScreen user={user} grade={grade} onLogout={onLogout}
-        onSelect={(sub)=>{ setSubject(sub); setSubjectSelected(true); }}
-        onGradeChange={(g)=>{ setGrade(g); setSubjectSelected(false); }}
+      <TodayScreen
+        user={user}
+        grade={grade}
+        onLogout={onLogout}
+        onGradeChange={(g)=>{ setGrade(g); }}
+        subjects={todaySubjects}
+        onStart={(key)=>openSubject(key, "start")}
+        onReview={(key)=>openSubject(key, "review")}
+        onMistakes={(key)=>openSubject(key, "mistakes")}
+        onMore={(key)=>openSubject(key, "home")}
       />
+      {studentToast && <ComingSoonToast message={studentToast} onDone={()=>setStudentToast(null)}/>}
     </Wrap>
   );
 
@@ -1411,7 +1488,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}
         isMock={sessionResult.isMock}
-        onHome={()=>setScreen("home")}
+        onHome={leaveToHub}
         onNextSession={()=>{ setInSession(true); setScreen("home"); }}
       />
     </Wrap>
@@ -1424,8 +1501,9 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         grade={grade}
         subject={subject}
         onGradeChange={(g)=>{setGrade(g);setScreen("home");}}
-        onSubjectChange={(key, live)=>{ setSubject(key); setScreen("home"); if(!live) setStudentToast("Coming Soon:   "); else setStudentToast(null); }}
+        onSubjectChange={(key, live)=>{ setZhAction(null); setSubject(key); setScreen("home"); if(!live) setStudentToast("Coming soon"); else setStudentToast(null); }}
         onLogout={onLogout}
+        onToday={leaveToHub}
         toastMsg={studentToast}
         onToastDone={()=>setStudentToast(null)}
       />
@@ -1433,7 +1511,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <>
           {enDrill && (
@@ -1452,7 +1530,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
       ) : null}
 
-      <StudentBottomNav screen={screen} setScreen={setScreen} mistakeCount={(prog.mistakes||[]).filter(m=>m.date===todayStr()).length}/>
+      <StudentBottomNav screen={screen==="home"?"":screen} setScreen={(s)=>{ if(s==="home") leaveToHub(); else setScreen(s); }} mistakeCount={(prog.mistakes||[]).filter(m=>m.date===todayStr()).length}/>
     </Wrap>
   );
 }
@@ -1491,6 +1569,10 @@ function AdminApp({user, onLogout}){
                 </div>
               ))}
             </div>
+            <button onClick={()=>{ window.location.href="/adaptive"; }} style={{width:"100%",marginBottom:14,background:"#0F172A",color:"#fff",border:"none",borderRadius:12,padding:"12px 14px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
+              Question generator
+              <div style={{fontWeight:600,fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,.7)",marginTop:3}}>Admin only. Draft questions for review.</div>
+            </button>
             <div style={{background:"#fff",borderRadius:14,padding:14,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
               <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",marginBottom:10}}>Recent Students</div>
               {students.slice(0,8).map((s,i)=>{

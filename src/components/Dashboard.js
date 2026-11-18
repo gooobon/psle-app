@@ -4,7 +4,33 @@ import {
   C, Wrap, AnimNumber, AnimProgressBar,
 } from "@/lib/uiShared";
 import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
+import { todayStr } from "@/lib/sessionUtils";
 import KpiCard from "@/components/KpiCard"; // STEP6_KPI_CARD
+
+// TODO(owner): parent settings store a per-subject daily_target on the server.
+// The student screen cannot read that yet, so today's target stays 1 set per live subject.
+export const DAILY_SET_TARGET = 1;
+
+export function todaySetStatus(prog, sectionTotal) {
+  const today = todayStr();
+  const history = (prog && prog.history) || [];
+  const completedEntries = history.filter((h) => h && h.date === today);
+  const ss = prog && prog.sessionSections;
+  const partial = ss && prog && ss.sessionNum === prog.nextSession
+    ? Object.keys(ss.results || {}).length
+    : 0;
+  const latest = completedEntries[completedEntries.length - 1];
+  const total = sectionTotal || 0;
+  return {
+    target: DAILY_SET_TARGET,
+    completed: completedEntries.length,
+    met: completedEntries.length >= DAILY_SET_TARGET,
+    score: latest && typeof latest.totalPct === "number" ? latest.totalPct : null,
+    partial,
+    sectionTotal: total,
+    inProgress: partial > 0 && (total === 0 || partial < total),
+  };
+}
 //  App-wide constants 
 export const GRADES = ["P3", "P4", "P5", "P6"];
 // 대시보드 상단 학년 탭. 등록 폼(GRADES)과 달리 마지막 단계인 PSLE 까지 보여준다.
@@ -63,7 +89,6 @@ function ComingSoonToast({message, onDone}){
 
 function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
   const [comingSoon, setComingSoon] = React.useState(null);
-  const [showStageModal, setShowStageModal] = React.useState(false);
   const [toastMsg, setToastMsg] = React.useState(null);
   return(
     <div style={{minHeight:"100vh",background:C.bg}}>
@@ -104,7 +129,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
         {Object.entries(SUBJECTS).map(([key,sub])=>{
           const live=!!LIVE_CONTENT[grade+"_"+key];
           return(
-            <button key={key} onClick={()=>{ if(live){ onSelect(key); } else { setToastMsg("Coming Soon: 준비 중인 과목입니다"); setComingSoon(key); } }}
+            <button key={key} onClick={()=>{ if(live){ onSelect(key); } else { setToastMsg("Coming soon"); setComingSoon(key); } }}
               className={`gm-fadeIn-${Math.min(Object.keys(SUBJECTS).indexOf(key)+1,4)}`}
               style={{width:"100%",background:live
                 ?"linear-gradient(135deg,"+sub.color+","+sub.color+"cc)"
@@ -137,55 +162,6 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
         })}
       </div>
 
-    
-  {/* AI ADAPTIVE PRACTICE SECTION */}
-  {showStageModal && (
-    <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,0.55)",zIndex:200,display:"flex",alignItems:"center",justifyContent:"center"}}
-      onClick={()=>setShowStageModal(false)}>
-      <div style={{background:"#fff",borderRadius:20,padding:"24px 20px",width:"min(92vw,360px)",boxShadow:"0 8px 32px rgba(0,0,0,0.18)"}}
-        onClick={e=>e.stopPropagation()}>
-        <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.214)",color:"#1a1a2e",marginBottom:4}}>AI Adaptive Practice</div>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#888",marginBottom:16}}>Select exam stage for {grade} English</div>
-        {["WA1","WA2","WA3","EOY"].map(stage => (
-          <button key={stage} onClick={()=>{
-            setShowStageModal(false);
-            window.location.href = "/adaptive?grade="+grade+"&subject=English&stage="+stage+"&userId="+(user.id||"")+"&userName="+(encodeURIComponent(user.name||""))+"&school="+(encodeURIComponent(user.school||""));
-          }} style={{
-            width:"100%",marginBottom:8,padding:"12px 16px",borderRadius:12,
-            border:"1.5px solid #E0E0EE",background:"#F8F8FF",
-            cursor:"pointer",textAlign:"left",display:"flex",justifyContent:"space-between",alignItems:"center"
-          }}>
-            <span style={{fontWeight:700,fontSize:"calc(var(--fs) * 1.000)",color:"#1a1a2e"}}>{stage}</span>
-            <span style={{fontSize:"calc(var(--fs) * 0.786)",color:"#888"}}>
-              {stage==="WA1"?"Term 1 Assessment":stage==="WA2"?"Mid-Year Exam":stage==="WA3"?"Term 3 Assessment":"End-of-Year Exam"}
-            </span>
-          </button>
-        ))}
-        <button onClick={()=>setShowStageModal(false)} style={{
-          width:"100%",padding:"10px",borderRadius:12,border:"none",
-          background:"#F0F0F8",color:"#888",fontWeight:600,fontSize:"calc(var(--fs) * 0.929)",cursor:"pointer",marginTop:4
-        }}>Cancel</button>
-      </div>
-    </div>
-  )}
-  <div style={{margin:"16px 16px 0"}}>
-    <button onClick={()=>setShowStageModal(true)} style={{
-      width:"100%",padding:"14px 16px",borderRadius:16,border:"none",
-      background:"linear-gradient(135deg,#7B68EE,#5B4FBE)",
-      color:"#fff",fontWeight:800,fontSize:"calc(var(--fs) * 1.071)",cursor:"pointer",
-      display:"flex",alignItems:"center",justifyContent:"center",gap:10,
-      boxShadow:"0 4px 16px rgba(123,104,238,0.35)"
-    }}>
-      <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>*</span>
-      Question Generator (teacher tool)
-      <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,background:"rgba(255,255,255,0.2)",
-        padding:"2px 8px",borderRadius:20}}>NEW</span>
-    </button>
-    <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#94A3B8",textAlign:"center",marginTop:6}}>
-      Generates draft questions for review - not the student adaptive round
-    </div>
-  </div>
-
     {toastMsg&&<ComingSoonToast message={toastMsg} onDone={()=>setToastMsg(null)}/>}
       {comingSoon&&(
         <div style={{position:"fixed",inset:0,background:"rgba(0,0,0,.55)",
@@ -196,7 +172,7 @@ function SubjectSelectScreen({user, grade, onLogout, onSelect, onGradeChange}){
               {SUBJECTS[comingSoon]?.label} — Coming Soon!
             </div>
             <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:24}}>
-              이 과목은 곧 제공될 예정입니다. 조금만 기다려 주세요!
+              This subject is not ready yet.
             </div>
             <div style={{background:C.lGreen,borderRadius:12,padding:"10px 14px",marginBottom:20,
               fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:"#065F46"}}>
@@ -237,14 +213,13 @@ function ComingSoonScreen({grade,subject}){
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, onStartAdaptive, availableSections, completedSections, onMistakes, onReview, onReviewSection}){ // STEP9_ADAPTIVE
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, onStartAdaptive, availableSections, completedSections, onMistakes, onReview, onReviewSection, today}){ // STEP9_ADAPTIVE
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
-  const mockH    = history.filter(h=>h.isMockExam);
-  const avgTotal = regularH.length ? Math.round(regularH.reduce((s,h)=>s+h.totalPct,0)/regularH.length):0;
   const [graphMode,    setGraphMode]    = useState("total");
   const [showProgress, setShowProgress] = useState(false);
-    const [showRecent,   setShowRecent]   = useState(false);
+  const [showRecent,   setShowRecent]   = useState(false);
+  const [showExtra,    setShowExtra]    = useState(false);
   // Subject theming: Chinese = red twin of the English (navy) design; identical layout.
   const isZh = subject === "Chinese";
   const SECS = isZh ? ZH_WA1_SECTIONS : SECTIONS;
@@ -253,6 +228,19 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
   const ACCENT = isZh ? "#B91C1C" : C.navy;
   const HSHADOW = isZh ? "rgba(124,45,18,0.3)" : "rgba(15,23,42,0.3)";
   const CFONT = isZh ? ZH_FONT_DASH : undefined;
+  const day = today || { met:false, completed:0, target:DAILY_SET_TARGET, score:null, partial:0, sectionTotal:0, inProgress:false };
+  const inProgress = !!day.inProgress;
+  const startTitle = inProgress
+    ? (isZh ? "\u7EE7\u7EED\u4ECA\u5929\u7684\u7EC3\u4E60" : "Continue today's set")
+    : day.met
+      ? (isZh ? "\u518D\u505A\u4E00\u5957\uFF08\u52A0\u7EC3\uFF09" : "Extra set")
+      : isMockDue
+        ? (isZh ? "\u5F00\u59CB\u4ECA\u5929\u7684\u6A21\u62DF\u8003" : "Start today's mock")
+        : (isZh ? "\u5F00\u59CB\u4ECA\u5929\u7684\u7EC3\u4E60" : "Start today's set");
+  const startNote = isZh
+    ? "\u8FA8\u5B57 \u00B7 \u62FC\u97F3 \u00B7 \u8BCD\u8BED \u00B7 \u642D\u914D \u00B7 \u9020\u53E5 \u00B7 \u77ED\u6587\u586B\u7A7A \u00B7 \u9605\u8BFB \u00B7 \u7EA6 30 \u5206\u949F"
+    : (isMockDue ? "Flagged mock \u00B7 about 30 min" : "Grammar \u00B7 Vocabulary \u00B7 Comprehension \u00B7 about 35 min");
+  const hasAdaptive = !!(onStartAdaptive && (prog.trials||[]).length > 0);
 
   const sectionAvgs={};
   ORDER.forEach(type=>{
@@ -261,50 +249,34 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
   });
 
   return(
-    <div style={{paddingBottom:80}}> {user.school&&<SchoolBanner school={user.school}/>} <div style={{background:"#fff",padding:"14px 16px 0",borderBottom:`1px solid ${C.border}`}}>
-        <div style={{display:"flex",gap:10,paddingBottom:14}}>
-          {[{icon:"",l:"Sessions",v:history.length},{icon:"",l:"Avg",v:avgTotal?`${avgTotal}%`:"—"},{icon:"",l:"Mock",v:mockH.length},{icon:"",l:"Next",v:`#${prog.nextSession}`}].map((s,i)=>(
-            <div key={i} style={{flex:1,background:"#F8FAFC",borderRadius:12,padding:"8px 4px",textAlign:"center"}}>
-              <div style={{fontSize:"calc(var(--fs) * 1.143)"}}>{s.icon}</div>
-              <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,color:ACCENT}}>{s.v}</div>
-              <div style={{fontSize:"calc(var(--fs) * 0.780)",color:C.muted,fontWeight:600}}>{s.l}</div>
+    <div style={{paddingBottom:80}}> {user.school&&<SchoolBanner school={user.school}/>}
+      <div style={{padding:"16px 16px 0"}}>
+        <div style={{background:"#fff",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)",border:`1px solid ${day.met&&!inProgress?"#BBF7D0":C.border}`}}>
+          <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",gap:8}}>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:C.muted,letterSpacing:0.6,textTransform:"uppercase"}}>{isZh?"\u4ECA\u5929":"Today"} · {day.completed}/{day.target} {isZh?"\u5957":"set"}</div>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:day.met&&!inProgress?"#047857":ACCENT}}>
+              {inProgress
+                ? (isZh ? `\u8FDB\u884C\u4E2D ${day.partial}/${day.sectionTotal||"?"}` : `In progress ${day.partial}/${day.sectionTotal||"?"}`)
+                : day.met
+                  ? (isZh ? `\u5DF2\u5B8C\u6210${day.score!=null?" \u00B7 "+day.score+"%":""}` : `Done${day.score!=null?" \u00B7 "+day.score+"%":""}`)
+                  : (isZh ? "\u8FD8\u6CA1\u505A" : "Not started")}
             </div>
-          ))}
+          </div>
+          <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,marginTop:6,lineHeight:1.45}}>
+            {day.met && !inProgress
+              ? (isZh ? "\u4ECA\u5929\u8FD9\u4E00\u5957\u5DF2\u7ECF\u505A\u5B8C\u3002\u4E0B\u9762\u7684\u6309\u94AE\u662F\u52A0\u7EC3\u3002" : "Today's set is done. The button below starts an extra set.")
+              : (isZh ? "\u5148\u505A\u5B8C\u4ECA\u5929\u8FD9\u4E00\u5957\uFF0C\u518D\u590D\u4E60\u9519\u9898\u3002" : "Finish this set, then review what you missed.")}
+          </div>
         </div>
-      </div>
-
-      <KpiCard prog={prog} isZh={isZh} accent={ACCENT}/>
-
-      <div style={{padding:"16px 16px 0"}}> {false&&( /* CLEANUP1: past-paper banner retired */
-          <div style={{background:HG,borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(15,23,42,0.35)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontSize:28}}></span>
-              <div>
-                <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>Past Paper #{prog.nextSession-10} Unlocked!</div>
-                <div style={{color:"rgba(255,255,255,0.75)",fontSize:"calc(var(--fs) * 0.857)",marginTop:1}}>{user.school ? user.school+" style" : "School paper style"} · Real exam questions</div>
-              </div>
-            </div>
-          </div>
-        )}
-        {isMockDue&&prog.nextSession<11&&(
-          <div style={{background:"linear-gradient(135deg,#7C3AED,#8B5CF6)",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 4px 16px rgba(124,58,237,0.3)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:10}}>
-              <span style={{fontSize:28}}></span>
-              <div>
-                <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>Mock Exam Unlocked!</div>
-                <div style={{color:"rgba(255,255,255,0.8)",fontSize:"calc(var(--fs) * 0.857)",marginTop:1}}>10 sessions complete — real school paper test awaits</div>
-              </div>
-            </div>
-          </div>
-        )} <div role="button" tabIndex={0} onClick={onStart} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onStart&&onStart();}}} style={{width:"100%",background:HG,color:"#fff",border:"none",borderRadius:18,padding:"0",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 28px "+HSHADOW,overflow:"hidden",textAlign:"left",fontFamily:CFONT}}>
+        <div role="button" tabIndex={0} onClick={onStart} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onStart&&onStart();}}} style={{width:"100%",background:HG,color:"#fff",border:"none",borderRadius:18,padding:"0",marginBottom:12,cursor:"pointer",boxShadow:"0 8px 28px "+HSHADOW,overflow:"hidden",textAlign:"left",fontFamily:CFONT}}>
           <div style={{padding:"18px 20px"}}>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.6)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>
-              {grade} {subject} · {isMockDue?"Mock Exam":"Session #"+prog.nextSession}
+              {grade} {subject} · {isMockDue?(isZh?"\u4ECA\u5929\u7684\u6A21\u62DF\u8003":"Today's mock"):(isZh?"\u4ECA\u5929\u7684\u7EC3\u4E60":"Today's set")} · #{prog.nextSession}
             </div>
             <div style={{fontSize:"calc(var(--fs) * 1.286)",fontWeight:900,color:"#fff",marginBottom:4}}>
-              {isZh?"\u2192 \u5F00\u59CB\u4ECA\u5929\u7684\u7EC3\u4E60 \u2192":isMockDue?" Start Mock Exam \u2192":"\u2192 Start Practice for Today \u2192"}
+              {startTitle}
             </div>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.5)"}}>{isZh?"\u8FA8\u5B57 \u00B7 \u62FC\u97F3 \u00B7 \u8BCD\u8BED \u00B7 \u642D\u914D \u00B7 \u9020\u53E5 \u00B7 \u77ED\u6587\u586B\u7A7A \u00B7 \u9605\u8BFB \u00B7 ~30 min":prog.nextSession>=11?" Real school past paper \u00B7 ~35 min":isMockDue?"Nanyang Primary WA1 style \u00B7 ~30 min":"Grammar \u00B7 Vocabulary \u00B7 Comprehension \u00B7 ~35 min"+(user.school?" \u00B7 "+user.school+" style":"")}</div>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.5)"}}>{startNote}</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.06)",padding:"8px 20px",display:"flex",gap:8,flexWrap:"wrap"}}>
             {Object.entries(SECS).map(([k,v])=>(
@@ -324,20 +296,36 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
             ))}
           </div>
         </div>
-        {onStartAdaptive && (prog.trials||[]).length > 0 && (
-          <button onClick={onStartAdaptive} style={{width:"100%",background:"linear-gradient(135deg,#0F766E,#14B8A6)",color:"#fff",border:"none",borderRadius:18,padding:"16px 20px",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 24px rgba(15,118,110,0.28)",textAlign:"left",fontFamily:isZh?"'KaiTi','STKaiti','LXGW WenKai',serif":"inherit"}}>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{isZh?"\u81EA\u9002\u5E94 \u00B7 10 \u9898":"Adaptive \u00B7 10 questions"}</div>
-            <div style={{fontSize:"calc(var(--fs) * 1.214)",fontWeight:900,color:"#fff",marginBottom:4}}>{isZh?"\u81EA\u9002\u5E94\u7EC3\u4E60":"Adaptive round"}</div>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)"}}>{isZh?"\u5148\u8865\u5F31\u9879\uFF0C\u518D\u5DE9\u56FA\u5FEB\u638C\u63E1\u7684\uFF0C\u90FD\u662F\u65B0\u9898\u76EE":"Fix weak spots first, then sharpen the nearly-mastered - all new questions"}</div>
-          </button>
+        <div style={{display:"flex",gap:8,marginBottom:14}}>
+          <button onClick={onMistakes} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{isZh?"\u9519\u9898":"Mistakes"}</button>
+          <button onClick={onReview} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{isZh?"\u590D\u4E60":"Review"}</button>
+        </div>
+        {(hasAdaptive || onStartMock) && (
+          <div style={{background:"#fff",borderRadius:16,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)",overflow:"hidden"}}>
+            <button onClick={()=>setShowExtra(v=>!v)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+              <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.text}}>{isZh?"\u52A0\u7EC3":"Extra practice"}</div>
+              <span style={{color:C.muted,fontSize:"calc(var(--fs) * 0.929)",transform:showExtra?"rotate(90deg)":"none",transition:"transform 0.2s"}}>›</span>
+            </button>
+            {showExtra && (
+              <div style={{padding:"0 12px 12px",display:"flex",flexDirection:"column",gap:8}}>
+                {hasAdaptive && (
+                  <button onClick={onStartAdaptive} style={{width:"100%",background:"linear-gradient(135deg,#0F766E,#14B8A6)",color:"#fff",border:"none",borderRadius:14,padding:"12px 14px",cursor:"pointer",textAlign:"left",fontFamily:CFONT}}>
+                    <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{isZh?"\u81EA\u9002\u5E94\u7EC3\u4E60 \u00B7 10 \u9898":"Adaptive round \u00B7 10 questions"}</div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.8)",marginTop:2}}>{isZh?"\u5148\u8865\u5F31\u9879\uFF0C\u518D\u5DE9\u56FA\u5FEB\u638C\u63E1\u7684":"Fix weak spots, then sharpen what is nearly mastered"}</div>
+                  </button>
+                )}
+                {onStartMock && (
+                  <button onClick={onStartMock} style={{width:"100%",background:"linear-gradient(135deg,#7C3AED,#8B5CF6)",color:"#fff",border:"none",borderRadius:14,padding:"12px 14px",cursor:"pointer",textAlign:"left",fontFamily:CFONT}}>
+                    <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{isZh?"\u771F\u9898\u6A21\u62DF\u8003":"Past-paper mock"}</div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.8)",marginTop:2}}>{isZh?"\u5B66\u6821\u771F\u5377\uFF0C\u4E0D\u7B97\u4ECA\u5929\u7684\u90A3\u4E00\u5957":"School past paper. Separate from today's set."}</div>
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
         )}
-        {onStartMock && (
-          <button onClick={onStartMock} style={{width:"100%",background:"linear-gradient(135deg,#7C3AED,#8B5CF6)",color:"#fff",border:"none",borderRadius:18,padding:"16px 20px",marginBottom:16,cursor:"pointer",boxShadow:"0 8px 24px rgba(124,58,237,0.28)",textAlign:"left",fontFamily:CFONT}}>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",fontWeight:700,letterSpacing:1,textTransform:"uppercase",marginBottom:4}}>{isZh?"\u6A21\u62DF\u8003 \u00B7 \u771F\u9898":"Mock Exam \u00B7 Past Papers"}</div>
-            <div style={{fontSize:"calc(var(--fs) * 1.214)",fontWeight:900,color:"#fff",marginBottom:4}}>{isZh?"\u534E\u6587 \u6A21\u62DF\u8003 (\u5168\u6821\u771F\u9898)":"Mock Exam (School Past Papers)"}</div>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)"}}>{isZh?"\u771F\u5B9E\u8003\u5377 \u00B7 \u5168\u6821 \u00B7 \u68C0\u9A8C\u5B9E\u529B":"Real exam papers \u00B7 all schools"}</div>
-          </button>
-        )} {regularH.length>0&&(
+        <KpiCard prog={prog} isZh={isZh} accent={ACCENT}/>
+        {regularH.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowProgress(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"14px 16px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 1.000)",color:C.text}}> My Progress</div>
@@ -423,16 +411,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
             })}
           </div>}
           </div>
-        )} <div style={{display:"flex",gap:10}}>
-          <button onClick={onMistakes} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <span style={{fontSize:"calc(var(--fs) * 1.571)"}}></span>
-            <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:C.text}}>Mistakes</span>
-          </button>
-          <button onClick={onReview} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:14,padding:"12px 8px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:4,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <span style={{fontSize:"calc(var(--fs) * 1.571)"}}></span>
-            <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:C.text}}>Review</span>
-          </button>
-        </div>
+        )}
       </div>
     </div>
   );
@@ -555,20 +534,132 @@ function ZhHome({user, prog, onStart, onStartWA1, onStartDrill, onBack}){
 
 
 
-export function StudentShell({ user, grade, subject, onGradeChange, onSubjectChange, onLogout, toastMsg, onToastDone }) {
+const SUBJECT_TITLES = {
+  English: "English",
+  Chinese: "Chinese",
+  Math: "Mathematics",
+  Science: "Science",
+};
+
+function todayPrimary(card) {
+  const zh = card.key === "Chinese";
+  if (card.status && card.status.inProgress) return zh ? "\u7EE7\u7EED\u4ECA\u5929\u7684\u7EC3\u4E60" : "Continue today's set";
+  if (card.status && !card.status.met) {
+    if (card.isMockDue) return zh ? "\u5F00\u59CB\u4ECA\u5929\u7684\u6A21\u62DF\u8003" : "Start today's mock";
+    return zh ? "\u5F00\u59CB\u4ECA\u5929\u7684\u7EC3\u4E60" : "Start today's set";
+  }
+  return zh ? "\u590D\u4E60\u9519\u9898" : "Review mistakes";
+}
+
+function todayDetail(card) {
+  const zh = card.key === "Chinese";
+  const s = card.status;
+  if (!s) return "Coming soon";
+  if (s.inProgress) return zh ? `\u8FDB\u884C\u4E2D \u00B7 ${s.partial}/${s.sectionTotal} \u90E8\u5206` : `In progress \u00B7 ${s.partial} of ${s.sectionTotal} sections`;
+  if (s.met) return zh
+    ? `\u4ECA\u5929\u5DF2\u5B8C\u6210${s.score != null ? " \u00B7 " + s.score + "%" : ""}`
+    : `Done today${s.score != null ? " \u00B7 " + s.score + "%" : ""}`;
+  return zh ? "\u8FD8\u6CA1\u505A \u00B7 \u4ECA\u5929 1 \u5957" : "Not started \u00B7 1 set left today";
+}
+
+function TodayScreen({ user, grade, onGradeChange, onLogout, subjects, onStart, onReview, onMistakes, onMore }) {
+  const live = (subjects || []).filter((s) => s.live);
+  const soon = (subjects || []).filter((s) => !s.live);
+  const finished = live.filter((s) => s.status && s.status.met && !s.status.inProgress).length;
+  const first = (user.name || "there").split(" ")[0];
+  return (
+    <div style={{minHeight:"100vh",background:C.bg,paddingBottom:32}}>
+      <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",padding:"22px 20px 16px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8,marginBottom:14}}>
+          <div>
+            <div style={{color:"rgba(255,255,255,.55)",fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,letterSpacing:1.2,textTransform:"uppercase"}}>Genius Project</div>
+            <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.429)",fontWeight:900,marginTop:2}}>Hello, {first}</div>
+            <div style={{color:"rgba(255,255,255,.6)",fontSize:"calc(var(--fs) * 0.857)",marginTop:2}}>{user.school || "Primary School"} · {grade}</div>
+          </div>
+          <button onClick={onLogout} style={{background:"rgba(255,255,255,.12)",border:"none",borderRadius:10,padding:"7px 12px",color:"rgba(255,255,255,.85)",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,flexShrink:0}}>Logout</button>
+        </div>
+        <div style={{display:"flex",gap:6,width:"100%"}}>
+          {GRADE_TABS.map((g) => (
+            <button key={g} onClick={() => onGradeChange(g)} style={{flex:"1 1 0",minWidth:0,background:g===grade?"rgba(255,255,255,.95)":"rgba(255,255,255,.1)",border:"none",borderRadius:10,padding:"7px 4px",color:g===grade?"#0F172A":"rgba(255,255,255,.7)",fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,cursor:"pointer"}}>{g}</button>
+          ))}
+        </div>
+      </div>
+      <div style={{padding:"16px 16px 0"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",marginBottom:4}}>
+          <div style={{fontSize:"calc(var(--fs) * 1.214)",fontWeight:900,color:"#0F172A"}}>Today</div>
+          <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:C.muted}}>{todayStr()}</div>
+        </div>
+        <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.5,marginBottom:14}}>
+          {live.length
+            ? `${finished} of ${live.length} done. One set per subject, then review what you missed.`
+            : `Practice for ${grade} is not ready yet. P3 English and Chinese are available.`}
+        </div>
+        {live.map((card) => {
+          const zh = card.key === "Chinese";
+          const s = card.status || {};
+          const done = s.met && !s.inProgress;
+          const accent = card.key === "Chinese" ? "#B91C1C" : C.navy;
+          return (
+            <div key={card.key} style={{background:"#fff",borderRadius:18,padding:"14px 14px 12px",marginBottom:12,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",border:done?"1.5px solid #86EFAC":"1.5px solid transparent"}}>
+              <div style={{display:"flex",justifyContent:"space-between",alignItems:"flex-start",gap:8,marginBottom:10}}>
+                <div>
+                  <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:900,color:accent}}>{zh ? "\u534E\u6587" : SUBJECT_TITLES[card.key]}</div>
+                  {zh && <div style={{fontSize:"calc(var(--fs) * 0.780)",color:C.muted,fontWeight:700}}>Chinese</div>}
+                  <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#334155",marginTop:4,fontWeight:700}}>{todayDetail(card)}</div>
+                </div>
+                <div style={{background:done?"#DCFCE7":s.inProgress?"#FEF3C7":"#F1F5F9",color:done?"#166534":s.inProgress?"#92400E":"#475569",borderRadius:999,padding:"4px 10px",fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,flexShrink:0}}>
+                  {done ? (zh ? "\u5B8C\u6210" : "Done") : s.inProgress ? (zh ? "\u8FDB\u884C\u4E2D" : "Part done") : (zh ? "\u672A\u505A" : "To do")}
+                </div>
+              </div>
+              <button onClick={() => (done ? onReview(card.key) : onStart(card.key))} style={{width:"100%",background:done?"#059669":accent,color:"#fff",border:"none",borderRadius:12,padding:"12px 10px",fontWeight:900,fontSize:"calc(var(--fs) * 1.000)",cursor:"pointer"}}>
+                {todayPrimary(card)}
+              </button>
+              {done && (
+                <button onClick={() => onStart(card.key)} style={{width:"100%",marginTop:8,background:"#fff",color:accent,border:`1.5px solid ${accent}`,borderRadius:12,padding:"10px",fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",cursor:"pointer"}}>
+                  {zh ? "\u518D\u505A\u4E00\u5957\uFF08\u52A0\u7EC3\uFF09" : "Extra set"}
+                </button>
+              )}
+              <div style={{display:"flex",gap:8,marginTop:8}}>
+                <button onClick={() => onMistakes(card.key)} style={{flex:1,background:"#F8FAFC",border:`1px solid ${C.border}`,borderRadius:10,padding:"8px 4px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.786)",color:"#0F172A"}}>
+                  {zh ? "\u9519\u9898" : "Mistakes"}{card.mistakesToday ? ` ${card.mistakesToday}` : ""}
+                </button>
+                <button onClick={() => onReview(card.key)} style={{flex:1,background:"#F8FAFC",border:`1px solid ${C.border}`,borderRadius:10,padding:"8px 4px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.786)",color:"#0F172A"}}>
+                  {zh ? "\u590D\u4E60" : "Review"}
+                </button>
+                <button onClick={() => onMore(card.key)} style={{flex:1,background:"#F8FAFC",border:`1px solid ${C.border}`,borderRadius:10,padding:"8px 4px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.786)",color:"#0F172A"}}>
+                  {zh ? "\u66F4\u591A" : "More"}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+        {soon.length > 0 && (
+          <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,padding:"4px 2px 8px",lineHeight:1.5}}>
+            Coming soon: {soon.map((s) => SUBJECT_TITLES[s.key] || s.key).join(", ")}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function StudentShell({ user, grade, subject, onGradeChange, onSubjectChange, onLogout, onToday, toastMsg, onToastDone }) {
   return (
     <>
       <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",padding:"18px 20px 0"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}}>
-          <div style={{display:"flex",alignItems:"center",gap:10}}>
-            <div style={{width:36,height:36,borderRadius:12,background:user.color||C.blue,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.429)"}}>{user.avatar||""}</div>
-            <div>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14,gap:8}}>
+          <div style={{display:"flex",alignItems:"center",gap:10,minWidth:0}}>
+            <div style={{width:36,height:36,borderRadius:12,background:user.color||C.blue,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.429)",flexShrink:0}}>{user.avatar||""}</div>
+            <div style={{minWidth:0}}>
               <div style={{color:"rgba(255,255,255,0.65)",fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,letterSpacing:1,textTransform:"uppercase"}}>Genius Project</div>
               <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.071)",fontWeight:800}}>{user.name}</div>
               {user.school&&<div style={{color:"rgba(255,255,255,0.55)",fontSize:"calc(var(--fs) * 0.780)",marginTop:1}}> {user.school}</div>}
             </div>
           </div>
-          <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 12px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>Logout</button>
+          <div style={{display:"flex",gap:6,flexShrink:0}}>
+            {onToday && <button onClick={onToday} style={{background:"rgba(255,255,255,0.95)",border:"none",borderRadius:10,padding:"6px 10px",color:"#0F172A",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",fontWeight:800}}>Today</button>}
+            <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 10px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>Logout</button>
+          </div>
         </div>
         <div style={{display:"flex",gap:6,marginBottom:12,width:"100%"}}>
           {GRADE_TABS.map(g=>(
@@ -598,7 +689,7 @@ export function StudentShell({ user, grade, subject, onGradeChange, onSubjectCha
 export {
 
   ComingSoonToast, SubjectSelectScreen, ComingSoonScreen,
-  StudentHome, ZhHome,
+  StudentHome, ZhHome, TodayScreen,
 };
 
 
