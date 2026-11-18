@@ -26,7 +26,21 @@ const mark = (s) => (s.sets >= s.target ? "✅" : "❌");
 // Template parameters must be single-line, no tabs, no 4+ consecutive spaces (Meta rule).
 const clean = (v) => String(v ?? "").replace(/[\r\n\t]+/g, " ").replace(/ {4,}/g, "   ").trim();
 
-export function formatWhatsApp(p) {
+// Accepts the single-child shape OR the combined payload used by the daily cron ({children:[...]}).
+function normalize(p) {
+  if (!Array.isArray(p.children)) return p;
+  const kids = p.children;
+  return {
+    ...p,
+    childName: kids.map((c) => c.name).join(" & "),
+    subjects: kids.flatMap((c) => c.subjects.map((s) => ({ ...s, name: kids.length > 1 ? `${c.name} ${s.name}` : s.name }))),
+    questions: kids.reduce((a, c) => a + c.questions, 0),
+    accuracy: null,
+  };
+}
+
+export function formatWhatsApp(raw) {
+  const p = normalize(raw);
   const summary = (p.subjects || []).map((s) => `${mark(s)} ${s.name} ${s.sets}/${s.target}`).join(", ") || "no subjects";
   const questions = String(p.questions ?? 0) + (p.accuracy == null ? "" : ` (${p.accuracy}% correct)`);
   const params = [p.parentName, p.childName, p.date, summary, questions].map(clean);

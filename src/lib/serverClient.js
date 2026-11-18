@@ -44,9 +44,35 @@ export async function importLocalOnce(username) {
 // Daily activity log: report one completed set/round. Fire-and-forget; never blocks or alters the learning flow.
 // Idempotent server-side per (user, SGT date, subject, key). Does nothing when the flag is off.
 import { SERVER_AUTH as _FLAG } from "@/lib/supabase/config";
-export function reportActivity(subject, key, results, minutes = 0) {
+// ── Study minutes ──────────────────────────────────────────────
+// Active time = sum of gaps between consecutive student interactions (tap/click/key/scroll) since the last report.
+// A gap longer than IDLE_CAP_MS (5 min) is treated as a break and not counted. The clock starts at the first
+// interaction after a report, so time between sets is not counted. Passive; it never touches engine logic.
+const IDLE_CAP_MS = 5 * 60 * 1000;
+const tracker = { last: 0, activeMs: 0, on: false };
+function touch() {
+  const now = Date.now();
+  if (tracker.last) { const gap = now - tracker.last; if (gap <= IDLE_CAP_MS) tracker.activeMs += gap; }
+  tracker.last = now;
+}
+function startTracker() {
+  if (tracker.on || typeof window === "undefined") return;
+  tracker.on = true;
+  for (const ev of ["pointerdown", "keydown", "touchstart", "scroll"]) window.addEventListener(ev, touch, { passive: true, capture: true });
+}
+// Returns whole minutes of active time since the previous call, then resets. >=20 s counts as 1 minute.
+export function takeActiveMinutes() {
+  touch(); // close the final gap (completion tap)
+  const ms = tracker.activeMs;
+  tracker.activeMs = 0; tracker.last = 0;
+  return ms >= 20000 ? Math.max(1, Math.round(ms / 60000)) : 0;
+}
+if (_FLAG) startTracker();
+
+export function reportActivity(subject, key, results, minutes) {
   if (!_FLAG) return;
   try {
+    if (minutes == null) minutes = takeActiveMinutes();
     const graded = (results || []).filter(r => r && r.scored !== false);
     serverPost("/api/activity", {
       subject, key: String(key),

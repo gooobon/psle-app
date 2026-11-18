@@ -1,19 +1,22 @@
-// Email channel. Formatting is real; sending is a stub until the owner picks an email provider.
-// TODO(owner): choose a provider (Resend / Supabase SMTP / SES) and implement send() below.
-const mark = (s) => (s.sets >= s.target ? "✅" : "❌");
+// Email channel via Resend (https://resend.com/docs/api-reference/emails/send-email).
+// Real sends happen ONLY if EMAIL_ALERTS_ENABLED=true AND RESEND_API_KEY and ALERT_FROM_EMAIL are set.
+// Otherwise send() is a no-op and the caller logs a dry run. Env (names only; values live in Vercel):
+//   EMAIL_ALERTS_ENABLED, RESEND_API_KEY, ALERT_FROM_EMAIL
+import { renderDailyEmail } from "./emailTemplate.mjs";
 
 export const emailChannel = {
   type: "email",
-  isEnabled: () => false, // no provider wired yet
-  format(p) {
-    const lines = (p.subjects || []).map((s) => `${mark(s)} ${s.name}: ${s.sets}/${s.target} set(s)`);
-    return {
-      subject: `${p.childName}: practice summary for ${p.date}`,
-      text: [`Hi ${p.parentName},`, "", ...lines, `Questions answered: ${p.questions}` + (p.accuracy == null ? "" : ` (accuracy ${p.accuracy}%)`)].join("\n"),
-    };
-  },
-  async send(target) {
-    console.log("[notify:email] no provider configured; skipped", target?.address ? "(address on file)" : "");
-    return { status: "skipped", reason: "email provider not configured" };
+  isEnabled: (env = process.env) => env.EMAIL_ALERTS_ENABLED === "true",
+  format: (p) => renderDailyEmail(p),
+  async send(target, message, { env = process.env, fetchImpl } = {}) {
+    if (!emailChannel.isEnabled(env)) { console.log("[notify:email] disabled (EMAIL_ALERTS_ENABLED!=true); no-op"); return { status: "noop", reason: "disabled" }; }
+    if (!env.RESEND_API_KEY || !env.ALERT_FROM_EMAIL) return { status: "skipped", reason: "RESEND_API_KEY or ALERT_FROM_EMAIL missing" };
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(String(target?.address || ""))) return { status: "skipped", reason: "no valid email address" };
+    const r = await (fetchImpl || fetch)("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: env.ALERT_FROM_EMAIL, to: [target.address], subject: message.subject, text: message.text, html: message.html }),
+    });
+    return r.ok ? { status: "sent" } : { status: "error", error: `provider HTTP ${r.status}` };
   },
 };
