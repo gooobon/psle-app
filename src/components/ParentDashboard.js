@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
-import { SERVER_AUTH, serverPost, serverGet } from "@/lib/serverClient";
+import { SERVER_AUTH, WRONG_ANSWERS_SYNC, serverPost, serverGet } from "@/lib/serverClient";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 
 // ── Parent: Mistakes review tab ───────────────────────────────
@@ -11,12 +11,38 @@ function ParentMistakesTab({child, history, grade, subject}){
   const [filterSession, setFilterSession] = React.useState("all");
   const [expanded, setExpanded] = React.useState(null);
 
+  // Server mode (flags on): read this child's wrong answers from the server so any device works.
+  // Flag off, or server unreachable: fall back to the local history exactly as before.
+  // child.id is the username; the API needs the server UUID (child.serverId). Without serverId we use local data.
+  const useServer = SERVER_AUTH && WRONG_ANSWERS_SYNC && !!child?.serverId;
+  const [srv, setSrv] = React.useState(null); // null = not loaded / failed
+  React.useEffect(()=>{
+    setSrv(null);
+    if(!useServer) return;
+    let alive = true;
+    serverGet(`/api/parent/wrong-answers?child=${encodeURIComponent(child.serverId)}&subject=${encodeURIComponent(subject)}`)
+      .then(r=>{ if(alive && r.ok && Array.isArray(r.items)) setSrv(r.items); });
+    return ()=>{ alive=false; };
+  },[useServer, child?.serverId, subject]);
+
   const allMistakes = [];
-  (history||[]).forEach(h=>{
-    (h.mistakes||[]).forEach(m=>{
-      allMistakes.push({...m, sessionNum:h.sessionNum, sessionDate:h.date});
+  if(useServer && srv){
+    // Server rows arrive newest first; grade filter matches the grade selector.
+    srv.filter(x=>!x.grade || x.grade===grade).forEach(x=>{
+      const mm = /^set-(\d+)$/.exec(x.attempt_key||"");
+      allMistakes.push({
+        id:x.question_id, q:x.question_text||undefined, topic:x.section_type||undefined, sectionType:x.section_type||undefined,
+        yourAnswer:x.student_answer||undefined, correctAnswer:x.correct_answer||undefined,
+        sessionNum: mm?Number(mm[1]):0, sessionDate:x.attempted_at,
+      });
     });
-  });
+  } else {
+    (history||[]).forEach(h=>{
+      (h.mistakes||[]).forEach(m=>{
+        allMistakes.push({...m, sessionNum:h.sessionNum, sessionDate:h.date});
+      });
+    });
+  }
 
   const sessions = [...new Set(allMistakes.map(m=>m.sessionNum))].sort((a,b)=>b-a);
   const filtered = filterSession==="all" ? allMistakes

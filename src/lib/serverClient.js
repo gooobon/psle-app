@@ -1,7 +1,8 @@
 // Browser-side helpers for the optional Supabase server (only used when NEXT_PUBLIC_SERVER_AUTH=true).
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
-export { SERVER_AUTH } from "@/lib/supabase/config";
+export { SERVER_AUTH, WRONG_ANSWERS_SYNC } from "@/lib/supabase/config";
+import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA } from "@/lib/supabase/config";
 
 const IMPORT_MARKER = "genius_server_import_v1";
 
@@ -79,4 +80,52 @@ export function reportActivity(subject, key, results, minutes) {
       questions: graded.length, correct: graded.filter(r => r.correct).length, minutes,
     });
   } catch {}
+}
+
+// ── Wrong-answer sync (flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_WRONG_ANSWERS_SYNC_ENABLED, default off) ──
+// Copies only; the localStorage write stays exactly as is and is never cleared.
+const WA_MARKER = "genius_wrong_answers_sync_v1";
+const asText = v => (v == null ? undefined : typeof v === "string" ? v : JSON.stringify(v));
+function waItem(m, subject, grade, attemptKey, attemptedAt, sourceId) {
+  const opts = Array.isArray(m.options) ? m.options : null;
+  const pick = v => (opts && typeof v === "number" && opts[v] !== undefined ? opts[v] : v);
+  return {
+    subject, grade, questionId: String(m.id), attemptKey, attemptedAt, sourceId,
+    studentAnswer: asText(pick(m.userAnswer !== undefined ? m.userAnswer : m.yourAnswer !== undefined ? m.yourAnswer : m.studentAnswer)),
+    correctAnswer: asText(pick(m.correctAnswer !== undefined ? m.correctAnswer : m.answer)),
+    questionText: asText(m.q || m.sentence || m.word), sectionType: m.sectionType || m.topic,
+    taxonomyIds: m.conceptIds, // TODO(owner): results do not carry taxonomy ids yet; filled when present
+  };
+}
+// Live path: call right after the session is saved locally. Fire-and-forget.
+export function reportWrongAnswers(subject, grade, sessionNum, missed, sourceId) {
+  if (!_SA || !_WA) return;
+  try {
+    const at = new Date().toISOString();
+    const items = (missed || []).filter(m => m && m.id != null).map(m => waItem(m, subject, grade, "set-" + sessionNum, at, sourceId || undefined));
+    if (items.length) serverPost("/api/wrong-answers", { items });
+  } catch {}
+}
+// One-time upload of this student's existing local wrong answers (from history[].mistakes). Copy, never move/clear.
+export async function syncLocalWrongAnswersOnce(username) {
+  if (!_SA || !_WA || !username) return { skipped: true };
+  let mk = {}; try { mk = JSON.parse(localStorage.getItem(WA_MARKER) || "{}"); } catch {}
+  if (mk[username]) return { skipped: true };
+  const all = lsJson("genius_progress_v2", {});
+  const items = [];
+  for (const [k, prog] of Object.entries(all)) {
+    const m = k.startsWith(username + "_") && k.slice(username.length + 1).match(/^(P\d)_(\w+)$/);
+    if (!m) continue;
+    for (const h of (prog && prog.history) || []) {
+      const at = h.date && !isNaN(new Date(h.date)) ? new Date(h.date).toISOString() : undefined;
+      for (const x of h.mistakes || []) if (x && x.id != null) items.push(waItem(x, m[2], m[1], "set-" + h.sessionNum, at, h.school));
+    }
+  }
+  let ok = true;
+  for (let i = 0; i < items.length; i += 200) {
+    const r = await serverPost("/api/wrong-answers", { items: items.slice(i, i + 200) });
+    if (!r.ok) { ok = false; break; }
+  }
+  if (ok) { try { localStorage.setItem(WA_MARKER, JSON.stringify({ ...mk, [username]: new Date().toISOString() })); } catch {} }
+  return { ok, count: items.length };
 }
