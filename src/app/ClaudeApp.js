@@ -57,7 +57,8 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { resolveDailyTarget } from '@/lib/activity';
 
 
 
@@ -229,7 +230,7 @@ function makeSeedHistory(userId){
 
 
 
-function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubjectChange, onGradeChange, initialAction}){
+function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubjectChange, onGradeChange, initialAction, dailyTarget}){
 
   const grade="P3", subject="Chinese";
   const prog = getProgress(grade, subject);
@@ -541,7 +542,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       ) : (
         <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startAdaptive}
           isMockDue={isMockDue}
-          today={todaySetStatus(prog, zhPlan.length)}
+          today={todaySetStatus(prog, zhPlan.length, dailyTarget ? dailyTarget.Chinese : undefined)}
           onStart={()=>startSession()}
           onStartFrom={(sec)=>startSession(sec)}
           onStartMock={()=>setInSession(true)}
@@ -1219,6 +1220,8 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     });
   }
   const [studentToast,    setStudentToast]    = useState(null);
+  // Parent's per-subject daily goal. Null keeps the on-screen default of 1 set (flag off, no server id, or a failed read).
+  const [dailyTarget, setDailyTarget] = useState(null);
 
   const prog = getProgress(grade, subject);
   const isLive = !!LIVE_CONTENT[`${grade}_${subject}`];
@@ -1231,6 +1234,16 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [enGate, setEnGate] = useState(null); // words[] while the English end-of-round word review is showing
   const [enDrillMode, setEnDrillMode] = useState(false);
   const [enAdaptive, setEnAdaptive] = useState(null);
+  useEffect(() => {
+    const id = user && user.serverId;
+    if (!SERVER_AUTH || typeof id !== "string" || !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id)) return;
+    let alive = true;
+    serverGet("/api/student/daily-target").then((r) => {
+      if (!alive || !r || !r.ok || !r.dailyTarget) return;
+      setDailyTarget(resolveDailyTarget(r.dailyTarget));
+    }).catch(() => {});
+    return () => { alive = false; };
+  }, [user]);
   function startEnAdaptive(){
     const sch = scheduleRound(prog, EN_BANK, prog.nextSession, { n: 10 });
     if(!sch.ids.length) return;
@@ -1334,7 +1347,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     }
     return {
       key, label: meta.label || key, color: meta.color, live,
-      status: todaySetStatus(p, sections),
+      status: todaySetStatus(p, sections, dailyTarget ? dailyTarget[key] : undefined),
       mistakesToday: (p.mistakes||[]).filter(m=>m.date===todayStr()).length,
       isMockDue: p.nextSession>1 && (p.nextSession-1)%10===0,
     };
@@ -1469,6 +1482,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       onGradeChange={(g)=>{ setGrade(g); }}
       onSubjectChange={(key, live)=>{ setZhAction(null); setSubject(key); setScreen("home"); setHub(false); setSubjectSelected(true); if(!live) setStudentToast("Coming soon"); else setStudentToast(null); }}
       initialAction={zhAction}
+      dailyTarget={dailyTarget}
     />
   );
 
@@ -1563,7 +1577,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length, dailyTarget ? dailyTarget.English : undefined)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
       ) : screen==="mistakes" ? (
         <>
           {enDrill && (

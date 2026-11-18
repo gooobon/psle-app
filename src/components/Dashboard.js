@@ -5,13 +5,13 @@ import {
 } from "@/lib/uiShared";
 import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
 import { todayStr } from "@/lib/sessionUtils";
+import { dailyGoalMet, dailySetGoal } from "@/lib/activity";
 import KpiCard from "@/components/KpiCard"; // STEP6_KPI_CARD
 
-// TODO(owner): parent settings store a per-subject daily_target on the server.
-// The student screen cannot read that yet, so today's target stays 1 set per live subject.
+// Fallback when server auth is off, the child has no server id, or the target request fails.
 export const DAILY_SET_TARGET = 1;
 
-export function todaySetStatus(prog, sectionTotal) {
+export function todaySetStatus(prog, sectionTotal, target) {
   const today = todayStr();
   const history = (prog && prog.history) || [];
   const completedEntries = history.filter((h) => h && h.date === today);
@@ -21,10 +21,11 @@ export function todaySetStatus(prog, sectionTotal) {
     : 0;
   const latest = completedEntries[completedEntries.length - 1];
   const total = sectionTotal || 0;
+  const goal = dailySetGoal(target == null ? DAILY_SET_TARGET : target);
   return {
-    target: DAILY_SET_TARGET,
+    target: goal,
     completed: completedEntries.length,
-    met: completedEntries.length >= DAILY_SET_TARGET,
+    met: dailyGoalMet(completedEntries.length, goal),
     score: latest && typeof latest.totalPct === "number" ? latest.totalPct : null,
     partial,
     sectionTotal: total,
@@ -253,7 +254,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
       <div style={{padding:"16px 16px 0"}}>
         <div style={{background:"#fff",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)",border:`1px solid ${day.met&&!inProgress?"#BBF7D0":C.border}`}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",gap:8}}>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:C.muted,letterSpacing:0.6,textTransform:"uppercase"}}>{isZh?"\u4ECA\u5929":"Today"} · {day.completed}/{day.target} {isZh?"\u5957":"set"}</div>
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:C.muted,letterSpacing:0.6,textTransform:"uppercase"}}>{isZh?"\u4ECA\u5929":"Today"} · {day.target > 0 ? `${day.completed}/${day.target} ${isZh?"\u5957":"set"}` : (isZh?"\u4ECA\u5929\u4E0D\u7528\u505A":"no set today")}</div>
             <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:day.met&&!inProgress?"#047857":ACCENT}}>
               {inProgress
                 ? (isZh ? `\u8FDB\u884C\u4E2D ${day.partial}/${day.sectionTotal||"?"}` : `In progress ${day.partial}/${day.sectionTotal||"?"}`)
@@ -263,9 +264,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
             </div>
           </div>
           <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,marginTop:6,lineHeight:1.45}}>
-            {day.met && !inProgress
-              ? (isZh ? "\u4ECA\u5929\u8FD9\u4E00\u5957\u5DF2\u7ECF\u505A\u5B8C\u3002\u4E0B\u9762\u7684\u6309\u94AE\u662F\u52A0\u7EC3\u3002" : "Today's set is done. The button below starts an extra set.")
-              : (isZh ? "\u5148\u505A\u5B8C\u4ECA\u5929\u8FD9\u4E00\u5957\uFF0C\u518D\u590D\u4E60\u9519\u9898\u3002" : "Finish this set, then review what you missed.")}
+            {todayProgressNote(day, isZh, inProgress)}
           </div>
         </div>
         <div role="button" tabIndex={0} onClick={onStart} onKeyDown={e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();onStart&&onStart();}}} style={{width:"100%",background:HG,color:"#fff",border:"none",borderRadius:18,padding:"0",marginBottom:12,cursor:"pointer",boxShadow:"0 8px 28px "+HSHADOW,overflow:"hidden",textAlign:"left",fontFamily:CFONT}}>
@@ -551,21 +550,65 @@ function todayPrimary(card) {
   return zh ? "\u590D\u4E60\u9519\u9898" : "Review mistakes";
 }
 
+function todayProgressNote(day, isZh, inProgress) {
+  const n = day.target;
+  if (n === 1) {
+    return day.met && !inProgress
+      ? (isZh ? "\u4ECA\u5929\u8FD9\u4E00\u5957\u5DF2\u7ECF\u505A\u5B8C\u3002\u4E0B\u9762\u7684\u6309\u94AE\u662F\u52A0\u7EC3\u3002" : "Today's set is done. The button below starts an extra set.")
+      : (isZh ? "\u5148\u505A\u5B8C\u4ECA\u5929\u8FD9\u4E00\u5957\uFF0C\u518D\u590D\u4E60\u9519\u9898\u3002" : "Finish this set, then review what you missed.");
+  }
+  if (!(n > 0)) return isZh ? "\u4ECA\u5929\u8FD9\u4E00\u79D1\u6CA1\u6709\u8981\u6C42\u7684\u5957\u6570\u3002" : "No set is required today. You can still start one.";
+  if (day.met && !inProgress) {
+    return isZh
+      ? `\u4ECA\u5929\u7684 ${n} \u5957\u5DF2\u7ECF\u505A\u5B8C\u3002\u4E0B\u9762\u7684\u6309\u94AE\u662F\u52A0\u7EC3\u3002`
+      : `Today's ${n} sets are done. The button below starts an extra set.`;
+  }
+  return isZh
+    ? `\u5148\u505A\u5B8C\u4ECA\u5929\u7684 ${n} \u5957\uFF08\u5DF2\u5B8C\u6210 ${day.completed}/${n}\uFF09\uFF0C\u518D\u590D\u4E60\u9519\u9898\u3002`
+    : `Finish today's ${n} sets (${day.completed}/${n} done), then review what you missed.`;
+}
+
 function todayDetail(card) {
   const zh = card.key === "Chinese";
   const s = card.status;
   if (!s) return "Coming soon";
-  if (s.inProgress) return zh ? `\u8FDB\u884C\u4E2D \u00B7 ${s.partial}/${s.sectionTotal} \u90E8\u5206` : `In progress \u00B7 ${s.partial} of ${s.sectionTotal} sections`;
-  if (s.met) return zh
-    ? `\u4ECA\u5929\u5DF2\u5B8C\u6210${s.score != null ? " \u00B7 " + s.score + "%" : ""}`
-    : `Done today${s.score != null ? " \u00B7 " + s.score + "%" : ""}`;
-  return zh ? "\u8FD8\u6CA1\u505A \u00B7 \u4ECA\u5929 1 \u5957" : "Not started \u00B7 1 set left today";
+  const goal = s.target ?? 1;
+  if (s.inProgress) {
+    const base = zh ? `\u8FDB\u884C\u4E2D \u00B7 ${s.partial}/${s.sectionTotal} \u90E8\u5206` : `In progress \u00B7 ${s.partial} of ${s.sectionTotal} sections`;
+    if (goal === 1) return base;
+    return zh ? `${base} \u00B7 ${s.completed}/${goal} \u5957` : `${base} \u00B7 ${s.completed}/${goal} sets`;
+  }
+  if (s.met) {
+    const score = s.score != null ? " \u00B7 " + s.score + "%" : "";
+    if (goal === 1) return zh ? `\u4ECA\u5929\u5DF2\u5B8C\u6210${score}` : `Done today${score}`;
+    return zh ? `\u4ECA\u5929\u5DF2\u5B8C\u6210 ${s.completed}/${goal} \u5957${score}` : `Done today \u00B7 ${s.completed}/${goal} sets${score}`;
+  }
+  if (!(goal > 0)) return zh ? "\u4ECA\u5929\u4E0D\u7528\u505A" : "No set today";
+  if (s.completed > 0) return zh ? `\u5DF2\u5B8C\u6210 ${s.completed}/${goal} \u5957` : `${s.completed} of ${goal} sets done`;
+  if (goal === 1) return zh ? "\u8FD8\u6CA1\u505A \u00B7 \u4ECA\u5929 1 \u5957" : "Not started \u00B7 1 set left today";
+  return zh ? `\u8FD8\u6CA1\u505A \u00B7 \u4ECA\u5929 ${goal} \u5957` : `Not started \u00B7 ${goal} sets left today`;
+}
+
+function todaySummary(live, grade) {
+  if (!live.length) return `Practice for ${grade} is not ready yet. P3 English and Chinese are available.`;
+  const finished = live.filter((s) => s.status && s.status.met && !s.status.inProgress).length;
+  const targets = live.map((s) => (s.status && typeof s.status.target === "number" ? s.status.target : 1));
+  if (targets.every((t) => t === 1)) return `${finished} of ${live.length} done. One set per subject, then review what you missed.`;
+  const required = live.filter((s, i) => targets[i] > 0);
+  if (!required.length) return "No sets today. You can still practise if you want.";
+  const doneCount = required.filter((s) => s.status && s.status.met && !s.status.inProgress).length;
+  const head = `${doneCount} of ${required.length} done.`;
+  const uniq = [...new Set(required.map((s) => s.status.target))];
+  if (uniq.length === 1) {
+    const n = uniq[0];
+    return `${head} ${n} set${n === 1 ? "" : "s"} per subject, then review what you missed.`;
+  }
+  return `${head} Finish each subject's goal, then review what you missed.`;
 }
 
 function TodayScreen({ user, grade, onGradeChange, onLogout, subjects, onStart, onReview, onMistakes, onMore }) {
   const live = (subjects || []).filter((s) => s.live);
   const soon = (subjects || []).filter((s) => !s.live);
-  const finished = live.filter((s) => s.status && s.status.met && !s.status.inProgress).length;
   const first = (user.name || "there").split(" ")[0];
   return (
     <div style={{minHeight:"100vh",background:C.bg,paddingBottom:32}}>
@@ -590,9 +633,7 @@ function TodayScreen({ user, grade, onGradeChange, onLogout, subjects, onStart, 
           <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:C.muted}}>{todayStr()}</div>
         </div>
         <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.5,marginBottom:14}}>
-          {live.length
-            ? `${finished} of ${live.length} done. One set per subject, then review what you missed.`
-            : `Practice for ${grade} is not ready yet. P3 English and Chinese are available.`}
+          {todaySummary(live, grade)}
         </div>
         {live.map((card) => {
           const zh = card.key === "Chinese";

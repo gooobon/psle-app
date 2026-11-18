@@ -12,7 +12,9 @@ const REASON_TEXT = {
 
 // items: enriched mistakes, each with _k (stable key, see mistakeKeys)
 // similarFor(m) -> { ids, reason }
-export default function MistakeNotebook({ items, onCause, onTrySimilar, similarFor }) {
+// TODO(owner): show Korean cause labels to students? Default off (CLAUDE.md §5: no Korean in student UI).
+// `ko` stays in CAUSES as data; pass showKo only from a parent-facing screen.
+export default function MistakeNotebook({ items, onCause, onTrySimilar, similarFor, showKo = false }) {
   const [open, setOpen] = React.useState(null);
   if (!items || !items.length) return null;
   const shown = items.slice().reverse().slice(0, 50);
@@ -52,7 +54,7 @@ export default function MistakeNotebook({ items, onCause, onTrySimilar, similarF
                     <button key={c.value} onClick={() => onCause(m._k, c.value)}
                       style={{ border: m.cause === c.value ? '2px solid #DC2626' : '1px solid #CBD5E1', background: m.cause === c.value ? '#FEE2E2' : '#fff',
                         borderRadius: 16, padding: '5px 10px', cursor: 'pointer', fontSize: 'calc(var(--fs) * 0.786)', fontWeight: 700, color: '#0F172A' }}>
-                      {c.en} <span style={{ fontWeight: 500, color: '#64748B' }}>({c.ko})</span>
+                      {c.en}{showKo && c.ko ? <span style={{ fontWeight: 500, color: '#64748B' }}> ({c.ko})</span> : null}
                     </button>
                   ))}
                 </div>
