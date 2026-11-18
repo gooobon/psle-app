@@ -1,6 +1,6 @@
 // Student reports wrong answers (batch). Idempotent: unique (student, subject, question, attempt_key), ON CONFLICT DO NOTHING.
 // Behind NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_WRONG_ANSWERS_SYNC (default off).
-import { sessionClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
+import { adminClient, sessionClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { WRONG_ANSWERS_SYNC } from "@/lib/supabase/config";
 import { SUBJECT_KEYS } from "@/lib/activity";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
@@ -37,5 +37,15 @@ export async function POST(request) {
   const sb = await sessionClient();
   const { error } = await sb.from("wrong_answers").upsert(rows, { onConflict: "student_id,subject,question_id,attempt_key", ignoreDuplicates: true });
   if (error) return jerr("could not record", 500);
+  // First insert wins, so a later copy can fill text that was missing. Never touches cause or resolved_at.
+  // Students have no update policy, so this backfill uses the service role and is scoped to the caller.
+  const fill = rows.filter((r) => r.question_text || r.student_answer || r.correct_answer);
+  if (fill.length) {
+    const admin = adminClient();
+    const writes = await Promise.all(fill.map((r) => admin.from("wrong_answers").update({
+      question_text: r.question_text, student_answer: r.student_answer, correct_answer: r.correct_answer,
+    }).eq("student_id", me.profile.id).eq("subject", r.subject).eq("question_id", r.question_id).eq("attempt_key", r.attempt_key).is("question_text", null)));
+    if (writes.some((w) => w.error)) return jerr("could not record", 500);
+  }
   return jok({ received: rows.length });
 }

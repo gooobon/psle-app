@@ -5,6 +5,19 @@ export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS } from "@/lib
 import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW } from "@/lib/supabase/config";
 
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
+import { describeMistake, indexSets } from "@/lib/reviewRounds";
+import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
+import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
+
+// Exam results store an id and an option index. The notebook resolves the words for display;
+// the server copy has to do the same lookup or the parent sees a blank card.
+const QUESTION_INDEX = {
+  English: indexSets(WA1_PRACTICE_SETS),
+  Chinese: indexSets(WA1_ZH_PRACTICE),
+};
+function describedMistake(m, subject) {
+  return describeMistake(m, QUESTION_INDEX[subject] || QUESTION_INDEX.English);
+}
 
 const IMPORT_MARKER = "genius_server_import_v1";
 
@@ -96,14 +109,17 @@ export function reportActivity(subject, key, results, minutes) {
 const WA_MARKER = "genius_wrong_answers_sync_v1";
 const asText = v => (v == null ? undefined : typeof v === "string" ? v : JSON.stringify(v));
 function waItem(m, subject, grade, attemptKey, attemptedAt, sourceId) {
-  const opts = Array.isArray(m.options) ? m.options : null;
+  const d = describedMistake(m, subject);
+  const opts = Array.isArray(d.options) ? d.options : null;
   const pick = v => (opts && typeof v === "number" && opts[v] !== undefined ? opts[v] : v);
+  const student = d.yourAnswer != null ? d.yourAnswer : pick(d.userAnswer !== undefined ? d.userAnswer : d.studentAnswer);
+  const correct = d.correctAnswer != null ? d.correctAnswer : pick(d.answer);
   return {
-    subject, grade, questionId: String(m.id), attemptKey, attemptedAt, sourceId,
-    studentAnswer: asText(pick(m.userAnswer !== undefined ? m.userAnswer : m.yourAnswer !== undefined ? m.yourAnswer : m.studentAnswer)),
-    correctAnswer: asText(pick(m.correctAnswer !== undefined ? m.correctAnswer : m.answer)),
-    questionText: asText(m.q || m.sentence || m.word), sectionType: m.sectionType || m.topic,
-    taxonomyIds: m.conceptIds || taxonomyIdsFor(m.id) || undefined, // only confident tags (null/undefined otherwise)
+    subject, grade, questionId: String(d.id), attemptKey, attemptedAt, sourceId,
+    studentAnswer: asText(student),
+    correctAnswer: asText(correct),
+    questionText: asText(d.q || d.sentence || d.word), sectionType: d.sectionType || d.topic,
+    taxonomyIds: d.conceptIds || taxonomyIdsFor(d.id) || undefined, // only confident tags (null/undefined otherwise)
   };
 }
 // Live path: call right after the session is saved locally. Fire-and-forget.
