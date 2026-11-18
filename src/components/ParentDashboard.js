@@ -199,7 +199,11 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor})
                               {child?.name||"Child"}'S ANSWER
                             </div>
                             <div style={{fontSize:13,fontWeight:700,color:"#7F1D1D"}}>
-                              {m.yourAnswer||m.studentAnswer!==undefined&&m.options?m.options[m.studentAnswer]:"—"}
+                              {m.yourAnswer != null && m.yourAnswer !== ""
+                                ? String(m.yourAnswer)
+                                : (Array.isArray(m.options) && m.studentAnswer != null && m.options[m.studentAnswer] != null
+                                    ? m.options[m.studentAnswer]
+                                    : "—")}
                             </div>
                           </div>
                           <div style={{flex:1,background:"#D1FAE5",borderRadius:10,padding:"8px 12px"}}>
@@ -622,7 +626,14 @@ function AddChildForm({onCreated}){
 // "Did they do it today?": read from the server (daily_activity), so it works from any device.
 function TodayCard({linkedStudents}){
   const [data,setData]=useState(null); const [err,setErr]=useState("");
-  useEffect(()=>{ let off=false; serverGet("/api/parent/today").then(r=>{ if(off) return; if(r.ok) setData(r); else setErr("Could not load today's activity."); }); return ()=>{off=true}; },[linkedStudents.length]);
+  useEffect(()=>{
+    let off=false;
+    const load=()=>serverGet("/api/parent/today").then(r=>{ if(off) return; if(r.ok){ setData(r); setErr(""); } else setErr("Could not load today's activity."); });
+    load();
+    const onSettings=()=>load();
+    window.addEventListener("genius-parent-settings", onSettings);
+    return ()=>{ off=true; window.removeEventListener("genius-parent-settings", onSettings); };
+  },[linkedStudents.length]);
   if(err) return <div style={{fontSize:12,color:C.muted,marginBottom:14}}>{err}</div>;
   if(!data||!data.children.length) return null;
   return(
@@ -698,17 +709,37 @@ function GuardianTools({linkedStudents,onChildLinked}){
   );
 }
 
-// Alert settings: WhatsApp number + opt-in (stored only; sending is disabled server-side until the owner enables it).
+// Daily target + alert channels. The student Today screen reads daily_target from this same settings row.
+// WhatsApp is stored only; sending stays off until the owner enables the provider.
+const DAILY_TARGET_SUBJECTS = ["English","Chinese","Math","Science"];
 function AlertSettings(){
   const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState(""); const [em,setEm]=useState(true);
-  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
-  async function save(){ setMsg(""); const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}}); setMsg(r.ok?"Saved.":(r.error||"Failed.")); }
+  const [target,setTarget]=useState({English:1,Chinese:1,Math:1,Science:1});
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } if(r.dailyTarget) setTarget(t=>({...t,...r.dailyTarget})); }); },[open]);
+  function setCount(subject, raw){
+    const n = Math.max(0, Math.min(10, Math.round(Number(raw))));
+    setTarget(t=>({...t,[subject]: Number.isFinite(n)?n:0}));
+  }
+  async function save(){
+    setMsg("");
+    const r=await serverPost("/api/parent/settings",{dailyTarget:target,email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}});
+    setMsg(r.ok?"Saved.":(r.error||"Failed."));
+    if(r.ok){ try{ window.dispatchEvent(new Event("genius-parent-settings")); }catch{} }
+  }
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alert settings</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Daily target and alerts</button>
       {open&&(<div style={{marginTop:10}}>
-        <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
+        <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Sets per day</div>
+        <div style={{fontSize:11,color:C.muted,marginBottom:8,lineHeight:1.5}}>Your child sees this on Today. 0 means that subject is not required. Math and Science are still coming soon.</div>
+        {DAILY_TARGET_SUBJECTS.map(s=>(
+          <label key={s} style={{display:"flex",justifyContent:"space-between",alignItems:"center",fontSize:13,marginBottom:6}}>
+            <span>{s}</span>
+            <input aria-label={s+" sets per day"} type="number" min={0} max={10} value={target[s]??1} onChange={e=>setCount(s,e.target.value)} style={{width:72,padding:"6px 8px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13}}/>
+          </label>
+        ))}
+        <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
         <button onClick={save} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
