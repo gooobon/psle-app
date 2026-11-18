@@ -20,10 +20,10 @@ export async function POST(request) {
 
   const admin = adminClient();
   const id = data.user.id;
-  const p = await admin.from("profiles").insert({ id, role: "parent", display_name: name }).select().single();
+  const p = await admin.from("profiles").insert({ id, role: "parent", display_name: name, email }).select().single();
   if (p.error) return jerr("profile failed", 500);
-  await admin.from("parent_settings").insert({ parent_id: id, alert_email: email }); // daily target defaults to 1 set/subject
-  // TODO(owner): if "Confirm email" is on in Supabase Auth settings, no session is returned until the link is clicked.
+  await admin.from("parent_settings").insert({ parent_id: id, alert_email: email, alert_channels: [{ type: "email", enabled: true, address: email }] }); // daily target defaults to 1 set/subject
+  // Owner decision: "Confirm email" is ON in Supabase Auth settings, so no session is returned until the link is clicked.
   if (!data.session) return jok({ needsConfirmation: true });
   return jok({ profile: publicProfile(p.data), children: [] });
 }

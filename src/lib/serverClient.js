@@ -40,3 +40,17 @@ export async function importLocalOnce(username) {
   if (r.ok) { try { localStorage.setItem(IMPORT_MARKER, JSON.stringify({ ...marker(), [username]: new Date().toISOString() })); } catch {} }
   return r;
 }
+
+// Daily activity log: report one completed set/round. Fire-and-forget; never blocks or alters the learning flow.
+// Idempotent server-side per (user, SGT date, subject, key). Does nothing when the flag is off.
+import { SERVER_AUTH as _FLAG } from "@/lib/supabase/config";
+export function reportActivity(subject, key, results, minutes = 0) {
+  if (!_FLAG) return;
+  try {
+    const graded = (results || []).filter(r => r && r.scored !== false);
+    serverPost("/api/activity", {
+      subject, key: String(key),
+      questions: graded.length, correct: graded.filter(r => r.correct).length, minutes,
+    });
+  } catch {}
+}
