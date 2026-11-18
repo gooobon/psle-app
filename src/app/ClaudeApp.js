@@ -45,6 +45,9 @@ import { openTicketsFromResults, gradeTicketsFromDrill, pickDrillItems, pickNext
 import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
 
 import { ParentApp } from '@/components/ParentDashboard';
+import MistakeNotebook from '@/components/MistakeNotebook';
+import { setMistakeCause, applySimilarRetry, pickSimilar } from '@/lib/wrongNotebook';
+import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
 import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
 import VocabQuiz from '@/components/VocabQuiz'; // STEP2F_VOCAB_QUIZ_V2
 import EN_VOCAB from '@/data/p3/english/en_vocab.json';
@@ -54,7 +57,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, serverPost, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 
 
 
@@ -284,7 +287,30 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum});
   }
+  // Notebook v1: cause + "Try 3 similar" (additive fields on prog.mistakes[i]; nothing is deleted)
+  const notebook = {
+    onCause:(i,cause)=>{
+      const m=(prog.mistakes||[])[i]; if(!m) return;
+      setProgress(grade, subject, setMistakeCause(prog, i, cause, new Date().toISOString()));
+      updateWrongAnswer(subject, m.id, m.sessionNum!=null?"set-"+m.sessionNum:null, {cause});
+    },
+    similarFor:(m)=>pickSimilar(getTagIndex(), ZH_ROUND_INDEX, m, similarQuestions),
+    onTrySimilar:(i,ids)=>{
+      const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
+      if(!built.plan.length) return;
+      setRoundReview({plan:built.plan, sessionNum:(prog.mistakes||[])[i]?.sessionNum||0, similar:{idx:i, ids}});
+    },
+  };
   function finishRoundReview(results){
+    if(roundReview.similar){
+      const {idx:mi, ids}=roundReview.similar, now=new Date().toISOString();
+      const m0=(prog.mistakes||[])[mi];
+      const t=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'SIMILAR_RETRY' });
+      const r=applySimilarRetry(t, mi, ids, results, now);
+      setProgress(grade, subject, r.prog);
+      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, m0.sessionNum!=null?"set-"+m0.sessionNum:null, {resolved:true});
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.REVIEW, sessionNum: roundReview.sessionNum, setId: REVIEW_SET_ID });
     setProgress(grade, subject, markRoundReviewed(withTrials, roundReview.sessionNum, results, todayStr()));
     setRoundReview(null); setScreen("mistakes");
@@ -337,7 +363,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     const totalPct=graded.length?Math.round(graded.filter(r=>r.correct).length/graded.length*100):0;
     const missed=graded.filter(r=>!r.correct);
     const newEntry={sessionNum,date:todayStr(),scores:bySection,totalPct,isMockExam:!!isMock,mistakes:missed.map(r=>({...r}))};
-    const newMistakes=[...(prog.mistakes||[]),...missed.map(r=>({...r,date:todayStr()}))];
+    const newMistakes=[...(prog.mistakes||[]),...missed.map(r=>({...r,date:todayStr(),sessionNum}))];
     const withTrials=recordTrials(prog, results, { mode: isMock?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: WA1_ZH_PRACTICE[wa1Idx].setId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade,subject,{...withTickets,history:[...(prog.history||[]),newEntry],mistakes:newMistakes,nextSession:sessionNum+1,sessionSections:null});
@@ -399,7 +425,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
-        mockInfo={{school:"\u9519\u9898\u590D\u4E60 \u7B2C "+roundReview.sessionNum+" \u8F6E"}}
+        mockInfo={{school:roundReview.similar?"\u7C7B\u4F3C\u9898\u7EC3\u4E60":"\u9519\u9898\u590D\u4E60 \u7B2C "+roundReview.sessionNum+" \u8F6E"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
       />
@@ -508,7 +534,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
           )}
           <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}
             rounds={listReviewableRounds(prog.history||[], ZH_ROUND_INDEX, prog.trials||[])} reviewedRounds={prog.reviewedRounds||{}} trials={prog.trials||[]}
-            onReviewRound={startRoundReview} isZh={true} roundIndex={ZH_ROUND_INDEX} history={prog.history||[]}/>
+            notebook={notebook} onReviewRound={startRoundReview} isZh={true} roundIndex={ZH_ROUND_INDEX} history={prog.history||[]}/>
         </>
       ) : screen==="review" ? (
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
@@ -1220,7 +1246,30 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum});
   }
+  // Notebook v1: cause + "Try 3 similar" (additive fields on prog.mistakes[i]; nothing is deleted)
+  const notebook = {
+    onCause:(i,cause)=>{
+      const m=(prog.mistakes||[])[i]; if(!m) return;
+      setProgress(grade, subject, setMistakeCause(prog, i, cause, new Date().toISOString()));
+      updateWrongAnswer(subject, m.id, m.sessionNum!=null?"set-"+m.sessionNum:null, {cause});
+    },
+    similarFor:(m)=>pickSimilar(getTagIndex(), EN_ROUND_INDEX, m, similarQuestions),
+    onTrySimilar:(i,ids)=>{
+      const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
+      if(!built.plan.length) return;
+      setRoundReview({plan:built.plan, sessionNum:(prog.mistakes||[])[i]?.sessionNum||0, similar:{idx:i, ids}});
+    },
+  };
   function finishRoundReview(results){
+    if(roundReview.similar){
+      const {idx:mi, ids}=roundReview.similar, now=new Date().toISOString();
+      const m0=(prog.mistakes||[])[mi];
+      const t=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'SIMILAR_RETRY' });
+      const r=applySimilarRetry(t, mi, ids, results, now);
+      setProgress(grade, subject, r.prog);
+      if(r.resolved && m0) updateWrongAnswer(subject, m0.id, m0.sessionNum!=null?"set-"+m0.sessionNum:null, {resolved:true});
+      setRoundReview(null); setScreen("mistakes"); return;
+    }
     const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.REVIEW, sessionNum: roundReview.sessionNum, setId: REVIEW_SET_ID });
     setProgress(grade, subject, markRoundReviewed(withTrials, roundReview.sessionNum, results, todayStr()));
     setRoundReview(null); setScreen("mistakes");
@@ -1328,7 +1377,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       isMockExam: isMock||isPastPaper,
       school: isMock?"Nanyang Primary": isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
       examType: isMock?"WA1": isPastPaper?"Past Paper #"+(sessionNum-10):undefined };
-    const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map(r=>({...r,date:todayStr()}))];
+    const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map(r=>({...r,date:todayStr(),sessionNum}))];
     const allLookedUp = [...new Set(results.flatMap(r=>r.lookedUpWords||[]))];
     const wrongWords  = [...new Set(graded.filter(r=>!r.correct).flatMap(r=>{
       const sentence=r.sentence||"";
@@ -1363,7 +1412,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
-        mockInfo={{school:"Round "+roundReview.sessionNum+" review"}}
+        mockInfo={{school:roundReview.similar?"Similar questions":"Round "+roundReview.sessionNum+" review"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
       />
@@ -1527,7 +1576,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
           )}
         <MistakesTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}
           rounds={listReviewableRounds(prog.history||[], EN_ROUND_INDEX, prog.trials||[])} reviewedRounds={prog.reviewedRounds||{}} trials={prog.trials||[]}
-          onReviewRound={startRoundReview} isZh={false} roundIndex={EN_ROUND_INDEX} history={prog.history||[]}/>
+          notebook={notebook} onReviewRound={startRoundReview} isZh={false} roundIndex={EN_ROUND_INDEX} history={prog.history||[]}/>
         </>
       ) : screen==="review" ? (
         <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
@@ -1818,11 +1867,11 @@ function VocabQuizByRound({history, roundIndex, isZh}){
   );
 }
 
-function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], reviewedRounds={}, onReviewRound, isZh=false, roundIndex=null, history=[], trials=[]}){
+function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], reviewedRounds={}, onReviewRound, isZh=false, roundIndex=null, history=[], trials=[]}){
   const kpi = React.useMemo(()=>firstTryStats({trials}),[trials]);
   const L = (zh,en)=> isZh?zh:en;
   // Results from ExamSession carry ids only; resolve question/options/answers for display.
-  const mistakes = React.useMemo(()=>enrichMistakes(rawMistakes||[], roundIndex),[rawMistakes, roundIndex]);
+  const mistakes = React.useMemo(()=>enrichMistakes(rawMistakes||[], roundIndex).map((m,i)=>({...m,_i:i})),[rawMistakes, roundIndex]);
   const [filter, setFilter] = React.useState("all");
   const [view, setView]     = React.useState("list"); // list | quiz
   const [expanded, setExpanded] = React.useState(null);
@@ -1922,6 +1971,7 @@ function MistakesTab({mistakes:rawMistakes, onBack, vocabBook=[], rounds=[], rev
             })}
           </div>
 
+          {notebook&&<MistakeNotebook items={filtered} onCause={notebook.onCause} onTrySimilar={notebook.onTrySimilar} similarFor={notebook.similarFor}/>}
           {/* STEP2C_NO_MISTAKE_LIST */}
           {/* Per-mistake cards removed: re-solving lives in the By Round tab. */}
           {onReviewRound&&(
