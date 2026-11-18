@@ -13,16 +13,17 @@ function ParentMistakesTab({child, history, grade, subject}){
 
   // Server mode (flags on): read this child's wrong answers from the server so any device works.
   // Flag off, or server unreachable: fall back to the local history exactly as before.
-  const useServer = SERVER_AUTH && WRONG_ANSWERS_SYNC && !!child?.id;
+  // child.id is the username; the API needs the server UUID (child.serverId). Without serverId we use local data.
+  const useServer = SERVER_AUTH && WRONG_ANSWERS_SYNC && !!child?.serverId;
   const [srv, setSrv] = React.useState(null); // null = not loaded / failed
   React.useEffect(()=>{
     setSrv(null);
     if(!useServer) return;
     let alive = true;
-    serverGet(`/api/parent/wrong-answers?child=${encodeURIComponent(child.id)}&subject=${encodeURIComponent(subject)}`)
+    serverGet(`/api/parent/wrong-answers?child=${encodeURIComponent(child.serverId)}&subject=${encodeURIComponent(subject)}`)
       .then(r=>{ if(alive && r.ok && Array.isArray(r.items)) setSrv(r.items); });
     return ()=>{ alive=false; };
-  },[useServer, child?.id, subject]);
+  },[useServer, child?.serverId, subject]);
 
   const allMistakes = [];
   if(useServer && srv){
