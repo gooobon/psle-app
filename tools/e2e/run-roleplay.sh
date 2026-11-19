@@ -131,8 +131,8 @@ if ! curl -sf -o /dev/null "http://127.0.0.1:3000"; then
   exit 1
 fi
 
-E2E_API_URL="$API_URL" E2E_SERVICE_ROLE="$SERVICE_ROLE_KEY" \
+E2E_API_URL="$API_URL" E2E_SERVICE_ROLE="$SERVICE_ROLE_KEY" E2E_ANON_KEY="$ANON_KEY" \
   E2E_DB_CONTAINER="$DB_CONTAINER" E2E_DAY_SHIFT_FILE="$STATE/day-shift.txt" \
   ALERT_DRY_RUN_LOG="$ALERT_LOG" CRON_SECRET=e2e-cron-secret \
-  npx playwright test --grep @roleplay
+  npx playwright test --grep "${E2E_PLAYWRIGHT_GREP:-@roleplay}"
 echo "Role-play finished. Steps: $STATE/roleplay-steps.json"

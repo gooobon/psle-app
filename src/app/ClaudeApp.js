@@ -197,7 +197,10 @@ function getProgress(userId, grade, subject){
 function setProgress(userId, grade, subject, data){
   const key = `${userId}_${grade}_${subject}`;
   persistProgressLS(key, data);
-  syncLearningTrials(userId, grade, subject, data).catch(()=>{}); // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off); copy only, fire-and-forget
+  // Local progress stays keyed by the username. The server row is the profile UUID (serverId).
+  // Passing the username made the learning sync skip every real student (it requires a UUID).
+  const serverId = (STORE.users[userId] && STORE.users[userId].serverId) || userId;
+  syncLearningTrials(serverId, grade, subject, data).catch(()=>{}); // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off); copy only, fire-and-forget
 }
 
 function makeSeedHistory(userId){
@@ -2017,6 +2020,11 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
         ))}
       </div>
 
+      {notebook&&SERVER_AUTH&&LEARNING_DASHBOARD&&(
+        <div style={{padding:"12px 16px 0"}}>
+          <LearningDashboard self subject={isZh?"Chinese":"English"}/>
+        </div>
+      )}
       {filtered.length===0?(
         <div style={{textAlign:"center",padding:"60px 24px",color:"#64748B"}}>
           <div style={{fontSize:48,marginBottom:12}}></div>
@@ -2050,7 +2058,6 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
           </div>
 
           <MistakePatterns summary={patternSummary(filtered, getTagIndex())}/>
-          {notebook&&SERVER_AUTH&&LEARNING_DASHBOARD&&<LearningDashboard self subject={isZh?"Chinese":"English"}/>}
           {notebook&&<MistakeNotebook items={filtered} onCause={notebook.onCause} onTrySimilar={notebook.onTrySimilar} similarFor={notebook.similarFor}/>}
           {/* STEP2C_NO_MISTAKE_LIST */}
           {/* Per-mistake cards removed: re-solving lives in the By Round tab. */}
