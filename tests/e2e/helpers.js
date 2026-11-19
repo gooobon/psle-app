@@ -239,5 +239,5 @@ async function logout(page) {
 }
 
 module.exports = {
-  SHOTS, shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, assertLocalOnly,
+  SHOTS, shot, bodyText, dbGet, drive, nudge, loginStudent, loginParent, logout, ensureParent, ensureStudent, assertLocalOnly,
 };
