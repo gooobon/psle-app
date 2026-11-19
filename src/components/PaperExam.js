@@ -39,9 +39,10 @@ function CompQuestion({ q, a, set }) {
   const v = (a && a.val) ?? null;
   const head = <div style={{ fontSize: 14, fontWeight: 700 }}>{q.no ? q.no + '. ' : ''}{q.stem} <span style={{ color: '#94A3B8', fontWeight: 600 }}>[{q.marks}]</span></div>;
   if (q.fmt === 'mcq') return <div>{head}<Choice options={q.options} value={v} onPick={(i) => set({ val: i })} /></div>;
-  if (q.fmt === 'ab_circle') return <div>{head}<Choice options={q.abChoices || ['A', 'B']} value={(q.abChoices || ['A', 'B']).indexOf(v)} onPick={(i) => set({ val: (q.abChoices || ['A', 'B'])[i] })} /></div>;
+  const ab = Array.isArray(q.abChoices) && q.abChoices.length ? q.abChoices : ['A', 'B'];
+  if (q.fmt === 'ab_circle') return <div>{head}<Choice options={ab} value={ab.indexOf(v)} onPick={(i) => set({ val: ab[i] })} /></div>;
   if (q.fmt === 'true_false') {
-    const sts = q.statements && q.statements.length ? q.statements : [q.stem];
+    const sts = Array.isArray(q.statements) && q.statements.length ? q.statements : [q.stem];
     const arr = Array.isArray(v) ? v : [];
     return (
       <div>{head}
@@ -56,7 +57,7 @@ function CompQuestion({ q, a, set }) {
     );
   }
   if (q.fmt === 'sequence') {
-    const items = q.sequenceItems || [];
+    const items = Array.isArray(q.sequenceItems) ? q.sequenceItems : [];
     const seq = Array.isArray(a && a.seq) ? a.seq : [];
     return (
       <div>{head}
@@ -78,7 +79,9 @@ function Section({ sec, answers, setAns, flags, toggleFlag }) {
     return sec.items.map((q, i) => (
       <div key={q.id} style={card}>
         <div style={{ fontSize: 14, fontWeight: 700 }}>{i + 1}. {q.sentence}<Flag id={q.id} /></div>
-        <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+        {q.options && q.options.length
+          ? <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+          : <Text value={answers[q.id] && answers[q.id].val} onChange={(t) => setAns(q.id, { val: t })} />}
       </div>
     ));
   }

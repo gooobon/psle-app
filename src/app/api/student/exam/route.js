@@ -10,7 +10,7 @@ import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
 import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers } from "@/lib/examServer";
-import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, pickPaper, PAPER_FEEDS_SCORE_TIERS } from "@/lib/examEngine";
+import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS } from "@/lib/examEngine";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -89,13 +89,17 @@ export async function POST(request) {
     if (error) return jerr("could not submit", 500);
     if (!a) return jerr("not found", 404);
     if (a.status !== "in_progress") return jok({ attempt: attemptOut(a), already: true }); // idempotent: a repeat submit changes nothing
+    const deadline = Date.parse(a.deadline_at), startedMs = Date.parse(a.started_at);
+    // A hand-in after the deadline plus the network grace is refused. The client cannot keep
+    // answering past 0:00 and send the paper later. Auto-submit is only "automatic" when the
+    // server clock has actually reached the deadline.
+    if (acceptSubmitTime({ nowMs, deadline }) === "late") return jerr("time is up", 409);
     const answers = cleanAnswers(b.answers);
     const g = gradeSubmission(a.paper_id, answers);
     if (!g) return jerr("paper not found", 500);
-    const deadline = Date.parse(a.deadline_at), startedMs = Date.parse(a.started_at);
     const used = elapsedSeconds(startedMs, nowMs, deadline); // server clock, capped at the deadline
     const verdict = countsAsAttempt({ elapsedSeconds: used, allowedMinutes: a.minutes_allowed, answered: g.answered, total: g.count });
-    const status = statusAfterSubmit({ auto: b.auto === true, nowMs, deadline });
+    const status = statusAfterSubmit({ auto: b.auto === true && nowMs >= deadline, nowMs, deadline });
     const day = sgtDate(new Date(nowMs));
     const reason = verdict.counts ? (verdict.byTime ? "time" : "answers") : "too_little";
     // Claim the attempt first (only one concurrent submit wins), then write answers.
