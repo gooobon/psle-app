@@ -15,7 +15,7 @@ export function normTyped(s) {
 }
 const norm = (s) => normTyped(s).replace(/[.,!?'"]/g, "");
 
-function getFormat(q) {
+export function getFormat(q) {
   const f = q.format || "";
   if (["fill_blank", "fill_word", "mcq", "ab_circle", "true_false", "sequence", "tf_reason", "open_sentence"].includes(f)) return f;
   if (f === "truefalse") return "true_false";

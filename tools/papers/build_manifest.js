@@ -67,8 +67,37 @@ function answerKeyNote(src) {
   return 'unknown';
 }
 
+/* Position of each English paper file in the runtime pool (flattenEnglishPool() = wa1, wa2, wa3, eoy in
+   index.ts order). The exam engine joins manifest rows to runtime papers with this. Read from index.ts only. */
+function poolIndexByFile() {
+  const dir = path.join(ROOT, 'src', 'data', 'p3', 'english', 'papers');
+  const src = fs.readFileSync(path.join(dir, 'index.ts'), 'utf8');
+  const ident = new Map(); // local identifier -> file (repo-relative)
+  const rel = (spec) => path.relative(ROOT, path.join(dir, spec + '.ts')).split(path.sep).join('/');
+  for (const m of src.matchAll(/^import\s+(.+?)\s+from\s+'(\.\/[^']+)';/gm)) {
+    const clause = m[1], file = rel(m[2]);
+    const def = clause.match(/^([A-Za-z0-9_$]+)\s*(?:,|$)/);
+    if (def) ident.set(def[1], file);
+    for (const n of clause.matchAll(/([A-Za-z0-9_$]+)(?:\s+as\s+([A-Za-z0-9_$]+))?\s*(?=[,}])/g)) {
+      if (clause.indexOf('{') !== -1 && n.index > clause.indexOf('{')) ident.set(n[2] || n[1], file);
+    }
+  }
+  const out = new Map();
+  let idx = 0;
+  for (const bucket of ['p3EnglishWA1Papers', 'p3EnglishWA2Papers', 'p3EnglishWA3Papers', 'p3EnglishEOYPapers']) {
+    const body = (src.match(new RegExp('export const ' + bucket + '[^=]*=\\s*\\[([\\s\\S]*?)\\n\\];')) || [])[1] || '';
+    for (const call of body.split('normalizePaper(').slice(1)) {
+      const ids = (call.split('),')[0].match(/[A-Za-z_][A-Za-z0-9_$]*/g) || []).filter((x) => ident.has(x));
+      if (ids.length) out.set(ident.get(ids[0]), idx);
+      idx += 1;
+    }
+  }
+  return out;
+}
+
 function build() {
   const papers = readAll();
+  const poolIdx = poolIndexByFile();
   const rows = papers.map((p) => {
     const school = declaredSchool(p);
     const year = declaredYear(p);
@@ -81,6 +110,7 @@ function build() {
       declaredId: p.id || null,
       subject: p.subject,
       file: p.file,
+      poolIndex: p.subject === 'English' && poolIdx.has(p.file) ? poolIdx.get(p.file) : null,
       bucket: p.bucket,
       school: school.value || null,
       schoolFrom: school.from || null,

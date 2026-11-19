@@ -61,7 +61,8 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, LEARNING_DASHBOARD, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import PaperExam from '@/components/PaperExam'; // mock exams from past papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off)
+import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
 
@@ -1241,6 +1242,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const [sessionResult,   setSessionResult]   = useState(null);
   const [inSession,       setInSession]       = useState(false);
   const [mockSession,     setMockSession]     = useState(false);
+  const [paperExam,       setPaperExam]       = useState(false); // past-paper mock exam screen (flagged off)
   const [startFromSection, setStartFromSection] = useState(null);
   const [reviewSection, setReviewSection] = useState(null);
   const [sectionResults, setSectionResults] = useState(() => {
@@ -1515,6 +1517,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     </Wrap>
   );
 
+  if(paperExam) return(
+    <Wrap>
+      <PaperExam onBack={()=>setPaperExam(false)}/>
+    </Wrap>
+  );
+
   if(mockSession) return(
     <Wrap>
       <ExamSessionScreen
@@ -1572,6 +1580,13 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
         onMore={(key)=>openSubject(key, "home")}
       />
       <StickerShelf/>
+      {SERVER_AUTH&&MOCK_EXAMS_ENABLED&&grade==="P3"&&(
+        <div style={{padding:"0 16px 12px"}}>
+          <button onClick={()=>setPaperExam(true)} style={{width:"100%",background:"#fff",border:"2px solid #7C3AED",color:"#5B21B6",borderRadius:14,padding:"12px 16px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
+            English mock papers <span style={{fontSize:12,fontWeight:600,color:"#64748B"}}>real past papers, timed</span>
+          </button>
+        </div>
+      )}
       {studentToast && <ComingSoonToast message={studentToast} onDone={()=>setStudentToast(null)}/>}
     </Wrap>
   );
