@@ -240,8 +240,11 @@ export async function POST(request) {
     // A hand-in after the deadline plus the network grace is refused. The client cannot keep answering past 0:00 and send the paper
     // later. The sitting itself is not lost: it is auto-submitted from the answers saved before the deadline (the 409 stays).
     if (acceptSubmitTime({ nowMs, deadline }) === "late") {
-      await autoSubmitExpired(admin, a, nowMs);
-      return jerr("time is up", 409);
+      const r = await autoSubmitExpired(admin, a, nowMs);
+      if (r && r.attempt && !r.error) return jerr("time is up", 409); // handed in from the saved answers (or already handed in by another request)
+      // The saved answers could not be read or graded just now. Not a server crash and not a silent loss: the sitting stays open and is
+      // retried on the student's next GET or start. Tell the client plainly (503 = try again), never 500.
+      return jerr("time is up, but we could not hand in your saved answers just now. Open Mock papers again in a moment and they will be handed in.", 503);
     }
     const r = await finalize(admin, a, cleanAnswers(b.answers), { nowMs, auto: b.auto });
     if (r.error) return jerr(r.error, r.code || 500);

@@ -550,4 +550,122 @@ try {
   console.log("PASS settings save with the mock-exam flag off preserves paper reward settings");
 } catch (e) { n--; console.error("FAIL settings save with flag off preserves paper settings\n ", e.message); process.exitCode = 1; }
 
+// ── Role-play (student Amir, parents Mrs Tan and Mr Tan) on the REAL route and server code with an in-memory fake database. No network. ──
+// NOTE: written WITHOUT being able to execute node in the authoring environment (see docs/e2e-report-mock-phase2-2026-11-20.md).
+async function aok(name, fn) { n++; try { await fn(); console.log("PASS", name); } catch (e) { n--; console.error("FAIL", name, "\n ", e.message); process.exitCode = 1; } }
+const liveAttempt = (over) => ({ ...expiredAttempt(), started_at: new Date(Date.now() - 10 * 60_000).toISOString(), deadline_at: new Date(Date.now() + 50 * 60_000).toISOString(), ...over });
+const MRS = "33333333-3333-3333-3333-333333333333", MR = "44444444-4444-4444-4444-444444444444", SAT = "2026-11-21";
+
+await aok("Amir hands in a paper of blanks: wrong auto-graded items reach the notebook (cap 20), he can pick one of the six causes, and the review then opens", async () => {
+  const db = fakeDb(); db.tables().exam_attempts.push(liveAttempt());
+  const r = await route(db);
+  const res = await r.POST(req("http://x", { action: "submit", attemptId: UUID1, answers: {} }));
+  assert.ok(res.status === undefined, "submit must not fail: " + JSON.stringify(res).slice(0, 200));
+  const nb = db.tables().wrong_answers;
+  assert.ok(nb.length >= 1 && nb.length <= E.MAX_NOTEBOOK_PER_PAPER, "notebook rows within the cap: " + nb.length);
+  assert.ok(nb.every((x) => x.attempt_key === "exam-" + UUID1 && x.source_id === paperId && x.student_id === SID && !x.cause), "attempt key, source id, cause left blank");
+  const q = nb[0].question_id;
+  assert.equal((await r.POST(req("http://x", { action: "cause", attemptId: UUID1, questionId: q, cause: "bogus" }))).status, 400);
+  for (const c of ["concept_unknown", "misread", "calculation", "trap", "time", "guessed"]) {
+    const ok_ = await r.POST(req("http://x", { action: "cause", attemptId: UUID1, questionId: q, cause: c }));
+    assert.ok(ok_.status === undefined && nb[0].cause === c, "cause " + c);
+  }
+  assert.equal((await r.POST(req("http://x", { action: "cause", attemptId: UUID1, questionId: "no-such-item", cause: "misread" }))).status, 404);
+  const rv = await r.GET(req("http://x/api/student/exam?review=" + UUID1));
+  assert.ok(rv.status === undefined && Array.isArray(rv.items) && rv.items.length > 0, "own submitted attempt can be reviewed");
+});
+
+await aok("review gating: in-progress = 409, another student's attempt = 404, and nothing sent before submission carries a key", async () => {
+  const OTHER = "55555555-5555-5555-5555-555555555555", OTHER_ATT = "66666666-6666-6666-6666-666666666666";
+  const db = fakeDb(); db.tables().exam_attempts.push(liveAttempt(), liveAttempt({ id: OTHER_ATT, student_id: OTHER, status: "submitted" }));
+  const r = await route(db);
+  assert.equal((await r.GET(req("http://x/api/student/exam?review=" + UUID1))).status, 409);
+  assert.equal((await r.GET(req("http://x/api/student/exam?review=" + OTHER_ATT))).status, 404);
+  assert.equal((await r.POST(req("http://x", { action: "cause", attemptId: UUID1, questionId: "x", cause: "misread" }))).status, 404, "cause on an unfinished attempt");
+  const r2 = await route(fakeDb());
+  const st = await r2.POST(req("http://x", { action: "start", paperId }));
+  assert.ok(st.paper && !LEAK.test(JSON.stringify(st)), "start response has no answer keys");
+  assert.ok(!LEAK.test(JSON.stringify(await r2.GET(req("http://x/api/student/exam")))), "list/resume response has no answer keys");
+});
+
+await aok("a late submit whose saved answers cannot be read returns a clear 503 (never 500); the next GET hands the sitting in", async () => {
+  const db = fakeDb(); db.tables().exam_attempts.push(expiredAttempt());
+  const broken = { ...db, from: (t) => (t === "exam_answers" ? { select: () => ({ eq: async () => ({ data: null, error: { message: "boom" } }) }) } : db.from(t)) };
+  const res = await (await route(broken)).POST(req("http://x", { action: "submit", attemptId: UUID1, answers: {} }));
+  assert.equal(res.status, 503, JSON.stringify(res).slice(0, 200));
+  assert.equal(db.tables().exam_attempts[0].status, "in_progress", "nothing was lost or half-written");
+  const again = await (await route(db)).GET(req("http://x/api/student/exam"));
+  assert.ok(again.status === undefined && db.tables().exam_attempts[0].status === "auto_submitted", "the next GET hands it in");
+});
+
+// Saturday paper reward: the REAL awardPaperReward with a recording rpc that mimics the SQL uniqueness (credit per child+kind+period+subject, sticker per child+kind+period).
+const rewardsServerWith = async (db, rpcLog) => {
+  const seen = new Set();
+  const dbx = { ...db, rpc: async (name, args) => {
+    rpcLog.push([name, args]);
+    if (name === "award_credit" || name === "award_sticker") {
+      const k = [name, args.p_child, args.p_kind, args.p_period, args.p_subject || ""].join("|"); const dup = seen.has(k); seen.add(k);
+      return { data: { awarded: !dup }, error: null };
+    }
+    return { data: 0, error: null };
+  } };
+  const RS = await loadSource("src/lib/rewardsServer.js", { "@/lib/rewards": R, "@/lib/childSettings": CS, "@/lib/supabase/config": { MOCK_EXAMS_ENABLED: true, REWARDS: true } }, "return { awardPaperReward };");
+  return (a) => RS.awardPaperReward(dbx, a);
+};
+const setting = (over) => ({ child_id: SID, effective_from: "2026-01-01", enabled: true, sgd_per_credit: 0.5, daily_tiers: [], weekly_unit: "credits", weekly_amounts: {}, daily_target: {}, homework_per_mistake: 3, paper_unit: "credits", paper_amounts: { English: 4 }, paper_check_off: false, ...over });
+const links = [{ parent_id: MR, child_id: SID, created_at: "2026-02-01" }, { parent_id: MRS, child_id: SID, created_at: "2026-01-01" }];
+
+await aok("Saturday paper reward: pending credit owned by the earliest-linked parent, gate_day = Saturday, once per subject per Saturday, effort check enforced", async () => {
+  assert.ok(R.isSaturday(SAT) && !R.isSaturday("2026-11-20"));
+  const log = []; const award = await rewardsServerWith(fakeDb({ child_setting_versions: [setting()], parent_child: links, parent_homework: [] }), log);
+  const a1 = await award({ childId: SID, subject: "English", day: SAT, status: "submitted", counts: true });
+  assert.ok(a1.eligible && a1.awarded && a1.sticker && a1.credits === 4, JSON.stringify(a1));
+  const c = log.find((x) => x[0] === "award_credit")[1];
+  assert.deepEqual([c.p_kind, c.p_parent, c.p_gate_day, c.p_period, c.p_credits], ["paper", MRS, SAT, SAT, 4]);
+  const a2 = await award({ childId: SID, subject: "English", day: SAT, status: "submitted", counts: true });
+  assert.ok(!a2.awarded && !a2.sticker, "a second paper the same Saturday earns nothing more");
+  const wk = await award({ childId: SID, subject: "English", day: "2026-11-20", status: "submitted", counts: true });
+  assert.ok(!wk.eligible && wk.reason === "not_saturday");
+  const blank = await award({ childId: SID, subject: "English", day: "2026-11-28", status: "submitted", counts: false });
+  assert.ok(!blank.eligible && blank.reason === "too_little", "effort check fails");
+  const unsub = await award({ childId: SID, subject: "English", day: "2026-11-28", status: "abandoned", counts: true });
+  assert.ok(!unsub.eligible && unsub.reason === "not_submitted");
+});
+
+await aok("the parent can turn the effort check off; the default amount is nothing", async () => {
+  const off = await rewardsServerWith(fakeDb({ child_setting_versions: [setting({ paper_check_off: true })], parent_child: links }), []);
+  const o = await off({ childId: SID, subject: "English", day: SAT, status: "submitted", counts: false });
+  assert.ok(o.eligible && o.awarded, "check off: a submitted paper qualifies");
+  const none = []; const zero = await rewardsServerWith(fakeDb({ child_setting_versions: [setting({ paper_amounts: {} })], parent_child: links }), none);
+  const z = await zero({ childId: SID, subject: "English", day: SAT, status: "submitted", counts: true });
+  assert.ok(z.eligible && !z.awarded && z.credits === 0 && !none.some((x) => x[0] === "award_credit"), "no amount = no credit");
+});
+
+await aok("pending -> confirmed/forfeited follows the homework gate (finalize_credits SQL read statically); both parents read one ledger per child", () => {
+  const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261126000000_pending_credits_shared_settings.sql"), "utf8");
+  assert.ok(/assigned > 0 and remaining = 0 then 'confirmed'/.test(sql) && /gd >= p_today then 'pending'/.test(sql) && /when assigned > 0 then 'forfeited'/.test(sql) && /else 'confirmed' end/.test(sql));
+  const rows = [{ credits: 4, status: "confirmed" }, { credits: 4, status: "pending" }, { credits: 4, status: "forfeited" }];
+  const t = R.creditTotals(rows, 1);
+  assert.deepEqual([t.confirmed, t.pending, t.forfeited, t.balance], [4, 4, 4, 3]);
+  const pr = fs.readFileSync(path.join(ROOT, "src/app/api/parent/rewards/route.js"), "utf8");
+  assert.ok(/from\("reward_credits"\)[^;]*\.eq\("child_id", child\)/.test(pr), "ledger is read by child, not by parent, so Mrs and Mr Tan see the same totals");
+});
+
+await aok("mastery counts only the first sitting: a retake of the same paper writes no new mock trials", async () => {
+  const PS = await loadSource("src/lib/examPostSubmit.js", { "@/lib/supabase/config": { LEARNING_DASHBOARD: true }, "@/lib/examServer": S }, "return { recordMockTrials };");
+  const db = fakeDb(); const g = S.gradeSubmission(paperId, {});
+  const a1 = { id: UUID1, student_id: SID, paper_id: paperId, grade: "P3" }, a2 = { ...a1, id: "77777777-7777-7777-7777-777777777777" };
+  const r1 = await PS.recordMockTrials(db, a1, g, Date.now());
+  const after1 = db.tables().learning_trials.length;
+  assert.ok(r1.recorded > 0 && after1 === r1.recorded && db.tables().learning_trials.every((t) => t.mode === "mock" && t.weight === 1));
+  await PS.recordMockTrials(db, a2, g, Date.now());
+  assert.equal(db.tables().learning_trials.length, after1, "the retake added nothing");
+});
+
+await aok("8pm email block reflects an auto-submitted sitting", () => {
+  const blk = D.paperBlock([{ status: "auto_submitted", sgt_day: SAT, paper_label: "Test Paper", score: 20, total: 40, elapsed_seconds: 4500, minutes_allowed: 75, counts: true, open_total: 2 }], SAT);
+  assert.equal(blk.done.length, 1);
+  assert.deepEqual([blk.done[0].pct, blk.done[0].toReview, blk.done[0].openToMark, blk.done[0].counted], [50, 20, 2, true]);
+});
+
 console.log(`\n${n} checks run${process.exitCode ? ", SOME FAILED" : ", all passed"}`);
