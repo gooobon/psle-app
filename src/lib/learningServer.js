@@ -10,7 +10,7 @@ export async function loadLearning(studentId, subject) {
   const since = new Date(Date.now() - CAUSE_WINDOW_DAYS * DAY_MS).toISOString();
   const [tr, wa] = await Promise.all([
     sb.from("learning_trials").select("skill,mode,first_try,weight,session_num,attempted_at")
-      .eq("student_id", studentId).eq("subject", subject).order("attempted_at", { ascending: false }).limit(5000),
+      .eq("student_id", studentId).eq("subject", subject).eq("server_graded", true).order("attempted_at", { ascending: false }).limit(5000),
     sb.from("wrong_answers").select("cause,attempted_at")
       .eq("student_id", studentId).eq("subject", subject).gte("attempted_at", since).order("attempted_at", { ascending: false }).limit(1000),
   ]);

@@ -509,11 +509,41 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
     };
   }
   const kid = await childId();
-  const synced = await dbGet("learning_trials?student_id=eq." + kid + "&select=skill,weight,mode&subject=eq.English");
+  const synced = await dbGet("learning_trials?student_id=eq." + kid + "&server_graded=eq.true&select=skill,weight,mode&subject=eq.English");
   const viewA = await learningView(pp);
   file = await snap(pp, "20-learning");
   const okA = synced.length > 0 && viewA.skills > 0 && viewA.causes > 0 && /Mastery by skill/.test(viewA.text) && /Why answers were wrong/.test(viewA.text) && /Improving|Flat|Slipping|Not enough practice yet/.test(viewA.trend);
   record("parent A", "Learning dashboard: mastery, causes, and whether the child is improving", "Learning tab shows mastery by skill, 14-day cause bars and an improving / flat / slipping word, from synced trials", synced.length + " synced English trials; trend '" + viewA.trend + "'; " + viewA.skills + " skills; " + viewA.causes + " cause rows", okA ? "PASS" : "FAIL", file);
+
+  // Forged learning trials must be rejected (PR #43 follow-up). The full matrix is in tests/e2e/learning.spec.js (@learning).
+  const forgedPost = await sp.evaluate(async () => {
+    const r = await fetch("/api/learning/trials", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", answer: 0, firstTry: true, correct: true, weight: 9, sessionNum: 99, ts: Date.now(), grade: "P3" }] }) });
+    return r.status;
+  });
+  const forgedRows = await dbGet("learning_trials?student_id=eq." + kid + "&item_id=eq.forged-perfect&select=id");
+  const syncedRows = await dbGet("learning_trials?student_id=eq." + kid + "&select=server_graded");
+  // Direct PostgREST insert with the student's own session must be refused (no insert policy, no table grant).
+  let directStatus = "skipped";
+  {
+    const ck = (await student.cookies()).filter((c) => c.name.startsWith("sb-127-auth-token")).sort((a, b) => a.name.localeCompare(b.name));
+    let token = "";
+    try {
+      const raw = ck.map((c) => c.value).join("");
+      const dec = raw.startsWith("base64-") ? Buffer.from(raw.slice(7), "base64url").toString("utf8") : decodeURIComponent(raw);
+      const parsed = JSON.parse(dec);
+      token = parsed.access_token || (Array.isArray(parsed) ? parsed[0] : "") || "";
+    } catch {}
+    if (token && process.env.E2E_ANON_KEY && process.env.E2E_API_URL) {
+      const r = await fetch(process.env.E2E_API_URL.replace(/\/$/, "") + "/rest/v1/learning_trials", { method: "POST",
+        headers: { apikey: process.env.E2E_ANON_KEY, Authorization: "Bearer " + token, "Content-Type": "application/json" },
+        body: JSON.stringify({ student_id: kid, subject: "English", item_id: "forged-direct", skill: "x", mode: "exam", first_try: true, correct: true, weight: 0.5 }) });
+      directStatus = r.status;
+    }
+  }
+  const directRows = await dbGet("learning_trials?item_id=eq.forged-direct&select=id");
+  const allGraded = syncedRows.length > 0 && syncedRows.every((r) => r.server_graded === true);
+  record("student", "Forged learning trial is rejected", "A made-up trial (unknown item, claimed first try, weight 9) stores nothing; direct table insert is refused; stored rows are server-graded", "post " + forgedPost + ", forged rows " + forgedRows.length + ", direct " + directStatus + ", direct rows " + directRows.length + ", all server_graded " + allGraded, forgedRows.length === 0 && directRows.length === 0 && allGraded && (directStatus === 401 || directStatus === 403) ? "PASS" : "FAIL", "");
 
   await pp.getByRole("button", { name: /Overview/ }).click();
 

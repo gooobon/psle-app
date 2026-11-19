@@ -5,7 +5,6 @@ export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DAS
 import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD } from "@/lib/supabase/config";
 
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
-import { skillIdsOf } from "@/lib/similarItemsCore";
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
 import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
 import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
@@ -188,16 +187,20 @@ export async function syncLearningTrials(userId, grade, subject, prog) {
   if (!fresh.length) return { skipped: true };
   ldBusy[key] = true;
   try {
-    const items = fresh.map(x => {
-      const leaf = skillIdsOf(taxonomyIdsFor(x.itemId) || [])[0]; // taxonomy v1 leaf skill when the item is confidently tagged
-      return { itemId: String(x.itemId), skill: leaf || x.skill, mode: x.mode, firstTry: !!x.firstTry, correct: !!x.correct,
-        weight: typeof x.weight === "number" ? x.weight : 1, sessionNum: x.sessionNum, ts: x.ts, grade, subject };
-    });
+    // Send the ANSWER only. The server grades it and derives correct / first-try / weight / skill itself. Trials recorded before
+    // answers were kept (no userAnswer) cannot be graded and are not sent.
+    const items = fresh.filter(x => x.userAnswer !== undefined && x.userAnswer !== null).map(x => ({
+      itemId: String(x.itemId), mode: x.mode, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
+      guessed: !!x.guessed, hinted: !!x.solvedAfterHint, sessionNum: x.sessionNum, ts: x.ts, grade, subject,
+    }));
+    // The marker also moves past ungradable (older) trials so they are not retried forever.
     let top = since;
+    const allTop = Math.max(...fresh.map(x => x.ts));
+    if (!items.length) top = allTop;
     for (let i = 0; i < items.length; i += 300) {
       const r = await serverPost("/api/learning/trials", { items: items.slice(i, i + 300) });
       if (!r.ok) break;
-      top = Math.max(top, ...fresh.slice(i, i + 300).map(x => x.ts));
+      top = i + 300 >= items.length ? allTop : Math.max(top, ...items.slice(i, i + 300).map(x => x.ts));
     }
     if (top > since) { try { localStorage.setItem(LD_MARKER, JSON.stringify({ ...lsJson(LD_MARKER, {}), [key]: top })); } catch {} }
     return { ok: top > since };

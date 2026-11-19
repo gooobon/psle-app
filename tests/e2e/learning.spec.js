@@ -226,7 +226,7 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   await sp.getByText(/Hello,|Your patterns/).first().waitFor({ timeout: 20000 });
   await waitTrials(id, n0 + 1);
 
-  const trials = await dbGet("learning_trials?student_id=eq." + id + "&subject=eq.English&select=skill,mode,first_try,weight,session_num,attempted_at&order=attempted_at");
+  const trials = await dbGet("learning_trials?student_id=eq." + id + "&subject=eq.English&server_graded=eq.true&select=skill,mode,first_try,weight,session_num,attempted_at&order=attempted_at");
   const wrongs = await dbGet("wrong_answers?student_id=eq." + id + "&subject=eq.English&select=cause,attempted_at");
   const nowMs = Date.now() + 8 * 86400000;
   const hand = handBuild(trials, wrongs, nowMs);
@@ -293,38 +293,82 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   const todayCard = await sp.getByText("Mastery by skill").count();
   record("student", "Mastery card stays when the mistake list is filtered", "The server-backed card is not inside the mistake list, so a filter does not remove it", todayCard > 0 ? "Mastery by skill still on screen" : "card missing", todayCard > 0 ? "PASS" : "FAIL", await snap(sp, "09-filtered"));
 
-  const forgedTs = await sp.evaluate(() => Date.now());
-  const forged = await sp.evaluate(async (ts) => {
-    const r = await fetch("/api/learning/trials", {
-      method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [
-        { subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", firstTry: true, correct: true, weight: 9, sessionNum: 99, ts, grade: "P3" },
-      ] }),
-    });
-    return { status: r.status, body: await r.json() };
-  }, forgedTs);
-  const forgedRow = await dbGet("learning_trials?student_id=eq." + id + "&item_id=eq.forged-perfect&select=first_try,correct,weight,skill");
-  const again = await sp.evaluate(async (ts) => {
-    const r = await fetch("/api/learning/trials", {
-      method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ items: [
-        { subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", firstTry: false, correct: false, weight: 1, sessionNum: 99, ts, grade: "P3" },
-      ] }),
-    });
-    return r.status;
-  }, forgedTs);
-  const afterDup = await dbGet("learning_trials?student_id=eq." + id + "&item_id=eq.forged-perfect&select=first_try,weight");
-  const direct = await directInsert(student, id);
-  const accepted = forged.status === 200 && forgedRow.length === 1 && forgedRow[0].first_try === true && Number(forgedRow[0].weight) === 1;
-  const notFlipped = afterDup.length === 1 && afterDup[0].first_try === true;
-  record("student", "Forged learning trial", "A signed-in student must not be able to store a trial they never sat, or choose its first-try flag or weight.", "API post " + forged.status + " stored " + JSON.stringify(forgedRow) + "; same timestamp again " + again + " still " + JSON.stringify(afterDup) + "; direct row " + JSON.stringify(direct), accepted && notFlipped ? "FAIL" : "PASS", "");
+  // ── Forgery checks (PR #43 follow-up). The server must grade the submitted answer itself and own correct / first_try / weight. ──
+  const post = (items) => sp.evaluate(async (body) => {
+    const r = await fetch("/api/learning/trials", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: body }) });
+    let j = null; try { j = await r.json(); } catch {}
+    return { status: r.status, body: j };
+  }, items);
+  const rowsOf = (itemId) => dbGet("learning_trials?student_id=eq." + id + "&item_id=eq." + encodeURIComponent(itemId) + "&select=first_try,correct,weight,skill,mode,server_graded,attempted_at");
+  const recorded = new Set((await dbGet("learning_trials?student_id=eq." + id + "&select=item_id")).map((r) => r.item_id));
+  const pool = [];
+  for (const setId of ["S08", "S07", "S06", "S05", "S04", "S03", "S02"]) {
+    for (const it of (answers.sets[setId] && answers.sets[setId].items) || []) if (it.kind === "mcq" && typeof it.answer === "number" && it.n >= 3 && !recorded.has(it.id)) pool.push(it);
+  }
+  const [fa, fb] = pool;
+  const before = (await dbGet("learning_trials?student_id=eq." + id + "&select=id")).length;
+  const now = await sp.evaluate(() => Date.now());
 
-  const productFails = STEPS.filter((s) => s.status === "FAIL" && s.step !== "Forged learning trial");
+  // 1) The old forgery: an id that is not in the bank, with perfect flags and weight 9.
+  const f1 = await post([{ subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", answer: 0, firstTry: true, correct: true, weight: 9, sessionNum: 99, ts: now, grade: "P3" }]);
+  const r1 = await rowsOf("forged-perfect");
+  const ok1 = r1.length === 0 && f1.status === 200;
+  // 2) A real item answered WRONG while the client claims correct, first try and a made-up skill / weight: server stores its own verdict.
+  const wrongAns = (fa.answer + 1) % fa.n;
+  const f2 = await post([{ subject: "English", itemId: fa.id, skill: "en.grammar.forged_skill", mode: "exam", answer: wrongAns, firstTry: true, correct: true, weight: 0.3, sessionNum: 99, ts: now, grade: "P3" }]);
+  const r2 = await rowsOf(fa.id);
+  const ok2 = r2.length === 1 && r2[0].correct === false && r2[0].first_try === false && Number(r2[0].weight) === 1 && r2[0].skill !== "en.grammar.forged_skill" && r2[0].server_graded === true;
+  // 3) Resubmitting the same item with the right answer and a new timestamp must not add a perfect row or change the stored one.
+  const f3 = await post([{ subject: "English", itemId: fa.id, mode: "exam", answer: fa.answer, sessionNum: 99, ts: now - 1000, grade: "P3" }, { subject: "English", itemId: fa.id, mode: "exam", answer: fa.answer, sessionNum: 99, ts: now - 2000, grade: "P3" }]);
+  const r3 = await rowsOf(fa.id);
+  const ok3 = r3.length === 1 && r3[0].correct === false && r3[0].first_try === false;
+  // 4) A real item answered right with weight 9 claimed: stored once, weight 1. A later correct answer in another mode is not first try.
+  const f4 = await post([{ subject: "English", itemId: fb.id, mode: "exam", answer: fb.answer, weight: 9, firstTry: true, sessionNum: 99, ts: now, grade: "P3" }]);
+  const f4b = await post([{ subject: "English", itemId: fb.id, mode: "mock", answer: fb.answer, sessionNum: 99, ts: now, grade: "P3" }]);
+  const r4 = await rowsOf(fb.id);
+  const exam4 = r4.find((r) => r.mode === "exam"), mock4 = r4.find((r) => r.mode === "mock");
+  const ok4 = !!exam4 && exam4.first_try === true && Number(exam4.weight) === 1 && !!mock4 && mock4.first_try === false;
+  // 5) Homework for an item that no parent assigned, with a weight claim: nothing is stored.
+  const hwTarget = pool[2] || fb;
+  const f5 = await post([{ subject: "English", itemId: hwTarget.id, mode: "homework", answer: hwTarget.answer, weight: 0.5, sessionNum: 99, ts: now, grade: "P3" }]);
+  const r5 = (await rowsOf(hwTarget.id)).filter((r) => r.mode === "homework");
+  const ok5 = r5.length === 0;
+  // 6) The response never carries correctness or the key.
+  const leaks = JSON.stringify([f1.body, f2.body, f3.body, f4.body]);
+  const ok6 = !/correct|answer|first_try|firstTry|weight/i.test(leaks.replace(/"ok"/g, ""));
+  // 7) A client-set timestamp far in the past is not trusted (no backdated rows).
+  const f7item = pool[3];
+  let ok7 = true, a7 = "no spare item";
+  if (f7item) {
+    await post([{ subject: "English", itemId: f7item.id, mode: "exam", answer: f7item.answer, sessionNum: 99, ts: now - 30 * 86400000, grade: "P3" }]);
+    const r7 = await rowsOf(f7item.id);
+    ok7 = r7.length === 1 && Date.parse(r7[0].attempted_at) > Date.now() - 3 * 86400000;
+    a7 = JSON.stringify(r7);
+  }
+  // 8) Direct table writes are blocked for a signed-in student (insert, update, delete).
+  const direct = await directWrites(student, id);
+  const blocked = (s) => s === 401 || s === 403;
+  const ok8 = !direct.skipped && !direct.error && blocked(direct.weight9) && blocked(direct.weightHalf) && blocked(direct.otherStudent) && blocked(direct.update) && blocked(direct.delete) && direct.forgedRows === 0;
+  const after = (await dbGet("learning_trials?student_id=eq." + id + "&select=id")).length;
+  const added = after - before; // fa wrong, fb exam + mock, and f7item
+  const expectAdded = 3 + (f7item ? 1 : 0);
+
+  record("student", "Forged trial: item not in the bank", "Rejected, nothing stored", "status " + f1.status + ", rows " + r1.length, ok1 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: client-sent correct / first_try / weight / skill", "Server grades the answer: a wrong answer is stored wrong, weight 1, server skill", JSON.stringify(r2), ok2 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: resubmitting the same item", "No second row, no perfect row from a new timestamp", "status " + f3.status + ", rows " + JSON.stringify(r3), ok3 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: weight 9 claim and first try", "First try is server-derived; a later mode for the same item is not first try", JSON.stringify(r4), ok4 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: homework nobody assigned", "No row, no mastery", "rows " + r5.length + ", status " + f5.status, ok5 ? "PASS" : "FAIL", "");
+  record("student", "Trial response does not leak the key", "Counts only", leaks, ok6 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: backdated timestamp", "Server ignores a timestamp older than 48 hours", a7, ok7 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: direct insert, update, delete on the table", "All blocked for the signed-in student (RLS and grants)", JSON.stringify(direct), ok8 ? "PASS" : "FAIL", "");
+  record("student", "Forged trial: only the legitimate rows were added", "Exactly " + expectAdded + " new rows", "added " + added, added === expectAdded ? "PASS" : "FAIL", "");
+
   console.log("LEARNING " + STEPS.filter((s) => s.status === "PASS").length + " pass, " + STEPS.filter((s) => s.status === "FAIL").length + " fail, " + STEPS.filter((s) => s.status === "GAP").length + " gap");
+  const productFails = STEPS.filter((s) => s.status === "FAIL");
   expect(productFails, productFails.map((s) => s.step + ": " + s.actual).join("\n")).toEqual([]);
 });
 
-async function directInsert(context, studentId) {
+async function directWrites(context, studentId) {
   const anon = process.env.E2E_ANON_KEY;
   const api = process.env.E2E_API_URL;
   if (!anon || !api) return { skipped: "no anon key" };
@@ -338,22 +382,17 @@ async function directInsert(context, studentId) {
     token = parsed.access_token || (Array.isArray(parsed) ? parsed[0] : "") || "";
   } catch { return { error: "could not read the session cookie" }; }
   if (!token) return { error: "no access token" };
+  const base = api.replace(/\/$/, "") + "/rest/v1/learning_trials";
   const headers = { apikey: anon, Authorization: "Bearer " + token, "Content-Type": "application/json", Prefer: "return=representation" };
-  const heavy = await fetch(api.replace(/\/$/, "") + "/rest/v1/learning_trials", {
-    method: "POST", headers,
-    body: JSON.stringify({ student_id: studentId, subject: "English", item_id: "forged-weight-9", skill: "en.grammar.forged_skill", mode: "exam", first_try: true, correct: true, weight: 9, attempted_at: new Date().toISOString() }),
-  });
-  const fraction = await fetch(api.replace(/\/$/, "") + "/rest/v1/learning_trials", {
-    method: "POST", headers,
-    body: JSON.stringify({ student_id: studentId, subject: "English", item_id: "forged-direct", skill: "en.grammar.forged_skill", mode: "exam", first_try: true, correct: true, weight: 0.5, attempted_at: new Date().toISOString() }),
-  });
-  const other = await fetch(api.replace(/\/$/, "") + "/rest/v1/learning_trials", {
-    method: "POST", headers,
-    body: JSON.stringify({ student_id: "00000000-0000-0000-0000-000000000000", subject: "English", item_id: "forged-other", skill: "en.grammar.forged_skill", mode: "exam", first_try: true, correct: true, weight: 1, attempted_at: new Date().toISOString() }),
-  });
-  return { weight9: heavy.status, weightHalf: fraction.status, otherStudent: other.status };
+  const ins = (item, weight, sid) => fetch(base, { method: "POST", headers, body: JSON.stringify({ student_id: sid, subject: "English", item_id: item, skill: "en.grammar.forged_skill", mode: "exam", first_try: true, correct: true, weight, attempted_at: new Date().toISOString() }) });
+  const heavy = await ins("forged-weight-9", 9, studentId);
+  const fraction = await ins("forged-direct", 0.5, studentId);
+  const other = await ins("forged-other", 1, "00000000-0000-0000-0000-000000000000");
+  const upd = await fetch(base + "?student_id=eq." + studentId, { method: "PATCH", headers, body: JSON.stringify({ first_try: true, weight: 1 }) });
+  const del = await fetch(base + "?student_id=eq." + studentId, { method: "DELETE", headers });
+  const left = await dbGet("learning_trials?item_id=like.forged-*&select=id");
+  return { weight9: heavy.status, weightHalf: fraction.status, otherStudent: other.status, update: upd.status, delete: del.status, forgedRows: left.length };
 }
-
 function handBuild(trials, wrongs, nowMs) {
   const wOf = (r) => Number(r.weight) > 0 ? Math.min(1, Number(r.weight)) : 1;
   const rate = (rows) => {

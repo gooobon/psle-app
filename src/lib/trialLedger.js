@@ -69,6 +69,13 @@ export function skillKeyOf(r) {
   return r.sectionType ? 'sec:' + r.sectionType : null;
 }
 
+function keepAnswer(v) {
+  if (typeof v === 'number' && isFinite(v)) return v;
+  if (typeof v === 'string') return v.slice(0, 500);
+  if (Array.isArray(v)) return v.slice(0, 20).map((x) => (typeof x === 'number' && isFinite(x) ? x : typeof x === 'string' ? x.slice(0, 500) : null));
+  return undefined;
+}
+
 export function normalizeTrial(r, meta) {
   return {
     itemId: r.id,
@@ -85,6 +92,8 @@ export function normalizeTrial(r, meta) {
     sessionNum: meta.sessionNum,
     ts: meta.ts || Date.now(),
     // 1 for every normal mode; only homework trials carry a fraction (additive field, absent on old rows = 1).
+    // Additive (learning dashboard sync): the submitted answer, so the SERVER can grade it. Absent on older rows.
+    userAnswer: keepAnswer(r.userAnswer), userAnswerSeq: keepAnswer(r.userAnswerSeq), userAnswerReason: keepAnswer(r.userAnswerReason),
     weight: meta.mode === MODE.HOMEWORK && typeof r.weight === 'number' && r.weight > 0 && r.weight < 1 ? r.weight : 1,
   };
 }

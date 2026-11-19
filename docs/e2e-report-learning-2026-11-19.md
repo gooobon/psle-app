@@ -78,3 +78,10 @@ A signed-in student can write `learning_trials` rows for answers he never sat.
 - Calling PostgREST with the student's own access token (the anon key is in the client) bypasses that route. Weight 9 was rejected by the table check (`weight > 0 and weight <= 1`, HTTP 400). Weight 0.5 with `first_try: true` on a made-up exam item was inserted (HTTP 201). Another student's id was rejected (HTTP 403).
 
 What that changes: the parent Learning tab and Amir's own mastery card. An invented exam row adds a skill, and enough of them move the weekly first-attempt score and the improving / flat / slipping word. Rewards, homework completion, and local `genius_*` progress are separate and were not changed. Closing the hole means the server grades the answer. Clamping the weight does not, because correctness, skill, item, and time still come from the client.
+
+## Follow-up: forged trials fix (not yet re-run)
+The FAIL above is addressed in a later commit; this report's numbers are from the run before the fix and were NOT regenerated.
+- `POST /api/learning/trials` takes only the item id and the submitted answer. The server grades it against the bank and sets `correct`, `first_try`, `weight` and `skill` itself (`src/lib/learningGrade.js`).
+- Unknown ids, ungradable items and unassigned homework are dropped. One row per student, subject, item and mode (`dedupe_key`). Timestamps older than 48 h are replaced by server time. At most 200 new daily-set rows per subject per SGT day.
+- Migration `supabase/migrations/20261128000000_learning_trials_server_only.sql` removes the student insert policy and revokes table writes. Writes use the service role. Rows written before it have `server_graded = false` and are not shown.
+- New checks: `tests/e2e/learning.spec.js` (forgery matrix) and one step in `tests/e2e/roleplay.spec.js`. Run `bash tools/e2e/run-roleplay.sh` (and `E2E_PLAYWRIGHT_GREP=@learning bash tools/e2e/run-roleplay.sh`) to regenerate this report.
