@@ -17,6 +17,13 @@ const note = { fontSize: 12, color: '#64748B', marginTop: 4 };
 function load() { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch { return null; } }
 function save(v) { try { localStorage.setItem(KEY, JSON.stringify(v)); } catch { /* storage full: the server deadline still holds */ } }
 function clear() { try { localStorage.removeItem(KEY); } catch { /* ignore */ } }
+// Resume state: the server copy wins, unless this device holds unsynced changes for the same attempt.
+function mergeDraft(attemptId, server) {
+  const local = load();
+  if (local && local.attemptId === attemptId && local.pending) return local;
+  if (server && (Object.keys(server.answers || {}).length || Object.keys(server.flags || {}).length)) return { attemptId, answers: server.answers || {}, flags: server.flags || {} };
+  return local && local.attemptId === attemptId ? local : {};
+}
 const fmt = (s) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 
 // ── one question input ───────────────────────────────────────────────────────
@@ -127,17 +134,37 @@ function Sitting({ attempt, paper, initial, onSubmitted, onExit }) {
   const sent = React.useRef(false);
   const deadline = Date.parse(attempt.deadlineAt);
 
-  React.useEffect(() => { save({ attemptId: attempt.id, answers, flags }); }, [attempt.id, answers, flags]);
+  // Local copy (new key only) marks itself unsynced; the server copy is the cross-device source of truth.
+  const dirty = React.useRef(false), inflight = React.useRef(null), latest = React.useRef({ answers, flags });
+  latest.current = { answers, flags };
+  const syncNow = React.useCallback(() => {
+    if (!dirty.current) return inflight.current || Promise.resolve();
+    const { answers: A, flags: F } = latest.current;
+    const body = {}; for (const [id, a] of Object.entries(A)) body[id] = { ...a, flagged: !!F[id] };
+    for (const id of Object.keys(F)) if (F[id] && !body[id]) body[id] = { val: null, flagged: true };
+    dirty.current = false;
+    const p = serverPost('/api/student/exam', { action: 'save', attemptId: attempt.id, answers: body }).then((r) => {
+      if (!r.ok) dirty.current = true; // network / server error: retry on the next tick, the local copy is still there
+      else save({ attemptId: attempt.id, answers: latest.current.answers, flags: latest.current.flags, pending: dirty.current });
+    }).finally(() => { if (inflight.current === p) inflight.current = null; });
+    inflight.current = p;
+    return p;
+  }, [attempt.id]);
+  React.useEffect(() => { dirty.current = true; save({ attemptId: attempt.id, answers, flags, pending: true }); const t = setTimeout(syncNow, 3000); return () => clearTimeout(t); }, [attempt.id, answers, flags, syncNow]);
+  React.useEffect(() => { const t = setInterval(syncNow, 30000); return () => clearInterval(t); }, [syncNow]);
   React.useEffect(() => { const t = setInterval(() => setNow(Date.now()), 1000); return () => clearInterval(t); }, []);
   const left = remainingSeconds(deadline, now);
 
   const submit = React.useCallback(async (auto) => {
     if (sent.current) return;
     sent.current = true; setPhase('sending'); setErr('');
+    if (inflight.current) await inflight.current; // never let a draft save land after the hand-in
     const body = {}; for (const [id, a] of Object.entries(answers)) body[id] = { ...a, flagged: !!flags[id] };
     const r = await serverPost('/api/student/exam', { action: 'submit', attemptId: attempt.id, answers: body, auto: !!auto });
-    if (r.ok) { clear(); onSubmitted(r); } else { sent.current = false; setPhase('check'); setErr(r.error || 'Could not submit. Your answers are saved on this device; try again.'); }
-  }, [answers, flags, attempt.id, onSubmitted]);
+    if (r.ok) { clear(); onSubmitted(r); }
+    else if (r.status === 409) { clear(); onExit(); } // too late: the server already handed in the saved answers (auto-submitted); the list shows the result
+    else { sent.current = false; setPhase('check'); setErr(r.error || 'Could not submit. Your answers are saved on this device; try again.'); }
+  }, [answers, flags, attempt.id, onSubmitted, onExit]);
 
   React.useEffect(() => { if (left <= 0 && phase === 'sit') submit(true); }, [left, phase, submit]);
   React.useEffect(() => { if (left <= 0 && phase === 'check') submit(true); }, [left, phase, submit]);
@@ -230,20 +257,14 @@ export default function PaperExam({ onBack }) {
     const r = await serverPost('/api/student/exam', { action: 'start', paperId });
     setBusy('');
     if (!r.ok) { setErr(r.error || 'Could not start.'); return; }
-    const local = load();
-    setSitting({ attempt: r.attempt, paper: r.paper, initial: local && local.attemptId === r.attempt.id ? local : {} });
+    setSitting({ attempt: r.attempt, paper: r.paper, initial: mergeDraft(r.attempt.id, r) });
+    if (r.autoSubmitted) refresh(); // a previous expired sitting was handed in from its saved answers
   }
   // An unfinished attempt (page closed / refreshed): the server deadline keeps running. Resume, or auto-submit saved answers if time is up.
   async function resume() {
     if (!d || !d.open) return;
-    const local = load();
-    if (d.open.expired) {
-      setBusy('resume');
-      const body = {}; const ans = local && local.attemptId === d.open.id ? local.answers || {} : {};
-      for (const [id, a] of Object.entries(ans)) body[id] = { ...a, flagged: !!(local.flags || {})[id] };
-      const r = await serverPost('/api/student/exam', { action: 'submit', attemptId: d.open.id, answers: body, auto: true });
-      setBusy('');
-      if (r.ok) { clear(); setResult(r); refresh(); } else setErr(r.error || 'Could not hand in.');
+    if (d.open.expired) { // the server auto-submits an expired sitting from its saved answers; reload to show it
+      setBusy('resume'); await refresh(); setBusy('');
       return;
     }
     await start(d.open.paperId);
@@ -263,11 +284,16 @@ export default function PaperExam({ onBack }) {
       </div>
       {err ? <div style={{ ...card, color: '#B91C1C', fontSize: 13 }}>{err}</div> : null}
       {!d && !err ? <div style={{ ...card, color: '#64748B', fontSize: 13 }}>Loading…</div> : null}
+      {d && d.autoSubmitted ? (
+        <div style={{ ...card, background: '#ECFDF5', fontSize: 13 }}>
+          <b>{d.autoSubmitted.label}</b>: time ran out, so your saved answers were handed in automatically. Score {d.autoSubmitted.score}/{d.autoSubmitted.total}.
+        </div>
+      ) : null}
       {d && d.open ? (
         <div style={{ ...card, background: '#FFFBEB' }}>
           <b>You have a paper in progress: {d.open.label}</b>
-          <div style={note}>{d.open.expired ? 'Time is up. Hand it in to see your score.' : 'The clock kept running while you were away.'}</div>
-          <button style={{ ...btn(), marginTop: 8 }} disabled={!!busy} onClick={resume}>{d.open.expired ? 'Hand in' : 'Continue'}</button>
+          <div style={note}>{d.open.expired ? 'Time is up. Your saved answers are being handed in.' : 'The clock kept running while you were away.'}</div>
+          <button style={{ ...btn(), marginTop: 8 }} disabled={!!busy} onClick={resume}>{d.open.expired ? 'Refresh' : 'Continue'}</button>
         </div>
       ) : null}
       {d && d.papers.map((p) => {

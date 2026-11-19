@@ -1,15 +1,17 @@
 // Mock exams from real past papers, student side (issue #44, docs/design/mock-exams-v1.md phase 1).
 //   GET  -> eligible papers (no questions, no answers), recommended paper, recent attempts, an unfinished attempt (if any)
 //   POST { action:"start",  paperId }                        -> new attempt, the answer-free paper, a server wall-clock deadline
+//   POST { action:"save", attemptId, answers }               -> autosave drafts into exam_answers (correct = null) for the student's own open attempt
 //   POST { action:"submit", attemptId, answers, auto? }      -> server grades from the paper's own key, stores the result
 // The student never receives an answer key, and never a per-item correct answer: only verdicts after submit.
 // Flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_MOCK_EXAMS_ENABLED (default OFF; with it off this route does nothing: 404).
+// An open attempt past its deadline is auto-submitted (auto_submitted) from the saved drafts; GET returns the drafts to resume on any device.
 // Needs supabase/migrations/20261129000000_exam_attempts.sql (applied by hand).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
-import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers } from "@/lib/examServer";
+import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, cleanDraft, answersFromRows } from "@/lib/examServer";
 import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS } from "@/lib/examEngine";
 
 export const runtime = "nodejs";
@@ -24,6 +26,58 @@ const attemptOut = (a) => ({
   countsReason: a.counts_reason, elapsedSeconds: a.elapsed_seconds, attemptNo: a.attempt_no,
 });
 
+// Draft answers saved so far for an open attempt (the student's own; never a key or a verdict). Used to resume on another device.
+async function loadDraft(admin, attemptId) {
+  const { data, error } = await admin.from("exam_answers").select("question_id,answer,flagged").eq("attempt_id", attemptId);
+  if (error) return null;
+  return answersFromRows(data || []);
+}
+const draftOut = (m) => { const answers = {}, flags = {}; for (const [id, a] of Object.entries(m || {})) { answers[id] = { val: a.val, seq: a.seq, reason: a.reason }; if (a.flagged) flags[id] = true; } return { answers, flags }; };
+
+// Grade and store an attempt. Shared by a client hand-in and the server-side auto-submit of an expired sitting.
+// opts.expired: the deadline passed with no hand-in: grade the saved draft, record it at the deadline, status auto_submitted.
+async function finalize(admin, a, answers, { nowMs, auto, expired }) {
+  const id = a.id, sid = a.student_id;
+  const deadline = Date.parse(a.deadline_at), startedMs = Date.parse(a.started_at);
+  const g = gradeSubmission(a.paper_id, answers);
+  if (!g) return { error: "paper not found", code: 500 };
+  const endMs = expired ? deadline : nowMs;
+  const used = elapsedSeconds(startedMs, endMs, deadline); // server clock, capped at the deadline
+  const verdict = countsAsAttempt({ elapsedSeconds: used, allowedMinutes: a.minutes_allowed, answered: g.answered, total: g.count });
+  const status = expired ? "auto_submitted" : statusAfterSubmit({ auto: auto === true && nowMs >= deadline, nowMs, deadline });
+  const day = sgtDate(new Date(endMs));
+  const reason = verdict.counts ? (verdict.byTime ? "time" : "answers") : "too_little";
+  // Claim the attempt first (only one concurrent finalize wins), then write answers.
+  const upd = await admin.from("exam_attempts").update({
+    status, submitted_at: new Date(endMs).toISOString(), elapsed_seconds: used, score: g.score, total: g.total, answered: g.answered,
+    question_count: g.count, unanswered: g.unanswered, open_total: g.ungraded, section_scores: g.sections, counts: verdict.counts,
+    counts_reason: reason, sgt_day: day,
+  }).eq("id", id).eq("status", "in_progress").select("*").maybeSingle();
+  if (upd.error) return { error: "could not submit", code: 500 };
+  if (!upd.data) { const cur = await admin.from("exam_attempts").select("*").eq("id", id).maybeSingle(); return { attempt: cur.data || a, already: true }; }
+  const rows = g.rows.map((r) => ({
+    attempt_id: id, question_id: r.id, section: r.section, answer: r.answer ? { val: r.answer.val, seq: r.answer.seq, reason: r.answer.reason } : null,
+    correct: r.correct, flagged: r.flagged,
+  }));
+  // Overwrite (not ignore) so autosaved draft rows (correct = null) become the graded rows.
+  const w = await admin.from("exam_answers").upsert(rows, { onConflict: "attempt_id,question_id" });
+  if (w.error) console.error("[exam] answers write failed", id);
+  // A counted paper is the subject's daily set but never feeds the first-set score tiers (record_paper_activity stores a 0/0 first set).
+  let daily = "skipped";
+  if (verdict.counts && !PAPER_FEEDS_SCORE_TIERS) {
+    const r = await admin.rpc("record_paper_activity", { p_user: sid, p_subject: "English", p_key: "paper-" + id, p_questions: g.answered, p_correct: g.score, p_minutes: Math.max(1, Math.ceil(used / 60)) });
+    daily = r.error ? "error" : "recorded";
+    if (r.error) console.error("[exam] daily activity failed", id);
+  }
+  return { attempt: upd.data, daily, g };
+}
+// An in-progress attempt past its deadline: submit it from the server-saved answers instead of abandoning it.
+async function autoSubmitExpired(admin, a, nowMs) {
+  const draft = await loadDraft(admin, a.id);
+  if (!draft) return null;
+  return finalize(admin, a, draft, { nowMs, expired: true });
+}
+
 function gate() { return !serverAuthEnabled() || !MOCK_EXAMS_ENABLED; }
 async function student() {
   const me = await currentUser();
@@ -37,15 +91,23 @@ export async function GET() {
   const admin = adminClient();
   const { data, error } = await admin.from("exam_attempts").select("*").eq("student_id", me.profile.id).order("started_at", { ascending: false }).limit(60);
   if (error) return jerr("could not load", 500);
-  const rows = data || [];
+  let rows = data || [];
   const now = Date.now();
+  let autoSubmitted = null;
+  const stale = rows.find((a) => a.status === "in_progress" && Date.parse(a.deadline_at) <= now);
+  if (stale) { // deadline passed with no hand-in: grade the server-saved answers now
+    const r = await autoSubmitExpired(admin, stale, now);
+    if (r && r.attempt) { rows = rows.map((a) => (a.id === stale.id ? r.attempt : a)); autoSubmitted = r.already ? null : attemptOut(r.attempt); }
+  }
   const open = rows.find((a) => a.status === "in_progress") || null;
+  const draft = open ? await loadDraft(admin, open.id) : null;
   const papers = listPapers();
   const rec = pickPaper(papers.map((p) => ({ ...p })), { school: me.profile.school, attempts: rows.map((a) => ({ paperId: a.paper_id, status: a.status, at: Date.parse(a.submitted_at || a.started_at) })) });
   return jok({
     papers, recommendedId: rec ? rec.id : null,
     attempts: rows.filter((a) => a.status !== "in_progress").slice(0, 30).map(attemptOut),
-    open: open ? { ...attemptOut(open), expired: Date.parse(open.deadline_at) <= now } : null,
+    open: open ? { ...attemptOut(open), expired: Date.parse(open.deadline_at) <= now, ...draftOut(draft) } : null,
+    autoSubmitted,
   });
 }
 
@@ -66,10 +128,15 @@ export async function POST(request) {
     const { data: prior, error: pe } = await admin.from("exam_attempts").select("*").eq("student_id", sid).order("started_at", { ascending: false }).limit(200);
     if (pe) return jerr("could not start", 500);
     const open = (prior || []).find((a) => a.status === "in_progress");
-    if (open && Date.parse(open.deadline_at) > nowMs) { // one sitting at a time: resume it (the deadline is the original one)
-      return jok({ attempt: attemptOut(open), paper: publicPaper(open.paper_id), resumed: true });
+    if (open && Date.parse(open.deadline_at) > nowMs) { // one sitting at a time: resume it (the deadline is the original one), with the server-saved answers
+      return jok({ attempt: attemptOut(open), paper: publicPaper(open.paper_id), resumed: true, ...draftOut(await loadDraft(admin, open.id)) });
     }
-    if (open) await admin.from("exam_attempts").update({ status: "abandoned" }).eq("id", open.id).eq("status", "in_progress");
+    let autoSubmitted = null;
+    if (open) { // expired: grade it from the saved answers. Only if that fails does it fall back to abandoned (nothing to lose then).
+      const r = await autoSubmitExpired(admin, open, nowMs);
+      if (r && r.attempt && !r.error) { autoSubmitted = r.already ? null : attemptOut(r.attempt); prior.forEach((x, i) => { if (x.id === open.id) prior[i] = r.attempt; }); }
+      else await admin.from("exam_attempts").update({ status: "abandoned" }).eq("id", open.id).eq("status", "in_progress");
+    }
     const mine = (prior || []).filter((a) => a.paper_id === meta.row.id);
     const minutes = minutesAllowed(meta.row);
     const started = new Date(nowMs);
@@ -79,7 +146,32 @@ export async function POST(request) {
       deadline_at: new Date(deadlineMs(nowMs, minutes)).toISOString(), attempt_no: mine.length + 1,
     }).select("*").single();
     if (ins.error || !ins.data) return jerr(ins.error && ins.error.code === "23505" ? "try again" : "could not start", ins.error && ins.error.code === "23505" ? 409 : 500);
-    return jok({ attempt: attemptOut(ins.data), paper: publicPaper(meta.row.id), resumed: false });
+    return jok({ attempt: attemptOut(ins.data), paper: publicPaper(meta.row.id), resumed: false, autoSubmitted });
+  }
+
+  if (b.action === "save") { // autosave of in-progress answers: own open attempt, before the deadline only
+    const id = String(b.attemptId || "");
+    if (!UUID.test(id)) return jerr("bad request", 400);
+    if (!rateLimit(`examsave:${sid}`, { max: 60, windowMs: 60_000 })) return jerr("too many requests", 429);
+    const { data: a, error } = await admin.from("exam_attempts").select("*").eq("id", id).eq("student_id", sid).maybeSingle();
+    if (error) return jerr("could not save", 500);
+    if (!a) return jerr("not found", 404);
+    if (a.status !== "in_progress") return jok({ saved: false, status: a.status });
+    if (nowMs >= Date.parse(a.deadline_at)) return jok({ saved: false, status: "expired" }); // answers after 0:00 never count
+    const draft = cleanDraft(a.paper_id, b.answers);
+    if (!draft) return jerr("paper not found", 500);
+    const ids = Object.keys(draft);
+    const cur = await admin.from("exam_answers").select("question_id").eq("attempt_id", id);
+    if (cur.error) return jerr("could not save", 500);
+    const gone = (cur.data || []).map((r) => r.question_id).filter((q) => !draft[q]); // answer cleared on screen: drop the draft row
+    if (ids.length) {
+      const w = await admin.from("exam_answers").upsert(ids.map((q) => ({
+        attempt_id: id, question_id: q, answer: { val: draft[q].val, seq: draft[q].seq, reason: draft[q].reason }, flagged: draft[q].flagged, correct: null,
+      })), { onConflict: "attempt_id,question_id" });
+      if (w.error) return jerr("could not save", 500);
+    }
+    if (gone.length) await admin.from("exam_answers").delete().eq("attempt_id", id).in("question_id", gone);
+    return jok({ saved: true, count: ids.length });
   }
 
   if (b.action === "submit") {
@@ -89,41 +181,17 @@ export async function POST(request) {
     if (error) return jerr("could not submit", 500);
     if (!a) return jerr("not found", 404);
     if (a.status !== "in_progress") return jok({ attempt: attemptOut(a), already: true }); // idempotent: a repeat submit changes nothing
-    const deadline = Date.parse(a.deadline_at), startedMs = Date.parse(a.started_at);
-    // A hand-in after the deadline plus the network grace is refused. The client cannot keep
-    // answering past 0:00 and send the paper later. Auto-submit is only "automatic" when the
-    // server clock has actually reached the deadline.
-    if (acceptSubmitTime({ nowMs, deadline }) === "late") return jerr("time is up", 409);
-    const answers = cleanAnswers(b.answers);
-    const g = gradeSubmission(a.paper_id, answers);
-    if (!g) return jerr("paper not found", 500);
-    const used = elapsedSeconds(startedMs, nowMs, deadline); // server clock, capped at the deadline
-    const verdict = countsAsAttempt({ elapsedSeconds: used, allowedMinutes: a.minutes_allowed, answered: g.answered, total: g.count });
-    const status = statusAfterSubmit({ auto: b.auto === true && nowMs >= deadline, nowMs, deadline });
-    const day = sgtDate(new Date(nowMs));
-    const reason = verdict.counts ? (verdict.byTime ? "time" : "answers") : "too_little";
-    // Claim the attempt first (only one concurrent submit wins), then write answers.
-    const upd = await admin.from("exam_attempts").update({
-      status, submitted_at: new Date(nowMs).toISOString(), elapsed_seconds: used, score: g.score, total: g.total, answered: g.answered,
-      question_count: g.count, unanswered: g.unanswered, open_total: g.ungraded, section_scores: g.sections, counts: verdict.counts,
-      counts_reason: reason, sgt_day: day,
-    }).eq("id", id).eq("status", "in_progress").select("*").maybeSingle();
-    if (upd.error) return jerr("could not submit", 500);
-    if (!upd.data) { const cur = await admin.from("exam_attempts").select("*").eq("id", id).maybeSingle(); return jok({ attempt: attemptOut(cur.data || a), already: true }); }
-    const rows = g.rows.map((r) => ({
-      attempt_id: id, question_id: r.id, section: r.section, answer: r.answer ? { val: r.answer.val, seq: r.answer.seq, reason: r.answer.reason } : null,
-      correct: r.correct, flagged: r.flagged,
-    }));
-    const w = await admin.from("exam_answers").upsert(rows, { onConflict: "attempt_id,question_id", ignoreDuplicates: true });
-    if (w.error) console.error("[exam] answers write failed", id);
-    // A counted paper is the subject's daily set but never feeds the first-set score tiers (record_paper_activity stores a 0/0 first set).
-    let daily = "skipped";
-    if (verdict.counts && !PAPER_FEEDS_SCORE_TIERS) {
-      const r = await admin.rpc("record_paper_activity", { p_user: sid, p_subject: "English", p_key: "paper-" + id, p_questions: g.answered, p_correct: g.score, p_minutes: Math.max(1, Math.ceil(used / 60)) });
-      daily = r.error ? "error" : "recorded";
-      if (r.error) console.error("[exam] daily activity failed", id);
+    const deadline = Date.parse(a.deadline_at);
+    // A hand-in after the deadline plus the network grace is refused. The client cannot keep answering past 0:00 and send the paper
+    // later. The sitting itself is not lost: it is auto-submitted from the answers saved before the deadline (the 409 stays).
+    if (acceptSubmitTime({ nowMs, deadline }) === "late") {
+      await autoSubmitExpired(admin, a, nowMs);
+      return jerr("time is up", 409);
     }
-    return jok({ attempt: attemptOut(upd.data), daily, verdicts: g.rows.map((r) => ({ id: r.id, section: r.section, answered: r.answered, correct: r.correct })) });
+    const r = await finalize(admin, a, cleanAnswers(b.answers), { nowMs, auto: b.auto });
+    if (r.error) return jerr(r.error, r.code || 500);
+    if (r.already) return jok({ attempt: attemptOut(r.attempt), already: true });
+    return jok({ attempt: attemptOut(r.attempt), daily: r.daily, verdicts: r.g.rows.map((x) => ({ id: x.id, section: x.section, answered: x.answered, correct: x.correct })) });
   }
   return jerr("bad request", 400);
 }

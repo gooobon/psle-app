@@ -103,6 +103,25 @@ export function cleanAnswers(raw) {
   return out;
 }
 
+// Autosave validation: keep only ids that belong to THIS paper (a student cannot write arbitrary rows), and only answered or flagged items.
+export function cleanDraft(paperId, raw) {
+  const d = paperData(paperId);
+  if (!d) return null;
+  const known = new Set(d.questions.map((q) => q.id));
+  const src = cleanAnswers(raw), out = Object.create(null);
+  for (const id of Object.keys(src)) if (known.has(id) && (isAnswered(src[id]) || src[id].flagged)) out[id] = src[id];
+  return out;
+}
+// Rebuild an answers map from stored exam_answers rows (draft or final). Same shape cleanAnswers returns.
+export function answersFromRows(rows) {
+  const out = Object.create(null);
+  for (const r of rows || []) {
+    const a = r.answer && typeof r.answer === "object" ? r.answer : {};
+    out[r.question_id] = { val: a.val === undefined ? null : a.val, seq: a.seq === undefined ? null : a.seq, reason: a.reason === undefined ? null : a.reason, flagged: r.flagged === true };
+  }
+  return out;
+}
+
 // Grade a submission. rows: one per question in printed order. correct: true/false, or null when not auto-graded (open-ended or ambiguous id).
 export function gradeSubmission(paperId, answers) {
   const d = paperData(paperId);

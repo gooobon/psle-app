@@ -119,6 +119,52 @@ ok("grader never returns or needs the key to the caller (verdict rows only carry
   const g = S.gradeSubmission(list[0].id, {});
   assert.ok(!LEAK.test(JSON.stringify(g.rows.map((r) => ({ id: r.id, section: r.section, answered: r.answered, correct: r.correct })))));
 });
+// ── autosave + server auto-submit (issue #46) ──
+const first = list[0].id;
+const qids = S.publicPaper(first).questionIds;
+ok("autosave validation: only this paper's ids, only answered/flagged, capped values, no key fields", () => {
+  const d = S.cleanDraft(first, { [qids[0]]: { val: 1 }, [qids[1]]: { val: "  " }, [qids[2]]: { val: null, flagged: true }, "not-a-question": { val: 1 }, __proto__: { val: 1 }, x: "str" });
+  assert.deepEqual(Object.keys(d).sort(), [qids[0], qids[2]].sort());
+  assert.equal(d[qids[2]].flagged, true);
+  assert.equal(S.cleanDraft("no-such-paper", {}), null);
+  assert.ok(!LEAK.test(JSON.stringify(d)));
+});
+ok("draft rows round-trip to the answers map and grade like a direct submit", () => {
+  const meta = S.paperMeta(first);
+  const plan = B.englishPaperExamPlan(B.flattenEnglishPool()[meta.row.poolIndex]);
+  const right = {};
+  for (const sec of plan) if (sec.type.endsWith("MCQ")) sec.items.forEach((q) => { right[q.id] = { val: q.answer }; });
+  const draft = S.cleanDraft(first, right);
+  const rows = Object.entries(draft).map(([q, a]) => ({ question_id: q, answer: { val: a.val, seq: a.seq, reason: a.reason }, flagged: a.flagged, correct: null }));
+  const back = S.answersFromRows(rows);
+  assert.deepEqual(JSON.parse(JSON.stringify(back)), JSON.parse(JSON.stringify(draft)));
+  const g1 = S.gradeSubmission(first, S.cleanAnswers(right)), g2 = S.gradeSubmission(first, back);
+  assert.equal(g2.score, g1.score); assert.equal(g2.answered, g1.answered);
+  assert.equal(Object.keys(S.answersFromRows([])).length, 0);
+});
+ok("expired sitting: auto_submitted status, elapsed capped at the deadline; late client hand-in still refused", () => {
+  const start = 1_000_000, dl = E.deadlineMs(start, 60);
+  assert.equal(E.statusAfterSubmit({ auto: false, nowMs: dl + 3_600_000, deadline: dl }), "auto_submitted");
+  assert.equal(E.elapsedSeconds(start, dl, dl), 3600);
+  assert.equal(E.acceptSubmitTime({ nowMs: dl + 20_000, deadline: dl }), "on_time");
+  assert.equal(E.acceptSubmitTime({ nowMs: dl + 20_001, deadline: dl }), "late");
+});
+ok("route wiring: save action, drafts reused on resume, expired -> auto-submit (not abandoned), 409 kept, no key to the client", () => {
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  assert.ok(/b\.action === "save"/.test(r) && /cleanDraft\(a\.paper_id/.test(r) && /\.eq\("student_id", sid\)/.test(r));
+  assert.ok(/status !== "in_progress"\) return jok\(\{ saved: false/.test(r) && /nowMs >= Date\.parse\(a\.deadline_at\)\) return jok\(\{ saved: false/.test(r));
+  assert.ok(/autoSubmitExpired\(admin, open, nowMs\)/.test(r) && /autoSubmitExpired\(admin, stale, now\)/.test(r));
+  assert.ok(/jerr\("time is up", 409\)/.test(r));
+  assert.ok(/ignoreDuplicates/.test(r) === false, "final write must overwrite drafts");
+  assert.ok(!/modelAnswers|\banswer_key\b|\.answer\b/.test(r.replace(/r\.answer|a\.answer|draft\[q\]/g, "")));
+  const c = fs.readFileSync(path.join(ROOT, "src/components/PaperExam.js"), "utf8");
+  assert.ok(/action: 'save'/.test(c) && /setInterval\(syncNow, 30000\)/.test(c) && /genius_exam_inprogress_v1/.test(c));
+  assert.ok(!/localStorage\.(removeItem|clear)\([^)]*genius_(users|progress)/.test(c));
+});
+ok("autosave needs no new migration: latest migration is still exam_attempts", () => {
+  const files = fs.readdirSync(path.join(ROOT, "supabase/migrations")).sort();
+  assert.equal(files[files.length - 1], "20261129000000_exam_attempts.sql");
+});
 // ── 8pm email ──
 ok("email: papers block appears only when there is something to report", () => {
   const base = { parentName: "P", date: "2026-11-20", dashboardUrl: "https://x/", children: [{ name: "Kid", grade: "P3", subjects: [], questions: 0, accuracy: null, minutes: 0, streak: 0, activeDays: 0, missing: [] }] };
