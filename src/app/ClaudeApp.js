@@ -2250,10 +2250,25 @@ function App(){
 
   function refresh(){ setTick(t=>t+1); }
 
-  // Restore admin mode only if the server confirms a valid session cookie
+  // Restore a server session after a full page load. Parent and student auth lives in
+  // React state, so a reload (or the old invite-accept reload) would otherwise show
+  // the login screen even though the cookie is still valid. Flag off: this call is
+  // skipped and the app stays local-only. Admin restore is unchanged.
+  const [sessionChecked, setSessionChecked] = useState(!SERVER_AUTH);
   useEffect(()=>{
     let alive = true;
-    adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); });
+    const jobs = [];
+    jobs.push(adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); }));
+    if(SERVER_AUTH){
+      jobs.push(serverGet("/api/auth/me").then(r=>{
+        if(!alive || !r || !r.ok || !r.profile) return;
+        const kids = (r.children||[]).map(c=>mirrorServerUser(c));
+        const user = mirrorServerUser(r.profile, r.profile.role==="parent" ? {childIds:kids.map(k=>k.id)} : undefined);
+        if(r.profile.role==="student"){ importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); }
+        setAuth(a=>a||{role:r.profile.role, user});
+      }));
+    }
+    Promise.all(jobs).finally(()=>{ if(alive) setSessionChecked(true); });
     return ()=>{ alive = false; };
   },[]);
 
@@ -2273,6 +2288,7 @@ function App(){
     setAuth(null);
   }
 
+  if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
   if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup}/>;
 
   if(auth.role==="student"){

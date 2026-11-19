@@ -1,5 +1,5 @@
 // The invited parent accepts. Requires a logged-in parent whose CONFIRMED login email equals the invited email.
-import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
+import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile } from "@/lib/supabase/server";
 import { rateLimit } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -23,5 +23,6 @@ export async function POST(request) {
   // Conditional update: only the first accept flips the invite.
   await admin.from("guardian_invites").update({ status: "accepted", accepted_by: me.profile.id, accepted_at: new Date().toISOString() })
     .eq("id", id).eq("status", "pending");
-  return jok({ message: "Invite accepted. You can now see this child." });
+  const { data: child } = await admin.from("profiles").select("*").eq("id", inv.child_id).maybeSingle();
+  return jok({ message: "Invite accepted. You can now see this child.", child: child ? publicProfile(child) : null });
 }
