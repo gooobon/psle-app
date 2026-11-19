@@ -58,7 +58,7 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   }).eq("id", id).eq("status", "in_progress").select("*").maybeSingle();
   if (upd.error) return { error: "could not submit", code: 500 };
   if (!upd.data) { const cur = await admin.from("exam_attempts").select("*").eq("id", id).maybeSingle(); return { attempt: cur.data || a, already: true }; }
-  const rows = g.rows.map((r) => ({
+  const rows = g.rows.filter((r) => !r.excluded).map((r) => ({
     attempt_id: id, question_id: r.id, section: r.section, answer: r.answer ? { val: r.answer.val, seq: r.answer.seq, reason: r.answer.reason } : null,
     correct: r.correct, flagged: r.flagged,
   }));
@@ -79,6 +79,12 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   return { attempt: upd.data, daily, g, notebook, trials, reward };
 }
 
+// An in-progress attempt past its deadline: submit it from the server-saved answers instead of abandoning it.
+async function autoSubmitExpired(admin, a, nowMs) {
+  const draft = await loadDraft(admin, a.id);
+  if (!draft) return null;
+  return finalize(admin, a, draft, { nowMs, expired: true });
+}
 
 function gate() { return !serverAuthEnabled() || !MOCK_EXAMS_ENABLED; }
 async function student() {

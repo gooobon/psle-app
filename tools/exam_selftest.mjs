@@ -429,4 +429,125 @@ ok("all of this stays behind the flag, default OFF, and the student route 404s w
   assert.ok(/\{MOCK_EXAMS_ENABLED && \(/.test(pr), "the paper reward settings only render with the flag on");
 });
 
+// ── review-fix checks (issue #48 follow-up) ──
+// Tiny async harness: runs the REAL route / server-settings source with its imports replaced by stubs and an in-memory fake database.
+const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+function loadSource(file, mods, tail) {
+  let src = fs.readFileSync(path.join(ROOT, file), "utf8");
+  src = src.replace(/^import\s*\{([^}]*)\}\s*from\s*"([^"]+)";?/gm, (_, names, from) => `const {${names}} = __m[${JSON.stringify(from)}];`);
+  assert.ok(!/^import /m.test(src), file + ": every import must be stubbed in the harness");
+  src = src.replace(/^export (const|async function|function)/gm, "$1");
+  return new AsyncFunction("__m", src + "\n" + tail)(mods);
+}
+function fakeDb(seed) {
+  const t = { exam_attempts: [], exam_answers: [], wrong_answers: [], learning_trials: [], child_setting_versions: [], child_setting_audit: [], profiles: [], ...seed };
+  const match = (row, fs_) => fs_.every(([k, op, v]) => (op === "eq" ? row[k] === v : op === "in" ? v.includes(row[k]) : op === "is" ? row[k] === v : true));
+  class Q {
+    constructor(table) { this.table = table; this.f = []; this.op = "select"; this.cols = null; }
+    select(c) { if (this.op === "select") this.cols = c; this.ret = true; return this; }
+    eq(k, v) { this.f.push([k, "eq", v]); return this; } in(k, v) { this.f.push([k, "in", v]); return this; } is(k, v) { this.f.push([k, "is", v]); return this; }
+    order() { return this; } limit() { return this; }
+    update(p) { this.op = "update"; this.p = p; return this; } insert(p) { this.op = "insert"; this.p = p; return this; }
+    upsert(p, o) { this.op = "upsert"; this.p = p; this.o = o || {}; return this; } delete() { this.op = "delete"; return this; }
+    single() { this.one = true; return this; } maybeSingle() { this.one = true; return this; }
+    run() {
+      const rows = t[this.table]; let out;
+      if (this.op === "select") out = rows.filter((r) => match(r, this.f));
+      else if (this.op === "update") { out = rows.filter((r) => match(r, this.f)); out.forEach((r) => Object.assign(r, this.p)); }
+      else if (this.op === "delete") { out = rows.filter((r) => match(r, this.f)); t[this.table] = rows.filter((r) => !out.includes(r)); }
+      else {
+        const list = Array.isArray(this.p) ? this.p : [this.p]; out = [];
+        const keys = (this.o && this.o.onConflict ? this.o.onConflict : "id").split(",");
+        for (const p of list) {
+          const hit = this.op === "upsert" ? rows.find((r) => keys.every((k) => r[k] === p[k])) : null;
+          if (hit) { if (!this.o.ignoreDuplicates) Object.assign(hit, p); out.push(hit); } else { const row = { id: p.id || "id" + rows.length, ...p }; rows.push(row); out.push(row); }
+        }
+      }
+      return { data: this.one ? out[0] || null : out, error: null };
+    }
+    then(res, rej) { return Promise.resolve(this.run()).then(res, rej); }
+  }
+  return { tables: () => t, from: (n) => new Q(n), rpc: async () => ({ error: null }) };
+}
+const UUID1 = "11111111-1111-1111-1111-111111111111", SID = "22222222-2222-2222-2222-222222222222";
+const route = async (db, flagOn = true) => loadSource("src/app/api/student/exam/route.js", {
+  "@/lib/supabase/server": { adminClient: () => db, currentUser: async () => ({ profile: { id: SID, role: "student", school: "x", grade: "P3" } }), serverAuthEnabled: () => true,
+    jerr: (m, s) => ({ error: m, status: s }), jok: (o) => ({ ok: true, ...(o || {}) }), readJson: async (r) => r.body },
+  "@/lib/supabase/config": { MOCK_EXAMS_ENABLED: flagOn },
+  "@/lib/rateLimit": { rateLimit: () => true, clientIp: () => "1" },
+  "@/lib/activity": await import("../src/lib/activity.js"),
+  "@/lib/examServer": S, "@/lib/examEngine": E,
+  "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) },
+  "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"),
+}, "return { GET, POST };");
+const req = (url, body) => ({ url, headers: { get: () => "0" }, body });
+const paperId = manifestPaperId();
+function manifestPaperId() { return S.listPapers()[0].id; }
+const expiredAttempt = () => ({ id: UUID1, student_id: SID, subject: "English", grade: "P3", paper_id: paperId, paper_label: "x", paper_flags: [], minutes_allowed: 60,
+  status: "in_progress", started_at: new Date(Date.now() - 3 * 3600_000).toISOString(), deadline_at: new Date(Date.now() - 2 * 3600_000).toISOString(), attempt_no: 1 });
+
+for (const [label, run] of [
+  ["GET (reopen)", async (r, db) => r.GET(req("http://x/api/student/exam"))],
+  ["POST start", async (r, db) => r.POST(req("http://x", { action: "start", paperId }))],
+  ["POST submit after the grace window", async (r, db) => r.POST(req("http://x", { action: "submit", attemptId: UUID1, answers: {} }))],
+]) {
+  n++; // async check, reported like the others
+  try {
+    const db = fakeDb(); db.tables().exam_attempts.push(expiredAttempt());
+    const r = await route(db);
+    const first = db.tables().exam_attempts[0].id;
+    const q = S.paperMeta(paperId) && S.gradeSubmission(paperId, {}).rows[0].id; // a real question id of this paper
+    db.tables().exam_answers.push({ attempt_id: UUID1, question_id: q, answer: { val: 0, seq: null, reason: null }, flagged: false, correct: null });
+    const res = await run(r, db);
+    assert.ok(res.status === undefined || res.status === 409, label + " must not 500: " + JSON.stringify(res).slice(0, 200));
+    const a = db.tables().exam_attempts.find((x) => x.id === first);
+    assert.equal(a.status, "auto_submitted", label + ": the expired sitting is auto-submitted from its saved answers");
+    assert.equal(a.submitted_at, a.deadline_at, "recorded at the deadline");
+    assert.ok(db.tables().exam_answers.filter((x) => x.attempt_id === UUID1).every((x) => x.correct !== null || S.gradeSubmission(paperId, {}).rows.find((g) => g.id === x.question_id).correct === null), "draft rows became graded rows");
+    console.log("PASS expired-attempt auto-submit runs end to end:", label);
+  } catch (e) { n--; console.error("FAIL expired-attempt auto-submit:", label, "\n ", e.message); process.exitCode = 1; }
+}
+
+ok("items stored as multiple choice with no options are excluded from the score, the totals and the effort check, and never reach the notebook or mock trials", () => {
+  const withKey = [], noKey = [];
+  for (const p of S.listPapers()) {
+    const g = S.gradeSubmission(p.id, {});
+    const ex = g.rows.filter((r) => r.excluded);
+    if (ex.length) noKey.push({ p, g, ex });
+    else withKey.push(p);
+  }
+  assert.ok(noKey.length > 0, "the real papers include such items");
+  const { p, g, ex } = noKey[0];
+  assert.ok(ex.every((r) => r.correct === null), "excluded items are not graded wrong");
+  assert.equal(g.total + g.ungraded + ex.length, g.rows.length, "excluded items are in neither the total nor the open count");
+  assert.equal(g.count, g.rows.length - ex.length);
+  assert.ok(g.unanswered <= g.count);
+  assert.ok(S.reviewItems(p.id, [], "submitted").filter((i) => ex.some((r) => r.id === i.id)).every((i) => i.keyMissing && !i.openEnded && i.correctAnswer === ""));
+  assert.ok(!S.notebookRows(p.id, g, { studentId: "s", attemptId: "a", nowIso: "t" }).rows.some((r) => ex.some((x) => x.id === r.question_id)));
+  assert.ok(!S.mockTrialCandidates(p.id, g).some((c) => ex.some((x) => x.id === c.itemId)));
+  const sum = E.summarize([{ section: "a", correct: true }, { section: "a", correct: null, excluded: true }, { section: "a", correct: false }]);
+  assert.deepEqual([sum.score, sum.total, sum.ungraded], [1, 2, 0]);
+  const fs_ = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  assert.ok(/g\.rows\.filter\(\(r\) => !r\.excluded\)/.test(fs_), "no exam_answers row (so no parent marking entry) for them");
+});
+
+n++;
+try {
+  // Saving parent settings with the mock-exam flag OFF keeps the existing paper reward settings.
+  const db = fakeDb({ child_setting_versions: [{ child_id: "c1", effective_from: "2000-01-01", enabled: true, sgd_per_credit: 0.5, daily_tiers: [], weekly_unit: "credits", weekly_amounts: {}, daily_target: {}, homework_per_mistake: 3, paper_unit: "sgd", paper_amounts: { English: 7 }, paper_check_off: true }] });
+  const orig = db.from; db.from = (name) => { const q = orig(name); const sel = q.select.bind(q); q.select = (c) => { sel(c); return q; }; return q; };
+  const SS = await loadSource("src/lib/childSettingsServer.js", {
+    "@/lib/activity": await import("../src/lib/activity.js"), "@/lib/childSettings": CS,
+    "@/lib/rewardsServer": { loadSettingVersions: async (a, id) => ({ ok: true, versions: db.tables().child_setting_versions.map(({ paper_unit, paper_amounts, paper_check_off, ...rest }) => rest) }) },
+    "@/lib/dailyAlert": { notifyCoParents: async () => {} }, "@/lib/supabase/config": { MOCK_EXAMS_ENABLED: false },
+  }, "return { saveChildSetting };");
+  const r = await SS.saveChildSetting(db, { id: "p1", display_name: "P" }, "c1", { homeworkPerMistake: 4 });
+  assert.ok(r.ok, JSON.stringify(r));
+  const rows = db.tables().child_setting_versions;
+  const saved = rows.find((x) => x.effective_from !== "2000-01-01");
+  assert.ok(saved, "a new version row was written");
+  assert.deepEqual([saved.paper_unit, saved.paper_amounts.English, saved.paper_check_off], ["sgd", 7, true], "paper reward settings carried over, not reset");
+  console.log("PASS settings save with the mock-exam flag off preserves paper reward settings");
+} catch (e) { n--; console.error("FAIL settings save with flag off preserves paper settings\n ", e.message); process.exitCode = 1; }
+
 console.log(`\n${n} checks run${process.exitCode ? ", SOME FAILED" : ", all passed"}`);

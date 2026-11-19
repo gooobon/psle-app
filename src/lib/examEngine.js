@@ -84,6 +84,7 @@ export function summarize(rows) {
   const by = new Map();
   let score = 0, total = 0, ungraded = 0;
   for (const r of rows) {
+    if (r.excluded) continue; // cannot be answered (no options in the paper data): not scored, not "open"
     if (!by.has(r.section)) { const s = { section: r.section, score: 0, total: 0 }; by.set(r.section, s); sections.push(s); }
     const s = by.get(r.section);
     if (r.correct === null || r.correct === undefined) { ungraded += 1; continue; }

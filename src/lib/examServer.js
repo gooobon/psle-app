@@ -63,7 +63,14 @@ function paperData(paperId) {
   const seen = new Map();
   questions.forEach((q) => seen.set(q.id, (seen.get(q.id) || 0) + 1));
   const dup = new Set([...seen].filter(([, n]) => n > 1).map(([id]) => id));
-  const d = { hit, plan, index, questions: questions.filter((q, i) => questions.findIndex((x) => x.id === q.id) === i), dup };
+  // Items stored as multiple choice with NO options can never be answered correctly (existing paper data gap). They are excluded from
+  // grading: not in the score, the total, the effort check, the parent's marking list, the notebook or mastery. Shown in review as "not available".
+  const noKey = new Set();
+  for (const sec of plan) {
+    if (sec.type.endsWith("MCQ")) for (const q of sec.items) { if (!(q.options || []).length) noKey.add(q.id); }
+    else if (sec.type === "Comprehension") for (const s of sec.items) for (const q of s.questions || []) { if (getFormat(q) === "mcq" && !(q.options || []).length) noKey.add(q.id); }
+  }
+  const d = { hit, plan, index, questions: questions.filter((q, i) => questions.findIndex((x) => x.id === q.id) === i), dup, noKey };
   cache.set(paperId, d);
   return d;
 }
@@ -133,14 +140,16 @@ export function gradeSubmission(paperId, answers) {
     const answered = isAnswered(a);
     const rec = d.dup.has(q.id) ? null : resolveItem(d.index, q.id);
     let correct = null;
-    if (rec) {
+    const excluded = d.noKey.has(q.id);
+    if (rec && !excluded) {
       if (!answered) correct = false; // unanswered auto-graded item = wrong (shown as unanswered)
       else { const g = rec.grade({ val: a.val, seq: a.seq, reason: a.reason }); correct = g.scored ? !!g.correct : null; }
     }
-    return { id: q.id, section: q.section, answered, correct, flagged: !!(a && a.flagged), answer: a || null };
+    return { id: q.id, section: q.section, answered, correct, flagged: !!(a && a.flagged), answer: a || null, excluded };
   });
   const sum = summarize(rows);
-  return { rows, ...sum, answered: rows.filter((r) => r.answered).length, count: rows.length, unanswered: rows.filter((r) => !r.answered).length };
+  const live = rows.filter((r) => !r.excluded); // counts below ignore the excluded items
+  return { rows, ...sum, answered: live.filter((r) => r.answered).length, count: live.length, unanswered: live.filter((r) => !r.answered).length, excluded: rows.length - live.length };
 }
 
 // Parent-only: model answers for the items that are not auto-graded, so the parent can mark them. Never call from a student route.
@@ -237,10 +246,10 @@ export function reviewItems(paperId, rows, status) {
     return {
       id: q.id, section: q.section, no: x.no || null, prompt: x.prompt || "", yourAnswer: describeAnswer(x.options, a), answered,
       correct: r.correct === true ? true : r.correct === false ? false : null,
-      openEnded: r.correct == null && !ambiguous,
+      openEnded: r.correct == null && !ambiguous && !d.noKey.has(q.id),
       correctAnswer: ambiguous ? "" : x.correctText || "", explanation: ambiguous ? "" : x.explanation || "", ambiguous,
       // An auto-graded item whose paper data has no readable key (e.g. a "multiple choice" item stored without options). Shown as such, never with a guessed key.
-      keyMissing: r.correct != null && !ambiguous && !x.correctText,
+      keyMissing: !ambiguous && (d.noKey.has(q.id) || (r.correct != null && !x.correctText)),
       parentMark: r.parent_correct === true ? true : r.parent_correct === false ? false : null,
       timeSuggested: !answered && status === "auto_submitted",
     };

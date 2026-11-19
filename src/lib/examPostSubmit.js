@@ -38,10 +38,4 @@ export async function recordMockTrials(admin, a, g, endMs) {
     return { recorded: rows.length };
   } catch { return { recorded: 0, error: true }; }
 }
-// An in-progress attempt past its deadline: submit it from the server-saved answers instead of abandoning it.
-export async function autoSubmitExpired(admin, a, nowMs) {
-  const draft = await loadDraft(admin, a.id);
-  if (!draft) return null;
-  return finalize(admin, a, draft, { nowMs, expired: true });
-}
 

@@ -307,7 +307,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
           <div style={{ fontSize: 14, fontWeight: 700, marginTop: 2 }}>{it.prompt || it.id}</div>
           <div style={{ fontSize: 13, marginTop: 6 }}>Your answer: <b>{it.answered ? it.yourAnswer : '(no answer)'}</b></div>
           {it.ambiguous || it.keyMissing
-            ? <div style={note}>{it.keyMissing ? 'The answer for this question is not available in our copy of the paper.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
+            ? <div style={note}>{it.keyMissing ? 'This question is not available in our copy of the paper, so it is not counted in your score.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
             : <div style={{ fontSize: 13 }}>{it.openEnded ? 'Model answer' : 'Correct answer'}: <b>{it.correctAnswer || '—'}</b></div>}
           {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Your parent marked this: correct.' : it.parentMark === false ? 'Your parent marked this: not correct.' : 'Your parent has not marked this yet.'}</div> : null}
           {it.explanation ? <div style={{ fontSize: 13, marginTop: 6, background: '#F8FAFC', borderRadius: 8, padding: 8 }}>{it.explanation}</div> : null}
