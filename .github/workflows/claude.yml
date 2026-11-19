@@ -52,5 +52,5 @@ jobs:
           # Optional: Add claude_args to customize behavior and configuration
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://code.claude.com/docs/en/cli-reference for available options
-          claude_args: '--allowed-tools "Bash(npm:*)" "Bash(npx:*)" "Bash(node:*)"'
+          claude_args: '--allowedTools "Bash(npm:*),Bash(npx:*),Bash(node:*),Bash(npm *),Bash(npx *),Bash(node *)"'
 
