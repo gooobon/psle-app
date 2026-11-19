@@ -1,8 +1,8 @@
 // Browser-side helpers for the optional Supabase server (only used when NEXT_PUBLIC_SERVER_AUTH=true).
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
-export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS } from "@/lib/supabase/config";
-import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW } from "@/lib/supabase/config";
+export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD } from "@/lib/supabase/config";
+import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD } from "@/lib/supabase/config";
 
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
@@ -168,4 +168,41 @@ export async function reportWeeklyReview(subject, items) {
   const r = await serverPost("/api/student/rewards/weekly", { subject, items });
   if (typeof window !== "undefined") window.dispatchEvent(new Event("genius-rewards-changed"));
   return r;
+}
+
+// ── Learning dashboard trial sync (flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED, default off) ──
+// Copies mastery-mode trials (exam/mock/drill/homework) from local progress to the server. Never modifies or clears local data.
+// The only storage written is the new additive marker genius_learning_sync_v1 = { "<user>_<grade>_<subject>": lastSyncedTs }.
+const LD_MARKER = "genius_learning_sync_v1";
+const LD_MODES = ["exam", "mock", "drill", "homework"];
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const ldBusy = {};
+export async function syncLearningTrials(userId, grade, subject, prog) {
+  if (!_SA || !_LD || !UUID_RE.test(String(userId || "")) || (subject !== "English" && subject !== "Chinese")) return { skipped: true };
+  const key = `${userId}_${grade}_${subject}`;
+  if (ldBusy[key]) return { skipped: true };
+  const mk = lsJson(LD_MARKER, {});
+  const since = Number(mk[key]) || 0;
+  const fresh = ((prog && prog.trials) || []).filter(x => x && x.itemId != null && x.skill && typeof x.ts === "number" && x.ts > since && LD_MODES.includes(x.mode));
+  if (!fresh.length) return { skipped: true };
+  ldBusy[key] = true;
+  try {
+    // Send the ANSWER only. The server grades it and derives correct / first-try / weight / skill itself. Trials recorded before
+    // answers were kept (no userAnswer) cannot be graded and are not sent.
+    const items = fresh.filter(x => x.userAnswer !== undefined && x.userAnswer !== null).map(x => ({
+      itemId: String(x.itemId), mode: x.mode, setId: x.setId || undefined, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
+      guessed: !!x.guessed, hinted: !!x.solvedAfterHint, sessionNum: x.sessionNum, ts: x.ts, grade, subject,
+    }));
+    // The marker also moves past ungradable (older) trials so they are not retried forever.
+    let top = since;
+    const allTop = Math.max(...fresh.map(x => x.ts));
+    if (!items.length) top = allTop;
+    for (let i = 0; i < items.length; i += 300) {
+      const r = await serverPost("/api/learning/trials", { items: items.slice(i, i + 300) });
+      if (!r.ok) break;
+      top = i + 300 >= items.length ? allTop : Math.max(top, ...items.slice(i, i + 300).map(x => x.ts));
+    }
+    if (top > since) { try { localStorage.setItem(LD_MARKER, JSON.stringify({ ...lsJson(LD_MARKER, {}), [key]: top })); } catch {} }
+    return { ok: top > since };
+  } finally { ldBusy[key] = false; }
 }

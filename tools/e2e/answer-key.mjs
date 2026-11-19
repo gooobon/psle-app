@@ -3,6 +3,9 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { WA1_PRACTICE_SETS } from "../../src/data/p3/english/wa1_practice.ts";
 import { WA1_ZH_PRACTICE } from "../../src/data/p3/chinese/wa1_practice.ts";
+import { buildPastPaperPlan, DEFAULT_SETTINGS } from "../../src/lib/dataEngine.js";
+import { taxonomyIdsFor } from "../../src/lib/taxonomyLookup.js";
+import { skillIdsOf } from "../../src/lib/similarItemsCore.js";
 
 const SCORE_SETS = new Set(["S01", "S02", "S03", "S04", "S05", "S06", "S07", "S08"]);
 const AUTO_COMP = new Set(["mcq", "ab_circle", "true_false", "sequence", "fill_blank", "fill_word"]);
@@ -27,7 +30,8 @@ function mcqIndex(q) {
 
 function pushBank(bank, id, section, item) {
   if (!id) return;
-  bank.push({ id: String(id), section, skill: item && item.skill ? String(item.skill) : null, trapType: trapOf(item) });
+  const leaf = skillIdsOf(taxonomyIdsFor(String(id)) || [])[0] || null;
+  bank.push({ id: String(id), section, skill: item && item.skill ? String(item.skill) : null, trapType: trapOf(item), leaf });
 }
 
 function fromEnglish(set, bank, detailed) {
@@ -124,8 +128,14 @@ for (const set of WA1_ZH_PRACTICE) {
   if (detailed) sets[set.setId] = { items };
 }
 
+const pastPapers = {};
+for (const ses of [1, 2, 3, 4, 5, 6]) {
+  const plan = buildPastPaperPlan(DEFAULT_SETTINGS, "E2E Primary", ses);
+  pastPapers[String(ses)] = { paperKey: plan.paperKey, items: fromEnglish({ setId: "PAST" + ses, plan }, bank, true) };
+}
+
 mkdirSync("tests/e2e/fixtures", { recursive: true });
-writeFileSync("tests/e2e/fixtures/answers.json", JSON.stringify({ sets, bank }));
+writeFileSync("tests/e2e/fixtures/answers.json", JSON.stringify({ sets, bank, pastPapers }));
 const summary = {};
 for (const [id, s] of Object.entries(sets)) {
   summary[id] = { items: s.items.length, gradable: s.items.filter((i) => i.gradable).length };

@@ -47,6 +47,7 @@ import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn 
 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook, { MistakePatterns } from '@/components/MistakeNotebook';
+import LearningDashboard from '@/components/LearningDashboard'; // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off)
 import ParentHomework from '@/components/ParentHomework';
 import { StickerShelf, WeeklyReviewCard } from '@/components/Rewards'; // step 9 (flag NEXT_PUBLIC_REWARDS_ENABLED, default off)
 import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId, patternSummary } from '@/lib/wrongNotebook';
@@ -60,7 +61,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, LEARNING_DASHBOARD, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
 
@@ -196,6 +197,10 @@ function getProgress(userId, grade, subject){
 function setProgress(userId, grade, subject, data){
   const key = `${userId}_${grade}_${subject}`;
   persistProgressLS(key, data);
+  // Local progress stays keyed by the username. The server row is the profile UUID (serverId).
+  // Passing the username made the learning sync skip every real student (it requires a UUID).
+  const serverId = (STORE.users[userId] && STORE.users[userId].serverId) || userId;
+  syncLearningTrials(serverId, grade, subject, data).catch(()=>{}); // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off); copy only, fire-and-forget
 }
 
 function makeSeedHistory(userId){
@@ -1459,7 +1464,14 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const prevVocab   = prog.vocabBook||[];
     const newVocab    = [...prevVocab];
     vocabWords.forEach(w=>{ if(!newVocab.find(v=>v.word===w)) newVocab.push({word:w,def:WORD_DICT[w]||"",addedDate:todayStr(),fromMistake:wrongWords.includes(w)}); });
-    const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: newEntry.school||null });
+    // A past-paper mock (forceMock) is graded from that paper's own key. The key id is not an answer.
+    // A flagged every-10th mock still sits a practice set, so it keeps the school label as its set id.
+    let trialSetId = newEntry.school || null;
+    if (forceMock) {
+      const paperPlan = buildPastPaperPlan(prog.settings, user.school, sessionNum);
+      if (paperPlan && paperPlan.paperKey) trialSetId = "paper:" + paperPlan.paperKey;
+    }
+    const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: trialSetId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     reportActivity(subject, 'set-'+sessionNum, results);
@@ -2015,6 +2027,11 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
         ))}
       </div>
 
+      {notebook&&SERVER_AUTH&&LEARNING_DASHBOARD&&(
+        <div style={{padding:"12px 16px 0"}}>
+          <LearningDashboard self subject={isZh?"Chinese":"English"}/>
+        </div>
+      )}
       {filtered.length===0?(
         <div style={{textAlign:"center",padding:"60px 24px",color:"#64748B"}}>
           <div style={{fontSize:48,marginBottom:12}}></div>

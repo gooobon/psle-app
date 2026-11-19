@@ -542,12 +542,35 @@ export function englishPaperToPlan(
   });
 
   sections.paperMeta = paper.meta;
+  sections.paperKey = paperKeyOf(paper);
   sections.paperLabel =
     paper.meta?.school ||
     paper.meta?.title ||
     paper.meta?.assessment ||
     "P3 English Paper";
   return sections;
+}
+
+// Stable id for one paper, shared by the exam plan and the server grader. The pool index
+// keeps two papers with the same school and year apart. The answer is not part of the key.
+export function paperKeyOf(paper) {
+  const pool = flattenEnglishPool();
+  const i = pool.indexOf(paper);
+  const m = (paper && paper.meta) || {};
+  const base = [m.id, m.school, m.year, m.assessment, m.title].filter((x) => x != null && x !== "").join("|").slice(0, 140);
+  return (base || "paper") + "#" + (i >= 0 ? i : "x");
+}
+
+// Every English past-paper item, in the same ExamSession shape the student sits, so the server
+// can grade a submitted answer. One set per paper. Not sent to the client by the learning route.
+export function englishPaperGradeSets() {
+  const types = ["GrammarMCQ", "VocabMCQ", "GrammarCloze", "VocabCloze", "Editing", "Comprehension"];
+  return flattenEnglishPool().map((paper) => {
+    const buckets = normalizeEnglishQuestions(paper.questions || []);
+    const plan = [];
+    for (const type of types) if (buckets[type] && buckets[type].length) plan.push({ type, items: buckets[type] });
+    return { setId: paperKeyOf(paper), plan };
+  });
 }
 
 export function englishPaperToLegacyInfo(paper) {
