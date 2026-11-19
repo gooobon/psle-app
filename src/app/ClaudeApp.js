@@ -2294,7 +2294,7 @@ function App(){
       getProgress={getProgress}
       setProgress={(uid,g,s,d)=>{ setProgress(uid,g,s,d); refresh(); }}
       refresh={refresh}
-      homeworkSimilarFor={(subj,m)=>pickSimilar(getTagIndex(), subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX, {id:m.id}, similarQuestions)}
+      homeworkSimilarFor={(subj,m,count)=>pickSimilar(getTagIndex(), subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX, {id:m.id}, similarQuestions, count)}
       onChildCreated={SERVER_AUTH ? (c)=>{
         const kid = mirrorServerUser(c);
         const par = STORE.users[user.id];
