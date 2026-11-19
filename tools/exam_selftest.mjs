@@ -155,11 +155,22 @@ ok("route wiring: save action, drafts reused on resume, expired -> auto-submit (
   assert.ok(/status !== "in_progress"\) return jok\(\{ saved: false/.test(r) && /nowMs >= Date\.parse\(a\.deadline_at\)\) return jok\(\{ saved: false/.test(r));
   assert.ok(/autoSubmitExpired\(admin, open, nowMs\)/.test(r) && /autoSubmitExpired\(admin, stale, now\)/.test(r));
   assert.ok(/jerr\("time is up", 409\)/.test(r));
-  assert.ok(/ignoreDuplicates/.test(r) === false, "final write must overwrite drafts");
-  assert.ok(!/modelAnswers|\banswer_key\b|\.answer\b/.test(r.replace(/r\.answer|a\.answer|draft\[q\]/g, "")));
+  assert.ok(/onConflict: "attempt_id,question_id" \}\);/.test(r), "the final grade must still overwrite a draft");
+  assert.ok(!/modelAnswers|\banswer_key\b|\.answer\b/.test(r.replace(/r\.answer|a\.answer|row\.answer|draft\[q\]/g, "")));
   const c = fs.readFileSync(path.join(ROOT, "src/components/PaperExam.js"), "utf8");
   assert.ok(/action: 'save'/.test(c) && /setInterval\(syncNow, 30000\)/.test(c) && /genius_exam_inprogress_v1/.test(c));
   assert.ok(!/localStorage\.(removeItem|clear)\([^)]*genius_(users|progress)/.test(c));
+});
+ok("late autosave cannot overwrite or delete a graded row", () => {
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  const save = r.slice(r.indexOf('b.action === "save"'), r.indexOf('b.action === "submit"'));
+  assert.ok(/ignoreDuplicates:\s*true/.test(save), "inserting a draft must leave an existing row alone");
+  assert.ok(/\.update\(\{ answer: row\.answer, flagged: row\.flagged \}\)/.test(save));
+  assert.ok(/\.is\("correct", null\)/.test(save));
+  const deletes = save.split(".delete()");
+  assert.equal(deletes.length, 2, "one delete, of drafts only");
+  assert.ok(/\.is\("correct", null\)/.test(deletes[1]), "delete must be limited to correct IS NULL");
+  assert.ok(!/ignoreDuplicates/.test(r.slice(0, r.indexOf('b.action === "save"'))), "grading still overwrites the draft");
 });
 ok("autosave needs no new migration: latest migration is still exam_attempts", () => {
   const files = fs.readdirSync(path.join(ROOT, "supabase/migrations")).sort();

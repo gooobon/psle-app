@@ -165,12 +165,21 @@ export async function POST(request) {
     if (cur.error) return jerr("could not save", 500);
     const gone = (cur.data || []).map((r) => r.question_id).filter((q) => !draft[q]); // answer cleared on screen: drop the draft row
     if (ids.length) {
-      const w = await admin.from("exam_answers").upsert(ids.map((q) => ({
+      const payload = ids.map((q) => ({
         attempt_id: id, question_id: q, answer: { val: draft[q].val, seq: draft[q].seq, reason: draft[q].reason }, flagged: draft[q].flagged, correct: null,
-      })), { onConflict: "attempt_id,question_id" });
-      if (w.error) return jerr("could not save", 500);
+      }));
+      // New drafts only. A conflict (a row already graded) is left as it is.
+      const ins = await admin.from("exam_answers").upsert(payload, { onConflict: "attempt_id,question_id", ignoreDuplicates: true });
+      if (ins.error) return jerr("could not save", 500);
+      // Refresh the draft text. correct IS NULL, so a save that arrives after grading cannot blank the mark.
+      const wrote = await Promise.all(payload.map((row) => admin.from("exam_answers").update({ answer: row.answer, flagged: row.flagged })
+        .eq("attempt_id", id).eq("question_id", row.question_id).is("correct", null)));
+      if (wrote.some((w) => w.error)) return jerr("could not save", 500);
     }
-    if (gone.length) await admin.from("exam_answers").delete().eq("attempt_id", id).in("question_id", gone);
+    if (gone.length) {
+      const d = await admin.from("exam_answers").delete().eq("attempt_id", id).in("question_id", gone).is("correct", null);
+      if (d.error) return jerr("could not save", 500);
+    }
     return jok({ saved: true, count: ids.length });
   }
 
