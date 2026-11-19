@@ -227,12 +227,14 @@ test("parent and student journey @main", async ({ browser }) => {
       localStorage.setItem("genius_progress_v2", JSON.stringify(all));
     }, { seed, marker });
     await sp.reload();
+    // A restored server session lands on Today ("Hello,"). The login screen is the
+    // path when the cookie is not restored. Either way, open the notebook next.
     await sp.waitForFunction(() => {
       const t = document.body.innerText;
-      return t.includes("Welcome back") || t.includes("Your patterns");
+      return t.includes("Welcome back") || t.includes("Your patterns") || t.includes("Hello,");
     });
-    if (await sp.getByText("Welcome back").count()) {
-      await loginStudent(sp, CHILD.username, CHILD.password);
+    if (await sp.getByText("Welcome back").count()) await loginStudent(sp, CHILD.username, CHILD.password);
+    if (!(await sp.getByText("Your patterns", { exact: true }).count())) {
       await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
     }
     await sp.getByText("Your patterns", { exact: true }).waitFor();
