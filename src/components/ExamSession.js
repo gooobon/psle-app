@@ -828,7 +828,9 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
         <div style={S.instructions}>
           {hasBrackets
             ? (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u4ECE\u65B9\u6846\u91CC\u9009\u51FA\u6B63\u786E\u7684\u8BCD\u8BED\u586B\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\uFF0C\u6BCF\u4E2A\u8BCD\u53EA\u7528\u4E00\u6B21\u3002" : "Read the passage carefully. Underline or tap the correct word from the words given in the brackets.")
-            : (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u4ECE\u65B9\u6846\u91CC\u9009\u51FA\u6B63\u786E\u7684\u8BCD\u8BED\u586B\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\uFF0C\u6BCF\u4E2A\u8BCD\u53EA\u7528\u4E00\u6B21\u3002" : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only.")}
+            : hasWordBank
+            ? (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u4ECE\u65B9\u6846\u91CC\u9009\u51FA\u6B63\u786E\u7684\u8BCD\u8BED\u586B\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\uFF0C\u6BCF\u4E2A\u8BCD\u53EA\u7528\u4E00\u6B21\u3002" : "Read the passage carefully. Choose the correct word from the words given in the box and write its letter in each blank. Use each word once only.")
+            : (isZh ? "\u4ED4\u7EC6\u9605\u8BFB\u77ED\u6587\uFF0C\u5728\u6BCF\u4E2A\u7A7A\u683C\u91CC\u5199\u4E00\u4E2A\u5408\u9002\u7684\u8BCD\u8BED\u3002" : "Read the passage carefully. Write a suitable word in each blank.")}
         </div>
 
         {hasWordBank && !hasBrackets && (
@@ -881,6 +883,20 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
               })
           }
         </div>
+
+        {!hasWordBank && !hasBrackets && !submitted && (
+          <div style={{ marginBottom: 14 }}>
+            {blanks.map((b) => (
+              <label key={b.num} style={{ display: "block", marginBottom: 8, fontSize: "calc(var(--fs) * 1.000)" }}>
+                ({b.num}){" "}
+                <input type="text" value={answers[b.num] || ""}
+                  onChange={(e) => handleSelect(b.num, e.target.value)}
+                  placeholder={isZh ? "\u5199\u4E00\u4E2A\u8BCD\u8BED" : "Write a word"}
+                  style={{ padding: "6px 10px", borderRadius: 6, border: "1.5px solid #000", minWidth: 140, fontSize: "calc(var(--fs) * 1.000)" }} />
+              </label>
+            ))}
+          </div>
+        )}
 
         {hasWordBank && !hasBrackets && !submitted && (
           <div style={{ marginBottom: 14 }}>
@@ -956,6 +972,12 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                     {b.hint || "Think about the word that fits the meaning and grammar."}
                   </div>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 6 }}>{isZh ? "\u518D\u9009\u4E00\u6B21\uFF1A" : "Try again:"}</div>
+                  {wordBank.length === 0 ? (
+                    <input type="text" value={retryChosen || ""}
+                      onChange={(e) => handleRetrySelect(b.num, e.target.value)}
+                      placeholder={isZh ? "\u518D\u5199\u4E00\u4E2A\u8BCD" : "Try another word"}
+                      style={{ padding: "6px 10px", borderRadius: 6, border: "1.5px solid #000", minWidth: 140, fontSize: "calc(var(--fs) * 1.000)" }} />
+                  ) : null}
                   <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
                     {wordBank.filter(w => w !== chosen).map((w, i) => {
                       const isSel = retryChosen === w;

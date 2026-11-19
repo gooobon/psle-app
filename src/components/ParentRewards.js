@@ -8,6 +8,7 @@ const box = { background: '#fff', border: '1px solid #E2E8F0', borderRadius: 14,
 const inp = { width: 90, padding: '7px 8px', borderRadius: 8, border: '1px solid #CBD5E1', fontSize: 13 };
 const btn = { background: '#7C3AED', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' };
 const sgd = (n) => 'S$' + (Number(n) || 0).toFixed(2);
+const rowsSgd = (rows, status) => (rows || []).filter((r) => (r.status || 'confirmed') === status).reduce((a, r) => a + (Number(r.credits) || 0) * (Number(r.sgd_per_credit) || 0), 0);
 
 export default function ParentRewards({ child }) {
   const on = SERVER_AUTH && REWARDS && !!child?.serverId;
@@ -122,8 +123,8 @@ export default function ParentRewards({ child }) {
           Credits: {bal} unpaid{rule.sgdPerCredit ? ` (≈ ${sgd(bal * rule.sgdPerCredit)})` : ''}
         </div>
         <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4 }}>Confirmed {d.ledger.earned} · Paid {d.ledger.paid}</div>
-        {d.ledger.pending > 0 && <div style={{ fontSize: 11, color: '#92400E', fontWeight: 700, marginBottom: 4 }}>Pending: {d.ledger.pending} ({d.ledger.pendingNote})</div>}
-        {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B91C1C', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited}</div>}
+        {d.ledger.pending > 0 && <div style={{ fontSize: 11, color: '#92400E', fontWeight: 700, marginBottom: 4 }}>Pending: {d.ledger.pending} (≈ {sgd(rowsSgd(d.ledger.rows, 'pending'))}) ({d.ledger.pendingNote})</div>}
+        {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B91C1C', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited} (≈ {sgd(rowsSgd(d.ledger.rows, 'forfeited'))})</div>}
         {d.ledger.rows.slice(0, 10).map((r) => (
           <div key={r.kind + r.period + (r.subject || '')} style={{ fontSize: 11, color: '#475569' }}>
             {r.period}: {r.status === 'pending' ? 'pending ' : r.status === 'forfeited' ? 'forfeited ' : '+'}{r.credits} ({r.kind === 'weekly' ? 'weekly review' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
