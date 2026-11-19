@@ -896,7 +896,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -1780,7 +1780,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -2664,7 +2664,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -3559,7 +3559,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -4451,7 +4451,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -5338,7 +5338,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -6231,9 +6231,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -7114,7 +7114,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -7997,7 +7997,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -8889,7 +8889,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -9775,7 +9775,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -10663,7 +10663,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -11545,7 +11545,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -12429,7 +12429,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -13313,7 +13313,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -14203,9 +14203,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -15089,7 +15089,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -15970,9 +15970,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -16851,7 +16851,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -17740,7 +17740,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -18621,7 +18621,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -19509,7 +19509,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -20392,7 +20392,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -21275,7 +21275,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -22162,7 +22162,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -23050,7 +23050,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -23945,7 +23945,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -24829,7 +24829,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -25713,7 +25713,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -26595,7 +26595,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -27476,7 +27476,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -28348,9 +28348,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -29223,7 +29223,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -30108,7 +30108,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -30982,7 +30982,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -31860,7 +31860,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -32748,9 +32748,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -33632,7 +33632,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -34508,7 +34508,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -35392,7 +35392,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -36274,7 +36274,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -37157,9 +37157,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -38035,7 +38035,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -38911,7 +38911,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -39801,7 +39801,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -40686,7 +40686,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -41566,7 +41566,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -42450,9 +42450,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -43330,7 +43330,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -44217,7 +44217,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -45096,7 +45096,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -45976,9 +45976,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -46858,7 +46858,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -47739,7 +47739,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -48622,9 +48622,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               }
             ]
           }
@@ -49505,7 +49505,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -50388,7 +50388,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.fact_finding"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -51274,7 +51274,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -52160,7 +52160,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }
@@ -53043,7 +53043,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                   ]
                 },
                 "conceptIds": [
-                  "en.reading.open"
+                  "en.reading.inference"
                 ],
                 "taxonomyStatus": "certain"
               }

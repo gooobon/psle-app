@@ -45,10 +45,10 @@ import { openTicketsFromResults, gradeTicketsFromDrill, pickDrillItems, pickNext
 import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
 
 import { ParentApp } from '@/components/ParentDashboard';
-import MistakeNotebook from '@/components/MistakeNotebook';
+import MistakeNotebook, { MistakePatterns } from '@/components/MistakeNotebook';
 import ParentHomework from '@/components/ParentHomework';
 import { StickerShelf, WeeklyReviewCard } from '@/components/Rewards'; // step 9 (flag NEXT_PUBLIC_REWARDS_ENABLED, default off)
-import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId } from '@/lib/wrongNotebook';
+import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId, patternSummary } from '@/lib/wrongNotebook';
 import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
 import ReviewRounds from '@/components/ReviewRounds'; // STEP2_ROUND_REVIEW
 import VocabQuiz from '@/components/VocabQuiz'; // STEP2F_VOCAB_QUIZ_V2
@@ -2036,6 +2036,7 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
             })}
           </div>
 
+          <MistakePatterns summary={patternSummary(filtered, getTagIndex())}/>
           {notebook&&<MistakeNotebook items={filtered} onCause={notebook.onCause} onTrySimilar={notebook.onTrySimilar} similarFor={notebook.similarFor}/>}
           {/* STEP2C_NO_MISTAKE_LIST */}
           {/* Per-mistake cards removed: re-solving lives in the By Round tab. */}

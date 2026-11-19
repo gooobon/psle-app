@@ -1,7 +1,7 @@
-// Concept and trap catalogue, v1 DRAFT.
+// Concept and trap catalogue, v1 APPROVED 2026-11-19 for English and Chinese.
 // Source of truth for ids: ./taxonomy.json. Review copy: docs/taxonomy.md.
 // Ids are stable. Add new ids; do not rename one that has been tagged onto items.
-// TODO(owner): approve or split leaves before the wrong-answer notebook ships.
+// Math and Science concepts stay in the file with inScope: false and are not used.
 
 import taxonomy from './taxonomy.json';
 
@@ -19,6 +19,8 @@ export interface Concept {
   skill: string;
   label: string;
   level: string;
+  inScope?: boolean;
+  note?: string;
 }
 
 export interface Trap {
@@ -33,6 +35,7 @@ export interface NotebookCause {
   id: string;
   label: string;
   studentPrompt: string;
+  storedValue?: string;
 }
 
 export const CONCEPTS: Concept[] = taxonomy.concepts as Concept[];
@@ -82,4 +85,9 @@ export function conceptIdsUnder(id: string): string[] {
 
 export function conceptsBySubject(subject: SubjectId): Concept[] {
   return CONCEPTS.filter((c) => c.subject === subject);
+}
+
+/** English and Chinese are the approved v1 scope. Math and Science are not used. */
+export function isInScopeConcept(concept: Concept): boolean {
+  return concept.subject === 'english' || concept.subject === 'chinese';
 }

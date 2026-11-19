@@ -1,8 +1,9 @@
 {
-  "version": "v1-draft",
-  "status": "DRAFT",
+  "version": "v1",
+  "status": "APPROVED",
+  "approvedOn": "2026-11-19",
   "generatedBy": "tools/taxonomy/index_papers.js",
-  "note": "Sidecar tags for hand-authored past papers and comprehension_generated.ts. Regenerate with node tools/taxonomy/index_papers.js. Do not hand-edit. Stems and answers are not stored.",
+  "note": "Sidecar tags for hand-authored past papers and comprehension_generated.ts. Regenerate with node tools/taxonomy/index_papers.js. Do not hand-edit. Stems and answers are not stored. Math and Science are out of scope.",
   "unresolvedDuplicateIds": [
     "p3_zh_eoy_nh_005",
     "p3_zh_eoy_nh_013",
@@ -18993,9 +18994,9 @@
     },
     "p3_zh_eoy_bs_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_BodhiSchool_Paper2_2025.ts",
@@ -19080,9 +19081,9 @@
     },
     "p3_zh_eoy_bs_009": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/eoy/eoy_BodhiSchool_Paper2_2025.ts"
@@ -19224,9 +19225,9 @@
     },
     "p3_zh_eoy_bs_025": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_BodhiSchool_Paper2_2025.ts"
@@ -19269,18 +19270,18 @@
     },
     "p3_zh_eoy_bs_030": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_BodhiSchool_Paper2_2025.ts"
     },
     "p3_zh_eoy_ch_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_CatholicHigh_Paper2_2025.ts",
@@ -19365,9 +19366,9 @@
     },
     "p3_zh_eoy_ch_009": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/eoy/eoy_CatholicHigh_Paper2_2025.ts"
@@ -19518,9 +19519,9 @@
     },
     "p3_zh_eoy_ch_026": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_CatholicHigh_Paper2_2025.ts"
@@ -19554,9 +19555,9 @@
     },
     "p3_zh_eoy_ch_030": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_CatholicHigh_Paper2_2025.ts"
@@ -19944,9 +19945,9 @@
     },
     "p3_zh_eoy_mb_006": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/eoy/eoy_mahabodhi_higher_paper2_2025.ts"
@@ -21096,9 +21097,9 @@
     },
     "p3_zh_eoy_ph_030": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_peihwa_2024_paper2.ts"
@@ -21219,9 +21220,9 @@
     },
     "p3_zh_eoy_pq_012": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_peiqun_2021_paper2.ts"
@@ -21756,18 +21757,18 @@
     },
     "p3_zh_eoy_sn_001": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengdiao"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/eoy/eoy_stnicholas_higher_paper2_2025.ts"
     },
     "p3_zh_eoy_sn_002": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/eoy/eoy_stnicholas_higher_paper2_2025.ts"
@@ -21900,9 +21901,9 @@
     },
     "p3_zh_eoy_sn_016": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_stnicholas_higher_paper2_2025.ts"
@@ -21945,9 +21946,9 @@
     },
     "p3_zh_eoy_sn_021": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "TianKong",
       "file": "src/data/p3/chinese/papers/eoy/eoy_stnicholas_higher_paper2_2025.ts"
@@ -22131,18 +22132,18 @@
     },
     "p3_zh_eoy_tn24_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/eoy/eoy_taonan_2024_paper2.ts"
     },
     "p3_zh_eoy_tn24_007": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/eoy/eoy_taonan_2024_paper2.ts"
@@ -22383,9 +22384,9 @@
     },
     "p3_zh_eoy_tn24_033": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_taonan_2024_paper2.ts"
@@ -22452,9 +22453,9 @@
     },
     "p3_zh_eoy_tn_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/eoy/eoy_taonan_2023_paper2.ts"
@@ -22650,9 +22651,9 @@
     },
     "p3_zh_eoy_tn_028": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_taonan_2023_paper2.ts"
@@ -22713,9 +22714,9 @@
     },
     "p3_zh_nh_p2_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts",
@@ -22725,9 +22726,9 @@
     },
     "p3_zh_nh_p2_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts",
@@ -22737,9 +22738,9 @@
     },
     "p3_zh_nh_p2_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts",
@@ -22749,9 +22750,9 @@
     },
     "p3_zh_nh_p2_004": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts",
@@ -22950,9 +22951,9 @@
     },
     "p3_zh_nh_p2_026": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts"
@@ -22989,9 +22990,9 @@
     },
     "p3_zh_nh_p2_030": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_nanhua_hcl_paper2_2025.ts"
@@ -23583,9 +23584,9 @@
     },
     "p3_zh_rs_rev4_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts",
@@ -23595,9 +23596,9 @@
     },
     "p3_zh_rs_rev4_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts",
@@ -23607,9 +23608,9 @@
     },
     "p3_zh_rs_rev4_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts",
@@ -23619,9 +23620,9 @@
     },
     "p3_zh_rs_rev4_004": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts",
@@ -23631,9 +23632,9 @@
     },
     "p3_zh_rs_rev4_005": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts",
@@ -23670,9 +23671,9 @@
     },
     "p3_zh_rs_rev4_009": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
@@ -23850,27 +23851,27 @@
     },
     "p3_zh_rs_rev4_029": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
     },
     "p3_zh_rs_rev4_030": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
     },
     "p3_zh_rs_rev4_031": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
@@ -23886,18 +23887,18 @@
     },
     "p3_zh_rs_rev4_033": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
     },
     "p3_zh_rs_rev4_034": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/eoy/eoy_redswastika_hcl_revision4_2025.ts"
@@ -24870,27 +24871,27 @@
     },
     "p3_zh_wa1_001": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts"
     },
     "p3_zh_wa1_002": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts"
     },
     "p3_zh_wa1_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts",
@@ -24900,9 +24901,9 @@
     },
     "p3_zh_wa1_004": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts",
@@ -24912,9 +24913,9 @@
     },
     "p3_zh_wa1_005": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts",
@@ -25059,27 +25060,27 @@
     },
     "p3_zh_wa1_021": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts"
     },
     "p3_zh_wa1_022": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/wa1/wa1_2025.ts"
     },
     "p3_zh_wa1chr1_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25089,9 +25090,9 @@
     },
     "p3_zh_wa1chr1_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25101,9 +25102,9 @@
     },
     "p3_zh_wa1chr1_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25113,9 +25114,9 @@
     },
     "p3_zh_wa1chr1_004": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25125,9 +25126,9 @@
     },
     "p3_zh_wa1chr1_005": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25137,9 +25138,9 @@
     },
     "p3_zh_wa1chr1_006": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25149,9 +25150,9 @@
     },
     "p3_zh_wa1chr1_007": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25161,9 +25162,9 @@
     },
     "p3_zh_wa1chr1_008": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25173,9 +25174,9 @@
     },
     "p3_zh_wa1chr1_009": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25185,9 +25186,9 @@
     },
     "p3_zh_wa1chr1_010": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_chij_revision1_2025.ts",
@@ -25383,9 +25384,9 @@
     },
     "p3_zh_wa1rs_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts",
@@ -25395,9 +25396,9 @@
     },
     "p3_zh_wa1rs_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts",
@@ -25407,9 +25408,9 @@
     },
     "p3_zh_wa1rs_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts",
@@ -25419,9 +25420,9 @@
     },
     "p3_zh_wa1rs_004": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts",
@@ -25431,9 +25432,9 @@
     },
     "p3_zh_wa1rs_005": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts",
@@ -25461,9 +25462,9 @@
     },
     "p3_zh_wa1rs_008": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.liangci"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa1/wa1_red_swastika.ts"
@@ -25578,54 +25579,54 @@
     },
     "p3_zh_wa1rsmr1_001": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
     },
     "p3_zh_wa1rsmr1_002": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
     },
     "p3_zh_wa1rsmr1_003": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
     },
     "p3_zh_wa1rsmr1_004": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
     },
     "p3_zh_wa1rsmr1_005": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
     },
     "p3_zh_wa1rsmr1_006": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts",
@@ -25635,9 +25636,9 @@
     },
     "p3_zh_wa1rsmr1_007": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts",
@@ -25647,9 +25648,9 @@
     },
     "p3_zh_wa1rsmr1_008": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts",
@@ -25659,9 +25660,9 @@
     },
     "p3_zh_wa1rsmr1_009": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts",
@@ -25671,9 +25672,9 @@
     },
     "p3_zh_wa1rsmr1_010": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts",
@@ -25692,9 +25693,9 @@
     },
     "p3_zh_wa1rsmr1_012": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa1/wa1_redswastika_minirevision1_2025.ts"
@@ -25836,9 +25837,9 @@
     },
     "p3_zh_wa1tn_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts",
@@ -25848,9 +25849,9 @@
     },
     "p3_zh_wa1tn_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts",
@@ -25896,18 +25897,18 @@
     },
     "p3_zh_wa1tn_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts"
     },
     "p3_zh_wa1tn_007": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts"
@@ -25932,9 +25933,9 @@
     },
     "p3_zh_wa1tn_010": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts"
@@ -26139,9 +26140,9 @@
     },
     "p3_zh_wa1tn_032": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts"
@@ -26157,9 +26158,9 @@
     },
     "p3_zh_wa1tns5_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_supplementary5_2025.ts",
@@ -26169,9 +26170,9 @@
     },
     "p3_zh_wa1tns5_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_supplementary5_2025.ts",
@@ -26226,18 +26227,18 @@
     },
     "p3_zh_wa1tns5_007": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_supplementary5_2025.ts"
     },
     "p3_zh_wa1tns5_008": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_supplementary5_2025.ts"
@@ -26370,9 +26371,9 @@
     },
     "p3_zh_wa1tns5_023": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "TianKong",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_supplementary5_2025.ts"
@@ -26490,9 +26491,9 @@
     },
     "p3_zh_wa1tnwa_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts",
@@ -26502,9 +26503,9 @@
     },
     "p3_zh_wa1tnwa_003": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.tongyinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts",
@@ -26538,18 +26539,18 @@
     },
     "p3_zh_wa1tnwa_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts"
     },
     "p3_zh_wa1tnwa_007": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengdiao"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts"
@@ -26691,18 +26692,18 @@
     },
     "p3_zh_wa1tnwa_023": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "TianKong",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts"
     },
     "p3_zh_wa1tnwa_024": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.dapei"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "TianKong",
       "file": "src/data/p3/chinese/papers/wa1/wa1_tao_nan_maintest_2025.ts"
@@ -29037,9 +29038,9 @@
     },
     "p3_zh_wa3_csn3_006": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_chijstnicholas_rev3_2025.ts",
@@ -29049,9 +29050,9 @@
     },
     "p3_zh_wa3_csn3_007": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_chijstnicholas_rev3_2025.ts",
@@ -29646,9 +29647,9 @@
     },
     "p3_zh_wa3_pc2_010": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_peichun_term2_2025.ts"
@@ -29835,18 +29836,18 @@
     },
     "p3_zh_wa3_pc3_013": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadOpen",
       "file": "src/data/p3/chinese/papers/wa3/wa3_peichun_term3_2025.ts"
     },
     "p3_zh_wa3_rsw_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_redswastika_rev3_2025.ts",
@@ -29856,9 +29857,9 @@
     },
     "p3_zh_wa3_rsw_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_redswastika_rev3_2025.ts",
@@ -29913,9 +29914,9 @@
     },
     "p3_zh_wa3_rsw_007": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.jinyici"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa3/wa3_redswastika_rev3_2025.ts"
@@ -29931,9 +29932,9 @@
     },
     "p3_zh_wa3_rsw_009": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.liangci"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa3/wa3_redswastika_rev3_2025.ts"
@@ -30144,9 +30145,9 @@
     },
     "p3_zh_wa3_tn3_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp3_2024.ts"
@@ -30315,9 +30316,9 @@
     },
     "p3_zh_wa3_tn3_025": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp3_2024.ts"
@@ -30342,9 +30343,9 @@
     },
     "p3_zh_wa3_tn3_028": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp3_2024.ts"
@@ -30405,9 +30406,9 @@
     },
     "p3_zh_wa3_tn5_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp5_2025.ts",
@@ -30417,9 +30418,9 @@
     },
     "p3_zh_wa3_tn5_002": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp5_2025.ts",
@@ -30501,9 +30502,9 @@
     },
     "p3_zh_wa3_tn5_010": {
       "conceptIds": [
-        "zh.ciyu"
+        "zh.ciyu.jinyici"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "CiYu",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_supp5_2025.ts"
@@ -30726,9 +30727,9 @@
     },
     "p3_zh_wa3_tnw_001": {
       "conceptIds": [
-        "zh.hanzi"
+        "zh.hanzi.xingjinzi"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "BianZi",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts",
@@ -30786,18 +30787,18 @@
     },
     "p3_zh_wa3_tnw_006": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengmu_yunmu"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts"
     },
     "p3_zh_wa3_tnw_007": {
       "conceptIds": [
-        "zh.pinyin"
+        "zh.pinyin.shengdiao"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "PinYin",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts"
@@ -30957,18 +30958,18 @@
     },
     "p3_zh_wa3_tnw_025": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.inference"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts"
     },
     "p3_zh_wa3_tnw_026": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.detail"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts"
@@ -30984,9 +30985,9 @@
     },
     "p3_zh_wa3_tnw_028": {
       "conceptIds": [
-        "zh.reading"
+        "zh.reading.main_idea"
       ],
-      "taxonomyStatus": "uncertain",
+      "taxonomyStatus": "certain",
       "subject": "chinese",
       "topic": "YueReadMCQ",
       "file": "src/data/p3/chinese/papers/wa3/wa3_taonan_wa3_2025.ts"
@@ -32368,7 +32369,7 @@
     },
     "q0_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -32461,7 +32462,7 @@
     },
     "q10_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -32554,7 +32555,7 @@
     },
     "q11_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -32644,9 +32645,9 @@
     },
     "q12_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -32734,9 +32735,9 @@
     },
     "q13_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -32827,9 +32828,9 @@
     },
     "q14_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -32917,7 +32918,7 @@
     },
     "q15_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33007,7 +33008,7 @@
     },
     "q16_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33097,7 +33098,7 @@
     },
     "q17_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33187,7 +33188,7 @@
     },
     "q18_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33280,7 +33281,7 @@
     },
     "q19_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33370,7 +33371,7 @@
     },
     "q1_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33460,7 +33461,7 @@
     },
     "q20_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33553,9 +33554,9 @@
     },
     "q21_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -33646,9 +33647,9 @@
     },
     "q22_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -33736,9 +33737,9 @@
     },
     "q23_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -33826,7 +33827,7 @@
     },
     "q24_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -33916,9 +33917,9 @@
     },
     "q25_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34006,9 +34007,9 @@
     },
     "q26_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34096,7 +34097,7 @@
     },
     "q27_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -34189,7 +34190,7 @@
     },
     "q28_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -34279,7 +34280,7 @@
     },
     "q29_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -34372,9 +34373,9 @@
     },
     "q2_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34462,7 +34463,7 @@
     },
     "q30_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -34555,7 +34556,7 @@
     },
     "q31_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -34646,9 +34647,9 @@
     },
     "q32_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34736,9 +34737,9 @@
     },
     "q33_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34830,9 +34831,9 @@
     },
     "q34_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -34920,7 +34921,7 @@
     },
     "q35_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35010,7 +35011,7 @@
     },
     "q36_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35100,7 +35101,7 @@
     },
     "q37_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35190,9 +35191,9 @@
     },
     "q38_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -35280,7 +35281,7 @@
     },
     "q39_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35370,7 +35371,7 @@
     },
     "q3_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35460,9 +35461,9 @@
     },
     "q40_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -35554,9 +35555,9 @@
     },
     "q41_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -35644,7 +35645,7 @@
     },
     "q42_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35737,9 +35738,9 @@
     },
     "q43_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -35827,7 +35828,7 @@
     },
     "q44_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -35920,7 +35921,7 @@
     },
     "q45_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -36010,9 +36011,9 @@
     },
     "q4_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -36101,7 +36102,7 @@
     },
     "q5_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -36191,9 +36192,9 @@
     },
     "q6_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -36281,9 +36282,9 @@
     },
     "q7_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
-      "taxonomyStatus": "certain",
+      "taxonomyStatus": "uncertain",
       "subject": "english",
       "topic": "Comprehension",
       "file": "src/data/p3/english/comprehension_generated.ts"
@@ -36374,7 +36375,7 @@
     },
     "q8_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.inference"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",
@@ -36464,7 +36465,7 @@
     },
     "q9_48": {
       "conceptIds": [
-        "en.reading.open"
+        "en.reading.fact_finding"
       ],
       "taxonomyStatus": "certain",
       "subject": "english",

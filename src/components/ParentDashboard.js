@@ -7,6 +7,7 @@ import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, serverPost, 
 import ParentRewards from "@/components/ParentRewards";
 import { HOMEWORK_DAILY_CAP, HOMEWORK_PER_MISTAKE } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
+import { causeLabel } from "@/lib/wrongNotebook";
 
 // ── Parent: homework status (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off) ──
 function HomeworkStatus({child, refreshKey}){
@@ -31,7 +32,7 @@ function HomeworkStatus({child, refreshKey}){
 }
 
 // ── Parent: Mistakes review tab ───────────────────────────────
-function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor}){
+function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, notebookMistakes}){
   const [filterSession, setFilterSession] = React.useState("all");
   const [expanded, setExpanded] = React.useState(null);
 
@@ -70,13 +71,19 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor})
       allMistakes.push({
         id:x.question_id, q:x.question_text||undefined, topic:x.section_type||undefined, sectionType:x.section_type||undefined,
         yourAnswer:x.student_answer||undefined, correctAnswer:x.correct_answer||undefined,
+        cause:x.cause||undefined,
         sessionNum: mm?Number(mm[1]):0, sessionDate:x.attempted_at,
       });
     });
   } else {
+    const causeByKey = {};
+    (notebookMistakes||[]).forEach(m=>{
+      if(m && m.cause) causeByKey[(m.sessionNum!=null?m.sessionNum:"")+"|"+m.id] = m.cause;
+    });
     (history||[]).forEach(h=>{
       (h.mistakes||[]).forEach(m=>{
-        allMistakes.push({...m, sessionNum:h.sessionNum, sessionDate:h.date});
+        const cause = m.cause || causeByKey[(h.sessionNum!=null?h.sessionNum:"")+"|"+m.id];
+        allMistakes.push({...m, cause, sessionNum:h.sessionNum, sessionDate:h.date});
       });
     });
   }
@@ -163,6 +170,12 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor})
                               {diffLabel(m.difficulty)}
                             </span>
                           )}
+                          {causeLabel(m.cause) ? (
+                            <span style={{background:"#FEE2E2",color:"#991B1B",fontSize:10,
+                              fontWeight:700,padding:"2px 7px",borderRadius:6}}>
+                              {causeLabel(m.cause)}
+                            </span>
+                          ) : null}
                           {m.solvedAfterHint&&(
                             <span style={{background:"#FEF3C7",color:"#92400E",fontSize:10,
                               fontWeight:700,padding:"2px 7px",borderRadius:6}}>
@@ -849,7 +862,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&tab!=="rewards"&&!LIVE_CONTENT[`${grade}_${subject}`]&&<ComingSoonScreen grade={grade} subject={subject}/>}
         {child&&SERVER_AUTH&&REWARDS&&tab==="rewards" && <ParentRewards child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor}/>}
+        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}

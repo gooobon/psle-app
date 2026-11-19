@@ -1,10 +1,25 @@
 // Query questions that share a concept id or a trap id.
-// Not wired into the UI. Callers pass items (or the rows from collectQuestions).
 // Item fields win over the optional overlay (paper sidecar), which is keyed by id.
 //
 // A row is { id, item, conceptIds, trapIds, taxonomyStatus }.
-// similarQuestions returns up to `limit` rows (default 3): most specific concept
-// first, certain tags before uncertain ones, then the same trap ids.
+// similarQuestions returns up to `limit` rows (default 3).
+// A leaf concept is a skill and matches across sections and formats (an editing
+// past-tense item and a grammar MCQ past-tense item are the same skill).
+// Certain tags are ordered before uncertain ones. An uncertain section does not
+// drop the item. A parent id is not a skill: if the item has no leaf skill,
+// lookup uses its trap ids and does not match the whole parent bucket.
+
+import { PARENT_CONCEPT_IDS } from '../data/taxonomy/parents.js';
+
+const PARENT_IDS = new Set(PARENT_CONCEPT_IDS);
+
+export function isSkillConcept(id) {
+  return typeof id === 'string' && !!id && !PARENT_IDS.has(id);
+}
+
+export function skillIdsOf(conceptIds) {
+  return asArray(conceptIds).filter(isSkillConcept);
+}
 
 function asArray(value) {
   return Array.isArray(value) ? value.filter((id) => typeof id === 'string' && id) : [];
@@ -119,7 +134,7 @@ export function similarQuestions(index, seed, opts) {
   const tags = seed && Array.isArray(seed.conceptIds)
     ? seed
     : readItemTags(seedItem, options.overlayById);
-  const conceptIds = asArray(tags.conceptIds).slice().sort((a, b) => b.length - a.length);
+  const skills = skillIdsOf(tags.conceptIds).slice().sort((a, b) => b.length - a.length);
   const trapIds = asArray(tags.trapIds);
   const seen = new Set([seedId, ...(options.excludeIds || [])].filter(Boolean));
   const picked = [];
@@ -132,11 +147,17 @@ export function similarQuestions(index, seed, opts) {
     }
     return false;
   }
-  for (const conceptId of conceptIds) {
-    if (pull(index.byConcept[conceptId])) return picked;
+  // Same leaf skill matches across editing / MCQ / section. Uncertain rows stay
+  // in the list and sort after certain ones. Trap ids are used only when the
+  // item has no leaf skill (a section parent such as zh.reading or zh.hanzi).
+  if (skills.length) {
+    for (const conceptId of skills) {
+      if (pull(index.byConcept && index.byConcept[conceptId])) return picked;
+    }
+    return picked;
   }
   for (const trapId of trapIds) {
-    if (pull(index.byTrap[trapId])) return picked;
+    if (pull(index.byTrap && index.byTrap[trapId])) return picked;
   }
   return picked;
 }

@@ -6,7 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const ts = require('typescript');
-const { tagEnglish, tagChineseByTopic, SECTION_TOPICS } = require('./tagItem');
+const { tagEnglish, tagChineseItem, tagChineseByTopic, SECTION_TOPICS } = require('./tagItem');
 
 const ROOT = path.join(__dirname, '..', '..');
 const OUT = path.join(ROOT, 'src', 'data', 'taxonomy', 'paperTags.json');
@@ -64,12 +64,7 @@ function sameTag(a, b) {
     && a.taxonomyStatus === b.taxonomyStatus;
 }
 
-function addItem(id, tag, meta) {
-  seen += 1;
-  if (!tag) {
-    untagged.push({ id, ...meta });
-    return;
-  }
+function publicTag(tag, meta) {
   const row = {
     conceptIds: tag.conceptIds,
     taxonomyStatus: tag.taxonomyStatus,
@@ -78,15 +73,33 @@ function addItem(id, tag, meta) {
     file: meta.file,
   };
   if (tag.trapIds && tag.trapIds.length) row.trapIds = tag.trapIds;
+  if (meta.sectionKey) row._sectionKey = meta.sectionKey;
+  return row;
+}
+
+function addItem(id, tag, meta) {
+  seen += 1;
+  if (!tag) {
+    untagged.push({ id, ...meta });
+    return;
+  }
+  const row = publicTag(tag, meta);
   if (!items[id]) {
     items[id] = row;
     return;
   }
-  if (!sameTag(items[id], row)) {
-    conflicts.push({ id, file: meta.file, other: items[id].file });
-    delete items[id];
-    conflictIds.add(id);
+  if (sameTag(items[id], row)) return;
+  // Two files share this id and the specific skill tags disagree. If the
+  // section-level tags still agree, keep that shared tag instead of dropping
+  // the question. Ids whose section tags also disagree stay unresolved.
+  if (meta.sectionKey && items[id]._sectionKey && meta.sectionKey === items[id]._sectionKey) {
+    const fallback = JSON.parse(meta.sectionKey);
+    items[id] = publicTag(fallback, { ...meta, file: items[id].file, sectionKey: meta.sectionKey });
+    return;
   }
+  conflicts.push({ id, file: meta.file, other: items[id].file });
+  delete items[id];
+  conflictIds.add(id);
 }
 
 function visit(node, ctx) {
@@ -113,8 +126,15 @@ function visit(node, ctx) {
         method = stringOf(sol.method);
       }
       const section = topic || ctx.defaultSection;
+      const joinedStem = [stem, instruction].filter(Boolean).join('\n');
+      const sectionOnly = ctx.subject === 'chinese' ? tagChineseByTopic(topic, joinedStem) : null;
       const tag = ctx.subject === 'chinese'
-        ? tagChineseByTopic(topic, [stem, instruction].filter(Boolean).join('\n'))
+        ? tagChineseItem({
+          topic,
+          stem: joinedStem,
+          skill: stringOf(props.skill),
+          method,
+        })
         : tagEnglish({
           section,
           tip,
@@ -128,6 +148,11 @@ function visit(node, ctx) {
         subject: ctx.subject,
         topic,
         file: ctx.file,
+        sectionKey: sectionOnly ? JSON.stringify({
+          conceptIds: sectionOnly.conceptIds,
+          taxonomyStatus: sectionOnly.taxonomyStatus,
+          trapIds: sectionOnly.trapIds || [],
+        }) : '',
       });
     }
     const next = { ...ctx, topic: topic || ctx.topic };
@@ -155,13 +180,18 @@ for (const file of files) {
 }
 
 const ordered = {};
-for (const id of Object.keys(items).sort()) ordered[id] = items[id];
+for (const id of Object.keys(items).sort()) {
+  const row = { ...items[id] };
+  delete row._sectionKey;
+  ordered[id] = row;
+}
 
 const payload = {
-  version: 'v1-draft',
-  status: 'DRAFT',
+  version: 'v1',
+  status: 'APPROVED',
+  approvedOn: '2026-11-19',
   generatedBy: 'tools/taxonomy/index_papers.js',
-  note: 'Sidecar tags for hand-authored past papers and comprehension_generated.ts. Regenerate with node tools/taxonomy/index_papers.js. Do not hand-edit. Stems and answers are not stored.',
+  note: 'Sidecar tags for hand-authored past papers and comprehension_generated.ts. Regenerate with node tools/taxonomy/index_papers.js. Do not hand-edit. Stems and answers are not stored. Math and Science are out of scope.',
   unresolvedDuplicateIds: conflicts.map((row) => row.id).filter((id, i, all) => all.indexOf(id) === i).sort(),
   items: ordered,
 };
