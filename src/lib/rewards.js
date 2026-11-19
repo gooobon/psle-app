@@ -4,7 +4,9 @@
 import { SUBJECT_KEYS, sgtDate, dailySetGoal, isLiveSubject } from "./activity.js";
 
 // TODO(owner): default reward numbers. Rules ship empty/disabled; nothing accrues until a parent enables them.
-export const DEFAULT_RULES = { enabled: false, sgdPerCredit: 0, dailyTiers: [], weeklyUnit: "credits", weeklyAmounts: {} };
+// paper* = the Saturday past-paper reward (mock exams phase 2, docs/design/mock-exams-v1.md decisions 8 and 9). Separate from the daily and
+// weekly-review rules. Default: nothing (amount 0 = no credit), and the anti-gaming check is ON (paperCheckOff false).
+export const DEFAULT_RULES = { enabled: false, sgdPerCredit: 0, dailyTiers: [], weeklyUnit: "credits", weeklyAmounts: {}, paperUnit: "credits", paperAmounts: {}, paperCheckOff: false };
 
 // TODO(owner): if a child has several subjects with target > 0, the daily sticker needs ALL live subjects met (issue wording).
 // Stickers are unchanged (daily sticker once per day, weekly sticker once per week). CREDITS are per subject (issue #29):
@@ -119,6 +121,28 @@ export function weeklySubjectCredits(rule, subject) {
   return rule.weeklyUnit === "sgd" ? sgdToCredits(a, rule.sgdPerCredit) : Math.max(0, Math.floor(a));
 }
 
+// Saturday past-paper credits for ONE subject under `rule` (unit credits|sgd). Same unit mechanics as weeklySubjectCredits; 0 = nothing configured.
+export function paperSubjectCredits(rule, subject) {
+  if (!rule || !rule.enabled) return 0;
+  const a = Number(rule.paperAmounts && rule.paperAmounts[subject]) || 0;
+  return rule.paperUnit === "sgd" ? sgdToCredits(a, rule.sgdPerCredit) : Math.max(0, Math.floor(a));
+}
+
+// Does a submitted paper earn the Saturday paper reward? Pure; the server calls it and the client never decides.
+//   attempt: { status, sgtDay, counts }  (counts = the existing anti-gaming verdict: >= 50% of the time used OR >= 80% answered)
+//   rule: the rule in force that day (null = rewards off). A parent can turn the check off (rule.paperCheckOff); then any SUBMITTED paper
+//   qualifies. A paper that was never submitted (in progress / abandoned) never qualifies. One reward per child per subject per Saturday is
+//   enforced by the ledger's unique key, not here.
+// Returns { eligible, reason } with reason one of: ok | not_submitted | not_saturday | too_little | rewards_off
+export function paperRewardEligibility({ attempt, rule }) {
+  const a = attempt || {};
+  if (a.status !== "submitted" && a.status !== "auto_submitted") return { eligible: false, reason: "not_submitted" };
+  if (!a.sgtDay || !isSaturday(a.sgtDay)) return { eligible: false, reason: "not_saturday" };
+  if (!rule || !rule.enabled) return { eligible: false, reason: "rewards_off" };
+  if (!rule.paperCheckOff && a.counts !== true) return { eligible: false, reason: "too_little" };
+  return { eligible: true, reason: "ok" };
+}
+
 // Daily credits per subject: one entry per subject that has a first-set score. rows = today's daily_activity rows.
 export function dailyCreditPlan(rule, rows) {
   if (!rule || !rule.enabled) return [];
@@ -182,6 +206,7 @@ export const PENDING_NOTE = "Pending: finish today's homework";
 export const ruleFromRow = (r) => r ? ({
   enabled: !!r.enabled, sgdPerCredit: Number(r.sgd_per_credit) || 0, dailyTiers: Array.isArray(r.daily_tiers) ? r.daily_tiers : [],
   weeklyUnit: r.weekly_unit === "sgd" ? "sgd" : "credits", weeklyAmounts: r.weekly_amounts || {}, effectiveFrom: r.effective_from,
+  paperUnit: r.paper_unit === "sgd" ? "sgd" : "credits", paperAmounts: r.paper_amounts || {}, paperCheckOff: r.paper_check_off === true,
 }) : null;
 
 // Validate a parent-submitted rule. Returns { rule } or { error }. effectiveFrom must be today (SGT) or later, max one year ahead,
@@ -212,7 +237,16 @@ export function parseRuleVersion(b, todayYmd = sgtDate()) {
     if (!Number.isFinite(n) || n < 0 || n > (unit === "sgd" ? 10000 : 1000) || (unit === "credits" && !Number.isInteger(n))) return bad("Weekly amounts must be 0 or more (whole credits, or SGD up to 2 decimals).");
     amounts[s] = n;
   }
-  return { rule: { enabled: !!(b && b.enabled), sgdPerCredit: rate, dailyTiers: tiers, weeklyUnit: unit, weeklyAmounts: amounts, effectiveFrom: eff } };
+  // Saturday past-paper reward: same validation as the weekly amounts. Absent keys fall back to "nothing" (amount 0, check on).
+  const punit = b && b.paperUnit === "sgd" ? "sgd" : "credits";
+  const pamounts = {};
+  for (const s of SUBJECT_KEYS) {
+    const v = Number(b && b.paperAmounts && b.paperAmounts[s] != null && b.paperAmounts[s] !== "" ? b.paperAmounts[s] : 0);
+    const n = punit === "sgd" ? Math.round(v * 100) / 100 : v;
+    if (!Number.isFinite(n) || n < 0 || n > (punit === "sgd" ? 10000 : 1000) || (punit === "credits" && !Number.isInteger(n))) return bad("Saturday paper amounts must be 0 or more (whole credits, or SGD up to 2 decimals).");
+    pamounts[s] = n;
+  }
+  return { rule: { enabled: !!(b && b.enabled), sgdPerCredit: rate, dailyTiers: tiers, weeklyUnit: unit, weeklyAmounts: amounts, paperUnit: punit, paperAmounts: pamounts, paperCheckOff: !!(b && b.paperCheckOff), effectiveFrom: eff } };
 }
 
 export { addDays };

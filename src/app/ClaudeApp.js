@@ -1298,6 +1298,25 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum});
   }
+  // Mock papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off): missed items of a handed-in paper join the English notebook.
+  // The server already wrote the wrong_answers rows (attempt key 'exam-<attemptId>', capped per paper); this adds the same items to the local
+  // notebook, once each (mid = exam-<attemptId>|<questionId>). Additive only: nothing in prog is removed or reordered.
+  const paperToNotebook=(attempt, items)=>{
+    const p=getProgress(grade, "English");
+    const have=new Set((p.mistakes||[]).map(m=>m&&m.mid));
+    const key="exam-"+attempt.id;
+    const add=(items||[]).filter(it=>it.inNotebook&&it.correct===false&&!have.has(key+"|"+it.id)).map(it=>({
+      id:it.id, q:it.prompt, yourAnswer:it.answered?it.yourAnswer:"(no answer)", correctAnswer:it.correctAnswer, explanation:it.explanation||undefined,
+      sectionType:it.section, topic:it.section, correct:false, date:todayStr(), ts:Date.now(), mid:key+"|"+it.id, attemptKey:key,
+      sourceKind:"paper", paperId:attempt.paperId, paperLabel:attempt.label, ...(it.cause?{cause:it.cause,cause_at:new Date().toISOString()}:{}),
+    }));
+    if(add.length) setProgress(grade, "English", {...p, mistakes:[...(p.mistakes||[]), ...add]});
+  };
+  const paperCause=(attemptId, questionId, cause)=>{
+    const p=getProgress(grade, "English");
+    const mid="exam-"+attemptId+"|"+questionId;
+    if(findMistake(p, mid)) setProgress(grade, "English", setMistakeCause(p, mid, cause, new Date().toISOString()));
+  };
   // Notebook v1: cause + "Try 3 similar" (additive fields on prog.mistakes[i]; nothing is deleted)
   const notebook = {
     onCause:(key,cause)=>{
@@ -1519,7 +1538,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 
   if(paperExam) return(
     <Wrap>
-      <PaperExam onBack={()=>setPaperExam(false)}/>
+      <PaperExam onBack={()=>setPaperExam(false)} onNotebook={paperToNotebook} onCause={paperCause}/>
     </Wrap>
   );
 

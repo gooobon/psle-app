@@ -11,13 +11,16 @@ import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from
 import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
-import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, cleanDraft, answersFromRows } from "@/lib/examServer";
-import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS } from "@/lib/examEngine";
+import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, cleanDraft, answersFromRows, reviewItems } from "@/lib/examServer";
+import { awardPaperReward } from "@/lib/rewardsServer";
+import { writeNotebook, recordMockTrials } from "@/lib/examPostSubmit";
+import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS, canReview, notebookAttemptKey, suggestedCause } from "@/lib/examEngine";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 const MAX_BODY = 200_000;
 const UUID = /^[0-9a-f-]{36}$/i;
+const CAUSES = ["concept_unknown", "misread", "calculation", "trap", "time", "guessed"]; // CHECK constraint on wrong_answers.cause
 
 const attemptOut = (a) => ({
   id: a.id, paperId: a.paper_id, label: a.paper_label, flags: a.paper_flags || [], minutes: a.minutes_allowed, status: a.status,
@@ -69,14 +72,13 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
     daily = r.error ? "error" : "recorded";
     if (r.error) console.error("[exam] daily activity failed", id);
   }
-  return { attempt: upd.data, daily, g };
+  // Phase 2. Each step is best effort and never undoes or blocks the hand-in: the attempt and its answers are already saved.
+  const notebook = await writeNotebook(admin, upd.data, g, endMs);
+  const trials = await recordMockTrials(admin, upd.data, g, endMs);
+  const reward = await awardPaperReward(admin, { childId: sid, subject: "English", day, status, counts: verdict.counts });
+  return { attempt: upd.data, daily, g, notebook, trials, reward };
 }
-// An in-progress attempt past its deadline: submit it from the server-saved answers instead of abandoning it.
-async function autoSubmitExpired(admin, a, nowMs) {
-  const draft = await loadDraft(admin, a.id);
-  if (!draft) return null;
-  return finalize(admin, a, draft, { nowMs, expired: true });
-}
+
 
 function gate() { return !serverAuthEnabled() || !MOCK_EXAMS_ENABLED; }
 async function student() {
@@ -84,11 +86,36 @@ async function student() {
   return me && me.profile.role === "student" ? me : null;
 }
 
-export async function GET() {
+// Review of ONE finished attempt: the student's own answer, the key, the explanation (where the paper has one), the parent's mark on
+// open-ended items, and the notebook status/cause of each missed item. Own attempt only, and never while it is in progress.
+async function review(admin, me, id) {
+  if (!UUID.test(id)) return jerr("bad request", 400);
+  const { data: a, error } = await admin.from("exam_attempts").select("*").eq("id", id).eq("student_id", me.profile.id).maybeSingle();
+  if (error) return jerr("could not load", 500);
+  if (!a) return jerr("not found", 404);
+  if (!canReview({ attempt: a, studentId: me.profile.id })) return jerr("answers are shown after you hand in", 409);
+  const [ans, nb] = await Promise.all([
+    admin.from("exam_answers").select("question_id,answer,correct,parent_correct,flagged").eq("attempt_id", id),
+    admin.from("wrong_answers").select("question_id,cause,resolved_at").eq("student_id", me.profile.id).eq("subject", "English").eq("attempt_key", notebookAttemptKey(id)),
+  ]);
+  if (ans.error) return jerr("could not load", 500);
+  const items = reviewItems(a.paper_id, ans.data || [], a.status);
+  if (!items) return jerr("paper not found", 500);
+  const inBook = new Map((nb.error ? [] : nb.data || []).map((r) => [r.question_id, r]));
+  return jok({
+    attempt: attemptOut(a),
+    items: items.map((it) => ({ ...it, inNotebook: inBook.has(it.id), cause: (inBook.get(it.id) || {}).cause || null, suggestedCause: suggestedCause({ answered: it.answered, status: a.status }) })),
+    notebookCap: items.filter((it) => it.correct === false).length - inBook.size,
+  });
+}
+
+export async function GET(request) {
   if (gate()) return jerr("mock exams disabled", 404);
   const me = await student();
   if (!me) return jerr("student login required", 401);
   const admin = adminClient();
+  const reviewId = new URL(request.url).searchParams.get("review");
+  if (reviewId) return review(admin, me, String(reviewId));
   const { data, error } = await admin.from("exam_attempts").select("*").eq("student_id", me.profile.id).order("started_at", { ascending: false }).limit(60);
   if (error) return jerr("could not load", 500);
   let rows = data || [];
@@ -97,7 +124,7 @@ export async function GET() {
   const stale = rows.find((a) => a.status === "in_progress" && Date.parse(a.deadline_at) <= now);
   if (stale) { // deadline passed with no hand-in: grade the server-saved answers now
     const r = await autoSubmitExpired(admin, stale, now);
-    if (r && r.attempt) { rows = rows.map((a) => (a.id === stale.id ? r.attempt : a)); autoSubmitted = r.already ? null : attemptOut(r.attempt); }
+    if (r && r.attempt) { rows = rows.map((a) => (a.id === stale.id ? r.attempt : a)); autoSubmitted = r.already ? null : { ...attemptOut(r.attempt), reward: r.reward || null }; }
   }
   const open = rows.find((a) => a.status === "in_progress") || null;
   const draft = open ? await loadDraft(admin, open.id) : null;
@@ -134,7 +161,7 @@ export async function POST(request) {
     let autoSubmitted = null;
     if (open) { // expired: grade it from the saved answers. Only if that fails does it fall back to abandoned (nothing to lose then).
       const r = await autoSubmitExpired(admin, open, nowMs);
-      if (r && r.attempt && !r.error) { autoSubmitted = r.already ? null : attemptOut(r.attempt); prior.forEach((x, i) => { if (x.id === open.id) prior[i] = r.attempt; }); }
+      if (r && r.attempt && !r.error) { autoSubmitted = r.already ? null : { ...attemptOut(r.attempt), reward: r.reward || null }; prior.forEach((x, i) => { if (x.id === open.id) prior[i] = r.attempt; }); }
       else await admin.from("exam_attempts").update({ status: "abandoned" }).eq("id", open.id).eq("status", "in_progress");
     }
     const mine = (prior || []).filter((a) => a.paper_id === meta.row.id);
@@ -183,6 +210,19 @@ export async function POST(request) {
     return jok({ saved: true, count: ids.length });
   }
 
+  if (b.action === "cause") { // the student picks WHY a missed item went wrong (the six existing causes). Only items of their own finished paper.
+    const id = String(b.attemptId || ""), qid = String(b.questionId || "").slice(0, 200);
+    if (!UUID.test(id) || !qid || !CAUSES.includes(b.cause)) return jerr("bad request", 400);
+    const { data: a, error } = await admin.from("exam_attempts").select("id,student_id,status").eq("id", id).eq("student_id", sid).maybeSingle();
+    if (error) return jerr("could not save", 500);
+    if (!a || !canReview({ attempt: a, studentId: sid })) return jerr("not found", 404);
+    const u = await admin.from("wrong_answers").update({ cause: b.cause, updated_at: new Date().toISOString() })
+      .eq("student_id", sid).eq("subject", "English").eq("question_id", qid).eq("attempt_key", notebookAttemptKey(id)).select("question_id");
+    if (u.error) return jerr("could not save", 500);
+    if (!u.data || !u.data.length) return jerr("this item is not in your notebook", 404);
+    return jok();
+  }
+
   if (b.action === "submit") {
     const id = String(b.attemptId || "");
     if (!UUID.test(id)) return jerr("bad request", 400);
@@ -200,7 +240,7 @@ export async function POST(request) {
     const r = await finalize(admin, a, cleanAnswers(b.answers), { nowMs, auto: b.auto });
     if (r.error) return jerr(r.error, r.code || 500);
     if (r.already) return jok({ attempt: attemptOut(r.attempt), already: true });
-    return jok({ attempt: attemptOut(r.attempt), daily: r.daily, verdicts: r.g.rows.map((x) => ({ id: x.id, section: x.section, answered: x.answered, correct: x.correct })) });
+    return jok({ attempt: attemptOut(r.attempt), daily: r.daily, reward: r.reward, notebook: r.notebook, verdicts: r.g.rows.map((x) => ({ id: x.id, section: x.section, answered: x.answered, correct: x.correct })) });
   }
   return jerr("bad request", 400);
 }

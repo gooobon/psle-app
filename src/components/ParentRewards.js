@@ -2,7 +2,7 @@
 // Parent "Rewards" tab (roadmap step 9): sticker count, weekly review status, reward rules, credit ledger, mark-as-paid.
 // RECORD ONLY: the app never moves real money. Renders nothing unless the flags are on (default off).
 import React from 'react';
-import { SERVER_AUTH, REWARDS, serverGet, serverPost, serverPut } from '@/lib/serverClient';
+import { SERVER_AUTH, REWARDS, MOCK_EXAMS_ENABLED, serverGet, serverPost, serverPut } from '@/lib/serverClient';
 
 const box = { background: '#fff', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 14px', marginBottom: 12 };
 const inp = { width: 90, padding: '7px 8px', borderRadius: 8, border: '1px solid #CBD5E1', fontSize: 13 };
@@ -111,6 +111,27 @@ export default function ParentRewards({ child }) {
           </label>
         ))}
         <div />
+        {MOCK_EXAMS_ENABLED && (
+          <div style={{ marginTop: 6, paddingTop: 8, borderTop: '1px solid #E2E8F0' }}>
+            <div style={{ fontSize: 12, fontWeight: 800, margin: '0 0 2px' }}>Saturday past paper reward (separate from the daily rules)</div>
+            <div style={{ fontSize: 11, color: '#64748B', marginBottom: 6 }}>
+              Paid for handing in a real past paper on a Saturday, once per subject per Saturday. 0 = no reward. Like other credits it starts pending and is confirmed by that day&apos;s homework. The app only records credits; it never moves money.
+            </div>
+            <label style={{ fontSize: 12, display: 'block', marginBottom: 6 }}>Amount is in{' '}
+              <select value={rule.paperUnit || 'credits'} onChange={(e) => set('paperUnit', e.target.value)} style={{ ...inp, width: 110 }}>
+                <option value="credits">credits</option>
+                <option value="sgd">SGD (converted at the credit value)</option>
+              </select>
+            </label>
+            <label style={{ fontSize: 12, display: 'inline-block', marginRight: 10, marginBottom: 8 }}>English{' '}
+              <input type="number" min="0" step={rule.paperUnit === 'sgd' ? '0.01' : '1'} style={{ ...inp, width: 70 }}
+                value={(rule.paperAmounts || {}).English ?? 0} onChange={(e) => set('paperAmounts', { ...rule.paperAmounts, English: e.target.value })} />
+            </label>
+            <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>
+              <input type="checkbox" checked={!rule.paperCheckOff} onChange={(e) => set('paperCheckOff', !e.target.checked)} /> Effort check: only pay if at least half the time was used or 80% of the questions were answered (stops &quot;open and hand in blank&quot;)
+            </label>
+          </div>
+        )}
         <button onClick={saveRules} style={btn}>Save rules</button>
         {(d.upcoming || []).length > 0 && (
           <div style={{ fontSize: 11, color: '#475569', marginTop: 8 }}>Scheduled to start {d.tomorrow}: your latest saved changes</div>
@@ -127,7 +148,7 @@ export default function ParentRewards({ child }) {
         {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B91C1C', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited} (≈ {sgd(rowsSgd(d.ledger.rows, 'forfeited'))})</div>}
         {d.ledger.rows.slice(0, 10).map((r) => (
           <div key={r.kind + r.period + (r.subject || '')} style={{ fontSize: 11, color: '#475569' }}>
-            {r.period}: {r.status === 'pending' ? 'pending ' : r.status === 'forfeited' ? 'forfeited ' : '+'}{r.credits} ({r.kind === 'weekly' ? 'weekly review' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
+            {r.period}: {r.status === 'pending' ? 'pending ' : r.status === 'forfeited' ? 'forfeited ' : '+'}{r.credits} ({r.kind === 'weekly' ? 'weekly review' : r.kind === 'paper' ? 'Saturday past paper' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
           </div>
         ))}
         {bal > 0 && (

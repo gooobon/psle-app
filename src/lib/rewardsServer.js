@@ -1,7 +1,8 @@
 // Server-only helpers shared by the student claim/weekly/homework routes, the parent routes and the cron (never import from client code).
 // The client is never trusted: the homework gate and the rule in force are read from the DB here.
-import { homeworkGate } from "@/lib/rewards";
+import { homeworkGate, isSaturday, paperRewardEligibility, paperSubjectCredits } from "@/lib/rewards";
 import { settingForDate } from "@/lib/childSettings";
+import { MOCK_EXAMS_ENABLED, REWARDS } from "@/lib/supabase/config";
 
 // Homework state for one SGT day: every parent_homework row assigned for that day (any parent, any subject).
 // Returns { ok, eligible, assigned, remaining } ; ok:false on a DB error (fail closed). Used for DISPLAY; the decision is finalize_credits().
@@ -21,9 +22,12 @@ export async function finalizeCredits(admin, childId, todayYmd) {
 }
 
 // All shared-setting versions for a child, oldest first. { ok, versions }.
+// The paper_* columns are only selected while mock exams are on, so with the flag off the query is exactly what it was before.
+export const SETTING_COLUMNS = "effective_from,daily_target,homework_per_mistake,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts"
+  + (MOCK_EXAMS_ENABLED ? ",paper_unit,paper_amounts,paper_check_off" : "");
 export async function loadSettingVersions(admin, childId) {
   const { data, error } = await admin.from("child_setting_versions")
-    .select("effective_from,daily_target,homework_per_mistake,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts")
+    .select(SETTING_COLUMNS)
     .eq("child_id", childId).order("effective_from", { ascending: true });
   return error ? { ok: false, versions: [] } : { ok: true, versions: data || [] };
 }
@@ -44,4 +48,38 @@ export async function loadRewardRule(admin, childId, ymd) {
   const owner = [...(links || [])].sort((a, b) => String(a.created_at || "").localeCompare(String(b.created_at || "")) || String(a.parent_id).localeCompare(String(b.parent_id)))[0];
   const rule = s.setting.rule;
   return { ok: true, parentId: owner ? owner.parent_id : null, rule: owner && rule && rule.enabled ? rule : null };
+}
+
+// Saturday past-paper reward for ONE just-submitted paper (mock exams phase 2, design decisions 8 and 9). The server decides everything:
+// attempt status, the SGT Saturday it was handed in, the anti-gaming verdict (or the parent's choice to switch it off) and the amounts
+// from the rule in force that day. The credit is created PENDING with gate_day = that Saturday, so the existing homework gate confirms or
+// forfeits it. One credit per child per subject per Saturday (the ledger's unique key), one 'paper' sticker per Saturday.
+// The app never moves real money. Never throws: a failure only means no reward now (nothing is lost; the attempt is already saved).
+// Returns { saturday, eligible, reason, credits, awarded, sticker, homework? } for the result screen.
+export async function awardPaperReward(admin, { childId, subject, day, status, counts }) {
+  const out = { saturday: !!day && isSaturday(day), eligible: false, reason: "not_saturday", credits: 0, awarded: false, sticker: false };
+  try {
+    if (!out.saturday) return out;
+    if (!REWARDS) return { ...out, reason: "rewards_off" };
+    const rr = await loadRewardRule(admin, childId, day);
+    if (!rr.ok) return { ...out, reason: "error" };
+    const el = paperRewardEligibility({ attempt: { status, sgtDay: day, counts }, rule: rr.rule });
+    out.eligible = el.eligible; out.reason = el.reason;
+    if (!el.eligible) return out;
+    const st = await admin.rpc("award_sticker", { p_child: childId, p_kind: "paper", p_period: day });
+    out.sticker = !st.error && !!(st.data && st.data.awarded);
+    const credits = paperSubjectCredits(rr.rule, subject);
+    out.credits = credits;
+    if (credits > 0) {
+      const r = await admin.rpc("award_credit", {
+        p_parent: rr.parentId, p_child: childId, p_kind: "paper", p_period: day, p_subject: subject,
+        p_credits: credits, p_rate: rr.rule.sgdPerCredit, p_score_pct: null, p_effective: rr.rule.effectiveFrom, p_gate_day: day,
+      });
+      out.awarded = !r.error && !!(r.data && r.data.awarded);
+    }
+    const gate = await loadHomeworkGate(admin, childId, day);
+    if (gate.ok) out.homework = { eligible: gate.eligible, assigned: gate.assigned, remaining: gate.remaining };
+    await finalizeCredits(admin, childId, day);
+    return out;
+  } catch { return { ...out, reason: "error" }; }
 }

@@ -13,6 +13,8 @@ const S = await import("../src/lib/examServer.js");
 const B = await import("../src/lib/p3PaperBridge.js");
 const T = await import("../src/lib/notify/emailTemplate.mjs");
 const D = await import("../src/lib/dailyAlert.js");
+const R = await import("../src/lib/rewards.js");
+const CS = await import("../src/lib/childSettings.js");
 const manifest = JSON.parse(fs.readFileSync(path.join(ROOT, "src/data/papers/manifest.json"), "utf8"));
 
 let n = 0;
@@ -172,9 +174,11 @@ ok("late autosave cannot overwrite or delete a graded row", () => {
   assert.ok(/\.is\("correct", null\)/.test(deletes[1]), "delete must be limited to correct IS NULL");
   assert.ok(!/ignoreDuplicates/.test(r.slice(0, r.indexOf('b.action === "save"'))), "grading still overwrites the draft");
 });
-ok("autosave needs no new migration: latest migration is still exam_attempts", () => {
+ok("autosave (phase 1b) added no migration of its own: exam_attempts is still followed only by the phase 2 paper_rewards file", () => {
   const files = fs.readdirSync(path.join(ROOT, "supabase/migrations")).sort();
-  assert.equal(files[files.length - 1], "20261129000000_exam_attempts.sql");
+  const i = files.indexOf("20261129000000_exam_attempts.sql");
+  assert.ok(i >= 0);
+  assert.deepEqual(files.slice(i + 1), ["20261130000000_paper_rewards.sql"]);
 });
 // ── 8pm email ──
 ok("email: papers block appears only when there is something to report", () => {
@@ -199,7 +203,230 @@ ok("migration is additive: no drop table / delete / truncate of existing data, g
   assert.ok(!/drop\s+table|delete\s+from|truncate\s+table|alter\s+table\s+public\.(profiles|wrong_answers|daily_activity)/i.test(sql));
   assert.ok(/create table if not exists public\.exam_attempts/.test(sql) && /create table if not exists public\.exam_answers/.test(sql));
   assert.ok(/grant execute on function public\.record_paper_activity\(uuid,text,text,int,int,int\) to service_role/.test(sql));
-  const files = fs.readdirSync(path.join(ROOT, "supabase/migrations")).sort();
-  assert.equal(files[files.length - 1], "20261129000000_exam_attempts.sql");
 });
+
+// ═══ Phase 2 (issue #48): notebook, review, Saturday reward, mock trials ═══
+const papers = S.listPapers();
+const someId = papers[0].id;
+
+// ── notebook ──
+ok("notebook cap: wrong answered items first, then blanks; open-ended never; skipped is counted", () => {
+  const rows = [];
+  for (let i = 0; i < 30; i++) rows.push({ id: "q" + i, answered: i % 2 === 0, correct: false });
+  rows.push({ id: "open", answered: true, correct: null }, { id: "ok", answered: true, correct: true });
+  const { picked, skipped } = E.pickNotebookRows(rows);
+  assert.equal(E.MAX_NOTEBOOK_PER_PAPER, 20);
+  assert.equal(picked.length, 20); assert.equal(skipped, 10);
+  assert.ok(picked.slice(0, 15).every((r) => r.answered) && picked.slice(15).every((r) => !r.answered), "15 answered misses come first, then 5 blanks");
+  assert.ok(!picked.some((r) => r.id === "open" || r.id === "ok"));
+  assert.equal(E.pickNotebookRows([]).skipped, 0);
+});
+ok("attempt key is exam-<attemptId> (design section 6); the local notebook uses it for cause updates", async () => {
+  assert.equal(E.notebookAttemptKey("abc"), "exam-abc");
+  const W = await import("../src/lib/wrongNotebook.js");
+  assert.equal(W.attemptKeyFor({ history: [] }, { id: "q1", attemptKey: "exam-abc", sessionNum: 4 }), "exam-abc");
+  assert.equal(W.attemptKeyFor({ history: [] }, { id: "q1", sessionNum: 4 }), "set-4", "old records are unchanged");
+});
+ok("cause suggestion: Ran out of time only for blanks at an auto-submit; nothing is stored by it", () => {
+  assert.equal(E.suggestedCause({ answered: false, status: "auto_submitted" }), "time");
+  assert.equal(E.suggestedCause({ answered: false, status: "submitted" }), null);
+  assert.equal(E.suggestedCause({ answered: true, status: "auto_submitted" }), null);
+});
+ok("the six cause labels are the existing English ones", async () => {
+  const W = await import("../src/lib/wrongNotebook.js");
+  assert.deepEqual(W.CAUSES.map((c) => c.label), ["Didn't know the concept", "Misread the question", "Calculation slip", "Fell for a trap", "Ran out of time", "Guessed"]);
+});
+
+// ── review ──
+ok("review is only for the student's OWN finished attempt, never in progress", () => {
+  const a = (status, sid = "me") => ({ student_id: sid, status });
+  assert.ok(E.canReview({ attempt: a("submitted"), studentId: "me" }));
+  assert.ok(E.canReview({ attempt: a("auto_submitted"), studentId: "me" }));
+  assert.ok(!E.canReview({ attempt: a("in_progress"), studentId: "me" }));
+  assert.ok(!E.canReview({ attempt: a("abandoned"), studentId: "me" }));
+  assert.ok(!E.canReview({ attempt: a("submitted", "other"), studentId: "me" }));
+  assert.ok(!E.canReview({ attempt: null, studentId: "me" }) && !E.canReview({ attempt: a("submitted"), studentId: "" }));
+});
+ok("review on real papers: every auto-graded item shows the key, and the shown key is the one the grader accepts (MCQ)", () => {
+  let checked = 0, mcq = 0, missing = 0;
+  for (const p of papers.slice(0, 12)) {
+    const g0 = S.gradeSubmission(p.id, {});
+    const items = S.reviewItems(p.id, g0.rows.map((r) => ({ question_id: r.id, answer: null, correct: r.correct })), "submitted");
+    assert.equal(items.length, g0.count, p.id);
+    const answers = {};
+    for (const it of items) {
+      if (it.ambiguous || it.correct === null) { assert.equal(it.correctAnswer === "" || it.openEnded, true); continue; }
+      if (it.keyMissing) { assert.equal(it.correctAnswer, "", "a missing key is never guessed"); missing++; continue; }
+      assert.ok(it.correctAnswer, `${p.id} ${it.id} has no correct answer text`);
+      const m = /^([A-Z])\. /.exec(it.correctAnswer);
+      if (m && it.section.endsWith("MCQ")) { answers[it.id] = { val: m[1].charCodeAt(0) - 65 }; mcq++; }
+      checked++;
+    }
+    const g1 = S.gradeSubmission(p.id, answers);
+    for (const r of g1.rows) if (answers[r.id]) assert.equal(r.correct, true, `${p.id} ${r.id}: the shown correct answer was graded wrong`);
+  }
+  assert.ok(checked > 100 && mcq > 20, `checked ${checked}, mcq ${mcq}, missing-key ${missing}`);
+  console.log(`    (${checked} items with a key checked, ${mcq} MCQ round-tripped through the grader, ${missing} items flagged keyMissing)`);
+});
+ok("review shows the student's own answer in words and marks time-suggested blanks; open-ended items carry a model answer and the parent's mark", () => {
+  const p = papers.find((x) => S.gradeSubmission(x.id, {}).ungraded > 0) || papers[0];
+  const g = S.gradeSubmission(p.id, {});
+  const first = g.rows.find((r) => r.correct === false);
+  const rows = g.rows.map((r) => ({ question_id: r.id, answer: r.id === first.id ? { val: 0 } : null, correct: r.correct, parent_correct: r.correct === null ? true : null }));
+  const items = S.reviewItems(p.id, rows, "auto_submitted");
+  const it = items.find((x) => x.id === first.id);
+  assert.ok(it.yourAnswer.length > 0 && it.answered && it.timeSuggested === false);
+  assert.ok(items.some((x) => !x.answered && x.timeSuggested));
+  const open = items.find((x) => x.openEnded);
+  if (open) { assert.ok(open.correctAnswer, "model answer"); assert.equal(open.parentMark, true); }
+});
+ok("the student's PAPER payload still carries no key or explanation (review is a separate, post-submit call)", () => {
+  const pub = JSON.stringify(S.publicPaper(someId));
+  assert.ok(!/"answer"|"explanation"|"solution"|"hints"/.test(pub));
+});
+ok("review route: gated on canReview + own attempt; cause route only touches own notebook rows of a finished paper", () => {
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  const rv = r.slice(r.indexOf("async function review("), r.indexOf("export async function GET"));
+  assert.ok(/\.eq\("student_id", me\.profile\.id\)/.test(rv) && /canReview\(\{ attempt: a, studentId: me\.profile\.id \}\)/.test(rv) && /409/.test(rv));
+  assert.ok(rv.indexOf("canReview(") < rv.indexOf("reviewItems("), "the key is read only after the check");
+  const c = r.slice(r.indexOf('b.action === "cause"'), r.indexOf('b.action === "submit"'));
+  assert.ok(/CAUSES\.includes\(b\.cause\)/.test(c) && /canReview\(/.test(c) && /\.eq\("student_id", sid\)/.test(c) && /notebookAttemptKey\(id\)/.test(c));
+  assert.ok(!/\.delete\(\)/.test(c) && !/resolved_at/.test(c));
+  assert.ok(/reviewItems/.test(r) && !/reviewItems/.test(r.slice(0, r.indexOf("async function review(")).replace(/import[^\n]*\n/g, "")), "reviewItems is used only inside review()");
+});
+ok("notebook rows: capped, scoped to the student, attempt key exam-<id>, source = paper id, cause left NULL", () => {
+  let big = 0;
+  for (const p of papers.slice(0, 20)) {
+    const g = S.gradeSubmission(p.id, {}); // a blank paper: every auto-graded item is wrong
+    const { rows, skipped } = S.notebookRows(p.id, g, { studentId: "stu", attemptId: "att1", grade: "P3", nowIso: "2026-11-21T00:00:00.000Z" });
+    assert.ok(rows.length <= E.MAX_NOTEBOOK_PER_PAPER, p.id);
+    assert.equal(rows.length + skipped, g.rows.filter((r) => r.correct === false).length - (g.rows.filter((r) => r.correct === false).length - rows.length - skipped));
+    for (const r of rows) {
+      assert.equal(r.student_id, "stu"); assert.equal(r.attempt_key, "exam-att1"); assert.equal(r.source_id, p.id); assert.equal(r.subject, "English");
+      assert.ok(!("cause" in r) && r.correct_answer && r.question_id, "no entry without a readable correct answer");
+    }
+    if (skipped > 0) big++;
+  }
+  assert.ok(big > 0, "at least one long paper actually hits the cap");
+});
+
+// ── mastery (mock trials) ──
+ok("mock trials: one candidate per auto-graded item, keyed by the paper so a retake is the same key (ignored)", () => {
+  const g = S.gradeSubmission(someId, {});
+  const a = S.mockTrialCandidates(someId, g), b = S.mockTrialCandidates(someId, S.gradeSubmission(someId, {}));
+  assert.ok(a.length > 10 && a.length <= g.total);
+  assert.ok(a.every((c) => c.setId.startsWith("paper:") && c.skill && typeof c.correct === "boolean"));
+  assert.deepEqual(a.map((c) => "English|" + c.itemId + "|mock|" + c.setId), b.map((c) => "English|" + c.itemId + "|mock|" + c.setId));
+  assert.equal(new Set(a.map((c) => c.itemId)).size, a.length, "no item twice in one paper");
+  assert.ok(a.every((c) => c.skill), "every trial has a skill key");
+});
+ok("delayed similar question counts at half weight, same question never (existing homeworkMastery rules, unchanged)", async () => {
+  const H = await import("../src/lib/homeworkMastery.js");
+  const src = { id: "q1", skill: "s", date: "2026-11-20" };
+  assert.equal(H.homeworkMasteryWeight({ item: { id: "q1", skill: "s" }, source: src, seenIds: [], todayYmd: "2026-11-25" }).reason, "same-question");
+  const v = H.homeworkMasteryWeight({ item: { id: "q2", skill: "s" }, source: src, seenIds: [], todayYmd: "2026-11-21" });
+  assert.deepEqual([v.counts, v.weight], [true, 0.5]);
+  assert.equal(H.homeworkMasteryWeight({ item: { id: "q2", skill: "s" }, source: src, seenIds: [], todayYmd: "2026-11-20" }).reason, "too-soon");
+});
+ok("post-submit writes live in examPostSubmit (best effort, ignoreDuplicates) and the route never lets them fail the hand-in", () => {
+  const m = fs.readFileSync(path.join(ROOT, "src/lib/examPostSubmit.js"), "utf8");
+  assert.ok(/onConflict: "student_id,subject,question_id,attempt_key", ignoreDuplicates: true/.test(m));
+  assert.ok(/onConflict: "student_id,dedupe_key", ignoreDuplicates: true/.test(m) && /mode: "mock"/.test(m) && /weight: 1/.test(m) && /server_graded: true/.test(m));
+  assert.ok(/if \(!LEARNING_DASHBOARD\)/.test(m));
+  assert.equal((m.match(/catch \{/g) || []).length, 2);
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  assert.ok(/awardPaperReward\(admin/.test(r) && /writeNotebook\(admin/.test(r) && /recordMockTrials\(admin/.test(r));
+  assert.ok(r.indexOf('from("exam_answers").upsert(rows') < r.indexOf("writeNotebook(admin"), "answers are saved before the extras run");
+});
+
+// ── Saturday paper reward ──
+const SAT = "2026-11-21", FRI = "2026-11-20"; // 21 Nov 2026 is a Saturday
+const rule = (o = {}) => ({ enabled: true, sgdPerCredit: 0.5, dailyTiers: [], weeklyUnit: "credits", weeklyAmounts: {}, paperUnit: "credits", paperAmounts: { English: 5 }, paperCheckOff: false, ...o });
+ok("eligibility: submitted on a Saturday with the effort check passed; everything else is refused", () => {
+  const el = (attempt, r) => R.paperRewardEligibility({ attempt, rule: r === undefined ? rule() : r });
+  assert.ok(R.isSaturday(SAT) && !R.isSaturday(FRI));
+  assert.deepEqual(el({ status: "submitted", sgtDay: SAT, counts: true }), { eligible: true, reason: "ok" });
+  assert.deepEqual(el({ status: "auto_submitted", sgtDay: SAT, counts: true }), { eligible: true, reason: "ok" });
+  assert.equal(el({ status: "submitted", sgtDay: FRI, counts: true }).reason, "not_saturday");
+  assert.equal(el({ status: "in_progress", sgtDay: SAT, counts: true }).reason, "not_submitted");
+  assert.equal(el({ status: "abandoned", sgtDay: SAT, counts: true }).reason, "not_submitted");
+  assert.equal(el({ status: "submitted", sgtDay: SAT, counts: false }).reason, "too_little");
+  assert.equal(el({ status: "submitted", sgtDay: SAT, counts: true }, null).reason, "rewards_off");
+  assert.equal(el({ status: "submitted", sgtDay: SAT, counts: true }, rule({ enabled: false })).reason, "rewards_off");
+});
+ok("the effort check is the existing one (>= 50% time OR >= 80% answered) and the parent can turn it off", () => {
+  const counts = (used, ans) => E.countsAsAttempt({ elapsedSeconds: used, allowedMinutes: 60, answered: ans, total: 50 }).counts;
+  const el = (c, r) => R.paperRewardEligibility({ attempt: { status: "submitted", sgtDay: SAT, counts: c }, rule: r }).eligible;
+  assert.equal(el(counts(10, 0), rule()), false, "blank hand-in earns nothing with the check on");
+  assert.equal(el(counts(1800, 0), rule()), true);
+  assert.equal(el(counts(60, 40), rule()), true);
+  assert.equal(el(counts(10, 0), rule({ paperCheckOff: true })), true, "check off: any submitted paper qualifies");
+  assert.equal(R.paperRewardEligibility({ attempt: { status: "in_progress", sgtDay: SAT, counts: true }, rule: rule({ paperCheckOff: true }) }).eligible, false, "check off never rewards an unsubmitted paper");
+});
+ok("amounts: separate from daily/weekly, credits or SGD at the credit value, nothing by default", () => {
+  assert.equal(R.paperSubjectCredits(rule(), "English"), 5);
+  assert.equal(R.paperSubjectCredits(rule({ paperUnit: "sgd", paperAmounts: { English: 3 }, sgdPerCredit: 0.5 }), "English"), 6);
+  assert.equal(R.paperSubjectCredits(rule({ paperUnit: "sgd", paperAmounts: { English: 3 }, sgdPerCredit: 0 }), "English"), 0, "no rate = no guess");
+  assert.equal(R.paperSubjectCredits(rule({ weeklyAmounts: { English: 9 }, paperAmounts: {} }), "English"), 0, "the weekly-review amount is NOT used");
+  assert.equal(R.paperSubjectCredits(rule({ enabled: false }), "English"), 0);
+  assert.equal(R.paperSubjectCredits(R.DEFAULT_RULES, "English"), 0);
+  assert.equal(R.DEFAULT_RULES.paperCheckOff, false);
+});
+ok("parent settings: paper fields validate, default to nothing, merge across two parents' edits, and audit lines say what changed", () => {
+  const base = CS.DEFAULT_SETTING;
+  const e1 = CS.applySettingEdit(base, { enabled: true, paperUnit: "credits", paperAmounts: { English: 4 } }, FRI);
+  assert.equal(e1.setting.rule.paperAmounts.English, 4); assert.equal(e1.setting.rule.paperCheckOff, false);
+  const e2 = CS.applySettingEdit(e1.setting, { paperCheckOff: true }, FRI);
+  assert.equal(e2.setting.rule.paperAmounts.English, 4, "another field of the same rule is kept");
+  assert.equal(e2.setting.rule.paperCheckOff, true);
+  const lines = CS.diffSettings(e1.setting, e2.setting);
+  assert.deepEqual(lines, ["the Saturday paper effort check turned off"]);
+  assert.ok(CS.diffSettings(base, e1.setting).some((l) => /English Saturday paper reward to 4 credits/.test(l)));
+  assert.ok(CS.applySettingEdit(base, { paperAmounts: { English: -1 } }, FRI).error);
+  assert.ok(CS.applySettingEdit(base, { paperAmounts: { English: 1.5 } }, FRI).error, "whole credits only");
+  const plain = CS.applySettingEdit(base, { enabled: true, weeklyAmounts: { English: 2 } }, FRI);
+  assert.equal(R.paperSubjectCredits(plain.setting.rule, "English"), 0, "a settings edit that never mentions papers pays no paper reward");
+});
+ok("settings rows: paper columns are written only when the mock-exam flag is on, so the flag-off save is exactly the old row", () => {
+  const s = CS.applySettingEdit(CS.DEFAULT_SETTING, { paperAmounts: { English: 2 } }, FRI).setting;
+  const off = CS.settingToRow("c", s, "p", "t"), on = CS.settingToRow("c", s, "p", "t", { paper: true });
+  assert.ok(!("paper_unit" in off) && !("paper_amounts" in off) && !("paper_check_off" in off));
+  assert.deepEqual([on.paper_unit, on.paper_amounts.English, on.paper_check_off], ["credits", 2, false]);
+  const back = CS.settingFromRow({ effective_from: "2026-11-22", enabled: true, sgd_per_credit: 0.5, daily_tiers: [], weekly_unit: "credits", weekly_amounts: {}, daily_target: {}, homework_per_mistake: 3, paper_unit: "sgd", paper_amounts: { English: 2 }, paper_check_off: true });
+  assert.deepEqual([back.rule.paperUnit, back.rule.paperAmounts.English, back.rule.paperCheckOff], ["sgd", 2, true]);
+  assert.deepEqual([CS.settingFromRow({ effective_from: "x" }).rule.paperCheckOff, CS.settingFromRow(null).rule.paperAmounts], [false, {}], "old rows (no paper columns) read as nothing");
+  const ss = fs.readFileSync(path.join(ROOT, "src/lib/rewardsServer.js"), "utf8");
+  assert.ok(/MOCK_EXAMS_ENABLED \? ",paper_unit,paper_amounts,paper_check_off" : ""/.test(ss));
+});
+ok("reward service: Saturday only, needs REWARDS, pending credit gated on that Saturday, idempotent per subject per Saturday, never throws", () => {
+  const ss = fs.readFileSync(path.join(ROOT, "src/lib/rewardsServer.js"), "utf8");
+  const f = ss.slice(ss.indexOf("export async function awardPaperReward"));
+  assert.ok(/if \(!out\.saturday\) return out/.test(f) && /if \(!REWARDS\)/.test(f));
+  assert.ok(/p_kind: "paper", p_period: day, p_subject: subject/.test(f) && /p_gate_day: day/.test(f) && /award_sticker/.test(f) && /finalizeCredits/.test(f));
+  assert.ok(/catch \{ return/.test(f));
+  assert.ok(!/record_payout|reward_payouts/.test(f), "the app never moves money");
+});
+
+// ── migration (phase 2) ──
+ok("paper_rewards migration: new file, additive, guarded, 'paper' kind only widens, old migrations untouched", () => {
+  const dir = path.join(ROOT, "supabase/migrations");
+  const files = fs.readdirSync(dir).sort();
+  assert.equal(files[files.length - 1], "20261130000000_paper_rewards.sql");
+  const raw = fs.readFileSync(path.join(dir, "20261130000000_paper_rewards.sql"), "utf8");
+  assert.ok(/apply by hand|applied by hand/i.test(raw.split("\n").slice(0, 6).join("\n")));
+  const sql = raw.replace(/--.*$/gm, "");
+  assert.ok(!/drop\s+table|delete\s+from|truncate|update\s+public\./i.test(sql));
+  assert.ok(/add column if not exists paper_unit/.test(sql) && /add column if not exists paper_amounts/.test(sql) && /add column if not exists paper_check_off boolean not null default false/.test(sql));
+  assert.ok(/check \(kind in \('daily', 'weekly', 'paper'\)\)/.test(sql) && /stickers_kind_chk/.test(sql) && /reward_credits_kind_chk/.test(sql));
+  assert.ok(/create or replace function public\.award_credit\(\s*p_parent uuid, p_child uuid, p_kind text, p_period date, p_subject text,\s*p_credits int, p_rate numeric, p_score_pct int, p_effective date, p_gate_day date\s*\)/.test(sql), "10-argument signature unchanged");
+  assert.ok(/grant execute on function public\.award_credit\(uuid, uuid, text, date, text, int, numeric, int, date, date\) to service_role/.test(sql));
+  assert.ok(/grant execute on function public\.award_sticker\(uuid, text, date\) to service_role/.test(sql));
+});
+ok("all of this stays behind the flag, default OFF, and the student route 404s without it", () => {
+  const cfg = fs.readFileSync(path.join(ROOT, "src/lib/supabase/config.js"), "utf8");
+  assert.ok(/MOCK_EXAMS_ENABLED\s*=\s*process\.env\.NEXT_PUBLIC_MOCK_EXAMS_ENABLED === "true"/.test(cfg));
+  const pr = fs.readFileSync(path.join(ROOT, "src/components/ParentRewards.js"), "utf8");
+  assert.ok(/\{MOCK_EXAMS_ENABLED && \(/.test(pr), "the paper reward settings only render with the flag on");
+});
+
 console.log(`\n${n} checks run${process.exitCode ? ", SOME FAILED" : ", all passed"}`);
