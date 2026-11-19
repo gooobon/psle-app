@@ -29,7 +29,7 @@ export async function POST(request) {
   if (!rateLimit(`hws:${me.profile.id}:${clientIp(request)}`, { max: 30, windowMs: 60_000 })) return jerr("too many requests", 429);
   const b = await readJson(request);
   const subject = String(b.subject || "");
-  const results = Array.isArray(b.results) ? b.results.slice(0, 20) : [];
+  const results = Array.isArray(b.results) ? b.results.slice(0, 100) : [];
   if (!SUBJECT_KEYS.includes(subject) || !results.length) return jerr("bad request", 400);
   const admin = adminClient();
   const now = new Date().toISOString();

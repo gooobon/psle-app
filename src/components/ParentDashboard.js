@@ -5,7 +5,7 @@ import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
 import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, serverPost, serverGet } from "@/lib/serverClient";
 import ParentRewards from "@/components/ParentRewards";
-import { HOMEWORK_DAILY_CAP, HOMEWORK_PER_MISTAKE } from "@/lib/homework";
+import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
 
@@ -22,7 +22,7 @@ function HomeworkStatus({child, refreshKey}){
   const box=(n,l,c)=>(<div style={{flex:1,textAlign:"center"}}><div style={{fontSize:20,fontWeight:900,color:c}}>{n}</div><div style={{fontSize:10,fontWeight:700,color:"#64748B"}}>{l}</div></div>);
   return(
     <div style={{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:14,padding:"12px 14px",marginBottom:14}}>
-      <div style={{fontSize:13,fontWeight:800,color:"#92400E",marginBottom:8}}>📚 Homework today · {st.usedToday}/{st.cap} used</div>
+      <div style={{fontSize:13,fontWeight:800,color:"#92400E",marginBottom:8}}>📚 Homework today · {st.usedToday} assigned</div>
       <div style={{display:"flex",gap:6}}>{box(t.assigned,"Assigned","#0F172A")}{box(t.solved,"Solved","#059669")}{box(t.remaining,"Remaining","#DC2626")}{box(t.correct,"Correct","#2563EB")}</div>
       {(st.days||[]).filter(d=>d.date!==st.today).slice(0,6).map(d=>(
         <div key={d.date} style={{fontSize:11,color:"#64748B",marginTop:6}}>{d.date}: {d.solved}/{d.assigned} solved, {d.correct} correct{d.remaining?`, ${d.remaining} not done`:""}</div>
@@ -54,11 +54,22 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
   const hwOn = SERVER_AUTH && PARENT_HOMEWORK && !!child?.serverId && !!homeworkSimilarFor;
   const [hwKey,setHwKey]=React.useState(0);
   const [hwMsg,setHwMsg]=React.useState({});
+  // Parent-set number of similar questions per mistake (default 3), saved in parent settings.
+  const [hwCount,setHwCount]=React.useState(HOMEWORK_PER_MISTAKE);
+  React.useEffect(()=>{
+    if(!hwOn) return; let alive=true;
+    serverGet("/api/parent/settings").then(r=>{ if(alive&&r.ok&&r.homeworkPerMistake) setHwCount(clampHomeworkCount(r.homeworkPerMistake)); });
+    return ()=>{ alive=false; };
+  },[hwOn]);
+  function saveHwCount(v){
+    const n=clampHomeworkCount(v); setHwCount(n);
+    serverPost("/api/parent/settings",{homeworkPerMistake:n});
+  }
   async function assignHomework(m){
-    const sim=homeworkSimilarFor(subject,m);
+    const sim=homeworkSimilarFor(subject,m,hwCount);
     if(!sim||!sim.ids.length){ setHwMsg(x=>({...x,[m.id]:"No similar questions available for this mistake yet."})); return; }
     setHwMsg(x=>({...x,[m.id]:"Assigning…"}));
-    const r=await serverPost("/api/parent/homework",{child:child.serverId,subject,grade,sourceQuestionId:m.id,questionIds:sim.ids.slice(0,HOMEWORK_PER_MISTAKE)});
+    const r=await serverPost("/api/parent/homework",{child:child.serverId,subject,grade,sourceQuestionId:m.id,questionIds:sim.ids.slice(0,hwCount)});
     setHwMsg(x=>({...x,[m.id]:r.ok?(r.message||"Assigned."):(r.error||"Could not assign.")}));
     if(r.ok||r.code==="cap") setHwKey(k=>k+1);
   }
@@ -194,9 +205,11 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                         {hwOn&&useServer&&srv&&(
                           <div style={{marginBottom:10}}>
                             <button onClick={()=>assignHomework(m)} style={{background:"#D97706",color:"#fff",border:"none",borderRadius:10,padding:"8px 12px",fontSize:12,fontWeight:800,cursor:"pointer"}}>
-                              📚 Assign {HOMEWORK_PER_MISTAKE} similar as homework
+                              📚 Assign up to {hwCount} similar as homework
                             </button>
-                            <span style={{fontSize:11,color:"#64748B",marginLeft:8}}>max {HOMEWORK_DAILY_CAP}/day</span>
+                            <label style={{fontSize:11,color:"#64748B",marginLeft:8}}>Questions per mistake{" "}
+                              <input type="number" min="1" max={HOMEWORK_ABUSE_MAX} value={hwCount} onChange={e=>saveHwCount(e.target.value)} style={{width:56,padding:"4px 6px",borderRadius:6,border:"1px solid #CBD5E1",fontSize:12}}/>
+                            </label>
                             {hwMsg[m.id]&&<div style={{fontSize:12,color:"#92400E",marginTop:6}}>{hwMsg[m.id]}</div>}
                           </div>
                         )}

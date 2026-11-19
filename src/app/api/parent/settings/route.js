@@ -1,6 +1,7 @@
 // Parent alert settings: daily target + alert channel list (email now, whatsapp opt-in later).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { SUBJECT_KEYS, DEFAULT_TARGET } from "@/lib/activity";
+import { clampHomeworkCount, HOMEWORK_PER_MISTAKE } from "@/lib/homework";
 import { isE164 } from "@/lib/notify/index.mjs";
 
 export const runtime = "nodejs";
@@ -14,11 +15,12 @@ async function guard() {
 const view = (row) => ({
   dailyTarget: { ...DEFAULT_TARGET, ...(row?.daily_target || {}) },
   channels: Array.isArray(row?.alert_channels) ? row.alert_channels : [],
+  homeworkPerMistake: row?.homework_per_mistake ?? HOMEWORK_PER_MISTAKE,
 });
 
 export async function GET() {
   const g = await guard(); if (g.err) return g.err;
-  const { data } = await adminClient().from("parent_settings").select("daily_target,alert_channels").eq("parent_id", g.me.profile.id).maybeSingle();
+  const { data } = await adminClient().from("parent_settings").select("daily_target,alert_channels,homework_per_mistake").eq("parent_id", g.me.profile.id).maybeSingle();
   return jok(view(data));
 }
 
@@ -34,6 +36,7 @@ export async function POST(request) {
     for (const s of SUBJECT_KEYS) if (b.dailyTarget[s] != null) t[s] = Math.max(0, Math.min(10, Math.round(Number(b.dailyTarget[s]) || 0)));
     patch.daily_target = t;
   }
+  if (b.homeworkPerMistake != null) patch.homework_per_mistake = clampHomeworkCount(b.homeworkPerMistake);
   if (b.email && typeof b.email === "object" && typeof b.email.enabled === "boolean") {
     // Opt out / back in. Address falls back to the account email; stored per parent in alert_channels.
     const list = Array.isArray(cur?.alert_channels) ? cur.alert_channels : [];
@@ -61,6 +64,6 @@ export async function POST(request) {
     ? await admin.from("parent_settings").update(patch).eq("parent_id", g.me.profile.id)
     : await admin.from("parent_settings").insert({ parent_id: g.me.profile.id, ...patch });
   if (error) return jerr("could not save", 500);
-  const { data } = await admin.from("parent_settings").select("daily_target,alert_channels").eq("parent_id", g.me.profile.id).maybeSingle();
+  const { data } = await admin.from("parent_settings").select("daily_target,alert_channels,homework_per_mistake").eq("parent_id", g.me.profile.id).maybeSingle();
   return jok(view(data));
 }
