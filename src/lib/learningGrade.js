@@ -3,6 +3,7 @@
 // The grading rules mirror src/components/ExamSession.js (normTyped, cmp, gradeQuestion). Keep them in sync.
 // Nothing here returns or logs the answer key: gradeSubmitted() only reports { scored, correct }.
 import { indexSets } from "@/lib/reviewRounds";
+import { englishPaperGradeSets } from "@/lib/p3PaperBridge";
 
 // Same normalisation as ExamSession.normTyped (typed answers from iOS keyboards use curly quotes).
 export function normTyped(s) {
@@ -71,6 +72,60 @@ export function itemIndex(subject, loadSets) {
 }
 
 const trapOf = (x) => (x && x.explain && typeof x.explain.trapType === "string" && x.explain.trapType.length <= 24 ? x.explain.trapType : null);
+
+// Past-paper items are a separate index from the 60 practice sets. Some comprehension ids
+// (q28_41 and the like) exist in both with different answers, so a past-paper trial must
+// not be graded against the practice set, and a daily set must not be graded against a paper.
+let paperCache = null;
+function paperBank() {
+  if (paperCache) return paperCache;
+  const byId = Object.create(null);
+  const sig = Object.create(null);
+  const keys = new Set();
+  for (const set of englishPaperGradeSets()) {
+    keys.add(set.setId);
+    const part = indexSets([set]).byId;
+    for (const id of Object.keys(part)) {
+      const s = answerSig(part[id], id);
+      if (Object.prototype.hasOwnProperty.call(sig, id) && sig[id] !== s) byId[id] = null;
+      else { sig[id] = s; if (byId[id] !== null) byId[id] = part[id]; }
+    }
+  }
+  paperCache = { byId, keys };
+  return paperCache;
+}
+function answerSig(hit, id) {
+  if (!hit) return "";
+  if (hit.leaf) return "leaf:" + JSON.stringify(hit.leaf.answer);
+  const c = hit.container || {};
+  const num = Number(String(id).slice(String(hit.containerId || "").length + 1));
+  if (Array.isArray(c.blanks)) {
+    const b = c.blanks.find((x) => x.num === num);
+    return "blank:" + (b ? JSON.stringify(b.answer) : "");
+  }
+  if (Array.isArray(c.questions)) {
+    const q = c.questions.find((x) => x && x.id === id);
+    return "q:" + (q ? JSON.stringify(q.answer) + "|" + (q.format || "") : "");
+  }
+  if (Array.isArray(c.items)) {
+    const it = c.items.find((x) => x && x.id === id);
+    return "item:" + (it ? JSON.stringify(it.answer) : "");
+  }
+  return "other";
+}
+
+// setId "paper:<paperKey>" selects the past-paper bank. Anything else is the practice bank.
+// An unknown paper key resolves to null so a client cannot point a practice item at a paper.
+export function resolveSubmitted(practiceById, itemId, setId) {
+  if (typeof setId === "string" && setId.startsWith("paper:")) {
+    const bank = paperBank();
+    if (!bank.keys.has(setId.slice("paper:".length))) return null;
+    const hit = bank.byId[itemId];
+    if (!hit) return null;
+    return resolveItem(bank.byId, itemId);
+  }
+  return resolveItem(practiceById, itemId);
+}
 
 // Resolve one id to a gradable record { setId, sectionType, skill, grade(answerPayload) } or null (unknown / not auto-graded).
 // skill here is the item's OWN tag (zh skill) or null; the caller adds taxonomy / section fallbacks.

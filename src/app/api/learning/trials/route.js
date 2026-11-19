@@ -17,7 +17,7 @@ import { LEARNING_DASHBOARD } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
 import { LEARNING_SUBJECTS } from "@/lib/learningServer";
-import { itemIndex, resolveItem } from "@/lib/learningGrade";
+import { itemIndex, resolveSubmitted } from "@/lib/learningGrade";
 import { homeworkMasteryWeight } from "@/lib/homeworkMastery";
 import { skillIdsOf } from "@/lib/similarItemsCore";
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
@@ -67,10 +67,11 @@ export async function POST(request) {
   const cands = [];
   for (const it of items) {
     const subject = str(it && it.subject, 20), mode = str(it && it.mode, 20), itemId = str(it && it.itemId, 200);
+    const setId = str(it && it.setId, 200);
     if (!LEARNING_SUBJECTS.includes(subject) || !MODES.includes(mode) || !itemId) continue;
-    const rec = resolveItem(bankFor(subject), itemId);
+    const rec = resolveSubmitted(bankFor(subject), itemId, setId);
     if (!rec) continue;
-    cands.push({ it, subject, mode, itemId, rec });
+    cands.push({ it, subject, mode, itemId, setId, rec });
   }
   if (!cands.length) return jok({ received: items.length, recorded: 0, ignored: items.length }); // unknown / ungradable ids are dropped, not an error
 
@@ -101,8 +102,9 @@ export async function POST(request) {
   const rows = [];
   let ignored = 0;
   for (const c of cands) {
-    const { it, subject, mode, itemId, rec } = c;
-    const dk = subject + "|" + itemId + "|" + mode;
+    const { it, subject, mode, itemId, setId, rec } = c;
+    // setId keeps a past-paper item apart from a practice item that reused the same id.
+    const dk = subject + "|" + itemId + "|" + mode + "|" + (setId || "");
     if (seenMode.has(dk)) { ignored++; continue; } // already recorded (or duplicated inside this request)
     const graded = rec.grade({ val: cleanAnswer(it.answer), seq: cleanAnswer(it.answerSeq), reason: cleanAnswer(it.answerReason) });
     if (!graded.scored) { ignored++; continue; }
@@ -111,7 +113,7 @@ export async function POST(request) {
     if (mode === "homework") {
       const srcId = hwSource[subject + "|" + itemId];
       if (srcId == null) { ignored++; continue; } // not assigned to this student
-      const srcRec = resolveItem(bankFor(subject), srcId);
+      const srcRec = resolveSubmitted(bankFor(subject), srcId, null);
       const srcLeaf = skillIdsOf(taxonomyIdsFor(srcId) || [])[0];
       const srcSkill = srcLeaf || (srcRec ? (srcRec.skill || srcRec.trap || ("sec:" + srcRec.sectionType)) : null);
       const v = homeworkMasteryWeight({ item: { id: itemId, skill }, source: { id: srcId, skill: srcSkill, ts: srcAt[srcId] }, seenIds: seenItem.has(subject + "|" + itemId) ? [itemId] : [], todayYmd: today });

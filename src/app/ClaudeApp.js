@@ -1464,7 +1464,14 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const prevVocab   = prog.vocabBook||[];
     const newVocab    = [...prevVocab];
     vocabWords.forEach(w=>{ if(!newVocab.find(v=>v.word===w)) newVocab.push({word:w,def:WORD_DICT[w]||"",addedDate:todayStr(),fromMistake:wrongWords.includes(w)}); });
-    const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: newEntry.school||null });
+    // A past-paper mock (forceMock) is graded from that paper's own key. The key id is not an answer.
+    // A flagged every-10th mock still sits a practice set, so it keeps the school label as its set id.
+    let trialSetId = newEntry.school || null;
+    if (forceMock) {
+      const paperPlan = buildPastPaperPlan(prog.settings, user.school, sessionNum);
+      if (paperPlan && paperPlan.paperKey) trialSetId = "paper:" + paperPlan.paperKey;
+    }
+    const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: trialSetId });
     const withTickets=openTicketsFromResults(withTrials, results, sessionNum);
     setProgress(grade, subject, { ...withTickets, history:[...prog.history, newEntry], mistakes:newMistakes, nextSession:sessionNum+1, vocabBook:newVocab, sessionSections:null });
     reportActivity(subject, 'set-'+sessionNum, results);

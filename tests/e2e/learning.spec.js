@@ -41,12 +41,6 @@ async function installBrowserClock(context) {
     window.Date = Shifted;
   });
 }
-function skillKey(r) {
-  if (!r) return null;
-  if (typeof r.skill === "string" && r.skill) return r.skill;
-  if (typeof r.trapType === "string" && r.trapType && r.trapType.length <= 24) return r.trapType;
-  return r.sectionType ? "sec:" + r.sectionType : (r.section ? "sec:" + r.section : null);
-}
 function rateOf(rows) {
   let tot = 0, ok = 0;
   for (const r of rows) {
@@ -149,12 +143,16 @@ test("learning dashboard matches what was played @learning", async ({ browser })
     return all[key];
   });
   const seen = new Set((prog.trials || []).map((t) => t.itemId));
+  const leafOf = (itemId) => {
+    const b = (answers.bank || []).find((x) => x.id === String(itemId));
+    return b && b.leaf;
+  };
   let source = null;
   for (const m of prog.mistakes || []) {
-    const sk = skillKey(m);
-    if (!sk || !m.id) continue;
-    const unseen = (answers.bank || []).find((b) => (b.section === "GrammarMCQ" || b.section === "VocabMCQ") && skillKey(b) === sk && String(b.id) !== String(m.id) && !seen.has(b.id));
-    if (unseen) { source = { id: String(m.id), skill: sk, unseen: String(unseen.id) }; break; }
+    const leaf = leafOf(m.id);
+    if (!leaf || !m.id) continue;
+    const unseen = (answers.bank || []).find((b) => (b.section === "GrammarMCQ" || b.section === "VocabMCQ") && b.leaf === leaf && String(b.id) !== String(m.id) && !seen.has(b.id));
+    if (unseen) { source = { id: String(m.id), skill: leaf, unseen: String(unseen.id) }; break; }
   }
   record("student", "A same-skill unseen question exists", "There is a later homework item that can count at half weight", source ? source.id + " -> " + source.unseen + " (" + source.skill + ")" : "none", source ? "PASS" : "FAIL", "");
   if (!source) {
@@ -192,7 +190,7 @@ test("learning dashboard matches what was played @learning", async ({ browser })
       return ((all[key] && all[key].trials) || []).map((t) => t.itemId);
     });
     const freshSeen = new Set(fresh);
-    const unseenNow = (answers.bank || []).find((b) => (b.section === "GrammarMCQ" || b.section === "VocabMCQ") && skillKey(b) === source.skill && String(b.id) !== String(source.id) && !freshSeen.has(b.id));
+    const unseenNow = (answers.bank || []).find((b) => (b.section === "GrammarMCQ" || b.section === "VocabMCQ") && b.leaf === source.skill && String(b.id) !== String(source.id) && !freshSeen.has(b.id));
     if (unseenNow) source.unseen = String(unseenNow.id);
     await pp.bringToFront();
     await pp.goto("/");
@@ -225,6 +223,30 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   await sp.getByRole("button", { name: /Back to Home|返回主页/ }).first().click().catch(() => {});
   await sp.getByText(/Hello,|Your patterns/).first().waitFor({ timeout: 20000 });
   await waitTrials(id, n0 + 1);
+
+  const paperSes = await sp.evaluate(() => {
+    const all = JSON.parse(localStorage.getItem("genius_progress_v2") || "{}");
+    const key = Object.keys(all).find((k) => k.endsWith("_P3_English"));
+    return key ? all[key].nextSession : null;
+  });
+  const paper = answers.pastPapers && answers.pastPapers[String(paperSes)];
+  await sp.goto("/");
+  await ensureStudent(sp, CHILD.username, CHILD.password);
+  await sp.getByRole("button", { name: "More", exact: true }).first().click();
+  await sp.getByRole("button", { name: "Extra practice" }).click();
+  await sp.getByRole("button", { name: "Past-paper mock" }).click();
+  await driveToScore(sp, paper, { min: 100, max: 100 }, "learn-paper");
+  await sp.getByRole("button", { name: /Back to Home|返回主页/ }).first().click().catch(() => {});
+  await sp.getByText(/Hello,|Your patterns/).first().waitFor({ timeout: 20000 });
+  let mockRows = [];
+  for (let i = 0; i < 30; i++) {
+    mockRows = await dbGet("learning_trials?student_id=eq." + id + "&mode=eq.mock&select=item_id,server_graded,correct,first_try");
+    if (mockRows.length > 0) break;
+    await new Promise((r) => setTimeout(r, 500));
+  }
+  const paperIds = new Set(((paper && paper.items) || []).map((it) => it.id));
+  const mockOnPaper = mockRows.filter((r) => paperIds.has(r.item_id));
+  record("student", "Past-paper mock feeds the Learning tab", "Past-paper answers are stored as server-graded mock trials", mockRows.length + " mock rows, " + mockOnPaper.length + " match this paper, all graded " + (mockRows.length > 0 && mockRows.every((r) => r.server_graded === true)), mockOnPaper.length > 0 && mockRows.every((r) => r.server_graded === true) ? "PASS" : "FAIL", await snap(sp, "05b-past-paper"));
 
   const trials = await dbGet("learning_trials?student_id=eq." + id + "&subject=eq.English&server_graded=eq.true&select=skill,mode,first_try,weight,session_num,attempted_at&order=attempted_at");
   const wrongs = await dbGet("wrong_answers?student_id=eq." + id + "&subject=eq.English&select=cause,attempted_at");
@@ -293,6 +315,11 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   const todayCard = await sp.getByText("Mastery by skill").count();
   record("student", "Mastery card stays when the mistake list is filtered", "The server-backed card is not inside the mistake list, so a filter does not remove it", todayCard > 0 ? "Mastery by skill still on screen" : "card missing", todayCard > 0 ? "PASS" : "FAIL", await snap(sp, "09-filtered"));
 
+  const dashBefore = await pp.evaluate(async (child) => {
+    const r = await fetch("/api/parent/learning?child=" + child + "&subject=English", { credentials: "same-origin" });
+    return r.json();
+  }, id);
+
   // ── Forgery checks (PR #43 follow-up). The server must grade the submitted answer itself and own correct / first_try / weight. ──
   const post = (items) => sp.evaluate(async (body) => {
     const r = await fetch("/api/learning/trials", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ items: body }) });
@@ -313,6 +340,19 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   const f1 = await post([{ subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", answer: 0, firstTry: true, correct: true, weight: 9, sessionNum: 99, ts: now, grade: "P3" }]);
   const r1 = await rowsOf("forged-perfect");
   const ok1 = r1.length === 0 && f1.status === 200;
+  // Replays of that unseen item, with new timestamps and a tampered weight, still store nothing.
+  await post([
+    { subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", answer: 0, firstTry: true, correct: true, weight: 9, sessionNum: 99, ts: now - 5000, grade: "P3" },
+    { subject: "English", itemId: "forged-perfect", skill: "en.grammar.forged_skill", mode: "exam", answer: 1, firstTry: true, correct: true, weight: 0.5, sessionNum: 99, ts: now - 86400000, grade: "P3" },
+  ]);
+  const directEarly = await directWrites(student, id);
+  const dashAfter = await pp.evaluate(async (child) => {
+    const r = await fetch("/api/parent/learning?child=" + child + "&subject=English", { credentials: "same-origin" });
+    return r.json();
+  }, id);
+  const dashSame = ["skills", "weekly", "trend", "causes"].every((k) => JSON.stringify(dashBefore[k]) === JSON.stringify(dashAfter[k]));
+  const stillNone = (await rowsOf("forged-perfect")).length === 0 && directEarly.forgedRows === 0;
+  record("parent", "Forgery does not move the Learning tab", "Unknown items, weight tampering, new timestamps, and direct inserts leave both parents' numbers unchanged", "dashboard identical " + dashSame + "; forged rows still " + (await rowsOf("forged-perfect")).length + "; direct " + JSON.stringify(directEarly), dashSame && stillNone ? "PASS" : "FAIL", await snap(pp, "10-after-forgery"));
   // 2) A real item answered WRONG while the client claims correct, first try and a made-up skill / weight: server stores its own verdict.
   const wrongAns = (fa.answer + 1) % fa.n;
   const f2 = await post([{ subject: "English", itemId: fa.id, skill: "en.grammar.forged_skill", mode: "exam", answer: wrongAns, firstTry: true, correct: true, weight: 0.3, sessionNum: 99, ts: now, grade: "P3" }]);

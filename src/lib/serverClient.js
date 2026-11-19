@@ -190,7 +190,7 @@ export async function syncLearningTrials(userId, grade, subject, prog) {
     // Send the ANSWER only. The server grades it and derives correct / first-try / weight / skill itself. Trials recorded before
     // answers were kept (no userAnswer) cannot be graded and are not sent.
     const items = fresh.filter(x => x.userAnswer !== undefined && x.userAnswer !== null).map(x => ({
-      itemId: String(x.itemId), mode: x.mode, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
+      itemId: String(x.itemId), mode: x.mode, setId: x.setId || undefined, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
       guessed: !!x.guessed, hinted: !!x.solvedAfterHint, sessionNum: x.sessionNum, ts: x.ts, grade, subject,
     }));
     // The marker also moves past ungradable (older) trials so they are not retried forever.
