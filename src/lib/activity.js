@@ -23,9 +23,8 @@ export function resolveDailyTarget(raw) {
   return out;
 }
 
-// daily_target is stored once per parent, not per child. A child with more than one guardian
-// follows the earliest parent_child link that has a settings row (the parent who created or
-// first linked the child). TODO(owner): confirm this if two guardians set different targets.
+// LEGACY (kept for its selftest, no longer used at runtime): daily_target used to be stored per parent. Since issue #32 the child has
+// ONE shared setting (src/lib/childSettings.js, table child_setting_versions) that any linked parent may edit, effective next SGT day.
 export function pickParentDailyTarget(links, rows) {
   const ordered = [...(links || [])].sort((a, b) => {
     const c = String(a?.created_at || "").localeCompare(String(b?.created_at || ""));

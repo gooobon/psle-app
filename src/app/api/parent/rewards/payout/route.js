@@ -1,5 +1,5 @@
 // Parent marks a payout as PAID: records credits settled + SGD amount + date (atomic in SQL record_payout()).
-// RECORD ONLY: the app never moves money. Blocks if credits exceed this parent's unpaid balance. Flag-gated, default off.
+// RECORD ONLY: the app never moves money. Blocks if credits exceed the child's unpaid CONFIRMED balance (pending and forfeited credits never count). Flag-gated, default off.
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { REWARDS } from "@/lib/supabase/config";
 import { sgtDate } from "@/lib/activity";

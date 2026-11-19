@@ -26,7 +26,7 @@ export default function ParentHomework({ subject, refreshKey, onStart }) {
           Today: {items.length - todo.length} of {items.length} done{items.length - todo.length ? ` · ${correct} correct` : ''}
         </div>
         {todo.length > 0 ? (
-          <button onClick={() => onStart(todo.map((x) => x.id))}
+          <button onClick={() => onStart(todo.map((x) => x.id), Object.fromEntries(todo.map((x) => [x.id, x.source])))}
             style={{ background: '#D97706', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
             Start homework ({todo.length} left)
           </button>

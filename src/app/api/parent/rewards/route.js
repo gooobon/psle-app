@@ -1,10 +1,14 @@
 // Parent rewards: GET = stickers, weekly-review status, rules, credit ledger, payouts for ONE linked child.
-// PUT = save a rule VERSION (effectiveFrom today or later) for that child, so already-awarded credits keep their snapshot. Rules are per parent (a co-parent's rules/ledger are not visible here).
+// PUT = edit the child's ONE shared setting (any linked parent; effective TOMORROW SGT, audit-logged, co-parent notified), so already-awarded credits keep their snapshot.
+// The ledger is per child: both parents see the same credits. Only CONFIRMED credits count toward the balance; pending and forfeited are shown separately.
 // Record only: nothing here moves money. Flag-gated (NEXT_PUBLIC_REWARDS_ENABLED, default off); linked guardians only.
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { REWARDS } from "@/lib/supabase/config";
 import { sgtDate } from "@/lib/activity";
-import { DEFAULT_RULES, weekStart, parseRuleVersion, ruleFromRow, ruleForDate } from "@/lib/rewards";
+import { weekStart, creditTotals, PENDING_NOTE } from "@/lib/rewards";
+import { settingForDate, tomorrowSgt } from "@/lib/childSettings";
+import { saveChildSetting } from "@/lib/childSettingsServer";
+import { finalizeCredits } from "@/lib/rewardsServer";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -24,29 +28,32 @@ export async function GET(request) {
   if (!UUID.test(child)) return jerr("bad child", 400);
   const admin = adminClient();
   if (!(await linked(admin, me.profile.id, child))) return jerr("not your child", 403);
-  const ws = weekStart(sgtDate());
+  const today = sgtDate();
+  const ws = weekStart(today);
+  await finalizeCredits(admin, child, today);
   const [st, wr, ru, cr, po] = await Promise.all([
     admin.from("stickers").select("kind,period").eq("child_id", child),
     admin.from("weekly_reviews").select("subject,items,completed_at").eq("child_id", child).eq("week_start", ws),
-    admin.from("reward_rule_versions").select("effective_from,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts").eq("parent_id", me.profile.id).eq("child_id", child).order("effective_from", { ascending: true }),
-    admin.from("reward_credits").select("kind,period,subject,score_pct,credits,sgd_per_credit,created_at").eq("parent_id", me.profile.id).eq("child_id", child).order("period", { ascending: false }),
-    admin.from("reward_payouts").select("id,credits,amount_sgd,paid_on,note,created_at").eq("parent_id", me.profile.id).eq("child_id", child).order("created_at", { ascending: false }),
+    admin.from("child_setting_versions").select("effective_from,daily_target,homework_per_mistake,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts").eq("child_id", child).order("effective_from", { ascending: true }),
+    admin.from("reward_credits").select("kind,period,subject,score_pct,credits,sgd_per_credit,status,gate_day,created_at").eq("child_id", child).order("period", { ascending: false }),
+    admin.from("reward_payouts").select("id,credits,amount_sgd,paid_on,note,created_at").eq("child_id", child).order("created_at", { ascending: false }),
   ]);
   if (st.error || wr.error || ru.error || cr.error || po.error) return jerr("could not load", 500);
   const stickers = st.data || [];
   const credits = cr.data || [], payouts = po.data || [];
-  const earned = credits.reduce((a, r) => a + r.credits, 0);
   const paid = payouts.reduce((a, r) => a + r.credits, 0);
+  const totals = creditTotals(credits, paid);
   const versions = ru.data || [];
-  const today = sgtDate();
-  const current = ruleFromRow(ruleForDate(versions, today));
-  const upcoming = versions.filter((v) => v.effective_from > today).map(ruleFromRow);
+  const tomorrow = tomorrowSgt(today);
+  const current = settingForDate(versions, today);
+  const next = settingForDate(versions, tomorrow);
   return jok({
-    today: sgtDate(), weekStart: ws,
+    today, weekStart: ws, tomorrow,
     weekly: { done: (wr.data || []).length > 0, subjects: (wr.data || []).map((x) => x.subject) },
     stickers: { total: stickers.length, daily: stickers.filter((s) => s.kind === "daily").length, weekly: stickers.filter((s) => s.kind === "weekly").length },
-    rules: current || { ...DEFAULT_RULES, effectiveFrom: today }, upcoming,
-    ledger: { earned, paid, balance: earned - paid, rows: credits.slice(0, 60) },
+    // rules = what applies TODAY (read-only in the form's header); form edits start from what applies tomorrow (includes a co-parent's edit).
+    rules: current.rule, formRules: next.rule, upcoming: next.effectiveFrom > today ? [next.rule] : [],
+    ledger: { earned: totals.confirmed, pending: totals.pending, forfeited: totals.forfeited, pendingNote: PENDING_NOTE, paid, balance: totals.balance, rows: credits.slice(0, 60) },
     payouts: payouts.slice(0, 30).map((p) => ({ ...p, amount_sgd: Number(p.amount_sgd) })),
   });
 }
@@ -59,15 +66,12 @@ export async function PUT(request) {
   const b = await readJson(request);
   const child = String(b.child || "");
   if (!UUID.test(child)) return jerr("bad child", 400);
-  const p = parseRuleVersion(b);
-  if (p.error) return jerr(p.error, 400);
   const admin = adminClient();
   if (!(await linked(admin, me.profile.id, child))) return jerr("not your child", 403);
-  const { error } = await admin.from("reward_rule_versions").upsert({
-    parent_id: me.profile.id, child_id: child, effective_from: p.rule.effectiveFrom, enabled: p.rule.enabled,
-    sgd_per_credit: p.rule.sgdPerCredit, daily_tiers: p.rule.dailyTiers, weekly_unit: p.rule.weeklyUnit,
-    weekly_amounts: p.rule.weeklyAmounts, updated_at: new Date().toISOString(),
-  }, { onConflict: "parent_id,child_id,effective_from" });
-  if (error) return jerr("could not save", 500);
-  return jok({ rule: p.rule });
+  // Any effectiveFrom sent by the client is ignored: the shared setting always changes from the next SGT day.
+  const r = await saveChildSetting(admin, me.profile, child, {
+    enabled: b.enabled, sgdPerCredit: b.sgdPerCredit, dailyTiers: b.dailyTiers, weeklyUnit: b.weeklyUnit, weeklyAmounts: b.weeklyAmounts,
+  });
+  if (!r.ok) return jerr(r.error, r.status || 500);
+  return jok({ rule: r.setting.rule, changes: r.changes });
 }

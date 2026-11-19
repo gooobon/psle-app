@@ -15,7 +15,7 @@ export default function ParentRewards({ child }) {
   const [err, setErr] = React.useState('');
   const [key, setKey] = React.useState(0);
   const [rule, setRule] = React.useState(null);
-  // rule.effectiveFrom defaults to today; upcoming versions are listed below the form
+  // The form edits the shared setting as it will apply TOMORROW (includes a co-parent's edit); the server always sets the effective date to tomorrow.
   const [msg, setMsg] = React.useState('');
   const [pay, setPay] = React.useState({ credits: '', amount: '', date: '', note: '' });
   const [pmsg, setPmsg] = React.useState('');
@@ -25,7 +25,7 @@ export default function ParentRewards({ child }) {
     let alive = true;
     serverGet('/api/parent/rewards?child=' + encodeURIComponent(child.serverId)).then((r) => {
       if (!alive) return;
-      if (r.ok) { setD(r); setErr(''); setRule((x) => x || { ...r.rules, effectiveFrom: r.today }); } else setErr(r.error || 'Could not load rewards.');
+      if (r.ok) { setD(r); setErr(''); setRule((x) => x || { ...r.formRules }); } else setErr(r.error || 'Could not load rewards.');
     });
     return () => { alive = false; };
   }, [on, child?.serverId, key]);
@@ -40,7 +40,7 @@ export default function ParentRewards({ child }) {
   async function saveRules() {
     setMsg('Saving…');
     const r = await serverPut('/api/parent/rewards', { child: child.serverId, ...rule });
-    setMsg(r.ok ? `Saved. Applies from ${rule.effectiveFrom}; credits already earned are not changed.` : (r.error || 'Could not save.'));
+    setMsg(r.ok ? `Saved. Applies from tomorrow (${d.tomorrow}); credits already earned are not changed. The other parent is notified.` : (r.error || 'Could not save.'));
     if (r.ok) { setRule(null); setKey((k) => k + 1); }
   }
   async function markPaid() {
@@ -76,19 +76,15 @@ export default function ParentRewards({ child }) {
       <div style={box}>
         <div style={{ fontSize: 13, fontWeight: 800, marginBottom: 4 }}>Reward rules</div>
         <div style={{ fontSize: 11, color: '#64748B', marginBottom: 8 }}>
-          Off by default. Changes apply from the effective date, so you can adjust day by day. Credits are only a record: you pay any pocket money yourself, then mark it as paid below.
+          Off by default. These rules are shared with the other linked parent, and changes start tomorrow so today's rewards never change mid-day. Credits are only a record: you pay any pocket money yourself, then mark it as paid below.
         </div>
         <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>
           <input type="checkbox" checked={!!rule.enabled} onChange={(e) => set('enabled', e.target.checked)} /> Turn on credits for {child.name || 'this child'}
         </label>
-        <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>Effective from{' '}
-          <input type="date" min={d.today} style={{ ...inp, width: 140 }} value={rule.effectiveFrom || d.today}
-            onChange={(e) => set('effectiveFrom', e.target.value)} />
-        </label>
         {num('sgdPerCredit', 'SGD value of 1 credit (S$)')}
         <div style={{ fontSize: 12, fontWeight: 800, margin: '6px 0 2px' }}>Daily credits per subject (first set of the day)</div>
         <div style={{ fontSize: 11, color: '#64748B', marginBottom: 6 }}>
-          The highest tier the first set reaches wins. Below every tier = 0. Credits need all of the day&apos;s homework done (no homework = eligible).
+          The highest tier the first set reaches wins. Below every tier = 0. Credits start as pending and are confirmed once all of the day&apos;s homework is done (no homework assigned = confirmed at the end of the day; unfinished homework = forfeited).
         </div>
         {tiers.map((t, i) => (
           <div key={i} style={{ fontSize: 12, marginBottom: 6 }}>
@@ -116,7 +112,7 @@ export default function ParentRewards({ child }) {
         <div />
         <button onClick={saveRules} style={btn}>Save rules</button>
         {(d.upcoming || []).length > 0 && (
-          <div style={{ fontSize: 11, color: '#475569', marginTop: 8 }}>Scheduled changes: {d.upcoming.map((u) => u.effectiveFrom).join(', ')}</div>
+          <div style={{ fontSize: 11, color: '#475569', marginTop: 8 }}>Scheduled to start {d.tomorrow}: your latest saved changes</div>
         )}
         {msg && <span style={{ fontSize: 12, color: '#64748B', marginLeft: 10 }}>{msg}</span>}
       </div>
@@ -125,10 +121,12 @@ export default function ParentRewards({ child }) {
         <div style={{ fontSize: 13, fontWeight: 800, marginBottom: 6 }}>
           Credits: {bal} unpaid{rule.sgdPerCredit ? ` (≈ ${sgd(bal * rule.sgdPerCredit)})` : ''}
         </div>
-        <div style={{ fontSize: 11, color: '#64748B', marginBottom: 8 }}>Earned {d.ledger.earned} · Paid {d.ledger.paid}</div>
+        <div style={{ fontSize: 11, color: '#64748B', marginBottom: 4 }}>Confirmed {d.ledger.earned} · Paid {d.ledger.paid}</div>
+        {d.ledger.pending > 0 && <div style={{ fontSize: 11, color: '#92400E', fontWeight: 700, marginBottom: 4 }}>Pending: {d.ledger.pending} ({d.ledger.pendingNote})</div>}
+        {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B91C1C', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited}</div>}
         {d.ledger.rows.slice(0, 10).map((r) => (
           <div key={r.kind + r.period + (r.subject || '')} style={{ fontSize: 11, color: '#475569' }}>
-            {r.period}: +{r.credits} ({r.kind === 'weekly' ? 'weekly review' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
+            {r.period}: {r.status === 'pending' ? 'pending ' : r.status === 'forfeited' ? 'forfeited ' : '+'}{r.credits} ({r.kind === 'weekly' ? 'weekly review' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
           </div>
         ))}
         {bal > 0 && (

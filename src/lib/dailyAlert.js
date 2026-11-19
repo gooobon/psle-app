@@ -1,7 +1,9 @@
 // Server-only: builds the daily parent summary from daily_activity and dispatches it through the channels.
 // Used by /api/cron/daily-alert (all parents) and /api/admin/alert-preview (one parent, never sends).
-import { SUBJECT_KEYS, DEFAULT_TARGET, sgtDate, lastNDates, isLiveSubject } from "@/lib/activity";
+import { SUBJECT_KEYS, sgtDate, lastNDates, isLiveSubject } from "@/lib/activity";
 import { dispatchAlert, CHANNELS } from "@/lib/notify/index.mjs";
+import { renderSettingChangeEmail } from "@/lib/notify/emailTemplate.mjs";
+import { settingForDate } from "@/lib/childSettings";
 
 export function dashboardUrl(env = process.env) {
   const base = env.APP_BASE_URL || (env.VERCEL_PROJECT_PRODUCTION_URL ? "https://" + env.VERCEL_PROJECT_PRODUCTION_URL : "https://psle-app-vwx3.vercel.app");
@@ -23,14 +25,16 @@ export async function buildParentPayload(admin, parent, now = new Date()) {
   const { data: links } = await admin.from("parent_child").select("child_id").eq("parent_id", parent.id);
   const ids = (links || []).map((l) => l.child_id);
   const { data: st } = await admin.from("parent_settings").select("daily_target,alert_channels").eq("parent_id", parent.id).maybeSingle();
-  const target = { ...DEFAULT_TARGET, ...(st?.daily_target || {}) };
   const base = { parentName: parent.display_name || "there", date: today, dashboardUrl: dashboardUrl(), children: [] };
   if (!ids.length) return { payload: base, settings: st };
+  // Daily targets are one shared setting PER CHILD (child_setting_versions), the version in force today.
+  const { data: vers } = await admin.from("child_setting_versions").select("child_id,effective_from,daily_target").in("child_id", ids);
   const [{ data: profs }, { data: rows }] = await Promise.all([
     admin.from("profiles").select("id,display_name,grade").in("id", ids),
     admin.from("daily_activity").select("user_id,date,subject,sets_completed,questions_answered,correct,minutes").in("user_id", ids).gte("date", days[0]).lte("date", today),
   ]);
   base.children = (profs || []).map((p) => {
+    const target = settingForDate((vers || []).filter((v) => v.child_id === p.id), today).dailyTarget;
     const mine = (rows || []).filter((r) => r.user_id === p.id);
     const tr = mine.filter((r) => r.date === today);
     const subjects = SUBJECT_KEYS.filter((k) => Number(target[k]) > 0 && isLiveSubject(p.grade, k)).map((k) => {
@@ -74,7 +78,7 @@ const finish = (admin, parentId, date, channel, status, detail) =>
   admin.from("alert_log").update({ status, detail: detail ? String(detail).slice(0, 200) : null, updated_at: new Date().toISOString() })
     .eq("parent_id", parentId).eq("date", date).eq("channel", channel);
 
-async function emailConfirmed(admin, id) {
+export async function emailConfirmed(admin, id) {
   const { data, error } = await admin.auth.admin.getUserById(id);
   if (error) throw new Error("auth lookup failed");
   return !!data?.user?.email_confirmed_at;
@@ -108,4 +112,25 @@ export async function runDailyAlerts(admin, { env = process.env, now = new Date(
     }
   }
   return summary;
+}
+
+// Tell the OTHER linked parents that `changer` edited a child's shared setting (email channel only, behind EMAIL_ALERTS_ENABLED:
+// with the flag off it renders and logs a dry run, nothing is sent). Confirmed addresses only, like the daily alert. Never throws.
+export async function notifyCoParents(admin, { childId, childName, changerId, changerName, lines }, { env = process.env } = {}) {
+  const out = { sent: 0, dryRun: 0, skipped: 0 };
+  try {
+    const { data: links } = await admin.from("parent_child").select("parent_id").eq("child_id", childId);
+    const others = [...new Set((links || []).map((l) => l.parent_id))].filter((id) => id !== changerId);
+    for (const id of others) {
+      const { data: parent } = await admin.from("profiles").select("id,display_name,email").eq("id", id).maybeSingle();
+      if (!parent) { out.skipped++; continue; }
+      const { data: st } = await admin.from("parent_settings").select("alert_channels").eq("parent_id", id).maybeSingle();
+      const emailCh = channelsFor(parent, st).filter((c) => c.type === "email" && c.enabled);
+      if (!emailCh.length || !(await emailConfirmed(admin, id))) { out.skipped++; continue; }
+      const payload = { parentName: parent.display_name || "there", childName, changerName, lines, dashboardUrl: dashboardUrl(env) };
+      const [res] = await dispatchAlert(emailCh, payload, { env, formats: { email: renderSettingChangeEmail } });
+      if (res?.status === "sent") out.sent++; else if (res?.status === "dry-run") out.dryRun++; else out.skipped++;
+    }
+  } catch (e) { console.error("[notify-coparent] failed", String(e?.message || e)); }
+  return out;
 }

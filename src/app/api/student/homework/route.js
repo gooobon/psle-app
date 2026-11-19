@@ -1,10 +1,12 @@
 // Student side of parent homework. GET: today's assigned questions (SGT) for a subject.
 // POST: record answers {subject, results:[{id, correct}]}; only the caller's own, still-unsolved rows of today change.
-// Writes only solved_at/correct (never deletes). Does NOT touch mastery/trials. Flag-gated, default off.
+// Writes only solved_at/correct (never deletes). Mastery is decided CLIENT-side from homeworkMastery.js (delayed transfer only, half weight);
+// this route never writes trials. After solving, today's pending credits are re-checked (finished homework confirms them at once). Flag-gated, default off.
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { PARENT_HOMEWORK } from "@/lib/supabase/config";
 import { SUBJECT_KEYS, sgtDate } from "@/lib/activity";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
+import { finalizeCredits } from "@/lib/rewardsServer";
 
 export const runtime = "nodejs";
 const on = () => serverAuthEnabled() && PARENT_HOMEWORK;
@@ -16,10 +18,10 @@ export async function GET(request) {
   const subject = new URL(request.url).searchParams.get("subject") || "";
   if (!SUBJECT_KEYS.includes(subject)) return jerr("bad subject", 400);
   const { data, error } = await adminClient().from("parent_homework")
-    .select("question_id,solved_at,correct").eq("child_id", me.profile.id).eq("subject", subject)
+    .select("question_id,source_question_id,solved_at,correct").eq("child_id", me.profile.id).eq("subject", subject)
     .eq("assigned_for", sgtDate()).order("created_at", { ascending: true });
   if (error) return jerr("could not load", 500);
-  return jok({ items: (data || []).map((r) => ({ id: r.question_id, solved: !!r.solved_at, correct: r.correct === true })) });
+  return jok({ items: (data || []).map((r) => ({ id: r.question_id, source: r.source_question_id, solved: !!r.solved_at, correct: r.correct === true })) });
 }
 
 export async function POST(request) {
@@ -43,5 +45,7 @@ export async function POST(request) {
     if (error) return jerr("could not save", 500);
     n += (data || []).length;
   }
+  // Idempotent server-side finalize: pending credits confirm now if everything assigned today is solved. Never blocks the save.
+  if (n > 0) await finalizeCredits(admin, me.profile.id, sgtDate());
   return jok({ recorded: n });
 }

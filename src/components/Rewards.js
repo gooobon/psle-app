@@ -35,8 +35,23 @@ export function StickerShelf() {
   }, [on]);
   if (!on || !st) return null;
   const total = st.counts.daily + st.counts.weekly;
+  const cr = st.credits || { confirmed: 0, pending: 0, forfeited: 0 };
   return (
     <div style={{ padding: '14px 16px 0' }}>
+      {(cr.pending > 0 || cr.forfeited > 0) && (
+        <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 14, padding: 12, marginBottom: 10 }}>
+          {cr.pending > 0 && (
+            <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#92400E' }}>
+              Pending: {cr.pending} credit{cr.pending > 1 ? 's' : ''}. {cr.pendingNote}.
+            </div>
+          )}
+          {cr.forfeited > 0 && (
+            <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#78350F', marginTop: 4 }}>
+              {cr.forfeited} credit{cr.forfeited > 1 ? 's were' : ' was'} lost because homework was not finished that day.
+            </div>
+          )}
+        </div>
+      )}
       <div style={{ background: '#F5F3FF', border: '1px solid #DDD6FE', borderRadius: 14, padding: 12 }}>
         <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#5B21B6' }}>My Stickers: {total}</div>
         <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#6D28D9', margin: '2px 0 8px' }}>

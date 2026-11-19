@@ -18,10 +18,11 @@ export const MODE = {
   DRILL: 'drill',   // remediation drill
   REVIEW: 'review', // re-solve of a past round's wrong items
   GATE: 'gate',     // end-of-session vocab gate
+  HOMEWORK: 'homework', // parent homework: ONLY delayed-transfer items, at half weight (see homeworkMastery.js)
 };
 
 // Modes whose first-try results may count toward mastery / KPI.
-export const MASTERY_MODES = [MODE.EXAM, MODE.MOCK, MODE.DRILL];
+export const MASTERY_MODES = [MODE.EXAM, MODE.MOCK, MODE.DRILL, MODE.HOMEWORK];
 
 function emptyLedgerRow() {
   return {
@@ -83,6 +84,8 @@ export function normalizeTrial(r, meta) {
     mode: meta.mode,
     sessionNum: meta.sessionNum,
     ts: meta.ts || Date.now(),
+    // 1 for every normal mode; only homework trials carry a fraction (additive field, absent on old rows = 1).
+    weight: meta.mode === MODE.HOMEWORK && typeof r.weight === 'number' && r.weight > 0 && r.weight < 1 ? r.weight : 1,
   };
 }
 
@@ -94,36 +97,37 @@ function applyToLedger(ledger, t) {
   // prior fail on a DIFFERENT item exists (re-error definition)
   const hadPriorFail = L.failedItems.some((id) => id !== t.itemId);
 
-  L.att += 1;
+  const w = typeof t.weight === 'number' && t.weight > 0 && t.weight <= 1 ? t.weight : 1; // 1 for every non-homework trial
+  L.att += w;
   L.lastSeenSes = t.sessionNum;
-  if (t.firstTry) L.ftc += 1;
-  if (t.guessed) L.guessed += 1;
-  if (t.solvedAfterHint) L.hinted += 1;
-  if (!t.firstTry && !t.guessed) L.fail += 1;
+  if (t.firstTry) L.ftc += w;
+  if (t.guessed) L.guessed += w;
+  if (t.solvedAfterHint) L.hinted += w;
+  if (!t.firstTry && !t.guessed) L.fail += w;
 
   // Re-error: this skill failed earlier on a different item, now served again.
   if (hadPriorFail && !seenBefore) {
-    L.retryTotal += 1;
-    if (!t.firstTry) L.retryFail += 1;
+    L.retryTotal += w;
+    if (!t.firstTry) L.retryFail += w;
     if (L.lastFailSes != null && t.sessionNum - L.lastFailSes >= 1) {
-      L.delayedTotal += 1;
-      if (t.firstTry) L.delayedOk += 1;
+      L.delayedTotal += w;
+      if (t.firstTry) L.delayedOk += w;
     }
   }
   // Transfer: first-try success on a sectionType not yet succeeded in.
   if (L.sections.length > 0 && L.sections.indexOf(t.sectionType) === -1) {
-    L.transferTotal += 1;
-    if (t.firstTry) L.transferOk += 1;
+    L.transferTotal += w;
+    if (t.firstTry) L.transferOk += w;
   }
   if (t.firstTry && t.sectionType) pushCapped(L.sections, t.sectionType);
 
-  // theta (Step 9 scheduler): bounded 0..1, updated per attempt
+  // theta (Step 9 scheduler): bounded 0..1, updated per attempt; the step is scaled by the trial weight (w = 1 => unchanged).
   const th = typeof L.theta === 'number' ? L.theta : 0.5;
   const delayedWin = hadPriorFail && !seenBefore && t.firstTry && L.lastFailSes != null && t.sessionNum - L.lastFailSes >= 1;
-  if (delayedWin) L.theta = th + 0.25 * (1 - th);
-  else if (t.firstTry) L.theta = th + 0.15 * (1 - th);
+  if (delayedWin) L.theta = th + w * 0.25 * (1 - th);
+  else if (t.firstTry) L.theta = th + w * 0.15 * (1 - th);
   else if (t.guessed && t.correct) L.theta = th;
-  else L.theta = th - 0.25 * th;
+  else L.theta = th - w * 0.25 * th;
   L.theta = Math.max(0, Math.min(1, L.theta));
 
   if (!t.firstTry && !t.guessed) { L.lastFailSes = t.sessionNum; pushCapped(L.failedItems, t.itemId); }
