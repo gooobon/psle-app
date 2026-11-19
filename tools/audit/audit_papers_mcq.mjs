@@ -62,9 +62,10 @@ manifest.papers.filter((r) => r.subject === "English" && Number.isInteger(r.pool
 const gradedCache = new Map();
 for (const x of mcq) {
   if (!x.eligible) { x.graded = "n/a (paper not in exam catalogue)"; continue; }
-  if (!gradedCache.has(x.paper)) { const g = S.gradeSubmission(x.paper, {}); gradedCache.set(x.paper, g ? new Map(g.rows.map((r) => [r.id, r.correct])) : new Map()); }
+  if (!gradedCache.has(x.paper)) { const g = S.gradeSubmission(x.paper, {}); gradedCache.set(x.paper, g ? new Map(g.rows.map((r) => [r.id, r.correct])) : new Map()); gradedCache.set(x.paper + "#excluded", g ? new Map(g.rows.map((r) => [r.id, !!r.excluded])) : new Map()); }
   const c = gradedCache.get(x.paper).get(x.id);
-  x.graded = c === undefined ? "not_in_rows" : c === null ? "excluded(null)" : "graded";
+  const ex = gradedCache.get(x.paper + "#excluded").get(x.id); // true only on code that has the PR #49 `excluded` flag
+  x.graded = c === undefined ? "not_in_rows" : ex ? "excluded(PR49 flag)" : c === null ? "null(not auto-graded)" : "graded";
 }
 const count = (arr, f) => arr.reduce((m, x) => { const k = f(x); m[k] = (m[k] || 0) + 1; return m; }, {});
 if (process.argv.includes("--md-papers")) { // markdown table of every paper with a flag or exclusion reason

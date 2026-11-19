@@ -7,11 +7,11 @@ Numbers come from `tools/audit/audit_papers_mcq.mjs` (read-only; writes nothing)
 ## 0. Read this first: two findings that differ from the issue text
 
 1. **The "208 MCQ items without options" figure does not reproduce, and these items are not excluded from grading in this checkout.**
-   - The repo has a single commit (`17652bf`), so PR #45 and #49 are not visible in git history and I could not read what they changed. I audited the code as it is on this branch.
+   - The Action checks out with shallow history, so a single commit is expected. PRs #43, #45 and #47 are merged into `main`; the grading exclusion is in **PR #49 (branch `claude/issue-48-20261119-1551`), which is not merged**. Sections 0-5 describe `main`; section 6 describes PR #49.
    - Using the real runtime normaliser (`englishPaperExamPlan` in `src/lib/p3PaperBridge.js`), **1,038 items sit in a GrammarMCQ or VocabMCQ section with fewer than 2 options** (901 of them in the 57 papers the mock-exam picker offers).
    - `gradeSubmission` (`src/lib/examServer.js`) reports **all 901 as auto-graded**, not excluded (run result, section 2.2). Because `parseAnswerIndex` returns `0` when there are no options, `resolveItem` (`src/lib/learningGrade.js:138`) accepts the numeric `0` as the key. A typed or letter answer is never `=== 0`, so those items are always scored wrong. This was found by running the grader and reading the code.
    - Closest match to "about 208": letter keys 91 + digit-string keys 105 + 21 map-valued keys = 217, but that is a coincidence of one slicing, not a verified match. Please confirm which query produced 208.
-   - If PR #49's exclusion lives in a branch not merged here, the counts below still describe the data, and the "current behaviour" lines would need re-checking after that merge.
+   - The counts below describe the data and `main`. For what PR #49 changes, see section 6.
 2. **Only 105 of the 1,038 are real multiple-choice questions whose options were lost.** The other 933 are cloze, editing, comprehension and synthesis items that the bridge routes into an MCQ bucket by default (`classifyEnglishItem` ends with `return "GrammarMCQ"`). Options for the 105 sit in the source as an object map (`options: { "1": "cycle", ... }`) and `parseOptionTexts` only accepts arrays.
 
 ## 1. Past papers flagged in the manifest
@@ -222,7 +222,7 @@ The full per-paper, per-section list for all 1,038 items is in the script JSON (
 | **M2. Stop routing non-MCQ items into the MCQ bucket** (cloze, editing, comprehension go to their own renderers/graders) | Fixes the root cause for the other 933 items; typed answers are graded as typed | Larger change to the classifier; risk of changing what practice sessions show | Medium |
 | M3. Exclude any item with fewer than 2 options from auto-grading (show it, mark it parent-marked, count it as ungraded) | Fast, safe stop-gap; no wrong "incorrect" marks | Hides real MCQ that M1 could save; ungraded items shrink the scored total | Small |
 
-**Recommendation: M3 first as a safety net, then M1, then M2.** M3 matters most because at present these items always score wrong in the code I read. Confirm first whether PR #49 already does M3 in an unmerged branch (see section 0).
+**Recommendation: M3 first as a safety net, then M1, then M2.** On `main` these items always score wrong. PR #49 implements M3 for the mock-exam route (section 6), so merging it covers the safety-net step there; M1/M2 are still needed to make the items answerable.
 
 ## 4. How the numbers were produced
 
@@ -246,9 +246,32 @@ Spot checks done by reading source files: `src/data/p3/english/papers/wa3/wa3_ca
 | `node tools/exam_selftest.mjs` | Ran, 23 pass / 0 fail |
 | `tools/child_settings`, `daily_target`, `homework_mastery`, `notify`, `pending_credits`, `rewards_tiers` self-tests | Ran, all exit 0 |
 | `node zh_wa1_selftest.js` | Ran, 27 pass / 0 fail |
-| `tools/learning_grade_selftest.mjs` | **Not run successfully.** Its header says `npx tsx tools/learning_grade_selftest.mjs`; `tsx` is not in `package.json` and is not installed. Command: `npx --no-install tsx tools/learning_grade_selftest.mjs`. Error: `npm error npx canceled due to missing packages and no YES option: ["tsx@4.23.15"]`. Plain `node` fails with `ERR_MODULE_NOT_FOUND: Cannot find package '@/lib'`. Same on a clean tree, so it is not caused by this PR |
+| `npx --yes tsx tools/learning_grade_selftest.mjs` | **Ran, ALL PASS** (follow-up: `--yes` lets npx fetch tsx; no `package.json` change). The earlier `--no-install` attempt failed as below |
+| (earlier attempt) `tools/learning_grade_selftest.mjs` | Failed before the `--yes` retry. Its header says `npx tsx tools/learning_grade_selftest.mjs`; `tsx` is not in `package.json` and is not installed. Command: `npx --no-install tsx tools/learning_grade_selftest.mjs`. Error: `npm error npx canceled due to missing packages and no YES option: ["tsx@4.23.15"]`. Plain `node` fails with `ERR_MODULE_NOT_FOUND: Cannot find package '@/lib'`. Same on a clean tree, so it is not caused by this PR |
 | PR #45/#49 behaviour | Not verifiable: single-commit checkout |
 | Learning/practice route grading of these items | Read code only; not run |
 | UI | Not run (docs-only) |
 
 No data, migration, workflow, feature-flag default or `genius_*` storage was touched.
+
+## 6. Does PR #49 cover these items? (read and run, branch `claude/issue-48-20261119-1551`)
+
+**Rule (read in `src/lib/examServer.js` `paperData`):** an item goes into `noKey` when it sits in a section whose type ends in `MCQ` and `(q.options || []).length === 0`, or when it is a Comprehension question with `getFormat(q) === "mcq"` and no options. `gradeSubmission` then sets `correct = null` and `excluded = true`; `summarize` (`examEngine.js`) skips excluded rows, so they leave the score, total and "ungraded" count. `reviewItems` marks them `keyMissing`, and `notebookRows` and `mockTrialCandidates` skip items with no readable key.
+
+**How I ran it:** a temporary worktree of the PR #49 branch, with `node_modules` linked and this audit script copied in unchanged. The script calls the real `gradeSubmission(paper, {})` and records the new `excluded` flag. The worktree was removed afterwards, and nothing from it is committed.
+
+| Group | Items in the 57 offered papers | `excluded` on PR #49 | Covered? |
+|---|---|---|---|
+| All MCQ-bucket items with < 2 options | 901 | 901 | Yes. All have 0 options, and none has exactly 1, so the `length === 0` test catches every one |
+| 933-item cloze / editing / comprehension / synthesis group (in the MCQ bucket) | 858 in offered papers (127 editing, 413 comprehension/synthesis, 248 other, 38 cloze-with-word-bank, 32 passage items; the other 75 of the 933 are in papers the picker does not offer) | 858 | | Yes, but only because the rule keys on the section type (`*MCQ`), not on the item's real shape. These are not broken MCQs, they are mis-bucketed items. Excluding them is the right short-term outcome; the real fix is M1 (reclassify) |
+| 105 object-map MCQs | 43 in offered papers (62 more are in non-offered papers) | 43 | Yes. Still excluded after the fix lands; M2 (parse the map) would make them gradable |
+| 137 items in papers not offered by the picker | n/a | n/a | Not reachable from the mock route either way |
+
+The category rows above are the script's `mcqGradedByCategory` output on PR #49: editing 127, comprehension/synthesis 413, other 248, cloze 38, passage 32, object-map 43 = 901, all `excluded`.
+
+**Not covered by PR #49:**
+- The learning / practice route (`resolveItem` in `learningGrade.js`). PR #49 touches only the exam route. I only read this, I did not run it.
+- Items with exactly one option. None exist in the current data, but the rule would not catch them.
+- A nit on wording: `excluded` hides the item's score, but the student still sees the item in the paper. Whether to show it at all is a product choice (M1/M2 make it moot).
+
+**Effect on the recommendation:** merge #49 for M3 on the mock route. Next do M1 (reclassify cloze/editing/comprehension), then M2 (object-map options), which turns the 105 into real graded MCQs.
