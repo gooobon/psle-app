@@ -66,7 +66,9 @@ for (const row of Object.values(paper.items)) {
 const used = new Set([
   ...Object.keys(en.concepts), ...Object.keys(zh.concepts), ...Object.keys(drill.concepts), ...Object.keys(paperConcepts),
 ]);
-const unused = tax.concepts.filter((c) => !used.has(c.id)).map((c) => c.id);
+const outOfScope = new Set((tax.scope && tax.scope.outOfScopeSubjects) || ['math', 'science']);
+const unused = tax.concepts.filter((c) => !used.has(c.id) && !outOfScope.has(c.subject)).map((c) => c.id);
+const outOfScopeIds = tax.concepts.filter((c) => outOfScope.has(c.subject)).map((c) => c.id);
 const unknown = [...used].filter((id) => !tax.concepts.some((c) => c.id === id));
 
 const report = {
@@ -83,6 +85,8 @@ const report = {
   },
   mathQuestions: 0,
   scienceQuestions: 0,
+  outOfScopeSubjects: [...outOfScope],
+  outOfScopeConceptIds: outOfScopeIds,
   unusedConceptIds: unused,
   unknownConceptIds: unknown,
 };
@@ -96,6 +100,7 @@ function brief(block) {
 brief(en); brief(zh); brief(drill);
 console.log('\npapers tagged', report.papers.tagged, report.papers.status, report.papers.subject);
 console.log('unresolved', report.papers.unresolvedDuplicateIds);
-console.log('unused concepts', unused.length);
+console.log('out of scope (not used)', outOfScopeIds.length);
+console.log('unused in-scope concepts', unused.length);
 console.log(unused.join('\n'));
 if (unknown.length) console.log('UNKNOWN', unknown);

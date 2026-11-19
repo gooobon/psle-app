@@ -132,7 +132,42 @@ function keywordTrap(solution) {
   return ['trap.keyword_lift'];
 }
 
-function tagComp(format, stem, solution, traps) {
+/* Open-ended comprehension is two skills: fact-finding (the answer is written in the
+   passage) and inference (the student has to work out a feeling, lesson, or motive).
+   A bare "why" is not enough. The author's tip decides when it is clear, and a mixed
+   or thin cue is uncertain. */
+function tagOpenEnded(stem, solution, traps, extra) {
+  const fromSolutionTip = solution && typeof solution.tip === 'string' ? solution.tip : '';
+  const fromSolutionMethod = solution && typeof solution.method === 'string' ? solution.method : '';
+  const tip = fromSolutionTip || (extra && extra.tip) || '';
+  const method = fromSolutionMethod || (extra && extra.method) || '';
+  const head = String(stem || '');
+  const guide = [tip, method].filter(Boolean).join('\n');
+  const blob = head + '\n' + guide;
+  if (/\binfer|\binference|\binferring|character trait with evidence/i.test(method) && !/\bliteral\b/i.test(method)) {
+    return finish(['en.reading.inference'], 'certain', traps);
+  }
+  if (/\b(literal|fact-finding|retrieval|stated detail)\b/i.test(method)) {
+    return finish(['en.reading.fact_finding'], 'certain', traps);
+  }
+  const factCue = /\b(look for|look at\b|read the last paragraph|read paragraph|use .{0,50}own words|use (the|his|her|their|two) .{0,40}(words|note|explanation|details)|use (information|evidence|details) from|list all|given in paragraph|key phrase|the reason the \w+ gave|specific details|use the conversation|include both|find the reason|find evidence)\b/i.test(guide);
+  const inferCue = /\b(do you think|think about|unusual|unexpected|moral|valued most|meant to|lesson|not just|in your own|add your own|connect|how .{0,40}feel)\b/i.test(blob);
+  if (factCue && !inferCue) return finish(['en.reading.fact_finding'], 'certain', traps);
+  if (inferCue && !factCue) return finish(['en.reading.inference'], 'certain', traps);
+  if (factCue && inferCue) {
+    const factWins = /\b(look for|look at\b|list all|given in paragraph|own words|key phrase|use (information|evidence|details) from|specific details)\b/i.test(guide);
+    return finish([factWins ? 'en.reading.fact_finding' : 'en.reading.inference'], 'uncertain', traps);
+  }
+  const why = /^(why|how come)\b/i.test(head) || /\bdo you think\b/i.test(head);
+  const howKnow = /^how (do|did|does) we know\b/i.test(head);
+  if (howKnow || why) return finish(['en.reading.inference'], 'uncertain', traps);
+  if (/^(who|when|where|which|how many|how much|what|how)\b/i.test(head)) {
+    return finish(['en.reading.fact_finding'], 'uncertain', traps);
+  }
+  return finish(['en.reading.fact_finding'], 'uncertain', traps);
+}
+
+function tagComp(format, stem, solution, traps, section, extra) {
   const local = traps.slice();
   if (format === 'sequence') {
     local.push('trap.sequence_order');
@@ -151,7 +186,7 @@ function tagComp(format, stem, solution, traps) {
     return finish(['en.reading.true_false'], 'certain', local);
   }
   if (format === 'open_sentence') {
-    return finish(['en.reading.open'], 'certain', local);
+    return tagOpenEnded(stem, solution, local, extra);
   }
   if (format === 'mcq') {
     local.push(...keywordTrap(solution));
@@ -239,7 +274,7 @@ function classifyEnglish(input) {
   const solution = input.solution || null;
 
   if (section === 'Comprehension' || section === 'ComprehensionOE' || section === 'ComprehensionMCQ' || section === 'ComprehensionFIB') {
-    return tagComp(format, stem || text, solution, extraTraps(text, stem, null));
+    return tagComp(format, stem || text, solution, extraTraps(text, stem, null), section, { tip, method: input.method || '' });
   }
   if (section === 'VisualText') {
     return finish(['en.reading.visual_text'], 'certain', extraTraps(text, stem, null));
@@ -298,6 +333,54 @@ function tagChineseByTopic(topic, stem) {
   return finish(row.conceptIds, row.taxonomyStatus, traps);
 }
 
+/* The author's method line is the item's own skill note. A clear leaf replaces a
+   coarser section tag. A section that is already a certain leaf is left alone
+   unless the method names that same leaf or one of its children. */
+const ZH_METHOD_RULES = [
+  { re: /同音字|tongyinzi/i, id: 'zh.hanzi.tongyinzi', traps: ['trap.lookalike'] },
+  { re: /形近|同形旁|similar-looking character|xingjinzi/i, id: 'zh.hanzi.xingjinzi', traps: ['trap.lookalike'] },
+  { re: /多音|duoyinzi/i, id: 'zh.hanzi.duoyinzi', traps: [] },
+  { re: /声母|韵母|initial \(.*\) and final/i, id: 'zh.pinyin.shengmu_yunmu', traps: [] },
+  { re: /声调|identifying the tones/i, id: 'zh.pinyin.shengdiao', traps: [] },
+  { re: /近义|synonym/i, id: 'zh.ciyu.jinyici', traps: [] },
+  { re: /反义|antonym/i, id: 'zh.ciyu.fanyici', traps: [] },
+  { re: /量词|measure word/i, id: 'zh.ciyu.liangci', traps: [] },
+  { re: /搭配|collocation/i, id: 'zh.ciyu.dapei', traps: [] },
+  { re: /成语|idiom/i, id: 'zh.ciyu.chengyu', traps: ['trap.literal_idiom'] },
+  { re: /关联词|连词/i, id: 'zh.yufa.lianci', traps: [] },
+  { re: /语序|把字|word order/i, id: 'zh.yufa.word_order', traps: [] },
+  { re: /主旨|道理|main idea|the lesson/i, id: 'zh.reading.main_idea', traps: [] },
+  { re: /推断|推测|\binferr|\binference/i, id: 'zh.reading.inference', traps: [] },
+  { re: /细节|直接信息|direct information|clearly stated|stated in the passage/i, id: 'zh.reading.detail', traps: [] },
+  { re: /顺序|sequence of|in the order/i, id: 'zh.reading.sequence', traps: ['trap.sequence_order'] },
+];
+
+function tagChineseItem(input) {
+  const src = input || {};
+  const topic = src.topic || '';
+  const stem = src.stem || '';
+  const skill = src.skill;
+  if (skill && tax.zhSkillToConcept[skill]) return tagChineseBySkill(skill);
+  const sectionTag = tagChineseByTopic(topic, stem);
+  const text = String(src.method || '');
+  let cue = null;
+  for (const rule of ZH_METHOD_RULES) {
+    if (rule.re.test(text)) { cue = rule; break; }
+  }
+  if (!cue) return sectionTag;
+  const sectionIds = (sectionTag && sectionTag.conceptIds) || [];
+  const underSection = sectionIds.some((id) => cue.id === id || cue.id.startsWith(id + '.'));
+  // Only a skill under this section counts as the item's own skill. A method that
+  // names some other subject area is not used, so an uncertain section stays on
+  // its section tag and similar-question lookup can fall back to the trap.
+  if (!sectionTag || underSection) {
+    const traps = [...(cue.traps || []), ...((sectionTag && sectionTag.trapIds) || [])];
+    if (stem && NEGATION_RE.test(stem)) traps.push('trap.negation');
+    return finish([cue.id], 'certain', traps);
+  }
+  return sectionTag;
+}
+
 function applyTag(target, tag) {
   if (!tag) return target;
   target.conceptIds = tag.conceptIds;
@@ -313,6 +396,8 @@ module.exports = {
   tagEnglish,
   tagChineseBySkill,
   tagChineseByTopic,
+  tagChineseItem,
+  tagOpenEnded,
   tagTopicLabel,
   applyTag,
   finish,

@@ -3,8 +3,8 @@
     "name": "english WA1 (incl. comprehension)",
     "questions": 2460,
     "status": {
-      "certain": 2110,
-      "uncertain": 350,
+      "certain": 2101,
+      "uncertain": 359,
       "untagged": 0
     },
     "concepts": {
@@ -29,14 +29,14 @@
       "en.grammar.reported_speech": 40,
       "en.language.synthesis": 7,
       "en.reading.detail": 144,
-      "en.reading.inference": 36,
+      "en.reading.inference": 71,
       "en.reading.vocab_in_context": 60,
       "en.reading.sequence": 60,
       "en.reading.true_false": 120,
-      "en.reading.open": 60,
       "en.grammar.simple_present": 26,
       "en.grammar.present_continuous": 19,
       "en.grammar.preposition": 66,
+      "en.reading.fact_finding": 25,
       "en.grammar.connector": 53,
       "en.grammar.gerund_infinitive": 29,
       "en.grammar.quantifier": 26,
@@ -99,17 +99,17 @@
   "papers": {
     "tagged": 4666,
     "status": {
-      "certain": 2837,
-      "uncertain": 1829
+      "certain": 2926,
+      "uncertain": 1740
     },
     "subject": {
       "english": {
-        "certain": 2521,
-        "uncertain": 841
+        "certain": 2502,
+        "uncertain": 860
       },
       "chinese": {
-        "certain": 316,
-        "uncertain": 988
+        "certain": 424,
+        "uncertain": 880
       }
     },
     "unresolvedDuplicateIds": [
@@ -150,7 +150,7 @@
       "en.grammar.question_tag": 34,
       "en.grammar.past_perfect": 3,
       "en.reading.visual_text": 105,
-      "en.reading.inference": 112,
+      "en.reading.inference": 141,
       "en.grammar.simple_present": 25,
       "en.grammar.present_continuous": 22,
       "en.vocab.idiom": 6,
@@ -172,15 +172,24 @@
       "en.grammar.comparative": 6,
       "en.grammar.adverb": 4,
       "en.grammar.article_determiner": 2,
-      "zh.hanzi": 241,
-      "zh.ciyu": 296,
+      "zh.hanzi": 194,
+      "zh.ciyu": 281,
       "zh.writing.paragraph": 52,
-      "zh.reading": 279,
+      "zh.reading": 253,
       "zh.writing.picture": 47,
-      "zh.ciyu.dapei": 166,
+      "zh.ciyu.dapei": 177,
       "zh.writing.sentence": 150,
-      "zh.pinyin": 73,
-      "en.reading.open": 46
+      "zh.hanzi.xingjinzi": 35,
+      "zh.reading.main_idea": 9,
+      "zh.reading.inference": 11,
+      "zh.pinyin": 53,
+      "zh.pinyin.shengdiao": 3,
+      "zh.pinyin.shengmu_yunmu": 17,
+      "zh.reading.detail": 6,
+      "zh.hanzi.tongyinzi": 12,
+      "zh.ciyu.liangci": 2,
+      "zh.ciyu.jinyici": 2,
+      "en.reading.fact_finding": 17
     },
     "traps": {
       "trap.literal_idiom": 16,
@@ -193,22 +202,11 @@
   },
   "mathQuestions": 0,
   "scienceQuestions": 0,
-  "unusedConceptIds": [
-    "en.grammar.word_form",
-    "en.vocab",
-    "en.vocab.collocation",
-    "en.language",
-    "en.language.editing_grammar",
-    "en.reading.main_idea",
-    "en.writing",
-    "en.writing.situational",
-    "en.writing.continuous",
-    "zh.ciyu.fanyici",
-    "zh.ciyu.chengyu",
-    "zh.yufa",
-    "zh.reading.sequence",
-    "zh.writing",
-    "zh.writing.composition",
+  "outOfScopeSubjects": [
+    "math",
+    "science"
+  ],
+  "outOfScopeConceptIds": [
     "math.number",
     "math.number.whole",
     "math.number.fractions",
@@ -260,6 +258,24 @@
     "sci.interactions.gravity",
     "sci.interactions.elastic_spring",
     "sci.interactions.environment"
+  ],
+  "unusedConceptIds": [
+    "en.grammar.word_form",
+    "en.vocab",
+    "en.vocab.collocation",
+    "en.language",
+    "en.language.editing_grammar",
+    "en.reading.main_idea",
+    "en.reading.open",
+    "en.writing",
+    "en.writing.situational",
+    "en.writing.continuous",
+    "zh.ciyu.fanyici",
+    "zh.ciyu.chengyu",
+    "zh.yufa",
+    "zh.reading.sequence",
+    "zh.writing",
+    "zh.writing.composition"
   ],
   "unknownConceptIds": []
 }

@@ -3,20 +3,29 @@
 //   cause (one of CAUSES), cause_at (ISO), resolved_at (ISO), retries[] ({at, ids, correct, total}).
 // Old records without these fields stay valid. Records are never deleted by anything here.
 // Taxonomy ids are used as data only; no taxonomy names are hard-coded.
+//
+// `value` is what is stored on the mistake and what public.wrong_answers.cause allows.
+// `id` is the taxonomy id (cause.*). Labels are English. The app does not show another language.
+
+import { skillIdsOf } from './similarItemsCore.js';
 
 export const SIMILAR_COUNT = 3; // TODO(owner): confirm 3 (owner decision on #21); change here only.
 
 // Values match the CHECK constraint on public.wrong_answers.cause.
 export const CAUSES = [
-  { value: 'concept_unknown', en: "Didn't know the concept", ko: '개념 모름' },
-  { value: 'misread', en: 'Misread the question', ko: '문제 잘못 읽음' },
-  { value: 'calculation', en: 'Calculation slip', ko: '계산 실수' },
-  { value: 'trap', en: 'Fell for a trap', ko: '함정에 걸림' },
-  { value: 'time', en: 'Ran out of time', ko: '시간 부족' },
-  { value: 'guessed', en: 'Guessed', ko: '찍음' },
+  { id: 'cause.concept_unknown', value: 'concept_unknown', label: "Didn't know the concept" },
+  { id: 'cause.misread_question', value: 'misread', label: 'Misread the question' },
+  { id: 'cause.calculation_slip', value: 'calculation', label: 'Calculation slip' },
+  { id: 'cause.fell_for_trap', value: 'trap', label: 'Fell for a trap' },
+  { id: 'cause.ran_out_of_time', value: 'time', label: 'Ran out of time' },
+  { id: 'cause.guessed', value: 'guessed', label: 'Guessed' },
 ];
 export const CAUSE_VALUES = CAUSES.map((c) => c.value);
 export const isCause = (v) => CAUSE_VALUES.indexOf(v) !== -1;
+export function causeLabel(value) {
+  const row = CAUSES.find((c) => c.value === value || c.id === value);
+  return row ? row.label : '';
+}
 
 // A tag set is "confident" when it has concept ids and is not flagged uncertain.
 export function isConfidentRow(row) {
@@ -31,23 +40,51 @@ export function confidentTaxonomyIds(tagIndex, id) {
 }
 
 // pickSimilar(tagIndex, runnableIndex, mistake, similarQuestionsFn)
-//   tagIndex: buildTagIndex(...) over ALL known questions
+//   tagIndex: buildTagIndex(...) over practice questions, plus paper seeds in byId
 //   runnableIndex: indexSets(...) result; only ids present there can be re-run in ExamSession
-//   -> { ids, reason }  reason: 'ok' | 'no_tags' | 'uncertain' | 'few'
-// Fewer than SIMILAR_COUNT confident matches => returns what exists (reason 'few'); never pads/guesses.
+//   -> { ids, reason }  reason: 'ok' | 'no_tags' | 'no_skill' | 'few'
+// A leaf skill matches across sections. An uncertain section is not a reason to return nothing.
+// If the item has no leaf skill, traps are used. Fewer than SIMILAR_COUNT matches => reason 'few'.
 export function pickSimilar(tagIndex, runnableIndex, mistake, similarQuestionsFn, count) {
   const want = count || SIMILAR_COUNT;
   const seed = mistake && tagIndex && tagIndex.byId && tagIndex.byId[mistake.id];
-  if (!seed || !seed.conceptIds || !seed.conceptIds.length) return { ids: [], reason: 'no_tags' };
-  if (!isConfidentRow(seed)) return { ids: [], reason: 'uncertain' };
-  const byId = (runnableIndex && runnableIndex.byId) || {};
-  const confidentIdx = { byConcept: {}, byTrap: {}, byId: {} };
-  const keep = (list) => (list || []).filter((r) => isConfidentRow(r) && byId[r.id]);
-  Object.keys(tagIndex.byConcept || {}).forEach((k) => { confidentIdx.byConcept[k] = keep(tagIndex.byConcept[k]); });
-  Object.keys(tagIndex.byTrap || {}).forEach((k) => { confidentIdx.byTrap[k] = keep(tagIndex.byTrap[k]); });
-  const rows = similarQuestionsFn(confidentIdx, seed, { limit: want });
+  if (!seed) return { ids: [], reason: 'no_tags' };
+  const skills = skillIdsOf(seed.conceptIds);
+  const traps = Array.isArray(seed.trapIds) ? seed.trapIds : [];
+  if (!skills.length && !traps.length) {
+    return { ids: [], reason: (seed.conceptIds && seed.conceptIds.length) ? 'no_skill' : 'no_tags' };
+  }
+  const runnable = (runnableIndex && runnableIndex.byId) || {};
+  // Uncertain-section items stay in the pool. similarQuestions matches a leaf
+  // skill across formats, and uses a trap only when the skill is unknown.
+  // Only ids the session can actually run are returned.
+  const pool = { byConcept: {}, byTrap: {}, byId: {} };
+  const keep = (list) => (list || []).filter((r) => r && runnable[r.id]);
+  Object.keys(tagIndex.byConcept || {}).forEach((k) => { pool.byConcept[k] = keep(tagIndex.byConcept[k]); });
+  Object.keys(tagIndex.byTrap || {}).forEach((k) => { pool.byTrap[k] = keep(tagIndex.byTrap[k]); });
+  const rows = similarQuestionsFn(pool, seed, { limit: want });
   const ids = rows.map((r) => r.id);
   return { ids, reason: ids.length >= want ? 'ok' : 'few' };
+}
+
+// Counts for the student notebook. Causes are what the student picked.
+// Traps come from the question's tags (one count per mistake per trap id).
+export function patternSummary(mistakes, tagIndex) {
+  const causeCounts = {};
+  const trapCounts = {};
+  for (const m of mistakes || []) {
+    if (!m) continue;
+    if (isCause(m.cause)) causeCounts[m.cause] = (causeCounts[m.cause] || 0) + 1;
+    const row = tagIndex && tagIndex.byId && m.id != null ? tagIndex.byId[m.id] : null;
+    const seen = new Set();
+    for (const id of (row && row.trapIds) || []) {
+      if (!id || seen.has(id)) continue;
+      seen.add(id);
+      trapCounts[id] = (trapCounts[id] || 0) + 1;
+    }
+  }
+  const rank = (obj) => Object.entries(obj).sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])));
+  return { causes: rank(causeCounts), traps: rank(trapCounts) };
 }
 
 // Stable identity for a mistake record. New records carry `mid` (written once, never changed).
