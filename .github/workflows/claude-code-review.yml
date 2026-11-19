@@ -39,10 +39,11 @@ jobs:
           plugin_marketplaces: 'https://github.com/anthropics/claude-code.git'
           plugins: 'code-review@claude-code-plugins'
           prompt: '/code-review:code-review --comment ${{ github.repository }}/pull/${{ github.event.pull_request.number }}'
-          # claude[bot] opens its own PRs. The action rejects every bot actor
-          # unless named here (a trailing [bot] is ignored when matching).
+          # claude[bot] opens its own PRs, and cursor pushes follow-up commits.
+          # The action rejects every bot actor unless named here (a trailing
+          # [bot] is ignored when matching).
           # https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
-          allowed_bots: "claude[bot]"
+          allowed_bots: "claude[bot],cursor"
           # allowed_bots turns off the action's default --permission-mode auto.
           # Pass it explicitly so reviews keep the mode that already succeeds
           # for human authors; this flag wins over that default.
