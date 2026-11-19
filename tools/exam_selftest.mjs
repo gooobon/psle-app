@@ -101,7 +101,7 @@ ok("grading: the paper's own key marks right/wrong; blanks are wrong; ids are no
     const plan = B.englishPaperExamPlan(paper);
     const right = {}, wrong = {};
     for (const sec of plan) {
-      if (sec.type.endsWith("MCQ")) sec.items.forEach((q) => { right[q.id] = { val: q.answer }; wrong[q.id] = { val: (q.answer + 1) % Math.max(2, q.options.length) }; });
+      if (sec.type.endsWith("MCQ")) sec.items.filter((q) => (q.options || []).length).forEach((q) => { right[q.id] = { val: q.answer }; wrong[q.id] = { val: (q.answer + 1) % Math.max(2, q.options.length) }; });
       if (sec.type.endsWith("Cloze")) sec.items.forEach((s) => (s.blanks || []).forEach((b) => { right[s.id + "_" + b.num] = { val: b.answer }; wrong[s.id + "_" + b.num] = { val: "zzzz" }; }));
       if (sec.type === "Editing") sec.items.forEach((s) => (s.items || []).forEach((q) => { right[q.id] = { val: q.answer }; wrong[q.id] = { val: 99 }; }));
     }
@@ -113,7 +113,7 @@ ok("grading: the paper's own key marks right/wrong; blanks are wrong; ids are no
     const rightCount = a.rows.filter((r) => right[r.id] && r.correct === true).length;
     assert.ok(rightCount >= Object.keys(right).length * 0.9, `${p.id}: only ${rightCount}/${Object.keys(right).length} of its own keyed answers graded right`);
     assert.ok(bad.score < a.score || Object.keys(right).length === 0, p.id);
-    assert.equal(a.count, a.rows.length); checked++;
+    assert.equal(a.count + a.excluded, a.rows.length); checked++;
   }
   assert.equal(checked, list.length);
 });
@@ -252,7 +252,7 @@ ok("review on real papers: every auto-graded item shows the key, and the shown k
   for (const p of papers.slice(0, 12)) {
     const g0 = S.gradeSubmission(p.id, {});
     const items = S.reviewItems(p.id, g0.rows.map((r) => ({ question_id: r.id, answer: null, correct: r.correct })), "submitted");
-    assert.equal(items.length, g0.count, p.id);
+    assert.equal(items.length, g0.rows.length, p.id);
     const answers = {};
     for (const it of items) {
       if (it.ambiguous || it.correct === null) { assert.equal(it.correctAnswer === "" || it.openEnded, true); continue; }
@@ -554,7 +554,7 @@ try {
 // NOTE: written WITHOUT being able to execute node in the authoring environment (see docs/e2e-report-mock-phase2-2026-11-20.md).
 async function aok(name, fn) { n++; try { await fn(); console.log("PASS", name); } catch (e) { n--; console.error("FAIL", name, "\n ", e.message); process.exitCode = 1; } }
 const liveAttempt = (over) => ({ ...expiredAttempt(), started_at: new Date(Date.now() - 10 * 60_000).toISOString(), deadline_at: new Date(Date.now() + 50 * 60_000).toISOString(), ...over });
-const MRS = "33333333-3333-3333-3333-333333333333", MR = "44444444-4444-4444-4444-444444444444", SAT = "2026-11-21";
+const MRS = "33333333-3333-3333-3333-333333333333", MR = "44444444-4444-4444-4444-444444444444";
 
 await aok("Amir hands in a paper of blanks: wrong auto-graded items reach the notebook (cap 20), he can pick one of the six causes, and the review then opens", async () => {
   const db = fakeDb(); db.tables().exam_attempts.push(liveAttempt());
