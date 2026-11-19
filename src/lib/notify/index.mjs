@@ -14,12 +14,13 @@ export const isE164 = (s) => E164_RE.test(String(s || ""));
 export const CHANNELS = { email: emailChannel, whatsapp: whatsappChannel };
 
 // payload: { parentName, childName, date, subjects: [{name, sets, target}], questions, accuracy|null }
-export async function dispatchAlert(channelList, payload, { env = process.env, fetchImpl, dryRun = false } = {}) {
+// `formats` (optional) = { email: fn } overrides ch.format for one-off notices (e.g. a settings change) without touching the daily alert.
+export async function dispatchAlert(channelList, payload, { env = process.env, fetchImpl, dryRun = false, formats } = {}) {
   const out = [];
   for (const c of Array.isArray(channelList) ? channelList : []) {
     const ch = CHANNELS[c?.type];
     if (!ch || !c.enabled) continue;
-    const message = ch.format(payload);
+    const message = formats && formats[ch.type] ? formats[ch.type](payload) : ch.format(payload);
     // A channel whose own switch is off (EMAIL_ALERTS_ENABLED / WHATSAPP_ENABLED) is rendered but never sent.
     if (dryRun || !ch.isEnabled(env)) { out.push({ type: ch.type, status: "dry-run", message }); continue; }
     try { out.push({ type: ch.type, ...(await ch.send(c, message, { env, fetchImpl })) }); }

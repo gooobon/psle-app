@@ -6,7 +6,7 @@ export const HOMEWORK_PER_MISTAKE = SIMILAR_COUNT; // owner decision: default 3 
 // Only an abuse-protection bound remains: HOMEWORK_ABUSE_MAX per child per day and per assign request (mirrors SQL assign_homework()).
 export const HOMEWORK_ABUSE_MAX = 100;
 // Unsolved homework does NOT carry over to the next day.
-// TODO(owner): do homework retries count toward mastery? Current: NO, homework results are NOT written to trials/skillLedger.
+// Mastery (owner decision #32): delayed transfer only, half weight. See src/lib/homeworkMastery.js. Redoing the same question never counts.
 
 export function clampHomeworkCount(v) {
   const n = Math.round(Number(v));

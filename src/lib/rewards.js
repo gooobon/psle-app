@@ -10,9 +10,9 @@ export const DEFAULT_RULES = { enabled: false, sgdPerCredit: 0, dailyTiers: [], 
 // Stickers are unchanged (daily sticker once per day, weekly sticker once per week). CREDITS are per subject (issue #29):
 //   daily credits  = tier for the FIRST set of each subject that day (highest matching minPct wins; below all = 0)
 //   weekly credits = one award per subject whose Saturday review is done (one subject = one bonus, two = two)
-// TODO(owner): when two linked parents have different reward settings, which applies? Current: the earliest parent_child link
-//   that has a rule version (same rule as pickParentDailyTarget()). See pickRewardParent().
-// TODO(owner): do homework/redo results count toward mastery? Current: NO (never written to trials/skillLedger).
+// Owner decision (#32): ONE shared setting per child (src/lib/childSettings.js), editable by any linked parent, effective from the
+//   next SGT day. pickRewardParent() below is legacy (kept for its selftest) and is no longer used at runtime.
+// Owner decision (#32): homework mastery is "delayed transfer only" (src/lib/homeworkMastery.js).
 
 const dow = (ymd) => new Date(ymd + "T00:00:00Z").getUTCDay(); // 0 Sun .. 6 Sat
 const addDays = (ymd, n) => new Date(new Date(ymd + "T00:00:00Z").getTime() + n * 86400000).toISOString().slice(0, 10);
@@ -140,6 +140,43 @@ export function homeworkGate(rows) {
   const remaining = (rows || []).filter((r) => !r.solved_at).length;
   return { eligible: remaining === 0, assigned, remaining };
 }
+
+// ---- Pending credits (issue #32). Server-side only; the client never decides. ----
+// A credit is created 'pending' with gate_day = the SGT day whose homework condition applies (the claim day).
+//   confirmed : counts toward balance / payouts
+//   forfeited : kept as a record, never deleted, never counted
+// Decision for ONE pending credit, given that day's homework rows (see homeworkGate) and today's SGT date:
+//   homework assigned and all solved            -> confirmed now (even before the day ends)
+//   homework assigned, some unsolved, day over   -> forfeited
+//   nothing assigned, day over                   -> confirmed
+//   otherwise (day still open)                   -> pending (parent may still assign homework later today)
+// Mirrors SQL finalize_credits() in migration 20261126000000. Idempotent: only 'pending' rows are ever decided.
+export function creditStatusFor(gate, gateDay, todayYmd) {
+  const assigned = (gate && gate.assigned) || 0, remaining = (gate && gate.remaining) || 0;
+  const dayOver = String(gateDay) < String(todayYmd);
+  if (assigned > 0 && remaining === 0) return "confirmed";
+  if (!dayOver) return "pending";
+  return assigned > 0 ? "forfeited" : "confirmed";
+}
+
+// Apply creditStatusFor to ledger rows. hwByDay: { 'YYYY-MM-DD': parent_homework rows }. Returns NEW rows; only 'pending' rows change.
+export function finalizeCreditRows(rows, hwByDay, todayYmd) {
+  return (rows || []).map((r) => {
+    if (!r || r.status !== "pending") return r;
+    const day = r.gate_day || r.period;
+    const status = creditStatusFor(homeworkGate((hwByDay || {})[day] || []), day, todayYmd);
+    return status === r.status ? r : { ...r, status };
+  });
+}
+
+// Ledger totals. Only CONFIRMED credits count toward the balance; pending/forfeited are shown separately.
+export function creditTotals(rows, paid = 0) {
+  const sum = (st) => (rows || []).filter((r) => (r.status || "confirmed") === st).reduce((a, r) => a + (Number(r.credits) || 0), 0);
+  const confirmed = sum("confirmed");
+  return { confirmed, pending: sum("pending"), forfeited: sum("forfeited"), paid, balance: confirmed - paid };
+}
+
+export const PENDING_NOTE = "Pending: finish today's homework";
 
 // DB row <-> app shape.
 export const ruleFromRow = (r) => r ? ({

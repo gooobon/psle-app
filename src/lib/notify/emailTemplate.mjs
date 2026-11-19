@@ -45,3 +45,15 @@ ${kids.map((c) => `<h3 style="margin:16px 0 6px">${esc(t.childHeading(c))}</h3>
 <p style="font-size:12px;color:#64748B">${esc(t.footer)}</p></div>`;
   return { subject: t.subject(ctx), text, html };
 }
+
+// Notice to the OTHER linked parent when a shared child setting changes. payload: { parentName, childName, changerName, lines:[sentence], dashboardUrl }
+export function renderSettingChangeEmail(p) {
+  const lines = (p.lines || []).slice(0, 20);
+  const subject = `${p.changerName || "Your co-parent"} changed ${p.childName || "your child"}'s settings`;
+  const text = [`Hi ${p.parentName || "there"},`, "", ...lines, "", "These apply from the next Singapore day, so today's targets are not affected.", `Open the parent dashboard: ${p.dashboardUrl}`].join("\n");
+  const html = `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0F172A"><p>${esc(`Hi ${p.parentName || "there"},`)}</p>
+<ul style="padding-left:18px">${lines.map((l) => `<li>${esc(l)}</li>`).join("")}</ul>
+<p style="color:#64748B;font-size:12px">These apply from the next Singapore day, so today's targets are not affected.</p>
+<p><a href="${esc(p.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">Open the parent dashboard</a></p></div>`;
+  return { subject, text, html };
+}

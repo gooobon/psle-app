@@ -26,7 +26,8 @@ import { WA1_ZH_PRACTICE } from '@/data/p3/chinese/wa1_practice';
 // CLEANUP1: zhRemediation.js retired (replaced by src/lib/tickets.js)
 import { ZhSessionScreen } from '@/components/ChineseSession';
 import { todayStr, fmtTime } from '@/lib/sessionUtils';
-import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE, firstTryStats } from '@/lib/trialLedger'; // STEP1_TRIAL_LEDGER // STEP3A_KPI_HEADER
+import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE, firstTryStats, skillKeyOf } from '@/lib/trialLedger'; // STEP1_TRIAL_LEDGER // STEP3A_KPI_HEADER
+import { qualifyingHomeworkResults } from '@/lib/homeworkMastery';
 import ZhReviewGate from '@/components/ZhReviewGate';
 import ZH_VOCAB from '@/data/p3/chinese/zh_vocab.json';
 import { getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from '@/lib/zhReview';
@@ -60,7 +61,7 @@ const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
-import { resolveDailyTarget } from '@/lib/activity';
+import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
 
 
@@ -304,12 +305,12 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
-  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Not written to trials/mastery. TODO(owner): count toward mastery?
+  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Mastery: delayed transfer only (homeworkMastery.js).
   const [hwKey,setHwKey]=useState(0);
-  function startHomework(ids){
+  function startHomework(ids,sources){
     const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
     if(!built.plan.length) return;
-    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
+    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids, sources:sources||{}}});
   }
   // Saturday Weekly Review (flag NEXT_PUBLIC_REWARDS_ENABLED, default off). Like homework: not written to trials/mastery.
   const [wrKey,setWrKey]=useState(0);
@@ -324,7 +325,12 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       setRoundReview(null); setScreen("mistakes"); return;
     }
     if(roundReview.homework){
-      serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      const hw=roundReview.homework, hwRows=(results||[]).filter(r=>r&&r.id!=null);
+      serverPost("/api/student/homework",{subject, results:hwRows.map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      // Delayed transfer only (owner decision #32): a different, unseen, same-skill question answered >= 1 SGT day after the ORIGINAL
+      // mistake counts at half weight (right or wrong). Same-question redo and everything else never touch mastery.
+      const hwQual=qualifyingHomeworkResults(prog, hwRows, (r)=>{ const sid=hw.sources&&hw.sources[r.id]; const m0=(prog.mistakes||[]).find(m=>m&&sid!=null&&String(m.id)===String(sid)); return m0?{id:m0.id, skill:skillKeyOf(m0), date:m0.date, ts:m0.ts}:null; }, sgtToday(), skillKeyOf);
+      if(hwQual.length) setProgress(grade, subject, recordTrials(prog, hwQual, { mode: TRIAL_MODE.HOMEWORK, sessionNum: prog.nextSession, setId: 'PARENT_HW' }));
       setRoundReview(null); setScreen("mistakes"); return;
     }
     if(roundReview.similar){
@@ -1299,12 +1305,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       setRoundReview({plan:built.plan, sessionNum:(findMistake(prog,key)?.m.sessionNum)||0, similar:{key, ids}});
     },
   };
-  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Not written to trials/mastery. TODO(owner): count toward mastery?
+  // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Mastery: delayed transfer only (homeworkMastery.js).
   const [hwKey,setHwKey]=useState(0);
-  function startHomework(ids){
+  function startHomework(ids,sources){
     const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
     if(!built.plan.length) return;
-    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids}});
+    setRoundReview({plan:built.plan, sessionNum:0, homework:{ids, sources:sources||{}}});
   }
   // Saturday Weekly Review (flag NEXT_PUBLIC_REWARDS_ENABLED, default off). Like homework: not written to trials/mastery.
   const [wrKey,setWrKey]=useState(0);
@@ -1319,7 +1325,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
       setRoundReview(null); setScreen("mistakes"); return;
     }
     if(roundReview.homework){
-      serverPost("/api/student/homework",{subject, results:(results||[]).filter(r=>r&&r.id!=null).map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      const hw=roundReview.homework, hwRows=(results||[]).filter(r=>r&&r.id!=null);
+      serverPost("/api/student/homework",{subject, results:hwRows.map(r=>({id:r.id, correct:r.correct===true}))}).then(()=>setHwKey(k=>k+1));
+      // Delayed transfer only (owner decision #32): a different, unseen, same-skill question answered >= 1 SGT day after the ORIGINAL
+      // mistake counts at half weight (right or wrong). Same-question redo and everything else never touch mastery.
+      const hwQual=qualifyingHomeworkResults(prog, hwRows, (r)=>{ const sid=hw.sources&&hw.sources[r.id]; const m0=(prog.mistakes||[]).find(m=>m&&sid!=null&&String(m.id)===String(sid)); return m0?{id:m0.id, skill:skillKeyOf(m0), date:m0.date, ts:m0.ts}:null; }, sgtToday(), skillKeyOf);
+      if(hwQual.length) setProgress(grade, subject, recordTrials(prog, hwQual, { mode: TRIAL_MODE.HOMEWORK, sessionNum: prog.nextSession, setId: 'PARENT_HW' }));
       setRoundReview(null); setScreen("mistakes"); return;
     }
     if(roundReview.similar){

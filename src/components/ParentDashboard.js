@@ -3,8 +3,9 @@ import React, { useState, useEffect } from "react";
 import { C, Wrap } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
-import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, serverPost, serverGet } from "@/lib/serverClient";
+import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, serverPost, serverGet, serverPut } from "@/lib/serverClient";
 import ParentRewards from "@/components/ParentRewards";
+import ParentChildSettings from "@/components/ParentChildSettings";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
@@ -58,12 +59,13 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
   const [hwCount,setHwCount]=React.useState(HOMEWORK_PER_MISTAKE);
   React.useEffect(()=>{
     if(!hwOn) return; let alive=true;
-    serverGet("/api/parent/settings").then(r=>{ if(alive&&r.ok&&r.homeworkPerMistake) setHwCount(clampHomeworkCount(r.homeworkPerMistake)); });
+    serverGet("/api/parent/child-settings?child="+encodeURIComponent(child.serverId)).then(r=>{ if(alive&&r.ok){ const b=r.upcoming||r.current; if(b&&b.homeworkPerMistake) setHwCount(clampHomeworkCount(b.homeworkPerMistake)); } });
     return ()=>{ alive=false; };
-  },[hwOn]);
-  function saveHwCount(v){
-    const n=clampHomeworkCount(v); setHwCount(n);
-    serverPost("/api/parent/settings",{homeworkPerMistake:n});
+  },[hwOn, child?.serverId]);
+  function saveHwCount(v){ setHwCount(clampHomeworkCount(v)); }
+  function commitHwCount(){
+    // The count is part of the child's ONE shared setting (saved on blur, so each edit is ONE audit entry); it applies from tomorrow.
+    serverPut("/api/parent/child-settings",{child:child.serverId, homeworkPerMistake:hwCount});
   }
   async function assignHomework(m){
     const sim=homeworkSimilarFor(subject,m,hwCount);
@@ -208,7 +210,7 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                               📚 Assign up to {hwCount} similar as homework
                             </button>
                             <label style={{fontSize:11,color:"#64748B",marginLeft:8}}>Questions per mistake{" "}
-                              <input type="number" min="1" max={HOMEWORK_ABUSE_MAX} value={hwCount} onChange={e=>saveHwCount(e.target.value)} style={{width:56,padding:"4px 6px",borderRadius:6,border:"1px solid #CBD5E1",fontSize:12}}/>
+                              <input type="number" min="1" max={HOMEWORK_ABUSE_MAX} value={hwCount} onChange={e=>saveHwCount(e.target.value)} onBlur={commitHwCount} style={{width:56,padding:"4px 6px",borderRadius:6,border:"1px solid #CBD5E1",fontSize:12}}/>
                             </label>
                             {hwMsg[m.id]&&<div style={{fontSize:12,color:"#92400E",marginTop:6}}>{hwMsg[m.id]}</div>}
                           </div>
@@ -735,36 +737,22 @@ function GuardianTools({linkedStudents,onChildLinked}){
   );
 }
 
-// Daily target + alert channels. The student Today screen reads daily_target from this same settings row.
+// Alert channels (per parent). The daily target is now the child's shared setting: see ParentChildSettings.
 // WhatsApp is stored only; sending stays off until the owner enables the provider.
-const DAILY_TARGET_SUBJECTS = ["English","Chinese","Math","Science"];
 function AlertSettings(){
   const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState(""); const [em,setEm]=useState(true);
-  const [target,setTarget]=useState({English:1,Chinese:1,Math:1,Science:1});
-  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } if(r.dailyTarget) setTarget(t=>({...t,...r.dailyTarget})); }); },[open]);
-  function setCount(subject, raw){
-    const n = Math.max(0, Math.min(10, Math.round(Number(raw))));
-    setTarget(t=>({...t,[subject]: Number.isFinite(n)?n:0}));
-  }
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
   async function save(){
     setMsg("");
-    const r=await serverPost("/api/parent/settings",{dailyTarget:target,email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}});
+    const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}});
     setMsg(r.ok?"Saved.":(r.error||"Failed."));
     if(r.ok){ try{ window.dispatchEvent(new Event("genius-parent-settings")); }catch{} }
   }
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Daily target and alerts</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alerts</button>
       {open&&(<div style={{marginTop:10}}>
-        <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Sets per day</div>
-        <div style={{fontSize:11,color:C.muted,marginBottom:8,lineHeight:1.5}}>Your child sees this on Today. 0 means that subject is not required. Math and Science are still coming soon.</div>
-        {DAILY_TARGET_SUBJECTS.map(s=>(
-          <label key={s} style={{display:"flex",justifyContent:"space-between",alignItems:"center",fontSize:13,marginBottom:6}}>
-            <span>{s}</span>
-            <input aria-label={s+" sets per day"} type="number" min={0} max={10} value={target[s]??1} onChange={e=>setCount(s,e.target.value)} style={{width:72,padding:"6px 8px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13}}/>
-          </label>
-        ))}
         <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
@@ -877,6 +865,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
+        {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
       </div>
