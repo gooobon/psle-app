@@ -701,7 +701,16 @@ function GuardianTools({linkedStudents,onChildLinked}){
   useEffect(()=>{ loadInv(); },[]);
   async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.serverId}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setEmail(""); loadInv(); } }
   async function revokeInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/revoke",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); loadInv(); }
-  async function acceptInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/accept",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setTimeout(()=>{ try{ window.location.reload(); }catch{} },800); } else loadInv(); }
+  async function acceptInvite(id){
+    setBusy(true); setMsg("");
+    const r=await serverPost("/api/parent/co-parents/accept",{inviteId:id});
+    setBusy(false);
+    setMsg(r.ok?r.message:(r.error||"Failed."));
+    if(r.ok){
+      if(r.child) onChildLinked&&onChildLinked(r.child);
+      setInv(v=>({...v, received:(v.received||[]).filter(x=>x.id!==id)}));
+    } else loadInv();
+  }
   async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>

@@ -10286,7 +10286,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "answer": "arrived",
                 "questionNumber": 3,
                 "wrongWord": "arived",
-                "sentence": "Every corner of the living room was decorated with tiny oil lamps, and we all arived (3) in our brightest clothes.",
+                "sentence": "Every corner of the living room had been decorated with tiny oil lamps, and we all arived (3) in our brightest clothes.",
                 "hints": [
                   "The family came in their BRIGHTEST CLOTHES - the verb itself is right, but a letter has gone missing. Ask: how many times does -r- appear in the base word? Keep every letter of the base word when you add the ending."
                 ],
