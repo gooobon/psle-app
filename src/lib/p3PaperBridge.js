@@ -573,6 +573,15 @@ export function englishPaperGradeSets() {
   });
 }
 
+// One paper as ExamSession-shaped sections [{ type, items }] in the canonical order (mock exam engine, issue #44).
+export function englishPaperExamPlan(paper) {
+  const types = ["GrammarMCQ", "VocabMCQ", "GrammarCloze", "VocabCloze", "Editing", "Comprehension"];
+  const buckets = normalizeEnglishQuestions((paper && paper.questions) || []);
+  const plan = [];
+  for (const type of types) if (buckets[type] && buckets[type].length) plan.push({ type, items: buckets[type] });
+  return plan;
+}
+
 export function englishPaperToLegacyInfo(paper) {
   return {
     label:

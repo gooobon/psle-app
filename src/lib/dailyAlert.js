@@ -4,6 +4,7 @@ import { SUBJECT_KEYS, sgtDate, lastNDates, isLiveSubject } from "@/lib/activity
 import { dispatchAlert, CHANNELS } from "@/lib/notify/index.mjs";
 import { renderSettingChangeEmail } from "@/lib/notify/emailTemplate.mjs";
 import { settingForDate } from "@/lib/childSettings";
+import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 
 export function dashboardUrl(env = process.env) {
   const base = env.APP_BASE_URL || (env.VERCEL_PROJECT_PRODUCTION_URL ? "https://" + env.VERCEL_PROJECT_PRODUCTION_URL : "https://psle-app-vwx3.vercel.app");
@@ -17,6 +18,21 @@ export function streakFrom(days, activeSet) {
   let n = 0;
   for (; i >= 0 && activeSet.has(days[i]); i--) n++;
   return n;
+}
+
+// Papers for the 8pm email: submitted today, or still unfinished. null when there is nothing to report (no empty section).
+export function paperBlock(rows, today, now = new Date()) {
+  const done = rows.filter((r) => r.status !== "in_progress" && r.status !== "abandoned" && r.sgt_day === today);
+  const open = rows.filter((r) => r.status === "in_progress");
+  if (!done.length && !open.length) return null;
+  return {
+    done: done.map((r) => ({
+      label: r.paper_label || "Past paper", score: r.score, total: r.total, pct: r.total ? Math.round((r.score / r.total) * 100) : null,
+      minutesUsed: Math.round((r.elapsed_seconds || 0) / 60), minutesAllowed: r.minutes_allowed, counted: r.counts !== false,
+      toReview: Math.max(0, (r.total || 0) - (r.score || 0)), openToMark: r.open_total || 0,
+    })),
+    unfinished: open.map((r) => ({ label: r.paper_label || "Past paper", expired: Date.parse(r.deadline_at) <= now.getTime() })),
+  };
 }
 
 export async function buildParentPayload(admin, parent, now = new Date()) {
@@ -33,6 +49,15 @@ export async function buildParentPayload(admin, parent, now = new Date()) {
     admin.from("profiles").select("id,display_name,grade").in("id", ids),
     admin.from("daily_activity").select("user_id,date,subject,sets_completed,questions_answered,correct,minutes").in("user_id", ids).gte("date", days[0]).lte("date", today),
   ]);
+  // Mock papers block (issue #44). Only with the flag on; counts, scores and paper names only (no question text, no answers).
+  let paperRows = [];
+  if (MOCK_EXAMS_ENABLED) {
+    try {
+      const r = await admin.from("exam_attempts").select("student_id,paper_label,status,score,total,answered,question_count,elapsed_seconds,minutes_allowed,counts,open_total,sgt_day,deadline_at")
+        .in("student_id", ids).or(`sgt_day.eq.${today},status.eq.in_progress`).limit(200);
+      if (!r.error) paperRows = r.data || [];
+    } catch (e) { /* table not migrated yet: no papers block */ }
+  }
   base.children = (profs || []).map((p) => {
     const target = settingForDate((vers || []).filter((v) => v.child_id === p.id), today).dailyTarget;
     const mine = (rows || []).filter((r) => r.user_id === p.id);
@@ -43,7 +68,9 @@ export async function buildParentPayload(admin, parent, now = new Date()) {
     });
     const q = tr.reduce((a, r) => a + r.questions_answered, 0), c = tr.reduce((a, r) => a + r.correct, 0);
     const active = new Set(mine.filter((r) => r.sets_completed > 0).map((r) => r.date));
+    const papers = paperBlock(paperRows.filter((x) => x.student_id === p.id), today, now);
     return {
+      ...(papers ? { papers } : {}),
       name: p.display_name, grade: p.grade, subjects, questions: q, accuracy: q ? Math.round((c / q) * 100) : null,
       minutes: tr.reduce((a, r) => a + r.minutes, 0), streak: streakFrom(days, active), activeDays: days.filter((d) => active.has(d)).length,
       missing: subjects.filter((s) => !s.done).map((s) => s.name),

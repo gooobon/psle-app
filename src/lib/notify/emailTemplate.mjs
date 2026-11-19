@@ -11,10 +11,20 @@ export const COPY = {
     noSubjects: "No subjects with a daily target.",
     stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes}`,
     streak: (c) => `Streak: ${c.streak} day${c.streak === 1 ? "" : "s"} · Active ${c.activeDays} of the last 7 days`,
+    paperHeading: "Mock papers",
+    paperDone: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`} · ${x.minutesUsed} of ${x.minutesAllowed} min used${x.counted ? "" : " · did not count as a set"} · ${x.toReview} question${x.toReview === 1 ? "" : "s"} to review${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperUnfinished: (x) => `${x.label}: started, not handed in${x.expired ? " (time is up)" : ""}`,
     dashboard: "Open the parent dashboard",
     footer: "You get this because daily email alerts are on for your parent account.",
   },
 };
+
+// Additive: a child's optional `papers` block ({ done:[...], unfinished:[...] }). Absent or empty = no lines at all.
+export function paperLines(c, t) {
+  const p = c && c.papers;
+  if (!p || (!(p.done || []).length && !(p.unfinished || []).length)) return [];
+  return [t.paperHeading, ...(p.done || []).map(t.paperDone), ...(p.unfinished || []).map(t.paperUnfinished)];
+}
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -32,6 +42,7 @@ export function renderDailyEmail(payload, locale = "en") {
     ...(c.subjects.length ? c.subjects.map(t.subjectLine) : [t.noSubjects]),
     t.stats(c),
     t.streak(c),
+    ...paperLines(c, t),
   ].join("\n"));
   const text = [t.greeting(ctx), "", ...(banner.length ? [...banner, ""] : [t.allDone, ""]), textBlocks.join("\n\n"), "", `${t.dashboard}: ${payload.dashboardUrl}`, "", t.footer].join("\n");
 
@@ -40,7 +51,7 @@ export function renderDailyEmail(payload, locale = "en") {
 ${banner.length ? banner.map((b) => `<p style="background:#FEF3C7;border:1px solid #F59E0B;border-radius:8px;padding:10px;font-weight:bold">${esc(b)}</p>`).join("") : `<p style="background:#D1FAE5;border-radius:8px;padding:10px;font-weight:bold">${esc(t.allDone)}</p>`}
 ${kids.map((c) => `<h3 style="margin:16px 0 6px">${esc(t.childHeading(c))}</h3>
 <ul style="padding-left:18px;margin:0">${(c.subjects.length ? c.subjects.map((s) => `<li>${esc(t.subjectLine(s))}</li>`) : [`<li>${esc(t.noSubjects)}</li>`]).join("")}</ul>
-<p style="margin:6px 0">${esc(t.stats(c))}<br>${esc(t.streak(c))}</p>`).join("")}
+<p style="margin:6px 0">${esc(t.stats(c))}<br>${esc(t.streak(c))}</p>${paperLines(c, t).length ? `<p style="margin:6px 0"><b>${esc(paperLines(c, t)[0])}</b><br>${paperLines(c, t).slice(1).map(esc).join("<br>")}</p>` : ""}`).join("")}
 <p><a href="${esc(payload.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">${esc(t.dashboard)}</a></p>
 <p style="font-size:12px;color:#64748B">${esc(t.footer)}</p></div>`;
   return { subject: t.subject(ctx), text, html };

@@ -14,6 +14,10 @@ export const REWARDS = process.env.NEXT_PUBLIC_REWARDS_ENABLED === "true";
 // Needs supabase/migrations/20261127000000_learning_trials.sql applied by hand.
 export const LEARNING_DASHBOARD = process.env.NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED === "true";
 
+// Mock exams from real past papers (issue #44, docs/design/mock-exams-v1.md phase 1). Default OFF; also requires SERVER_AUTH
+// (objective items are graded on the server from the paper's own key). Needs supabase/migrations/20261129000000_exam_attempts.sql applied by hand.
+export const MOCK_EXAMS_ENABLED = process.env.NEXT_PUBLIC_MOCK_EXAMS_ENABLED === "true";
+
 // Children log in with username; Supabase Auth needs an email. This synthetic address is
 // internal only (.invalid is a reserved TLD) and is never shown in the UI.
 export const KID_EMAIL_DOMAIN = "kids.genius.invalid";
