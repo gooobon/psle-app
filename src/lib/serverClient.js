@@ -1,10 +1,11 @@
 // Browser-side helpers for the optional Supabase server (only used when NEXT_PUBLIC_SERVER_AUTH=true).
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
-export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS } from "@/lib/supabase/config";
-import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW } from "@/lib/supabase/config";
+export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD } from "@/lib/supabase/config";
+import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD } from "@/lib/supabase/config";
 
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
+import { skillIdsOf } from "@/lib/similarItemsCore";
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
 import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
 import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
@@ -168,4 +169,37 @@ export async function reportWeeklyReview(subject, items) {
   const r = await serverPost("/api/student/rewards/weekly", { subject, items });
   if (typeof window !== "undefined") window.dispatchEvent(new Event("genius-rewards-changed"));
   return r;
+}
+
+// ── Learning dashboard trial sync (flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED, default off) ──
+// Copies mastery-mode trials (exam/mock/drill/homework) from local progress to the server. Never modifies or clears local data.
+// The only storage written is the new additive marker genius_learning_sync_v1 = { "<user>_<grade>_<subject>": lastSyncedTs }.
+const LD_MARKER = "genius_learning_sync_v1";
+const LD_MODES = ["exam", "mock", "drill", "homework"];
+const UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+const ldBusy = {};
+export async function syncLearningTrials(userId, grade, subject, prog) {
+  if (!_SA || !_LD || !UUID_RE.test(String(userId || "")) || (subject !== "English" && subject !== "Chinese")) return { skipped: true };
+  const key = `${userId}_${grade}_${subject}`;
+  if (ldBusy[key]) return { skipped: true };
+  const mk = lsJson(LD_MARKER, {});
+  const since = Number(mk[key]) || 0;
+  const fresh = ((prog && prog.trials) || []).filter(x => x && x.itemId != null && x.skill && typeof x.ts === "number" && x.ts > since && LD_MODES.includes(x.mode));
+  if (!fresh.length) return { skipped: true };
+  ldBusy[key] = true;
+  try {
+    const items = fresh.map(x => {
+      const leaf = skillIdsOf(taxonomyIdsFor(x.itemId) || [])[0]; // taxonomy v1 leaf skill when the item is confidently tagged
+      return { itemId: String(x.itemId), skill: leaf || x.skill, mode: x.mode, firstTry: !!x.firstTry, correct: !!x.correct,
+        weight: typeof x.weight === "number" ? x.weight : 1, sessionNum: x.sessionNum, ts: x.ts, grade, subject };
+    });
+    let top = since;
+    for (let i = 0; i < items.length; i += 300) {
+      const r = await serverPost("/api/learning/trials", { items: items.slice(i, i + 300) });
+      if (!r.ok) break;
+      top = Math.max(top, ...fresh.slice(i, i + 300).map(x => x.ts));
+    }
+    if (top > since) { try { localStorage.setItem(LD_MARKER, JSON.stringify({ ...lsJson(LD_MARKER, {}), [key]: top })); } catch {} }
+    return { ok: top > since };
+  } finally { ldBusy[key] = false; }
 }

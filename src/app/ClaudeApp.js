@@ -47,6 +47,7 @@ import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn 
 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook, { MistakePatterns } from '@/components/MistakeNotebook';
+import LearningDashboard from '@/components/LearningDashboard'; // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off)
 import ParentHomework from '@/components/ParentHomework';
 import { StickerShelf, WeeklyReviewCard } from '@/components/Rewards'; // step 9 (flag NEXT_PUBLIC_REWARDS_ENABLED, default off)
 import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId, patternSummary } from '@/lib/wrongNotebook';
@@ -60,7 +61,7 @@ const ZH_ROUND_INDEX = indexSets([...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])]);
 const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
-import { SERVER_AUTH, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, LEARNING_DASHBOARD, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
 
@@ -196,6 +197,7 @@ function getProgress(userId, grade, subject){
 function setProgress(userId, grade, subject, data){
   const key = `${userId}_${grade}_${subject}`;
   persistProgressLS(key, data);
+  syncLearningTrials(userId, grade, subject, data).catch(()=>{}); // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off); copy only, fire-and-forget
 }
 
 function makeSeedHistory(userId){
@@ -2048,6 +2050,7 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
           </div>
 
           <MistakePatterns summary={patternSummary(filtered, getTagIndex())}/>
+          {notebook&&SERVER_AUTH&&LEARNING_DASHBOARD&&<LearningDashboard self subject={isZh?"Chinese":"English"}/>}
           {notebook&&<MistakeNotebook items={filtered} onCause={notebook.onCause} onTrySimilar={notebook.onTrySimilar} similarFor={notebook.similarFor}/>}
           {/* STEP2C_NO_MISTAKE_LIST */}
           {/* Per-mistake cards removed: re-solving lives in the By Round tab. */}

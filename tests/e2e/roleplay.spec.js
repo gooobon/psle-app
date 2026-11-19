@@ -496,12 +496,26 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const payouts = await dbGet("reward_payouts?select=credits,amount_sgd,note");
   record("parent A", "Mark a payout as paid", "A confirmed balance can be marked paid and the note is kept", unpaid > 0 ? ("Paid " + (payouts[0] && payouts[0].credits) + " credits, S$" + (payouts[0] && payouts[0].amount_sgd) + ", note " + (payouts[0] && payouts[0].note)) : "No confirmed balance to pay", payouts.length === 1 && payouts[0].note === "Friday pocket money" ? "PASS" : "FAIL", file);
 
+  // Learning dashboard (issue #42). Needs NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED=true, which the runner sets for this local run only.
+  async function learningView(page) {
+    await page.getByRole("button", { name: /📈 Learning/ }).click();
+    await page.getByTestId("learning-dashboard").waitFor({ timeout: 20000 });
+    await page.getByTestId("learning-skill").first().waitFor({ timeout: 20000 });
+    return {
+      trend: (await page.getByTestId("learning-trend").innerText()).trim(),
+      skills: await page.getByTestId("learning-skill").count(),
+      causes: await page.getByTestId("learning-cause").count(),
+      text: await bodyText(page),
+    };
+  }
+  const kid = await childId();
+  const synced = await dbGet("learning_trials?student_id=eq." + kid + "&select=skill,weight,mode&subject=eq.English");
+  const viewA = await learningView(pp);
+  file = await snap(pp, "20-learning");
+  const okA = synced.length > 0 && viewA.skills > 0 && viewA.causes > 0 && /Mastery by skill/.test(viewA.text) && /Why answers were wrong/.test(viewA.text) && /Improving|Flat|Slipping|Not enough practice yet/.test(viewA.trend);
+  record("parent A", "Learning dashboard: mastery, causes, and whether the child is improving", "Learning tab shows mastery by skill, 14-day cause bars and an improving / flat / slipping word, from synced trials", synced.length + " synced English trials; trend '" + viewA.trend + "'; " + viewA.skills + " skills; " + viewA.causes + " cause rows", okA ? "PASS" : "FAIL", file);
+
   await pp.getByRole("button", { name: /Overview/ }).click();
-  file = await snap(pp, "20-overview");
-  const overview = await bodyText(pp);
-  const hasSessions = /Sessions/.test(overview) && /Section Performance|All Sessions/.test(overview);
-  record("parent A", "Learning dashboard: mastery, causes, and whether the child is improving", "A dashboard of mastery trend per subject and skill, cause trends over time, and a clear improving or slipping judgement, shared by both parents", hasSessions ? "Overview shows session average, a last-3 trend, section bars and a session table from this browser's history. It does not show skill mastery over time, cause trends, or a server copy the other parent can open." : "Overview did not show the session summary.", "GAP", file);
-  ux("There is no learning dashboard for mastery-by-skill or cause trends. The Overview tab is a local session summary for one subject. Proposal: a Learning tab fed by the synced trials and wrong-answer causes, with mastery now versus 7 days ago per skill, a cause bar for the last 14 days, and one line that says improving, flat, or slipping from the first-try rate.");
 
   await pp.getByText(/Did Amir Tan do it today/).scrollIntoViewIfNeeded();
   file = await snap(pp, "21-friday-done");
@@ -715,6 +729,14 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   file = await snap(pp, "32-week-strip");
   const strip = await bodyText(pp);
   record("parent A", "Daily status across the practised days", "The 7-day strip and today's line show which days were done", strip.includes("Did Amir Tan do it today") ? "Today card is on the dashboard" : "Today card missing", strip.includes("Did Amir Tan do it today") ? "PASS" : "FAIL", file);
+
+  await pb.bringToFront();
+  await pb.goto("/");
+  await ensureParent(pb, PARENT_B.email, PARENT_B.password);
+  const viewB = await learningView(pb);
+  file = await snap(pb, "33-learning-parent-b");
+  const okB = viewB.skills === viewA.skills && viewB.causes === viewA.causes;
+  record("parent B", "Learning dashboard is the same for the other linked parent", "Parent B sees the same skills and cause rows as parent A", viewB.skills + " skills, " + viewB.causes + " cause rows (A: " + viewA.skills + ", " + viewA.causes + ")", okB ? "PASS" : "FAIL", file);
 
   const fails = STEPS.filter((s) => s.status === "FAIL").length;
   const gaps = STEPS.filter((s) => s.status === "GAP").length;
