@@ -101,7 +101,7 @@ export async function notifyEvent(admin, event, { env = process.env, now = new D
     const { data: child } = await admin.from("profiles").select("id,display_name").eq("id", event.childId).maybeSingle();
     const payloadBase = {
       kind: event.type, childName: child?.display_name || "Your child", subject: event.subject, label: event.label,
-      score: event.score, total: event.total, time: sgtClock(now), eventDay: day, dashboardUrl: dashboardUrl(env),
+      score: event.score, total: event.total, pending: event.pending || 0, time: sgtClock(now), eventDay: day, dashboardUrl: dashboardUrl(env),
     };
     for (const pid of [...new Set((links || []).map((l) => l.parent_id))]) {
       out.parents++;

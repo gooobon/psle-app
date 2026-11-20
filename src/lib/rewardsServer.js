@@ -56,7 +56,7 @@ export async function loadRewardRule(admin, childId, ymd) {
 // forfeits it. One credit per child per subject per Saturday (the ledger's unique key), one 'paper' sticker per Saturday.
 // The app never moves real money. Never throws: a failure only means no reward now (nothing is lost; the attempt is already saved).
 // Returns { saturday, eligible, reason, credits, awarded, sticker, homework? } for the result screen.
-export async function awardPaperReward(admin, { childId, subject, day, status, counts }) {
+export async function awardPaperReward(admin, { childId, subject, day, status, counts, scorePct = null }) {
   const out = { saturday: !!day && isSaturday(day), eligible: false, reason: "not_saturday", credits: 0, awarded: false, sticker: false };
   try {
     if (!out.saturday) return out;
@@ -73,7 +73,7 @@ export async function awardPaperReward(admin, { childId, subject, day, status, c
     if (credits > 0) {
       const r = await admin.rpc("award_credit", {
         p_parent: rr.parentId, p_child: childId, p_kind: "paper", p_period: day, p_subject: subject,
-        p_credits: credits, p_rate: rr.rule.sgdPerCredit, p_score_pct: null, p_effective: rr.rule.effectiveFrom, p_gate_day: day,
+        p_credits: credits, p_rate: rr.rule.sgdPerCredit, p_score_pct: Number.isInteger(scorePct) ? scorePct : null, p_effective: rr.rule.effectiveFrom, p_gate_day: day,
       });
       out.awarded = !r.error && !!(r.data && r.data.awarded);
     }

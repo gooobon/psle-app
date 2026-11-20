@@ -7,6 +7,7 @@
 import React from 'react';
 import { serverGet, serverPost } from '@/lib/serverClient';
 import OrderTap from '@/components/OrderTap';
+import { scoreText } from '@/lib/examScore';
 import { remainingSeconds, isAnswered, WARN_MINUTES } from '@/lib/examEngine';
 import { CAUSES } from '@/lib/wrongNotebook';
 
@@ -246,14 +247,14 @@ function Result({ r, onDone, onReview }) {
     <div style={{ padding: 16 }}>
       <div style={card}>
         <div style={{ fontSize: 18, fontWeight: 900 }}>{a.label}</div>
-        <div style={{ fontSize: 15, marginTop: 6 }}>Score: <b>{a.score}/{a.total}</b> (auto-marked) · Answered {a.answered}/{a.questionCount} · Time used {fmt(a.elapsedSeconds || 0)}</div>
-        {a.openTotal ? <div style={note}>{a.openTotal} open-ended question{a.openTotal === 1 ? '' : 's'} will be marked by your parent.</div> : null}
+        <div style={{ fontSize: 15, marginTop: 6 }}>Score: <b>{scoreText(a)}</b> · Answered {a.answered}/{a.questionCount} · Time used {fmt(a.elapsedSeconds || 0)}</div>
+        {a.pending ? <div style={note}>{a.pending} open-ended question{a.pending === 1 ? '' : 's'} will be marked by your parent. Your score, today's set credit and any reward settle when they are marked.</div> : a.openTotal ? <div style={note}>Your parent marked the open-ended questions: final score {a.score}/{a.total}{a.pct == null ? '' : ' (' + a.pct + '%)'}.</div> : null}
         {a.status === 'auto_submitted' ? <div style={note}>Time ran out, so your paper was handed in automatically.</div> : null}
         <div style={{ ...note, marginTop: 8 }}>{a.counts ? 'This paper counts as today\'s set.' : 'This paper did not count as a set: it needs at least half the time used or 80% of the questions answered.'}</div>
         {rw ? <div style={{ ...note, marginTop: 8, color: '#065F46', fontWeight: 700 }}>{rw}</div> : null}
       </div>
       <div style={card}>
-        <div style={{ fontWeight: 800, marginBottom: 6 }}>By section</div>
+        <div style={{ fontWeight: 800, marginBottom: 6 }}>By section (auto-marked items)</div>
         {(a.sections || []).map((s) => <div key={s.section} style={{ fontSize: 14 }}>{s.section}: {s.score}/{s.total}</div>)}
       </div>
       {bad.length ? <div style={card}><div style={{ fontWeight: 800 }}>{bad.length} to review</div><div style={note}>Open the review to see each answer and the explanation. Missed questions are also added to your notebook.</div></div> : null}
@@ -298,7 +299,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
       {head}
       <div style={card}>
         <div style={{ fontWeight: 800 }}>{d.attempt.label}</div>
-        <div style={note}>Score {d.attempt.score}/{d.attempt.total} · {todo.length} to review</div>
+        <div style={note}>Score {scoreText(d.attempt)} · {todo.length} to review</div>
         {skipped > 0 ? <div style={note}>To keep your notebook manageable, {skipped} missed question{skipped === 1 ? ' is' : 's are'} listed here but not added to it.</div> : null}
         <div style={{ marginTop: 8 }}>
           <button style={{ ...ghost, background: all ? '#F1F5F9' : '#EDE9FE' }} onClick={() => setAll(false)}>To review</button>{' '}
@@ -394,7 +395,7 @@ export default function PaperExam({ onBack, onNotebook, onCause }) {
       {!d && !err ? <div style={{ ...card, color: '#64748B', fontSize: 13 }}>Loading…</div> : null}
       {d && d.autoSubmitted ? (
         <div style={{ ...card, background: '#ECFDF5', fontSize: 13 }}>
-          <b>{d.autoSubmitted.label}</b>: time ran out, so your saved answers were handed in automatically. Score {d.autoSubmitted.score}/{d.autoSubmitted.total}.
+          <b>{d.autoSubmitted.label}</b>: time ran out, so your saved answers were handed in automatically. Score {scoreText(d.autoSubmitted)}.
         </div>
       ) : null}
       {d && d.open ? (
@@ -422,7 +423,7 @@ export default function PaperExam({ onBack, onNotebook, onCause }) {
       {d && d.attempts.length ? (
         <div style={card}>
           <div style={{ fontWeight: 800, marginBottom: 6 }}>Your papers</div>
-          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13, display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}><span>{a.label}: {a.score}/{a.total}{a.counts ? '' : ' (did not count)'}</span><button style={{ ...ghost, padding: '2px 8px', fontSize: 11 }} onClick={() => setReviewId(a.id)}>Review</button></div>)}
+          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13, display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}><span>{a.label}: {scoreText(a)}{a.counts ? '' : ' (did not count)'}</span><button style={{ ...ghost, padding: '2px 8px', fontSize: 11 }} onClick={() => setReviewId(a.id)}>Review</button></div>)}
         </div>
       ) : null}
     </div>

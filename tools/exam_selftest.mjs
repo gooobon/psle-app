@@ -189,7 +189,7 @@ ok("email: papers block appears only when there is something to report", () => {
     { status: "in_progress", paper_label: "Tao Nan 2025", deadline_at: "2099-01-01T00:00:00Z" }], "2026-11-20");
   base.children[0].papers = blk;
   const m = T.renderDailyEmail(base);
-  assert.ok(m.text.includes("Nanyang 2024 EOY: 30/40 (75%) · 50 of 75 min used") && m.text.includes("3 open-ended to mark") && m.text.includes("Tao Nan 2025: started, not handed in"));
+  assert.ok(m.text.includes("Nanyang 2024 EOY: 30/40 + 3 awaiting parent marking · 50 of 75 min used") && m.text.includes("Tao Nan 2025: started, not handed in"));
   assert.ok(m.html.includes("Mock papers"));
 });
 // ── flag + migration (static) ──
@@ -333,7 +333,7 @@ ok("post-submit writes live in examPostSubmit (best effort, ignoreDuplicates) an
   assert.ok(/onConflict: "student_id,subject,question_id,attempt_key", ignoreDuplicates: true/.test(m));
   assert.ok(/onConflict: "student_id,dedupe_key", ignoreDuplicates: true/.test(m) && /mode: "mock"/.test(m) && /weight: 1/.test(m) && /server_graded: true/.test(m));
   assert.ok(/if \(!LEARNING_DASHBOARD\)/.test(m));
-  assert.equal((m.match(/catch \{/g) || []).length, 2);
+  assert.equal((m.match(/catch \{/g) || []).length, 3); // writeNotebook, recordMockTrials, settleAttempt (issue #62)
   const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
   assert.ok(/awardPaperReward\(admin/.test(r) && /writeNotebook\(admin/.test(r) && /recordMockTrials\(admin/.test(r));
   assert.ok(r.indexOf('from("exam_answers").upsert(rows') < r.indexOf("writeNotebook(admin"), "answers are saved before the extras run");
@@ -476,7 +476,7 @@ const route = async (db, flagOn = true) => loadSource("src/app/api/student/exam/
   "@/lib/supabase/config": { MOCK_EXAMS_ENABLED: flagOn },
   "@/lib/rateLimit": { rateLimit: () => true, clientIp: () => "1" },
   "@/lib/activity": await import("../src/lib/activity.js"),
-  "@/lib/examServer": S, "@/lib/examEngine": E,
+  "@/lib/examServer": S, "@/lib/examEngine": E, "@/lib/examScore": await import("../src/lib/examScore.js"),
   "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) }, "@/lib/notify/weeklyReport.mjs": { sendForChild: async () => ({}) },
   "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"),
   "@/lib/notify/eventAlerts.mjs": { notifyEvent: async () => ({ enabled: false }) }, // alerts are covered by tools/event_alerts_selftest.mjs
@@ -657,7 +657,7 @@ await aok("pending -> confirmed/forfeited follows the homework gate (finalize_cr
 });
 
 await aok("mastery counts only the first sitting: a retake of the same paper writes no new mock trials", async () => {
-  const PS = await loadSource("src/lib/examPostSubmit.js", { "@/lib/supabase/config": { LEARNING_DASHBOARD: true }, "@/lib/examServer": S }, "return { recordMockTrials };");
+  const PS = await loadSource("src/lib/examPostSubmit.js", { "@/lib/supabase/config": { LEARNING_DASHBOARD: true }, "@/lib/examServer": S, "@/lib/examScore": await import("../src/lib/examScore.js"), "@/lib/rewardsServer": { awardPaperReward: async () => ({}) } }, "return { recordMockTrials };");
   const db = fakeDb(); const g = S.gradeSubmission(paperId, {});
   const a1 = { id: UUID1, student_id: SID, paper_id: paperId, grade: "P3" }, a2 = { ...a1, id: "77777777-7777-7777-7777-777777777777" };
   const r1 = await PS.recordMockTrials(db, a1, g, Date.now());

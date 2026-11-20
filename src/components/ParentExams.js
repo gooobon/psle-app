@@ -5,6 +5,7 @@
 import React from 'react';
 import { SERVER_AUTH, MOCK_EXAMS_ENABLED, serverGet, serverPost } from '@/lib/serverClient';
 import { FLAG_NOTES } from '@/lib/examEngine';
+import { scoreText } from '@/lib/examScore';
 
 const box = { background: '#fff', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 14px', marginBottom: 12 };
 const fmt = (s) => `${Math.floor((s || 0) / 60)} min ${(s || 0) % 60}s`;
@@ -25,7 +26,8 @@ export default function ParentExams({ child }) {
   if (!d) return <div style={{ ...box, fontSize: 13, color: '#64748B' }}>Loading…</div>;
   async function mark(attemptId, questionId, correct) {
     const r = await serverPost('/api/parent/exam', { attemptId, questionId, correct });
-    if (r.ok) setKey((k) => k + 1); else setErr(r.error || 'Could not save the mark.');
+    if (r.ok) setKey((k) => k + 1); // the score, percentage and the child's reward refresh from the server
+    else setErr(r.error || 'Could not save the mark.');
   }
   if (!d.attempts.length) return <div style={{ ...box, fontSize: 13 }}>No mock papers yet.</div>;
   return (
@@ -34,7 +36,7 @@ export default function ParentExams({ child }) {
         <div key={a.id} style={box}>
           <div style={{ fontWeight: 800 }}>{a.label}</div>
           <div style={{ fontSize: 13, marginTop: 4 }}>
-            Score {a.score}/{a.total} (auto-marked) · answered {a.answered}/{a.questionCount} · time {fmt(a.elapsedSeconds)} of {a.minutes} min
+            Score {scoreText(a)}{a.settled && a.openTotal ? ' (final, with your marks)' : ''}{a.pct != null && a.settled ? ' · ' + a.pct + '%' : ''} · answered {a.answered}/{a.questionCount} · time {fmt(a.elapsedSeconds)} of {a.minutes} min
             {a.status === 'auto_submitted' ? ' · handed in automatically' : ''}
           </div>
           <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>{a.counts ? 'Counted as the daily set.' : 'Did not count (under half the time used and under 80% answered).'}</div>

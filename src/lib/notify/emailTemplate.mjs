@@ -12,7 +12,7 @@ export const COPY = {
     stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes}`,
     streak: (c) => `Streak: ${c.streak} day${c.streak === 1 ? "" : "s"} · Active ${c.activeDays} of the last 7 days`,
     paperHeading: "Mock papers",
-    paperDone: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`} · ${x.minutesUsed} of ${x.minutesAllowed} min used${x.counted ? "" : " · did not count as a set"} · ${x.toReview} question${x.toReview === 1 ? "" : "s"} to review${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperDone: (x) => `${x.label}: ${paperScore(x)} · ${x.minutesUsed} of ${x.minutesAllowed} min used${x.counted ? "" : " · did not count as a set"} · ${x.toReview} question${x.toReview === 1 ? "" : "s"} to review`,
     paperUnfinished: (x) => `${x.label}: started, not handed in${x.expired ? " (time is up)" : ""}`,
     dashboard: "Open the parent dashboard",
     footer: "You get this because daily email alerts are on for your parent account.",
@@ -25,6 +25,11 @@ export function paperLines(c, t) {
   if (!p || (!(p.done || []).length && !(p.unfinished || []).length)) return [];
   return [t.paperHeading, ...(p.done || []).map(t.paperDone), ...(p.unfinished || []).map(t.paperUnfinished)];
 }
+
+// "2/36 + 4 awaiting parent marking" while open-ended items are unmarked, "30/40 (75%)" once everything is marked (issue #62).
+// x: { score, total, pct, pending } where score / total already include the parent's marks so far.
+export const paperScore = (x) => `${x.score}/${x.total}${x.pending ? ` + ${x.pending} awaiting parent marking` : x.pct == null ? "" : ` (${x.pct}%)`}`;
+const awaiting = (p) => (p.pending ? ` + ${p.pending} awaiting parent marking` : "");
 
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
@@ -76,7 +81,7 @@ export const COPY_WEEKLY = {
     homework: (h) => (h.assigned ? `Homework: ${h.solved} of ${h.assigned} solved${h.notDone ? ` · ${h.notDone} not done` : ""}` : "Homework: none assigned this week."),
     credits: (r) => `Credits: ${r.confirmed} confirmed${r.sgd ? ` (S$${r.sgd})` : ""} · ${r.pending} pending · ${r.forfeited} forfeited (homework not finished)`,
     paperHeading: "Mock exam / past paper this week",
-    paperLine: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`}${x.counted ? "" : " · did not count as a set"}${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperLine: (x) => `${x.label}: ${paperScore(x)}${x.counted ? "" : " · did not count as a set"}`,
     paperNone: "No mock exam or past paper handed in this week.",
     dashboard: "Open the parent dashboard",
     footer: "You get this weekly report because email alerts are on for your parent account.",
@@ -142,7 +147,7 @@ export function renderSettingChangeEmail(p) {
 // Real-time event email (issue #56), used as the fallback when WhatsApp is not usable.
 // payload: { kind:"started"|"milestone", parentName, childName, subject, label, score, total, time, dashboardUrl }
 export function renderEventEmail(p) {
-  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)` : "completed";
+  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)${awaiting(p)}` : p.pending ? `${p.pending} awaiting parent marking` : "completed";
   const line = p.kind === "started"
     ? `${p.childName} has started ${p.subject} practice${p.time ? ` at ${p.time} (Singapore time)` : ""}.`
     : `${p.childName} finished ${p.subject}: ${p.label || "practice set"}. Result: ${result}.`;

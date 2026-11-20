@@ -15,6 +15,7 @@ import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, clea
 import { awardPaperReward } from "@/lib/rewardsServer";
 import { sendForChild } from "@/lib/notify/weeklyReport.mjs";
 import { writeNotebook, recordMockTrials } from "@/lib/examPostSubmit";
+import { attemptScore } from "@/lib/examScore";
 import { notifyEvent } from "@/lib/notify/eventAlerts.mjs";
 import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS, canReview, notebookAttemptKey, suggestedCause } from "@/lib/examEngine";
 
@@ -24,12 +25,18 @@ const MAX_BODY = 200_000;
 const UUID = /^[0-9a-f-]{36}$/i;
 const CAUSES = ["concept_unknown", "misread", "calculation", "trap", "time", "guessed"]; // CHECK constraint on wrong_answers.cause
 
-const attemptOut = (a) => ({
-  id: a.id, paperId: a.paper_id, label: a.paper_label, flags: a.paper_flags || [], minutes: a.minutes_allowed, status: a.status,
-  startedAt: a.started_at, deadlineAt: a.deadline_at, submittedAt: a.submitted_at, score: a.score, total: a.total, answered: a.answered,
-  questionCount: a.question_count, unanswered: a.unanswered, openTotal: a.open_total, sections: a.section_scores || [], counts: a.counts,
-  countsReason: a.counts_reason, elapsedSeconds: a.elapsed_seconds, attemptNo: a.attempt_no,
-});
+// score / total INCLUDE the parent's marks so far (issue #62); autoScore / autoTotal are the auto-marked items only. pending = open-ended
+// items still waiting for the parent; settled = nothing waiting (the score is final).
+const attemptOut = (a) => {
+  const s = attemptScore(a);
+  return {
+    id: a.id, paperId: a.paper_id, label: a.paper_label, flags: a.paper_flags || [], minutes: a.minutes_allowed, status: a.status,
+    startedAt: a.started_at, deadlineAt: a.deadline_at, submittedAt: a.submitted_at, score: s.score, total: s.total, pending: s.pending, settled: s.settled, pct: s.pct,
+    autoScore: s.autoScore, autoTotal: s.autoTotal, parentMarked: s.marked, parentRight: s.right, answered: a.answered,
+    questionCount: a.question_count, unanswered: a.unanswered, openTotal: a.open_total, sections: a.section_scores || [], counts: a.counts,
+    countsReason: a.counts_reason, elapsedSeconds: a.elapsed_seconds, attemptNo: a.attempt_no,
+  };
+};
 
 // Draft answers saved so far for an open attempt (the student's own; never a key or a verdict). Used to resume on another device.
 async function loadDraft(admin, attemptId) {
@@ -76,12 +83,17 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   }
   // Phase 2. Each step is best effort and never undoes or blocks the hand-in: the attempt and its answers are already saved.
   const notebook = await writeNotebook(admin, upd.data, g, endMs);
-  const trials = await recordMockTrials(admin, upd.data, g, endMs);
-  const reward = await awardPaperReward(admin, { childId: sid, subject: "English", day, status, counts: verdict.counts });
+  // Open-ended items waiting for the parent (issue #62): the first-attempt trials, the Saturday credit and the sticker stay pending until the
+  // last one is marked (examPostSubmit.settleAttempt), then settle from the final score. A paper with nothing to mark settles right here.
+  const waiting = g.ungraded > 0;
+  const trials = waiting ? { recorded: 0, skipped: "awaiting_parent_marking" } : await recordMockTrials(admin, upd.data, g, endMs);
+  const reward = waiting
+    ? { saturday: false, eligible: false, reason: "awaiting_parent_marking", credits: 0, awarded: false, sticker: false, pending: true }
+    : await awardPaperReward(admin, { childId: sid, subject: "English", day, status, counts: verdict.counts, scorePct: g.total ? Math.round((g.score / g.total) * 100) : null });
   // Saturday milestone (issue #55): the weekly parent report goes out after a Saturday paper too. sendForChild no-ops off Saturday, dedupes per week, never throws.
   await sendForChild(admin, sid);
   // Milestone alert for a handed-in paper (best effort; off unless WHATSAPP_ENABLED=true; key per attempt so it cannot send twice).
-  await notifyEvent(admin, { type: "milestone", childId: sid, subject: "English", key: "paper-" + id, label: a.paper_label || "past paper", score: g.score, total: g.total });
+  await notifyEvent(admin, { type: "milestone", childId: sid, subject: "English", key: "paper-" + id, label: a.paper_label || "past paper", score: g.score, total: g.total, pending: g.ungraded });
   return { attempt: upd.data, daily, g, notebook, trials, reward };
 }
 

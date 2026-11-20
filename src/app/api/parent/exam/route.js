@@ -5,6 +5,8 @@
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { modelAnswersForParent } from "@/lib/examServer";
+import { attemptScore } from "@/lib/examScore";
+import { settleAttempt } from "@/lib/examPostSubmit";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -40,9 +42,11 @@ export async function GET(request) {
     const items = byAttempt[a.id] || [];
     const models = modelAnswersForParent(a.paper_id, items.map((i) => i.question_id));
     const text = (v) => (v == null ? "" : Array.isArray(v) ? v.filter((x) => x != null).join("; ") : String(v));
+    const sc = attemptScore(a); // score / total include the marks given so far; pending = still waiting for a mark
     return {
       id: a.id, label: a.paper_label, flags: a.paper_flags || [], status: a.status, submittedAt: a.submitted_at, minutes: a.minutes_allowed,
-      elapsedSeconds: a.elapsed_seconds, score: a.score, total: a.total, answered: a.answered, questionCount: a.question_count,
+      elapsedSeconds: a.elapsed_seconds, score: sc.score, total: sc.total, pending: sc.pending, settled: sc.settled, pct: sc.pct,
+      autoScore: sc.autoScore, autoTotal: sc.autoTotal, answered: a.answered, questionCount: a.question_count,
       unanswered: a.unanswered, sections: a.section_scores || [], counts: a.counts, countsReason: a.counts_reason, openTotal: a.open_total || 0,
       open: items.map((i) => ({
         questionId: i.question_id, question: (models[i.question_id] || {}).question || "", modelAnswer: (models[i.question_id] || {}).answer || "",
@@ -68,5 +72,9 @@ export async function POST(request) {
     .eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).select("question_id");
   if (error) return jerr("could not save", 500);
   if (!data || !data.length) return jerr("not an open-ended item", 404);
-  return jok();
+  // The mark now counts in the paper score. The last mark settles the attempt (final score, first-attempt trials, Saturday credit).
+  const st = await settleAttempt(admin, attemptId);
+  if (!st.ok) return jerr(st.error || "saved the mark but could not update the score", 500);
+  const sc = attemptScore(st.attempt);
+  return jok({ score: sc.score, total: sc.total, pending: sc.pending, settled: sc.settled, pct: sc.pct, settledNow: st.settledNow === true });
 }

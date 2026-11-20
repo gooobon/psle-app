@@ -70,7 +70,7 @@ export function formatWhatsApp(raw) {
 // Event message. payload: { kind: "started"|"milestone", parentName, childName, subject, label, score, total, time }
 export function formatWhatsAppEvent(p) {
   const t = EVENT_TEMPLATES[p.kind === "started" ? "started" : "milestone"];
-  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)` : "completed";
+  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)${p.pending ? ` + ${p.pending} awaiting parent marking` : ""}` : p.pending ? `${p.pending} awaiting parent marking` : "completed";
   const raw = p.kind === "started"
     ? [p.parentName, p.childName, p.subject, p.time]
     : [p.parentName, p.childName, p.subject, p.label || "practice set", result];

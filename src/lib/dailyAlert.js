@@ -1,5 +1,6 @@
 // Server-only alert helpers. The daily 20:00 parent summary was REMOVED in issue #55: the weekly report lives in src/lib/notify/weeklyReport.mjs.
 // What remains here: shared helpers (dashboardUrl, channelsFor, emailConfirmed, paperBlock) and the co-parent setting-change notice.
+import { attemptScore } from "@/lib/examScore";
 import { dispatchAlert } from "@/lib/notify/index.mjs";
 import { renderSettingChangeEmail } from "@/lib/notify/emailTemplate.mjs";
 
@@ -24,9 +25,9 @@ export function paperBlock(rows, today, now = new Date()) {
   if (!done.length && !open.length) return null;
   return {
     done: done.map((r) => ({
-      label: r.paper_label || "Past paper", score: r.score, total: r.total, pct: r.total ? Math.round((r.score / r.total) * 100) : null,
+      label: r.paper_label || "Past paper", score: attemptScore(r).score, total: attemptScore(r).total, pct: attemptScore(r).pct, pending: attemptScore(r).pending,
       minutesUsed: Math.round((r.elapsed_seconds || 0) / 60), minutesAllowed: r.minutes_allowed, counted: r.counts !== false,
-      toReview: Math.max(0, (r.total || 0) - (r.score || 0)), openToMark: r.open_total || 0,
+      toReview: Math.max(0, attemptScore(r).total - attemptScore(r).score), openToMark: attemptScore(r).pending,
     })),
     unfinished: open.map((r) => ({ label: r.paper_label || "Past paper", expired: Date.parse(r.deadline_at) <= now.getTime() })),
   };
