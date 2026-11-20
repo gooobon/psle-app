@@ -516,15 +516,19 @@ ok("items stored as multiple choice with no options are excluded from the score,
     if (ex.length) noKey.push({ p, g, ex });
     else withKey.push(p);
   }
-  assert.ok(noKey.length > 0, "the real papers include such items");
-  const { p, g, ex } = noKey[0];
-  assert.ok(ex.every((r) => r.correct === null), "excluded items are not graded wrong");
-  assert.equal(g.total + g.ungraded + ex.length, g.rows.length, "excluded items are in neither the total nor the open count");
-  assert.equal(g.count, g.rows.length - ex.length);
-  assert.ok(g.unanswered <= g.count);
-  assert.ok(S.reviewItems(p.id, [], "submitted").filter((i) => ex.some((r) => r.id === i.id)).every((i) => i.keyMissing && !i.openEnded && i.correctAnswer === ""));
-  assert.ok(!S.notebookRows(p.id, g, { studentId: "s", attemptId: "a", nowIso: "t" }).rows.some((r) => ex.some((x) => x.id === r.question_id)));
-  assert.ok(!S.mockTrialCandidates(p.id, g).some((c) => ex.some((x) => x.id === c.itemId)));
+  // Issue #54: option-map parsing and reclassification mean no offered paper has an option-less MCQ item any more, so the exclusion is a
+  // safety net that the real data no longer triggers. The checks on real items run only if one ever appears again.
+  assert.ok(withKey.length > 0, "every offered paper is graded");
+  if (noKey.length) {
+    const { p, g, ex } = noKey[0];
+    assert.ok(ex.every((r) => r.correct === null), "excluded items are not graded wrong");
+    assert.equal(g.total + g.ungraded + ex.length, g.rows.length, "excluded items are in neither the total nor the open count");
+    assert.equal(g.count, g.rows.length - ex.length);
+    assert.ok(g.unanswered <= g.count);
+    assert.ok(S.reviewItems(p.id, [], "submitted").filter((i) => ex.some((r) => r.id === i.id)).every((i) => i.keyMissing && !i.openEnded && i.correctAnswer === ""));
+    assert.ok(!S.notebookRows(p.id, g, { studentId: "s", attemptId: "a", nowIso: "t" }).rows.some((r) => ex.some((x) => x.id === r.question_id)));
+    assert.ok(!S.mockTrialCandidates(p.id, g).some((c) => ex.some((x) => x.id === c.itemId)));
+  }
   const sum = E.summarize([{ section: "a", correct: true }, { section: "a", correct: null, excluded: true }, { section: "a", correct: false }]);
   assert.deepEqual([sum.score, sum.total, sum.ungraded], [1, 2, 0]);
   const fs_ = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");

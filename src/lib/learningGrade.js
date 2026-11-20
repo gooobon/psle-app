@@ -52,6 +52,7 @@ function gradeComprehension(q, a) {
   }
   if (f === "sequence") {
     const items = q.sequenceItems || q.items || [];
+    if (!items.length) return null; // no printed slots to check: an empty list must not read as "all correct"
     const correct = Array.isArray(q.answer) ? q.answer : String(q.answer || "").split(",").map(Number);
     const seq = Array.isArray(a.seq) ? a.seq : [];
     return items.every((_, i) => parseInt(seq[i] || "0", 10) === correct[i]);
@@ -136,6 +137,8 @@ export function resolveItem(byId, id) {
   if (hit.leaf) { // MCQ family
     const q = hit.leaf;
     if (q.id !== id || typeof q.answer !== "number") return null;
+    // An MCQ with fewer than 2 options cannot be answered, so it is not auto-graded (never an always-wrong item).
+    if (!Array.isArray(q.options) || q.options.length < 2 || q.answer >= q.options.length) return null;
     return { ...base, skill: q.skill || null, trap: trapOf(q), grade: (p) => ({ scored: true, correct: p.val === q.answer }) };
   }
   const c = hit.container, cid = hit.containerId;

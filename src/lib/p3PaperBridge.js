@@ -58,11 +58,20 @@ export function pickChinesePaper({ sessionNum = 1, isPastPaper }) {
 
 // ── English adapters ─────────────────────────────────────────────────────────
 
+const optionText = (o) => (typeof o === "string" ? o : o && typeof o === "object" ? o.text || o.label || String(o) : String(o));
+
+// Options arrive as an array, or (about 105 paper items) as an object map keyed "1".."4" (or "A".."D").
+// The map is read in key order (digits numerically), so the stored answer "1" still means the first option.
+// Source files are not rewritten: this only changes how they are read.
 function parseOptionTexts(options) {
-  if (!Array.isArray(options)) return [];
-  return options.map((o) =>
-    typeof o === "string" ? o : o.text || o.label || String(o),
-  );
+  if (Array.isArray(options)) return options.map(optionText);
+  if (options && typeof options === "object") {
+    const keys = Object.keys(options).filter((k) => options[k] != null && String(optionText(options[k])).trim() !== "");
+    const allDigits = keys.length > 0 && keys.every((k) => /^\d+$/.test(k));
+    keys.sort((a, b) => (allDigits ? Number(a) - Number(b) : a.localeCompare(b)));
+    return keys.map((k) => optionText(options[k]));
+  }
+  return [];
 }
 
 function parseAnswerIndex(answer, options) {
@@ -122,7 +131,7 @@ function toEnglishClozeSet(set) {
     parseWordBankFromInstructions(set.instructions) ||
     [];
   const blanks = (set.questions || set.blanks || []).map((q, i) => {
-    const num = parseInt(q.questionNo || q.num || q.blank || i + 1, 10);
+    const num = parseInt(q.questionNo || q.num || q.blank || q.number || i + 1, 10);
     const rawAns = q.answer ?? q.correctAnswer ?? "";
     const rawAnsStr = String(rawAns);
     const answer =
@@ -140,7 +149,7 @@ function toEnglishClozeSet(set) {
   return {
     id: set.id || set.topic || "cloze_set",
     setLabel: set.setLabel || set.title || set.topic || "Cloze",
-    passage: set.passage || "",
+    passage: set.passage || set.passageText || "",
     wordBank,
     blanks,
   };
@@ -149,13 +158,29 @@ function toEnglishClozeSet(set) {
 function toEnglishEditSet(set) {
   const items = (set.questions || set.items || []).map((q, i) => {
     const options = parseOptionTexts(q.options);
-    const wrongWord = q.wrongWord || q.errorWord || q.highlight || "___";
+    const rawSentence = q.sentence || q.stem || q.question || q.stimulus || "";
+    // Editing is typed: the key is the corrected word as text. (It used to be an option index, which a
+    // typed answer can never equal, so every editing item was marked wrong.)
+    const typedKey = q.correctWord ?? q.correctAnswer;
+    let answer = typedKey != null ? String(typedKey) : q.answer;
+    if (typeof answer === "number" || (typeof answer === "string" && /^[A-Da-d1-4]$/.test(answer.trim()) && options.length >= 2)) {
+      const idx = parseAnswerIndex(answer, options);
+      answer = options[idx] != null ? options[idx] : String(answer);
+    }
+    answer = String(answer == null ? "" : answer).trim();
+    let wrongWord = q.wrongWord || q.errorWord || q.highlight || "";
+    let sentence = rawSentence;
+    if (!wrongWord) {
+      // "They are back [togedder] for ..." -> underline the bracketed word.
+      const br = rawSentence.match(/\[([^\]]+)\]/);
+      if (br) { wrongWord = br[1].trim(); sentence = rawSentence.replace(br[0], br[1]); }
+    }
     return {
       id: q.id || `${set.id || "ed"}_${i}`,
-      sentence: q.sentence || q.stem || q.question || "",
-      wrongWord,
-      options: options.length ? options : [q.answer].filter(Boolean),
-      answer: parseAnswerIndex(q.answer, options),
+      sentence,
+      wrongWord: wrongWord || "___",
+      options: [], // typed answer: the corrected word must not ride along as a choice
+      answer,
       hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
     };
   });
@@ -264,7 +289,7 @@ function compPassageKey(passage) {
     .toLowerCase();
 }
 
-function toEnglishCompSet(set) {
+function toEnglishCompSet(set, skipGenerated) {
   const passage =
     set.passage ||
     set.meta?.passageText ||
@@ -273,7 +298,7 @@ function toEnglishCompSet(set) {
 
   // If we have AI-generated 8-type questions for this passage, use them.
   const genKey = compPassageKey(passage);
-  const gen = genKey ? comprehensionGenerated[genKey] : null;
+  const gen = genKey && !skipGenerated ? comprehensionGenerated[genKey] : null;
   if (gen && Array.isArray(gen.questions) && gen.questions.length > 0) {
     const genQuestions = gen.questions.map((q, i) => {
       const options = parseOptionTexts(q.options);
@@ -341,8 +366,8 @@ function toEnglishCompSet(set) {
       questionNo:       q.questionNo || String(i + 1),
       format:           fmt,
       marks:            q.marks || 1,
-      question:         q.question || q.stem || q.q || "",
-      stem:             q.question || q.stem || q.q || "",
+      question:         q.question || q.stem || q.q || q.questionText || "",
+      stem:             q.question || q.stem || q.q || q.questionText || "",
       options:          tickOptions || options,
       answer,
       sequenceItems,
@@ -363,6 +388,28 @@ function toEnglishCompSet(set) {
   };
 }
 
+
+// ── Standalone items that are not multiple choice ────────────────────────────
+// Past-paper files store many cloze blanks, editing items and comprehension questions as flat items
+// (no `questions` array). classifyEnglishItem used to send all of them to GrammarMCQ, where they had no
+// options and could never be answered. They are now grouped into the set shapes the app already renders
+// and grades: typed cloze blanks, typed editing items, and comprehension questions (open-ended ones are
+// parent-marked: getFormat gives open_sentence, so no auto-grade and no model "wrong" mark).
+
+const bareWord = (w) => String(w == null ? "" : w).replace(/^\s*\(?[A-Fa-f]\)\s*/, "").trim();
+const itemText = (q) => String(q.question || q.stem || q.questionText || q.q || q.sentence || q.context || "");
+
+function isOptionItem(item) {
+  return parseOptionTexts(item.options).length >= 2;
+}
+
+function standaloneKind(item) {
+  const topic = String(item.topic || "");
+  if (/Editing/.test(topic) || item.type === "spelling" || item.errorWord != null || item.errorType != null) return "Editing";
+  if (/Cloze/.test(topic)) return "Cloze";
+  if (/Comprehension/.test(topic)) return "Comprehension";
+  return null;
+}
 
 function classifyEnglishItem(item) {
   const topic = item.topic || "";
@@ -386,8 +433,180 @@ function classifyEnglishItem(item) {
     if (item.passage && item.questions) return "Comprehension";
     return "GrammarCloze";
   }
+  // A cloze passage that carries its own blanks array (e.g. "Sugar Gliders"): one cloze set.
+  if (Array.isArray(item.blanks) && item.blanks.length && /Cloze/.test(topic) && (item.passage || item.passageText)) {
+    return topic.includes("Vocab") ? "VocabCloze" : "GrammarCloze";
+  }
+  // Real multiple choice (options as an array or an object map) stays MCQ.
+  if (isOptionItem(item)) return topic.includes("Vocab") ? "VocabMCQ" : "GrammarMCQ";
+  // Flat cloze / editing / comprehension items with no options: not MCQ.
+  const kind = standaloneKind(item);
+  if (kind === "Editing") return "EditingItem";
+  if (kind === "Cloze") return topic.includes("Vocab") ? "VocabClozeItem" : "GrammarClozeItem";
+  if (kind === "Comprehension") return "CompItem";
   if (topic.includes("Vocab")) return "VocabMCQ";
   return "GrammarMCQ";
+}
+
+const passageOf = (q) => String(q.passage || q.passageText || "");
+const groupKeyOf = (q) => (passageOf(q) ? compPassageKey(passageOf(q)) : "") + "|" + String(q.passageTitle || "");
+
+// Spelling/grammar edit items often give only the sentence fragment and the corrected word. Find the
+// word the student must fix: a quoted word in the prompt, else the sentence word closest to the answer.
+function editDistance(a, b) {
+  const m = a.length, n = b.length;
+  let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[n];
+}
+function findWrongWord(text, answer) {
+  const ans = String(answer || "").toLowerCase().trim();
+  if (!ans) return "";
+  const words = String(text).match(/[A-Za-z’']+/g) || [];
+  let best = "", bestD = 99;
+  for (const w of words) {
+    const lw = w.toLowerCase();
+    if (lw === ans || lw.length < 2) continue;
+    const d = editDistance(lw, ans);
+    if (d < bestD) { bestD = d; best = w; }
+  }
+  return bestD <= Math.max(2, Math.floor(ans.length / 3)) ? best : "";
+}
+
+function toEditingItem(q, passage) {
+  const answer = String(q.correctWord ?? q.correctAnswer ?? (Array.isArray(q.answer) ? q.answer[0] : q.answer) ?? "").trim();
+  const text = itemText(q);
+  const no = q.qNumber || q.questionNumber || q.blank;
+  let sentence = text;
+  let wrongWord = String(q.errorWord || "");
+  // Passage editing: "(29)[sirprise]" in the passage, "(29) ... 'sirprise'" in the question.
+  if (no != null && passage) {
+    const m = passage.match(new RegExp("\\(" + no + "\\)\\s*\\[([^\\]]+)\\]"));
+    if (m) {
+      const at = m.index;
+      const before = passage.slice(0, at), after = passage.slice(at + m[0].length);
+      const start = Math.max(before.lastIndexOf(". "), before.lastIndexOf("\n"), before.lastIndexOf("? "), before.lastIndexOf("! ")) + 1;
+      const endRel = after.search(/[.!?\n]/);
+      const tail = endRel >= 0 ? after.slice(0, endRel + 1) : after;
+      const clean = (t) => t.replace(/\(\s*[\d,]*\s*\)\s*\[([^\]]*)\]/g, (_, w) => (w === "○" ? "" : w));
+      wrongWord = wrongWord || m[1];
+      sentence = (clean(before.slice(start)) + m[1] + clean(tail)).trim();
+    }
+  }
+  if (!wrongWord) { const quoted = text.match(/['‘"“]([A-Za-z’'-]+)['’"”]/); if (quoted && quoted[1].toLowerCase() !== answer.toLowerCase()) wrongWord = quoted[1]; }
+  if (!wrongWord) wrongWord = findWrongWord(sentence, answer);
+  return {
+    id: q.id,
+    sentence,
+    wrongWord,
+    options: [], // typed answer: nothing to choose from, and the key must not ride along as an "option"
+    answer,
+    hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
+    explanation: q.explanation || "",
+  };
+}
+
+function groupStandalone(items, build) {
+  const groups = new Map();
+  for (const q of items) {
+    const key = String(q.topic || "") + "|" + groupKeyOf(q);
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(q);
+  }
+  return [...groups.values()].map(build);
+}
+
+function toEditingSets(items) {
+  return groupStandalone(items, (g) => {
+    const passage = passageOf(g[0]);
+    return {
+      id: g[0].id + "_ed",
+      setLabel: g[0].passageTitle || "Editing",
+      instructions: "Each of the underlined words contains a spelling error. Write the correct word in the box provided.",
+      items: g.map((q) => toEditingItem(q, passage)),
+    };
+  });
+}
+
+function toClozeItemSets(items) {
+  return groupStandalone(items, (g) => {
+    const first = g[0];
+    const passage = passageOf(first);
+    const wordBank = (Array.isArray(first.wordBank) ? first.wordBank : parseWordBankFromInstructions(first.instructions || "") || []).map(bareWord);
+    const used = new Set();
+    const blanks = g.map((q, i) => {
+      const text = itemText(q);
+      const paren = text.match(/\((\d+)\)/);
+      let num = parseInt(q.qNumber || q.questionNumber || (paren && paren[1]) || i + 1, 10);
+      if (Number.isNaN(num)) num = i + 1;
+      while (used.has(num)) num += 1000;
+      used.add(num);
+      const raw = Array.isArray(q.answer) ? q.answer[0] : q.answer;
+      const rawStr = String(raw ?? "").trim();
+      let answer = q.answerWord != null && String(q.answerWord).trim() !== "" ? String(q.answerWord).trim() : rawStr;
+      if (answer === rawStr && /^[A-F]$/.test(rawStr) && wordBank.length) answer = wordBank[rawStr.charCodeAt(0) - 65] || rawStr;
+      return { num, answer, choices: null, wordBank, hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []), _text: text };
+    });
+    const body = passage || blanks.map((b) => {
+      // keep the printed blank number so the cloze renderer can place the input
+      const t = b._text;
+      return /\(\d+\)\s*_{3,}/.test(t) || /\[[^\]]+\/[^\]]+\]/.test(t) ? t : t.replace(/_{3,}/, "(" + b.num + ") ______");
+    }).join("\n\n");
+    return {
+      id: first.id + "_cz",
+      setLabel: first.passageTitle || first.subtopic || "Cloze",
+      passage: body,
+      wordBank,
+      blanks: blanks.map(({ _text, ...b }) => b),
+    };
+  });
+}
+
+// Short single answer -> typed fill-in; anything else stays open-ended (parent-marked). Tick-choice items
+// become multiple choice only when the printed boxes can be read and the key matches one of them.
+function prepareCompItem(q) {
+  const text = itemText(q);
+  const ans = Array.isArray(q.answer) ? q.answer.join(" ") : String(q.answer ?? "");
+  const out = { ...q, question: text };
+  const boxes = [...text.matchAll(/(?:□|\[\s*\])\s*([^\n□\[]+)/g)].map((m) => m[1].trim()).filter(Boolean);
+  if (boxes.length >= 2) {
+    const hit = boxes.findIndex((b) => normKey(b) === normKey(ans));
+    if (hit >= 0) {
+      out.options = boxes;
+      out.answer = hit;
+      out.format = "mcq";
+      out.question = text.slice(0, text.search(/□|\[\s*\]/)).trim();
+      return out;
+    }
+    out.format = "open";
+    return out;
+  }
+  if (/ComprehensionFIB/.test(String(q.topic || "")) && ans && !ans.includes("\n") && ans.split(/\s+/).length <= 4 && ans.length < 40) {
+    out.format = "fill_blank";
+    return out;
+  }
+  // Anything that cannot be machine-checked is open-ended: parent-marked (explicitly open, never sequence/true_false by guess).
+  out.format = "open";
+  out.options = [];
+  return out;
+}
+const normKey = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+
+function toCompItemSets(items) {
+  return groupStandalone(items, (g) => {
+    const passage = passageOf(g[0]);
+    const set = toEnglishCompSet(
+      { id: g[0].id + "_cp", setLabel: g[0].passageTitle || "Comprehension", passage, questions: g.map(prepareCompItem) },
+      true,
+    );
+    // No passage in the source: the set can be sat in a paper, but is not borrowed for practice sessions.
+    if (!passage) set.noPassage = true;
+    return set;
+  });
 }
 
 function normalizeEnglishQuestions(questions = []) {
@@ -399,11 +618,13 @@ function normalizeEnglishQuestions(questions = []) {
     Editing: [],
     Comprehension: [],
   };
+  const flat = { EditingItem: [], GrammarClozeItem: [], VocabClozeItem: [], CompItem: [] };
 
   for (const raw of questions) {
     if (!raw || typeof raw !== "object") continue;
     const type = classifyEnglishItem(raw);
     if (!type) continue; // Skip unsupported types (e.g. SentenceCombining)
+    if (flat[type]) { flat[type].push(raw); continue; }
     if (type.endsWith("MCQ")) {
       buckets[type].push(toEnglishMcq(raw));
     } else if (type === "GrammarCloze") {
@@ -416,6 +637,10 @@ function normalizeEnglishQuestions(questions = []) {
       buckets.Comprehension.push(toEnglishCompSet(raw));
     }
   }
+  buckets.Editing.push(...toEditingSets(flat.EditingItem));
+  buckets.GrammarCloze.push(...toClozeItemSets(flat.GrammarClozeItem));
+  buckets.VocabCloze.push(...toClozeItemSets(flat.VocabClozeItem));
+  buckets.Comprehension.push(...toCompItemSets(flat.CompItem));
   return buckets;
 }
 
@@ -516,7 +741,8 @@ export function englishPaperToPlan(
   if (vmItems.length) sections.push({ type: "VocabMCQ", items: vmItems, level: lvl("VocabMCQ") });
 
   ["GrammarCloze", "VocabCloze", "Editing", "Comprehension"].forEach((type) => {
-    const sets = buckets[type];
+    // Practice sessions skip passage-less comprehension sets (open-ended questions with no text to read).
+    const sets = buckets[type].filter((x) => !x.noPassage);
     if (!sets.length) return;
     const maxSets = s[type]?.sets || 1;
     const chosen = [];
