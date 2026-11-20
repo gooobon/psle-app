@@ -57,6 +57,76 @@ ${kids.map((c) => `<h3 style="margin:16px 0 6px">${esc(t.childHeading(c))}</h3>
   return { subject: t.subject(ctx), text, html };
 }
 
+// ---- Weekly parent report (replaces the daily 20:00 summary; issue #55). All wording in COPY_WEEKLY so it can be translated later. ----
+export const CAUSE_LABELS = { concept_unknown: "Did not know the concept", misread: "Misread the question", calculation: "Careless / calculation slip", trap: "Fell for a trap", time: "Ran out of time", guessed: "Guessed" };
+export const COPY_WEEKLY = {
+  en: {
+    subject: (p) => `Weekly report (${p.range}): ${p.names}`,
+    greeting: (p) => `Hi ${p.parentName},`,
+    intro: (p) => `Here is the week of ${p.range} (Singapore time).`,
+    childHeading: (c) => `${c.name}${c.grade ? ` (${c.grade})` : ""}`,
+    subjectLine: (s) => `${s.name}: ${s.sets} set${s.sets === 1 ? "" : "s"} vs target ${s.target} · daily target met on ${s.daysMet} of ${s.daysTracked} day${s.daysTracked === 1 ? "" : "s"}`,
+    noSubjects: "No subjects with a daily target this week.",
+    stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes} · Active ${c.activeDays} of ${c.daysTracked} days`,
+    causesHeading: "Why answers were wrong",
+    causesNone: "No wrong answers were recorded on the server this week, so no pattern can be shown.",
+    causesUntagged: (n) => `${n} wrong answer${n === 1 ? "" : "s"} recorded, but no reason has been tagged yet, so we are not guessing a pattern. Tag them in the wrong-answer notebook.`,
+    causeLine: (label, n) => `${label}: ${n}`,
+    causesPartial: (n) => `${n} more not tagged yet.`,
+    homework: (h) => (h.assigned ? `Homework: ${h.solved} of ${h.assigned} solved${h.notDone ? ` · ${h.notDone} not done` : ""}` : "Homework: none assigned this week."),
+    credits: (r) => `Credits: ${r.confirmed} confirmed${r.sgd ? ` (S$${r.sgd})` : ""} · ${r.pending} pending · ${r.forfeited} forfeited (homework not finished)`,
+    paperHeading: "Mock exam / past paper this week",
+    paperLine: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`}${x.counted ? "" : " · did not count as a set"}${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperNone: "No mock exam or past paper handed in this week.",
+    dashboard: "Open the parent dashboard",
+    footer: "You get this weekly report because email alerts are on for your parent account.",
+  },
+};
+
+export function weekRangeLabel(startYmd, endYmd) {
+  const f = (y) => new Date(y + "T12:00:00Z").toLocaleDateString("en-GB", { day: "numeric", month: "short", timeZone: "UTC" });
+  return `${f(startYmd)} – ${f(endYmd)}`;
+}
+
+// payload: { parentName, weekStart, weekEnd, dashboardUrl, children:[{ name, grade, subjects:[{name,sets,target,daysMet,daysTracked}], questions, accuracy|null,
+//   minutes, activeDays, daysTracked, wrong:{total,untagged,byCause:{cause:n}}, homework:{assigned,solved,notDone}, credits:{confirmed,pending,forfeited,sgd},
+//   papers:[{label,score,total,pct,counted,openToMark}] }] }
+export function weeklyChildLines(c, t) {
+  const w = c.wrong || { total: 0, untagged: 0, byCause: {} };
+  const tagged = Object.entries(w.byCause || {}).filter(([, n]) => n > 0).sort((a, b) => b[1] - a[1]);
+  const cause = !w.total ? [t.causesNone] : !tagged.length ? [t.causesUntagged(w.untagged)]
+    : [...tagged.map(([k, n]) => t.causeLine(CAUSE_LABELS[k] || k, n)), ...(w.untagged ? [t.causesPartial(w.untagged)] : [])];
+  const papers = (c.papers || []).length ? c.papers.map(t.paperLine) : [t.paperNone];
+  return {
+    subjects: c.subjects.length ? c.subjects.map(t.subjectLine) : [t.noSubjects],
+    stats: t.stats(c),
+    cause: [t.causesHeading, ...cause],
+    homework: t.homework(c.homework || { assigned: 0, solved: 0, notDone: 0 }),
+    credits: t.credits(c.credits || { confirmed: 0, pending: 0, forfeited: 0, sgd: 0 }),
+    papers: [t.paperHeading, ...papers],
+  };
+}
+
+export function renderWeeklyEmail(payload, locale = "en") {
+  const t = COPY_WEEKLY[locale] || COPY_WEEKLY.en;
+  const kids = payload.children || [];
+  const range = weekRangeLabel(payload.weekStart, payload.weekEnd);
+  const ctx = { ...payload, range, names: kids.map((c) => c.name).join(", ") };
+  const blocks = kids.map((c) => ({ c, l: weeklyChildLines(c, t) }));
+  const text = [t.greeting(ctx), t.intro(ctx), "",
+    blocks.map(({ c, l }) => [t.childHeading(c), ...l.subjects, l.stats, "", ...l.cause, "", l.homework, l.credits, "", ...l.papers].join("\n")).join("\n\n"),
+    "", `${t.dashboard}: ${payload.dashboardUrl}`, "", t.footer].join("\n");
+  const ul = (a) => `<ul style="padding-left:18px;margin:4px 0">${a.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
+  const html = `<div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;color:#0F172A">
+<p>${esc(t.greeting(ctx))}<br>${esc(t.intro(ctx))}</p>
+${blocks.map(({ c, l }) => `<h3 style="margin:16px 0 6px">${esc(t.childHeading(c))}</h3>${ul(l.subjects)}<p style="margin:6px 0">${esc(l.stats)}</p>
+<p style="margin:6px 0"><b>${esc(l.cause[0])}</b></p>${ul(l.cause.slice(1))}<p style="margin:6px 0">${esc(l.homework)}<br>${esc(l.credits)}</p>
+<p style="margin:6px 0"><b>${esc(l.papers[0])}</b></p>${ul(l.papers.slice(1))}`).join("")}
+<p><a href="${esc(payload.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">${esc(t.dashboard)}</a></p>
+<p style="font-size:12px;color:#64748B">${esc(t.footer)}</p></div>`;
+  return { subject: t.subject(ctx), text, html };
+}
+
 // Notice to the OTHER linked parent when a shared child setting changes. payload: { parentName, childName, changerName, lines:[sentence], dashboardUrl }
 export function renderSettingChangeEmail(p) {
   const lines = (p.lines || []).slice(0, 20);

@@ -7,6 +7,7 @@ import { SUBJECT_KEYS, sgtDate } from "@/lib/activity";
 import { isSaturday, weekStart, weeklySubjectCredits } from "@/lib/rewards";
 import { loadHomeworkGate, loadRewardRule, finalizeCredits } from "@/lib/rewardsServer";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
+import { sendForChild } from "@/lib/notify/weeklyReport.mjs";
 
 export const runtime = "nodejs";
 
@@ -27,6 +28,8 @@ export async function POST(request) {
   if (ins.error) return jerr("could not save", 500);
   const { data, error } = await admin.rpc("award_sticker", { p_child: me.profile.id, p_kind: "weekly", p_period: ws });
   if (error) return jerr("could not award", 500);
+  // Saturday milestone: once the review (and its credit) is saved, the weekly parent report goes out (one per parent per week; never throws).
+  const reportDone = async () => { await sendForChild(admin, me.profile.id); return jok(out); };
   const out = { awarded: !!(data && data.awarded), credits: 0, creditsAwarded: false };
   // Credits: one award PER SUBJECT reviewed (period = Monday of the week), created PENDING and gated by TODAY's (Saturday's) parent homework:
   // confirmed at once when everything assigned today is solved, otherwise at the end of the SGT day (forfeited if homework was left undone).
@@ -36,10 +39,10 @@ export async function POST(request) {
   out.homework = { eligible: gate.eligible, assigned: gate.assigned, remaining: gate.remaining };
   const rr = await loadRewardRule(admin, me.profile.id, today);
   if (!rr.ok) return jerr("could not check", 500);
-  if (!rr.rule) return jok(out);
+  if (!rr.rule) return reportDone();
   const credits = weeklySubjectCredits(rr.rule, subject);
   out.credits = credits;
-  if (credits <= 0) return jok(out);
+  if (credits <= 0) return reportDone();
   const r = await admin.rpc("award_credit", {
     p_parent: rr.parentId, p_child: me.profile.id, p_kind: "weekly", p_period: ws, p_subject: subject,
     p_credits: credits, p_rate: rr.rule.sgdPerCredit, p_score_pct: null, p_effective: rr.rule.effectiveFrom, p_gate_day: today,
@@ -47,5 +50,5 @@ export async function POST(request) {
   if (r.error) return jerr("could not award", 500);
   out.creditsAwarded = !!(r.data && r.data.awarded);
   await finalizeCredits(admin, me.profile.id, today);
-  return jok(out);
+  return reportDone();
 }

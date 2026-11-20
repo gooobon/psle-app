@@ -477,7 +477,7 @@ const route = async (db, flagOn = true) => loadSource("src/app/api/student/exam/
   "@/lib/rateLimit": { rateLimit: () => true, clientIp: () => "1" },
   "@/lib/activity": await import("../src/lib/activity.js"),
   "@/lib/examServer": S, "@/lib/examEngine": E,
-  "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) },
+  "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) }, "@/lib/notify/weeklyReport.mjs": { sendForChild: async () => ({}) },
   "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"),
 }, "return { GET, POST };");
 const req = (url, body) => ({ url, headers: { get: () => "0" }, body });
