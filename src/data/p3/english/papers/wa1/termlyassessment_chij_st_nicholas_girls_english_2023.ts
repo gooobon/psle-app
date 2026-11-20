@@ -46,13 +46,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '앞 문장의 주어("Ali and I")를 대신하는 대명사를 고른다.',
+        method: 'Choose the pronoun that replaces the subject of the previous sentence ("Ali and I").',
         steps: [
-          '앞 문장: "Ali and I are best friends." — 화자(I)와 Ali 두 사람.',
-          '화자 자신을 포함한 복수는 "we"로 받는다.',
-          '따라서 "We are classmates too." → 정답 (2) We.',
+          'Previous sentence: "Ali and I are best friends." — the speaker (I) and Ali, two people.',
+          'A plural that includes the speaker is replaced by "we".',
+          'So "We are classmates too." → answer (2) We.',
         ],
-        tip: '"Ali and I"처럼 화자 자신이 포함된 복수는 we로 이어받습니다.',
+        tip: 'A plural that includes the speaker, like "Ali and I", is continued with we.',
       },
     },
     {
@@ -71,13 +71,13 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '조동사 did 뒤에는 동사원형이 온다는 규칙을 적용한다.',
+        method: 'Apply the rule that the base form of the verb follows did.',
         steps: [
-          '부정문 "did not + base form of verb" 구조.',
-          'did가 이미 과거시제를 담당하므로 본동사는 원형.',
-          '따라서 "did not go" → 정답 (1) go.',
+          'The negative form is "did not + base form of verb".',
+          'did already shows the past tense, so the main verb stays in its base form.',
+          'So "did not go" → answer (1) go.',
         ],
-        tip: 'do/does/did가 있는 문장의 본동사는 항상 동사원형입니다.',
+        tip: 'In a sentence with do/does/did, the main verb is always in its base form.',
       },
     },
     {
@@ -96,11 +96,11 @@ export const termlyAssessmentChijStNicholasGirlsEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '앞뒤 문장이 원인-결과 관계인지 확인한다.',
+        method: 'Check whether the two parts of the sentence show cause and effect.',
         steps: [
-          '앞: 비를 맞았다(원인) / 뒤: 젖었다(결과).',
-          '원인과 결과를 잇는 접속사는 "so"(그래서).',
-          '"but"(그러나)/"even though"(비록 ~이지만)는 대조 관계라 안 맞는다 → 정답 (2) so.',
+          'Before: got caught in the rain (cause) / After: got wet (result).',
+          'The conjunction that links cause and result is "so".',
+          '"but"/"even though" show contrast, so they do not fit → answer (2) so.',
         ],
         tip: 'We use "so" when the first part is the cause and the second part is the result.',
       },

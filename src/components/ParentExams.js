@@ -4,7 +4,7 @@
 // so the parent can mark; it is never sent to a student.
 import React from 'react';
 import { SERVER_AUTH, MOCK_EXAMS_ENABLED, serverGet, serverPost } from '@/lib/serverClient';
-import { FLAG_NOTES } from '@/lib/examEngine';
+import { FLAG_NOTES, scoreLine } from '@/lib/examEngine';
 
 const box = { background: '#fff', border: '1px solid #E2E8F0', borderRadius: 14, padding: '12px 14px', marginBottom: 12 };
 const fmt = (s) => `${Math.floor((s || 0) / 60)} min ${(s || 0) % 60}s`;
@@ -13,6 +13,7 @@ export default function ParentExams({ child }) {
   const on = SERVER_AUTH && MOCK_EXAMS_ENABLED && !!child?.serverId;
   const [d, setD] = React.useState(null);
   const [err, setErr] = React.useState('');
+  const [note, setNote] = React.useState('');
   const [key, setKey] = React.useState(0);
   React.useEffect(() => {
     if (!on) return undefined;
@@ -25,16 +26,17 @@ export default function ParentExams({ child }) {
   if (!d) return <div style={{ ...box, fontSize: 13, color: '#64748B' }}>Loading…</div>;
   async function mark(attemptId, questionId, correct) {
     const r = await serverPost('/api/parent/exam', { attemptId, questionId, correct });
-    if (r.ok) setKey((k) => k + 1); else setErr(r.error || 'Could not save the mark.');
+    if (r.ok) { setKey((k) => k + 1); setNote(r.pending ? '' : 'All marked. The final score is saved.'); } else setErr(r.error || 'Could not save the mark.');
   }
   if (!d.attempts.length) return <div style={{ ...box, fontSize: 13 }}>No mock papers yet.</div>;
   return (
     <div>
+      {note ? <div style={{ ...box, fontSize: 13, color: '#065F46' }}>{note}</div> : null}
       {d.attempts.map((a) => (
         <div key={a.id} style={box}>
           <div style={{ fontWeight: 800 }}>{a.label}</div>
           <div style={{ fontSize: 13, marginTop: 4 }}>
-            Score {a.score}/{a.total} (auto-marked) · answered {a.answered}/{a.questionCount} · time {fmt(a.elapsedSeconds)} of {a.minutes} min
+            Score {scoreLine({ score: a.score, total: a.total, pending: a.pending })}{a.pending ? '' : a.percent == null ? '' : ` (${a.percent}%)`} · answered {a.answered}/{a.questionCount} · time {fmt(a.elapsedSeconds)} of {a.minutes} min
             {a.status === 'auto_submitted' ? ' · handed in automatically' : ''}
           </div>
           <div style={{ fontSize: 12, color: '#64748B', marginTop: 2 }}>{a.counts ? 'Counted as the daily set.' : 'Did not count (under half the time used and under 80% answered).'}</div>

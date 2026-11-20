@@ -91,6 +91,7 @@ npm install
 npm run dev          # local dev server
 npm run build        # must compile before any PR touching src/
 npm run typecheck    # tsc --noEmit
+npm run selftest     # all node self-tests (incl. tools/no_korean_selftest.mjs, also run by prebuild)
 node zh_wa1_selftest.js        # Chinese schema/validator selftest: expect 27 pass / 0 fail (verified)
 node build_wa1_practice.js     # English regenerate + self-check: ALL PASS (0 failures)
 python3 verify_all_sets.py     # English independent full check (hint leaks, cloze, editing): 0 violations

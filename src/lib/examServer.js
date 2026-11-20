@@ -161,7 +161,7 @@ export function modelAnswersForParent(paperId, ids) {
   for (const sec of d.plan) {
     if (sec.type !== "Comprehension") continue;
     for (const s of sec.items) for (const q of s.questions || []) if (want.has(q.id)) {
-      out[q.id] = { question: q.stem || q.question || "", answer: Array.isArray(q.answer) ? q.answer.join("; ") : String(q.answer == null ? "" : q.answer) };
+      out[q.id] = { question: q.stem || q.question || "", answer: orderKeyText(q) || (Array.isArray(q.answer) ? q.answer.join("; ") : String(q.answer == null ? "" : q.answer)) };
     }
   }
   return out;
@@ -170,6 +170,12 @@ export function modelAnswersForParent(paperId, ids) {
 // ── Phase 2 (issue #48): post-submit review, notebook rows, mock trials. SERVER ONLY: these functions read the answer key and are
 // called only for the student's OWN finished attempt (examEngine.canReview) or for server-side writes. Never call from an in-progress path.
 const letter = (i) => String.fromCharCode(65 + i);
+// An order question's key read as words: "1. first event; 2. second event; ..." (the stored key is the rank of each printed card).
+export function orderKeyText(q) {
+  const items = q.sequenceItems || [], key = Array.isArray(q.answer) ? q.answer : [];
+  if (items.length < 2 || key.length !== items.length) return "";
+  return items.map((it, i) => ({ r: key[i], it })).sort((a, b) => a.r - b.r).map((x) => x.r + ". " + x.it).join("; ");
+}
 const joinText = (v) => (v == null ? "" : Array.isArray(v) ? v.filter((x) => x != null && x !== "").join("; ") : String(v));
 const optLine = (options, idx) => (Number.isInteger(idx) && options && options[idx] != null ? letter(idx) + ". " + options[idx] : null);
 function solutionText(sol) {
@@ -220,6 +226,7 @@ function detailsFor(paperId) {
         if (fmt === "mcq") correct = optLine(opts, mcqIdx(q)) || joinText(q.answer);
         else if (fmt === "ab_circle") correct = joinText(q.answer);
         else if (fmt === "true_false") correct = (Array.isArray(q.answer) ? q.answer : [q.answer]).map((x, i) => ((q.statements || [])[i] ? (q.statements[i] + " - ") : "") + x).join("; ");
+        else if (fmt === "sequence") correct = orderKeyText(q) || joinText(q.answer);
         else correct = joinText(q.answer);
         const choices = fmt === "ab_circle" ? (q.abChoices || ["A", "B"]) : opts;
         m.set(q.id, { section: sec.type, no: q.questionNo || null, prompt: q.stem || q.question || "", options: choices, correctText: correct, explanation: solutionText(q.solution) });

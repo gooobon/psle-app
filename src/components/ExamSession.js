@@ -1,4 +1,5 @@
 "use client";
+import OrderTap from '@/components/OrderTap';
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { C } from "@/lib/uiShared";
@@ -1794,44 +1795,17 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       const maxN    = items.length;
       return (
         <div style={{ marginTop: 10 }}>
-          <table style={{ border: EX.border, borderCollapse: 'collapse', width: '100%', fontFamily: EX.font }}>
-            <tbody>
-              {items.map((item, ii) => {
-                const key    = q.id + '_seq_' + ii;
-                const chosen = answers[key];
-                const corr   = correct[ii];
-                const ok     = submitted && chosen === corr;
-                return (
-                  <tr key={ii}>
-                    <td style={{ border: EX.thin, padding: '10px 12px', width: 90, textAlign: 'center',
-                      background: submitted ? (ok ? EX.correct : EX.wrong) : 'transparent' }}>
-                      <span style={{ display: 'inline-flex', gap: 3 }}>
-                        {Array.from({ length: maxN }, (_, n) => n + 1).map(n => (
-                          <button key={n}
-                            onClick={() => !submitted && setAnswers(a => ({ ...a, [key]: n }))}
-                            style={{ width: 24, height: 24, border: EX.thin,
-                              background: chosen === n ? '#1a1a1a' : '#fff',
-                              color:      chosen === n ? '#fff'    : '#1a1a1a',
-                              fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)",
-                              cursor: submitted ? 'default' : 'pointer' }}>
-                            {n}
-                          </button>
-                        ))}
-                      </span>
-                    </td>
-                    <td style={{ border: EX.thin, padding: '10px 12px', fontSize: "calc(var(--fs) * 1.000)" }}>
-                      {item}
-                      {submitted && !ok && (
-                        <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: '#9b1c1c', marginLeft: 8 }}>
-                          (should be {corr})
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <OrderTap
+            items={items}
+            value={items.map((_, ii) => answers[q.id + '_seq_' + ii])}
+            disabled={submitted}
+            correct={submitted ? correct : null}
+            onChange={(next) => setAnswers(a => {
+              const n = { ...a };
+              next.forEach((r, ii) => { if (r > 0) n[q.id + '_seq_' + ii] = r; else delete n[q.id + '_seq_' + ii]; });
+              return n;
+            })}
+          />
           {submitted && (
             <div style={{ marginTop: 8 }}>
               {verdictBadge(items.every((_, i) => parseInt(answers[q.id + '_seq_' + i] || '0', 10) === correct[i]))}
@@ -2812,7 +2786,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         }}></button>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: EXAM_BODY, fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)" }}>
-            {isMockExam ? ` ${mockInfo?.school || (isZh ? "\u6A21\u62DF\u8003" : "Mock Exam")}` : (isZh ? `\u7B2C ${secIdx + 1}/${totalSections} \u8282` : `Section ${secIdx + 1}/${totalSections}`)}
+            {isMockExam ? ` ${(plan && (plan.paperLabel || plan.paperSchool)) || (isZh ? "\u6A21\u62DF\u8003" : "Mock Exam")}` : (isZh ? `\u7B2C ${secIdx + 1}/${totalSections} \u8282` : `Section ${secIdx + 1}/${totalSections}`)}
           </div>
           <div style={{ fontFamily: EXAM_BODY, fontSize: "calc(var(--fs) * 1.000)", color: "#64748b" }}>
             {sectionLabel}

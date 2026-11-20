@@ -189,7 +189,7 @@ ok("email: papers block appears only when there is something to report", () => {
     { status: "in_progress", paper_label: "Tao Nan 2025", deadline_at: "2099-01-01T00:00:00Z" }], "2026-11-20");
   base.children[0].papers = blk;
   const m = T.renderDailyEmail(base);
-  assert.ok(m.text.includes("Nanyang 2024 EOY: 30/40 (75%) · 50 of 75 min used") && m.text.includes("3 open-ended to mark") && m.text.includes("Tao Nan 2025: started, not handed in"));
+  assert.ok(m.text.includes("Nanyang 2024 EOY: 30/40 + 3 awaiting parent marking · 50 of 75 min used") && m.text.includes("Tao Nan 2025: started, not handed in"));
   assert.ok(m.html.includes("Mock papers"));
 });
 // ── flag + migration (static) ──
@@ -335,7 +335,7 @@ ok("post-submit writes live in examPostSubmit (best effort, ignoreDuplicates) an
   assert.ok(/if \(!LEARNING_DASHBOARD\)/.test(m));
   assert.equal((m.match(/catch \{/g) || []).length, 2);
   const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
-  assert.ok(/awardPaperReward\(admin/.test(r) && /writeNotebook\(admin/.test(r) && /recordMockTrials\(admin/.test(r));
+  assert.ok(/settlePaper\(admin/.test(r) && /writeNotebook\(admin/.test(r) && /recordMockTrials\(admin/.test(r));
   assert.ok(r.indexOf('from("exam_answers").upsert(rows') < r.indexOf("writeNotebook(admin"), "answers are saved before the extras run");
 });
 
@@ -477,9 +477,8 @@ const route = async (db, flagOn = true) => loadSource("src/app/api/student/exam/
   "@/lib/rateLimit": { rateLimit: () => true, clientIp: () => "1" },
   "@/lib/activity": await import("../src/lib/activity.js"),
   "@/lib/examServer": S, "@/lib/examEngine": E,
-  "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) }, "@/lib/notify/weeklyReport.mjs": { sendForChild: async () => ({}) },
+  "@/lib/rewards": await import("../src/lib/rewards.js"), "@/lib/examSettle": { settlePaper: async () => ({ credited: false }) }, // settle step (reward, weekly report, milestone) is covered by its own checks below
   "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"),
-  "@/lib/notify/eventAlerts.mjs": { notifyEvent: async () => ({ enabled: false }) }, // alerts are covered by tools/event_alerts_selftest.mjs
 }, "return { GET, POST };");
 const req = (url, body) => ({ url, headers: { get: () => "0" }, body });
 const paperId = manifestPaperId();
@@ -517,15 +516,19 @@ ok("items stored as multiple choice with no options are excluded from the score,
     if (ex.length) noKey.push({ p, g, ex });
     else withKey.push(p);
   }
-  assert.ok(noKey.length > 0, "the real papers include such items");
-  const { p, g, ex } = noKey[0];
-  assert.ok(ex.every((r) => r.correct === null), "excluded items are not graded wrong");
-  assert.equal(g.total + g.ungraded + ex.length, g.rows.length, "excluded items are in neither the total nor the open count");
-  assert.equal(g.count, g.rows.length - ex.length);
-  assert.ok(g.unanswered <= g.count);
-  assert.ok(S.reviewItems(p.id, [], "submitted").filter((i) => ex.some((r) => r.id === i.id)).every((i) => i.keyMissing && !i.openEnded && i.correctAnswer === ""));
-  assert.ok(!S.notebookRows(p.id, g, { studentId: "s", attemptId: "a", nowIso: "t" }).rows.some((r) => ex.some((x) => x.id === r.question_id)));
-  assert.ok(!S.mockTrialCandidates(p.id, g).some((c) => ex.some((x) => x.id === c.itemId)));
+  // Issue #54: option-map parsing and reclassification mean no offered paper has an option-less MCQ item any more, so the exclusion is a
+  // safety net that the real data no longer triggers. The checks on real items run only if one ever appears again.
+  assert.ok(withKey.length > 0, "every offered paper is graded");
+  if (noKey.length) {
+    const { p, g, ex } = noKey[0];
+    assert.ok(ex.every((r) => r.correct === null), "excluded items are not graded wrong");
+    assert.equal(g.total + g.ungraded + ex.length, g.rows.length, "excluded items are in neither the total nor the open count");
+    assert.equal(g.count, g.rows.length - ex.length);
+    assert.ok(g.unanswered <= g.count);
+    assert.ok(S.reviewItems(p.id, [], "submitted").filter((i) => ex.some((r) => r.id === i.id)).every((i) => i.keyMissing && !i.openEnded && i.correctAnswer === ""));
+    assert.ok(!S.notebookRows(p.id, g, { studentId: "s", attemptId: "a", nowIso: "t" }).rows.some((r) => ex.some((x) => x.id === r.question_id)));
+    assert.ok(!S.mockTrialCandidates(p.id, g).some((c) => ex.some((x) => x.id === c.itemId)));
+  }
   const sum = E.summarize([{ section: "a", correct: true }, { section: "a", correct: null, excluded: true }, { section: "a", correct: false }]);
   assert.deepEqual([sum.score, sum.total, sum.ungraded], [1, 2, 0]);
   const fs_ = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
@@ -667,6 +670,75 @@ await aok("8pm email block reflects an auto-submitted sitting", () => {
   const blk = D.paperBlock([{ status: "auto_submitted", sgt_day: SAT, paper_label: "Test Paper", score: 20, total: 40, elapsed_seconds: 4500, minutes_allowed: 75, counts: true, open_total: 2 }], SAT);
   assert.equal(blk.done.length, 1);
   assert.deepEqual([blk.done[0].pct, blk.done[0].toReview, blk.done[0].openToMark, blk.done[0].counted], [50, 20, 2, true]);
+});
+
+// ── Parent marks count toward the score (issue #62) ──
+ok("combineMarks / scoreLine: pending until marked, then added to score and total", () => {
+  assert.equal(E.scoreLine({ score: 2, total: 36, pending: 4 }), "2/36 + 4 awaiting parent marking");
+  assert.equal(E.scoreLine({ score: 6, total: 40, pending: 0 }), "6/40");
+  const none = E.combineMarks({ autoScore: 2, autoTotal: 36, openMarks: [null, null, null, null], sections: [{ section: "Comprehension", score: 0, total: 0 }], openSections: Array(4).fill("Comprehension") });
+  assert.deepEqual([none.score, none.total, none.pending, none.settled], [2, 36, 4, false], "nothing marked: the number does not move");
+  const part = E.combineMarks({ autoScore: 2, autoTotal: 36, openMarks: [true, null, false, null], sections: [{ section: "Comprehension", score: 0, total: 0 }], openSections: Array(4).fill("Comprehension") });
+  assert.deepEqual([part.score, part.total, part.pending, part.settled], [3, 38, 2, false]);
+  assert.deepEqual(part.sections, [{ section: "Comprehension", score: 1, total: 2 }]);
+  const all = E.combineMarks({ autoScore: 2, autoTotal: 36, openMarks: [true, true, false, true], sections: [], openSections: Array(4).fill("Comprehension") });
+  assert.deepEqual([all.score, all.total, all.pending, all.settled, E.percentOf(all.score, all.total)], [5, 40, 0, true, 13]);
+  const flip = E.combineMarks({ autoScore: 2, autoTotal: 36, openMarks: [false, true, false, true], sections: [], openSections: Array(4).fill("Comprehension") });
+  assert.equal(flip.score, 4, "recomputed from all rows each time, so a changed mark never double counts");
+  assert.ok(E.readyToSettle({ pending: 0, settledAt: null }) && !E.readyToSettle({ pending: 1, settledAt: null }) && !E.readyToSettle({ pending: 0, settledAt: "x" }));
+});
+await aok("hand-in with open-ended items leaves score auto-only, pending, and settles nothing; parent marks settle once with the final score", async () => {
+  const withOpen = S.listPapers().find((p) => S.gradeSubmission(p.id, {}).ungraded > 0);
+  assert.ok(withOpen, "an offered paper has open-ended items");
+  const g0 = S.gradeSubmission(withOpen.id, {});
+  const settleLog = [], rpcLog = [];
+  const mk = async (db, file, extra) => loadSource(file, {
+    "@/lib/supabase/server": { adminClient: () => db, currentUser: async () => ({ profile: { id: file.includes("parent") ? PID : SID, role: file.includes("parent") ? "parent" : "student", school: "x", grade: "P3" } }), serverAuthEnabled: () => true,
+      jerr: (m, st) => ({ error: m, status: st }), jok: (o) => ({ ok: true, ...(o || {}) }), readJson: async (r) => r.body },
+    "@/lib/supabase/config": { MOCK_EXAMS_ENABLED: true }, "@/lib/rateLimit": { rateLimit: () => true, clientIp: () => "1" },
+    "@/lib/activity": await import("../src/lib/activity.js"), "@/lib/examServer": S, "@/lib/examEngine": E, "@/lib/rewards": await import("../src/lib/rewards.js"),
+    "@/lib/examSettle": { settlePaper: async (_a, att) => { settleLog.push({ score: att.score, total: att.total }); return { eligible: true }; } },
+    "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"), ...extra,
+  }, "return { GET, POST };");
+  const PID = "99999999-9999-9999-9999-999999999999";
+  const db = fakeDb({ parent_child: [{ parent_id: PID, child_id: SID }] });
+  const origRpc = db.rpc; db.rpc = async (n, a) => { rpcLog.push([n, a]); return origRpc(); };
+  db.tables().exam_attempts.push({ ...expiredAttempt(), paper_id: withOpen.id, deadline_at: new Date(Date.now() + 3600_000).toISOString(), started_at: new Date().toISOString(), settled_at: null });
+  const sr = await mk(db, "src/app/api/student/exam/route.js");
+  const res = await sr.POST(req("http://x", { action: "submit", attemptId: UUID1, answers: {} }));
+  assert.ok(res.ok, JSON.stringify(res).slice(0, 200));
+  let a = db.tables().exam_attempts[0];
+  assert.deepEqual([a.score, a.auto_score, a.total, a.auto_total, a.parent_pending, a.settled_at], [g0.score, g0.score, g0.total, g0.total, g0.ungraded, null]);
+  assert.equal(res.reward.reason, "awaiting_parent");
+  assert.equal(settleLog.length, 0, "no reward, weekly report or milestone while parent marking is outstanding");
+  const open = db.tables().exam_answers.filter((r) => r.attempt_id === UUID1 && r.correct === null);
+  assert.equal(open.length, g0.ungraded);
+  const pr = await mk(db, "src/app/api/parent/exam/route.js");
+  for (let i = 0; i < open.length; i++) {
+    const r = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[i].question_id, correct: i % 2 === 0 }));
+    assert.ok(r.ok, JSON.stringify(r));
+    const left = open.length - 1 - i;
+    assert.equal(r.pending, left);
+    assert.equal(r.total, g0.total + i + 1, "each mark adds one to the total");
+    assert.equal(settleLog.length, left === 0 ? 1 : 0, "settles exactly when the last item is marked");
+  }
+  a = db.tables().exam_attempts[0];
+  const ok_ = Math.ceil(open.length / 2);
+  assert.deepEqual([a.score, a.total, a.parent_pending, a.parent_score, a.parent_total], [g0.score + ok_, g0.total + open.length, 0, ok_, open.length]);
+  assert.ok(a.settled_at && a.auto_score === g0.score, "settled once; the auto result is kept");
+  assert.deepEqual(settleLog[0], { score: a.score, total: a.total }, "settled from the FINAL score");
+  // Changing a mark afterwards recomputes the score and does not settle (reward) again.
+  const flip = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[0].question_id, correct: false }));
+  assert.ok(flip.ok && flip.score === g0.score + ok_ - 1 && settleLog.length === 1);
+  const src = fs.readFileSync(path.join(ROOT, "src/app/api/parent/exam/route.js"), "utf8");
+  assert.ok(/is\("settled_at", null\)/.test(src), "settlement is claimed atomically");
+});
+ok("migration for parent marks is additive and the paper reward waits for settlement", () => {
+  const m = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261202000000_parent_marks_into_score.sql"), "utf8");
+  assert.ok(!/drop\s+(table|column)|delete\s+from|truncate/i.test(m.replace(/--.*$/gm, "")), "no destructive statement");
+  for (const c of ["auto_score", "auto_total", "parent_pending", "parent_score", "parent_total", "settled_at"]) assert.ok(m.includes(c));
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  assert.ok(/g\.ungraded > 0/.test(r) && !/awardPaperReward/.test(r), "hand-in never awards while items are unmarked");
 });
 
 console.log(`\n${n} checks run${process.exitCode ? ", SOME FAILED" : ", all passed"}`);

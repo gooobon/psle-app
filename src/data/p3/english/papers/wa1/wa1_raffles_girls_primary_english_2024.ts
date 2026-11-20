@@ -173,13 +173,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           stem: "In paragraph 1, what was the writer's favourite activity in his childhood?",
           answer: 'collecting saga seeds',
           solution: {
-            method: '1단락에서 "favourite"라는 단어가 들어간 문장을 찾는다.',
+            method: 'Find the sentence in paragraph 1 that contains the word "favourite".',
             steps: [
-              '1단락: "One of my favourite pastime was collecting saga seeds."',
-              '가장 좋아한 활동은 saga 씨앗 모으기.',
-              '따라서 답은 collecting saga seeds.',
+              'Paragraph 1: "One of my favourite pastime was collecting saga seeds."',
+              'The favourite activity was collecting saga seeds.',
+              'So the answer is collecting saga seeds.',
             ],
-            tip: '질문의 핵심어(favourite)를 지문에서 그대로 찾으면 답 문장을 빨리 찾을 수 있습니다.',
+            tip: 'If you find the key word of the question (favourite) in the passage, you can quickly find the answer sentence.',
           },
         },
         {
@@ -194,13 +194,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: '3',
           solution: {
-            method: '"little treasures" 바로 앞뒤 문맥에서 무엇을 가리키는지 찾는다.',
+            method: 'Look at the sentences just before and after "little treasures" to find what it refers to.',
             steps: [
-              '1단락: 밝은 빨간 씨앗(saga seeds)을 찾으며 "these little treasures"라고 표현.',
-              '"little treasures"는 그 빨간 saga 씨앗을 비유한 것.',
-              '따라서 답은 (3) saga seeds.',
+              'Paragraph 1: looking for bright red seeds (saga seeds) and calling them "these little treasures".',
+              '"little treasures" is a figure of speech for the red saga seeds.',
+              'So the answer is (3) saga seeds.',
             ],
-            tip: '비유 표현(little treasures 같은)은 그 표현 가까이에서 실제 가리키는 대상을 찾습니다.',
+            tip: 'For a figure of speech (like little treasures), look near the expression to find what it really refers to.',
           },
         },
         {
@@ -215,13 +215,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           answer:
             "The writer's grandmother warned them = 2; The writer's toddler sister almost swallowed a saga seed = 1; The writer and her brother put the saga seeds in jars = 3",
           solution: {
-            method: '2단락의 시간 표현(after, since then)을 단서로 순서를 정한다.',
+            method: 'Use the time words in paragraph 2 (after, since then) as clues to put the events in order.',
             steps: [
-              '"...our grandmother warned us AFTER our toddler sister almost swallowed one" → 동생이 삼킬 뻔한 일이 먼저(1), 할머니 경고가 그 다음(2).',
-              '"Since then, we began to keep the saga seeds in jars." → 병에 보관한 것은 마지막(3).',
-              '따라서 순서: 동생이 삼킬 뻔함=1, 할머니 경고=2, 병에 보관=3.',
+              '"...our grandmother warned us AFTER our toddler sister almost swallowed one" → the sister almost swallowing one came first (1), then grandmother\'s warning (2).',
+              '"Since then, we began to keep the saga seeds in jars." → keeping them in jars came last (3).',
+              'So the order: sister almost swallowed one = 1, grandmother\'s warning = 2, kept in jars = 3.',
             ],
-            tip: '"after", "since then", "then" 같은 시간 연결어가 순서 문제의 핵심 단서입니다.',
+            tip: 'Time linking words such as "after", "since then" and "then" are the key clues for order questions.',
           },
         },
         {
@@ -233,11 +233,11 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           solution: {
             method: "Find a word in Paragraph 2 that has a similar meaning to 'deadly' (harmful/dangerous).",
             steps: [
-              '2단락: "They are harmful," — 할머니가 씨앗이 해롭다고 경고.',
-              'harmful = 해로운 → deadly와 의미가 통한다.',
-              '따라서 답은 harmful.',
+              'Paragraph 2: "They are harmful," — grandmother warned that the seeds were harmful.',
+              'harmful = causing harm → it has the same meaning as deadly.',
+              'So the answer is harmful.',
             ],
-            tip: '동의어 문제는 지문 속 경고·설명 문장에 답이 들어 있는 경우가 많습니다.',
+            tip: 'For synonym questions, the answer is often in a warning or explanation sentence in the passage.',
           },
         },
         {
@@ -248,13 +248,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
             'Which three-word phrase in paragraph 2 tells you that the writer and her brother spent a lot of fun time playing with the seeds?',
           answer: 'hours of enjoyment',
           solution: {
-            method: '"many happy times"을 나타내는 세 단어 표현을 2단락에서 찾는다.',
+            method: 'Find the three-word phrase for "many happy times" in paragraph 2.',
             steps: [
-              '2단락: "The deep red seeds of the saga trees gave us hours of enjoyment."',
-              '"hours of enjoyment"가 세 단어로 된 표현이며 "long-lasting joy"을 뜻한다.',
-              '따라서 답은 hours of enjoyment.',
+              'Paragraph 2: "The deep red seeds of the saga trees gave us hours of enjoyment."',
+              '"hours of enjoyment" is the three-word phrase and means "long-lasting joy".',
+              'So the answer is hours of enjoyment.',
             ],
-            tip: '"three-word phrase"를 요구하면 정확히 세 단어를 그대로 옮겨 적어야 합니다.',
+            tip: 'If the question asks for a "three-word phrase", copy exactly three words from the passage.',
           },
         },
         {
@@ -270,13 +270,13 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           ],
           answer: '2',
           solution: {
-            method: '씨앗을 병에 보관한 이유(원인)를 2단락에서 찾는다.',
+            method: 'Find the reason (cause) for keeping the seeds in jars in paragraph 2.',
             steps: [
-              '2단락: 어린 동생이 씨앗을 삼킬 뻔한 뒤 할머니가 경고했고, 그래서 병에 보관하기 시작했다.',
-              '집안에 두지 않은 이유는 동생이 실수로 삼키는 것을 막기 위해서.',
-              '따라서 정답은 (2) toddler sister가 실수로 삼키지 않도록.',
+              'Paragraph 2: after the toddler sister almost swallowed a seed, grandmother warned them, so they began to keep the seeds in jars.',
+              'The seeds were not left around the house so that the sister would not swallow one by mistake.',
+              'So the answer is (2) so that the toddler sister would not swallow them by mistake.',
             ],
-            tip: '오답 보기(shakers, Art and Craft)는 "the use of seeds"일 뿐, "the reason for being careful"가 아님에 주의하세요.',
+            tip: 'Note that the wrong options (shakers, Art and Craft) are only "the use of seeds", not "the reason for being careful".',
           },
         },
         {
@@ -288,14 +288,14 @@ export const wa1RafflesGirlsPrimaryEnglish2024: EnglishPaper = {
           answer:
             'People could place them in special glass jars to be used as beautiful ornaments at home, and they could give them to their loved ones to express their love.',
           solution: {
-            method: '3단락의 "Some people... while others..." 문장에서 두 가지 용도를 찾는다.',
+            method: 'Find the two uses in the "Some people... while others..." sentence in paragraph 3.',
             steps: [
-              '3단락: "Some people would place them in special glass jars to be used as beautiful ornaments at home while others gave them to their loved ones to express their love for them."',
-              '용도 1: 특별한 유리병에 담아 집안 장식품으로 사용.',
-              '용도 2: 사랑하는 사람에게 선물해 애정을 표현.',
-              '완전한 문장으로 두 가지를 모두 포함해 답한다.',
+              'Paragraph 3: "Some people would place them in special glass jars to be used as beautiful ornaments at home while others gave them to their loved ones to express their love for them."',
+              'Use 1: put in special glass jars and used as ornaments at home.',
+              'Use 2: given as gifts to loved ones to show love.',
+              'Answer in a complete sentence that includes both uses.',
             ],
-            tip: '"complete sentence"를 요구하면 주어와 동사를 갖춘 온전한 문장으로 답해야 감점되지 않습니다.',
+            tip: 'If the question asks for a "complete sentence", answer with a full sentence that has a subject and a verb so you do not lose marks.',
           },
         },
       ],

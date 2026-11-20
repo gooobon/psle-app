@@ -6,8 +6,9 @@
 // In-progress answers live ONLY in the new key genius_exam_inprogress_v1 (no genius_* progress key is read or written).
 import React from 'react';
 import { serverGet, serverPost } from '@/lib/serverClient';
-import { remainingSeconds, isAnswered, WARN_MINUTES } from '@/lib/examEngine';
+import { remainingSeconds, isAnswered, WARN_MINUTES, scoreLine, percentOf } from '@/lib/examEngine';
 import { CAUSES } from '@/lib/wrongNotebook';
+import OrderTap from '@/components/OrderTap';
 
 const KEY = 'genius_exam_inprogress_v1';
 const card = { background: '#fff', borderRadius: 14, padding: '12px 14px', marginBottom: 12, boxShadow: '0 2px 8px rgba(0,0,0,.06)' };
@@ -42,6 +43,17 @@ function Choice({ options, value, onPick }) {
 function Text({ value, onChange, placeholder }) {
   return <input value={value == null ? '' : String(value)} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || 'Type your answer'} style={{ width: '100%', padding: '8px 10px', borderRadius: 8, border: '1px solid #CBD5E1', fontSize: 14, marginTop: 6, boxSizing: 'border-box' }} />;
 }
+// Underline the misspelled word only when it stands alone. "in" must not light up inside "underlined".
+function underlined(sentence, wrongWord) {
+  const sent = String(sentence || '');
+  const w = String(wrongWord || '');
+  if (!w) return sent;
+  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const m = sent.match(new RegExp('(?<![A-Za-z])' + esc + '(?![A-Za-z])'));
+  if (!m) return sent;
+  const at = m.index;
+  return <>{sent.slice(0, at)}<span style={{ textDecoration: 'underline', background: '#FEF08A', fontWeight: 800, padding: '0 2px' }}>{sent.slice(at, at + w.length)}</span>{sent.slice(at + w.length)}</>;
+}
 
 function CompQuestion({ q, a, set }) {
   const v = (a && a.val) ?? null;
@@ -69,11 +81,7 @@ function CompQuestion({ q, a, set }) {
     const seq = Array.isArray(a && a.seq) ? a.seq : [];
     return (
       <div>{head}
-        {items.map((it, i) => (
-          <div key={i} style={{ marginTop: 6, fontSize: 13 }}>
-            <input value={seq[i] ?? ''} onChange={(e) => { const n = items.map((_, j) => seq[j] ?? ''); n[i] = e.target.value.replace(/[^0-9]/g, '').slice(0, 2); set({ seq: n }); }} style={{ width: 40, textAlign: 'center', padding: 4, marginRight: 8 }} inputMode="numeric" />{it}
-          </div>
-        ))}
+        <OrderTap items={items} value={items.map((_, i) => seq[i])} onChange={(next) => set({ seq: next.map((r) => (r > 0 ? String(r) : '')) })} />
       </div>
     );
   }
@@ -111,8 +119,10 @@ function Section({ sec, answers, setAns, flags, toggleFlag }) {
       ))}
       {(s.items || []).map((q, i) => (
         <div key={q.id} style={{ marginTop: 10, fontSize: 14 }}>
-          <div>{i + 1}. {q.sentence}<Flag id={q.id} /></div>
-          <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+          <div>{i + 1}. {underlined(q.sentence, q.wrongWord)}<Flag id={q.id} /></div>
+          {q.options && q.options.length >= 2
+            ? <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+            : <Text value={answers[q.id] && answers[q.id].val} onChange={(t) => setAns(q.id, { val: t })} placeholder="Write the correct word" />}
         </div>
       ))}
       {(s.questions || []).map((q) => (
@@ -229,6 +239,7 @@ function rewardLine(w) {
     if (w.credits > 0 && w.homework && w.homework.remaining > 0) bits.push("Finish today's homework to confirm it.");
     return bits.join(' ');
   }
+  if (w.reason === 'awaiting_parent') return 'Your reward is decided after your parent has marked the open-ended questions.';
   if (w.reason === 'too_little') return 'No Saturday paper reward this time: it needs at least half the time used or 80% of the questions answered.';
   return null; // rewards off / not configured: say nothing
 }
@@ -240,8 +251,8 @@ function Result({ r, onDone, onReview }) {
     <div style={{ padding: 16 }}>
       <div style={card}>
         <div style={{ fontSize: 18, fontWeight: 900 }}>{a.label}</div>
-        <div style={{ fontSize: 15, marginTop: 6 }}>Score: <b>{a.score}/{a.total}</b> (auto-marked) · Answered {a.answered}/{a.questionCount} · Time used {fmt(a.elapsedSeconds || 0)}</div>
-        {a.openTotal ? <div style={note}>{a.openTotal} open-ended question{a.openTotal === 1 ? '' : 's'} will be marked by your parent.</div> : null}
+        <div style={{ fontSize: 15, marginTop: 6 }}>Score: <b>{scoreLine({ score: a.score, total: a.total, pending: a.parentPending })}</b>{a.parentPending ? '' : ` (${percentOf(a.score, a.total) == null ? 0 : percentOf(a.score, a.total)}%)`} · Answered {a.answered}/{a.questionCount} · Time used {fmt(a.elapsedSeconds || 0)}</div>
+        {a.parentPending ? <div style={note}>{a.parentPending} open-ended question{a.parentPending === 1 ? '' : 's'} will be marked by your parent. When they are marked, the marks are added to your score and your reward is settled from the final score.</div> : null}
         {a.status === 'auto_submitted' ? <div style={note}>Time ran out, so your paper was handed in automatically.</div> : null}
         <div style={{ ...note, marginTop: 8 }}>{a.counts ? 'This paper counts as today\'s set.' : 'This paper did not count as a set: it needs at least half the time used or 80% of the questions answered.'}</div>
         {rw ? <div style={{ ...note, marginTop: 8, color: '#065F46', fontWeight: 700 }}>{rw}</div> : null}
@@ -292,7 +303,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
       {head}
       <div style={card}>
         <div style={{ fontWeight: 800 }}>{d.attempt.label}</div>
-        <div style={note}>Score {d.attempt.score}/{d.attempt.total} · {todo.length} to review</div>
+        <div style={note}>Score {scoreLine({ score: d.attempt.score, total: d.attempt.total, pending: d.attempt.parentPending })} · {todo.length} to review</div>
         {skipped > 0 ? <div style={note}>To keep your notebook manageable, {skipped} missed question{skipped === 1 ? ' is' : 's are'} listed here but not added to it.</div> : null}
         <div style={{ marginTop: 8 }}>
           <button style={{ ...ghost, background: all ? '#F1F5F9' : '#EDE9FE' }} onClick={() => setAll(false)}>To review</button>{' '}
@@ -388,7 +399,7 @@ export default function PaperExam({ onBack, onNotebook, onCause }) {
       {!d && !err ? <div style={{ ...card, color: '#64748B', fontSize: 13 }}>Loading…</div> : null}
       {d && d.autoSubmitted ? (
         <div style={{ ...card, background: '#ECFDF5', fontSize: 13 }}>
-          <b>{d.autoSubmitted.label}</b>: time ran out, so your saved answers were handed in automatically. Score {d.autoSubmitted.score}/{d.autoSubmitted.total}.
+          <b>{d.autoSubmitted.label}</b>: time ran out, so your saved answers were handed in automatically. Score {scoreLine({ score: d.autoSubmitted.score, total: d.autoSubmitted.total, pending: d.autoSubmitted.parentPending })}.
         </div>
       ) : null}
       {d && d.open ? (
@@ -416,7 +427,7 @@ export default function PaperExam({ onBack, onNotebook, onCause }) {
       {d && d.attempts.length ? (
         <div style={card}>
           <div style={{ fontWeight: 800, marginBottom: 6 }}>Your papers</div>
-          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13, display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}><span>{a.label}: {a.score}/{a.total}{a.counts ? '' : ' (did not count)'}</span><button style={{ ...ghost, padding: '2px 8px', fontSize: 11 }} onClick={() => setReviewId(a.id)}>Review</button></div>)}
+          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13, display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}><span>{a.label}: {scoreLine({ score: a.score, total: a.total, pending: a.parentPending })}{a.counts ? '' : ' (did not count)'}</span><button style={{ ...ghost, padding: '2px 8px', fontSize: 11 }} onClick={() => setReviewId(a.id)}>Review</button></div>)}
         </div>
       ) : null}
     </div>

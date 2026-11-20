@@ -78,7 +78,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: "The class roared with laughter when the teacher's stomach ________.",
       options: [{ label: '1', text: 'jumbled' }, { label: '2', text: 'rumbled' }, { label: '3', text: 'fumbled' }, { label: '4', text: 'crumbled' }],
       answer: '2',
-      solution: { method: '배에서 꾸르륵 소리가 나는 동사를 고른다.', steps: ['"roared with laughter"(반 전체가 폭소) → 웃음의 원인은 선생님 배에서 소리가 남.', '"rumbled" = (배에서) 꾸르륵거리다 → 정답 (2).'], tip: '"stomach rumbled"는 배에서 꾸르륵 소리가 나는 것을 나타냅니다.' },
+      solution: { method: 'Choose the verb for the rumbling sound a stomach makes.', steps: ['"roared with laughter" (the whole class burst out laughing) → the cause of the laughter was a sound from the teacher\'s stomach.', '"rumbled" = made a low rumbling sound (a stomach) → answer (2).'], tip: '"stomach rumbled" describes the rumbling sound a stomach makes.' },
     },
     {
       kind: 'single', id: 'ny22wa1-q8', topic: 'VocabMCQ', format: 'mcq',
@@ -86,7 +86,7 @@ export const wa1NanyangPrimaryEnglish2022: EnglishPaper = {
       stem: '"Shall we go on a ________ through the park?" Brother suggested as he put on his walking shoes.',
       options: [{ label: '1', text: 'stroll' }, { label: '2', text: 'swim' }, { label: '3', text: 'climb' }, { label: '4', text: 'picnic' }],
       answer: '1',
-      solution: { method: '"through the park"(공원을 통해)와 "walking shoes"(걷는 신발)에 맞는 단어를 고른다.', steps: ['"put on his walking shoes"(걷는 신발 착용) → 걷는 활동.', '"through the park"(공원을 거니는) + "stroll"(산책) → 정확히 일치 → 정답 (1).'], tip: '"go on a stroll through the park"는 공원을 거닐다는 표현입니다.' },
+      solution: { method: 'Choose the word that fits "through the park" and "walking shoes".', steps: ['"put on his walking shoes" → an activity of walking.', '"through the park" + "stroll" (a slow, relaxed walk) → a perfect match → answer (1).'], tip: '"go on a stroll through the park" means to walk slowly and happily through the park.' },
     },
     // (C) Grammar Cloze – Prepositions Q9-12
     {

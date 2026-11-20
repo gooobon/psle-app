@@ -12,7 +12,7 @@ export const COPY = {
     stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes}`,
     streak: (c) => `Streak: ${c.streak} day${c.streak === 1 ? "" : "s"} · Active ${c.activeDays} of the last 7 days`,
     paperHeading: "Mock papers",
-    paperDone: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`} · ${x.minutesUsed} of ${x.minutesAllowed} min used${x.counted ? "" : " · did not count as a set"} · ${x.toReview} question${x.toReview === 1 ? "" : "s"} to review${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperDone: (x) => `${x.label}: ${scoreText(x)} · ${x.minutesUsed} of ${x.minutesAllowed} min used${x.counted ? "" : " · did not count as a set"} · ${x.toReview} question${x.toReview === 1 ? "" : "s"} to review`,
     paperUnfinished: (x) => `${x.label}: started, not handed in${x.expired ? " (time is up)" : ""}`,
     dashboard: "Open the parent dashboard",
     footer: "You get this because daily email alerts are on for your parent account.",
@@ -26,6 +26,8 @@ export function paperLines(c, t) {
   return [t.paperHeading, ...(p.done || []).map(t.paperDone), ...(p.unfinished || []).map(t.paperUnfinished)];
 }
 
+// Parent-marked items join the score once marked: "2/36 + 4 awaiting parent marking" until then, "6/40 (15%)" after.
+const scoreText = (x) => (x.openToMark ? `${x.score}/${x.total} + ${x.openToMark} awaiting parent marking` : `${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`}`);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 // payload: { parentName, date, dashboardUrl, children: [{ name, grade, subjects:[{name,sets,target,done}],
@@ -76,7 +78,7 @@ export const COPY_WEEKLY = {
     homework: (h) => (h.assigned ? `Homework: ${h.solved} of ${h.assigned} solved${h.notDone ? ` · ${h.notDone} not done` : ""}` : "Homework: none assigned this week."),
     credits: (r) => `Credits: ${r.confirmed} confirmed${r.sgd ? ` (S$${r.sgd})` : ""} · ${r.pending} pending · ${r.forfeited} forfeited (homework not finished)`,
     paperHeading: "Mock exam / past paper this week",
-    paperLine: (x) => `${x.label}: ${x.score}/${x.total}${x.pct == null ? "" : ` (${x.pct}%)`}${x.counted ? "" : " · did not count as a set"}${x.openToMark ? ` · ${x.openToMark} open-ended to mark` : ""}`,
+    paperLine: (x) => `${x.label}: ${scoreText(x)}${x.counted ? "" : " · did not count as a set"}`,
     paperNone: "No mock exam or past paper handed in this week.",
     dashboard: "Open the parent dashboard",
     footer: "You get this weekly report because email alerts are on for your parent account.",

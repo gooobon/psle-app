@@ -841,7 +841,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
               {Object.entries(SUBJECTS).map(([key,sub])=>{
                 const live=!!LIVE_CONTENT[`${grade}_${key}`];
                 return(
-                  <button key={key} onClick={()=>{ setSubject(key); if(!live) setParentToast("Coming Soon: 준비 중인 과목입니다"); else setParentToast(null); }} style={{flex:1,background:"none",border:"none",borderBottom:subject===key?"2.5px solid #fff":"2.5px solid transparent",padding:"8px 4px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
+                  <button key={key} onClick={()=>{ setSubject(key); if(!live) setParentToast("Coming Soon"); else setParentToast(null); }} style={{flex:1,background:"none",border:"none",borderBottom:subject===key?"2.5px solid #fff":"2.5px solid transparent",padding:"8px 4px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
                     <span style={{fontSize:15}}>{sub.icon}</span>
                     <span style={{fontSize:9,fontWeight:subject===key?800:400,color:subject===key?"#fff":"rgba(255,255,255,0.4)"}}>{key}</span>
                     {!live&&<span style={{fontSize:6,color:"rgba(255,255,255,0.45)",fontWeight:700}}>Coming Soon</span>}
