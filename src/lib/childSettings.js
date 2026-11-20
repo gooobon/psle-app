@@ -25,6 +25,7 @@ export function settingFromRow(r) {
       enabled: !!r.enabled, sgdPerCredit: Number(r.sgd_per_credit) || 0,
       dailyTiers: Array.isArray(r.daily_tiers) ? r.daily_tiers : [],
       weeklyUnit: r.weekly_unit === "sgd" ? "sgd" : "credits", weeklyAmounts: r.weekly_amounts || {},
+      paperUnit: r.paper_unit === "sgd" ? "sgd" : "credits", paperAmounts: r.paper_amounts || {}, paperCheckOff: r.paper_check_off === true,
       effectiveFrom: r.effective_from,
     },
   };
@@ -39,10 +40,13 @@ export function ruleInForce(versions, ymd) {
   return s.rule && s.rule.enabled ? s.rule : null;
 }
 
-export const settingToRow = (childId, s, updatedBy, nowIso) => ({
+// opts.paper: include the paper_* columns (migration 20261130000000_paper_rewards.sql). Off (the default) = the row is exactly what it was
+// before mock exams phase 2, so saving settings never depends on that migration while the mock-exam flag is off.
+export const settingToRow = (childId, s, updatedBy, nowIso, opts) => ({
   child_id: childId, effective_from: s.effectiveFrom, daily_target: s.dailyTarget, homework_per_mistake: s.homeworkPerMistake,
   enabled: !!s.rule.enabled, sgd_per_credit: s.rule.sgdPerCredit, daily_tiers: s.rule.dailyTiers,
   weekly_unit: s.rule.weeklyUnit, weekly_amounts: s.rule.weeklyAmounts, updated_by: updatedBy, updated_at: nowIso,
+  ...(opts && opts.paper ? { paper_unit: s.rule.paperUnit || "credits", paper_amounts: s.rule.paperAmounts || {}, paper_check_off: !!s.rule.paperCheckOff } : {}),
 });
 
 // Build the new full setting from a parent's PARTIAL edit. `base` = the setting that will be in force tomorrow (it already includes
@@ -76,6 +80,9 @@ export function applySettingEdit(base, body, todayYmd = sgtDate()) {
     dailyTiers: has("dailyTiers") ? b.dailyTiers : r0.dailyTiers,
     weeklyUnit: has("weeklyUnit") ? b.weeklyUnit : r0.weeklyUnit,
     weeklyAmounts: has("weeklyAmounts") ? { ...r0.weeklyAmounts, ...b.weeklyAmounts } : r0.weeklyAmounts,
+    paperUnit: has("paperUnit") ? b.paperUnit : r0.paperUnit,
+    paperAmounts: has("paperAmounts") ? { ...r0.paperAmounts, ...b.paperAmounts } : r0.paperAmounts,
+    paperCheckOff: has("paperCheckOff") ? b.paperCheckOff : r0.paperCheckOff,
   }, todayYmd);
   if (p.error) return { error: p.error };
   return { setting: { effectiveFrom: eff, dailyTarget, homeworkPerMistake, rule: p.rule } };
@@ -108,6 +115,12 @@ export function diffSettings(a, b) {
     const x = Number((ra.weeklyAmounts || {})[s]) || 0, y = Number((rb.weeklyAmounts || {})[s]) || 0;
     if (x !== y) out.push(`${s} Saturday reward to ${y} ${unitWord(rb.weeklyUnit)}`);
   }
+  if ((ra.paperUnit || "credits") !== (rb.paperUnit || "credits")) out.push(`Saturday paper reward unit to ${unitWord(rb.paperUnit || "credits")}`);
+  for (const s of SUBJECT_KEYS) {
+    const x = Number((ra.paperAmounts || {})[s]) || 0, y = Number((rb.paperAmounts || {})[s]) || 0;
+    if (x !== y) out.push(`${s} Saturday paper reward to ${y} ${unitWord(rb.paperUnit || "credits")}`);
+  }
+  if (!!ra.paperCheckOff !== !!rb.paperCheckOff) out.push(rb.paperCheckOff ? "the Saturday paper effort check turned off" : "the Saturday paper effort check turned on");
   return out;
 }
 

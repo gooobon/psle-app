@@ -7,6 +7,7 @@
 import React from 'react';
 import { serverGet, serverPost } from '@/lib/serverClient';
 import { remainingSeconds, isAnswered, WARN_MINUTES } from '@/lib/examEngine';
+import { CAUSES } from '@/lib/wrongNotebook';
 
 const KEY = 'genius_exam_inprogress_v1';
 const card = { background: '#fff', borderRadius: 14, padding: '12px 14px', marginBottom: 12, boxShadow: '0 2px 8px rgba(0,0,0,.06)' };
@@ -218,10 +219,23 @@ function Sitting({ attempt, paper, initial, onSubmitted, onExit }) {
   );
 }
 
-// ── result (verdict only; no answer key is ever sent to the student) ─────────
-function Result({ r, onDone }) {
+// ── result (verdict only until the student opens the review; the key is never sent in this response) ─────────
+function rewardLine(w) {
+  if (!w || !w.saturday) return null;
+  if (w.eligible) {
+    const bits = ['Saturday past paper done.'];
+    if (w.sticker) bits.push('You earned a sticker.');
+    if (w.credits > 0) bits.push(w.awarded ? `${w.credits} credit${w.credits === 1 ? '' : 's'} added as pending.` : `${w.credits} credit${w.credits === 1 ? '' : 's'} already recorded for this Saturday.`);
+    if (w.credits > 0 && w.homework && w.homework.remaining > 0) bits.push("Finish today's homework to confirm it.");
+    return bits.join(' ');
+  }
+  if (w.reason === 'too_little') return 'No Saturday paper reward this time: it needs at least half the time used or 80% of the questions answered.';
+  return null; // rewards off / not configured: say nothing
+}
+function Result({ r, onDone, onReview }) {
   const a = r.attempt;
   const bad = (r.verdicts || []).filter((v) => v.correct === false);
+  const rw = rewardLine(r.reward);
   return (
     <div style={{ padding: 16 }}>
       <div style={card}>
@@ -230,24 +244,98 @@ function Result({ r, onDone }) {
         {a.openTotal ? <div style={note}>{a.openTotal} open-ended question{a.openTotal === 1 ? '' : 's'} will be marked by your parent.</div> : null}
         {a.status === 'auto_submitted' ? <div style={note}>Time ran out, so your paper was handed in automatically.</div> : null}
         <div style={{ ...note, marginTop: 8 }}>{a.counts ? 'This paper counts as today\'s set.' : 'This paper did not count as a set: it needs at least half the time used or 80% of the questions answered.'}</div>
+        {rw ? <div style={{ ...note, marginTop: 8, color: '#065F46', fontWeight: 700 }}>{rw}</div> : null}
       </div>
       <div style={card}>
         <div style={{ fontWeight: 800, marginBottom: 6 }}>By section</div>
         {(a.sections || []).map((s) => <div key={s.section} style={{ fontSize: 14 }}>{s.section}: {s.score}/{s.total}</div>)}
       </div>
-      {bad.length ? <div style={card}><div style={{ fontWeight: 800 }}>{bad.length} to review</div><div style={note}>Ask your parent to go over these with you. Questions you missed are not shown with answers here.</div></div> : null}
-      <button style={btn()} onClick={onDone}>Done</button>
+      {bad.length ? <div style={card}><div style={{ fontWeight: 800 }}>{bad.length} to review</div><div style={note}>Open the review to see each answer and the explanation. Missed questions are also added to your notebook.</div></div> : null}
+      <div style={{ display: 'flex', gap: 8 }}>
+        <button style={btn('#059669')} onClick={() => onReview(a.id)}>Review answers</button>
+        <button style={btn()} onClick={onDone}>Done</button>
+      </div>
+    </div>
+  );
+}
+
+// ── review of one handed-in paper: your answer, the correct answer, the explanation, and why you missed it ──────
+// The server only returns this for the student's OWN finished attempt. Cause picking is optional; skipped = no cause saved.
+function Review({ attemptId, onBack, onNotebook, onCause }) {
+  const [d, setD] = React.useState(null);
+  const [err, setErr] = React.useState('');
+  const [all, setAll] = React.useState(false);
+  const [saving, setSaving] = React.useState('');
+  React.useEffect(() => {
+    let alive = true;
+    serverGet('/api/student/exam?review=' + encodeURIComponent(attemptId)).then((r) => {
+      if (!alive) return;
+      if (r.ok) { setD(r); setErr(''); if (onNotebook) onNotebook(r.attempt, r.items); } else setErr(r.error || 'Could not load the review.');
+    });
+    return () => { alive = false; };
+  }, [attemptId, onNotebook]);
+  async function pick(it, cause) {
+    setSaving(it.id);
+    const r = await serverPost('/api/student/exam', { action: 'cause', attemptId, questionId: it.id, cause });
+    setSaving('');
+    if (r.ok) { setD((x) => ({ ...x, items: x.items.map((y) => (y.id === it.id ? { ...y, cause } : y)) })); if (onCause) onCause(attemptId, it.id, cause); }
+    else setErr(r.error || 'Could not save.');
+  }
+  const head = <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}><div style={{ fontSize: 18, fontWeight: 900 }}>Review</div><button style={ghost} onClick={onBack}>← Back</button></div>;
+  if (err && !d) return <div style={{ padding: 16 }}>{head}<div style={{ ...card, color: '#B91C1C', fontSize: 13 }}>{err}</div></div>;
+  if (!d) return <div style={{ padding: 16 }}>{head}<div style={{ ...card, fontSize: 13, color: '#64748B' }}>Loading…</div></div>;
+  const todo = d.items.filter((it) => it.correct === false || it.openEnded);
+  const shown = all ? d.items : todo;
+  const skipped = Math.max(0, d.notebookCap || 0);
+  return (
+    <div style={{ padding: 16 }}>
+      {head}
+      <div style={card}>
+        <div style={{ fontWeight: 800 }}>{d.attempt.label}</div>
+        <div style={note}>Score {d.attempt.score}/{d.attempt.total} · {todo.length} to review</div>
+        {skipped > 0 ? <div style={note}>To keep your notebook manageable, {skipped} missed question{skipped === 1 ? ' is' : 's are'} listed here but not added to it.</div> : null}
+        <div style={{ marginTop: 8 }}>
+          <button style={{ ...ghost, background: all ? '#F1F5F9' : '#EDE9FE' }} onClick={() => setAll(false)}>To review</button>{' '}
+          <button style={{ ...ghost, background: all ? '#EDE9FE' : '#F1F5F9' }} onClick={() => setAll(true)}>All questions</button>
+        </div>
+      </div>
+      {err ? <div style={{ ...card, color: '#B91C1C', fontSize: 13 }}>{err}</div> : null}
+      {shown.length === 0 ? <div style={{ ...card, fontSize: 13 }}>Nothing to review. Well done!</div> : null}
+      {shown.map((it) => (
+        <div key={it.id} style={{ ...card, borderLeft: '4px solid ' + (it.correct === true ? '#10B981' : it.correct === false ? '#EF4444' : '#F59E0B') }}>
+          <div style={{ fontSize: 11, fontWeight: 800, color: '#7C3AED' }}>{it.section}{it.no ? ' · Q' + it.no : ''}</div>
+          <div style={{ fontSize: 14, fontWeight: 700, marginTop: 2 }}>{it.prompt || it.id}</div>
+          <div style={{ fontSize: 13, marginTop: 6 }}>Your answer: <b>{it.answered ? it.yourAnswer : '(no answer)'}</b></div>
+          {it.ambiguous || it.keyMissing
+            ? <div style={note}>{it.keyMissing ? 'This question is not available in our copy of the paper, so it is not counted in your score.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
+            : <div style={{ fontSize: 13 }}>{it.openEnded ? 'Model answer' : 'Correct answer'}: <b>{it.correctAnswer || '—'}</b></div>}
+          {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Your parent marked this: correct.' : it.parentMark === false ? 'Your parent marked this: not correct.' : 'Your parent has not marked this yet.'}</div> : null}
+          {it.explanation ? <div style={{ fontSize: 13, marginTop: 6, background: '#F8FAFC', borderRadius: 8, padding: 8 }}>{it.explanation}</div> : null}
+          {it.correct === false && it.inNotebook ? (
+            <div style={{ marginTop: 8 }}>
+              <div style={{ fontSize: 12, fontWeight: 800, color: '#64748B', marginBottom: 4 }}>Why did you get it wrong?{it.suggestedCause && !it.cause ? ' (suggestion: Ran out of time)' : ''}</div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                {CAUSES.map((c) => {
+                  const on = it.cause === c.value, hint = !it.cause && it.suggestedCause === c.value;
+                  return <button key={c.value} disabled={saving === it.id} onClick={() => pick(it, c.value)} style={{ padding: '5px 10px', borderRadius: 999, border: '2px solid ' + (on ? '#7C3AED' : hint ? '#C4B5FD' : '#E2E8F0'), background: on ? '#F5F3FF' : '#fff', fontSize: 12, cursor: 'pointer' }}>{c.label}</button>;
+                })}
+              </div>
+            </div>
+          ) : null}
+        </div>
+      ))}
     </div>
   );
 }
 
 // ── picker + controller ──────────────────────────────────────────────────────
-export default function PaperExam({ onBack }) {
+export default function PaperExam({ onBack, onNotebook, onCause }) {
   const [d, setD] = React.useState(null);
   const [err, setErr] = React.useState('');
   const [sitting, setSitting] = React.useState(null);
   const [result, setResult] = React.useState(null);
   const [busy, setBusy] = React.useState('');
+  const [reviewId, setReviewId] = React.useState(null);
 
   const refresh = React.useCallback(() => serverGet('/api/student/exam').then((r) => { if (r.ok) { setD(r); setErr(''); } else setErr(r.error || 'Mock papers are not available.'); }), []);
   React.useEffect(() => { refresh(); }, [refresh]);
@@ -270,7 +358,21 @@ export default function PaperExam({ onBack }) {
     await start(d.open.paperId);
   }
 
-  if (result) return <Result r={result} onDone={() => { setResult(null); refresh(); }} />;
+  // Missed items of a handed-in paper join the notebook even if the student never opens the review (the review fetch does it).
+  React.useEffect(() => {
+    const id = result && result.attempt && result.attempt.id;
+    if (!id || !onNotebook) return;
+    serverGet('/api/student/exam?review=' + encodeURIComponent(id)).then((r) => { if (r.ok) onNotebook(r.attempt, r.items); });
+  }, [result, onNotebook]);
+  // The newest finished paper is also synced when the list loads: covers a paper that was auto-submitted while the page was closed.
+  const latestId = d && d.attempts && d.attempts[0] && d.attempts[0].id;
+  React.useEffect(() => {
+    if (!latestId || !onNotebook) return;
+    serverGet('/api/student/exam?review=' + encodeURIComponent(latestId)).then((r) => { if (r.ok) onNotebook(r.attempt, r.items); });
+  }, [latestId, onNotebook]);
+
+  if (reviewId) return <Review attemptId={reviewId} onBack={() => setReviewId(null)} onNotebook={onNotebook} onCause={onCause} />;
+  if (result) return <Result r={result} onDone={() => { setResult(null); refresh(); }} onReview={(id) => setReviewId(id)} />;
   if (sitting) return <Sitting attempt={sitting.attempt} paper={sitting.paper} initial={sitting.initial} onSubmitted={(r) => { setSitting(null); setResult(r); }} onExit={() => setSitting(null)} />;
 
   return (
@@ -280,7 +382,7 @@ export default function PaperExam({ onBack }) {
         <button style={ghost} onClick={onBack}>← Back</button>
       </div>
       <div style={{ ...card, fontSize: 13 }}>
-        Real past papers, timed like the real exam. No hints and no answers until you hand in. Only the written, auto-marked parts of each paper are included (no listening, oral or composition).
+        Real past papers, timed like the real exam. No hints and no answers until you hand in; then you can review every answer. Only the written, auto-marked parts of each paper are included (no listening, oral or composition).
       </div>
       {err ? <div style={{ ...card, color: '#B91C1C', fontSize: 13 }}>{err}</div> : null}
       {!d && !err ? <div style={{ ...card, color: '#64748B', fontSize: 13 }}>Loading…</div> : null}
@@ -314,7 +416,7 @@ export default function PaperExam({ onBack }) {
       {d && d.attempts.length ? (
         <div style={card}>
           <div style={{ fontWeight: 800, marginBottom: 6 }}>Your papers</div>
-          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13 }}>{a.label}: {a.score}/{a.total}{a.counts ? '' : ' (did not count)'}</div>)}
+          {d.attempts.slice(0, 10).map((a) => <div key={a.id} style={{ fontSize: 13, display: 'flex', justifyContent: 'space-between', gap: 8, marginBottom: 4 }}><span>{a.label}: {a.score}/{a.total}{a.counts ? '' : ' (did not count)'}</span><button style={{ ...ghost, padding: '2px 8px', fontSize: 11 }} onClick={() => setReviewId(a.id)}>Review</button></div>)}
         </div>
       ) : null}
     </div>

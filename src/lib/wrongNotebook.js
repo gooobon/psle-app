@@ -110,6 +110,7 @@ export function findMistake(prog, key) {
 // Server attempt_key ('set-N') of a mistake: its own sessionNum, else the history entry (same date, contains the id). null if unknown.
 export function attemptKeyFor(prog, m) {
   if (!m) return null;
+  if (m.attemptKey) return String(m.attemptKey); // mock-paper entries carry 'exam-<attemptId>' (additive field)
   if (m.sessionNum != null) return 'set-' + m.sessionNum;
   const h = ((prog && prog.history) || []).find((e) => e && e.date === m.date && (e.mistakes || []).some((x) => x && x.id === m.id));
   return h && h.sessionNum != null ? 'set-' + h.sessionNum : null;

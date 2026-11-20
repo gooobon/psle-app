@@ -69,7 +69,7 @@ export function StickerShelf() {
         ) : (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: 22 }}>
             {st.stickers.map((s) => (
-              <span key={s.kind + s.period} title={(s.kind === 'weekly' ? 'Weekly Review, week of ' : 'Target met on ') + s.period}>{s.kind === 'weekly' ? '🏆' : '⭐'}</span>
+              <span key={s.kind + s.period} title={(s.kind === 'weekly' ? 'Weekly Review, week of ' : s.kind === 'paper' ? 'Saturday past paper on ' : 'Target met on ') + s.period}>{s.kind === 'weekly' ? '🏆' : s.kind === 'paper' ? '📝' : '⭐'}</span>
             ))}
           </div>
         )}

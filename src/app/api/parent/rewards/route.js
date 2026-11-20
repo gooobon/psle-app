@@ -8,7 +8,7 @@ import { sgtDate } from "@/lib/activity";
 import { weekStart, creditTotals, PENDING_NOTE } from "@/lib/rewards";
 import { settingForDate, tomorrowSgt } from "@/lib/childSettings";
 import { saveChildSetting } from "@/lib/childSettingsServer";
-import { finalizeCredits } from "@/lib/rewardsServer";
+import { finalizeCredits, SETTING_COLUMNS } from "@/lib/rewardsServer";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -34,7 +34,7 @@ export async function GET(request) {
   const [st, wr, ru, cr, po] = await Promise.all([
     admin.from("stickers").select("kind,period").eq("child_id", child),
     admin.from("weekly_reviews").select("subject,items,completed_at").eq("child_id", child).eq("week_start", ws),
-    admin.from("child_setting_versions").select("effective_from,daily_target,homework_per_mistake,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts").eq("child_id", child).order("effective_from", { ascending: true }),
+    admin.from("child_setting_versions").select(SETTING_COLUMNS).eq("child_id", child).order("effective_from", { ascending: true }),
     admin.from("reward_credits").select("kind,period,subject,score_pct,credits,sgd_per_credit,status,gate_day,created_at").eq("child_id", child).order("period", { ascending: false }),
     admin.from("reward_payouts").select("id,credits,amount_sgd,paid_on,note,created_at").eq("child_id", child).order("created_at", { ascending: false }),
   ]);
@@ -50,7 +50,7 @@ export async function GET(request) {
   return jok({
     today, weekStart: ws, tomorrow,
     weekly: { done: (wr.data || []).length > 0, subjects: (wr.data || []).map((x) => x.subject) },
-    stickers: { total: stickers.length, daily: stickers.filter((s) => s.kind === "daily").length, weekly: stickers.filter((s) => s.kind === "weekly").length },
+    stickers: { total: stickers.length, daily: stickers.filter((s) => s.kind === "daily").length, weekly: stickers.filter((s) => s.kind === "weekly").length, paper: stickers.filter((s) => s.kind === "paper").length },
     // rules = what applies TODAY (read-only in the form's header); form edits start from what applies tomorrow (includes a co-parent's edit).
     rules: current.rule, formRules: next.rule, upcoming: next.effectiveFrom > today ? [next.rule] : [],
     ledger: { earned: totals.confirmed, pending: totals.pending, forfeited: totals.forfeited, pendingNote: PENDING_NOTE, paid, balance: totals.balance, rows: credits.slice(0, 60) },
@@ -71,6 +71,7 @@ export async function PUT(request) {
   // Any effectiveFrom sent by the client is ignored: the shared setting always changes from the next SGT day.
   const r = await saveChildSetting(admin, me.profile, child, {
     enabled: b.enabled, sgdPerCredit: b.sgdPerCredit, dailyTiers: b.dailyTiers, weeklyUnit: b.weeklyUnit, weeklyAmounts: b.weeklyAmounts,
+    paperUnit: b.paperUnit, paperAmounts: b.paperAmounts, paperCheckOff: b.paperCheckOff,
   });
   if (!r.ok) return jerr(r.error, r.status || 500);
   return jok({ rule: r.setting.rule, changes: r.changes });

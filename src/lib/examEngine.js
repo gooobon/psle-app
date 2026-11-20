@@ -84,6 +84,7 @@ export function summarize(rows) {
   const by = new Map();
   let score = 0, total = 0, ungraded = 0;
   for (const r of rows) {
+    if (r.excluded) continue; // cannot be answered (no options in the paper data): not scored, not "open"
     if (!by.has(r.section)) { const s = { section: r.section, score: 0, total: 0 }; by.set(r.section, s); sections.push(s); }
     const s = by.get(r.section);
     if (r.correct === null || r.correct === undefined) { ungraded += 1; continue; }
@@ -114,4 +115,30 @@ export function pickPaper(rows, { school, attempts }) {
   const fresh = rows.filter((r) => !done.has(r.id));
   const pool = fresh.length ? fresh : rows;
   return [...pool].sort((a, b) => own(a) - own(b) || (done.get(a.id) || 0) - (done.get(b.id) || 0) || a.id.localeCompare(b.id))[0] || null;
+}
+
+// ── Phase 2: wrong-answer notebook, review, reward (issue #48) ───────────────────────────────────────────────────────
+// Design risk (c): a long paper must not dump dozens of items into the notebook at once. CHOICE: at most 20 items per paper
+// sitting enter the notebook. Wrong ANSWERED items come first (printed order), then unanswered ones, so the cap drops the items that
+// teach least (a blank is usually time, not a misconception). Items past the cap are still listed on the paper's review screen.
+export const MAX_NOTEBOOK_PER_PAPER = 20;
+export const notebookAttemptKey = (attemptId) => "exam-" + attemptId; // wrong_answers.attempt_key (design section 6)
+
+// rows: [{ id, answered, correct }] in printed order. Only auto-graded WRONG items (correct === false) qualify; open-ended items
+// (correct null) never do. Returns the chosen rows (at most `cap`) and how many were left out.
+export function pickNotebookRows(rows, cap = MAX_NOTEBOOK_PER_PAPER) {
+  const wrong = (rows || []).filter((r) => r && r.correct === false);
+  const ordered = [...wrong.filter((r) => r.answered), ...wrong.filter((r) => !r.answered)];
+  const picked = ordered.slice(0, Math.max(0, cap));
+  return { picked, skipped: wrong.length - picked.length };
+}
+
+// The cause the review screen pre-suggests (never stored by itself): "Ran out of time" for an item left blank at an auto-submit.
+export function suggestedCause({ answered, status }) {
+  return !answered && status === "auto_submitted" ? "time" : null;
+}
+
+// Review is only ever shown for the student's OWN, finished attempt. in_progress / abandoned attempts never expose a key.
+export function canReview({ attempt, studentId }) {
+  return !!attempt && !!studentId && attempt.student_id === studentId && (attempt.status === "submitted" || attempt.status === "auto_submitted");
 }
