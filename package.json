@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node tools/no_korean_selftest.mjs",
     "build": "next build",
     "start": "next start",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "e2e:local": "bash tools/e2e/run-local.sh"
+    "e2e:local": "bash tools/e2e/run-local.sh",
+    "selftest": "for f in $(ls tools/*_selftest.mjs | grep -v learning_grade); do node \"$f\" || exit 1; done"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

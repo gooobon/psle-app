@@ -409,13 +409,13 @@ export const wa1HenryParkPrimaryEnglish2025: EnglishPaper = {
             'At the end of the story: ________',
           answer: 'At the start of the story: frustrated.  At the end of the story: proud.',
           solution: {
-            method: '이야기의 처음과 끝에서 까마귀의 감정 변화를 확인한다.',
+            method: 'Check how the crow\'s feelings change from the start to the end of the story.',
             steps: [
-              '처음(1~2단락): "was getting tired and impatient", "tried to reach the water with its beak, but it could not" → 답답함/짜증 = frustrated.',
-              '끝(마지막 단락): "it swelled with pride and satisfaction" → 자랑스러움 = proud.',
-              '따라서 처음 = frustrated, 끝 = proud.',
+              'Start (paragraphs 1-2): "was getting tired and impatient", "tried to reach the water with its beak, but it could not" → upset and annoyed = frustrated.',
+              'End (last paragraph): "it swelled with pride and satisfaction" → feeling good about itself = proud.',
+              'So the start = frustrated, and the end = proud.',
             ],
-            tip: '이야기의 시작과 끝에서 인물의 감정이 어떻게 변화했는지(좌절 → 자부심) 비교하는 문제입니다.',
+            tip: 'This question asks you to compare how the character\'s feelings change from the start to the end of the story (frustration → pride).',
           },
         },
       ],

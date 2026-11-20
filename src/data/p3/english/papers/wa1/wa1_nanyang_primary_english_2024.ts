@@ -149,13 +149,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"Made a wonderful artwork" 사람을 가리키는 직업명을 고른다.',
+        method: '"Made a wonderful artwork": choose the job name for a person.',
         steps: [
-          '"created stunning artwork"(멋진 작품을 만들었다) — 그림/미술 작품을 만든 사람.',
-          '"artist" = 화가/예술가 → artwork를 만드는 사람과 정확히 일치.',
-          'actor(배우)/author(작가, 글)/advertiser(광고주)는 "Making an artwork"과 직접 관련 없다 → 정답 (2) artist.',
+          '"created stunning artwork" (made a beautiful piece of art): this is a person who makes pictures or art.',
+          '"artist" = a person who paints or creates art, which matches the person who makes the artwork exactly.',
+          'actor / author (writer) / advertiser are not directly connected to "Making an artwork", so the answer is (2) artist.',
         ],
-        tip: '"artwork"(미술 작품)을 만드는 사람은 artist입니다.',
+        tip: 'A person who makes "artwork" is an artist.',
       },
     },
     {
@@ -175,13 +175,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"Biting/harsh wind"에 대한 사람의 신체 반응을 나타내는 동사를 고른다.',
+        method: '"Biting/harsh wind": choose the verb that shows how a person\'s body reacts.',
         steps: [
-          '"piercing wind"(매서운 바람)에 떠는 모습 → "shivered"(추워서 떨었다).',
-          '뒤 문장 "wrapped himself more tightly in his thick woollen jacket"(두꺼운 옷을 더 단단히 둘렀다)도 추위를 뒷받침한다.',
-          'waved(흔들었다)/fluttered(나풀거렸다, 보통 깃발·잎)/shattered(부서졌다)는 사람이 추위에 보이는 반응이 아니다 → 정답 (3) shivered.',
+          'Trembling in the "piercing wind" (sharp, cold wind) = "shivered" (shook from the cold).',
+          'The next sentence "wrapped himself more tightly in his thick woollen jacket" also supports the idea of cold.',
+          'waved / fluttered (usually flags or leaves) / shattered (broke into pieces) are not how a person reacts to the cold, so the answer is (3) shivered.',
         ],
-        tip: '"shiver"는 추위나 두려움으로 몸을 떠는 동작을 나타냅니다.',
+        tip: '"shiver" means to shake because of cold or fear.',
       },
     },
     {
@@ -227,13 +227,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"Everyone clapped"는 반응에 어울리는 불꽃놀이 묘사 형용사를 고른다.',
+        method: '"Everyone clapped": choose the adjective that describes fireworks that deserve such a reaction.',
         steps: [
-          '"Everyone applauded after it ended"(모두가 박수쳤다) → 화려하고 멋진 불꽃놀이였음을 암시.',
-          '"vibrant" = 화려하고 생동감 있는 → 박수를 받을 만한 멋진 불꽃놀이에 적합.',
-          'dull(따분한)/limp(흐물흐물한)/grim(음울한)은 모두 부정적이라 박수와 안 맞는다 → 정답 (4) vibrant.',
+          '"Everyone applauded after it ended" suggests the fireworks were colourful and wonderful.',
+          '"vibrant" = bright and full of life, which suits fireworks worth applauding.',
+          'dull / limp (soft and floppy) / grim (gloomy) are all negative and do not fit applause, so the answer is (4) vibrant.',
         ],
-        tip: '뒤따르는 반응(applauded)이 형용사의 긍정/부정 방향을 알려주는 단서입니다.',
+        tip: 'The reaction that follows (applauded) is a clue to whether the adjective is positive or negative.',
       },
     },
 
@@ -262,13 +262,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Patrick used a wheelchair to get (9) ________ one place to another.',
           answer: 'C',
           solution: {
-            method: '"From one place to another place" 이동한다는 표현에 맞는 전치사를 고른다.',
+            method: '"From one place to another place": choose the preposition that fits the idea of moving.',
             steps: [
-              '"get from one place to another" = 한 곳에서 다른 곳으로 이동하다 → 정해진 표현.',
-              '"from"이 "From one place (starting point)"를 나타낸다.',
-              '보기에서 from은 (C) → 정답 (C).',
+              '"get from one place to another" = to move from one place to another, a fixed expression.',
+              '"from" shows the "one place (starting point)".',
+              'In the options, from is (C), so the answer is (C).',
             ],
-            tip: '"from A to B"는 "From A to B"라는 뜻의 짝꿍 전치사입니다.',
+            tip: '"from A to B" is a pair of prepositions showing a starting point and an end point.',
           },
         },
         {
@@ -278,13 +278,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'A year ago, while struggling to get (10) ________ the front door, Patrick dropped his keys.',
           answer: 'E',
           solution: {
-            method: '"To go through a door"는 동작에 맞는 전치사를 고른다.',
+            method: '"To go through a door": choose the preposition that fits the action.',
             steps: [
-              '"get through the door" = 문을 통과해 지나가다.',
-              '"through"는 통과의 의미를 가진 전치사.',
-              '보기에서 through는 (E) → 정답 (E).',
+              '"get through the door" = to pass through the door.',
+              '"through" is a preposition that means passing from one side to the other.',
+              'In the options, through is (E), so the answer is (E).',
             ],
-            tip: '"get through a door/gate"는 문/출입구를 통과하는 동작을 나타냅니다.',
+            tip: '"get through a door/gate" describes the action of passing through a door or entrance.',
           },
         },
         {
@@ -294,13 +294,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'It was a nightmare (11) ________ him to reach out for the keys...',
           answer: 'B',
           solution: {
-            method: '"For someone / When it comes to someone"라는 의미의 전치사를 고른다.',
+            method: '"For someone / When it comes to someone": choose the preposition with this meaning.',
             steps: [
-              '"It was a nightmare ___ him" — "It was like a nightmare for him"는 의미.',
-              '"for"는 "For someone / To someone"이라는 의미로 쓰인다.',
-              '보기에서 for는 (B) → 정답 (B).',
+              '"It was a nightmare ___ him" means "It was like a nightmare for him".',
+              '"for" is used to mean "for someone / to someone".',
+              'In the options, for is (B), so the answer is (B).',
             ],
-            tip: '"It was [adjective] for someone"은 "It was [adjective] for someone / to someone"는 뜻입니다.',
+            tip: '"It was [adjective] for someone" means "It was [adjective] to someone".',
           },
         },
         {
@@ -310,13 +310,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: '...leaning out of his wheelchair to pick (12) ________ the keys was dangerous.',
           answer: 'F',
           solution: {
-            method: '"To pick up something that fell on the floor"라는 동사구의 전치사를 고른다.',
+            method: '"To pick up something that fell on the floor": choose the preposition for this phrasal verb.',
             steps: [
-              '"pick up the keys" = 열쇠를 집어 들다(바닥에서 위로).',
-              '"up"은 아래에서 위로 들어 올리는 동작을 나타낸다.',
-              '보기에서 up은 (F) → 정답 (F). (남은 A·D는 사용되지 않음)',
+              '"pick up the keys" = to lift the keys up from the floor.',
+              '"up" shows the action of lifting from below to above.',
+              'In the options, up is (F), so the answer is (F). (A and D are left unused.)',
             ],
-            tip: '"pick up something"은 떨어진 물건을 집어 드는 동작을 나타내는 정해진 표현입니다.',
+            tip: '"pick up something" is a fixed expression for lifting up something that has fallen.',
           },
         },
       ],
@@ -344,13 +344,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Very few animals (13) [is / are] a threat to lions.',
           answer: 'are',
           solution: {
-            method: '주어 "Very few animals"의 수(복수)를 본다.',
+            method: 'Look at the number (plural) of the subject "Very few animals".',
             steps: [
-              '"animals"는 복수 명사.',
-              '복수 주어 → be동사는 are.',
-              '따라서 "Very few animals are a threat" → are.',
+              '"animals" is a plural noun.',
+              'A plural subject takes the verb "are".',
+              'So "Very few animals are a threat" uses are.',
             ],
-            tip: '"Very few + plural noun"는 복수 주어이므로 are를 씁니다.',
+            tip: '"Very few + plural noun" is a plural subject, so use are.',
           },
         },
         {
@@ -360,13 +360,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Leopards and hyenas (14) [hunt / hunts] lion cubs only when the adult lions are out of sight.',
           answer: 'hunt',
           solution: {
-            method: '"and"로 연결된 복수 주어를 본다.',
+            method: 'Look at the plural subject joined by "and".',
             steps: [
-              '"Leopards and hyenas"는 두 개의 명사가 and로 연결되어 복수 주어.',
-              '복수 주어 + 단순현재 → 동사 원형.',
-              '따라서 "Leopards and hyenas hunt" → hunt.',
+              '"Leopards and hyenas" are two nouns joined by and, so the subject is plural.',
+              'Plural subject + simple present = the base form of the verb.',
+              'So "Leopards and hyenas hunt" uses hunt.',
             ],
-            tip: 'A and B로 연결된 주어는 복수로 취급하여 동사에 -s를 붙이지 않습니다.',
+            tip: 'A subject joined as A and B is plural, so do not add -s to the verb.',
           },
         },
         {
@@ -376,13 +376,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Unfortunately, humans (15) [has / have] been a real threat to adult lions.',
           answer: 'have',
           solution: {
-            method: '주어 "humans"의 수(복수)를 본다.',
+            method: 'Look at the number (plural) of the subject "humans".',
             steps: [
-              '"humans"는 복수 명사.',
-              '복수 주어의 현재완료 조동사는 have.',
-              '따라서 "humans have been" → have.',
+              '"humans" is a plural noun.',
+              'The present perfect helping verb for a plural subject is have.',
+              'So "humans have been" uses have.',
             ],
-            tip: '복수 주어 + 현재완료는 "have been"을 씁니다(has는 단수 주어용).',
+            tip: 'A plural subject + present perfect uses "have been" (has is for a singular subject).',
           },
         },
         {
@@ -392,13 +392,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'This (16) [was / were] accepted in the past.',
           answer: 'was',
           solution: {
-            method: '주어 "This"의 수(단수)를 본다.',
+            method: 'Look at the number (singular) of the subject "This".',
             steps: [
-              '"This"는 단수 지시대명사(앞 문장의 상황을 가리킴).',
-              '단수 주어의 과거 be동사는 was.',
-              '따라서 "This was accepted" → was.',
+              '"This" is a singular demonstrative pronoun (it refers to the situation in the earlier sentence).',
+              'The past form of be for a singular subject is was.',
+              'So "This was accepted" uses was.',
             ],
-            tip: '"This/That"은 단수, "These/Those"는 복수 취급합니다.',
+            tip: '"This/That" are singular and "These/Those" are plural.',
           },
         },
       ],
@@ -428,13 +428,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Walt Disney once [corght] a mouse and made a leash for it using a string.',
           answer: 'caught',
           solution: {
-            method: '"Caught / Grabbed"는 단어(catch의 과거형)의 정확한 철자를 확인한다.',
+            method: '"Caught / Grabbed": check the correct spelling of the word (the past tense of catch).',
             steps: [
-              '잘못된 철자: corght.',
-              'catch의 과거형은 caught (불규칙 동사 catch–caught–caught).',
-              '따라서 caught.',
+              'Wrong spelling: corght.',
+              'The past tense of catch is caught (irregular verb catch-caught-caught).',
+              'So the answer is caught.',
             ],
-            tip: 'catch의 과거형은 caught입니다(catched ✗).',
+            tip: 'The past tense of catch is caught (not catched).',
           },
         },
         {
@@ -444,13 +444,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'One fine school day, Walt [hurryed] into class and showed everyone his new pet.',
           answer: 'hurried',
           solution: {
-            method: 'hurry + -ed 변형 규칙(y→i)을 적용한다.',
+            method: 'Apply the rule for adding -ed to hurry (y changes to i).',
             steps: [
-              '잘못된 철자: hurryed.',
-              '자음+y로 끝나는 동사는 -ed 붙일 때 y를 i로 바꾼다: hurry → hurri + ed.',
-              '따라서 hurried.',
+              'Wrong spelling: hurryed.',
+              'For a verb ending in consonant + y, change y to i before adding -ed: hurry becomes hurri + ed.',
+              'So the answer is hurried.',
             ],
-            tip: 'hurry → hurried, carry → carried처럼 y→i+ed로 바뀝니다.',
+            tip: 'hurry becomes hurried and carry becomes carried: change y to i, then add ed.',
           },
         },
         {
@@ -460,13 +460,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'One of his classmates saw the little animal and [skreemed].',
           answer: 'screamed',
           solution: {
-            method: '"Screamed"는 단어의 정확한 철자를 확인한다.',
+            method: '"Screamed": check the correct spelling of the word.',
             steps: [
-              '잘못된 철자: skreemed.',
-              '바른 단어는 scream — sc로 시작하고 ea로 쓴다.',
-              '과거형은 screamed.',
+              'Wrong spelling: skreemed.',
+              'The correct word is scream, which starts with sc and is spelt with ea.',
+              'The past tense is screamed.',
             ],
-            tip: 'scream은 "sc-ream"으로, sk나 ee가 아닌 sc와 ea로 씁니다.',
+            tip: 'scream is spelt "sc-ream", with sc and ea, not sk or ee.',
           },
         },
         {
@@ -476,13 +476,13 @@ export const wa1NanyangPrimaryEnglish2024: EnglishPaper = {
           stem: 'Walt was not upset. He was [pleesed] to get all the attention with his pet mouse for a day.',
           answer: 'pleased',
           solution: {
-            method: '"Was happy / Rejoiced"는 단어의 정확한 철자를 확인한다.',
+            method: '"Was happy / Rejoiced": check the correct spelling of the word.',
             steps: [
-              '잘못된 철자: pleesed.',
-              '바른 단어는 please — ea로 쓴다(plea-se).',
-              '과거형/형용사형은 pleased.',
+              'Wrong spelling: pleesed.',
+              'The correct word is please, which is spelt with ea (plea-se).',
+              'The past tense/adjective form is pleased.',
             ],
-            tip: 'please/pleased는 "plea-se"로, ee가 아닌 ea로 씁니다.',
+            tip: 'please/pleased is spelt "plea-se", with ea, not ee.',
           },
         },
       ],

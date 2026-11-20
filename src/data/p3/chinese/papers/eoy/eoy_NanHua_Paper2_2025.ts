@@ -22,44 +22,44 @@ export type Topic =
   | "JuZi";
 
 export interface SolutionInfo {
-  /** 해결 방법 / 풀이 방법 */
+  /** solving method */
   method: string;
-  /** 단계별 풀이 과정 */
+  /** step-by-step solution */
   steps: string[];
-  /** 학습 팁 */
+  /** learning tip */
   tip: string;
 }
 
-/** Type A: 단일 문제 (PinYin, BianZi, CiYu, JuZi, ZuJu 등) */
+/** Type A: single question (PinYin, BianZi, CiYu, JuZi, ZuJu etc.) */
 export interface SingleQuestion {
   id: string;
   topic: Topic;
   difficulty: Difficulty;
   instruction: string;
   q: string;
-  /** 객관식일 때만 사용. 주관식(JuZi, ZuJu 등)은 생략 */
+  /** MCQ only; omit for open-ended (JuZi, ZuJu etc.) */
   options?: string[];
-  /** MCQ: 0-based index (number) | OpenEnded: 정답/모범 텍스트 (string) */
+  /** MCQ: 0-based index (number) | OpenEnded: answer text (string) */
   answer: string | number;
   pinyin: string;
   meaning: string;
   solution: SolutionInfo;
 }
 
-/** Type B 의 세트 내부 개별 질문 */
+/** Individual question inside a Type B set */
 export interface SubQuestion {
   id: string;
   type: "MCQ" | "OpenEnded";
   q: string;
   options?: string[];
-  /** MCQ: 0-based index (number) | OpenEnded: 정답 텍스트 (string) */
+  /** MCQ: 0-based index (number) | OpenEnded: answer text (string) */
   answer: string | number;
   pinyin: string;
   meaning: string;
   solution: SolutionInfo;
 }
 
-/** Type B: 세트/지문 문제 (PeiDui, TianKong, JuZi(组句成段), YueReadMCQ, YueReadOpen 등) */
+/** Type B: set/passage question (PeiDui, TianKong, JuZi(组句成段), YueReadMCQ, YueReadOpen etc.) */
 export interface SetQuestion {
   id: string;
   topic: Topic;
@@ -67,7 +67,7 @@ export interface SetQuestion {
   setLabel: string;
   instruction?: string;
   passage?: string;
-  /** 제시어 단어 표 (词语表) - 있을 때만 사용 */
+  /** word bank table (词语表) - only when present */
   wordBank?: string[];
   questions: SubQuestion[];
 }

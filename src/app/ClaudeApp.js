@@ -1458,7 +1458,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     setStartFromSection(null);
   }
 
-  function handleSessionDone(results, forceMock){
+  function handleSessionDone(results, forceMock, mockLabel){
     const sessionNum = prog.nextSession;
     const isMock = forceMock || isMockDue;
     const graded = results.filter(r=>r.scored!==false);
@@ -1473,7 +1473,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const newEntry={ sessionNum, date:todayStr(), scores, totalPct,
       mistakes: graded.filter(r=>!r.correct).map(r=>({...r})),
       isMockExam: isMock||isPastPaper,
-      school: isMock?"Nanyang Primary": isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
+      school: isMock?(mockLabel||"WA1 Mock Exam"): isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
       examType: isMock?"WA1": isPastPaper?"Past Paper #"+(sessionNum-10):undefined };
     const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map((r,n)=>({...r,date:todayStr(),sessionNum,mid:newMistakeId(sessionNum,r.id,n)}))];
     const allLookedUp = [...new Set(results.flatMap(r=>r.lookedUpWords||[]))];
@@ -1542,24 +1542,24 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     </Wrap>
   );
 
-  if(mockSession) return(
+  if(mockSession) { const mockPlan = buildPastPaperPlan(prog.settings, user.school, prog.nextSession); const mockLabel = mockPlan.paperLabel || "Past Paper"; return(
     <Wrap>
       <ExamSessionScreen
-        plan={buildPastPaperPlan(prog.settings, user.school, prog.nextSession)}
+        plan={mockPlan}
         isMockExam
-        mockInfo={MOCK_EXAMS[0]}
-        onFinish={(results)=>{ setMockSession(false); handleSessionDone(results, true); }}
+        mockInfo={{ school: mockLabel }}
+        onFinish={(results)=>{ setMockSession(false); handleSessionDone(results, true, mockLabel); }}
         onBack={()=>setMockSession(false)}
       />
     </Wrap>
-  );
+  ); }
 
   if(inSession) return(
     <Wrap>
       <ExamSessionScreen
         plan={wa1Plan}
         isMockExam={isMockDue}
-        mockInfo={isMockDue?MOCK_EXAMS[0]:null}
+        mockInfo={isMockDue?{ school:"WA1 Mock Exam" }:null}
         startFrom={startFromSection}
         singleSection={!!startFromSection}
         completedTypes={Object.keys(sectionResults)}

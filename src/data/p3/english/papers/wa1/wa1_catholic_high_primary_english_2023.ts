@@ -117,9 +117,9 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '앞 문장의 명사("worksheets")의 수를 확인해 대명사를 고른다.',
+        method: 'Check whether the noun in the previous sentence ("worksheets") is singular or plural, then choose the pronoun.',
         steps: [
-          '앞 문장: "I have taken my friend\'The word \'worksheets\' is plural.',
+          'Previous sentence: "I have taken my friend\'s worksheets." The word \'worksheets\' is plural.',
           'The object pronoun that replaces a plural noun is \'them\'.',
           'Therefore, \'I will return them to him\' → the correct answer is (4) them.',
         ],
@@ -192,11 +192,11 @@ export const wa1CatholicHighPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"earlier in the day"(이미 지난 그날의 시간)로 과거시제를 파악한다.',
+        method: 'Use "earlier in the day" (a time already passed that day) to identify the past tense.',
         steps: [
-          '"earlier in the day"는 "a point in time that has already passed during that day"을 가리키며 과거시제를 요구한다.',
-          'leave의 과거형은 left.',
-          '따라서 "Wee Boon\'\'His father left for a meeting earlier in the day.\' → the correct answer is (1) left.',
+          '"earlier in the day" refers to "a point in time that has already passed during that day", so the past tense is needed.',
+          'The past tense of "leave" is "left".',
+          'So, "Wee Boon\'s father left for a meeting earlier in the day." → the correct answer is (1) left.',
         ],
         tip: 'Expressions like "earlier in the day/week" are usually used with the Simple Past tense.',
       },

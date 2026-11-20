@@ -69,13 +69,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"this morning"이 이미 지난 시점인지(과거) 확인한다.',
+        method: 'Check whether "this morning" is already in the past.',
         steps: [
-          '"this morning"은 글을 쓰는 시점이 오늘 오후/저녁이라면 이미 끝난 과거의 일.',
-          '완료된 행동(기부함)을 나타내는 단순과거 → made.',
-          '따라서 "Joan made a donation this morning" → 정답 (1) made.',
+          '"this morning" is already over if the writer is writing in the afternoon or evening, so it is in the past.',
+          'A finished action (making a donation) uses the simple past → made.',
+          'So "Joan made a donation this morning" → answer (1) made.',
         ],
-        tip: '"this morning/this afternoon"은 문맥상 이미 끝난 일이면 단순과거(made)로 씁니다.',
+        tip: 'If "this morning/this afternoon" is already over in the context, use the simple past (made).',
       },
     },
     {
@@ -95,13 +95,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '주어의 수("Both Siti and Ali")와 시제("received"=과거)를 본다.',
+        method: 'Look at the subject ("Both Siti and Ali") and the tense ("received" = past).',
         steps: [
-          '"Both A and B"는 항상 복수 주어.',
-          '"when they received"(과거) — 전체 문장이 과거시제.',
-          '복수+과거 → were → 정답 (4).',
+          '"Both A and B" is always a plural subject.',
+          '"when they received" (past) — the whole sentence is in the past tense.',
+          'Plural + past → were → answer (4).',
         ],
-        tip: '"Both A and B"는 복수 주어이므로 are/were를 씁니다.',
+        tip: '"Both A and B" is a plural subject, so use are/were.',
       },
     },
     {
@@ -121,13 +121,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '명사의 수(복수)와 거리(가까움)을 본다.',
+        method: 'Look at whether the noun is plural and whether it is near.',
         steps: [
-          '"books"는 복수 → this/that(단수) 제외.',
-          '"Pointing to the books in front of her"(자기 앞에 있는 책들을 가리키며) → 가까운 거리.',
-          '복수+가까움 = these → 정답 (3).',
+          '"books" is plural → rule out this/that (singular).',
+          '"Pointing to the books in front of her" → the books are near.',
+          'Plural + near = these → answer (3).',
         ],
-        tip: '"in front of her"(자기 앞에 있는)는 가까운 거리를 나타내는 단서입니다.',
+        tip: '"in front of her" is a clue that the things are near.',
       },
     },
     {
@@ -146,13 +146,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '주어 "Tina and I"(1인칭 복수)에 맞는 재귀대명사를 고른다.',
+        method: 'Choose the reflexive pronoun that matches the subject "Tina and I" (we).',
         steps: [
-          '"Tina and I"는 화자 자신을 포함한 복수 주어.',
-          '1인칭 복수의 재귀대명사는 "ourselves".',
-          '"completed the project by ourselves"(우리끼리/스스로 완성했다) → 정답 (3).',
+          '"Tina and I" is a plural subject that includes the speaker.',
+          'The reflexive pronoun for "we" is "ourselves".',
+          '"completed the project by ourselves" (did it on our own) → answer (3).',
         ],
-        tip: '"A and I"가 주어이면 재귀대명사는 ourselves입니다.',
+        tip: 'When the subject is "A and I", the reflexive pronoun is ourselves.',
       },
     },
     {
@@ -172,14 +172,14 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '앞뒤 내용이 대조/양보 관계인지 확인한다.',
+        method: 'Check whether the two parts of the sentence show contrast.',
         steps: [
-          '앞: 대회에 참가하기로 결심함(determined) / 뒤: 몸이 안 좋음(feeling unwell).',
-          '몸이 안 좋음에도 "despite / in spite of" 참가를 결심함 → 대조/양보 관계.',
-          '"although"(비록 ~이지만)가 양보의 의미를 나타낸다.',
-          'so(그래서)/because(왜냐하면)는 원인-결과 관계라 안 맞는다 → 정답 (3) although.',
+          'First part: decided to take part in the competition (determined) / second part: feeling unwell.',
+          'She decided to take part even though she felt unwell → contrast.',
+          '"although" shows this kind of contrast.',
+          'so/because show cause and effect, which does not fit → answer (3) although.',
         ],
-        tip: '"although"는 뒤 내용이 앞 내용에 대한 장애물/반대 상황임에도 그렇게 했다는 것을 나타냅니다.',
+        tip: '"although" shows that something was done even though there was a difficulty or an opposite situation.',
       },
     },
     {
@@ -198,13 +198,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '1',
       solution: {
-        method: '"definitely"(반드시/확실히)와 어울리는 확신의 조동사를 고른다.',
+        method: 'Choose the modal verb that goes with "definitely" to show certainty.',
         steps: [
-          '"definitely like it"(분명히 좋아할 것이다) — 강한 확신을 나타내는 미래 예측.',
-          '"will definitely"는 확신에 찬 미래 예측을 나타내는 자연스러운 짝.',
-          'can/may/could는 가능성·허락을 나타내어 "definitely"(확실함)와 어울림이 약하다 → 정답 (1) will.',
+          '"definitely like it" — a strong, certain prediction about the future.',
+          '"will definitely" is a natural pair for a certain prediction.',
+          'can/may/could show possibility or permission and do not fit "definitely" well → answer (1) will.',
         ],
-        tip: '"definitely"는 확신을 나타내는 단어이므로 will과 자주 짝지어집니다.',
+        tip: '"definitely" shows certainty, so it often goes with will.',
       },
     },
     {
@@ -224,13 +224,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"a certificate for [achievement / action]"라는 표현에 맞는 전치사를 고른다.',
+        method: 'Choose the preposition that fits "a certificate for [achievement / action]".',
         steps: [
-          '"a certificate ___ reading the most books"(가장 많은 책을 읽은 것에 대한 상장).',
-          '"a certificate for [achievement / action]" = ~에 대한 상장/증명서.',
-          'in/of/from은 이 의미와 안 맞는다 → 정답 (3) for.',
+          '"a certificate ___ reading the most books" (a certificate for reading the most books).',
+          '"a certificate for [achievement / action]" = a certificate given for something done.',
+          'in/of/from do not fit this meaning → answer (3) for.',
         ],
-        tip: '"a certificate/award for [achievement]"는 어떤 성취에 대해 주는 상을 나타냅니다.',
+        tip: '"a certificate/award for [achievement]" is given for an achievement.',
       },
     },
     {
@@ -250,13 +250,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"sugar"의 가산 여부와 공손한 권유 표현을 본다.',
+        method: 'Look at whether "sugar" is countable and at the polite offer.',
         steps: [
-          '"sugar"는 셀 수 없는 명사 → a few/many(가산용) 제외.',
-          '차에 설탕을 권하는 공손한 표현 "Would you like ~?"에는 적은 양을 나타내는 "a little"이 자연스럽다.',
-          '"much"는 보통 부정문/의문문에 쓰이며 권유 표현에는 덜 자연스럽다 → 정답 (4) a little.',
+          '"sugar" is uncountable → rule out a few/many (used with countable nouns).',
+          'When politely offering sugar for tea ("Would you like ~?"), "a little" sounds natural.',
+          '"much" is usually used in negative sentences and questions, so it is less natural in an offer → answer (4) a little.',
         ],
-        tip: '음료에 설탕/우유 등을 권할 때는 "a little"(약간)이 자연스러운 표현입니다.',
+        tip: 'When offering sugar or milk in a drink, "a little" is the natural expression.',
       },
     },
     {
@@ -275,11 +275,11 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '부가의문문(tag question)의 시제·긍정/부정 일치 규칙을 적용한다.',
+        method: 'Apply the tag question rule: match the tense and use the opposite (positive/negative) form.',
         steps: [
-          '본문장 "Adele visits..."는 단순현재 + 긍정문.',
-          '부가의문문은 본문장과 시제를 일치시키고, 긍정문이면 부정 형태로 묻는다.',
-          '단순현재 부정 조동사는 doesn\'The subject refers to Adele (3rd person singular), so the pronoun is \'she\'.',
+          'The main sentence "Adele visits..." is simple present and positive.',
+          'A tag question matches the tense of the main sentence and is negative if the main sentence is positive.',
+          'The negative of the simple present for "Adele" (3rd person singular) is doesn\'t, and the pronoun is \'she\'.',
           'Therefore, the tag is \'doesn\'t she?\' → correct answer is (4).',
         ],
         tip: 'Question tags: a positive sentence uses a negative tag (positive sentence + doesn\'t/isn\'t she, etc.), and the tense must match the main sentence.',
@@ -356,13 +356,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '코미디언의 농담에 대한 관객의 반응(웃음)을 나타내는 동사를 고른다.',
+        method: 'Choose the verb for how the audience reacted (laughter) to the comedian\'s jokes.',
         steps: [
-          '"had fun"(즐거워했다)와 "jokes"(농담들)에 어울리는 큰 웃음.',
-          '"guffawed" = 큰 소리로 웃었다(폭소) → 즐거운 분위기와 정확히 일치.',
-          'cackled(꺅꺅 웃음, 보통 마녀 같은 느낌)/squealed(꺅 소리를 지름)/snickered(킥킥거리며 비웃음, 부정적)는 즐거운 관객 반응과 덜 맞는다 → 정답 (2) guffawed.',
+          '"had fun" and "jokes" go with loud laughter.',
+          '"guffawed" = laughed loudly → matches the happy mood exactly.',
+          'cackled (a harsh, witch-like laugh)/squealed (made a high shriek)/snickered (laughed unkindly, negative) fit a happy audience less → answer (2) guffawed.',
         ],
-        tip: '"guffaw"는 즐거운 농담에 큰 소리로 웃는 것을 나타냅니다.',
+        tip: '"guffaw" means to laugh loudly at a funny joke.',
       },
     },
     {
@@ -382,13 +382,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"trembled with fear"는 결과와 어울리는 감정 형용사를 고른다.',
+        method: 'Choose the feeling adjective that goes with "trembled with fear".',
         steps: [
-          '"trembled with fear"(두려움에 떨었다) → 깜짝 놀라고 불안한 감정.',
-          '"alarmed" = 놀란/불안한(위험을 느낌) → fear와 직접 연결.',
-          'irritated(짜증난)/ashamed(부끄러운)/embarrassed(당황한, 민망함)는 "fear"과는 다른 감정 → 정답 (2) alarmed.',
+          '"trembled with fear" → feeling startled and anxious.',
+          '"alarmed" = frightened/anxious (sensing danger) → directly linked to fear.',
+          'irritated (annoyed)/ashamed/embarrassed are different feelings from "fear" → answer (2) alarmed.',
         ],
-        tip: '"trembled with fear"는 alarmed(놀라서 불안해진)와 자연스럽게 짝을 이룹니다.',
+        tip: '"trembled with fear" naturally goes with alarmed (startled and anxious).',
       },
     },
     {
@@ -407,13 +407,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"but"으로 대조되는, "not nervous"을 나타내는 직유를 고른다.',
+        method: 'Choose the simile that means "not nervous", contrasting with "but".',
         steps: [
-          '"All of us were nervous ... but Rachel was ___" — Rachel은 모두와 달리 긴장하지 않았다.',
-          '"as cool as a cucumber" = 매우 차분하고 침착한 → "nervous"와 정반대.',
-          '"as jumpy as a cat"(겁이 많고 불안한)은 오히려 nervous와 비슷한 의미라 대조에 안 맞고, "as cold as ice"(차가운 성격)/"as meek as a mouse"(온순한)는 "not nervous"을 직접 나타내지 않는다 → 정답 (4).',
+          '"All of us were nervous ... but Rachel was ___" — Rachel was not nervous, unlike everyone else.',
+          '"as cool as a cucumber" = very calm and relaxed → the opposite of "nervous".',
+          '"as jumpy as a cat" (easily frightened) is similar to nervous, so it does not give a contrast, and "as cold as ice" (unfriendly)/"as meek as a mouse" (gentle and timid) do not directly mean "not nervous" → answer (4).',
         ],
-        tip: '"as cool as a cucumber"는 긴장된 상황에서도 매우 침착함을 나타내는 정해진 직유입니다.',
+        tip: '"as cool as a cucumber" is a fixed simile meaning very calm even in a tense situation.',
       },
     },
 
@@ -490,13 +490,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
           stem: "He teams up with his friends and they [perservear] to stop the witch's plans.",
           answer: 'persevere',
           solution: {
-            method: '"to persevere / to keep trying steadily"는 단어의 정확한 철자를 확인한다.',
+            method: 'Check the exact spelling of "to persevere / to keep trying steadily".',
             steps: [
-              '잘못된 철자: perservear.',
-              '바른 단어는 persevere — per-se-vere로 v와 e의 순서에 주의.',
-              '따라서 persevere.',
+              'Wrong spelling: perservear.',
+              'The correct word is persevere — per-se-vere; watch the order of v and e.',
+              'So the answer is persevere.',
             ],
-            tip: 'persevere는 "per-se-vere"로 씁니다(perservear ✗).',
+            tip: 'persevere is spelt "per-se-vere" (perservear ✗).',
           },
         },
         {
@@ -507,13 +507,13 @@ export const minitest1RulangPrimaryEnglish2024: EnglishPaper = {
             '"...we showcase how the characters interact [by] one another during their adventure..."',
           answer: 'with',
           solution: {
-            method: '"interact"와 짝지어지는 올바른 전치사를 확인한다.',
+            method: 'Check the correct preposition that goes with "interact".',
             steps: [
-              '"interact with someone" = ~와 상호작용하다 → 정해진 전치사 짝.',
-              '"interact by"는 올바른 표현이 아니다.',
-              '따라서 by를 with로 고친다.',
+              '"interact with someone" = a fixed preposition pair.',
+              '"interact by" is not correct.',
+              'So change by to with.',
             ],
-            tip: '"interact with"는 항상 짝을 이루는 고정 전치사 표현입니다.',
+            tip: '"interact with" is a fixed preposition pair.',
           },
         },
       ],
