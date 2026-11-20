@@ -752,10 +752,11 @@ function GuardianTools({linkedStudents,onChildLinked}){
 // WhatsApp is stored only; sending stays off until the owner enables the provider.
 function AlertSettings(){
   const [open,setOpen]=useState(false); const [num,setNum]=useState(""); const [opt,setOpt]=useState(false); const [msg,setMsg]=useState(""); const [em,setEm]=useState(true);
-  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } }); },[open]);
+  const [qOn,setQOn]=useState(true); const [qs,setQs]=useState("21:30"); const [qe,setQe]=useState("06:30");
+  useEffect(()=>{ if(!open) return; serverGet("/api/parent/settings").then(r=>{ const e=(r.channels||[]).find(c=>c.type==="email"); setEm(e?!!e.enabled:true); /* no email entry (older account) = on by default */ const w=(r.channels||[]).find(c=>c.type==="whatsapp"); if(w){ setNum(w.address||""); setOpt(!!w.opt_in); } if(r.quiet){ setQOn(r.quiet.enabled!==false); setQs(r.quiet.start); setQe(r.quiet.end); } }); },[open]);
   async function save(){
     setMsg("");
-    const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt}});
+    const r=await serverPost("/api/parent/settings",{email:{enabled:em},whatsapp:{number:num.trim(),optIn:opt},quiet:{enabled:qOn,start:qs,end:qe}});
     setMsg(r.ok?"Saved.":(r.error||"Failed."));
     if(r.ok){ try{ window.dispatchEvent(new Event("genius-parent-settings")); }catch{} }
   }
@@ -767,6 +768,8 @@ function AlertSettings(){
         <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
+        <label style={{fontSize:12,display:"block",marginBottom:6}}><input type="checkbox" checked={qOn} onChange={e=>setQOn(e.target.checked)}/> Quiet hours for live alerts (Singapore time). Alerts that arrive in this window are held and sent when it ends.</label>
+        {qOn&&<div style={{fontSize:12,marginBottom:8}}>From <input type="time" value={qs} onChange={e=>setQs(e.target.value)}/> to <input type="time" value={qe} onChange={e=>setQe(e.target.value)}/></div>}
         <button onClick={save} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
         {msg&&<span style={{fontSize:12,color:C.muted,marginLeft:10}}>{msg}</span>}
       </div>)}

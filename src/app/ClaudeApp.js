@@ -62,7 +62,7 @@ const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 import PaperExam from '@/components/PaperExam'; // mock exams from past papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off)
-import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
 
@@ -264,6 +264,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const [dailyResult, setDailyResult] = useState(null); // {results, sessionNum} for the end-of-round summary (after the gate)
   const [adaptive, setAdaptive] = useState(null); // {plan, ids, parts} while an adaptive round is running
   function startAdaptive(){
+    reportPracticeStarted(subject);
     const sch = scheduleRound(prog, ZH_BANK, prog.nextSession, { n: 10 });
     if(!sch.ids.length) return;
     const plan = buildRoundReviewPlan({ mistakes: sch.ids.map(id=>({id})) }, ZH_ROUND_INDEX).plan;
@@ -314,6 +315,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Mastery: delayed transfer only (homeworkMastery.js).
   const [hwKey,setHwKey]=useState(0);
   function startHomework(ids,sources){
+    reportPracticeStarted(subject);
     const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, ZH_ROUND_INDEX);
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum:0, homework:{ids, sources:sources||{}}});
@@ -364,6 +366,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
     setProgress(grade, subject, { ...prog, sessionSections: { sessionNum: prog.nextSession, results: merged } });
   }
   function startSession(fromSection){
+    reportPracticeStarted(subject);
     setStartFromSection(typeof fromSection === "string" ? fromSection : null);
     setExamMode(true);
   }
@@ -1284,6 +1287,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     return () => { alive = false; };
   }, [user]);
   function startEnAdaptive(){
+    reportPracticeStarted(subject);
     const sch = scheduleRound(prog, EN_BANK, prog.nextSession, { n: 10 });
     if(!sch.ids.length) return;
     setEnAdaptive({ plan: buildRoundReviewPlan({ mistakes: sch.ids.map(id=>({id})) }, EN_ROUND_INDEX).plan, ids: sch.ids, parts: sch.parts });
@@ -1334,6 +1338,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   // Parent homework (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off). Mastery: delayed transfer only (homeworkMastery.js).
   const [hwKey,setHwKey]=useState(0);
   function startHomework(ids,sources){
+    reportPracticeStarted(subject);
     const built=buildRoundReviewPlan({mistakes:ids.map(id=>({id}))}, EN_ROUND_INDEX);
     if(!built.plan.length) return;
     setRoundReview({plan:built.plan, sessionNum:0, homework:{ids, sources:sources||{}}});
@@ -1377,6 +1382,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   const SESSION_SECTIONS = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Synthesis","Comprehension"];
 
   function startSession(fromSection){
+    reportPracticeStarted(subject);
     setStartFromSection(typeof fromSection === "string" ? fromSection : null);
     setInSession(true);
   }

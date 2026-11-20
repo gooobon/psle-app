@@ -2,6 +2,7 @@
 // The daily target and homework count moved to the child's ONE shared setting: /api/parent/child-settings (issue #32).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { isE164 } from "@/lib/notify/index.mjs";
+import { isHHMM, quietFrom } from "@/lib/notify/eventAlerts.mjs";
 
 export const runtime = "nodejs";
 
@@ -13,12 +14,18 @@ async function guard() {
 }
 const view = (row) => ({
   channels: Array.isArray(row?.alert_channels) ? row.alert_channels : [],
+  quiet: quietFrom(row), // real-time alert quiet hours (SGT); messages inside the window are delayed, not dropped
 });
+// Quiet-hours columns need supabase/migrations/20261201000000_event_alerts.sql; before it is applied fall back to channels only.
+async function readSettings(admin, id) {
+  const full = await admin.from("parent_settings").select("alert_channels,quiet_enabled,quiet_start,quiet_end").eq("parent_id", id).maybeSingle();
+  if (!full.error) return full.data;
+  return (await admin.from("parent_settings").select("alert_channels").eq("parent_id", id).maybeSingle()).data;
+}
 
 export async function GET() {
   const g = await guard(); if (g.err) return g.err;
-  const { data } = await adminClient().from("parent_settings").select("alert_channels").eq("parent_id", g.me.profile.id).maybeSingle();
-  return jok(view(data));
+  return jok(view(await readSettings(adminClient(), g.me.profile.id)));
 }
 
 // Body: { email?: { enabled: boolean }, whatsapp?: { number: "+65...", optIn: boolean } }
@@ -51,10 +58,14 @@ export async function POST(request) {
     rest.push({ type: "whatsapp", enabled: optIn, address: number || null, opt_in: optIn });
     patch.alert_channels = rest;
   }
+  // Body: quiet?: { enabled: boolean, start: "HH:MM", end: "HH:MM" } (Singapore time)
+  if (b.quiet && typeof b.quiet === "object") {
+    if (!isHHMM(b.quiet.start) || !isHHMM(b.quiet.end)) return jerr("quiet hours must be HH:MM, e.g. 21:30", 400);
+    Object.assign(patch, { quiet_enabled: b.quiet.enabled !== false, quiet_start: b.quiet.start, quiet_end: b.quiet.end });
+  }
   const { error } = cur
     ? await admin.from("parent_settings").update(patch).eq("parent_id", g.me.profile.id)
     : await admin.from("parent_settings").insert({ parent_id: g.me.profile.id, ...patch });
   if (error) return jerr("could not save", 500);
-  const { data } = await admin.from("parent_settings").select("alert_channels").eq("parent_id", g.me.profile.id).maybeSingle();
-  return jok(view(data));
+  return jok(view(await readSettings(admin, g.me.profile.id)));
 }
