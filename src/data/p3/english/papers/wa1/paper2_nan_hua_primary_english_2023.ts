@@ -147,13 +147,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"a group of musicians"을 가리키는 집합명사를 고른다.',
+        method: 'Choose the collective noun for "a group of musicians".',
         steps: [
-          '"a ___ of musicians"(음악가들의 ~) — 함께 연주하는 음악가 집단.',
-          '"band" = 악단/밴드 → "a band of musicians"가 가장 자연스럽다.',
-          'army(군대)/troop(부대)는 군사 집단, choir는 보통 합창단(노래하는 사람들)을 가리켜 "musicians"(악기 연주자 포함)과 약간 거리감 → 정답 (2) band.',
+          '"a ___ of musicians" — a group of musicians who play together.',
+          '"band" = a group of musicians → "a band of musicians" is the most natural.',
+          'army/troop are military groups, and choir usually means singers, which is a little far from "musicians" (who also play instruments) → answer (2) band.',
         ],
-        tip: '"a band of musicians"은 함께 연주하는 음악가 무리를 가리키는 자연스러운 표현입니다.',
+        tip: '"a band of musicians" is a natural expression for a group of musicians who play together.',
       },
     },
     {
@@ -173,13 +173,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"being ~ like a dove"이라는 직유에 어울리는 형용사를 고른다.',
+        method: 'Choose the adjective that fits the simile "like a dove".',
         steps: [
-          '"as ___ as a dove" — dove(비둘기)는 평화롭고 온화함의 상징.',
-          '"gentle" = 부드러운/온화한 → "as gentle as a dove"가 정해진 직유 표현.',
-          'busy(바쁜)/graceful(우아한)/devoted(헌신적인)는 dove와 짝지어 쓰이는 관용 표현이 아니다 → 정답 (2) gentle.',
+          '"as ___ as a dove" — a dove is a symbol of peace and gentleness.',
+          '"gentle" = soft and kind → "as gentle as a dove" is the fixed simile.',
+          'busy/graceful/devoted are not fixed expressions with dove → answer (2) gentle.',
         ],
-        tip: '"as gentle as a dove"는 온화하고 부드러운 성격을 나타내는 정해진 직유입니다.',
+        tip: '"as gentle as a dove" is a fixed simile for a gentle, soft nature.',
       },
     },
 
@@ -203,13 +203,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '주어의 수("nobody")와 전체 문장의 시제(과거)를 본다.',
+        method: 'Look at the subject ("nobody") and the tense of the whole sentence (past).',
         steps: [
-          '"had to deliver"(과거) — 전체 문장이 과거시제.',
-          '"nobody"는 단수 취급.',
-          '단수+과거 → was → 정답 (3).',
+          '"had to deliver" is past, so the whole sentence is in the past tense.',
+          '"nobody" is treated as singular.',
+          'Singular + past → was → answer (3).',
         ],
-        tip: '"nobody/somebody/everybody"는 항상 단수로 취급합니다.',
+        tip: '"nobody/somebody/everybody" are always treated as singular.',
       },
     },
     {
@@ -229,13 +229,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '"his children"(3인칭 복수)을 가리키는 재귀대명사를 고른다.',
+        method: 'Choose the reflexive pronoun for "his children" (3rd person plural).',
         steps: [
-          '"reminded his children to take care of ___" — 아이들 스스로를 돌보라는 의미.',
-          '"his children"은 3인칭 복수 → 재귀대명사 "themselves".',
-          '따라서 정답은 (4) themselves.',
+          '"reminded his children to take care of ___" — the children should take care of themselves.',
+          '"his children" is 3rd person plural → reflexive pronoun "themselves".',
+          'So the answer is (4) themselves.',
         ],
-        tip: '재귀대명사는 문장의 주어/목적어가 가리키는 대상의 인칭·수에 맞춥니다(his children → themselves).',
+        tip: 'A reflexive pronoun matches the person and number of the subject/object it refers to (his children → themselves).',
       },
     },
     {
@@ -255,13 +255,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '4',
       solution: {
-        method: '명사의 수(복수)와 거리(멈)를 본다.',
+        method: 'Look at the noun (plural) and the distance (far).',
         steps: [
-          '"penguins"는 복수 → this/that(단수) 제외.',
-          '"in the enclosure there"(저쪽 우리 안)와 "go nearer"(더 가까이 가자)는 현재 멀리 있음을 의미.',
-          '복수+먼 거리 = those → 정답 (4).',
+          '"penguins" is plural → this/that (singular) are out.',
+          '"in the enclosure there" and "go nearer" mean the penguins are far away now.',
+          'Plural + far = those → answer (4).',
         ],
-        tip: '"Shall we go nearer"는 대상이 지금 멀리 있음을 알려주는 단서입니다(those).',
+        tip: '"Shall we go nearer" is a clue that the things are far away now (those).',
       },
     },
     {
@@ -280,13 +280,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '3',
       solution: {
-        method: '"politely" 묻는 표현에 맞는 조동사를 고른다.',
+        method: 'Choose the helping verb for asking "politely".',
         steps: [
-          '"asked the diners politely" — 매우 공손한 표현이 필요.',
-          '"May I take your order?"는 식당 서비스에서 가장 공식적이고 공손한 표현.',
-          'Will/Can도 가능하나 "politely"라는 신호에 가장 적합한 것은 May → 정답 (3).',
+          '"asked the diners politely" — a very polite expression is needed.',
+          '"May I take your order?" is the most formal and polite way to ask in restaurant service.',
+          'Will/Can are possible, but the clue "politely" fits May best → answer (3).',
         ],
-        tip: '"May I ~?"는 Will/Can보다 더 공손하고 격식 있는 요청 표현입니다.',
+        tip: '"May I ~?" is a more polite and formal request than Will/Can.',
       },
     },
     {
@@ -306,13 +306,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"be about to + base verb (means something is going to happen very soon)" 구문을 적용한다.',
+        method: 'Use the pattern "be about to + base verb" (means something is going to happen very soon).',
         steps: [
-          '"was about to ___"는 "was just about to ~"는 뜻의 정해진 구문.',
-          'to 뒤에는 동사원형이 온다.',
-          '따라서 "was about to leave" → 정답 (2) leave.',
+          '"was about to ___" is a fixed pattern meaning "was just going to ~".',
+          'The base form of the verb comes after to.',
+          'So "was about to leave" → answer (2) leave.',
         ],
-        tip: '"be about to + base verb (means something is going to happen very soon)"은 "just about to ~"이라는 뜻입니다.',
+        tip: '"be about to + base verb" means "just going to ~" (something is going to happen very soon).',
       },
     },
     {
@@ -331,13 +331,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
       ],
       answer: '2',
       solution: {
-        method: '"which one among several movies"을 묻는 의문사를 고른다.',
+        method: 'Choose the question word for "which one among several movies".',
         steps: [
-          '"___ one of the movies"는 여러 영화 중에서 선택을 묻는다.',
-          '"Which"는 정해진 범위(여러 영화) 안에서 "which one"을 물을 때 쓴다.',
-          'Who(누구)/Where(어디)/Whose(누구의)는 영화 선택을 묻기에 부적합 → 정답 (2) Which.',
+          '"___ one of the movies" asks about choosing from several movies.',
+          '"Which" is used to ask "which one" from a fixed group (several movies).',
+          'Who/Where/Whose do not fit a question about choosing a movie → answer (2) Which.',
         ],
-        tip: '"Which one of ~"는 정해진 선택지 중에서 하나를 고를 때 쓰는 의문사입니다.',
+        tip: '"Which one of ~" is the question word used to choose one from a fixed set of choices.',
       },
     },
     {
@@ -422,13 +422,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             "Nora met up with her classmates, Amy and Gary, as (15) ________ wanted to discuss what to do for Mr Lenny on Teachers' Day.",
           answer: 'D',
           solution: {
-            method: 'Nora, Amy, Gary 세 사람을 함께 가리키는 주어 대명사를 고른다.',
+            method: 'Choose the subject pronoun for all three people: Nora, Amy and Gary.',
             steps: [
-              '"Nora met up with her classmates, Amy and Gary" — 세 사람(Nora, Amy, Gary)이 모두 의논하고 싶어함.',
-              '서술자 자신("I")을 포함하지 않는 3인칭 복수 → "they".',
-              '보기에서 they는 (D) → 정답 (D).',
+              '"Nora met up with her classmates, Amy and Gary" — all three (Nora, Amy, Gary) want to discuss.',
+              'This is 3rd person plural and does not include the narrator ("I") → "they".',
+              'In the word list, they is (D) → answer (D).',
             ],
-            tip: '3인칭 시점 서술에서 등장인물 여러 명을 함께 가리킬 때는 they를 씁니다.',
+            tip: 'In a story told in the 3rd person, use they for several characters together.',
           },
         },
         {
@@ -438,13 +438,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: '"I think (16) ________ should make a gigantic card together," suggested Gary.',
           answer: 'E',
           solution: {
-            method: 'Gary가 자신을 포함한 그룹(자신+Nora+Amy)을 가리키는 주어를 고른다.',
+            method: 'Choose the subject for Gary\'s group, which includes himself (himself + Nora + Amy).',
             steps: [
-              '"make a gigantic card together"(함께 카드를 만들자) — Gary 자신을 포함한 제안.',
-              '화자(Gary) 자신을 포함한 복수는 "we".',
-              '보기에서 we는 (E) → 정답 (E).',
+              '"make a gigantic card together" — a suggestion that includes Gary himself.',
+              'A plural that includes the speaker (Gary) is "we".',
+              'In the word list, we is (E) → answer (E).',
             ],
-            tip: '"together"(함께)라는 단어는 화자 자신을 포함한 "we"의 단서입니다.',
+            tip: 'The word "together" is a clue for "we", which includes the speaker.',
           },
         },
         {
@@ -454,13 +454,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: '"Great idea, Gary! Could (17) ________ please bring some paper tomorrow?" Nora asked.',
           answer: 'F',
           solution: {
-            method: 'Nora가 Gary에게 직접 부탁하는 말의 주어를 고른다.',
+            method: 'Choose the subject of the words Nora says directly to Gary.',
             steps: [
-              'Nora가 Gary("Gary!"라고 부른 직후)에게 직접 부탁하고 있다.',
-              '상대방 한 명을 가리키는 2인칭 주어는 "you".',
-              '보기에서 you는 (F) → 정답 (F).',
+              'Nora is talking directly to Gary (right after calling "Gary!").',
+              'The 2nd person subject for one listener is "you".',
+              'In the word list, you is (F) → answer (F).',
             ],
-            tip: '대화에서 상대방에게 직접 부탁할 때는 "you"를 씁니다.',
+            tip: 'When speaking directly to someone in a conversation, use "you".',
           },
         },
         {
@@ -470,13 +470,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: '"Nora and (18) ________ will bring some coloured markers then," volunteered Amy.',
           answer: 'B',
           solution: {
-            method: 'Amy 자신을 가리키는 1인칭 주어 대명사를 고른다.',
+            method: 'Choose the 1st person subject pronoun that refers to Amy herself.',
             steps: [
-              'Amy가 스스로 자원하며 "Nora and ___ will bring the coloured pencils"라고 말한다.',
-              '화자(Amy) 자신을 가리키는 1인칭 단수는 "I".',
-              '보기에서 I는 (B) → 정답 (B). ("Nora and I" — 다른 사람과 함께 주어로 쓸 때도 I를 사용)',
+              'Amy volunteers by saying "Nora and ___ will bring the coloured pencils".',
+              'The 1st person singular for the speaker (Amy) is "I".',
+              'In the word list, I is (B) → answer (B). (Use "Nora and I" — I is also used when it is part of a subject with another person.)',
             ],
-            tip: '"A and I"처럼 다른 사람과 함께 자기 자신을 주어로 쓸 때도 I를 사용합니다(me가 아님).',
+            tip: 'Use I even when you and another person are the subject, as in "A and I" (not me).',
           },
         },
       ],
@@ -501,13 +501,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Two boys were seen damaging the locks on rental bicycles (19) ________ cycling off on their free ride.',
           answer: 'H',
           solution: {
-            method: '두 동작(자물쇠 훼손, 자전거 타고 가기)의 시간 순서를 나타내는 전치사를 고른다.',
+            method: 'Choose the preposition that shows the time order of two actions (breaking the lock, cycling off).',
             steps: [
-              '두 소년은 자물쇠를 훼손한 "After" 자전거를 타고 갔다 → 자물쇠 훼손이 먼저, 타고 가기가 나중.',
-              '"before cycling off" = 타고 가기 전(즉, 그 전에 자물쇠를 훼손함).',
-              '보기에서 before는 (H) → 정답 (H).',
+              'The two boys cycled off after breaking the lock → breaking the lock came first, cycling off came after.',
+              '"before cycling off" = before they cycled off (so the lock was broken earlier).',
+              'In the word list, before is (H) → answer (H).',
             ],
-            tip: '"A before B"는 "A before B"라는 뜻으로, A가 먼저 일어난 사건임을 나타냅니다.',
+            tip: '"A before B" means A happened first.',
           },
         },
         {
@@ -517,12 +517,12 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: 'Their inconsiderate act was caught (20) ________ video.',
           answer: 'M',
           solution: {
-            method: '"To be caught on camera"라는 표현에 맞는 전치사를 고른다.',
+            method: 'Choose the preposition that fits "To be caught on camera".',
             steps: [
-              '"caught on video" = 영상에 포착되다 → 정해진 전치사 표현.',
-              '보기에서 on은 (M) → 정답 (M).',
+              '"caught on video" = recorded on video → a fixed preposition expression.',
+              'In the word list, on is (M) → answer (M).',
             ],
-            tip: '"caught on camera/video/tape"는 영상에 찍혔다는 뜻의 고정 표현입니다.',
+            tip: '"caught on camera/video/tape" is a fixed expression meaning recorded on film.',
           },
         },
         {
@@ -533,13 +533,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'Recently, a couple was filmed tossing at least two rental bicycles (21) ________ a drain.',
           answer: 'L',
           solution: {
-            method: '물건을 "Into ~" 던지는 동작에 맞는 전치사를 고른다.',
+            method: 'Choose the preposition that fits the action of throwing something "into ~".',
             steps: [
-              '자전거를 배수구 "Into" 던졌다는 의미.',
-              '"toss A into B" = A를 B 안으로 던지다.',
-              '보기에서 into는 (L) → 정답 (L).',
+              'It means they threw the bike into the drain.',
+              '"toss A into B" = throw A into B.',
+              'In the word list, into is (L) → answer (L).',
             ],
-            tip: '"toss/throw something into something"은 물건을 안으로 던지는 동작을 나타냅니다.',
+            tip: '"toss/throw something into something" shows throwing something inside.',
           },
         },
         {
@@ -550,13 +550,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
             'The bike-sharing companies (22) ________ Singapore have introduced reward systems to encourage greater responsibility among bike users.',
           answer: 'K',
           solution: {
-            method: '회사가 위치한 국가/지역을 나타내는 전치사를 고른다.',
+            method: 'Choose the preposition for the country or place where the companies are.',
             steps: [
-              '"the bike-sharing companies ___ Singapore" — 싱가포르"That is in ~" 회사들.',
-              '국가/도시 앞에는 "in"을 쓴다.',
-              '보기에서 in은 (K) → 정답 (K). (남은 G·J는 사용되지 않음)',
+              '"the bike-sharing companies ___ Singapore" — the companies that are in Singapore.',
+              'Use "in" before a country or city.',
+              'In the word list, in is (K) → answer (K). (G and J are left unused.)',
             ],
-            tip: '국가·도시 이름 앞에서 "That is in ~"을 나타낼 때는 in을 씁니다(companies in Singapore).',
+            tip: 'Use in before the name of a country or city to show where something is (companies in Singapore).',
           },
         },
       ],
@@ -622,13 +622,13 @@ export const paper2NanHuaPrimaryEnglish2023: EnglishPaper = {
           stem: "Sam was (25) ________ by the man's dishonest act.",
           answer: 'A',
           solution: {
-            method: '부정행위를 본 후의 감정을 나타내는 형용사를 고른다.',
+            method: 'Choose the adjective for the feeling after seeing someone cheat.',
             steps: [
-              '주인의 부정직한 행동(durian 일부를 빼돌림)을 봄.',
-              '"annoyed" = 짜증난/언짢은 → 부정행위에 대한 자연스러운 반응.',
-              '보기에서 annoyed는 (A) → 정답 (A).',
+              'The owner did something dishonest (kept back some of the durian).',
+              '"annoyed" = irritated/upset → a natural reaction to dishonest behaviour.',
+              'In the word list, annoyed is (A) → answer (A).',
             ],
-            tip: '부정행위(dishonest act)를 목격한 반응으로는 annoyed가 자연스럽습니다.',
+            tip: 'Annoyed is a natural reaction to seeing a dishonest act.',
           },
         },
         {

@@ -142,3 +142,32 @@ export function suggestedCause({ answered, status }) {
 export function canReview({ attempt, studentId }) {
   return !!attempt && !!studentId && attempt.student_id === studentId && (attempt.status === "submitted" || attempt.status === "auto_submitted");
 }
+
+// ── Parent marks count toward the score (issue #62) ─────────────────────────────────────────────────────────────
+// Unit = one item (the same unit summarize() already uses for the auto-graded part). At hand-in the auto-graded items give
+// autoScore / autoTotal and every open-ended item is PENDING. Each parent mark adds 1 to the total, and 1 to the score when "correct".
+// Pure: the parent route, the self-test and the weekly report all use this. marks: array of true | false | null (null = not marked yet).
+export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections }) {
+  const marks = Array.isArray(openMarks) ? openMarks : [];
+  const marked = marks.filter((m) => m === true || m === false);
+  const pScore = marked.filter((m) => m === true).length;
+  const pending = marks.length - marked.length;
+  const secs = (sections || []).map((s) => ({ ...s }));
+  (openSections || []).forEach((sec, i) => {
+    const m = marks[i];
+    if (m !== true && m !== false) return;
+    let s = secs.find((x) => x.section === sec);
+    if (!s) { s = { section: sec, score: 0, total: 0 }; secs.push(s); }
+    s.total += 1; if (m === true) s.score += 1;
+  });
+  return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + marked.length, parentScore: pScore, parentTotal: marked.length, pending, settled: pending === 0, sections: secs };
+}
+export const percentOf = (score, total) => (total > 0 ? Math.round((score / total) * 100) : null);
+// "2/36 + 4 awaiting parent marking" while open items are unmarked; "6/40" once settled.
+export function scoreLine({ score, total, pending }) {
+  const base = `${score == null ? 0 : score}/${total == null ? 0 : total}`;
+  const p = Number(pending) || 0;
+  return p > 0 ? `${base} + ${p} awaiting parent marking` : base;
+}
+// Is the settle step (reward, milestone, weekly report) due? Only when nothing is waiting for the parent and it has not run yet.
+export const readyToSettle = ({ pending, settledAt }) => (Number(pending) || 0) === 0 && !settledAt;

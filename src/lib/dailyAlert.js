@@ -26,7 +26,7 @@ export function paperBlock(rows, today, now = new Date()) {
     done: done.map((r) => ({
       label: r.paper_label || "Past paper", score: r.score, total: r.total, pct: r.total ? Math.round((r.score / r.total) * 100) : null,
       minutesUsed: Math.round((r.elapsed_seconds || 0) / 60), minutesAllowed: r.minutes_allowed, counted: r.counts !== false,
-      toReview: Math.max(0, (r.total || 0) - (r.score || 0)), openToMark: r.open_total || 0,
+      toReview: Math.max(0, (r.total || 0) - (r.score || 0)), openToMark: r.parent_pending != null ? r.parent_pending : r.open_total || 0,
     })),
     unfinished: open.map((r) => ({ label: r.paper_label || "Past paper", expired: Date.parse(r.deadline_at) <= now.getTime() })),
   };

@@ -23,7 +23,7 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
     q: "我【让】为乱丢垃圾是不对的。",
     answer: "认",
     pinyin: "rèn wéi",
-    meaning: "Correct'바른 글자'The character written is correct.'让→认'. '认为(rènwéi)' = to think/believe. 我认为乱丢垃圾是不对的.",
+    meaning: "Correct: the character written is correct. '让→认'. '认为(rènwéi)' = to think/believe. 我认为乱丢垃圾是不对的.",
     solution: {
       method: "Correcting characters that look or sound alike (homophone/similar-shape errors)",
       steps: [
@@ -478,7 +478,7 @@ export const wa3_chijstnicholas_rev3_2025: Question[] = [
             "He was too focused on his game and did not listen carefully to what Mum said.",
             "→ (1) 只想玩手机的游戏.",
           ],
-          tip: "'Turn a deaf ear (귓등으로 흘리다)' + keeps playing games → Being too focused on games is the cause.",
+          tip: "'Turn a deaf ear (to ignore completely)' + keeps playing games → Being too focused on games is the cause.",
         },
       },
       {

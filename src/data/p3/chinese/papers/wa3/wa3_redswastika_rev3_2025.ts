@@ -455,7 +455,7 @@ export const wa3_redswastika_rev3_2025: Question[] = [
     pinyin: "xiǎo xiàng jiào xiǎo xióng xiǎng yí gè bàn fǎ jiù xiǎo yā zi",
     meaning: "The little elephant told the little bear to think of a way to save the duckling. (Direct → 兼语句 with 叫)",
     solution: {
-      method: "Changing direct speech into a pivot sentence (겸어문) using '叫'.",
+      method: "Changing direct speech into a pivot sentence using '叫'.",
       steps: [
         "A command in a quote is changed to '叫 + person + action'.",
         "'说：“小熊，快…！”' → '叫小熊 想一个办法救小鸭子'.",

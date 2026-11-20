@@ -100,7 +100,7 @@ export function summariseChild({ profile, days, versions = [], activity = [], wr
     credits: cr,
     papers: papers.filter((r) => r.status !== "in_progress" && r.status !== "abandoned").map((r) => ({
       label: r.paper_label || "Past paper", score: r.score, total: r.total, pct: r.total ? Math.round((r.score / r.total) * 100) : null,
-      counted: r.counts !== false, openToMark: r.open_total || 0,
+      counted: r.counts !== false, openToMark: r.parent_pending != null ? r.parent_pending : r.open_total || 0,
     })),
   };
 }
@@ -122,7 +122,7 @@ export async function buildWeeklyPayload(admin, parent, now = new Date(), { env 
     admin.from("wrong_answers").select("student_id,cause").in("student_id", ids).gte("attempted_at", since).limit(2000),
     admin.from("parent_homework").select("child_id,solved_at").in("child_id", ids).gte("assigned_for", wk).lte("assigned_for", end).limit(2000),
     admin.from("reward_credits").select("child_id,status,credits,sgd_per_credit").in("child_id", ids).gte("gate_day", wk).lte("gate_day", end).limit(2000),
-    mock ? admin.from("exam_attempts").select("student_id,paper_label,status,score,total,open_total,counts").in("student_id", ids).gte("sgt_day", wk).lte("sgt_day", end).limit(200) : Promise.resolve(null),
+    mock ? admin.from("exam_attempts").select("student_id,paper_label,status,score,total,open_total,parent_pending,counts").in("student_id", ids).gte("sgt_day", wk).lte("sgt_day", end).limit(200) : Promise.resolve(null),
   ]);
   base.children = rows(profs).map((p) => summariseChild({
     profile: p, days,

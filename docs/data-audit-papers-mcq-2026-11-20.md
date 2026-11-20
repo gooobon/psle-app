@@ -275,3 +275,19 @@ The category rows above are the script's `mcqGradedByCategory` output on PR #49:
 - A nit on wording: `excluded` hides the item's score, but the student still sees the item in the paper. Whether to show it at all is a product choice (M1/M2 make it moot).
 
 **Effect on the recommendation:** merge #49 for M3 on the mock route. Next do M1 (reclassify cloze/editing/comprehension), then M2 (object-map options), which turns the 105 into real graded MCQs.
+
+## 7. Follow-up (issue #54): what changed
+
+Order followed: M3 (PR #49, merged), then M1 (parse option maps), then M2 (reclassify). Section 6's M1/M2 labels were swapped; section 3 is authoritative.
+
+| Measure (English pool, `tools/audit/audit_papers_mcq.mjs`) | Before | After |
+|---|---|---|
+| MCQ-bucket items with fewer than 2 options | 1,038 (901 in offered papers) | 0 |
+| Object-map MCQ items (105) readable with the right key | 0 | 105 (43 in offered papers) |
+| Offered-paper items `excluded` from grading | 901 | 0 |
+
+- `parseOptionTexts` (`src/lib/p3PaperBridge.js`) accepts an object map, read in key order, so answer "1" is still the first option. Source paper files are unchanged.
+- `classifyEnglishItem` sends flat cloze, editing and comprehension items to the set shapes the app renders: typed cloze blanks, typed editing items, comprehension questions. Open-ended questions have no auto-grade key and are parent-marked. Passage-less comprehension sets can be sat in a paper but are not borrowed for practice sessions.
+- Editing items now carry the corrected word as the typed key (it was an option index no typed answer could equal), and no longer expose it as an option.
+- `resolveItem` (`src/lib/learningGrade.js`) no longer grades an MCQ with fewer than 2 options. A sequence question with no printed slots is no longer read as all-correct.
+- `tools/p3_reclass_selftest.mjs` covers the above. The mock-exam exclusion rule from PR #49 stays as a safety net.

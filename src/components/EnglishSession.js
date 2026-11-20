@@ -19,7 +19,7 @@ function SessionScreen({plan, isMockExam, mockInfo, onFinish, onBack}){
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:7}}>
           <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:32,height:32,cursor:"pointer",color:"#fff",fontSize:15,display:"flex",alignItems:"center",justifyContent:"center"}}>â†</button>
           <div style={{flex:1}}>
-            <div style={{color:"#fff",fontSize:13,fontWeight:800}}>{isMockExam?`ðŸ« Mock: ${mockInfo?.school||"School Paper"}`:meta.label}</div>
+            <div style={{color:"#fff",fontSize:13,fontWeight:800}}>{isMockExam?`ðŸ« Mock: ${plan?.paperLabel||"School Paper"}`:meta.label}</div>
             <div style={{color:"rgba(255,255,255,0.7)",fontSize:10}}>Section {secIdx+1}/{plan.length}</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.2)",borderRadius:9,padding:"3px 10px"}}><span style={{color:"#fff",fontSize:11,fontWeight:700}}>{progress}%</span></div>

@@ -295,7 +295,7 @@ export const wa3_taonan_wa3_2025: Question[] = [
     meaning: "'努力学习' = to study hard.",
     solution: {
       method: "Adverb + Verb Agreement",
-      steps: ["Before '学习 (to study)' → use '열심히 (hard/diligently)'.", "'努力' matches → 努力学习 (option 4).", "The remaining '参加 (1)' is an unused trap word."],
+      steps: ["Before '学习 (to study)' → use 'diligently (hard)'.", "'努力' matches → 努力学习 (option 4).", "The remaining '参加 (1)' is an unused trap word."],
       tip: "'Study hard' → 努力学习. (参加 goes with 比赛/活动, meaning competitions or activities)",
     },
   },
@@ -418,7 +418,7 @@ export const wa3_taonan_wa3_2025: Question[] = [
         meaning: "'答应' = to agree/consent. 答应了鸭子的请求 = agreed to the duck's request.",
         solution: {
           method: "Make sure the verb and object match correctly: '___了…的请求'",
-          steps: ["To 'grant/agree to' a request (부탁) → 答应 means to say yes to someone's request.", "This has a cause-and-effect relationship with '放开了它' (let it go) that comes after.", "→ 2 答应."],
+          steps: ["To 'grant/agree to' a request → 答应 means to say yes to someone's request.", "This has a cause-and-effect relationship with '放开了它' (let it go) that comes after.", "→ 2 答应."],
           tip: "To 'agree to' a request → 答应请求 means to accept what someone has asked for.",
         },
       },

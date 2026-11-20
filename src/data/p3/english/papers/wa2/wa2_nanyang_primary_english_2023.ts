@@ -349,11 +349,11 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           solution: {
             method: 'Tell the difference between home and work to find the place where someone worked.',
             steps: [
-              '1단락: "walk from her home at Chinatown to Collyer Quay where she worked."',
-              'Chinatown은 집, 일한 곳은 Collyer Quay.',
-              'Redhill은 현재 사는 곳, Apex Club은 식품 받는 곳 → 정답 (4) Collyer Quay.',
+              'Paragraph 1: "walk from her home at Chinatown to Collyer Quay where she worked."',
+              'Chinatown is her home, and Collyer Quay is where she worked.',
+              'Redhill is where she lives now, and the Apex Club is where she gets food → answer (4) Collyer Quay.',
             ],
-            tip: '장소 문제는 "home / workplace / current place of living"를 헷갈리지 않게 각각 구분하세요.',
+            tip: 'For place questions, keep "home / workplace / current place of living" separate and do not mix them up.',
           },
         },
         {
@@ -367,13 +367,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           answer:
             'a) Her adoptive parents never sent (Madam Ng) her to school.  b) She could not find a job (as an adult).',
           solution: {
-            method: '2단락에서 일하게 된 원인 두 가지를 순서대로 찾는다.',
+            method: 'Find the two reasons she had to work in paragraph 2, in order.',
             steps: [
-              '2단락: "her adoptive parents never sent her to school." → a) 학교에 보내지 않음.',
-              '"As an adult, Madam Ng could not find a job." → b) 일자리를 구할 수 없었음.',
-              '교육을 못 받아 직업을 못 구했고, 그래서 Samsui 여성으로 일하게 되었다.',
+              'Paragraph 2: "her adoptive parents never sent her to school." → a) was not sent to school.',
+              '"As an adult, Madam Ng could not find a job." → b) could not find a job.',
+              'She had no education and could not get a job, so she became a Samsui woman.',
             ],
-            tip: '"complete the sentences" 문제는 주어진 시작 어구 뒤에 지문 표현을 자연스럽게 이어 적습니다.',
+            tip: 'For "complete the sentences" questions, continue naturally from the given start using words from the passage.',
           },
         },
         {
@@ -388,13 +388,13 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
           ],
           answer: 'A',
           solution: {
-            method: 'past(지난/넘어선)와 같은 뜻의 단어를 두 보기 중에서 고른다.',
+            method: 'Choose the word with the same meaning as past from the two options.',
             steps: [
-              'beyond = ~을 넘어선 → "past the age"(나이를 지난)와 의미가 통한다.',
-              'ideal = 이상적인 → past와 뜻이 다르다.',
-              '따라서 정답은 (A) beyond.',
+              'beyond = further than → it matches "past the age" (older than the age).',
+              'ideal = perfect → it has a different meaning from past.',
+              'So the answer is (A) beyond.',
             ],
-            tip: '"beyond/past the age"는 "past a certain age"이라는 같은 의미로 쓰입니다.',
+            tip: '"beyond/past the age" are used with the same meaning, "past a certain age".',
           },
         },
         {
@@ -405,7 +405,7 @@ export const wa2NanyangPrimaryEnglish2023: EnglishPaper = {
             'From paragraph 4, pick out an 8-word phrase that tells you that Madam Ng is still active despite her old age.',
           answer: 'does not let her age slow her down',
           solution: {
-            method: '4단락에서 "does not give up because of age"를 보여주는 여덟 단어 표현을 찾는다.',
+            method: 'Find the eight-word phrase in paragraph 4 that shows she "does not give up because of age".',
             steps: [
               'Paragraph 4: \'...and does not let her age slow her down.\'',
               'Does not let her age slow her down = she is still active.',
