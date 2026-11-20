@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const SHOTS = path.join(process.cwd(), "docs", "e2e-2026-11-19");
+const SHOTS = path.join(process.cwd(), process.env.E2E_SHOTS_DIR || "docs/e2e-2026-11-19");
 const PRODUCTION_REF = "zehnulwvysvnsshunxzr";
 
 function assertLocalOnly() {
