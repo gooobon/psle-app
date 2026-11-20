@@ -114,8 +114,9 @@ function toEnglishMcq(q) {
 }
 
 function parseWordBankFromInstructions(text = "") {
-  const matches = [...text.matchAll(/\([A-F]\)\s*([^()]+?)(?=\s*\([A-F]\)|$)/g)];
-  if (matches.length) return matches.map((m) => m[1].trim());
+  // "(G) at  (H) before  (J) during" -> ["(G) at", "(H) before", "(J) during"]; the printed letters are kept (they may not start at A).
+  const matches = [...text.matchAll(/\(([A-Z])\)\s*([^()]+?)(?=\s*\([A-Z]\)|$)/g)];
+  if (matches.length) return matches.map((m) => "(" + m[1] + ") " + m[2].trim());
   return null;
 }
 
@@ -125,31 +126,67 @@ function letterToWordBankAnswer(letter, wordBank) {
   return wordBank[idx] || letter;
 }
 
+// A cloze word bank arrives as an array ("(A) at" or "at") or as a letter map {A:"at",B:"down"}. The app always shows plain
+// words (no letters), so the bank is normalised to an array of bare words plus a letter -> word table.
+export function normaliseClozeBank(wb) {
+  const strip = (w) => String(optionText(w) == null ? "" : optionText(w)).replace(/^\s*\(?[A-Za-z][).:]\s+/, "").trim();
+  const letterOf = (w) => { const m = String(optionText(w) == null ? "" : optionText(w)).match(/^\s*\(?([A-Za-z])[).:]\s*\S/); return m ? m[1].toUpperCase() : null; };
+  if (Array.isArray(wb)) {
+    const items = wb.filter((w) => w != null && String(optionText(w)).trim() !== "");
+    const words = items.map(strip);
+    const byLetter = {};
+    items.forEach((w, i) => { byLetter[letterOf(w) || String.fromCharCode(65 + i)] = words[i]; });
+    return { words, byLetter };
+  }
+  if (wb && typeof wb === "object") {
+    const keys = Object.keys(wb).filter((k) => wb[k] != null && String(optionText(wb[k])).trim() !== "").sort((x, y) => x.localeCompare(y));
+    const byLetter = {};
+    for (const k of keys) byLetter[/^[A-Za-z]$/.test(k) ? k.toUpperCase() : k] = strip(wb[k]);
+    return { words: keys.map((k) => strip(wb[k])), byLetter };
+  }
+  return { words: [], byLetter: {} };
+}
+
+// The numbers printed in the passage, in order: "... looked (21) ______ and ..." -> [21, 22, 23, 24].
+export function passageBlankNumbers(passage) {
+  return [...String(passage || "").matchAll(/\(\s*(\d{1,3})\s*\)\s*[_\uFF3F\u2026.\u2014-]{2,}/g)].map((m) => parseInt(m[1], 10));
+}
+
+// A letter key (A-H) is turned into the word only when a letter table exists (word bank or lettered options); a plain word key stays.
+export function clozeKeyToWord(raw, byLetter) {
+  const str = String(Array.isArray(raw) ? raw[0] : raw ?? "").trim();
+  const m = str.match(/^\(?([A-Z])\)?[.):]?$/);
+  if (m && byLetter && byLetter[m[1].toUpperCase()]) return byLetter[m[1].toUpperCase()];
+  return str;
+}
+
 function toEnglishClozeSet(set) {
-  const wordBank =
-    set.wordBank ||
-    parseWordBankFromInstructions(set.instructions) ||
-    [];
-  const blanks = (set.questions || set.blanks || []).map((q, i) => {
-    const num = parseInt(q.questionNo || q.num || q.blank || q.number || i + 1, 10);
-    const rawAns = q.answer ?? q.correctAnswer ?? "";
-    const rawAnsStr = String(rawAns);
-    const answer =
-      wordBank.length && /^[A-F]$/i.test(rawAnsStr)
-        ? letterToWordBankAnswer(rawAnsStr, wordBank)
-        : rawAnsStr;
+  const bank = normaliseClozeBank(set.wordBank || parseWordBankFromInstructions(set.instructions) || []);
+  const wordBank = bank.words;
+  const rawBlanks = set.questions || set.blanks || [];
+  const passage = set.passage || set.passageText || "";
+  // The boxes carry the passage's own numbers when the passage prints one number per blank ((21)-(24), not (1)-(4)).
+  const printed = passageBlankNumbers(passage);
+  const usePrinted = printed.length === rawBlanks.length && new Set(printed).size === printed.length;
+  const blanks = rawBlanks.map((q, i) => {
+    const num = usePrinted ? printed[i] : parseInt(q.questionNo || q.num || q.blank || q.number || i + 1, 10);
+    const own = q.wordBank || q.options || q.choices;
+    const ownBank = own ? normaliseClozeBank(own) : null;
+    const table = ownBank && ownBank.words.length ? ownBank.byLetter : bank.byLetter;
+    const wordKey = [q.answerWord, q.answerText, q.word].find((v) => v != null && String(v).trim() !== "");
+    const answer = wordKey != null ? String(wordKey).trim() : clozeKeyToWord(q.answer ?? q.correctAnswer ?? "", table);
     return {
       num: Number.isNaN(num) ? i + 1 : num,
       answer,
       choices: q.choices || null,
-      wordBank: q.wordBank || wordBank,
+      wordBank: ownBank && ownBank.words.length && q.wordBank ? ownBank.words : wordBank,
       hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []),
     };
   });
   return {
     id: set.id || set.topic || "cloze_set",
     setLabel: set.setLabel || set.title || set.topic || "Cloze",
-    passage: set.passage || set.passageText || "",
+    passage,
     wordBank,
     blanks,
   };
@@ -539,7 +576,8 @@ function toClozeItemSets(items) {
   return groupStandalone(items, (g) => {
     const first = g[0];
     const passage = passageOf(first);
-    const wordBank = (Array.isArray(first.wordBank) ? first.wordBank : parseWordBankFromInstructions(first.instructions || "") || []).map(bareWord);
+    const bank = normaliseClozeBank(first.wordBank && !Array.isArray(first.wordBank) ? first.wordBank : (Array.isArray(first.wordBank) ? first.wordBank : parseWordBankFromInstructions(first.instructions || "") || []));
+    const wordBank = bank.words;
     const used = new Set();
     const blanks = g.map((q, i) => {
       const text = itemText(q);
@@ -550,8 +588,10 @@ function toClozeItemSets(items) {
       used.add(num);
       const raw = Array.isArray(q.answer) ? q.answer[0] : q.answer;
       const rawStr = String(raw ?? "").trim();
-      let answer = q.answerWord != null && String(q.answerWord).trim() !== "" ? String(q.answerWord).trim() : rawStr;
-      if (answer === rawStr && /^[A-F]$/.test(rawStr) && wordBank.length) answer = wordBank[rawStr.charCodeAt(0) - 65] || rawStr;
+      // answerWord / answerText (the printed word) beat a bare letter key.
+      const wordKey = [q.answerWord, q.answerText, q.word].find((v) => v != null && String(v).trim() !== "");
+      let answer = wordKey != null ? String(wordKey).trim() : rawStr;
+      if (answer === rawStr && wordBank.length) answer = clozeKeyToWord(rawStr, bank.byLetter);
       return { num, answer, choices: null, wordBank, hints: q.hints || (q.solution?.tip ? [q.solution.tip] : []), _text: text };
     });
     const body = passage || blanks.map((b) => {
