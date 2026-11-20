@@ -7,6 +7,7 @@ import { PARENT_HOMEWORK } from "@/lib/supabase/config";
 import { SUBJECT_KEYS, sgtDate } from "@/lib/activity";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { finalizeCredits } from "@/lib/rewardsServer";
+import { notifyEvent } from "@/lib/notify/eventAlerts.mjs";
 
 export const runtime = "nodejs";
 const on = () => serverAuthEnabled() && PARENT_HOMEWORK;
@@ -47,5 +48,13 @@ export async function POST(request) {
   }
   // Idempotent server-side finalize: pending credits confirm now if everything assigned today is solved. Never blocks the save.
   if (n > 0) await finalizeCredits(admin, me.profile.id, sgtDate());
+  // Milestone: all of today's assigned homework for this subject is now solved. Key is per day+subject, so repeats dedupe. Off unless WHATSAPP_ENABLED=true.
+  if (n > 0 && process.env.WHATSAPP_ENABLED === "true") {
+    const all = await admin.from("parent_homework").select("solved_at,correct").eq("child_id", me.profile.id).eq("subject", subject).eq("assigned_for", sgtDate());
+    const rows = all.data || [];
+    if (!all.error && rows.length && rows.every((r) => r.solved_at)) {
+      await notifyEvent(admin, { type: "milestone", childId: me.profile.id, subject, key: "hw-" + sgtDate(), label: "parent-assigned homework", score: rows.filter((r) => r.correct === true).length, total: rows.length });
+    }
+  }
   return jok({ recorded: n });
 }
