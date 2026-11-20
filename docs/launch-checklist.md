@@ -72,7 +72,9 @@ Names only. Source of the list: every `process.env.*` / `env.*` read in `src/` (
 | `NEXT_PUBLIC_REWARDS_ENABLED` | client + server | Optional | off | Flag: stickers, weekly review, credits (including pending credits), payout record | `config.js` |
 | `NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED` | client + server | Optional | off | Flag: learning dashboards and trial sync | `config.js` |
 | `NEXT_PUBLIC_MOCK_EXAMS_ENABLED` | client + server | Optional | off | Flag: past-paper mock exams | `config.js` |
-| `CRON_SECRET` | server only | Required for the daily cron | none; cron returns 401 (fails closed) | Vercel sends it as `Authorization: Bearer ...` to `/api/cron/daily-alert` | `src/app/api/cron/daily-alert/route.js` |
+| `CRON_SECRET` | server only | Required for the cron and send-now | none; both return 401 (fail closed) | Vercel sends it as `Authorization: Bearer ...` to `/api/cron/weekly-report`; the owner uses the same header for `/api/cron/weekly-report/send-now` | `src/app/api/cron/weekly-report/*` |
+| `ALERT_TEST_RECIPIENTS` | server only | Optional (trial) | unset; see allow-list precedence in section 3 | Comma-separated emails allowed to receive the weekly report. Owner sets the value in Vercel; never commit it | `src/lib/notify/weeklyReport.mjs` |
+| `ALERT_ALLOW_ALL_PARENTS` | server only | Launch only | unset (fail closed without an allow-list) | `true` = real sends to every eligible parent when no allow-list is set | `src/lib/notify/weeklyReport.mjs` |
 | `EMAIL_ALERTS_ENABLED` | server only | Optional | off; email is rendered and logged as a dry run, never sent | Real email sending switch | `src/lib/notify/email.mjs` |
 | `RESEND_API_KEY` | server only | Required to send email | send is skipped | Resend credential | `src/lib/notify/email.mjs` |
 | `ALERT_FROM_EMAIL` | server only | Required to send email | send is skipped | Sender address (must be on a Resend-verified domain, see section 3) | `src/lib/notify/email.mjs` |
@@ -96,41 +98,50 @@ Notes:
 
 ## 3. Resend / email setup
 
-What the code does (all from `src/lib/dailyAlert.js`, `src/lib/notify/*`, `src/app/api/cron/daily-alert/route.js`, `vercel.json`):
+**The daily 20:00 parent email no longer exists (issue #55).** It is replaced by a **weekly report email**. What the code does (`src/lib/notify/weeklyReport.mjs`, `src/lib/notify/emailTemplate.mjs`, `src/app/api/cron/weekly-report/*`, `vercel.json`):
 
-- A real email is sent only if `EMAIL_ALERTS_ENABLED=true` **and** `RESEND_API_KEY` **and** `ALERT_FROM_EMAIL` are set, the parent's Supabase email is **confirmed**, the parent has an enabled email channel and at least one linked child.
-- With `EMAIL_ALERTS_ENABLED` unset the cron still runs: it renders each email, logs counts (no addresses, no bodies), writes no `alert_log` row, and returns `dryRun` in its summary. Enabling it later still sends that day.
-- Once enabled, `alert_log` (unique per parent, SGT date, channel) stops a retry or duplicate cron run from emailing the same parent twice in a day. A previous `error` row may be retried.
-- The cron is in `vercel.json`: `0 12 * * *` UTC = **20:00 Singapore time**, path `/api/cron/daily-alert`. Vercel crons run only on the production deployment of the project that holds `vercel.json`, and send `Authorization: Bearer $CRON_SECRET`.
-- The same cron also runs `finalizeCredits` (settles pending credits) on every run, **independent of the email flag**. It returns 404 if server auth is off and 401 if `CRON_SECRET` is missing.
+- **Content** (past week Mon..Sun, SGT, per child): daily-set completion per subject vs target (sets, and days the target was met), questions/accuracy/minutes, wrong-answer causes, homework solved vs not done, credits (confirmed / pending / forfeited, S$ for confirmed), and the week's mock exam / past-paper results. Wrong-answer causes come from `wrong_answers.cause`, which only exists once the student or parent tags it. If nothing is tagged the email says so ("not guessing a pattern"); if nothing was recorded on the server it says that. Causes are never inferred.
+- **Primary send is event-triggered, on Saturday (SGT):** right after the child finishes the Saturday **weekly review** (`/api/student/rewards/weekly`) **or** hands in a **past paper / mock test** (`/api/student/exam`), whichever comes first. One report per parent per SGT week: `alert_log` is claimed with `date` = Monday of the week and `channel` = `email_weekly`, so the second Saturday activity, the fallback and retries do not send again. Off Saturday the event does nothing. (The weekly review is per subject, so the first subject finished triggers the report; credits still pending at that moment show as pending.)
+- **Fallback (cron, one rule):** the single Hobby cron runs daily at `0 13 * * *` UTC = **21:00 SGT** on `/api/cron/weekly-report`. It sends the weekly report only on **Saturday from 21:00 SGT** (nobody triggered it that day) and again on **Sunday** as a catch-up if Saturday's run failed (an `error` claim may be retried; a `sent` claim never is). Every other day it no-ops. The "Sunday morning" variant is **not** possible with one daily cron (it has one fixed run time), so the Sunday catch-up runs at 21:00 SGT. Hobby crons may fire anywhere inside the scheduled hour; the rule only needs the hour to be >= 21. **Cron is fallback-only**; the happy path never waits for it. The same cron still runs `finalizeCredits` daily, independent of the email flag.
+- A real email needs `EMAIL_ALERTS_ENABLED=true` **and** `RESEND_API_KEY` **and** `ALERT_FROM_EMAIL`, a **confirmed** Supabase email, an enabled email channel and at least one linked child.
+
+### Recipient allow-list (trial safety). Names only; the owner sets values in Vercel project `psle-app-vwx3`
+
+Precedence, first match wins (`sendPolicy` / `recipientDecision`):
+
+1. `EMAIL_ALERTS_ENABLED` is not `true`: **nothing is sent** (render + log only, no `alert_log` row, so enabling later still sends that week).
+2. `ALERT_TEST_RECIPIENTS` is **set** (comma-separated emails): send **only** to those addresses (case-insensitive, matched against the address the parent's email channel uses). A set-but-empty value means nobody (fail closed). Applies to the event send, the cron fallback and send-now. Everyone else is skipped and logged as counts / parent ids (never addresses) and gets no claim, so a later list change can still send.
+3. List **unset** and `ALERT_ALLOW_ALL_PARENTS=true`: every eligible parent (launch mode, only set this deliberately).
+4. List unset, no `ALERT_ALLOW_ALL_PARENTS`: **nobody** (fail closed). Setting `EMAIL_ALERTS_ENABLED=true` alone can no longer email everyone.
+
+Not covered: the co-parent "setting changed" notice (`notifyCoParents`) still follows `EMAIL_ALERTS_ENABLED` only.
 
 ### Setup steps
 
 1. In Resend, add the sending domain and publish the DNS records Resend shows (SPF, DKIM, and DMARC if you use it). Wait until the domain shows **Verified**.
 2. Create an API key in Resend with sending access only. Put it in `psle-app-vwx3` as `RESEND_API_KEY`. Do not paste it anywhere else.
 3. Set `ALERT_FROM_EMAIL` to an address **on the verified domain** (name only here; choose it in Resend).
-4. Set `CRON_SECRET` to a long random string (generate it yourself; never reuse another secret) on `psle-app-vwx3`. Confirm the cron appears in Vercel, Settings, Cron Jobs, with schedule `0 12 * * *`.
+4. Set `CRON_SECRET` to a long random string (generate it yourself; never reuse another secret) on `psle-app-vwx3`. Confirm the cron appears in Vercel, Settings, Cron Jobs, as `/api/cron/weekly-report` with schedule `0 13 * * *`.
 5. Set `APP_BASE_URL` to the live site origin so email links point at `psle-app-vwx3`.
-6. Leave `EMAIL_ALERTS_ENABLED` **unset** and redeploy. Do not enable it until section "Test to one parent" passes.
+6. Leave `EMAIL_ALERTS_ENABLED` **unset** and redeploy. For the trial set `ALERT_TEST_RECIPIENTS` first (names only in the repo), then enable the flag after "Test to one parent" passes.
 7. **Keep WhatsApp off.** Do not set `WHATSAPP_ENABLED`. Parents can store a WhatsApp number (`src/app/api/parent/settings/route.js` says it is "stored even while WHATSAPP_ENABLED is off") but nothing is sent. `src/lib/notify/whatsapp.mjs` sends only if `WHATSAPP_ENABLED=true` and the provider variables are present.
 
 ### Dry run (no email leaves the system)
 
-- **Preview one parent:** sign in as admin (`POST /api/admin/login`), then `GET /api/admin/alert-preview?email=<parent email>`. It renders today's email for that parent, never sends and never writes `alert_log` (`src/app/api/admin/alert-preview/route.js`).
-- **Cron dry run:** with `EMAIL_ALERTS_ENABLED` unset, trigger the cron once (Vercel, Cron Jobs, Run, or `curl` with the bearer header from your own shell; do not paste the secret into a ticket). Expect `summary.sent = 0` and `summary.dryRun` equal to the number of confirmed parents with children.
+- **Preview one parent:** sign in as admin (`POST /api/admin/login`), then `GET /api/admin/alert-preview?email=<parent email>`. It renders **this week's weekly report** for that parent, never sends and never writes `alert_log`. The response also says whether the address would be allowed under the current allow-list policy.
+- **Send-now dry run (default):** `POST /api/cron/weekly-report/send-now` with `Authorization: Bearer $CRON_SECRET` and JSON body `{"parentId":"<uuid>"}` (or `{"email":"..."}`; in the body so it stays out of URL logs). `dryRun` defaults to **true**: it renders and logs, sends nothing, writes **no** `alert_log` row, so the real Saturday send is unaffected. Fails closed with 401 if `CRON_SECRET` is missing or wrong, 404 if server auth is off.
+- **Cron dry run:** with `EMAIL_ALERTS_ENABLED` unset, call `GET /api/cron/weekly-report` (Bearer header from your own shell; do not paste the secret into a ticket). It does nothing outside the fallback window (`summary.noop: true`).
 - Local capture: `ALERT_DRY_RUN_LOG` (local runs only).
 
-### Test to one parent, safely
+### Test to one parent, safely (now supported)
 
-**Gap I found:** there is **no code path that sends a real email to just one parent.** `runDailyAlerts` loops over **every** parent, and migration `20261121` turned the email channel on for every confirmed parent. So the moment `EMAIL_ALERTS_ENABLED=true` is set, the next cron run emails all eligible parents. I did not add a switch because this PR is docs only. Choose one of these:
+1. Set `ALERT_TEST_RECIPIENTS` to the owner's own test address(es) and `EMAIL_ALERTS_ENABLED=true`; redeploy.
+2. `POST /api/cron/weekly-report/send-now` with `{"parentId":"<uuid>","dryRun":false}`. A real trial needs the allow-list to be set and the parent's address on it (else `skipped`). It is logged in `alert_log` under channel `email_weekly_trial`, so it never uses up the week's real claim; repeat it as often as needed.
+3. While the list is set, Saturday events and the cron fallback also reach only listed addresses. To go live: unset `ALERT_TEST_RECIPIENTS` **and** set `ALERT_ALLOW_ALL_PARENTS=true`.
 
-1. **Before any real family has signed up:** count them first (`select count(*) from profiles where role='parent';`). If only the owner and test accounts exist, enabling the flag and triggering the cron sends only to them. This is the safest option.
-2. **Use Resend's own test mode (not verified in this repo; check Resend's docs):** Resend offers a shared test sender that delivers only to the account owner's own address. Use it as `ALERT_FROM_EMAIL` for the first run and a parent account registered with the owner's address. Then switch to the verified-domain address.
-3. **If real parents already exist:** do not enable the flag. Open a follow-up issue for an allow-list env var (for example a list of parent ids permitted to receive real mail) and enable it only after that ships.
+After a real run check `select parent_id, date, channel, status, detail from alert_log order by created_at desc limit 20;` (expect `sent`; `detail` is a short provider status), the Resend dashboard for bounces, and that links open `psle-app-vwx3`. No SQL migration is needed (`alert_log.channel` is free text and `date` holds the Monday of the week).
 
-Either way, after the first real run check `select parent_id, date, status, detail from alert_log order by created_at desc limit 20;` (expect `sent`; `detail` holds only a short provider status), check the Resend dashboard for bounces, and confirm the email links open `psle-app-vwx3`.
-
-**Roll back email:** unset `EMAIL_ALERTS_ENABLED` and redeploy. Nothing is deleted; `alert_log` keeps its history and the cron returns to dry-run behaviour.
+**Roll back email:** unset `EMAIL_ALERTS_ENABLED` and redeploy. Nothing is deleted; `alert_log` keeps its history and the weekly report returns to dry-run behaviour.
 
 ---
 
@@ -174,7 +185,7 @@ There is **no separate flag for pending credits**. They ship inside rewards (mig
 - Depends on: flags 0 and 2; SQL 2, 6, 7, 8 and **9** (applied before the code that needs it); `CRON_SECRET` set so the cron can settle credits.
 - Parent: set a reward rule for the test child. Confirm it is **record only**: the app never moves money (`supabase/migrations/20261124000000_rewards.sql` header).
 - Student: meet the daily target; a sticker appears (`/api/student/rewards`); a credit is created as `pending`. On Saturday (SGT) the weekly review is available (`/api/student/rewards/weekly`).
-- Parent: the pending credit shows. Finish that day's homework; after the 20:00 SGT cron (or a manual trigger), the credit becomes `confirmed`. Unfinished homework becomes `forfeited` and is kept, never deleted.
+- Parent: the pending credit shows. Finish that day's homework; after the 21:00 SGT cron (or a manual trigger), the credit becomes `confirmed`. Unfinished homework becomes `forfeited` and is kept, never deleted.
 - SQL: `select status, count(*) from reward_credits group by 1;`
 - Roll back: unset and redeploy. Stickers, credits and payouts stay in their tables. The cron still runs `finalizeCredits`; that is harmless and idempotent.
 
@@ -190,15 +201,15 @@ There is **no separate flag for pending credits**. They ship inside rewards (mig
 
 - Depends on: flag 0; SQL 12 applied **before** this flag. Read section 5 below first: some paper items are not answerable yet.
 - Student: pick a full paper from the picker (English, 45 marks or more); start, answer, submit; a score appears; it counts as **one** set for the daily target.
-- Parent: the paper result appears (`/api/parent/exam`) and in the 8pm email's paper block (`src/lib/dailyAlert.js` `paperBlock`).
+- Parent: the paper result appears (`/api/parent/exam`) and in the weekly report's paper section (`src/lib/notify/weeklyReport.mjs` `summariseChild`).
 - SQL: `select status, score, total from exam_attempts order by started_at desc limit 5;`
 - Roll back: unset and redeploy. Attempts and answers stay in `exam_attempts` / `exam_answers`.
 - PR #49 (`20261130000000_paper_rewards.sql`, grading exclusion for MCQ items without options) is **not merged**. Do not describe paper rewards as live until it is merged, its migration is applied and it has its own entry here.
 
-### 6. `EMAIL_ALERTS_ENABLED` (daily parent alert; server env, not a build flag)
+### 6. `EMAIL_ALERTS_ENABLED` (weekly parent report; server env, not a build flag)
 
 - Depends on: flag 0; SQL 1 to 4; everything in section 3, including a verified domain and the one-parent test.
-- Parent smoke test: after the 20:00 SGT cron, the email arrives from the verified sender, shows the right child, subjects, sets and (if mock exams are on) papers, and links to the live site.
+- Parent smoke test: use send-now (section 3) or finish the Saturday weekly review; the weekly email arrives once, from the verified sender, shows the right child, subjects, sets, causes (or the honest fallback), homework, credits and (if mock exams are on) papers, and links to the live site. Keep `ALERT_TEST_RECIPIENTS` set until the owner is happy.
 - Roll back: unset and redeploy (no data lost).
 - `WHATSAPP_ENABLED` stays off throughout.
 
@@ -242,7 +253,8 @@ Use a test parent and a linked test student. Record the time and result next to 
 - [ ] `CRON_SECRET`, `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`, `APP_BASE_URL`
 - [ ] `RESEND_API_KEY`, `ALERT_FROM_EMAIL` set; Resend domain shows **Verified**
 - [ ] `EMAIL_ALERTS_ENABLED` still **unset**; `WHATSAPP_*` not set
-- [ ] Cron Jobs page shows `/api/cron/daily-alert` at `0 12 * * *` (= 20:00 SGT)
+- [ ] Cron Jobs page shows `/api/cron/weekly-report` at `0 13 * * *` (= 21:00 SGT, fallback only)
+- [ ] `ALERT_TEST_RECIPIENTS` set to the owner's test address(es) (value in Vercel only) until launch
 
 **Turn on, one at a time (redeploy after each; smoke test as student and parent; stop on first failure)**
 - [ ] 0. `NEXT_PUBLIC_SERVER_AUTH`
@@ -251,15 +263,15 @@ Use a test parent and a linked test student. Record the time and result next to 
 - [ ] 3. `NEXT_PUBLIC_REWARDS_ENABLED`
 - [ ] 4. `NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED`
 - [ ] 5. `NEXT_PUBLIC_MOCK_EXAMS_ENABLED` (only after the PR #49 decision)
-- [ ] 6. Admin alert preview for the test parent looks right (no send), then `EMAIL_ALERTS_ENABLED` per section 3
+- [ ] 6. Admin alert preview for the test parent looks right (no send), then `EMAIL_ALERTS_ENABLED` with `ALERT_TEST_RECIPIENTS` per section 3
 
 **Regression check on every deploy**
 - [ ] An existing local account still logs in and its history is still there (`genius_users_v2`, `genius_progress_v2` untouched).
 - [ ] Student: a daily set saves and survives a refresh.
 - [ ] Parent: dashboard loads; no console errors.
 
-**After the 20:00 SGT cron**
-- [ ] Cron run in Vercel logs shows 200 with a summary (`errors: 0`).
+**After the Saturday report / 21:00 SGT fallback**
+- [ ] Cron run in Vercel logs shows 200 (`summary.noop: true` on any day except Saturday 21:00+ and Sunday).
 - [ ] `alert_log` rows say `sent` (or `dryRun` if the email flag is still off).
 - [ ] The test parent received one email, link opens `psle-app-vwx3`.
 

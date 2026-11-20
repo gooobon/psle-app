@@ -1,5 +1,6 @@
 {
   "crons": [
-    { "path": "/api/cron/daily-alert", "schedule": "0 12 * * *" }
+    { "path": "/api/cron/weekly-report", "schedule": "0 13 * * *" },
+    { "path": "/api/cron/event-alerts", "schedule": "35 22 * * *" }
   ]
 }

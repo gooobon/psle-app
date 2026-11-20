@@ -13,7 +13,9 @@ import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
 import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, cleanDraft, answersFromRows, reviewItems } from "@/lib/examServer";
 import { awardPaperReward } from "@/lib/rewardsServer";
+import { sendForChild } from "@/lib/notify/weeklyReport.mjs";
 import { writeNotebook, recordMockTrials } from "@/lib/examPostSubmit";
+import { notifyEvent } from "@/lib/notify/eventAlerts.mjs";
 import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS, canReview, notebookAttemptKey, suggestedCause } from "@/lib/examEngine";
 
 export const runtime = "nodejs";
@@ -76,6 +78,10 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   const notebook = await writeNotebook(admin, upd.data, g, endMs);
   const trials = await recordMockTrials(admin, upd.data, g, endMs);
   const reward = await awardPaperReward(admin, { childId: sid, subject: "English", day, status, counts: verdict.counts });
+  // Saturday milestone (issue #55): the weekly parent report goes out after a Saturday paper too. sendForChild no-ops off Saturday, dedupes per week, never throws.
+  await sendForChild(admin, sid);
+  // Milestone alert for a handed-in paper (best effort; off unless WHATSAPP_ENABLED=true; key per attempt so it cannot send twice).
+  await notifyEvent(admin, { type: "milestone", childId: sid, subject: "English", key: "paper-" + id, label: a.paper_label || "past paper", score: g.score, total: g.total });
   return { attempt: upd.data, daily, g, notebook, trials, reward };
 }
 

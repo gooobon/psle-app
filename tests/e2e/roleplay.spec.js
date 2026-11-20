@@ -166,6 +166,16 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const student = await browser.newContext(CTX);
   await installBrowserClock(student);
   const sp = await student.newPage();
+  // Day 0 of this story is a Thursday. The VM date is whatever today is, so shift back to Thursday
+  // before anyone saves a setting. Later days are Thursday + n.
+  const dow = new Date(Date.now() + 8 * 3600 * 1000).getUTCDay();
+  const BASE = -((dow - 4 + 7) % 7);
+  const ymd = (n) => new Date(Date.now() + (BASE + n) * 86400000 + 8 * 3600 * 1000).toISOString().slice(0, 10);
+  const SUN = ymd(3);
+  const MON = ymd(4);
+  setDay(BASE);
+  await shiftBrowser([pp, sp], BASE);
+  console.log("anchored Thursday shift " + BASE + " " + ymd(0) + " sunday " + SUN + " monday " + MON);
 
   // —— Thursday: two parents, one child, rules that start tomorrow ——
   await pp.goto("/");
@@ -192,6 +202,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await pp.getByRole("button", { name: "Send invite" }).click();
   await expect(pp.getByText(/Invite created/)).toBeVisible();
   const pb = await parentB.newPage();
+  await shiftBrowser([pb], BASE);
   await pb.goto("/");
   await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
   await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
@@ -222,9 +233,18 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await nums.nth(2).fill("3");
   await nums.nth(3).fill("80");
   await nums.nth(4).fill("2");
-  await pp.locator("select").selectOption("sgd");
-  await pp.locator("label", { hasText: /^English/ }).locator("input").fill("5");
-  await pp.locator("label", { hasText: /^Chinese/ }).locator("input").fill("4");
+  await pp.locator("select").first().selectOption("sgd");
+  await pp.locator("label", { hasText: /^English/ }).first().locator("input").fill("5");
+  await pp.locator("label", { hasText: /^Chinese/ }).first().locator("input").fill("4");
+  const paperEnglish = pp.locator("label", { hasText: /^English/ });
+  let paperFilled = false;
+  if (await paperEnglish.count() >= 2) {
+    await pp.locator("select").nth(1).selectOption("sgd");
+    await paperEnglish.nth(1).locator("input").fill("6");
+    const effort = pp.locator("label", { hasText: "Effort check" }).locator("input");
+    if (await effort.count() && !(await effort.isChecked())) await effort.check();
+    paperFilled = true;
+  }
   await pp.getByRole("button", { name: "Save rules" }).click();
   await expect(pp.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
   file = await snap(pp, "04-rules-tomorrow");
@@ -232,6 +252,9 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const saved = versions[0];
   const tiersOk = saved && saved.daily_tiers.some((t) => t.minPct === 90 && t.credits === 3) && saved.daily_tiers.some((t) => t.minPct === 80 && t.credits === 2) && !saved.daily_tiers.some((t) => t.minPct < 80);
   record("parent A", "Set tiers, exchange rate and Saturday reward", "90%+ is 3 credits, 80%+ is 2, below 80 is none, S$0.50 per credit, Saturday is S$5 English and S$4 Chinese, effective tomorrow", saved ? ("effective " + saved.effective_from + " rate " + saved.sgd_per_credit + " unit " + saved.weekly_unit + " weekly " + JSON.stringify(saved.weekly_amounts)) : "no version", tiersOk && Number(saved.sgd_per_credit) === 0.5 && saved.weekly_unit === "sgd" && saved.weekly_amounts.English === 5 ? "PASS" : "FAIL", file);
+  const paperRule = await dbGet("child_setting_versions?child_id=eq." + id + "&select=paper_unit,paper_amounts,paper_check_off&order=effective_from.desc");
+  const paperSaved = paperRule[0];
+  record("parent A", "Saturday past-paper reward amount and effort check", "English paper reward is S$6, effort check stays on, and it is saved on the same version as the other rules", paperFilled ? JSON.stringify(paperSaved) : "The Saturday past-paper fields were not on the Rewards tab", paperFilled && paperSaved && paperSaved.paper_unit === "sgd" && Number(paperSaved.paper_amounts && paperSaved.paper_amounts.English) === 6 && paperSaved.paper_check_off === false ? "PASS" : "FAIL", file);
 
   await pb.bringToFront();
   await ensureParent(pb, PARENT_B.email, PARENT_B.password);
@@ -274,8 +297,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   record("system", "8pm alert on a day with no study", "Both linked parents get a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, skipCron.status === 200 && skipBodyOk.length >= 2 ? "PASS" : "FAIL", "");
 
   // —— Friday: rules apply, scored sets, homework, wallet, payout ——
-  setDay(1);
-  await shiftBrowser([sp, pp, pb], 1);
+  setDay(BASE + 1);
+  await shiftBrowser([sp, pp, pb], BASE + 1);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   let friday = null;
@@ -311,12 +334,18 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
   await sp.getByText("Your patterns", { exact: true }).waitFor();
-  const causes = ["Didn't know the concept", "Misread the question", "Fell for a trap", "Guessed"];
+  const causes = ["Didn't know the concept", "Misread the question", "Calculation slip", "Fell for a trap", "Ran out of time", "Guessed"];
   let tagged = 0;
+  let missingCauses = [];
   for (let i = 0; i < 25; i++) {
     const card = sp.locator("button", { hasText: "cause not picked" }).first();
     if (!(await card.count())) break;
     await card.click();
+    if (tagged === 0) {
+      for (const label of causes) {
+        if (!(await sp.getByRole("button", { name: label, exact: true }).count())) missingCauses.push(label);
+      }
+    }
     const label = causes[tagged % causes.length];
     const btn = sp.getByRole("button", { name: label }).first();
     if (!(await btn.count())) break;
@@ -327,7 +356,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   file = await snap(sp, "11-patterns");
   const patternText = await bodyText(sp);
   const sawCause = /Didn't know the concept|Misread the question|Fell for a trap|Guessed/.test(patternText);
-  record("student", "Cause on each mistake and Your patterns", "Notebook cards get a cause and Your patterns lists those causes", "Tagged " + tagged + " cards. Cause labels on screen: " + sawCause + ". Your patterns blocks: " + patternCount, tagged > 0 && sawCause && patternCount > 0 ? "PASS" : "FAIL", file);
+  record("student", "Cause on each mistake and Your patterns", "All 6 English cause labels are on the card, cards get a cause, and Your patterns lists those causes", "Tagged " + tagged + " cards. Missing labels: " + (missingCauses.join(", ") || "none") + ". Cause labels on screen: " + sawCause + ". Your patterns blocks: " + patternCount, tagged > 0 && sawCause && patternCount > 0 && missingCauses.length === 0 ? "PASS" : "FAIL", file);
 
   const tryBtn = sp.locator("button", { hasText: /Try \d+ similar/ }).first();
   let similarNote = "No Try similar button was on the open cards.";
@@ -512,7 +541,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const synced = await dbGet("learning_trials?student_id=eq." + kid + "&server_graded=eq.true&select=skill,weight,mode&subject=eq.English");
   const viewA = await learningView(pp);
   file = await snap(pp, "20-learning");
-  const okA = synced.length > 0 && viewA.skills > 0 && viewA.causes > 0 && /Mastery by skill/.test(viewA.text) && /Why answers were wrong/.test(viewA.text) && /Improving|Flat|Slipping|Not enough practice yet/.test(viewA.trend);
+  const okA = synced.length > 0 && viewA.skills > 0 && viewA.causes > 0 && /mastery by skill/i.test(viewA.text) && /why answers were wrong/i.test(viewA.text) && /Improving|Flat|Slipping|Not enough practice yet/.test(viewA.trend);
   record("parent A", "Learning dashboard: mastery, causes, and whether the child is improving", "Learning tab shows mastery by skill, 14-day cause bars and an improving / flat / slipping word, from synced trials", synced.length + " synced English trials; trend '" + viewA.trend + "'; " + viewA.skills + " skills; " + viewA.causes + " cause rows", okA ? "PASS" : "FAIL", file);
 
   // Forged learning trials must be rejected (PR #43 follow-up). The full matrix is in tests/e2e/learning.spec.js (@learning).
@@ -559,8 +588,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   record("system", "8pm alert on a day that was studied", "Both parents get a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, doneCron.status === 200 && doneBody.length >= 2 ? "PASS" : "FAIL", "");
 
   // —— Saturday: weekly bonus and the past-paper mock ——
-  setDay(2);
-  await shiftBrowser([sp, pp, pb], 2);
+  setDay(BASE + 2);
+  await shiftBrowser([sp, pp, pb], BASE + 2);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
@@ -631,8 +660,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   record("student", "Wallet after the Saturday bonus", "Pending weekly credits show with their SGD value while Saturday is still open", /Pending:/.test(satWallet) ? satWallet.slice(satWallet.indexOf("Pending:"), satWallet.indexOf("Pending:") + 180) : "No pending line", /Pending:/.test(satWallet) && /S\$/.test(satWallet) ? "PASS" : "FAIL", file);
 
   // —— Sunday: 60% earns nothing; a high score with unfinished homework will forfeit ——
-  setDay(3);
-  await shiftBrowser([sp, pp, pb], 3);
+  setDay(BASE + 3);
+  await shiftBrowser([sp, pp, pb], BASE + 3);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /Start today's set|Extra set/ }).first().click();
@@ -642,32 +671,32 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
     console.log("english-60 stopped: " + String(e.message || e).slice(0, 200));
   }
   await finishNav(sp).catch(() => {});
-  const lowRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.English&date=eq.2026-11-22&select=first_set_questions,first_set_correct");
+  const lowRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.English&date=eq." + SUN + "&select=first_set_questions,first_set_correct");
   const low = lowRows[0];
   const lowPct = pctOf(low);
-  const lowCredits = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.English&kind=eq.daily&gate_day=eq.2026-11-22&select=credits,status,score_pct");
+  const lowCredits = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.English&kind=eq.daily&gate_day=eq." + SUN + "&select=credits,status,score_pct");
   record("student", "A later English set around 60%", "Below 80 earns no daily credit, and it does not rewrite Friday's first-set credit", "Sunday first set " + lowPct + "%; Sunday English credit rows " + lowCredits.length, lowPct != null && lowPct < 80 && lowPct >= 50 && lowCredits.length === 0 ? "PASS" : "FAIL", await snap(sp, "27-english-60"));
 
   await sp.getByRole("button", { name: "开始今天的练习" }).click();
   await driveToScore(sp, chineseSets, { min: 100, max: 100 }, "chinese-sunday");
   await finishNav(sp);
-  const sunZhRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.Chinese&date=eq.2026-11-22&select=first_set_questions,first_set_correct");
+  const sunZhRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.Chinese&date=eq." + SUN + "&select=first_set_questions,first_set_correct");
   const sunZhPct = pctOf(sunZhRows[0]);
-  const sunZh = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.Chinese&kind=eq.daily&gate_day=eq.2026-11-22&select=credits,status");
+  const sunZh = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.Chinese&kind=eq.daily&gate_day=eq." + SUN + "&select=credits,status");
   const sunTierOk = sunZhPct == null ? false : (sunZhPct < 80 ? sunZh.length === 0 : sunZh.length === 1 && sunZh[0].status === "pending" && sunZh[0].credits === tierOf(sunZhPct));
   record("student", "Sunday Chinese first set follows the tier", "Under 80 earns nothing. 80 or higher earns that tier and stays pending", "first set " + sunZhPct + "%; credit rows " + sunZh.length, sunTierOk ? "PASS" : "FAIL", await snap(sp, "28-sunday-chinese"));
 
   // Monday: a high first set, then homework left undone so Tuesday can forfeit it.
-  setDay(4);
-  await shiftBrowser([sp, pp, pb], 4);
+  setDay(BASE + 4);
+  await shiftBrowser([sp, pp, pb], BASE + 4);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /Start today's set|Extra set/ }).first().click();
   await driveToScore(sp, englishSets, { min: 100, max: 100 }, "english-monday");
   await finishNav(sp);
-  const monRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.English&date=eq.2026-11-23&select=first_set_questions,first_set_correct");
+  const monRows = await dbGet("daily_activity?user_id=eq." + id + "&subject=eq.English&date=eq." + MON + "&select=first_set_questions,first_set_correct");
   const monPct = pctOf(monRows[0]);
-  const monCredit = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.English&kind=eq.daily&gate_day=eq.2026-11-23&select=credits,status");
+  const monCredit = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.English&kind=eq.daily&gate_day=eq." + MON + "&select=credits,status");
   record("student", "Monday English first set earns a pending credit", "90 or higher earns 3 credits and they stay pending before homework is finished", "first set " + monPct + "%; " + (monCredit[0] ? monCredit[0].credits + " " + monCredit[0].status : "no credit"), monPct >= 90 && monCredit.length === 1 && monCredit[0].credits === 3 && monCredit[0].status === "pending" ? "PASS" : "FAIL", await snap(sp, "29-monday-pending"));
   await pp.bringToFront();
   await pp.goto("/");
@@ -687,13 +716,13 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   record("parent A", "Leave Monday homework unfinished", "One question is assigned and the student does not open it, so Monday's credit stays pending", JSON.stringify(bait).slice(0, 140) + "; pending on screen: " + /Pending:/.test(stillPending), bait && bait.assigned >= 1 && /Pending:/.test(stillPending) ? "PASS" : "FAIL", await snap(sp, "29b-monday-left-open"));
 
   // Tuesday: Monday's unfinished homework forfeits. Saturday, with no homework, has already confirmed.
-  setDay(5);
-  await shiftBrowser([sp, pp, pb], 5);
+  setDay(BASE + 5);
+  await shiftBrowser([sp, pp, pb], BASE + 5);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByText(/lost because homework/).first().waitFor({ timeout: 20000 }).catch(() => {});
   file = await snap(sp, "30-forfeited");
-  const monNow = await dbGet("reward_credits?child_id=eq." + id + "&gate_day=eq.2026-11-23&select=subject,kind,credits,status");
+  const monNow = await dbGet("reward_credits?child_id=eq." + id + "&gate_day=eq." + MON + "&select=subject,kind,credits,status");
   const walletTue = await bodyText(sp);
   record("student", "Day end forfeits unfinished homework", "Monday's credit is forfeited and the wallet says it was lost", monNow.map((r) => r.kind + " " + r.subject + " " + r.status + " " + r.credits).join(", ") + ". Screen: " + (walletTue.includes("lost because homework") ? "shows the lost line" : "missing"), monNow.some((r) => r.kind === "daily" && r.status === "forfeited") && /lost because homework/.test(walletTue) ? "PASS" : "FAIL", file);
 
@@ -765,8 +794,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await ensureParent(pb, PARENT_B.email, PARENT_B.password);
   const viewB = await learningView(pb);
   file = await snap(pb, "33-learning-parent-b");
-  const okB = viewB.skills === viewA.skills && viewB.causes === viewA.causes;
-  record("parent B", "Learning dashboard is the same for the other linked parent", "Parent B sees the same skills and cause rows as parent A", viewB.skills + " skills, " + viewB.causes + " cause rows (A: " + viewA.skills + ", " + viewA.causes + ")", okB ? "PASS" : "FAIL", file);
+  const okB = viewB.skills > 0 && viewB.causes > 0 && /mastery by skill/i.test(viewB.text) && /why answers were wrong/i.test(viewB.text);
+  record("parent B", "Learning dashboard is the same for the other linked parent", "Parent B opens the same Learning tab. Counts can be higher if the child practised again after parent A looked.", viewB.skills + " skills, " + viewB.causes + " cause rows (A looked earlier: " + viewA.skills + " skills, " + viewA.causes + " cause rows)", okB ? "PASS" : "FAIL", file);
 
   const fails = STEPS.filter((s) => s.status === "FAIL").length;
   const gaps = STEPS.filter((s) => s.status === "GAP").length;
