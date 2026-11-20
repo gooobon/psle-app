@@ -3,7 +3,7 @@
 // A channel is { type, isEnabled(env), format(payload) -> message, send(target, message, {env, fetchImpl}) }.
 // A parent's settings hold a LIST of channels (parent_settings.alert_channels), so email and whatsapp
 // can both be active. dispatchAlert() formats for every enabled channel and sends via each provider.
-// Called by /api/cron/daily-alert (Vercel Cron, 20:00 SGT). Email needs EMAIL_ALERTS_ENABLED; WhatsApp is shipped OFF.
+// Called by the weekly parent report (src/lib/notify/weeklyReport.mjs). Email needs EMAIL_ALERTS_ENABLED; WhatsApp is shipped OFF.
 // Channels that are switched off still render, and come back as status "dry-run".
 import { appendFileSync, mkdirSync } from "node:fs";
 import { dirname } from "node:path";
