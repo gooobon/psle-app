@@ -138,3 +138,17 @@ export function renderSettingChangeEmail(p) {
 <p><a href="${esc(p.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">Open the parent dashboard</a></p></div>`;
   return { subject, text, html };
 }
+
+// Real-time event email (issue #56), used as the fallback when WhatsApp is not usable.
+// payload: { kind:"started"|"milestone", parentName, childName, subject, label, score, total, time, dashboardUrl }
+export function renderEventEmail(p) {
+  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)` : "completed";
+  const line = p.kind === "started"
+    ? `${p.childName} has started ${p.subject} practice${p.time ? ` at ${p.time} (Singapore time)` : ""}.`
+    : `${p.childName} finished ${p.subject}: ${p.label || "practice set"}. Result: ${result}.`;
+  const subject = p.kind === "started" ? `${p.childName} started ${p.subject} practice` : `${p.childName} finished ${p.subject}: ${result}`;
+  const text = [`Hi ${p.parentName || "there"},`, "", line, "", `Open the parent dashboard: ${p.dashboardUrl}`].join("\n");
+  const html = `<div style="font-family:Arial,sans-serif;max-width:520px;margin:0 auto;color:#0F172A"><p>${esc(`Hi ${p.parentName || "there"},`)}</p><p>${esc(line)}</p>
+<p><a href="${esc(p.dashboardUrl)}" style="background:#7C3AED;color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none;font-weight:bold">Open the parent dashboard</a></p></div>`;
+  return { subject, text, html };
+}

@@ -178,7 +178,7 @@ ok("autosave (phase 1b) added no migration of its own: exam_attempts is still fo
   const files = fs.readdirSync(path.join(ROOT, "supabase/migrations")).sort();
   const i = files.indexOf("20261129000000_exam_attempts.sql");
   assert.ok(i >= 0);
-  assert.deepEqual(files.slice(i + 1), ["20261130000000_paper_rewards.sql"]);
+  assert.deepEqual(files.slice(i + 1).slice(0, 1), ["20261130000000_paper_rewards.sql"]); // later migrations (e.g. event alerts, #56) may follow
 });
 // ── 8pm email ──
 ok("email: papers block appears only when there is something to report", () => {
@@ -411,7 +411,7 @@ ok("reward service: Saturday only, needs REWARDS, pending credit gated on that S
 ok("paper_rewards migration: new file, additive, guarded, 'paper' kind only widens, old migrations untouched", () => {
   const dir = path.join(ROOT, "supabase/migrations");
   const files = fs.readdirSync(dir).sort();
-  assert.equal(files[files.length - 1], "20261130000000_paper_rewards.sql");
+  assert.ok(files.includes("20261130000000_paper_rewards.sql"));
   const raw = fs.readFileSync(path.join(dir, "20261130000000_paper_rewards.sql"), "utf8");
   assert.ok(/apply by hand|applied by hand/i.test(raw.split("\n").slice(0, 6).join("\n")));
   const sql = raw.replace(/--.*$/gm, "");
@@ -479,6 +479,7 @@ const route = async (db, flagOn = true) => loadSource("src/app/api/student/exam/
   "@/lib/examServer": S, "@/lib/examEngine": E,
   "@/lib/rewardsServer": { awardPaperReward: async () => ({ credited: false }) }, "@/lib/notify/weeklyReport.mjs": { sendForChild: async () => ({}) },
   "@/lib/examPostSubmit": await import("../src/lib/examPostSubmit.js"),
+  "@/lib/notify/eventAlerts.mjs": { notifyEvent: async () => ({ enabled: false }) }, // alerts are covered by tools/event_alerts_selftest.mjs
 }, "return { GET, POST };");
 const req = (url, body) => ({ url, headers: { get: () => "0" }, body });
 const paperId = manifestPaperId();

@@ -8,7 +8,9 @@
 //   WHATSAPP_ENABLED          "true" to allow real sends (default: off)
 //   WHATSAPP_PHONE_NUMBER_ID  Meta phone-number id of the business number
 //   WHATSAPP_ACCESS_TOKEN     permanent system-user token
-//   WHATSAPP_TEMPLATE_NAME    approved template name (see TEMPLATE below)
+//   WHATSAPP_TEMPLATE_NAME    approved name of the DAILY summary template (see TEMPLATE below)
+//   WHATSAPP_TEMPLATE_STARTED approved name of the "practice started" event template (default "practice_started")
+//   WHATSAPP_TEMPLATE_MILESTONE approved name of the "milestone done" event template (default "milestone_done")
 //   WHATSAPP_TEMPLATE_LANG    template language code, default "en"
 //   WHATSAPP_API_VERSION      Graph API version, default "v21.0"
 
@@ -18,6 +20,22 @@ export const TEMPLATE = {
   name: "daily_practice_summary",
   language: "en",
   body: "Hi {{1}}, {{2}} practice on {{3}}: {{4}}. Questions answered: {{5}}.",
+};
+
+// Event templates (issue #56). Submit each in Meta Business Manager: category UTILITY, language en. Meta must APPROVE them
+// before any real send (can take up to 24 hours). Sample values below are made up; the positional {{n}} order is stable.
+// Business-initiated messages outside the 24-hour window must be approved templates (never free-form text).
+export const EVENT_TEMPLATES = {
+  started: {
+    name: "practice_started", envVar: "WHATSAPP_TEMPLATE_STARTED",
+    body: "Hi {{1}}, {{2}} has started {{3}} practice at {{4}} (Singapore time).",
+    sample: ["Parent", "Child", "English", "16:05"],
+  },
+  milestone: {
+    name: "milestone_done", envVar: "WHATSAPP_TEMPLATE_MILESTONE",
+    body: "Hi {{1}}, {{2}} finished {{3}}: {{4}}. Result: {{5}}.",
+    sample: ["Parent", "Child", "English", "daily set 12", "17 of 20 correct (85%)"],
+  },
 };
 
 const E164 = /^\+[1-9]\d{7,14}$/;
@@ -49,6 +67,18 @@ export function formatWhatsApp(raw) {
   return { template: TEMPLATE.name, params, preview };
 }
 
+// Event message. payload: { kind: "started"|"milestone", parentName, childName, subject, label, score, total, time }
+export function formatWhatsAppEvent(p) {
+  const t = EVENT_TEMPLATES[p.kind === "started" ? "started" : "milestone"];
+  const result = p.total ? `${p.score} of ${p.total} correct (${Math.round((p.score / p.total) * 100)}%)` : "completed";
+  const raw = p.kind === "started"
+    ? [p.parentName, p.childName, p.subject, p.time]
+    : [p.parentName, p.childName, p.subject, p.label || "practice set", result];
+  const params = raw.map((v) => clean(v) || "-");
+  const preview = t.body.replace(/\{\{(\d)\}\}/g, (_, n) => params[Number(n) - 1] ?? "");
+  return { template: t.name, templateEnvVar: t.envVar, params, preview };
+}
+
 export function buildRequest(to, message, env = process.env) {
   const version = env.WHATSAPP_API_VERSION || "v21.0";
   return {
@@ -61,7 +91,7 @@ export function buildRequest(to, message, env = process.env) {
         to: to.replace(/^\+/, ""),
         type: "template",
         template: {
-          name: env.WHATSAPP_TEMPLATE_NAME || TEMPLATE.name,
+          name: message.templateEnvVar ? (env[message.templateEnvVar] || message.template) : (env.WHATSAPP_TEMPLATE_NAME || TEMPLATE.name),
           language: { code: env.WHATSAPP_TEMPLATE_LANG || TEMPLATE.language },
           components: [{ type: "body", parameters: message.params.map((text) => ({ type: "text", text })) }],
         },

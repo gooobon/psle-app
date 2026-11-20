@@ -86,6 +86,15 @@ export function takeActiveMinutes() {
 }
 if (_FLAG) startTracker();
 
+// "Practice started" signal (flag NEXT_PUBLIC_SERVER_AUTH). Sent when the student presses Start on a set / round / homework, once per
+// subject per page load; the server dedupes to one alert per child per SGT day and sends nothing unless WHATSAPP_ENABLED=true.
+const _startedSent = new Set();
+export function reportPracticeStarted(subject) {
+  if (!_FLAG || !subject || _startedSent.has(subject)) return;
+  _startedSent.add(subject);
+  try { serverPost("/api/student/started", { subject }).then((r) => { if (!r || !r.ok) _startedSent.delete(subject); }).catch(() => _startedSent.delete(subject)); } catch { _startedSent.delete(subject); }
+}
+
 export function reportActivity(subject, key, results, minutes) {
   if (!_FLAG) return;
   try {
