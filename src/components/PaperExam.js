@@ -42,6 +42,17 @@ function Choice({ options, value, onPick }) {
 function Text({ value, onChange, placeholder }) {
   return <input value={value == null ? '' : String(value)} onChange={(e) => onChange(e.target.value)} placeholder={placeholder || 'Type your answer'} style={{ width: '100%', padding: '8px 10px', borderRadius: 8, border: '1px solid #CBD5E1', fontSize: 14, marginTop: 6, boxSizing: 'border-box' }} />;
 }
+// Underline the misspelled word only when it stands alone. "in" must not light up inside "underlined".
+function underlined(sentence, wrongWord) {
+  const sent = String(sentence || '');
+  const w = String(wrongWord || '');
+  if (!w) return sent;
+  const esc = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const m = sent.match(new RegExp('(?<![A-Za-z])' + esc + '(?![A-Za-z])'));
+  if (!m) return sent;
+  const at = m.index;
+  return <>{sent.slice(0, at)}<span style={{ textDecoration: 'underline', background: '#FEF08A', fontWeight: 800, padding: '0 2px' }}>{sent.slice(at, at + w.length)}</span>{sent.slice(at + w.length)}</>;
+}
 
 function CompQuestion({ q, a, set }) {
   const v = (a && a.val) ?? null;
@@ -111,8 +122,10 @@ function Section({ sec, answers, setAns, flags, toggleFlag }) {
       ))}
       {(s.items || []).map((q, i) => (
         <div key={q.id} style={{ marginTop: 10, fontSize: 14 }}>
-          <div>{i + 1}. {q.sentence}<Flag id={q.id} /></div>
-          <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+          <div>{i + 1}. {underlined(q.sentence, q.wrongWord)}<Flag id={q.id} /></div>
+          {q.options && q.options.length >= 2
+            ? <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
+            : <Text value={answers[q.id] && answers[q.id].val} onChange={(t) => setAns(q.id, { val: t })} placeholder="Write the correct word" />}
         </div>
       ))}
       {(s.questions || []).map((q) => (
