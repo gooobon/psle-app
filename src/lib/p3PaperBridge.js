@@ -499,6 +499,9 @@ function toEditingItem(q, passage) {
   }
   if (!wrongWord) { const quoted = text.match(/['‘"“]([A-Za-z’'-]+)['’"”]/); if (quoted && quoted[1].toLowerCase() !== answer.toLowerCase()) wrongWord = quoted[1]; }
   if (!wrongWord) wrongWord = findWrongWord(sentence, answer);
+  // A punctuation key (comma, apostrophe) has no misspelled word. The closest-word guess
+  // underlines an ordinary word such as "is" in the instruction. Leave it unmarked.
+  if (!q.errorWord && answer && !/[A-Za-z0-9]/.test(answer)) wrongWord = "";
   return {
     id: q.id,
     sentence,
