@@ -229,6 +229,74 @@ function toEnglishEditSet(set) {
   };
 }
 
+// ── Order / sequencing questions ("Write 1, 2 and 3 in the boxes to show the order of events") ──────────────────
+// The events are printed as lines ("___ The boys fed Koko.", "[ ] ...", "□ ..."), or stored as sequenceItems / items /
+// subEvents. The key arrives as numbers in event order, an object {event: n}, "2, 1, 3", "2 / 1 / 3", "2 – 3 – 1" or
+// labelled lines ("The boys fed Koko: 1"). It is normalised to numbers in event order, or the item stays parent-marked.
+const SEQ_LINE = /^\s*(?:_{2,}|\[\s*\d?\s*\]|\u25A1|\u2610|\(\s*\))\s*(\S.*?)\s*$/;
+
+export function sequenceItemsOf(q) {
+  for (const k of ["sequenceItems", "items", "subEvents"]) {
+    const a = q && q[k];
+    if (Array.isArray(a) && a.length >= 2 && a.every((x) => typeof x === "string" || (x && typeof x.text === "string"))) return a.map((x) => String(typeof x === "string" ? x : x.text).trim());
+  }
+  const text = String((q && (q.question || q.stem || q.q || q.questionText)) || "");
+  const lines = text.split("\n").map((l) => l.match(SEQ_LINE)).filter(Boolean).map((m) => m[1]);
+  if (lines.length >= 2) return lines;
+  const inline = [...text.matchAll(/\(\s*\)\s*([^.(]+)/g)].map((m) => m[1].trim()).filter(Boolean);
+  return inline.length >= 2 ? inline : null;
+}
+
+export function isOrderQuestion(q) {
+  if (!q || parseOptionTexts(q.options).length >= 2) return false;
+  const text = String(q.question || q.stem || q.q || q.questionText || "");
+  const items = sequenceItemsOf(q);
+  if (!items) return false;
+  return /\b(order|sequence|first,? next|what happened first)\b/i.test(text) || /\b(write|put|number|arrange)\b[^\n]{0,80}\b1\b[^\n]{0,12}\b(2|and 2|or 2)\b/i.test(text) || q.format === "sequence" || q.questionType === "sequence";
+}
+
+const seqTokens = (t) => String(t || "").toLowerCase().replace(/[^a-z0-9' ]+/g, " ").split(/\s+/).filter((w) => w.length >= 3);
+
+// Numbers in event order (a permutation of 1..n), or null when the key cannot be read with certainty.
+export function sequenceKey(answer, items) {
+  const n = items.length;
+  const isPerm = (a) => a.length === n && a.every((x) => Number.isInteger(x)) && [...a].sort((x, y) => x - y).every((x, i) => x === i + 1);
+  if (Array.isArray(answer)) { const a = answer.map((x) => parseInt(x, 10)); return isPerm(a) ? a : null; }
+  if (answer && typeof answer === "object") {
+    const keys = Object.keys(answer);
+    const a = items.map((it) => { const k = keys.find((x) => x === it) || keys.find((x) => normKey(x) === normKey(it)); return k == null ? NaN : parseInt(answer[k], 10); });
+    return isPerm(a) ? a : null;
+  }
+  const str = String(answer == null ? "" : answer).trim();
+  if (!str) return null;
+  if (/^[\d\s,;/\u2013\u2014\-\u2192>.]+$/.test(str)) { const a = (str.match(/\d+/g) || []).map(Number); return isPerm(a) ? a : null; }
+  let segs = str.split(/\n|;|\s\/\s|\s*\|\s*/).map((x) => x.trim()).filter(Boolean);
+  if (segs.length !== n) segs = str.split(/\)\s*,\s*/).map((x, i, all) => (i < all.length - 1 ? x + ")" : x).trim()).filter(Boolean);
+  if (segs.length !== n) return null;
+  const digit = (seg) => { const d = seg.match(/(?:^|[^A-Za-z0-9])([1-9])(?![A-Za-z0-9])/g); if (!d) return null; const nums = d.map((m) => parseInt(m.replace(/\D/g, ""), 10)); const first = /^\s*[(]?[1-9]\s*[:.)\u2013\u2014\-\u2192=]/.test(seg) ? nums[0] : nums[nums.length - 1]; return nums.length === 1 ? nums[0] : first; };
+  const itemTok = items.map(seqTokens);
+  const scores = [];
+  segs.forEach((seg, si) => { const tk = new Set(seqTokens(seg.replace(/[1-9]/g, " "))); itemTok.forEach((it, ii) => { const hit = it.filter((w) => tk.has(w)).length; scores.push({ si, ii, v: hit / Math.max(1, Math.min(it.length, tk.size)) }); }); });
+  scores.sort((x, y) => y.v - x.v);
+  const segTo = {}, itemUsed = new Set();
+  for (const sc of scores) { if (sc.v <= 0) break; if (segTo[sc.si] != null || itemUsed.has(sc.ii)) continue; segTo[sc.si] = sc.ii; itemUsed.add(sc.ii); }
+  if (Object.keys(segTo).length !== n) return null;
+  const key = new Array(n).fill(NaN);
+  for (let si = 0; si < n; si++) { const d = digit(segs[si]); if (d == null) return null; key[segTo[si]] = d; }
+  return isPerm(key) ? key : null;
+}
+
+// Item text with the printed event lines removed (the cards show them), plus the cards and the key; null when it is not readable.
+export function prepareSequence(q) {
+  const items = sequenceItemsOf(q);
+  if (!items) return null;
+  const key = sequenceKey(q.answer ?? q.correctAnswer, items);
+  const text = String(q.question || q.stem || q.q || q.questionText || "");
+  const stem = text.split("\n").filter((l) => !SEQ_LINE.test(l)).join("\n").replace(/\n{2,}/g, "\n").trim() || "Put the events in order.";
+  return key ? { items, key, stem } : { items, key: null, stem };
+}
+
+
 function detectCompFormat(q, options) {
   // 데이터의 format 필드가 'open'으로 잘못 일괄 태깅된 경우가 많으므로
   // question/stem 내용을 항상 재검사하여 실제 유형을 감지한다.
@@ -265,9 +333,11 @@ function detectCompFormat(q, options) {
   //    Detect by: explicit "write 1, 2..." OR (sequence/order keyword + numbered slots)
   const emptyBracketCount = (qRaw.match(/\(\s*\)/g) || []).length;
   const blankSlotCount = (qRaw.match(/(?:^|\s)_{2,}/g) || []).length;
-  const numberedSlots = emptyBracketCount + blankSlotCount;
+  const boxSlotCount = (qRaw.match(/\[\s*\]|\u25A1|\u2610/g) || []).length;
+  const numberedSlots = emptyBracketCount + blankSlotCount + boxSlotCount;
   const hasSeqKeyword = qText.includes("sequence") || qText.includes("the order") ||
                         qText.includes("order of events") || qText.includes("order in which");
+  if (isOrderQuestion(q)) return "sequence";
   if (/write\s+1\s*[,，]?\s*2/.test(qText) ||
       /put\s+(?:these|the)\s+events/.test(qText) ||
       (hasSeqKeyword && numberedSlots >= 2) ||
@@ -373,23 +443,28 @@ function toEnglishCompSet(set, skipGenerated) {
 
   const questions = (set.questions || []).map((q, i) => {
     const options = parseOptionTexts(q.options);
-    const fmt = detectCompFormat(q, options);
+    let fmt = detectCompFormat(q, options);
+
+    // Order questions: cards + numeric key in event order. A key that cannot be read stays open-ended (parent-marked), never unanswerable.
+    let seq = null;
+    if (fmt === "sequence" || (fmt !== "mcq" && isOrderQuestion(q))) {
+      seq = prepareSequence(q);
+      fmt = seq && seq.key ? "sequence" : "open";
+    }
 
     // MCQ: use parseAnswerIndex. All other formats: preserve raw string answer.
     const isMcq = fmt === "mcq";
-    const answer = isMcq
-      ? parseAnswerIndex(q.answer, options)
-      : Array.isArray(q.answer)
-        ? q.answer
-        : String(q.answer ?? q.correctAnswer ?? "");
-
-    // For sequence format, extract the event items from the question text
-    let sequenceItems = q.sequenceItems || q.items || null;
-    if (fmt === "sequence" && !sequenceItems && q.question) {
-      // Parse "( ) Event A. ( ) Event B." pattern
-      const matches = [...q.question.matchAll(/\(\s*\)\s*([^.(]+)/g)];
-      if (matches.length >= 2) sequenceItems = matches.map(m => m[1].trim());
-    }
+    const answer = seq && seq.key
+      ? seq.key
+      : isMcq
+        ? parseAnswerIndex(q.answer, options)
+        : Array.isArray(q.answer)
+          ? q.answer
+          : typeof q.answer === "object" && q.answer
+            ? Object.entries(q.answer).map(([k, v]) => k + ": " + v).join("\n")
+            : String(q.answer ?? q.correctAnswer ?? "");
+    const sequenceItems = seq && seq.key ? seq.items : (fmt === "sequence" ? (q.sequenceItems || q.items || null) : null);
+    const seqStem = seq && seq.key ? seq.stem : null;
 
     // For tick_choice format, extract checkbox options from [ ] pattern
     let tickOptions = null;
@@ -403,8 +478,8 @@ function toEnglishCompSet(set, skipGenerated) {
       questionNo:       q.questionNo || String(i + 1),
       format:           fmt,
       marks:            q.marks || 1,
-      question:         q.question || q.stem || q.q || q.questionText || "",
-      stem:             q.question || q.stem || q.q || q.questionText || "",
+      question:         seqStem || q.question || q.stem || q.q || q.questionText || "",
+      stem:             seqStem || q.question || q.stem || q.q || q.questionText || "",
       options:          tickOptions || options,
       answer,
       sequenceItems,
@@ -684,6 +759,14 @@ function normalizeEnglishQuestions(questions = []) {
   buckets.GrammarCloze.push(...toClozeItemSets(flat.GrammarClozeItem));
   buckets.VocabCloze.push(...toClozeItemSets(flat.VocabClozeItem));
   buckets.Comprehension.push(...toCompItemSets(flat.CompItem));
+  // Question ids must be unique inside one paper (the grader treats a repeated id as ambiguous and cannot auto-grade it).
+  // Items without an id of their own were numbered per passage (comp_0, comp_1...), so a second passage repeated them.
+  // The first use keeps its id; a later duplicate gets the set number appended.
+  const seenIds = new Set();
+  buckets.Comprehension.forEach((set, si) => (set.questions || []).forEach((q) => {
+    if (seenIds.has(q.id)) q.id = q.id + "~s" + si;
+    seenIds.add(q.id);
+  }));
   return buckets;
 }
 

@@ -6,6 +6,7 @@
 // In-progress answers live ONLY in the new key genius_exam_inprogress_v1 (no genius_* progress key is read or written).
 import React from 'react';
 import { serverGet, serverPost } from '@/lib/serverClient';
+import OrderTap from '@/components/OrderTap';
 import { remainingSeconds, isAnswered, WARN_MINUTES } from '@/lib/examEngine';
 import { CAUSES } from '@/lib/wrongNotebook';
 
@@ -78,15 +79,7 @@ function CompQuestion({ q, a, set }) {
   if (q.fmt === 'sequence') {
     const items = Array.isArray(q.sequenceItems) ? q.sequenceItems : [];
     const seq = Array.isArray(a && a.seq) ? a.seq : [];
-    return (
-      <div>{head}
-        {items.map((it, i) => (
-          <div key={i} style={{ marginTop: 6, fontSize: 13 }}>
-            <input value={seq[i] ?? ''} onChange={(e) => { const n = items.map((_, j) => seq[j] ?? ''); n[i] = e.target.value.replace(/[^0-9]/g, '').slice(0, 2); set({ seq: n }); }} style={{ width: 40, textAlign: 'center', padding: 4, marginRight: 8 }} inputMode="numeric" />{it}
-          </div>
-        ))}
-      </div>
-    );
+    return <div>{head}<OrderTap items={items} value={seq} onChange={(n) => set({ seq: n.map((x) => (x ? x : '')) })} /></div>;
   }
   // fill_blank / fill_word / tf_reason / open_sentence: typed text. Open-ended answers are marked by the parent after the paper.
   return <div>{head}<Text value={v} onChange={(t) => set({ val: t })} placeholder={q.fmt === 'open_sentence' ? 'Write your answer (your parent will mark this one)' : undefined} /></div>;

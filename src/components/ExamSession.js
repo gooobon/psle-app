@@ -2,6 +2,7 @@
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { C } from "@/lib/uiShared";
+import OrderTap from "@/components/OrderTap";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
 import ZH_VOCAB from "@/data/p3/chinese/zh_vocab.json";
@@ -1787,51 +1788,19 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       );
     }
 
-    // -- SEQUENCE ----------------------------------
+    // -- SEQUENCE (tap-to-order cards) -------------
     if (f === 'sequence') {
       const items   = q.sequenceItems || q.items || [];
       const correct = Array.isArray(q.answer) ? q.answer : String(q.answer || '').split(',').map(Number);
-      const maxN    = items.length;
+      const current = items.map((_, i) => answers[q.id + '_seq_' + i]);
       return (
         <div style={{ marginTop: 10 }}>
-          <table style={{ border: EX.border, borderCollapse: 'collapse', width: '100%', fontFamily: EX.font }}>
-            <tbody>
-              {items.map((item, ii) => {
-                const key    = q.id + '_seq_' + ii;
-                const chosen = answers[key];
-                const corr   = correct[ii];
-                const ok     = submitted && chosen === corr;
-                return (
-                  <tr key={ii}>
-                    <td style={{ border: EX.thin, padding: '10px 12px', width: 90, textAlign: 'center',
-                      background: submitted ? (ok ? EX.correct : EX.wrong) : 'transparent' }}>
-                      <span style={{ display: 'inline-flex', gap: 3 }}>
-                        {Array.from({ length: maxN }, (_, n) => n + 1).map(n => (
-                          <button key={n}
-                            onClick={() => !submitted && setAnswers(a => ({ ...a, [key]: n }))}
-                            style={{ width: 24, height: 24, border: EX.thin,
-                              background: chosen === n ? '#1a1a1a' : '#fff',
-                              color:      chosen === n ? '#fff'    : '#1a1a1a',
-                              fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)",
-                              cursor: submitted ? 'default' : 'pointer' }}>
-                            {n}
-                          </button>
-                        ))}
-                      </span>
-                    </td>
-                    <td style={{ border: EX.thin, padding: '10px 12px', fontSize: "calc(var(--fs) * 1.000)" }}>
-                      {item}
-                      {submitted && !ok && (
-                        <span style={{ fontFamily: EX.sans, fontSize: "calc(var(--fs) * 1.000)", color: '#9b1c1c', marginLeft: 8 }}>
-                          (should be {corr})
-                        </span>
-                      )}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
+          <OrderTap items={items} value={current} disabled={submitted} correct={submitted ? correct : null}
+            onChange={(next) => setAnswers(a => {
+              const n = { ...a };
+              next.forEach((v, i) => { if (v) n[q.id + '_seq_' + i] = v; else delete n[q.id + '_seq_' + i]; });
+              return n;
+            })} />
           {submitted && (
             <div style={{ marginTop: 8 }}>
               {verdictBadge(items.every((_, i) => parseInt(answers[q.id + '_seq_' + i] || '0', 10) === correct[i]))}
