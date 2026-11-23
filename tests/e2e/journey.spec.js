@@ -80,12 +80,13 @@ test("parent and student journey @main", async ({ browser }) => {
     await nums.nth(1 + i * 2).fill(String(tiers[i][0]));
     await nums.nth(2 + i * 2).fill(String(tiers[i][1]));
   }
-  await pa.locator("select").selectOption("sgd");
-  await pa.locator("label", { hasText: /^English/ }).locator("input").fill("5");
-  await pa.locator("label", { hasText: /^Chinese/ }).locator("input").fill("4");
+  // The form now has two unit selects and two English/Chinese amount rows: weekly first, then the Saturday paper reward. These steps set the weekly ones.
+  await pa.locator("select").first().selectOption("sgd");
+  await pa.locator("label", { hasText: /^English/ }).first().locator("input").fill("5");
+  await pa.locator("label", { hasText: /^Chinese/ }).first().locator("input").fill("4");
   await pa.getByRole("button", { name: "Save rules" }).click();
   await expect(pa.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
-  await expect(pa.locator('input[type="number"]')).toHaveCount(11);
+  await expect(pa.locator('input[type="number"]')).toHaveCount(12); // one more number input than before (the form changed; 12 observed on the current UI)
   await shot(pa, "06-reward-rules");
   // The rules form no longer has an effective-date picker: a saved rule always applies from the next SGT day (the "scheduled change" step was removed with it).
   const versions = await dbGet("child_setting_versions?select=effective_from,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts&order=effective_from");
