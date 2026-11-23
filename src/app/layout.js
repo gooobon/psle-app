@@ -12,7 +12,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Genius Project",
+  title: "ClewQuest",
   description: "PSLE practice for Primary school students: English and Chinese.",
 };
 
