@@ -9,7 +9,7 @@
 // in-memory rate limit is applied below (per instance only; see src/lib/rateLimit.js).
 import { sessionClient, adminClient, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
-import { kidEmail, normUsername, USERNAME_RE, RESERVED_USERNAMES } from "@/lib/supabase/config";
+import { kidEmail, normUsername, usernameKey, usernameIlike, USERNAME_RE, isReservedUsername } from "@/lib/supabase/config";
 
 export const runtime = "nodejs";
 
@@ -22,13 +22,13 @@ export async function POST(request) {
   const username = normUsername(b.username);
   const password = String(b.password || "");
   const name = String(b.name || "").trim().slice(0, 80);
-  if (!rateLimit("lm-user:" + username, { max: 5, ...win })) return jerr("too many attempts, try again later", 429);
-  if (!USERNAME_RE.test(username) || RESERVED_USERNAMES.includes(username) || username.startsWith("demo_")) return jerr("cannot migrate this username", 400);
+  if (!rateLimit("lm-user:" + usernameKey(username), { max: 5, ...win })) return jerr("too many attempts, try again later", 429);
+  if (!USERNAME_RE.test(username) || isReservedUsername(username) || usernameKey(username).startsWith("demo_")) return jerr("cannot migrate this username", 400);
   if (password.length < 6) return jerr("invalid credentials", 401); // legacy minimum was 6
   if (!name) return jerr("name required", 400);
 
   const admin = adminClient();
-  const { data: existing } = await admin.from("profiles").select("id").eq("username", username).maybeSingle();
+  const { data: existing } = await admin.from("profiles").select("id").ilike("username", usernameIlike(username)).maybeSingle();
   if (existing) return jerr("account already exists on the server", 409);
 
   const made = await createStudent(admin, { username, password, name, grade: String(b.grade || "").slice(0, 8), school: String(b.school || "").slice(0, 120) });

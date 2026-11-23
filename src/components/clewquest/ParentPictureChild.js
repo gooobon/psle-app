@@ -21,14 +21,14 @@ export default function ParentPictureChild({ onChildLinked }) {
   }
   async function create() {
     setCmsg("");
-    if (!/^[a-z0-9_]{3,30}$/.test(cu.trim().toLowerCase())) return setCmsg("Username: 3-30 letters, numbers or _.");
+    if (!/^[A-Za-z0-9_]{3,30}$/.test(cu.trim())) return setCmsg("Username: 3-30 letters, numbers or _.");
     if (!cn.trim()) return setCmsg("Type your child's name.");
     if (a.length !== CODE_LENGTH || a.join() !== b.join()) { setB([]); return setCmsg("Pick the same 4 pictures twice."); }
     setBusy(true);
     const r = await cqPost("/api/parent/children/picture", { username: cu.trim(), name: cn.trim(), sequence: a });
     setBusy(false);
     if (r.ok && r.child) { onChildLinked && onChildLinked(r.child); setCmsg("Created " + r.child.name + ". They sign in with the 4 pictures."); setCu(""); setCn(""); setA([]); setB([]); return; }
-    setCmsg(r.status === 409 ? "That username is taken." : r.status === 429 ? "Too many tries. Please wait." : "Could not create the account.");
+    setCmsg(r.status === 409 ? (r.error === "display name taken" ? "That display name is already taken." : "That username is taken.") : r.status === 429 ? "Too many tries. Please wait." : "Could not create the account.");
   }
   return (
     <div data-testid="parent-picture-child" style={{ marginTop: 10, paddingTop: 10, borderTop: "1px solid #E2E8F0" }}>

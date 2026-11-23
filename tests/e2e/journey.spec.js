@@ -62,10 +62,12 @@ test("parent and student journey @main", async ({ browser }) => {
   await shot(pp, "01-parent-signed-up");
 
   await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(CHILD.username);
-  await pp.getByPlaceholder("Display name").fill(CHILD.name);
+  await pp.getByTestId("ac-username").fill(CHILD.username);
+  await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
   await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
+  await pp.getByRole("button", { name: "Check", exact: true }).click();
+  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
   await expect(pp.getByText(/Created\./)).toBeVisible();
   await expect(pp.getByText(CHILD.name).first()).toBeVisible();
