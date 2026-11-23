@@ -521,3 +521,18 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
 
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);
+
+// Thread tint: only yarn pixels change (pure pixel logic, no network).
+{
+  const { tintPixels } = await import("../src/lib/clewquest/tint.js");
+  const px = (...a) => new Uint8ClampedArray(a);
+  const red = tintPixels(px(190, 50, 45, 255), "#2449A8", "red");
+  eq("red yarn becomes blue", red[2] > red[0], true);
+  const skin = tintPixels(px(250, 205, 170, 255), "#2449A8", "red");
+  eq("skin keeps its colour", [skin[0], skin[1], skin[2]], [250, 205, 170]);
+  const ball = tintPixels(px(10, 10, 10, 255), "#D9A52E", "dark");
+  eq("black ball becomes visible in colour", ball[0] > 100, true);
+  const eye = tintPixels(px(255, 255, 255, 255), "#D9A52E", "dark");
+  eq("eye white keeps its colour", [eye[0], eye[1], eye[2]], [255, 255, 255]);
+  eq("transparent pixels untouched", Array.from(tintPixels(px(10, 10, 10, 0), "#D9A52E", "dark")), [10, 10, 10, 0]);
+}

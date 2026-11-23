@@ -70,7 +70,7 @@ function ClewHome({ st, character, award, onBack, onEdit, onOpen, onToday, subje
       {award > 0 && <div data-testid="cq-award" style={{ background: "#DCFCE7", color: "#166534", fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>+{fmt(award)} thread from your last round!</div>}
       {st.leveledUp && <div data-testid="cq-stageup" style={{ background: "#FEF3C7", color: "#92400E", fontWeight: 900, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>Your Clew grew to Stage {stage}!</div>}
       <div style={{ textAlign: "center", background: "#fff", borderRadius: 20, padding: 16, margin: "10px 0" }}>
-        <Art testId="cq-character" k={art} alt={`Your Clew at Stage ${stage}`} style={{ maxHeight: 260, width: "auto" }} />
+        <Art testId="cq-character" k={art} alt={`Your Clew at Stage ${stage}`} tint={hex} style={{ maxHeight: 260, width: "auto" }} />
         <div style={{ fontWeight: 900, fontSize: 20 }}>{character.nickname || "Your Clew"}</div>
         <div style={{ color: "#475569" }}>Stage {stage}: {(cur || {}).name}</div>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 8 }}>
@@ -89,7 +89,7 @@ function ClewHome({ st, character, award, onBack, onEdit, onOpen, onToday, subje
         {reach.map((s) => {
           const got = s.stage <= stage;
           return (<div key={s.stage} style={{ textAlign: "center", minWidth: 64 }}>
-            <Art k={stageAssetKey(s.stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS)} alt={got ? `Stage ${s.stage}` : `Stage ${s.stage}, locked`} style={{ width: 56, filter: got ? "none" : "brightness(0) opacity(.35)" }} />
+            <Art k={stageAssetKey(s.stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS)} alt={got ? `Stage ${s.stage}` : `Stage ${s.stage}, locked`} tint={hex} style={{ width: 56, filter: got ? "none" : "brightness(0) opacity(.35)" }} />
             <div style={{ fontSize: 11, fontWeight: 700 }}>{got ? `Stage ${s.stage}` : `${s.minThread} thread`}</div>
           </div>);
         })}

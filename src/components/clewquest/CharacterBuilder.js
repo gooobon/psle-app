@@ -36,11 +36,11 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
       {gender && hairKey && (
         <div style={{ display: "flex", alignItems: "flex-end", gap: 14, background: "#fff", borderRadius: 18, padding: 14, marginBottom: 14 }}>
           <div style={{ flex: 1, textAlign: "center" }}>
-            <Art testId="cq-preview" k={stageAssetKey(5, gender, hairKey, colour, ASSET_KEYS)} alt="Your Clew at Stage 5" style={{ maxHeight: 220, width: "auto" }} />
+            <Art testId="cq-preview" k={stageAssetKey(5, gender, hairKey, colour, ASSET_KEYS)} alt="Your Clew at Stage 5" tint={hex} style={{ maxHeight: 220, width: "auto" }} />
             {nick.trim() && <div style={{ fontWeight: 800, marginTop: 6 }}>{nick.trim()}</div>}
           </div>
           <div style={{ textAlign: "center", width: 84 }}>
-            <Art k="stages/stage-1" alt="Stage 1 Yarn Ball" style={{ width: 60 }} />
+            <Art k="stages/stage-1" alt="Stage 1 Yarn Ball" tint={hex} style={{ width: 60 }} />
             <div style={{ fontSize: 12, fontWeight: 700 }}>Start: Yarn Ball</div>
             <span style={{ display: "inline-block", width: 18, height: 18, borderRadius: 9, background: hex, marginTop: 4 }} />
           </div>
