@@ -21,6 +21,8 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
   const ordered = [...CLEWQUEST.hair.filter((h) => h.gender === gender), ...CLEWQUEST.hair.filter((h) => h.gender !== gender)];
 
   function pickGender(g) { setGender(g); setHair(defaultHair(g)); }
+  // A card of the other gender sets gender too (same state Shuffle sets), so preview + validation agree.
+  function pickHair(h) { setGender(h.gender); setHair(h.key); }
   function shuffle() {
     const h = CLEWQUEST.hair[Math.floor(Math.random() * CLEWQUEST.hair.length)];
     setGender(h.gender); setHair(h.key); setColour(CLEWQUEST.colours[Math.floor(Math.random() * CLEWQUEST.colours.length)].key);
@@ -69,7 +71,7 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 8, marginBottom: 18 }}>
           {ordered.map((h) => (
-            <button key={h.key} data-testid={`cq-hair-${h.key}`} onClick={() => setHair(h.key)} aria-pressed={hair === h.key}
+            <button key={h.key} data-testid={`cq-hair-${h.key}`} onClick={() => pickHair(h)} aria-pressed={hair === h.key}
               style={{ background: "#fff", border: hair === h.key ? `3px solid ${T.cta}` : `1.5px solid ${T.border}`, borderRadius: 12, padding: 3, cursor: "pointer", fontFamily: FONT }}>
               <Art k={`hair/thumb-${h.key}`} alt={h.name} style={{ width: "100%" }} /><div style={{ fontSize: 10, fontWeight: 700, color: T.ink, lineHeight: 1.15, minHeight: 24 }}>{h.name}</div>
             </button>
