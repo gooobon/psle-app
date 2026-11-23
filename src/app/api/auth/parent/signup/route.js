@@ -21,8 +21,23 @@ export async function POST(request) {
   const admin = adminClient();
   const id = data.user.id;
   const p = await admin.from("profiles").insert({ id, role: "parent", display_name: name, email }).select().single();
-  if (p.error) return jerr("profile failed", 500);
-  await admin.from("parent_settings").insert({ parent_id: id, alert_email: email, alert_channels: [{ type: "email", enabled: true, address: email }] }); // daily target defaults to 1 set/subject
+  // Undo a half-finished signup so the same email can be retried. Best effort; never throws.
+  const rollback = async () => {
+    await admin.from("parent_settings").delete().eq("parent_id", id).then(() => {}, () => {});
+    await admin.from("profiles").delete().eq("id", id).then(() => {}, () => {});
+    await admin.auth.admin.deleteUser(id).catch(() => {});
+  };
+  if (p.error) {
+    console.error("parent signup: profiles insert failed", p.error.code, p.error.message);
+    await rollback();
+    return jerr("profile failed", 500);
+  }
+  const s = await admin.from("parent_settings").insert({ parent_id: id, alert_email: email, alert_channels: [{ type: "email", enabled: true, address: email }] }); // daily target defaults to 1 set/subject
+  if (s.error) {
+    console.error("parent signup: parent_settings insert failed", s.error.code, s.error.message);
+    await rollback();
+    return jerr("profile failed", 500);
+  }
   // Owner decision: "Confirm email" is ON in Supabase Auth settings, so no session is returned until the link is clicked.
   if (!data.session) return jok({ needsConfirmation: true });
   return jok({ profile: publicProfile(p.data), children: [] });
