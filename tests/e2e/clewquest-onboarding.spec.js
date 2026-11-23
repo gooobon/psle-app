@@ -98,8 +98,18 @@ test("parent sign-up -> confirm -> add child with pictures -> child logs in -> b
   // 10-11. first login -> builder -> home
   await expect(page.getByTestId("cq-builder")).toBeVisible({ timeout: 30000 }); await shot(page, "ob-10-builder");
   expect(await page.getByTestId("cq-tab-eyes").count()).toBe(0); // Hair tab only
+  // Issue #100: tapping a hair card (other gender's card included) must update the live preview and allow saving.
+  const preview = page.getByTestId("cq-preview");
+  const before = await preview.evaluate((el) => (el.currentSrc || el.src || el.outerHTML));
+  await shot(page, "ob-10a-builder-before-hair");
+  await page.getByTestId("cq-hair-apollo-curls").click();
+  await expect(page.getByTestId("cq-hair-apollo-curls")).toHaveAttribute("aria-pressed", "true");
+  await expect.poll(() => preview.evaluate((el) => (el.currentSrc || el.src || el.outerHTML))).not.toBe(before);
+  await shot(page, "ob-10b-builder-after-hair");
   await page.getByTestId("cq-save").click();
+  await expect(page.getByTestId("cq-builder-error")).not.toContainText("Choose a hairstyle");
   await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 }); await shot(page, "ob-11-home");
+  for (const n of ["English", "Chinese", "Math", "Science", "The Clew"]) await expect(page.getByRole("button", { name: n, exact: true })).toBeVisible();
 });
 
 test("parent resets a child's sign-in; the child logs in with the new pictures", async ({ page }) => {

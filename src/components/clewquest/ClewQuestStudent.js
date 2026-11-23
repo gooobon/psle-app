@@ -30,10 +30,10 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, picture
         <LandingArt pills={false}>
           {ISLAND_PILLS.map((p) => <IslandPill key={p.label} {...p} testId={`cq-pill-${p.label.toLowerCase()}`} />)}
           {HOTSPOTS.filter((h) => subjects[h.key]).map((h) => (
-            <button key={h.key} data-testid={`cq-island-${h.key}`} aria-label={subjects[h.key].label + (subjects[h.key].status === "open" ? "" : ", coming soon")} onClick={() => onOpen(h.key)}
+            <button key={h.key} data-testid={`cq-island-${h.key}`} aria-label={h.key.charAt(0).toUpperCase() + h.key.slice(1)} aria-description={subjects[h.key].status === "open" ? undefined : "Coming soon"} onClick={() => onOpen(h.key)}
               style={{ position: "absolute", left: h.x + "%", top: h.y + "%", width: h.w + "%", height: h.h + "%", background: "transparent", border: "none", cursor: "pointer" }} />
           ))}
-          <button data-testid="cq-clew" aria-label="The Clew (home)" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer" }} />
+          <button data-testid="cq-clew" aria-label="The Clew" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer" }} />
           <LogoBadge style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" }} />
         </LandingArt>
       </div>
