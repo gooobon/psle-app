@@ -92,7 +92,7 @@ eq("nickname profanity filter", L.cleanNickname("shit head").ok, false);
 // 5. picture code
 const PEPPER = "test-pepper-0123456789-abcdef";
 eq("sequence normalises", P.normalizeSequence([3, 1, 4, 7]), "3-1-4-7");
-eq("sequence accepts keys", P.normalizeSequence(["owl", "lyre", "laurel", "ship"]), "0-1-2-3");
+eq("sequence accepts keys", P.normalizeSequence(["owl", "trident", "harp", "bolt"]), "0-1-2-3");
 eq("short sequence rejected", P.normalizeSequence([1, 2, 3]), null);
 eq("out-of-range rejected", P.normalizeSequence([1, 2, 3, 9]), null);
 eq("9 pictures", P.PICTURES.length, 9);
@@ -125,8 +125,9 @@ eq("flag defaults off", clewquestEnabled(), false);
   delete globalThis.window; globalThis.fetch = f; t("client hook sends nothing with the flag off", !called); }
 const apiDirs = ["src/app/api/clewquest", "src/app/api/auth/student/picture-login", "src/app/api/auth/student/picture-signup"];
 const routeFiles = []; (function walk(d) { for (const e of fs.readdirSync(path.join(root, d), { withFileTypes: true })) { const p = path.join(d, e.name); if (e.isDirectory()) walk(p); else if (e.name === "route.js") routeFiles.push(p); } })("src/app/api/clewquest");
-routeFiles.push("src/app/api/auth/student/picture-login/route.js", "src/app/api/auth/student/picture-signup/route.js");
-for (const f of routeFiles) {
+routeFiles.push("src/app/api/auth/student/picture-login/route.js");
+const REMOVED_ROUTES = new Set(["src/app/api/clewquest/link-code/route.js"]); // always-404 stubs (see tools/onboarding_selftest.mjs)
+for (const f of routeFiles.filter((x) => !REMOVED_ROUTES.has(x))) {
   const src = fs.readFileSync(path.join(root, f), "utf8");
   const fns = src.match(/export async function (GET|POST|PUT)\([^)]*\) \{\n([^\n]*)/g) || [];
   t(`${f}: every handler starts with the flag guard`, fns.length > 0 && fns.every((x) => /clewquestRoutesOn\(\)\) return notFound\(\)/.test(x)), fns);
@@ -312,12 +313,12 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
 // 12. parent picture-code reset UI
 {
   const ui = fs.readFileSync(path.join(root, "src/components/clewquest/ParentPictureReset.js"), "utf8");
-  t("reset UI has a confirm step, calls the existing reset API and shows an English success message", /picture-reset-confirm/.test(ui) && /\/api\/clewquest\/picture-reset/.test(ui) && /new picture code is saved/.test(ui));
+  t("reset UI has a confirm step, calls the existing reset API and shows an English success message", /reset-save/.test(ui) && /\/api\/clewquest\/picture-reset/.test(ui) && /can log in now with/.test(ui));
   const dash = fs.readFileSync(path.join(root, "src/components/ParentDashboard.js"), "utf8");
-  t("parent screen renders the reset only behind the flag and server auth", /SERVER_AUTH&&clewquestEnabled\(\)&&child\.serverId&&tab==="settings" && <ParentPictureReset/.test(dash));
-  const rr = fs.readFileSync(path.join(root, "src/app/api/clewquest/picture-reset/route.js"), "utf8");
-  t("reset route: parent only, linked via parent_child, picture-code accounts only", /role !== "parent"/.test(rr) && /from\("parent_child"\)/.test(rr) && /eq\("parent_id", me\.profile\.id\)\.eq\("child_id", childId\)/.test(rr) && /!usesPictureCode\(cur\.data\.user\)/.test(rr) && !/user_metadata/.test(rr.replace(/\/\/[^\n]*/g, "")));
-  t("parent reset clears the child's lockout", /loginGuard\.reset/.test(rr));
+  t("parent screen renders the reset only behind the flag and server auth", /child&&child\.serverId&&clewquestEnabled\(\)&&<ChildCard/.test(dash));
+  const rr = fs.readFileSync(path.join(root, "src/app/api/clewquest/picture-reset/route.js"), "utf8"), rs = fs.readFileSync(path.join(root, "src/lib/clewquest/resetSignin.js"), "utf8");
+  t("reset route: parent only, linked via parent_child, picture-code accounts only", /role !== "parent"/.test(rr) && /from\("parent_child"\)/.test(rs) && /eq\("parent_id", parentId\)\.eq\("child_id", childId\)/.test(rs) && /usesPictureCode\(cur\.data\.user\)/.test(rs) && !/user_metadata/.test(rr.replace(/\/\/[^\n]*/g, "")));
+  t("parent reset clears the child's lockout", /loginGuard\.reset/.test(rr) && /clearLockout/.test(rs));
 }
 
 // 13. review follow-ups (PR #71 review F3-F11 and batching)
@@ -329,15 +330,15 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   eq("F3: app_metadata.picture_code=true counts", usesPictureCode({ app_metadata: { picture_code: true }, user_metadata: {} }), true);
   eq("F3: app_metadata false wins over user_metadata true", usesPictureCode({ app_metadata: { picture_code: false }, user_metadata: { picture_code: true } }), false);
   eq("F3: no user / no metadata", [usesPictureCode(null), usesPictureCode({})], [false, false]);
-  { const su = fs.readFileSync(path.join(root, "src/app/api/auth/student/picture-signup/route.js"), "utf8");
+  { const su = fs.readFileSync(path.join(root, "src/app/api/parent/children/picture/route.js"), "utf8");
     const ch = fs.readFileSync(path.join(root, "src/app/api/clewquest/character/route.js"), "utf8").replace(/\/\/[^\n]*/g, "");
     const sv = fs.readFileSync(path.join(root, "src/lib/supabase/server.js"), "utf8");
-    t("F3: signup sets app_metadata at creation (no separate unchecked update)", /appMetadata: PICTURE_APP_METADATA/.test(su) && !/updateUserById/.test(su) && /app_metadata: appMetadata/.test(sv));
+    t("F3: child create sets app_metadata at creation (no separate unchecked update)", /appMetadata: PICTURE_APP_METADATA/.test(su) && !/updateUserById/.test(su) && /app_metadata: appMetadata/.test(fs.readFileSync(path.join(root, "src/lib/supabase/createStudent.js"), "utf8")));
     t("F3: character route reads the flag from app_metadata only", /usesPictureCode\(me\.user\)/.test(ch) && !/user_metadata/.test(ch));
     // F10
     t("F10: signup never returns a raw Supabase error", !/jerr\(made\.error/.test(su) && /"username taken"/.test(su) && /"could not create account"/.test(su)); }
-  { const rr = fs.readFileSync(path.join(root, "src/app/api/clewquest/picture-reset/route.js"), "utf8");
-    t("F3: parent reset writes app_metadata", /app_metadata: PICTURE_APP_METADATA/.test(rr)); }
+  { const rr = fs.readFileSync(path.join(root, "src/app/api/clewquest/picture-reset/route.js"), "utf8"), rs = fs.readFileSync(path.join(root, "src/lib/clewquest/resetSignin.js"), "utf8");
+    t("F3: parent reset writes app_metadata", /app_metadata: PICTURE_APP_METADATA/.test(rs)); }
 
   // F4: server-graded retry after the hint = 0.5; the client cannot fake it
   const { planCandidates, threadEntries } = await import("../src/lib/clewquest/awardPlan.js");
@@ -414,13 +415,19 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     t("F9: shell only mounts for a configured grade", /const cqOk = CQ_ON && typeof user\.serverId==="string" && questGrade\(user\.grade\)/.test(app));
     t("F9: the shell reads subjects for the student's grade, not the default grade", /questGrade\(user\.grade\)/.test(cq) && /subjectsFor\(grade\)/.test(cq) && !/grades\[CLEWQUEST\.defaultGrade\]/.test(cq)); }
 
-  // F11: widely supported glyphs, labels always shown, slots unchanged
-  { const cps = P.PICTURES.flatMap((p) => [...p.glyph].map((c) => c.codePointAt(0)));
-    t("F11: no olive U+1FAD2", !cps.includes(0x1FAD2));
-    t("F11: no glyph from Unicode 10+ blocks (>= U+1F990 or U+1FA00+)", cps.every((c) => c < 0x1F990 || c === 0xFE0F), cps.map((c) => c.toString(16)));
-    eq("F11: slot 6 keeps its index (codes unchanged)", [P.PICTURES[6].key, P.normalizeSequence([6, 6, 6, 6])], ["grapes", "6-6-6-6"]);
+  // F11: flat vector art (no emoji, no wine imagery), labels always shown, slots unchanged
+  { t("F11: no glyph field (inline SVG art only)", P.PICTURES.every((p) => !("glyph" in p)));
+    t("F11: no grapes", !P.PICTURES.some((p) => /grape|wine|amphora/i.test(p.key + p.label)));
+    eq("F11: labels in design order", P.PICTURES.map((p) => p.label), ["Owl", "Trident", "Harp", "Bolt", "Wing shoe", "Pegasus", "Laurel", "Helmet", "Clew"]);
+    eq("F11: slot 6 keeps its index (codes unchanged)", [P.PICTURES[6].key, P.normalizeSequence([6, 6, 6, 6])], ["laurel", "6-6-6-6"]);
+    t("F11: CODE_LENGTH drives the copy", P.codeCopy(P.CODE_LENGTH) === `Tap your ${P.CODE_LENGTH} pictures in order` && P.codeCopy(3) === "Tap your 3 pictures in order");
     const pa = fs.readFileSync(path.join(root, "src/components/clewquest/PictureAuth.js"), "utf8");
     t("F11: picture pad always renders the text label", /data-testid=\{`pic-label-\$\{i\}`\}[^>]*>\{p\.label\}/.test(pa)); }
+  { const T = await import("../src/lib/theme/tokens.js");
+    eq("tokens: marble bg", T.TOKENS.bg, "#F6F2EA"); eq("tokens: crimson cta", T.TOKENS.cta, "#C8372D"); eq("tokens: egyptian blue", T.TOKENS.primary, "#1F3F95");
+    eq("tokens: ink", T.TOKENS.ink, "#1B2340"); eq("tokens: gold", T.TOKENS.gold, "#D9A52E");
+    eq("tokens: disabled main button is ~50% opacity", T.mainBtn(true).opacity, 0.5);
+    t("tokens: no purple/slate/navy shell colours", !/7C3AED|4C1D95|F1F5F9|0B3B73|16A34A/i.test(JSON.stringify(T.TOKENS))); }
   delete process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED;
 }
 
@@ -492,11 +499,10 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
 
   // routes / wiring (source checks: these files import Next, so they cannot be loaded here)
   const issueR = rd("src/app/api/clewquest/link-code/route.js"), redeemR = rd("src/app/api/parent/children/link-code/route.js"), mkR = rd("src/app/api/parent/children/picture/route.js"), resetR = rd("src/app/api/clewquest/picture-reset/route.js");
-  t("routes: all behind the flag guard", [issueR, redeemR, mkR].every((x) => /clewquestRoutesOn\(\)\) return notFound\(\)/.test(x)));
-  t("routes: issue needs a picture-code student (app_metadata only)", /role !== "student"/.test(issueR) && /usesPictureCode\(me\.user\)/.test(issueR));
-  t("routes: redeem needs a parent session and only links picture-code children", /role !== "parent"/.test(redeemR) && /usesPictureCode/.test(redeemR) && /parent_child/.test(redeemR));
+  t("routes: create and reset behind the flag guard", [mkR, resetR].every((x) => /clewquestRoutesOn\(\)\) return notFound\(\)/.test(x)));
+  t("routes: link-code routes are removed (always 404)", [issueR, redeemR].every((x) => /jerr\("not found", 404\)/.test(x) && !/adminClient/.test(x)));
   t("routes: parent-created picture child is linked at creation", /parentId: me\.profile\.id/.test(mkR.replace(/\\/g, "")) || /parentId: me\.profile\.id/.test(mkR));
-  t("routes: parent reset clears the lockout and fails if it could not", /loginGuard\.reset/.test(resetR) && /cleared\.error/.test(resetR));
+  t("routes: parent reset clears the lockout and fails if it could not", /loginGuard\.reset/.test(resetR) && /cleared\.error/.test(rd("src/lib/clewquest/resetSignin.js")));
   const mig = rd("supabase/migrations/20261204000000_clewquest_link_codes.sql").replace(/--[^\n]*/g, "");
   t("migration: new file, hashed codes, service role only, re-runnable", /create table if not exists public\.clewquest_link_codes/.test(mig) && /code_hash/.test(mig) && /enable row level security/.test(mig) && /grant execute on function public\.clewquest_link_redeem\(uuid, text\) to service_role/.test(mig) && /create or replace function/.test(mig) && !/drop table|truncate/i.test(mig));
   t("migration: redeem is an atomic delete of an unexpired matching row", /delete from public\.clewquest_link_codes where child_id = p_child and code_hash = p_hash and expires_at > now\(\)/.test(mig));
@@ -508,16 +514,33 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   t("B2: logout closes the opt-in view", /setAuth\(null\); setCqOpen\(false\)/.test(app));
   t("B2: builder has Skip for now and Log out", /data-testid="cq-skip"/.test(cb) && /Skip for now/.test(cb) && /Log out/.test(cb) && /onSkip=\{view === "builder"/.test(cq) && /onLogout=\{onLogout\}/.test(cq));
   t("B2: skipping does not re-force the builder", /skipped \? \(next === "home"/.test(cq));
-  t("B2: server tells the client who uses a picture code (me / picture login / signup)", /usesPictureCode\(me\.user\)/.test(rd("src/app/api/auth/me/route.js")) && /publicProfile\(r\.profile, true\)/.test(rd("src/app/api/auth/student/picture-login/route.js")) && /publicProfile\(profile, true\)/.test(rd("src/app/api/auth/student/picture-signup/route.js")));
+  t("B2: server tells the client who uses a picture code (me / picture login / signup)", /usesPictureCode\(me\.user\)/.test(rd("src/app/api/auth/me/route.js")) && /publicProfile\(r\.profile, true\)/.test(rd("src/app/api/auth/student/picture-login/route.js")));
   { const { publicProfile } = await import("../src/lib/supabase/server.js").catch(() => ({}));
     if (publicProfile) eq("B2: password student profile has no pictureCode flag", [publicProfile({ id: "1", role: "student" }).pictureCode, publicProfile({ id: "1", role: "student" }, true).pictureCode], [undefined, true]); }
   // small fixes
-  t("nickname: builder shows a live counter and uses the shared max", /data-testid="cq-nick-count"/.test(cb) && /maxLength=\{CLEWQUEST\.nickname\.max\}/.test(cb) && CLEWQUEST.nickname.max === 24);
-  t("coming soon: label never wraps inside itself", /whiteSpace: "nowrap"/.test(cq) && /\(Coming soon\)/.test(cq));
+  t("builder: one screen, no nickname step, no green save, no gender colour buttons", !/cq-nickname|#16A34A|#DB2777|EFF6FF/.test(cb) && /This is my Clew/.test(cb) && /Make your Clew/.test(cb));
+  { const sh = fs.readFileSync(path.join(root, "src/components/clewquest/Shell.js"), "utf8");
+    t("pills: white, ink text, nowrap, no 'Island', no 'The Clew' label", /background: "#fff"/.test(sh) && /whiteSpace: "nowrap"/.test(sh) && !/label: "[^"]*(Island|The Clew)/.test(sh) && /Coming soon/.test(sh));
+    t("logged-in landing: no dark label boxes or text shadows, hotspots keep aria-label", !/textShadow|rgba\(15,23,42/.test(cq) && /aria-label="The Clew \(home\)"/.test(cq));
+    t("builder tabs come from config; only Hair enabled", CLEWQUEST.builder.tabs.filter((x) => x.enabled).map((x) => x.key).join() === "hair" && CLEWQUEST.builder.tabs.length === 5); }
   t("landing: no forced full-height navy band under the map", !/minHeight: "100vh", background: "#0B3B73"/.test(cq));
-  t("lock screen: tells the child to ask a parent to reset, and how to get a link code", /Ask a parent to reset your picture code/.test(pa) && /Link a parent/.test(pa) && /6 numbers/.test(pa));
-  t("link UI: no Korean, child home offers the link code", !/[\uAC00-\uD7AF]/.test(rd("src/components/clewquest/LinkCode.js") + rd("src/components/clewquest/ParentPictureChild.js")) && /data-testid="cq-linkcode/.test(rd("src/components/clewquest/LinkCode.js")));
+  t("lock screen: tells the child to ask a parent to reset", /Ask a parent to reset your picture code/.test(pa) && !/Link a parent/.test(pa));
 }
 
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);
+
+// Thread tint: only yarn pixels change (pure pixel logic, no network).
+{
+  const { tintPixels } = await import("../src/lib/clewquest/tint.js");
+  const px = (...a) => new Uint8ClampedArray(a);
+  const red = tintPixels(px(190, 50, 45, 255), "#2449A8", "red");
+  eq("red yarn becomes blue", red[2] > red[0], true);
+  const skin = tintPixels(px(250, 205, 170, 255), "#2449A8", "red");
+  eq("skin keeps its colour", [skin[0], skin[1], skin[2]], [250, 205, 170]);
+  const ball = tintPixels(px(10, 10, 10, 255), "#D9A52E", "dark");
+  eq("black ball becomes visible in colour", ball[0] > 100, true);
+  const eye = tintPixels(px(255, 255, 255, 255), "#D9A52E", "dark");
+  eq("eye white keeps its colour", [eye[0], eye[1], eye[2]], [255, 255, 255]);
+  eq("transparent pixels untouched", Array.from(tintPixels(px(10, 10, 10, 0), "#D9A52E", "dark")), [10, 10, 10, 0]);
+}

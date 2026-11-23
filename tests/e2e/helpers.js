@@ -208,23 +208,36 @@ async function drive(page, { done, max = 900, label = "exam" }) {
   throw new Error("Exam driver timed out during " + label + " " + JSON.stringify(tally));
 }
 
+// The logged-out first screen is the landing; open the login form from it (no-op if already on the form).
+async function openLogin(page) {
+  await page.waitForFunction(() => {
+    const t = document.body.innerText;
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Add child");
+  });
+  const btn = page.getByTestId("cq-landing-login");
+  if (await btn.count()) await btn.click();
+}
+
 async function loginStudent(page, id, password) {
   await page.goto("/");
-  await page.getByText("Welcome back").waitFor();
-  await page.locator("button").filter({ hasText: /^\s*Student\s*$/ }).click();
-  await page.getByPlaceholder("Your login ID").fill(id);
-  await page.getByPlaceholder("Your password").fill(password);
-  await page.getByRole("button", { name: /Log In/ }).click();
+  await openLogin(page);
+  await page.getByTestId("login-form").waitFor();
+  await page.getByTestId("login-role-student").click();
+  if (await page.getByTestId("use-password").count()) await page.getByTestId("use-password").click(); // picture pad is the default when ClewQuest is on
+  await page.getByTestId("login-id").fill(id);
+  await page.getByTestId("login-password").fill(password);
+  await page.getByTestId("login-submit").click();
   await page.getByText(/Hello,/).waitFor({ timeout: 20000 });
 }
 
 async function loginParent(page, email, password) {
   await page.goto("/");
-  await page.getByText("Welcome back").waitFor();
-  await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
-  await page.getByPlaceholder("Your email").fill(email);
-  await page.getByPlaceholder("Your password").fill(password);
-  await page.getByRole("button", { name: /Log In/ }).click();
+  await openLogin(page);
+  await page.getByTestId("login-form").waitFor();
+  await page.getByTestId("login-role-parent").click();
+  await page.getByTestId("login-id").fill(email);
+  await page.getByTestId("login-password").fill(password);
+  await page.getByTestId("login-submit").click();
   await page.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
 }
 
@@ -232,25 +245,27 @@ async function ensureParent(page, email, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Welcome back") || t.includes("Add child");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Add child");
   });
-  if (await page.getByText("Welcome back").count()) await loginParent(page, email, password);
+  await openLogin(page);
+  if (await page.getByTestId("login-form").count()) await loginParent(page, email, password);
 }
 
 async function ensureStudent(page, id, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Welcome back") || t.includes("Hello,");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,");
   });
-  if (await page.getByText("Welcome back").count()) await loginStudent(page, id, password);
+  await openLogin(page);
+  if (await page.getByTestId("login-form").count()) await loginStudent(page, id, password);
 }
 
 async function logout(page) {
   await page.getByRole("button", { name: "Logout" }).click();
-  await page.getByText("Welcome back").waitFor({ timeout: 20000 });
+  await page.getByText(/Log in|Untangle PSLE/).first().waitFor({ timeout: 20000 });
 }
 
 module.exports = {
-  SHOTS, shot, bodyText, dbGet, drive, nudge, loginStudent, loginParent, logout, ensureParent, ensureStudent, assertLocalOnly,
+  SHOTS, openLogin, shot, bodyText, dbGet, drive, nudge, loginStudent, loginParent, logout, ensureParent, ensureStudent, assertLocalOnly,
 };

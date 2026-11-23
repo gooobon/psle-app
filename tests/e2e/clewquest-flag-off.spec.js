@@ -31,15 +31,17 @@ test("flag off: ClewQuest routes 404 and the app has no ClewQuest UI", async ({ 
     expect(r.status(), path).toBe(404);
   }
   await page.goto("/");
-  await expect(page.getByText("Welcome back")).toBeVisible();
+  await expect(page.getByTestId("cq-prelogin")).toBeVisible();
+  await expect(page.getByTestId("cq-landing-signup")).toBeVisible();
+  await page.getByTestId("cq-landing-login").click();
+  await expect(page.getByTestId("login-form")).toBeVisible();
   expect(await page.getByTestId("cq-open-picture-signup").count()).toBe(0);
   expect(await page.getByTestId("cq-open-picture-login").count()).toBe(0);
   expect(await page.getByText(/sign in with pictures|create account with pictures/i).count()).toBe(0);
-  await expect(page.getByRole("button", { name: "Parent Sign Up" })).toBeVisible();
   await shot(page, "off-01-login");
-  await page.getByPlaceholder("Your login ID").fill("demo_student");
-  await page.getByPlaceholder("Your password").fill("demo123");
-  await page.getByRole("button", { name: /Log In/ }).click();
+  await page.getByTestId("login-id").fill("demo_student");
+  await page.getByTestId("login-password").fill("demo123");
+  await page.getByTestId("login-submit").click();
   await expect(page.getByText("Hello, Demo")).toBeVisible({ timeout: 20000 });
   expect(await page.getByTestId("cq-landing").count()).toBe(0);
   expect(await page.getByTestId("cq-builder").count()).toBe(0);

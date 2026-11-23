@@ -179,7 +179,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   // —— Thursday: two parents, one child, rules that start tomorrow ——
   await pp.goto("/");
-  await pp.getByText("Welcome back").waitFor();
+  await pp.getByTestId("login-form").waitFor();
   await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
   await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
   await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
@@ -188,10 +188,12 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await pp.getByRole("button", { name: "Create Parent Account" }).click();
   await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
   await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(CHILD.username);
-  await pp.getByPlaceholder("Display name").fill(CHILD.name);
+  await pp.getByTestId("ac-username").fill(CHILD.username);
+  await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
   await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
+  await pp.getByRole("button", { name: "Check", exact: true }).click();
+  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
   await expect(pp.getByText(/Created\./)).toBeVisible();
   let file = await snap(pp, "01-child-created");

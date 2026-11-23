@@ -48,6 +48,14 @@ export const CLEWQUEST = {
   calendar: { defaultSource: "sg_default", editableBy: ["student", "parent"] },
   economy: { enabled: false }, // cycles, trial, Daily Chest, shop: NOT Phase 1
   nickname: { min: 2, max: 24 },
+  // Builder tabs. Only tabs with `enabled: true` are usable; Eyes/Brows/Mouth/Skin wait for part art (enable them here when it exists).
+  builder: { tabs: [
+    { key: "hair", label: "Hair", enabled: true },
+    { key: "eyes", label: "Eyes", enabled: false },
+    { key: "brows", label: "Brows", enabled: false },
+    { key: "mouth", label: "Mouth", enabled: false },
+    { key: "skin", label: "Skin", enabled: false },
+  ] },
   lockout: { max: 5, windowMs: 15 * 60 * 1000, lockMs: 15 * 60 * 1000, ipMax: 100 }, // max = attempts per username (6th locks); ipMax = DISTINCT failing usernames per client IP in the same window
 };
 

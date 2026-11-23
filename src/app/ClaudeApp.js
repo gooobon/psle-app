@@ -66,7 +66,9 @@ import PaperExam from '@/components/PaperExam'; // mock exams from past papers (
 import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
 import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
 import { Art } from '@/components/clewquest/Art';
-import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
+import { PictureLogin } from '@/components/clewquest/PictureAuth';
+import { PreLoginLanding, LoginFrame, ForgotPassword, SetNewPassword, SignupParentStep1, SignupStep2 } from '@/components/clewquest/AuthScreens';
+import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, linkBtn } from '@/components/clewquest/Shell';
 import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
@@ -607,39 +609,27 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
 
 const CQ_ON = clewquestEnabled() && SERVER_AUTH;
-function AuthScreen({onLogin, onSignup}){
-  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
+const SHOW_DEMO = process.env.NEXT_PUBLIC_SHOW_DEMO === "true"; // the "Try Demo Account" box is gone; seed the demo users only when this is on
+const GOOGLE_LOGIN = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED === "true"; // OAuth provider not configured yet: default off
+
+// Remembers the email a parent just signed up with, so the confirm-link landing can prefill the login if auto-login is not possible.
+const PENDING_PARENT_EMAIL_KEY = "clewquest_pending_parent_email";
+
+function AuthScreen({onLogin, onSignup, confirmInfo, resetCode, onResetDone, onParentSignedUp}){
+  const [mode, setMode] = useState(confirmInfo?"login":"landing");   // landing | login | signup_parent | signup_legacy_student
   function pictureDone(profile){
     const user = mirrorServerUser(profile);
     importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); // same fire-and-forget copies as the password login
     onLogin("student", user);
   }
+  if(resetCode) return <SetNewPassword code={resetCode} onDone={()=>{ onResetDone(); setMode("login"); }}/>;
+  if(mode==="landing") return <PreLoginLanding onLogin={()=>setMode("login")} onSignup={()=>setMode("signup_parent")}/>;
+  if(mode==="signup_parent" && SERVER_AUTH) return <SignupParentStep1 onLoginInstead={()=>setMode("login")} onSignedIn={(p)=>onParentSignedUp(p)}/>;
   return(
-    <Wrap>
-      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0B3B73"}}> <div data-testid="cq-auth-header" style={{background:"linear-gradient(180deg,#0B3B73 0%,#1D5FA8 100%)",padding:"36px 20px 36px",textAlign:"center",flexShrink:0}}>
-          <div style={{display:"flex",justifyContent:"center",marginBottom:8}}>
-            <Art k="brand/logo-b1" alt="ClewQuest" style={{width:"min(180px, 60vw)"}}/>
-          </div>
-          <div style={{color:"#fff",fontSize:"clamp(24px, 8vw, 30px)",fontWeight:900,letterSpacing:1,overflowWrap:"anywhere"}}>ClewQuest</div>
-          <div style={{color:"rgba(255,255,255,0.75)",fontSize:"calc(var(--fs) * 0.929)",marginTop:6}}>PSLE Practice . English . Chinese</div>
-          <div style={{display:"flex",gap:8,justifyContent:"center",marginTop:16,flexWrap:"wrap"}}>
-            {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.14)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.85)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
-          </div>
-        </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
-          {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
-          {mode==="login" && CQ_ON && (
-            <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
-              <button data-testid="cq-open-picture-login" onClick={()=>setMode("picture_login")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>Student: sign in with pictures</button>
-              <button data-testid="cq-open-picture-signup" onClick={()=>setMode("picture_signup")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>New student: create account with pictures</button>
-            </div>
-          )}
-          {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("login")}/>}
-          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("login")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>)}
-        </div>
-      </div>
-    </Wrap>
+    <LoginFrame onBack={()=>setMode("landing")}>
+      {mode==="login" && <LoginForm onLogin={onLogin} onPictureDone={pictureDone} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
+      {mode==="signup_parent"  && <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>}
+    </LoginFrame>
   );
 }
 
@@ -954,7 +944,7 @@ function LegacyParentEmailPrompt({local, onBack}){
   }
   if(done) return(<div>
     <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:8}}>Check your email 📧</div>
-    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in, use "Link existing child" on the dashboard to connect your child's account.</div>
+    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in you add your child and pick their pictures.</div>
     <BigBtn color="#7C3AED" onClick={onBack}>Back to login</BigBtn></div>);
   return(<div>
     <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:6}}>Add your email</div>
@@ -967,24 +957,22 @@ function LegacyParentEmailPrompt({local, onBack}){
   </div>);
 }
 
-function LoginForm({onLogin, onGoSignup}){
-  const [role, setRole] = useState("student");
-  const [id,   setId]   = useState("");
+function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo}){
+  const [role, setRole] = useState(confirmInfo ? "parent" : "student");
+  const [id,   setId]   = useState(confirmInfo?.email || "");
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
   const [legacyParent, setLegacyParent] = useState(null);
+  const [usePw, setUsePw] = useState(!CQ_ON); // student tab: pictures when ClewQuest is on, else (or on request) a password
+  const [forgot, setForgot] = useState(false);
 
-  function fillDemo(){
-    if(role==="student"){ setId("demo_student"); setPw("demo123"); }
-    else { setId("demo_parent"); setPw("demo456"); }
-  }
-
-  if(!STORE.users["demo_student"]){
+  if(SHOW_DEMO && !STORE.users["demo_student"]){
     STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"",color:"#3B82F6"};
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
+  if(forgot) return <ForgotPassword initialEmail={id.includes("@")?id:""} onBack={()=>setForgot(false)}/>;
   if(legacyParent) return <LegacyParentEmailPrompt local={legacyParent} onBack={()=>setLegacyParent(null)}/>;
 
   async function handleLogin(){
@@ -999,146 +987,51 @@ function LoginForm({onLogin, onGoSignup}){
       const r = await serverLogin(role, id.trim(), pw);
       if(r && r.needsConfirmation){ setErr("Please confirm your email first: open the link we sent you, then log in."); return; }
       if(r) { onLogin(role, r); return; }
-      setErr(role==="parent" ? "Wrong email or password." : "Wrong ID or password. Please check and try again.");
+      setErr(role==="parent" ? "Wrong email or password." : id.includes("@") ? "Parents: please use the Parent tab" : "Wrong ID or password. Please check and try again.");
       return;
     }
     const user = allUsers().find(u=>u.id===id.trim()&&u.password===pw&&u.role===role);
     if(user){ onLogin(role, user); return; }
-    setErr("Wrong ID or password. Please check and try again.");
+    setErr(role==="student" && id.includes("@") ? "Parents: please use the Parent tab" : "Wrong ID or password. Please check and try again.");
   }
 
+  const parentTab = role==="parent";
+  const canPw = !!id.trim() && !!pw;
   return(
-    <div>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:6}}>Welcome back </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Log in to continue your practice</div> <div style={{display:"flex",background:"#E2E8F0",borderRadius:14,padding:4,marginBottom:20}}>
-        {["student","parent"].map(r=>(
-          <button key={r} onClick={()=>{setRole(r);setErr("");}} style={{flex:1,background:role===r?"#fff":"none",border:"none",borderRadius:11,padding:"10px 0",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,cursor:"pointer",color:role===r?"#0F172A":C.muted,boxShadow:role===r?"0 2px 8px rgba(0,0,0,0.1)":"none",transition:"all 0.2s"}}>
-            {r==="student"?" Student":" Parent"}
-          </button>
-        ))}
-      </div> <div onClick={fillDemo} style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"10px 14px",marginBottom:18,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <div>
-          <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account (demo only)</div>
-          <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#3B82F6"}}>{role==="student"?"ID: demo_student / PW: demo123":"ID: demo_parent / PW: demo456"}</div>
+    <div data-testid="login-form">
+      <h1 style={{margin:"0 0 14px",fontWeight:800,fontSize:26,color:T.ink,fontFamily:FONT}}>Log in</h1>
+      {confirmInfo&&<div data-testid="email-confirmed-note" style={{background:"#EEF3E2",borderRadius:10,padding:"9px 13px",marginBottom:14,fontSize:14,color:T.successText,fontWeight:700}}>Email confirmed. Please log in.</div>}
+      <div style={{marginBottom:18}}><Segmented testId="login-role" value={role} onChange={r=>{setRole(r);setErr("");}} options={[["student","Student"],["parent","Parent"]]}/></div>
+      {!parentTab && CQ_ON && !usePw && <PictureLogin onDone={onPictureDone} onUsePassword={()=>setUsePw(true)}/>}
+      {(parentTab || usePw || !CQ_ON) && (<>
+        <Field id="lg-id" label={parentTab?"Email":"Username"}>
+          <input id="lg-id" data-testid="login-id" style={inputStyle} value={id} onChange={e=>setId(e.target.value)} placeholder={parentTab?"you@example.com":"Your username"} autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
+        </Field>
+        <Field id="lg-pw" label="Password">
+          <div style={{position:"relative"}}>
+            <input id="lg-pw" data-testid="login-password" style={{...inputStyle,paddingRight:64}} type={showPw?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)} placeholder="Your password" onKeyDown={e=>{ if(e.key==="Enter") handleLogin(); }}/>
+            <button type="button" onClick={()=>setShowPw(p=>!p)} style={{...linkBtn,position:"absolute",right:12,top:14,color:T.primary,fontSize:13}}>{showPw?"Hide":"Show"}</button>
+          </div>
+        </Field>
+        {parentTab && SERVER_AUTH && <div style={{textAlign:"right",marginTop:-6,marginBottom:12}}><button type="button" data-testid="forgot-link" onClick={()=>setForgot(true)} style={{...linkBtn,color:T.primary,fontSize:14}}>Forgot password?</button></div>}
+        {err&&<ErrorText testId="login-error">{err}</ErrorText>}
+        <button data-testid="login-submit" disabled={!canPw} onClick={handleLogin} style={mainBtn(!canPw)}>Log in</button>
+        {parentTab && GOOGLE_LOGIN && (<>
+          <div style={{textAlign:"center",color:T.muted,margin:"12px 0"}}>or</div>
+          <button data-testid="google-login" type="button" onClick={()=>setErr("Google login is not set up yet.")} style={secondaryBtn}>Continue with Google</button>
+        </>)}
+        {!parentTab && CQ_ON && <div style={{textAlign:"center",marginTop:14}}><button type="button" onClick={()=>{setUsePw(false);setErr("");}} style={{...linkBtn,color:T.muted,fontSize:13,fontWeight:500,textDecoration:"underline"}}>Use my pictures</button></div>}
+      </>)}
+      {parentTab ? (
+        <div style={{marginTop:22,textAlign:"center",fontSize:14,color:T.ink}}>
+          New here? <button type="button" data-testid="login-create-family" onClick={()=>onGoSignup("signup_parent")} style={{...linkBtn,color:T.cta,fontSize:14}}>Create a family account</button>
+          <div style={{color:T.muted,marginTop:8,fontSize:13}}>Children log in on the Student tab with their pictures.</div>
         </div>
-        <span style={{color:"#3B82F6",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700}}>Fill </span>
-      </div>
-
-      <InputField label={SERVER_AUTH&&role==="parent"?"Email":"ID"} value={id} onChange={setId} placeholder={SERVER_AUTH&&role==="parent"?"Your email":"Your login ID"}/>
-      <div style={{position:"relative",marginBottom:16}}>
-        <InputField label="Password" value={pw} onChange={setPw} type={showPw?"text":"password"} placeholder="Your password" onEnter={handleLogin}/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
-      </div>
-
-      {err&&<ErrorBox msg={err}/>}
-
-      <BigBtn color={C.navy} onClick={handleLogin}>Log In </BigBtn>
-
-      <div style={{marginTop:20,textAlign:"center"}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:12}}>Don't have an account?</div>
-        <div style={{display:"flex",gap:10}}>
-          {!SERVER_AUTH&&<button onClick={()=>onGoSignup("signup_student")} style={{flex:1,background:"none",border:`2px solid ${C.navy}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:C.navy}}>
-             Student Sign Up
-          </button>}
-          <button onClick={()=>onGoSignup("signup_parent")} style={{flex:1,background:"none",border:`2px solid #7C3AED`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:"#7C3AED"}}>
-             Parent Sign Up
-          </button>
-        </div>
-      </div>
+      ) : null}
     </div>
   );
 }
 
-function SignupStudentForm({onSignup, onBack}){
-  const [form, setForm] = useState({name:"",grade:"P3",id:"",password:"",confirm:"",school:"",schoolCustom:""});
-  const [showPw, setShowPw] = useState(false);
-  const [err, setErr] = useState("");
-  const [gender, setGender] = useState(null); // null | "boy" | "girl"
-
-  function f(k,v){ setForm(p=>({...p,[k]:v})); }
-
-  function selectGender(g){
-    setGender(g);
-  }
-
-  function handleSubmit(){
-    setErr("");
-    if(!gender)           return setErr("Please choose Boy or Girl.");
-    if(!form.name.trim()) return setErr("Please enter your name.");
-    const schoolFinal = form.school==="other" ? form.schoolCustom.trim() : form.school;
-    if(!form.id.trim())   return setErr("Please choose a Student ID.");
-    if(form.id.includes(" ")) return setErr("ID cannot contain spaces.");
-    if(allUsers().find(u=>u.id===form.id)) return setErr("This ID is already taken. Choose another.");
-    if(form.password.length<6) return setErr("Password must be at least 6 characters.");
-    if(form.password!==form.confirm) return setErr("Passwords do not match.");
-    const user = { id:form.id, password:form.password, name:form.name.trim(), grade:form.grade, role:"student", gender, school:schoolFinal };
-    onSignup("student", user);
-  }
-
-  return(
-    <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Create Student Account </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Set up your practice profile</div> <div style={{marginBottom:20}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>Step 1 . I am a...</div>
-        <div style={{display:"flex",gap:12}}>
-          <button onClick={()=>selectGender("boy")} style={{flex:1,background:gender==="boy"?"linear-gradient(135deg,#3B82F6,#2563EB)":"#F1F5F9",border:gender==="boy"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="boy"?"0 6px 18px rgba(59,130,246,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}></div>
-            <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,color:gender==="boy"?"#fff":"#0F172A"}}>Boy</div>
-            
-          </button>
-          <button onClick={()=>selectGender("girl")} style={{flex:1,background:gender==="girl"?"linear-gradient(135deg,#EC4899,#A855F7)":"#F1F5F9",border:gender==="girl"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="girl"?"0 6px 18px rgba(236,72,153,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}></div>
-            <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,color:gender==="girl"?"#fff":"#0F172A"}}>Girl</div>
-            
-          </button>
-        </div>
-      </div>       <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
-           Step 3 . Your School
-        </div>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,marginBottom:10,lineHeight:1.5}}>
-          We use your school's past papers to tailor questions to your exam style!
-        </div> <SchoolDropdown value={form.school} onChange={v=>f("school",v)}/>
-
-        {form.school==="Other / Not Listed"&&(
-          <div style={{marginTop:10}}>
-            <InputField label="Type your school name" value={form.schoolCustom} onChange={v=>f("schoolCustom",v)} placeholder="e.g. Rosyth School"/>
-          </div>
-        )}
-        {form.school&&form.school!=="Other / Not Listed"&&<SchoolFeedbackBox school={form.school}/>}
-        {form.school==="Other / Not Listed"&&form.schoolCustom&&(
-          <div style={{marginTop:8,background:"#F0FDF4",borderRadius:10,padding:"9px 13px",fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:600,lineHeight:1.6}}>
-             Got it! We'll use similar school papers as reference for your practice questions.
-          </div>
-        )}
-      </div>
-
-      <div style={{marginBottom:16}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>Grade</div>
-        <div style={{display:"flex",gap:8}}>
-          {GRADES.map(g=>(
-            <button key={g} onClick={()=>f("grade",g)} style={{flex:1,background:form.grade===g?C.navy:"#F1F5F9",color:form.grade===g?"#fff":C.muted,border:"none",borderRadius:10,padding:"10px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,cursor:"pointer"}}>
-              {g}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <InputField label="Student ID (for login)" value={form.id} onChange={v=>f("id",v.toLowerCase().replace(/\s/g,"_"))} placeholder="e.g. mei_lin_2026"/>
-      <div style={{position:"relative",marginBottom:4}}>
-        <InputField label="Password (min 6 chars)" value={form.password} onChange={v=>f("password",v)} type={showPw?"text":"password"} placeholder="Create a password"/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
-      </div>
-      <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={handleSubmit}/>
-
-      {err&&<ErrorBox msg={err}/>}
-      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account </BigBtn>
-    </div>
-  );
-}
-
-// Server mode: parent signs up with a real email (children are then created from the dashboard).
 function SignupParentServerForm({onLogin, onBack}){
   const [form, setForm] = useState({name:"",email:"",password:"",confirm:""});
   const [err, setErr] = useState("");
@@ -1155,7 +1048,7 @@ function SignupParentServerForm({onLogin, onBack}){
     const r = await serverPost("/api/auth/parent/signup",{name:form.name.trim(),email:form.email.trim(),password:form.password});
     setBusy(false);
     if(!r.ok) return setErr(r.error||"Sign-up failed.");
-    if(r.needsConfirmation) return setInfo("Check your email to confirm your address, then log in.");
+    if(r.needsConfirmation){ try{ localStorage.setItem(PENDING_PARENT_EMAIL_KEY, form.email.trim().toLowerCase()); }catch{} return setInfo("Check your email to confirm your address, then log in."); }
     onLogin("parent", mirrorServerUser(r.profile,{childIds:[]}));
   }
   return(
@@ -2362,12 +2255,41 @@ function App(){
   // the login screen even though the cookie is still valid. Flag off: this call is
   // skipped and the app stays local-only. Admin restore is unchanged.
   const [sessionChecked, setSessionChecked] = useState(!SERVER_AUTH);
+  const [resetCode, setResetCode] = useState("");   // password-reset link: /?reset=1&code=...
+  const [onboard, setOnboard] = useState(false);     // new parent with no children: go straight to "Add your child"
+  const [confirmInfo, setConfirmInfo] = useState(null); // {email}: confirm link could not auto-login -> Parent login with a note
   useEffect(()=>{
     let alive = true;
     const jobs = [];
+    // Supabase confirm link lands on /?code=...: exchange it for a session so the parent opens straight into the dashboard.
+    let confirmCode = ""; let confirmHash = ""; let confirmType = "";
+    if(SERVER_AUTH){
+      try{
+        const u = new URL(window.location.href);
+        confirmCode = u.searchParams.get("code") || "";
+        confirmHash = u.searchParams.get("token_hash") || ""; confirmType = u.searchParams.get("type") || "";
+        if(confirmHash){ u.searchParams.delete("token_hash"); u.searchParams.delete("type"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
+        if(u.searchParams.get("reset")==="1" && confirmCode){ const rc=confirmCode; confirmCode=""; u.searchParams.delete("reset"); u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); setResetCode(rc); }
+        if(confirmCode){ u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
+      }catch{}
+    }
+    let pending = Promise.resolve();
+    if(confirmCode || confirmHash){
+      pending = serverPost("/api/auth/parent/confirm",confirmHash?{tokenHash:confirmHash,type:confirmType}:{code:confirmCode}).then(r=>{
+        let email = ""; try{ email = localStorage.getItem(PENDING_PARENT_EMAIL_KEY) || ""; }catch{}
+        if(!alive) return;
+        if(r && r.ok && r.profile){
+          try{ localStorage.removeItem(PENDING_PARENT_EMAIL_KEY); }catch{}
+          const kids = (r.children||[]).map(c=>mirrorServerUser(c));
+          const user = mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
+          setAuth(a=>a||{role:"parent",user});
+          if(!kids.length) setOnboard(true);
+        } else setConfirmInfo({email});
+      });
+    }
     jobs.push(adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); }));
     if(SERVER_AUTH){
-      jobs.push(serverGet("/api/auth/me").then(r=>{
+      jobs.push(pending.then(()=>serverGet("/api/auth/me")).then(r=>{
         if(!alive || !r || !r.ok || !r.profile) return;
         const kids = (r.children||[]).map(c=>mirrorServerUser(c));
         const user = mirrorServerUser(r.profile, r.profile.role==="parent" ? {childIds:kids.map(k=>k.id)} : undefined);
@@ -2385,7 +2307,9 @@ function App(){
     setAuth({role, user:userData});
   }
   function handleLogin(role, user){ 
-    setAuth({role, user}); 
+    setAuth({role, user});
+    if(role==="parent" && confirmInfo && !(user.childIds||[]).length) setOnboard(true); // confirm link could not auto-login: after the Parent login go straight to step 2
+
     if(!window._GENIUS_STORE) window._GENIUS_STORE = {users:{},progress:{}};
     window._GENIUS_STORE._currentUser = user.id;
   }
@@ -2396,7 +2320,11 @@ function App(){
   }
 
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
-  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup}/>;
+  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo} resetCode={resetCode} onResetDone={()=>setResetCode("")}
+    onParentSignedUp={(p)=>{ handleLogin("parent", mirrorServerUser(p,{childIds:[]})); setOnboard(true); }}/>;
+  if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2
+    onCreated={(c)=>{ const k=mirrorServerUser(c); if(STORE.users[auth.user.id]){ STORE.users[auth.user.id].childIds=[...new Set([...(STORE.users[auth.user.id].childIds||[]), k.id])]; persistUsers(); } }}
+    onDone={()=>{ const ids=(STORE.users[auth.user.id]&&STORE.users[auth.user.id].childIds)||[]; setAuth(a=>({...a,user:{...a.user,childIds:ids}})); setOnboard(false); }}/>;
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;

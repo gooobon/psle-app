@@ -51,7 +51,7 @@ test("parent and student journey @main", async ({ browser }) => {
   const pp = await parent.newPage();
 
   await pp.goto("/");
-  await pp.getByText("Welcome back").waitFor();
+  await pp.getByTestId("login-form").waitFor();
   await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
   await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
   await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
@@ -62,10 +62,12 @@ test("parent and student journey @main", async ({ browser }) => {
   await shot(pp, "01-parent-signed-up");
 
   await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(CHILD.username);
-  await pp.getByPlaceholder("Display name").fill(CHILD.name);
+  await pp.getByTestId("ac-username").fill(CHILD.username);
+  await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
   await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
+  await pp.getByRole("button", { name: "Check", exact: true }).click();
+  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
   await expect(pp.getByText(/Created\./)).toBeVisible();
   await expect(pp.getByText(CHILD.name).first()).toBeVisible();
@@ -93,11 +95,11 @@ test("parent and student journey @main", async ({ browser }) => {
   await shot(pp, "04-invite-received");
   await pp.getByRole("button", { name: "Accept" }).click();
   await Promise.race([
-    pp.getByText("Welcome back").waitFor({ timeout: 20000 }),
+    pp.getByTestId("login-form").waitFor({ timeout: 20000 }),
     pp.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 }),
   ]);
   let relogged = false;
-  if (await pp.getByText("Welcome back").count()) {
+  if (await pp.getByTestId("login-form").count()) {
     relogged = true;
     await loginParent(pp, PARENT_B.email, PARENT_B.password);
   }
@@ -231,9 +233,9 @@ test("parent and student journey @main", async ({ browser }) => {
     // path when the cookie is not restored. Either way, open the notebook next.
     await sp.waitForFunction(() => {
       const t = document.body.innerText;
-      return t.includes("Welcome back") || t.includes("Your patterns") || t.includes("Hello,");
+      return t.includes("Log in") || t.includes("Your patterns") || t.includes("Hello,");
     });
-    if (await sp.getByText("Welcome back").count()) await loginStudent(sp, CHILD.username, CHILD.password);
+    if (await sp.getByTestId("login-form").count()) await loginStudent(sp, CHILD.username, CHILD.password);
     if (!(await sp.getByText("Your patterns", { exact: true }).count())) {
       await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
     }
@@ -444,15 +446,15 @@ test("flags off stays local @off", async ({ browser }) => {
     localStorage.setItem("genius_users_v2", JSON.stringify({ e2e_keep: { id: "e2e_keep", password: "secret", name: "Keep Me", role: "student", grade: "P3" } }));
   });
   await page.goto("/");
-  await page.getByText("Welcome back").waitFor();
+  await page.getByTestId("login-form").waitFor();
   await expect(page.getByRole("button", { name: /Student Sign Up/ })).toBeVisible();
-  await expect(page.getByPlaceholder("Your login ID")).toBeVisible();
-  await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
-  await expect(page.getByPlaceholder("Your login ID")).toBeVisible();
+  await expect(page.getByTestId("login-id")).toBeVisible();
+  await page.getByTestId("login-role-parent").click();
+  await expect(page.getByTestId("login-id")).toBeVisible();
   await shot(page, "23-flags-off-login");
-  await page.locator("button").filter({ hasText: /^\s*Student\s*$/ }).click();
+  await page.getByTestId("login-role-student").click();
   await page.getByText("Fill").click();
-  await page.getByRole("button", { name: /Log In/ }).click();
+  await page.getByTestId("login-submit").click();
   await page.getByText(/Hello,/).waitFor();
   await expect(page.getByText(/1 set left today/).first()).toBeVisible();
   await expect(page.getByText("My Stickers")).toHaveCount(0);

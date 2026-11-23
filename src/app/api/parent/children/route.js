@@ -1,28 +1,10 @@
 // Parent creates a child account (service role, after verifying the caller is a logged-in parent).
-import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
-import { normUsername, USERNAME_RE, RESERVED_USERNAMES } from "@/lib/supabase/config";
+import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
-export async function POST(request) {
-  if (!serverAuthEnabled()) return jerr("server auth disabled", 404);
-  const me = await currentUser();
-  if (!me || me.profile.role !== "parent") return jerr("parent login required", 401);
-  const b = await readJson(request);
-  const username = normUsername(b.username);
-  const password = String(b.password || "");
-  const name = String(b.name || "").trim();
-  const grade = String(b.grade || "").trim();
-  const school = String(b.school || "").trim();
-  if (!USERNAME_RE.test(username) || RESERVED_USERNAMES.includes(username)) return jerr("username must be 3-30 chars: a-z, 0-9, _", 400);
-  if (password.length < 6) return jerr("password must be at least 6 characters", 400);
-  if (!name || name.length > 80) return jerr("name required", 400);
-  if (!["P3", "P4", "P5", "P6"].includes(grade)) return jerr("grade must be P3-P6", 400);
-
-  const made = await createStudent(adminClient(), { username, password, name, grade, school: school.slice(0, 120), parentId: me.profile.id });
-  if (made.error) return jerr(made.error, made.status);
-  return jok({ child: { id: made.id, role: "student", username, name, grade, school } });
-}
+// POST removed: new children are created with a picture code at /api/parent/children/picture. Always 404.
+export async function POST() { return jerr("not found", 404); }
 
 export async function GET() {
   if (!serverAuthEnabled()) return jerr("server auth disabled", 404);
