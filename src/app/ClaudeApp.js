@@ -974,6 +974,8 @@ function LoginForm({onLogin, onGoSignup}){
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
   const [legacyParent, setLegacyParent] = useState(null);
+  // The emailed link (?link=1&u=...) lands on the Parent tab; the parent dashboard then opens the link form.
+  useEffect(()=>{ try{ if(new URLSearchParams(window.location.search).get("link")==="1") setRole("parent"); }catch(e){} },[]);
 
   function fillDemo(){
     if(role==="student"){ setId("demo_student"); setPw("demo123"); }

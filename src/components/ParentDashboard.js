@@ -800,6 +800,16 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
   const [subject, setSubject] = useState("English");
   const [tab,     setTab]     = useState("overview");
   const [parentToast, setParentToast] = useState(null);
+  // "Link my child" card: open when no child is linked yet, or when the emailed link (?link=1&u=<login ID>) brought the parent here.
+  const [linkParam, setLinkParam] = useState({on:false,u:""});
+  const [linkNotice, setLinkNotice] = useState("");
+  useEffect(()=>{ try{ const q=new URLSearchParams(window.location.search); if(q.get("link")==="1") setLinkParam({on:true,u:(q.get("u")||"").slice(0,30)}); }catch(e){} },[]);
+  function handleChildLinked(c){
+    onChildCreated&&onChildCreated(c);
+    setLinkNotice(`Linked ${c.name}. ${c.name} is now in your dashboard.`);
+    setLinkParam({on:false,u:""});
+    try{ const url=new URL(window.location.href); url.searchParams.delete("link"); url.searchParams.delete("u"); window.history.replaceState(null,"",url.pathname+(url.search||"")+url.hash); }catch(e){}
+  }
 
   // Auto-select a child: the first when none is chosen yet, and the newest-linked one when a child is added.
   const prevCount = React.useRef(linkedStudents.length);
@@ -840,7 +850,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 12px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>
         </div> {linkedStudents.length===0?(
           <div style={{background:"rgba(255,255,255,0.1)",borderRadius:12,padding:"10px 14px",marginBottom:12}}>
-            <div style={{color:"rgba(255,255,255,0.7)",fontSize:12}}>No students linked. Ask your child to share their Student ID.</div>
+            <div style={{color:"rgba(255,255,255,0.8)",fontSize:12}}>No children linked yet. Use the "Link my child" card below.</div>
           </div>
         ):(
           <div style={{display:"flex",gap:8,marginBottom:12,overflowX:"auto",paddingBottom:2}}>
@@ -888,15 +898,17 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
       </div>
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
+        {linkNotice&&<div data-testid="link-success" role="status" style={{background:"#D1FAE5",border:"1px solid #10B981",borderRadius:12,padding:"10px 14px",marginBottom:14,fontSize:13,fontWeight:800,color:"#065F46"}}>✅ {linkNotice}</div>}
+        {SERVER_AUTH&&onChildCreated&&clewquestEnabled()&&(linkedStudents.length===0||linkParam.on)&&<ParentPictureChild card onChildLinked={handleChildLinked} prefillUser={linkParam.u}/>}
         {SERVER_AUTH&&onChildCreated&&<TodayCard linkedStudents={linkedStudents}/>}
-        {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
-        {SERVER_AUTH&&onChildCreated&&<GuardianTools linkedStudents={linkedStudents} onChildLinked={onChildCreated}/>}
+        {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={handleChildLinked}/>}
+        {SERVER_AUTH&&onChildCreated&&<GuardianTools linkedStudents={linkedStudents} onChildLinked={handleChildLinked}/>}
         {SERVER_AUTH&&onChildCreated&&<AlertSettings/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>
             <div style={{fontWeight:700,fontSize:16,marginBottom:8}}>No children linked yet</div>
-            <div style={{fontSize:13,lineHeight:1.7}}>Go to Settings → Manage Children to link your child's Student ID. Ask your child to check their Profile for their ID.</div>
+            <div style={{fontSize:13,lineHeight:1.7}}>Use the "Link my child" card at the top of this page.</div>
           </div>
         )}
         {parentToast&&<ComingSoonToast message={parentToast} onDone={()=>setParentToast(null)}/>}

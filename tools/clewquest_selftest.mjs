@@ -501,6 +501,40 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   t("migration: new file, hashed codes, service role only, re-runnable", /create table if not exists public\.clewquest_link_codes/.test(mig) && /code_hash/.test(mig) && /enable row level security/.test(mig) && /grant execute on function public\.clewquest_link_redeem\(uuid, text\) to service_role/.test(mig) && /create or replace function/.test(mig) && !/drop table|truncate/i.test(mig));
   t("migration: redeem is an atomic delete of an unexpired matching row", /delete from public\.clewquest_link_codes where child_id = p_child and code_hash = p_hash and expires_at > now\(\)/.test(mig));
 
+  // issue #95: email the link code to a parent (mocks only: no network, no Supabase)
+  { const LE = await import("../src/lib/clewquest/linkEmail.mjs");
+    const mkDb = () => { const db = mkLinkDb(); db.from = (tbl) => ({ upsert: async (row) => { db.codes.set(row.child_id, { code_hash: row.code_hash, expires: db.now.t + LC.LINK.ttlSecs * 1000 }); return { error: null }; },
+      select: () => ({ eq: (_c, id) => ({ maybeSingle: async () => { const c = db.codes.get(id); return { data: c ? { code_hash: c.code_hash, expires_at: new Date(c.expires).toISOString() } : null, error: null }; } }) }) }); return db; };
+    const ON = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "from@example.test", ALERT_ALLOW_ALL_PARENTS: "true", APP_BASE_URL: "https://app.example.test/" };
+    const fx = () => { const calls = []; return { calls, fetchImpl: async (u, o) => { calls.push({ u, body: JSON.parse(o.body) }); return { ok: true, status: 200 }; } }; };
+    const go = async (db, over) => LE.sendLinkCodeEmail({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER, env: ON, now: db.now.t, ...over });
+    const logs = []; const origErr = console.error, origLog = console.log; console.error = (...a) => logs.push(a.join(" ")); console.log = (...a) => logs.push(a.join(" "));
+    try {
+    { const db = mkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); const f = fx();
+      const r = await go(db, { code: iss.code, email: "mum@example.test", fetchImpl: f.fetchImpl });
+      eq("email: sends once to the parent with login ID, code, expiry and a Parent-login button", [r.status, f.calls.length, f.calls[0].body.to, f.calls[0].body.from], [200, 1, ["mum@example.test"], "from@example.test"]);
+      const b = f.calls[0].body; t("email: body has login ID, code, minutes and the APP_BASE_URL link (prefilled login ID, code not in URL)", b.text.includes("kid1") && b.text.includes(iss.code) && /10 minutes/.test(b.text) && b.html.includes("https://app.example.test/?link=1&amp;u=kid1") && !/link=1[^\s"]*\d{6}/.test(b.html));
+      for (let i = 0; i < 2; i++) await go(db, { code: iss.code, email: "mum@example.test", fetchImpl: f.fetchImpl });
+      eq("email: 4th request in the hour -> 429, nothing more sent", [(await go(db, { code: iss.code, email: "mum@example.test", fetchImpl: f.fetchImpl })).status, f.calls.length], [429, 3]);
+      t("email: no table write holds the parent address", ![...db.codes.values()].some((v) => JSON.stringify(v).includes("mum@")) && ![...db.tries.keys()].some((k) => k.includes("mum")));
+      t("email: the code and the address are never logged", !logs.some((l) => l.includes(iss.code) || l.includes("mum@"))); }
+    { const db = mkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); const f = fx();
+      eq("email: wrong code -> 410, nothing sent", [(await go(db, { code: iss.code === "000000" ? "000001" : "000000", email: "mum@example.test", fetchImpl: f.fetchImpl })).status, f.calls.length], [410, 0]);
+      db.now.t += 601_000; eq("email: expired code -> 410, nothing sent", [(await go(db, { code: iss.code, email: "mum@example.test", fetchImpl: f.fetchImpl })).status, f.calls.length], [410, 0]);
+      eq("email: bad address -> 400", (await go(db, { code: iss.code, email: "not-an-email", fetchImpl: f.fetchImpl })).status, 400); }
+    { const db = mkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); const f = fx();
+      eq("email: EMAIL_ALERTS_ENABLED off -> 503, nothing sent, nothing counted", [(await go(db, { code: iss.code, email: "mum@example.test", env: { ...ON, EMAIL_ALERTS_ENABLED: "" }, fetchImpl: f.fetchImpl })).status, f.calls.length, [...db.tries.keys()].some((k) => k.startsWith("linkmail"))], [503, 0, false]);
+      eq("email: ALERT_TEST_RECIPIENTS allow-list blocks others, allows listed", [(await go(db, { code: iss.code, email: "other@example.test", env: { ...ON, ALERT_ALLOW_ALL_PARENTS: undefined, ALERT_TEST_RECIPIENTS: "mum@example.test" }, fetchImpl: f.fetchImpl })).status, (await go(db, { code: iss.code, email: "MUM@example.test", env: { ...ON, ALERT_ALLOW_ALL_PARENTS: undefined, ALERT_TEST_RECIPIENTS: "mum@example.test" }, fetchImpl: f.fetchImpl })).status, f.calls.length], [503, 200, 1]);
+      eq("email: no allow-list and no ALERT_ALLOW_ALL_PARENTS -> fails closed", (await go(db, { code: iss.code, email: "mum@example.test", env: { ...ON, ALERT_ALLOW_ALL_PARENTS: undefined }, fetchImpl: f.fetchImpl })).status, 503); }
+    { const db = mkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); db.cfg.down = true;
+      eq("email: store down -> 503", (await go(db, { code: iss.code, email: "mum@example.test", fetchImpl: fx().fetchImpl })).status, 503); }
+    } finally { console.error = origErr; console.log = origLog; }
+    const emR = rd("src/app/api/clewquest/link-code/email/route.js"), lc = rd("src/components/clewquest/LinkCode.js"), ppc = rd("src/components/clewquest/ParentPictureChild.js"), pd = rd("src/components/ParentDashboard.js");
+    t("email route: flag guard, student + picture-code only", /clewquestRoutesOn\(\)\) return notFound\(\)/.test(emR) && /role !== "student"/.test(emR) && /usesPictureCode\(me\.user\)/.test(emR));
+    t("child screen: login ID, 3 steps, countdown, new-code button, email form", ["cq-linkcode-username", "cq-linkcode-timer", "cq-linkcode-new", "cq-linkcode-email", "cq-linkcode-send"].every((x) => lc.includes(x)) && /Your parent logs in at clewquest\.com \(Parent tab\)/.test(lc) && /They tap <b>Link my child<\/b>/.test(lc) && /They type your login ID and these 6 numbers/.test(lc));
+    t("parent card: Link my child with both options, ?link=1&u= prefill, old header text gone", /Link my child/.test(ppc) && /My child already made an account: enter their login ID \+ 6-digit code/.test(ppc) && /Create my child&apos;s account|Create my child's account/.test(ppc) && /get\("link"\)==="1"/.test(pd) && /get\("u"\)/.test(pd) && !/Ask your child to share their Student ID/.test(pd) && /data-testid="link-success"/.test(pd));
+    t("no Korean in the new files", !/[\uAC00-\uD7AF]/.test(emR + lc + ppc + rd("src/lib/clewquest/linkEmail.mjs"))); }
+
   // Blocker 2: password students keep the Today hub; ClewQuest is opt-in; builder can be left
   const app = rd("src/app/ClaudeApp.js"), cq = rd("src/components/clewquest/ClewQuestStudent.js"), cb = rd("src/components/clewquest/CharacterBuilder.js"), pa = rd("src/components/clewquest/PictureAuth.js");
   t("B2: shell is forced only for picture-code students, or when a password student opened it", /cqOk && \(user\.pictureCode \|\| cqOpen\)/.test(app));

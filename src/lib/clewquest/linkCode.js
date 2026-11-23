@@ -3,11 +3,14 @@
 // Fails CLOSED: any error from the durable store is 503. One generic message for every wrong / expired / unknown case.
 import crypto from "node:crypto";
 
-export const LINK = Object.freeze({ digits: 6, ttlSecs: 600, issueMax: 5, issueWindowSecs: 600, redeemMax: 5, redeemWindowSecs: 900 });
+export const LINK = Object.freeze({ digits: 6, ttlSecs: 600, issueMax: 5, issueWindowSecs: 600, redeemMax: 5, redeemWindowSecs: 900, emailMax: 3, emailWindowSecs: 3600 });
 export const LINK_MSG = {
   unavailable: "link temporarily unavailable",
   tooMany: "too many tries, try again later",
   invalid: "That code did not work. Ask your child for a new code.",
+  expired: "This code has expired. Get a new code.",
+  emailOff: "Email is not available right now. Show your parent the 6 numbers instead.",
+  badEmail: "Type your parent's email address.",
 };
 const norm = (u) => String(u).trim().toLowerCase();
 export const CODE_RE = /^\d{6}$/;
@@ -34,6 +37,24 @@ export async function issueLinkCode({ admin, childId, username, pepper, code }) 
   const up = await admin.from("clewquest_link_codes").upsert({ child_id: childId, code_hash: h, expires_at: new Date(Date.now() + LINK.ttlSecs * 1000).toISOString() }, { onConflict: "child_id" });
   if (up.error) return { status: 503, error: LINK_MSG.unavailable };
   return { status: 200, code: c, expiresInSecs: LINK.ttlSecs };
+}
+
+// Child side: is `code` the child's own live (unexpired) code? Never logs or returns the code. -> { status, expiresInSecs? }
+export async function checkLinkCode({ admin, childId, username, code, pepper, now = Date.now() }) {
+  if (!CODE_RE.test(String(code || ""))) return { status: 410, error: LINK_MSG.expired };
+  let h; try { h = hashLinkCode(pepper, username, code); } catch { return { status: 503, error: LINK_MSG.unavailable }; }
+  const r = await admin.from("clewquest_link_codes").select("code_hash,expires_at").eq("child_id", childId).maybeSingle();
+  if (r.error) return { status: 503, error: LINK_MSG.unavailable };
+  const exp = r.data ? Date.parse(r.data.expires_at) : NaN;
+  if (!r.data || r.data.code_hash !== h || !(exp > now)) return { status: 410, error: LINK_MSG.expired };
+  return { status: 200, expiresInSecs: Math.floor((exp - now) / 1000) };
+}
+// Counts one "email my parent" request (3 per hour per child, durable store, fails closed).
+export async function allowLinkEmail(admin, childId) {
+  const a = await attempt(admin, tryKey("linkmail", childId), LINK.emailMax, LINK.emailWindowSecs);
+  if (a.error) return { status: 503, error: LINK_MSG.unavailable };
+  if (!a.allowed) return { status: 429, error: LINK_MSG.tooMany };
+  return { status: 200 };
 }
 
 // Parent side. deps: { admin, parentId, username, code, pepper, loadChild(username) -> {id, username} | null (picture-code students only),
