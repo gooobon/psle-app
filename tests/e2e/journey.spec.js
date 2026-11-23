@@ -409,13 +409,15 @@ test("flags off stays local @off", async ({ browser }) => {
   await page.goto("/");
   await openLogin(page); // the pre-login landing shows first, even with the ClewQuest flag off
   await page.getByTestId("login-form").waitFor();
-  await expect(page.getByRole("button", { name: /Student Sign Up/ })).toBeVisible();
+  // The login screen no longer has a Student Sign Up button: students get an account from a parent (picture code). With ClewQuest off it shows the Student and Parent tabs and the ID field.
+  await expect(page.getByTestId("login-role-student")).toBeVisible();
   await expect(page.getByTestId("login-id")).toBeVisible();
   await page.getByTestId("login-role-parent").click();
   await expect(page.getByTestId("login-id")).toBeVisible();
   await shot(page, "23-flags-off-login");
   await page.getByTestId("login-role-student").click();
-  await page.getByText("Fill").click();
+  await page.getByTestId("login-id").fill("demo_student"); // seeded only when NEXT_PUBLIC_SHOW_DEMO=true (the old "Fill" helper button is gone)
+  await page.getByTestId("login-password").fill("demo123");
   await page.getByTestId("login-submit").click();
   await page.getByText(/Hello,/).waitFor();
   await expect(page.getByText(/1 set left today/).first()).toBeVisible();
@@ -431,6 +433,6 @@ test("flags off stays local @off", async ({ browser }) => {
   expect(kept.progress.e2e_keep.history[0].date).toBe("01 Jan 2020");
   const me = await page.request.get("/api/auth/me");
   expect(me.status()).toBe(404);
-  note("8 flags off", "PASS", "Login offers Student Sign Up and an ID field. Demo Today has no stickers and no homework. genius_users_v2 and genius_progress_v2 kept the seeded e2e_keep records. /api/auth/me is 404.");
+  note("8 flags off", "PASS", "Login offers the Student and Parent tabs and an ID field (no Student Sign Up button any more). Demo Today has no stickers and no homework. genius_users_v2 and genius_progress_v2 kept the seeded e2e_keep records. /api/auth/me is 404.");
   await ctx.close();
 });
