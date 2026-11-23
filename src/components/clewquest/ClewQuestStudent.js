@@ -20,7 +20,8 @@ const HOTSPOTS = [
 const fmt = (n) => (Math.round(n * 10) / 10).toString();
 const SEEN_STAGE_KEY = "clewquest_seen_stage_v1";
 
-const todayBtn = { ...secondaryBtn, width: "auto", height: 40, padding: "0 18px", fontSize: 15 };
+const todayBtn = { ...secondaryBtn, width: "auto", height: 40, padding: "0 18px", fontSize: 15, borderRadius: 999 };
+const logoutPill = { ...todayBtn, border: `1.5px solid ${T.border}`, color: T.muted, fontWeight: 600 };
 
 function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, pictureCode, toast }) {
   const [showLink, setShowLink] = useState(false);
@@ -37,10 +38,10 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, picture
           <LogoBadge style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" }} />
         </LandingArt>
       </div>
-      <div data-testid="cq-landing-bar" style={{ background: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "10px 14px", boxShadow: "0 2px 10px rgba(27,35,64,.08)" }}>
+      <div data-testid="cq-landing-bar" style={{ background: T.bg, display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "12px 14px" }}>
         <button data-testid="cq-today" onClick={onToday} style={todayBtn}>Today</button>
         {onLeave && <button data-testid="cq-leave" onClick={onLeave} style={{ ...todayBtn, height: 40 }}>Back to Today</button>}
-        <button data-testid="cq-logout" onClick={onLogout} style={{ ...linkBtn, color: T.muted, fontWeight: 500, fontSize: 14 }}>Log out</button>
+        <button data-testid="cq-logout" onClick={onLogout} style={logoutPill}>Log out</button>
       </div>
       {toast && <div role="status" data-testid="cq-toast" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: T.ink, color: "#fff", padding: "10px 18px", borderRadius: 14, fontWeight: 800 }}>{toast}</div>}
     </Page>

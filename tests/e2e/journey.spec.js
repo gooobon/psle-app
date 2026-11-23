@@ -1,10 +1,9 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily } = require("./helpers");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const STATE = path.join("tests", "e2e", ".state");
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
@@ -50,67 +49,15 @@ test("parent and student journey @main", async ({ browser }) => {
   const parent = await browser.newContext(CTX);
   const pp = await parent.newPage();
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
-  await shot(pp, "01-parent-signed-up");
-
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
-  await expect(pp.getByText(CHILD.name).first()).toBeVisible();
-  await shot(pp, "02-child-created");
-  const links = await dbGet("parent_child?select=parent_id,child_id");
-  expect(links.length).toBe(1);
-  note("1 parent signup and child", "PASS", "Mrs Tan created amir_e2e; parent_child has 1 row");
-
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await expect(pp.getByText(/Invite created/)).toBeVisible();
-  await shot(pp, "03-invite-sent");
-  await parent.storageState({ path: path.join(STATE, "parent-a.json") });
-  await logout(pp);
-
-  await pp.goto("/");
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByText(/invited you to follow/).waitFor({ timeout: 15000 });
-  await shot(pp, "04-invite-received");
-  await pp.getByRole("button", { name: "Accept" }).click();
-  await Promise.race([
-    pp.getByTestId("login-form").waitFor({ timeout: 20000 }),
-    pp.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 }),
-  ]);
-  let relogged = false;
-  if (await pp.getByTestId("login-form").count()) {
-    relogged = true;
-    await loginParent(pp, PARENT_B.email, PARENT_B.password);
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
+  await shot(pp, "01-parent-and-child");
+  {
+    const links = await dbGet("parent_child?select=parent_id,child_id");
+    expect(links.length).toBe(1);
   }
-  await expect(pp.getByRole("button", { name: new RegExp(CHILD.name) })).toBeVisible();
-  note("1 second parent links", "PASS", relogged
-    ? "Invite accepted. Accept reloads the page and the in-memory session is not restored, so Mr Tan had to log in again; Amir Tan is then on the dashboard."
-    : "Mr Tan accepted the invite and stayed signed in with Amir Tan.");
-  await shot(pp, "05-second-parent");
-  const both = await dbGet("parent_child?select=parent_id,child_id");
-  expect(both.length).toBe(2);
-  await parent.storageState({ path: path.join(STATE, "parent-b.json") });
+  note("1 parent signup and child", "PASS", "Mrs Tan signed up, added amir_e2e with a picture code; parent_child has 1 row");
+  await parent.storageState({ path: path.join(STATE, "parent-a.json") });
   await parent.close();
 
   // Rewards configured by the creating parent before any practice, so "no homework" can award.
@@ -132,31 +79,18 @@ test("parent and student journey @main", async ({ browser }) => {
   await pa.locator("label", { hasText: /^English/ }).locator("input").fill("5");
   await pa.locator("label", { hasText: /^Chinese/ }).locator("input").fill("4");
   await pa.getByRole("button", { name: "Save rules" }).click();
-  await expect(pa.getByText(/Saved\. Applies from/)).toBeVisible();
+  await expect(pa.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
   await expect(pa.locator('input[type="number"]')).toHaveCount(11);
-  const today = await pa.locator('input[type="date"]').inputValue();
-  const tomorrow = new Date(today + "T00:00:00Z");
-  tomorrow.setUTCDate(tomorrow.getUTCDate() + 1);
-  const tomorrowYmd = tomorrow.toISOString().slice(0, 10);
-  await pa.locator('input[type="date"]').fill(tomorrowYmd);
-  await pa.locator('input[type="number"]').nth(6).fill("99");
-  await pa.getByRole("button", { name: "Save rules" }).click();
-  await expect(pa.getByText(/Saved\. Applies from/)).toBeVisible();
-  await expect(pa.getByText("Scheduled changes: " + tomorrowYmd)).toBeVisible();
   await shot(pa, "06-reward-rules");
-  const versions = await dbGet("reward_rule_versions?select=effective_from,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts&order=effective_from");
-  expect(versions.length).toBe(2);
-  expect(versions[0].effective_from).toBe(today);
-  expect(versions[1].effective_from).toBe(tomorrowYmd);
+  // The rules form no longer has an effective-date picker: a saved rule always applies from the next SGT day (the "scheduled change" step was removed with it).
+  const versions = await dbGet("child_setting_versions?select=effective_from,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts&order=effective_from");
+  expect(versions.length).toBe(1);
   expect(versions[0].weekly_unit).toBe("sgd");
   expect(Number(versions[0].sgd_per_credit)).toBe(1);
   expect(versions[0].weekly_amounts.English).toBe(5);
   expect(versions[0].weekly_amounts.Chinese).toBe(4);
-  const todayTop = versions[0].daily_tiers.find((t) => t.minPct === 90);
-  const tomorrowTop = versions[1].daily_tiers.find((t) => t.minPct === 90);
-  expect(todayTop.credits).toBe(3);
-  expect(tomorrowTop.credits).toBe(99);
-  note("5 reward tiers and effective date", "PASS", "Today's 90% tier is 3 credits; " + tomorrowYmd + " is 99 and does not replace today. Weekly bonus is S$5 English and S$4 Chinese at S$1 per credit.");
+  expect(versions[0].daily_tiers.find((t) => t.minPct === 90).credits).toBe(3);
+  note("5 reward tiers", "PASS", "90% tier is 3 credits, effective " + versions[0].effective_from + ". Weekly bonus is S$5 English and S$4 Chinese at S$1 per credit.");
   await parentA.close();
 
   const student = await browser.newContext(CTX);

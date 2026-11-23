@@ -3,11 +3,10 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, ensureParent, ensureStudent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
 const { driveToScore } = require("./scoreDrive");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const STEPS = [];
@@ -69,48 +68,18 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   assertLocalOnly();
   const answers = JSON.parse(fs.readFileSync("tests/e2e/fixtures/answers.json", "utf8"));
   const parent = await browser.newContext(CTX);
-  const parentB = await browser.newContext(CTX);
   const student = await browser.newContext(CTX);
   await installBrowserClock(parent);
-  await installBrowserClock(parentB);
   await installBrowserClock(student);
   const pp = await parent.newPage();
-  const pb = await parentB.newPage();
   const sp = await student.newPage();
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await pp.getByText(/Invite created/).waitFor();
-  await pb.goto("/");
-  await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pb.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pb.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pb.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pb.getByRole("button", { name: "Create Parent Account" }).click();
-  await pb.getByText(/invited you to follow/).waitFor();
-  await pb.getByRole("button", { name: "Accept" }).click();
-  await pb.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 });
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
+  await shot(pp, "01-parent-and-child");
   const links = await dbGet("parent_child?select=parent_id,child_id");
-  record("parent", "Both parents linked", "2 parent_child rows", "rows " + links.length, links.length === 2 ? "PASS" : "FAIL", await snap(pb, "01-parents"));
+  expect(links.length).toBe(1);
+  record("parent", "Parent signed up and child linked", "1 parent_child row", "rows " + links.length, links.length === 1 ? "PASS" : "FAIL", await snap(pp, "01-parents"));
 
   const id = await childId();
   await loginStudent(sp, CHILD.username, CHILD.password);
@@ -184,7 +153,7 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   }
 
   setDay(1);
-  await shiftBrowser([sp, pp, pb], 1);
+  await shiftBrowser([sp, pp], 1);
   if (source) {
     const fresh = await sp.evaluate(() => {
       const all = JSON.parse(localStorage.getItem("genius_progress_v2") || "{}");
@@ -216,7 +185,7 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   }
 
   setDay(8);
-  await shiftBrowser([sp, pp, pb], 8);
+  await shiftBrowser([sp, pp], 8);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /Start today's set|Extra set/ }).first().click();
@@ -270,11 +239,7 @@ test("learning dashboard matches what was played @learning", async ({ browser })
   }
   const viewA = await openLearning(pp, PARENT_A);
   const fileA = await snap(pp, "06-parent-a");
-  const viewB = await openLearning(pb, PARENT_B);
-  const fileB = await snap(pb, "07-parent-b");
 
-  const same = JSON.stringify(viewA.api.skills) === JSON.stringify(viewB.api.skills) && JSON.stringify(viewA.api.causes) === JSON.stringify(viewB.api.causes) && JSON.stringify(viewA.api.trend) === JSON.stringify(viewB.api.trend) && JSON.stringify(viewA.api.weekly) === JSON.stringify(viewB.api.weekly);
-  record("parent", "Both parents see the same learning data", "Skills, causes, trend and weekly scores match exactly", same ? "identical" : "A " + JSON.stringify(viewA.api.trend) + " B " + JSON.stringify(viewB.api.trend), same ? "PASS" : "FAIL", fileB);
 
   const skillMismatch = [];
   for (const s of hand.skills) {

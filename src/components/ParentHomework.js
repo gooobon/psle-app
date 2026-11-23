@@ -20,18 +20,18 @@ export default function ParentHomework({ subject, refreshKey, onStart }) {
   const correct = items.filter((x) => x.solved && x.correct).length;
   return (
     <div style={{ padding: '14px 16px 0' }}>
-      <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 14, padding: 12 }}>
-        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#92400E' }}>Homework from Parent</div>
+      <div style={{ background: '#FBF6EA', border: '1px solid #E2DBCF', borderRadius: 14, padding: 12 }}>
+        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#1B2340' }}>Homework from Parent</div>
         <div style={{ fontSize: 'calc(var(--fs) * 0.857)', color: '#78350F', margin: '4px 0 8px' }}>
           Today: {items.length - todo.length} of {items.length} done{items.length - todo.length ? ` · ${correct} correct` : ''}
         </div>
         {todo.length > 0 ? (
           <button onClick={() => onStart(todo.map((x) => x.id), Object.fromEntries(todo.map((x) => [x.id, x.source])))}
-            style={{ background: '#D97706', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
+            style={{ background: '#D9A52E', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
             Start homework ({todo.length} left)
           </button>
         ) : (
-          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', fontWeight: 800, color: '#059669' }}>All done for today!</div>
+          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', fontWeight: 800, color: '#4F6B22' }}>All done for today!</div>
         )}
       </div>
     </div>

@@ -4,9 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { bodyText, dbGet, nudge, loginStudent, loginParent, assertLocalOnly } = require("./helpers");
+const { bodyText, dbGet, nudge, loginStudent, loginParent, assertLocalOnly, setupFamily } = require("./helpers");
 
-const PARENT = { name: "Mrs Tan", email: "mrs.tan.pr57@example.com", password: "Testpass1" };
+const PARENT = { name: "Mrs Tan", email: "mrs.tan.pr57@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const SHOTS = path.join(process.cwd(), "docs", "e2e-pr57-2026-11-20");
@@ -231,36 +231,8 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
     }
   });
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  let signed = "timeout";
-  for (let i = 0; i < 40; i++) {
-    if (await pp.getByRole("button", { name: /Add child/ }).count()) { signed = "new"; break; }
-    if (await pp.getByText("User already registered").count()) { signed = "exists"; break; }
-    await pp.waitForTimeout(500);
-  }
-  if (signed !== "new") {
-    await confirmParents();
-    await pp.goto("/");
-    await loginParent(pp, PARENT.email, PARENT.password);
-  }
-  if (!(await pp.getByText(CHILD.name).count())) {
-    await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-    await pp.getByRole("button", { name: "Check", exact: true }).click();
-    await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-    await pp.getByRole("button", { name: "Create child account" }).click();
-    await expect(pp.getByText(/Created\./)).toBeVisible();
-  }
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT, child: CHILD });
   await confirmParents();
   const id = await childId();
 

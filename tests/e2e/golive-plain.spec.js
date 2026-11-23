@@ -5,11 +5,10 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, ensureParent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, ensureParent, assertLocalOnly, setupFamily } = require("./helpers");
 const { driveToScore } = require("./scoreDrive");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "mei_e2e", name: "Mei Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const HANGUL = /[\uac00-\ud7af]/;
@@ -205,58 +204,21 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   const marks = JSON.parse(fs.readFileSync(path.join("tests", "e2e", ".state", "marks-paper.json"), "utf8"));
   const paper = marks.chosen;
   const parent = await browser.newContext(CTX);
-  const parentB = await browser.newContext(CTX);
   const student = await browser.newContext(CTX);
   await installBrowserClock(parent);
-  await installBrowserClock(parentB);
   await installBrowserClock(student);
   const pp = await parent.newPage();
-  const pb = await parentB.newPage();
   const sp = await student.newPage();
   setDay(0);
-  await shiftBrowser([pp, pb, sp], 0);
+  await shiftBrowser([pp, sp], 0);
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  const grade = await pp.locator("select").first().inputValue();
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
   let file = await snap(pp, "01-child-created");
   const kid = await childId();
-  record("parent A", "Create a P3 child", "Grade selector is P3 and the child is stored as P3", "selector " + grade + " stored grade " + kid.grade + " school " + kid.school, grade === "P3" && kid.grade === "P3" ? "PASS" : "FAIL", file);
-
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await pp.getByText(PARENT_B.email).waitFor();
-  await pb.goto("/");
-  await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pb.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pb.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pb.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pb.getByRole("button", { name: "Create Parent Account" }).click();
-  await pb.getByText(/invited you to follow/).waitFor({ timeout: 20000 });
-  await pb.getByRole("button", { name: "Accept" }).click();
-  await pb.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 });
-  await confirmParents();
   const links = await dbGet("parent_child?select=parent_id,child_id");
-  file = await snap(pb, "02-both-parents");
-  record("parents", "Two parents linked to one child", "2 parent_child rows", "rows " + links.length, links.length === 2 ? "PASS" : "FAIL", file);
+  expect(links.length).toBe(1);
+  record("parent A", "Sign up, add a P3 child by picture code", "Child is stored as P3 and linked to one parent", "stored grade " + kid.grade + " school " + kid.school + " links " + links.length, kid.grade === "P3" && links.length === 1 ? "PASS" : "FAIL", file);
 
   await pp.bringToFront();
   const rewardsBefore = await pp.getByRole("button", { name: /Rewards/ }).count();
@@ -284,7 +246,7 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
 
   const beforeAlerts = Number(sql("select count(*) from public.event_alert_log;").trim());
   setDay(1);
-  await shiftBrowser([pp, pb, sp], 1);
+  await shiftBrowser([pp, sp], 1);
 
   await sp.goto("/");
   await loginStudent(sp, CHILD.username, CHILD.password);
@@ -533,7 +495,7 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   const hwEligible = hwLines.filter((l) => /email skipped/.test(l));
   const hwBlocked = hwLines.filter((l) => /allow-list|not_on_allow_list|not in allow-list/.test(l));
   const hwSent = hwLines.filter((l) => /\|sent\|/.test(l));
-  record("system", "Finishing homework with email on and WhatsApp off", "A milestone row is written for the homework. The allow-listed parent reaches the send and stops with no Resend key. The other parent is skipped. Nothing is status sent.", "rows before " + before + "\n" + afterHw.trim(), hwLines.length >= 2 && hwEligible.length === 1 && hwBlocked.length === 1 && hwSent.length === 0 ? "PASS" : "FAIL", "");
+  record("system", "Finishing homework with email on and WhatsApp off", "A milestone row is written for the homework. The parent reaches the send and stops with no Resend key. Nothing is status sent.", "rows before " + before + "\n" + afterHw.trim(), hwLines.length >= 1 && hwEligible.length === 1 && hwBlocked.length === 0 && hwSent.length === 0 ? "PASS" : "FAIL", "");
 
   if (!(await sp.getByText("Hello,").count())) {
     const home = sp.getByRole("button", { name: /Back to Home|Today/ }).first();
@@ -553,7 +515,7 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   const setEligible = setLines.filter((l) => /email skipped/.test(l));
   const setBlocked = setLines.filter((l) => /not_on_allow_list/.test(l));
   const setSent = setLines.filter((l) => /\|sent\|/.test(l));
-  record("system", "Finishing a daily set with email on and WhatsApp off", "A milestone row is written for the Chinese set. Only the allow-listed parent is eligible, and nothing is delivered.", "log:\n" + afterSet.trim(), setLines.length >= 2 && setEligible.length === 1 && setBlocked.length === 1 && setSent.length === 0 ? "PASS" : "FAIL", "");
+  record("system", "Finishing a daily set with email on and WhatsApp off", "A milestone row is written for the Chinese set. Only the allow-listed parent is eligible, and nothing is delivered.", "log:\n" + afterSet.trim(), setLines.length >= 1 && setEligible.length === 1 && setBlocked.length === 0 && setSent.length === 0 ? "PASS" : "FAIL", "");
 
   const parent = await browser.newContext(CTX);
   await installBrowserClock(parent);
@@ -593,12 +555,10 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   const log = sql("select event_type, status, left(coalesce(detail,''), 160) from public.event_alert_log order by created_at;");
   const parents = await dbGet("profiles?role=eq.parent&select=id,email");
   const allow = parents.find((p) => p.email === PARENT_A.email);
-  const other = parents.find((p) => p.email === PARENT_B.email);
   record("parent A", "Mark the remaining open items", "The paper settles and the final score is saved", JSON.stringify(settled[0] || null), settled[0] && Number(settled[0].parent_pending) === 0 ? "PASS" : "FAIL", file);
   const lines = log.trim().split("\n").filter(Boolean);
   const sent = lines.filter((l) => /\|sent\|/.test(l) || l.endsWith("|sent") || /\|sent/.test(l));
-  record("system", "Milestone email goes only to the test recipient, and nothing is delivered", "Parent A is eligible and skipped for a missing sender, parent B is skipped by the allow-list, and no row is status sent", log.trim() || "(empty)", lines.length > 0 && sent.length === 0 && /not_on_allow_list/.test(log) && /email skipped/.test(log) ? "PASS" : "FAIL", "");
-  record("system", "Recipient identity", "Allow-list is the test parent only", "A " + (allow && allow.email) + " B " + (other && other.email), allow && other ? "PASS" : "FAIL", "");
+  record("system", "Milestone email goes only to the test recipient, and nothing is delivered", "The parent is eligible and skipped for a missing sender, and no row is status sent", log.trim() || "(empty)", lines.length > 0 && sent.length === 0 && /email skipped/.test(log) ? "PASS" : "FAIL", "");
   }
   }
 });

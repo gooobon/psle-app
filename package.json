@@ -6,7 +6,7 @@
     "dev": "next dev",
     "prebuild": "node tools/no_korean_selftest.mjs",
     "build": "next build",
-    "selftest": "node tools/no_korean_selftest.mjs && node tools/cloze_order_selftest.mjs && node tools/p3_reclass_selftest.mjs && node tools/exam_selftest.mjs && node tools/child_settings_selftest.mjs && node tools/daily_target_selftest.mjs && node tools/homework_mastery_selftest.mjs && node tools/pending_credits_selftest.mjs && node tools/rewards_tiers_selftest.mjs && node tools/notify_selftest.mjs && node tools/weekly_report_selftest.mjs && node tools/event_alerts_selftest.mjs && node tools/overview_summary_selftest.mjs && node tools/clewquest_selftest.mjs && node tools/onboarding_selftest.mjs && node tools/login_id_selftest.mjs && node zh_wa1_selftest.js",
+    "selftest": "node tools/no_korean_selftest.mjs && node tools/cloze_order_selftest.mjs && node tools/p3_reclass_selftest.mjs && node tools/exam_selftest.mjs && node tools/child_settings_selftest.mjs && node tools/daily_target_selftest.mjs && node tools/homework_mastery_selftest.mjs && node tools/pending_credits_selftest.mjs && node tools/rewards_tiers_selftest.mjs && node tools/notify_selftest.mjs && node tools/weekly_report_selftest.mjs && node tools/event_alerts_selftest.mjs && node tools/overview_summary_selftest.mjs && node tools/clewquest_selftest.mjs && node tools/onboarding_selftest.mjs && node tools/login_id_selftest.mjs && node tools/e2e_guard_selftest.cjs && node zh_wa1_selftest.js",
     "start": "next start",
     "typecheck": "tsc --noEmit -p tsconfig.json",
     "e2e:local": "bash tools/e2e/run-local.sh",

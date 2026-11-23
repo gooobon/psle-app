@@ -1,4 +1,5 @@
 const { defineConfig } = require("@playwright/test");
+require("./tests/e2e/guard").assertNonProduction(); // fail fast if any configured Supabase URL or key is the production project
 
 module.exports = defineConfig({
   testDir: "tests/e2e",

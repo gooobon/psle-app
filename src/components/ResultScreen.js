@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
-import { C, AnimProgressBar } from "@/lib/uiShared";
+import { CS as C, AnimProgressBar } from "@/lib/uiShared";
+import { T } from "@/lib/theme/tokens";
 import { SECTIONS, SECTION_ORDER, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
 
 function ZhResultScreen({results, sessionNum, onHome, onNext}){
@@ -12,10 +13,10 @@ function ZhResultScreen({results, sessionNum, onHome, onNext}){
   const wrong=results.filter(r=>!r.correct);
   return(
     <div style={{paddingBottom:20}}>
-      <div style={{background:`linear-gradient(135deg,${col},${col}cc)`,padding:"32px 24px",textAlign:"center"}}>
-        <div style={{fontSize:52}}>{pct>=85?"🏆":pct>=70?"🌟":"💪"}</div>
-        <div style={{fontSize:42,fontWeight:900,color:"#fff",margin:"8px 0 2px"}}>{pct}%</div>
-        <div style={{fontSize:"calc(var(--fs) * 1.000)",color:"rgba(255,255,255,.85)"}}>{correct}/{total} 道题正确</div>
+      <div style={{background:T.card,boxShadow:"0 6px 20px rgba(27,35,64,.10)",borderRadius:"0 0 24px 24px",borderBottom:`4px solid ${col}`,padding:"32px 24px",textAlign:"center"}}>
+        <div style={{fontSize:52}}></div>
+        <div style={{fontSize:42,fontWeight:900,color:col,margin:"8px 0 2px"}}>{pct}%</div>
+        <div style={{fontSize:"calc(var(--fs) * 1.000)",color:T.muted}}>{correct}/{total} 道题正确</div>
       </div>
       <div style={{padding:"18px 16px"}}>
         <div style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:12,boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
@@ -36,12 +37,12 @@ function ZhResultScreen({results, sessionNum, onHome, onNext}){
           })}
         </div>
         {wrong.length>0&&(
-          <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,padding:"11px 14px",marginBottom:12}}>
-            <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:"#92400E",marginBottom:4}}>📅 {wrong.length} 道题加入错题记录</div>
-            {wrong.slice(0,3).map((w,i)=><div key={i} style={{fontSize:"calc(var(--fs) * 0.786)",color:"#78350F"}}>• {w.topic}</div>)}
+          <div style={{background:C.lAmber,border:"1px solid #E2DBCF",borderRadius:12,padding:"11px 14px",marginBottom:12}}>
+            <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:"#1B2340",marginBottom:4}}> {wrong.length} 道题加入错题记录</div>
+            {wrong.slice(0,3).map((w,i)=><div key={i} style={{fontSize:"calc(var(--fs) * 0.786)",color:"#1B2340"}}>• {w.topic}</div>)}
           </div>
         )}
-        <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",borderRadius:16,padding:"16px",marginBottom:10}}>
+        <div style={{background:T.primary,borderRadius:16,padding:"16px",marginBottom:10}}>
           <div style={{color:"rgba(255,255,255,.7)",fontSize:"calc(var(--fs) * 0.786)",marginBottom:4}}>准备好继续了吗？</div>
           <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,marginBottom:10}}>第 #{sessionNum+1} 节课已就绪！</div>
           <button onClick={onNext} style={{width:"100%",background:"rgba(255,255,255,.15)",border:"1.5px solid rgba(255,255,255,.3)",borderRadius:10,padding:"12px",color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900,cursor:"pointer"}}>
@@ -68,17 +69,17 @@ function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession
   const col=pct>=85?C.green:pct>=70?C.amber:C.red;
   return(
     <div style={{paddingBottom:20}}>
-      <div style={{background:`linear-gradient(135deg,${col},${col}cc)`,padding:"32px 24px",textAlign:"center"}}>
-        <div style={{fontSize:52}}>{pct>=85?"🏆":pct>=70?"🌟":"💪"}</div>
-        <div style={{fontSize:42,fontWeight:900,color:"#fff",margin:"8px 0 2px"}}>{pct}%</div>
-        <div style={{fontSize:"calc(var(--fs) * 1.000)",color:"rgba(255,255,255,0.85)"}}>{correct}/{total} correct on first try</div>
+      <div style={{background:T.card,boxShadow:"0 6px 20px rgba(27,35,64,.10)",borderRadius:"0 0 24px 24px",borderBottom:`4px solid ${col}`,padding:"32px 24px",textAlign:"center"}}>
+        <div style={{fontSize:52}}></div>
+        <div style={{fontSize:42,fontWeight:900,color:col,margin:"8px 0 2px"}}>{pct}%</div>
+        <div style={{fontSize:"calc(var(--fs) * 1.000)",color:T.muted}}>{correct}/{total} correct on first try</div>
         {solvedWithHint>0&&(
-          <div style={{marginTop:6,background:"rgba(255,255,255,0.2)",borderRadius:10,
-            padding:"5px 14px",display:"inline-block",color:"#fff",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>
-            💡 {solvedWithHint} solved after hint (counted as practice, not correct)
+          <div style={{marginTop:6,background:T.tile,borderRadius:10,
+            padding:"5px 14px",display:"inline-block",color:T.ink,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>
+             {solvedWithHint} solved after hint (counted as practice, not correct)
           </div>
         )}
-        {isMock&&<div style={{marginTop:8,background:"rgba(255,255,255,0.25)",borderRadius:10,padding:"6px 16px",display:"inline-block",color:"#fff",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>🏫 Mock Exam</div>}
+        {isMock&&<div style={{marginTop:8,background:T.tile,borderRadius:10,padding:"6px 16px",display:"inline-block",color:T.ink,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}> Mock Exam</div>}
       </div>
       <div style={{padding:"18px 16px"}}>
         <div style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:12,boxShadow:"0 2px 10px rgba(0,0,0,0.06)"}}>
@@ -88,26 +89,26 @@ function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession
         <div style={{background:"#fff",borderRadius:16,padding:"16px",
           boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
           <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:C.text,marginBottom:12}}>
-            📊 How You Did
+             How You Did
           </div>
           <div style={{display:"flex",gap:8}}>
-            <div style={{flex:1,background:"#D1FAE5",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
-              <div style={{fontSize:24,fontWeight:900,color:"#065F46"}}>{firstTry}</div>
-              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#047857",marginTop:2}}>✅ First Try</div>
+            <div style={{flex:1,background:"#FBF6EA",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
+              <div style={{fontSize:24,fontWeight:900,color:"#4F6B22"}}>{firstTry}</div>
+              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#4F6B22",marginTop:2}}> First Try</div>
             </div>
-            <div style={{flex:1,background:"#FEF3C7",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
-              <div style={{fontSize:24,fontWeight:900,color:"#92400E"}}>{solvedWithHint}</div>
-              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#B45309",marginTop:2}}>💡 After Hint</div>
+            <div style={{flex:1,background:"#FBF6EA",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
+              <div style={{fontSize:24,fontWeight:900,color:"#1B2340"}}>{solvedWithHint}</div>
+              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#D9A52E",marginTop:2}}> After Hint</div>
             </div>
-            <div style={{flex:1,background:"#FEE2E2",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
-              <div style={{fontSize:24,fontWeight:900,color:"#991B1B"}}>{totallyWrong}</div>
-              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#B91C1C",marginTop:2}}>❌ Not Solved</div>
+            <div style={{flex:1,background:"#FBF6EA",borderRadius:12,padding:"12px 8px",textAlign:"center"}}>
+              <div style={{fontSize:24,fontWeight:900,color:"#B3261E"}}>{totallyWrong}</div>
+              <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#B3261E",marginTop:2}}> Not Solved</div>
             </div>
           </div>
           {solvedWithHint>0&&(
-            <div style={{background:"#FFFBEB",borderRadius:10,padding:"10px 12px",marginTop:12,
-              fontSize:"calc(var(--fs) * 0.786)",color:"#92400E",fontWeight:600,lineHeight:1.5}}>
-              💡 "After Hint" questions are counted as <strong>not correct</strong> for your score —
+            <div style={{background:"#FBF6EA",borderRadius:10,padding:"10px 12px",marginTop:12,
+              fontSize:"calc(var(--fs) * 0.786)",color:"#1B2340",fontWeight:600,lineHeight:1.5}}>
+               "After Hint" questions are counted as <strong>not correct</strong> for your score —
               you'll see these again to practise until you can solve them on the first try!
             </div>
           )}
@@ -124,18 +125,18 @@ function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession
                   <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{meta.icon} {meta.label}</span>
                   <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:sc}}>{c}/{items.length} · {p}%</span>
                 </div>
-                <div style={{background:"#EEF2F7",borderRadius:6,height:7}}>
+                <div style={{background:"#E8E4DC",borderRadius:6,height:7}}>
                   <div style={{background:sc,borderRadius:6,height:7,width:`${p}%`,transition:"width 0.5s"}}/>
                 </div>
               </div>
             );
           })}
         </div>
-        {wrong.length>0&&<div style={{background:C.lAmber,border:`1px solid #FDE68A`,borderRadius:12,padding:"11px 14px",marginBottom:12}}>
-          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:"#92400E",marginBottom:4}}>📅 {wrong.length} questions added to review</div>
-          {wrong.slice(0,3).map((w,i)=><div key={i} style={{fontSize:"calc(var(--fs) * 0.786)",color:"#78350F"}}>• {w.topic}</div>)}
+        {wrong.length>0&&<div style={{background:C.lAmber,border:`1px solid #E2DBCF`,borderRadius:12,padding:"11px 14px",marginBottom:12}}>
+          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:"#1B2340",marginBottom:4}}> {wrong.length} questions added to review</div>
+          {wrong.slice(0,3).map((w,i)=><div key={i} style={{fontSize:"calc(var(--fs) * 0.786)",color:"#1B2340"}}>• {w.topic}</div>)}
         </div>}
-        <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",borderRadius:16,padding:"16px",marginBottom:10}}>
+        <div style={{background:T.primary,borderRadius:16,padding:"16px",marginBottom:10}}>
           <div style={{color:"rgba(255,255,255,0.7)",fontSize:"calc(var(--fs) * 0.786)",marginBottom:4}}>Ready for more?</div>
           <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,marginBottom:10}}>Session #{sessionNum+1} is ready!</div>
           <button onClick={onNextSession} style={{width:"100%",background:"rgba(255,255,255,0.15)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:10,padding:"12px",color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900,cursor:"pointer"}}>▶ Go to Next Practice Session →</button>

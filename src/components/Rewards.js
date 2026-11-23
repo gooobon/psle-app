@@ -40,14 +40,14 @@ export function StickerShelf() {
   return (
     <div style={{ padding: '14px 16px 0' }}>
       {showWallet && (
-        <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 14, padding: 12, marginBottom: 10 }}>
+        <div style={{ background: '#FBF6EA', border: '1px solid #E2DBCF', borderRadius: 14, padding: 12, marginBottom: 10 }}>
           {cr.confirmed > 0 && (
-            <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#92400E' }}>
+            <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#1B2340' }}>
               Wallet: {cr.balance} confirmed credit{cr.balance === 1 ? '' : 's'}
             </div>
           )}
           {cr.pending > 0 && (
-            <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#92400E', marginTop: cr.confirmed > 0 ? 4 : 0 }}>
+            <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#1B2340', marginTop: cr.confirmed > 0 ? 4 : 0 }}>
               Pending: {cr.pending} credit{cr.pending > 1 ? 's' : ''}. {cr.pendingNote}.
             </div>
           )}
@@ -58,17 +58,17 @@ export function StickerShelf() {
           )}
         </div>
       )}
-      <div style={{ background: '#F5F3FF', border: '1px solid #DDD6FE', borderRadius: 14, padding: 12 }}>
-        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#5B21B6' }}>My Stickers: {total}</div>
-        <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#6D28D9', margin: '2px 0 8px' }}>
+      <div style={{ background: '#FBF6EA', border: '1px solid #E2DBCF', borderRadius: 14, padding: 12 }}>
+        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#1B2340' }}>My Stickers: {total}</div>
+        <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#1F3F95', margin: '2px 0 8px' }}>
           A star for every day you meet your daily target. A trophy for each Saturday Weekly Review.
         </div>
         {total === 0 ? (
-          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', color: '#64748B' }}>Meet today&apos;s target to earn your first sticker!</div>
+          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', color: '#6B6F7B' }}>Meet today&apos;s target to earn your first sticker!</div>
         ) : (
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 4, fontSize: 22 }}>
             {st.stickers.map((s) => (
-              <span key={s.kind + s.period} title={(s.kind === 'weekly' ? 'Weekly Review, week of ' : s.kind === 'paper' ? 'Saturday past paper on ' : 'Target met on ') + s.period}>{s.kind === 'weekly' ? '🏆' : s.kind === 'paper' ? '📝' : '⭐'}</span>
+              <span key={s.kind + s.period} title={(s.kind === 'weekly' ? 'Weekly Review, week of ' : s.kind === 'paper' ? 'Saturday past paper on ' : 'Target met on ') + s.period}>{s.kind === 'weekly' ? 'Weekly' : s.kind === 'paper' ? 'Paper' : 'Daily'}</span>
             ))}
           </div>
         )}
@@ -86,17 +86,17 @@ export function WeeklyReviewCard({ subject, prog, roundIndex, onStart, refreshKe
   if (!done && !ids.length) return null;
   return (
     <div style={{ padding: '14px 16px 0' }}>
-      <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', borderRadius: 14, padding: 12 }}>
-        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#065F46' }}>Weekly Review</div>
+      <div style={{ background: '#FBF6EA', border: '1px solid #E2DBCF', borderRadius: 14, padding: 12 }}>
+        <div style={{ fontSize: 'calc(var(--fs) * 1.0)', fontWeight: 900, color: '#4F6B22' }}>Weekly Review</div>
         {done ? (
-          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', fontWeight: 800, color: '#059669', marginTop: 4 }}>Done for this week! 🏆</div>
+          <div style={{ fontSize: 'calc(var(--fs) * 0.857)', fontWeight: 800, color: '#4F6B22', marginTop: 4 }}>Done for this week!</div>
         ) : (
           <>
-            <div style={{ fontSize: 'calc(var(--fs) * 0.857)', color: '#047857', margin: '4px 0 8px' }}>
+            <div style={{ fontSize: 'calc(var(--fs) * 0.857)', color: '#4F6B22', margin: '4px 0 8px' }}>
               {ids.length} mistake{ids.length > 1 ? 's' : ''} from this week to fix. Finish it for a bonus sticker.
             </div>
             <button onClick={() => onStart(ids)}
-              style={{ background: '#059669', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
+              style={{ background: '#4F6B22', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>
               Start Weekly Review
             </button>
           </>
