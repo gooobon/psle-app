@@ -362,5 +362,5 @@ async function logout(page) {
 
 module.exports = {
   SHOTS, PRODUCTION_REF, CHILD_CODE, openLogin, shot, bodyText, dbGet, drive, nudge, pickPictures, confirmLinkHash, signUpParent, addChild, setupFamily,
-  loginStudent, loginParent, logout, ensureParent, ensureStudent, toTodayHub, assertLocalOnly,
+  loginStudent, loginParent, logout, ensureParent, ensureStudent, toTodayHub, assertLocalOnly, restHeaders,
 };

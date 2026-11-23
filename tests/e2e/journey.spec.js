@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub, restHeaders } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -353,6 +353,22 @@ test("saturday weekly bonus and payout @saturday", async ({ browser }) => {
   await shot(sp, "20-weekly-chinese-done");
   note("7 per-subject Saturday bonus", "PASS", "English weekly credit 5 and Chinese weekly credit 4, one row each. A second English completion did not add another row (creditsAwarded=" + again.creditsAwarded + ").");
   await student.close();
+
+  // Weekly credits are created PENDING. With no homework assigned for Saturday they are only confirmed when the SGT day ends
+  // (finalize_credits: gate_day < today). The test server clock stays on Saturday, so close the day the way the app does:
+  // run finalize_credits for Sunday with the service role of the LOCAL test project (the guard in helpers refuses production).
+  {
+    const pending = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.pending&select=id");
+    expect(pending.length).toBe(2);
+    const { url, headers } = restHeaders();
+    const r = await fetch(url.replace(/\/$/, "") + "/rest/v1/rpc/finalize_credits", {
+      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_child: id, p_today: sgtYmd(1) }),
+    });
+    expect(r.ok).toBeTruthy();
+    const confirmed = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.confirmed&select=id");
+    expect(confirmed.length).toBe(2);
+  }
 
   const parent = await browser.newContext({ ...CTX, storageState: path.join(STATE, "parent-a.json") });
   const pp = await parent.newPage();
