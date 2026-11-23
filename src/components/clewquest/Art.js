@@ -65,10 +65,13 @@ export function Art({ k, alt, style, className, testId, tint, priority }) {
   const imgStyle = { maxWidth: "100%", height: "auto", ...style };
   const loadAttrs = priority ? { loading: "eager", fetchPriority: "high", decoding: "async" } : null;
   if (url) return <img src={url} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} data-tint={hex} style={imgStyle} />;
+  // Explicit box for the card: an image that has not loaded yet has no size of its own (width:auto + maxHeight would collapse it to nothing).
+  const sw = style && style.width, mh = style && style.maxHeight;
+  const boxSize = typeof sw === "number" || typeof sw === "string" && sw !== "auto" ? { width: sw } : mh ? { height: mh, width: Math.round((mh * a.w) / a.h) } : { width: a.w };
   if (pending) { // marble card at the art's size right away; the untinted image loads (hidden) underneath and the tint replaces the card
     return (
-      <span data-testid={testId ? testId + "-placeholder" : "cq-art-placeholder"} style={{ display: "inline-block", lineHeight: 0, borderRadius: 16, background: MARBLE, maxWidth: "100%", verticalAlign: "bottom" }}>
-        <img src={a.webp || a.png} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} style={{ ...imgStyle, visibility: "hidden" }} />
+      <span data-testid={testId ? testId + "-placeholder" : "cq-art-placeholder"} style={{ display: "inline-block", lineHeight: 0, borderRadius: 16, background: MARBLE, maxWidth: "100%", verticalAlign: "bottom", aspectRatio: `${a.w} / ${a.h}`, ...boxSize }}>
+        <img src={a.webp || a.png} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} style={{ ...imgStyle, width: "100%", height: "100%", maxHeight: "none", visibility: "hidden" }} />
       </span>
     );
   }

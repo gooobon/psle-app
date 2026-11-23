@@ -68,6 +68,7 @@ import PaperExam from '@/components/PaperExam'; // mock exams from past papers (
 import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
 import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
 import { Art } from '@/components/clewquest/Art';
+import BootLoading from '@/components/clewquest/BootLoading';
 import { PictureLogin } from '@/components/clewquest/PictureAuth';
 import { PreLoginLanding, LoginFrame, ForgotPassword, SetNewPassword, SignupParentStep1, SignupStep2 } from '@/components/clewquest/AuthScreens';
 import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, labelStyle, linkBtn, helperStyle } from '@/components/clewquest/Shell';
@@ -2310,7 +2311,7 @@ function App(){
         } else setConfirmInfo({email});
       });
     }
-    jobs.push(adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); }));
+    jobs.push(adminSessionValid().then(ok=>{ if(alive && ok){ setAuth(a=>a||{role:"admin",user:ADMIN_USER}); setSessionChecked(true); } }));
     if(SERVER_AUTH){
       jobs.push(pending.then(()=>serverGet("/api/auth/me")).then(r=>{
         if(!alive || !r || !r.ok || !r.profile) return;
@@ -2318,6 +2319,7 @@ function App(){
         const user = mirrorServerUser(r.profile, r.profile.role==="parent" ? {childIds:kids.map(k=>k.id)} : undefined);
         if(r.profile.role==="student"){ importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); }
         setAuth(a=>a||{role:r.profile.role, user});
+        setSessionChecked(true); // a valid session is enough: do not also wait for the admin probe
       }));
     }
     Promise.all(jobs).finally(()=>{ if(alive) setSessionChecked(true); });
@@ -2342,7 +2344,7 @@ function App(){
     setAuth(null); setCqOpen(false);
   }
 
-  if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#6B6F7B",fontWeight:700}}>Loading…</div>;
+  if(!sessionChecked) return <BootLoading/>;
   if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo} resetCode={resetCode} onResetDone={()=>setResetCode("")}
     onParentSignedUp={(p)=>{ handleLogin("parent", mirrorServerUser(p,{childIds:[]})); setOnboard(true); }}/>;
   if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2
