@@ -397,8 +397,8 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
                   <div style={{width:36,height:36,borderRadius:10,background:h.isMockExam?"#EDE9FE":col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.286)",flexShrink:0}}>
                     {h.isMockExam?"":""}
                   </div>
-                  <div style={{flex:1}}>
-                    <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.text}}>{h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:`Session #${h.sessionNum}`}</div>
+                  <div style={{flex:1,minWidth:0}}>
+                    <div title={h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:undefined} style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.text,whiteSpace:"normal",overflowWrap:"anywhere"}}>{h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:`Session #${h.sessionNum}`}</div>
                     <div style={{fontSize:"calc(var(--fs) * 0.780)",color:C.muted}}>{h.date}</div>
                   </div>
                   <div style={{textAlign:"right"}}>
