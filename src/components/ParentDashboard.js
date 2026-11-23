@@ -625,7 +625,7 @@ function ParentAdviceTab({advice, child, onApply}){
               <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#B3261E":adv.priority.includes("Advance")?T.success:"#D9A52E",marginBottom:3}}>{adv.priority} · {SECTIONS[adv.section]?.label||"All"}</div>
               <div style={{fontSize:12,color:C.text,lineHeight:1.7,marginBottom:8}}>{adv.text}</div>
               {adv.action&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:8}}>{Object.entries(adv.action).map(([k,v])=><div key={k} style={{background:"#FBF6EA",borderRadius:7,padding:"3px 9px",fontSize:10,fontWeight:700,color:C.navy}}>{k}: {String(v)}</div>)}</div>}
-              {adv.action&&<button onClick={()=>onApply(adv)} style={{background:`linear-gradient(135deg,${C.navy},#1F3F95)`,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:11,fontWeight:800,cursor:"pointer"}}> Apply to Settings</button>}
+              {adv.action&&<button onClick={()=>onApply(adv)} style={{background:C.navy,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:11,fontWeight:800,cursor:"pointer"}}> Apply to Settings</button>}
             </div>
           </div>
         </div>
