@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "name": "picture signup shows a label under every picture",
+      "pass": true
+    },
+    {
+      "name": "builder: boy and girl, 10 hairstyles, 6 colours, 40-char nickname rejected",
+      "pass": true
+    },
+    {
+      "name": "four islands: open subjects, coming soon, tap targets",
+      "pass": true
+    },
+    {
+      "name": "Today from landing and home, and leaving a subject returns",
+      "pass": true
+    },
+    {
+      "name": "stages 1-5 art and stage 6+ not offered",
+      "pass": true
+    },
+    {
+      "name": "English ExamSession: +1 / +0.5 / 0 and no game UI on solve",
+      "pass": true
+    },
+    {
+      "name": "Chinese ExamSession: +1 / +0.5 / 0 and no game UI",
+      "pass": true
+    },
+    {
+      "name": "wrong picture code five times shows the parent lock message",
+      "pass": true
+    },
+    {
+      "name": "password student and parent keep Today, homework, wallet, rewards",
+      "pass": true
+    },
+    {
+      "name": "linked parent can reset the picture code; unlinked parent cannot",
+      "pass": true
+    }
+  ],
+  "findings": [
+    {
+      "severity": "medium",
+      "area": "nickname",
+      "detail": "Typing 40 characters into the nickname field keeps 12 (\"AAAAAAAAAAAA\"). The field does not show a rejection; maxLength cuts the text."
+    },
+    {
+      "severity": "low",
+      "area": "lockout",
+      "detail": "After 5 wrong codes the message was \"That did not work. Try again.\". The lock text appeared on a later try. Messages: [\"That did not work. Try again.\",\"That did not work. Try again.\",\"That did not work. Try again.\",\"That did not work. Try again.\",\"That did not work. Try again.\",\"Ask a parent to help you sign in.\"]"
+    },
+    {
+      "severity": "medium",
+      "area": "password-signup",
+      "detail": "With server auth on, the login screen hides Student Sign Up. A new password student cannot self-register; a parent creates the child, or the child uses a picture code. Demo login still works."
+    },
+    {
+      "severity": "high",
+      "area": "password-student",
+      "detail": "A parent-created P3 password student is sent to Build your Clew and cannot reach the Today hub without saving a character. The builder has no logout."
+    },
+    {
+      "severity": "medium",
+      "area": "password-student",
+      "detail": "After password login the student is inside ClewQuest. The old Today hub opens from the Today button."
+    },
+    {
+      "severity": "high",
+      "area": "parent-link",
+      "detail": "The parent link form asks for the child's password. A picture-code child has no password the parent knows, so a parent cannot link that child from the UI. Picture reset stays unreachable until a parent_child row already exists."
+    }
+  ]
+}

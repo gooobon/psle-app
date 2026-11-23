@@ -51,8 +51,9 @@ test("picture sign-up -> builder -> landing -> English practice -> thread on hom
   await page.getByTestId("cq-island-math").click();
   await expect(page.getByTestId("cq-toast")).toHaveText("Coming soon");
 
-  const chars = await dbGet("clewquest_characters?select=user_id,gender,hair_key,colour_key,nickname,picture_code_set");
-  const mine = chars.find((c) => c.nickname === "Starlet");
+  const prof = await dbGet("profiles?select=id&username=eq." + USER);
+  const chars = await dbGet("clewquest_characters?select=user_id,gender,hair_key,colour_key,nickname,picture_code_set&user_id=eq." + prof[0].id);
+  const mine = chars[0];
   expect(mine).toBeTruthy();
   expect([mine.gender, mine.hair_key, mine.colour_key, mine.picture_code_set]).toEqual(["girl", "ariadne-buns", "egyptian-blue", true]);
 
