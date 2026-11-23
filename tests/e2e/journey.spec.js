@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -170,11 +170,13 @@ test("parent and student journey @main", async ({ browser }) => {
     await sp.reload();
     // A restored server session lands on Today ("Hello,"). The login screen is the
     // path when the cookie is not restored. Either way, open the notebook next.
+    // ClewQuest may also show its builder or landing screen after a reload; toTodayHub steps through them.
     await sp.waitForFunction(() => {
       const t = document.body.innerText;
-      return t.includes("Log in") || t.includes("Your patterns") || t.includes("Hello,");
+      return t.includes("Log in") || t.includes("Your patterns") || t.includes("Hello,") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
     });
     if (await sp.getByTestId("login-form").count()) await loginStudent(sp, CHILD.username, CHILD.password);
+    else if (await sp.getByTestId("cq-builder").count() || await sp.getByTestId("cq-landing").count()) await toTodayHub(sp);
     if (!(await sp.getByText("Your patterns", { exact: true }).count())) {
       await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
     }
