@@ -29,7 +29,13 @@ function shiftDays() {
   const file = process.env.E2E_DAY_SHIFT_FILE;
   return file && fs.existsSync(file) ? Number(fs.readFileSync(file, "utf8")) || 0 : 0;
 }
+// The runner's real date is not a Friday: shift so that setDay(0) is a Friday and setDay(1) the Saturday (SGT).
+const FRIDAY_OFFSET = (() => {
+  const sgt = new Date(Date.now() + 8 * 3600000).getUTCDay(); // 0 = Sunday ... 5 = Friday
+  return (5 - sgt + 7) % 7;
+})();
 function setDay(days) {
+  days = days + FRIDAY_OFFSET;
   fs.writeFileSync(process.env.E2E_DAY_SHIFT_FILE, String(days));
   sql("update public.e2e_clock set shift_days = " + Number(days));
 }
@@ -37,7 +43,7 @@ async function shiftBrowser(pages, days) {
   const base = process.env.E2E_BASE_URL || "http://127.0.0.1:3000";
   for (const page of pages) {
     if (!String(page.url() || "").startsWith(base)) await page.goto(base);
-    await page.evaluate((d) => sessionStorage.setItem("e2e-shift-days", String(d)), days);
+    await page.evaluate((d) => sessionStorage.setItem("e2e-shift-days", String(d)), days + FRIDAY_OFFSET);
   }
 }
 async function installBrowserClock(context) {
