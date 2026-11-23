@@ -1,0 +1,80 @@
+[
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|q0_43"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|S01_A_S01_A4"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_A_S01_A5"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B1"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B2"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B4"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B5"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B6"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B7"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_B_S01_B8"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_C_4"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "english",
+    "source_ref": "english|S01_C_8"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "english",
+    "source_ref": "english|S01_D_1"
+  }
+]
