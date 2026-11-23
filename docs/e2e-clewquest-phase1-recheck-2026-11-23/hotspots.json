@@ -1,0 +1,32 @@
+[
+  {
+    "name": "english",
+    "testid": "cq-island-english",
+    "tag": "SPAN",
+    "y": 150
+  },
+  {
+    "name": "chinese",
+    "testid": "cq-island-chinese",
+    "tag": "SPAN",
+    "y": 395
+  },
+  {
+    "name": "math",
+    "testid": "cq-island-math",
+    "tag": "SPAN",
+    "y": 150
+  },
+  {
+    "name": "science",
+    "testid": "cq-island-science",
+    "tag": "SPAN",
+    "y": 395
+  },
+  {
+    "name": "clew",
+    "testid": "cq-clew",
+    "tag": "SPAN",
+    "y": 240
+  }
+]

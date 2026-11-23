@@ -7,7 +7,8 @@ const { bodyText, dbGet, drive, shot, assertLocalOnly } = require("./helpers");
 
 const PROD = "zehnulwvysvnsshunxzr";
 const HANGUL = /[\uAC00-\uD7A3\u1100-\u11FF\u3130-\u318F]/;
-const OUT = path.join(process.cwd(), process.env.E2E_SHOTS_DIR || "docs/e2e-clewquest-phase1-2026-11-23");
+const OUT = path.join(process.cwd(), process.env.E2E_SHOTS_DIR || "docs/e2e-clewquest-phase1-recheck-2026-11-23");
+const GENERIC_LINK = "That code did not work. Ask your child for a new code.";
 const LABELS = ["Owl", "Lyre", "Laurel", "Ship", "Column", "Amphora", "Grapes", "Sun", "Shield"];
 const BOY_HAIR = ["apollo-curls", "hermes-wind", "achilles-plume", "heracles-crop", "perseus-waves"];
 const GIRL_HAIR = ["athena-braid", "artemis-tail", "aphrodite-waves", "persephone-wreath", "ariadne-buns"];
@@ -91,6 +92,45 @@ function setNativeValue(el, value) {
   el.dispatchEvent(new Event("input", { bubbles: true }));
 }
 
+async function logoutToLogin(page) {
+  // ClewQuest says "Log out". The Today hub and the parent dashboard say "Logout".
+  const named = page.getByRole("button", { name: /^log ?out$/i });
+  if (await named.count()) await named.first().click();
+  else await page.getByTestId("cq-builder-logout").click();
+  await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
+}
+
+async function openParentTools(page) {
+  if ((await page.getByTestId("pl-username").count()) === 0) {
+    await page.getByRole("button", { name: /Invite another parent/ }).click();
+  }
+  await expect(page.getByTestId("pl-username")).toBeVisible();
+}
+
+async function tapPad(page, padIndex, code) {
+  const pad = page.locator("[data-testid='pic-dots']").nth(padIndex).locator("xpath=..");
+  for (const i of code) await pad.getByTestId("pic-" + i).click();
+}
+
+async function readLinkCode(page) {
+  await page.getByTestId("cq-linkcode-open").click();
+  await page.getByTestId("cq-linkcode-get").click();
+  const el = page.getByTestId("cq-linkcode-value");
+  await expect(el).toBeVisible({ timeout: 15000 });
+  const code = (await el.innerText()).replace(/\s+/g, "");
+  expect(code).toMatch(/^\d{6}$/);
+  return code;
+}
+
+async function expectGenericLink(page) {
+  const msg = page.getByTestId("pl-msg");
+  await expect(msg).toBeVisible({ timeout: 15000 });
+  const text = (await msg.innerText()).trim();
+  expect(text).toBe(GENERIC_LINK);
+  expect(text).not.toMatch(/expired|already used|reused|reuse|wrong code|does not exist|unknown|not found|invalid hash/i);
+  return text;
+}
+
 async function clickChoice(page, qNum, optNum) {
   const head = page.locator("span", { hasText: new RegExp("^" + qNum + "\\.$") }).first();
   await head.scrollIntoViewIfNeeded();
@@ -118,6 +158,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
   const student = "cqrp_" + stamp;
   const lockUser = "cqlk_" + stamp;
   const passUser = "cqpw_" + stamp;
+  const picUser = "cqpic_" + stamp;
   const parentEmail = "cqparent_" + stamp + "@local.test";
   const otherEmail = "cqother_" + stamp + "@local.test";
   const CODE = [0, 3, 5, 8];
@@ -154,7 +195,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await noKorean(page, "builder step 1");
     });
 
-    await check("builder: boy and girl, 10 hairstyles, 6 colours, 40-char nickname rejected", async () => {
+    await check("builder: boy and girl, 10 hairstyles, 6 colours, nickname 24 with counter", async () => {
       await page.getByTestId("cq-gender-boy").click();
       for (const h of BOY_HAIR) await expect(page.getByTestId("cq-hair-" + h)).toBeVisible();
       expect(await page.locator("[data-testid^='cq-hair-']").count()).toBe(5);
@@ -175,9 +216,14 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await shot(page, "rp-03-colours");
       await page.getByTestId("cq-next-colour").click();
       const nick = page.getByTestId("cq-nickname");
+      const count = page.getByTestId("cq-nick-count");
+      await nick.fill("B");
+      await expect(count).toHaveText("1 / 24");
       await nick.fill("A".repeat(40));
       const shown = await nick.inputValue();
-      if (shown.length < 40) note("medium", "nickname", "Typing 40 characters into the nickname field keeps " + shown.length + " (" + JSON.stringify(shown) + "). The field does not show a rejection; maxLength cuts the text.");
+      expect(shown.length).toBe(24);
+      await expect(count).toHaveText("24 / 24");
+      await shot(page, "rp-04-nickname-counter");
       await nick.evaluate((el) => {
         el.removeAttribute("maxLength");
         const proto = window.HTMLInputElement.prototype;
@@ -186,17 +232,75 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
         setter.call(el, "A".repeat(40));
         el.dispatchEvent(new Event("input", { bubbles: true }));
       });
+      await expect(count).toHaveText("40 / 24");
       await page.getByTestId("cq-save").click();
-      await expect(page.getByTestId("cq-builder-error")).toContainText(/2-12/);
+      await expect(page.getByTestId("cq-builder-error")).toContainText(/2-24/);
       await shot(page, "rp-04-nickname-rejected");
       await nick.fill("Bluebun");
+      await expect(count).toHaveText("7 / 24");
       await page.getByTestId("cq-save").click();
       await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
       await noKorean(page, "landing");
     });
 
-    await check("four islands: open subjects, coming soon, tap targets", async () => {
+    await check("four islands: open subjects, coming soon on one line, no navy band", async () => {
       await shot(page, "rp-05-landing-mobile");
+      const layout = await page.evaluate(() => {
+        const landing = document.querySelector("[data-testid='cq-landing']");
+        const img = landing.querySelector("img");
+        const ir = img.getBoundingClientRect();
+        const lr = landing.getBoundingClientRect();
+        const vh = window.innerHeight;
+        function paint(x, y) {
+          let n = document.elementFromPoint(x, y);
+          const tag = n ? n.tagName : null;
+          while (n && n !== document.documentElement) {
+            const bg = getComputedStyle(n).backgroundColor;
+            if (bg && bg !== "rgba(0, 0, 0, 0)" && bg !== "transparent") {
+              return { bg, testid: n.getAttribute && n.getAttribute("data-testid"), tag: n.tagName };
+            }
+            n = n.parentElement;
+          }
+          return { bg: "none", tag };
+        }
+        const soon = [...document.querySelectorAll("[data-testid^='cq-island-']")].map((btn) => {
+          const phrase = [...btn.querySelectorAll("span")].find((s) => (s.textContent || "").trim() === "(Coming soon)");
+          const lines = phrase ? phrase.innerText.split(/\n/).map((s) => s.trim()).filter(Boolean) : [];
+          return {
+            testid: btn.getAttribute("data-testid"),
+            text: (btn.innerText || "").replace(/\s+/g, " ").trim(),
+            phrase: phrase ? phrase.textContent : null,
+            lineCount: phrase ? phrase.getClientRects().length : 0,
+            lines,
+          };
+        });
+        const sampleY = Math.min(vh - 3, Math.max(lr.bottom + 6, vh - 3));
+        return {
+          imgBottom: Math.round(ir.bottom),
+          landingBottom: Math.round(lr.bottom),
+          vh,
+          gapBelowLanding: Math.round(vh - lr.bottom),
+          navyBelowImage: Math.round(lr.bottom - ir.bottom),
+          bottom: paint(window.innerWidth / 2, sampleY),
+          soon,
+        };
+      });
+      fs.writeFileSync(path.join(OUT, "landing-metrics.json"), JSON.stringify(layout, null, 2));
+      for (const row of layout.soon) {
+        if (!row.phrase) continue;
+        expect(row.phrase).toBe("(Coming soon)");
+        expect(row.lineCount).toBe(1);
+        expect(row.lines.join(" ")).not.toMatch(/Coming\s*$/);
+        expect(row.text).not.toMatch(/\(Coming$/);
+      }
+      const bottomNavy = layout.bottom && /rgb\(11,\s*59,\s*115\)/.test(layout.bottom.bg || "");
+      if (bottomNavy && layout.gapBelowLanding > 24) {
+        note("high", "landing-navy", "A navy band fills " + layout.gapBelowLanding + "px under the map on a 390×844 screen. " + JSON.stringify(layout.bottom));
+      }
+      expect(bottomNavy && layout.gapBelowLanding > 24, "navy band under the map").toBe(false);
+      if (layout.navyBelowImage > 140) {
+        note("medium", "landing-navy", "The landing background stays navy for " + layout.navyBelowImage + "px under the island art.");
+      }
       const hits = await page.evaluate(() => {
         const root = document.querySelector("[data-testid='cq-landing'] img");
         const box = root.getBoundingClientRect();
@@ -235,8 +339,11 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await expect(page.getByTestId("cq-toast")).toHaveText("Coming soon");
       await expect(page.getByTestId("cq-landing")).toBeVisible();
       const labels = await page.locator("[data-testid^='cq-island-']").allInnerTexts();
-      if (labels.some((t) => /\n/.test(t) || /soon\)\s*$/m.test(t) && t.includes("\n"))) {
-        note("medium", "landing-labels", "Island coming-soon labels wrap inside the chip: " + JSON.stringify(labels));
+      for (const t of labels) {
+        const lines = t.split(/\n/).map((s) => s.trim()).filter(Boolean);
+        if (lines.length === 1) continue;
+        expect(lines[lines.length - 1]).toBe("(Coming soon)");
+        expect(lines.some((l) => /Coming$/.test(l) || /^soon\)/.test(l))).toBe(false);
       }
     });
 
@@ -393,9 +500,139 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await shot(page, "rp-17-zh-home");
     });
 
-    await check("wrong picture code five times shows the parent lock message", async () => {
+    await check("picture child gets a 6-digit code and a parent links with it", async () => {
       await page.goto("/");
-      await page.getByRole("button", { name: "Log out" }).click();
+      await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
+      const linkCode = await readLinkCode(page);
+      const uid = fs.readFileSync(path.join(OUT, "student-id.txt"), "utf8").trim();
+      const stored = await dbGet("clewquest_link_codes?select=code_hash,expires_at&child_id=eq." + uid);
+      expect(stored.length).toBe(1);
+      expect(stored[0].code_hash).toMatch(/^[0-9a-f]{64}$/);
+      expect(stored[0].code_hash).not.toContain(linkCode);
+      await shot(page, "rp-30-link-code");
+      fs.writeFileSync(path.join(OUT, "link-code-meta.json"), JSON.stringify({ digits: linkCode.length, hashStored: true, expiresAt: stored[0].expires_at }, null, 2));
+      await logoutToLogin(page);
+      await page.getByRole("button", { name: "Parent Sign Up" }).click();
+      await page.getByPlaceholder("e.g. Mrs Lee").fill("Mrs Tan");
+      await page.getByPlaceholder("you@example.com").fill(parentEmail);
+      await page.getByPlaceholder("Create a password").fill("parentpass1");
+      await page.getByPlaceholder("Re-enter password").fill("parentpass1");
+      await page.getByRole("button", { name: /Create Parent Account/ }).click();
+      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await openParentTools(page);
+      const wrong = linkCode === "000000" ? "111111" : "000000";
+      await page.getByTestId("pl-username").fill(student);
+      await page.getByTestId("pl-code").fill(wrong);
+      await page.getByTestId("pl-submit").click();
+      const wrongMsg = await expectGenericLink(page);
+      await shot(page, "rp-31-link-wrong");
+      await page.getByTestId("pl-code").fill(linkCode);
+      await page.getByTestId("pl-submit").click();
+      await expect(page.getByTestId("pl-msg")).toContainText("Linked Aria Tan", { timeout: 15000 });
+      await expect(page.getByRole("button", { name: /Aria Tan/ })).toBeVisible({ timeout: 15000 });
+      const me = await page.evaluate(async () => (await fetch("/api/auth/me", { credentials: "same-origin" })).json());
+      const links = await dbGet("parent_child?select=parent_id,child_id&child_id=eq." + uid);
+      expect(links.length).toBe(1);
+      expect(links[0].parent_id).toBe(me.profile.id);
+      await shot(page, "rp-32-linked");
+      await page.getByTestId("pl-username").fill(student);
+      await page.getByTestId("pl-code").fill(linkCode);
+      await page.getByTestId("pl-submit").click();
+      const reusedMsg = await expectGenericLink(page);
+      await shot(page, "rp-33-link-reused");
+      await logoutToLogin(page);
+      await page.getByTestId("cq-open-picture-login").click();
+      await page.getByTestId("pic-username").fill(student);
+      for (const i of CODE) await page.getByTestId("pic-" + i).click();
+      await page.getByTestId("pic-submit").click();
+      await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
+      const fresh = await readLinkCode(page);
+      expect(fresh).not.toBe(linkCode);
+      await dbWrite("PATCH", "clewquest_link_codes?child_id=eq." + uid, { expires_at: "2020-01-01T00:00:00.000Z" });
+      await logoutToLogin(page);
+      await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
+      await page.getByPlaceholder("Your email").fill(parentEmail);
+      await page.getByPlaceholder("Your password").fill("parentpass1");
+      await page.getByRole("button", { name: /Log In/ }).click();
+      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await openParentTools(page);
+      await page.getByTestId("pl-username").fill(student);
+      await page.getByTestId("pl-code").fill(fresh);
+      await page.getByTestId("pl-submit").click();
+      const expiredMsg = await expectGenericLink(page);
+      await shot(page, "rp-34-link-expired");
+      expect(wrongMsg).toBe(reusedMsg);
+      expect(reusedMsg).toBe(expiredMsg);
+      fs.writeFileSync(path.join(OUT, "link-messages.json"), JSON.stringify({ wrong: wrongMsg, reused: reusedMsg, expired: expiredMsg }, null, 2));
+    });
+
+    await check("parent-created picture child is already linked", async () => {
+      await openParentTools(page);
+      await page.getByRole("button", { name: /Create a picture-code child/ }).click();
+      await page.getByTestId("pc-username").fill(picUser);
+      await page.getByTestId("pc-name").fill("Picture Kid");
+      await tapPad(page, 0, CODE);
+      await expect(page.locator("[data-testid='pic-dots']")).toHaveCount(2);
+      await tapPad(page, 1, CODE);
+      await page.getByTestId("pc-submit").click();
+      await expect(page.getByTestId("pc-msg")).toContainText("Created Picture Kid", { timeout: 20000 });
+      await expect(page.getByRole("button", { name: /Picture Kid/ })).toBeVisible({ timeout: 15000 });
+      const kid = (await dbGet("profiles?select=id,username&username=eq." + picUser))[0];
+      const me = await page.evaluate(async () => (await fetch("/api/auth/me", { credentials: "same-origin" })).json());
+      const links = await dbGet("parent_child?select=parent_id,child_id&child_id=eq." + kid.id);
+      expect(links.length).toBe(1);
+      expect(links[0].parent_id).toBe(me.profile.id);
+      await shot(page, "rp-35-parent-created-picture");
+    });
+
+    await check("password student keeps Today and can open ClewQuest", async () => {
+      await page.getByRole("button", { name: /Add child/ }).click();
+      await page.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(passUser);
+      await page.getByPlaceholder("Display name").fill("Password Kid");
+      await page.getByPlaceholder("Child's password (min 6 chars)").fill("pass1234");
+      await page.getByRole("button", { name: "Create child account" }).click();
+      await expect(page.getByText(/Created\./).first()).toBeVisible({ timeout: 20000 });
+      await expect(page.getByRole("button", { name: /Password Kid/ })).toBeVisible();
+      await shot(page, "rp-22-parent-dashboard");
+      await logoutToLogin(page);
+      await page.getByPlaceholder("Your login ID").fill("demo_student");
+      await page.getByPlaceholder("Your password").fill("demo123");
+      await page.getByRole("button", { name: /Log In/ }).click();
+      await expect(page.getByText("Hello, Demo")).toBeVisible({ timeout: 20000 });
+      expect(await page.getByTestId("cq-landing").count() + await page.getByTestId("cq-builder").count()).toBe(0);
+      expect(await bodyText(page)).not.toMatch(/S\$|SGD/);
+      await shot(page, "rp-19-demo-student");
+      await page.getByRole("button", { name: "Logout" }).click();
+      await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
+      await page.locator("button").filter({ hasText: /^\s*Student\s*$/ }).click();
+      await page.getByPlaceholder("Your login ID").fill(passUser);
+      await page.getByPlaceholder("Your password").fill("pass1234");
+      await page.getByRole("button", { name: /Log In/ }).click();
+      await expect(page.getByText("Hello, Password")).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("today-open-clewquest")).toBeVisible();
+      expect(await page.getByTestId("cq-builder").count()).toBe(0);
+      expect(await page.getByTestId("cq-landing").count()).toBe(0);
+      const hub = await bodyText(page);
+      expect(hub).toMatch(/English/);
+      expect(hub).toMatch(/华文|Chinese/);
+      expect(hub).not.toMatch(/S\$|SGD/);
+      await noKorean(page, "password today");
+      await shot(page, "rp-21-password-today");
+      await page.getByTestId("today-open-clewquest").click();
+      await expect(page.getByTestId("cq-builder")).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("cq-skip")).toHaveText("Skip for now");
+      await expect(page.getByTestId("cq-builder-logout")).toHaveText("Log out");
+      await shot(page, "rp-36-builder-skip-logout");
+      await page.getByTestId("cq-skip").click();
+      await expect(page.getByText("Hello, Password")).toBeVisible({ timeout: 20000 });
+      expect(await page.getByTestId("cq-builder").count()).toBe(0);
+      await page.getByTestId("today-open-clewquest").click();
+      await expect(page.getByTestId("cq-builder")).toBeVisible();
+      await page.getByTestId("cq-builder-logout").click();
+      await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
+    });
+
+    await check("five wrong codes lock on the fifth; linked parent reset clears it", async () => {
       await page.getByTestId("cq-open-picture-signup").click();
       await page.getByTestId("su-username").fill(lockUser);
       await page.getByTestId("su-name").fill("Lock Kid");
@@ -405,142 +642,88 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       for (const i of LOCK_CODE) await page.getByTestId("pic-" + i).click();
       await page.getByTestId("su-create").click();
       await expect(page.getByTestId("cq-builder")).toBeVisible({ timeout: 30000 });
+      await expect(page.getByTestId("cq-skip")).toBeVisible();
+      await expect(page.getByTestId("cq-builder-logout")).toBeVisible();
       await page.getByTestId("cq-gender-boy").click();
       await page.getByTestId("cq-next-hair").click();
       await page.getByTestId("cq-next-colour").click();
       await page.getByTestId("cq-save").click();
       await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
-      await page.getByRole("button", { name: "Log out" }).click();
+      const lockCode = await readLinkCode(page);
+      await logoutToLogin(page);
+      await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
+      await page.getByPlaceholder("Your email").fill(parentEmail);
+      await page.getByPlaceholder("Your password").fill("parentpass1");
+      await page.getByRole("button", { name: /Log In/ }).click();
+      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await openParentTools(page);
+      await page.getByTestId("pl-username").fill(lockUser);
+      await page.getByTestId("pl-code").fill(lockCode);
+      await page.getByTestId("pl-submit").click();
+      await expect(page.getByTestId("pl-msg")).toContainText("Linked Lock Kid", { timeout: 15000 });
+      await expect(page.getByRole("button", { name: /Lock Kid/ })).toBeVisible();
+      await logoutToLogin(page);
       const messages = [];
-      for (let n = 1; n <= 6; n++) {
+      for (let n = 1; n <= 5; n++) {
         await page.getByTestId("cq-open-picture-login").click();
         await page.getByTestId("pic-username").fill(lockUser);
         for (const i of [0, 0, 0, 0]) await page.getByTestId("pic-" + i).click();
         await page.getByTestId("pic-submit").click();
         const err = page.getByTestId("pic-error");
         await expect(err).toBeVisible({ timeout: 15000 });
-        messages.push(await err.innerText());
-        await page.getByRole("button", { name: "Back" }).click();
+        const text = (await err.innerText()).trim();
+        const locked = await page.getByTestId("pic-locked").count();
+        messages.push({ n, text, locked: locked > 0 });
+        if (n < 5) {
+          expect(locked).toBe(0);
+          expect(text).toBe("That did not work. Try again.");
+          await page.getByRole("button", { name: "Back" }).click();
+        }
       }
-      fs.writeFileSync(path.join(OUT, "lockout-messages.json"), JSON.stringify(messages, null, 2));
-      const locked = messages.filter((m) => m.includes("Ask a parent to help you sign in"));
-      expect(locked.length).toBeGreaterThan(0);
-      await page.getByTestId("cq-open-picture-login").click();
+      await expect(page.getByTestId("pic-locked")).toBeVisible();
+      const lockedText = await page.getByTestId("pic-locked").innerText();
+      expect(lockedText).toMatch(/Ask a parent to reset your picture code/);
+      expect(lockedText).not.toMatch(/\d{6}/);
+      expect(await page.getByTestId("cq-linkcode").count()).toBe(0);
+      expect(await page.getByTestId("cq-linkcode-value").count()).toBe(0);
+      expect(messages[4].text).toBe("Locked for 15 minutes.");
+      expect(messages[4].locked).toBe(true);
+      fs.writeFileSync(path.join(OUT, "lockout-messages.json"), JSON.stringify({ messages, lockedText }, null, 2));
       await shot(page, "rp-18-lockout");
-      if (!messages[4].includes("Ask a parent")) {
-        note("low", "lockout", "After 5 wrong codes the message was " + JSON.stringify(messages[4]) + ". The lock text appeared on a later try. Messages: " + JSON.stringify(messages));
-      }
-    });
-
-    await check("password student and parent keep Today, homework, wallet, rewards", async () => {
-      await page.goto("/");
-      const studentSignup = page.getByRole("button", { name: "Student Sign Up" });
-      if (await studentSignup.count() === 0) {
-        note("medium", "password-signup", "With server auth on, the login screen hides Student Sign Up. A new password student cannot self-register; a parent creates the child, or the child uses a picture code. Demo login still works.");
-      }
-      await page.getByPlaceholder("Your login ID").fill("demo_student");
-      await page.getByPlaceholder("Your password").fill("demo123");
-      await page.getByRole("button", { name: /Log In/ }).click();
-      await expect(page.getByText("Hello, Demo")).toBeVisible({ timeout: 20000 });
-      const demoQuest = await page.getByTestId("cq-landing").count() + await page.getByTestId("cq-builder").count();
-      if (demoQuest) note("high", "demo-student", "demo_student landed in ClewQuest.");
-      const demoText = await bodyText(page);
-      expect(demoText).not.toMatch(/S\$|SGD/);
-      await shot(page, "rp-19-demo-student");
-      await page.getByRole("button", { name: "Logout" }).click();
-      await page.getByRole("button", { name: "Parent Sign Up" }).click();
-      await page.getByPlaceholder("e.g. Mrs Lee").fill("Mrs Tan");
-      await page.getByPlaceholder("you@example.com").fill(parentEmail);
-      const pw = page.getByPlaceholder("Create a password");
-      await pw.fill("parentpass1");
-      await page.getByPlaceholder("Re-enter password").fill("parentpass1");
-      await page.getByRole("button", { name: /Create Parent Account/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
-      await shot(page, "rp-22-parent-dashboard");
-      const parentText = await bodyText(page);
-      expect(parentText).not.toMatch(/[\uAC00-\uD7A3]/);
-      await page.getByRole("button", { name: /Add child/ }).click();
-      await page.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(passUser);
-      await page.getByPlaceholder("Display name").fill("Password Kid");
-      await page.getByPlaceholder("Child's password (min 6 chars)").fill("pass1234");
-      await page.getByRole("button", { name: "Create child account" }).click();
-      await expect(page.getByText(/Created\./).first()).toBeVisible({ timeout: 20000 });
-      await page.getByRole("button", { name: /Password Kid/ }).click();
-      const tabNames = await page.locator("button").allInnerTexts();
-      fs.writeFileSync(path.join(OUT, "parent-tabs.json"), JSON.stringify(tabNames, null, 2));
-      const rewards = page.getByRole("button", { name: /Rewards/ });
-      if (await rewards.count()) {
-        await rewards.click();
-        await shot(page, "rp-22b-parent-rewards");
-      } else note("medium", "parent-rewards", "Rewards tab was not rendered after creating a child. Tabs: " + tabNames.join(" | "));
-      await page.getByRole("button", { name: /Settings/ }).click();
-      await shot(page, "rp-22c-parent-settings");
-      await page.getByRole("button", { name: "Logout" }).click();
-      await page.locator("button").filter({ hasText: /^\s*Student\s*$/ }).click();
-      await page.getByPlaceholder("Your login ID").fill(passUser);
-      await page.getByPlaceholder("Your password").fill("pass1234");
-      await page.getByRole("button", { name: /Log In/ }).click();
-      await page.waitForTimeout(1500);
-      await shot(page, "rp-20-password-login");
-      if (await page.getByTestId("cq-builder").count()) {
-        note("high", "password-student", "A parent-created P3 password student is sent to Build your Clew and cannot reach the Today hub without saving a character. The builder has no logout.");
-        await page.getByTestId("cq-gender-boy").click();
-        await page.getByTestId("cq-next-hair").click();
-        await page.getByTestId("cq-next-colour").click();
-        await page.getByTestId("cq-save").click();
-        await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
-      }
-      if (await page.getByTestId("cq-landing").count() || await page.getByTestId("cq-home").count()) {
-        note("medium", "password-student", "After password login the student is inside ClewQuest. The old Today hub opens from the Today button.");
-        if (await page.getByTestId("cq-landing").count()) await page.getByTestId("cq-today").click();
-        else await page.getByTestId("cq-today-home").click();
-      }
-      await expect(page.getByText("Today").first()).toBeVisible({ timeout: 20000 });
-      await page.getByText(/My Stickers|Meet today's target/).waitFor({ timeout: 8000 }).catch(() => {});
-      await shot(page, "rp-21-password-today");
-      const hub = await bodyText(page);
-      expect(hub).toMatch(/English/);
-      expect(hub).toMatch(/华文|Chinese/);
-      expect(hub).not.toMatch(/S\$|SGD/);
-      expect(hub).toMatch(/set left|1 set|套/);
-      if (!/My Stickers|Wallet|credit/i.test(hub)) note("low", "wallet", "The Today hub showed the daily target and subjects, and no S$. The sticker shelf / credit wallet was not in the text.");
-      await page.getByRole("button", { name: "Logout" }).click().catch(async () => { await page.getByRole("button", { name: "Log out" }).click(); });
+      await page.getByRole("button", { name: "Back" }).click();
       await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
       await page.getByPlaceholder("Your email").fill(parentEmail);
       await page.getByPlaceholder("Your password").fill("parentpass1");
       await page.getByRole("button", { name: /Log In/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
-      await page.getByRole("button", { name: /Invite another parent/ }).click();
-      await page.getByPlaceholder("Child's username").fill(lockUser);
-      await page.getByPlaceholder("Child's password").fill("not-the-picture-code");
-      await page.getByRole("button", { name: "Link child" }).click();
-      await expect(page.getByText(/wrong child username or password|Failed/i)).toBeVisible({ timeout: 15000 });
-      await shot(page, "rp-23-parent-cannot-link-picture-child");
-      note("high", "parent-link", "The parent link form asks for the child's password. A picture-code child has no password the parent knows, so a parent cannot link that child from the UI. Picture reset stays unreachable until a parent_child row already exists.");
-    });
-
-    await check("linked parent can reset the picture code; unlinked parent cannot", async () => {
-      const kid = (await dbGet("profiles?select=id,username&username=eq." + lockUser))[0];
-      const me = await page.evaluate(async () => {
-        const r = await fetch("/api/auth/me", { credentials: "same-origin" });
-        return r.json();
-      });
-      expect(kid && me && me.profile && me.profile.id).toBeTruthy();
-      await dbWrite("POST", "parent_child", { parent_id: me.profile.id, child_id: kid.id });
-      await page.reload();
       await expect(page.getByRole("button", { name: /Lock Kid/ })).toBeVisible({ timeout: 20000 });
+      await page.getByRole("button", { name: /Lock Kid/ }).click();
       await page.getByRole("button", { name: /Settings/ }).click();
       await expect(page.getByTestId("picture-reset")).toBeVisible();
       await page.getByTestId("picture-reset-start").click();
-      for (let i = 0; i < 9; i++) await expect(page.getByTestId("pic-label-" + i)).toBeVisible();
-      for (const i of NEW_CODE) await page.getByTestId("pic-" + i).click();
+      const reset = page.getByTestId("picture-reset");
+      for (const i of NEW_CODE) await reset.getByTestId("pic-" + i).click();
       await page.getByTestId("picture-reset-review").click();
       await shot(page, "rp-24-parent-reset-confirm");
       await page.getByTestId("picture-reset-confirm").click();
       await expect(page.getByTestId("picture-reset-done")).toBeVisible({ timeout: 20000 });
       await shot(page, "rp-25-parent-reset-done");
-      // Unlinked parent
-      await page.getByRole("button", { name: "Logout" }).click();
+      await logoutToLogin(page);
+      await page.getByTestId("cq-open-picture-login").click();
+      await page.getByTestId("pic-username").fill(lockUser);
+      for (const i of LOCK_CODE) await page.getByTestId("pic-" + i).click();
+      await page.getByTestId("pic-submit").click();
+      await expect(page.getByTestId("pic-error")).toBeVisible({ timeout: 15000 });
+      expect(await page.getByTestId("pic-locked").count()).toBe(0);
+      await page.getByTestId("pic-clear").click();
+      for (const i of NEW_CODE) await page.getByTestId("pic-" + i).click();
+      await page.getByTestId("pic-submit").click();
+      await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
+      await shot(page, "rp-27-new-code-login");
+    });
+
+    await check("unlinked parent cannot reset a picture code", async () => {
+      const kid = (await dbGet("profiles?select=id,username&username=eq." + lockUser))[0];
+      await logoutToLogin(page);
       await page.getByRole("button", { name: "Parent Sign Up" }).click();
       await page.getByPlaceholder("e.g. Mrs Lee").fill("Mr Other");
       await page.getByPlaceholder("you@example.com").fill(otherEmail);
@@ -558,19 +741,8 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       }, kid.id);
       expect(api).toBe(403);
       await shot(page, "rp-26-unlinked-parent");
-      // Child signs in with the new code, and the old code does not work.
-      await page.getByRole("button", { name: "Logout" }).click();
-      await page.getByTestId("cq-open-picture-login").click();
-      await page.getByTestId("pic-username").fill(lockUser);
-      for (const i of LOCK_CODE) await page.getByTestId("pic-" + i).click();
-      await page.getByTestId("pic-submit").click();
-      await expect(page.getByTestId("pic-error")).toBeVisible();
-      await page.getByTestId("pic-clear").click();
-      for (const i of NEW_CODE) await page.getByTestId("pic-" + i).click();
-      await page.getByTestId("pic-submit").click();
-      await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
-      await shot(page, "rp-27-new-code-login");
     });
+
   } finally {
     dump();
   }

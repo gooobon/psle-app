@@ -12,6 +12,9 @@ const ROUTES = [
   ["/api/clewquest/award", "POST"],
   ["/api/clewquest/hint", "POST"],
   ["/api/clewquest/picture-reset", "POST"],
+  ["/api/clewquest/link-code", "POST"],
+  ["/api/parent/children/link-code", "POST"],
+  ["/api/parent/children/picture", "POST"],
 ];
 
 test.use({ viewport: { width: 390, height: 844 } });
