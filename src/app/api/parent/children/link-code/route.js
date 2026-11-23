@@ -1,7 +1,7 @@
 // ClewQuest: a logged-in parent links a picture-code child with the child's username + the one-time 6-digit link code.
 // The parent proves themselves with their own password session; the child never shares a password or picture code. Flag off => 404.
 import { adminClient, currentUser, jerr, jok, readJson, publicProfile } from "@/lib/supabase/server";
-import { normUsername } from "@/lib/supabase/config";
+import { normUsername, usernameIlike } from "@/lib/supabase/config";
 import { rateLimit } from "@/lib/rateLimit";
 import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { usesPictureCode } from "@/lib/clewquest/pictureFlag";
@@ -20,7 +20,7 @@ export async function POST(request) {
   const r = await redeemLinkCode({
     admin, username: normUsername(b.username), code: String(b.code || "").trim(), pepper: process.env.CLEWQUEST_PICTURE_PEPPER,
     loadChild: async (u) => {
-      const { data, error } = await admin.from("profiles").select("*").eq("username", u).eq("role", "student").maybeSingle();
+      const { data, error } = await admin.from("profiles").select("*").ilike("username", usernameIlike(u)).eq("role", "student").maybeSingle();
       if (error) throw new Error("lookup failed");
       if (!data) return null;
       const au = await admin.auth.admin.getUserById(data.id);

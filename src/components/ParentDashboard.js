@@ -15,6 +15,7 @@ import { cqPost } from "@/lib/clewquest/client";
 import { CODE_LENGTH } from "@/lib/clewquest/pictures";
 import { PicturePad } from "@/components/clewquest/PictureAuth";
 import SchoolCombobox from "@/components/SchoolCombobox";
+import { cleanNamePart, fullName, suggestLoginId, loginIdProblem } from "@/lib/supabase/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
@@ -639,64 +640,99 @@ function ParentAdviceTab({advice, child, onApply}){
 function AddChildForm({onCreated}){
   // Picture password (same picker + server hashing as the student picture sign-up) when ClewQuest is on; otherwise the old typed password.
   const pic = clewquestEnabled();
-  const blank = {username:"",name:"",grade:"P3",school:"",password:""};
+  const blank = {username:"",first:"",last:"",grade:"P3",school:"",password:""};
   const [open, setOpen] = useState(false);
   const [f, setF] = useState(blank);
+  const [idTouched, setIdTouched] = useState(false); // once the parent edits the Login ID, stop auto-suggesting
   const [a, setA] = useState([]); const [b, setB] = useState([]);
-  const [nameState, setNameState] = useState(""); // "" unchecked | "checking" | "available" | "taken" | "error", for the name in checkedName
-  const [checkedName, setCheckedName] = useState("");
+  const [chk, setChk] = useState({state:"",key:"",nameFree:null,idFree:null}); // state: "" | "checking" | "done" | "error"
   const [err, setErr] = useState("");
   const [ok, setOk] = useState("");
   const [busy, setBusy] = useState(false);
   const set=(k,v)=>setF(p=>({...p,[k]:v}));
+  const lbl={display:"block",fontSize:12,fontWeight:800,color:"#334155",marginBottom:4};
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
-  const nameOk = nameState==="available" && checkedName===f.name.trim().toLowerCase();
-  async function checkName(){
-    const n=f.name.trim();
-    if(!n) return setErr("Type the display name first.");
-    setErr(""); setNameState("checking"); setCheckedName(n.toLowerCase());
-    const r = await serverPost("/api/parent/children/check-name",{name:n});
-    setNameState(r.ok ? (r.available?"available":"taken") : "error");
+  const first=cleanNamePart(f.first), last=cleanNamePart(f.last), full=fullName(first,last);
+  const username=f.username.trim();
+  const idProblem=loginIdProblem(f.username);
+  const key=full.toLowerCase()+"|"+username.toLowerCase();
+  const checked = chk.state==="done" && chk.key===key;
+  const nameOk = checked && chk.nameFree && chk.idFree && !idProblem && !!first && !!username;
+  function setName(k,v){
+    setF(p=>{
+      const n={...p,[k]:v};
+      if(!idTouched) n.username=suggestLoginId(n.first,n.last); // suggestion strips every space
+      return n;
+    });
+  }
+  async function check(){
+    if(!first) return setErr("Type the child's first name first.");
+    if(!username) return setErr("Type a login ID first.");
+    if(idProblem) return setErr(idProblem);
+    setErr(""); setChk({state:"checking",key,nameFree:null,idFree:null});
+    const r = await serverPost("/api/parent/children/check-name",{firstName:first,lastName:last,username});
+    setChk(r.ok ? {state:"done",key,nameFree:!!r.available,idFree:r.usernameAvailable!==false} : {state:"error",key,nameFree:null,idFree:null});
   }
   async function submit(){
     setErr(""); setOk("");
-    if(!nameOk) return setErr("Check that the display name is available first.");
+    if(!nameOk) return setErr("Check that the name and login ID are available first.");
     if(pic){
       if(a.length!==CODE_LENGTH || a.join()!==b.join()){ setB([]); return setErr("Pick the same 4 pictures twice."); }
     } else if(f.password.length<6) return setErr("Password must be at least 6 characters.");
     setBusy(true);
-    const body = {...f,username:f.username.trim().toLowerCase(),name:f.name.trim()};
+    const body = {username,firstName:first,lastName:last,name:full,grade:f.grade,school:f.school,password:f.password};
     const r = pic ? await cqPost("/api/parent/children/picture",{...body,sequence:a}) : await serverPost("/api/parent/children",body);
     setBusy(false);
     if(!r.ok){
-      if(r.status===409 && r.error==="display name taken"){ setNameState("taken"); return setErr("That display name is already taken."); }
+      if(r.status===409 && r.error==="display name taken"){ setChk(c=>({...c,nameFree:false})); return setErr("That name is already taken."); }
+      if(r.status===409){ setChk(c=>({...c,idFree:false})); return setErr("That login ID is already taken."); }
       return setErr(r.error||"Could not create child.");
     }
     onCreated&&onCreated(r.child);
-    setOk(pic?`Created. ${r.child.name} logs in with username "${r.child.username}" and the 4 pictures.`:`Created. ${r.child.name} logs in with username "${r.child.username}" and the password you set.`);
-    setF(blank); setA([]); setB([]); setNameState(""); setCheckedName("");
+    setOk(pic?`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the 4 pictures.`:`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the password you set.`);
+    setF(blank); setIdTouched(false); setA([]); setB([]); setChk({state:"",key:"",nameFree:null,idFree:null});
   }
+  const st=(good,text,tid)=><div data-testid={tid} style={{color:good?"#065F46":"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>{text}</div>;
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
       <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add child</button>
       {open&&(
         <div style={{marginTop:10}}>
-          <input style={inp} placeholder="Child's username (a-z, 0-9, _)" value={f.username} onChange={e=>set("username",e.target.value)} autoCapitalize="none"/>
-          <div style={{display:"flex",gap:8,alignItems:"flex-start"}}>
-            <input data-testid="ac-name" style={{...inp,flex:1,width:"auto"}} placeholder="Display name" value={f.name} onChange={e=>{ set("name",e.target.value); setNameState(""); }}/>
-            <button type="button" data-testid="ac-check" disabled={nameState==="checking"} onClick={checkName} style={{background:"#4C1D95",color:"#fff",border:"none",borderRadius:8,padding:"9px 14px",fontWeight:800,fontSize:13,cursor:"pointer"}}>{nameState==="checking"?"Checking...":"Check"}</button>
+          <div style={{display:"flex",gap:8}}>
+            <div style={{flex:1}}>
+              <label htmlFor="ac-first" style={lbl}>Child's first name</label>
+              <input id="ac-first" data-testid="ac-first" style={inp} placeholder="e.g. Joon Hee" value={f.first} onChange={e=>setName("first",e.target.value)}/>
+            </div>
+            <div style={{flex:1}}>
+              <label htmlFor="ac-last" style={lbl}>Child's last name</label>
+              <input id="ac-last" data-testid="ac-last" style={inp} placeholder="e.g. Kim" value={f.last} onChange={e=>setName("last",e.target.value)}/>
+            </div>
           </div>
-          {nameState==="available"&&<div data-testid="ac-name-status" style={{color:"#065F46",fontSize:12,fontWeight:700,marginBottom:8}}>Available</div>}
-          {nameState==="taken"&&<div data-testid="ac-name-status" style={{color:"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>Already taken</div>}
-          {nameState==="error"&&<div data-testid="ac-name-status" style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>Could not check. Try again.</div>}
-          <select style={inp} value={f.grade} onChange={e=>set("grade",e.target.value)}>{GRADES.map(g=><option key={g} value={g}>{g}</option>)}</select>
+          <label htmlFor="ac-username" style={lbl}>Login ID</label>
+          <div style={{display:"flex",gap:8,alignItems:"flex-start"}}>
+            <input id="ac-username" data-testid="ac-username" style={{...inp,flex:1,width:"auto",marginBottom:4,borderColor:idProblem?"#B91C1C":C.border}} placeholder="e.g. Aquacat01" value={f.username} onChange={e=>{ setIdTouched(true); set("username",e.target.value); }} autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
+            <button type="button" data-testid="ac-check" disabled={chk.state==="checking"} onClick={check} style={{background:"#4C1D95",color:"#fff",border:"none",borderRadius:8,padding:"9px 14px",fontWeight:800,fontSize:13,cursor:"pointer"}}>{chk.state==="checking"?"Checking...":"Check"}</button>
+          </div>
+          {idProblem
+            ? <div data-testid="ac-id-problem" style={{color:"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>{idProblem}</div>
+            : <div style={{color:C.muted,fontSize:11,marginBottom:8}}>3-30 characters: letters (A-Z, a-z), numbers (0-9) and _ only. Capital letters are kept, but Aquacat01 and aquacat01 count as the same ID.</div>}
+          {checked&&chk.nameFree&&st(true,"Name available","ac-name-status")}
+          {checked&&!chk.nameFree&&st(false,"That name is already taken","ac-name-status")}
+          {checked&&!chk.idFree&&st(false,"That login ID is already taken","ac-id-status")}
+          {checked&&chk.idFree&&!idProblem&&st(true,"Login ID available","ac-id-status")}
+          {chk.state==="error"&&<div data-testid="ac-name-status" style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>Could not check. Try again.</div>}
+          <label htmlFor="ac-grade" style={lbl}>Level</label>
+          <select id="ac-grade" style={inp} value={f.grade} onChange={e=>set("grade",e.target.value)}>{GRADES.map(g=><option key={g} value={g}>{g}</option>)}</select>
+          <label style={lbl}>School</label>
           <SchoolCombobox value={f.school} onChange={v=>set("school",v)} border={C.border}/>
           {pic?(<div style={{marginBottom:8}}>
+            <span style={lbl}>Picture password</span>
             <PicturePad value={a} onChange={setA} label="Pick 4 pictures in order (your child's secret code)"/>
             {a.length===CODE_LENGTH&&<div style={{marginTop:10}}><PicturePad value={b} onChange={setB} label="Pick the same 4 pictures again"/></div>}
-          </div>):(
-            <input style={inp} type="password" placeholder="Child's password (min 6 chars)" value={f.password} onChange={e=>set("password",e.target.value)}/>
-          )}
+          </div>):(<>
+            <label htmlFor="ac-pw" style={lbl}>Password</label>
+            <input id="ac-pw" style={inp} type="password" placeholder="Child's password (min 6 chars)" value={f.password} onChange={e=>set("password",e.target.value)}/>
+          </>)}
           {err&&<div style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>{err}</div>}
           {ok&&<div style={{color:"#065F46",fontSize:12,marginBottom:8}}>{ok}</div>}
           <button data-testid="ac-create" disabled={busy||!nameOk} onClick={submit} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:nameOk?"pointer":"not-allowed",opacity:nameOk?1:0.55}}>{busy?"Creating...":"Create child account"}</button>

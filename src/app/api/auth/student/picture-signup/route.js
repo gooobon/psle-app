@@ -1,7 +1,7 @@
 // ClewQuest: student self sign-up with a picture code. Flag NEXT_PUBLIC_CLEWQUEST_ENABLED (default off => 404).
 // The picture sequence is turned into the Supabase password server-side (HMAC with CLEWQUEST_PICTURE_PEPPER); the raw sequence is never stored.
 import { sessionClient, adminClient, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
-import { normUsername, USERNAME_RE, RESERVED_USERNAMES, kidEmail } from "@/lib/supabase/config";
+import { normUsername, USERNAME_RE, isReservedUsername, USERNAME_MSG, kidEmail } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { CLEWQUEST } from "@/lib/clewquest/config";
@@ -18,7 +18,7 @@ export async function POST(request) {
   const username = normUsername(b.username);
   const name = String(b.name || "").trim();
   const seq = normalizeSequence(b.sequence);
-  if (!USERNAME_RE.test(username) || RESERVED_USERNAMES.includes(username)) return jerr("username must be 3-30 chars: a-z, 0-9, _", 400);
+  if (!USERNAME_RE.test(username) || isReservedUsername(username)) return jerr(USERNAME_MSG, 400);
   if (!name || name.length > 80) return jerr("name required", 400);
   if (!seq) return jerr("choose 4 pictures", 400);
   let password;

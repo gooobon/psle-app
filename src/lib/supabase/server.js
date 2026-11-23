@@ -44,12 +44,12 @@ export async function currentUser() {
 
 // pictureCode (optional, ClewQuest): true only for a student whose server account signs in with a picture code (app_metadata).
 export function publicProfile(p, pictureCode) {
-  return { id: p.id, role: p.role, username: p.username, name: p.display_name, grade: p.grade, school: p.school, ...(pictureCode ? { pictureCode: true } : {}) };
+  return { id: p.id, role: p.role, username: p.username, name: p.display_name, ...(p.first_name ? { firstName: p.first_name } : {}), ...(p.last_name ? { lastName: p.last_name } : {}), grade: p.grade, school: p.school, ...(pictureCode ? { pictureCode: true } : {}) };
 }
 
 // Create student auth user + profile (+ optional parent link). Rolls back the auth user on failure.
 // appMetadata (optional, additive): server-only flags set at creation, e.g. ClewQuest's { picture_code: true }.
-export async function createStudent(admin, { username, password, name, grade, school, parentId, appMetadata }) {
+export async function createStudent(admin, { username, password, name, firstName, lastName, grade, school, parentId, appMetadata }) {
   const { data, error } = await admin.auth.admin.createUser({
     email: kidEmail(username), password, email_confirm: true,
     user_metadata: { role: "student" },
@@ -58,7 +58,10 @@ export async function createStudent(admin, { username, password, name, grade, sc
   if (error || !data?.user) return { error: error?.message || "create failed", status: /registered|exists/i.test(error?.message || "") ? 409 : 500 };
   const id = data.user.id;
   const rollback = async () => { await admin.auth.admin.deleteUser(id).catch(() => {}); };
-  const ins = await admin.from("profiles").insert({ id, role: "student", username, display_name: name, grade: grade || null, school: school || null });
+  const row = { id, role: "student", username, display_name: name, grade: grade || null, school: school || null };
+  let ins = await admin.from("profiles").insert(firstName || lastName ? { ...row, first_name: firstName || null, last_name: lastName || null } : row);
+  // first_name/last_name come from an additive migration applied by hand; if it is not applied yet, store the full name only.
+  if (ins.error && ins.error.code !== "23505" && /first_name|last_name/.test(ins.error.message || "")) ins = await admin.from("profiles").insert(row);
   if (ins.error) { await rollback(); return { error: ins.error.code === "23505" ? "username taken" : "profile failed", status: ins.error.code === "23505" ? 409 : 500 }; }
   if (parentId) {
     const link = await admin.from("parent_child").insert({ parent_id: parentId, child_id: id });

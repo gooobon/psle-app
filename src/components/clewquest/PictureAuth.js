@@ -65,7 +65,7 @@ export function PictureSignup({ onDone, onBack }) {
   const [err, setErr] = useState(""); const [busy, setBusy] = useState(false);
   function next() {
     setErr("");
-    if (!/^[a-z0-9_]{3,30}$/.test(username.trim().toLowerCase())) return setErr("Username: 3-30 letters, numbers or _.");
+    if (!/^[A-Za-z0-9_]{3,30}$/.test(username.trim())) return setErr("Username: 3-30 letters, numbers or _.");
     if (!name.trim()) return setErr("Type your name.");
     setStep(2);
   }

@@ -21,7 +21,36 @@ export const MOCK_EXAMS_ENABLED = process.env.NEXT_PUBLIC_MOCK_EXAMS_ENABLED ===
 // Children log in with username; Supabase Auth needs an email. This synthetic address is
 // internal only (.invalid is a reserved TLD) and is never shown in the UI.
 export const KID_EMAIL_DOMAIN = "kids.genius.invalid";
-export const USERNAME_RE = /^[a-z0-9_]{3,30}$/;
+// Login IDs: A-Z, a-z, 0-9, _ (3-30). The original casing is stored and shown; uniqueness, login, lockout and the synthetic
+// email are all case-insensitive ("Aquacat01" and "aquacat01" are the same account).
+export const USERNAME_RE = /^[A-Za-z0-9_]{3,30}$/;
+export const USERNAME_MSG = "Login ID must be 3-30 characters: letters (A-Z, a-z), numbers (0-9) and _ only";
 export const RESERVED_USERNAMES = ["admin", "root", "system"];
-export function kidEmail(username) { return `${username}@${KID_EMAIL_DOMAIN}`; }
-export function normUsername(u) { return String(u || "").trim().toLowerCase(); }
+export function isReservedUsername(u) { return RESERVED_USERNAMES.includes(String(u || "").toLowerCase()); }
+export function kidEmail(username) { return `${String(username).trim().toLowerCase()}@${KID_EMAIL_DOMAIN}`; }
+// Trimmed, original casing kept. Use usernameKey() for any comparison / map key.
+export function normUsername(u) { return String(u || "").trim(); }
+export function usernameKey(u) { return String(u || "").trim().toLowerCase(); }
+// ilike pattern that matches exactly one login ID, ignoring case (escapes % _ \).
+export function usernameIlike(u) { return usernameKey(u).replace(/[\\%_]/g, "\\$&"); }
+
+// Names: collapse runs of whitespace, trim. Spaces are always fine ("Joon Hee" or "JoonHee").
+export function cleanNamePart(s) { return String(s || "").replace(/\s+/g, " ").trim(); }
+export function fullName(first, last) { return cleanNamePart(`${cleanNamePart(first)} ${cleanNamePart(last)}`); }
+// Suggested login ID from a name: all whitespace and other illegal characters stripped, capped at 30.
+export function suggestLoginId(first, last) { return (cleanNamePart(first) + cleanNamePart(last)).replace(/[^A-Za-z0-9_]/g, "").slice(0, 30); }
+// Live validation for the login ID field. Returns "" when fine, else a message naming the bad character.
+export function loginIdProblem(u) {
+  const v = String(u || "");
+  if (!v) return "";
+  const bad = v.match(/[^A-Za-z0-9_]/);
+  if (bad) {
+    const c = bad[0];
+    if (/\s/.test(c)) return "Spaces aren't allowed in the login ID";
+    return `"${c}" isn't allowed in the login ID. Use letters, numbers and _ only`;
+  }
+  if (v.length < 3) return "Login ID needs at least 3 characters";
+  if (v.length > 30) return "Login ID can be at most 30 characters";
+  if (isReservedUsername(v)) return "That login ID is reserved. Try another";
+  return "";
+}
