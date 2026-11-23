@@ -267,7 +267,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const skipMails = alerts().slice(beforeSkip).filter((a) => /Not done yet today/.test(a.subject || ""));
   const skipBodyOk = skipMails.filter((a) => /NOT DONE YET today: Amir Tan/.test(a.text || "") && /❌ Not done – English: 0\/1 set/.test(a.text || "") && /❌ Not done – Chinese: 0\/1 set/.test(a.text || ""));
   // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, "SKIP", "");
+  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   // —— Friday: rules apply, scored sets, homework, wallet, payout ——
   setDay(BASE + 1);
@@ -552,14 +552,14 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await pp.getByText(/Did Amir Tan do it today/).scrollIntoViewIfNeeded();
   file = await snap(pp, "21-friday-done");
   const friText = await bodyText(pp);
-  record("parent A", "Friday daily status after both subjects", "English 2/2 and Chinese 1/1 are done", /English[\s\S]{0,30}✅ 2\/2/.test(friText) && /Chinese[\s\S]{0,30}✅ 1\/1/.test(friText) ? "Both done" : friText.slice(friText.indexOf("Did Amir"), friText.indexOf("Did Amir") + 320), /✅ 2\/2/.test(friText) && /✅ 1\/1/.test(friText) ? "PASS" : "FAIL", file);
+  record("parent A", "Friday daily status after both subjects", "English 2/2 and Chinese 1/1 are done", /English\s*Done 2\/2 sets/.test(friText) && /Chinese\s*Done 1\/1 set/.test(friText) ? "Both done" : friText.slice(friText.indexOf("Did Amir"), friText.indexOf("Did Amir") + 320), /English\s*Done 2\/2 sets/.test(friText) && /Chinese\s*Done 1\/1 set/.test(friText) ? "PASS" : "FAIL", file);
 
   const beforeDone = alerts().length;
   const doneCron = await cron();
   const doneMails = alerts().slice(beforeDone).filter((a) => /All done today/.test(a.subject || ""));
   const doneBody = doneMails.filter((a) => /✅ Done – English: 2\/2 sets/.test(a.text || "") && /✅ Done – Chinese: 1\/1 set/.test(a.text || ""));
   // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, "SKIP", "");
+  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   // —— Saturday: weekly bonus and the past-paper mock ——
   setDay(BASE + 2);
@@ -631,7 +631,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await goHub(sp);
   file = await snap(sp, "26-saturday-wallet");
   const satWallet = await bodyText(sp);
-  record("student", "Wallet after the Saturday bonus", "Pending weekly credits show with their SGD value while Saturday is still open", /Pending:/.test(satWallet) ? satWallet.slice(satWallet.indexOf("Pending:"), satWallet.indexOf("Pending:") + 180) : "No pending line", /Pending:/.test(satWallet) && /S\$/.test(satWallet) ? "PASS" : "FAIL", file);
+  record("student", "Wallet after the Saturday bonus", "Pending weekly credits show in credits (the wallet shows credits, not S$) while Saturday is still open", /Pending:/.test(satWallet) ? satWallet.slice(satWallet.indexOf("Pending:"), satWallet.indexOf("Pending:") + 180) : "No pending line", /Pending:\s*\d+ credits/.test(satWallet) ? "PASS" : "FAIL", file);
 
   // —— Sunday: 60% earns nothing; a high score with unfinished homework will forfeit ——
   setDay(BASE + 3);
