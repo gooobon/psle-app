@@ -32,7 +32,7 @@ function tintedUrl(k, a, hex) {
 export function Art({ k, alt, style, className, testId, tint }) {
   const a = manifest.assets[k];
   const yarn = !!a && (k.startsWith("stages/stage-") && !/stage-[678]/.test(k) || k.startsWith("characters/"));
-  const hex = yarn ? tint : null;
+  const hex = yarn && !/^stages\/stage-[12]$/.test(k) ? tint : null; // stages 1-2 are always black, whatever the tint
   const [done, setDone] = useState(null); // { key, url } (url null = tint failed, show original)
   useEffect(() => {
     if (!hex || !a) return undefined;

@@ -31,5 +31,7 @@ export async function GET() {
     // Only CONFIRMED credits are earned; pending ones wait for the day's homework, forfeited ones are kept as a record.
     // Only CONFIRMED credits are earned; pending ones wait for the day's homework. Credits only: no dollar value ever reaches a student.
     credits: studentCredits(rows),
+    // Read-only dated list for My Clew / My records (credits only, no money values).
+    creditHistory: rows.slice(0, 60).map(({ kind, period, subject, credits, status }) => ({ kind, period, subject, credits, status })),
   });
 }
