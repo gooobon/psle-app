@@ -24,6 +24,10 @@ export const CLEWQUEST = {
     { stage: 7, key: "wings", reachable: false, rule: { type: "exam_cycle", resetEach: ["WA1", "WA2", "WA3", "EOY"], trial: { kind: "weekly_mock", cutoff: "parent_rules.wings_mock_cutoff_pct" } } },
     { stage: 8, key: "god", reachable: false, rule: { type: "semester_end" } },
   ],
+  // Art key per stage (data-driven): drop new files + manifest.json entries under these keys to swap the art.
+  // Stages 1-2 are ALWAYS black (never tinted); the student's colour first appears at stage 3 / arms, 100 threads (colourFromStage).
+  stageArt: { 1: "stages/stage-1", 2: "stages/stage-2", 3: "stages/stage-3", 4: "stages/stage-4" },
+  colourFromStage: 3,
   colours: [
     { key: "ariadne-crimson", name: "Ariadne Crimson", hex: "#C8372D", default: true },
     { key: "apollo-gold", name: "Apollo Gold", hex: "#D9A52E" },
@@ -44,6 +48,35 @@ export const CLEWQUEST = {
     { key: "persephone-wreath", name: "Persephone wreath", gender: "girl" },
     { key: "ariadne-buns", name: "Ariadne buns", gender: "girl", default: true },
   ],
+  // Myth-item level ladder, per subject island. Ordered, never goes down. `threads` = lifetime threads on that subject;
+  // `minAvg` = last-2-week average % (null = no accuracy gate). `icon` is a manifest key under levels/ (graceful SVG fallback if missing).
+  levels: [
+    { lv: 1, key: "hermes-sandals", name: "Hermes' Sandals", threads: 0, minAvg: null, icon: "levels/lv1-hermes-sandals" },
+    { lv: 2, key: "apollo-lyre", name: "Apollo's Lyre", threads: 30, minAvg: null, icon: "levels/lv2-apollo-lyre" },
+    { lv: 3, key: "heracles-lion-hood", name: "Heracles' Lion Hood", threads: 80, minAvg: null, icon: "levels/lv3-heracles-lion-hood" },
+    { lv: 4, key: "medusa-shield", name: "Medusa Shield", threads: 160, minAvg: null, icon: "levels/lv4-medusa-shield" },
+    { lv: 5, key: "athena-helm", name: "Athena's Helm", threads: 300, minAvg: 75, icon: "levels/lv5-athena-helm" },
+    { lv: 6, key: "poseidon-trident", name: "Poseidon's Trident", threads: 500, minAvg: 80, icon: "levels/lv6-poseidon-trident" },
+    { lv: 7, key: "zeus-thunderbolt", name: "Zeus' Thunderbolt", threads: 800, minAvg: 85, icon: "levels/lv7-zeus-thunderbolt" },
+  ],
+  levelWindowDays: 14,
+  // Profile pose cycling. `{hair}` / `{n}` are filled in; frames missing from manifest.json fall back to the placeholder transforms.
+  poses: { count: 6, intervalMs: 700, character: { girl: "poses/girl-{hair}-{n}", boy: "poses/boy-{hair}-{n}" }, pets: [
+    { key: "owl", name: "Athena's owlet", frames: "poses/pet-owl-{n}" },
+    { key: "pegasus", name: "Pegasus foal", frames: "poses/pet-pegasus-{n}" },
+  ] },
+  // Trader's Ship (landing). Phase-2 placeholder: browse only, nothing can be bought. `shopEnabled` shows the placeholder view.
+  ship: { art: "ship/treasure-ship", loopSeconds: 60, shopEnabled: true },
+  shop: { items: [
+    { key: "hair-laurel", group: "Hair accessories", name: "Gold laurel band", credits: 20 },
+    { key: "hair-ribbon", group: "Hair accessories", name: "Crimson ribbon", credits: 12 },
+    { key: "colour-tyrian", group: "Thread colours", name: "Tyrian purple thread", credits: 30 },
+    { key: "colour-flax", group: "Thread colours", name: "Raw flax thread", credits: 15 },
+    { key: "pet-owl", group: "Pets", name: "Athena's owlet", credits: 60 },
+    { key: "pet-pegasus", group: "Pets", name: "Pegasus foal", credits: 80 },
+    { key: "decor-olive", group: "Island decor", name: "Olive tree", credits: 25 },
+    { key: "decor-amphora", group: "Island decor", name: "Painted amphora", credits: 18 },
+  ] },
   destinies: [], // stage 6+ costumes and props: data only, add freely (not reachable in Phase 1)
   calendar: { defaultSource: "sg_default", editableBy: ["student", "parent"] },
   economy: { enabled: false }, // cycles, trial, Daily Chest, shop: NOT Phase 1
