@@ -6,7 +6,7 @@ import { SG_PRIMARY_SCHOOLS } from "@/data/schools/sgPrimarySchools";
 
 const MAX_SHOWN = 60;
 
-export default function SchoolCombobox({ value, onChange, schools = SG_PRIMARY_SCHOOLS, border = "#CBD5E1" }) {
+export default function SchoolCombobox({ value, onChange, schools = SG_PRIMARY_SCHOOLS, border = "#CBD5E1", placeholder = "School (type to search)" }) {
   const [text, setText] = useState(value || "");
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState(0);
@@ -31,7 +31,7 @@ export default function SchoolCombobox({ value, onChange, schools = SG_PRIMARY_S
       <input
         data-testid="school-combobox" role="combobox" aria-expanded={open} aria-controls={listId} aria-autocomplete="list"
         aria-activedescendant={open && shown[active] ? `${listId}-${active}` : undefined} aria-label="School"
-        placeholder="School (type to search)" value={text} autoComplete="off" autoCapitalize="none" enterKeyHint="done"
+        placeholder={placeholder} value={text} autoComplete="off" autoCapitalize="none" enterKeyHint="done"
         onChange={(e) => { setText(e.target.value); setOpen(true); setActive(0); if (!e.target.value) onChange(""); }}
         onFocus={() => setOpen(true)} onKeyDown={onKey}
         onBlur={() => { setOpen(false); setText(value || ""); }} // only a picked school counts; typed text that is not picked is dropped

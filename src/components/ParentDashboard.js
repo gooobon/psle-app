@@ -9,13 +9,9 @@ import LearningDashboard from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
 import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
+import AddChild from "@/components/clewquest/AddChild";
 import ParentPictureChild from "@/components/clewquest/ParentPictureChild";
 import { clewquestEnabled } from "@/lib/clewquest/config";
-import { cqPost } from "@/lib/clewquest/client";
-import { CODE_LENGTH } from "@/lib/clewquest/pictures";
-import { PicturePad } from "@/components/clewquest/PictureAuth";
-import SchoolCombobox from "@/components/SchoolCombobox";
-import { cleanNamePart, fullName, suggestLoginId, loginIdProblem } from "@/lib/supabase/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
@@ -340,7 +336,7 @@ function ParentOverview({child, history, settings, subject}){
           {icon:"📋",l:"Sessions",v:sessionCount,c:C.blue},
           {icon:"🎯",l:"Average",  v:avgTotal?`${avgTotal}%`:"—",c:avgTotal>=85?C.green:avgTotal>=70?C.amber:C.red},
           {icon:"📈",l:"Trend",    v:last3.length>=2?(trend>=0?`+${trend}%`:`${trend}%`):"—",c:trend>=0?C.green:C.red},
-          {icon:"🏫",l:"Mock Done",v:history.filter(h=>h.isMockExam).length,c:"#7C3AED"},
+          {icon:"🏫",l:"Mock Done",v:history.filter(h=>h.isMockExam).length,c:"#1F3F95"},
         ].map((s,i)=>(
           <div key={i} style={{background:"#fff",borderRadius:14,padding:"12px",textAlign:"center",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
             <div style={{fontSize:22}}>{s.icon}</div>
@@ -416,7 +412,7 @@ function ParentOverview({child, history, settings, subject}){
             const topTopics=Object.entries(tc).sort((a,b)=>b[1]-a[1]).slice(0,4);
             const total=allMistakes.length;
             const topicColors={"Numbers":"#3B82F6","Addition":"#10B981","Subtraction":"#F59E0B",
-              "Multiplication":"#7C3AED","Division":"#F97316","Money":"#0D9488",
+              "Multiplication":"#1F3F95","Division":"#F97316","Money":"#0D9488",
               "Word Problem":"#0891B2","Grammar":"#3B82F6","Vocabulary":"#8B5CF6","Other":"#64748B"};
             return(
               <div style={{padding:"0 16px 16px"}}>
@@ -562,7 +558,7 @@ function ParentMockTab({child, history}){
   return(
     <div>
       <div style={{background:"#F5F3FF",border:"1.5px solid #DDD6FE",borderRadius:14,padding:"12px",marginBottom:14}}>
-        <div style={{fontWeight:800,fontSize:13,color:"#4C1D95",marginBottom:4}}>🏫 Mock Exams</div>
+        <div style={{fontWeight:800,fontSize:13,color:"#1F3F95",marginBottom:4}}>🏫 Mock Exams</div>
         <div style={{fontSize:12,color:"#6D28D9",lineHeight:1.6}}>Every 10 practice sessions, {child?.name} receives a real school paper style mock exam. Compare performance against actual school benchmarks.</div>
       </div>
       {mockH.length===0?(
@@ -636,108 +632,15 @@ function ParentAdviceTab({advice, child, onApply}){
 }
 
 // ── Parent App (main container) ───────────────────────────────
-// Server mode only: parent creates a child account (username + password the parent chooses).
+// Server mode only: parent adds a child. Same component and styling as sign-up step 2 (src/components/clewquest/AddChild.js).
 function AddChildForm({onCreated}){
-  // Picture password (same picker + server hashing as the student picture sign-up) when ClewQuest is on; otherwise the old typed password.
-  const pic = clewquestEnabled();
-  const blank = {username:"",first:"",last:"",grade:"P3",school:"",password:""};
   const [open, setOpen] = useState(false);
-  const [f, setF] = useState(blank);
-  const [idTouched, setIdTouched] = useState(false); // once the parent edits the Login ID, stop auto-suggesting
-  const [a, setA] = useState([]); const [b, setB] = useState([]);
-  const [chk, setChk] = useState({state:"",key:"",nameFree:null,idFree:null}); // state: "" | "checking" | "done" | "error"
-  const [err, setErr] = useState("");
   const [ok, setOk] = useState("");
-  const [busy, setBusy] = useState(false);
-  const set=(k,v)=>setF(p=>({...p,[k]:v}));
-  const lbl={display:"block",fontSize:12,fontWeight:800,color:"#334155",marginBottom:4};
-  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
-  const first=cleanNamePart(f.first), last=cleanNamePart(f.last), full=fullName(first,last);
-  const username=f.username.trim();
-  const idProblem=loginIdProblem(f.username);
-  const key=full.toLowerCase()+"|"+username.toLowerCase();
-  const checked = chk.state==="done" && chk.key===key;
-  const nameOk = checked && chk.nameFree && chk.idFree && !idProblem && !!first && !!username;
-  function setName(k,v){
-    setF(p=>{
-      const n={...p,[k]:v};
-      if(!idTouched) n.username=suggestLoginId(n.first,n.last); // suggestion strips every space
-      return n;
-    });
-  }
-  async function check(){
-    if(!first) return setErr("Type the child's first name first.");
-    if(!username) return setErr("Type a login ID first.");
-    if(idProblem) return setErr(idProblem);
-    setErr(""); setChk({state:"checking",key,nameFree:null,idFree:null});
-    const r = await serverPost("/api/parent/children/check-name",{firstName:first,lastName:last,username});
-    setChk(r.ok ? {state:"done",key,nameFree:!!r.available,idFree:r.usernameAvailable!==false} : {state:"error",key,nameFree:null,idFree:null});
-  }
-  async function submit(){
-    setErr(""); setOk("");
-    if(!nameOk) return setErr("Check that the name and login ID are available first.");
-    if(pic){
-      if(a.length!==CODE_LENGTH || a.join()!==b.join()){ setB([]); return setErr("Pick the same 4 pictures twice."); }
-    } else if(f.password.length<6) return setErr("Password must be at least 6 characters.");
-    setBusy(true);
-    const body = {username,firstName:first,lastName:last,name:full,grade:f.grade,school:f.school,password:f.password};
-    const r = pic ? await cqPost("/api/parent/children/picture",{...body,sequence:a}) : await serverPost("/api/parent/children",body);
-    setBusy(false);
-    if(!r.ok){
-      if(r.status===409 && r.error==="display name taken"){ setChk(c=>({...c,nameFree:false})); return setErr("That name is already taken."); }
-      if(r.status===409){ setChk(c=>({...c,idFree:false})); return setErr("That login ID is already taken."); }
-      return setErr(r.error||"Could not create child.");
-    }
-    onCreated&&onCreated(r.child);
-    setOk(pic?`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the 4 pictures.`:`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the password you set.`);
-    setF(blank); setIdTouched(false); setA([]); setB([]); setChk({state:"",key:"",nameFree:null,idFree:null});
-  }
-  const st=(good,text,tid)=><div data-testid={tid} style={{color:good?"#065F46":"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>{text}</div>;
   return(
-    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add child</button>
-      {open&&(
-        <div style={{marginTop:10}}>
-          <div style={{display:"flex",gap:8}}>
-            <div style={{flex:1}}>
-              <label htmlFor="ac-first" style={lbl}>Child's first name</label>
-              <input id="ac-first" data-testid="ac-first" style={inp} placeholder="e.g. Joon Hee" value={f.first} onChange={e=>setName("first",e.target.value)}/>
-            </div>
-            <div style={{flex:1}}>
-              <label htmlFor="ac-last" style={lbl}>Child's last name</label>
-              <input id="ac-last" data-testid="ac-last" style={inp} placeholder="e.g. Kim" value={f.last} onChange={e=>setName("last",e.target.value)}/>
-            </div>
-          </div>
-          <label htmlFor="ac-username" style={lbl}>Login ID</label>
-          <div style={{display:"flex",gap:8,alignItems:"flex-start"}}>
-            <input id="ac-username" data-testid="ac-username" style={{...inp,flex:1,width:"auto",marginBottom:4,borderColor:idProblem?"#B91C1C":C.border}} placeholder="e.g. Aquacat01" value={f.username} onChange={e=>{ setIdTouched(true); set("username",e.target.value); }} autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
-            <button type="button" data-testid="ac-check" disabled={chk.state==="checking"} onClick={check} style={{background:"#4C1D95",color:"#fff",border:"none",borderRadius:8,padding:"9px 14px",fontWeight:800,fontSize:13,cursor:"pointer"}}>{chk.state==="checking"?"Checking...":"Check"}</button>
-          </div>
-          {idProblem
-            ? <div data-testid="ac-id-problem" style={{color:"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>{idProblem}</div>
-            : <div style={{color:C.muted,fontSize:11,marginBottom:8}}>3-30 characters: letters (A-Z, a-z), numbers (0-9) and _ only. Capital letters are kept, but Aquacat01 and aquacat01 count as the same ID.</div>}
-          {checked&&chk.nameFree&&st(true,"Name available","ac-name-status")}
-          {checked&&!chk.nameFree&&st(false,"That name is already taken","ac-name-status")}
-          {checked&&!chk.idFree&&st(false,"That login ID is already taken","ac-id-status")}
-          {checked&&chk.idFree&&!idProblem&&st(true,"Login ID available","ac-id-status")}
-          {chk.state==="error"&&<div data-testid="ac-name-status" style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>Could not check. Try again.</div>}
-          <label htmlFor="ac-grade" style={lbl}>Level</label>
-          <select id="ac-grade" style={inp} value={f.grade} onChange={e=>set("grade",e.target.value)}>{GRADES.map(g=><option key={g} value={g}>{g}</option>)}</select>
-          <label style={lbl}>School</label>
-          <SchoolCombobox value={f.school} onChange={v=>set("school",v)} border={C.border}/>
-          {pic?(<div style={{marginBottom:8}}>
-            <span style={lbl}>Picture password</span>
-            <PicturePad value={a} onChange={setA} label="Pick 4 pictures in order (your child's secret code)"/>
-            {a.length===CODE_LENGTH&&<div style={{marginTop:10}}><PicturePad value={b} onChange={setB} label="Pick the same 4 pictures again"/></div>}
-          </div>):(<>
-            <label htmlFor="ac-pw" style={lbl}>Password</label>
-            <input id="ac-pw" style={inp} type="password" placeholder="Child's password (min 6 chars)" value={f.password} onChange={e=>set("password",e.target.value)}/>
-          </>)}
-          {err&&<div style={{color:"#B91C1C",fontSize:12,marginBottom:8}}>{err}</div>}
-          {ok&&<div style={{color:"#065F46",fontSize:12,marginBottom:8}}>{ok}</div>}
-          <button data-testid="ac-create" disabled={busy||!nameOk} onClick={submit} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:nameOk?"pointer":"not-allowed",opacity:nameOk?1:0.55}}>{busy?"Creating...":"Create child account"}</button>
-        </div>
-      )}
+    <div style={{background:"#fff",borderRadius:20,boxShadow:"0 6px 20px rgba(27,35,64,.10)",padding:16,marginBottom:14}}>
+      <button data-testid="ac-open" onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:15,color:"#1F3F95",padding:0}}>{open?"− ":"+ "}Add child</button>
+      {ok&&<div data-testid="ac-ok" style={{color:"#4F6B22",fontSize:13,fontWeight:700,marginTop:8}}>{ok}</div>}
+      {open&&<div style={{marginTop:12}}><AddChild onCreated={(c)=>{ setOk(`Added ${c.name}. Login username: ${c.username}`); setOpen(false); onCreated&&onCreated(c); }}/></div>}
     </div>
   );
 }
@@ -789,7 +692,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
   const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
   const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
-  const btn={background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
+  const btn={background:"#1F3F95",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
   const [inv,setInv]=useState({sent:[],received:[]});
   const loadInv=()=>serverGet("/api/parent/co-parents").then(r=>{ if(r.ok) setInv({sent:r.sent||[],received:r.received||[]}); });
   useEffect(()=>{ loadInv(); },[]);
@@ -808,7 +711,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
   async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#1F3F95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
       {inv.received.length>0&&(<div style={{marginTop:10,background:"#FEF3C7",border:"1px solid #F59E0B",borderRadius:10,padding:10}}>
         <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Invitations for you</div>
         {inv.received.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:13,marginBottom:4}}>
@@ -854,18 +757,23 @@ function AlertSettings(){
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alerts</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#1F3F95",padding:0}}>{open?"− ":"＋ "}Alerts</button>
       {open&&(<div style={{marginTop:10}}>
         <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me when my child finishes a set, a paper or assigned homework, plus the weekly report</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
         <label style={{fontSize:12,display:"block",marginBottom:6}}><input type="checkbox" checked={qOn} onChange={e=>setQOn(e.target.checked)}/> Quiet hours for live alerts (Singapore time). Alerts that arrive in this window are held and sent when it ends.</label>
         {qOn&&<div style={{fontSize:12,marginBottom:8}}>From <input type="time" value={qs} onChange={e=>setQs(e.target.value)}/> to <input type="time" value={qe} onChange={e=>setQe(e.target.value)}/></div>}
-        <button onClick={save} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
+        <button onClick={save} style={{background:"#1F3F95",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>
         {msg&&<span style={{fontSize:12,color:C.muted,marginLeft:10}}>{msg}</span>}
       </div>)}
     </div>
   );
+}
+
+// Parent shell: marble page (tokens), same width as Wrap.
+function ParentWrap({children}){
+  return <div style={{background:"#F6F2EA",minHeight:"100vh"}}><div style={{maxWidth:"var(--wrap-w)",width:"100%",margin:"0 auto",position:"relative",overflowX:"hidden",boxSizing:"border-box",fontFamily:"var(--font-noto-sans),system-ui,sans-serif"}}>{children}</div></div>;
 }
 
 function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated, homeworkSimilarFor}){
@@ -905,25 +813,24 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
   }
 
   return(
-    <Wrap> <div style={{background:"linear-gradient(135deg,#0F172A,#1E3A6E)",padding:"18px 20px 0"}}>
+    <ParentWrap> <div style={{background:"#fff",boxShadow:"0 1px 0 rgba(27,35,64,.06)",padding:"18px 20px 0"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}}>
           <div>
-            <div style={{color:"rgba(255,255,255,0.55)",fontSize:10,fontWeight:700,letterSpacing:1,textTransform:"uppercase"}}>ClewQuest · Parent</div>
-            <div style={{color:"#fff",fontSize:15,fontWeight:800}}>👩 {user.name}</div>
+            <div style={{color:"#6B6F7B",fontSize:10,fontWeight:700,letterSpacing:1,textTransform:"uppercase"}}>ClewQuest · Parent</div>
+            <div style={{color:"#1B2340",fontSize:15,fontWeight:800}}>{user.name}</div>
           </div>
-          <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 12px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>
+          <button onClick={onLogout} style={{background:"none",border:"none",borderRadius:10,padding:"6px 12px",color:"#6B6F7B",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>
         </div> {linkedStudents.length===0?(
-          <div style={{background:"rgba(255,255,255,0.1)",borderRadius:12,padding:"10px 14px",marginBottom:12}}>
-            <div style={{color:"rgba(255,255,255,0.7)",fontSize:12}}>No students linked. Ask your child to share their Student ID.</div>
+          <div style={{background:"#F6F2EA",borderRadius:12,padding:"10px 14px",marginBottom:12}}>
+            <div style={{color:"#6B6F7B",fontSize:12}}>No students linked. Ask your child to share their Student ID.</div>
           </div>
         ):(
           <div style={{display:"flex",gap:8,marginBottom:12,overflowX:"auto",paddingBottom:2}}>
             {linkedStudents.map(s=>(
-              <button key={s.id} onClick={()=>{setSelectedId(s.id);setTab("overview");}} style={{background:selectedId===s.id?"rgba(255,255,255,0.9)":"rgba(255,255,255,0.12)",border:"none",borderRadius:12,padding:"8px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:6,flexShrink:0,transition:"all 0.2s"}}>
-                <span style={{fontSize:18}}>{s.avatar||"👤"}</span>
-                <div style={{textAlign:"left"}}>
-                  <div style={{fontSize:12,fontWeight:800,color:selectedId===s.id?"#0F172A":"#fff"}}>{s.name}</div>
-                  <div style={{fontSize:9,color:selectedId===s.id?C.muted:"rgba(255,255,255,0.5)"}}>{s.grade}</div>
+              <button key={s.id} onClick={()=>{setSelectedId(s.id);setTab("overview");}} style={{background:selectedId===s.id?"#1F3F95":"#F6F2EA",border:"none",borderRadius:12,padding:"8px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:6,flexShrink:0,transition:"all 0.2s"}}>
+                                <div style={{textAlign:"left"}}>
+                  <div style={{fontSize:12,fontWeight:800,color:selectedId===s.id?"#fff":"#1B2340"}}>{s.name}</div>
+                  <div style={{fontSize:9,color:selectedId===s.id?"#E2DBCF":"#6B6F7B"}}>{s.grade}</div>
                 </div>
               </button>
             ))}
@@ -932,19 +839,18 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           <>
             <div style={{display:"flex",gap:6,marginBottom:10}}>
               {GRADES.map(g=>(
-                <button key={g} onClick={()=>setGrade(g)} style={{background:grade===g?"rgba(255,255,255,0.9)":"rgba(255,255,255,0.1)",border:"none",borderRadius:8,padding:"5px 12px",color:grade===g?"#0F172A":"rgba(255,255,255,0.6)",fontSize:12,fontWeight:800,cursor:"pointer",flexShrink:0}}>
+                <button key={g} onClick={()=>setGrade(g)} style={{background:grade===g?"#1F3F95":"#F6F2EA",border:"none",borderRadius:999,padding:"5px 14px",color:grade===g?"#fff":"#6B6F7B",fontSize:12,fontWeight:800,cursor:"pointer",flexShrink:0}}>
                   {g}
                 </button>
               ))}
             </div>
-            <div style={{display:"flex",gap:0,borderBottom:"1px solid rgba(255,255,255,0.1)",marginBottom:0}}>
+            <div style={{display:"flex",gap:0,borderBottom:"1px solid #E2DBCF",marginBottom:0}}>
               {Object.entries(SUBJECTS).map(([key,sub])=>{
                 const live=!!LIVE_CONTENT[`${grade}_${key}`];
                 return(
-                  <button key={key} onClick={()=>{ setSubject(key); if(!live) setParentToast("Coming Soon"); else setParentToast(null); }} style={{flex:1,background:"none",border:"none",borderBottom:subject===key?"2.5px solid #fff":"2.5px solid transparent",padding:"8px 4px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
-                    <span style={{fontSize:15}}>{sub.icon}</span>
-                    <span style={{fontSize:9,fontWeight:subject===key?800:400,color:subject===key?"#fff":"rgba(255,255,255,0.4)"}}>{key}</span>
-                    {!live&&<span style={{fontSize:6,color:"rgba(255,255,255,0.45)",fontWeight:700}}>Coming Soon</span>}
+                  <button key={key} onClick={()=>{ setSubject(key); if(!live) setParentToast("Coming Soon"); else setParentToast(null); }} style={{flex:1,background:"none",border:"none",borderBottom:subject===key?"2.5px solid #D9A52E":"2.5px solid transparent",padding:"8px 4px",cursor:"pointer",display:"flex",flexDirection:"column",alignItems:"center",gap:1}}>
+                    <span style={{fontSize:12,fontWeight:subject===key?800:500,color:subject===key?"#1B2340":"#6B6F7B"}}>{key}</span>
+                    {!live&&<span style={{fontSize:6,color:"#6B6F7B",fontWeight:700}}>Coming Soon</span>}
                   </button>
                 );
               })}
@@ -952,8 +858,8 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           </>
         )} {child&&(
           <div style={{display:"flex",gap:5,padding:"10px 0 0",overflowX:"auto"}}>
-            {[["overview","📊 Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","📈 Learning"]]:[]),["mistakes","❌ Mistakes"],["settings","⚙️ Settings"],["mock","🏫 Mock"],["advice","AI Advice"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","🎁 Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&subject==="English"?[["papers","📄 Papers"]]:[])].map(([t,l])=>(
-              <button key={t} onClick={()=>setTab(t)} style={{background:tab===t?"rgba(255,255,255,0.9)":"rgba(255,255,255,0.1)",border:"none",borderRadius:10,padding:"7px 12px",color:tab===t?"#0F172A":"rgba(255,255,255,0.7)",fontSize:11,fontWeight:800,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>
+            {[["overview","Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","Learning"]]:[]),["mistakes","Mistakes"],["settings","Settings"],["mock","Mock"],["advice","AI Advice"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&subject==="English"?[["papers","Papers"]]:[])].map(([t,l])=>(
+              <button key={t} onClick={()=>setTab(t)} style={{background:tab===t?"#1F3F95":"#F6F2EA",border:"none",borderRadius:999,padding:"8px 14px",color:tab===t?"#fff":"#1B2340",fontSize:11,fontWeight:800,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>
                 {l}
               </button>
             ))}
@@ -986,7 +892,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
       </div>
-    </Wrap>
+    </ParentWrap>
   );
 }
 

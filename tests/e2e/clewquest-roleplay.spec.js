@@ -97,7 +97,7 @@ async function logoutToLogin(page) {
   const named = page.getByRole("button", { name: /^log ?out$/i });
   if (await named.count()) await named.first().click();
   else await page.getByTestId("cq-builder-logout").click();
-  await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
+  await expect(page.getByTestId("login-form")).toBeVisible({ timeout: 20000 });
 }
 
 async function openParentTools(page) {
@@ -550,10 +550,10 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       expect(fresh).not.toBe(linkCode);
       await dbWrite("PATCH", "clewquest_link_codes?child_id=eq." + uid, { expires_at: "2020-01-01T00:00:00.000Z" });
       await logoutToLogin(page);
-      await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
-      await page.getByPlaceholder("Your email").fill(parentEmail);
-      await page.getByPlaceholder("Your password").fill("parentpass1");
-      await page.getByRole("button", { name: /Log In/ }).click();
+      await page.getByTestId("login-role-parent").click();
+      await page.getByTestId("login-id").fill(parentEmail);
+      await page.getByTestId("login-password").fill("parentpass1");
+      await page.getByTestId("login-submit").click();
       await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
       await openParentTools(page);
       await page.getByTestId("pl-username").fill(student);
@@ -595,19 +595,19 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await expect(page.getByRole("button", { name: /Password Kid/ })).toBeVisible();
       await shot(page, "rp-22-parent-dashboard");
       await logoutToLogin(page);
-      await page.getByPlaceholder("Your login ID").fill("demo_student");
-      await page.getByPlaceholder("Your password").fill("demo123");
-      await page.getByRole("button", { name: /Log In/ }).click();
+      await page.getByTestId("login-id").fill("demo_student");
+      await page.getByTestId("login-password").fill("demo123");
+      await page.getByTestId("login-submit").click();
       await expect(page.getByText("Hello, Demo")).toBeVisible({ timeout: 20000 });
       expect(await page.getByTestId("cq-landing").count() + await page.getByTestId("cq-builder").count()).toBe(0);
       expect(await bodyText(page)).not.toMatch(/S\$|SGD/);
       await shot(page, "rp-19-demo-student");
       await page.getByRole("button", { name: "Logout" }).click();
-      await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
-      await page.locator("button").filter({ hasText: /^\s*Student\s*$/ }).click();
-      await page.getByPlaceholder("Your login ID").fill(passUser);
-      await page.getByPlaceholder("Your password").fill("pass1234");
-      await page.getByRole("button", { name: /Log In/ }).click();
+      await expect(page.getByTestId("login-form")).toBeVisible({ timeout: 20000 });
+      await page.getByTestId("login-role-student").click();
+      await page.getByTestId("login-id").fill(passUser);
+      await page.getByTestId("login-password").fill("pass1234");
+      await page.getByTestId("login-submit").click();
       await expect(page.getByText("Hello, Password")).toBeVisible({ timeout: 20000 });
       await expect(page.getByTestId("today-open-clewquest")).toBeVisible();
       expect(await page.getByTestId("cq-builder").count()).toBe(0);
@@ -629,7 +629,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await page.getByTestId("today-open-clewquest").click();
       await expect(page.getByTestId("cq-builder")).toBeVisible();
       await page.getByTestId("cq-builder-logout").click();
-      await expect(page.getByText("Welcome back")).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("login-form")).toBeVisible({ timeout: 20000 });
     });
 
     await check("five wrong codes lock on the fifth; linked parent reset clears it", async () => {
@@ -651,10 +651,10 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
       const lockCode = await readLinkCode(page);
       await logoutToLogin(page);
-      await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
-      await page.getByPlaceholder("Your email").fill(parentEmail);
-      await page.getByPlaceholder("Your password").fill("parentpass1");
-      await page.getByRole("button", { name: /Log In/ }).click();
+      await page.getByTestId("login-role-parent").click();
+      await page.getByTestId("login-id").fill(parentEmail);
+      await page.getByTestId("login-password").fill("parentpass1");
+      await page.getByTestId("login-submit").click();
       await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
       await openParentTools(page);
       await page.getByTestId("pl-username").fill(lockUser);
@@ -691,10 +691,10 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       fs.writeFileSync(path.join(OUT, "lockout-messages.json"), JSON.stringify({ messages, lockedText }, null, 2));
       await shot(page, "rp-18-lockout");
       await page.getByRole("button", { name: "Back" }).click();
-      await page.locator("button").filter({ hasText: /^\s*Parent\s*$/ }).click();
-      await page.getByPlaceholder("Your email").fill(parentEmail);
-      await page.getByPlaceholder("Your password").fill("parentpass1");
-      await page.getByRole("button", { name: /Log In/ }).click();
+      await page.getByTestId("login-role-parent").click();
+      await page.getByTestId("login-id").fill(parentEmail);
+      await page.getByTestId("login-password").fill("parentpass1");
+      await page.getByTestId("login-submit").click();
       await expect(page.getByRole("button", { name: /Lock Kid/ })).toBeVisible({ timeout: 20000 });
       await page.getByRole("button", { name: /Lock Kid/ }).click();
       await page.getByRole("button", { name: /Settings/ }).click();

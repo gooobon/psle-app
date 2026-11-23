@@ -66,7 +66,9 @@ import PaperExam from '@/components/PaperExam'; // mock exams from past papers (
 import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
 import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
 import { Art } from '@/components/clewquest/Art';
-import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
+import { PictureLogin } from '@/components/clewquest/PictureAuth';
+import { PreLoginLanding, LoginFrame, ForgotPassword, SetNewPassword, SignupParentStep1, SignupStep2 } from '@/components/clewquest/AuthScreens';
+import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, linkBtn } from '@/components/clewquest/Shell';
 import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
@@ -607,84 +609,28 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
 
 const CQ_ON = clewquestEnabled() && SERVER_AUTH;
-
-// Logged-out first screen: four-island art + white card (docs/design/clewquest-phase1-spec.md 2.3). Labels are decorative; no hotspots.
-function PreLoginLanding({onLogin, onSignup}){
-  const isl = (label, soon, pos) => (
-    <div style={{position:"absolute",...pos,width:"40%",textAlign:"center",pointerEvents:"none"}}>
-      <span style={{background:"rgba(15,23,42,.55)",color:"#fff",borderRadius:10,padding:"3px 8px",display:"inline-block",fontWeight:900,fontSize:15,textShadow:"0 1px 4px #000"}}>
-        {label}{soon && <span style={{display:"block",fontSize:12,whiteSpace:"nowrap"}}>(Coming soon)</span>}
-      </span>
-    </div>
-  );
-  return(
-    <Wrap>
-      <div data-testid="cq-prelogin" style={{minHeight:"100vh",background:"#0B3B73"}}>
-        <div style={{maxWidth:480,margin:"0 auto"}}>
-          <div style={{position:"relative"}}>
-            <Art k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{width:"100%",display:"block"}}/>
-            {isl("English",false,{left:"3%",top:"15%"})}
-            {isl("Chinese",false,{left:"3%",top:"61%"})}
-            {isl("Math",true,{left:"57%",top:"15%"})}
-            {isl("Science",true,{left:"57%",top:"61%"})}
-            <div style={{position:"absolute",top:8,left:0,right:0,display:"flex",justifyContent:"center"}}>
-              <Art k="brand/logo-b1" alt="ClewQuest" style={{width:120}}/>
-            </div>
-          </div>
-          <div style={{position:"relative",marginTop:-48,padding:"0 16px 32px"}}>
-            <div style={{background:"#fff",borderRadius:24,padding:"24px 20px",boxShadow:"0 8px 24px rgba(0,0,0,.25)",textAlign:"center"}}>
-              <div style={{fontWeight:900,fontSize:24,color:"#0F172A",lineHeight:1.2}}>Untangle PSLE. Master the Maze.</div>
-              <div style={{color:"#475569",marginTop:8}}>Daily practice for P3 to P6</div>
-              <div aria-hidden="true" style={{borderTop:"3px dotted #FBBF24",margin:"16px 0"}}/>
-              <button data-testid="cq-landing-login" onClick={onLogin} style={{width:"100%",padding:"14px",borderRadius:14,border:"none",background:"#DC2626",color:"#fff",fontWeight:900,fontSize:17,cursor:"pointer",marginBottom:10}}>Log in</button>
-              <button data-testid="cq-landing-signup" onClick={onSignup} style={{width:"100%",padding:"12px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",color:"#1E3A6E",fontWeight:900,fontSize:17,cursor:"pointer"}}>Sign up</button>
-            </div>
-            <div style={{color:"rgba(255,255,255,.85)",textAlign:"center",marginTop:14,fontSize:14}}>Parents: Sign up creates your family account</div>
-          </div>
-        </div>
-      </div>
-    </Wrap>
-  );
-}
+const SHOW_DEMO = process.env.NEXT_PUBLIC_SHOW_DEMO === "true"; // the "Try Demo Account" box is gone; seed the demo users only when this is on
+const GOOGLE_LOGIN = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED === "true"; // OAuth provider not configured yet: default off
 
 // Remembers the email a parent just signed up with, so the confirm-link landing can prefill the login if auto-login is not possible.
 const PENDING_PARENT_EMAIL_KEY = "clewquest_pending_parent_email";
 
-function AuthScreen({onLogin, onSignup, confirmInfo}){
-  const [mode, setMode] = useState(confirmInfo?"login":"landing");   // landing | login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
+function AuthScreen({onLogin, onSignup, confirmInfo, resetCode, onResetDone, onParentSignedUp}){
+  const [mode, setMode] = useState(confirmInfo?"login":"landing");   // landing | login | signup_parent | signup_legacy_student
   function pictureDone(profile){
     const user = mirrorServerUser(profile);
     importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); // same fire-and-forget copies as the password login
     onLogin("student", user);
   }
+  if(resetCode) return <SetNewPassword code={resetCode} onDone={()=>{ onResetDone(); setMode("login"); }}/>;
   if(mode==="landing") return <PreLoginLanding onLogin={()=>setMode("login")} onSignup={()=>setMode("signup_parent")}/>;
+  if(mode==="signup_parent" && SERVER_AUTH) return <SignupParentStep1 onLoginInstead={()=>setMode("login")} onSignedIn={(p)=>onParentSignedUp(p)}/>;
   return(
-    <Wrap>
-      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0B3B73"}}> <div data-testid="cq-auth-header" style={{background:"linear-gradient(180deg,#0B3B73 0%,#1D5FA8 100%)",padding:"36px 20px 36px",textAlign:"center",flexShrink:0}}>
-          <div style={{display:"flex",justifyContent:"center",marginBottom:8}}>
-            <Art k="brand/logo-b1" alt="ClewQuest" style={{width:"min(180px, 60vw)"}}/>
-          </div>
-          <div style={{color:"#fff",fontSize:"clamp(24px, 8vw, 30px)",fontWeight:900,letterSpacing:1,overflowWrap:"anywhere"}}>ClewQuest</div>
-          <div style={{color:"rgba(255,255,255,0.75)",fontSize:"calc(var(--fs) * 0.929)",marginTop:6}}>PSLE Practice . English . Chinese</div>
-          <div style={{display:"flex",gap:8,justifyContent:"center",marginTop:16,flexWrap:"wrap"}}>
-            {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.14)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.85)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
-          </div>
-        </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
-          {mode==="login" && <button data-testid="cq-back-landing" onClick={()=>setMode("landing")} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontWeight:700,marginBottom:12,padding:0}}>&larr; Back</button>}
-          {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
-          {mode==="login" && CQ_ON && (
-            <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
-              <button data-testid="cq-open-picture-login" onClick={()=>setMode("picture_login")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>Student: sign in with pictures</button>
-              <button data-testid="cq-open-picture-signup" onClick={()=>setMode("picture_signup")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>New student: create account with pictures</button>
-            </div>
-          )}
-          {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("landing")}/>}
-          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("landing")}/>}
-          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("landing")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>)}
-        </div>
-      </div>
-    </Wrap>
+    <LoginFrame onBack={()=>setMode("landing")}>
+      {mode==="login" && <LoginForm onLogin={onLogin} onPictureDone={pictureDone} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
+      {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("landing")}/>}
+      {mode==="signup_parent"  && <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>}
+    </LoginFrame>
   );
 }
 
@@ -1012,24 +958,22 @@ function LegacyParentEmailPrompt({local, onBack}){
   </div>);
 }
 
-function LoginForm({onLogin, onGoSignup, confirmInfo}){
+function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo}){
   const [role, setRole] = useState(confirmInfo ? "parent" : "student");
   const [id,   setId]   = useState(confirmInfo?.email || "");
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
   const [legacyParent, setLegacyParent] = useState(null);
+  const [usePw, setUsePw] = useState(!CQ_ON); // student tab: pictures when ClewQuest is on, else (or on request) a password
+  const [forgot, setForgot] = useState(false);
 
-  function fillDemo(){
-    if(role==="student"){ setId("demo_student"); setPw("demo123"); }
-    else { setId("demo_parent"); setPw("demo456"); }
-  }
-
-  if(!STORE.users["demo_student"]){
+  if(SHOW_DEMO && !STORE.users["demo_student"]){
     STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"",color:"#3B82F6"};
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
+  if(forgot) return <ForgotPassword initialEmail={id.includes("@")?id:""} onBack={()=>setForgot(false)}/>;
   if(legacyParent) return <LegacyParentEmailPrompt local={legacyParent} onBack={()=>setLegacyParent(null)}/>;
 
   async function handleLogin(){
@@ -1052,45 +996,39 @@ function LoginForm({onLogin, onGoSignup, confirmInfo}){
     setErr(role==="student" && id.includes("@") ? "Parents: please use the Parent tab" : "Wrong ID or password. Please check and try again.");
   }
 
+  const parentTab = role==="parent";
+  const canPw = !!id.trim() && !!pw;
   return(
-    <div>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:6}}>Welcome back </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Log in to continue your practice</div>
-      {confirmInfo&&<div data-testid="email-confirmed-note" style={{background:"#F0FDF4",borderRadius:10,padding:"9px 13px",marginBottom:14,fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:700}}>Email confirmed. Please log in.</div>} <div style={{display:"flex",background:"#E2E8F0",borderRadius:14,padding:4,marginBottom:20}}>
-        {["student","parent"].map(r=>(
-          <button key={r} onClick={()=>{setRole(r);setErr("");}} style={{flex:1,background:role===r?"#fff":"none",border:"none",borderRadius:11,padding:"10px 0",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,cursor:"pointer",color:role===r?"#0F172A":C.muted,boxShadow:role===r?"0 2px 8px rgba(0,0,0,0.1)":"none",transition:"all 0.2s"}}>
-            {r==="student"?" Student":" Parent"}
-          </button>
-        ))}
-      </div> <div onClick={fillDemo} style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"10px 14px",marginBottom:18,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-        <div>
-          <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:2}}> Try Demo Account (demo only)</div>
-          <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#3B82F6"}}>{role==="student"?"ID: demo_student / PW: demo123":"ID: demo_parent / PW: demo456"}</div>
+    <div data-testid="login-form">
+      <h1 style={{margin:"0 0 14px",fontWeight:800,fontSize:26,color:T.ink,fontFamily:FONT}}>Log in</h1>
+      {confirmInfo&&<div data-testid="email-confirmed-note" style={{background:"#EEF3E2",borderRadius:10,padding:"9px 13px",marginBottom:14,fontSize:14,color:T.successText,fontWeight:700}}>Email confirmed. Please log in.</div>}
+      <div style={{marginBottom:18}}><Segmented testId="login-role" value={role} onChange={r=>{setRole(r);setErr("");}} options={[["student","Student"],["parent","Parent"]]}/></div>
+      {!parentTab && CQ_ON && !usePw && <PictureLogin onDone={onPictureDone} onUsePassword={()=>setUsePw(true)}/>}
+      {(parentTab || usePw || !CQ_ON) && (<>
+        <Field id="lg-id" label={parentTab?"Email":"Username"}>
+          <input id="lg-id" data-testid="login-id" style={inputStyle} value={id} onChange={e=>setId(e.target.value)} placeholder={parentTab?"you@example.com":"Your username"} autoCapitalize="none" autoCorrect="off" spellCheck={false}/>
+        </Field>
+        <Field id="lg-pw" label="Password">
+          <div style={{position:"relative"}}>
+            <input id="lg-pw" data-testid="login-password" style={{...inputStyle,paddingRight:64}} type={showPw?"text":"password"} value={pw} onChange={e=>setPw(e.target.value)} placeholder="Your password" onKeyDown={e=>{ if(e.key==="Enter") handleLogin(); }}/>
+            <button type="button" onClick={()=>setShowPw(p=>!p)} style={{...linkBtn,position:"absolute",right:12,top:14,color:T.primary,fontSize:13}}>{showPw?"Hide":"Show"}</button>
+          </div>
+        </Field>
+        {parentTab && SERVER_AUTH && <div style={{textAlign:"right",marginTop:-6,marginBottom:12}}><button type="button" data-testid="forgot-link" onClick={()=>setForgot(true)} style={{...linkBtn,color:T.primary,fontSize:14}}>Forgot password?</button></div>}
+        {err&&<ErrorText testId="login-error">{err}</ErrorText>}
+        <button data-testid="login-submit" disabled={!canPw} onClick={handleLogin} style={mainBtn(!canPw)}>Log in</button>
+        {parentTab && GOOGLE_LOGIN && (<>
+          <div style={{textAlign:"center",color:T.muted,margin:"12px 0"}}>or</div>
+          <button data-testid="google-login" type="button" onClick={()=>setErr("Google login is not set up yet.")} style={secondaryBtn}>Continue with Google</button>
+        </>)}
+        {!parentTab && CQ_ON && <div style={{textAlign:"center",marginTop:14}}><button type="button" onClick={()=>{setUsePw(false);setErr("");}} style={{...linkBtn,color:T.muted,fontSize:13,fontWeight:500,textDecoration:"underline"}}>Use my pictures</button></div>}
+      </>)}
+      {parentTab ? (
+        <div style={{marginTop:22,textAlign:"center",fontSize:14,color:T.ink}}>
+          New here? <button type="button" data-testid="login-create-family" onClick={()=>onGoSignup("signup_parent")} style={{...linkBtn,color:T.cta,fontSize:14}}>Create a family account</button>
+          <div style={{color:T.muted,marginTop:8,fontSize:13}}>Children log in on the Student tab with their pictures.</div>
         </div>
-        <span style={{color:"#3B82F6",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700}}>Fill </span>
-      </div>
-
-      <InputField label={SERVER_AUTH&&role==="parent"?"Email":"ID"} value={id} onChange={setId} placeholder={SERVER_AUTH&&role==="parent"?"Your email":"Your login ID"}/>
-      <div style={{position:"relative",marginBottom:16}}>
-        <InputField label="Password" value={pw} onChange={setPw} type={showPw?"text":"password"} placeholder="Your password" onEnter={handleLogin}/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
-      </div>
-
-      {err&&<ErrorBox msg={err}/>}
-
-      <BigBtn color={C.navy} onClick={handleLogin}>Log In </BigBtn>
-
-      <div style={{marginTop:20,textAlign:"center"}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:12}}>Don't have an account?</div>
-        <div style={{display:"flex",gap:10}}>
-          {!SERVER_AUTH&&<button onClick={()=>onGoSignup("signup_student")} style={{flex:1,background:"none",border:`2px solid ${C.navy}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:C.navy}}>
-             Student Sign Up
-          </button>}
-          <button onClick={()=>onGoSignup("signup_parent")} style={{flex:1,background:"none",border:`2px solid #7C3AED`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,cursor:"pointer",color:"#7C3AED"}}>
-             Parent Sign Up
-          </button>
-        </div>
-      </div>
+      ) : null}
     </div>
   );
 }
@@ -2408,6 +2346,8 @@ function App(){
   // the login screen even though the cookie is still valid. Flag off: this call is
   // skipped and the app stays local-only. Admin restore is unchanged.
   const [sessionChecked, setSessionChecked] = useState(!SERVER_AUTH);
+  const [resetCode, setResetCode] = useState("");   // password-reset link: /?reset=1&code=...
+  const [onboard, setOnboard] = useState(false);     // new parent with no children: go straight to "Add your child"
   const [confirmInfo, setConfirmInfo] = useState(null); // {email}: confirm link could not auto-login -> Parent login with a note
   useEffect(()=>{
     let alive = true;
@@ -2418,6 +2358,7 @@ function App(){
       try{
         const u = new URL(window.location.href);
         confirmCode = u.searchParams.get("code") || "";
+        if(u.searchParams.get("reset")==="1" && confirmCode){ const rc=confirmCode; confirmCode=""; u.searchParams.delete("reset"); u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); setResetCode(rc); }
         if(confirmCode){ u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
       }catch{}
     }
@@ -2431,6 +2372,7 @@ function App(){
           const kids = (r.children||[]).map(c=>mirrorServerUser(c));
           const user = mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
           setAuth(a=>a||{role:"parent",user});
+          if(!kids.length) setOnboard(true);
         } else setConfirmInfo({email});
       });
     }
@@ -2465,7 +2407,9 @@ function App(){
   }
 
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
-  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo}/>;
+  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo} resetCode={resetCode} onResetDone={()=>setResetCode("")}
+    onParentSignedUp={(p)=>{ handleLogin("parent", mirrorServerUser(p,{childIds:[]})); setOnboard(true); }}/>;
+  if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2 onDone={(c)=>{ const k=mirrorServerUser(c); if(STORE.users[auth.user.id]){ STORE.users[auth.user.id].childIds=[k.id]; persistUsers(); } setAuth(a=>({...a,user:{...a.user,childIds:[k.id]}})); setOnboard(false); }}/>;
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;

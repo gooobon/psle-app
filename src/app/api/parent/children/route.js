@@ -1,5 +1,5 @@
 // Parent creates a child account (service role, after verifying the caller is a logged-in parent).
-import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent, displayNameTaken } from "@/lib/supabase/server";
+import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
 import { normUsername, USERNAME_RE, isReservedUsername, USERNAME_MSG, cleanNamePart, fullName } from "@/lib/supabase/config";
 
 export const runtime = "nodejs";
@@ -22,8 +22,11 @@ export async function POST(request) {
 
   if (school.length > 120) return jerr("school too long", 400);
   const admin = adminClient();
-  try { if (await displayNameTaken(admin, name)) return jerr("display name taken", 409); } catch { return jerr("could not check name", 500); }
-  const made = await createStudent(admin, { username, password, name, firstName, lastName, grade, school: school.slice(0, 120), parentId: me.profile.id });
+  // Duplicate display names are allowed; only the login username is unique (createStudent returns 409 on a clash).
+  const SUBJ = ["English", "Math", "Science"], MT = ["Chinese", "Higher Chinese", "Other / none"];
+  const subjects = Array.isArray(b.subjects) ? b.subjects.filter((x) => SUBJ.includes(x)) : [];
+  const extra = {}; if (subjects.length) extra.subjects = subjects; if (MT.includes(b.motherTongue)) extra.mother_tongue = b.motherTongue;
+  const made = await createStudent(admin, { username, password, name, firstName, lastName, grade, school: school.slice(0, 120), parentId: me.profile.id, extra });
   if (made.error) return jerr(made.error, made.status);
   return jok({ child: { id: made.id, role: "student", username, name, grade, school } });
 }

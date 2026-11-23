@@ -8,6 +8,8 @@ export async function POST(request) {
   const email = String(b.email || "").trim().toLowerCase();
   const password = String(b.password || "");
   const name = String(b.name || "").trim();
+  const relationship = b.relationship === "guardian" ? "guardian" : "parent";
+  const consent = b.consent === true, weeklyEmail = b.weeklyEmail === true;
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return jerr("valid email required", 400);
   if (password.length < 8) return jerr("password must be at least 8 characters", 400);
   if (!name || name.length > 80) return jerr("name required", 400);
@@ -38,6 +40,8 @@ export async function POST(request) {
     await rollback();
     return jerr("profile failed", 500);
   }
+  // Additive migration (20261206000000): relationship, consent time, weekly-email opt-in. Skipped silently if the columns do not exist yet.
+  if (consent) await admin.from("parent_settings").update({ relationship, consent_at: new Date().toISOString(), weekly_email_optin: weeklyEmail }).eq("parent_id", id).then(() => {}, () => {});
   // Owner decision: "Confirm email" is ON in Supabase Auth settings, so no session is returned until the link is clicked.
   if (!data.session) return jok({ needsConfirmation: true });
   return jok({ profile: publicProfile(p.data), children: [] });

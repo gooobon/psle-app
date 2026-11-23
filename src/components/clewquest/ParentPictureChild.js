@@ -7,7 +7,7 @@ import { PicturePad } from "@/components/clewquest/PictureAuth";
 import { cqPost } from "@/lib/clewquest/client";
 
 const inp = { width: "100%", padding: "9px 10px", fontSize: 13, borderRadius: 8, border: "1px solid #CBD5E1", boxSizing: "border-box", marginBottom: 8 };
-const btn = { padding: "9px 14px", fontSize: 13, fontWeight: 800, color: "#fff", background: "#4C1D95", border: "none", borderRadius: 10, cursor: "pointer", marginBottom: 8 };
+const btn = { padding: "9px 14px", fontSize: 13, fontWeight: 800, color: "#fff", background: "#1F3F95", border: "none", borderRadius: 10, cursor: "pointer", marginBottom: 8 };
 
 export default function ParentPictureChild({ onChildLinked }) {
   const [lu, setLu] = useState(""); const [code, setCode] = useState(""); const [msg, setMsg] = useState(""); const [busy, setBusy] = useState(false);
@@ -38,7 +38,7 @@ export default function ParentPictureChild({ onChildLinked }) {
       <input data-testid="pl-code" style={inp} placeholder="6-digit code" inputMode="numeric" maxLength={6} value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} />
       <button data-testid="pl-submit" disabled={busy} style={btn} onClick={link}>Link with code</button>
       {msg && <div data-testid="pl-msg" style={{ fontSize: 12, color: "#475569" }}>{msg}</div>}
-      <button type="button" onClick={() => setOpen((o) => !o)} style={{ display: "block", background: "none", border: "none", padding: 0, marginTop: 6, fontWeight: 800, fontSize: 12, color: "#4C1D95", cursor: "pointer" }}>{open ? "− " : "＋ "}Create a picture-code child</button>
+      <button type="button" onClick={() => setOpen((o) => !o)} style={{ display: "block", background: "none", border: "none", padding: 0, marginTop: 6, fontWeight: 800, fontSize: 12, color: "#1F3F95", cursor: "pointer" }}>{open ? "− " : "＋ "}Create a picture-code child</button>
       {open && (<div style={{ marginTop: 8 }}>
         <input data-testid="pc-username" style={inp} placeholder="Choose a username" value={cu} onChange={(e) => setCu(e.target.value)} autoCapitalize="none" />
         <input data-testid="pc-name" style={inp} placeholder="Child's name" value={cn} onChange={(e) => setCn(e.target.value)} />

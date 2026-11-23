@@ -18,7 +18,7 @@ function tintedUrl(k, a, hex) {
         const c = document.createElement("canvas"); c.width = img.naturalWidth; c.height = img.naturalHeight;
         const x = c.getContext("2d"); x.drawImage(img, 0, 0);
         const d = x.getImageData(0, 0, c.width, c.height);
-        tintPixels(d.data, hex, k.startsWith("stages/stage-5") || k.startsWith("characters/") ? "red" : "dark");
+        tintPixels(d.data, hex, /^stages\/stage-[45]/.test(k) || k.startsWith("characters/") ? "red" : "dark");
         x.putImageData(d, 0, 0);
         const url = c.toDataURL("image/png"); tintCache.set(ck, url); resolve(url);
       } catch (e) { resolve(null); }

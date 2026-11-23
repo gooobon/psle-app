@@ -1,5 +1,8 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 :root {
+  /* ClewQuest shell tokens: keep in sync with src/lib/theme/tokens.js */
+  --cq-bg: #F6F2EA; --cq-card: #FFFFFF; --cq-primary: #1F3F95; --cq-ink: #1B2340; --cq-cta: #C8372D; --cq-gold: #D9A52E;
+  --cq-success: #7E9A45; --cq-error: #B3261E; --cq-muted: #6B6F7B; --cq-border: #E2DBCF;
   --background: #ffffff;
   --foreground: #0f172a;
   color-scheme: light;

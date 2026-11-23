@@ -217,7 +217,7 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await shiftBrowser([pp, pb, sp], 0);
 
   await pp.goto("/");
-  await pp.getByText("Welcome back").waitFor();
+  await pp.getByTestId("login-form").waitFor();
   await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
   await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
   await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);

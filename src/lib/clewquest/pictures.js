@@ -1,17 +1,20 @@
-// Picture-code icons (client-safe). The code is an ordered list of 4 picks from these 9. The SLOT (index) is what counts,
-// so changing a glyph or label never changes anyone's code. Every glyph is Unicode 9 or older; the label is always shown.
+// Picture-code icons (client-safe). The code is an ordered list of CODE_LENGTH picks from these 9. The SLOT (index) is what counts
+// and is what the server hashes, so changing the art or label of a slot never changes the hash (pepper and hashes stay compatible).
+// NOTE: slots were re-labelled in the first-screens redesign; test codes made earlier now show different pictures. Art lives in PictureIcon.js (inline SVG, no emoji).
 export const PICTURES = [
-  { key: "owl", label: "Owl", glyph: "\u{1F989}" },
-  { key: "lyre", label: "Lyre", glyph: "\u{1F3B6}" },
-  { key: "laurel", label: "Laurel", glyph: "\u{1F33F}" },
-  { key: "ship", label: "Ship", glyph: "⛵" },
-  { key: "column", label: "Column", glyph: "\u{1F3DB}️" },
-  { key: "amphora", label: "Amphora", glyph: "\u{1F3FA}" },
-  { key: "grapes", label: "Grapes", glyph: "\u{1F347}" }, // was Olive U+1FAD2 (Unicode 13, missing on older devices); same slot 6, so codes are unchanged
-  { key: "sun", label: "Sun", glyph: "☀️" },
-  { key: "shield", label: "Shield", glyph: "\u{1F6E1}️" },
+  { key: "owl", label: "Owl", colour: "#8B7355" },
+  { key: "trident", label: "Trident", colour: "#2F6FD0" },
+  { key: "harp", label: "Harp", colour: "#8A5A2B" },
+  { key: "bolt", label: "Bolt", colour: "#E0B400" },
+  { key: "wing-shoe", label: "Wing shoe", colour: "#5BB6E8" },
+  { key: "pegasus", label: "Pegasus", colour: "#9C8CC9" },
+  { key: "laurel", label: "Laurel", colour: "#4E8B3A" },
+  { key: "helmet", label: "Helmet", colour: "#B5763A" },
+  { key: "clew", label: "Clew", colour: "#C8372D" },
 ];
+// Single config value: copy, dots and validation all follow it. Keep 4: existing accounts use 4.
 export const CODE_LENGTH = 4;
+export const codeCopy = (n = CODE_LENGTH) => `Tap your ${n} pictures in order`;
 // Returns the canonical sequence string "3-1-4-7", or null when invalid. Accepts an array of indices or picture keys.
 export function normalizeSequence(seq) {
   if (!Array.isArray(seq) || seq.length !== CODE_LENGTH) return null;

@@ -92,7 +92,7 @@ eq("nickname profanity filter", L.cleanNickname("shit head").ok, false);
 // 5. picture code
 const PEPPER = "test-pepper-0123456789-abcdef";
 eq("sequence normalises", P.normalizeSequence([3, 1, 4, 7]), "3-1-4-7");
-eq("sequence accepts keys", P.normalizeSequence(["owl", "lyre", "laurel", "ship"]), "0-1-2-3");
+eq("sequence accepts keys", P.normalizeSequence(["owl", "trident", "harp", "bolt"]), "0-1-2-3");
 eq("short sequence rejected", P.normalizeSequence([1, 2, 3]), null);
 eq("out-of-range rejected", P.normalizeSequence([1, 2, 3, 9]), null);
 eq("9 pictures", P.PICTURES.length, 9);
@@ -414,13 +414,19 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     t("F9: shell only mounts for a configured grade", /const cqOk = CQ_ON && typeof user\.serverId==="string" && questGrade\(user\.grade\)/.test(app));
     t("F9: the shell reads subjects for the student's grade, not the default grade", /questGrade\(user\.grade\)/.test(cq) && /subjectsFor\(grade\)/.test(cq) && !/grades\[CLEWQUEST\.defaultGrade\]/.test(cq)); }
 
-  // F11: widely supported glyphs, labels always shown, slots unchanged
-  { const cps = P.PICTURES.flatMap((p) => [...p.glyph].map((c) => c.codePointAt(0)));
-    t("F11: no olive U+1FAD2", !cps.includes(0x1FAD2));
-    t("F11: no glyph from Unicode 10+ blocks (>= U+1F990 or U+1FA00+)", cps.every((c) => c < 0x1F990 || c === 0xFE0F), cps.map((c) => c.toString(16)));
-    eq("F11: slot 6 keeps its index (codes unchanged)", [P.PICTURES[6].key, P.normalizeSequence([6, 6, 6, 6])], ["grapes", "6-6-6-6"]);
+  // F11: flat vector art (no emoji, no wine imagery), labels always shown, slots unchanged
+  { t("F11: no glyph field (inline SVG art only)", P.PICTURES.every((p) => !("glyph" in p)));
+    t("F11: no grapes", !P.PICTURES.some((p) => /grape|wine|amphora/i.test(p.key + p.label)));
+    eq("F11: labels in design order", P.PICTURES.map((p) => p.label), ["Owl", "Trident", "Harp", "Bolt", "Wing shoe", "Pegasus", "Laurel", "Helmet", "Clew"]);
+    eq("F11: slot 6 keeps its index (codes unchanged)", [P.PICTURES[6].key, P.normalizeSequence([6, 6, 6, 6])], ["laurel", "6-6-6-6"]);
+    t("F11: CODE_LENGTH drives the copy", P.codeCopy(P.CODE_LENGTH) === `Tap your ${P.CODE_LENGTH} pictures in order` && P.codeCopy(3) === "Tap your 3 pictures in order");
     const pa = fs.readFileSync(path.join(root, "src/components/clewquest/PictureAuth.js"), "utf8");
     t("F11: picture pad always renders the text label", /data-testid=\{`pic-label-\$\{i\}`\}[^>]*>\{p\.label\}/.test(pa)); }
+  { const T = await import("../src/lib/theme/tokens.js");
+    eq("tokens: marble bg", T.TOKENS.bg, "#F6F2EA"); eq("tokens: crimson cta", T.TOKENS.cta, "#C8372D"); eq("tokens: egyptian blue", T.TOKENS.primary, "#1F3F95");
+    eq("tokens: ink", T.TOKENS.ink, "#1B2340"); eq("tokens: gold", T.TOKENS.gold, "#D9A52E");
+    eq("tokens: disabled main button is ~50% opacity", T.mainBtn(true).opacity, 0.5);
+    t("tokens: no purple/slate/navy shell colours", !/7C3AED|4C1D95|F1F5F9|0B3B73|16A34A/i.test(JSON.stringify(T.TOKENS))); }
   delete process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED;
 }
 
@@ -512,8 +518,11 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   { const { publicProfile } = await import("../src/lib/supabase/server.js").catch(() => ({}));
     if (publicProfile) eq("B2: password student profile has no pictureCode flag", [publicProfile({ id: "1", role: "student" }).pictureCode, publicProfile({ id: "1", role: "student" }, true).pictureCode], [undefined, true]); }
   // small fixes
-  t("nickname: builder shows a live counter and uses the shared max", /data-testid="cq-nick-count"/.test(cb) && /maxLength=\{CLEWQUEST\.nickname\.max\}/.test(cb) && CLEWQUEST.nickname.max === 24);
-  t("coming soon: label never wraps inside itself", /whiteSpace: "nowrap"/.test(cq) && /\(Coming soon\)/.test(cq));
+  t("builder: one screen, no nickname step, no green save, no gender colour buttons", !/cq-nickname|#16A34A|#DB2777|EFF6FF/.test(cb) && /This is my Clew/.test(cb) && /Make your Clew/.test(cb));
+  { const sh = fs.readFileSync(path.join(root, "src/components/clewquest/Shell.js"), "utf8");
+    t("pills: white, ink text, nowrap, no 'Island', no 'The Clew' label", /background: "#fff"/.test(sh) && /whiteSpace: "nowrap"/.test(sh) && !/label: "[^"]*(Island|The Clew)/.test(sh) && /Coming soon/.test(sh));
+    t("logged-in landing: no dark label boxes or text shadows, hotspots keep aria-label", !/textShadow|rgba\(15,23,42/.test(cq) && /aria-label="The Clew \(home\)"/.test(cq));
+    t("builder tabs come from config; only Hair enabled", CLEWQUEST.builder.tabs.filter((x) => x.enabled).map((x) => x.key).join() === "hair" && CLEWQUEST.builder.tabs.length === 5); }
   t("landing: no forced full-height navy band under the map", !/minHeight: "100vh", background: "#0B3B73"/.test(cq));
   t("lock screen: tells the child to ask a parent to reset, and how to get a link code", /Ask a parent to reset your picture code/.test(pa) && /Link a parent/.test(pa) && /6 numbers/.test(pa));
   t("link UI: no Korean, child home offers the link code", !/[\uAC00-\uD7AF]/.test(rd("src/components/clewquest/LinkCode.js") + rd("src/components/clewquest/ParentPictureChild.js")) && /data-testid="cq-linkcode/.test(rd("src/components/clewquest/LinkCode.js")));

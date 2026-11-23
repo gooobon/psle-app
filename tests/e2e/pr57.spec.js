@@ -232,7 +232,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   });
 
   await pp.goto("/");
-  await pp.getByText("Welcome back").waitFor();
+  await pp.getByTestId("login-form").waitFor();
   await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
   await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT.name);
   await pp.getByPlaceholder("you@example.com").fill(PARENT.email);

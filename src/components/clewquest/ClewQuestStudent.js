@@ -7,9 +7,11 @@ import { stageFromTotal, stageAssetKey, questGrade, subjectsFor } from "@/lib/cl
 import { Art, ASSET_KEYS } from "./Art";
 import CharacterBuilder from "./CharacterBuilder";
 import LinkCode from "./LinkCode";
+import { LandingArt } from "./AuthScreens";
+import { Page, LogoBadge, IslandPill, ISLAND_PILLS, T, FONT, mainBtn, secondaryBtn, linkBtn } from "./Shell";
 import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward } from "@/lib/clewquest/client";
 
-// Hotspots as percent of the landing image box (864x1184). Tune against the art.
+// Invisible hotspots as percent of the landing art box (864x1184). Full names live only in aria-label.
 const HOTSPOTS = [
   { key: "english", x: 3, y: 15, w: 40, h: 26 },
   { key: "chinese", x: 3, y: 61, w: 40, h: 26 },
@@ -19,37 +21,33 @@ const HOTSPOTS = [
 const fmt = (n) => (Math.round(n * 10) / 10).toString();
 const SEEN_STAGE_KEY = "clewquest_seen_stage_v1";
 
-const todayBtn = { background: "#FBBF24", color: "#0F172A", border: "none", borderRadius: 12, padding: "8px 14px", fontWeight: 900, cursor: "pointer" };
+const todayBtn = { ...secondaryBtn, width: "auto", height: 40, padding: "0 18px", fontSize: 15 };
 
 function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, pictureCode, toast }) {
   const [showLink, setShowLink] = useState(false);
   return (
-    <div data-testid="cq-landing" style={{ position: "relative", maxWidth: 480, margin: "0 auto", background: "#0B3B73" }}>
+    <Page testId="cq-landing">
       <div style={{ position: "relative" }}>
-        <Art k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{ width: "100%", display: "block" }} />
-        {HOTSPOTS.filter((h) => subjects[h.key]).map((h) => (
-          <button key={h.key} data-testid={`cq-island-${h.key}`} aria-label={subjects[h.key].label + (subjects[h.key].status === "open" ? "" : ", coming soon")} onClick={() => onOpen(h.key)}
-            style={{ position: "absolute", left: h.x + "%", top: h.y + "%", width: h.w + "%", height: h.h + "%", background: "transparent", border: "none", cursor: "pointer", color: "#fff", textShadow: "0 1px 4px #000", fontWeight: 900, fontSize: 15 }}>
-            <span style={{ background: "rgba(15,23,42,.55)", borderRadius: 10, padding: "3px 8px", display: "inline-block", whiteSpace: "nowrap" }}>
-              {subjects[h.key].label}{subjects[h.key].status === "open" ? "" : <span style={{ display: "block", fontSize: 12, whiteSpace: "nowrap" }}>(Coming soon)</span>}
-            </span>
-          </button>
-        ))}
-        <button data-testid="cq-clew" aria-label="The Clew (home)" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer", color: "#fff", fontWeight: 900, textShadow: "0 1px 4px #000" }}>
-          <span style={{ background: "rgba(15,23,42,.55)", borderRadius: 10, padding: "3px 8px" }}>The Clew</span>
-        </button>
-        <div style={{ position: "absolute", top: 8, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
-          <Art k="brand/logo-b1" alt="ClewQuest" style={{ width: 120 }} />
-        </div>
+        <LandingArt pills={false}>
+          {ISLAND_PILLS.map((p) => <IslandPill key={p.label} {...p} testId={`cq-pill-${p.label.toLowerCase()}`} />)}
+          {HOTSPOTS.filter((h) => subjects[h.key]).map((h) => (
+            <button key={h.key} data-testid={`cq-island-${h.key}`} aria-label={subjects[h.key].label + (subjects[h.key].status === "open" ? "" : ", coming soon")} onClick={() => onOpen(h.key)}
+              style={{ position: "absolute", left: h.x + "%", top: h.y + "%", width: h.w + "%", height: h.h + "%", background: "transparent", border: "none", cursor: "pointer" }} />
+          ))}
+          <button data-testid="cq-clew" aria-label="The Clew (home)" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer" }} />
+          <LogoBadge style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" }} />
+        </LandingArt>
       </div>
-      <button data-testid="cq-today" onClick={onToday} style={{ ...todayBtn, position: "absolute", top: 10, left: 10 }}>Today</button>
-      <button onClick={onLogout} style={{ position: "absolute", top: 10, right: 10, background: "rgba(255,255,255,.85)", border: "none", borderRadius: 10, padding: "6px 10px", fontWeight: 800, cursor: "pointer" }}>Log out</button>
-      {onLeave && <button data-testid="cq-leave" onClick={onLeave} style={{ position: "absolute", top: 46, left: 10, background: "rgba(255,255,255,.85)", border: "none", borderRadius: 10, padding: "6px 10px", fontWeight: 800, cursor: "pointer" }}>Back to Today</button>}
-      {pictureCode && (<div style={{ padding: "10px 12px 24px" }}>
-        {showLink ? <LinkCode /> : <button data-testid="cq-linkcode-open" onClick={() => setShowLink(true)} style={{ width: "100%", padding: 10, borderRadius: 12, border: "none", background: "rgba(255,255,255,.9)", fontWeight: 800, cursor: "pointer" }}>Link a parent</button>}
+      <div data-testid="cq-landing-bar" style={{ background: "#fff", display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, padding: "10px 14px", boxShadow: "0 2px 10px rgba(27,35,64,.08)" }}>
+        <button data-testid="cq-today" onClick={onToday} style={todayBtn}>Today</button>
+        {onLeave && <button data-testid="cq-leave" onClick={onLeave} style={{ ...todayBtn, height: 40 }}>Back to Today</button>}
+        <button data-testid="cq-logout" onClick={onLogout} style={{ ...linkBtn, color: T.muted, fontWeight: 500, fontSize: 14 }}>Log out</button>
+      </div>
+      {pictureCode && (<div style={{ padding: "14px 16px 24px" }}>
+        {showLink ? <LinkCode /> : <button data-testid="cq-linkcode-open" onClick={() => setShowLink(true)} style={secondaryBtn}>Link a parent</button>}
       </div>)}
-      {toast && <div role="status" data-testid="cq-toast" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: "#0F172A", color: "#fff", padding: "10px 18px", borderRadius: 14, fontWeight: 800 }}>{toast}</div>}
-    </div>
+      {toast && <div role="status" data-testid="cq-toast" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: T.ink, color: "#fff", padding: "10px 18px", borderRadius: 14, fontWeight: 800 }}>{toast}</div>}
+    </Page>
   );
 }
 
@@ -62,26 +60,26 @@ function ClewHome({ st, character, award, onBack, onEdit, onOpen, onToday, subje
   const cur = reach.find((s) => s.stage === stage);
   const pct = next ? Math.min(100, Math.round(((total - (cur ? cur.minThread : 0)) / (next.need - (cur ? cur.minThread : 0))) * 100)) : 100;
   return (
-    <div data-testid="cq-home" style={{ maxWidth: 480, margin: "0 auto", padding: "18px 18px 40px", minHeight: "100vh", background: "#EFF6FF", boxSizing: "border-box" }}>
+    <div data-testid="cq-home" style={{ maxWidth: 480, margin: "0 auto", padding: "18px 18px 40px", minHeight: "100vh", background: T.bg, color: T.ink, fontFamily: FONT, boxSizing: "border-box" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", fontWeight: 800, cursor: "pointer", color: "#1E3A6E" }}>Back to the islands</button>
+        <button onClick={onBack} style={{ background: "none", border: "none", fontWeight: 700, cursor: "pointer", color: T.primary, fontFamily: FONT }}>Back to the islands</button>
         <button data-testid="cq-today-home" onClick={onToday} style={todayBtn}>Today</button>
       </div>
-      {award > 0 && <div data-testid="cq-award" style={{ background: "#DCFCE7", color: "#166534", fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>+{fmt(award)} thread from your last round!</div>}
-      {st.leveledUp && <div data-testid="cq-stageup" style={{ background: "#FEF3C7", color: "#92400E", fontWeight: 900, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>Your Clew grew to Stage {stage}!</div>}
-      <div style={{ textAlign: "center", background: "#fff", borderRadius: 20, padding: 16, margin: "10px 0" }}>
+      {award > 0 && <div data-testid="cq-award" style={{ background: "#EEF3E2", color: T.successText, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>+{fmt(award)} thread from your last round!</div>}
+      {st.leveledUp && <div data-testid="cq-stageup" style={{ background: "#FBF1D6", color: T.ink, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>Your Clew grew to Stage {stage}!</div>}
+      <div style={{ textAlign: "center", background: "#fff", borderRadius: 20, boxShadow: "0 6px 20px rgba(27,35,64,.10)", padding: 16, margin: "10px 0" }}>
         <Art testId="cq-character" k={art} alt={`Your Clew at Stage ${stage}`} tint={hex} style={{ maxHeight: 260, width: "auto" }} />
-        <div style={{ fontWeight: 900, fontSize: 20 }}>{character.nickname || "Your Clew"}</div>
-        <div style={{ color: "#475569" }}>Stage {stage}: {(cur || {}).name}</div>
+        <div style={{ fontWeight: 800, fontSize: 20 }}>{character.nickname || "Your Clew"}</div>
+        <div style={{ color: T.muted }}>Stage {stage}: {(cur || {}).name}</div>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 8 }}>
-          <span style={{ width: 22, height: 22, borderRadius: 11, background: hex, border: "1px solid #94A3B8" }} />
+          <span style={{ width: 22, height: 22, borderRadius: 11, background: hex, border: "1px solid rgba(27,35,64,.18)" }} />
           <span data-testid="cq-thread-total" style={{ fontWeight: 900, fontSize: 22 }}>{fmt(total)}</span><span>thread</span>
         </div>
-        <div style={{ color: "#475569", fontSize: 14, marginTop: 4 }}>
+        <div style={{ color: T.muted, fontSize: 14, marginTop: 4 }}>
           English {fmt((st.thread.bySubject || {}).english || 0)} · Chinese {fmt((st.thread.bySubject || {}).chinese || 0)}
         </div>
         {next ? (<>
-          <div style={{ height: 10, background: "#E2E8F0", borderRadius: 6, margin: "12px 0 4px" }}><div style={{ width: pct + "%", height: 10, background: hex, borderRadius: 6 }} /></div>
+          <div style={{ height: 10, background: T.track, borderRadius: 6, margin: "12px 0 4px" }}><div style={{ width: pct + "%", height: 10, background: T.gold, borderRadius: 6 }} /></div>
           <div data-testid="cq-next" style={{ fontSize: 14, fontWeight: 700 }}>{fmt(next.have)} / {next.need} thread to Stage {next.stage}</div>
         </>) : <div style={{ fontWeight: 800, marginTop: 10 }}>Full-grown Clew!</div>}
       </div>
@@ -100,9 +98,9 @@ function ClewHome({ st, character, award, onBack, onEdit, onOpen, onToday, subje
       </div>
       <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
         {Object.entries(subjects).filter(([, v]) => v.status === "open").map(([key, v], i) => (
-          <button key={key} data-testid={`cq-go-${key}`} onClick={() => onOpen(key)} style={{ flex: 1, padding: 14, borderRadius: 14, border: "none", background: i % 2 ? "#B91C1C" : "#1E3A6E", color: "#fff", fontWeight: 800, cursor: "pointer" }}>{v.label}</button>
+          <button key={key} data-testid={`cq-go-${key}`} onClick={() => onOpen(key)} style={{ ...(i === 0 ? mainBtn(false) : secondaryBtn), flex: 1 }}>{v.label}</button>
         ))}
-        <button data-testid="cq-edit-look" onClick={onEdit} style={{ width: "100%", padding: 12, borderRadius: 14, border: "2px solid #1E3A6E", background: "#fff", fontWeight: 800, cursor: "pointer" }}>Edit look</button>
+        <button data-testid="cq-edit-look" onClick={onEdit} style={secondaryBtn}>Edit look</button>
       </div>
     </div>
   );
@@ -147,7 +145,7 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
   function openToday() { setFrom(view === "home" ? "home" : "landing"); setSubject(null); setView("today"); }
   if (view === "practice" && subject) return renderPractice(subjects[subject].appSubject, () => { setSubject(null); load(from); });
   if (view === "today") return renderPractice(null, () => load(from));
-  if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>;
+  if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: T.bg, color: T.ink }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>;
   if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onLogout={onLogout} onSkip={view === "builder" ? () => { setSkipped(true); if (onLeaveQuest) onLeaveQuest(); else openToday(); } : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
   if (view === "home" && st && character) return <ClewHome st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} />;
   return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} pictureCode={!!user.pictureCode} toast={toast} />;
