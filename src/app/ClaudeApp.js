@@ -679,9 +679,9 @@ function AuthScreen({onLogin, onSignup, confirmInfo}){
             </div>
           )}
           {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("signup_choose")}/>}
-          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("signup_choose")}/>}
-          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("signup_choose")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("signup_choose")}/>)}
+          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("landing")}/>}
+          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("landing")}/>}
+          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("landing")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>)}
         </div>
       </div>
     </Wrap>
