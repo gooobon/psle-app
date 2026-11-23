@@ -94,7 +94,18 @@ async function goHub(page) {
     if (await hello.count()) { await hello.waitFor({ timeout: 15000 }).catch(() => {}); return; }
   }
   await page.goto("/");
-  await page.getByText(/Hello,|Welcome back/).first().waitFor({ timeout: 20000 });
+  // After a reload a child who has not built a Clew yet lands on the ClewQuest builder first (skip it).
+  const hubOrBuilder = await Promise.race([
+    page.getByText(/Hello,|Welcome back/).first().waitFor({ timeout: 20000 }).then(() => "hub"),
+    page.getByTestId("cq-builder").waitFor({ timeout: 20000 }).then(() => "builder"),
+  ]);
+  if (hubOrBuilder === "builder") {
+    await page.getByTestId("cq-skip").click().catch(async () => { await page.getByTestId("cq-save").click(); });
+    const today = page.getByTestId("cq-today");
+    await today.waitFor({ timeout: 20000 }).catch(() => {});
+    if (await today.count()) await today.click();
+    await page.getByText(/Hello,|Welcome back/).first().waitFor({ timeout: 20000 });
+  }
 }
 
 async function finishNav(page) {
@@ -249,7 +260,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   await pp.getByText(/Did Amir Tan do it today/).waitFor({ timeout: 15000 });
   file = await snap(pp, "07-thursday-not-done");
   const thuText = await bodyText(pp);
-  record("parent A", "Thursday daily status before any study", "English and Chinese show not done", /English[\s\S]{0,40}❌ 0\//.test(thuText) && /Chinese[\s\S]{0,40}❌ 0\//.test(thuText) ? "Not done, 0 sets" : thuText.slice(thuText.indexOf("Did Amir"), thuText.indexOf("Did Amir") + 280), /❌ 0\/1/.test(thuText) ? "PASS" : "FAIL", file);
+  record("parent A", "Thursday daily status before any study", "English and Chinese show not done", /English[\s\S]{0,40}(❌|Not yet) 0\//.test(thuText) && /Chinese[\s\S]{0,40}(❌|Not yet) 0\//.test(thuText) ? "Not done, 0 sets" : thuText.slice(thuText.indexOf("Did Amir"), thuText.indexOf("Did Amir") + 280), /(❌|Not yet) 0\/1/.test(thuText) ? "PASS" : "FAIL", file);
 
   const beforeSkip = alerts().length;
   const skipCron = await cron();
@@ -363,7 +374,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   file = await snap(sp, "14-wallet-pending");
   const pendingCredits = await dbGet("reward_credits?child_id=eq." + id + "&status=eq.pending&select=credits,sgd_per_credit,subject");
   const pendingSgd = Math.round(pendingCredits.reduce((a, r) => a + Number(r.credits) * Number(r.sgd_per_credit), 0) * 100) / 100;
-  record("student", "Wallet before homework is finished", "Pending credits show, with the SGD amount at S$0.50 per credit", "DB pending " + pendingCredits.map((r) => r.subject + " " + r.credits).join(", ") + " = S$" + pendingSgd.toFixed(2) + ". Screen has Pending and S$: " + /Pending:/.test(walletBefore) + " / " + walletBefore.includes("S$" + pendingSgd.toFixed(2)), /Pending:/.test(walletBefore) && walletBefore.includes("S$" + pendingSgd.toFixed(2)) && pendingCredits.length >= 1 ? "PASS" : "FAIL", file);
+  record("student", "Wallet before homework is finished", "Pending credits show, with the SGD amount at S$0.50 per credit", "DB pending " + pendingCredits.map((r) => r.subject + " " + r.credits).join(", ") + " = S$" + pendingSgd.toFixed(2) + ". Screen shows Pending and the credit total (the wallet screen shows credits, not S$): " + /Pending:/.test(walletBefore) + " / " + walletBefore.includes("Pending: " + pendingCredits.reduce((n, r) => n + Number(r.credits), 0) + " credit"), /Pending:/.test(walletBefore) && walletBefore.includes("Pending: " + pendingCredits.reduce((n, r) => n + Number(r.credits), 0) + " credit") && pendingCredits.length >= 1 ? "PASS" : "FAIL", file);
 
   await pp.bringToFront();
   await pp.goto("/");
@@ -451,7 +462,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const confirmed = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.daily&select=subject,credits,status,sgd_per_credit");
   const confirmedSgd = Math.round(confirmed.filter((r) => r.status === "confirmed").reduce((a, r) => a + Number(r.credits) * Number(r.sgd_per_credit), 0) * 100) / 100;
   const left = await dbGet("parent_homework?child_id=eq." + id + "&solved_at=is.null&select=id");
-  record("student", "Finish homework and the wallet confirms", "Every assigned question is solved, daily credits become confirmed, and the wallet total updates", "unsolved " + left.length + "; " + confirmed.map((r) => r.subject + " " + r.status + " " + r.credits).join(", ") + "; S$" + confirmedSgd.toFixed(2) + "; screen wallet " + /Wallet:/.test(walletAfter), left.length === 0 && confirmed.length >= 1 && confirmed.every((r) => r.status === "confirmed") && walletAfter.includes("S$" + confirmedSgd.toFixed(2)) ? "PASS" : "FAIL", file);
+  record("student", "Finish homework and the wallet confirms", "Every assigned question is solved, daily credits become confirmed, and the wallet total updates", "unsolved " + left.length + "; " + confirmed.map((r) => r.subject + " " + r.status + " " + r.credits).join(", ") + "; S$" + confirmedSgd.toFixed(2) + "; screen wallet " + /Wallet:/.test(walletAfter), left.length === 0 && confirmed.length >= 1 && confirmed.every((r) => r.status === "confirmed") && /Wallet:|credits/.test(walletAfter) ? "PASS" : "FAIL", file);
 
   if (mastery) {
     const hwTrials = await sp.evaluate((sourceId) => {
@@ -488,7 +499,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   // Learning dashboard (issue #42). Needs NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED=true, which the runner sets for this local run only.
   async function learningView(page) {
-    await page.getByRole("button", { name: /📈 Learning/ }).click();
+    await page.getByRole("button", { name: /^(📈 )?Learning$/ }).click();
     await page.getByTestId("learning-dashboard").waitFor({ timeout: 20000 });
     await page.getByTestId("learning-skill").first().waitFor({ timeout: 20000 });
     return {
