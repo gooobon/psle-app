@@ -1,7 +1,7 @@
 {
   "version": 1,
   "generated": "2026-11-23",
-  "note": "Phase 1 placeholder art. Stage 1-3 need a fully-black redraw; stage 6-8 are not reachable in Phase 1.",
+  "note": "Phase 1 placeholder art. Stage 1-3 are fully black (redrawn 2026-11-23); stage 6-8 are not reachable in Phase 1.",
   "assets": {
     "brand/logo-b1-icon": {
       "webp": "/clewquest/brand/logo-b1-icon.webp",
@@ -162,20 +162,20 @@
     "stages/stage-1": {
       "webp": "/clewquest/stages/stage-1.webp",
       "png": "/clewquest/stages/stage-1.png",
-      "w": 162,
-      "h": 161
+      "w": 172,
+      "h": 172
     },
     "stages/stage-2": {
       "webp": "/clewquest/stages/stage-2.webp",
       "png": "/clewquest/stages/stage-2.png",
-      "w": 163,
-      "h": 181
+      "w": 165,
+      "h": 186
     },
     "stages/stage-3": {
       "webp": "/clewquest/stages/stage-3.webp",
       "png": "/clewquest/stages/stage-3.png",
-      "w": 198,
-      "h": 190
+      "w": 212,
+      "h": 187
     },
     "stages/stage-4": {
       "webp": "/clewquest/stages/stage-4.webp",

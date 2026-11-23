@@ -49,10 +49,28 @@ await ok("quiet hours helpers (wrap midnight, default 21:30-06:30)", () => {
   assert.equal(sgtDay(NIGHT), "2026-11-20"); assert.equal(sgtDay(new Date("2026-11-20T17:00:00Z")), "2026-11-21");
 });
 
-await ok("no send when WhatsApp is off (even with email on): no network, no DB writes", async () => {
+await ok("both channels off: no network, no DB writes", async () => {
   const db = makeDb(); const f = fetchLog();
-  const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "set-1", score: 1, total: 2 }, { env: { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co" }, now: DAY, fetchImpl: f.fetchImpl });
+  const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "set-1", score: 1, total: 2 }, { env: {}, now: DAY, fetchImpl: f.fetchImpl });
   assert.equal(r.enabled, false); assert.equal(f.calls.length, 0); assert.equal(db.t.event_alert_log.length, 0);
+});
+
+await ok("WhatsApp off, email on: milestone falls back to email (issue #66)", async () => {
+  const db = makeDb(); const f = fetchLog();
+  const env = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co" };
+  const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "set-1", score: 1, total: 2 }, { env, now: DAY, fetchImpl: f.fetchImpl });
+  assert.equal(r.enabled, true); assert.equal(r.sent, 2); assert(f.calls.length === 2 && f.calls.every((c) => c.u.includes("resend.com")), "email only, never WhatsApp");
+  assert.equal(db.t.event_alert_log.length, 2);
+});
+
+await ok("WhatsApp off, email on: allow-list still applies; 'started' stays WhatsApp-only", async () => {
+  const db = makeDb(); const f = fetchLog();
+  const env = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co", ALERT_TEST_RECIPIENTS: "one@example.test" };
+  const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "k2", score: 1, total: 2 }, { env, now: DAY, fetchImpl: f.fetchImpl });
+  assert.equal(r.sent, 1); assert.equal(r.skipped, 1); assert.deepEqual(f.calls[0].body.to, ["one@example.test"]);
+  const db2 = makeDb(); const f2 = fetchLog();
+  const s = await notifyEvent(db2, { type: "started", childId: "c1", subject: "English" }, { env: { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co" }, now: DAY, fetchImpl: f2.fetchImpl });
+  assert.equal(s.enabled, false); assert.equal(f2.calls.length, 0); assert.equal(db2.t.event_alert_log.length, 0);
 });
 
 await ok("both parents notified on a milestone, with the result", async () => {

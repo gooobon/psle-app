@@ -200,6 +200,14 @@ export function creditTotals(rows, paid = 0) {
   return { confirmed, pending: sum("pending"), forfeited: sum("forfeited"), paid, balance: confirmed - paid };
 }
 
+// What a STUDENT may see of the wallet: credit counts only, never a dollar value or rate (S$ is for parent screens). Pure.
+export function studentCredits(rows) {
+  const list = rows || [];
+  return {
+    ...creditTotals(list, 0), pendingNote: PENDING_NOTE,
+    pendingRows: list.filter((r) => r.status === "pending").slice(0, 20).map(({ kind, period, subject, credits, status, gate_day }) => ({ kind, period, subject, credits, status, gate_day })),
+  };
+}
 export const PENDING_NOTE = "Pending: finish today's homework";
 
 // DB row <-> app shape.

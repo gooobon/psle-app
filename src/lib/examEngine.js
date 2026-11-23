@@ -78,7 +78,23 @@ export function isAnswered(a) {
   return false;
 }
 
-// Score summary. rows: [{ section, correct: true|false|null }] (null = not auto-graded, shown to the parent to mark).
+// Marks printed on a question: "(2 marks)", "[2 marks]", "(1 mark)", "[3m]". Returns an integer 1..20, or null when none is printed.
+// Printed text wins over a stored default, so a "(2 marks)" question is worth 2 even when the data row says marks: 1.
+export function parseMarks(text) {
+  const m = /[(\[]\s*(\d{1,2})\s*(?:marks?|mks?|m)\s*[)\]]/i.exec(String(text == null ? "" : text));
+  if (!m) return null;
+  const n = Number(m[1]);
+  return n >= 1 && n <= 20 ? n : null;
+}
+// Marks one question is worth: printed in its text, else a numeric `marks` field, else 1. q: any item/question/blank object.
+export function marksOf(q) {
+  if (!q || typeof q !== "object") return 1;
+  for (const t of [q.stem, q.question, q.sentence, q.text]) { const p = parseMarks(t); if (p) return p; }
+  const n = Number(q.marks);
+  return Number.isInteger(n) && n >= 1 && n <= 20 ? n : 1;
+}
+
+// Score summary. rows: [{ section, correct: true|false|null, marks?: number }] (marks defaults to 1 per item). (null = not auto-graded, shown to the parent to mark).
 export function summarize(rows) {
   const sections = [];
   const by = new Map();
@@ -88,8 +104,9 @@ export function summarize(rows) {
     if (!by.has(r.section)) { const s = { section: r.section, score: 0, total: 0 }; by.set(r.section, s); sections.push(s); }
     const s = by.get(r.section);
     if (r.correct === null || r.correct === undefined) { ungraded += 1; continue; }
-    s.total += 1; total += 1;
-    if (r.correct) { s.score += 1; score += 1; }
+    const w = Number.isInteger(r.marks) && r.marks > 0 ? r.marks : 1;
+    s.total += w; total += w;
+    if (r.correct) { s.score += w; score += w; }
   }
   return { score, total, ungraded, sections };
 }
@@ -147,10 +164,13 @@ export function canReview({ attempt, studentId }) {
 // Unit = one item (the same unit summarize() already uses for the auto-graded part). At hand-in the auto-graded items give
 // autoScore / autoTotal and every open-ended item is PENDING. Each parent mark adds 1 to the total, and 1 to the score when "correct".
 // Pure: the parent route, the self-test and the weekly report all use this. marks: array of true | false | null (null = not marked yet).
-export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections }) {
+// openWeights (optional): marks each open item is worth, same order as openMarks; missing = 1. Score and total count marks, `pending` counts items.
+export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections, openWeights }) {
   const marks = Array.isArray(openMarks) ? openMarks : [];
+  const wt = (i) => { const w = openWeights && openWeights[i]; return Number.isInteger(w) && w > 0 ? w : 1; };
   const marked = marks.filter((m) => m === true || m === false);
-  const pScore = marked.filter((m) => m === true).length;
+  const pScore = marks.reduce((n, m, i) => n + (m === true ? wt(i) : 0), 0);
+  const pTotal = marks.reduce((n, m, i) => n + (m === true || m === false ? wt(i) : 0), 0);
   const pending = marks.length - marked.length;
   const secs = (sections || []).map((s) => ({ ...s }));
   (openSections || []).forEach((sec, i) => {
@@ -158,9 +178,9 @@ export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSe
     if (m !== true && m !== false) return;
     let s = secs.find((x) => x.section === sec);
     if (!s) { s = { section: sec, score: 0, total: 0 }; secs.push(s); }
-    s.total += 1; if (m === true) s.score += 1;
+    s.total += wt(i); if (m === true) s.score += wt(i);
   });
-  return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + marked.length, parentScore: pScore, parentTotal: marked.length, pending, settled: pending === 0, sections: secs };
+  return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + pTotal, parentScore: pScore, parentTotal: pTotal, pending, settled: pending === 0, sections: secs };
 }
 export const percentOf = (score, total) => (total > 0 ? Math.round((score / total) * 100) : null);
 // "2/36 + 4 awaiting parent marking" while open items are unmarked; "6/40" once settled.
