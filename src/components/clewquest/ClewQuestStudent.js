@@ -110,7 +110,8 @@ function ClewHome({ uid, st, character, award, onBack, onEdit, onOpen, onToday, 
   const art = stageAssetKey(stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS);
   const hex = (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex;
   const tint = tintForStage(stage, hex); // black for stages 1-2: the chosen colour appears from stage 3 (100 threads)
-  const frames = resolveFrames(characterPoseKeys(character.gender, character.hair_key), art, ASSET_KEYS);
+  // Pose art is the full character (face + hair), so it is only used from stage 5; before that the stage art stands in with the same motion.
+  const frames = resolveFrames(stage >= 5 ? characterPoseKeys(character.gender, character.hair_key) : Array.from({ length: CLEWQUEST.poses.count }, () => "none"), art, ASSET_KEYS);
   const petFrames = CLEWQUEST.poses.pets.map((p) => ({ pet: p, frames: resolveFrames(petPoseKeys(p), art, ASSET_KEYS) }));
   const levels = Object.entries(subjects).filter(([, v]) => v.status === "open").map(([key, v]) => {
     const r = subjectLevel(uid, key, (st.thread.bySubject || {})[key] || 0, getProgress ? getProgress(grade, v.appSubject) : null);
@@ -127,8 +128,14 @@ function ClewHome({ uid, st, character, award, onBack, onEdit, onOpen, onToday, 
       </div>
       {award > 0 && <div data-testid="cq-award" style={{ background: "#EEF3E2", color: T.successText, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>+{fmt(award)} thread from your last round!</div>}
       {st.leveledUp && <div data-testid="cq-stageup" style={{ background: "#FBF1D6", color: T.ink, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>Your Clew grew to Stage {stage}!</div>}
-      <div style={{ textAlign: "center", background: "#fff", borderRadius: 20, boxShadow: "0 6px 20px rgba(27,35,64,.10)", padding: 16, margin: "10px 0" }}>
-        <PoseCycler testId="cq-character" frames={frames} alt={`Your Clew at Stage ${stage}`} tint={tint} height={260} />
+      <div data-testid="cq-vault" style={{ textAlign: "center", background: "#fff", borderRadius: 20, boxShadow: "0 6px 20px rgba(27,35,64,.10)", margin: "10px 0", overflow: "hidden" }}>
+        <div data-testid="cq-vault-stage" style={{ position: "relative", aspectRatio: "1600 / 893", background: "#E4DDD0" }}>
+          {ASSET_KEYS.has(CLEWQUEST.vaultArt) && <Art priority k={CLEWQUEST.vaultArt} alt="The Vault of the Oracle: a marble temple with a golden light" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", maxWidth: "none" }} />}
+          <div style={{ position: "absolute", left: 0, right: 0, bottom: "9%", display: "flex", justifyContent: "center" }}>
+            <PoseCycler testId="cq-character" frames={frames} alt={`Your Clew at Stage ${stage}`} tint={tint} height={190} />
+          </div>
+        </div>
+        <div style={{ padding: "12px 16px 16px", background: "#fff" }}>
         <div style={{ fontWeight: 800, fontSize: 20 }}>{character.nickname || "Your Clew"}</div>
         <div style={{ color: T.muted }}>Stage {stage}: {(cur || {}).name}</div>
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 8 }}>
@@ -142,12 +149,13 @@ function ClewHome({ uid, st, character, award, onBack, onEdit, onOpen, onToday, 
           <div style={{ height: 10, background: T.track, borderRadius: 6, margin: "12px 0 4px" }}><div style={{ width: pct + "%", height: 10, background: T.gold, borderRadius: 6 }} /></div>
           <div data-testid="cq-next" style={{ fontSize: 14, fontWeight: 700 }}>{fmt(next.have)} / {next.need} thread to Stage {next.stage}</div>
         </>) : <div style={{ fontWeight: 800, marginTop: 10 }}>Full-grown Clew!</div>}
+        </div>
       </div>
       <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "6px 0" }}>
         {reach.map((s) => {
           const got = s.stage <= stage;
-          return (<div key={s.stage} style={{ textAlign: "center", minWidth: 64 }}>
-            <Art k={stageAssetKey(s.stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS)} alt={got ? `Stage ${s.stage}` : `Stage ${s.stage}, locked`} tint={tintForStage(s.stage, hex)} style={{ width: 56, filter: got ? "none" : "brightness(0) opacity(.35)" }} />
+          return (<div key={s.stage} data-testid={`cq-strip-${s.stage}`} style={{ textAlign: "center", minWidth: 64 }}>
+            <Art k={stageAssetKey(s.stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS)} alt={got ? `Stage ${s.stage}` : `Stage ${s.stage}, locked`} tint={tintForStage(s.stage, hex)} style={{ height: 72, width: "auto", filter: got ? "none" : "brightness(0) opacity(.35)" }} />
             <div style={{ fontSize: 11, fontWeight: 700 }}>{got ? `Stage ${s.stage}` : `${s.minThread} thread`}</div>
           </div>);
         })}
@@ -222,7 +230,13 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
   if (view === "practice" && subject) return renderPractice(subjects[subject].appSubject, () => { setSubject(null); load(from); });
   if (view === "today") return renderPractice(null, () => load(from));
   if (view === "shop") return <ShopScreen onBack={() => setView("landing")} />;
-  if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: T.bg, color: T.ink }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>;
+  if (view === "loading") return ( // marble card + the island art straight away (never plain text on a blank page)
+    <Page testId="cq-loading">
+      <LandingArt pills={false}>
+        <div role="status" data-testid="cq-loading-text" style={{ position: "absolute", left: 0, right: 0, bottom: 18, textAlign: "center", fontWeight: 800, color: T.ink }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>
+      </LandingArt>
+    </Page>
+  );
   if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onLogout={onLogout} onSkip={view === "builder" ? () => { setSkipped(true); if (onLeaveQuest) onLeaveQuest(); else openToday(); } : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
   if (view === "home" && st && character) return <ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} />;
   return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else if (st) { setView("home"); load("home"); } else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;

@@ -1,17 +1,17 @@
 {
   "version": 1,
   "generated": "2026-11-23",
-  "note": "Phase 1 placeholder art. Stage 1-3 are fully black (redrawn 2026-11-23); stage 6-8 are not reachable in Phase 1.",
+  "note": "Phase 1 art; v2 art (#107) added 2026-11-23. Stage 1-3 are fully black, stage 4 is the yarn-wrapped baby; stage 6-8 are not reachable in Phase 1.",
   "assets": {
-    "brand/logo-b1-icon": {
-      "webp": "/clewquest/brand/logo-b1-icon.webp",
-      "png": "/clewquest/brand/logo-b1-icon.png",
-      "w": 512,
-      "h": 512
-    },
     "brand/logo-b1": {
       "webp": "/clewquest/brand/logo-b1.webp",
       "png": "/clewquest/brand/logo-b1.png",
+      "w": 512,
+      "h": 512
+    },
+    "brand/logo-b1-icon": {
+      "webp": "/clewquest/brand/logo-b1-icon.webp",
+      "png": "/clewquest/brand/logo-b1-icon.png",
       "w": 512,
       "h": 512
     },
@@ -159,29 +159,257 @@
       "w": 864,
       "h": 1184
     },
+    "landing/four-islands-empty": {
+      "webp": "/clewquest/landing/four-islands-empty.webp",
+      "png": "/clewquest/landing/four-islands-empty.png",
+      "w": 1200,
+      "h": 1607
+    },
+    "levels/lv1-hermes-sandals": {
+      "webp": "/clewquest/levels/lv1-hermes-sandals.webp",
+      "png": "/clewquest/levels/lv1-hermes-sandals.png",
+      "w": 382,
+      "h": 512
+    },
+    "levels/lv2-apollo-lyre": {
+      "webp": "/clewquest/levels/lv2-apollo-lyre.webp",
+      "png": "/clewquest/levels/lv2-apollo-lyre.png",
+      "w": 382,
+      "h": 512
+    },
+    "levels/lv3-heracles-lion-hood": {
+      "webp": "/clewquest/levels/lv3-heracles-lion-hood.webp",
+      "png": "/clewquest/levels/lv3-heracles-lion-hood.png",
+      "w": 382,
+      "h": 512
+    },
+    "levels/lv4-perseus-medusa-shield": {
+      "webp": "/clewquest/levels/lv4-perseus-medusa-shield.webp",
+      "png": "/clewquest/levels/lv4-perseus-medusa-shield.png",
+      "w": 382,
+      "h": 512
+    },
+    "levels/lv5-athena-helmet": {
+      "webp": "/clewquest/levels/lv5-athena-helmet.webp",
+      "png": "/clewquest/levels/lv5-athena-helmet.png",
+      "w": 385,
+      "h": 512
+    },
+    "levels/lv6-poseidon-trident": {
+      "webp": "/clewquest/levels/lv6-poseidon-trident.webp",
+      "png": "/clewquest/levels/lv6-poseidon-trident.png",
+      "w": 382,
+      "h": 512
+    },
+    "levels/lv7-zeus-thunderbolt": {
+      "webp": "/clewquest/levels/lv7-zeus-thunderbolt.webp",
+      "png": "/clewquest/levels/lv7-zeus-thunderbolt.png",
+      "w": 382,
+      "h": 512
+    },
+    "poses/boy-apollo-curls-1": {
+      "webp": "/clewquest/poses/boy-apollo-curls-1.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-1.png",
+      "w": 444,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-1-blink": {
+      "webp": "/clewquest/poses/boy-apollo-curls-1-blink.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-1-blink.png",
+      "w": 444,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-2": {
+      "webp": "/clewquest/poses/boy-apollo-curls-2.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-2.png",
+      "w": 443,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-3": {
+      "webp": "/clewquest/poses/boy-apollo-curls-3.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-3.png",
+      "w": 439,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-4": {
+      "webp": "/clewquest/poses/boy-apollo-curls-4.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-4.png",
+      "w": 458,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-5": {
+      "webp": "/clewquest/poses/boy-apollo-curls-5.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-5.png",
+      "w": 500,
+      "h": 600
+    },
+    "poses/boy-apollo-curls-6": {
+      "webp": "/clewquest/poses/boy-apollo-curls-6.webp",
+      "png": "/clewquest/poses/boy-apollo-curls-6.png",
+      "w": 428,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-1": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-1.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-1.png",
+      "w": 502,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-1-blink": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-1-blink.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-1-blink.png",
+      "w": 502,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-2": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-2.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-2.png",
+      "w": 500,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-3": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-3.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-3.png",
+      "w": 486,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-4": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-4.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-4.png",
+      "w": 499,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-5": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-5.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-5.png",
+      "w": 486,
+      "h": 600
+    },
+    "poses/girl-ariadne-buns-6": {
+      "webp": "/clewquest/poses/girl-ariadne-buns-6.webp",
+      "png": "/clewquest/poses/girl-ariadne-buns-6.png",
+      "w": 497,
+      "h": 600
+    },
+    "poses/pet-owl-1": {
+      "webp": "/clewquest/poses/pet-owl-1.webp",
+      "png": "/clewquest/poses/pet-owl-1.png",
+      "w": 478,
+      "h": 600
+    },
+    "poses/pet-owl-1-blink": {
+      "webp": "/clewquest/poses/pet-owl-1-blink.webp",
+      "png": "/clewquest/poses/pet-owl-1-blink.png",
+      "w": 478,
+      "h": 600
+    },
+    "poses/pet-owl-2": {
+      "webp": "/clewquest/poses/pet-owl-2.webp",
+      "png": "/clewquest/poses/pet-owl-2.png",
+      "w": 515,
+      "h": 600
+    },
+    "poses/pet-owl-3": {
+      "webp": "/clewquest/poses/pet-owl-3.webp",
+      "png": "/clewquest/poses/pet-owl-3.png",
+      "w": 606,
+      "h": 600
+    },
+    "poses/pet-owl-4": {
+      "webp": "/clewquest/poses/pet-owl-4.webp",
+      "png": "/clewquest/poses/pet-owl-4.png",
+      "w": 583,
+      "h": 600
+    },
+    "poses/pet-owl-5": {
+      "webp": "/clewquest/poses/pet-owl-5.webp",
+      "png": "/clewquest/poses/pet-owl-5.png",
+      "w": 505,
+      "h": 600
+    },
+    "poses/pet-owl-6": {
+      "webp": "/clewquest/poses/pet-owl-6.webp",
+      "png": "/clewquest/poses/pet-owl-6.png",
+      "w": 524,
+      "h": 600
+    },
+    "poses/pet-pegasus-1": {
+      "webp": "/clewquest/poses/pet-pegasus-1.webp",
+      "png": "/clewquest/poses/pet-pegasus-1.png",
+      "w": 514,
+      "h": 600
+    },
+    "poses/pet-pegasus-1-blink": {
+      "webp": "/clewquest/poses/pet-pegasus-1-blink.webp",
+      "png": "/clewquest/poses/pet-pegasus-1-blink.png",
+      "w": 514,
+      "h": 600
+    },
+    "poses/pet-pegasus-2": {
+      "webp": "/clewquest/poses/pet-pegasus-2.webp",
+      "png": "/clewquest/poses/pet-pegasus-2.png",
+      "w": 518,
+      "h": 600
+    },
+    "poses/pet-pegasus-3": {
+      "webp": "/clewquest/poses/pet-pegasus-3.webp",
+      "png": "/clewquest/poses/pet-pegasus-3.png",
+      "w": 585,
+      "h": 600
+    },
+    "poses/pet-pegasus-4": {
+      "webp": "/clewquest/poses/pet-pegasus-4.webp",
+      "png": "/clewquest/poses/pet-pegasus-4.png",
+      "w": 799,
+      "h": 600
+    },
+    "poses/pet-pegasus-5": {
+      "webp": "/clewquest/poses/pet-pegasus-5.webp",
+      "png": "/clewquest/poses/pet-pegasus-5.png",
+      "w": 678,
+      "h": 600
+    },
+    "poses/pet-pegasus-6": {
+      "webp": "/clewquest/poses/pet-pegasus-6.webp",
+      "png": "/clewquest/poses/pet-pegasus-6.png",
+      "w": 652,
+      "h": 600
+    },
+    "profile/vault-oracle-temple": {
+      "webp": "/clewquest/profile/vault-oracle-temple.webp",
+      "png": "/clewquest/profile/vault-oracle-temple.png",
+      "w": 1600,
+      "h": 893
+    },
+    "ship/treasure-ship": {
+      "webp": "/clewquest/ship/treasure-ship.webp",
+      "png": "/clewquest/ship/treasure-ship.png",
+      "w": 1400,
+      "h": 950
+    },
     "stages/stage-1": {
       "webp": "/clewquest/stages/stage-1.webp",
       "png": "/clewquest/stages/stage-1.png",
-      "w": 172,
-      "h": 172
+      "w": 512,
+      "h": 512
     },
     "stages/stage-2": {
       "webp": "/clewquest/stages/stage-2.webp",
       "png": "/clewquest/stages/stage-2.png",
-      "w": 165,
-      "h": 186
+      "w": 434,
+      "h": 482
     },
     "stages/stage-3": {
       "webp": "/clewquest/stages/stage-3.webp",
       "png": "/clewquest/stages/stage-3.png",
-      "w": 212,
-      "h": 187
+      "w": 757,
+      "h": 700
     },
     "stages/stage-4": {
       "webp": "/clewquest/stages/stage-4.webp",
       "png": "/clewquest/stages/stage-4.png",
-      "w": 208,
-      "h": 186
+      "w": 515,
+      "h": 700
     },
     "stages/stage-5-boy": {
       "webp": "/clewquest/stages/stage-5-boy.webp",
