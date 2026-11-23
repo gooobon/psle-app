@@ -23,7 +23,7 @@ export function reportThread(subject, results) {
   if (!clewquestEnabled() || typeof window === "undefined") return;
   try {
     const items = (results || []).filter((r) => r && r.scored !== false && r.id != null && r.userAnswer !== undefined && r.userAnswer !== null)
-      .map((r) => ({ itemId: String(r.id), answer: r.userAnswer, answerSeq: r.userAnswerSeq, answerReason: r.userAnswerReason, hinted: !!r.solvedAfterHint }));
+      .map((r) => ({ itemId: String(r.id), answer: r.userAnswer, answerSeq: r.userAnswerSeq, answerReason: r.userAnswerReason })); // no hint flag: the server records hint reveals itself
     if (!items.length) return;
     cqPost("/api/clewquest/award", { subject: String(subject || "").toLowerCase(), items }).then((r) => {
       if (r && r.ok && r.added > 0) {
@@ -34,3 +34,19 @@ export function reportThread(subject, results) {
   } catch {}
 }
 export function takeLastAward() { try { const v = Number(JSON.parse(sessionStorage.getItem(LAST_AWARD_KEY) || "0")) || 0; sessionStorage.removeItem(LAST_AWARD_KEY); return v; } catch { return 0; } }
+
+// Hint reveals: the shared hint box announces the hint text it shows (generic window event "genius-hint-shown"; no ClewQuest code on solve
+// screens). The server records it. Flag off => nothing is installed. Deduped per page load.
+let hintListener = false;
+export function installHintRecorder() {
+  if (hintListener || !clewquestEnabled() || typeof window === "undefined") return;
+  hintListener = true;
+  const sent = new Set();
+  window.addEventListener("genius-hint-shown", (e) => {
+    const text = e && e.detail && typeof e.detail.text === "string" ? e.detail.text : "";
+    if (!text || sent.has(text)) return;
+    sent.add(text);
+    cqPost("/api/clewquest/hint", { text }).then((r) => { if (!r || !r.ok) sent.delete(text); }).catch(() => sent.delete(text));
+  });
+}
+installHintRecorder();

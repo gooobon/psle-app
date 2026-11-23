@@ -23,3 +23,6 @@ export function rateLimitBlocked(key, { max }) {
   const b = buckets.get(key);
   return !!b && b.reset > Date.now() && b.n >= max;
 }
+
+// Additive: forget a key (successful login, parent reset).
+export function rateLimitClear(key) { buckets.delete(key); }

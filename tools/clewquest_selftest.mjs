@@ -159,5 +159,114 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
 { const sql = fs.readFileSync(path.join(root, "supabase/migrations/20261203000000_clewquest_phase1.sql"), "utf8").replace(/--[^\n]*/g, "");
   t("migration has no drop table/column, truncate or rename", !/drop\s+(table|column|view|schema)|alter\s+table[^;]*rename|truncate\s+table|delete\s+from/i.test(sql)); }
 
+
+// 10. durable lockout across two simulated serverless instances (mock DB that mirrors the SQL functions; never touches Supabase)
+{
+  const { createLoginGuard } = await import("../src/lib/clewquest/lockout.js");
+  const clock = { t: 1_000_000 };
+  const mkDb = () => { const rows = new Map(); let failReads = false; return { rows, setReadError(v) { failReads = v; },
+    async rpc(name, a) {
+      const k = a.p_scope + "|" + a.p_key, now = clock.t, r = rows.get(k);
+      if (name === "clewquest_login_status") return failReads ? { data: null, error: { message: "down" } } : { data: r && r.locked_until && r.locked_until > now ? r.locked_until : null, error: null };
+      if (name === "clewquest_login_fail") {
+        let n = r || { fails: 0, window_start: now, locked_until: null };
+        if (!r || n.window_start < now - a.p_window_secs * 1000) n = { fails: 1, window_start: now, locked_until: n.locked_until }; else n = { ...n, fails: n.fails + 1 };
+        if (n.fails >= a.p_max) n.locked_until = now + a.p_lock_secs * 1000;
+        rows.set(k, n); return { data: n.fails >= a.p_max ? n.locked_until : null, error: null };
+      }
+      if (name === "clewquest_login_ok") { if (r) rows.set(k, { fails: 0, window_start: now, locked_until: null }); return { data: null, error: null }; }
+      return { data: null, error: { message: "unknown rpc" } };
+    } }; };
+  const mkMem = () => { const m = new Map(); return { blocked: (key, { max }) => (m.get(key) || 0) >= max, hit: (key) => { m.set(key, (m.get(key) || 0) + 1); return true; }, clear: (key) => m.delete(key), m }; };
+  const db = mkDb();
+  const A = createLoginGuard({ memory: mkMem() }), B = createLoginGuard({ memory: mkMem() }); // two instances: separate memory, shared database
+  const ipA = "ipA", ipB = "ipB";
+  eq("fresh username is not locked on either instance", [(await A.check(db, "Kid1", ipA)).locked, (await B.check(db, "kid1", ipA)).locked], [false, false]);
+  for (let i = 0; i < 3; i++) await A.fail(db, "kid1", ipA);
+  for (let i = 0; i < 2; i++) await B.fail(db, "kid1", ipB);
+  eq("3 failures on A + 2 on B lock the username on BOTH instances", [(await A.check(db, "kid1", "ipC")).locked, (await B.check(db, "KID1", "ipC")).locked], [true, true]);
+  t("a different username is unaffected", !(await A.check(db, "kid2", "ipC")).locked);
+  clock.t += 14 * 60 * 1000;
+  t("still locked 14 min after the 5th failure (from a fresh instance with empty memory)", (await createLoginGuard({ memory: mkMem() }).check(db, "kid1", "ipC")).locked);
+  clock.t += 2 * 60 * 1000;
+  t("unlocked 15 min after the 5th failure on a fresh instance", !(await createLoginGuard({ memory: mkMem() }).check(db, "kid1", "ipC")).locked);
+  // a success resets the username counter (the first layer too)
+  for (let i = 0; i < 4; i++) await A.fail(db, "kid3", ipA);
+  await B.reset(db, "kid3");
+  await A.fail(db, "kid3", ipA);
+  t("success resets the counter: 4 failures, a success, 1 more failure is not a lock", !(await B.check(db, "kid3", "ipC")).locked);
+  // per-IP cap: many usernames from one IP lock that IP, other IPs are fine
+  for (let i = 0; i < CLEWQUEST.lockout.ipMax; i++) await (i % 2 ? A : B).fail(db, "spray" + i, "ipSpray");
+  eq("per-IP cap locks a new username from that IP, not from another IP", [(await A.check(db, "fresh_user", "ipSpray")).locked, (await B.check(db, "fresh_user", "ipOther")).locked], [true, false]);
+  eq("config: 5 per username in 15 min, locked 15 min, larger per-IP cap", [CLEWQUEST.lockout.max, CLEWQUEST.lockout.windowMs, CLEWQUEST.lockout.lockMs, CLEWQUEST.lockout.ipMax > CLEWQUEST.lockout.max], [5, 900000, 900000, true]);
+  // fail closed when the durable store cannot be read
+  db.setReadError(true);
+  t("durable store read error is reported so the route fails closed", (await A.check(db, "kid4", ipA)).error === true);
+  db.setReadError(false);
+  // hashing: the raw IP is never stored; keys are lower-cased
+  t("IP is stored as a keyed hash", PS.hashIp(PEPPER, "203.0.113.9") !== "203.0.113.9" && PS.hashIp(PEPPER, "203.0.113.9") === PS.hashIp(PEPPER, "203.0.113.9") && PS.hashIp(PEPPER, "1.1.1.1") !== PS.hashIp(PEPPER, "1.1.1.2"));
+  { const route = fs.readFileSync(path.join(root, "src/app/api/auth/student/picture-login/route.js"), "utf8");
+    t("picture-login uses the durable guard (check, fail, reset) and fails closed", /loginGuard\.check/.test(route) && /loginGuard\.fail/.test(route) && /loginGuard\.reset/.test(route) && /503/.test(route)); }
+  { const sql = fs.readFileSync(path.join(root, "supabase/migrations/20261203000000_clewquest_phase1.sql"), "utf8");
+    t("migration adds the lockout table with RLS on and service-role-only functions", /create table if not exists public\.clewquest_login_attempts/.test(sql) && /clewquest_login_attempts enable row level security/.test(sql) && /grant execute on function public\.clewquest_login_fail[^;]*to service_role/.test(sql) && /revoke all on function public\.clewquest_login_fail[^;]*from public, anon, authenticated/.test(sql));
+    t("migration adds the hint events table, RLS on, no client access", /create table if not exists public\.clewquest_hint_events/.test(sql) && /clewquest_hint_events enable row level security/.test(sql) && /revoke all on public\.clewquest_hint_events from anon, authenticated/.test(sql)); }
+}
+
+// 11. hints are server-recorded: thread 1 vs 0.5 comes from clewquest_hint_events only
+{
+  process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED = "true"; // awardThread is a no-op with the flag off
+  const H = await import("../src/lib/clewquest/hintServer.js");
+  const byId = {
+    q1: { leaf: { id: "q1", answer: 0, options: ["a", "b"], hints: ["Look at the word  ONCE", "second hint"] }, setId: "S1", sectionType: "GrammarMCQ" },
+    q2: { leaf: { id: "q2", answer: 1, options: ["a", "b"], hint: "zh hint text" }, setId: "S1", sectionType: "BianZi" },
+    q3: { leaf: { id: "q3", answer: 1, options: ["a", "b"] }, setId: "S1", sectionType: "VocabMCQ" },
+    c1_2: { container: { id: "c1", blanks: [{ num: 1, hints: ["blank one hint"] }, { num: 2, hints: ["blank two hint"] }] }, containerId: "c1", setId: "S2", sectionType: "Cloze" },
+  };
+  const events = new Set(); // hint hashes recorded for user u1
+  const admin = { from(table) { const q = { _in: null, select() { return q; }, eq() { return q; }, in(col, vals) { q._in = vals; return q; },
+    then(res) { res({ data: table === "clewquest_hint_events" ? q._in.filter((h) => events.has(h)).map((h) => ({ hint_hash: h })) : [], error: null }); } }; return q; } };
+  const cands = Object.keys(byId).map((id) => ({ itemId: id, hit: byId[id] }));
+  eq("no recorded hint => nothing is hinted", [...(await H.hintedItemIds(admin, "u1", cands))], []);
+  t("hint text is whitespace-normalised before hashing", H.hintHash("Look at the word  ONCE ") === H.hintHash("Look at the word ONCE"));
+  t("the bank hint set contains item hints (leaf, string hint and cloze blank) and not unrelated text", (() => { const k = H.knownHintHashes(byId); return k.has(H.hintHash("zh hint text")) && k.has(H.hintHash("blank two hint")) && !k.has(H.hintHash("anything else")); })());
+  events.add(H.hintHash("Look at the word ONCE"));
+  eq("a recorded hint marks exactly that item as hinted", [...(await H.hintedItemIds(admin, "u1", cands))], ["q1"]);
+  events.add(H.hintHash("blank two hint"));
+  eq("a hint on one blank does not mark the sibling blank", [...(await H.hintedItemIds(admin, "u1", cands))].sort(), ["c1_2", "q1"]);
+  eq("item without hints is never hinted", (await H.hintedItemIds(admin, "u1", [{ itemId: "q3", hit: byId.q3 }])).has("q3"), false);
+  // the award decision, exactly as the route does it: a client that CLAIMS no hint after a recorded hint still gets 0.5
+  const ledger = mockAdmin();
+  for (const claim of [{ hinted: false }, { hinted: true }, {}]) {
+    const hinted = await H.hintedItemIds(admin, "u1", [{ itemId: "q1", hit: byId.q1 }]);
+    const r2 = await awardThread({ admin: ledger, userId: "u1" + JSON.stringify(claim), grade: "P3", subject: "english", sourceRef: "english|q1", usedHint: hinted.has("q1") });
+    eq(`client claim ${JSON.stringify(claim)} after a recorded hint still awards 0.5`, r2.awarded, 0.5);
+  }
+  { const hinted = await H.hintedItemIds(admin, "u1", [{ itemId: "q3", hit: byId.q3 }]);
+    eq("no recorded hint awards 1 even if the client claims a hint", (await awardThread({ admin: ledger, userId: "u9", grade: "P3", subject: "english", sourceRef: "english|q3", usedHint: hinted.has("q3") })).awarded, 1); }
+  const failing = { from() { const q = { select() { return q; }, eq() { return q; }, in() { return q; }, then(res) { res({ data: null, error: { message: "x" } }); } }; return q; } };
+  let threw2 = false; try { await H.hintedItemIds(failing, "u1", cands); } catch { threw2 = true; }
+  t("a hint-lookup error throws (the route returns 500 and awards nothing)", threw2);
+  const award = fs.readFileSync(path.join(root, "src/app/api/clewquest/award/route.js"), "utf8").replace(/\/\/[^\n]*/g, "");
+  t("award route never reads a client hint flag", !/it\.hinted|\.hintUsed|hinted\s*===\s*true|solvedAfterHint/.test(award) && /hintedItemIds/.test(award));
+  const client = fs.readFileSync(path.join(root, "src/lib/clewquest/client.js"), "utf8").replace(/\/\/[^\n]*/g, "");
+  t("client no longer sends a hint flag with the award", !/hinted:/.test(client));
+  const hintRoute = fs.readFileSync(path.join(root, "src/app/api/clewquest/hint/route.js"), "utf8");
+  t("hint route is student-only, rate limited, bank-checked and flag guarded", /role !== "student"/.test(hintRoute) && /rateLimit\(/.test(hintRoute) && /knownHintHashes/.test(hintRoute) && /clewquestRoutesOn\(\)\) return notFound\(\)/.test(hintRoute));
+  const ui = fs.readFileSync(path.join(root, "src/lib/uiShared.js"), "utf8");
+  t("HintBox only dispatches a generic event (no ClewQuest code in the shared UI)", /genius-hint-shown/.test(ui) && !/clewquest|ClewQuest/.test(ui));
+  delete process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED;
+}
+
+// 12. parent picture-code reset UI
+{
+  const ui = fs.readFileSync(path.join(root, "src/components/clewquest/ParentPictureReset.js"), "utf8");
+  t("reset UI has a confirm step, calls the existing reset API and shows an English success message", /picture-reset-confirm/.test(ui) && /\/api\/clewquest\/picture-reset/.test(ui) && /new picture code is saved/.test(ui));
+  const dash = fs.readFileSync(path.join(root, "src/components/ParentDashboard.js"), "utf8");
+  t("parent screen renders the reset only behind the flag and server auth", /SERVER_AUTH&&clewquestEnabled\(\)&&child\.serverId&&tab==="settings" && <ParentPictureReset/.test(dash));
+  const rr = fs.readFileSync(path.join(root, "src/app/api/clewquest/picture-reset/route.js"), "utf8");
+  t("reset route: parent only, linked via parent_child, picture-code accounts only", /role !== "parent"/.test(rr) && /from\("parent_child"\)/.test(rr) && /eq\("parent_id", me\.profile\.id\)\.eq\("child_id", childId\)/.test(rr) && /picture_code !== true/.test(rr));
+  t("parent reset clears the child's lockout", /loginGuard\.reset/.test(rr));
+}
+
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);

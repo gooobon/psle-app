@@ -1,6 +1,6 @@
 // ClewQuest: thread award after a round is marked. The student reports ANSWERS; the server grades them against the bank
 // (never trusts a client "correct"), so thread cannot be forged. Only the FIRST sight of an item can earn thread
-// (clewquest_seen_items), and the ledger is idempotent per (user, source_ref). Wrong answers award nothing and nothing is deducted.
+// (clewquest_seen_items), hint use comes from the server record clewquest_hint_events (never from the client), and the ledger is idempotent per (user, source_ref). Wrong answers award nothing and nothing is deducted.
 // Flag off => 404 (the client hook is a no-op too). Does not touch scoring, attempt history or the learning ledger.
 import { adminClient, currentUser, jerr, jok, readJson } from "@/lib/supabase/server";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
@@ -8,16 +8,13 @@ import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { CLEWQUEST } from "@/lib/clewquest/config";
 import { awardThread, readTotals, syncStage } from "@/lib/clewquest/award";
 import { sourceRefOf, subjectsFor } from "@/lib/clewquest/logic";
-import { itemIndex, resolveSubmitted } from "@/lib/learningGrade";
-import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
-import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
-import WA1_ZH_DRILL from "@/data/p3/chinese/wa1_drill";
+import { resolveSubmitted } from "@/lib/learningGrade";
+import { bankFor, SETS } from "@/lib/clewquest/banks";
+import { hintedItemIds } from "@/lib/clewquest/hintServer";
 
 export const runtime = "nodejs";
 const MAX_ITEMS = 300;
 const str = (v, n) => String(v == null ? "" : v).slice(0, n);
-const SETS = { english: () => WA1_PRACTICE_SETS, chinese: () => [...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])] };
-const bankFor = (subject) => itemIndex(subject === "chinese" ? "Chinese" : "English", SETS[subject]);
 function cleanAnswer(v) {
   if (typeof v === "number" && Number.isFinite(v)) return v;
   if (typeof v === "string") return v.slice(0, 500);
@@ -48,7 +45,7 @@ export async function POST(request) {
     const graded = rec.grade({ val: cleanAnswer(it.answer), seq: cleanAnswer(it.answerSeq), reason: cleanAnswer(it.answerReason) });
     if (!graded.scored) continue;
     seenIn.add(itemId);
-    cands.push({ itemId, ref: sourceRefOf(subject, itemId), correct: graded.correct === true, hinted: it.hinted === true });
+    cands.push({ itemId, ref: sourceRefOf(subject, itemId), correct: graded.correct === true }); // any client-sent hint flag is ignored
   }
   if (!cands.length) return jok({ added: 0 });
 
@@ -58,6 +55,9 @@ export async function POST(request) {
   if (prior.error) return jerr("could not record", 500);
   const had = new Set((prior.data || []).map((r) => r.source_ref));
   const fresh = cands.filter((c) => !had.has(c.ref));
+  // 1 vs 0.5 thread comes ONLY from the server-recorded hint reveals (looked up before anything is written, so a failure loses nothing).
+  let hinted = new Set();
+  try { hinted = await hintedItemIds(admin, uid, fresh.filter((c) => c.correct).map((c) => ({ itemId: c.itemId, hit: bankFor(subject)[c.itemId] }))); } catch { return jerr("could not record", 500); }
   if (fresh.length) {
     const ins = await admin.from("clewquest_seen_items").upsert(fresh.map((c) => ({ user_id: uid, source_ref: c.ref })), { onConflict: "user_id,source_ref", ignoreDuplicates: true });
     if (ins.error) return jerr("could not record", 500);
@@ -65,7 +65,7 @@ export async function POST(request) {
   let added = 0;
   for (const c of fresh) {
     if (!c.correct) continue;
-    const r = await awardThread({ admin, userId: uid, grade, subject, sourceRef: c.ref, usedHint: c.hinted });
+    const r = await awardThread({ admin, userId: uid, grade, subject, sourceRef: c.ref, usedHint: hinted.has(c.itemId) });
     if (r.error) return jerr("could not record", 500);
     added += r.awarded || 0;
   }

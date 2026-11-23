@@ -1,7 +1,8 @@
 // Server-only: picture sequence -> Supabase password, and the login lockout. Never import from client code.
 import crypto from "node:crypto";
-import { rateLimit, rateLimitBlocked } from "../rateLimit.js";
+import { rateLimit, rateLimitBlocked, rateLimitClear } from "../rateLimit.js";
 import { CLEWQUEST } from "./config.js";
+import { createLoginGuard } from "./lockout.js";
 
 // password = HMAC_SHA256(CLEWQUEST_PICTURE_PEPPER, normUsername + ":" + seq), hex. The raw sequence is never stored.
 export function derivePicturePassword(pepper, username, seqString) {
@@ -14,3 +15,8 @@ const lim = () => ({ max: CLEWQUEST.lockout.max, windowMs: CLEWQUEST.lockout.win
 // 5 failures per username per 15 minutes (lib/rateLimit.js). Only failures are counted.
 export const isLockedOut = (username) => rateLimitBlocked(key(username), lim());
 export const recordFailure = (username) => rateLimit(key(username), lim());
+
+// Durable lockout (Supabase) layered behind the in-memory one. See lockout.js.
+export const loginGuard = createLoginGuard({ memory: { blocked: rateLimitBlocked, hit: rateLimit, clear: rateLimitClear } });
+// The client IP is stored only as a keyed hash.
+export const hashIp = (pepper, ip) => crypto.createHmac("sha256", String(pepper || "")).update(`ip:${String(ip || "unknown")}`).digest("hex").slice(0, 32);

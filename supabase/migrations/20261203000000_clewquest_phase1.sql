@@ -98,3 +98,73 @@ create policy clewquest_parent_rules_select on public.clewquest_parent_rules for
 -- Writes to the ledger / seen-items / stage cache are server-only: no insert/update/delete for client roles.
 revoke insert, update, delete, truncate on public.clewquest_thread_ledger, public.clewquest_seen_items, public.clewquest_stage_state from anon, authenticated;
 revoke insert, update, delete, truncate on public.clewquest_calendar, public.clewquest_parent_rules from anon, authenticated;
+
+-- ---------------------------------------------------------------------------------------------------------------
+-- Durable picture-code lockout (shared by every serverless instance). Service role only: RLS on, no policies, no grants.
+-- One row per (scope, key): scope 'user' = normalised username, scope 'ip' = HMAC of the client IP (never the raw IP).
+-- 5 failures per username in 15 min -> locked 15 min; a larger per-IP cap; a success resets the username counter.
+create table if not exists public.clewquest_login_attempts (
+  scope text not null check (scope in ('user','ip')),
+  key text not null,
+  fails integer not null default 0,
+  window_start timestamptz not null default now(),
+  locked_until timestamptz,
+  updated_at timestamptz not null default now(),
+  primary key (scope, key)
+);
+alter table public.clewquest_login_attempts enable row level security;
+revoke all on public.clewquest_login_attempts from anon, authenticated;
+
+-- Returns locked_until while the key is locked, else null.
+create or replace function public.clewquest_login_status(p_scope text, p_key text) returns timestamptz
+language sql security definer set search_path = public as $$
+  select locked_until from public.clewquest_login_attempts
+  where scope = p_scope and key = p_key and locked_until is not null and locked_until > now();
+$$;
+
+-- Atomically counts one failure (fixed window); locks for p_lock_secs once p_max failures are reached. Returns locked_until or null.
+create or replace function public.clewquest_login_fail(p_scope text, p_key text, p_max integer, p_window_secs integer, p_lock_secs integer) returns timestamptz
+language plpgsql security definer set search_path = public as $$
+declare r public.clewquest_login_attempts; lock_to timestamptz;
+begin
+  insert into public.clewquest_login_attempts as a (scope, key, fails, window_start, updated_at)
+  values (p_scope, p_key, 1, now(), now())
+  on conflict (scope, key) do update set
+    fails = case when a.window_start < now() - make_interval(secs => p_window_secs) then 1 else a.fails + 1 end,
+    window_start = case when a.window_start < now() - make_interval(secs => p_window_secs) then now() else a.window_start end,
+    updated_at = now()
+  returning * into r;
+  if r.fails >= p_max then
+    lock_to := now() + make_interval(secs => p_lock_secs);
+    update public.clewquest_login_attempts set locked_until = lock_to where scope = p_scope and key = p_key;
+    return lock_to;
+  end if;
+  return null;
+end $$;
+
+-- Clears the counter and any lock for a key (successful login, or a parent resetting the picture code).
+create or replace function public.clewquest_login_ok(p_scope text, p_key text) returns void
+language sql security definer set search_path = public as $$
+  update public.clewquest_login_attempts set fails = 0, locked_until = null, window_start = now(), updated_at = now()
+  where scope = p_scope and key = p_key;
+$$;
+
+revoke all on function public.clewquest_login_status(text, text) from public, anon, authenticated;
+revoke all on function public.clewquest_login_fail(text, text, integer, integer, integer) from public, anon, authenticated;
+revoke all on function public.clewquest_login_ok(text, text) from public, anon, authenticated;
+grant execute on function public.clewquest_login_status(text, text) to service_role;
+grant execute on function public.clewquest_login_fail(text, text, integer, integer, integer) to service_role;
+grant execute on function public.clewquest_login_ok(text, text) to service_role;
+
+-- ---------------------------------------------------------------------------------------------------------------
+-- Server-recorded hint reveals. The app reports a revealed hint text; the server stores only a hash of it, and only when the text
+-- is a real hint in the question bank. The award route compares an item's own hint hashes with these rows (1 vs 0.5 thread);
+-- a client-sent "hint used" flag is ignored. Service role only (RLS on, no policies).
+create table if not exists public.clewquest_hint_events (
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  hint_hash text not null,
+  created_at timestamptz not null default now(),
+  primary key (user_id, hint_hash)
+);
+alter table public.clewquest_hint_events enable row level security;
+revoke all on public.clewquest_hint_events from anon, authenticated;

@@ -48,7 +48,7 @@ export const CLEWQUEST = {
   calendar: { defaultSource: "sg_default", editableBy: ["student", "parent"] },
   economy: { enabled: false }, // cycles, trial, Daily Chest, shop: NOT Phase 1
   nickname: { min: 2, max: 12 },
-  lockout: { max: 5, windowMs: 15 * 60 * 1000 },
+  lockout: { max: 5, windowMs: 15 * 60 * 1000, lockMs: 15 * 60 * 1000, ipMax: 30 }, // per username; ipMax = failures per client IP in the same window
 };
 
 // Asset keys that exist under public/clewquest (mirrors manifest.json; a self-test checks they agree).
