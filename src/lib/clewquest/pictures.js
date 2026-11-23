@@ -1,4 +1,5 @@
-// Picture-code icons (client-safe). The code is an ordered list of 4 picks from these 9.
+// Picture-code icons (client-safe). The code is an ordered list of 4 picks from these 9. The SLOT (index) is what counts,
+// so changing a glyph or label never changes anyone's code. Every glyph is Unicode 9 or older; the label is always shown.
 export const PICTURES = [
   { key: "owl", label: "Owl", glyph: "\u{1F989}" },
   { key: "lyre", label: "Lyre", glyph: "\u{1F3B6}" },
@@ -6,7 +7,7 @@ export const PICTURES = [
   { key: "ship", label: "Ship", glyph: "⛵" },
   { key: "column", label: "Column", glyph: "\u{1F3DB}️" },
   { key: "amphora", label: "Amphora", glyph: "\u{1F3FA}" },
-  { key: "olive", label: "Olive", glyph: "\u{1FAD2}" },
+  { key: "grapes", label: "Grapes", glyph: "\u{1F347}" }, // was Olive U+1FAD2 (Unicode 13, missing on older devices); same slot 6, so codes are unchanged
   { key: "sun", label: "Sun", glyph: "☀️" },
   { key: "shield", label: "Shield", glyph: "\u{1F6E1}️" },
 ];

@@ -496,6 +496,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
       guessed: !!(flaggedIds && flaggedIds.has(q.id)),
       solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
+      retryAnswer: answers[q.id] !== q.answer && retried[q.id] ? retryAnswers[q.id] : undefined, // additive: the answer chosen after the hint (not used for scoring)
       timeTaken: Math.round(t / items.length),
     }));
     // Save results first, then trigger page advance
@@ -723,6 +724,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       correct: cmp(answers[b.num], b.answer),
       solvedAfterHint: !cmp(answers[b.num], b.answer) && !!retriedCorrect[b.num],
       attempts: cmp(answers[b.num], b.answer) ? 1 : (retried[b.num] ? 2 : 1),
+      retryAnswer: !cmp(answers[b.num], b.answer) && retried[b.num] ? retryAnswers[b.num] : undefined, // additive: the answer chosen after the hint (not used for scoring)
       timeTaken: Math.round(t / Math.max(blanks.length, 1)),
     }));
     onPageDone(results, true);

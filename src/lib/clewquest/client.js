@@ -23,7 +23,8 @@ export function reportThread(subject, results) {
   if (!clewquestEnabled() || typeof window === "undefined") return;
   try {
     const items = (results || []).filter((r) => r && r.scored !== false && r.id != null && r.userAnswer !== undefined && r.userAnswer !== null)
-      .map((r) => ({ itemId: String(r.id), answer: r.userAnswer, answerSeq: r.userAnswerSeq, answerReason: r.userAnswerReason })); // no hint flag: the server records hint reveals itself
+      .map((r) => ({ itemId: String(r.id), answer: r.userAnswer, answerSeq: r.userAnswerSeq, answerReason: r.userAnswerReason,
+        retryAnswer: r.attempts === 2 && r.retryAnswer !== undefined && r.retryAnswer !== null ? r.retryAnswer : undefined })); // no hint flag: the server grades the retry and records hint reveals itself
     if (!items.length) return;
     cqPost("/api/clewquest/award", { subject: String(subject || "").toLowerCase(), items }).then((r) => {
       if (r && r.ok && r.added > 0) {

@@ -15,11 +15,32 @@ export async function awardThread({ admin, userId, grade, subject, sourceRef, us
   return { awarded: inserted ? amount : 0 };
 }
 
-// Lifetime totals for a student from the ledger, plus the cached stage row (updated; never decreases in Phase 1).
+// Many awards in ONE upsert (the award route). entries: [{ sourceRef, usedHint }]. Duplicates (already in the ledger, or twice
+// in this call) award nothing; only rows actually inserted are counted. -> { awarded } or { error }.
+export async function awardMany({ admin, userId, grade, subject, entries }, cfg = CLEWQUEST) {
+  if (!clewquestEnabled()) return { skipped: true, awarded: 0 };
+  if (!userId || !subject) return { skipped: true, awarded: 0 };
+  const seen = new Set(), rows = [];
+  for (const e of entries || []) {
+    const ref = String((e && e.sourceRef) || "");
+    const amount = earnAmount({ correct: true, usedHint: !!(e && e.usedHint) }, cfg);
+    if (!ref || seen.has(ref) || !(amount > 0)) continue;
+    seen.add(ref);
+    rows.push({ user_id: userId, grade: grade || cfg.defaultGrade, subject: String(subject).toLowerCase(), amount, reason: earnReason({ usedHint: !!e.usedHint }), source_ref: ref });
+  }
+  if (!rows.length) return { awarded: 0 };
+  const { data, error } = await admin.from("clewquest_thread_ledger").upsert(rows, { onConflict: "user_id,source_ref", ignoreDuplicates: true }).select("source_ref,amount");
+  if (error) return { error: error.message, awarded: 0 };
+  const awarded = (Array.isArray(data) ? data : []).reduce((n, r) => n + (Number(r.amount) || 0), 0);
+  return { awarded: Math.round(awarded * 10) / 10 };
+}
+
+// Lifetime totals per subject, summed IN THE DATABASE (view clewquest_thread_totals, at most one row per subject), so the
+// total never stalls at the API row cap (PostgREST max_rows = 1000) however long the ledger grows.
 export async function readTotals(admin, userId) {
-  const { data, error } = await admin.from("clewquest_thread_ledger").select("subject,amount").eq("user_id", userId).limit(100000);
+  const { data, error } = await admin.from("clewquest_thread_totals").select("subject,thread").eq("user_id", userId);
   if (error) return { error: error.message };
-  return { totals: totalsBySubject(data || []) };
+  return { totals: totalsBySubject((data || []).map((r) => ({ subject: r.subject, amount: Number(r.thread) || 0 }))) };
 }
 export async function syncStage(admin, userId, total) {
   const stage = stageFromTotal(total);

@@ -1,7 +1,7 @@
 -- Genius Project: ClewQuest Phase 1 (docs/design/clewquest-phase1-spec.md section 3).
 -- Apply by hand in the Supabase SQL editor. NOT applied by the PR. Safe to re-run.
 -- ADDITIVE ONLY: new tables, indexes, policies. Nothing is dropped, renamed or rewritten.
--- RLS: a student reads/writes their own character; linked parents read via is_parent_of(); the thread ledger,
+-- RLS: a student reads their own character (writes go through the server route); linked parents read via is_parent_of(); the thread ledger,
 -- seen-items and stage cache are written by the service role only (server routes), students/parents can only read.
 
 -- 3.1 character (one per student)
@@ -80,10 +80,16 @@ alter table public.clewquest_parent_rules   enable row level security;
 
 drop policy if exists clewquest_characters_select on public.clewquest_characters;
 create policy clewquest_characters_select on public.clewquest_characters for select using (user_id = auth.uid() or public.is_parent_of(user_id));
+-- Characters are written ONLY by the server route (service role, validated). No client insert/update policy; the two
+-- "drop policy if exists" lines only remove policies an earlier draft of THIS migration created on its own new table.
 drop policy if exists clewquest_characters_insert on public.clewquest_characters;
-create policy clewquest_characters_insert on public.clewquest_characters for insert with check (user_id = auth.uid());
 drop policy if exists clewquest_characters_update on public.clewquest_characters;
-create policy clewquest_characters_update on public.clewquest_characters for update using (user_id = auth.uid()) with check (user_id = auth.uid());
+revoke insert, update, delete, truncate on public.clewquest_characters from anon, authenticated;
+do $$ begin
+  if not exists (select 1 from pg_constraint where conname = 'clewquest_characters_nickname_len') then
+    alter table public.clewquest_characters add constraint clewquest_characters_nickname_len check (nickname is null or char_length(nickname) <= 24);
+  end if;
+end $$;
 
 drop policy if exists clewquest_ledger_select on public.clewquest_thread_ledger;
 create policy clewquest_ledger_select on public.clewquest_thread_ledger for select using (user_id = auth.uid() or public.is_parent_of(user_id));
@@ -102,7 +108,8 @@ revoke insert, update, delete, truncate on public.clewquest_calendar, public.cle
 -- ---------------------------------------------------------------------------------------------------------------
 -- Durable picture-code lockout (shared by every serverless instance). Service role only: RLS on, no policies, no grants.
 -- One row per (scope, key): scope 'user' = normalised username, scope 'ip' = HMAC of the client IP (never the raw IP).
--- 5 failures per username in 15 min -> locked 15 min; a larger per-IP cap; a success resets the username counter.
+-- 5 attempts per username in 15 min, the 6th is refused and locks 15 min (counted atomically BEFORE sign-in); a success resets
+-- the username counter. Per IP: more than 100 distinct failing usernames in 15 min locks that IP.
 create table if not exists public.clewquest_login_attempts (
   scope text not null check (scope in ('user','ip')),
   key text not null,
@@ -122,21 +129,61 @@ language sql security definer set search_path = public as $$
   where scope = p_scope and key = p_key and locked_until is not null and locked_until > now();
 $$;
 
--- Atomically counts one failure (fixed window); locks for p_lock_secs once p_max failures are reached. Returns locked_until or null.
-create or replace function public.clewquest_login_fail(p_scope text, p_key text, p_max integer, p_window_secs integer, p_lock_secs integer) returns timestamptz
+-- ATOMIC attempt counter, called BEFORE the sign-in (one insert ... on conflict do update; the row lock serialises parallel
+-- requests, so N concurrent attempts can never all pass). Counts every attempt; a success clears it via clewquest_login_ok.
+-- Returns true = allowed, false = locked. While locked nothing is counted and the lock is not extended. When a lock or the
+-- window has expired the counter restarts at 1. The (p_max + 1)th attempt inside one window sets the lock.
+create or replace function public.clewquest_login_try(p_scope text, p_key text, p_max integer, p_window_secs integer, p_lock_secs integer) returns boolean
 language plpgsql security definer set search_path = public as $$
-declare r public.clewquest_login_attempts; lock_to timestamptz;
+declare r public.clewquest_login_attempts;
 begin
-  insert into public.clewquest_login_attempts as a (scope, key, fails, window_start, updated_at)
-  values (p_scope, p_key, 1, now(), now())
+  insert into public.clewquest_login_attempts as a (scope, key, fails, window_start, locked_until, updated_at)
+  values (p_scope, p_key, 1, now(), null, now())
   on conflict (scope, key) do update set
-    fails = case when a.window_start < now() - make_interval(secs => p_window_secs) then 1 else a.fails + 1 end,
-    window_start = case when a.window_start < now() - make_interval(secs => p_window_secs) then now() else a.window_start end,
+    fails = case
+      when a.locked_until > now() then a.fails
+      when a.locked_until is not null or a.window_start < now() - make_interval(secs => p_window_secs) then 1
+      else a.fails + 1 end,
+    window_start = case
+      when a.locked_until > now() then a.window_start
+      when a.locked_until is not null or a.window_start < now() - make_interval(secs => p_window_secs) then now()
+      else a.window_start end,
+    locked_until = case
+      when a.locked_until > now() then a.locked_until
+      when a.locked_until is not null or a.window_start < now() - make_interval(secs => p_window_secs) then null
+      when a.fails + 1 > p_max then now() + make_interval(secs => p_lock_secs)
+      else null end,
     updated_at = now()
   returning * into r;
-  if r.fails >= p_max then
+  return not (r.locked_until is not null and r.locked_until > now());
+end $$;
+
+-- Per-IP cap counts DISTINCT usernames that failed from one IP (keyed hash) inside the window, so a school or home sharing
+-- one IP is not locked by a few children mistyping. Recorded after a failed sign-in; an advisory lock per IP makes the
+-- count-and-lock atomic. Locks the IP (scope 'ip' row) once more than p_max distinct usernames failed. Returns locked_until or null.
+create table if not exists public.clewquest_login_ip_users (
+  ip_key text not null,
+  user_key text not null,
+  last_at timestamptz not null default now(),
+  primary key (ip_key, user_key)
+);
+alter table public.clewquest_login_ip_users enable row level security;
+revoke all on public.clewquest_login_ip_users from anon, authenticated;
+
+create or replace function public.clewquest_login_ip_fail(p_ip text, p_user text, p_max integer, p_window_secs integer, p_lock_secs integer) returns timestamptz
+language plpgsql security definer set search_path = public as $$
+declare n integer; lock_to timestamptz;
+begin
+  perform pg_advisory_xact_lock(hashtext('clewquest_login_ip:' || p_ip));
+  insert into public.clewquest_login_ip_users as u (ip_key, user_key, last_at) values (p_ip, p_user, now())
+  on conflict (ip_key, user_key) do update set last_at = now();
+  select count(*) into n from public.clewquest_login_ip_users
+  where ip_key = p_ip and last_at > now() - make_interval(secs => p_window_secs);
+  if n > p_max then
     lock_to := now() + make_interval(secs => p_lock_secs);
-    update public.clewquest_login_attempts set locked_until = lock_to where scope = p_scope and key = p_key;
+    insert into public.clewquest_login_attempts as a (scope, key, fails, window_start, locked_until, updated_at)
+    values ('ip', p_ip, n, now(), lock_to, now())
+    on conflict (scope, key) do update set fails = excluded.fails, locked_until = excluded.locked_until, updated_at = now();
     return lock_to;
   end if;
   return null;
@@ -150,10 +197,12 @@ language sql security definer set search_path = public as $$
 $$;
 
 revoke all on function public.clewquest_login_status(text, text) from public, anon, authenticated;
-revoke all on function public.clewquest_login_fail(text, text, integer, integer, integer) from public, anon, authenticated;
+revoke all on function public.clewquest_login_try(text, text, integer, integer, integer) from public, anon, authenticated;
+revoke all on function public.clewquest_login_ip_fail(text, text, integer, integer, integer) from public, anon, authenticated;
 revoke all on function public.clewquest_login_ok(text, text) from public, anon, authenticated;
 grant execute on function public.clewquest_login_status(text, text) to service_role;
-grant execute on function public.clewquest_login_fail(text, text, integer, integer, integer) to service_role;
+grant execute on function public.clewquest_login_try(text, text, integer, integer, integer) to service_role;
+grant execute on function public.clewquest_login_ip_fail(text, text, integer, integer, integer) to service_role;
 grant execute on function public.clewquest_login_ok(text, text) to service_role;
 
 -- ---------------------------------------------------------------------------------------------------------------

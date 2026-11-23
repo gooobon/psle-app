@@ -66,6 +66,7 @@ import PaperExam from '@/components/PaperExam'; // mock exams from past papers (
 import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
 import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
 import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
+import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
@@ -1254,6 +1255,9 @@ function SignupParentForm({onSignup, onBack}){
 
 function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, onExitToQuest}){
   // initialSubject / onExitToQuest are only passed by the ClewQuest shell (flag on). Without them nothing changes.
+  // Opened from an island (initialSubject set): leaving the subject returns to the islands. Opened via "Today" (no
+  // initialSubject): this is the normal Today hub; leaving a subject comes back to it, and the hub offers a way back.
+  const exitSubjectToQuest = !!(onExitToQuest && initialSubject);
   const [grade,           setGrade]           = useState(user.grade||"P3");
   const [subject,         setSubject]         = useState(initialSubject||"English");
   const [subjectSelected, setSubjectSelected] = useState(!!initialSubject);
@@ -1406,7 +1410,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
   }
 
   function leaveToHub(){
-    if(onExitToQuest){ onExitToQuest(); return; } // ClewQuest: the islands replace the Today hub
+    if(exitSubjectToQuest){ onExitToQuest(); return; } // ClewQuest: back to where the student came from (the islands)
     setHub(true);
     setSubjectSelected(false);
     setScreen("home");
@@ -1614,6 +1618,11 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
 
   if(hub || !subjectSelected) return(
     <Wrap>
+      {onExitToQuest&&(
+        <div style={{padding:"10px 16px 0"}}>
+          <button data-testid="today-back-to-islands" onClick={onExitToQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Back to the islands</button>
+        </div>
+      )}
       <TodayScreen
         user={user}
         grade={grade}
@@ -2390,9 +2399,10 @@ function App(){
       {...extra}
     />;
     // ClewQuest (flag on + a server student account): builder / four-island landing / home; practice is the existing StudentApp.
-    if(CQ_ON && typeof user.serverId==="string"){
+    // Only for a grade ClewQuest has a config for; otherwise the normal app. renderPractice(null, exit) opens the Today hub.
+    if(CQ_ON && typeof user.serverId==="string" && questGrade(user.grade)){
       return <ClewQuestStudent user={user} onLogout={handleLogout}
-        renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject, onExitToQuest:exit})}/>;
+        renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject||undefined, onExitToQuest:exit})}/>;
     }
     return practice();
   }

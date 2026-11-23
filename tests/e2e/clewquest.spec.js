@@ -78,12 +78,25 @@ test("picture sign-up -> builder -> landing -> English practice -> thread on hom
   expect(new Set(ledger.map((r) => r.source_ref)).size).toBe(ledger.length); // idempotent
   await shot(page, "cq-04-home");
 
+  // F7: the existing Today hub stays reachable with the flag on, and its back button returns to where it was opened
+  await page.getByTestId("cq-today-home").click();
+  await expect(page.getByTestId("today-back-to-islands")).toBeVisible({ timeout: 20000 });
+  await shot(page, "cq-05-today-hub");
+  await page.getByTestId("today-back-to-islands").click();
+  await expect(page.getByTestId("cq-home")).toBeVisible({ timeout: 20000 });
+  await page.getByRole("button", { name: "Back to the islands" }).click();
+  await page.getByTestId("cq-today").click();
+  await expect(page.getByTestId("today-back-to-islands")).toBeVisible({ timeout: 20000 });
+  await page.getByTestId("today-back-to-islands").click();
+  await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
+
   // Picture login with the same code, after logging out
   await page.reload();
   await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });
   await page.getByRole("button", { name: "Log out" }).click();
   await page.getByTestId("cq-open-picture-login").click();
   await page.getByTestId("pic-username").fill(USER);
+  for (let i = 0; i < 9; i++) await expect(page.getByTestId(`pic-label-${i}`)).toBeVisible(); // F11: labels always shown
   for (const i of CODE) await page.getByTestId(`pic-${i}`).click();
   await page.getByTestId("pic-submit").click();
   await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 });

@@ -43,7 +43,9 @@ export default function ParentPictureReset({ child }) {
       </>)}
       {step === "confirm" && (<>
         <div style={{ fontSize: 13, marginBottom: 8 }}>Replace {name}&apos;s picture code with these 4 pictures? The old code will stop working.</div>
-        <div data-testid="picture-reset-preview" style={{ fontSize: 34, marginBottom: 10 }}>{seq.map((i) => PICTURES[i].glyph).join(" ")}</div>
+        <div data-testid="picture-reset-preview" style={{ display: "flex", gap: 10, marginBottom: 10 }}>{seq.map((i, n) => (
+          <span key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}><span aria-hidden="true" style={{ fontSize: 30 }}>{PICTURES[i].glyph}</span><span style={{ fontSize: 11, fontWeight: 800 }}>{PICTURES[i].label}</span></span>
+        ))}</div>
         <div style={{ display: "flex", gap: 8 }}>
           <button style={btn("#fff", "#334155")} onClick={() => setStep("pick")}>Back</button>
           <button data-testid="picture-reset-confirm" style={btn("#4C1D95")} onClick={busy ? undefined : save}>{busy ? "Saving..." : "Yes, save new code"}</button>

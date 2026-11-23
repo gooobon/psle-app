@@ -18,7 +18,10 @@ export function PicturePad({ value, onChange, label }) {
       <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 10 }}>
         {PICTURES.map((p, i) => (
           <button key={p.key} type="button" data-testid={`pic-${i}`} aria-label={p.label} onClick={() => value.length < CODE_LENGTH && onChange([...value, i])}
-            style={{ fontSize: 38, padding: "14px 0", background: "#fff", border: "2px solid #CBD5E1", borderRadius: 16, cursor: "pointer" }}>{p.glyph}</button>
+            style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, padding: "10px 0 8px", background: "#fff", border: "2px solid #CBD5E1", borderRadius: 16, cursor: "pointer" }}>
+            <span aria-hidden="true" style={{ fontSize: 34, lineHeight: 1 }}>{p.glyph}</span>
+            <span data-testid={`pic-label-${i}`} style={{ fontSize: 12, fontWeight: 800, color: "#334155" }}>{p.label}</span>
+          </button>
         ))}
       </div>
       <button type="button" data-testid="pic-clear" onClick={() => onChange([])} style={{ marginTop: 10, background: "none", border: "none", color: "#475569", fontWeight: 700, cursor: "pointer" }}>Clear</button>

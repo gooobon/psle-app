@@ -2,6 +2,7 @@
 import { adminClient, currentUser, jerr, jok, readJson } from "@/lib/supabase/server";
 import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { validateCharacter } from "@/lib/clewquest/logic";
+import { usesPictureCode } from "@/lib/clewquest/pictureFlag";
 
 export const runtime = "nodejs";
 
@@ -12,7 +13,7 @@ export async function PUT(request) {
   const v = validateCharacter(await readJson(request));
   if (!v.ok) return jerr(v.error, 400);
   const row = { user_id: me.profile.id, ...v.value, updated_at: new Date().toISOString() };
-  if (me.user && me.user.user_metadata && me.user.user_metadata.picture_code === true) row.picture_code_set = true;
+  if (usesPictureCode(me.user)) row.picture_code_set = true; // app_metadata only (server-set), never user_metadata
   const { data, error } = await adminClient().from("clewquest_characters").upsert(row, { onConflict: "user_id" }).select().single();
   if (error) return jerr("could not save", 500);
   return jok({ character: data });

@@ -47,10 +47,12 @@ export function publicProfile(p) {
 }
 
 // Create student auth user + profile (+ optional parent link). Rolls back the auth user on failure.
-export async function createStudent(admin, { username, password, name, grade, school, parentId }) {
+// appMetadata (optional, additive): server-only flags set at creation, e.g. ClewQuest's { picture_code: true }.
+export async function createStudent(admin, { username, password, name, grade, school, parentId, appMetadata }) {
   const { data, error } = await admin.auth.admin.createUser({
     email: kidEmail(username), password, email_confirm: true,
     user_metadata: { role: "student" },
+    ...(appMetadata ? { app_metadata: appMetadata } : {}),
   });
   if (error || !data?.user) return { error: error?.message || "create failed", status: /registered|exists/i.test(error?.message || "") ? 409 : 500 };
   const id = data.user.id;

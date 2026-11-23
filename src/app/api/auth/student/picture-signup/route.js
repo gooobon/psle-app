@@ -7,6 +7,7 @@ import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { CLEWQUEST } from "@/lib/clewquest/config";
 import { normalizeSequence } from "@/lib/clewquest/pictures";
 import { derivePicturePassword } from "@/lib/clewquest/pictureServer";
+import { PICTURE_APP_METADATA } from "@/lib/clewquest/pictureFlag";
 
 export const runtime = "nodejs";
 
@@ -24,9 +25,9 @@ export async function POST(request) {
   try { password = derivePicturePassword(process.env.CLEWQUEST_PICTURE_PEPPER, username, seq); } catch { return jerr("picture sign-up unavailable", 503); }
 
   const admin = adminClient();
-  const made = await createStudent(admin, { username, password, name, grade: CLEWQUEST.defaultGrade, school: "" });
-  if (made.error) return jerr(made.error, made.status);
-  await admin.auth.admin.updateUserById(made.id, { user_metadata: { role: "student", picture_code: true } });
+  // The picture-code flag is set in app_metadata AT CREATION (service role only; one call, so it cannot be half-applied).
+  const made = await createStudent(admin, { username, password, name, grade: CLEWQUEST.defaultGrade, school: "", appMetadata: PICTURE_APP_METADATA });
+  if (made.error) return made.status === 409 ? jerr("username taken", 409) : jerr("could not create account", 500); // never a raw Supabase error
 
   const sb = await sessionClient();
   const { data, error } = await sb.auth.signInWithPassword({ email: kidEmail(username), password });

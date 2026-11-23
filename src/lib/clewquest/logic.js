@@ -69,6 +69,8 @@ export function validateConfig(cfg = CLEWQUEST, assetKeys = null) {
 }
 
 export const subjectsFor = (grade, cfg = CLEWQUEST) => (cfg.grades[grade] ? cfg.grades[grade].subjects : {});
+// The student's own grade if ClewQuest has a config for it, else null (=> the normal app is shown, no ClewQuest shell).
+export const questGrade = (grade, cfg = CLEWQUEST) => { const g = grade || cfg.defaultGrade; return cfg.grades[g] ? g : null; };
 export const openSubjects = (grade, cfg = CLEWQUEST) => Object.entries(subjectsFor(grade, cfg)).filter(([, v]) => v.status === "open").map(([k]) => k);
 export const defaultHair = (gender, cfg = CLEWQUEST) => (cfg.hair.find((h) => h.gender === gender && h.default) || {}).key;
 export const defaultColour = (cfg = CLEWQUEST) => (cfg.colours.find((c) => c.default) || {}).key;
