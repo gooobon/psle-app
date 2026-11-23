@@ -358,12 +358,15 @@ test("saturday weekly bonus and payout @saturday", async ({ browser }) => {
   // (finalize_credits: gate_day < today). The test server clock stays on Saturday, so close the day the way the app does:
   // run finalize_credits for Sunday with the service role of the LOCAL test project (the guard in helpers refuses production).
   {
-    const pending = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.pending&select=id");
+    const pending = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.pending&select=id,gate_day");
     expect(pending.length).toBe(2);
+    // The phase server runs on a shifted Saturday, so take the day after the credits' own gate day, not the runner's calendar.
+    const gate = new Date(String(pending[0].gate_day) + "T00:00:00Z");
+    const nextDay = new Date(gate.getTime() + 86400000).toISOString().slice(0, 10);
     const { url, headers } = restHeaders();
     const r = await fetch(url.replace(/\/$/, "") + "/rest/v1/rpc/finalize_credits", {
       method: "POST", headers: { ...headers, "Content-Type": "application/json" },
-      body: JSON.stringify({ p_child: id, p_today: sgtYmd(1) }),
+      body: JSON.stringify({ p_child: id, p_today: nextDay }),
     });
     expect(r.ok).toBeTruthy();
     const confirmed = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.confirmed&select=id");
