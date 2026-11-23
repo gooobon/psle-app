@@ -10,8 +10,8 @@ const PENDING_PARENT_EMAIL_KEY = "clewquest_pending_parent_email";
 
 export function LandingArt({ height = "60vh", minHeight = 420, pills = true, children }) {
   return (
-    <div style={{ position: "relative", height, minHeight, overflow: "hidden" }}>
-      <Art k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", maxWidth: "none" }} />
+    <div style={{ position: "relative", height, minHeight, overflow: "hidden", background: "linear-gradient(160deg,#F4EFE6 0%,#E4DDD0 55%,#F1ECE2 100%)" }} data-testid="cq-landing-art">
+      <Art priority k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center", display: "block", maxWidth: "none" }} />
       {pills && ISLAND_PILLS.map((p) => <IslandPill key={p.label} {...p} testId={`cq-pill-${p.label.toLowerCase()}`} />)}
       {children}
     </div>
@@ -46,7 +46,7 @@ export function LoginFrame({ children, onBack }) {
   return (
     <Page testId="cq-login">
       <div style={{ position: "relative", height: 170, overflow: "hidden" }}>
-        <Art k="landing/four-islands" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 55%", display: "block", maxWidth: "none" }} />
+        <Art priority k="landing/four-islands" alt="" style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center 55%", display: "block", maxWidth: "none" }} />
         {onBack && <button data-testid="cq-back-landing" onClick={onBack} style={{ ...linkBtn, position: "absolute", top: 10, left: 12, background: "#fff", borderRadius: 8, padding: "5px 10px", color: T.ink, fontSize: 13, boxShadow: "0 2px 8px rgba(27,35,64,.18)" }}>Back</button>}
       </div>
       <div style={{ position: "relative", background: "#fff", borderRadius: "24px 24px 0 0", marginTop: -24, padding: "0 20px 36px", minHeight: "calc(100vh - 146px)", boxShadow: "0 -6px 20px rgba(27,35,64,.08)" }}>

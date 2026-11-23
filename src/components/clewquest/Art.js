@@ -29,27 +29,30 @@ function tintedUrl(k, a, hex) {
 }
 
 // `tint` (hex) recolours only the yarn of yarn-body art (stages 1-5 and characters); other art ignores it.
-export function Art({ k, alt, style, className, testId, tint }) {
+export function Art({ k, alt, style, className, testId, tint, priority }) {
   const a = manifest.assets[k];
   const yarn = !!a && (k.startsWith("stages/stage-") && !/stage-[678]/.test(k) || k.startsWith("characters/"));
   const hex = yarn ? tint : null;
   const [done, setDone] = useState(null); // { key, url } (url null = tint failed, show original)
+  const [gaveUp, setGaveUp] = useState(null); // tint key we stopped waiting for (never leave the art blank)
   useEffect(() => {
     if (!hex || !a) return undefined;
     let live = true;
     tintedUrl(k, a, hex).then((url) => { if (live) setDone({ key: k + "|" + hex, url }); });
-    return () => { live = false; };
+    const timer = setTimeout(() => { if (live) setGaveUp(k + "|" + hex); }, 1500);
+    return () => { live = false; clearTimeout(timer); };
   }, [k, hex]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!a) return null;
   const url = hex && done && done.key === k + "|" + hex ? done.url : (hex && tintCache.get(k + "|" + hex)) || null;
   const failed = !!hex && done && done.key === k + "|" + hex && !done.url;
-  const pending = !!hex && !url && !failed; // wait for the tinted image so the old colour never flashes
+  const pending = !!hex && !url && !failed && gaveUp !== k + "|" + hex; // wait for the tinted image so the old colour never flashes
   const imgStyle = { maxWidth: "100%", height: "auto", ...style, ...(pending ? { visibility: "hidden" } : null) };
+  const loadAttrs = priority ? { loading: "eager", fetchPriority: "high", decoding: "async" } : null;
   if (url) return <img src={url} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} data-tint={hex} style={imgStyle} />;
   return (
     <picture>
       <source srcSet={a.webp} type="image/webp" />
-      <img src={a.png || a.webp} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} style={imgStyle} />
+      <img src={a.png || a.webp} alt={alt || ""} width={a.w} height={a.h} className={className} data-testid={testId} style={imgStyle} {...loadAttrs} />
     </picture>
   );
 }
