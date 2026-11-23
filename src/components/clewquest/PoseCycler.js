@@ -32,9 +32,10 @@ export default function PoseCycler({ frames, intervalMs = 700, alt, tint, height
   }, []);
   useEffect(() => {
     if (reduced || !visible || list.length < 2) return undefined;
-    const id = setInterval(() => setI((n) => (n + 1) % list.length), intervalMs);
-    return () => clearInterval(id);
-  }, [reduced, visible, list.length, intervalMs]);
+    const cur = list[i % list.length];
+    const id = setTimeout(() => setI((n) => (n + 1) % list.length), (cur && cur.ms) || intervalMs); // blink frames are brief
+    return () => clearTimeout(id);
+  }, [reduced, visible, list.length, intervalMs, i]); // eslint-disable-line react-hooks/exhaustive-deps
   if (!list.length) return null;
   const idx = reduced && !tapped ? 0 : i % list.length;
   const f = list[idx];
@@ -43,7 +44,7 @@ export default function PoseCycler({ frames, intervalMs = 700, alt, tint, height
       onClick={() => { setTapped(true); setI((n) => (n + 1) % list.length); }}
       style={{ background: "none", border: "none", padding: 0, cursor: "pointer", height, display: "inline-flex", alignItems: "flex-end", justifyContent: "center" }}>
       <style>{`@keyframes cq-pose-in{0%{opacity:.2;transform:translateY(6px) scale(.97)}60%{opacity:1;transform:translateY(-4px) scale(1.02)}100%{opacity:1;transform:none}}@media (prefers-reduced-motion: reduce){.cq-pose-frame{animation:none !important;transition:none !important}}`}</style>
-      <span key={idx} className="cq-pose-frame" style={{ display: "inline-block", transform: reduced ? "none" : f.transform || "none", transition: reduced ? "none" : "transform .35s ease", animation: reduced ? "none" : "cq-pose-in .45s ease-out" }}>
+      <span key={idx} className="cq-pose-frame" style={{ display: "inline-block", transform: reduced ? "none" : f.transform || "none", transition: reduced ? "none" : "transform .35s ease", animation: reduced || f.ms ? "none" : "cq-pose-in .45s ease-out" }}>
         <Art k={f.key} alt={alt || ""} tint={tint} style={{ maxHeight: height, width: "auto" }} />
       </span>
     </button>
