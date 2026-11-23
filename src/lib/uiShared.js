@@ -535,6 +535,8 @@ function ErrorBox({msg}){
 }
 
 function HintBox({text}){
+  // Generic signal that a hint was shown (a server-side listener may record it; nothing listens when that feature is off).
+  useEffect(()=>{ if(text&&typeof window!=="undefined") try{ window.dispatchEvent(new CustomEvent("genius-hint-shown",{detail:{text}})); }catch{} },[text]);
   if(!text) return null;
   return(
     <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,

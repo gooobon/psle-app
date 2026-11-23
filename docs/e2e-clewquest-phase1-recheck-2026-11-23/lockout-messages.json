@@ -1,0 +1,30 @@
+{
+  "messages": [
+    {
+      "n": 1,
+      "text": "That did not work. Try again.",
+      "locked": false
+    },
+    {
+      "n": 2,
+      "text": "That did not work. Try again.",
+      "locked": false
+    },
+    {
+      "n": 3,
+      "text": "That did not work. Try again.",
+      "locked": false
+    },
+    {
+      "n": 4,
+      "text": "That did not work. Try again.",
+      "locked": false
+    },
+    {
+      "n": 5,
+      "text": "Locked for 15 minutes.",
+      "locked": true
+    }
+  ],
+  "lockedText": "Ask a parent to reset your picture code. They log in on their own account and pick new pictures for you. You can sign in again right away.\nNo parent linked yet? Wait 15 minutes and sign in. Then tap \"Link a parent\" to get 6 numbers, and give them to a parent."
+}

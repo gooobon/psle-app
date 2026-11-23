@@ -159,7 +159,9 @@ async function nudge(page) {
     const bracket = [...document.querySelectorAll("span")].find((el) => getComputedStyle(el).cursor === "pointer" && el.closest("span") && /\[/.test((el.parentElement && el.parentElement.innerText) || ""));
     if (bracket) { bracket.click(); return "bracket"; }
 
-    const order = buttons().find((b) => /Not ordered yet/.test(b.getAttribute("aria-label") || ""));
+    // OrderTap cards (comprehension "put the events in order"). Tap each unordered card once.
+    // Without this the driver clicks an already-answered True/False button until the step cap.
+    const order = buttons().find((b) => !b.disabled && /Not ordered yet/.test(b.getAttribute("aria-label") || ""));
     if (order) { order.click(); return "order"; }
 
     const tfButtons = buttons().filter((b) => /^(True|False|对|错)$/.test(text(b)) && !b.disabled);

@@ -63,6 +63,10 @@ const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 import PaperExam from '@/components/PaperExam'; // mock exams from past papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off)
+import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
+import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
+import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
+import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
@@ -150,7 +154,7 @@ function mirrorServerUser(p, extra){
   const prev = STORE.users[id] || {};
   STORE.users[id] = {
     ...prev, id, role:p.role, name:p.name, grade:p.grade||prev.grade, school:p.school||prev.school,
-    serverId:p.id, ...(extra||{}),
+    serverId:p.id, ...(p.role==="student" ? {pictureCode:!!p.pictureCode} : {}), ...(extra||{}),
   };
   persistUsers();
   return STORE.users[id];
@@ -601,8 +605,14 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 }
 
 
+const CQ_ON = clewquestEnabled() && SERVER_AUTH;
 function AuthScreen({onLogin, onSignup}){
-  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent
+  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
+  function pictureDone(profile){
+    const user = mirrorServerUser(profile);
+    importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); // same fire-and-forget copies as the password login
+    onLogin("student", user);
+  }
   return(
     <Wrap>
       <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0F172A"}}> <div style={{background:"linear-gradient(160deg,#1E3A6E,#1E40AF)",padding:"48px 24px 36px",textAlign:"center",flexShrink:0}}>
@@ -614,6 +624,14 @@ function AuthScreen({onLogin, onSignup}){
           </div>
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
           {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
+          {mode==="login" && CQ_ON && (
+            <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
+              <button data-testid="cq-open-picture-login" onClick={()=>setMode("picture_login")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>Student: sign in with pictures</button>
+              <button data-testid="cq-open-picture-signup" onClick={()=>setMode("picture_signup")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>New student: create account with pictures</button>
+            </div>
+          )}
+          {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
+          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
           {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("login")}/>}
           {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("login")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>)}
         </div>
@@ -1235,12 +1253,15 @@ function SignupParentForm({onSignup, onBack}){
 }
 
 
-function StudentApp({user, onLogout, getProgress, setProgress}){
-
+function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, onExitToQuest, onOpenQuest}){
+  // initialSubject / onExitToQuest are only passed by the ClewQuest shell (flag on). Without them nothing changes.
+  // Opened from an island (initialSubject set): leaving the subject returns to the islands. Opened via "Today" (no
+  // initialSubject): this is the normal Today hub; leaving a subject comes back to it, and the hub offers a way back.
+  const exitSubjectToQuest = !!(onExitToQuest && initialSubject);
   const [grade,           setGrade]           = useState(user.grade||"P3");
-  const [subject,         setSubject]         = useState("English");
-  const [subjectSelected, setSubjectSelected] = useState(false);
-  const [hub,             setHub]             = useState(true); // today overview until a subject is opened
+  const [subject,         setSubject]         = useState(initialSubject||"English");
+  const [subjectSelected, setSubjectSelected] = useState(!!initialSubject);
+  const [hub,             setHub]             = useState(!initialSubject); // today overview until a subject is opened
   const [zhAction,        setZhAction]        = useState(null);
   const [screen,          setScreen]          = useState("home");
   const [sessionResult,   setSessionResult]   = useState(null);
@@ -1389,6 +1410,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   }
 
   function leaveToHub(){
+    if(exitSubjectToQuest){ onExitToQuest(); return; } // ClewQuest: back to where the student came from (the islands)
     setHub(true);
     setSubjectSelected(false);
     setScreen("home");
@@ -1596,6 +1618,16 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
 
   if(hub || !subjectSelected) return(
     <Wrap>
+      {onOpenQuest&&!onExitToQuest&&(
+        <div style={{padding:"10px 16px 0"}}>
+          <button data-testid="today-open-clewquest" onClick={onOpenQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Open ClewQuest</button>
+        </div>
+      )}
+      {onExitToQuest&&(
+        <div style={{padding:"10px 16px 0"}}>
+          <button data-testid="today-back-to-islands" onClick={onExitToQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Back to the islands</button>
+        </div>
+      )}
       <TodayScreen
         user={user}
         grade={grade}
@@ -2316,6 +2348,7 @@ function ReviewTab({mistakes, onBack}){
 function App(){
   const [auth,    setAuth]    = useState(null);   // { role, user }
   const [tick,    setTick]    = useState(0);       // force re-render after store mutations
+  const [cqOpen,  setCqOpen]  = useState(false);   // ClewQuest: a password student opened ClewQuest from the Today hub (never forced)
   
   // Data is loaded from localStorage at startup - no async needed
 
@@ -2356,7 +2389,7 @@ function App(){
   function handleLogout(){
     if(auth && auth.role==="admin") fetch("/api/admin/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
     if(SERVER_AUTH && auth && auth.role!=="admin") serverPost("/api/auth/logout");
-    setAuth(null);
+    setAuth(null); setCqOpen(false);
   }
 
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
@@ -2364,12 +2397,23 @@ function App(){
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;
-    return <StudentApp
+    const practice = (extra)=><StudentApp
       user={user}
       onLogout={handleLogout}
       getProgress={(g,s)=>getProgress(user.id,g,s)}
       setProgress={(g,s,d)=>{ setProgress(user.id,g,s,d); refresh(); }}
+      {...extra}
     />;
+    // ClewQuest (flag on + a server student account): builder / four-island landing / home; practice is the existing StudentApp.
+    // Only for a grade ClewQuest has a config for; otherwise the normal app. renderPractice(null, exit) opens the Today hub.
+    // Picture-code students (server says so) live in ClewQuest. Password students keep the Today hub as home and may OPEN ClewQuest
+    // from it (cqOpen); it is never forced on them.
+    const cqOk = CQ_ON && typeof user.serverId==="string" && questGrade(user.grade);
+    if(cqOk && (user.pictureCode || cqOpen)){
+      return <ClewQuestStudent user={user} onLogout={handleLogout} onLeaveQuest={user.pictureCode ? undefined : ()=>setCqOpen(false)}
+        renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject||undefined, onExitToQuest:exit})}/>;
+    }
+    return practice(cqOk ? {onOpenQuest:()=>setCqOpen(true)} : undefined);
   }
 
   if(auth.role==="parent"){

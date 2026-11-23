@@ -17,3 +17,6 @@ export function rateLimit(key, { max, windowMs }) {
   if (b.n >= max) return false;
   b.n += 1; return true;
 }
+
+// Additive: forget a key (successful login, parent reset).
+export function rateLimitClear(key) { buckets.delete(key); }

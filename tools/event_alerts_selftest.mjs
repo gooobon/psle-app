@@ -57,7 +57,7 @@ await ok("both channels off: no network, no DB writes", async () => {
 
 await ok("WhatsApp off, email on: milestone falls back to email (issue #66)", async () => {
   const db = makeDb(); const f = fetchLog();
-  const env = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co" };
+  const env = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co", ALERT_ALLOW_ALL_PARENTS: "true" };
   const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "set-1", score: 1, total: 2 }, { env, now: DAY, fetchImpl: f.fetchImpl });
   assert.equal(r.enabled, true); assert.equal(r.sent, 2); assert(f.calls.length === 2 && f.calls.every((c) => c.u.includes("resend.com")), "email only, never WhatsApp");
   assert.equal(db.t.event_alert_log.length, 2);
@@ -130,7 +130,7 @@ await ok("stale deferred 'started' is dropped; deferred milestone is not", async
 });
 
 await ok("email fallback: no opt-in / bad number / missing credentials / provider error", async () => {
-  const mail = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "from@example.test" };
+  const mail = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "from@example.test", ALERT_ALLOW_ALL_PARENTS: "true" };
   const ev = (key) => ({ type: "milestone", childId: "c1", subject: "English", key, score: 1, total: 2 });
   // no opt-in on p1, invalid number on p2
   let db = makeDb({ settings: { p1: { alert_channels: [{ type: "whatsapp", enabled: true, address: "+6590000001", opt_in: false }, { type: "email", enabled: true }] }, p2: { alert_channels: [{ type: "whatsapp", enabled: true, address: "91234567", opt_in: true }, { type: "email", enabled: true }] } } });
@@ -163,4 +163,28 @@ await ok("templates: stable positional params, env-var template names, no free-f
   assert.equal(req.type, "template"); assert.equal(req.template.name, "custom_started");
   assert.equal(JSON.parse(buildRequest("+6590000001", m, ENV).init.body).template.name, "milestone_done");
 });
+await ok("WhatsApp off, email on: recipient policy fails closed without allow-list or ALERT_ALLOW_ALL_PARENTS; logs written; dry-run when email off", async () => {
+  const mail = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co" };
+  const ev = (key) => ({ type: "milestone", childId: "c1", subject: "English", key, score: 1, total: 2 });
+  let db = makeDb(); let f = fetchLog();
+  let r = await notifyEvent(db, ev("hw-2026-11-20"), { env: mail, now: DAY, fetchImpl: f.fetchImpl });
+  assert.equal(r.sent, 0); assert.equal(r.skipped, 2); assert.equal(f.calls.length, 0); assert.equal(db.t.event_alert_log.length, 2);
+  assert(db.t.event_alert_log.every((x) => x.status === "skipped" && /no_allow_list_fail_closed/.test(x.detail)));
+  db = makeDb(); f = fetchLog(); // empty list = nobody
+  r = await notifyEvent(db, ev("k"), { env: { ...mail, ALERT_TEST_RECIPIENTS: "", ALERT_ALLOW_ALL_PARENTS: "true" }, now: DAY, fetchImpl: f.fetchImpl });
+  assert.equal(r.sent, 0); assert.equal(f.calls.length, 0);
+  db = makeDb(); f = fetchLog(); // email off: dry run, still logged, nothing leaves
+  r = await notifyEvent(db, ev("k"), { env: { EMAIL_ALERTS_ENABLED: "false" }, now: DAY, fetchImpl: f.fetchImpl });
+  assert.equal(r.enabled, false); assert.equal(f.calls.length, 0);
+});
+
+await ok("quiet hours with email-only: milestone deferred then flushed by email", async () => {
+  const env = { EMAIL_ALERTS_ENABLED: "true", RESEND_API_KEY: "k", ALERT_FROM_EMAIL: "a@b.co", ALERT_ALLOW_ALL_PARENTS: "true" };
+  const db = makeDb(); const f = fetchLog();
+  const r = await notifyEvent(db, { type: "milestone", childId: "c1", subject: "English", key: "q", score: 1, total: 1 }, { env, now: NIGHT, fetchImpl: f.fetchImpl });
+  assert.equal(r.deferred, 2);
+  const fl = await flushDeferred(db, { env, now: MORNING, fetchImpl: f.fetchImpl });
+  assert.equal(fl.sent, 2); assert(f.calls.every((c) => c.u.includes("resend.com")));
+});
+
 console.log(`ALL PASS (${n} checks)`);

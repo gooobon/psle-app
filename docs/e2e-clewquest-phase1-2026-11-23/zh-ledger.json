@@ -1,0 +1,104 @@
+[
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_A1"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_A2"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_A4"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_A5"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_B1"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_B4"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_C1"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_C4"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_C5"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_D_1"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_D_2"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_D_3"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_D_4"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_D_5"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_F_1"
+  },
+  {
+    "amount": 0.5,
+    "reason": "correct_after_hint",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_F_3"
+  },
+  {
+    "amount": 1,
+    "reason": "correct_first_try",
+    "subject": "chinese",
+    "source_ref": "chinese|ZS01_G2"
+  }
+]

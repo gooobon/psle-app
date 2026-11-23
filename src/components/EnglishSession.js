@@ -17,9 +17,9 @@ function SessionScreen({plan, isMockExam, mockInfo, onFinish, onBack}){
     <div style={{background:C.bg,minHeight:"100vh"}}>
       <div style={{background:isMockExam?"linear-gradient(135deg,#7C3AED,#8B5CF6)":`linear-gradient(135deg,${meta.color}dd,${meta.color})`,padding:"14px 20px 10px"}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:7}}>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:32,height:32,cursor:"pointer",color:"#fff",fontSize:15,display:"flex",alignItems:"center",justifyContent:"center"}}>â†</button>
+          <button onClick={onBack} aria-label="Back" style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:44,height:44,flexShrink:0,cursor:"pointer",color:"#fff",fontSize:15,display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <div style={{flex:1}}>
-            <div style={{color:"#fff",fontSize:13,fontWeight:800}}>{isMockExam?`ðŸ« Mock: ${plan?.paperLabel||"School Paper"}`:meta.label}</div>
+            <div style={{color:"#fff",fontSize:13,fontWeight:800}}>{isMockExam?`🏫 Mock: ${plan?.paperLabel||"School Paper"}`:meta.label}</div>
             <div style={{color:"rgba(255,255,255,0.7)",fontSize:10}}>Section {secIdx+1}/{plan.length}</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.2)",borderRadius:9,padding:"3px 10px"}}><span style={{color:"#fff",fontSize:11,fontWeight:700}}>{progress}%</span></div>
@@ -260,7 +260,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     return blanks.length>0 && blanks.every(b=>cCor[b.num]||cRev[b.num]);
   }
 
-  // â”€â”€ Word Bank handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Word Bank handlers ──────────────────────────────────────
   function handleWbTap(word){
     if(submitted) return;
     if(wbSelected===word){ setWbSelected(null); setActiveBlank(null); return; }
@@ -290,7 +290,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     }
   }
 
-  // â”€â”€ Word Bank submit (check all at once) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Word Bank submit (check all at once) ───────────────────
   function handleWbSubmit(){
     if(!allAnswered()) return;
     const t=Date.now()-startRef.current;
@@ -304,7 +304,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     setSubmitted(true);
   }
 
-  // â”€â”€ Bracket handlers â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Bracket handlers ────────────────────────────────────────
   function handleBracketSelect(num,opt){
     if(submitted) return;
     setCAns(a=>({...a,[num]:opt}));
@@ -322,7 +322,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     setSubmitted(true);
   }
 
-  // â”€â”€ Word Bank MCQ (per-blank, old style fallback) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Word Bank MCQ (per-blank, old style fallback) ───────────
   function handleSelect(num,opt){if(cCor[num]||cRev[num])return;setCAns(a=>({...a,[num]:opt}));}
   function handleCheck(blank){
     const chosen=cAns[blank.num]; if(!chosen)return;
@@ -339,7 +339,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     startRef.current=Date.now();
   }
 
-  // â”€â”€ Render passage with inline bracket choices â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Render passage with inline bracket choices ─────────────
   function renderBracketPassage(){
     if(!cs.passage) return null;
     // Build map of blank num -> blank object
@@ -386,7 +386,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     );
   }
 
-  // â”€â”€ Render passage with blank boxes (Word Bank type) â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── Render passage with blank boxes (Word Bank type) ────────
   function renderWordBankPassage(){
     if(!cs.passage) return null;
     const blankMap={};
@@ -427,7 +427,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
     );
   }
 
-  // â”€â”€ BRACKET TYPE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── BRACKET TYPE ────────────────────────────────────────────
   if(isBracket){
     return(
       <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
@@ -437,13 +437,13 @@ function ClozeSection({sets,sectionType,meta,onDone}){
         </div>
         <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"16px 18px",marginBottom:16}}>
           <div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
-            ðŸ“– Underline the correct word in each bracket
+            📖 Underline the correct word in each bracket
           </div>
           {renderBracketPassage()}
         </div>
         {submitted&&(
           <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:12,padding:"10px 14px",marginBottom:12,fontSize:13,fontWeight:700,color:"#065F46"}}>
-            âœ… {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
+            ✅ {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
           </div>
         )}
         {!submitted&&(
@@ -457,12 +457,12 @@ function ClozeSection({sets,sectionType,meta,onDone}){
             </div>}
           </button>
         )}
-        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section â†’":"Next Set â†’"}</ActionBtn>}
+        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":"Next Set →"}</ActionBtn>}
       </div>
     );
   }
 
-  // â”€â”€ WORD BANK TYPE â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── WORD BANK TYPE ──────────────────────────────────────────
   if(hasWordBank){
     const usedWords=Object.values(cAns).filter(Boolean);
     return(
@@ -475,7 +475,7 @@ function ClozeSection({sets,sectionType,meta,onDone}){
         {/* Word Bank Box */}
         <div style={{background:C.lBlue,border:`1.5px solid ${meta.color}44`,borderRadius:14,padding:"12px 14px",marginBottom:14}}>
           <div style={{fontSize:11,fontWeight:800,color:meta.color,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
-            Word Bank â€” tap a word, then tap its blank
+            Word Bank — tap a word, then tap its blank
           </div>
           <div style={{display:"flex",gap:8,flexWrap:"wrap"}}>
             {wordBank.map((w,i)=>{
@@ -503,14 +503,14 @@ function ClozeSection({sets,sectionType,meta,onDone}){
         {/* Passage with inline blank boxes */}
         <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"16px 18px",marginBottom:16}}>
           <div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>
-            ðŸ“– Tap a word above, then tap its blank â€” tap a filled blank to undo
+            📖 Tap a word above, then tap its blank — tap a filled blank to undo
           </div>
           {renderWordBankPassage()}
         </div>
 
         {submitted&&(
           <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:12,padding:"10px 14px",marginBottom:12,fontSize:13,fontWeight:700,color:"#065F46"}}>
-            âœ… {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
+            ✅ {blanks.filter(b=>cCor[b.num]).length}/{blanks.length} correct
           </div>
         )}
         {!submitted&&(
@@ -524,27 +524,27 @@ function ClozeSection({sets,sectionType,meta,onDone}){
             </div>}
           </button>
         )}
-        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section â†’":"Next Set â†’"}</ActionBtn>}
+        {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":"Next Set →"}</ActionBtn>}
       </div>
     );
   }
 
-  // â”€â”€ FALLBACK: per-blank MCQ (original behaviour) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+  // ── FALLBACK: per-blank MCQ (original behaviour) ───────────
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}><span style={{fontSize:13,fontWeight:700,color:C.muted}}>Set {setIdx+1}/{sets.length}</span><TagPill color={meta.color} bg={meta.color+"18"}>{cs.setLabel}</TagPill></div>
-      <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"14px 16px",marginBottom:16}}><div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>ðŸ“– Read & Fill in the Blanks</div><div style={{fontSize:14,color:C.text,lineHeight:2}}>{cs.passage}</div></div>
+      <div style={{background:"#F0F9FF",border:"1.5px solid #BAE6FD",borderRadius:16,padding:"14px 16px",marginBottom:16}}><div style={{fontSize:11,fontWeight:800,color:"#0284C7",marginBottom:6,textTransform:"uppercase",letterSpacing:1}}>📖 Read & Fill in the Blanks</div><div style={{fontSize:14,color:C.text,lineHeight:2}}>{cs.passage}</div></div>
       {blanks.map(b=>{
         const wa=cAtt[b.num]||0;const correct=cCor[b.num];const rev=cRev[b.num];
         return(<div key={b.num} style={{background:C.card,borderRadius:16,padding:"14px 16px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.06)"}}>
-          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{width:26,height:26,borderRadius:8,background:correct?C.lGreen:rev?"#FEE2E2":meta.color+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:800,color:correct?C.green:rev?C.red:meta.color}}>{b.num}</div><span style={{fontSize:13,fontWeight:700,color:correct?C.green:rev?C.red:C.text}}>{correct?"âœ… Correct!":rev?"ðŸ“– Answer shown":wa>0?`âŒ Try again (${3-wa} left)`:"Choose the correct word"}</span></div>
+          <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{width:26,height:26,borderRadius:8,background:correct?C.lGreen:rev?"#FEE2E2":meta.color+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:13,fontWeight:800,color:correct?C.green:rev?C.red:meta.color}}>{b.num}</div><span style={{fontSize:13,fontWeight:700,color:correct?C.green:rev?C.red:C.text}}>{correct?"✅ Correct!":rev?"📖 Answer shown":wa>0?`❌ Try again (${3-wa} left)`:"Choose the correct word"}</span></div>
           <div style={{display:"flex",flexWrap:"wrap",gap:8,marginBottom:8}}>{(b.wordBank||cs.wordBank||[]).map(opt=>{let bg="#F1F5F9",border=C.border,col=C.text,cursor="pointer";if(correct||rev)cursor="default";if((correct||rev)&&opt===b.answer){bg=C.lGreen;border=C.green;col="#065F46";}else if(cAns[b.num]===opt&&!correct&&!rev){bg=C.lBlue;border=meta.color;col=meta.color;}return(<div key={opt} onClick={()=>handleSelect(b.num,opt)} style={{background:bg,border:`2px solid ${border}`,borderRadius:10,padding:"7px 16px",fontSize:14,fontWeight:600,cursor,color:col,transition:"all 0.15s"}}>{opt}</div>);})}</div>
           {wa>0&&!correct&&!rev&&b.hints&&<HintBox text={b.hints&&b.hints[Math.min(wa-1,1)]} level={wa}/>}
-          {rev&&<div style={{background:"#FEE2E2",border:`1px solid ${C.red}`,borderRadius:10,padding:"8px 12px",fontSize:13,color:C.red,fontWeight:600}}>âœï¸ Answer: <strong>{b.answer}</strong></div>}
+          {rev&&<div style={{background:"#FEE2E2",border:`1px solid ${C.red}`,borderRadius:10,padding:"8px 12px",fontSize:13,color:C.red,fontWeight:600}}>✏️ Answer: <strong>{b.answer}</strong></div>}
           {!correct&&!rev&&<button onClick={()=>handleCheck(b)} disabled={!cAns[b.num]} style={{marginTop:6,background:cAns[b.num]?meta.color:"#C8D3E0",color:"#fff",border:"none",borderRadius:10,padding:"7px 20px",fontSize:13,fontWeight:700,cursor:cAns[b.num]?"pointer":"not-allowed"}}>Check ({3-wa} tries left)</button>}
         </div>);
       })}
-      {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section â†’":`Next Set â†’`}</ActionBtn>}
+      {allSettled()&&<ActionBtn color={meta.color} onClick={next}>{setIdx+1>=sets.length?"Finish Section →":`Next Set →`}</ActionBtn>}
     </div>
   );
 }
@@ -655,9 +655,9 @@ function EditSection({sets, sectionType, meta, onDone, level}){
   }
 
   // Level badge
-  const lvlBadge = level==="easy" ? {label:"Easy ðŸŸ¢", bg:"#D1FAE5", col:"#065F46"}
-                 : level==="hard" ? {label:"Hard ðŸ”´", bg:"#FEE2E2", col:"#991B1B"}
-                 : {label:"Medium ðŸŸ¡", bg:"#FEF3C7", col:"#92400E"};
+  const lvlBadge = level==="easy" ? {label:"Easy 🟢", bg:"#D1FAE5", col:"#065F46"}
+                 : level==="hard" ? {label:"Hard 🔴", bg:"#FEE2E2", col:"#991B1B"}
+                 : {label:"Medium 🟡", bg:"#FEF3C7", col:"#92400E"};
 
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
@@ -697,7 +697,7 @@ function EditSection({sets, sectionType, meta, onDone, level}){
               ))}
               {(isC||isR)&&<span style={{background:C.lGreen,border:`1px solid ${C.green}`,
                 borderRadius:4,padding:"1px 8px",fontWeight:800,color:C.green,marginLeft:6,fontSize:14}}>
-                â†’ {item.answer}
+                → {item.answer}
               </span>}
             </div>
 
@@ -705,7 +705,7 @@ function EditSection({sets, sectionType, meta, onDone, level}){
             {level==="easy" && !isC && !isR && (
               <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:8,
                 padding:"6px 12px",marginBottom:10,fontSize:12,color:"#1D4ED8",fontWeight:600}}>
-                ðŸ’¡ Hint: {generateHint(item.answer, 0)}
+                💡 Hint: {generateHint(item.answer, 0)}
               </div>
             )}
 
@@ -714,7 +714,7 @@ function EditSection({sets, sectionType, meta, onDone, level}){
               <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:8,
                 padding:"6px 12px",marginBottom:10,fontSize:12,color:"#1D4ED8",fontWeight:600,
                 letterSpacing:2}}>
-                ðŸ’¡ Hint: {hint}
+                💡 Hint: {hint}
               </div>
             )}
 
@@ -754,10 +754,10 @@ function EditSection({sets, sectionType, meta, onDone, level}){
               <div style={{background:C.lGreen,border:`1px solid ${C.green}`,borderRadius:10,
                 padding:"10px 14px",fontSize:13}}>
                 <div style={{fontWeight:800,color:C.green,marginBottom:4}}>
-                  {wa===0?"â­ Perfect spelling!":"âœ… Correct!"}
+                  {wa===0?"⭐ Perfect spelling!":"✅ Correct!"}
                 </div>
                 {item.hints&&item.hints[0]&&(
-                  <div style={{fontSize:12,color:"#065F46"}}>ðŸ’¡ {item.hints[0]}</div>
+                  <div style={{fontSize:12,color:"#065F46"}}>💡 {item.hints[0]}</div>
                 )}
               </div>
             )}
@@ -767,10 +767,10 @@ function EditSection({sets, sectionType, meta, onDone, level}){
               <div style={{background:"#FEE2E2",border:`1px solid ${C.red}`,borderRadius:10,
                 padding:"10px 14px",fontSize:13}}>
                 <div style={{fontWeight:800,color:C.red,marginBottom:4}}>
-                  âœï¸ Correct spelling: <strong>{item.answer}</strong>
+                  ✏️ Correct spelling: <strong>{item.answer}</strong>
                 </div>
                 {item.hints&&item.hints[0]&&(
-                  <div style={{fontSize:12,color:"#7F1D1D",marginTop:4}}>ðŸ’¡ {item.hints[0]}</div>
+                  <div style={{fontSize:12,color:"#7F1D1D",marginTop:4}}>💡 {item.hints[0]}</div>
                 )}
               </div>
             )}
@@ -780,7 +780,7 @@ function EditSection({sets, sectionType, meta, onDone, level}){
 
       {allSettled()&&(
         <ActionBtn color={meta.color} onClick={handleNext}>
-          {setIdx+1>=sets.length?"Finish Section â†’":"Next Set â†’"}
+          {setIdx+1>=sets.length?"Finish Section →":"Next Set →"}
         </ActionBtn>
       )}
     </div>
@@ -1577,19 +1577,19 @@ function SummaryScreen({summary,mastery,onHome,onRetry}){
   return(
     <div style={{paddingBottom:80}}>
       <div style={{background:`linear-gradient(135deg,${C.navy},#2563EB)`,borderRadius:"0 0 24px 24px",padding:"28px 24px",textAlign:"center",color:"#fff",marginBottom:20,boxShadow:"0 8px 28px rgba(30,58,110,0.35)"}}>
-        <div style={{fontSize:48}}>{pct>=80?"ðŸ†":pct>=60?"ðŸ‘":"ðŸ’ª"}</div>
+        <div style={{fontSize:48}}>{pct>=80?"🏆":pct>=60?"👍":"💪"}</div>
         <div style={{fontSize:38,fontWeight:900,margin:"8px 0 4px"}}>{pct}%</div>
-        <div style={{fontSize:15,opacity:0.9}}>{correct}/{total} correct Â· {fmtTime(duration)}</div>
+        <div style={{fontSize:15,opacity:0.9}}>{correct}/{total} correct · {fmtTime(duration)}</div>
       </div>
       <div style={{padding:"0 16px"}}>
         <div style={{background:C.card,borderRadius:18,padding:"16px",marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,0.07)"}}>
-          <div style={{fontWeight:800,fontSize:14,marginBottom:12}}>ðŸ“Š Section Breakdown</div>
+          <div style={{fontWeight:800,fontSize:14,marginBottom:12}}>📊 Section Breakdown</div>
           {SECTION_ORDER.map(type=>{const meta=SECTIONS[type];const items=bySection[type]||[];if(!items.length)return null;const c=items.filter(r=>r.correct).length;const p=Math.round((c/items.length)*100);return(<div key={type} style={{marginBottom:12}}><div style={{display:"flex",justifyContent:"space-between",marginBottom:4}}><span style={{fontSize:13,fontWeight:700}}>{meta.icon} {meta.label}</span><span style={{fontSize:12,fontWeight:800,color:p>=80?C.green:p>=60?C.amber:C.red}}>{c}/{items.length} ({p}%)</span></div><div style={{background:"#EEF2F7",borderRadius:8,height:8}}><div style={{background:p>=80?C.green:p>=60?C.amber:C.red,borderRadius:8,height:8,width:`${p}%`,transition:"width 0.6s"}}/></div></div>);})}
         </div>
-        {flagged.length>0&&(<div style={{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:16,padding:"14px",marginBottom:14}}><div style={{fontWeight:800,fontSize:13,color:"#92400E",marginBottom:6}}>âš¡ {flagged.length} Quick Answer{flagged.length>1?"s":""} Flagged</div>{(flagged||[]).map(f=>(<div key={f.id} style={{fontSize:12,color:"#78350F",marginBottom:3}}>â€¢ {f.topic} â€” {fmtTime(f.timeTaken)}</div>))}</div>)}
-        {wrong.length>0&&(<div style={{background:C.lRed,border:`1px solid #FECACA`,borderRadius:16,padding:"14px",marginBottom:14}}><div style={{fontWeight:800,fontSize:13,color:C.red,marginBottom:8}}>ðŸ“… Added to Mistakes Log</div>{(wrong||[]).map((w,i)=>(<div key={i} style={{fontSize:13,color:C.text,marginBottom:4}}>â€¢ {w.topic}</div>))}</div>)}
-        <button onClick={onHome} style={{width:"100%",background:`linear-gradient(135deg,${C.navy},#2563EB)`,color:"#fff",border:"none",borderRadius:18,padding:"16px 0",fontSize:15,fontWeight:900,cursor:"pointer",marginBottom:10}}>â† Back to Home</button>
-        <button onClick={onRetry} style={{width:"100%",background:"none",color:C.navy,border:`2px solid ${C.navy}`,borderRadius:18,padding:"14px 0",fontSize:15,fontWeight:800,cursor:"pointer"}}>ðŸ”„ New Session</button>
+        {flagged.length>0&&(<div style={{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:16,padding:"14px",marginBottom:14}}><div style={{fontWeight:800,fontSize:13,color:"#92400E",marginBottom:6}}>⚡ {flagged.length} Quick Answer{flagged.length>1?"s":""} Flagged</div>{(flagged||[]).map(f=>(<div key={f.id} style={{fontSize:12,color:"#78350F",marginBottom:3}}>• {f.topic} — {fmtTime(f.timeTaken)}</div>))}</div>)}
+        {wrong.length>0&&(<div style={{background:C.lRed,border:`1px solid #FECACA`,borderRadius:16,padding:"14px",marginBottom:14}}><div style={{fontWeight:800,fontSize:13,color:C.red,marginBottom:8}}>📅 Added to Mistakes Log</div>{(wrong||[]).map((w,i)=>(<div key={i} style={{fontSize:13,color:C.text,marginBottom:4}}>• {w.topic}</div>))}</div>)}
+        <button onClick={onHome} style={{width:"100%",background:`linear-gradient(135deg,${C.navy},#2563EB)`,color:"#fff",border:"none",borderRadius:18,padding:"16px 0",fontSize:15,fontWeight:900,cursor:"pointer",marginBottom:10}}>← Back to Home</button>
+        <button onClick={onRetry} style={{width:"100%",background:"none",color:C.navy,border:`2px solid ${C.navy}`,borderRadius:18,padding:"14px 0",fontSize:15,fontWeight:800,cursor:"pointer"}}>🔄 New Session</button>
       </div>
     </div>
   );

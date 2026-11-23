@@ -1,6 +1,8 @@
 // Session restore: returns the logged-in profile (and, for parents, linked children).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, publicProfile } from "@/lib/supabase/server";
 
+import { usesPictureCode } from "@/lib/clewquest/pictureFlag";
+
 export const runtime = "nodejs";
 
 export async function GET() {
@@ -14,5 +16,5 @@ export async function GET() {
     const ids = (kids || []).map(k => k.child_id);
     if (ids.length) { const { data } = await admin.from("profiles").select("*").in("id", ids); children = (data || []).map(publicProfile); }
   }
-  return jok({ profile: publicProfile(me.profile), children });
+  return jok({ profile: publicProfile(me.profile, me.profile.role === "student" && usesPictureCode(me.user)), children });
 }

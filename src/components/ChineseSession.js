@@ -684,7 +684,7 @@ function ZhSessionScreen({plan, onFinish, onBack}){
   return(
     <div style={{background:C.bg,minHeight:"100vh"}}> <div style={{background:`linear-gradient(135deg,${meta.color}dd,${meta.color})`,padding:"14px 20px 10px"}}>
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:7}}>
-          <button onClick={onBack} style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:32,height:32,cursor:"pointer",color:"#fff",fontSize:"calc(var(--fs) * 1.071)",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
+          <button onClick={onBack} aria-label="Back" style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:44,height:44,flexShrink:0,cursor:"pointer",color:"#fff",fontSize:"calc(var(--fs) * 1.071)",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <div style={{flex:1}}>
             <div style={{color:"#fff",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800}}>{meta.icon} {meta.label}</div>
             <div style={{color:"rgba(255,255,255,0.7)",fontSize:"calc(var(--fs) * 0.780)",marginTop:1}}>{meta.sub} · 第{secIdx+1}/{plan.length}节</div>
