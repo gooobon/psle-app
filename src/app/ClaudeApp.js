@@ -65,6 +65,7 @@ import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 import PaperExam from '@/components/PaperExam'; // mock exams from past papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off)
 import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
 import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
+import { Art } from '@/components/clewquest/Art';
 import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
 import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
@@ -615,12 +616,14 @@ function AuthScreen({onLogin, onSignup}){
   }
   return(
     <Wrap>
-      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0F172A"}}> <div style={{background:"linear-gradient(160deg,#1E3A6E,#1E40AF)",padding:"48px 24px 36px",textAlign:"center",flexShrink:0}}>
-          <div style={{fontSize:56,marginBottom:10}}></div>
-          <div style={{color:"#fff",fontSize:30,fontWeight:900,letterSpacing:1}}>Genius Project</div>
-          <div style={{color:"rgba(255,255,255,0.6)",fontSize:"calc(var(--fs) * 0.929)",marginTop:6}}>PSLE Practice . English . Math . Science . Chinese</div>
+      <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0B3B73"}}> <div data-testid="cq-auth-header" style={{background:"linear-gradient(180deg,#0B3B73 0%,#1D5FA8 100%)",padding:"36px 20px 36px",textAlign:"center",flexShrink:0}}>
+          <div style={{display:"flex",justifyContent:"center",marginBottom:8}}>
+            <Art k="brand/logo-b1" alt="ClewQuest" style={{width:"min(180px, 60vw)"}}/>
+          </div>
+          <div style={{color:"#fff",fontSize:"clamp(24px, 8vw, 30px)",fontWeight:900,letterSpacing:1,overflowWrap:"anywhere"}}>ClewQuest</div>
+          <div style={{color:"rgba(255,255,255,0.75)",fontSize:"calc(var(--fs) * 0.929)",marginTop:6}}>PSLE Practice . English . Chinese</div>
           <div style={{display:"flex",gap:8,justifyContent:"center",marginTop:16,flexWrap:"wrap"}}>
-            {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.12)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.75)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
+            {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.14)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.85)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
           </div>
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
           {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
