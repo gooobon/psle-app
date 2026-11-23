@@ -327,7 +327,7 @@ async function driveToScore(page, setOrMap, band, label, hooks) {
     }
     await page.waitForTimeout(30);
   }
-  await page.screenshot({ path: "docs/e2e-2026-11-23/stuck-" + label + ".png", fullPage: true }).catch(() => {});
+  await page.screenshot({ path: (process.env.E2E_SHOTS_DIR || "docs/e2e-2026-11-23") + "/stuck-" + label + ".png", fullPage: true }).catch(() => {});
   const snippet = (await page.locator("body").innerText().catch(() => "")).slice(0, 400);
   throw new Error("Score driver timed out during " + label + " last=" + log.slice(-12).join(",") + "\n" + snippet);
 }

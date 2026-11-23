@@ -6,7 +6,8 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 ROOT="$(pwd)"
 STATE="$ROOT/tests/e2e/.state"
-SHOTS="$ROOT/docs/e2e-2026-11-23"
+SHOTS_REL="${1:-docs/e2e-2026-11-23}"
+SHOTS="$ROOT/$SHOTS_REL"
 mkdir -p "$STATE" "$SHOTS" "$ROOT/tests/e2e/fixtures"
 rm -f "$STATE/golive-steps.json"
 ALERT_LOG="$STATE/alerts.jsonl"
@@ -154,9 +155,9 @@ start_next main
 set +e
 E2E_API_URL="$API_URL" E2E_SERVICE_ROLE="$SERVICE_ROLE_KEY" E2E_ANON_KEY="$ANON_KEY" \
   E2E_DB_CONTAINER="$DB_CONTAINER" E2E_DAY_SHIFT_FILE="$STATE/day-shift.txt" \
-  E2E_SHOTS_DIR="docs/e2e-2026-11-23" ALERT_DRY_RUN_LOG="$ALERT_LOG" \
+  E2E_SHOTS_DIR="$SHOTS_REL" ALERT_DRY_RUN_LOG="$ALERT_LOG" \
   CRON_SECRET=e2e-local-cron \
-  npx playwright test tests/e2e/golive-plain.spec.js --grep @golive
+  npx playwright test tests/e2e/golive-plain.spec.js --grep "@golive$"
 main_code=$?
 set -e
 
@@ -164,7 +165,7 @@ start_next alert
 set +e
 E2E_API_URL="$API_URL" E2E_SERVICE_ROLE="$SERVICE_ROLE_KEY" E2E_ANON_KEY="$ANON_KEY" \
   E2E_DB_CONTAINER="$DB_CONTAINER" E2E_DAY_SHIFT_FILE="$STATE/day-shift.txt" \
-  E2E_SHOTS_DIR="docs/e2e-2026-11-23" ALERT_DRY_RUN_LOG="$ALERT_LOG" \
+  E2E_SHOTS_DIR="$SHOTS_REL" ALERT_DRY_RUN_LOG="$ALERT_LOG" \
   CRON_SECRET=e2e-local-cron E2E_PHASE=alert \
   npx playwright test tests/e2e/golive-plain.spec.js --grep @golive-alert
 alert_code=$?

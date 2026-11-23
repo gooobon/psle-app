@@ -5,7 +5,7 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, loginParent, ensureParent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, ensureParent, assertLocalOnly } = require("./helpers");
 const { driveToScore } = require("./scoreDrive");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
@@ -89,6 +89,68 @@ async function activity(id, subject) {
 
 async function credits(id) {
   return dbGet("reward_credits?child_id=eq." + id + "&select=kind,subject,credits,status,score_pct,sgd_per_credit,period&order=period.desc");
+}
+
+async function assignPracticeHomework(page) {
+  await page.getByRole("button", { name: /Mistakes/ }).click();
+  await page.getByText(/Review Together/).first().waitFor({ timeout: 20000 });
+  // The tab paints the parent's empty local history first, then replaces it with the server list.
+  await page.waitForFunction(() => /All \(\d+\)/.test(document.body.innerText || ""), { timeout: 25000 });
+  const sessionChip = page.getByRole("button", { name: /^Session 1$/ });
+  if (await sessionChip.count()) await sessionChip.click();
+  const notes = [];
+  for (let i = 0; i < 6; i++) {
+    const opened = await page.evaluate((index) => {
+      const cards = [...document.querySelectorAll("button")].filter((b) => {
+        const t = (b.innerText || "").replace(/\s+/g, " ").trim();
+        return /Session \d+/.test(t) && t.length > 40;
+      });
+      if (!cards[index]) return false;
+      cards[index].click();
+      return (cards[index].innerText || "").replace(/\s+/g, " ").trim().slice(0, 80);
+    }, i);
+    if (!opened) { notes.push("no card " + i); break; }
+    const hwInput = page.locator("label", { hasText: "Questions per mistake" }).locator("input");
+    if (await hwInput.count()) {
+      await hwInput.fill("2");
+      await hwInput.blur();
+    }
+    const assign = page.getByRole("button", { name: /Assign up to/ }).first();
+    if (!(await assign.count())) { notes.push("card " + i + " has no Assign button"); continue; }
+    const respPromise = page.waitForResponse((r) => r.url().includes("/api/parent/homework") && r.request().method() === "POST", { timeout: 20000 }).catch(() => null);
+    await assign.click();
+    const resp = await respPromise;
+    let body = "";
+    if (resp) body = (await resp.text().catch(() => "")).slice(0, 240);
+    await page.waitForTimeout(400);
+    notes.push("card " + i + " (" + opened + ") http " + (resp ? resp.status() : "none") + " " + body.replace(/\s+/g, " "));
+    if (resp && resp.ok()) return { ok: true, notes };
+  }
+  return { ok: false, notes };
+}
+
+async function finishAssignedHomework(page, childId) {
+  if (await page.getByText("Hello,").count()) {
+    await page.getByRole("button", { name: /^Mistakes/ }).first().click();
+  }
+  const start = page.getByRole("button", { name: /Start homework/ });
+  await start.waitFor({ timeout: 20000 });
+  const before = await start.innerText();
+  await start.click();
+  await page.getByText(/Mock Exam|Submit Page|Section \d+\//).first().waitFor({ timeout: 20000 });
+  const driven = await drive(page, {
+    label: "homework",
+    max: 500,
+    done: async () => {
+      const t = await bodyText(page);
+      if (/All done for today/.test(t)) return true;
+      if (/Section \d+\/|Mock Exam|Submit Page|Submit Answers/.test(t)) return false;
+      const rows = await dbGet("parent_homework?child_id=eq." + childId + "&select=solved_at");
+      return rows.length > 0 && rows.every((r) => r.solved_at);
+    },
+  });
+  await page.waitForTimeout(800);
+  return { before, steps: driven.steps };
 }
 
 function tierOf(pct) {
@@ -195,9 +257,9 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   record("parents", "Two parents linked to one child", "2 parent_child rows", "rows " + links.length, links.length === 2 ? "PASS" : "FAIL", file);
 
   await pp.bringToFront();
-  // Creating a child does not select them. The dashboard tabs stay hidden until the chip is tapped.
-  const tabsBefore = await pp.getByRole("button", { name: /Rewards/ }).count();
-  await pp.getByRole("button", { name: new RegExp(CHILD.name) }).click();
+  const rewardsBefore = await pp.getByRole("button", { name: /Rewards/ }).count();
+  const papersBefore = await pp.getByRole("button", { name: /Papers/ }).count();
+  record("parent A", "New child is selected", "Rewards and Papers show without tapping the child chip", "Rewards " + rewardsBefore + " Papers " + papersBefore, rewardsBefore > 0 && papersBefore > 0 ? "PASS" : "FAIL", file);
   await pp.getByRole("button", { name: /Rewards/ }).click();
   await pp.getByText("Reward rules").waitFor();
   await pp.locator("label", { hasText: "Turn on credits" }).locator("input").check();
@@ -216,7 +278,7 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await pp.getByText(/Saved\. Applies from tomorrow|Could not save|Enter a valid|Each tier/).first().waitFor({ timeout: 20000 }).catch(() => {});
   file = await snap(pp, "03-reward-rules");
   const ruleText = await bodyText(pp);
-  record("parent A", "Detailed reward rules", "Credits on, S$0.50 per credit, 90% → 3 and 80% → 2, starting tomorrow", /S\$0\.50|0\.50/.test(ruleText) && /Applies from tomorrow/.test(ruleText) ? "saved, S$ shown, applies tomorrow. Rewards tab before tapping the child: " + tabsBefore : ruleText.slice(0, 240), /Applies from tomorrow/.test(ruleText) ? "PASS" : "FAIL", file);
+  record("parent A", "Detailed reward rules", "Credits on, S$0.50 per credit, 90% → 3 and 70% → 2, starting tomorrow", /S\$0\.50|0\.50/.test(ruleText) && /Applies from tomorrow/.test(ruleText) ? "saved, S$ shown, applies tomorrow" : ruleText.slice(0, 240), /Applies from tomorrow/.test(ruleText) ? "PASS" : "FAIL", file);
 
   const beforeAlerts = Number(sql("select count(*) from public.event_alert_log;").trim());
   setDay(1);
@@ -296,7 +358,23 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
     return mock ? { school: mock.school || "", examType: mock.examType || "", session: mock.sessionNum } : null;
   }, CHILD.username);
   const hardcoded = historySchool && historySchool.school === "Nanyang Primary" && !/Nanyang/.test(mockHeader);
-  record("student", "History uses the paper's real school", "Recent Sessions mock label is the sat paper's school, not a fixed Nanyang name", "header " + mockHeader + "; stored " + JSON.stringify(historySchool) + "; screen has Mock " + /Mock:/.test(historyText), historySchool && historySchool.school && historySchool.school !== "E2E Primary" && !hardcoded && /Mock:/.test(historyText) ? "PASS" : "FAIL", file);
+  const schoolFit = historySchool && historySchool.school ? await sp.evaluate((school) => {
+    const nodes = [...document.querySelectorAll("div")].filter((el) => (el.innerText || "").includes("Mock: " + school));
+    const el = nodes.sort((a, b) => (a.innerText || "").length - (b.innerText || "").length)[0];
+    if (!el) return { found: false };
+    const s = getComputedStyle(el);
+    return {
+      found: true,
+      text: (el.innerText || "").replace(/\s+/g, " ").trim(),
+      whiteSpace: s.whiteSpace,
+      overflowWrap: s.overflowWrap,
+      textOverflow: s.textOverflow,
+      clientWidth: el.clientWidth,
+      scrollWidth: el.scrollWidth,
+      clipped: el.scrollWidth > el.clientWidth + 2,
+    };
+  }, historySchool.school) : { found: false };
+  record("student", "History uses the paper's real school", "Recent Sessions mock label is the sat paper's school, not a fixed Nanyang name, and the full name is on screen", "header " + mockHeader + "; stored " + JSON.stringify(historySchool) + "; fit " + JSON.stringify(schoolFit), historySchool && historySchool.school && historySchool.school !== "E2E Primary" && !hardcoded && schoolFit.found && !schoolFit.clipped && schoolFit.text.includes(historySchool.school) ? "PASS" : "FAIL", file);
 
   await sp.getByRole("button", { name: "Today" }).first().click();
   await sp.getByRole("button", { name: /English mock papers/ }).click();
@@ -344,26 +422,32 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   record("parent A", "Daily study status", "Today card shows English done and Chinese not done", /English[\s\S]{0,80}✅/.test(today) && /Chinese[\s\S]{0,80}❌/.test(today) ? "English done, Chinese not done" : today.slice(today.indexOf("Did Mei"), today.indexOf("Did Mei") + 320), /Did Mei Tan do it today/.test(today) ? "PASS" : "FAIL", file);
 
   await pp.getByRole("button", { name: /Overview/ }).click();
+  await pp.getByText("Sessions").first().waitFor({ timeout: 20000 });
+  await pp.waitForTimeout(1200);
   file = await snap(pp, "15-parent-overview");
-  const overview = await bodyText(pp);
-  record("parent A", "Progress dashboard on another device", "Sessions and mistakes from the child's browser are visible here", "sessions snippet " + (overview.match(/Sessions[\s\S]{0,40}/) || ["none"])[0].replace(/\s+/g, " "), /Session #|Mock:/.test(overview) ? "PASS" : "FAIL", file);
+  const stats = await pp.evaluate(() => {
+    const cards = [...document.querySelectorAll("div")].filter((d) => {
+      const lines = (d.innerText || "").split("\n").map((s) => s.trim()).filter(Boolean);
+      return lines.length >= 2 && lines.length <= 3 && /^(Sessions|Average|Trend|Mock Done)$/.test(lines[lines.length - 1]);
+    });
+    const out = {};
+    for (const c of cards) {
+      const lines = c.innerText.split("\n").map((s) => s.trim()).filter(Boolean);
+      const label = lines[lines.length - 1];
+      if (!out[label]) out[label] = lines[lines.length - 2];
+    }
+    const section = ((document.body.innerText || "").match(/Section Performance[\s\S]{0,700}/) || [""])[0];
+    return { cards: out, sectionHasBar: /%/.test(section) && /Grammar|Vocabulary|Editing|Comprehension|Cloze/.test(section) };
+  });
+  const sessionsOk = stats.cards.Sessions && stats.cards.Sessions !== "—" && Number(stats.cards.Sessions) > 0;
+  const avgOk = stats.cards.Average && /\d+%/.test(stats.cards.Average);
+  record("parent A", "Overview sessions and average on another device", "Sessions and Average come from the server. This browser has none of the child's local history.", JSON.stringify(stats.cards), sessionsOk && avgOk ? "PASS" : "FAIL", file);
+  record("parent A", "Overview stats that still use this device", "Trend, Mock Done and the section bars read the child's local history", "Trend " + (stats.cards.Trend || "?") + "; Mock Done " + (stats.cards["Mock Done"] || "?") + "; section bars " + stats.sectionHasBar, "NOTE", file);
 
-  await pp.getByRole("button", { name: /Mistakes/ }).click();
-  await pp.getByText(/Session|Assign up to|No similar|Mistakes from practice/).first().waitFor({ timeout: 20000 });
-  const mistakeCard = pp.locator("button", { hasText: /Session/ }).first();
-  if (await mistakeCard.count()) await mistakeCard.click();
-  const hwInput = pp.locator("label", { hasText: "Questions per mistake" }).locator("input");
-  if (await hwInput.count()) {
-    await hwInput.fill("2");
-    await hwInput.blur();
-  }
-  const assign = pp.getByRole("button", { name: /Assign up to/ }).first();
-  if (await assign.count()) await assign.click();
-  await pp.waitForTimeout(1500);
+  const assigned = await assignPracticeHomework(pp);
   file = await snap(pp, "16-homework");
-  const hw = await bodyText(pp);
-  const hwRows = await dbGet("parent_homework?child_id=eq." + kid.id + "&select=id,subject");
-  record("parent A", "Set extra homework", "A mistake can be assigned as similar-question homework", "rows " + hwRows.length + "; " + (hw.match(/Assigned[^\n]*|No similar[^\n]*|Assign up to[^\n]*/) || ["no assign text"])[0], hwRows.length > 0 ? "PASS" : "FAIL", file);
+  const hwRows = await dbGet("parent_homework?child_id=eq." + kid.id + "&select=id,subject,question_id,source_question_id,assigned_for,solved_at");
+  record("parent A", "Set extra homework", "A practice-set mistake can be assigned as similar-question homework", "rows " + hwRows.length + "; " + assigned.notes.join(" || "), hwRows.length > 0 ? "PASS" : "FAIL", file);
 
   await pp.getByRole("button", { name: /Papers/ }).click();
   await pp.getByText(paper.label).waitFor({ timeout: 20000 });
@@ -397,7 +481,9 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   });
   file = await snap(pp, "19-alerts-settings");
   const alertUi = await bodyText(pp);
-  record("parent A", "Alert settings the parent can see", "The 8pm checkbox and quiet hours are on the screen. WhatsApp is described as not sending yet.", /8pm Singapore time/.test(alertUi) && /Quiet hours/.test(alertUi) ? "8pm checkbox and quiet hours shown" : "missing", /8pm Singapore time/.test(alertUi) ? "PASS" : "FAIL", file);
+  const quietTimes = await pp.locator("input[type='time']").evaluateAll((els) => els.map((el) => el.value));
+  const alertCopyOk = /finishes a set, a paper or assigned homework/.test(alertUi) && /weekly report/.test(alertUi) && /Quiet hours/.test(alertUi) && quietTimes.includes("21:30") && quietTimes.includes("06:30") && !/8pm Singapore time/.test(alertUi);
+  record("parent A", "Alert settings the parent can see", "The checkbox names a finished set, paper or homework plus the weekly report. Quiet hours stay 21:30–06:30. It does not offer an 8pm daily email.", alertCopyOk ? "milestone checkbox, weekly report, quiet hours " + quietTimes.join("-") : alertUi.slice(alertUi.indexOf("Alerts"), alertUi.indexOf("Alerts") + 500) + " times " + quietTimes.join(","), alertCopyOk ? "PASS" : "FAIL", file);
 
   const studentPages = [hello, solve, result, wallet, historyText, paperText];
   const hangulHits = studentPages.filter((t) => HANGUL.test(t)).length;
@@ -423,6 +509,35 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   await sp.goto("/");
   await sp.evaluate((d) => sessionStorage.setItem("e2e-shift-days", String(d)), shift);
   await loginStudent(sp, CHILD.username, CHILD.password);
+  const hwBeforeFinish = await dbGet("parent_homework?child_id=eq." + kid + "&select=id,solved_at,assigned_for,subject");
+  let hwFinishNote = "no assigned rows to finish";
+  let hwFinishOk = false;
+  if (hwBeforeFinish.length) {
+    try {
+      const finished = await finishAssignedHomework(sp, kid);
+      hwFinishNote = "started from " + finished.before + " in " + finished.steps + " steps";
+      hwFinishOk = true;
+    } catch (err) {
+      hwFinishNote = String(err && err.message || err).slice(0, 400);
+      await snap(sp, "22-homework-stuck");
+    }
+  }
+  await sp.waitForTimeout(1500);
+  const hwAfter = sql("select subject, assigned_for::text, solved_at is not null as solved, correct from public.parent_homework order by created_at;");
+  const solvedN = hwAfter.trim().split("\n").filter((l) => /\|t\|/.test(l) || /\|true\|/.test(l)).length;
+  record("student", "Finish the assigned homework", "Every parent_homework row for today is marked solved", hwFinishNote + "\n" + hwAfter.trim(), hwBeforeFinish.length > 0 && hwFinishOk && solvedN === hwBeforeFinish.length ? "PASS" : "FAIL", await snap(sp, "22-homework-done"));
+  const afterHw = sql("select event_type, status, event_key, left(coalesce(detail,''), 180) from public.event_alert_log order by created_at;");
+  const hwLines = afterHw.trim().split("\n").filter((l) => /:hw-/.test(l));
+  const hwEligible = hwLines.filter((l) => /email skipped/.test(l));
+  const hwBlocked = hwLines.filter((l) => /allow-list|not_on_allow_list|not in allow-list/.test(l));
+  const hwSent = hwLines.filter((l) => /\|sent\|/.test(l));
+  record("system", "Finishing homework with email on and WhatsApp off", "A milestone row is written for the homework. The allow-listed parent reaches the send and stops with no Resend key. The other parent is skipped. Nothing is status sent.", "rows before " + before + "\n" + afterHw.trim(), hwLines.length >= 2 && hwEligible.length === 1 && hwBlocked.length === 1 && hwSent.length === 0 ? "PASS" : "FAIL", "");
+
+  if (!(await sp.getByText("Hello,").count())) {
+    const home = sp.getByRole("button", { name: /Back to Home|Today/ }).first();
+    if (await home.count()) await home.click();
+    await sp.getByText("Hello,").waitFor({ timeout: 20000 }).catch(() => {});
+  }
   const zhStart = sp.getByRole("button", { name: /开始今天的练习/ });
   if (await zhStart.count()) await zhStart.click();
   else await sp.getByRole("button", { name: "More" }).nth(1).click();
@@ -431,8 +546,12 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   const zh = await bodyText(sp);
   const zhAct = await activity(kid, "Chinese");
   record("student", "Chinese practice set", "A Chinese set is handed in and its first-set score is stored. No Hangul outside the Chinese subject text is required; the screen itself is Chinese.", "first set " + (zhAct && zhAct.first_set_correct) + "/" + (zhAct && zhAct.first_set_questions) + "; hangul " + HANGUL.test(zh) + "; " + ((zh.match(/\d+\/\d+[^\n]*/) || [""])[0]), zhAct && Number(zhAct.sets_completed) >= 1 ? "PASS" : "FAIL", file);
-  const afterSet = sql("select event_type, status, detail from public.event_alert_log order by created_at;");
-  record("system", "Finishing a daily set with email on and WhatsApp off", "A milestone row is written for the test recipient only", "rows before " + before + " log:\n" + afterSet.trim(), /milestone/.test(afterSet) ? "PASS" : "FAIL", "");
+  const afterSet = sql("select event_type, status, event_key, left(coalesce(detail,''), 160) from public.event_alert_log order by created_at;");
+  const setLines = afterSet.trim().split("\n").filter((l) => /:set-/.test(l) && /Chinese/.test(l));
+  const setEligible = setLines.filter((l) => /email skipped/.test(l));
+  const setBlocked = setLines.filter((l) => /not_on_allow_list/.test(l));
+  const setSent = setLines.filter((l) => /\|sent\|/.test(l));
+  record("system", "Finishing a daily set with email on and WhatsApp off", "A milestone row is written for the Chinese set. Only the allow-listed parent is eligible, and nothing is delivered.", "log:\n" + afterSet.trim(), setLines.length >= 2 && setEligible.length === 1 && setBlocked.length === 1 && setSent.length === 0 ? "PASS" : "FAIL", "");
 
   const parent = await browser.newContext(CTX);
   await installBrowserClock(parent);
@@ -476,7 +595,7 @@ test("milestone email fallback with WhatsApp off @golive-alert", async ({ browse
   record("parent A", "Mark the remaining open items", "The paper settles and the final score is saved", JSON.stringify(settled[0] || null), settled[0] && Number(settled[0].parent_pending) === 0 ? "PASS" : "FAIL", file);
   const lines = log.trim().split("\n").filter(Boolean);
   const sent = lines.filter((l) => /\|sent\|/.test(l) || l.endsWith("|sent") || /\|sent/.test(l));
-  record("system", "Milestone email goes only to the test recipient, and nothing is delivered", "Parent A is eligible and skipped for a missing sender, parent B is skipped by the allow-list, and no row is status sent", log.trim() || "(empty)", lines.length > 0 && sent.length === 0 && /allow-list/.test(log) ? "PASS" : "FAIL", "");
+  record("system", "Milestone email goes only to the test recipient, and nothing is delivered", "Parent A is eligible and skipped for a missing sender, parent B is skipped by the allow-list, and no row is status sent", log.trim() || "(empty)", lines.length > 0 && sent.length === 0 && /not_on_allow_list/.test(log) && /email skipped/.test(log) ? "PASS" : "FAIL", "");
   record("system", "Recipient identity", "Allow-list is the test parent only", "A " + (allow && allow.email) + " B " + (other && other.email), allow && other ? "PASS" : "FAIL", "");
   }
   }
