@@ -1,6 +1,8 @@
 // Pure checks for parent-configured reward tiers, homework gate, SGD conversion and per-subject weekly bonus (issue #29).
 // No network, no student data. Run: node tools/rewards_tiers_selftest.mjs
-import { firstSetScore, tierCredits, dailyCreditPlan, homeworkGate, sgdToCredits, weeklySubjectCredits, ruleForDate, parseRuleVersion, pickRewardParent } from "../src/lib/rewards.js";
+import { firstSetScore, tierCredits, dailyCreditPlan, homeworkGate, sgdToCredits, weeklySubjectCredits, ruleForDate, parseRuleVersion, pickRewardParent, studentCredits } from "../src/lib/rewards.js";
+import { mockSchoolLabel, MOCK_FALLBACK_LABEL } from "../src/lib/attemptMeta.js";
+import fs from "node:fs";
 
 let failed = 0;
 function eq(name, actual, expected) {
@@ -72,6 +74,25 @@ eq("next week is a new period", award(ledger, "English", "2026-11-23"), true);
 // Parent choice (same rule as pickParentDailyTarget): earliest link with a rule
 eq("earliest link with a rule wins", pickRewardParent([{ parent_id: "b", created_at: "2026-01-02" }, { parent_id: "a", created_at: "2026-01-03" }], ["a", "b"]), "b");
 eq("link without a rule is skipped", pickRewardParent([{ parent_id: "b", created_at: "2026-01-02" }, { parent_id: "a", created_at: "2026-01-03" }], ["a"]), "a");
+
+// Issue #66 fix 4: a student never sees S$. Credits only; the dollar rate is not even sent to the student.
+{
+  const rows = [{ kind: "daily", period: "2026-11-20", subject: "English", credits: 2, status: "confirmed", gate_day: "2026-11-20", sgd_per_credit: 0.5 },
+    { kind: "daily", period: "2026-11-21", subject: "English", credits: 3, status: "pending", gate_day: "2026-11-21", sgd_per_credit: 0.5 }];
+  const sc = studentCredits(rows);
+  eq("student credits: counts kept", [sc.confirmed, sc.pending, sc.balance], [2, 3, 2]);
+  eq("student credits: no dollar fields anywhere", /sgd|S\$/i.test(JSON.stringify(sc)), false);
+  for (const f of ["src/components/Rewards.js", "src/app/api/student/rewards/route.js"]) {
+    const t = fs.readFileSync(new URL("../" + f, import.meta.url), "utf8");
+    eq(f + " has no S$ / sgd", /S\$|sgd/i.test(t), false);
+  }
+  eq("parent screen still shows S$", /S\$/.test(fs.readFileSync(new URL("../src/components/ParentRewards.js", import.meta.url), "utf8")), true);
+}
+// Issue #66 fix 1: the history label is the paper's real school, not a hard-coded one.
+eq("mock label: forced paper wins", mockSchoolLabel({ paperPlan: { paperLabel: "Rosyth School" }, dailyPlan: { paperLabel: "Other" } }), "Rosyth School");
+eq("mock label: flagged daily set label", mockSchoolLabel({ dailyPlan: { paperLabel: " Tao Nan " } }), "Tao Nan");
+eq("mock label: neutral fallback", mockSchoolLabel({}), MOCK_FALLBACK_LABEL);
+eq("ClaudeApp has no hard-coded mock school", /isMock\?"Nanyang Primary"/.test(fs.readFileSync(new URL("../src/app/ClaudeApp.js", import.meta.url), "utf8")), false);
 
 if (failed) { console.error(failed + " FAILED"); process.exit(1); }
 console.log("ALL PASS");

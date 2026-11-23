@@ -36,7 +36,6 @@ export function StickerShelf() {
   if (!on || !st) return null;
   const total = st.counts.daily + st.counts.weekly;
   const cr = st.credits || { confirmed: 0, pending: 0, forfeited: 0, balance: 0 };
-  const money = (n) => 'S$' + (Number(n) || 0).toFixed(2);
   const showWallet = cr.pending > 0 || cr.forfeited > 0 || cr.confirmed > 0;
   return (
     <div style={{ padding: '14px 16px 0' }}>
@@ -44,17 +43,17 @@ export function StickerShelf() {
         <div style={{ background: '#FFFBEB', border: '1px solid #FDE68A', borderRadius: 14, padding: 12, marginBottom: 10 }}>
           {cr.confirmed > 0 && (
             <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#92400E' }}>
-              Wallet: {cr.balance} confirmed ({money(cr.confirmedSgd)})
+              Wallet: {cr.balance} confirmed credit{cr.balance === 1 ? '' : 's'}
             </div>
           )}
           {cr.pending > 0 && (
             <div style={{ fontSize: 'calc(var(--fs) * 0.929)', fontWeight: 800, color: '#92400E', marginTop: cr.confirmed > 0 ? 4 : 0 }}>
-              Pending: {cr.pending} credit{cr.pending > 1 ? 's' : ''} ({money(cr.pendingSgd)}). {cr.pendingNote}.
+              Pending: {cr.pending} credit{cr.pending > 1 ? 's' : ''}. {cr.pendingNote}.
             </div>
           )}
           {cr.forfeited > 0 && (
             <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#78350F', marginTop: 4 }}>
-              {cr.forfeited} credit{cr.forfeited > 1 ? 's' : ''} ({money(cr.forfeitedSgd)}) lost because homework was not finished that day.
+              {cr.forfeited} credit{cr.forfeited > 1 ? 's' : ''} lost because homework was not finished that day.
             </div>
           )}
         </div>
