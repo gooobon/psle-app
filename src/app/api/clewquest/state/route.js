@@ -3,6 +3,7 @@ import { adminClient, currentUser, jerr, jok } from "@/lib/supabase/server";
 import { clewquestRoutesOn, notFound } from "@/lib/clewquest/guard";
 import { readTotals, syncStage } from "@/lib/clewquest/award";
 import { progressToNext } from "@/lib/clewquest/logic";
+import { usesPictureCode } from "@/lib/clewquest/pictureFlag";
 
 export const runtime = "nodejs";
 
@@ -16,5 +17,5 @@ export async function GET() {
   const total = t.totals.total || 0;
   const st = await syncStage(admin, id, total);
   const bySubject = { ...t.totals }; delete bySubject.total;
-  return jok({ character: character || null, thread: { total, bySubject }, stage: st.stage, leveledUp: st.leveledUp, next: progressToNext(total) });
+  return jok({ pictureCode: usesPictureCode(me.user), character: character || null, thread: { total, bySubject }, stage: st.stage, leveledUp: st.leveledUp, next: progressToNext(total) });
 }

@@ -85,7 +85,7 @@ eq("stage 5 asset falls back to crimson art", L.stageAssetKey(5, "girl", "ariadn
 eq("stage 1-4 art keys", [1, 2, 3, 4].map((s) => L.stageAssetKey(s, "boy", "apollo-curls", "ariadne-crimson")), ["stages/stage-1", "stages/stage-2", "stages/stage-3", "stages/stage-4"]);
 eq("character validation accepts a good look", L.validateCharacter({ gender: "girl", hair_key: "ariadne-buns", colour_key: "ariadne-crimson", nickname: "Star 7" }).ok, true);
 eq("a boy cannot take a girl's hair", L.validateCharacter({ gender: "boy", hair_key: "ariadne-buns", colour_key: "ariadne-crimson" }).ok, false);
-eq("nickname length is 2-12", [L.cleanNickname("a").ok, L.cleanNickname("abcdefghijklm").ok, L.cleanNickname("ab").ok, L.cleanNickname("").value], [false, false, true, null]);
+eq("nickname length is 2-24", [L.cleanNickname("a").ok, L.cleanNickname("a".repeat(25)).ok, L.cleanNickname("ab").ok, L.cleanNickname("").value], [false, false, true, null]);
 eq("nickname is English letters/numbers/spaces only", L.cleanNickname("ab-c!").ok, false);
 eq("nickname profanity filter", L.cleanNickname("shit head").ok, false);
 
@@ -191,6 +191,9 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
         if (cnt > a.p_max) { const lock = now + a.p_lock_secs * 1000; rows.set("ip|" + a.p_ip, { fails: cnt, window_start: now, locked_until: lock }); return { data: lock, error: null }; }
         return { data: null, error: null };
       }
+      if (name === "clewquest_login_after_fail") { const k = a.p_scope + "|" + a.p_key, r = rows.get(k);
+        if (r && r.fails >= a.p_max && !(r.locked_until && r.locked_until > now)) rows.set(k, { ...r, locked_until: now + a.p_lock_secs * 1000 });
+        const n = rows.get(k); return { data: !!(n && n.locked_until && n.locked_until > now), error: null }; }
       if (name === "clewquest_login_ok") { const k = a.p_scope + "|" + a.p_key; if (rows.has(k)) rows.set(k, { fails: 0, window_start: now, locked_until: null }); return { data: null, error: null }; }
       return { data: null, error: { message: "unknown rpc" } };
     } }; };
@@ -206,7 +209,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   { const db = mkDb(), c = { n: 0 };
     const res = await Promise.all(Array.from({ length: 20 }, () => login(createLoginGuard({ memory: noMem }), db, "kidpar", "ipP", {}, c)));
     t("F1: 20 concurrent wrong attempts on 20 instances -> <= 5 sign-in calls (durable layer)", c.n <= 5, c.n);
-    eq("F1: the other 15 are refused with 429", res.filter((r) => r.status === 429).length, 15);
+    t("F1: at least the other 15 are refused with 429 (the 5th wrong code now also reports locked)", res.filter((r) => r.status === 429).length >= 15);
     t("F1: and the username is now locked for a later correct code too", (await login(createLoginGuard({ memory: noMem }), db, "kidpar", "ipQ", { correct: true })).status === 429); }
   { const db = mkDb(), c = { n: 0 }, G = createLoginGuard({ memory: mkMem() });
     await Promise.all(Array.from({ length: 20 }, () => login(G, db, "kidpar2", "ipP", {}, c)));
@@ -225,8 +228,8 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   // success resets the username counter
   for (let i = 0; i < 4; i++) await login(A, db, "kid3", "ipA");
   eq("success after 4 wrong codes signs in", (await login(A, db, "kid3", "ipA", { correct: true })).status, 200);
-  for (let i = 0; i < 5; i++) await login(createLoginGuard({ memory: mkMem() }), db, "kid3", "ipA");
-  t("success resets the counter: 5 more attempts are allowed afterwards", !db.rows.get("user|kid3").locked_until);
+  for (let i = 0; i < 4; i++) await login(createLoginGuard({ memory: mkMem() }), db, "kid3", "ipA");
+  t("success resets the counter: 4 more wrong attempts do not lock", !db.rows.get("user|kid3").locked_until);
   // F8: per-IP cap counts DISTINCT failing usernames; 100 is fine, the 101st locks that IP only
   { const dbi = mkDb();
     for (let i = 0; i < 100; i++) await login(createLoginGuard({ memory: noMem }), dbi, "spray" + i, "ipSchool");
@@ -235,6 +238,23 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     await login(createLoginGuard({ memory: noMem }), dbi, "spray_101", "ipSchool");
     eq("F8: the 101st distinct failing username locks that IP, not another IP", [(await login(createLoginGuard({ memory: noMem }), dbi, "other_kid", "ipSchool", { correct: true })).status, (await login(createLoginGuard({ memory: noMem }), dbi, "other_kid", "ipHome", { correct: true })).status], [429, 200]); }
   eq("config: 5 per username in 15 min, locked 15 min, 100 distinct usernames per IP", [CLEWQUEST.lockout.max, CLEWQUEST.lockout.windowMs, CLEWQUEST.lockout.lockMs, CLEWQUEST.lockout.ipMax], [5, 900000, 900000, 100]);
+    // behaviour through the shared flow: wrong code 401, locked 429, store error 503, right code 200 (+ link allowed only on 200)
+  { const d = mkDb(), G = createLoginGuard({ memory: noMem });
+    eq("#76-1: wrong code -> generic 401", (await login(G, d, "pkid", "ipL")).status, 401);
+    eq("#76-1: right code -> 200", (await login(G, d, "pkid", "ipL", { correct: true })).status, 200);
+    const e = mkDb(); e.err.clewquest_login_try = true;
+    eq("#76-1: lockout RPC error -> 503, never links", (await login(G, e, "pkid2", "ipL", { correct: true })).status, 503); }
+  // #76: the 5th wrong code already reports locked; a correct 5th code still signs in
+  { const d = mkDb(), G = createLoginGuard({ memory: noMem }); const st = [];
+    for (let i = 0; i < 5; i++) st.push((await login(G, d, "kid76", "ipX")).status);
+    eq("#76: wrong codes 1-4 -> 401, the 5th -> 429 (locked)", st, [401, 401, 401, 401, 429]);
+    eq("#76: the 6th is refused without a sign-in", (await login(G, d, "kid76", "ipX", { correct: true })).status, 429);
+    const d2 = mkDb(); for (let i = 0; i < 4; i++) await login(G, d2, "kid77", "ipX");
+    eq("#76: a correct 5th code still signs in", (await login(G, d2, "kid77", "ipX", { correct: true })).status, 200); }
+  { const d = mkDb(); d.rpc0 = d.rpc; d.rpc = async (n, a) => n === "clewquest_login_after_fail" ? { data: null, error: { code: "PGRST202", message: "missing" } } : d.rpc0(n, a);
+    eq("#76: SQL not applied yet (function missing) -> old behaviour, 401 not 503", (await login(createLoginGuard({ memory: noMem }), d, "kid78", "ipX")).status, 401); }
+  { const d = mkDb(); d.err.clewquest_login_after_fail = true;
+    eq("#76: other after-fail store error -> 503 (fail closed)", (await login(createLoginGuard({ memory: noMem }), d, "kid79", "ipX")).status, 503); }
   // F2: fail closed on every lockout store error
   { const d = mkDb(), c = { n: 0 }; d.err.clewquest_login_try = true;
     const r = await login(createLoginGuard({ memory: mkMem() }), d, "kid4", "ipA", { correct: true }, c);
@@ -420,6 +440,29 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     eq("F11: slot 6 keeps its index (codes unchanged)", [P.PICTURES[6].key, P.normalizeSequence([6, 6, 6, 6])], ["grapes", "6-6-6-6"]);
     const pa = fs.readFileSync(path.join(root, "src/components/clewquest/PictureAuth.js"), "utf8");
     t("F11: picture pad always renders the text label", /data-testid=\{`pic-label-\$\{i\}`\}[^>]*>\{p\.label\}/.test(pa)); }
+  // #76 blocker 1: parent links a picture-code child with the picture code
+  { const lk = fs.readFileSync(path.join(root, "src/app/api/parent/children/link/route.js"), "utf8");
+    const pd = fs.readFileSync(path.join(root, "src/components/ParentDashboard.js"), "utf8");
+    t("#76-1: link route verifies the code with runPictureLogin + loginGuard (HMAC + atomic lockout)", /runPictureLogin\(/.test(lk) && /guard: loginGuard/.test(lk) && /derivePicturePassword\(/.test(lk));
+    t("#76-1: only an app_metadata picture_code account can be linked this way", /usesPictureCode\(cur\.data\.user\)/.test(lk));
+    t("#76-1: parent_child row is created only after the verified code", lk.lastIndexOf('from("parent_child").upsert') > lk.indexOf("runPictureLogin({") && /if \(r\.status !== 200\) return jerr\(r\.error, r\.status\)/.test(lk));
+    t("#76-1: flag off => 404 for the picture path; the password path is untouched", /if \(!clewquestRoutesOn\(\)\) return jerr\("not found", 404\)/.test(lk) && /signInWithPassword\(\{ email: kidEmail\(username\), password \}\)/.test(lk));
+    t("#76-1: parent screen uses the 9-picture picker (labels in PicturePad) behind the flag", /<PicturePad value=\{lseq\}/.test(pd) && /clewquestEnabled\(\)&&/.test(pd) && /sequence:lseq/.test(pd));
+  }
+
+  // #76 blocker 2: password students keep the Today hub; the builder always has Log out and Skip for now
+  { const cq = fs.readFileSync(path.join(root, "src/components/clewquest/ClewQuestStudent.js"), "utf8");
+    const cb = fs.readFileSync(path.join(root, "src/components/clewquest/CharacterBuilder.js"), "utf8");
+    const st = fs.readFileSync(path.join(root, "src/app/api/clewquest/state/route.js"), "utf8");
+    t("#76-2: state route reports pictureCode from app_metadata only", /pictureCode: usesPictureCode\(me\.user\)/.test(st));
+    t("#76-2: a non-picture student starts on the Today hub, not the builder", /if \(initial && !r\.pictureCode\) \{ setFrom\("landing"\); setView\("today"\); return r; \}/.test(cq) && /load\(undefined, true\)/.test(cq));
+    t("#76-2: builder gets Skip for now (to Today) and Log out", /onSkip=\{view === "builder"/.test(cq) && /onLogout=\{onLogout\}/.test(cq) && /data-testid="cq-skip"/.test(cb) && /Skip for now/.test(cb) && /data-testid="cq-builder-logout"/.test(cb));
+    t("#76-2: load failure screen has Log out", /data-testid="cq-load-logout"/.test(cq));
+    t("#76-2: no game UI on solve screens (shell only wraps renderPractice)", !/clewquest/i.test(fs.readFileSync(path.join(root, "src/components/ExamSession.js"), "utf8").replace(/clewquest_\w+|reportThread|clewquest\/client/gi, "")));
+    // small fixes
+    eq("#76: nickname max is 24 on client and server", [CLEWQUEST.nickname.max, L.cleanNickname("a".repeat(24)).ok, L.cleanNickname("a".repeat(25)).ok], [24, true, false]);
+    t("#76: builder shows a visible counter and the input maxLength follows the config", /data-testid="cq-nick-count"/.test(cb) && /maxLength=\{CLEWQUEST\.nickname\.max\}/.test(cb));
+    t("#76: 'Coming soon' label never wraps mid-phrase", /whiteSpace: "nowrap"[^]*Coming soon/.test(cq)); }
   delete process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED;
 }
 

@@ -22,13 +22,13 @@ const todayBtn = { background: "#FBBF24", color: "#0F172A", border: "none", bord
 
 function Landing({ subjects, onOpen, onHome, onToday, onLogout, toast }) {
   return (
-    <div data-testid="cq-landing" style={{ position: "relative", maxWidth: 480, margin: "0 auto", minHeight: "100vh", background: "#0B3B73" }}>
+    <div data-testid="cq-landing" style={{ position: "relative", maxWidth: 480, margin: "0 auto", background: "#0B3B73" }}>
       <div style={{ position: "relative" }}>
         <Art k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{ width: "100%", display: "block" }} />
         {HOTSPOTS.filter((h) => subjects[h.key]).map((h) => (
           <button key={h.key} data-testid={`cq-island-${h.key}`} aria-label={subjects[h.key].label + (subjects[h.key].status === "open" ? "" : ", coming soon")} onClick={() => onOpen(h.key)}
             style={{ position: "absolute", left: h.x + "%", top: h.y + "%", width: h.w + "%", height: h.h + "%", background: "transparent", border: "none", cursor: "pointer", color: "#fff", textShadow: "0 1px 4px #000", fontWeight: 900, fontSize: 15 }}>
-            <span style={{ background: "rgba(15,23,42,.55)", borderRadius: 10, padding: "3px 8px" }}>{subjects[h.key].label}{subjects[h.key].status === "open" ? "" : " (Coming soon)"}</span>
+            <span style={{ display: "inline-block", whiteSpace: "nowrap", background: "rgba(15,23,42,.55)", borderRadius: 10, padding: "3px 8px", fontSize: 14 }}>{subjects[h.key].label}{subjects[h.key].status === "open" ? "" : <span style={{ display: "block", whiteSpace: "nowrap", fontSize: 12 }}>Coming soon</span>}</span>
           </button>
         ))}
         <button data-testid="cq-clew" aria-label="The Clew (home)" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer", color: "#fff", fontWeight: 900, textShadow: "0 1px 4px #000" }}>
@@ -113,7 +113,7 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice }) {
   const [award, setAward] = useState(0);
   const [failed, setFailed] = useState(false);
 
-  const load = useCallback(async (next) => {
+  const load = useCallback(async (next, initial) => {
     const r = await cqGet("/api/clewquest/state");
     if (!r.ok) { setFailed(true); const cached = readCachedCharacter(uid); if (cached) { setCharacter(cached); setView(next || "landing"); } return null; }
     setFailed(false); setSt(r); setCharacter(r.character);
@@ -123,10 +123,13 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice }) {
       r.leveledUp = !!r.stage && r.stage > seen;
       if (r.stage && r.stage !== seen && (next === "home" || r.stage < seen)) localStorage.setItem(k, String(r.stage));
     } catch { r.leveledUp = false; }
+    // A password student (parent-created / password login) keeps the Today hub as home. ClewQuest is reachable from there
+    // (back to the islands) but is never forced on them.
+    if (initial && !r.pictureCode) { setFrom("landing"); setView("today"); return r; }
     setView(r.character ? (next || "landing") : "builder");
     return r;
   }, [uid]);
-  useEffect(() => { load(); }, [load]);
+  useEffect(() => { load(undefined, true); }, [load]);
   useEffect(() => { if (view === "home") setAward(takeLastAward()); }, [view]);
 
   function openSubject(key) {
@@ -138,8 +141,8 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice }) {
   function openToday() { setFrom(view === "home" ? "home" : "landing"); setSubject(null); setView("today"); }
   if (view === "practice" && subject) return renderPractice(subjects[subject].appSubject, () => { setSubject(null); load(from); });
   if (view === "today") return renderPractice(null, () => load(from));
-  if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>;
-  if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
+  if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700 }}>{failed ? <div style={{ textAlign: "center" }}><div>Could not load ClewQuest. Please refresh.</div><button data-testid="cq-load-logout" onClick={onLogout} style={{ marginTop: 12, padding: "8px 14px", borderRadius: 10, border: "2px solid #1E3A6E", background: "#fff", fontWeight: 800, cursor: "pointer" }}>Log out</button></div> : "Loading..."}</div>;
+  if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} onSkip={view === "builder" ? () => { setFrom("landing"); setSubject(null); setView("today"); } : null} onLogout={onLogout} />;
   if (view === "home" && st && character) return <ClewHome st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} />;
   return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { load("home"); }} onToday={openToday} onLogout={onLogout} toast={toast} />;
 }

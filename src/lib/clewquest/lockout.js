@@ -26,10 +26,19 @@ export function createLoginGuard({ memory, cfg = CLEWQUEST.lockout }) {
       if (u.error || typeof u.data !== "boolean") return { error: true };
       return { locked: u.data === false };
     },
-    // AFTER a failed sign-in: record the username against the IP (distinct-username cap). -> { error: boolean }
+    // AFTER a failed sign-in: record the username against the IP (distinct-username cap), then lock the username when this
+    // was its last allowed attempt (clewquest_login_after_fail, so the 5th wrong code already says "locked").
+    // -> { error: boolean, locked: boolean }. If the newer SQL function is not applied yet (function-missing error only) it
+    // degrades to the old behaviour (the 6th attempt locks); any other error fails closed.
     async fail(admin, username, ipHash) {
       const r = await admin.rpc("clewquest_login_ip_fail", { p_ip: String(ipHash), p_user: norm(username), p_max: cfg.ipMax, p_window_secs: winSecs, p_lock_secs: lockSecs });
-      return { error: !!r.error };
+      if (r.error) return { error: true, locked: false };
+      const u = await admin.rpc("clewquest_login_after_fail", { p_scope: "user", p_key: norm(username), p_max: cfg.max, p_lock_secs: lockSecs });
+      if (u.error) {
+        const missing = u.error.code === "PGRST202" || u.error.code === "42883";
+        return { error: !missing, locked: false };
+      }
+      return { error: false, locked: u.data === true };
     },
     // Success, or a parent resetting the code: clear the username counter and lock (the IP record is left alone).
     async reset(admin, username) {

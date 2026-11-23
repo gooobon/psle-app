@@ -9,6 +9,8 @@ import LearningDashboard from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
 import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
+import { PicturePad } from "@/components/clewquest/PictureAuth";
+import { CODE_LENGTH } from "@/lib/clewquest/pictures";
 import { clewquestEnabled } from "@/lib/clewquest/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
@@ -699,6 +701,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
   const [open,setOpen]=useState(false);
   const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.serverId||"");
   const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
+  const [byPic,setByPic]=useState(false); const [lseq,setLseq]=useState([]); // ClewQuest: child signs in with a picture code
   const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   const btn={background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
@@ -717,7 +720,14 @@ function GuardianTools({linkedStudents,onChildLinked}){
       setInv(v=>({...v, received:(v.received||[]).filter(x=>x.id!==id)}));
     } else loadInv();
   }
-  async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
+  async function linkChild(){
+    if(byPic&&lseq.length!==CODE_LENGTH){ setMsg("Tap the child's 4 pictures."); return; }
+    setBusy(true); setMsg("");
+    const r=await serverPost("/api/parent/children/link",byPic?{username:lu,sequence:lseq}:{username:lu,password:lp});
+    setBusy(false);
+    if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); setLseq([]); }
+    else { setLseq([]); setMsg(r.status===429?"Too many tries. Please wait a while and try again.":r.status===503?"Temporarily unavailable. Please try again later.":byPic?"Could not link. Check the username and picture code.":(r.error||"Failed.")); }
+  }
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
       <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
@@ -742,7 +752,10 @@ function GuardianTools({linkedStudents,onChildLinked}){
         </>)}
         <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Link an existing child account</div>
         <input style={inp} placeholder="Child's username" value={lu} onChange={e=>setLu(e.target.value)}/>
-        <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
+        {clewquestEnabled()&&(<label style={{display:"flex",alignItems:"center",gap:6,fontSize:12,fontWeight:700,marginBottom:8}}>
+          <input type="checkbox" data-testid="link-by-picture" checked={byPic} onChange={e=>{ setByPic(e.target.checked); setLseq([]); setMsg(""); }}/> My child signs in with a picture code</label>)}
+        {byPic?(<div style={{marginBottom:10}}><PicturePad value={lseq} onChange={setLseq} label="Tap your child's 4 pictures in order"/></div>)
+          :(<input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>)}
         <button disabled={busy} style={btn} onClick={linkChild}>Link child</button>
         {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
       </div>)}

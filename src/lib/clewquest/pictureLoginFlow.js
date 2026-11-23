@@ -15,7 +15,7 @@ export async function runPictureLogin({ guard, admin, username, ipHash, signIn, 
   if (g.locked) return { status: 429, error: MSG.locked };
   const failed = async () => {
     const f = await guard.fail(admin, username, ipHash);
-    return f.error ? { status: 503, error: MSG.unavailable } : { status: 401, error: MSG.invalid };
+    return f.error ? { status: 503, error: MSG.unavailable } : f.locked ? { status: 429, error: MSG.locked } : { status: 401, error: MSG.invalid };
   };
   const s = await signIn();
   if (!s || s.error || !s.user) return failed();
