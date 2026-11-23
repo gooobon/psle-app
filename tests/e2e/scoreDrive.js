@@ -259,7 +259,7 @@ function setsOf(setOrMap) {
   return Object.entries(setOrMap || {}).map(([setId, set]) => ({ ...set, setId }));
 }
 
-async function driveToScore(page, setOrMap, band, label) {
+async function driveToScore(page, setOrMap, band, label, hooks) {
   let chosen = setsOf(setOrMap);
   if (chosen.length > 1) {
     await page.waitForFunction(() => /Submit|提交|Tap a word|Fill in all blanks|Write a suitable|填写/.test(document.body.innerText || ""), { timeout: 20000 }).catch(() => {});
@@ -286,16 +286,40 @@ async function driveToScore(page, setOrMap, band, label) {
     wrong.push(...plan.wrong);
   }
   const log = [];
+  let tfRun = 0;
   for (let i = 0; i < 2500; i++) {
     const t = await page.locator("body").innerText().catch(() => "");
-    if (t.includes("correct on first try") || t.includes("题首次答对")) {
+    if (t.includes("correct on first try") || t.includes("题首次答对") || t.includes("道题正确")) {
       return { log: log.slice(-30), steps: i };
     }
     const filled = await fillMarked(page);
     if (filled) { log.push("fill:" + filled); continue; }
     const step = await applyOne(page, items, wrong);
+    if (step && !step.did && step.why === "advance" && hooks && hooks.onHint && !hooks.hinted) {
+      const hintText = await page.locator("body").innerText().catch(() => "");
+      if (/Not quite! Hint:|再想想/.test(hintText)) {
+        hooks.hinted = true;
+        await hooks.onHint(page, hintText);
+      }
+    }
     if (step && step.did) { log.push(step.why + ":" + (step.id || "")); continue; }
     const action = await nudge(page);
+    if (action === "tf-btn") {
+      tfRun++;
+      const trues = page.locator("button", { hasText: /^True$/ });
+      const tn = await trues.count();
+      for (let t = 0; t < tn; t++) await trues.nth(t).click({ timeout: 1500 }).catch(() => {});
+      const areas = page.locator("textarea");
+      const an = await areas.count();
+      for (let t = 0; t < an; t++) {
+        const v = await areas.nth(t).inputValue().catch(() => "x");
+        if (!String(v).trim()) await areas.nth(t).fill("the passage says so").catch(() => {});
+      }
+      if (tfRun > 6) {
+        const sub = page.getByRole("button", { name: /^(Submit|Submit Answers|Next Page|Finish Section|Next Section)/ });
+        if (await sub.count()) await sub.first().click({ timeout: 1500 }).catch(() => {});
+      }
+    } else tfRun = 0;
     log.push(action);
     if (action === "stuck") {
       const stuck = log.slice(-8).every((x) => x === "stuck" || x === "none");
@@ -303,6 +327,7 @@ async function driveToScore(page, setOrMap, band, label) {
     }
     await page.waitForTimeout(30);
   }
+  await page.screenshot({ path: (process.env.E2E_SHOTS_DIR || "docs/e2e-2026-11-23") + "/stuck-" + label + ".png", fullPage: true }).catch(() => {});
   const snippet = (await page.locator("body").innerText().catch(() => "")).slice(0, 400);
   throw new Error("Score driver timed out during " + label + " last=" + log.slice(-12).join(",") + "\n" + snippet);
 }

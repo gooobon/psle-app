@@ -76,7 +76,7 @@ async function nudge(page) {
       if (opt) { opt.click(); return "meaning"; }
     }
 
-    const submit = enabled(/^(Submit|提交|提交答案|提交 第)/);
+    const submit = enabled(/^(Submit|Submit Answers|提交|提交答案|提交 第)/);
     if (submit) { submit.click(); return "submit:" + text(submit).slice(0, 40); }
 
     const compCells = [...document.querySelectorAll("td")].filter((td) => {
@@ -161,11 +161,19 @@ async function nudge(page) {
 
     // OrderTap cards (comprehension "put the events in order"). Tap each unordered card once.
     // Without this the driver clicks an already-answered True/False button until the step cap.
-    const orderCard = buttons().find((b) => !b.disabled && /Not ordered yet/.test(b.getAttribute("aria-label") || ""));
-    if (orderCard) { orderCard.click(); return "order-tap"; }
+    const order = buttons().find((b) => !b.disabled && /Not ordered yet/.test(b.getAttribute("aria-label") || ""));
+    if (order) { order.click(); return "order"; }
 
-    const tfBtn = enabled(/^(True|False|对|错)$/);
-    if (tfBtn) { tfBtn.click(); return "tf-btn"; }
+    const tfButtons = buttons().filter((b) => /^(True|False|对|错)$/.test(text(b)) && !b.disabled);
+    const tfPicked = tfButtons.some((b) => getComputedStyle(b).backgroundColor !== "rgb(255, 255, 255)");
+    if (tfButtons.length && !tfPicked) {
+      const tfBtn = tfButtons.find((b) => /^(True|对)$/.test(text(b))) || tfButtons[0];
+      const key = Object.keys(tfBtn).find((k) => k.startsWith("__reactProps"));
+      const handler = key && tfBtn[key] && tfBtn[key].onClick;
+      if (handler) handler({ preventDefault() {}, stopPropagation() {} });
+      else tfBtn.click();
+      return "tf-btn";
+    }
 
     return "stuck";
   });
