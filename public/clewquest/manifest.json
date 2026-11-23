@@ -1,0 +1,235 @@
+{
+  "version": 1,
+  "generated": "2026-11-23",
+  "note": "Phase 1 placeholder art. Stage 1-3 need a fully-black redraw; stage 6-8 are not reachable in Phase 1.",
+  "assets": {
+    "brand/logo-b1-icon": {
+      "webp": "/clewquest/brand/logo-b1-icon.webp",
+      "png": "/clewquest/brand/logo-b1-icon.png",
+      "w": 512,
+      "h": 512
+    },
+    "brand/logo-b1": {
+      "webp": "/clewquest/brand/logo-b1.webp",
+      "png": "/clewquest/brand/logo-b1.png",
+      "w": 512,
+      "h": 512
+    },
+    "characters/stage5-boy-achilles-plume": {
+      "webp": "/clewquest/characters/stage5-boy-achilles-plume.webp",
+      "png": "/clewquest/characters/stage5-boy-achilles-plume.png",
+      "w": 225,
+      "h": 387
+    },
+    "characters/stage5-boy-apollo-curls": {
+      "webp": "/clewquest/characters/stage5-boy-apollo-curls.webp",
+      "png": "/clewquest/characters/stage5-boy-apollo-curls.png",
+      "w": 276,
+      "h": 350
+    },
+    "characters/stage5-boy-heracles-crop": {
+      "webp": "/clewquest/characters/stage5-boy-heracles-crop.webp",
+      "png": "/clewquest/characters/stage5-boy-heracles-crop.png",
+      "w": 226,
+      "h": 334
+    },
+    "characters/stage5-boy-hermes-wind": {
+      "webp": "/clewquest/characters/stage5-boy-hermes-wind.webp",
+      "png": "/clewquest/characters/stage5-boy-hermes-wind.png",
+      "w": 293,
+      "h": 328
+    },
+    "characters/stage5-boy-perseus-waves": {
+      "webp": "/clewquest/characters/stage5-boy-perseus-waves.webp",
+      "png": "/clewquest/characters/stage5-boy-perseus-waves.png",
+      "w": 267,
+      "h": 325
+    },
+    "characters/stage5-girl-aphrodite-waves": {
+      "webp": "/clewquest/characters/stage5-girl-aphrodite-waves.webp",
+      "png": "/clewquest/characters/stage5-girl-aphrodite-waves.png",
+      "w": 297,
+      "h": 308
+    },
+    "characters/stage5-girl-ariadne-buns": {
+      "webp": "/clewquest/characters/stage5-girl-ariadne-buns.webp",
+      "png": "/clewquest/characters/stage5-girl-ariadne-buns.png",
+      "w": 265,
+      "h": 313
+    },
+    "characters/stage5-girl-artemis-tail": {
+      "webp": "/clewquest/characters/stage5-girl-artemis-tail.webp",
+      "png": "/clewquest/characters/stage5-girl-artemis-tail.png",
+      "w": 339,
+      "h": 342
+    },
+    "characters/stage5-girl-athena-braid": {
+      "webp": "/clewquest/characters/stage5-girl-athena-braid.webp",
+      "png": "/clewquest/characters/stage5-girl-athena-braid.png",
+      "w": 215,
+      "h": 309
+    },
+    "characters/stage5-girl-persephone-wreath": {
+      "webp": "/clewquest/characters/stage5-girl-persephone-wreath.webp",
+      "png": "/clewquest/characters/stage5-girl-persephone-wreath.png",
+      "w": 271,
+      "h": 307
+    },
+    "colours/thread-colours-swatch": {
+      "webp": "/clewquest/colours/thread-colours-swatch.webp",
+      "png": "/clewquest/colours/thread-colours-swatch.png",
+      "w": 1239,
+      "h": 672
+    },
+    "hair/hair-sheet-boys": {
+      "webp": "/clewquest/hair/hair-sheet-boys.webp",
+      "png": "/clewquest/hair/hair-sheet-boys.png",
+      "w": 1344,
+      "h": 768
+    },
+    "hair/hair-sheet-girls": {
+      "webp": "/clewquest/hair/hair-sheet-girls.webp",
+      "png": "/clewquest/hair/hair-sheet-girls.png",
+      "w": 1344,
+      "h": 768
+    },
+    "hair/thumb-achilles-plume": {
+      "webp": "/clewquest/hair/thumb-achilles-plume.webp",
+      "png": "/clewquest/hair/thumb-achilles-plume.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-aphrodite-waves": {
+      "webp": "/clewquest/hair/thumb-aphrodite-waves.webp",
+      "png": "/clewquest/hair/thumb-aphrodite-waves.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-apollo-curls": {
+      "webp": "/clewquest/hair/thumb-apollo-curls.webp",
+      "png": "/clewquest/hair/thumb-apollo-curls.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-ariadne-buns": {
+      "webp": "/clewquest/hair/thumb-ariadne-buns.webp",
+      "png": "/clewquest/hair/thumb-ariadne-buns.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-artemis-tail": {
+      "webp": "/clewquest/hair/thumb-artemis-tail.webp",
+      "png": "/clewquest/hair/thumb-artemis-tail.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-athena-braid": {
+      "webp": "/clewquest/hair/thumb-athena-braid.webp",
+      "png": "/clewquest/hair/thumb-athena-braid.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-heracles-crop": {
+      "webp": "/clewquest/hair/thumb-heracles-crop.webp",
+      "png": "/clewquest/hair/thumb-heracles-crop.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-hermes-wind": {
+      "webp": "/clewquest/hair/thumb-hermes-wind.webp",
+      "png": "/clewquest/hair/thumb-hermes-wind.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-persephone-wreath": {
+      "webp": "/clewquest/hair/thumb-persephone-wreath.webp",
+      "png": "/clewquest/hair/thumb-persephone-wreath.png",
+      "w": 160,
+      "h": 160
+    },
+    "hair/thumb-perseus-waves": {
+      "webp": "/clewquest/hair/thumb-perseus-waves.webp",
+      "png": "/clewquest/hair/thumb-perseus-waves.png",
+      "w": 160,
+      "h": 160
+    },
+    "landing/four-islands": {
+      "webp": "/clewquest/landing/four-islands.webp",
+      "png": "/clewquest/landing/four-islands.png",
+      "w": 864,
+      "h": 1184
+    },
+    "stages/stage-1": {
+      "webp": "/clewquest/stages/stage-1.webp",
+      "png": "/clewquest/stages/stage-1.png",
+      "w": 162,
+      "h": 161
+    },
+    "stages/stage-2": {
+      "webp": "/clewquest/stages/stage-2.webp",
+      "png": "/clewquest/stages/stage-2.png",
+      "w": 163,
+      "h": 181
+    },
+    "stages/stage-3": {
+      "webp": "/clewquest/stages/stage-3.webp",
+      "png": "/clewquest/stages/stage-3.png",
+      "w": 198,
+      "h": 190
+    },
+    "stages/stage-4": {
+      "webp": "/clewquest/stages/stage-4.webp",
+      "png": "/clewquest/stages/stage-4.png",
+      "w": 208,
+      "h": 186
+    },
+    "stages/stage-5-boy": {
+      "webp": "/clewquest/stages/stage-5-boy.webp",
+      "png": "/clewquest/stages/stage-5-boy.png",
+      "w": 223,
+      "h": 324
+    },
+    "stages/stage-5-girl": {
+      "webp": "/clewquest/stages/stage-5-girl.webp",
+      "png": "/clewquest/stages/stage-5-girl.png",
+      "w": 257,
+      "h": 306
+    },
+    "stages/stage-6-boy": {
+      "webp": "/clewquest/stages/stage-6-boy.webp",
+      "png": "/clewquest/stages/stage-6-boy.png",
+      "w": 202,
+      "h": 318
+    },
+    "stages/stage-6-girl": {
+      "webp": "/clewquest/stages/stage-6-girl.webp",
+      "png": "/clewquest/stages/stage-6-girl.png",
+      "w": 254,
+      "h": 317
+    },
+    "stages/stage-7-boy": {
+      "webp": "/clewquest/stages/stage-7-boy.webp",
+      "png": "/clewquest/stages/stage-7-boy.png",
+      "w": 258,
+      "h": 267
+    },
+    "stages/stage-7-girl": {
+      "webp": "/clewquest/stages/stage-7-girl.webp",
+      "png": "/clewquest/stages/stage-7-girl.png",
+      "w": 260,
+      "h": 253
+    },
+    "stages/stage-8-boy": {
+      "webp": "/clewquest/stages/stage-8-boy.webp",
+      "png": "/clewquest/stages/stage-8-boy.png",
+      "w": 261,
+      "h": 335
+    },
+    "stages/stage-8-girl": {
+      "webp": "/clewquest/stages/stage-8-girl.webp",
+      "png": "/clewquest/stages/stage-8-girl.png",
+      "w": 261,
+      "h": 278
+    }
+  }
+}
