@@ -61,6 +61,7 @@ export async function importLocalOnce(username) {
 // Daily activity log: report one completed set/round. Fire-and-forget; never blocks or alters the learning flow.
 // Idempotent server-side per (user, SGT date, subject, key). Does nothing when the flag is off.
 import { SERVER_AUTH as _FLAG } from "@/lib/supabase/config";
+import { reportThread } from "@/lib/clewquest/client";
 // ── Study minutes ──────────────────────────────────────────────
 // Active time = sum of gaps between consecutive student interactions (tap/click/key/scroll) since the last report.
 // A gap longer than IDLE_CAP_MS (5 min) is treated as a break and not counted. The clock starts at the first
@@ -97,6 +98,7 @@ export function reportPracticeStarted(subject) {
 
 export function reportActivity(subject, key, results, minutes) {
   if (!_FLAG) return;
+  reportThread(subject, results); // ClewQuest thread award (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off => no-op); independent of scoring
   try {
     if (minutes == null) minutes = takeActiveMinutes();
     const graded = (results || []).filter(r => r && r.scored !== false);

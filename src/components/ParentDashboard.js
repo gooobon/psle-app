@@ -8,6 +8,8 @@ import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DAS
 import LearningDashboard from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
+import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
+import { clewquestEnabled } from "@/lib/clewquest/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
@@ -882,6 +884,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}
+        {child&&SERVER_AUTH&&clewquestEnabled()&&child.serverId&&tab==="settings" && <ParentPictureReset child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
       </div>
