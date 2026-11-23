@@ -15,7 +15,11 @@ export async function runPictureLogin({ guard, admin, username, ipHash, signIn, 
   if (g.locked) return { status: 429, error: MSG.locked };
   const failed = async () => {
     const f = await guard.fail(admin, username, ipHash);
-    return f.error ? { status: 503, error: MSG.unavailable } : { status: 401, error: MSG.invalid };
+    if (f.error) return { status: 503, error: MSG.unavailable };
+    // The max-th wrong code already shows the locked message (the next attempt would be refused). A count error is not fatal here.
+    const c = guard.count ? await guard.count(admin, username) : { error: true };
+    if (!c.error && c.count >= guard.max) return { status: 429, error: MSG.locked };
+    return { status: 401, error: MSG.invalid };
   };
   const s = await signIn();
   if (!s || s.error || !s.user) return failed();

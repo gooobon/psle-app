@@ -85,7 +85,7 @@ eq("stage 5 asset falls back to crimson art", L.stageAssetKey(5, "girl", "ariadn
 eq("stage 1-4 art keys", [1, 2, 3, 4].map((s) => L.stageAssetKey(s, "boy", "apollo-curls", "ariadne-crimson")), ["stages/stage-1", "stages/stage-2", "stages/stage-3", "stages/stage-4"]);
 eq("character validation accepts a good look", L.validateCharacter({ gender: "girl", hair_key: "ariadne-buns", colour_key: "ariadne-crimson", nickname: "Star 7" }).ok, true);
 eq("a boy cannot take a girl's hair", L.validateCharacter({ gender: "boy", hair_key: "ariadne-buns", colour_key: "ariadne-crimson" }).ok, false);
-eq("nickname length is 2-12", [L.cleanNickname("a").ok, L.cleanNickname("abcdefghijklm").ok, L.cleanNickname("ab").ok, L.cleanNickname("").value], [false, false, true, null]);
+eq("nickname length is 2-24 (client = server = DB)", [L.cleanNickname("a").ok, L.cleanNickname("a".repeat(24)).ok, L.cleanNickname("a".repeat(25)).ok, L.cleanNickname("ab").ok, L.cleanNickname("").value], [false, true, false, true, null]);
 eq("nickname is English letters/numbers/spaces only", L.cleanNickname("ab-c!").ok, false);
 eq("nickname profanity filter", L.cleanNickname("shit head").ok, false);
 
@@ -132,7 +132,7 @@ for (const f of routeFiles) {
   t(`${f}: every handler starts with the flag guard`, fns.length > 0 && fns.every((x) => /clewquestRoutesOn\(\)\) return notFound\(\)/.test(x)), fns);
 }
 { const g = fs.readFileSync(path.join(root, "src/lib/clewquest/guard.js"), "utf8"); t("guard requires the flag and server auth", /clewquestEnabled\(\) && serverAuthEnabled\(\)/.test(g)); }
-{ const app = fs.readFileSync(path.join(root, "src/app/ClaudeApp.js"), "utf8"); t("ClewQuest shell is gated by the flag", /const CQ_ON = clewquestEnabled\(\) && SERVER_AUTH/.test(app) && /if\(CQ_ON && typeof user\.serverId/.test(app)); }
+{ const app = fs.readFileSync(path.join(root, "src/app/ClaudeApp.js"), "utf8"); t("ClewQuest shell is gated by the flag", /const CQ_ON = clewquestEnabled\(\) && SERVER_AUTH/.test(app) && /const cqOk = CQ_ON && typeof user\.serverId/.test(app)); }
 
 // 7. no Hangul in ClewQuest code, assets list or rendered strings
 const HANGUL = /[가-힣ᄀ-ᇿ㄰-㆏]/;
@@ -191,6 +191,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
         if (cnt > a.p_max) { const lock = now + a.p_lock_secs * 1000; rows.set("ip|" + a.p_ip, { fails: cnt, window_start: now, locked_until: lock }); return { data: lock, error: null }; }
         return { data: null, error: null };
       }
+      if (name === "clewquest_login_fails") { const r = rows.get(a.p_scope + "|" + a.p_key); return { data: r && r.window_start >= now - a.p_window_secs * 1000 ? r.fails : 0, error: null }; }
       if (name === "clewquest_login_ok") { const k = a.p_scope + "|" + a.p_key; if (rows.has(k)) rows.set(k, { fails: 0, window_start: now, locked_until: null }); return { data: null, error: null }; }
       return { data: null, error: { message: "unknown rpc" } };
     } }; };
@@ -206,7 +207,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   { const db = mkDb(), c = { n: 0 };
     const res = await Promise.all(Array.from({ length: 20 }, () => login(createLoginGuard({ memory: noMem }), db, "kidpar", "ipP", {}, c)));
     t("F1: 20 concurrent wrong attempts on 20 instances -> <= 5 sign-in calls (durable layer)", c.n <= 5, c.n);
-    eq("F1: the other 15 are refused with 429", res.filter((r) => r.status === 429).length, 15);
+    eq("F1: all 20 answer 429 (15 refused, the <=5 real wrong codes already show the locked message)", res.filter((r) => r.status === 429).length, 20);
     t("F1: and the username is now locked for a later correct code too", (await login(createLoginGuard({ memory: noMem }), db, "kidpar", "ipQ", { correct: true })).status === 429); }
   { const db = mkDb(), c = { n: 0 }, G = createLoginGuard({ memory: mkMem() });
     await Promise.all(Array.from({ length: 20 }, () => login(G, db, "kidpar2", "ipP", {}, c)));
@@ -410,7 +411,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     t("F7: practice returns to where it was opened from", /setFrom\(view === "home" \? "home" : "landing"\)/.test(cq) && /load\(from\)/.test(cq));
     // F9: the student's own grade
     eq("F9: questGrade uses the student's grade, default when missing, null when unconfigured", [L.questGrade("P3"), L.questGrade(undefined), L.questGrade("P5")], ["P3", "P3", null]);
-    t("F9: shell only mounts for a configured grade", /if\(CQ_ON && typeof user\.serverId==="string" && questGrade\(user\.grade\)\)/.test(app));
+    t("F9: shell only mounts for a configured grade", /const cqOk = CQ_ON && typeof user\.serverId==="string" && questGrade\(user\.grade\)/.test(app));
     t("F9: the shell reads subjects for the student's grade, not the default grade", /questGrade\(user\.grade\)/.test(cq) && /subjectsFor\(grade\)/.test(cq) && !/grades\[CLEWQUEST\.defaultGrade\]/.test(cq)); }
 
   // F11: widely supported glyphs, labels always shown, slots unchanged
@@ -421,6 +422,101 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
     const pa = fs.readFileSync(path.join(root, "src/components/clewquest/PictureAuth.js"), "utf8");
     t("F11: picture pad always renders the text label", /data-testid=\{`pic-label-\$\{i\}`\}[^>]*>\{p\.label\}/.test(pa)); }
   delete process.env.NEXT_PUBLIC_CLEWQUEST_ENABLED;
+}
+
+// 11. LAUNCH BLOCKERS (PR for issue #76)
+{
+  const { createLoginGuard } = await import("../src/lib/clewquest/lockout.js");
+  const { runPictureLogin, MSG } = await import("../src/lib/clewquest/pictureLoginFlow.js");
+  const LC = await import("../src/lib/clewquest/linkCode.js");
+  const rd = (f) => fs.readFileSync(path.join(root, f), "utf8");
+
+  // 5th wrong code shows the locked message (429); 1st-4th say "try again" (401); a correct 5th still signs in
+  { const fails = new Map();
+    const admin = { async rpc(name, a) {
+      if (name === "clewquest_login_status") return { data: null, error: null };
+      if (name === "clewquest_login_try") { const n = (fails.get(a.p_key) || 0) + 1; fails.set(a.p_key, n); return { data: n <= a.p_max, error: null }; }
+      if (name === "clewquest_login_ip_fail") return { data: null, error: null };
+      if (name === "clewquest_login_fails") return { data: fails.get(a.p_key) || 0, error: null };
+      return { data: null, error: { message: "unknown" } }; } };
+    const mem = { hit: () => true, clear: () => {} };
+    const go = (correct) => runPictureLogin({ guard: createLoginGuard({ memory: mem }), admin, username: "kid", ipHash: "ip", signIn: async () => correct ? { user: { id: "u" } } : { error: true }, loadProfile: async () => ({ role: "student" }), signOut: async () => {} });
+    const out = []; for (let i = 0; i < 5; i++) out.push((await go(false)).status);
+    eq("lockout: wrong codes 1-4 = 401, the 5th = 429 (locked message)", out, [401, 401, 401, 401, 429]);
+    eq("lockout: the 5th status carries the locked message", (await go(false)).error, MSG.locked); }
+  { const admin = { async rpc(name) { return name === "clewquest_login_fails" ? { data: null, error: { message: "x" } } : { data: name === "clewquest_login_try" ? true : null, error: null }; } };
+    const r = await runPictureLogin({ guard: createLoginGuard({ memory: { hit: () => true, clear: () => {} } }), admin, username: "k", ipHash: "i", signIn: async () => ({ error: true }), loadProfile: async () => ({}), signOut: async () => {} });
+    eq("lockout: a count read error still answers 401 (not a crash)", r.status, 401); }
+
+  // link code: format, hashing, one-time, expiry, rate limit, fail closed, no enumeration
+  t("link: code is 6 digits", LC.CODE_RE.test(LC.newLinkCode()) && LC.newLinkCode(() => 7) === "000007");
+  const h1 = LC.hashLinkCode(PEPPER, "Kid1", "123456");
+  t("link: hash is hex HMAC, username-bound and never the digits", /^[0-9a-f]{64}$/.test(h1) && h1 !== LC.hashLinkCode(PEPPER, "kid2", "123456") && !h1.includes("123456") && h1 === LC.hashLinkCode(PEPPER, "kid1", "123456"));
+  const mkLinkDb = () => { const codes = new Map(), tries = new Map(), cfg = { down: false }; const now = { t: 1_000_000 };
+    return { codes, tries, cfg, now, async rpc(name, a) {
+      if (cfg.down) return { data: null, error: { message: "down" } };
+      if (name === "clewquest_login_try") { const n = (tries.get(a.p_key) || 0) + 1; tries.set(a.p_key, n); return { data: n <= a.p_max, error: null }; }
+      if (name === "clewquest_login_ok") { tries.delete(a.p_key); return { data: null, error: null }; }
+      if (name === "clewquest_link_redeem") { const c = codes.get(a.p_child); if (c && c.code_hash === a.p_hash && c.expires > now.t) { codes.delete(a.p_child); return { data: true, error: null }; } return { data: false, error: null }; }
+      return { data: null, error: { message: "unknown" } }; },
+      from: () => ({ upsert: async (row) => { if (cfg.down) return { error: { message: "down" } }; codes.set(row.child_id, { code_hash: row.code_hash, expires: now.t + LC.LINK.ttlSecs * 1000 }); return { error: null }; } }) }; };
+  const loadChild = async (u) => (u === "kid1" ? { id: "c1" } : null);
+  const mkLink = () => { const links = []; return { links, link: async (id) => { links.push(id); return {}; } }; };
+  { const db = mkLinkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER });
+    eq("link: issue -> 200 with a 6-digit code, 10 minutes", [iss.status, LC.CODE_RE.test(iss.code), iss.expiresInSecs], [200, true, 600]);
+    t("link: only the hash is stored", db.codes.get("c1").code_hash === LC.hashLinkCode(PEPPER, "kid1", iss.code) && !JSON.stringify([...db.codes.values()]).includes(iss.code));
+    const L1 = mkLink();
+    const bad = await LC.redeemLinkCode({ admin: db, username: "kid1", code: iss.code === "000000" ? "000001" : "000000", pepper: PEPPER, loadChild, link: L1.link });
+    eq("link: wrong code -> 401 and no parent_child row", [bad.status, L1.links.length], [401, 0]);
+    const ok = await LC.redeemLinkCode({ admin: db, username: "Kid1", code: iss.code, pepper: PEPPER, loadChild, link: L1.link });
+    eq("link: right code (any username case) -> 200 and the parent_child row is created", [ok.status, L1.links], [200, ["c1"]]);
+    const again = await LC.redeemLinkCode({ admin: db, username: "kid1", code: iss.code, pepper: PEPPER, loadChild, link: L1.link });
+    eq("link: single use (second redeem -> 401)", [again.status, L1.links.length], [401, 1]); }
+  { const db = mkLinkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); db.now.t += 601_000;
+    const L2 = mkLink(); const r = await LC.redeemLinkCode({ admin: db, username: "kid1", code: iss.code, pepper: PEPPER, loadChild, link: L2.link });
+    eq("link: expired after 10 minutes -> 401, no row", [r.status, L2.links.length], [401, 0]); }
+  { const db = mkLinkDb(); const iss = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); const L3 = mkLink(); const st = [];
+    for (let i = 0; i < 7; i++) st.push((await LC.redeemLinkCode({ admin: db, username: "kid1", code: "999999" === iss.code ? "999998" : "999999", pepper: PEPPER, loadChild, link: L3.link })).status);
+    eq("link: guessing is rate limited (5 tries, then 429)", st, [401, 401, 401, 401, 401, 429, 429]);
+    eq("link: even the right code is refused while rate limited", (await LC.redeemLinkCode({ admin: db, username: "kid1", code: iss.code, pepper: PEPPER, loadChild, link: L3.link })).status, 429); }
+  { const db = mkLinkDb(); const a = await LC.redeemLinkCode({ admin: db, username: "nobody", code: "123456", pepper: PEPPER, loadChild, link: async () => ({}) });
+    const b = await LC.redeemLinkCode({ admin: db, username: "kid1", code: "123456", pepper: PEPPER, loadChild, link: async () => ({}) });
+    eq("link: unknown user and wrong code answer identically (no oracle)", [a.status, a.error], [b.status, b.error]);
+    eq("link: malformed code -> 401 before any attempt is counted", [(await LC.redeemLinkCode({ admin: db, username: "kid1", code: "12ab56", pepper: PEPPER, loadChild, link: async () => ({}) })).status, db.tries.size === 2], [401, true]); }
+  { const db = mkLinkDb(); db.cfg.down = true; const L4 = mkLink();
+    eq("link: issue fails closed (503) when the store is down", (await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER })).status, 503);
+    eq("link: redeem fails closed (503) when the store is down, no row", [(await LC.redeemLinkCode({ admin: db, username: "kid1", code: "123456", pepper: PEPPER, loadChild, link: L4.link })).status, L4.links.length], [503, 0]);
+    eq("link: no pepper -> 503", (await LC.issueLinkCode({ admin: mkLinkDb(), childId: "c1", username: "kid1", pepper: "" })).status, 503); }
+  { const db = mkLinkDb(); let n = 0; for (; n < 8; n++) { const r = await LC.issueLinkCode({ admin: db, childId: "c1", username: "kid1", pepper: PEPPER }); if (r.status === 429) break; }
+    eq("link: issuing codes is rate limited (6th request -> 429)", n, 5); }
+
+  // routes / wiring (source checks: these files import Next, so they cannot be loaded here)
+  const issueR = rd("src/app/api/clewquest/link-code/route.js"), redeemR = rd("src/app/api/parent/children/link-code/route.js"), mkR = rd("src/app/api/parent/children/picture/route.js"), resetR = rd("src/app/api/clewquest/picture-reset/route.js");
+  t("routes: all behind the flag guard", [issueR, redeemR, mkR].every((x) => /clewquestRoutesOn\(\)\) return notFound\(\)/.test(x)));
+  t("routes: issue needs a picture-code student (app_metadata only)", /role !== "student"/.test(issueR) && /usesPictureCode\(me\.user\)/.test(issueR));
+  t("routes: redeem needs a parent session and only links picture-code children", /role !== "parent"/.test(redeemR) && /usesPictureCode/.test(redeemR) && /parent_child/.test(redeemR));
+  t("routes: parent-created picture child is linked at creation", /parentId: me\.profile\.id/.test(mkR.replace(/\\/g, "")) || /parentId: me\.profile\.id/.test(mkR));
+  t("routes: parent reset clears the lockout and fails if it could not", /loginGuard\.reset/.test(resetR) && /cleared\.error/.test(resetR));
+  const mig = rd("supabase/migrations/20261204000000_clewquest_link_codes.sql").replace(/--[^\n]*/g, "");
+  t("migration: new file, hashed codes, service role only, re-runnable", /create table if not exists public\.clewquest_link_codes/.test(mig) && /code_hash/.test(mig) && /enable row level security/.test(mig) && /grant execute on function public\.clewquest_link_redeem\(uuid, text\) to service_role/.test(mig) && /create or replace function/.test(mig) && !/drop table|truncate/i.test(mig));
+  t("migration: redeem is an atomic delete of an unexpired matching row", /delete from public\.clewquest_link_codes where child_id = p_child and code_hash = p_hash and expires_at > now\(\)/.test(mig));
+
+  // Blocker 2: password students keep the Today hub; ClewQuest is opt-in; builder can be left
+  const app = rd("src/app/ClaudeApp.js"), cq = rd("src/components/clewquest/ClewQuestStudent.js"), cb = rd("src/components/clewquest/CharacterBuilder.js"), pa = rd("src/components/clewquest/PictureAuth.js");
+  t("B2: shell is forced only for picture-code students, or when a password student opened it", /cqOk && \(user\.pictureCode \|\| cqOpen\)/.test(app));
+  t("B2: a password student gets the Today hub plus an Open ClewQuest entry", /practice\(cqOk \? \{onOpenQuest/.test(app) && /today-open-clewquest/.test(app));
+  t("B2: logout closes the opt-in view", /setAuth\(null\); setCqOpen\(false\)/.test(app));
+  t("B2: builder has Skip for now and Log out", /data-testid="cq-skip"/.test(cb) && /Skip for now/.test(cb) && /Log out/.test(cb) && /onSkip=\{view === "builder"/.test(cq) && /onLogout=\{onLogout\}/.test(cq));
+  t("B2: skipping does not re-force the builder", /skipped \? \(next === "home"/.test(cq));
+  t("B2: server tells the client who uses a picture code (me / picture login / signup)", /usesPictureCode\(me\.user\)/.test(rd("src/app/api/auth/me/route.js")) && /publicProfile\(r\.profile, true\)/.test(rd("src/app/api/auth/student/picture-login/route.js")) && /publicProfile\(profile, true\)/.test(rd("src/app/api/auth/student/picture-signup/route.js")));
+  { const { publicProfile } = await import("../src/lib/supabase/server.js").catch(() => ({}));
+    if (publicProfile) eq("B2: password student profile has no pictureCode flag", [publicProfile({ id: "1", role: "student" }).pictureCode, publicProfile({ id: "1", role: "student" }, true).pictureCode], [undefined, true]); }
+  // small fixes
+  t("nickname: builder shows a live counter and uses the shared max", /data-testid="cq-nick-count"/.test(cb) && /maxLength=\{CLEWQUEST\.nickname\.max\}/.test(cb) && CLEWQUEST.nickname.max === 24);
+  t("coming soon: label never wraps inside itself", /whiteSpace: "nowrap"/.test(cq) && /\(Coming soon\)/.test(cq));
+  t("landing: no forced full-height navy band under the map", !/minHeight: "100vh", background: "#0B3B73"/.test(cq));
+  t("lock screen: tells the child to ask a parent to reset, and how to get a link code", /Ask a parent to reset your picture code/.test(pa) && /Link a parent/.test(pa) && /6 numbers/.test(pa));
+  t("link UI: no Korean, child home offers the link code", !/[\uAC00-\uD7AF]/.test(rd("src/components/clewquest/LinkCode.js") + rd("src/components/clewquest/ParentPictureChild.js")) && /data-testid="cq-linkcode/.test(rd("src/components/clewquest/LinkCode.js")));
 }
 
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);

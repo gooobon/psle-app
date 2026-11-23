@@ -47,7 +47,7 @@ export const CLEWQUEST = {
   destinies: [], // stage 6+ costumes and props: data only, add freely (not reachable in Phase 1)
   calendar: { defaultSource: "sg_default", editableBy: ["student", "parent"] },
   economy: { enabled: false }, // cycles, trial, Daily Chest, shop: NOT Phase 1
-  nickname: { min: 2, max: 12 },
+  nickname: { min: 2, max: 24 },
   lockout: { max: 5, windowMs: 15 * 60 * 1000, lockMs: 15 * 60 * 1000, ipMax: 100 }, // max = attempts per username (6th locks); ipMax = DISTINCT failing usernames per client IP in the same window
 };
 

@@ -33,5 +33,5 @@ export async function POST(request) {
   const { data, error } = await sb.auth.signInWithPassword({ email: kidEmail(username), password });
   if (error || !data?.user) return jerr("account created, please sign in", 500);
   const { data: profile } = await admin.from("profiles").select("*").eq("id", made.id).maybeSingle();
-  return jok({ profile: publicProfile(profile) });
+  return jok({ profile: publicProfile(profile, true) });
 }

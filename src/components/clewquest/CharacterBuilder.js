@@ -8,7 +8,7 @@ import { cqPut } from "@/lib/clewquest/client";
 
 const btn = (bg, extra) => ({ padding: "14px 16px", fontSize: 16, fontWeight: 800, color: "#fff", background: bg, border: "none", borderRadius: 14, cursor: "pointer", ...extra });
 
-export default function CharacterBuilder({ initial, onSaved, onCancel }) {
+export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, onLogout }) {
   const [step, setStep] = useState(1);
   const [gender, setGender] = useState(initial ? initial.gender : null);
   const [hair, setHair] = useState(initial ? initial.hair_key : null);
@@ -86,12 +86,17 @@ export default function CharacterBuilder({ initial, onSaved, onCancel }) {
       </div>)}
       {step === 4 && (<div>
         <div style={{ fontWeight: 800, marginBottom: 8 }}>Step 4. Name your Clew (optional)</div>
-        <input data-testid="cq-nickname" aria-label="Nickname" placeholder="2-12 letters or numbers" value={nick} maxLength={CLEWQUEST.nickname.max} onChange={(e) => setNick(e.target.value)} style={{ width: "100%", padding: "12px 14px", fontSize: 16, borderRadius: 12, border: "2px solid #CBD5E1", boxSizing: "border-box" }} />
+        <input data-testid="cq-nickname" aria-label="Nickname" placeholder={`${CLEWQUEST.nickname.min}-${CLEWQUEST.nickname.max} letters or numbers`} value={nick} maxLength={CLEWQUEST.nickname.max} onChange={(e) => setNick(e.target.value)} style={{ width: "100%", padding: "12px 14px", fontSize: 16, borderRadius: 12, border: "2px solid #CBD5E1", boxSizing: "border-box" }} />
+        <div data-testid="cq-nick-count" style={{ textAlign: "right", fontSize: 12, fontWeight: 700, color: nick.length >= CLEWQUEST.nickname.max ? "#B91C1C" : "#64748B", marginTop: 4 }}>{nick.length} / {CLEWQUEST.nickname.max}</div>
         {err && <div data-testid="cq-builder-error" style={{ color: "#B91C1C", fontWeight: 700, marginTop: 8 }}>{err}</div>}
         <div style={{ display: "flex", gap: 10, marginTop: 14 }}>
           <button style={btn("#64748B")} onClick={() => setStep(3)}>Back</button>
           <button data-testid="cq-save" style={btn("#16A34A", { flex: 1 })} onClick={busy ? undefined : save}>{busy ? "Saving..." : "Save my Clew"}</button>
         </div>
+      </div>)}
+      {(onSkip || onLogout) && (<div style={{ display: "flex", justifyContent: "space-between", marginTop: 16 }}>
+        {onSkip ? <button data-testid="cq-skip" onClick={onSkip} style={{ background: "none", border: "none", color: "#1E3A6E", fontWeight: 800, cursor: "pointer" }}>Skip for now</button> : <span />}
+        {onLogout && <button data-testid="cq-builder-logout" onClick={onLogout} style={{ background: "none", border: "none", color: "#475569", fontWeight: 700, cursor: "pointer" }}>Log out</button>}
       </div>)}
       {onCancel && <button onClick={onCancel} style={{ background: "none", border: "none", marginTop: 16, color: "#475569", fontWeight: 700, cursor: "pointer" }}>Cancel</button>}
     </div>

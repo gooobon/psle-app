@@ -42,8 +42,9 @@ export async function currentUser() {
   return { user: data.user, profile };
 }
 
-export function publicProfile(p) {
-  return { id: p.id, role: p.role, username: p.username, name: p.display_name, grade: p.grade, school: p.school };
+// pictureCode (optional, ClewQuest): true only for a student whose server account signs in with a picture code (app_metadata).
+export function publicProfile(p, pictureCode) {
+  return { id: p.id, role: p.role, username: p.username, name: p.display_name, grade: p.grade, school: p.school, ...(pictureCode ? { pictureCode: true } : {}) };
 }
 
 // Create student auth user + profile (+ optional parent link). Rolls back the auth user on failure.

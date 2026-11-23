@@ -28,6 +28,7 @@ export async function POST(request) {
   try { password = derivePicturePassword(process.env.CLEWQUEST_PICTURE_PEPPER, kid.username, seq); } catch { return jerr("picture codes unavailable", 503); }
   const up = await admin.auth.admin.updateUserById(childId, { password, app_metadata: PICTURE_APP_METADATA });
   if (up.error) return jerr("could not reset", 500);
-  await loginGuard.reset(admin, kid.username); // a locked-out child can sign in with the new code right away
+  const cleared = await loginGuard.reset(admin, kid.username); // a locked-out child can sign in with the new code right away
+  if (cleared.error) return jerr("picture codes unavailable", 503); // new code is saved, but the lockout is not cleared: tell the parent, who can retry
   return jok({});
 }
