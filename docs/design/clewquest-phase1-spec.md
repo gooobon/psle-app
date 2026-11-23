@@ -27,7 +27,7 @@ Out of scope here and **must not be touched**: the plain P3 EN/ZH practice go-li
 |---|---|
 | Logo | **B1** — `public/clewquest/brand/logo-b1.*`, app icon `logo-b1-icon.*`. (B2, B3 not chosen.) |
 | Landing | **Option 1: four islands** joined by a thread, Clew hub in the centre — `public/clewquest/landing/four-islands.*`. (Option 2 "four quarters" not chosen.) |
-| Stage 1 | A **fully black** yarn ball with eyes. Current art is dark charcoal (median ≈ `#3F3936`) with grey lines and pink cheeks → placeholder until the owner's redraw. |
+| Stage 1 | A **fully black** yarn ball with eyes only (no cheeks, no mouth). Stage 2 adds legs, stage 3 adds arms. Art redrawn 2026-11-23. |
 | Thread colours | 6 colours, default **Ariadne Crimson**. (Attic Clay orange and palettes B/C not chosen.) |
 | Hairstyles | 10 styles (5 boy, 5 girl). Girls' default **Ariadne buns**. |
 | Destiny costumes / props | Approved, but **config only** so they can be added or changed later. |
@@ -199,7 +199,7 @@ Only new keys prefixed `clewquest_` (e.g. a cached character for offline display
 |---|---|---|
 | `brand/` | `logo-b1`, `logo-b1-icon` | 512 px, transparent |
 | `landing/` | `four-islands` | 864×1184 |
-| `stages/` | `stage-1` … `stage-4`, `stage-{5..8}-{boy,girl}` | cut from the evo8 sheet, transparent, old threshold labels removed. 6–8 are placeholders (unreachable). |
+| `stages/` | `stage-1` … `stage-4`, `stage-{5..8}-{boy,girl}` | 1–3: fully black redraw (eyes only); 4–8 cut from the evo8 sheet, transparent, old threshold labels removed. 6–8 are placeholders (unreachable). |
 | `characters/` | `stage5-{boy,girl}-{hairKey}` | full-body stage-5 look per hair (crimson) — builder preview |
 | `hair/` | `thumb-{hairKey}`, `hair-sheet-{boys,girls}` | head thumbnails for tiles; reference sheets |
 | `colours/` | `thread-colours-swatch` | reference sheet of the 6 colours (UI swatches should use the hex values) |
@@ -207,7 +207,6 @@ Only new keys prefixed `clewquest_` (e.g. a cached character for offline display
 Colour variants: Phase 1 art is crimson only. For other colours either (a) pre-render recoloured variants offline into `public/clewquest/characters/` (keyed `stage5-{gender}-{hair}-{colour}`) with a luminance-preserving recolour that masks skin, eyes and sandals, or (b) show crimson art plus the chosen colour on the thread ball/UI until variants exist. The asset resolver must fall back gracefully to crimson.
 
 Known art follow-ups (owner will redraw in Gemini):
-- Stage 1 (and the matching bodies in stages 2–3) must be **fully black**; current art is charcoal with grey lines and pink cheeks.
 - Cut-outs have slight edge fringes; stage 8 wings are clipped by the original panel frame.
 - Premium stage 7–8 art: not done; slot only (`art_tier = 'premium'`).
 
