@@ -21,6 +21,8 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
   const ordered = [...CLEWQUEST.hair.filter((h) => h.gender === gender), ...CLEWQUEST.hair.filter((h) => h.gender !== gender)];
 
   function pickGender(g) { setGender(g); setHair(defaultHair(g)); }
+  // A card of the other gender sets gender too (same state Shuffle sets), so preview + validation agree.
+  function pickHair(h) { setGender(h.gender); setHair(h.key); }
   function shuffle() {
     const h = CLEWQUEST.hair[Math.floor(Math.random() * CLEWQUEST.hair.length)];
     setGender(h.gender); setHair(h.key); setColour(CLEWQUEST.colours[Math.floor(Math.random() * CLEWQUEST.colours.length)].key);
@@ -51,14 +53,14 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
             </div>
             <Arrow />
             <div style={{ textAlign: "center", width: 70 }}>
-              <Art k="stages/stage-4" alt="300 threads: a yarn ball in your colour" tint={hex} style={{ width: 62 }} />{cap("300 threads")}
+              <Art k="stages/stage-3" alt="100 threads: your Clew with arms, in your colour" tint={hex} style={{ width: 62 }} />{cap("100 threads")}
             </div>
             <Arrow />
             <div style={{ textAlign: "center", flex: 1 }}>
               <Art testId="cq-preview" k={stageAssetKey(5, gender, hair, colour, ASSET_KEYS)} alt="700 threads: your Clew with hair" tint={hex} style={{ maxHeight: 190, width: "auto" }} />{cap("700 threads")}
             </div>
           </div>
-          <div data-testid="cq-colour-note" style={{ ...helperStyle, textAlign: "center", marginTop: 10 }}>Your Clew starts black. Your colour appears at 300 threads.</div>
+          <div data-testid="cq-colour-note" style={{ ...helperStyle, textAlign: "center", marginTop: 10 }}>Your Clew starts black. Your colour appears at 100 threads.</div>
         </div>
 
         <div role="tablist" data-testid="cq-tabs" style={{ display: "flex", gap: 8, overflowX: "auto", marginBottom: 12 }}>
@@ -70,14 +72,14 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
 
         <div style={{ display: "grid", gridTemplateColumns: "repeat(5,1fr)", gap: 8, marginBottom: 18 }}>
           {ordered.map((h) => (
-            <button key={h.key} data-testid={`cq-hair-${h.key}`} onClick={() => setHair(h.key)} aria-pressed={hair === h.key}
+            <button key={h.key} data-testid={`cq-hair-${h.key}`} onClick={() => pickHair(h)} aria-pressed={hair === h.key}
               style={{ background: "#fff", border: hair === h.key ? `3px solid ${T.cta}` : `1.5px solid ${T.border}`, borderRadius: 12, padding: 3, cursor: "pointer", fontFamily: FONT }}>
               <Art k={`hair/thumb-${h.key}`} alt={h.name} style={{ width: "100%" }} /><div style={{ fontSize: 10, fontWeight: 700, color: T.ink, lineHeight: 1.15, minHeight: 24 }}>{h.name}</div>
             </button>
           ))}
         </div>
 
-        <div style={{ fontWeight: 600, fontSize: 14, color: T.ink, marginBottom: 10 }}>Thread colour (body and hair, from stage 4)</div>
+        <div style={{ fontWeight: 600, fontSize: 14, color: T.ink, marginBottom: 10 }}>Thread colour (body and hair, from 100 threads)</div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(6,1fr)", gap: 6, marginBottom: 20 }}>
           {CLEWQUEST.colours.map((c) => {
             const on = colour === c.key, nm = c.name.split(" ").pop();
@@ -92,7 +94,7 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
 
         <ErrorText testId="cq-builder-error">{err}</ErrorText>
         <button data-testid="cq-save" disabled={busy} style={mainBtn(busy)} onClick={busy ? undefined : save}>{busy ? "Saving..." : "This is my Clew"}</button>
-        <div style={{ ...helperStyle, fontSize: 12, textAlign: "center", marginTop: 12 }}>You start as a black yarn ball. Your colour comes at 300 threads, your face at 700.</div>
+        <div style={{ ...helperStyle, fontSize: 12, textAlign: "center", marginTop: 12 }}>You start as a black yarn ball. Your colour comes at 100 threads, your face at 700.</div>
         {(onSkip || onLogout || onCancel) && (<div style={{ display: "flex", justifyContent: "space-between", marginTop: 14 }}>
           {onSkip ? <button data-testid="cq-skip" onClick={onSkip} style={{ ...linkBtn, color: T.primary }}>Skip for now</button> : onCancel ? <button onClick={onCancel} style={{ ...linkBtn, color: T.muted }}>Cancel</button> : <span />}
           {onLogout && <button data-testid="cq-builder-logout" onClick={onLogout} style={{ ...linkBtn, color: T.muted, fontWeight: 500 }}>Log out</button>}

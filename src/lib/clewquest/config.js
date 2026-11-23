@@ -25,9 +25,9 @@ export const CLEWQUEST = {
     { stage: 8, key: "god", reachable: false, rule: { type: "semester_end" } },
   ],
   // Art key per stage (data-driven): drop new files + manifest.json entries under these keys to swap the art.
-  // Stages 1-3 are ALWAYS black (never tinted); the student's colour first appears at stage 4 (colourFromStage).
+  // Stages 1-2 are ALWAYS black (never tinted); the student's colour first appears at stage 3 / arms, 100 threads (colourFromStage).
   stageArt: { 1: "stages/stage-1", 2: "stages/stage-2", 3: "stages/stage-3", 4: "stages/stage-4" },
-  colourFromStage: 4,
+  colourFromStage: 3,
   colours: [
     { key: "ariadne-crimson", name: "Ariadne Crimson", hex: "#C8372D", default: true },
     { key: "apollo-gold", name: "Apollo Gold", hex: "#D9A52E" },
@@ -66,7 +66,7 @@ export const CLEWQUEST = {
     { key: "pegasus", name: "Pegasus foal", frames: "poses/pet-pegasus-{n}" },
   ] },
   // Trader's Ship (landing). Phase-2 placeholder: browse only, nothing can be bought. `shopEnabled` shows the placeholder view.
-  ship: { art: "ship/treasure-ship", loopSeconds: 5, shopEnabled: true },
+  ship: { art: "ship/treasure-ship", loopSeconds: 60, shopEnabled: true },
   shop: { items: [
     { key: "hair-laurel", group: "Hair accessories", name: "Gold laurel band", credits: 20 },
     { key: "hair-ribbon", group: "Hair accessories", name: "Crimson ribbon", credits: 12 },

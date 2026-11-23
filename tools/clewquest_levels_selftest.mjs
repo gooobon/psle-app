@@ -12,10 +12,10 @@ const V = await import("../src/lib/clewquest/levels.js");
 const P = await import("../src/lib/clewquest/poses.js");
 const R = await import("../src/lib/studyRecords.js");
 
-// (b) tint ignored for stage 1-3, applied for 4-5
-for (const s of [1, 2, 3]) eq(`stage ${s} ignores tint`, L.tintForStage(s, "#C8372D"), undefined);
-for (const s of [4, 5]) eq(`stage ${s} applies tint`, L.tintForStage(s, "#C8372D"), "#C8372D");
-eq("bad hex is not applied", L.tintForStage(4, "red"), undefined);
+// (b) tint ignored for stage 1-2, applied for 3-5
+for (const s of [1, 2]) eq(`stage ${s} ignores tint`, L.tintForStage(s, "#C8372D"), undefined);
+for (const s of [3, 4, 5]) eq(`stage ${s} applies tint`, L.tintForStage(s, "#C8372D"), "#C8372D");
+eq("bad hex is not applied", L.tintForStage(3, "red"), undefined);
 eq("stage 1-3 art keys come from config", [1, 2, 3].map((s) => L.stageAssetKey(s, "boy", "x", "y")), ["stages/stage-1", "stages/stage-2", "stages/stage-3"]);
 const keys = new Set(Object.keys(JSON.parse(fs.readFileSync(path.join(root, "public/clewquest/manifest.json"), "utf8")).assets));
 t("stage art keys exist in manifest", Object.values(CLEWQUEST.stageArt).every((k) => keys.has(k)));
@@ -81,3 +81,17 @@ t("logo keeps alt text", /alt="ClewQuest"/.test(fs.readFileSync(path.join(root, 
 
 console.log(`clewquest levels selftest: ${pass} pass / ${fail} fail`);
 process.exit(fail ? 1 : 0);
+
+// colour rule + landing/ship/logo-only guards (11/23 23:19 SGT decision: colour from stage 3 / 100 threads)
+{
+  const rd = (f) => fs.readFileSync(path.join(root, f), "utf8");
+  const cb = rd("src/components/clewquest/CharacterBuilder.js"), art = rd("src/components/clewquest/Art.js"), cq = rd("src/components/clewquest/ClewQuestStudent.js");
+  eq("colourFromStage is 3", CLEWQUEST.colourFromStage, 3);
+  eq("builder hint says 100 threads", /Your colour appears at 100 threads\./.test(cb) && !/300 threads/.test(cb), true);
+  eq("Art guard only blocks stages 1-2", /stage-\[12\]\$/.test(art), true);
+  eq("landing: single walker, reduced-motion skips the walk", /prefers-reduced-motion/.test(cq) && /reduced \|\| !character\) \{ onOpen/.test(cq) && (cq.match(/<WalkingClew/g) || []).length === 1, true);
+  eq("hair-card fix kept (#104)", /function pickHair\(h\) \{ setGender\(h\.gender\); setHair\(h\.key\); \}/.test(cb), true);
+  eq("ship loop is slow (>= 40s)", CLEWQUEST.ship.loopSeconds >= 40, true);
+  const sh = rd("src/components/clewquest/Shell.js"), dash = rd("src/components/Dashboard.js");
+  eq("logo-only headers: no ClewQuest text next to the logo", !/>\s*ClewQuest\s*</.test(sh) && !/>\s*ClewQuest\s*</.test(dash) && /alt="ClewQuest"/.test(sh), true);
+}

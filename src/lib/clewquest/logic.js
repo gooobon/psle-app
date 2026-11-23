@@ -113,9 +113,9 @@ export function stageAssetKey(stage, gender, hairKey, colourKey, assetKeys = nul
   return !assetKeys || assetKeys.has(key) ? key : `stages/stage-${Math.min(Math.max(stage, 1), 4)}`;
 }
 
-// Colour rule: stages 1-3 are always black (no tint, whatever the chosen colour); the chosen colour applies from stage 4.
+// Colour rule: stages 1-2 are always black (no tint, whatever the chosen colour); the chosen colour applies from stage 3 (arms, 100 threads).
 export function tintForStage(stage, hex, cfg = CLEWQUEST) {
-  const from = cfg.colourFromStage || 4;
+  const from = cfg.colourFromStage || 3;
   return Number(stage) >= from && typeof hex === "string" && /^#[0-9A-Fa-f]{6}$/.test(hex) ? hex : undefined;
 }
 

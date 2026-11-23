@@ -1,5 +1,5 @@
 "use client";
-// Trader's Ship: a small treasure ship sails a loop in the open sea below the islands; tapping it opens the Phase-2 placeholder shop.
+// Trader's Ship: a small treasure ship sails a slow, stately loop (no logo on or above it) in the open sea below the islands; tapping it opens the Phase-2 placeholder shop.
 // Nothing can be bought here and there is no payment UI. Reduced motion: the ship stays still at one spot.
 import React, { useEffect, useState } from "react";
 import { CLEWQUEST } from "@/lib/clewquest/config";
@@ -35,15 +35,15 @@ export function SailingShip({ onOpen }) {
   const flip = `@keyframes cq-ship-flip{0%,49.9%{transform:scaleX(1)}50%,100%{transform:scaleX(-1)}}`;
   return (
     <>
-      <style>{`@keyframes cq-ship-loop{${shipKeyframes()}}${flip}@keyframes cq-ship-bob{0%,100%{transform:translateY(0) rotate(-1.5deg)}50%{transform:translateY(-3px) rotate(1.5deg)}}@keyframes cq-ship-wake{0%{opacity:.55;transform:scaleX(.6)}100%{opacity:0;transform:scaleX(1.4)}}@media (prefers-reduced-motion: reduce){.cq-ship,.cq-ship-flip,.cq-ship-bob,.cq-ship-wake{animation:none !important}}`}</style>
+      <style>{`@keyframes cq-ship-loop{${shipKeyframes()}}${flip}@keyframes cq-ship-bob{0%,100%{transform:translateY(0) rotate(-1deg)}50%{transform:translateY(-2px) rotate(1deg)}}@keyframes cq-ship-wake{0%{opacity:.55;transform:scaleX(.6)}100%{opacity:0;transform:scaleX(1.4)}}@media (prefers-reduced-motion: reduce){.cq-ship,.cq-ship-flip,.cq-ship-bob,.cq-ship-wake{animation:none !important}}`}</style>
       <button type="button" className="cq-ship" data-testid="cq-ship" data-reduced={reduced ? "1" : "0"} aria-label="Trader's Ship (opens the shop)" onClick={onOpen}
         style={{ position: "absolute", width: 74, height: 50, padding: 0, background: "transparent", border: "none", cursor: "pointer", zIndex: 5, ...(reduced ? still : { animation: `cq-ship-loop ${loop}s linear infinite` }) }}>
         <span className="cq-ship-flip" style={{ display: "block", width: "100%", height: "100%", animation: reduced ? "none" : `cq-ship-flip ${loop}s steps(1,end) infinite` }}>
-          <span className="cq-ship-bob" style={{ display: "block", width: "100%", height: "100%", animation: reduced ? "none" : "cq-ship-bob 1.6s ease-in-out infinite" }}>
+          <span className="cq-ship-bob" style={{ display: "block", width: "100%", height: "100%", animation: reduced ? "none" : "cq-ship-bob 5s ease-in-out infinite" }}>
             {ASSET_KEYS.has(art) ? <Art k={art} alt="" style={{ width: "100%", height: "100%", objectFit: "contain" }} /> : <ShipSvg />}
           </span>
         </span>
-        {!reduced && <span className="cq-ship-wake" aria-hidden="true" style={{ position: "absolute", left: "-10%", right: "-10%", bottom: -3, height: 6, borderRadius: 6, background: "rgba(255,255,255,.7)", animation: "cq-ship-wake 1.2s ease-out infinite" }} />}
+        {!reduced && <span className="cq-ship-wake" aria-hidden="true" style={{ position: "absolute", left: "-10%", right: "-10%", bottom: -3, height: 6, borderRadius: 6, background: "rgba(255,255,255,.7)", animation: "cq-ship-wake 4s ease-out infinite" }} />}
       </button>
     </>
   );

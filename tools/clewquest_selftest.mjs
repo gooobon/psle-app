@@ -85,6 +85,7 @@ eq("stage 5 asset falls back to crimson art", L.stageAssetKey(5, "girl", "ariadn
 eq("stage 1-4 art keys", [1, 2, 3, 4].map((s) => L.stageAssetKey(s, "boy", "apollo-curls", "ariadne-crimson")), ["stages/stage-1", "stages/stage-2", "stages/stage-3", "stages/stage-4"]);
 eq("character validation accepts a good look", L.validateCharacter({ gender: "girl", hair_key: "ariadne-buns", colour_key: "ariadne-crimson", nickname: "Star 7" }).ok, true);
 eq("a boy cannot take a girl's hair", L.validateCharacter({ gender: "boy", hair_key: "ariadne-buns", colour_key: "ariadne-crimson" }).ok, false);
+eq("hair card tap sets gender and hair (same as Shuffle)", /function pickHair\(h\) \{ setGender\(h\.gender\); setHair\(h\.key\); \}/.test(fs.readFileSync(path.join(root, "src/components/clewquest/CharacterBuilder.js"), "utf8")), true);
 eq("nickname length is 2-24 (client = server = DB)", [L.cleanNickname("a").ok, L.cleanNickname("a".repeat(24)).ok, L.cleanNickname("a".repeat(25)).ok, L.cleanNickname("ab").ok, L.cleanNickname("").value], [false, true, false, true, null]);
 eq("nickname is English letters/numbers/spaces only", L.cleanNickname("ab-c!").ok, false);
 eq("nickname profanity filter", L.cleanNickname("shit head").ok, false);
@@ -521,7 +522,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   t("builder: one screen, no nickname step, no green save, no gender colour buttons", !/cq-nickname|#16A34A|#DB2777|EFF6FF/.test(cb) && /This is my Clew/.test(cb) && /Make your Clew/.test(cb));
   { const sh = fs.readFileSync(path.join(root, "src/components/clewquest/Shell.js"), "utf8");
     t("pills: white, ink text, nowrap, no 'Island', no 'The Clew' label", /background: "#fff"/.test(sh) && /whiteSpace: "nowrap"/.test(sh) && !/label: "[^"]*(Island|The Clew)/.test(sh) && /Coming soon/.test(sh));
-    t("logged-in landing: no dark label boxes or text shadows, hotspots keep aria-label", !/textShadow|rgba\(15,23,42/.test(cq) && /aria-label="The Clew \(home\)"/.test(cq));
+    t("logged-in landing: no dark label boxes or text shadows, hotspots keep aria-label", !/textShadow|rgba\(15,23,42/.test(cq) && /aria-label="The Clew"/.test(cq));
     t("builder tabs come from config; only Hair enabled", CLEWQUEST.builder.tabs.filter((x) => x.enabled).map((x) => x.key).join() === "hair" && CLEWQUEST.builder.tabs.length === 5); }
   t("landing: no forced full-height navy band under the map", !/minHeight: "100vh", background: "#0B3B73"/.test(cq));
   t("lock screen: tells the child to ask a parent to reset", /Ask a parent to reset your picture code/.test(pa) && !/Link a parent/.test(pa));
