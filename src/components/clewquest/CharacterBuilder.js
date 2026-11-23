@@ -7,7 +7,7 @@ import { Art, ASSET_KEYS } from "./Art";
 import { cqPut } from "@/lib/clewquest/client";
 import { Page, HeaderBar, Segmented, ErrorText, T, FONT, mainBtn, helperStyle, linkBtn } from "./Shell";
 
-const Arrow = () => <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" style={{ flexShrink: 0 }}><path d="M4 12h14m-5-6 6 6-6 6" fill="none" stroke={T.gold} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>;
+const Arrow = () => <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" style={{ flexShrink: 0 }}><path d="M4 12h14m-5-6 6 6-6 6" fill="none" stroke={T.gold} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>;
 
 export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, onLogout }) {
   const [gender, setGender] = useState(initial ? initial.gender : "girl");
@@ -47,17 +47,21 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
 
         <div style={{ background: "#fff", borderRadius: 20, boxShadow: "0 6px 20px rgba(27,35,64,.10)", padding: 14, marginBottom: 16 }}>
           <div style={{ width: 150 }}><Segmented testId="cq-gender" value={gender} onChange={pickGender} options={[["boy", "Boy"], ["girl", "Girl"]]} /></div>
-          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 8, marginTop: 12 }}>
-            <div style={{ textAlign: "center", width: 62 }}>
-              <Art k="stages/stage-1" alt="Today: a black yarn ball" style={{ width: 54 }} />{cap("Today")}
+          <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "center", gap: 4, marginTop: 12 }}>
+            <div style={{ textAlign: "center", width: 54 }}>
+              <Art k="stages/stage-1" alt="Today: a black yarn ball" style={{ width: 46 }} />{cap("Today")}
             </div>
             <Arrow />
-            <div style={{ textAlign: "center", width: 70 }}>
-              <Art k="stages/stage-3" alt="100 threads: your Clew with arms, in your colour" tint={hex} style={{ width: 62 }} />{cap("100 threads")}
+            <div style={{ textAlign: "center", width: 62 }}>
+              <Art testId="cq-preview-100" k="stages/stage-3" alt="100 threads: your Clew with arms, in your colour" tint={hex} style={{ width: 56 }} />{cap("100 threads")}
+            </div>
+            <Arrow />
+            <div style={{ textAlign: "center", width: 52 }}>
+              <Art testId="cq-preview-300" k="stages/stage-4" alt="300 threads: your Clew wrapped in yarn in your colour" tint={hex} style={{ width: 46 }} />{cap("300 threads")}
             </div>
             <Arrow />
             <div style={{ textAlign: "center", flex: 1 }}>
-              <Art testId="cq-preview" k={stageAssetKey(5, gender, hair, colour, ASSET_KEYS)} alt="700 threads: your Clew with hair" tint={hex} style={{ maxHeight: 190, width: "auto" }} />{cap("700 threads")}
+              <Art testId="cq-preview" k={stageAssetKey(5, gender, hair, colour, ASSET_KEYS)} alt="700 threads: your Clew with hair" tint={hex} style={{ maxHeight: 150, width: "auto" }} />{cap("700 threads")}
             </div>
           </div>
           <div data-testid="cq-colour-note" style={{ ...helperStyle, textAlign: "center", marginTop: 10 }}>Your Clew starts black. Your colour appears at 100 threads.</div>

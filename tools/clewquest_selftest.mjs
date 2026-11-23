@@ -541,6 +541,24 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   for (const h of CLEWQUEST.hair) t(`hair thumb exists ${h.key}`, !!manifest.assets[`hair/thumb-${h.key}`]);
 }
 
+// 13. v2 art (#107) is registered in the manifest and the config points at keys that exist; manifest sizes match the PNG files
+{
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "public/clewquest/manifest.json"), "utf8"));
+  const has = (k) => !!manifest.assets[k];
+  t("ship art in manifest", has(CLEWQUEST.ship.art));
+  t("vault art in manifest", has(CLEWQUEST.vaultArt));
+  for (const l of CLEWQUEST.levels) t(`level icon in manifest ${l.lv}`, has(l.icon), { icon: l.icon });
+  for (const k of Object.values(CLEWQUEST.stageArt)) t(`stage art in manifest ${k}`, has(k));
+  t("blink frames in manifest", has("poses/boy-apollo-curls-1-blink") && has("poses/girl-ariadne-buns-1-blink"));
+  for (const [k, a] of Object.entries(manifest.assets)) {
+    const b = fs.readFileSync(path.join(root, "public", a.png));
+    t(`manifest size matches file ${k}`, b.readUInt32BE(16) === a.w && b.readUInt32BE(20) === a.h);
+  }
+  const PO = await import("../src/lib/clewquest/poses.js");
+  const frames = PO.resolveFrames(PO.characterPoseKeys("boy", "apollo-curls"), "stages/stage-5-boy", new Set(Object.keys(manifest.assets)));
+  t("pose cycle includes the blink frame right after pose 1", frames[1] && frames[1].key === "poses/boy-apollo-curls-1-blink" && frames[1].ms > 0);
+}
+
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);
 

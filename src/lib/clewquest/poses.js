@@ -18,8 +18,16 @@ export const PLACEHOLDER_TRANSFORMS = [
   "translateY(-6px) rotate(-3deg)",
 ];
 // Frame list for a PoseCycler: real art keys when they exist in the manifest, else the fallback key with a transform.
-export function resolveFrames(keys, fallbackKey, assetKeys) {
-  return keys.map((k, i) => (assetKeys && assetKeys.has(k)
+export function resolveFrames(keys, fallbackKey, assetKeys, cfg = CLEWQUEST) {
+  const out = keys.map((k, i) => (assetKeys && assetKeys.has(k)
     ? { key: k, transform: "none" }
     : { key: fallbackKey, transform: PLACEHOLDER_TRANSFORMS[i % PLACEHOLDER_TRANSFORMS.length], placeholder: true }));
+  // Blink frame: a very short "<pose 1>-blink" frame right after pose 1 when that art exists.
+  const withBlink = [];
+  out.forEach((f, i) => {
+    withBlink.push(f);
+    const b = keys[i] + "-blink";
+    if (!f.placeholder && assetKeys && assetKeys.has(b)) withBlink.push({ key: b, transform: "none", ms: cfg.poses.blinkMs || 160 });
+  });
+  return withBlink;
 }
