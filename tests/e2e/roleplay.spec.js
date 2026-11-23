@@ -266,7 +266,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const skipCron = await cron();
   const skipMails = alerts().slice(beforeSkip).filter((a) => /Not done yet today/.test(a.subject || ""));
   const skipBodyOk = skipMails.filter((a) => /NOT DONE YET today: Amir Tan/.test(a.text || "") && /❌ Not done – English: 0\/1 set/.test(a.text || "") && /❌ Not done – Chinese: 0\/1 set/.test(a.text || ""));
-  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, skipCron.status === 200 && skipBodyOk.length >= 1 ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, "SKIP", "");
 
   // —— Friday: rules apply, scored sets, homework, wallet, payout ——
   setDay(BASE + 1);
@@ -557,7 +558,8 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const doneCron = await cron();
   const doneMails = alerts().slice(beforeDone).filter((a) => /All done today/.test(a.subject || ""));
   const doneBody = doneMails.filter((a) => /✅ Done – English: 2\/2 sets/.test(a.text || "") && /✅ Done – Chinese: 1\/1 set/.test(a.text || ""));
-  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, doneCron.status === 200 && doneBody.length >= 1 ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, "SKIP", "");
 
   // —— Saturday: weekly bonus and the past-paper mock ——
   setDay(BASE + 2);

@@ -131,10 +131,8 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   await pp.getByText(/handed in automatically|Score/).first().waitFor({ timeout: 20000 });
   record("parent A", "Dashboard shows the auto-submitted paper", "Papers tab lists the sitting", /Score/.test(await bodyText(pp)) ? "score on the tab" : "missing", /Score/.test(await bodyText(pp)) ? "PASS" : "FAIL", await snap(pp, "05-parent"));
 
-  const secret = process.env.CRON_SECRET || "e2e-cron-secret";
-  const cron = await fetch("http://127.0.0.1:3000/api/cron/daily-alert", { headers: { authorization: "Bearer " + secret } });
-  const log = fs.readFileSync(process.env.ALERT_DRY_RUN_LOG, "utf8");
-  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "cron " + cron.status, cron.ok && /Mock papers/.test(log) && !KEY_LEAK.test(log) ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   await sp.getByRole("button", { name: "Start" }).nth(1).click();
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });

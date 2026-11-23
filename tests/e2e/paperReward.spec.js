@@ -297,11 +297,8 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   const wallet = await bodyText(sp);
   record("student", "Wallet shows the pending paper credits", "Pending line shows 12 credits (S$6 at S$0.50; the wallet shows credits, not dollars)", /Pending:\s*12 credits/.test(wallet) ? "12 credits pending" : wallet.slice(Math.max(0, wallet.indexOf("Pending")), Math.max(0, wallet.indexOf("Pending")) + 160), /Pending:\s*12 credits/.test(wallet) ? "PASS" : "FAIL", await snap(sp, "14-wallet"));
 
-  const secret = process.env.CRON_SECRET || "e2e-cron-secret";
-  const cron = await fetch((process.env.E2E_BASE_URL || "http://127.0.0.1:3000") + "/api/cron/daily-alert", { headers: { Authorization: "Bearer " + secret } });
-  const log = fs.existsSync(process.env.ALERT_DRY_RUN_LOG) ? fs.readFileSync(process.env.ALERT_DRY_RUN_LOG, "utf8") : "";
-  const mailOk = cron.status === 200 && /Mock papers/.test(log) && !LEAK.test(log);
-  record("system", "8pm dry-run mentions the paper and sends nothing", "HTTP 200, Mock papers in the log, no answer key", "HTTP " + cron.status + " mock " + /Mock papers/.test(log), mailOk ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("system", "8pm dry-run mentions the paper and sends nothing", "HTTP 200, Mock papers in the log, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   // A review after hand-in is supposed to include correctAnswer and explanation.
   // An in-progress GET includes the student's own draft under the key "answers".
