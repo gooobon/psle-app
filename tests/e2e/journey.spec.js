@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub, restHeaders } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub, restHeaders, openLogin } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -406,6 +406,7 @@ test("flags off stays local @off", async ({ browser }) => {
     localStorage.setItem("genius_users_v2", JSON.stringify({ e2e_keep: { id: "e2e_keep", password: "secret", name: "Keep Me", role: "student", grade: "P3" } }));
   });
   await page.goto("/");
+  await openLogin(page); // the pre-login landing shows first, even with the ClewQuest flag off
   await page.getByTestId("login-form").waitFor();
   await expect(page.getByRole("button", { name: /Student Sign Up/ })).toBeVisible();
   await expect(page.getByTestId("login-id")).toBeVisible();
