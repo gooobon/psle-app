@@ -154,7 +154,7 @@ function mirrorServerUser(p, extra){
   const prev = STORE.users[id] || {};
   STORE.users[id] = {
     ...prev, id, role:p.role, name:p.name, grade:p.grade||prev.grade, school:p.school||prev.school,
-    serverId:p.id, ...(extra||{}),
+    serverId:p.id, ...(p.role==="student" ? {pictureCode:!!p.pictureCode} : {}), ...(extra||{}),
   };
   persistUsers();
   return STORE.users[id];
@@ -1253,7 +1253,7 @@ function SignupParentForm({onSignup, onBack}){
 }
 
 
-function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, onExitToQuest}){
+function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, onExitToQuest, onOpenQuest}){
   // initialSubject / onExitToQuest are only passed by the ClewQuest shell (flag on). Without them nothing changes.
   // Opened from an island (initialSubject set): leaving the subject returns to the islands. Opened via "Today" (no
   // initialSubject): this is the normal Today hub; leaving a subject comes back to it, and the hub offers a way back.
@@ -1618,6 +1618,11 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
 
   if(hub || !subjectSelected) return(
     <Wrap>
+      {onOpenQuest&&!onExitToQuest&&(
+        <div style={{padding:"10px 16px 0"}}>
+          <button data-testid="today-open-clewquest" onClick={onOpenQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Open ClewQuest</button>
+        </div>
+      )}
       {onExitToQuest&&(
         <div style={{padding:"10px 16px 0"}}>
           <button data-testid="today-back-to-islands" onClick={onExitToQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Back to the islands</button>
@@ -2343,6 +2348,7 @@ function ReviewTab({mistakes, onBack}){
 function App(){
   const [auth,    setAuth]    = useState(null);   // { role, user }
   const [tick,    setTick]    = useState(0);       // force re-render after store mutations
+  const [cqOpen,  setCqOpen]  = useState(false);   // ClewQuest: a password student opened ClewQuest from the Today hub (never forced)
   
   // Data is loaded from localStorage at startup - no async needed
 
@@ -2383,7 +2389,7 @@ function App(){
   function handleLogout(){
     if(auth && auth.role==="admin") fetch("/api/admin/logout",{method:"POST",credentials:"same-origin"}).catch(()=>{});
     if(SERVER_AUTH && auth && auth.role!=="admin") serverPost("/api/auth/logout");
-    setAuth(null);
+    setAuth(null); setCqOpen(false);
   }
 
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
@@ -2400,11 +2406,14 @@ function App(){
     />;
     // ClewQuest (flag on + a server student account): builder / four-island landing / home; practice is the existing StudentApp.
     // Only for a grade ClewQuest has a config for; otherwise the normal app. renderPractice(null, exit) opens the Today hub.
-    if(CQ_ON && typeof user.serverId==="string" && questGrade(user.grade)){
-      return <ClewQuestStudent user={user} onLogout={handleLogout}
+    // Picture-code students (server says so) live in ClewQuest. Password students keep the Today hub as home and may OPEN ClewQuest
+    // from it (cqOpen); it is never forced on them.
+    const cqOk = CQ_ON && typeof user.serverId==="string" && questGrade(user.grade);
+    if(cqOk && (user.pictureCode || cqOpen)){
+      return <ClewQuestStudent user={user} onLogout={handleLogout} onLeaveQuest={user.pictureCode ? undefined : ()=>setCqOpen(false)}
         renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject||undefined, onExitToQuest:exit})}/>;
     }
-    return practice();
+    return practice(cqOk ? {onOpenQuest:()=>setCqOpen(true)} : undefined);
   }
 
   if(auth.role==="parent"){

@@ -31,6 +31,12 @@ export function createLoginGuard({ memory, cfg = CLEWQUEST.lockout }) {
       const r = await admin.rpc("clewquest_login_ip_fail", { p_ip: String(ipHash), p_user: norm(username), p_max: cfg.ipMax, p_window_secs: winSecs, p_lock_secs: lockSecs });
       return { error: !!r.error };
     },
+    // AFTER a failed sign-in: how many attempts this username has used in the window (includes the one just made). -> { count } | { error: true }
+    async count(admin, username) {
+      const r = await admin.rpc("clewquest_login_fails", { p_scope: "user", p_key: norm(username), p_window_secs: winSecs });
+      return r.error || typeof r.data !== "number" ? { error: true } : { count: r.data };
+    },
+    max: cfg.max,
     // Success, or a parent resetting the code: clear the username counter and lock (the IP record is left alone).
     async reset(admin, username) {
       memory.clear(memKey(username));

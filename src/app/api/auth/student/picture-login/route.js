@@ -30,5 +30,5 @@ export async function POST(request) {
     signOut: () => sb.auth.signOut(),
   });
   if (r.status !== 200) return jerr(r.error, r.status); // never says which picture was wrong
-  return jok({ profile: publicProfile(r.profile) });
+  return jok({ profile: publicProfile(r.profile, true) });
 }

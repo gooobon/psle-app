@@ -9,6 +9,7 @@ import LearningDashboard from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
 import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
+import ParentPictureChild from "@/components/clewquest/ParentPictureChild";
 import { clewquestEnabled } from "@/lib/clewquest/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
@@ -745,6 +746,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
         <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
         <button disabled={busy} style={btn} onClick={linkChild}>Link child</button>
         {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
+        {SERVER_AUTH&&clewquestEnabled()&&<ParentPictureChild onChildLinked={onChildLinked}/>}
       </div>)}
     </div>
   );

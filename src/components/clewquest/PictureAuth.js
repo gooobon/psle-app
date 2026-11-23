@@ -30,9 +30,9 @@ export function PicturePad({ value, onChange, label }) {
 }
 
 export function PictureLogin({ onDone, onBack }) {
-  const [username, setU] = useState(""); const [seq, setSeq] = useState([]); const [err, setErr] = useState(""); const [busy, setBusy] = useState(false);
+  const [username, setU] = useState(""); const [seq, setSeq] = useState([]); const [err, setErr] = useState(""); const [busy, setBusy] = useState(false); const [locked, setLocked] = useState(false);
   async function go() {
-    setErr("");
+    setErr(""); setLocked(false);
     if (!username.trim()) return setErr("Type your username.");
     if (seq.length !== CODE_LENGTH) return setErr("Tap 4 pictures.");
     setBusy(true);
@@ -40,7 +40,8 @@ export function PictureLogin({ onDone, onBack }) {
     setBusy(false);
     if (r.ok && r.profile) return onDone(r.profile);
     setSeq([]);
-    setErr(r.status === 429 ? "Ask a parent to help you sign in." : "That did not work. Try again.");
+    setLocked(r.status === 429);
+    setErr(r.status === 429 ? "Locked for 15 minutes." : "That did not work. Try again.");
   }
   return (
     <div style={wrap}>
@@ -49,6 +50,10 @@ export function PictureLogin({ onDone, onBack }) {
       <input data-testid="pic-username" aria-label="Username" placeholder="Username" value={username} onChange={(e) => setU(e.target.value)} autoCapitalize="none" style={field} />
       <PicturePad value={seq} onChange={setSeq} label="Tap your 4 pictures in order" />
       {err && <div data-testid="pic-error" style={{ color: "#B91C1C", fontWeight: 700 }}>{err}</div>}
+      {locked && (<div data-testid="pic-locked" style={{ background: "#FEF3C7", color: "#78350F", borderRadius: 12, padding: 12, fontSize: 14, lineHeight: 1.5 }}>
+        <b>Ask a parent to reset your picture code.</b> They log in on their own account and pick new pictures for you. You can sign in again right away.<br />
+        No parent linked yet? Wait 15 minutes and sign in. Then tap &quot;Link a parent&quot; to get 6 numbers, and give them to a parent.
+      </div>)}
       <button data-testid="pic-submit" style={btn("#1E3A6E")} onClick={busy ? undefined : go}>{busy ? "Signing in..." : "Sign in"}</button>
     </div>
   );
