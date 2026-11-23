@@ -17,3 +17,9 @@ export function rateLimit(key, { max, windowMs }) {
   if (b.n >= max) return false;
   b.n += 1; return true;
 }
+
+// Additive: true when the key has already used up its allowance (does not count a hit).
+export function rateLimitBlocked(key, { max }) {
+  const b = buckets.get(key);
+  return !!b && b.reset > Date.now() && b.n >= max;
+}

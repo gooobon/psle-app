@@ -62,6 +62,9 @@ const EN_ROUND_INDEX = indexSets(WA1_PRACTICE_SETS);
 const EN_BANK = bankFromIndex(EN_ROUND_INDEX);
 import { scheduleRound } from '@/lib/scheduler'; // STEP9_ADAPTIVE
 import PaperExam from '@/components/PaperExam'; // mock exams from past papers (flag NEXT_PUBLIC_MOCK_EXAMS_ENABLED, default off)
+import { clewquestEnabled } from '@/lib/clewquest/config'; // ClewQuest (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off)
+import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
+import { PictureLogin, PictureSignup } from '@/components/clewquest/PictureAuth';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 
@@ -600,8 +603,14 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 }
 
 
+const CQ_ON = clewquestEnabled() && SERVER_AUTH;
 function AuthScreen({onLogin, onSignup}){
-  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent
+  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
+  function pictureDone(profile){
+    const user = mirrorServerUser(profile);
+    importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); // same fire-and-forget copies as the password login
+    onLogin("student", user);
+  }
   return(
     <Wrap>
       <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0F172A"}}> <div style={{background:"linear-gradient(160deg,#1E3A6E,#1E40AF)",padding:"48px 24px 36px",textAlign:"center",flexShrink:0}}>
@@ -613,6 +622,14 @@ function AuthScreen({onLogin, onSignup}){
           </div>
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
           {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
+          {mode==="login" && CQ_ON && (
+            <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
+              <button data-testid="cq-open-picture-login" onClick={()=>setMode("picture_login")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>Student: sign in with pictures</button>
+              <button data-testid="cq-open-picture-signup" onClick={()=>setMode("picture_signup")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>New student: create account with pictures</button>
+            </div>
+          )}
+          {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
+          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
           {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("login")}/>}
           {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("login")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>)}
         </div>
@@ -1234,12 +1251,12 @@ function SignupParentForm({onSignup, onBack}){
 }
 
 
-function StudentApp({user, onLogout, getProgress, setProgress}){
-
+function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, onExitToQuest}){
+  // initialSubject / onExitToQuest are only passed by the ClewQuest shell (flag on). Without them nothing changes.
   const [grade,           setGrade]           = useState(user.grade||"P3");
-  const [subject,         setSubject]         = useState("English");
-  const [subjectSelected, setSubjectSelected] = useState(false);
-  const [hub,             setHub]             = useState(true); // today overview until a subject is opened
+  const [subject,         setSubject]         = useState(initialSubject||"English");
+  const [subjectSelected, setSubjectSelected] = useState(!!initialSubject);
+  const [hub,             setHub]             = useState(!initialSubject); // today overview until a subject is opened
   const [zhAction,        setZhAction]        = useState(null);
   const [screen,          setScreen]          = useState("home");
   const [sessionResult,   setSessionResult]   = useState(null);
@@ -1388,6 +1405,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
   }
 
   function leaveToHub(){
+    if(onExitToQuest){ onExitToQuest(); return; } // ClewQuest: the islands replace the Today hub
     setHub(true);
     setSubjectSelected(false);
     setScreen("home");
@@ -2361,12 +2379,19 @@ function App(){
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;
-    return <StudentApp
+    const practice = (extra)=><StudentApp
       user={user}
       onLogout={handleLogout}
       getProgress={(g,s)=>getProgress(user.id,g,s)}
       setProgress={(g,s,d)=>{ setProgress(user.id,g,s,d); refresh(); }}
+      {...extra}
     />;
+    // ClewQuest (flag on + a server student account): builder / four-island landing / home; practice is the existing StudentApp.
+    if(CQ_ON && typeof user.serverId==="string"){
+      return <ClewQuestStudent user={user} onLogout={handleLogout}
+        renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject, onExitToQuest:exit})}/>;
+    }
+    return practice();
   }
 
   if(auth.role==="parent"){
