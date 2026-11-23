@@ -1,0 +1,53 @@
+{
+  "results": [
+    {
+      "name": "picture signup shows a label under every picture",
+      "pass": true
+    },
+    {
+      "name": "builder: boy and girl, 10 hairstyles, 6 colours, nickname 24 with counter",
+      "pass": true
+    },
+    {
+      "name": "four islands: open subjects, coming soon on one line, no navy band",
+      "pass": true
+    },
+    {
+      "name": "Today from landing and home, and leaving a subject returns",
+      "pass": true
+    },
+    {
+      "name": "stages 1-5 art and stage 6+ not offered",
+      "pass": true
+    },
+    {
+      "name": "English ExamSession: +1 / +0.5 / 0 and no game UI on solve",
+      "pass": true
+    },
+    {
+      "name": "Chinese ExamSession: +1 / +0.5 / 0 and no game UI",
+      "pass": true
+    },
+    {
+      "name": "picture child gets a 6-digit code and a parent links with it",
+      "pass": true
+    },
+    {
+      "name": "parent-created picture child is already linked",
+      "pass": true
+    },
+    {
+      "name": "password student keeps Today and can open ClewQuest",
+      "pass": true
+    },
+    {
+      "name": "five wrong codes lock on the fifth; linked parent reset clears it",
+      "pass": true
+    },
+    {
+      "name": "unlinked parent cannot reset a picture code",
+      "pass": true
+    }
+  ],
+  "findings": []
+}

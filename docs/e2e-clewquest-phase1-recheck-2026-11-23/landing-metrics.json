@@ -1,0 +1,46 @@
+{
+  "imgBottom": 534,
+  "landingBottom": 612,
+  "vh": 844,
+  "gapBelowLanding": 232,
+  "navyBelowImage": 78,
+  "bottom": {
+    "bg": "rgb(255, 255, 255)",
+    "testid": null,
+    "tag": "BODY"
+  },
+  "soon": [
+    {
+      "testid": "cq-island-english",
+      "text": "English Island",
+      "phrase": null,
+      "lineCount": 0,
+      "lines": []
+    },
+    {
+      "testid": "cq-island-chinese",
+      "text": "Chinese Island",
+      "phrase": null,
+      "lineCount": 0,
+      "lines": []
+    },
+    {
+      "testid": "cq-island-math",
+      "text": "Math Island (Coming soon)",
+      "phrase": "(Coming soon)",
+      "lineCount": 1,
+      "lines": [
+        "(Coming soon)"
+      ]
+    },
+    {
+      "testid": "cq-island-science",
+      "text": "Science Island (Coming soon)",
+      "phrase": "(Coming soon)",
+      "lineCount": 1,
+      "lines": [
+        "(Coming soon)"
+      ]
+    }
+  ]
+}
