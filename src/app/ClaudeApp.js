@@ -607,13 +607,69 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
 
 const CQ_ON = clewquestEnabled() && SERVER_AUTH;
+
+// Logged-out first screen: four-island art + white card (docs/design/clewquest-phase1-spec.md 2.3). Labels are decorative; no hotspots.
+function PreLoginLanding({onLogin, onSignup}){
+  const isl = (label, soon, pos) => (
+    <div style={{position:"absolute",...pos,width:"40%",textAlign:"center",pointerEvents:"none"}}>
+      <span style={{background:"rgba(15,23,42,.55)",color:"#fff",borderRadius:10,padding:"3px 8px",display:"inline-block",fontWeight:900,fontSize:15,textShadow:"0 1px 4px #000"}}>
+        {label}{soon && <span style={{display:"block",fontSize:12,whiteSpace:"nowrap"}}>(Coming soon)</span>}
+      </span>
+    </div>
+  );
+  return(
+    <Wrap>
+      <div data-testid="cq-prelogin" style={{minHeight:"100vh",background:"#0B3B73"}}>
+        <div style={{maxWidth:480,margin:"0 auto"}}>
+          <div style={{position:"relative"}}>
+            <Art k="landing/four-islands" alt="Four islands joined by a thread, with the Clew in the middle" style={{width:"100%",display:"block"}}/>
+            {isl("English",false,{left:"3%",top:"15%"})}
+            {isl("Chinese",false,{left:"3%",top:"61%"})}
+            {isl("Math",true,{left:"57%",top:"15%"})}
+            {isl("Science",true,{left:"57%",top:"61%"})}
+            <div style={{position:"absolute",top:8,left:0,right:0,display:"flex",justifyContent:"center"}}>
+              <Art k="brand/logo-b1" alt="ClewQuest" style={{width:120}}/>
+            </div>
+          </div>
+          <div style={{position:"relative",marginTop:-48,padding:"0 16px 32px"}}>
+            <div style={{background:"#fff",borderRadius:24,padding:"24px 20px",boxShadow:"0 8px 24px rgba(0,0,0,.25)",textAlign:"center"}}>
+              <div style={{fontWeight:900,fontSize:24,color:"#0F172A",lineHeight:1.2}}>Untangle PSLE. Master the Maze.</div>
+              <div style={{color:"#475569",marginTop:8}}>Daily practice for P3 to P6</div>
+              <div aria-hidden="true" style={{borderTop:"3px dotted #FBBF24",margin:"16px 0"}}/>
+              <button data-testid="cq-landing-login" onClick={onLogin} style={{width:"100%",padding:"14px",borderRadius:14,border:"none",background:"#DC2626",color:"#fff",fontWeight:900,fontSize:17,cursor:"pointer",marginBottom:10}}>Log in</button>
+              <button data-testid="cq-landing-signup" onClick={onSignup} style={{width:"100%",padding:"12px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",color:"#1E3A6E",fontWeight:900,fontSize:17,cursor:"pointer"}}>Sign up</button>
+            </div>
+            <div style={{color:"rgba(255,255,255,.85)",textAlign:"center",marginTop:14,fontSize:14}}>Parents: Sign up creates your family account</div>
+          </div>
+        </div>
+      </div>
+    </Wrap>
+  );
+}
+
+function SignupChooser({onParent, onStudentPictures, onStudentLegacy, onBack}){
+  const btn = {padding:"14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer",color:"#1E3A6E"};
+  return(
+    <div data-testid="cq-signup-chooser">
+      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:16}}>Sign up</div>
+      <div style={{display:"flex",flexDirection:"column",gap:10}}>
+        <button data-testid="cq-choose-parent" onClick={onParent} style={btn}>Parent sign up</button>
+        {CQ_ON && <button data-testid="cq-open-picture-signup" onClick={onStudentPictures} style={btn}>New student with pictures</button>}
+        {!CQ_ON && !SERVER_AUTH && <button onClick={onStudentLegacy} style={btn}>New student</button>}
+      </div>
+      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontWeight:700,marginTop:16}}>Back</button>
+    </div>
+  );
+}
+
 function AuthScreen({onLogin, onSignup}){
-  const [mode, setMode] = useState("login");   // login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
+  const [mode, setMode] = useState("landing");   // landing | login | signup_choose | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
   function pictureDone(profile){
     const user = mirrorServerUser(profile);
     importLocalOnce(user.id); syncLocalWrongAnswersOnce(user.id); // same fire-and-forget copies as the password login
     onLogin("student", user);
   }
+  if(mode==="landing") return <PreLoginLanding onLogin={()=>setMode("login")} onSignup={()=>setMode("signup_choose")}/>;
   return(
     <Wrap>
       <div style={{minHeight:"100vh",display:"flex",flexDirection:"column",background:"#0B3B73"}}> <div data-testid="cq-auth-header" style={{background:"linear-gradient(180deg,#0B3B73 0%,#1D5FA8 100%)",padding:"36px 20px 36px",textAlign:"center",flexShrink:0}}>
@@ -626,6 +682,8 @@ function AuthScreen({onLogin, onSignup}){
             {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.14)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.85)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
           </div>
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
+          {mode==="login" && <button data-testid="cq-back-landing" onClick={()=>setMode("landing")} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontWeight:700,marginBottom:12,padding:0}}>&larr; Back</button>}
+          {mode==="signup_choose" && <SignupChooser onParent={()=>setMode("signup_parent")} onStudentPictures={()=>setMode("picture_signup")} onStudentLegacy={()=>setMode("signup_student")} onBack={()=>setMode("landing")}/>}
           {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
           {mode==="login" && CQ_ON && (
             <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
@@ -634,9 +692,9 @@ function AuthScreen({onLogin, onSignup}){
             </div>
           )}
           {mode==="picture_login"  && <PictureLogin onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("login")}/>}
-          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("login")}/>}
-          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("login")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("login")}/>)}
+          {mode==="picture_signup" && <PictureSignup onDone={p=>pictureDone(p)} onBack={()=>setMode("signup_choose")}/>}
+          {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("signup_choose")}/>}
+          {mode==="signup_parent"  && (SERVER_AUTH ? <SignupParentServerForm onLogin={onLogin} onBack={()=>setMode("signup_choose")}/> : <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("signup_choose")}/>)}
         </div>
       </div>
     </Wrap>
@@ -999,12 +1057,12 @@ function LoginForm({onLogin, onGoSignup}){
       const r = await serverLogin(role, id.trim(), pw);
       if(r && r.needsConfirmation){ setErr("Please confirm your email first: open the link we sent you, then log in."); return; }
       if(r) { onLogin(role, r); return; }
-      setErr(role==="parent" ? "Wrong email or password." : "Wrong ID or password. Please check and try again.");
+      setErr(role==="parent" ? "Wrong email or password." : id.includes("@") ? "Parents: please use the Parent tab" : "Wrong ID or password. Please check and try again.");
       return;
     }
     const user = allUsers().find(u=>u.id===id.trim()&&u.password===pw&&u.role===role);
     if(user){ onLogin(role, user); return; }
-    setErr("Wrong ID or password. Please check and try again.");
+    setErr(role==="student" && id.includes("@") ? "Parents: please use the Parent tab" : "Wrong ID or password. Please check and try again.");
   }
 
   return(
