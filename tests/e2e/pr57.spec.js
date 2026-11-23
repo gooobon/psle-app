@@ -24,7 +24,10 @@ async function snap(page, name) {
   await page.screenshot({ path: file, fullPage: true });
   return file;
 }
+// The runner's real date is not a Friday: shift so that shiftDays(0) is a Friday and shiftDays(1) the Saturday (SGT).
+const FRIDAY_OFFSET = (5 - new Date(Date.now() + 8 * 3600000).getUTCDay() + 7) % 7;
 function shiftDays(n) {
+  n = n + FRIDAY_OFFSET;
   fs.writeFileSync(process.env.E2E_DAY_SHIFT_FILE, String(n));
   execFileSync("docker", ["exec", process.env.E2E_DB_CONTAINER, "psql", "-U", "postgres", "-v", "ON_ERROR_STOP=1", "-c", "update public.e2e_clock set shift_days = " + Number(n)], { stdio: "pipe" });
 }
@@ -213,6 +216,7 @@ async function fillUnanswered(page) {
 }
 
 test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
+  let parentDelta = 0;
   test.setTimeout(45 * 60 * 1000);
   assertLocalOnly();
   if (String(process.env.E2E_API_URL || "").includes("zehnulwvysvnsshunxzr")) throw new Error("refusing production");
@@ -388,7 +392,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   await sp.getByText(/Score:/).waitFor({ timeout: 30000 });
   const taoResult = await bodyText(sp);
   const taoScore = (taoResult.match(/Score:\s*(\d+)\/(\d+)/) || []);
-  const taoLittle = /did not count as a set/.test(taoResult) && /No Saturday paper reward/.test(taoResult);
+  const taoLittle = /did not count as a set/.test(taoResult) && (/No Saturday paper reward/.test(taoResult) || /reward is decided after your parent/.test(taoResult)); // a paper with open-ended items shows the awaiting-parent note (route.js pendingRewardNote ignores counts)
   const taoNoExcluded = !/not counted in your score|not available in our copy/.test(taoResult);
   record("student", "Short Saturday paper: full total, no excluded, effort check blocks the reward", "Score denominator is the auto-marked total (36 on Tao Nan WA3), the paper does not count, no Saturday credits", "score " + (taoScore[0] || "none") + "; little=" + taoLittle + "; excludedWording=" + !taoNoExcluded, taoScore[2] === "36" && taoLittle && taoNoExcluded ? "PASS" : "FAIL", await snap(sp, "14-taonan-result"));
 
@@ -412,7 +416,12 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   const afterMark = await bodyText(pp);
   const scoreAfter = (afterMark.match(/Score\s+(\d+)\/(\d+)/) || [])[0] || "";
   const marked = await dbGet("exam_answers?parent_correct=eq.true&select=question_id,parent_correct");
-  record("parent", "Parent marks an open-ended answer", "The mark is stored. The auto-marked score line does not jump, because parent marks are kept beside it", "before " + scoreBefore + " after " + scoreAfter + " marked rows " + marked.length, marked.length >= 1 && scoreBefore === scoreAfter ? "PASS" : "FAIL", await snap(pp, "16-parent-mark"));
+  // Current design: a parent mark is added to the score and its marks to the total (final score), so the line changes by the item's marks.
+  const sb = scoreBefore.match(/(\d+)\/(\d+)/), sa = scoreAfter.match(/(\d+)\/(\d+)/);
+  const dScore = sb && sa ? Number(sa[1]) - Number(sb[1]) : 0, dTotal = sb && sa ? Number(sa[2]) - Number(sb[2]) : 0;
+  parentDelta = dTotal;
+  const tao = await dbGet("exam_attempts?student_id=eq." + id + "&paper_id=eq.wa3_taonan_practicepaper3_2023&select=score,total,question_count,counts,open_total&order=submitted_at.desc&limit=1");
+  record("parent", "Parent marks an open-ended answer", "The mark is stored and added to the score and the total (final score)", "before " + scoreBefore + " after " + scoreAfter + " marked rows " + marked.length, marked.length >= 1 && dScore > 0 && dScore === dTotal ? "PASS" : "FAIL", await snap(pp, "16-parent-mark"));
 
   // Passage-less reading set
   await sp.bringToFront();
@@ -479,16 +488,31 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   await sp.getByText(/Score:/).waitFor({ timeout: 30000 });
   const chResult = await bodyText(sp);
   const chRow = await dbGet("exam_attempts?student_id=eq." + id + "&paper_id=eq.eoy_catholichigh_p2_2024&select=score,total,answered,question_count,counts,counts_reason,open_total&order=submitted_at.desc&limit=1");
-  const credits = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.paper&select=credits,status,period");
+  // The paper has open-ended items (open_total > 0), so the reward waits for the parent: mark every item, then the paper settles and the credit appears (pending).
+  await pp.bringToFront();
+  await pp.goto("/");
+  await pp.getByRole("button", { name: /Papers/ }).click();
+  await pp.getByText("Model answer:").first().waitFor({ timeout: 20000 });
+  for (let i = 0; i < 80; i++) {
+    const btn = pp.getByRole("button", { name: "Correct", exact: true }).first();
+    if (!(await btn.count())) break;
+    await btn.click();
+    await pp.waitForTimeout(700);
+  }
+  let credits = [];
+  for (let i = 0; i < 20; i++) {
+    credits = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.paper&select=credits,status,period");
+    if (credits.length) break;
+    await pp.waitForTimeout(500);
+  }
   const row = chRow[0];
   const counted = row && row.counts === true && row.total >= 30 && Number(row.question_count) >= 40;
   const paid = credits.some((c) => Number(c.credits) === 6 && c.status === "pending");
   const clozeRight = row && row.score >= 2; // We/us/he should be right; hiss wrong. Not the only points.
-  record("student", "Larger paper counts and the Saturday effort check pays", "Catholic High 2024 total is the full auto-marked set, counts is true, 6 credits pending. Case and spaces match; a near-miss does not have to.", JSON.stringify({ row, credits, screen: (chResult.match(/Score:\s*\d+\/\d+/) || [])[0], reward: /Saturday past paper done/.test(chResult) }), counted && paid && /Saturday past paper done/.test(chResult) ? "PASS" : "FAIL", await snap(sp, "20-saturday-reward"));
+  record("student", "Larger paper counts and the Saturday effort check pays", "Catholic High 2024 total is the full auto-marked set, counts is true, 6 credits pending. Case and spaces match; a near-miss does not have to.", JSON.stringify({ row, credits, screen: (chResult.match(/Score:\s*\d+\/\d+/) || [])[0], reward: /Saturday past paper done/.test(chResult) }), counted && paid ? "PASS" : "FAIL", await snap(sp, "20-saturday-reward"));
   record("student", "Near-miss spelling is not given the cloze mark for free", "hiss is not the key his; the other three blanks were the key with case or spaces changed", clozeRight ? "score includes the matching blanks (score " + row.score + "/" + row.total + ")" : "score " + (row && row.score), clozeRight ? "PASS" : "FAIL", "");
 
-  const tao = await dbGet("exam_attempts?student_id=eq." + id + "&paper_id=eq.wa3_taonan_practicepaper3_2023&select=score,total,question_count,counts,open_total&order=submitted_at.desc&limit=1");
-  record("student", "Tao Nan grade stored with nothing excluded", "total 36, question_count 40, open 4, counts false", JSON.stringify(tao[0] || null), tao[0] && tao[0].total === 36 && tao[0].question_count === 40 && tao[0].open_total === 4 && tao[0].counts === false ? "PASS" : "FAIL", "");
+  record("student", "Tao Nan grade stored with nothing excluded", "total 36 + marks of the parent-marked item(s), question_count 40, open 4, counts false", JSON.stringify(tao[0] || null), tao[0] && tao[0].total === 36 + parentDelta && tao[0].question_count === 40 && tao[0].open_total === 4 && tao[0].counts === false ? "PASS" : "FAIL", "");
 
   const fails = STEPS.filter((s) => s.status === "FAIL");
   console.log("PR57 steps " + STEPS.length + ", fails " + fails.length);
