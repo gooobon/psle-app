@@ -37,6 +37,9 @@ test("mock exam role-play @mock", async ({ browser }) => {
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
+    // Pre-submit traffic only: the post-hand-in review (?review=) and the submit result legitimately carry the key.
+    const post = res.request().postData() || "";
+    if (res.url().includes("review=") || /"action"\s*:\s*"(submit|cause)"/.test(post)) return;
     const text = await res.text().catch(() => "");
     studentBodies.push(text.slice(0, 300000));
   });

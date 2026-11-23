@@ -49,6 +49,9 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
+    // Pre-submit traffic only: the post-hand-in review (?review=) and the submit result legitimately carry the key.
+    const post = res.request().postData() || "";
+    if (res.url().includes("review=") || /"action"\s*:\s*"(submit|cause)"/.test(post)) return;
     bodies.push(await res.text().catch(() => ""));
   });
 
