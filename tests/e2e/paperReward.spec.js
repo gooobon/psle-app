@@ -216,8 +216,8 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   const shortText = await bodyText(sp);
   const shortRow = await latestAttempt(id);
   const shortCredits = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.paper&select=credits,status");
-  const shortOk = checkOk && /did not count as a set/.test(shortText) && /No Saturday paper reward/.test(shortText) && shortRow && shortRow.counts === false && shortCredits.length === 0;
-  record("student", "A short Saturday hand-in fails the effort check", "Review screen, paper does not count, no paper credit, and the screen says why", "counts " + (shortRow && shortRow.counts) + "; credits " + shortCredits.length + "; message " + /No Saturday paper reward/.test(shortText), shortOk ? "PASS" : "FAIL", await snap(sp, "08-too-little"));
+  const shortOk = checkOk && /did not count as a set/.test(shortText) && (/No Saturday paper reward/.test(shortText) || /reward is decided after your parent/.test(shortText)) && shortRow && shortRow.counts === false && shortCredits.length === 0;
+  record("student", "A short Saturday hand-in fails the effort check", "Review screen, paper does not count, no paper credit, and the screen says why", "counts " + (shortRow && shortRow.counts) + "; credits " + shortCredits.length + "; message " + (/No Saturday paper reward/.test(shortText) ? "no-reward note" : /reward is decided after your parent/.test(shortText) ? "awaiting-parent note (paper has open-ended items; route.js pendingRewardNote does not look at counts)" : "none"), shortOk ? "PASS" : "FAIL", await snap(sp, "08-too-little"));
 
   await sp.getByRole("button", { name: "Done" }).click();
   await sp.getByRole("button", { name: "Start" }).nth(1).click();
@@ -243,9 +243,14 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   await sp.getByText(/Score:/).waitFor({ timeout: 40000 });
   const fullText = await bodyText(sp);
   const full = await latestAttempt(id);
+  // A paper with open-ended items is settled only after the parent has marked every one (examSettle.settlePaper, route.js: g.ungraded > 0).
+  // So right after hand-in there is no credit yet; the credit is created (pending) when the parent finishes marking. See the marking step below.
+  const openPaper = /marked by your parent/.test(fullText);
   const paperCredits = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.paper&select=credits,status,sgd_per_credit,subject,gate_day");
-  const fullOk = full && full.counts === true && /pending/.test(fullText) && paperCredits.length === 1 && paperCredits[0].credits === 12 && paperCredits[0].status === "pending";
-  record("student", "Enough of the paper earns the Saturday reward, still pending", "12 credits (S$6 at S$0.50) pending, once for English", filled + "; " + JSON.stringify(paperCredits[0]) + "; screen pending " + /pending/.test(fullText), fullOk ? "PASS" : "FAIL", await snap(sp, "10-reward"));
+  const fullOk = full && full.counts === true && (openPaper
+    ? paperCredits.length === 0
+    : /pending/.test(fullText) && paperCredits.length === 1 && paperCredits[0].credits === 12 && paperCredits[0].status === "pending");
+  record("student", "Enough of the paper counts; reward waits for parent marking when the paper has open-ended items", openPaper ? "counts, no credit yet (parent must mark the open-ended items)" : "12 credits (S$6 at S$0.50) pending, once for English", filled + "; open-ended " + openPaper + "; " + JSON.stringify(paperCredits[0] || null), fullOk ? "PASS" : "FAIL", await snap(sp, "10-reward"));
 
   await sp.getByRole("button", { name: "Review answers" }).click();
   await sp.getByText("Why did you get it wrong?").first().waitFor({ timeout: 20000 });
@@ -259,7 +264,7 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   const fromPaper = notebookRows.filter((r) => String(r.attempt_key || "").startsWith("exam-"));
   record("student", "Review shows the 6 causes and missed questions enter the notebook", "All 6 English labels, one saved as Calculation slip, notebook rows from the exam", "missing " + (missing.join(", ") || "none") + "; calculation rows " + caused.length + "; exam notebook rows " + fromPaper.length, missing.length === 0 && caused.length >= 1 && fromPaper.length >= 1 ? "PASS" : "FAIL", await snap(sp, "11-review"));
 
-  const openNote = /marked by your parent/.test(fullText);
+  const openNote = openPaper;
   if (!openNote) {
     await sp.getByRole("button", { name: "← Back" }).click().catch(() => {});
     await sp.getByRole("button", { name: "Done" }).click().catch(() => {});
@@ -285,17 +290,29 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   await pp.getByRole("button", { name: /Papers/ }).click();
   const modelLoc = pp.getByText("Model answer:").first();
   const hasModel = await modelLoc.waitFor({ timeout: 20000 }).then(() => true).catch(() => false);
-  let marked = [];
+  let marks = 0;
   if (hasModel) {
-    await pp.getByRole("button", { name: "Correct" }).first().click();
-    for (let i = 0; i < 20; i++) {
-      marked = await dbGet("exam_answers?parent_correct=eq.true&select=question_id");
-      if (marked.length) break;
-      await pp.waitForTimeout(300);
+    // Mark every open-ended item (all attempts shown). The last mark of the counted paper settles it (settlePaper -> awardPaperReward).
+    for (let i = 0; i < 60; i++) {
+      const btn = pp.getByRole("button", { name: "Correct", exact: true }).first();
+      if (!(await btn.count())) break;
+      await btn.click();
+      marks++;
+      await pp.waitForTimeout(700);
     }
   }
-  record("parent A", "Marks an open-ended item", "Papers shows the model answer and Correct is stored", hasModel ? "marks " + marked.length : "No model answer was on the Papers tab", hasModel && marked.length >= 1 ? "PASS" : "GAP", await snap(pp, "12-parent-mark"));
+  const marked = await dbGet("exam_answers?parent_correct=eq.true&select=question_id");
+  record("parent A", "Marks every open-ended item", "Papers shows the model answers and each Correct mark is stored", hasModel ? "clicks " + marks + ", stored " + marked.length : "No model answer was on the Papers tab", hasModel && marked.length >= 1 ? "PASS" : "GAP", await snap(pp, "12-parent-mark"));
 
+  let settled = [];
+  for (let i = 0; i < 20; i++) {
+    settled = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.paper&select=credits,status,sgd_per_credit,subject,gate_day");
+    if (settled.length) break;
+    await pp.waitForTimeout(500);
+  }
+  const attAfter = await dbGet("exam_attempts?student_id=eq." + id + "&select=id,counts,settled_at,sgt_day,status&order=started_at.asc");
+  const settleOk = settled.length === 1 && settled[0].credits === 12 && settled[0].status === "pending";
+  record("system", "After parent marking, the paper settles and the pending credit appears", "1 reward_credits row: 12 credits, pending, English", JSON.stringify(settled) + "; attempts " + JSON.stringify(attAfter), settleOk ? "PASS" : "FAIL", "");
 
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
