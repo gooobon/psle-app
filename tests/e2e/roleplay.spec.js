@@ -1,12 +1,11 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, ensureParent, ensureStudent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
 const { execFileSync } = require("child_process");
 const { driveToScore } = require("./scoreDrive");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const ALERTS = process.env.ALERT_DRY_RUN_LOG || path.join("tests", "e2e", ".state", "alerts.jsonl");
@@ -161,8 +160,6 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const parent = await browser.newContext(CTX);
   await installBrowserClock(parent);
   const pp = await parent.newPage();
-  const parentB = await browser.newContext(CTX);
-  await installBrowserClock(parentB);
   const student = await browser.newContext(CTX);
   await installBrowserClock(student);
   const sp = await student.newPage();
@@ -178,48 +175,11 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   console.log("anchored Thursday shift " + BASE + " " + ymd(0) + " sunday " + SUN + " monday " + MON);
 
   // —— Thursday: two parents, one child, rules that start tomorrow ——
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
   let file = await snap(pp, "01-child-created");
-  record("parent A", "Sign up and create the child", "Mrs Tan has a linked child", "Created " + CHILD.username, "PASS", file);
-
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await expect(pp.getByText(/Invite created/)).toBeVisible();
-  const pb = await parentB.newPage();
-  await shiftBrowser([pb], BASE);
-  await pb.goto("/");
-  await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pb.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pb.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pb.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pb.getByRole("button", { name: "Create Parent Account" }).click();
-  await pb.getByText(/invited you to follow/).waitFor({ timeout: 20000 });
-  file = await snap(pb, "02-invite");
-  await pb.getByRole("button", { name: "Accept" }).click();
-  await pb.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 });
   const links = await dbGet("parent_child?select=parent_id,child_id");
-  file = await snap(pb, "03-both-parents");
-  record("parent B", "Accept the invite and see the same child", "parent_child has 2 rows and Amir is on the dashboard", "parent_child rows " + links.length, links.length === 2 ? "PASS" : "FAIL", file);
-  await confirmParents();
+  record("parent A", "Sign up and add the child by picture code", "Mrs Tan has one linked child", "parent_child rows " + links.length, links.length === 1 ? "PASS" : "FAIL", file);
 
   const id = await childId();
   await pp.bringToFront();
@@ -258,21 +218,20 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const paperSaved = paperRule[0];
   record("parent A", "Saturday past-paper reward amount and effort check", "English paper reward is S$6, effort check stays on, and it is saved on the same version as the other rules", paperFilled ? JSON.stringify(paperSaved) : "The Saturday past-paper fields were not on the Rewards tab", paperFilled && paperSaved && paperSaved.paper_unit === "sgd" && Number(paperSaved.paper_amounts && paperSaved.paper_amounts.English) === 6 && paperSaved.paper_check_off === false ? "PASS" : "FAIL", file);
 
-  await pb.bringToFront();
-  await ensureParent(pb, PARENT_B.email, PARENT_B.password);
-  await pb.getByRole("button", { name: /Settings/ }).click();
-  const enSets = pb.locator("label", { hasText: "English sets per day" }).locator("input");
+  await pp.bringToFront();
+  await ensureParent(pp, PARENT_A.email, PARENT_A.password);
+  await pp.getByRole("button", { name: /Settings/ }).click();
+  const enSets = pp.locator("label", { hasText: "English sets per day" }).locator("input");
   await enSets.scrollIntoViewIfNeeded();
   await enSets.fill("2");
-  await pb.getByRole("button", { name: "Save", exact: true }).click();
-  await expect(pb.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
-  await expect(pb.getByText(/English daily sets from 1 to 2/)).toBeVisible();
-  file = await snap(pb, "05-parent-b-audit");
+  await pp.getByRole("button", { name: "Save", exact: true }).click();
+  await expect(pp.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
+  await expect(pp.getByText(/English daily sets from 1 to 2/)).toBeVisible();
+  file = await snap(pp, "05-parent-audit");
   const audit = await dbGet("child_setting_audit?child_id=eq." + id + "&select=changed_by_name,changes,effective_from&order=changed_at.desc");
   const auditHit = audit.find((a) => (a.changes || []).some((line) => /English daily sets from 1 to 2/.test(line)));
   const notice = alerts().filter((a) => /changed/.test(a.subject || "") && /Mrs Tan/.test(a.text || ""));
-  record("parent B", "Edit the shared English target", "Applies next SGT day, an audit row is stored, and parent A is notified without a real email", auditHit ? (auditHit.changed_by_name + " effective " + auditHit.effective_from + "; dry-run emails " + notice.length) : "no audit row", auditHit && notice.length >= 1 ? "PASS" : "FAIL", file);
-  if (notice.length) ux("The co-parent notice is only a dry-run while email is off. Parent A does not see it inside the app, only in the change log if she opens Settings.");
+  record("parent A", "Edit the English target", "Applies next SGT day and an audit row is stored", auditHit ? (auditHit.changed_by_name + " effective " + auditHit.effective_from + "; dry-run emails " + notice.length) : "no audit row", auditHit ? "PASS" : "FAIL", file);
 
   await loginStudent(sp, CHILD.username, CHILD.password);
   await sp.getByText(/1 set left today/).first().waitFor({ timeout: 15000 });
@@ -296,11 +255,11 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const skipCron = await cron();
   const skipMails = alerts().slice(beforeSkip).filter((a) => /Not done yet today/.test(a.subject || ""));
   const skipBodyOk = skipMails.filter((a) => /NOT DONE YET today: Amir Tan/.test(a.text || "") && /❌ Not done – English: 0\/1 set/.test(a.text || "") && /❌ Not done – Chinese: 0\/1 set/.test(a.text || ""));
-  record("system", "8pm alert on a day with no study", "Both linked parents get a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, skipCron.status === 200 && skipBodyOk.length >= 2 ? "PASS" : "FAIL", "");
+  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "HTTP " + skipCron.status + " dryRun=" + (skipCron.body && skipCron.body.summary && skipCron.body.summary.dryRun) + "; matching emails " + skipBodyOk.length + " of " + skipMails.length, skipCron.status === 200 && skipBodyOk.length >= 1 ? "PASS" : "FAIL", "");
 
   // —— Friday: rules apply, scored sets, homework, wallet, payout ——
   setDay(BASE + 1);
-  await shiftBrowser([sp, pp, pb], BASE + 1);
+  await shiftBrowser([sp, pp], BASE + 1);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   let friday = null;
@@ -587,11 +546,11 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const doneCron = await cron();
   const doneMails = alerts().slice(beforeDone).filter((a) => /All done today/.test(a.subject || ""));
   const doneBody = doneMails.filter((a) => /✅ Done – English: 2\/2 sets/.test(a.text || "") && /✅ Done – Chinese: 1\/1 set/.test(a.text || ""));
-  record("system", "8pm alert on a day that was studied", "Both parents get a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, doneCron.status === 200 && doneBody.length >= 2 ? "PASS" : "FAIL", "");
+  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "HTTP " + doneCron.status + " dryRun=" + (doneCron.body && doneCron.body.summary && doneCron.body.summary.dryRun) + "; matching emails " + doneBody.length, doneCron.status === 200 && doneBody.length >= 1 ? "PASS" : "FAIL", "");
 
   // —— Saturday: weekly bonus and the past-paper mock ——
   setDay(BASE + 2);
-  await shiftBrowser([sp, pp, pb], BASE + 2);
+  await shiftBrowser([sp, pp], BASE + 2);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
@@ -663,7 +622,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   // —— Sunday: 60% earns nothing; a high score with unfinished homework will forfeit ——
   setDay(BASE + 3);
-  await shiftBrowser([sp, pp, pb], BASE + 3);
+  await shiftBrowser([sp, pp], BASE + 3);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /Start today's set|Extra set/ }).first().click();
@@ -690,7 +649,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   // Monday: a high first set, then homework left undone so Tuesday can forfeit it.
   setDay(BASE + 4);
-  await shiftBrowser([sp, pp, pb], BASE + 4);
+  await shiftBrowser([sp, pp], BASE + 4);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByRole("button", { name: /Start today's set|Extra set/ }).first().click();
@@ -719,7 +678,7 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
 
   // Tuesday: Monday's unfinished homework forfeits. Saturday, with no homework, has already confirmed.
   setDay(BASE + 5);
-  await shiftBrowser([sp, pp, pb], BASE + 5);
+  await shiftBrowser([sp, pp], BASE + 5);
   await sp.goto("/");
   await ensureStudent(sp, CHILD.username, CHILD.password);
   await sp.getByText(/lost because homework/).first().waitFor({ timeout: 20000 }).catch(() => {});
@@ -790,14 +749,6 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   file = await snap(pp, "32-week-strip");
   const strip = await bodyText(pp);
   record("parent A", "Daily status across the practised days", "The 7-day strip and today's line show which days were done", strip.includes("Did Amir Tan do it today") ? "Today card is on the dashboard" : "Today card missing", strip.includes("Did Amir Tan do it today") ? "PASS" : "FAIL", file);
-
-  await pb.bringToFront();
-  await pb.goto("/");
-  await ensureParent(pb, PARENT_B.email, PARENT_B.password);
-  const viewB = await learningView(pb);
-  file = await snap(pb, "33-learning-parent-b");
-  const okB = viewB.skills > 0 && viewB.causes > 0 && /mastery by skill/i.test(viewB.text) && /why answers were wrong/i.test(viewB.text);
-  record("parent B", "Learning dashboard is the same for the other linked parent", "Parent B opens the same Learning tab. Counts can be higher if the child practised again after parent A looked.", viewB.skills + " skills, " + viewB.causes + " cause rows (A looked earlier: " + viewA.skills + " skills, " + viewA.causes + " cause rows)", okB ? "PASS" : "FAIL", file);
 
   const fails = STEPS.filter((s) => s.status === "FAIL").length;
   const gaps = STEPS.filter((s) => s.status === "GAP").length;

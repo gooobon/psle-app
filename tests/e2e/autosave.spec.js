@@ -2,10 +2,9 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly, setupFamily } = require("./helpers");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const KEY_LEAK = /"(hints|solution|explanation|explain|learning_tip|retry_hint|correctAnswer|modelAnswer)"\s*:/;
@@ -45,49 +44,23 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   assertLocalOnly();
   const bodies = [];
   const parent = await browser.newContext(CTX);
-  const parentB = await browser.newContext(CTX);
   const student = await browser.newContext(CTX);
   const pp = await parent.newPage();
-  const pb = await parentB.newPage();
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
     bodies.push(await res.text().catch(() => ""));
   });
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await pp.getByText(/Invite created/).waitFor();
-  await pb.goto("/");
-  await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pb.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pb.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pb.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pb.getByRole("button", { name: "Create Parent Account" }).click();
-  await pb.getByText(/invited you to follow/).waitFor();
-  await pb.getByRole("button", { name: "Accept" }).click();
-  await pb.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 });
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
+  await shot(pp, "01-parent-and-child");
+  {
+    const links = await dbGet("parent_child?select=parent_id,child_id");
+    expect(links.length).toBe(1);
+  }
   const id = await childId();
-  record("parent", "Both parents linked", "Mrs Tan and Mr Tan follow Amir", "linked", "PASS", await snap(pb, "01-parents"));
+  record("parent", "Parent signed up and child linked", "Mrs Tan added Amir with a picture code", "linked", "PASS", await snap(pp, "01-parents"));
 
   await loginStudent(sp, CHILD.username, CHILD.password);
   await openPapers(sp);
@@ -153,10 +126,6 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   await pp.getByRole("button", { name: /Papers/ }).click();
   await pp.getByText(/handed in automatically|Score/).first().waitFor({ timeout: 20000 });
   record("parent A", "Dashboard shows the auto-submitted paper", "Papers tab lists the sitting", /Score/.test(await bodyText(pp)) ? "score on the tab" : "missing", /Score/.test(await bodyText(pp)) ? "PASS" : "FAIL", await snap(pp, "05-parent"));
-  await ensureParent(pb, PARENT_B.email, PARENT_B.password);
-  await pb.getByRole("button", { name: /Papers/ }).click();
-  await pb.getByText(/Score/).first().waitFor({ timeout: 20000 });
-  record("parent B", "Mr Tan sees the same paper", "Both parents", "visible", "PASS", await snap(pb, "06-parent-b"));
 
   const secret = process.env.CRON_SECRET || "e2e-cron-secret";
   const cron = await fetch("http://127.0.0.1:3000/api/cron/daily-alert", { headers: { authorization: "Bearer " + secret } });

@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { C, Wrap } from "@/lib/uiShared";
+import { CS as C, Wrap } from "@/lib/uiShared";
+import { T, FONT, RADIUS, SHADOW, mainBtn, secondaryBtn } from "@/lib/theme/tokens";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
 import ParentExams from '@/components/ParentExams';
@@ -25,13 +26,13 @@ function HomeworkStatus({child, refreshKey}){
   },[child?.serverId, refreshKey]);
   if(!st) return null;
   const t=(st.days||[]).find(d=>d.date===st.today)||{assigned:0,solved:0,remaining:0,correct:0};
-  const box=(n,l,c)=>(<div style={{flex:1,textAlign:"center"}}><div style={{fontSize:20,fontWeight:900,color:c}}>{n}</div><div style={{fontSize:10,fontWeight:700,color:"#64748B"}}>{l}</div></div>);
+  const box=(n,l,c)=>(<div style={{flex:1,textAlign:"center"}}><div style={{fontSize:20,fontWeight:900,color:c}}>{n}</div><div style={{fontSize:10,fontWeight:700,color:"#6B6F7B"}}>{l}</div></div>);
   return(
-    <div style={{background:"#FFFBEB",border:"1px solid #FDE68A",borderRadius:14,padding:"12px 14px",marginBottom:14}}>
-      <div style={{fontSize:13,fontWeight:800,color:"#92400E",marginBottom:8}}>📚 Homework today · {st.usedToday} assigned</div>
-      <div style={{display:"flex",gap:6}}>{box(t.assigned,"Assigned","#0F172A")}{box(t.solved,"Solved","#059669")}{box(t.remaining,"Remaining","#DC2626")}{box(t.correct,"Correct","#2563EB")}</div>
+    <div style={{background:"#FBF6EA",border:"1px solid #E2DBCF",borderRadius:14,padding:"12px 14px",marginBottom:14}}>
+      <div style={{fontSize:13,fontWeight:800,color:"#1B2340",marginBottom:8}}> Homework today · {st.usedToday} assigned</div>
+      <div style={{display:"flex",gap:6}}>{box(t.assigned,"Assigned","#1B2340")}{box(t.solved,"Solved",T.success)}{box(t.remaining,"Remaining","#B3261E")}{box(t.correct,"Correct","#1F3F95")}</div>
       {(st.days||[]).filter(d=>d.date!==st.today).slice(0,6).map(d=>(
-        <div key={d.date} style={{fontSize:11,color:"#64748B",marginTop:6}}>{d.date}: {d.solved}/{d.assigned} solved, {d.correct} correct{d.remaining?`, ${d.remaining} not done`:""}</div>
+        <div key={d.date} style={{fontSize:11,color:"#6B6F7B",marginTop:6}}>{d.date}: {d.solved}/{d.assigned} solved, {d.correct} correct{d.remaining?`, ${d.remaining} not done`:""}</div>
       ))}
     </div>
   );
@@ -117,28 +118,28 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
     byTopic[key].push(m);
   });
 
-  const diffColor = d => d==="foundation"?"#1D4ED8":d==="core"?"#92400E":d==="stretch"?"#991B1B":"#64748B";
-  const diffBg    = d => d==="foundation"?"#DBEAFE":d==="core"?"#FEF3C7":d==="stretch"?"#FEE2E2":"#F1F5F9";
+  const diffColor = d => d==="foundation"?"#1F3F95":d==="core"?"#1B2340":d==="stretch"?"#B3261E":"#6B6F7B";
+  const diffBg    = d => d==="foundation"?"#FBF6EA":d==="core"?"#FBF6EA":d==="stretch"?"#FBF6EA":"#FBF6EA";
   const diffLabel = d => d==="foundation"?"⬤ Foundation":d==="core"?"⬤⬤ Core":d==="stretch"?"⬤⬤⬤ Stretch":"Core";
 
   return(
     <div style={{padding:"4px 0"}}>
       {hwOn&&<HomeworkStatus child={child} refreshKey={hwKey}/>}
-      <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:14,
+      <div style={{background:"#FBF6EA",border:"1px solid #E2DBCF",borderRadius:14,
         padding:"12px 14px",marginBottom:14}}>
-        <div style={{fontSize:13,fontWeight:800,color:"#1D4ED8",marginBottom:4}}>
-          👨‍👧 Review Together
+        <div style={{fontSize:13,fontWeight:800,color:"#1F3F95",marginBottom:4}}>
+           Review Together
         </div>
-        <div style={{fontSize:12,color:"#1E40AF",lineHeight:1.6}}>
+        <div style={{fontSize:12,color:"#1F3F95",lineHeight:1.6}}>
           Sit with {child?.name||"your child"} and go through these together. Each card shows
           what they answered, the correct answer, and how to solve it step by step.
         </div>
       </div>
 
       {filtered.length===0 ? (
-        <div style={{textAlign:"center",padding:"50px 20px",color:"#64748B"}}>
-          <div style={{fontSize:44,marginBottom:12}}>🎉</div>
-          <div style={{fontSize:15,fontWeight:800,color:"#0F172A",marginBottom:6}}>
+        <div style={{textAlign:"center",padding:"50px 20px",color:"#6B6F7B"}}>
+          <div style={{fontSize:44,marginBottom:12}}></div>
+          <div style={{fontSize:15,fontWeight:800,color:"#1B2340",marginBottom:6}}>
             No mistakes recorded yet!
           </div>
           <div style={{fontSize:13}}>Mistakes from practice sessions will appear here.</div>
@@ -147,16 +148,16 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
         <>
           <div style={{display:"flex",gap:6,overflowX:"auto",paddingBottom:10,marginBottom:6}}>
             <button onClick={()=>setFilterSession("all")}
-              style={{background:filterSession==="all"?"#DC2626":"#F1F5F9",
-                color:filterSession==="all"?"#fff":"#64748B",border:"none",borderRadius:20,
+              style={{background:filterSession==="all"?"#1F3F95":"#FBF6EA",
+                color:filterSession==="all"?"#fff":"#6B6F7B",border:"none",borderRadius:20,
                 padding:"5px 14px",fontSize:12,fontWeight:700,cursor:"pointer",
                 whiteSpace:"nowrap",flexShrink:0}}>
               All ({allMistakes.length})
             </button>
             {sessions.map(s=>(
               <button key={s} onClick={()=>setFilterSession(String(s))}
-                style={{background:filterSession===String(s)?"#DC2626":"#F1F5F9",
-                  color:filterSession===String(s)?"#fff":"#64748B",border:"none",borderRadius:20,
+                style={{background:filterSession===String(s)?"#1F3F95":"#FBF6EA",
+                  color:filterSession===String(s)?"#fff":"#6B6F7B",border:"none",borderRadius:20,
                   padding:"5px 14px",fontSize:12,fontWeight:700,cursor:"pointer",
                   whiteSpace:"nowrap",flexShrink:0}}>
                 Session {s}
@@ -178,7 +179,7 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                         cursor:"pointer",display:"flex",justifyContent:"space-between",
                         alignItems:"flex-start",gap:8,textAlign:"left"}}>
                       <div style={{flex:1}}>
-                        <div style={{fontSize:12,fontWeight:700,color:"#0F172A",marginBottom:4,lineHeight:1.5}}>
+                        <div style={{fontSize:12,fontWeight:700,color:"#1B2340",marginBottom:4,lineHeight:1.5}}>
                           {m.q||m.sentence||m.word||"Question"}
                         </div>
                         <div style={{display:"flex",gap:6,flexWrap:"wrap",alignItems:"center"}}>
@@ -189,21 +190,21 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                             </span>
                           )}
                           {causeLabel(m.cause) ? (
-                            <span style={{background:"#FEE2E2",color:"#991B1B",fontSize:10,
+                            <span style={{background:"#FBF6EA",color:"#B3261E",fontSize:10,
                               fontWeight:700,padding:"2px 7px",borderRadius:6}}>
                               {causeLabel(m.cause)}
                             </span>
                           ) : null}
                           {m.solvedAfterHint&&(
-                            <span style={{background:"#FEF3C7",color:"#92400E",fontSize:10,
+                            <span style={{background:"#FBF6EA",color:"#1B2340",fontSize:10,
                               fontWeight:700,padding:"2px 7px",borderRadius:6}}>
-                              💡 solved on try {m.attempts||2}
+                               solved on try {m.attempts||2}
                             </span>
                           )}
-                          <span style={{fontSize:10,color:"#94A3B8"}}>Session {m.sessionNum}</span>
+                          <span style={{fontSize:10,color:"#6B6F7B"}}>Session {m.sessionNum}</span>
                         </div>
                       </div>
-                      <span style={{color:"#94A3B8",fontSize:16,
+                      <span style={{color:"#6B6F7B",fontSize:16,
                         transform:isOpen?"rotate(90deg)":"none",transition:"transform .2s"}}>›</span>
                     </button>
 
@@ -211,24 +212,24 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                       <div style={{padding:"0 14px 14px"}}>
                         {hwOn&&useServer&&srv&&(
                           <div style={{marginBottom:10}}>
-                            <button onClick={()=>assignHomework(m)} style={{background:"#D97706",color:"#fff",border:"none",borderRadius:10,padding:"8px 12px",fontSize:12,fontWeight:800,cursor:"pointer"}}>
-                              📚 Assign up to {hwCount} similar as homework
+                            <button onClick={()=>assignHomework(m)} style={{background:"#D9A52E",color:"#fff",border:"none",borderRadius:10,padding:"8px 12px",fontSize:12,fontWeight:800,cursor:"pointer"}}>
+                               Assign up to {hwCount} similar as homework
                             </button>
-                            <label style={{fontSize:11,color:"#64748B",marginLeft:8}}>Questions per mistake{" "}
-                              <input type="number" min="1" max={HOMEWORK_ABUSE_MAX} value={hwCount} onChange={e=>saveHwCount(e.target.value)} onBlur={commitHwCount} style={{width:56,padding:"4px 6px",borderRadius:6,border:"1px solid #CBD5E1",fontSize:12}}/>
+                            <label style={{fontSize:11,color:"#6B6F7B",marginLeft:8}}>Questions per mistake{" "}
+                              <input type="number" min="1" max={HOMEWORK_ABUSE_MAX} value={hwCount} onChange={e=>saveHwCount(e.target.value)} onBlur={commitHwCount} style={{width:56,padding:"4px 6px",borderRadius:6,border:"1px solid #E2DBCF",fontSize:12}}/>
                             </label>
-                            {hwMsg[m.id]&&<div style={{fontSize:12,color:"#92400E",marginTop:6}}>{hwMsg[m.id]}</div>}
+                            {hwMsg[m.id]&&<div style={{fontSize:12,color:"#1B2340",marginTop:6}}>{hwMsg[m.id]}</div>}
                           </div>
                         )}
                         {(m.q||m.sentence) && (
-                          <div style={{background:"#F8FAFC",borderRadius:10,padding:"10px 12px",
-                            marginBottom:10,fontSize:13,fontWeight:600,color:"#0F172A",lineHeight:1.6}}>
+                          <div style={{background:"#FBF6EA",borderRadius:10,padding:"10px 12px",
+                            marginBottom:10,fontSize:13,fontWeight:600,color:"#1B2340",lineHeight:1.6}}>
                             {m.q||m.sentence}
                           </div>
                         )}
                         <div style={{display:"flex",gap:8,marginBottom:10}}>
-                          <div style={{flex:1,background:"#FEE2E2",borderRadius:10,padding:"8px 12px"}}>
-                            <div style={{fontSize:10,fontWeight:700,color:"#991B1B",marginBottom:2}}>
+                          <div style={{flex:1,background:"#FBF6EA",borderRadius:10,padding:"8px 12px"}}>
+                            <div style={{fontSize:10,fontWeight:700,color:"#B3261E",marginBottom:2}}>
                               {child?.name||"Child"}'S ANSWER
                             </div>
                             <div style={{fontSize:13,fontWeight:700,color:"#7F1D1D"}}>
@@ -239,52 +240,52 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
                                     : "—")}
                             </div>
                           </div>
-                          <div style={{flex:1,background:"#D1FAE5",borderRadius:10,padding:"8px 12px"}}>
-                            <div style={{fontSize:10,fontWeight:700,color:"#065F46",marginBottom:2}}>CORRECT</div>
+                          <div style={{flex:1,background:"#FBF6EA",borderRadius:10,padding:"8px 12px"}}>
+                            <div style={{fontSize:10,fontWeight:700,color:"#4F6B22",marginBottom:2}}>CORRECT</div>
                             <div style={{fontSize:13,fontWeight:700,color:"#064E3B"}}>
                               {m.correctAnswer!==undefined&&m.options?m.options[m.correctAnswer]:m.correctAnswer||m.answer||"—"}
                             </div>
                           </div>
                         </div>
                         {m.solution && (
-                          <div style={{background:"#F0FDF4",border:"1.5px solid #10B981",
+                          <div style={{background:"#FBF6EA",border:"1.5px solid #4F6B22",
                             borderRadius:12,padding:"12px 14px"}}>
-                            <div style={{fontSize:11,fontWeight:800,color:"#065F46",marginBottom:8,
+                            <div style={{fontSize:11,fontWeight:800,color:"#4F6B22",marginBottom:8,
                               textTransform:"uppercase",letterSpacing:.6}}>
-                              📐 How to solve: {typeof m.solution.method==="string"?m.solution.method:""}
+                               How to solve: {typeof m.solution.method==="string"?m.solution.method:""}
                             </div>
                             {(Array.isArray(m.solution.steps)?m.solution.steps:[]).slice(0,6).map((step,si)=>(
                               typeof step==="string" ? (
-                                <div key={si} style={{fontSize:12,color:"#0F172A",lineHeight:1.7,
+                                <div key={si} style={{fontSize:12,color:"#1B2340",lineHeight:1.7,
                                   fontFamily:/[=+\-×÷]/.test(step)?"monospace":"inherit",
                                   paddingLeft:step.startsWith("【")?0:4,
                                   fontWeight:step.startsWith("【")?800:400,
-                                  color:step.startsWith("【")?"#0D9488":"#0F172A"}}>
+                                  color:step.startsWith("【")?T.success:"#1B2340"}}>
                                   {step}
                                 </div>
                               ) : null
                             ))}
                             {m.solution.tip && typeof m.solution.tip==="string" && (
-                              <div style={{background:"#FEF3C7",borderRadius:8,padding:"7px 10px",
-                                marginTop:8,fontSize:11,color:"#92400E",fontWeight:700}}>
-                                💡 {m.solution.tip}
+                              <div style={{background:"#FBF6EA",borderRadius:8,padding:"7px 10px",
+                                marginTop:8,fontSize:11,color:"#1B2340",fontWeight:700}}>
+                                 {m.solution.tip}
                               </div>
                             )}
                           </div>
                         )}
                         {m.explanation && typeof m.explanation==="string" && (
-                          <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:10,
-                            padding:"10px 12px",marginTop:8,fontSize:12,color:"#1E40AF",lineHeight:1.6}}>
+                          <div style={{background:"#FBF6EA",border:"1px solid #E2DBCF",borderRadius:10,
+                            padding:"10px 12px",marginTop:8,fontSize:12,color:"#1F3F95",lineHeight:1.6}}>
                             {m.explanation}
                           </div>
                         )}
                         {m.meaning && typeof m.meaning==="string" && (
-                          <div style={{background:"#EFF6FF",border:"1px solid #BFDBFE",borderRadius:10,
+                          <div style={{background:"#FBF6EA",border:"1px solid #E2DBCF",borderRadius:10,
                             padding:"10px 12px",marginTop:8}}>
-                            <div style={{fontSize:10,fontWeight:800,color:"#1D4ED8",marginBottom:3}}>
-                              📖 MEANING {m.pinyin?`· ${m.pinyin}`:""}
+                            <div style={{fontSize:10,fontWeight:800,color:"#1F3F95",marginBottom:3}}>
+                               MEANING {m.pinyin?`· ${m.pinyin}`:""}
                             </div>
-                            <div style={{fontSize:13,color:"#1E40AF",fontWeight:600}}>{m.meaning}</div>
+                            <div style={{fontSize:13,color:"#1F3F95",fontWeight:600}}>{m.meaning}</div>
                           </div>
                         )}
                       </div>
@@ -317,6 +318,7 @@ function ParentOverview({child, history, settings, subject}){
   const localAvg=regularH.length?Math.round(regularH.reduce((s,h)=>s+h.totalPct,0)/regularH.length):0;
   const avgTotal=srvSub?(srvSub.average||0):localAvg;
   const sessionCount=srvSub?Math.max(srvSub.sessions,0):history.length;
+  const mockDone=history.filter(h=>h.isMockExam).length;
   const last3=regularH.slice(-3);
   const trend=last3.length>=2?last3[last3.length-1].totalPct-last3[0].totalPct:0;
   const sectionAvgs={}, sectionTrends={};
@@ -330,23 +332,25 @@ function ParentOverview({child, history, settings, subject}){
 
   return(
     <div>
-      <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}}>
+      <div data-testid="parent-stat-cards" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:14}}>
         {[
-          {icon:"📋",l:"Sessions",v:sessionCount,c:C.blue},
-          {icon:"🎯",l:"Average",  v:avgTotal?`${avgTotal}%`:"—",c:avgTotal>=85?C.green:avgTotal>=70?C.amber:C.red},
-          {icon:"📈",l:"Trend",    v:last3.length>=2?(trend>=0?`+${trend}%`:`${trend}%`):"—",c:trend>=0?C.green:C.red},
-          {icon:"🏫",l:"Mock Done",v:history.filter(h=>h.isMockExam).length,c:"#1F3F95"},
+          {l:"Sessions",v:sessionCount,bar:Math.min(100,Math.round(sessionCount/60*100))},
+          {l:"Average",v:avgTotal?`${avgTotal}%`:"-",bar:avgTotal},
+          {l:"Trend",v:last3.length>=2?(trend>=0?`+${trend}%`:`${trend}%`):"-",bar:last3.length>=2?Math.max(0,Math.min(100,50+trend)):0},
+          {l:"Mock done",v:mockDone,bar:Math.min(100,Math.round(mockDone/Math.max(1,Math.ceil(sessionCount/10))*100))},
         ].map((s,i)=>(
-          <div key={i} style={{background:"#fff",borderRadius:14,padding:"12px",textAlign:"center",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <div style={{fontSize:22}}>{s.icon}</div>
-            <div style={{fontSize:19,fontWeight:900,color:s.c,margin:"4px 0 2px"}}>{s.v}</div>
-            <div style={{fontSize:10,color:C.muted,fontWeight:600}}>{s.l}</div>
+          <div key={i} data-testid="parent-stat-card" style={{background:T.card,borderRadius:RADIUS.card,padding:"16px 14px",boxShadow:SHADOW,fontFamily:FONT}}>
+            <div style={{fontSize:13,color:T.muted,fontWeight:600}}>{s.l}</div>
+            <div style={{fontSize:28,fontWeight:800,color:T.ink,margin:"4px 0 10px"}}>{s.v}</div>
+            <div style={{background:T.track,borderRadius:6,height:8}}>
+              <div style={{background:T.gold,borderRadius:6,height:8,width:`${s.bar}%`,transition:"width 0.6s"}}/>
+            </div>
           </div>
         ))}
       </div>
 
-      <div style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-        <div style={{fontWeight:800,fontSize:13,marginBottom:10}}>📊 Section Performance</div>
+      <div style={{background:T.card,borderRadius:RADIUS.card,padding:"16px",marginBottom:12,boxShadow:SHADOW}}>
+        <div style={{fontWeight:800,fontSize:13,marginBottom:10}}> Section Performance</div>
         {SECTION_ORDER.map(type=>{
           const meta=SECTIONS[type]; const avg=sectionAvgs[type]; if(!avg) return null;
           const col=avg>=85?C.green:avg>=70?C.amber:C.red;
@@ -354,14 +358,14 @@ function ParentOverview({child, history, settings, subject}){
           return(
             <div key={type} style={{marginBottom:10}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
-                <span style={{fontSize:12,fontWeight:700}}>{meta.icon} {meta.label}</span>
+                <span style={{fontSize:12,fontWeight:700}}>{meta.label}</span>
                 <div style={{display:"flex",gap:6,alignItems:"center"}}>
                   {tr!=null&&<span style={{fontSize:9,color:tr>=0?C.green:C.red,fontWeight:700}}>{tr>=0?`▲+${tr}%`:`▼${tr}%`}</span>}
-                  <span style={{fontSize:12,fontWeight:800,color:col}}>{avg}%</span>
+                  <span style={{fontSize:12,fontWeight:800,color:T.ink}}>{avg}%</span>
                 </div>
               </div>
-              <div style={{background:"#EEF2F7",borderRadius:6,height:7}}>
-                <div style={{background:col,borderRadius:6,height:7,width:`${avg}%`,transition:"width 0.6s"}}/>
+              <div style={{background:"#E8E4DC",borderRadius:6,height:7}}>
+                <div style={{background:T.gold,borderRadius:6,height:7,width:`${avg}%`,transition:"width 0.6s"}}/>
               </div>
             </div>
           );
@@ -369,34 +373,34 @@ function ParentOverview({child, history, settings, subject}){
       </div>
 
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:12}}>
-        <div style={{background:C.lGreen,border:`1.5px solid #A7F3D0`,borderRadius:14,padding:"12px"}}>
-          <div style={{fontWeight:800,fontSize:11,color:"#065F46",marginBottom:6}}>💪 Strongest</div>
-          {strongest.map((t,i)=><div key={i} style={{fontSize:11,color:"#065F46",marginBottom:3}}>{SECTIONS[t]?.icon} {SECTIONS[t]?.label?.replace(" MCQ","")}: <strong>{sectionAvgs[t]}%</strong></div>)}
+        <div style={{background:C.lGreen,border:`1.5px solid #E2DBCF`,borderRadius:14,padding:"12px"}}>
+          <div style={{fontWeight:800,fontSize:11,color:C.text,marginBottom:6}}>Strongest</div>
+          {strongest.map((t,i)=><div key={i} style={{fontSize:11,color:C.text,marginBottom:3}}>{SECTIONS[t]?.label?.replace(" MCQ","")}: <strong>{sectionAvgs[t]}%</strong></div>)}
         </div>
-        <div style={{background:C.lRed,border:`1.5px solid #FECACA`,borderRadius:14,padding:"12px"}}>
-          <div style={{fontWeight:800,fontSize:11,color:C.red,marginBottom:6}}>⚠️ Weakest</div>
-          {weakest.map((t,i)=><div key={i} style={{fontSize:11,color:C.red,marginBottom:3}}>{SECTIONS[t]?.icon} {SECTIONS[t]?.label?.replace(" MCQ","")}: <strong>{sectionAvgs[t]}%</strong></div>)}
+        <div style={{background:C.lRed,border:`1.5px solid #E2DBCF`,borderRadius:14,padding:"12px"}}>
+          <div style={{fontWeight:800,fontSize:11,color:C.text,marginBottom:6}}>Weakest</div>
+          {weakest.map((t,i)=><div key={i} style={{fontSize:11,color:C.text,marginBottom:3}}>{SECTIONS[t]?.label?.replace(" MCQ","")}: <strong>{sectionAvgs[t]}%</strong></div>)}
         </div>
       </div>
 
       <div style={{background:"#fff",borderRadius:16,padding:"14px",boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-        <div style={{fontWeight:800,fontSize:13,marginBottom:10}}>📅 All Sessions</div>
+        <div style={{fontWeight:800,fontSize:13,marginBottom:10}}> All Sessions</div>
         <div style={{overflowX:"auto"}}>
           <table style={{width:"100%",borderCollapse:"collapse",fontSize:11}}>
-            <thead><tr style={{background:"#F8FAFC"}}>
+            <thead><tr style={{background:"#FBF6EA"}}>
               {["#","Date","Total","Gm%","Vc%","Comp%","Type"].map(h=><th key={h} style={{padding:"5px 3px",textAlign:"center",color:C.muted,fontWeight:700}}>{h}</th>)}
             </tr></thead>
             <tbody>
               {[...history].reverse().map((h,i)=>{
                 const c=h.totalPct>=85?C.green:h.totalPct>=70?C.amber:C.red;
-                return(<tr key={i} style={{background:i%2===0?"#fff":"#F8FAFC",borderTop:`1px solid ${C.border}`}}>
+                return(<tr key={i} style={{background:i%2===0?"#fff":"#FBF6EA",borderTop:`1px solid ${C.border}`}}>
                   <td style={{padding:"6px 3px",textAlign:"center",fontWeight:700}}>{h.sessionNum}</td>
                   <td style={{padding:"6px 3px",textAlign:"center",color:C.muted,whiteSpace:"nowrap"}}>{h.date.split(" ").slice(0,2).join(" ")}</td>
                   <td style={{padding:"6px 3px",textAlign:"center",fontWeight:900,color:c}}>{h.totalPct}%</td>
                   <td style={{padding:"6px 3px",textAlign:"center",color:(h.scores.GrammarMCQ||0)>=70?C.green:C.red}}>{h.scores.GrammarMCQ||"-"}</td>
                   <td style={{padding:"6px 3px",textAlign:"center",color:(h.scores.VocabMCQ||0)>=70?C.green:C.red}}>{h.scores.VocabMCQ||"-"}</td>
                   <td style={{padding:"6px 3px",textAlign:"center",color:(h.scores.Comprehension||0)>=70?C.green:C.red}}>{h.scores.Comprehension||"-"}</td>
-                  <td style={{padding:"6px 3px",textAlign:"center"}}>{h.isMockExam?"🏫":"📝"}</td>
+                  <td style={{padding:"6px 3px",textAlign:"center"}}>{h.isMockExam?"Mock":"Set"}</td>
                 </tr>);
               })}
             </tbody>
@@ -410,18 +414,18 @@ function ParentOverview({child, history, settings, subject}){
             allMistakes.forEach(m=>{const k=m.topic||m.sectionType||"Other";tc[k]=(tc[k]||0)+1;});
             const topTopics=Object.entries(tc).sort((a,b)=>b[1]-a[1]).slice(0,4);
             const total=allMistakes.length;
-            const topicColors={"Numbers":"#3B82F6","Addition":"#10B981","Subtraction":"#F59E0B",
-              "Multiplication":"#1F3F95","Division":"#F97316","Money":"#0D9488",
-              "Word Problem":"#0891B2","Grammar":"#3B82F6","Vocabulary":"#8B5CF6","Other":"#64748B"};
+            const topicColors={"Numbers":"#1F3F95","Addition":T.success,"Subtraction":"#D9A52E",
+              "Multiplication":"#1F3F95","Division":"#D9A52E","Money":T.success,
+              "Word Problem":T.primary,"Grammar":"#1F3F95","Vocabulary":T.gold,"Other":"#6B6F7B"};
             return(
               <div style={{padding:"0 16px 16px"}}>
                 <div style={{background:"#fff",borderRadius:16,padding:"16px",
                   boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
                   <div style={{fontSize:13,fontWeight:800,color:C.text,marginBottom:12}}>
-                    🎯 Weakest Topics (All Time)
+                     Weakest Topics (All Time)
                   </div>
                   {topTopics.map(([topic,count],i)=>{
-                    const col=topicColors[topic]||"#64748B";
+                    const col=topicColors[topic]||"#6B6F7B";
                     const pct=Math.round(count/total*100);
                     return(
                       <div key={topic} style={{marginBottom:10}}>
@@ -430,23 +434,23 @@ function ParentOverview({child, history, settings, subject}){
                             <span style={{width:8,height:8,borderRadius:"50%",
                               background:col,display:"inline-block",flexShrink:0}}/>
                             <span style={{fontSize:12,fontWeight:700,color:C.text}}>{topic}</span>
-                            {i===0&&<span style={{background:"#FEE2E2",color:"#991B1B",fontSize:9,
+                            {i===0&&<span style={{background:"#FBF6EA",color:"#B3261E",fontSize:9,
                               fontWeight:800,padding:"1px 6px",borderRadius:6}}>Most Weak</span>}
                           </div>
                           <span style={{fontSize:11,color:C.muted,fontWeight:600}}>
                             {count} mistake{count>1?"s":""}
                           </span>
                         </div>
-                        <div style={{background:"#F1F5F9",borderRadius:6,height:7}}>
+                        <div style={{background:"#FBF6EA",borderRadius:6,height:7}}>
                           <div style={{background:col,borderRadius:6,height:7,
                             width:pct+"%",transition:"width .5s"}}/>
                         </div>
                       </div>
                     );
                   })}
-                  <div style={{background:"#F0FDF4",borderRadius:10,padding:"8px 12px",
-                    marginTop:8,fontSize:11,color:"#065F46",fontWeight:600,lineHeight:1.5}}>
-                    📌 Tip: Focus tutoring sessions on{" "}
+                  <div style={{background:"#FBF6EA",borderRadius:10,padding:"8px 12px",
+                    marginTop:8,fontSize:11,color:"#4F6B22",fontWeight:600,lineHeight:1.5}}>
+                     Tip: Focus tutoring sessions on{" "}
                     <strong>{topTopics[0]?.[0]||"all topics"}</strong> first.
                   </div>
 
@@ -463,9 +467,9 @@ function ParentOverview({child, history, settings, subject}){
                         <div style={{fontSize:11,fontWeight:800,color:C.muted,marginBottom:8,
                           textTransform:"uppercase",letterSpacing:.8}}>Mistakes by Difficulty Level</div>
                         {[
-                          ["foundation","⬤ Foundation","#1D4ED8","#DBEAFE","P3 basic level"],
-                          ["core","⬤⬤ Core","#92400E","#FEF3C7","Standard P3 exam"],
-                          ["stretch","⬤⬤⬤ Stretch","#991B1B","#FEE2E2","Above average"],
+                          ["foundation","⬤ Foundation","#1F3F95","#FBF6EA","P3 basic level"],
+                          ["core","⬤⬤ Core","#1B2340","#FBF6EA","Standard P3 exam"],
+                          ["stretch","⬤⬤⬤ Stretch","#B3261E","#FBF6EA","Above average"],
                         ].map(([key,label,col,bg,desc])=>(
                           <div key={key} style={{display:"flex",alignItems:"center",gap:10,
                             padding:"7px 10px",borderRadius:9,background:bg,marginBottom:6}}>
@@ -498,13 +502,13 @@ function ParentSettings({child, settings, onUpdate, advice, onApplyAdvice}){
   return(
     <div>
       {advice.filter(a=>a.type!=="maintain").length>0&&(
-        <div style={{background:"#FFFBEB",border:"1.5px solid #FDE68A",borderRadius:14,padding:"12px",marginBottom:14}}>
-          <div style={{fontWeight:800,fontSize:12,color:"#92400E",marginBottom:8}}>💡 AI Recommends</div>
+        <div style={{background:"#FBF6EA",border:"1.5px solid #E2DBCF",borderRadius:14,padding:"12px",marginBottom:14}}>
+          <div style={{fontWeight:800,fontSize:12,color:"#1B2340",marginBottom:8}}> AI Recommends</div>
           {advice.filter(a=>a.type!=="maintain").slice(0,2).map((adv,i)=>(
             <div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8,background:"#fff",borderRadius:10,padding:"10px"}}>
-              <span style={{fontSize:18,flexShrink:0}}>{adv.icon}</span>
+              
               <div style={{flex:1}}>
-                <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#DC2626":"#059669",marginBottom:2}}>{adv.priority}</div>
+                <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#B3261E":T.success,marginBottom:2}}>{adv.priority}</div>
                 <div style={{fontSize:12,color:C.text,lineHeight:1.6,marginBottom:6}}>{adv.text}</div>
               </div>
               {adv.action&&<button onClick={()=>onApplyAdvice(adv)} style={{background:C.navy,color:"#fff",border:"none",borderRadius:8,padding:"6px 10px",fontSize:11,fontWeight:700,cursor:"pointer",flexShrink:0}}>Apply</button>}
@@ -516,7 +520,7 @@ function ParentSettings({child, settings, onUpdate, advice, onApplyAdvice}){
         const meta=SECTIONS[type];
         return(
           <div key={type} style={{background:"#fff",borderRadius:14,padding:"14px",marginBottom:10,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><span style={{fontSize:18}}>{meta.icon}</span><div style={{fontWeight:800,fontSize:13}}>{meta.label}</div></div>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{fontWeight:800,fontSize:13}}>{meta.label}</div></div>
             <div style={{marginBottom:10}}>
               <div style={{fontSize:11,color:C.muted,fontWeight:600,marginBottom:5}}>Questions: <strong style={{color:C.navy}}>{S[type]?.count||16}</strong></div>
               <input type="range" min={8} max={24} step={2} value={S[type]?.count||16} onChange={e=>onUpdate(type,"count",+e.target.value)} style={{width:"100%",accentColor:C.navy}}/>
@@ -525,7 +529,7 @@ function ParentSettings({child, settings, onUpdate, advice, onApplyAdvice}){
             <div style={{fontSize:11,color:C.muted,fontWeight:600,marginBottom:5}}>Difficulty</div>
             <div style={{display:"flex",gap:5}}>
               {[["standard","Standard"],["mixed","Mixed"],["advanced","Advanced"]].map(([v,l])=>(
-                <button key={v} onClick={()=>onUpdate(type,"difficulty",v)} style={{flex:1,background:(S[type]?.difficulty||"standard")===v?C.navy:"#F1F5F9",color:(S[type]?.difficulty||"standard")===v?"#fff":C.muted,border:"none",borderRadius:8,padding:"7px 4px",fontSize:10,fontWeight:700,cursor:"pointer"}}>{l}</button>
+                <button key={v} onClick={()=>onUpdate(type,"difficulty",v)} style={{flex:1,background:(S[type]?.difficulty||"standard")===v?C.navy:"#FBF6EA",color:(S[type]?.difficulty||"standard")===v?"#fff":C.muted,border:"none",borderRadius:8,padding:"7px 4px",fontSize:10,fontWeight:700,cursor:"pointer"}}>{l}</button>
               ))}
             </div>
           </div>
@@ -535,10 +539,10 @@ function ParentSettings({child, settings, onUpdate, advice, onApplyAdvice}){
         const meta=SECTIONS[type]; const sets=S[type]?.sets||1;
         return(
           <div key={type} style={{background:"#fff",borderRadius:14,padding:"14px",marginBottom:10,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}><span style={{fontSize:18}}>{meta.icon}</span><div style={{fontWeight:800,fontSize:13}}>{meta.label}</div></div>
+            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:8}}><div style={{fontWeight:800,fontSize:13}}>{meta.label}</div></div>
             <div style={{fontSize:11,color:C.muted,fontWeight:600,marginBottom:8}}>Sets: <strong style={{color:C.navy}}>{sets}</strong> ({sets*(meta.blanksPerSet||6)} questions)</div>
             <div style={{display:"flex",gap:6}}>
-              {[1,2,3].map(n=><button key={n} onClick={()=>onUpdate(type,"sets",n)} style={{flex:1,background:sets===n?meta.color:"#F1F5F9",color:sets===n?"#fff":C.muted,border:"none",borderRadius:8,padding:"9px",fontSize:12,fontWeight:800,cursor:"pointer"}}>{n} {n===1?"set":"sets"}</button>)}
+              {[1,2,3].map(n=><button key={n} onClick={()=>onUpdate(type,"sets",n)} style={{flex:1,background:sets===n?meta.color:"#FBF6EA",color:sets===n?"#fff":C.muted,border:"none",borderRadius:8,padding:"9px",fontSize:12,fontWeight:800,cursor:"pointer"}}>{n} {n===1?"set":"sets"}</button>)}
             </div>
           </div>
         );
@@ -556,16 +560,16 @@ function ParentMockTab({child, history}){
 
   return(
     <div>
-      <div style={{background:"#F5F3FF",border:"1.5px solid #DDD6FE",borderRadius:14,padding:"12px",marginBottom:14}}>
-        <div style={{fontWeight:800,fontSize:13,color:"#1F3F95",marginBottom:4}}>🏫 Mock Exams</div>
-        <div style={{fontSize:12,color:"#6D28D9",lineHeight:1.6}}>Every 10 practice sessions, {child?.name} receives a real school paper style mock exam. Compare performance against actual school benchmarks.</div>
+      <div style={{background:"#FBF6EA",border:"1.5px solid #E2DBCF",borderRadius:14,padding:"12px",marginBottom:14}}>
+        <div style={{fontWeight:800,fontSize:13,color:"#1F3F95",marginBottom:4}}> Mock Exams</div>
+        <div style={{fontSize:12,color:"#1F3F95",lineHeight:1.6}}>Every 10 practice sessions, {child?.name} receives a real school paper style mock exam. Compare performance against actual school benchmarks.</div>
       </div>
       {mockH.length===0?(
         <div style={{textAlign:"center",padding:"36px",background:"#fff",borderRadius:16,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-          <div style={{fontSize:36,marginBottom:10}}>🏫</div>
+          <div style={{fontSize:36,marginBottom:10}}></div>
           <div style={{fontSize:14,fontWeight:700}}>No mock exams yet</div>
           <div style={{fontSize:12,color:C.muted,marginTop:4}}>{regularH.length}/10 sessions done</div>
-          <div style={{marginTop:12,background:"#F1F5F9",borderRadius:8,height:8}}>
+          <div style={{marginTop:12,background:"#FBF6EA",borderRadius:8,height:8}}>
             <div style={{background:C.navy,borderRadius:8,height:8,width:`${Math.min(regularH.length*10,100)}%`}}/>
           </div>
         </div>
@@ -573,9 +577,9 @@ function ParentMockTab({child, history}){
         mockH.map((h,i)=>{
           const col=h.totalPct>=70?C.green:h.totalPct>=55?C.amber:C.red;
           return(
-            <div key={i} style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:12,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
+            <div key={i} style={{background:T.card,borderRadius:RADIUS.card,padding:"16px",marginBottom:12,boxShadow:SHADOW}}>
               <div style={{display:"flex",justifyContent:"space-between",marginBottom:10}}>
-                <div><div style={{fontWeight:800,fontSize:14}}>🏫 {h.school}</div><div style={{fontSize:11,color:C.muted}}>{h.examType} · {h.date}</div></div>
+                <div><div style={{fontWeight:800,fontSize:14}}> {h.school}</div><div style={{fontSize:11,color:C.muted}}>{h.examType} · {h.date}</div></div>
                 <div style={{textAlign:"center"}}><div style={{fontSize:26,fontWeight:900,color:col}}>{h.totalPct}%</div><div style={{fontSize:9,color:col}}>{h.totalPct>=70?"On Track":h.totalPct>=55?"Getting There":"Needs Work"}</div></div>
               </div>
               {SECTION_ORDER.filter(t=>h.scores[t]!=null).map(type=>{
@@ -584,10 +588,10 @@ function ParentMockTab({child, history}){
                 return(
                   <div key={type} style={{marginBottom:8}}>
                     <div style={{display:"flex",justifyContent:"space-between",marginBottom:2,fontSize:11}}>
-                      <span style={{fontWeight:700}}>{meta.icon} {meta.label.replace(" MCQ","")}</span>
+                      <span style={{fontWeight:700}}>{meta.label.replace(" MCQ","")}</span>
                       <span style={{color:C.muted}}>Practice: {pAvg}% → <strong style={{color:ms>=70?C.green:C.red}}>Mock: {ms}%</strong> <span style={{color:diff>=0?C.green:C.red,fontSize:10}}>{diff>=0?`(+${diff})`:diff}</span></span>
                     </div>
-                    <div style={{background:"#E2E8F0",borderRadius:5,height:5,position:"relative"}}>
+                    <div style={{background:"#E2DBCF",borderRadius:5,height:5,position:"relative"}}>
                       <div style={{background:C.muted+"60",borderRadius:5,height:5,width:`${pAvg}%`,position:"absolute"}}/>
                       <div style={{background:ms>=70?C.green:C.red,borderRadius:5,height:5,width:`${ms}%`,position:"absolute"}}/>
                     </div>
@@ -595,7 +599,7 @@ function ParentMockTab({child, history}){
                 );
               })}
               <div style={{marginTop:10,background:col+"15",borderRadius:8,padding:"8px 10px",fontSize:11,color:col,fontWeight:600,lineHeight:1.6}}>
-                {h.totalPct>=70?`✅ ${child?.name} is on track for ${h.school} ${h.examType} level!`:h.totalPct>=55?`📈 Making progress. Focus on weaker sections.`:`⚠️ More practice needed. See AI Advice tab for recommendations.`}
+                {h.totalPct>=70?` ${child?.name} is on track for ${h.school} ${h.examType} level!`:h.totalPct>=55?` Making progress. Focus on weaker sections.`:` More practice needed. See AI Advice tab for recommendations.`}
               </div>
             </div>
           );
@@ -610,18 +614,18 @@ function ParentAdviceTab({advice, child, onApply}){
   return(
     <div>
       <div style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"11px 13px",marginBottom:14}}>
-        <div style={{fontSize:11,fontWeight:700,color:"#1D4ED8",marginBottom:3}}>🤖 AI Analysis — {child?.name}</div>
-        <div style={{fontSize:11,color:"#1E40AF",lineHeight:1.6}}>Based on recent performance across all sessions. Apply recommendations directly to settings.</div>
+        <div style={{fontSize:11,fontWeight:700,color:"#1F3F95",marginBottom:3}}> AI Analysis — {child?.name}</div>
+        <div style={{fontSize:11,color:"#1F3F95",lineHeight:1.6}}>Based on recent performance across all sessions. Apply recommendations directly to settings.</div>
       </div>
       {advice.map((adv,i)=>(
         <div key={i} style={{background:"#fff",borderRadius:14,padding:"14px",marginBottom:10,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
           <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
             <div style={{width:40,height:40,borderRadius:12,background:adv.type==="increase"?C.lRed:adv.type==="advance"?C.lGreen:C.lAmber,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>{adv.icon}</div>
             <div style={{flex:1}}>
-              <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#DC2626":adv.priority.includes("Advance")?"#059669":"#D97706",marginBottom:3}}>{adv.priority} · {SECTIONS[adv.section]?.label||"All"}</div>
+              <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#B3261E":adv.priority.includes("Advance")?T.success:"#D9A52E",marginBottom:3}}>{adv.priority} · {SECTIONS[adv.section]?.label||"All"}</div>
               <div style={{fontSize:12,color:C.text,lineHeight:1.7,marginBottom:8}}>{adv.text}</div>
-              {adv.action&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:8}}>{Object.entries(adv.action).map(([k,v])=><div key={k} style={{background:"#F1F5F9",borderRadius:7,padding:"3px 9px",fontSize:10,fontWeight:700,color:C.navy}}>{k}: {String(v)}</div>)}</div>}
-              {adv.action&&<button onClick={()=>onApply(adv)} style={{background:`linear-gradient(135deg,${C.navy},#2563EB)`,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:11,fontWeight:800,cursor:"pointer"}}>✅ Apply to Settings</button>}
+              {adv.action&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:8}}>{Object.entries(adv.action).map(([k,v])=><div key={k} style={{background:"#FBF6EA",borderRadius:7,padding:"3px 9px",fontSize:10,fontWeight:700,color:C.navy}}>{k}: {String(v)}</div>)}</div>}
+              {adv.action&&<button onClick={()=>onApply(adv)} style={{background:`linear-gradient(135deg,${C.navy},#1F3F95)`,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:11,fontWeight:800,cursor:"pointer"}}> Apply to Settings</button>}
             </div>
           </div>
         </div>
@@ -664,17 +668,17 @@ function TodayCard({linkedStudents}){
         const subs=Object.entries(c.subjects).filter(([k,v])=>v.target>0&&LIVE_CONTENT[`${c.grade||"P3"}_${k}`]);
         const allDone=subs.length>0&&subs.every(([,v])=>v.sets>=v.target);
         return(
-          <div key={c.id} style={{background:"#fff",border:`2px solid ${allDone?"#10B981":"#F59E0B"}`,borderRadius:14,padding:14,marginBottom:10}}>
-            <div style={{fontWeight:900,fontSize:14,color:"#0F172A",marginBottom:8}}>Did {c.name} do it today? {allDone?"🎉":""}</div>
+          <div key={c.id} style={{background:"#fff",border:`2px solid ${allDone?T.success:"#D9A52E"}`,borderRadius:14,padding:14,marginBottom:10}}>
+            <div style={{fontWeight:900,fontSize:14,color:"#1B2340",marginBottom:8}}>Did {c.name} do it today? {allDone?"Yes":""}</div>
             {subs.map(([k,v])=>(
               <div key={k} style={{display:"flex",justifyContent:"space-between",fontSize:13,padding:"3px 0"}}>
-                <span>{SUBJECTS[k]?.icon} {k}</span><span style={{fontWeight:800}}>{v.sets>=v.target?"✅":"❌"} {v.sets}/{v.target} set{v.target===1?"":"s"}</span>
+                <span>{k}</span><span style={{fontWeight:800}}>{v.sets>=v.target?"Done":"Not yet"} {v.sets}/{v.target} set{v.target===1?"":"s"}</span>
               </div>
             ))}
             <div style={{fontSize:12,color:C.muted,marginTop:8}}>Questions today: <b>{c.questions}</b> · Accuracy: <b>{c.accuracy==null?"–":c.accuracy+"%"}</b></div>
             <div style={{display:"flex",gap:4,marginTop:8}} title="Last 7 days">
               {c.strip.map(d=>(<div key={d.date} style={{flex:1,textAlign:"center"}}>
-                <div style={{height:14,borderRadius:4,background:d.sets>0?"#10B981":"#E2E8F0"}}/>
+                <div style={{height:14,borderRadius:4,background:d.sets>0?T.success:"#E2DBCF"}}/>
                 <div style={{fontSize:9,color:C.muted,marginTop:2}}>{d.date.slice(8)}</div></div>))}
             </div>
           </div>
@@ -816,7 +820,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {SERVER_AUTH&&onChildCreated&&<AlertSettings/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
-            <div style={{fontSize:40,marginBottom:12}}>🔗</div>
+            <div style={{fontSize:40,marginBottom:12}}></div>
             <div style={{fontWeight:700,fontSize:16,marginBottom:8}}>No children linked yet</div>
             <div style={{fontSize:13,lineHeight:1.7}}>Tap Add child above to create your child's account. You choose their login ID and pictures.</div>
           </div>

@@ -44,7 +44,7 @@ const EN_REVIEW = makeReviewStore('en');
 import ZH_BANK from '@/data/p3/chinese/wa1_bank.json'; // STEP7_TICKETS
 import { openTicketsFromResults, gradeTicketsFromDrill, pickDrillItems, pickNextSet, bankFromIndex, ticketSummary } from '@/lib/tickets';
 
-import { Wrap, StudentBottomNav, C, BigBtn, ErrorBox, InputField, SFX, SpeakBtn } from '@/lib/uiShared';
+import { Wrap, StudentBottomNav, CS as C, ErrorBox, SFX, SpeakBtn } from '@/lib/uiShared';
 
 import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook, { MistakePatterns } from '@/components/MistakeNotebook';
@@ -68,7 +68,7 @@ import ClewQuestStudent from '@/components/clewquest/ClewQuestStudent';
 import { Art } from '@/components/clewquest/Art';
 import { PictureLogin } from '@/components/clewquest/PictureAuth';
 import { PreLoginLanding, LoginFrame, ForgotPassword, SetNewPassword, SignupParentStep1, SignupStep2 } from '@/components/clewquest/AuthScreens';
-import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, linkBtn } from '@/components/clewquest/Shell';
+import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, labelStyle, linkBtn, helperStyle } from '@/components/clewquest/Shell';
 import { questGrade } from '@/lib/clewquest/logic';
 import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
@@ -547,7 +547,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   );
 
   if(screen==="result"&&sessionResult) return(
-    <Wrap>
+    <Wrap shell>
       <ZhResultScreen
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}
@@ -558,7 +558,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   );
 
   return(
-    <Wrap>
+    <Wrap shell>
       <StudentShell
         user={user}
         grade={grade}
@@ -576,7 +576,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
           <WeeklyReviewCard subject="Chinese" prog={prog} roundIndex={ZH_ROUND_INDEX} refreshKey={wrKey} onStart={startWeekly}/>
           {drill && (
             <div style={{padding:"14px 16px 0"}}>
-              <button onClick={()=>setDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#B91C1C,#EF4444)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",fontFamily:"\'KaiTi\',\'STKaiti\',\'LXGW WenKai\',serif",boxShadow:"0 4px 14px rgba(185,28,28,0.25)"}}>
+              <button onClick={()=>setDrillMode(true)} style={{width:"100%",background:T.cta,color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",fontFamily:"\'KaiTi\',\'STKaiti\',\'LXGW WenKai\',serif",boxShadow:"0 4px 14px rgba(185,28,28,0.25)"}}>
                 <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{"\u5F31\u9879\u8BAD\u7EC3 (\u9519\u9898)"}<span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,marginLeft:8,opacity:.85}}>{"\u5F85\u5DE9\u56FA "+zhTickets.open+" \u9879 \u00B7 \u5DF2\u638C\u63E1 "+zhTickets.closed}</span></div>
                 <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",marginTop:2}}>{"\u53EA\u7EC3\u4F60\u6700\u5BB9\u6613\u9519\u7684\u9898\u578B"}</div>
               </button>
@@ -815,7 +815,7 @@ const MOE_PRIMARY_SCHOOLS = [
 
 function SchoolFeedbackBox({school}){
   const profile = getSchoolProfile(school);
-  const styleColors = {challenging:"#EF4444", advanced:"#7C3AED", standard:"#3B82F6"};
+  const styleColors = {challenging:"#B3261E", advanced:T.primary, standard:"#1F3F95"};
   const col = profile ? (styleColors[profile.style] || C.navy) : C.navy;
   return(
     <div style={{marginTop:10,background:col+"15",border:"1px solid "+col+"44",borderRadius:10,padding:"9px 13px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:600,lineHeight:1.6,color:col}}>
@@ -829,7 +829,7 @@ function SchoolFeedbackBox({school}){
 function SchoolBanner({school}){
   const profile = getSchoolProfile(school);
   if(!profile) return null;
-  const styleColors = {challenging:"#EF4444", advanced:"#7C3AED", standard:"#3B82F6"};
+  const styleColors = {challenging:"#B3261E", advanced:T.primary, standard:"#1F3F95"};
   const col = styleColors[profile.style] || C.navy;
   return(
     <div style={{background:col+"12",borderBottom:"1px solid "+col+"22",padding:"8px 16px",display:"flex",alignItems:"center",gap:8}}>
@@ -856,11 +856,11 @@ function SchoolDropdown({value, onChange}){
   const hasVal     = !!value;
 
   return(
-    <div style={{position:"relative",marginBottom:0}}> <div onClick={()=>setOpen(o=>!o)} style={{background:"#fff",border:`1.5px solid ${open?C.navy:C.border}`,borderRadius:12,padding:"12px 14px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:hasVal?700:400,color:hasVal?"#0F172A":C.muted,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",transition:"border 0.15s",boxShadow:open?"0 0 0 3px rgba(30,58,110,0.1)":"none"}}>
+    <div style={{position:"relative",marginBottom:0}}> <div onClick={()=>setOpen(o=>!o)} style={{background:"#fff",border:`1.5px solid ${open?C.navy:C.border}`,borderRadius:12,padding:"12px 14px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:hasVal?700:400,color:hasVal?"#1B2340":C.muted,cursor:"pointer",display:"flex",justifyContent:"space-between",alignItems:"center",transition:"border 0.15s",boxShadow:open?"0 0 0 3px rgba(30,58,110,0.1)":"none"}}>
         <span style={{flex:1,whiteSpace:"nowrap",overflow:"hidden",textOverflow:"ellipsis"}}>{displayVal}</span>
         <span style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,marginLeft:8,flexShrink:0,transform:open?"rotate(180deg)":"none",transition:"transform 0.2s"}}></span>
       </div> {open&&(
-        <div style={{position:"absolute",top:"calc(100% + 6px)",left:0,right:0,background:"#fff",border:`1.5px solid ${C.navy}`,borderRadius:14,boxShadow:"0 8px 32px rgba(15,23,42,0.18)",zIndex:999,overflow:"hidden"}}> <div style={{padding:"10px 12px",borderBottom:`1px solid ${C.border}`,background:"#F8FAFC"}}>
+        <div style={{position:"absolute",top:"calc(100% + 6px)",left:0,right:0,background:"#fff",border:`1.5px solid ${C.navy}`,borderRadius:14,boxShadow:"0 8px 32px rgba(15,23,42,0.18)",zIndex:999,overflow:"hidden"}}> <div style={{padding:"10px 12px",borderBottom:`1px solid ${C.border}`,background:"#FBF6EA"}}>
             <div style={{display:"flex",alignItems:"center",gap:8,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:10,padding:"7px 12px"}}>
               <span style={{fontSize:"calc(var(--fs) * 1.000)",color:C.muted}}></span>
               <input
@@ -868,7 +868,7 @@ function SchoolDropdown({value, onChange}){
                 value={search}
                 onChange={e=>setSearch(e.target.value)}
                 placeholder="Search school name..."
-                style={{border:"none",outline:"none",fontSize:"calc(var(--fs) * 0.929)",flex:1,fontFamily:"'Times New Roman', Times, serif",color:"#0F172A"}}
+                style={{border:"none",outline:"none",fontSize:"calc(var(--fs) * 0.929)",flex:1,fontFamily:"'Times New Roman', Times, serif",color:"#1B2340"}}
               />
               {search&&<button onClick={()=>setSearch("")} style={{background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.000)",color:C.muted,padding:0}}>x</button>}
             </div>
@@ -884,18 +884,18 @@ function SchoolDropdown({value, onChange}){
               return(
                 <div key={i}
                   onClick={()=>{ onChange(school); setOpen(false); setSearch(""); }}
-                  style={{padding:"10px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,background:isSelected?"#EFF6FF":"#fff",borderBottom:`1px solid ${C.border}`,transition:"background 0.1s"}}
-                  onMouseEnter={e=>{ if(!isSelected) e.currentTarget.style.background="#F8FAFC"; }}
+                  style={{padding:"10px 14px",cursor:"pointer",display:"flex",alignItems:"center",gap:10,background:isSelected?"#FBF6EA":"#fff",borderBottom:`1px solid ${C.border}`,transition:"background 0.1s"}}
+                  onMouseEnter={e=>{ if(!isSelected) e.currentTarget.style.background="#FBF6EA"; }}
                   onMouseLeave={e=>{ if(!isSelected) e.currentTarget.style.background="#fff"; }}
                 >
                   <span style={{fontSize:"calc(var(--fs) * 1.143)",flexShrink:0}}>{isOther?"":""}</span>
-                  <span style={{flex:1,fontSize:"calc(var(--fs) * 0.929)",fontWeight:isSelected?800:500,color:isSelected?C.navy:"#0F172A"}}>{school}</span>
+                  <span style={{flex:1,fontSize:"calc(var(--fs) * 0.929)",fontWeight:isSelected?800:500,color:isSelected?C.navy:"#1B2340"}}>{school}</span>
                   {styleTag&&<span style={{fontSize:"calc(var(--fs) * 0.857)",flexShrink:0}}>{styleTag}</span>}
                   {isSelected&&<span style={{fontSize:"calc(var(--fs) * 1.000)",flexShrink:0}}></span>}
                 </div>
               );
             })}
-          </div> <div style={{padding:"8px 14px",background:"#F8FAFC",borderTop:`1px solid ${C.border}`,display:"flex",gap:12,fontSize:"calc(var(--fs) * 0.780)",color:C.muted}}>
+          </div> <div style={{padding:"8px 14px",background:"#FBF6EA",borderTop:`1px solid ${C.border}`,display:"flex",gap:12,fontSize:"calc(var(--fs) * 0.780)",color:C.muted}}>
             <span> Challenging</span><span> Advanced</span><span> Standard</span>
           </div>
         </div>
@@ -943,17 +943,17 @@ function LegacyParentEmailPrompt({local, onBack}){
     setDone(true);
   }
   if(done) return(<div>
-    <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:8}}>Check your email 📧</div>
-    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in you add your child and pick their pictures.</div>
-    <BigBtn color="#7C3AED" onClick={onBack}>Back to login</BigBtn></div>);
+    <h1 style={{margin:"0 0 10px",fontWeight:800,fontSize:24,color:T.ink,fontFamily:FONT}}>Check your email</h1>
+    <div style={{...helperStyle,marginBottom:18}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in you add your child and pick their pictures.</div>
+    <button onClick={onBack} style={mainBtn(false)}>Back to login</button></div>);
   return(<div>
-    <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:6}}>Add your email</div>
-    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>Parent accounts now use an email so you can see progress from any device. Your existing data on this device is kept.</div>
-    <InputField label="Email" value={email} onChange={setEmail} placeholder="you@example.com"/>
-    <InputField label="New password (min 8 chars)" value={pw} onChange={setPw} type="password" placeholder="Choose a password" onEnter={submit}/>
-    {err&&<ErrorBox msg={err}/>}
-    <BigBtn color="#7C3AED" onClick={busy?()=>{}:submit}>{busy?"Creating...":"Create server account"}</BigBtn>
-    <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontWeight:700,marginTop:10}}>Cancel</button>
+    <h1 style={{margin:"0 0 6px",fontWeight:800,fontSize:24,color:T.ink,fontFamily:FONT}}>Add your email</h1>
+    <div style={{...helperStyle,marginBottom:18}}>Parent accounts now use an email so you can see progress from any device. Your existing data on this device is kept.</div>
+    <Field id="lp-email" label="Email"><input id="lp-email" style={inputStyle} value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" autoCapitalize="none" autoCorrect="off" spellCheck={false}/></Field>
+    <Field id="lp-pw" label="New password (min 8 chars)"><input id="lp-pw" style={inputStyle} type="password" value={pw} onChange={e=>setPw(e.target.value)} placeholder="Choose a password" onKeyDown={e=>{ if(e.key==="Enter") submit(); }}/></Field>
+    {err&&<ErrorText>{err}</ErrorText>}
+    <button onClick={busy?undefined:submit} disabled={busy} style={mainBtn(busy)}>{busy?"Creating...":"Create server account"}</button>
+    <div style={{textAlign:"center",marginTop:12}}><button onClick={onBack} style={{...linkBtn,color:T.muted,fontSize:14}}>Cancel</button></div>
   </div>);
 }
 
@@ -968,7 +968,7 @@ function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo}){
   const [forgot, setForgot] = useState(false);
 
   if(SHOW_DEMO && !STORE.users["demo_student"]){
-    STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"",color:"#3B82F6"};
+    STORE.users["demo_student"] = {id:"demo_student",password:"demo123",name:"Mei Lin",grade:"P3",role:"student",avatar:"",color:"#1F3F95"};
     STORE.users["demo_parent"]  = {id:"demo_parent", password:"demo456",name:"Mrs Lee", role:"parent",childIds:["demo_student"]};
   }
 
@@ -1051,18 +1051,19 @@ function SignupParentServerForm({onLogin, onBack}){
     if(r.needsConfirmation){ try{ localStorage.setItem(PENDING_PARENT_EMAIL_KEY, form.email.trim().toLowerCase()); }catch{} return setInfo("Check your email to confirm your address, then log in."); }
     onLogin("parent", mirrorServerUser(r.profile,{childIds:[]}));
   }
+  const pf=(id,label,k,type,ph,onEnter)=>(<Field id={id} label={label}><input id={id} style={inputStyle} type={type} value={form[k]} onChange={e=>f(k,e.target.value)} placeholder={ph} autoCapitalize="none" autoCorrect="off" spellCheck={false} onKeyDown={onEnter?(e=>{ if(e.key==="Enter") onEnter(); }):undefined}/></Field>);
   return(
     <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Create Parent Account</div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>After signing up you can add your child's account from the dashboard.</div>
-      <InputField label="Your Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mrs Lee"/>
-      <InputField label="Email" value={form.email} onChange={v=>f("email",v)} placeholder="you@example.com"/>
-      <InputField label="Password (min 8 chars)" value={form.password} onChange={v=>f("password",v)} type="password" placeholder="Create a password"/>
-      <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={submit}/>
-      {err&&<ErrorBox msg={err}/>}
-      {info&&<div style={{background:"#F0FDF4",borderRadius:10,padding:"9px 13px",marginBottom:12,fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:600}}>{info}</div>}
-      <BigBtn color="#7C3AED" onClick={busy?()=>{}:submit}>{busy?"Creating...":"Create Parent Account"}</BigBtn>
+      <button onClick={onBack} style={{...linkBtn,color:T.primary,fontSize:14,marginBottom:16}}>Back to login</button>
+      <h1 style={{margin:"0 0 4px",fontWeight:800,fontSize:26,color:T.ink,fontFamily:FONT}}>Create Parent Account</h1>
+      <div style={{...helperStyle,marginBottom:18}}>After signing up you can add your child's account from the dashboard.</div>
+      {pf("sp-name","Your name","name","text","e.g. Mrs Lee")}
+      {pf("sp-email","Email","email","email","you@example.com")}
+      {pf("sp-pw","Password (min 8 chars)","password","password","Create a password")}
+      {pf("sp-confirm","Confirm password","confirm","password","Re-enter password",submit)}
+      {err&&<ErrorText>{err}</ErrorText>}
+      {info&&<div style={{background:T.tile,border:`1.5px solid ${T.success}`,borderRadius:12,padding:"9px 13px",marginBottom:12,fontSize:14,color:T.successText,fontWeight:700}}>{info}</div>}
+      <button onClick={busy?undefined:submit} disabled={busy} style={mainBtn(busy)}>{busy?"Creating...":"Create Parent Account"}</button>
     </div>
   );
 }
@@ -1085,7 +1086,7 @@ function SignupParentForm({onSignup, onBack}){
     const child = allUsers().find(u=>u.id===cid&&u.role==="student");
     if(!child){ setLinkMsg("No student with ID '"+cid+"' found. Please check the ID."); return; }
     setLinkedIds(p=>[...p,cid]);
-    setLinkMsg(" Linked: "+child.name+" ("+child.grade+")");
+    setLinkMsg("Linked: "+child.name+" ("+child.grade+")");
     setChildInput("");
   }
 
@@ -1103,47 +1104,47 @@ function SignupParentForm({onSignup, onBack}){
     onSignup("parent", user);
   }
 
+  const pf=(id,label,k,type,ph,tx)=>(<Field id={id} label={label}><input id={id} style={inputStyle} type={type} value={form[k]} onChange={e=>f(k,tx?tx(e.target.value):e.target.value)} placeholder={ph} autoCapitalize="none" autoCorrect="off" spellCheck={false}/></Field>);
   return(
-    <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Create Parent Account </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Monitor your child's progress</div>
-
-      <InputField label="Parent Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mrs Lee"/>
-      <InputField label="Parent ID (for login)" value={form.id} onChange={v=>f("id",v.toLowerCase().replace(/\s/g,"_"))} placeholder="e.g. mrs_lee_parent"/>
-      <div style={{position:"relative",marginBottom:4}}>
-        <InputField label="Password (min 6 chars)" value={form.password} onChange={v=>f("password",v)} type={showPw?"text":"password"} placeholder="Create a password"/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
-      </div>
-      <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password"/> <div style={{background:"#F5F3FF",border:"1.5px solid #DDD6FE",borderRadius:16,padding:"14px",marginBottom:16,marginTop:4}}>
-        <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:"#4C1D95",marginBottom:8}}> Link Student Accounts</div>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#6D28D9",marginBottom:10,lineHeight:1.6}}>
-          Ask your child to share their Student ID, then add it here. You can add multiple children.
+    <div data-testid="signup-local-form">
+      <button onClick={onBack} style={{...linkBtn,color:T.primary,fontSize:14,marginBottom:16}}>Back to login</button>
+      <h1 style={{margin:"0 0 4px",fontWeight:800,fontSize:26,color:T.ink,fontFamily:FONT}}>Create Parent Account</h1>
+      <div style={{...helperStyle,marginBottom:18}}>Monitor your child's progress</div>
+      {pf("sl-name","Parent name","name","text","e.g. Mrs Lee")}
+      {pf("sl-id","Parent ID (for login)","id","text","e.g. mrs_lee_parent",v=>v.toLowerCase().replace(/\s/g,"_"))}
+      <Field id="sl-pw" label="Password (min 6 chars)">
+        <div style={{position:"relative"}}>
+          <input id="sl-pw" style={{...inputStyle,paddingRight:64}} type={showPw?"text":"password"} value={form.password} onChange={e=>f("password",e.target.value)} placeholder="Create a password"/>
+          <button type="button" onClick={()=>setShowPw(p=>!p)} style={{...linkBtn,position:"absolute",right:12,top:14,color:T.primary,fontSize:13}}>{showPw?"Hide":"Show"}</button>
         </div>
+      </Field>
+      {pf("sl-confirm","Confirm password","confirm","password","Re-enter password")}
+      <div style={{background:T.tile,border:`1.5px solid ${T.border}`,borderRadius:20,padding:14,marginBottom:16,marginTop:4}}>
+        <div style={{fontWeight:800,fontSize:14,color:T.ink,marginBottom:6}}>Link student accounts</div>
+        <div style={{...helperStyle,marginBottom:10}}>Ask your child to share their Student ID, then add it here. You can add multiple children.</div>
         <div style={{display:"flex",gap:8,marginBottom:6}}>
-          <input value={childInput} onChange={e=>setChildInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter") addChild();}} placeholder="Enter student ID..." style={{flex:1,border:"1.5px solid #DDD6FE",borderRadius:10,padding:"9px 12px",fontSize:"calc(var(--fs) * 0.929)",outline:"none"}}/>
-          <button onClick={addChild} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:"pointer"}}>Add</button>
+          <input value={childInput} onChange={e=>setChildInput(e.target.value)} onKeyDown={e=>{if(e.key==="Enter") addChild();}} placeholder="Enter student ID..." style={{...inputStyle,flex:1,width:"auto"}}/>
+          <button onClick={addChild} style={{...secondaryBtn,width:"auto",height:46,padding:"0 18px",fontSize:15}}>Add</button>
         </div>
-        {linkMsg&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:linkMsg.startsWith("")?C.green:C.red,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
-        {linkedIds.length===0&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,fontStyle:"italic"}}>No children linked yet. You can also add them later.</div>}
+        {linkMsg&&<div style={{fontSize:13,color:linkMsg.startsWith("Linked")?T.successText:T.error,fontWeight:600,marginBottom:8}}>{linkMsg}</div>}
+        {linkedIds.length===0&&<div style={helperStyle}>No children linked yet. You can also add them later.</div>}
         {linkedIds.map(cid=>{
           const ch=allUsers().find(u=>u.id===cid);
           if(!ch) return null;
           return(
-            <div key={cid} style={{display:"flex",alignItems:"center",gap:8,background:"#fff",borderRadius:10,padding:"8px 12px",marginBottom:6}}>
-              <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>{ch.avatar||""}</span>
+            <div key={cid} style={{display:"flex",alignItems:"center",gap:8,background:"#fff",borderRadius:12,padding:"8px 12px",marginBottom:6}}>
               <div style={{flex:1}}>
-                <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:"#4C1D95"}}>{ch.name}</div>
-                <div style={{fontSize:"calc(var(--fs) * 0.786)",color:C.muted}}>{ch.grade} . ID: {cid}</div>
+                <div style={{fontSize:14,fontWeight:700,color:T.ink}}>{ch.name}</div>
+                <div style={{fontSize:12,color:T.muted}}>{ch.grade} . ID: {cid}</div>
               </div>
-              <button onClick={()=>removeChild(cid)} style={{background:"none",border:"none",cursor:"pointer",color:C.red,fontSize:"calc(var(--fs) * 1.143)"}}>x</button>
+              <button onClick={()=>removeChild(cid)} style={{...linkBtn,color:T.error,fontSize:14}}>Remove</button>
             </div>
           );
         })}
       </div>
 
-      {err&&<ErrorBox msg={err}/>}
-      <BigBtn color="#7C3AED" onClick={handleSubmit}>Create Parent Account </BigBtn>
+      {err&&<ErrorText>{err}</ErrorText>}
+      <button onClick={handleSubmit} style={mainBtn(false)}>Create Parent Account</button>
     </div>
   );
 }
@@ -1513,15 +1514,15 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
 
 
   if(hub || !subjectSelected) return(
-    <Wrap>
+    <Wrap shell>
       {onOpenQuest&&!onExitToQuest&&(
         <div style={{padding:"10px 16px 0"}}>
-          <button data-testid="today-open-clewquest" onClick={onOpenQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Open ClewQuest</button>
+          <button data-testid="today-open-clewquest" onClick={onOpenQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1B2340",cursor:"pointer",padding:0}}>Open ClewQuest</button>
         </div>
       )}
       {onExitToQuest&&(
         <div style={{padding:"10px 16px 0"}}>
-          <button data-testid="today-back-to-islands" onClick={onExitToQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1E3A6E",cursor:"pointer",padding:0}}>Back to the islands</button>
+          <button data-testid="today-back-to-islands" onClick={onExitToQuest} style={{background:"none",border:"none",fontWeight:800,color:"#1B2340",cursor:"pointer",padding:0}}>Back to the islands</button>
         </div>
       )}
       <TodayScreen
@@ -1538,8 +1539,8 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
       <StickerShelf/>
       {SERVER_AUTH&&MOCK_EXAMS_ENABLED&&grade==="P3"&&(
         <div style={{padding:"0 16px 12px"}}>
-          <button onClick={()=>setPaperExam(true)} style={{width:"100%",background:"#fff",border:"2px solid #7C3AED",color:"#5B21B6",borderRadius:14,padding:"12px 16px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
-            English mock papers <span style={{fontSize:12,fontWeight:600,color:"#64748B"}}>real past papers, timed</span>
+          <button onClick={()=>setPaperExam(true)} style={{width:"100%",background:"#fff",border:`2px solid ${T.primary}`,color:T.primary,borderRadius:14,padding:"12px 16px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
+            English mock papers <span style={{fontSize:12,fontWeight:600,color:"#6B6F7B"}}>real past papers, timed</span>
           </button>
         </div>
       )}
@@ -1592,7 +1593,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
   );
 
   if(screen==="result"&&sessionResult) return(
-    <Wrap>
+    <Wrap shell>
       <StudentResultScreen
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}
@@ -1604,7 +1605,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
   );
 
   return(
-    <Wrap>
+    <Wrap shell>
       <StudentShell
         user={user}
         grade={grade}
@@ -1627,7 +1628,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
           <WeeklyReviewCard subject="English" prog={prog} roundIndex={EN_ROUND_INDEX} refreshKey={wrKey} onStart={startWeekly}/>
           {enDrill && (
             <div style={{padding:"14px 16px 0"}}>
-              <button onClick={()=>setEnDrillMode(true)} style={{width:"100%",background:"linear-gradient(135deg,#0F172A,#1E3A6E)",color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",boxShadow:"0 4px 14px rgba(15,23,42,0.25)"}}>
+              <button onClick={()=>setEnDrillMode(true)} style={{width:"100%",background:T.primary,color:"#fff",border:"none",borderRadius:14,padding:"12px 16px",cursor:"pointer",textAlign:"left",boxShadow:"0 4px 14px rgba(15,23,42,0.25)"}}>
                 <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>Weak-spot drill<span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:600,marginLeft:8,opacity:.85}}>{"to fix "+enTickets.open+" \u00B7 mastered "+enTickets.closed}</span></div>
                 <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.75)",marginTop:2}}>New questions on the skills you keep missing. Never the same question again.</div>
               </button>
@@ -1658,14 +1659,14 @@ function AdminApp({user, onLogout}){
   const T = {fontSize:"calc(var(--fs) * 0.857)",padding:"7px 12px",fontWeight:700,borderRadius:9,border:"none",cursor:"pointer"};
   const tabs = ["overview","students","accounts"];
   return(
-    <Wrap>
-      <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"16px 20px"}}>
+    <Wrap shell>
+      <div style={{background:T.primary,padding:"16px 20px"}}>
         <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
           <div style={{color:"#fff",fontWeight:900,fontSize:"calc(var(--fs) * 1.071)"}}> Admin Dashboard</div>
           <button onClick={onLogout} style={{...T,background:"rgba(255,255,255,.15)",color:"#fff",fontSize:"calc(var(--fs) * 0.786)"}}>Logout</button>
         </div>
         <div style={{display:"flex",gap:6,marginTop:10}}>
-          {tabs.map(t=><button key={t} onClick={()=>setTab(t)} style={{...T,background:tab===t?"#fff":"rgba(255,255,255,.15)",color:tab===t?"#1E3A6E":"#fff",fontSize:"calc(var(--fs) * 0.786)",textTransform:"capitalize"}}>{t}</button>)}
+          {tabs.map(t=><button key={t} onClick={()=>setTab(t)} style={{...T,background:tab===t?"#fff":"rgba(255,255,255,.15)",color:tab===t?"#1B2340":"#fff",fontSize:"calc(var(--fs) * 0.786)",textTransform:"capitalize"}}>{t}</button>)}
         </div>
       </div>
       <div style={{padding:16}}>
@@ -1675,12 +1676,12 @@ function AdminApp({user, onLogout}){
               {[["","Total Users",users.length],["","Students",students.length],["","Parents",parents.length]].map(([ic,lb,v],i)=>(
                 <div key={i} style={{background:"#fff",borderRadius:12,padding:"12px 8px",textAlign:"center",boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
                   <div style={{fontSize:"calc(var(--fs) * 1.571)"}}>{ic}</div>
-                  <div style={{fontSize:"calc(var(--fs) * 1.286)",fontWeight:900,color:"#1E3A6E"}}>{v}</div>
-                  <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#64748B"}}>{lb}</div>
+                  <div style={{fontSize:"calc(var(--fs) * 1.286)",fontWeight:900,color:"#1B2340"}}>{v}</div>
+                  <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B"}}>{lb}</div>
                 </div>
               ))}
             </div>
-            <button onClick={()=>{ window.location.href="/adaptive"; }} style={{width:"100%",marginBottom:14,background:"#0F172A",color:"#fff",border:"none",borderRadius:12,padding:"12px 14px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
+            <button onClick={()=>{ window.location.href="/adaptive"; }} style={{width:"100%",marginBottom:14,background:"#1B2340",color:"#fff",border:"none",borderRadius:12,padding:"12px 14px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
               Question generator
               <div style={{fontWeight:600,fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,.7)",marginTop:3}}>Admin only. Draft questions for review.</div>
             </button>
@@ -1690,13 +1691,13 @@ function AdminApp({user, onLogout}){
                 const prog = getProgress(s.id,"P3","English");
                 const pct = prog.history?.length ? Math.round(prog.history.reduce((a,h)=>a+h.totalPct,0)/prog.history.length) : null;
                 return(
-                  <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<7?"1px solid #F1F5F9":"none"}}>
-                    <div style={{width:32,height:32,borderRadius:9,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.143)"}}>{s.avatar||""}</div>
+                  <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<7?"1px solid #FBF6EA":"none"}}>
+                    <div style={{width:32,height:32,borderRadius:9,background:s.color||"#E2DBCF",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.143)"}}>{s.avatar||""}</div>
                     <div style={{flex:1}}>
                       <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{s.name}</div>
-                      <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#64748B"}}>{s.school||"-"} . {s.grade}</div>
+                      <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B"}}>{s.school||"-"} . {s.grade}</div>
                     </div>
-                    <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:pct>=70?"#10B981":pct?"#F59E0B":"#94A3B8"}}>{pct!=null?pct+"%":"-"}</div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:pct>=70?T.success:pct?"#D9A52E":"#6B6F7B"}}>{pct!=null?pct+"%":"-"}</div>
                   </div>
                 );
               })}
@@ -1710,11 +1711,11 @@ function AdminApp({user, onLogout}){
               const prog = getProgress(s.id,"P3","English");
               const sessions = prog.history?.length||0;
               return(
-                <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<students.length-1?"1px solid #F1F5F9":"none"}}>
-                  <div style={{width:30,height:30,borderRadius:8,background:s.color||"#E2E8F0",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.000)"}}>{s.avatar||""}</div>
+                <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"8px 0",borderBottom:i<students.length-1?"1px solid #FBF6EA":"none"}}>
+                  <div style={{width:30,height:30,borderRadius:8,background:s.color||"#E2DBCF",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.000)"}}>{s.avatar||""}</div>
                   <div style={{flex:1}}>
-                    <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{s.name} <span style={{color:"#94A3B8",fontWeight:400}}>({s.id})</span></div>
-                    <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#64748B"}}>{s.grade} . {sessions} sessions . {s.school||"-"}</div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{s.name} <span style={{color:"#6B6F7B",fontWeight:400}}>({s.id})</span></div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B"}}>{s.grade} . {sessions} sessions . {s.school||"-"}</div>
                   </div>
                 </div>
               );
@@ -1723,12 +1724,12 @@ function AdminApp({user, onLogout}){
         )}
         {tab==="accounts"&&(
           <div style={{display:"flex",flexDirection:"column",gap:10}}>
-            {[[" Students",students,"#1E3A6E"],[" Parents",parents,"#059669"],[" Admins",users.filter(u=>u.role==="admin"),"#7C3AED"]].map(([title,list,color],gi)=>(
+            {[[" Students",students,"#1B2340"],[" Parents",parents,T.success],[" Admins",users.filter(u=>u.role==="admin"),T.primary]].map(([title,list,color],gi)=>(
               <div key={gi} style={{background:"#fff",borderRadius:14,padding:14,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
                 <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color,marginBottom:8}}>{title} ({list.length})</div>
                 {list.map((u,i)=>(
-                  <div key={i} style={{fontSize:"calc(var(--fs) * 0.857)",padding:"4px 0",borderBottom:i<list.length-1?"1px solid #F8FAFC":"none",color:"#0F172A"}}>
-                    {u.name} . <span style={{color:"#64748B"}}>{u.id}</span>
+                  <div key={i} style={{fontSize:"calc(var(--fs) * 0.857)",padding:"4px 0",borderBottom:i<list.length-1?"1px solid #FBF6EA":"none",color:"#1B2340"}}>
+                    {u.name} . <span style={{color:"#6B6F7B"}}>{u.id}</span>
                   </div>
                 ))}
               </div>
@@ -1901,8 +1902,8 @@ function VocabQuizByRound({history, roundIndex, isZh}){
   const entry = rounds.find(h=>h.sessionNum===sel) || rounds[0] || null;
   const words = React.useMemo(()=> entry ? roundVocabCandidates(entry, roundIndex, 10, isZh?"zh":"en") : [], [entry, roundIndex, isZh]);
   if(!rounds.length) return(
-    <div style={{textAlign:"center",padding:"50px 20px",color:"#64748B"}}>
-      <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,color:"#0F172A",marginBottom:6}}>{isZh?"\u8FD8\u6CA1\u6709\u9519\u9898":"No wrong answers yet"}</div>
+    <div style={{textAlign:"center",padding:"50px 20px",color:"#6B6F7B"}}>
+      <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,color:"#1B2340",marginBottom:6}}>{isZh?"\u8FD8\u6CA1\u6709\u9519\u9898":"No wrong answers yet"}</div>
       <div style={{fontSize:"calc(var(--fs) * 0.857)"}}>{isZh?"\u5B8C\u6210\u4E00\u8F6E\u7EC3\u4E60\u540E\uFF0C\u8FD9\u91CC\u4F1A\u51FA\u73B0\u6BCF\u8F6E\u9519\u9898\u7684\u8BCD\u8BED\u3002":"Words from each round's wrong answers will appear here."}</div>
     </div>
   );
@@ -1911,14 +1912,14 @@ function VocabQuizByRound({history, roundIndex, isZh}){
       <div style={{display:"flex",gap:8,overflowX:"auto",paddingBottom:8,marginBottom:8}}>
         {rounds.map(h=>(
           <button key={h.sessionNum} onClick={()=>setSel(h.sessionNum)}
-            style={{flexShrink:0,padding:"6px 12px",borderRadius:20,border:"1.5px solid "+(sel===h.sessionNum?"#2563EB":"#E2E8F0"),
-              background:sel===h.sessionNum?"#2563EB":"#fff",color:sel===h.sessionNum?"#fff":"#334155",fontWeight:700,cursor:"pointer",
+            style={{flexShrink:0,padding:"6px 12px",borderRadius:20,border:"1.5px solid "+(sel===h.sessionNum?"#1F3F95":"#E2DBCF"),
+              background:sel===h.sessionNum?"#1F3F95":"#fff",color:sel===h.sessionNum?"#fff":"#334155",fontWeight:700,cursor:"pointer",
               fontSize:"calc(var(--fs) * 0.857)"}}>
             {(isZh?"\u7B2C "+h.sessionNum+" \u8F6E":"Round "+h.sessionNum)}
           </button>
         ))}
       </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#64748B",marginBottom:8}}>
+      <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#6B6F7B",marginBottom:8}}>
         {isZh?"\u672C\u8F6E\u8BCD\u6C47\u9898\u9519\u9898\u4E2D\u7684\u8BCD\u8BED\uFF08\u6700\u591A 10 \u4E2A\uFF09\uFF1A\u5148\u9009\u610F\u601D\uFF0C\u518D\u586B\u53E5\u5B50":"Words from this round's vocabulary mistakes (up to 10): meaning first, then use in a sentence"}
       </div>
       <VocabQuiz key={entry?entry.sessionNum:0} words={words} dict={isZh?ZH_VOCAB:EN_VOCAB} lang={isZh?"zh":"en"} limit={10}/>
@@ -1951,17 +1952,17 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
   });
 
   const topicColors = {
-    "Numbers":"#3B82F6","Addition":"#10B981","Subtraction":"#F59E0B",
-    "Multiplication":"#7C3AED","Division":"#F97316","Money":"#0D9488",
-    "Measurement":"#EF4444","Fractions":"#EC4899","Patterns":"#6366F1",
-    "Word Problem":"#0891B2","Grammar":"#3B82F6","Vocabulary":"#8B5CF6",
-    "BianZi":"#EF4444","CiYu":"#F97316","Other":"#64748B",
+    "Numbers":"#1F3F95","Addition":T.success,"Subtraction":"#D9A52E",
+    "Multiplication":T.primary,"Division":"#D9A52E","Money":T.success,
+    "Measurement":"#B3261E","Fractions":"#EC4899","Patterns":"#6366F1",
+    "Word Problem":T.primary,"Grammar":"#1F3F95","Vocabulary":T.gold,
+    "BianZi":"#B3261E","CiYu":"#D9A52E","Other":"#6B6F7B",
   };
 
   return(
     <div style={{fontFamily:"'Times New Roman', Times, serif",paddingBottom:80}}>
       {/* Header */}
-      <div style={{background:"linear-gradient(135deg,#7C2D12,#DC2626)",padding:"18px 20px"}}>
+      <div style={{background:T.cta,padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",
           fontWeight:700,marginBottom:10}}> Back</button>
@@ -1975,12 +1976,12 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
       </div>
 
       {/* Sub-tabs: mistakes list / vocab quiz */}
-      <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2E8F0"}}>
+      <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2DBCF"}}>
         {[["list", isZh?" \u9519\u9898":" Mistakes"],["quiz", isZh?" \u8BCD\u8BED\u7EC3\u4E60":" Vocab Quiz"],["rounds", isZh?" \u6309\u8F6E\u590D\u4E60":" By Round"]].map(([v,l])=>(
           <button key={v} onClick={()=>setView(v)}
             style={{flex:1,background:"none",border:"none",cursor:"pointer",padding:"12px 8px",
-              fontSize:"calc(var(--fs) * 0.929)",fontWeight:view===v?800:500,color:view===v?"#7C2D12":"#64748B",
-              borderBottom:view===v?"2.5px solid #DC2626":"2.5px solid transparent"}}>{l}</button>
+              fontSize:"calc(var(--fs) * 0.929)",fontWeight:view===v?800:500,color:view===v?"#1B2340":"#6B6F7B",
+              borderBottom:view===v?"2.5px solid #B3261E":"2.5px solid transparent"}}>{l}</button>
         ))}
       </div>
       {view==="quiz"&&<div style={{padding:"12px 16px"}}><VocabQuizByRound history={history} roundIndex={roundIndex} isZh={isZh}/></div>}
@@ -1988,10 +1989,10 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
       {view==="list"&&<>
       {/* Filter pills */}
       <div style={{display:"flex",gap:8,padding:"12px 16px",background:"#fff",
-        borderBottom:"1px solid #E2E8F0"}}>
+        borderBottom:"1px solid #E2DBCF"}}>
         {[["all", L("\u5168\u90E8","All")],["today", L("\u4ECA\u5929","Today")],["week", L("\u672C\u5468","This Week")]].map(([v,l])=>(
           <button key={v} onClick={()=>setFilter(v)}
-            style={{background:filter===v?"#DC2626":"#F1F5F9",color:filter===v?"#fff":"#64748B",
+            style={{background:filter===v?"#B3261E":"#FBF6EA",color:filter===v?"#fff":"#6B6F7B",
               border:"none",borderRadius:20,padding:"5px 14px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,cursor:"pointer"}}>
             {l}
           </button>
@@ -2004,9 +2005,9 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
         </div>
       )}
       {filtered.length===0?(
-        <div style={{textAlign:"center",padding:"60px 24px",color:"#64748B"}}>
+        <div style={{textAlign:"center",padding:"60px 24px",color:"#6B6F7B"}}>
           <div style={{fontSize:48,marginBottom:12}}></div>
-          <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:800,color:"#0F172A",marginBottom:6}}>
+          <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:800,color:"#1B2340",marginBottom:6}}>
             No mistakes {filter==="today"?"today":filter==="week"?"this week":"yet"}!
           </div>
           <div style={{fontSize:"calc(var(--fs) * 0.929)"}}>Keep up the great work!</div>
@@ -2016,18 +2017,18 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
           {/* Topic summary bar */}
           <div style={{background:"#fff",borderRadius:16,padding:"14px",marginBottom:14,
             boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
-            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#64748B",marginBottom:10,
+            <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#6B6F7B",marginBottom:10,
               textTransform:"uppercase",letterSpacing:.8}}>{L("\u8584\u5F31\u9898\u578B","Weak Topics")}</div>
             {Object.entries(byTopic).sort((a,b)=>b[1].length-a[1].length).map(([topic,items])=>{
-              const col = topicColors[topic]||"#64748B";
+              const col = topicColors[topic]||"#6B6F7B";
               const pct = Math.round(items.length/filtered.length*100);
               return(
                 <div key={topic} style={{marginBottom:8}}>
                   <div style={{display:"flex",justifyContent:"space-between",marginBottom:3}}>
                     <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:col}}>{topic}</span>
-                    <span style={{fontSize:"calc(var(--fs) * 0.786)",color:"#64748B"}}>{isZh?`\u9519 ${items.length} \u9898`:`${items.length} mistake${items.length>1?"s":""}`}</span>
+                    <span style={{fontSize:"calc(var(--fs) * 0.786)",color:"#6B6F7B"}}>{isZh?`\u9519 ${items.length} \u9898`:`${items.length} mistake${items.length>1?"s":""}`}</span>
                   </div>
-                  <div style={{background:"#F1F5F9",borderRadius:6,height:6}}>
+                  <div style={{background:"#FBF6EA",borderRadius:6,height:6}}>
                     <div style={{background:col,borderRadius:6,height:6,width:pct+"%",transition:"width .4s"}}/>
                   </div>
                 </div>
@@ -2042,7 +2043,7 @@ function MistakesTab({notebook, mistakes:rawMistakes, onBack, vocabBook=[], roun
           {onReviewRound&&(
             <button onClick={()=>setView("rounds")}
               style={{width:"100%",marginTop:4,padding:"12px 0",borderRadius:12,border:"none",cursor:"pointer",
-                background:"#2563EB",color:"#fff",fontWeight:800,fontSize:"calc(var(--fs) * 0.929)"}}>
+                background:"#1F3F95",color:"#fff",fontWeight:800,fontSize:"calc(var(--fs) * 0.929)"}}>
               {isZh?"\u6309\u8F6E\u91CD\u505A\u9519\u9898 \u2192":"Re-solve mistakes by round \u2192"}
             </button>
           )}
@@ -2070,15 +2071,15 @@ function ReviewTab({mistakes, onBack}){
   const maxCount = topTopics[0]?.[1]||1;
 
   const topicColors={
-    "Numbers":"#3B82F6","Addition":"#10B981","Subtraction":"#F59E0B",
-    "Multiplication":"#7C3AED","Division":"#F97316","Money":"#0D9488",
-    "Word Problem":"#0891B2","Grammar":"#3B82F6","Vocabulary":"#8B5CF6",
-    "BianZi":"#EF4444","CiYu":"#F97316","Other":"#64748B",
+    "Numbers":"#1F3F95","Addition":T.success,"Subtraction":"#D9A52E",
+    "Multiplication":T.primary,"Division":"#D9A52E","Money":T.success,
+    "Word Problem":T.primary,"Grammar":"#1F3F95","Vocabulary":T.gold,
+    "BianZi":"#B3261E","CiYu":"#D9A52E","Other":"#6B6F7B",
   };
 
   return(
     <div style={{fontFamily:"'Times New Roman', Times, serif",paddingBottom:80}}>
-      <div style={{background:"linear-gradient(135deg,#1E3A6E,#2563EB)",padding:"18px 20px"}}>
+      <div style={{background:T.primary,padding:"18px 20px"}}>
         <button onClick={onBack} style={{background:"rgba(255,255,255,.15)",border:"none",
           borderRadius:9,padding:"6px 12px",color:"#fff",cursor:"pointer",fontSize:"calc(var(--fs) * 0.857)",
           fontWeight:700,marginBottom:10}}> Back</button>
@@ -2089,13 +2090,13 @@ function ReviewTab({mistakes, onBack}){
       </div>
 
       {/* Tab switcher */}
-      <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2E8F0"}}>
+      <div style={{display:"flex",background:"#fff",borderBottom:"1px solid #E2DBCF"}}>
         {[["trend"," Trend"],["weak"," Weak Topics"]].map(([v,l])=>(
           <button key={v} onClick={()=>setView(v)}
             style={{flex:1,background:"none",border:"none",cursor:"pointer",
               padding:"13px 8px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:view===v?800:500,
-              color:view===v?"#1E3A6E":"#64748B",
-              borderBottom:view===v?"2.5px solid #1E3A6E":"2.5px solid transparent"}}>
+              color:view===v?"#1B2340":"#6B6F7B",
+              borderBottom:view===v?"2.5px solid #1B2340":"2.5px solid transparent"}}>
             {l}
           </button>
         ))}
@@ -2107,11 +2108,11 @@ function ReviewTab({mistakes, onBack}){
             {/* Mistakes over time bar chart */}
             <div style={{background:"#fff",borderRadius:18,padding:"16px",marginBottom:14,
               boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
-              <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#0F172A",marginBottom:14}}>
+              <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#1B2340",marginBottom:14}}>
                 Mistakes Per Session
               </div>
               {trendData.length===0?(
-                <div style={{textAlign:"center",color:"#94A3B8",padding:"24px",fontSize:"calc(var(--fs) * 0.929)"}}>
+                <div style={{textAlign:"center",color:"#6B6F7B",padding:"24px",fontSize:"calc(var(--fs) * 0.929)"}}>
                   No data yet. Complete some sessions first!
                 </div>
               ):(
@@ -2123,13 +2124,13 @@ function ReviewTab({mistakes, onBack}){
                     return(
                       <div key={i} style={{flex:1,display:"flex",flexDirection:"column",
                         alignItems:"center",gap:4}}>
-                        <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#64748B"}}>
+                        <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#6B6F7B"}}>
                           {d.mistakes}
                         </div>
                         <div style={{width:"100%",height:h,borderRadius:"4px 4px 0 0",
-                          background:isLast?"#EF4444":"#BFDBFE",
+                          background:isLast?"#B3261E":"#E2DBCF",
                           transition:"height .4s"}}/>
-                        <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#94A3B8",textAlign:"center",
+                        <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B",textAlign:"center",
                           lineHeight:1.2,maxWidth:28,overflow:"hidden"}}>
                           {d.date.slice(0,5)}
                         </div>
@@ -2142,9 +2143,9 @@ function ReviewTab({mistakes, onBack}){
                 const first=trendData[0].mistakes, last=trendData[trendData.length-1].mistakes;
                 const improved = last < first;
                 return(
-                  <div style={{background:improved?"#D1FAE5":"#FEF3C7",borderRadius:10,
+                  <div style={{background:improved?"#FBF6EA":"#FBF6EA",borderRadius:10,
                     padding:"8px 12px",marginTop:10,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,
-                    color:improved?"#065F46":"#92400E"}}>
+                    color:improved?"#4F6B22":"#1B2340"}}>
                     {improved
                       ? ` Mistakes reduced from ${first}  ${last}. Great improvement!`
                       : last===first
@@ -2159,26 +2160,26 @@ function ReviewTab({mistakes, onBack}){
             {mistakes.length>0&&(
               <div style={{background:"#fff",borderRadius:18,padding:"16px",
                 boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
-                <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#0F172A",marginBottom:12}}>
+                <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#1B2340",marginBottom:12}}>
                    Last Mistakes to Revisit
                 </div>
                 {mistakes.slice(-3).reverse().map((m,i)=>{
-                  const col = topicColors[m.topic||m.sectionType]||"#64748B";
+                  const col = topicColors[m.topic||m.sectionType]||"#6B6F7B";
                   return(
-                    <div key={i} style={{borderBottom:i<2?"1px solid #F1F5F9":"none",
+                    <div key={i} style={{borderBottom:i<2?"1px solid #FBF6EA":"none",
                       paddingBottom:i<2?12:0,marginBottom:i<2?12:0}}>
                       <div style={{display:"flex",gap:8,alignItems:"flex-start"}}>
                         <span style={{background:col+"18",borderRadius:8,padding:"4px 8px",
                           fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:col,flexShrink:0}}>
                           {m.topic||m.sectionType}
                         </span>
-                        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#0F172A",fontWeight:600,lineHeight:1.5}}>
+                        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#1B2340",fontWeight:600,lineHeight:1.5}}>
                           {(m.q||m.id||"-").slice(0,80)}{(m.q||"").length>80?"...":""}
                         </div>
                       </div>
                       {m.solution&&(
-                        <div style={{background:"#F0FDF4",borderRadius:10,padding:"8px 10px",
-                          marginTop:8,fontSize:"calc(var(--fs) * 0.786)",color:"#065F46",fontWeight:600}}>
+                        <div style={{background:"#FBF6EA",borderRadius:10,padding:"8px 10px",
+                          marginTop:8,fontSize:"calc(var(--fs) * 0.786)",color:"#4F6B22",fontWeight:600}}>
                            {m.solution.tip
                             ? m.solution.tip.replace(" ","")
                             : (m.solution.steps||[])[0]||"See solution in Mistakes tab"}
@@ -2195,15 +2196,15 @@ function ReviewTab({mistakes, onBack}){
         {view==="weak"&&(
           <div style={{background:"#fff",borderRadius:18,padding:"16px",
             boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
-            <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#0F172A",marginBottom:14}}>
+            <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,color:"#1B2340",marginBottom:14}}>
               Topics That Need More Practice
             </div>
             {topTopics.length===0?(
-              <div style={{textAlign:"center",color:"#94A3B8",padding:"24px",fontSize:"calc(var(--fs) * 0.929)"}}>
+              <div style={{textAlign:"center",color:"#6B6F7B",padding:"24px",fontSize:"calc(var(--fs) * 0.929)"}}>
                 No data yet!
               </div>
             ):topTopics.map(([topic,count],i)=>{
-              const col = topicColors[topic]||"#64748B";
+              const col = topicColors[topic]||"#6B6F7B";
               const pct = Math.round(count/maxCount*100);
               const priority = i===0?" High":i<=1?" Medium":" Low";
               return(
@@ -2212,17 +2213,17 @@ function ReviewTab({mistakes, onBack}){
                     alignItems:"center",marginBottom:4}}>
                     <div>
                       <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:col}}>{topic}</span>
-                      <span style={{fontSize:"calc(var(--fs) * 0.780)",color:"#94A3B8",marginLeft:6}}>{priority}</span>
+                      <span style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B",marginLeft:6}}>{priority}</span>
                     </div>
-                    <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:"#64748B"}}>
+                    <span style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:700,color:"#6B6F7B"}}>
                       {count} mistake{count>1?"s":""}
                     </span>
                   </div>
-                  <div style={{background:"#F1F5F9",borderRadius:8,height:8}}>
+                  <div style={{background:"#FBF6EA",borderRadius:8,height:8}}>
                     <div style={{background:col,borderRadius:8,height:8,
                       width:pct+"%",transition:"width .5s"}}/>
                   </div>
-                  <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#94A3B8",marginTop:3}}>
+                  <div style={{fontSize:"calc(var(--fs) * 0.780)",color:"#6B6F7B",marginTop:3}}>
                     {i===0?"Focus on this topic first in your next session"
                      :i===1?"Revise this topic regularly"
                      :"Keep an eye on this topic"}
@@ -2319,7 +2320,7 @@ function App(){
     setAuth(null); setCqOpen(false);
   }
 
-  if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
+  if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#6B6F7B",fontWeight:700}}>Loading…</div>;
   if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo} resetCode={resetCode} onResetDone={()=>setResetCode("")}
     onParentSignedUp={(p)=>{ handleLogin("parent", mirrorServerUser(p,{childIds:[]})); setOnboard(true); }}/>;
   if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2

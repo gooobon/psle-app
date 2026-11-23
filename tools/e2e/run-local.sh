@@ -83,8 +83,15 @@ start_next() {
   stop_next
   local log="$STATE/next-${mode}.log"
   local flags=()
+  # The current flow (landing -> sign up -> Add your child with a picture code -> child logs in with the picture code) needs ClewQuest on.
+  # The "off" phase keeps ClewQuest off and seeds the demo users so the flag-off spec can log in.
+  if [[ "$mode" == "off" ]]; then
+    flags+=( NEXT_PUBLIC_SERVER_AUTH=true NEXT_PUBLIC_SHOW_DEMO=true )
+  fi
   if [[ "$mode" != "off" ]]; then
     flags+=(
+      NEXT_PUBLIC_CLEWQUEST_ENABLED=true
+      CLEWQUEST_PICTURE_PEPPER=e2e-local-pepper-0123456789
       NEXT_PUBLIC_SERVER_AUTH=true
       NEXT_PUBLIC_WRONG_ANSWERS_SYNC_ENABLED=true
       NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED=true

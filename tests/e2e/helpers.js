@@ -2,18 +2,11 @@ const fs = require("fs");
 const path = require("path");
 
 const SHOTS = path.join(process.cwd(), process.env.E2E_SHOTS_DIR || "docs/e2e-2026-11-19");
-const PRODUCTION_REF = "zehnulwvysvnsshunxzr";
+const { assertNonProduction, PRODUCTION_REF } = require("./guard");
 
+// Kept under its old name: every spec calls it first. Throws if anything points at the production project.
 function assertLocalOnly() {
-  const blob = [
-    process.env.NEXT_PUBLIC_SUPABASE_URL,
-    process.env.E2E_API_URL,
-    process.env.E2E_DB_URL,
-    process.env.SUPABASE_SERVICE_ROLE_KEY,
-  ].join(" ");
-  if (blob.includes(PRODUCTION_REF)) {
-    throw new Error("Refusing to run: a Supabase URL or key points at the production project.");
-  }
+  assertNonProduction();
 }
 
 async function shot(page, name) {
@@ -72,7 +65,7 @@ async function nudge(page) {
     if (check) { check.click(); return "check"; }
 
     if (/What does this word mean\?|这个词语是什么意思/.test(body)) {
-      const opt = buttons().find((b) => !b.disabled && !/Logout|Today|Next|Finish|See results|查看成绩|完成复习|下一个/.test(text(b)));
+      const opt = buttons().find((b) => !b.disabled && !/Log ?out|Today|Next|Finish|See results|查看成绩|完成复习|下一个/.test(text(b)));
       if (opt) { opt.click(); return "meaning"; }
     }
 
@@ -208,6 +201,12 @@ async function drive(page, { done, max = 900, label = "exam" }) {
   throw new Error("Exam driver timed out during " + label + " " + JSON.stringify(tally));
 }
 
+// ---- Current flow (ClewQuest on, server auth on): landing -> Log in, or Sign up -> parent account -> (email confirm) ->
+// Add your child (login ID + 4-picture code) -> auto-linked -> the child logs in with the picture code. ----
+// Test project only. The email confirm step is mocked through the Supabase admin API of the LOCAL / non-production project
+// (generate_link), and is skipped when that project has "Confirm email" off (local default).
+const CHILD_CODE = [0, 3, 8, 4]; // picture indexes: Owl, Bolt, Clew, Wing shoe
+
 // The logged-out first screen is the landing; open the login form from it (no-op if already on the form).
 async function openLogin(page) {
   await page.waitForFunction(() => {
@@ -218,16 +217,110 @@ async function openLogin(page) {
   if (await btn.count()) await btn.click();
 }
 
-async function loginStudent(page, id, password) {
+// `pad` 0 = the first picture pad on screen, 1 = the "pick the same pictures again" pad (Add child and reset sign-in show two).
+async function pickPictures(page, code = CHILD_CODE, pad = 0) {
+  for (const i of code) await page.getByTestId(`pic-${i}`).nth(pad).click();
+}
+
+// Admin API of the test project: the token_hash the app's confirm route verifies.
+async function confirmLinkHash(email) {
+  assertNonProduction();
+  const base = String(process.env.E2E_API_URL || "").replace(/\/$/, "");
+  const key = process.env.E2E_SERVICE_ROLE;
+  if (!base || !key) throw new Error("E2E_API_URL and E2E_SERVICE_ROLE (local or non-production project) are required.");
+  const r = await fetch(base + "/auth/v1/admin/generate_link", {
+    method: "POST", headers: { apikey: key, Authorization: "Bearer " + key, "Content-Type": "application/json" },
+    body: JSON.stringify({ type: "magiclink", email }),
+  });
+  const j = await r.json();
+  const hash = j.hashed_token || (j.properties && j.properties.hashed_token);
+  if (!hash) throw new Error("no hashed_token from the test project: " + JSON.stringify(Object.keys(j)));
+  return hash;
+}
+
+// Landing -> Sign up -> parent account (step 1) -> email confirm if the project requires it -> "Add your child" (step 2).
+async function signUpParent(page, { name, email, password }) {
+  if (!/@example\.test$/i.test(email)) throw new Error("E2E parent emails must end in @example.test (never a real address): " + email);
+  await page.goto("/");
+  await page.getByTestId("cq-landing-signup").click();
+  await page.getByTestId("su-pname").fill(name);
+  await page.getByTestId("su-pemail").fill(email);
+  await page.getByTestId("su-ppassword").fill(password);
+  await page.getByTestId("su-c1").check();
+  await page.getByTestId("su-c2").check();
+  await page.getByTestId("su-continue").click();
+  const next = await Promise.race([
+    page.getByTestId("check-email").waitFor({ timeout: 30000 }).then(() => "confirm"),
+    page.getByTestId("cq-signup-step2").waitFor({ timeout: 30000 }).then(() => "step2"),
+  ]);
+  if (next === "confirm") {
+    const hash = await confirmLinkHash(email);
+    await page.goto(`/?token_hash=${encodeURIComponent(hash)}&type=magiclink`);
+    await page.getByTestId("cq-signup-step2").waitFor({ timeout: 30000 });
+  }
+}
+
+// Step 2 / "Add child" form: names, level, subjects, login ID and the 4-picture code (entered twice). Waits for "<first> is ready!".
+async function addChild(page, { first, last = "Tan", username, level = "P3", code = CHILD_CODE }) {
+  await page.getByTestId("ac-first").fill(first);
+  await page.getByTestId("ac-last").fill(last);
+  await page.getByRole("button", { name: level, exact: true }).click();
+  await page.getByRole("button", { name: "English" }).click();
+  await page.getByRole("button", { name: "Chinese", exact: true }).click();
+  await page.getByTestId("ac-username").fill(username);
+  await page.getByTestId("ac-status").filter({ hasText: "Available" }).waitFor({ timeout: 15000 });
+  await pickPictures(page, code, 0);
+  await pickPictures(page, code, 1);
+  await page.getByTestId("ac-create").click();
+  await page.getByTestId("child-ready").waitFor({ timeout: 30000 });
+}
+
+// Test-project fixture only: set a child's school directly (the Add child form only accepts schools from the MOE list).
+async function setChildSchool(username, school) {
+  assertNonProduction();
+  const base = String(process.env.E2E_API_URL || "").replace(/\/$/, ""); const key = process.env.E2E_SERVICE_ROLE;
+  const r = await fetch(base + "/rest/v1/profiles?username=eq." + encodeURIComponent(username), {
+    method: "PATCH", headers: { apikey: key, Authorization: "Bearer " + key, "Content-Type": "application/json", Prefer: "return=minimal" }, body: JSON.stringify({ school }),
+  });
+  if (!r.ok) throw new Error("could not set the test child's school: " + r.status);
+}
+
+// One call for the whole parent side of a spec: sign up, add the child (auto-linked), land on the parent dashboard.
+async function setupFamily(page, { parent, child }) {
+  await signUpParent(page, parent);
+  await addChild(page, { first: child.first || child.name.split(" ")[0], last: child.last || child.name.split(" ").slice(1).join(" ") || "Tan", username: child.username, level: child.level || "P3", code: child.code || CHILD_CODE });
+  await page.getByTestId("ready-dashboard").click();
+  await page.getByTestId("child-card").waitFor({ timeout: 30000 });
+  if (child.school) { await setChildSchool(child.username, child.school); await page.reload(); await page.getByTestId("child-card").waitFor({ timeout: 30000 }); }
+}
+
+// Child login: Student tab, login ID + picture code. First login goes through the Clew builder (skip) and the islands;
+// the specs below work from the Today hub, so this returns once "Hello," is on screen.
+async function loginStudent(page, username, _passwordIgnored, code = CHILD_CODE) {
   await page.goto("/");
   await openLogin(page);
   await page.getByTestId("login-form").waitFor();
   await page.getByTestId("login-role-student").click();
-  if (await page.getByTestId("use-password").count()) await page.getByTestId("use-password").click(); // picture pad is the default when ClewQuest is on
-  await page.getByTestId("login-id").fill(id);
-  await page.getByTestId("login-password").fill(password);
-  await page.getByTestId("login-submit").click();
-  await page.getByText(/Hello,/).waitFor({ timeout: 20000 });
+  await page.getByTestId("pic-username").fill(username);
+  await pickPictures(page, code);
+  await page.getByTestId("pic-submit").click();
+  await toTodayHub(page);
+}
+
+async function toTodayHub(page) {
+  const seen = await Promise.race([
+    page.getByTestId("cq-builder").waitFor({ timeout: 30000 }).then(() => "builder"),
+    page.getByTestId("cq-landing").waitFor({ timeout: 30000 }).then(() => "landing"),
+    page.getByText(/Hello,/).first().waitFor({ timeout: 30000 }).then(() => "today"),
+  ]);
+  if (seen === "builder") {
+    await page.getByTestId("cq-skip").click().catch(async () => { await page.getByTestId("cq-save").click(); });
+    await page.getByTestId("cq-landing").waitFor({ timeout: 20000 });
+  }
+  if (seen !== "today") {
+    if (await page.getByTestId("cq-today").count()) await page.getByTestId("cq-today").click();
+    await page.getByText(/Hello,/).first().waitFor({ timeout: 20000 });
+  }
 }
 
 async function loginParent(page, email, password) {
@@ -238,34 +331,36 @@ async function loginParent(page, email, password) {
   await page.getByTestId("login-id").fill(email);
   await page.getByTestId("login-password").fill(password);
   await page.getByTestId("login-submit").click();
-  await page.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
+  await page.getByTestId("child-card").or(page.getByRole("button", { name: /Add child/ })).first().waitFor({ timeout: 20000 });
 }
 
 async function ensureParent(page, email, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Add child");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Add child") || t.includes("ClewQuest");
   });
   await openLogin(page);
   if (await page.getByTestId("login-form").count()) await loginParent(page, email, password);
 }
 
-async function ensureStudent(page, id, password) {
+async function ensureStudent(page, username, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Today");
   });
   await openLogin(page);
-  if (await page.getByTestId("login-form").count()) await loginStudent(page, id, password);
+  if (await page.getByTestId("login-form").count()) await loginStudent(page, username, password);
+  else if (!(await page.getByText(/Hello,/).count())) await toTodayHub(page);
 }
 
 async function logout(page) {
-  await page.getByRole("button", { name: "Logout" }).click();
+  await page.getByRole("button", { name: /^Log ?out$/i }).first().click();
   await page.getByText(/Log in|Untangle PSLE/).first().waitFor({ timeout: 20000 });
 }
 
 module.exports = {
-  SHOTS, openLogin, shot, bodyText, dbGet, drive, nudge, loginStudent, loginParent, logout, ensureParent, ensureStudent, assertLocalOnly,
+  SHOTS, PRODUCTION_REF, CHILD_CODE, openLogin, shot, bodyText, dbGet, drive, nudge, pickPictures, confirmLinkHash, signUpParent, addChild, setupFamily,
+  loginStudent, loginParent, logout, ensureParent, ensureStudent, toTodayHub, assertLocalOnly,
 };

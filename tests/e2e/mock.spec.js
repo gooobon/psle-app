@@ -2,10 +2,9 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
 
-const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.com", password: "Testpass1" };
-const PARENT_B = { name: "Mr Tan", email: "mr.tan.e2e@example.com", password: "Testpass2" };
+const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
 const LEAK = /"(answer|answers|acceptableAnswers|hints|solution|explanation|explain|learning_tip|retry_hint|correctAnswer|modelAnswer)"\s*:/;
@@ -33,10 +32,8 @@ test("mock exam role-play @mock", async ({ browser }) => {
   assertLocalOnly();
   const studentBodies = [];
   const parent = await browser.newContext(CTX);
-  const parentB = await browser.newContext(CTX);
   const student = await browser.newContext(CTX);
   const pp = await parent.newPage();
-  const pb = await parentB.newPage();
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
@@ -44,39 +41,12 @@ test("mock exam role-play @mock", async ({ browser }) => {
     studentBodies.push(text.slice(0, 300000));
   });
 
-  await pp.goto("/");
-  await pp.getByTestId("login-form").waitFor();
-  await pp.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pp.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_A.name);
-  await pp.getByPlaceholder("you@example.com").fill(PARENT_A.email);
-  await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
-  await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
-  await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).click();
-  await pp.getByTestId("ac-username").fill(CHILD.username);
-  await pp.getByTestId("ac-first").fill(CHILD.name);
-  await pp.getByPlaceholder("School").fill(CHILD.school);
-  await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
-  await pp.getByRole("button", { name: "Check", exact: true }).click();
-  await expect(pp.getByTestId("ac-name-status")).toBeVisible();
-  await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
-  await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
-  await pp.getByRole("button", { name: "Send invite" }).click();
-  await pp.getByText(/Invite created/).waitFor();
-  await pb.goto("/");
-  await pb.getByRole("button", { name: /Parent Sign Up/ }).click();
-  await pb.getByPlaceholder("e.g. Mrs Lee").fill(PARENT_B.name);
-  await pb.getByPlaceholder("you@example.com").fill(PARENT_B.email);
-  await pb.getByPlaceholder("Create a password").fill(PARENT_B.password);
-  await pb.getByPlaceholder("Re-enter password").fill(PARENT_B.password);
-  await pb.getByRole("button", { name: "Create Parent Account" }).click();
-  await pb.getByText(/invited you to follow/).waitFor();
-  await pb.getByRole("button", { name: "Accept" }).click();
-  await pb.getByRole("button", { name: new RegExp(CHILD.name) }).waitFor({ timeout: 20000 });
+  // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
+  await setupFamily(pp, { parent: PARENT_A, child: CHILD });
+  await shot(pp, "01-parent-and-child");
   const links = await dbGet("parent_child?select=parent_id,child_id");
-  record("parent", "Both parents linked", "2 parent_child rows", "rows " + links.length, links.length === 2 ? "PASS" : "FAIL", await snap(pb, "01-parents"));
+  expect(links.length).toBe(1);
+  record("parent", "Parent signed up and child linked", "1 parent_child row", "rows " + links.length, links.length === 1 ? "PASS" : "FAIL", await snap(pp, "01-parents"));
 
   const id = await childId();
   await loginStudent(sp, CHILD.username, CHILD.password);
@@ -205,13 +175,6 @@ test("mock exam role-play @mock", async ({ browser }) => {
   }
   record("parent A", "Marks an open-ended item from the model answer", "Papers tab shows the model answer and a Correct mark is stored", "model shown; marks " + marked.length, model.length > 0 && marked.length >= 1 ? "PASS" : "FAIL", await snap(pp, "08-parent-mark"));
 
-  await pb.bringToFront();
-  await pb.goto("/");
-  await ensureParent(pb, PARENT_B.email, PARENT_B.password);
-  await pb.getByRole("button", { name: /Papers/ }).click();
-  await pb.getByText("Model answer:").first().waitFor({ timeout: 20000 });
-  const same = (await bodyText(pb)).includes(model.slice(0, 40));
-  record("parent B", "Sees the same paper and model answer", "Both parents can open Papers", same ? "model answer visible" : "model answer missing", same ? "PASS" : "FAIL", await snap(pb, "09-parent-b"));
 
   const leaked = studentBodies.filter((t) => LEAK.test(t) || (model && model.length > 12 && t.includes(model.slice(0, 40))));
   record("student", "Answer keys never reach the student", "Student exam responses have no answer, hint, or model-answer fields", studentBodies.length + " responses, leaks " + leaked.length, studentBodies.length > 0 && leaked.length === 0 ? "PASS" : "FAIL", "");

@@ -6,7 +6,7 @@ import React from 'react';
 import { SERVER_AUTH, serverGet, serverPut } from '@/lib/serverClient';
 
 const SUBJECTS = ['English', 'Chinese', 'Math', 'Science'];
-const inp = { width: 72, padding: '6px 8px', borderRadius: 8, border: '1px solid #CBD5E1', fontSize: 13 };
+const inp = { width: 72, padding: '6px 8px', borderRadius: 8, border: '1px solid #E2DBCF', fontSize: 13 };
 
 export default function ParentChildSettings({ child }) {
   const on = SERVER_AUTH && !!child?.serverId;
@@ -36,9 +36,9 @@ export default function ParentChildSettings({ child }) {
     if (r.ok) { try { window.dispatchEvent(new Event('genius-parent-settings')); } catch {} setKey((k) => k + 1); }
   }
   return (
-    <div style={{ background: '#fff', border: '1px solid #E2E8F0', borderRadius: 12, padding: 12, marginBottom: 14 }}>
-      <div style={{ fontSize: 13, fontWeight: 800, color: '#4C1D95', marginBottom: 4 }}>{child.name || 'Child'}&apos;s targets (shared with the other parent)</div>
-      <div style={{ fontSize: 11, color: '#64748B', marginBottom: 8, lineHeight: 1.5 }}>
+    <div style={{ background: '#fff', border: '1px solid #E2DBCF', borderRadius: 12, padding: 12, marginBottom: 14 }}>
+      <div style={{ fontSize: 13, fontWeight: 800, color: '#1B2340', marginBottom: 4 }}>{child.name || 'Child'}&apos;s targets (shared with the other parent)</div>
+      <div style={{ fontSize: 11, color: '#6B6F7B', marginBottom: 8, lineHeight: 1.5 }}>
         Any linked parent can change these. Changes start tomorrow ({d.tomorrow}) so today&apos;s targets stay the same. 0 means that subject is not required.
       </div>
       {SUBJECTS.map((s) => (
@@ -52,13 +52,13 @@ export default function ParentChildSettings({ child }) {
         <span>Homework questions per mistake</span>
         <input type="number" min={1} max={100} style={inp} value={hw} onChange={(e) => setHw(e.target.value)} />
       </label>
-      <button onClick={save} style={{ background: '#7C3AED', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>Save</button>
-      {msg && <span style={{ fontSize: 12, color: '#64748B', marginLeft: 10 }}>{msg}</span>}
+      <button onClick={save} style={{ background: '#1F3F95', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' }}>Save</button>
+      {msg && <span style={{ fontSize: 12, color: '#6B6F7B', marginLeft: 10 }}>{msg}</span>}
       {d.audit.length > 0 && (
-        <div style={{ marginTop: 10, borderTop: '1px solid #E2E8F0', paddingTop: 8 }}>
+        <div style={{ marginTop: 10, borderTop: '1px solid #E2DBCF', paddingTop: 8 }}>
           <div style={{ fontSize: 12, fontWeight: 800, marginBottom: 4 }}>Change log</div>
           {d.audit.slice(0, 15).map((a) => (a.changes || []).map((line, i) => (
-            <div key={a.id + ':' + i} style={{ fontSize: 11, color: '#475569' }}>{String(a.changed_at).slice(0, 10)}: {line}</div>
+            <div key={a.id + ':' + i} style={{ fontSize: 11, color: '#6B6F7B' }}>{String(a.changed_at).slice(0, 10)}: {line}</div>
           )))}
         </div>
       )}

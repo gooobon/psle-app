@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
+import { TOKENS as TK, FONT as TK_FONT } from "@/lib/theme/tokens";
 
 const C = {
   navy:"#1E3A6E", blue:"#3B82F6", purple:"#8B5CF6",
@@ -8,6 +9,16 @@ const C = {
   muted:"#64748B", border:"#E2E8F0",
   lBlue:"#DBEAFE", lGreen:"#D1FAE5", lRed:"#FEE2E2",
   lAmber:"#FEF3C7", lOrange:"#FFEDD5",
+};
+
+// Shell palette (shared design tokens). Used by shell screens only (home, dashboards, results). The solving screens keep `C` above.
+const CS = {
+  navy:TK.ink, blue:TK.primary, purple:TK.primary,
+  amber:TK.gold, red:TK.error, green:TK.success, orange:TK.gold,
+  bg:TK.bg, card:TK.card, text:TK.ink,
+  muted:TK.muted, border:TK.border,
+  lBlue:TK.tile, lGreen:TK.tile, lRed:TK.tile,
+  lAmber:TK.tile, lOrange:TK.tile,
 };
 
 // ── Claude API — Dynamic AI Hints ────────────────────────────
@@ -454,11 +465,12 @@ function AnimProgressBar({ pct, color='#10B981', height=8, style={} }){
 
 
 // ── App shell wrapper ─────────────────────────────────────────
-function Wrap({children}){
+// `shell` = marble background + Noto Sans for shell screens (home, results). Solving screens omit it and look exactly as before.
+function Wrap({children, shell}){
   return(
     <div style={{
-      fontFamily:"Nunito,system-ui,'KaiTi','STKaiti','LXGW WenKai',sans-serif",
-      background:C.bg,
+      fontFamily:shell?TK_FONT:"Nunito,system-ui,'KaiTi','STKaiti','LXGW WenKai',sans-serif",
+      background:shell?TK.bg:C.bg,
       minHeight:"100vh",
       maxWidth:"var(--wrap-w)",
       width:"100%",
@@ -749,24 +761,24 @@ function RuleCard({card}){
 
 function StudentBottomNav({screen, setScreen, mistakeCount}){
   const tabs=[
-    {key:"home",   icon:"🏠", label:"Home"},
-    {key:"mistakes",icon:"❌", label:"Mistakes", badge:mistakeCount},
-    {key:"review", icon:"📚", label:"Review"},
+    {key:"home",   label:"Home"},
+    {key:"mistakes",label:"Mistakes", badge:mistakeCount},
+    {key:"review", label:"Review"},
   ];
   return(
     <div style={{position:"fixed",bottom:0,left:"50%",transform:"translateX(-50%)",
-      width:"100%",maxWidth:430,background:C.card,borderTop:"1px solid "+C.border,
+      width:"100%",maxWidth:430,background:TK.card,borderTop:"1px solid "+TK.border,
       display:"flex",zIndex:100}}>
       {tabs.map(t=>(
         <button key={t.key} onClick={()=>setScreen(t.key)}
           style={{flex:1,background:"none",border:"none",cursor:"pointer",
             padding:"10px 4px 12px",display:"flex",flexDirection:"column",
             alignItems:"center",gap:2,position:"relative"}}>
-          <span style={{fontSize:"calc(var(--fs) * 1.429)"}}>{t.icon}</span>
-          <span style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:screen===t.key?800:500,
-            color:screen===t.key?C.navy:C.muted}}>{t.label}</span>
+          <span style={{fontSize:14,fontWeight:screen===t.key?800:600,fontFamily:TK_FONT,padding:"4px 0",
+            borderBottom:screen===t.key?"3px solid "+TK.gold:"3px solid transparent",
+            color:screen===t.key?TK.primary:TK.muted}}>{t.label}</span>
           {t.badge>0&&(
-            <span style={{position:"absolute",top:6,right:"20%",background:C.red,
+            <span style={{position:"absolute",top:6,right:"20%",background:TK.error,
               color:"#fff",borderRadius:"50%",width:16,height:16,fontSize:"calc(var(--fs) * 0.780)",
               fontWeight:800,display:"flex",alignItems:"center",justifyContent:"center"}}>
               {t.badge>9?"9+":t.badge}
@@ -780,7 +792,7 @@ function StudentBottomNav({screen, setScreen, mistakeCount}){
 
 
 export {
-  C, TTS, SpeakBtn, SFX,
+  C, CS, TTS, SpeakBtn, SFX,
   Motion, AnimNumber, StarBurst, AnimProgressBar,
   Wrap, TagPill, BigBtn, ActionBtn, InputField,
   ErrorBox, HintBox, FeedbackBox, LearnCard, RevealBox, WrongBanner, RuleCard,
