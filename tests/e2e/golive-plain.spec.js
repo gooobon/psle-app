@@ -308,8 +308,10 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await driveToScore(sp, answers.pastPapers, { min: 50, max: 80 }, "past-mock");
   await sp.getByRole("button", { name: /Back to Home/ }).click();
   await sp.getByText(/Hello,/).waitFor({ timeout: 20000 });
+  // "Recent Sessions" moved: the history is now My records > History (data-testid home-my-records).
   await sp.getByRole("button", { name: "More" }).first().click();
-  await sp.getByText(/Recent Sessions/).click();
+  await sp.getByTestId("home-my-records").click();
+  await sp.getByTestId("rec-row").first().waitFor({ timeout: 20000 });
   file = await snap(sp, "11-history-school");
   const historyText = await bodyText(sp);
   const historySchool = await sp.evaluate((username) => {
