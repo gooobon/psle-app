@@ -39,6 +39,11 @@ async function childId() {
   return rows[0].id;
 }
 
+// SGT calendar date (YYYY-MM-DD), offset in days. A saved reward rule applies from the NEXT SGT day, never the same day.
+function sgtYmd(offset = 0) {
+  return new Date(Date.now() + 8 * 3600000 + offset * 86400000).toISOString().slice(0, 10);
+}
+
 test.describe.configure({ mode: "serial" });
 
 test("parent and student journey @main", async ({ browser }) => {
@@ -90,6 +95,7 @@ test("parent and student journey @main", async ({ browser }) => {
   expect(versions[0].weekly_amounts.English).toBe(5);
   expect(versions[0].weekly_amounts.Chinese).toBe(4);
   expect(versions[0].daily_tiers.find((t) => t.minPct === 90).credits).toBe(3);
+  expect(String(versions[0].effective_from)).toBe(sgtYmd(1));
   note("5 reward tiers", "PASS", "90% tier is 3 credits, effective " + versions[0].effective_from + ". Weekly bonus is S$5 English and S$4 Chinese at S$1 per credit.");
   await parentA.close();
 
@@ -113,10 +119,9 @@ test("parent and student journey @main", async ({ browser }) => {
   expect(en.first_set_questions).toBeGreaterThan(0);
   const credits1 = await dbGet("reward_credits?child_id=eq." + id + "&select=kind,subject,credits,score_pct,rule_effective_from");
   const enDaily = credits1.filter((r) => r.kind === "daily" && r.subject === "English");
-  expect(enDaily.length).toBe(1);
-  expect(enDaily[0].credits).toBeLessThan(99);
-  expect(enDaily[0].rule_effective_from).toBe(today);
-  note("2 English daily activity and first-set score", "PASS", "English sets=1 questions=" + en.questions_answered + " correct=" + en.correct + " first_set=" + en.first_set_correct + "/" + en.first_set_questions + ". Daily credit " + enDaily[0].credits + " at " + enDaily[0].score_pct + "% from the rule effective " + today + " (tomorrow's 99-credit tier was not used). No homework was assigned, so the gate allowed the credit.");
+  // The rule saved above is effective tomorrow, so no rule is in force today: practising today earns no daily credit.
+  expect(enDaily.length).toBe(0);
+  note("2 English daily activity and first-set score", "PASS", "English sets=1 questions=" + en.questions_answered + " correct=" + en.correct + " first_set=" + en.first_set_correct + "/" + en.first_set_questions + ". No daily credit today: the saved reward rule applies from tomorrow (" + versions[0].effective_from + ").");
 
   await sp.getByRole("button", { name: "Extra set" }).click();
   await finishSet(sp, "english-set-2");
@@ -128,8 +133,8 @@ test("parent and student journey @main", async ({ browser }) => {
   expect(activity2[0].first_set_correct).toBe(en.first_set_correct);
   expect(activity2[0].questions_answered).toBeGreaterThan(en.questions_answered);
   const credits2 = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.daily&subject=eq.English&select=credits");
-  expect(credits2.length).toBe(1);
-  note("2 second set keeps the first-set score", "PASS", "sets_completed=2, questions grew from " + en.questions_answered + " to " + activity2[0].questions_answered + ", first_set stayed " + activity2[0].first_set_correct + "/" + activity2[0].first_set_questions + ". Still one English daily credit.");
+  expect(credits2.length).toBe(0);
+  note("2 second set keeps the first-set score", "PASS", "sets_completed=2, questions grew from " + en.questions_answered + " to " + activity2[0].questions_answered + ", first_set stayed " + activity2[0].first_set_correct + "/" + activity2[0].first_set_questions + ". Still no English daily credit today (rule applies from tomorrow).");
 
   // Causes, patterns, Try similar.
   await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
@@ -286,15 +291,14 @@ test("parent and student journey @main", async ({ browser }) => {
   await sp.getByText(/Hello,/).waitFor();
   await sp.waitForTimeout(1500);
   const zhCreditsAfter = await dbGet("reward_credits?child_id=eq." + id + "&subject=eq.Chinese&kind=eq.daily&select=credits,score_pct,rule_effective_from");
-  expect(zhCreditsAfter.length).toBe(1);
-  expect(zhCreditsAfter[0].rule_effective_from).toBe(today);
+  expect(zhCreditsAfter.length).toBe(0);
   const left = await dbGet("parent_homework?child_id=eq." + id + "&solved_at=is.null&select=id");
   expect(left.length).toBe(0);
   await shot(sp, "17-credits-after-homework");
-  note("6 credits after homework, and when none were assigned", "PASS", "After every assigned question was solved, Chinese daily credit " + zhCreditsAfter[0].credits + " at " + zhCreditsAfter[0].score_pct + "% was written. Earlier, English was credited when nothing was assigned.");
+  note("6 credits after homework, and when none were assigned", "PASS", "After every assigned question was solved, no Chinese daily credit was written because the reward rule applies from tomorrow.");
 
   await student.storageState({ path: path.join(STATE, "student.json") });
-  fs.writeFileSync(path.join(STATE, "today.txt"), today);
+  fs.writeFileSync(path.join(STATE, "today.txt"), sgtYmd(0));
   await student.close();
 });
 
