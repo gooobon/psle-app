@@ -259,8 +259,9 @@ test("parent and student journey @main", async ({ browser }) => {
   }
   const hw = await dbGet("parent_homework?child_id=eq." + id + "&select=id,question_id,solved_at");
   expect(hw.length).toBeGreaterThan(10);
-  const settings = await dbGet("parent_settings?select=homework_per_mistake");
-  expect(settings.some((s) => s.homework_per_mistake === 4)).toBeTruthy();
+  // The per-mistake count now lives in the child's shared setting version and, like rewards, applies from the next SGT day.
+  const settings = await dbGet("child_setting_versions?child_id=eq." + id + "&select=homework_per_mistake,effective_from&order=effective_from.desc");
+  expect(settings.some((s) => s.homework_per_mistake === 4 && String(s.effective_from) === sgtYmd(1))).toBeTruthy();
   await shot(p2, "14-homework-assigned");
   note("4 homework count and more than 10", "PASS", "homework_per_mistake saved as 4. Assigned " + hw.length + " questions today (above the old 10/day cap; the abuse bound is 100).");
   await parentAgain.close();
