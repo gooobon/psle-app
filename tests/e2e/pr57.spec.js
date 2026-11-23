@@ -4,7 +4,7 @@ const fs = require("fs");
 const path = require("path");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { bodyText, dbGet, nudge, loginStudent, loginParent, assertLocalOnly, setupFamily } = require("./helpers");
+const { bodyText, dbGet, nudge, loginStudent, loginParent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT = { name: "Mrs Tan", email: "mrs.tan.pr57@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -346,7 +346,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   // —— Saturday mock papers ——
   shiftDays(1);
   await sp.goto("/");
-  await sp.getByText(/Hello,/).waitFor({ timeout: 20000 });
+  await toTodayHub(sp);
 
   await startPaper(sp, "Tao Nan School 2023 WA3");
   await openSection(sp, "Grammar (multiple choice)");

@@ -4,7 +4,7 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -220,6 +220,7 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   const shift = shiftDays();
   sql("update public.exam_attempts set deadline_at = now() + (" + shift + " || ' days')::interval + interval '8 seconds' where id = '" + ticking.id + "'");
   await sp.reload();
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByRole("button", { name: "Continue" }).click();
   await sp.getByText(/Time ran out, so your paper was handed in automatically/).waitFor({ timeout: 25000 });
