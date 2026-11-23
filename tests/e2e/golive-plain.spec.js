@@ -224,8 +224,7 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
   await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
   await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
-  await pp.getByRole("button", { name: /Add child/ }).click();
+  await pp.getByTestId("add-child-card").waitFor({ timeout: 20000 });
   await pp.getByTestId("ac-username").fill(CHILD.username);
   await pp.getByTestId("ac-first").fill(CHILD.name);
   const grade = await pp.locator("select").first().inputValue();
@@ -234,12 +233,12 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await pp.getByRole("button", { name: "Check", exact: true }).click();
   await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
+  await expect(pp.getByTestId("ac-success")).toBeVisible();
   let file = await snap(pp, "01-child-created");
   const kid = await childId();
   record("parent A", "Create a P3 child", "Grade selector is P3 and the child is stored as P3", "selector " + grade + " stored grade " + kid.grade + " school " + kid.school, grade === "P3" && kid.grade === "P3" ? "PASS" : "FAIL", file);
 
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
+  await pp.getByRole("button", { name: /Share with another parent/ }).click();
   await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
   await pp.getByRole("button", { name: "Send invite" }).click();
   await pp.getByText(PARENT_B.email).waitFor();

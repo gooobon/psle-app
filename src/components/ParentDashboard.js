@@ -12,7 +12,7 @@ import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
 import ParentPictureChild from "@/components/clewquest/ParentPictureChild";
 import { clewquestEnabled } from "@/lib/clewquest/config";
 import { cqPost } from "@/lib/clewquest/client";
-import { CODE_LENGTH } from "@/lib/clewquest/pictures";
+import { CODE_LENGTH, PICTURES } from "@/lib/clewquest/pictures";
 import { PicturePad } from "@/components/clewquest/PictureAuth";
 import SchoolCombobox from "@/components/SchoolCombobox";
 import { cleanNamePart, fullName, suggestLoginId, loginIdProblem } from "@/lib/supabase/config";
@@ -637,11 +637,13 @@ function ParentAdviceTab({advice, child, onApply}){
 
 // ── Parent App (main container) ───────────────────────────────
 // Server mode only: parent creates a child account (username + password the parent chooses).
-function AddChildForm({onCreated}){
+function AddChildForm({onCreated,onChildLinked,empty}){
   // Picture password (same picker + server hashing as the student picture sign-up) when ClewQuest is on; otherwise the old typed password.
   const pic = clewquestEnabled();
   const blank = {username:"",first:"",last:"",grade:"P3",school:"",password:""};
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(!!empty); // open by default when the parent has no linked child yet
+  const [codeOpen, setCodeOpen] = useState(false); // small collapsed "Link with a code" fallback
+  const [done, setDone] = useState(null); // {name, username, seq|null} after a successful create
   const [f, setF] = useState(blank);
   const [idTouched, setIdTouched] = useState(false); // once the parent edits the Login ID, stop auto-suggesting
   const [a, setA] = useState([]); const [b, setB] = useState([]);
@@ -689,15 +691,40 @@ function AddChildForm({onCreated}){
       return setErr(r.error||"Could not create child.");
     }
     onCreated&&onCreated(r.child);
-    setOk(pic?`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the 4 pictures.`:`Created. ${r.child.name} logs in with login ID "${r.child.username}" and the password you set.`);
+    setDone({name:r.child.name||full,username:r.child.username||username,seq:pic?[...a]:null});
     setF(blank); setIdTouched(false); setA([]); setB([]); setChk({state:"",key:"",nameFree:null,idFree:null});
   }
   const st=(good,text,tid)=><div data-testid={tid} style={{color:good?"#065F46":"#B91C1C",fontSize:12,fontWeight:700,marginBottom:8}}>{text}</div>;
+  const big = !!empty || open;
   return(
-    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add child</button>
-      {open&&(
+    <div data-testid="add-child-card" style={{background:"#fff",border:`${empty?2:1}px solid ${empty?"#7C3AED":C.border}`,borderRadius:14,padding:empty?16:12,marginBottom:14}}>
+      {done&&(
+        <div data-testid="ac-success" style={{background:"#ECFDF5",border:"1px solid #6EE7B7",borderRadius:12,padding:16,marginBottom:12,textAlign:"center"}}>
+          <div style={{fontSize:32,marginBottom:4}}>🎉</div>
+          <div style={{fontSize:20,fontWeight:900,color:"#065F46",marginBottom:6}}>{done.name} is ready!</div>
+          <div style={{fontSize:14,color:"#064E3B",lineHeight:1.5,marginBottom:10}}>
+            {done.seq
+              ? <>On your child's device, open <b>clewquest.com</b>, tap <b>Log in</b>, type <b>{done.username}</b> and tap the 4 pictures.</>
+              : <>On your child's device, open <b>clewquest.com</b>, tap <b>Log in</b>, type <b>{done.username}</b> and the password you set.</>}
+          </div>
+          <div style={{fontSize:11,fontWeight:800,color:"#475569",textTransform:"uppercase",letterSpacing:0.5}}>Login ID</div>
+          <div data-testid="ac-success-id" style={{fontSize:22,fontWeight:900,color:"#0F172A",marginBottom:done.seq?10:0}}>{done.username}</div>
+          {done.seq&&(<div data-testid="ac-success-pics" style={{display:"flex",gap:8,justifyContent:"center"}}>
+            {done.seq.map((i,n)=>(<div key={n} style={{background:"#fff",border:"1px solid #A7F3D0",borderRadius:10,padding:"6px 8px",minWidth:56}}>
+              <div style={{fontSize:28,lineHeight:1.2}}>{PICTURES[i]?.glyph}</div>
+              <div style={{fontSize:10,fontWeight:700,color:"#475569"}}>{n+1}. {PICTURES[i]?.label}</div>
+            </div>))}
+          </div>)}
+          <div style={{fontSize:12,color:"#065F46",marginTop:10}}>{done.name} now appears in your dashboard.</div>
+          <button data-testid="ac-another" onClick={()=>{ setDone(null); setOpen(true); }} style={{marginTop:10,background:"none",border:"1px solid #6EE7B7",borderRadius:10,padding:"7px 14px",fontWeight:800,fontSize:12,color:"#065F46",cursor:"pointer"}}>Add another child</button>
+        </div>
+      )}
+      {!done&&empty
+        ? <div style={{fontWeight:900,fontSize:18,color:"#4C1D95",marginBottom:2}}>Add my child</div>
+        : <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:big&&open?15:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Add my child</button>}
+      {(empty&&!done||open&&!empty)&&(
         <div style={{marginTop:10}}>
+          {empty&&<div style={{fontSize:13,color:C.muted,marginBottom:10}}>Create your child's account here. It is linked to you straight away. No codes to copy.</div>}
           <div style={{display:"flex",gap:8}}>
             <div style={{flex:1}}>
               <label htmlFor="ac-first" style={lbl}>Child's first name</label>
@@ -738,8 +765,25 @@ function AddChildForm({onCreated}){
           <button data-testid="ac-create" disabled={busy||!nameOk} onClick={submit} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:nameOk?"pointer":"not-allowed",opacity:nameOk?1:0.55}}>{busy?"Creating...":"Create child account"}</button>
         </div>
       )}
+      {(open||empty)&&(<div style={{marginTop:12,paddingTop:8,borderTop:"1px solid #E2E8F0"}}>
+        <button data-testid="code-link-toggle" onClick={()=>setCodeOpen(o=>!o)} style={{background:"none",border:"none",padding:0,cursor:"pointer",fontSize:11,color:C.muted,textDecoration:"underline"}}>Child already has an account? Link with a code</button>
+        {codeOpen&&(pic&&SERVER_AUTH?<ParentPictureChild onChildLinked={onChildLinked||onCreated}/>:<LegacyLinkChild onChildLinked={onChildLinked||onCreated}/>)}
+      </div>)}
     </div>
   );
+}
+
+// Old username + password link, only used when ClewQuest picture codes are off.
+function LegacyLinkChild({onChildLinked}){
+  const [lu,setLu]=useState(""); const [lp,setLp]=useState(""); const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
+  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
+  async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
+  return(<div style={{marginTop:8}}>
+    <input style={inp} placeholder="Child's login ID" value={lu} onChange={e=>setLu(e.target.value)}/>
+    <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
+    <button disabled={busy} style={{background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:8}} onClick={linkChild}>Link child</button>
+    {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
+  </div>);
 }
 
 // ── Server mode only ──────────────────────────────────────────
@@ -782,11 +826,10 @@ function TodayCard({linkedStudents}){
   );
 }
 
-// Link another parent (by their registered email) to one of my children, or link an existing child account.
+// Share a child with another parent (by their registered email).
 function GuardianTools({linkedStudents,onChildLinked}){
   const [open,setOpen]=useState(false);
   const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.serverId||"");
-  const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
   const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
   const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
   const btn={background:"#7C3AED",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
@@ -805,10 +848,9 @@ function GuardianTools({linkedStudents,onChildLinked}){
       setInv(v=>({...v, received:(v.received||[]).filter(x=>x.id!==id)}));
     } else loadInv();
   }
-  async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
   return(
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
+      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Share with another parent</button>
       {inv.received.length>0&&(<div style={{marginTop:10,background:"#FEF3C7",border:"1px solid #F59E0B",borderRadius:10,padding:10}}>
         <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Invitations for you</div>
         {inv.received.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:13,marginBottom:4}}>
@@ -828,12 +870,7 @@ function GuardianTools({linkedStudents,onChildLinked}){
               <button disabled={busy} style={{background:"none",border:`1px solid ${C.border}`,borderRadius:8,padding:"4px 10px",cursor:"pointer",fontSize:12}} onClick={()=>revokeInvite(i.id)}>Revoke</button></div>))}
           </div>)}
         </>)}
-        <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Link an existing child account</div>
-        <input style={inp} placeholder="Child's username" value={lu} onChange={e=>setLu(e.target.value)}/>
-        <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
-        <button disabled={busy} style={btn} onClick={linkChild}>Link child</button>
         {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
-        {SERVER_AUTH&&clewquestEnabled()&&<ParentPictureChild onChildLinked={onChildLinked}/>}
       </div>)}
     </div>
   );
@@ -914,7 +951,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           <button onClick={onLogout} style={{background:"rgba(255,255,255,0.15)",border:"none",borderRadius:10,padding:"6px 12px",color:"rgba(255,255,255,0.8)",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>
         </div> {linkedStudents.length===0?(
           <div style={{background:"rgba(255,255,255,0.1)",borderRadius:12,padding:"10px 14px",marginBottom:12}}>
-            <div style={{color:"rgba(255,255,255,0.7)",fontSize:12}}>No students linked. Ask your child to share their Student ID.</div>
+            <div style={{color:"rgba(255,255,255,0.7)",fontSize:12}}>Add your child to get started.</div>
           </div>
         ):(
           <div style={{display:"flex",gap:8,marginBottom:12,overflowX:"auto",paddingBottom:2}}>
@@ -962,15 +999,15 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
       </div>
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
+        {SERVER_AUTH&&onChildCreated&&<AddChildForm empty={linkedStudents.length===0} onCreated={onChildCreated} onChildLinked={onChildCreated}/>}
         {SERVER_AUTH&&onChildCreated&&<TodayCard linkedStudents={linkedStudents}/>}
-        {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
         {SERVER_AUTH&&onChildCreated&&<GuardianTools linkedStudents={linkedStudents} onChildLinked={onChildCreated}/>}
         {SERVER_AUTH&&onChildCreated&&<AlertSettings/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>
             <div style={{fontWeight:700,fontSize:16,marginBottom:8}}>No children linked yet</div>
-            <div style={{fontSize:13,lineHeight:1.7}}>Go to Settings → Manage Children to link your child's Student ID. Ask your child to check their Profile for their ID.</div>
+            <div style={{fontSize:13,lineHeight:1.7}}>Use the Add my child card at the top to create your child's account.</div>
           </div>
         )}
         {parentToast&&<ComingSoonToast message={parentToast} onDone={()=>setParentToast(null)}/>}

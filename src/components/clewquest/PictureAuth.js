@@ -84,6 +84,7 @@ export function PictureSignup({ onDone, onBack }) {
     <div style={wrap}>
       <button onClick={onBack} style={{ background: "none", border: "none", textAlign: "left", cursor: "pointer", fontWeight: 700, color: "#475569" }}>Back</button>
       <div style={{ fontWeight: 900, fontSize: 22 }}>Create your account</div>
+      <div data-testid="su-parent-note" style={{ fontSize: 13, color: "#475569", background: "#F1F5F9", borderRadius: 10, padding: "8px 10px" }}>Easier: ask your parent to add you from their ClewQuest account.</div>
       {step === 1 && (<>
         <input data-testid="su-username" aria-label="Username" placeholder="Choose a username" value={username} onChange={(e) => setU(e.target.value)} autoCapitalize="none" style={field} />
         <input data-testid="su-name" aria-label="Your name" placeholder="Your name" value={name} onChange={(e) => setName(e.target.value)} style={field} />

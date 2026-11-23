@@ -52,7 +52,6 @@ test("mock exam role-play @mock", async ({ browser }) => {
   await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
   await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
   await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).click();
   await pp.getByTestId("ac-username").fill(CHILD.username);
   await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
@@ -60,8 +59,8 @@ test("mock exam role-play @mock", async ({ browser }) => {
   await pp.getByRole("button", { name: "Check", exact: true }).click();
   await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
+  await expect(pp.getByTestId("ac-success")).toBeVisible();
+  await pp.getByRole("button", { name: /Share with another parent/ }).click();
   await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
   await pp.getByRole("button", { name: "Send invite" }).click();
   await pp.getByText(/Invite created/).waitFor();

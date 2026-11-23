@@ -102,7 +102,7 @@ async function logoutToLogin(page) {
 
 async function openParentTools(page) {
   if ((await page.getByTestId("pl-username").count()) === 0) {
-    await page.getByRole("button", { name: /Invite another parent/ }).click();
+    await page.getByTestId("code-link-toggle").click();
   }
   await expect(page.getByTestId("pl-username")).toBeVisible();
 }
@@ -518,7 +518,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await page.getByPlaceholder("Create a password").fill("parentpass1");
       await page.getByPlaceholder("Re-enter password").fill("parentpass1");
       await page.getByRole("button", { name: /Create Parent Account/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("add-child-card")).toBeVisible({ timeout: 20000 });
       await openParentTools(page);
       const wrong = linkCode === "000000" ? "111111" : "000000";
       await page.getByTestId("pl-username").fill(student);
@@ -554,7 +554,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await page.getByPlaceholder("Your email").fill(parentEmail);
       await page.getByPlaceholder("Your password").fill("parentpass1");
       await page.getByRole("button", { name: /Log In/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("add-child-card")).toBeVisible({ timeout: 20000 });
       await openParentTools(page);
       await page.getByTestId("pl-username").fill(student);
       await page.getByTestId("pl-code").fill(fresh);
@@ -567,15 +567,18 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
     });
 
     await check("parent-created picture child is already linked", async () => {
-      await openParentTools(page);
-      await page.getByRole("button", { name: /Create a picture-code child/ }).click();
-      await page.getByTestId("pc-username").fill(picUser);
-      await page.getByTestId("pc-name").fill("Picture Kid");
+      await page.getByRole("button", { name: /Add my child/ }).click();
+      await page.getByTestId("ac-first").fill("Picture");
+      await page.getByTestId("ac-last").fill("Kid");
+      await page.getByTestId("ac-username").fill(picUser);
+      await page.getByTestId("ac-check").click();
+      await expect(page.getByTestId("ac-id-status")).toContainText("available", { timeout: 15000 });
       await tapPad(page, 0, CODE);
       await expect(page.locator("[data-testid='pic-dots']")).toHaveCount(2);
       await tapPad(page, 1, CODE);
-      await page.getByTestId("pc-submit").click();
-      await expect(page.getByTestId("pc-msg")).toContainText("Created Picture Kid", { timeout: 20000 });
+      await page.getByTestId("ac-create").click();
+      await expect(page.getByTestId("ac-success")).toContainText("Picture Kid is ready!", { timeout: 20000 });
+      await expect(page.getByTestId("ac-success-pics").locator("div").first()).toBeVisible();
       await expect(page.getByRole("button", { name: /Picture Kid/ })).toBeVisible({ timeout: 15000 });
       const kid = (await dbGet("profiles?select=id,username&username=eq." + picUser))[0];
       const me = await page.evaluate(async () => (await fetch("/api/auth/me", { credentials: "same-origin" })).json());
@@ -586,12 +589,12 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
     });
 
     await check("password student keeps Today and can open ClewQuest", async () => {
-      await page.getByRole("button", { name: /Add child/ }).click();
+      await page.getByTestId("add-child-card").waitFor();
       // With ClewQuest on, the Add-child form uses pictures. A password child (legacy) is still created through the API the form used before.
       const made = await page.request.post("/api/parent/children", { data: { username: passUser, name: "Password Kid", grade: "P3", school: "", password: "pass1234" } });
       expect(made.ok()).toBeTruthy();
       await page.reload();
-      await page.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
+      await page.getByTestId("add-child-card").waitFor({ timeout: 20000 });
       await expect(page.getByRole("button", { name: /Password Kid/ })).toBeVisible();
       await shot(page, "rp-22-parent-dashboard");
       await logoutToLogin(page);
@@ -655,7 +658,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await page.getByPlaceholder("Your email").fill(parentEmail);
       await page.getByPlaceholder("Your password").fill("parentpass1");
       await page.getByRole("button", { name: /Log In/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("add-child-card")).toBeVisible({ timeout: 20000 });
       await openParentTools(page);
       await page.getByTestId("pl-username").fill(lockUser);
       await page.getByTestId("pl-code").fill(lockCode);
@@ -730,7 +733,7 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
       await page.getByPlaceholder("Create a password").fill("parentpass1");
       await page.getByPlaceholder("Re-enter password").fill("parentpass1");
       await page.getByRole("button", { name: /Create Parent Account/ }).click();
-      await expect(page.getByRole("button", { name: /Add child/ })).toBeVisible({ timeout: 20000 });
+      await expect(page.getByTestId("add-child-card")).toBeVisible({ timeout: 20000 });
       expect(await page.getByTestId("picture-reset").count()).toBe(0);
       const api = await page.evaluate(async (childId) => {
         const r = await fetch("/api/clewquest/picture-reset", {

@@ -225,14 +225,14 @@ async function loginParent(page, email, password) {
   await page.getByPlaceholder("Your email").fill(email);
   await page.getByPlaceholder("Your password").fill(password);
   await page.getByRole("button", { name: /Log In/ }).click();
-  await page.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
+  await page.getByTestId("add-child-card").waitFor({ timeout: 20000 });
 }
 
 async function ensureParent(page, email, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Welcome back") || t.includes("Add child");
+    return t.includes("Welcome back") || t.includes("Add my child");
   });
   if (await page.getByText("Welcome back").count()) await loginParent(page, email, password);
 }

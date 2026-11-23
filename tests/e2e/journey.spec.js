@@ -58,10 +58,9 @@ test("parent and student journey @main", async ({ browser }) => {
   await pp.getByPlaceholder("Create a password").fill(PARENT_A.password);
   await pp.getByPlaceholder("Re-enter password").fill(PARENT_A.password);
   await pp.getByRole("button", { name: "Create Parent Account" }).click();
-  await pp.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
+  await pp.getByTestId("add-child-card").waitFor({ timeout: 20000 });
   await shot(pp, "01-parent-signed-up");
 
-  await pp.getByRole("button", { name: /Add child/ }).click();
   await pp.getByTestId("ac-username").fill(CHILD.username);
   await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
@@ -69,14 +68,14 @@ test("parent and student journey @main", async ({ browser }) => {
   await pp.getByRole("button", { name: "Check", exact: true }).click();
   await expect(pp.getByTestId("ac-name-status")).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
-  await expect(pp.getByText(/Created\./)).toBeVisible();
+  await expect(pp.getByTestId("ac-success")).toBeVisible();
   await expect(pp.getByText(CHILD.name).first()).toBeVisible();
   await shot(pp, "02-child-created");
   const links = await dbGet("parent_child?select=parent_id,child_id");
   expect(links.length).toBe(1);
   note("1 parent signup and child", "PASS", "Mrs Tan created amir_e2e; parent_child has 1 row");
 
-  await pp.getByRole("button", { name: /Invite another parent/ }).click();
+  await pp.getByRole("button", { name: /Share with another parent/ }).click();
   await pp.getByPlaceholder(/Other parent's email/).fill(PARENT_B.email);
   await pp.getByRole("button", { name: "Send invite" }).click();
   await expect(pp.getByText(/Invite created/)).toBeVisible();

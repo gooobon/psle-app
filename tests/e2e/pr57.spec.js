@@ -241,7 +241,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   await pp.getByRole("button", { name: "Create Parent Account" }).click();
   let signed = "timeout";
   for (let i = 0; i < 40; i++) {
-    if (await pp.getByRole("button", { name: /Add child/ }).count()) { signed = "new"; break; }
+    if (await pp.getByTestId("add-child-card").count()) { signed = "new"; break; }
     if (await pp.getByText("User already registered").count()) { signed = "exists"; break; }
     await pp.waitForTimeout(500);
   }
@@ -251,7 +251,6 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
     await loginParent(pp, PARENT.email, PARENT.password);
   }
   if (!(await pp.getByText(CHILD.name).count())) {
-    await pp.getByRole("button", { name: /Add child/ }).click();
   await pp.getByTestId("ac-username").fill(CHILD.username);
   await pp.getByTestId("ac-first").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
@@ -259,7 +258,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
     await pp.getByRole("button", { name: "Check", exact: true }).click();
     await expect(pp.getByTestId("ac-name-status")).toBeVisible();
     await pp.getByRole("button", { name: "Create child account" }).click();
-    await expect(pp.getByText(/Created\./)).toBeVisible();
+    await expect(pp.getByTestId("ac-success")).toBeVisible();
   }
   await confirmParents();
   const id = await childId();
