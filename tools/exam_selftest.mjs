@@ -714,22 +714,24 @@ await aok("hand-in with open-ended items leaves score auto-only, pending, and se
   const open = db.tables().exam_answers.filter((r) => r.attempt_id === UUID1 && r.correct === null);
   assert.equal(open.length, g0.ungraded);
   const pr = await mk(db, "src/app/api/parent/exam/route.js");
+  const w = S.marksByQuestion(withOpen.id, open.map((o) => o.question_id)); // marks each open item is worth (issue #66)
+  let markedTotal = 0, markedOk = 0;
   for (let i = 0; i < open.length; i++) {
+    markedTotal += w[i]; if (i % 2 === 0) markedOk += w[i];
     const r = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[i].question_id, correct: i % 2 === 0 }));
     assert.ok(r.ok, JSON.stringify(r));
     const left = open.length - 1 - i;
     assert.equal(r.pending, left);
-    assert.equal(r.total, g0.total + i + 1, "each mark adds one to the total");
+    assert.equal(r.total, g0.total + markedTotal, "each mark adds its marks to the total");
     assert.equal(settleLog.length, left === 0 ? 1 : 0, "settles exactly when the last item is marked");
   }
   a = db.tables().exam_attempts[0];
-  const ok_ = Math.ceil(open.length / 2);
-  assert.deepEqual([a.score, a.total, a.parent_pending, a.parent_score, a.parent_total], [g0.score + ok_, g0.total + open.length, 0, ok_, open.length]);
+  assert.deepEqual([a.score, a.total, a.parent_pending, a.parent_score, a.parent_total], [g0.score + markedOk, g0.total + markedTotal, 0, markedOk, markedTotal]);
   assert.ok(a.settled_at && a.auto_score === g0.score, "settled once; the auto result is kept");
   assert.deepEqual(settleLog[0], { score: a.score, total: a.total }, "settled from the FINAL score");
   // Changing a mark afterwards recomputes the score and does not settle (reward) again.
   const flip = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[0].question_id, correct: false }));
-  assert.ok(flip.ok && flip.score === g0.score + ok_ - 1 && settleLog.length === 1);
+  assert.ok(flip.ok && flip.score === g0.score + markedOk - w[0] && settleLog.length === 1);
   const src = fs.readFileSync(path.join(ROOT, "src/app/api/parent/exam/route.js"), "utf8");
   assert.ok(/is\("settled_at", null\)/.test(src), "settlement is claimed atomically");
 });
@@ -739,6 +741,27 @@ ok("migration for parent marks is additive and the paper reward waits for settle
   for (const c of ["auto_score", "auto_total", "parent_pending", "parent_score", "parent_total", "settled_at"]) assert.ok(m.includes(c));
   const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
   assert.ok(/g\.ungraded > 0/.test(r) && !/awardPaperReward/.test(r), "hand-in never awards while items are unmarked");
+});
+
+// Issue #66 fix 2: "(2 marks)" is worth 2 in scores and totals.
+ok("parseMarks / marksOf read the printed marks", () => {
+  assert.equal(E.parseMarks("Why? (2 marks)"), 2); assert.equal(E.parseMarks("Why? [3 marks]"), 3);
+  assert.equal(E.parseMarks("Name it (1 mark)"), 1); assert.equal(E.parseMarks("no marks here"), null); assert.equal(E.parseMarks("(0 marks)"), null);
+  assert.equal(E.marksOf({ stem: "Why? (2 marks)", marks: 1 }), 2); assert.equal(E.marksOf({ stem: "Why?", marks: 3 }), 3); assert.equal(E.marksOf({ stem: "Why?" }), 1);
+});
+ok("summarize weights by marks", () => {
+  const s = E.summarize([{ section: "C", correct: true, marks: 2 }, { section: "C", correct: false, marks: 1 }, { section: "C", correct: true }]);
+  assert.equal(s.score, 3); assert.equal(s.total, 4); assert.deepEqual(s.sections, [{ section: "C", score: 3, total: 4 }]);
+});
+ok("combineMarks adds a parent-marked 2-mark item as 2", () => {
+  const c = E.combineMarks({ autoScore: 5, autoTotal: 10, openMarks: [true, false, null], openWeights: [2, 3, 2], sections: [], openSections: ["Comprehension", "Comprehension", "Comprehension"] });
+  assert.equal(c.score, 7); assert.equal(c.total, 15); assert.equal(c.parentScore, 2); assert.equal(c.parentTotal, 5); assert.equal(c.pending, 1); assert.equal(c.sections[0].total, 5);
+  const d = E.combineMarks({ autoScore: 1, autoTotal: 2, openMarks: [true], sections: [], openSections: ["X"] }); // no weights = 1 each (old behaviour)
+  assert.equal(d.total, 3);
+});
+ok("server grading uses marks printed in the stem", () => {
+  assert.equal(typeof S.marksByQuestion, "function");
+  assert.deepEqual(S.marksByQuestion("no-such-paper", ["a", "b"]), [1, 1]);
 });
 
 console.log(`\n${n} checks run${process.exitCode ? ", SOME FAILED" : ", all passed"}`);

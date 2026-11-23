@@ -1,5 +1,7 @@
 // Real-time parent alerts (issue #56): "practice started" (once per child per SGT day) and "milestone finished" (with the result).
-// Shipped OFF: nothing is sent, and no database write happens, unless WHATSAPP_ENABLED=true. Server-only; relative imports only so
+// Shipped OFF: nothing is sent, and no database write happens, unless a channel is on. WHATSAPP_ENABLED=true turns on both alerts.
+// With WhatsApp off, the MILESTONE alert still falls back to email (it then follows EMAIL_ALERTS_ENABLED and ALERT_TEST_RECIPIENTS like every
+// email); the "started" alert stays WhatsApp-only. With both off, nothing is sent and nothing is written. Server-only; relative imports only so
 // tools/event_alerts_selftest.mjs can run it under plain node. Never throws: a failed alert must not affect the student's flow.
 //
 // Per linked parent (parent_child, both parents): claim a row in event_alert_log (unique per parent + event_key, so a double submit or a
@@ -39,6 +41,9 @@ export function quietEndsAt(now, q = DEFAULT_QUIET) {
 }
 
 export const masterOn = (env = process.env) => env.WHATSAPP_ENABLED === "true";
+export const emailOn = (env = process.env) => env.EMAIL_ALERTS_ENABLED === "true";
+// Is this event type active at all? WhatsApp master switch, or (milestones only) the email channel.
+export const eventActive = (type, env = process.env) => masterOn(env) || (type === "milestone" && emailOn(env));
 const allowList = (env) => String(env.ALERT_TEST_RECIPIENTS || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
 export function dashboardUrl(env = process.env) {
   const base = env.APP_BASE_URL || (env.VERCEL_PROJECT_PRODUCTION_URL ? "https://" + env.VERCEL_PROJECT_PRODUCTION_URL : "https://psle-app-vwx3.vercel.app");
@@ -59,7 +64,8 @@ async function emailConfirmed(admin, id) {
 async function deliver(admin, parent, channels, payload, { env, fetchImpl }) {
   const formats = { whatsapp: formatWhatsAppEvent, email: renderEventEmail };
   let waDetail = "no whatsapp channel";
-  const wa = channels.find((c) => c.type === "whatsapp" && c.enabled);
+  const wa = masterOn(env) ? channels.find((c) => c.type === "whatsapp" && c.enabled) : null;
+  if (!masterOn(env)) waDetail = "whatsapp off";
   if (wa && wa.opt_in && isE164(wa.address)) {
     const [r] = await dispatchAlert([wa], payload, { env, fetchImpl, formats });
     if (r?.status === "sent") return { status: "sent", detail: "whatsapp" };
@@ -92,8 +98,8 @@ async function loadParent(admin, pid) {
 
 // event: { type:"started"|"milestone", childId, subject, key?, label?, score?, total? }. Returns a summary; never throws.
 export async function notifyEvent(admin, event, { env = process.env, now = new Date(), fetchImpl } = {}) {
-  const out = { enabled: masterOn(env), parents: 0, sent: 0, deferred: 0, duplicate: 0, skipped: 0, errors: 0, dryRun: 0 };
-  if (!out.enabled) { log(`disabled (WHATSAPP_ENABLED!=true); no-op type=${event?.type}`); return out; }
+  const out = { enabled: eventActive(event && event.type, env), parents: 0, sent: 0, deferred: 0, duplicate: 0, skipped: 0, errors: 0, dryRun: 0 };
+  if (!out.enabled) { log(`disabled (WhatsApp and milestone email fallback both off); no-op type=${event?.type}`); return out; }
   try {
     const day = sgtDay(now);
     const eventKey = event.type === "started" ? startedKey(event.childId, day) : milestoneKey(event.childId, event.subject, event.key);
@@ -128,7 +134,7 @@ export async function notifyEvent(admin, event, { env = process.env, now = new D
 // by flipping 'deferred' -> 'claimed' first. A deferred "started" from an earlier SGT day is dropped as stale; milestones are always sent.
 export async function flushDeferred(admin, { env = process.env, now = new Date(), fetchImpl } = {}) {
   const out = { due: 0, sent: 0, skipped: 0, errors: 0 };
-  if (!masterOn(env)) return out;
+  if (!masterOn(env) && !emailOn(env)) return out;
   try {
     const { data: rows } = await admin.from("event_alert_log").select("parent_id,child_id,event_type,event_key,payload").eq("status", "deferred").lte("send_after", now.toISOString()).limit(200);
     for (const row of rows || []) {
@@ -137,6 +143,7 @@ export async function flushDeferred(admin, { env = process.env, now = new Date()
           .eq("parent_id", row.parent_id).eq("event_key", row.event_key).eq("status", "deferred").select("parent_id");
         if (!won || !won.length) continue;
         out.due++;
+        if (row.event_type === "started" && !masterOn(env)) { await finish(admin, row, "skipped", "started alert is WhatsApp-only"); out.skipped++; continue; }
         if (row.event_type === "started" && row.payload?.eventDay !== sgtDay(now)) { await finish(admin, row, "skipped", "stale started alert dropped"); out.skipped++; continue; }
         const { parent, channels } = await loadParent(admin, row.parent_id);
         if (!parent) { await finish(admin, row, "skipped", "parent missing"); out.skipped++; continue; }

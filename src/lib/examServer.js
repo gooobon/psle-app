@@ -5,7 +5,7 @@ import manifest from "@/data/papers/manifest.json";
 import { flattenEnglishPool, paperKeyOf, englishPaperExamPlan } from "@/lib/p3PaperBridge";
 import { indexSets } from "@/lib/reviewRounds";
 import { resolveItem, getFormat } from "@/lib/learningGrade";
-import { isFullPaper, minutesAllowed, minutesRule, paperFlags, paperMarks, paperLabel, FLAG_NOTES, isAnswered, summarize, pickNotebookRows, notebookAttemptKey } from "@/lib/examEngine";
+import { isFullPaper, minutesAllowed, minutesRule, paperFlags, paperMarks, paperLabel, FLAG_NOTES, isAnswered, summarize, marksOf, pickNotebookRows, notebookAttemptKey } from "@/lib/examEngine";
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 import { skillIdsOf } from "@/lib/similarItemsCore";
 
@@ -43,10 +43,10 @@ function flatten(plan) {
   const out = [];
   for (const sec of plan) {
     for (const it of sec.items) {
-      if (sec.type.endsWith("MCQ")) out.push({ id: it.id, section: sec.type });
-      else if (sec.type.endsWith("Cloze")) (it.blanks || []).forEach((b) => out.push({ id: it.id + "_" + b.num, section: sec.type }));
-      else if (sec.type === "Editing") (it.items || []).forEach((q) => out.push({ id: q.id, section: sec.type }));
-      else if (sec.type === "Comprehension") (it.questions || []).forEach((q) => out.push({ id: q.id, section: sec.type, marks: q.marks || 1 }));
+      if (sec.type.endsWith("MCQ")) out.push({ id: it.id, section: sec.type, marks: marksOf(it) });
+      else if (sec.type.endsWith("Cloze")) (it.blanks || []).forEach((b) => out.push({ id: it.id + "_" + b.num, section: sec.type, marks: marksOf(b) }));
+      else if (sec.type === "Editing") (it.items || []).forEach((q) => out.push({ id: q.id, section: sec.type, marks: marksOf(q) }));
+      else if (sec.type === "Comprehension") (it.questions || []).forEach((q) => out.push({ id: q.id, section: sec.type, marks: marksOf(q) }));
     }
   }
   return out;
@@ -77,7 +77,7 @@ function paperData(paperId) {
 export function paperMeta(paperId) { const d = paperData(paperId); return d ? { row: d.hit.row, key: d.hit.key } : null; }
 
 const pickQ = (q) => ({
-  id: q.id, no: q.questionNo || null, fmt: getFormat(q), marks: q.marks || 1, stem: q.stem || q.question || "",
+  id: q.id, no: q.questionNo || null, fmt: getFormat(q), marks: marksOf(q), stem: q.stem || q.question || "",
   options: (q.options || []).map((o) => (typeof o === "string" ? o : String(o && (o.text || o.label) || o))),
   sequenceItems: q.sequenceItems || null, statements: q.statements || null, abSentence: q.abSentence || null, abChoices: q.abChoices || null,
 });
@@ -145,11 +145,18 @@ export function gradeSubmission(paperId, answers) {
       if (!answered) correct = false; // unanswered auto-graded item = wrong (shown as unanswered)
       else { const g = rec.grade({ val: a.val, seq: a.seq, reason: a.reason }); correct = g.scored ? !!g.correct : null; }
     }
-    return { id: q.id, section: q.section, answered, correct, flagged: !!(a && a.flagged), answer: a || null, excluded };
+    return { id: q.id, section: q.section, marks: q.marks || 1, answered, correct, flagged: !!(a && a.flagged), answer: a || null, excluded };
   });
   const sum = summarize(rows);
   const live = rows.filter((r) => !r.excluded); // counts below ignore the excluded items
   return { rows, ...sum, answered: live.filter((r) => r.answered).length, count: live.length, unanswered: live.filter((r) => !r.answered).length, excluded: rows.length - live.length };
+}
+
+// Marks each question is worth, by id (parent marking route). Unknown ids = 1.
+export function marksByQuestion(paperId, ids) {
+  const d = paperData(paperId);
+  const m = new Map((d ? d.questions : []).map((q) => [q.id, q.marks || 1]));
+  return (ids || []).map((id) => m.get(id) || 1);
 }
 
 // Parent-only: model answers for the items that are not auto-graded, so the parent can mark them. Never call from a student route.

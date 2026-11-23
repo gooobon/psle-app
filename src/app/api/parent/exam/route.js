@@ -4,7 +4,7 @@
 // The model answer is sent to a verified linked PARENT only, never to a student. Flags: SERVER_AUTH + MOCK_EXAMS_ENABLED (default OFF).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
-import { modelAnswersForParent } from "@/lib/examServer";
+import { modelAnswersForParent, marksByQuestion } from "@/lib/examServer";
 import { combineMarks, percentOf, readyToSettle } from "@/lib/examEngine";
 import { settlePaper } from "@/lib/examSettle";
 
@@ -80,7 +80,7 @@ export async function POST(request) {
   const autoScore = a.auto_score == null ? a.score : a.auto_score, autoTotal = a.auto_total == null ? a.total : a.auto_total;
   const c = combineMarks({
     autoScore, autoTotal, sections: a.auto_sections || a.section_scores || [],
-    openMarks: open.map((r) => (r.parent_correct === true ? true : r.parent_correct === false ? false : null)), openSections: open.map((r) => r.section || "Comprehension"),
+    openMarks: open.map((r) => (r.parent_correct === true ? true : r.parent_correct === false ? false : null)), openSections: open.map((r) => r.section || "Comprehension"), openWeights: marksByQuestion(a.paper_id, open.map((r) => r.question_id)),
   });
   const wasSettled = !!a.settled_at;
   const patch = { auto_score: autoScore, auto_total: autoTotal, auto_sections: a.auto_sections || a.section_scores || [], score: c.score, total: c.total, section_scores: c.sections, parent_score: c.parentScore, parent_total: c.parentTotal, parent_pending: c.pending };

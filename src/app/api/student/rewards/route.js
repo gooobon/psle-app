@@ -2,7 +2,7 @@
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok } from "@/lib/supabase/server";
 import { REWARDS } from "@/lib/supabase/config";
 import { sgtDate } from "@/lib/activity";
-import { isSaturday, weekStart, creditTotals, PENDING_NOTE } from "@/lib/rewards";
+import { isSaturday, weekStart, studentCredits } from "@/lib/rewards";
 import { finalizeCredits } from "@/lib/rewardsServer";
 
 export const runtime = "nodejs";
@@ -18,23 +18,18 @@ export async function GET() {
   const [st, wr, cr] = await Promise.all([
     admin.from("stickers").select("kind,period").eq("child_id", me.profile.id).order("period", { ascending: false }).limit(400),
     admin.from("weekly_reviews").select("subject").eq("child_id", me.profile.id).eq("week_start", ws),
-    admin.from("reward_credits").select("kind,period,subject,credits,status,gate_day,sgd_per_credit").eq("child_id", me.profile.id).order("period", { ascending: false }).limit(200),
+    admin.from("reward_credits").select("kind,period,subject,credits,status,gate_day").eq("child_id", me.profile.id).order("period", { ascending: false }).limit(200),
   ]);
   if (st.error || wr.error || cr.error) return jerr("could not load", 500);
   const stickers = st.data || [];
   const rows = cr.data || [];
-  // Dollar value uses the rate stored on each credit (the parent's rate at the time it was earned).
-  const sgdFor = (status) => Math.round(rows.filter((r) => (r.status || "confirmed") === status).reduce((a, r) => a + (Number(r.credits) || 0) * (Number(r.sgd_per_credit) || 0), 0) * 100) / 100;
   return jok({
     today, saturday: isSaturday(today), weekStart: ws,
     weeklyDone: (wr.data || []).map((r) => r.subject),
     counts: { daily: stickers.filter((s) => s.kind === "daily").length, weekly: stickers.filter((s) => s.kind === "weekly").length },
     stickers: stickers.slice(0, 60),
     // Only CONFIRMED credits are earned; pending ones wait for the day's homework, forfeited ones are kept as a record.
-    credits: {
-      ...creditTotals(rows, 0), pendingNote: PENDING_NOTE,
-      pendingSgd: sgdFor("pending"), confirmedSgd: sgdFor("confirmed"), forfeitedSgd: sgdFor("forfeited"),
-      pendingRows: rows.filter((r) => r.status === "pending").slice(0, 20),
-    },
+    // Only CONFIRMED credits are earned; pending ones wait for the day's homework. Credits only: no dollar value ever reaches a student.
+    credits: studentCredits(rows),
   });
 }

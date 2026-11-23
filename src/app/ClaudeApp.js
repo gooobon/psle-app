@@ -1,4 +1,5 @@
 "use client";
+import { mockSchoolLabel } from "@/lib/attemptMeta";
 import React from 'react';
 import { useState, useRef, useEffect } from "react";
 
@@ -1476,10 +1477,12 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     const totalPct=graded.length?Math.round(graded.filter(r=>r.correct).length/graded.length*100):0;
     const isPastPaper = false; // CLEANUP1_NO_PASTPAPER: daily sessions always run WA1 sets (S1..S60)
     const paperInfo = isPastPaper ? selectPastPaper(user.school) : null;
+    // The paper the student actually sat (forced mock) gives the real school; a flagged daily mock uses that set's own label.
+    const sat = forceMock ? buildPastPaperPlan(prog.settings, user.school, sessionNum) : null;
     const newEntry={ sessionNum, date:todayStr(), scores, totalPct,
       mistakes: graded.filter(r=>!r.correct).map(r=>({...r})),
       isMockExam: isMock||isPastPaper,
-      school: isMock?"Nanyang Primary": isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
+      school: isMock?mockSchoolLabel({ paperPlan: sat, dailyPlan: wa1Plan }): isPastPaper?(paperInfo?.label||"Past Paper"):undefined,
       examType: isMock?"WA1": isPastPaper?"Past Paper #"+(sessionNum-10):undefined };
     const newMistakes=[...(prog.mistakes||[]),...graded.filter(r=>!r.correct).map((r,n)=>({...r,date:todayStr(),sessionNum,mid:newMistakeId(sessionNum,r.id,n)}))];
     const allLookedUp = [...new Set(results.flatMap(r=>r.lookedUpWords||[]))];
@@ -1495,7 +1498,7 @@ function StudentApp({user, onLogout, getProgress, setProgress}){
     // A flagged every-10th mock still sits a practice set, so it keeps the school label as its set id.
     let trialSetId = newEntry.school || null;
     if (forceMock) {
-      const paperPlan = buildPastPaperPlan(prog.settings, user.school, sessionNum);
+      const paperPlan = sat;
       if (paperPlan && paperPlan.paperKey) trialSetId = "paper:" + paperPlan.paperKey;
     }
     const withTrials=recordTrials(prog, results, { mode: (isMock||isPastPaper)?TRIAL_MODE.MOCK:TRIAL_MODE.EXAM, sessionNum, setId: trialSetId });
