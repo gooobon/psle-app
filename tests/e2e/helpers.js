@@ -211,7 +211,7 @@ const CHILD_CODE = [0, 3, 8, 4]; // picture indexes: Owl, Bolt, Clew, Wing shoe
 async function openLogin(page) {
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Add child");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Add child") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
   });
   const btn = page.getByTestId("cq-landing-login");
   if (await btn.count()) await btn.click();
@@ -348,7 +348,7 @@ async function ensureStudent(page, username, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Today");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Today") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
   });
   await openLogin(page);
   if (await page.getByTestId("login-form").count()) await loginStudent(page, username, password);
