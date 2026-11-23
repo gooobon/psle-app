@@ -587,11 +587,11 @@ test("role-play ClewQuest Phase 1", async ({ page }) => {
 
     await check("password student keeps Today and can open ClewQuest", async () => {
       await page.getByRole("button", { name: /Add child/ }).click();
-      await page.getByPlaceholder("Child's username (a-z, 0-9, _)").fill(passUser);
-      await page.getByPlaceholder("Display name").fill("Password Kid");
-      await page.getByPlaceholder("Child's password (min 6 chars)").fill("pass1234");
-      await page.getByRole("button", { name: "Create child account" }).click();
-      await expect(page.getByText(/Created\./).first()).toBeVisible({ timeout: 20000 });
+      // With ClewQuest on, the Add-child form uses pictures. A password child (legacy) is still created through the API the form used before.
+      const made = await page.request.post("/api/parent/children", { data: { username: passUser, name: "Password Kid", grade: "P3", school: "", password: "pass1234" } });
+      expect(made.ok()).toBeTruthy();
+      await page.reload();
+      await page.getByRole("button", { name: /Add child/ }).waitFor({ timeout: 20000 });
       await expect(page.getByRole("button", { name: /Password Kid/ })).toBeVisible();
       await shot(page, "rp-22-parent-dashboard");
       await logoutToLogin(page);

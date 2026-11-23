@@ -66,3 +66,13 @@ export async function createStudent(admin, { username, password, name, grade, sc
   }
   return { id };
 }
+
+// Case-insensitive "is this student display name already used?" (profiles.display_name, role student).
+// No DB unique index (an additive index could fail on existing duplicates), so this is checked in the routes. Returns true/false.
+export async function displayNameTaken(admin, name) {
+  const pat = String(name || "").trim().replace(/[\\%_]/g, "\\$&");
+  if (!pat) return false;
+  const { data, error } = await admin.from("profiles").select("id").eq("role", "student").ilike("display_name", pat).limit(1);
+  if (error) throw new Error("name check failed");
+  return !!(data && data.length);
+}

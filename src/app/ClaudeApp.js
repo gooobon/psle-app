@@ -607,7 +607,10 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
 
 const CQ_ON = clewquestEnabled() && SERVER_AUTH;
-function AuthScreen({onLogin, onSignup}){
+// Remembers the email a parent just signed up with, so the confirm-link landing can prefill the login if auto-login is not possible.
+const PENDING_PARENT_EMAIL_KEY = "clewquest_pending_parent_email";
+
+function AuthScreen({onLogin, onSignup, confirmInfo}){
   const [mode, setMode] = useState("login");   // login | signup_student | signup_parent | picture_login | picture_signup (ClewQuest)
   function pictureDone(profile){
     const user = mirrorServerUser(profile);
@@ -626,7 +629,7 @@ function AuthScreen({onLogin, onSignup}){
             {["P3","P4","P5","P6"].map(g=><span key={g} style={{background:"rgba(255,255,255,0.14)",borderRadius:8,padding:"4px 12px",color:"rgba(255,255,255,0.85)",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{g}</span>)}
           </div>
         </div> <div style={{flex:1,background:"#F1F5F9",borderRadius:"24px 24px 0 0",marginTop:-16,padding:"28px 20px 40px"}}>
-          {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)}/>}
+          {mode==="login"    && <LoginForm onLogin={onLogin} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
           {mode==="login" && CQ_ON && (
             <div style={{marginTop:18,display:"flex",flexDirection:"column",gap:10}}>
               <button data-testid="cq-open-picture-login" onClick={()=>setMode("picture_login")} style={{padding:"12px 14px",borderRadius:14,border:"2px solid #1E3A6E",background:"#fff",fontWeight:800,cursor:"pointer"}}>Student: sign in with pictures</button>
@@ -967,9 +970,9 @@ function LegacyParentEmailPrompt({local, onBack}){
   </div>);
 }
 
-function LoginForm({onLogin, onGoSignup}){
-  const [role, setRole] = useState("student");
-  const [id,   setId]   = useState("");
+function LoginForm({onLogin, onGoSignup, confirmInfo}){
+  const [role, setRole] = useState(confirmInfo ? "parent" : "student");
+  const [id,   setId]   = useState(confirmInfo?.email || "");
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
   const [err,  setErr]  = useState("");
@@ -1010,7 +1013,8 @@ function LoginForm({onLogin, onGoSignup}){
   return(
     <div>
       <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:6}}>Welcome back </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Log in to continue your practice</div> <div style={{display:"flex",background:"#E2E8F0",borderRadius:14,padding:4,marginBottom:20}}>
+      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Log in to continue your practice</div>
+      {confirmInfo&&<div data-testid="email-confirmed-note" style={{background:"#F0FDF4",borderRadius:10,padding:"9px 13px",marginBottom:14,fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:700}}>Email confirmed. Please log in.</div>} <div style={{display:"flex",background:"#E2E8F0",borderRadius:14,padding:4,marginBottom:20}}>
         {["student","parent"].map(r=>(
           <button key={r} onClick={()=>{setRole(r);setErr("");}} style={{flex:1,background:role===r?"#fff":"none",border:"none",borderRadius:11,padding:"10px 0",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,cursor:"pointer",color:role===r?"#0F172A":C.muted,boxShadow:role===r?"0 2px 8px rgba(0,0,0,0.1)":"none",transition:"all 0.2s"}}>
             {r==="student"?" Student":" Parent"}
@@ -1155,7 +1159,7 @@ function SignupParentServerForm({onLogin, onBack}){
     const r = await serverPost("/api/auth/parent/signup",{name:form.name.trim(),email:form.email.trim(),password:form.password});
     setBusy(false);
     if(!r.ok) return setErr(r.error||"Sign-up failed.");
-    if(r.needsConfirmation) return setInfo("Check your email to confirm your address, then log in.");
+    if(r.needsConfirmation){ try{ localStorage.setItem(PENDING_PARENT_EMAIL_KEY, form.email.trim().toLowerCase()); }catch{} return setInfo("Check your email to confirm your address, then log in."); }
     onLogin("parent", mirrorServerUser(r.profile,{childIds:[]}));
   }
   return(
@@ -2362,12 +2366,35 @@ function App(){
   // the login screen even though the cookie is still valid. Flag off: this call is
   // skipped and the app stays local-only. Admin restore is unchanged.
   const [sessionChecked, setSessionChecked] = useState(!SERVER_AUTH);
+  const [confirmInfo, setConfirmInfo] = useState(null); // {email}: confirm link could not auto-login -> Parent login with a note
   useEffect(()=>{
     let alive = true;
     const jobs = [];
+    // Supabase confirm link lands on /?code=...: exchange it for a session so the parent opens straight into the dashboard.
+    let confirmCode = "";
+    if(SERVER_AUTH){
+      try{
+        const u = new URL(window.location.href);
+        confirmCode = u.searchParams.get("code") || "";
+        if(confirmCode){ u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
+      }catch{}
+    }
+    let pending = Promise.resolve();
+    if(confirmCode){
+      pending = serverPost("/api/auth/parent/confirm",{code:confirmCode}).then(r=>{
+        let email = ""; try{ email = localStorage.getItem(PENDING_PARENT_EMAIL_KEY) || ""; }catch{}
+        if(!alive) return;
+        if(r && r.ok && r.profile){
+          try{ localStorage.removeItem(PENDING_PARENT_EMAIL_KEY); }catch{}
+          const kids = (r.children||[]).map(c=>mirrorServerUser(c));
+          const user = mirrorServerUser(r.profile,{childIds:kids.map(k=>k.id)});
+          setAuth(a=>a||{role:"parent",user});
+        } else setConfirmInfo({email});
+      });
+    }
     jobs.push(adminSessionValid().then(ok=>{ if(alive && ok) setAuth(a=>a||{role:"admin",user:ADMIN_USER}); }));
     if(SERVER_AUTH){
-      jobs.push(serverGet("/api/auth/me").then(r=>{
+      jobs.push(pending.then(()=>serverGet("/api/auth/me")).then(r=>{
         if(!alive || !r || !r.ok || !r.profile) return;
         const kids = (r.children||[]).map(c=>mirrorServerUser(c));
         const user = mirrorServerUser(r.profile, r.profile.role==="parent" ? {childIds:kids.map(k=>k.id)} : undefined);
@@ -2396,7 +2423,7 @@ function App(){
   }
 
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
-  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup}/>;
+  if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo}/>;
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;

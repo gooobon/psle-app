@@ -1,5 +1,5 @@
 // Parent creates a child account (service role, after verifying the caller is a logged-in parent).
-import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent } from "@/lib/supabase/server";
+import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson, publicProfile, createStudent, displayNameTaken } from "@/lib/supabase/server";
 import { normUsername, USERNAME_RE, RESERVED_USERNAMES } from "@/lib/supabase/config";
 
 export const runtime = "nodejs";
@@ -19,7 +19,10 @@ export async function POST(request) {
   if (!name || name.length > 80) return jerr("name required", 400);
   if (!["P3", "P4", "P5", "P6"].includes(grade)) return jerr("grade must be P3-P6", 400);
 
-  const made = await createStudent(adminClient(), { username, password, name, grade, school: school.slice(0, 120), parentId: me.profile.id });
+  if (school.length > 120) return jerr("school too long", 400);
+  const admin = adminClient();
+  try { if (await displayNameTaken(admin, name)) return jerr("display name taken", 409); } catch { return jerr("could not check name", 500); }
+  const made = await createStudent(admin, { username, password, name, grade, school: school.slice(0, 120), parentId: me.profile.id });
   if (made.error) return jerr(made.error, made.status);
   return jok({ child: { id: made.id, role: "student", username, name, grade, school } });
 }

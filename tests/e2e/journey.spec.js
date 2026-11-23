@@ -66,6 +66,8 @@ test("parent and student journey @main", async ({ browser }) => {
   await pp.getByPlaceholder("Display name").fill(CHILD.name);
   await pp.getByPlaceholder("School").fill(CHILD.school);
   await pp.getByPlaceholder("Child's password (min 6 chars)").fill(CHILD.password);
+  await pp.getByRole("button", { name: "Check", exact: true }).click();
+  await expect(pp.getByText("Available", { exact: true })).toBeVisible();
   await pp.getByRole("button", { name: "Create child account" }).click();
   await expect(pp.getByText(/Created\./)).toBeVisible();
   await expect(pp.getByText(CHILD.name).first()).toBeVisible();
