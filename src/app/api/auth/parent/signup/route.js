@@ -27,6 +27,11 @@ export async function POST(request) {
     await admin.from("profiles").delete().eq("id", id).then(() => {}, () => {});
     await admin.auth.admin.deleteUser(id).catch(() => {});
   };
+  if (p.error?.code === "23505") {
+    // Duplicate profile: an unconfirmed parent re-signed up with the same email and Supabase returned the existing
+    // user (it resends the confirmation mail). Do NOT roll back, that would delete the pending user and profile.
+    return jok({ needsConfirmation: true });
+  }
   if (p.error) {
     console.error("parent signup: profiles insert failed", p.error.code, p.error.message);
     await rollback();
