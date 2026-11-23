@@ -98,7 +98,7 @@ test("parent sign-up -> confirm -> add child with pictures -> child logs in -> b
   await expect.poll(() => preview.evaluate((el) => (el.currentSrc || el.src || el.outerHTML))).not.toBe(before);
   await shot(page, "ob-10b-builder-after-hair");
   await page.getByTestId("cq-save").click();
-  await expect(page.getByTestId("cq-builder-error")).not.toContainText("Choose a hairstyle");
+  await expect(page.getByText("Choose a hairstyle")).toHaveCount(0); // no error element is rendered when the save works
   await expect(page.getByTestId("cq-landing")).toBeVisible({ timeout: 20000 }); await shot(page, "ob-11-home");
   for (const n of ["English", "Chinese", "Math", "Science", "The Clew"]) await expect(page.getByRole("button", { name: n, exact: true })).toBeVisible();
 });
