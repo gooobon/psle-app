@@ -528,6 +528,19 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   t("lock screen: tells the child to ask a parent to reset", /Ask a parent to reset your picture code/.test(pa) && !/Link a parent/.test(pa));
 }
 
+// 12. every hair x gender x colour resolves to a real image file (never a blank preview)
+{
+  const manifest = JSON.parse(fs.readFileSync(path.join(root, "public/clewquest/manifest.json"), "utf8"));
+  const keys = new Set(Object.keys(manifest.assets));
+  for (const h of CLEWQUEST.hair) for (const g of ["boy", "girl"]) for (const c of CLEWQUEST.colours) {
+    const k = L.stageAssetKey(5, g, h.key, c.key, keys);
+    const a = manifest.assets[k];
+    const file = a && (a.png || a.webp);
+    t(`stage5 art resolves ${g}/${h.key}/${c.key}`, !!file && fs.existsSync(path.join(root, "public", file)), { k });
+  }
+  for (const h of CLEWQUEST.hair) t(`hair thumb exists ${h.key}`, !!manifest.assets[`hair/thumb-${h.key}`]);
+}
+
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);
 process.exit(fail ? 1 : 0);
 

@@ -52,6 +52,7 @@ function WalkingClew({ artKey, tint, alt, walk }) {
 
 function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop, pictureCode, toast, character, stage }) {
   const [showLink, setShowLink] = useState(false);
+  const [pressed, setPressed] = useState(false);
   const [walk, setWalk] = useState(null);
   const reduced = usePrefersReducedMotion();
   const hex = character ? (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex : undefined;
@@ -74,7 +75,7 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
               style={{ position: "absolute", left: h.x + "%", top: h.y + "%", width: h.w + "%", height: h.h + "%", background: "transparent", border: "none", cursor: "pointer" }} />
           ))}
           {artKey && <WalkingClew artKey={artKey} tint={tintForStage(stage, hex)} alt="" walk={walk} />}
-          <button data-testid="cq-clew" aria-label="The Clew" onClick={onHome} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: "transparent", border: "none", cursor: "pointer" }} />
+          <button data-testid="cq-clew" aria-label="The Clew" onClick={() => { setPressed(true); onHome(); }} onPointerDown={() => setPressed(true)} onPointerCancel={() => setPressed(false)} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: pressed ? "rgba(255,255,255,.35)" : "transparent", border: "none", borderRadius: "50%", cursor: "pointer", transform: pressed ? "scale(.96)" : "none", transition: "background .08s, transform .08s", touchAction: "manipulation" }} />
           {CLEWQUEST.ship.shopEnabled && <SailingShip onOpen={onShop} />}
           <LogoBadge style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" }} />
         </LandingArt>
@@ -208,6 +209,7 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
     return r;
   }, [uid, skipped]);
   useEffect(() => { load(); }, [load]);
+  useEffect(() => { const i = new Image(); i.src = "/clewquest/landing/four-islands.webp"; }, []); // warm the island art while state loads
   useEffect(() => { if (view === "home") setAward(takeLastAward()); }, [view]);
 
   function openSubject(key) {
@@ -223,5 +225,5 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
   if (view === "loading") return <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", fontWeight: 700, background: T.bg, color: T.ink }}>{failed ? "Could not load ClewQuest. Please refresh." : "Loading..."}</div>;
   if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onLogout={onLogout} onSkip={view === "builder" ? () => { setSkipped(true); if (onLeaveQuest) onLeaveQuest(); else openToday(); } : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
   if (view === "home" && st && character) return <ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} />;
-  return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;
+  return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else if (st) { setView("home"); load("home"); } else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;
 }
