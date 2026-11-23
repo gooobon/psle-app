@@ -8,7 +8,8 @@ import { Art } from "@/components/clewquest/Art";
 import { SECTION_ORDER, SECTIONS, ZH_SECTION_ORDER, ZH_SECTIONS } from "@/lib/quizMeta";
 import { todayStr } from "@/lib/sessionUtils";
 import { dailyGoalMet, dailySetGoal } from "@/lib/activity";
-import KpiCard from "@/components/KpiCard"; // STEP6_KPI_CARD
+import { HomeLevel } from "@/components/clewquest/LevelBadge";
+import { mistakeStatus } from "@/lib/studyRecords"; // KpiCard now lives in My records > Progress
 
 // Fallback when server auth is off, the child has no server id, or the target request fails.
 export const DAILY_SET_TARGET = 1;
@@ -213,12 +214,11 @@ function ComingSoonScreen({grade,subject}){
 }
 
 
-function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, onStartAdaptive, availableSections, completedSections, onMistakes, onReview, onReviewSection, today}){ // STEP9_ADAPTIVE
+function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFrom, onStartMock, onStartAdaptive, availableSections, completedSections, onMistakes, onRecords, onReviewSection, today}){ // STEP9_ADAPTIVE
   const history = prog.history||[];
   const regularH = history.filter(h=>!h.isMockExam);
   const [graphMode,    setGraphMode]    = useState("total");
   const [showProgress, setShowProgress] = useState(false);
-  const [showRecent,   setShowRecent]   = useState(false);
   const [showExtra,    setShowExtra]    = useState(false);
   // Subject theming: Chinese = red twin of the English (navy) design; identical layout.
   const isZh = subject === "Chinese";
@@ -240,6 +240,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
   const startNote = isZh
     ? "\u8FA8\u5B57 \u00B7 \u62FC\u97F3 \u00B7 \u8BCD\u8BED \u00B7 \u642D\u914D \u00B7 \u9020\u53E5 \u00B7 \u77ED\u6587\u586B\u7A7A \u00B7 \u9605\u8BFB \u00B7 \u7EA6 30 \u5206\u949F"
     : (isMockDue ? "Flagged mock \u00B7 about 30 min" : "Grammar \u00B7 Vocabulary \u00B7 Comprehension \u00B7 about 35 min");
+  const remaining = mistakeStatus(prog).remaining;
   const hasAdaptive = !!(onStartAdaptive && (prog.trials||[]).length > 0);
 
   const sectionAvgs={};
@@ -250,6 +251,7 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
 
   return(
     <div style={{paddingBottom:80}}> {user.school&&<SchoolBanner school={user.school}/>}
+      <HomeLevel uid={user.serverId} subject={subject} history={history}/>
       <div style={{padding:"16px 16px 0"}}>
         <div style={{background:"#fff",borderRadius:16,padding:"14px 16px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)",border:`1px solid ${day.met&&!inProgress?"#E2DBCF":C.border}`}}>
           <div style={{display:"flex",justifyContent:"space-between",alignItems:"baseline",gap:8}}>
@@ -294,10 +296,10 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
           </div>
         </div>
         <div style={{display:"flex",gap:8,marginBottom:14}}>
-          <button onClick={onMistakes} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{isZh?"\u9519\u9898":"Mistakes"}</button>
-          <button onClick={onReview} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{isZh?"\u590D\u4E60":"Review"}</button>
+          <button data-testid="home-fix-mistakes" onClick={onMistakes} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{(isZh?"\u9519\u9898":"Fix mistakes")+(remaining>0?` (${remaining})`:"")}</button>
+          <button data-testid="home-my-records" onClick={onRecords} style={{flex:1,background:"#fff",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"10px 8px",cursor:"pointer",fontWeight:800,fontSize:"calc(var(--fs) * 0.857)",color:C.text}}>{isZh?"\u6211\u7684\u8BB0\u5F55":"My records"}</button>
         </div>
-        {(hasAdaptive || onStartMock) && (
+        {(hasAdaptive || onStartMock || remaining>0) && (
           <div style={{background:"#fff",borderRadius:16,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.05)",overflow:"hidden"}}>
             <button onClick={()=>setShowExtra(v=>!v)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"12px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.text}}>{isZh?"\u52A0\u7EC3":"Extra practice"}</div>
@@ -311,6 +313,12 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
                     <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.8)",marginTop:2}}>{isZh?"\u5148\u8865\u5F31\u9879\uFF0C\u518D\u5DE9\u56FA\u5FEB\u638C\u63E1\u7684":"Fix weak spots, then sharpen what is nearly mastered"}</div>
                   </button>
                 )}
+                {remaining>0 && (
+                  <button data-testid="home-redo-mistakes" onClick={onMistakes} style={{width:"100%",background:T.primary,color:"#fff",border:"none",borderRadius:14,padding:"12px 14px",cursor:"pointer",textAlign:"left",fontFamily:CFONT}}>
+                    <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{isZh?"\u91CD\u505A\u9519\u9898":"Redo my mistakes"}</div>
+                    <div style={{fontSize:"calc(var(--fs) * 0.786)",color:"rgba(255,255,255,0.8)",marginTop:2}}>{isZh?`\u8FD8\u6709 ${remaining} \u9898\u5F85\u8BA2\u6B63`:`${remaining} left to fix`}</div>
+                  </button>
+                )}
                 {onStartMock && (
                   <button onClick={onStartMock} style={{width:"100%",background:T.primary,color:"#fff",border:"none",borderRadius:14,padding:"12px 14px",cursor:"pointer",textAlign:"left",fontFamily:CFONT}}>
                     <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:900}}>{isZh?"\u771F\u9898\u6A21\u62DF\u8003":"Past-paper mock"}</div>
@@ -321,7 +329,6 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
             )}
           </div>
         )}
-        <KpiCard prog={prog} isZh={isZh} accent={ACCENT}/>
         {regularH.length>0&&(
           <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 12px rgba(0,0,0,0.06)",overflow:"hidden"}}>
             <button onClick={()=>setShowProgress(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"14px 16px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
@@ -379,33 +386,6 @@ function StudentHome({user, prog, grade, subject, isMockDue, onStart, onStartFro
                 })}
               </div>
             )}
-          </div>}
-          </div>
-        )} {history.length>0&&(
-          <div style={{background:"#fff",borderRadius:18,marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,0.06)",overflow:"hidden"}}>
-            <button onClick={()=>setShowRecent(p=>!p)} style={{width:"100%",background:"none",border:"none",cursor:"pointer",padding:"13px 14px",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-              <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.text}}> Recent Sessions ({history.length})</div>
-              <span style={{color:C.muted,fontSize:"calc(var(--fs) * 0.929)",transform:showRecent?"rotate(90deg)":"none",transition:"transform 0.2s"}}>›</span>
-            </button>
-          {showRecent&&<div style={{padding:"0 14px 14px"}}>
-            {[...history].reverse().slice(0,5).map((h,i)=>{
-              const col=h.totalPct>=85?C.green:h.totalPct>=70?C.amber:C.red;
-              return(
-                <div key={i} style={{display:"flex",alignItems:"center",gap:10,padding:"9px 0",borderBottom:i<4?`1px solid ${C.border}`:"none"}}>
-                  <div style={{width:36,height:36,borderRadius:10,background:h.isMockExam?"#EDE9FE":col+"18",display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 1.286)",flexShrink:0}}>
-                    {h.isMockExam?"":""}
-                  </div>
-                  <div style={{flex:1,minWidth:0}}>
-                    <div title={h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:undefined} style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.text,whiteSpace:"normal",overflowWrap:"anywhere"}}>{h.isMockExam?`Mock: ${h.school||""} ${h.examType||""}`:`Session #${h.sessionNum}`}</div>
-                    <div style={{fontSize:"calc(var(--fs) * 0.780)",color:C.muted}}>{h.date}</div>
-                  </div>
-                  <div style={{textAlign:"right"}}>
-                    <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:900,color:col}}>{h.totalPct}%</div>
-                    <div style={{fontSize:"calc(var(--fs) * 0.780)",color:col}}>{h.totalPct>=85?"Excellent":h.totalPct>=70?"Good":"Keep Going"}</div>
-                  </div>
-                </div>
-              );
-            })}
           </div>}
           </div>
         )}

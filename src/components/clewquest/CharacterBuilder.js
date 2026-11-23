@@ -58,6 +58,7 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
               <Art testId="cq-preview" k={stageAssetKey(5, gender, hair, colour, ASSET_KEYS)} alt="700 threads: your Clew with hair" tint={hex} style={{ maxHeight: 190, width: "auto" }} />{cap("700 threads")}
             </div>
           </div>
+          <div data-testid="cq-colour-note" style={{ ...helperStyle, textAlign: "center", marginTop: 10 }}>Your Clew starts black. Your colour appears at 300 threads.</div>
         </div>
 
         <div role="tablist" data-testid="cq-tabs" style={{ display: "flex", gap: 8, overflowX: "auto", marginBottom: 12 }}>

@@ -99,7 +99,7 @@ export function validateCharacter(input, cfg = CLEWQUEST) {
 }
 
 // Asset resolver with graceful fallback. Phase 1 art is crimson only, so a colour variant falls back to the crimson base.
-export function stageAssetKey(stage, gender, hairKey, colourKey, assetKeys = null) {
+export function stageAssetKey(stage, gender, hairKey, colourKey, assetKeys = null, cfg = CLEWQUEST) {
   const g = gender === "girl" ? "girl" : "boy";
   if (stage >= 5) {
     const variant = `characters/stage5-${g}-${hairKey}-${colourKey}`;
@@ -108,5 +108,24 @@ export function stageAssetKey(stage, gender, hairKey, colourKey, assetKeys = nul
     if (!assetKeys || assetKeys.has(base)) return base;
     return `stages/stage-5-${g}`;
   }
-  return `stages/stage-${Math.min(Math.max(stage, 1), 4)}`;
+  const art = cfg.stageArt || {};
+  const key = art[Math.min(Math.max(stage, 1), 4)] || `stages/stage-${Math.min(Math.max(stage, 1), 4)}`;
+  return !assetKeys || assetKeys.has(key) ? key : `stages/stage-${Math.min(Math.max(stage, 1), 4)}`;
+}
+
+// Colour rule: stages 1-3 are always black (no tint, whatever the chosen colour); the chosen colour applies from stage 4.
+export function tintForStage(stage, hex, cfg = CLEWQUEST) {
+  const from = cfg.colourFromStage || 4;
+  return Number(stage) >= from && typeof hex === "string" && /^#[0-9A-Fa-f]{6}$/.test(hex) ? hex : undefined;
+}
+
+// Threads earned, grouped by day (SGT-agnostic: uses the date part of created_at). rows: [{ amount, subject, created_at }]
+export function groupThreadsByDay(rows) {
+  const by = new Map();
+  for (const r of rows || []) {
+    const day = String(r.created_at || "").slice(0, 10); if (!day) continue;
+    const e = by.get(day) || { day, total: 0, bySubject: {} };
+    const a = Number(r.amount) || 0; e.total += a; e.bySubject[r.subject] = (e.bySubject[r.subject] || 0) + a; by.set(day, e);
+  }
+  return [...by.values()].sort((a, b) => (a.day < b.day ? 1 : -1));
 }

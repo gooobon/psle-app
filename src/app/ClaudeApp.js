@@ -31,6 +31,7 @@ import { recordTrials, ensureLedgerFields, MODE as TRIAL_MODE, firstTryStats, sk
 import { qualifyingHomeworkResults } from '@/lib/homeworkMastery';
 import ZhReviewGate from '@/components/ZhReviewGate';
 import ZH_VOCAB from '@/data/p3/chinese/zh_vocab.json';
+import { getState as zhGetState } from '@/lib/zhReview';
 import { getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from '@/lib/zhReview';
 
 // Function words never worth pushing into the whole-set review gate.
@@ -50,6 +51,7 @@ import { ParentApp } from '@/components/ParentDashboard';
 import MistakeNotebook, { MistakePatterns } from '@/components/MistakeNotebook';
 import LearningDashboard from '@/components/LearningDashboard'; // flag NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off)
 import ParentHomework from '@/components/ParentHomework';
+import MyRecords from '@/components/MyRecords'; // student My records (history, mistakes, words, progress)
 import { StickerShelf, WeeklyReviewCard } from '@/components/Rewards'; // step 9 (flag NEXT_PUBLIC_REWARDS_ENABLED, default off)
 import { setMistakeCause, applySimilarRetry, pickSimilar, findMistake, attemptKeyFor, mistakeKeys, newMistakeId, patternSummary } from '@/lib/wrongNotebook';
 import { getTagIndex, similarQuestions } from '@/lib/taxonomyLookup';
@@ -269,6 +271,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
   const [startFromSection, setStartFromSection] = useState(null);
   const [reviewSection, setReviewSection] = useState(null);
   const [zhGate, setZhGate] = useState(null); // words[] when the whole-set review gate is showing
+  const [recGate, setRecGate] = useState(null); // words[] for a review started from My records
   const [dailyResult, setDailyResult] = useState(null); // {results, sessionNum} for the end-of-round summary (after the gate)
   const [adaptive, setAdaptive] = useState(null); // {plan, ids, parts} while an adaptive round is running
   function startAdaptive(){
@@ -450,6 +453,11 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
   // Whole-set review gate — shown once, after every section type of the set is
   // done (triggered by recordDaily). Takes priority over every other screen.
+  if(recGate) return(
+    <Wrap>
+      <ZhReviewGate words={recGate} dict={ZH_VOCAB} onDone={()=>{ setRecGate(null); setScreen("records"); }} />
+    </Wrap>
+  );
   if(zhGate) return(
     <Wrap>
       <ZhReviewGate words={zhGate} dict={ZH_VOCAB} onDone={showDailyResult} />
@@ -587,7 +595,11 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
             notebook={notebook} onReviewRound={startRoundReview} isZh={true} roundIndex={ZH_ROUND_INDEX} history={prog.history||[]}/>
         </>
       ) : screen==="review" ? (
-        <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("home")}/>
+        <ReviewTab mistakes={prog.mistakes||[]} onBack={()=>setScreen("records")}/>
+      ) : screen==="records" ? (
+        <MyRecords prog={prog} subject={subject} isZh={true} dict={ZH_VOCAB} vocabState={zhGetState()} onBack={()=>setScreen("home")}
+          onFixMistakes={()=>setScreen("mistakes")} onReviewTopics={()=>setScreen("review")}
+          onStartVocab={()=>{ const w=zhAssembleGate([], ZH_VOCAB, 10); if(w.length) setRecGate(w); }}/>
       ) : (
         <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startAdaptive}
           isMockDue={isMockDue}
@@ -598,7 +610,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
           completedSections={Object.keys(sectionResults)}
           availableSections={ZH_WA1_ORDER}
           onMistakes={()=>setScreen("mistakes")}
-          onReview={()=>setScreen("review")}
+          onRecords={()=>setScreen("records")}
           onReviewSection={(sec)=>setReviewSection(sec)}
         />
       )}
@@ -1193,6 +1205,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
   const wa1Plan = WA1_PRACTICE_SETS[(((prog.nextSession - 1) % _wa1Len) + _wa1Len) % _wa1Len].plan;
   const [roundReview, setRoundReview] = useState(null); // {plan, sessionNum} while re-solving a past round
   const [enGate, setEnGate] = useState(null); // words[] while the English end-of-round word review is showing
+  const [enRecGate, setEnRecGate] = useState(null); // words[] for a review started from My records
   const [enDrillMode, setEnDrillMode] = useState(false);
   const [enAdaptive, setEnAdaptive] = useState(null);
   useEffect(() => {
@@ -1586,6 +1599,11 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
     </Wrap>
   );
 
+  if(enRecGate) return(
+    <Wrap>
+      <EnReviewGate words={enRecGate} dict={EN_VOCAB} store={EN_REVIEW} onDone={()=>{ setEnRecGate(null); setScreen("records"); }} />
+    </Wrap>
+  );
   if(enGate) return(
     <Wrap>
       <EnReviewGate words={enGate} dict={EN_VOCAB} store={EN_REVIEW} onDone={()=>{ setEnGate(null); setScreen("result"); }} />
@@ -1621,7 +1639,11 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
         <ComingSoonScreen grade={grade} subject={subject}/>
       ) : screen==="home" ? (
         <>
-      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length, dailyTarget ? dailyTarget.English : undefined)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onReview={()=>setScreen("review")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
+      <StudentHome user={user} prog={prog} grade={grade} subject={subject} onStartAdaptive={startEnAdaptive} isMockDue={isMockDue} today={todaySetStatus(prog, wa1Plan.length, dailyTarget ? dailyTarget.English : undefined)} onStart={startSession} onStartFrom={(sec)=>startSession(sec)} onStartMock={()=>setMockSession(true)} completedSections={Object.keys(sectionResults)} availableSections={subject==="English" ? Array.from(new Set(wa1Plan.map(x=>x.type))) : null}  onMistakes={()=>setScreen("mistakes")} onRecords={()=>setScreen("records")} onReviewSection={(sec)=>setReviewSection(sec)}/></>
+      ) : screen==="records" ? (
+        <MyRecords prog={prog} subject={subject} isZh={false} dict={EN_VOCAB} vocabState={EN_REVIEW.getState()} onBack={()=>setScreen("home")}
+          onFixMistakes={()=>setScreen("mistakes")} onReviewTopics={()=>setScreen("review")}
+          onStartVocab={()=>{ const w=EN_REVIEW.assembleGate([], EN_VOCAB, 10); if(w.length) setEnRecGate(w); }}/>
       ) : screen==="mistakes" ? (
         <>
           <ParentHomework subject="English" refreshKey={hwKey} onStart={startHomework}/>
@@ -2342,7 +2364,7 @@ function App(){
     // from it (cqOpen); it is never forced on them.
     const cqOk = CQ_ON && typeof user.serverId==="string" && questGrade(user.grade);
     if(cqOk && (user.pictureCode || cqOpen)){
-      return <ClewQuestStudent user={user} onLogout={handleLogout} onLeaveQuest={user.pictureCode ? undefined : ()=>setCqOpen(false)}
+      return <ClewQuestStudent user={user} onLogout={handleLogout} getProgress={(g,s)=>getProgress(user.id,g,s)} onLeaveQuest={user.pictureCode ? undefined : ()=>setCqOpen(false)}
         renderPractice={(appSubject, exit)=>practice({initialSubject:appSubject||undefined, onExitToQuest:exit})}/>;
     }
     return practice(cqOk ? {onOpenQuest:()=>setCqOpen(true)} : undefined);
