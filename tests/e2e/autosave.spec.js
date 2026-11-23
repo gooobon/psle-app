@@ -2,7 +2,7 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -114,6 +114,7 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
 
   sql("update public.exam_attempts set started_at = now() - interval '80 minutes', deadline_at = now() - interval '40 seconds' where id = '" + attempt.id + "'");
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByText(/saved answers were handed in automatically/).waitFor({ timeout: 20000 });
   const finished = await dbGet("exam_attempts?id=eq." + attempt.id + "&select=status,counts,counts_reason,score,answered");
@@ -153,6 +154,7 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   record("student", "Late hand-in is 409 and the saved answer is kept", "Past the grace the submit is refused, then the draft is graded", "HTTP " + lateStatus + " " + JSON.stringify(lateRow[0]) + " " + JSON.stringify(kept[0]), lateOk ? "PASS" : "FAIL", await snap(sp, "07-late"));
 
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByRole("button", { name: "Start" }).first().click();
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });

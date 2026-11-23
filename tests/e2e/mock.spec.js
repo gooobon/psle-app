@@ -2,7 +2,7 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -116,6 +116,7 @@ test("mock exam role-play @mock", async ({ browser }) => {
   const open = await latestAttempt(id);
   sql("update public.exam_attempts set started_at = now(), deadline_at = now() + interval '8 seconds' where id = '" + open.id + "'");
   await sp.reload();
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByRole("button", { name: "Continue" }).click();
   await sp.getByText("Previous section").waitFor({ timeout: 20000 });
@@ -205,6 +206,7 @@ test("mock exam role-play @mock", async ({ browser }) => {
   const sitting = await latestAttempt(id);
   sql("update public.exam_attempts set deadline_at = now() - interval '1 minute' where id = '" + sitting.id + "'");
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByText("Time is up").waitFor({ timeout: 20000 });
   const otherStart = sp.getByRole("button", { name: "Start" }).nth(3);
