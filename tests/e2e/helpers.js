@@ -189,7 +189,9 @@ async function drive(page, { done, max = 900, label = "exam" }) {
     tally[action] = (tally[action] || 0) + 1;
     if (action === "stuck") {
       stuck++;
-      if (stuck >= 6) {
+      // A save request at the end of a round can keep the screen unchanged for a moment; give it time before giving up.
+      await page.waitForTimeout(400);
+      if (stuck >= 8) {
         await shot(page, "stuck-" + label);
         const snippet = (await bodyText(page).catch(() => "")).slice(0, 500);
         throw new Error("Exam driver stuck during " + label + " after " + i + " steps. On screen:\n" + snippet);
