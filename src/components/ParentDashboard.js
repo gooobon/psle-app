@@ -301,9 +301,22 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
 }
 
 // ── Parent: Overview / stats tab ──────────────────────────────
-function ParentOverview({child, history, settings}){
+function ParentOverview({child, history, settings, subject}){
+  // With server auth on, Sessions and Average come from the server (daily_activity) so they show on the parent's own device;
+  // the child's local history is only the fallback (demo / server unavailable). Local data is never modified.
+  const [srv,setSrv]=useState(null);
+  useEffect(()=>{
+    setSrv(null);
+    if(!SERVER_AUTH||!child?.serverId) return;
+    let off=false;
+    serverGet("/api/parent/overview?child="+encodeURIComponent(child.serverId)).then(r=>{ if(!off&&r.ok&&r.subjects) setSrv(r.subjects); }).catch(()=>{});
+    return ()=>{ off=true; };
+  },[child?.serverId]);
+  const srvSub=srv&&srv[subject];
   const regularH=history.filter(h=>!h.isMockExam);
-  const avgTotal=regularH.length?Math.round(regularH.reduce((s,h)=>s+h.totalPct,0)/regularH.length):0;
+  const localAvg=regularH.length?Math.round(regularH.reduce((s,h)=>s+h.totalPct,0)/regularH.length):0;
+  const avgTotal=srvSub?(srvSub.average||0):localAvg;
+  const sessionCount=srvSub?Math.max(srvSub.sessions,0):history.length;
   const last3=regularH.slice(-3);
   const trend=last3.length>=2?last3[last3.length-1].totalPct-last3[0].totalPct:0;
   const sectionAvgs={}, sectionTrends={};
@@ -319,7 +332,7 @@ function ParentOverview({child, history, settings}){
     <div>
       <div style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:14}}>
         {[
-          {icon:"📋",l:"Sessions",v:history.length,c:C.blue},
+          {icon:"📋",l:"Sessions",v:sessionCount,c:C.blue},
           {icon:"🎯",l:"Average",  v:avgTotal?`${avgTotal}%`:"—",c:avgTotal>=85?C.green:avgTotal>=70?C.amber:C.red},
           {icon:"📈",l:"Trend",    v:last3.length>=2?(trend>=0?`+${trend}%`:`${trend}%`):"—",c:trend>=0?C.green:C.red},
           {icon:"🏫",l:"Mock Done",v:history.filter(h=>h.isMockExam).length,c:"#7C3AED"},
@@ -769,7 +782,7 @@ function AlertSettings(){
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
       <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#4C1D95",padding:0}}>{open?"− ":"＋ "}Alerts</button>
       {open&&(<div style={{marginTop:10}}>
-        <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me the daily progress alert (8pm Singapore time)</label>
+        <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me when my child finishes a set, a paper or assigned homework, plus the weekly report</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
         <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
         <label style={{fontSize:12,display:"block",marginBottom:6}}><input type="checkbox" checked={qOn} onChange={e=>setQOn(e.target.checked)}/> Quiet hours for live alerts (Singapore time). Alerts that arrive in this window are held and sent when it ends.</label>
@@ -788,7 +801,16 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
   const [tab,     setTab]     = useState("overview");
   const [parentToast, setParentToast] = useState(null);
 
-  const child = linkedStudents.find(s=>s.id===selectedId);
+  // Auto-select a child: the first when none is chosen yet, and the newest-linked one when a child is added.
+  const prevCount = React.useRef(linkedStudents.length);
+  useEffect(()=>{
+    const n=linkedStudents.length;
+    if(!n){ prevCount.current=0; return; }
+    if(n>prevCount.current) setSelectedId(linkedStudents[n-1].id);
+    else if(!linkedStudents.some(s=>s.id===selectedId)) setSelectedId(linkedStudents[0].id);
+    prevCount.current=n;
+  },[linkedStudents.length]); // eslint-disable-line react-hooks/exhaustive-deps
+  const child = linkedStudents.find(s=>s.id===selectedId) || (selectedId==null?linkedStudents[0]:undefined);
   const prog  = selectedId ? getProgress(selectedId, grade, subject) : null;
   const history  = prog?.history||[];
   const settings = prog?.settings||DEFAULT_SETTINGS;
@@ -882,7 +904,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&SERVER_AUTH&&LEARNING_DASHBOARD&&child.serverId&&tab==="learning" && (["English","Chinese"].includes(subject)?<LearningDashboard childId={child.serverId} subject={subject}/>:<ComingSoonScreen grade={grade} subject={subject}/>)}
         {child&&SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child.serverId&&subject==="English"&&tab==="papers" && <ParentExams child={child}/>}
         {child&&SERVER_AUTH&&REWARDS&&tab==="rewards" && <ParentRewards child={child}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings}/>}
+        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings} subject={subject}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}

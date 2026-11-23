@@ -11,6 +11,7 @@
 import { dispatchAlert, isE164 } from "./index.mjs";
 import { formatWhatsAppEvent } from "./whatsapp.mjs";
 import { renderEventEmail } from "./emailTemplate.mjs";
+import { sendPolicy, recipientDecision } from "./weeklyReport.mjs";
 
 const OFFSET_MS = 8 * 3600000; // Asia/Singapore, no DST
 export const DEFAULT_QUIET = { enabled: true, start: "21:30", end: "06:30" };
@@ -44,7 +45,6 @@ export const masterOn = (env = process.env) => env.WHATSAPP_ENABLED === "true";
 export const emailOn = (env = process.env) => env.EMAIL_ALERTS_ENABLED === "true";
 // Is this event type active at all? WhatsApp master switch, or (milestones only) the email channel.
 export const eventActive = (type, env = process.env) => masterOn(env) || (type === "milestone" && emailOn(env));
-const allowList = (env) => String(env.ALERT_TEST_RECIPIENTS || "").split(",").map((s) => s.trim().toLowerCase()).filter(Boolean);
 export function dashboardUrl(env = process.env) {
   const base = env.APP_BASE_URL || (env.VERCEL_PROJECT_PRODUCTION_URL ? "https://" + env.VERCEL_PROJECT_PRODUCTION_URL : "https://psle-app-vwx3.vercel.app");
   return base.replace(/\/+$/, "") + "/";
@@ -76,8 +76,9 @@ async function deliver(admin, parent, channels, payload, { env, fetchImpl }) {
   const em = channels.find((c) => c.type === "email" && c.enabled);
   if (!em) return { status: "skipped", detail: `${waDetail}; email off` };
   const address = em.address || parent.email;
-  const allow = allowList(env);
-  if (allow.length && !allow.includes(String(address || "").toLowerCase())) { log(`parent=${parent.id} email skipped: not in ALERT_TEST_RECIPIENTS`); return { status: "skipped", detail: `${waDetail}; email not in allow-list` }; }
+  // Same recipient policy as the weekly report: allow-list if ALERT_TEST_RECIPIENTS is set, else everyone only with ALERT_ALLOW_ALL_PARENTS=true, else nobody.
+  const dec = recipientDecision(sendPolicy(env), address);
+  if (!dec.allowed) { log(`parent=${parent.id} email skipped: ${dec.reason}`); return { status: "skipped", detail: `${waDetail}; email ${dec.reason}` }; }
   if (!(await emailConfirmed(admin, parent.id))) return { status: "skipped", detail: `${waDetail}; email unconfirmed` };
   const [r] = await dispatchAlert([{ ...em, address }], payload, { env, fetchImpl, formats });
   if (r?.status === "sent") return { status: "sent", detail: "email fallback" };
