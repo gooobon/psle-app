@@ -6,7 +6,6 @@ import { CLEWQUEST } from "@/lib/clewquest/config";
 import { stageFromTotal, stageAssetKey, questGrade, subjectsFor } from "@/lib/clewquest/logic";
 import { Art, ASSET_KEYS } from "./Art";
 import CharacterBuilder from "./CharacterBuilder";
-import LinkCode from "./LinkCode";
 import { LandingArt } from "./AuthScreens";
 import { Page, LogoBadge, IslandPill, ISLAND_PILLS, T, FONT, mainBtn, secondaryBtn, linkBtn } from "./Shell";
 import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward } from "@/lib/clewquest/client";
@@ -43,9 +42,6 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, picture
         {onLeave && <button data-testid="cq-leave" onClick={onLeave} style={{ ...todayBtn, height: 40 }}>Back to Today</button>}
         <button data-testid="cq-logout" onClick={onLogout} style={{ ...linkBtn, color: T.muted, fontWeight: 500, fontSize: 14 }}>Log out</button>
       </div>
-      {pictureCode && (<div style={{ padding: "14px 16px 24px" }}>
-        {showLink ? <LinkCode /> : <button data-testid="cq-linkcode-open" onClick={() => setShowLink(true)} style={secondaryBtn}>Link a parent</button>}
-      </div>)}
       {toast && <div role="status" data-testid="cq-toast" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: T.ink, color: "#fff", padding: "10px 18px", borderRadius: 14, fontWeight: 800 }}>{toast}</div>}
     </Page>
   );

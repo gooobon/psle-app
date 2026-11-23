@@ -8,9 +8,8 @@ import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DAS
 import LearningDashboard from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
-import ParentPictureReset from "@/components/clewquest/ParentPictureReset";
+import ChildCard from "@/components/clewquest/ParentPictureReset";
 import AddChild from "@/components/clewquest/AddChild";
-import ParentPictureChild from "@/components/clewquest/ParentPictureChild";
 import { clewquestEnabled } from "@/lib/clewquest/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
@@ -640,7 +639,7 @@ function AddChildForm({onCreated}){
     <div style={{background:"#fff",borderRadius:20,boxShadow:"0 6px 20px rgba(27,35,64,.10)",padding:16,marginBottom:14}}>
       <button data-testid="ac-open" onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:15,color:"#1F3F95",padding:0}}>{open?"− ":"+ "}Add child</button>
       {ok&&<div data-testid="ac-ok" style={{color:"#4F6B22",fontSize:13,fontWeight:700,marginTop:8}}>{ok}</div>}
-      {open&&<div style={{marginTop:12}}><AddChild onCreated={(c)=>{ setOk(`Added ${c.name}. Login username: ${c.username}`); setOpen(false); onCreated&&onCreated(c); }}/></div>}
+      {open&&<div style={{marginTop:12}}><AddChild onCreated={(c)=>{ onCreated&&onCreated(c); }} onDone={(c)=>{ setOk(`Added ${c.name}. Login ID: ${c.username}`); setOpen(false); }}/></div>}
     </div>
   );
 }
@@ -681,63 +680,6 @@ function TodayCard({linkedStudents}){
           </div>
         );
       })}
-    </div>
-  );
-}
-
-// Link another parent (by their registered email) to one of my children, or link an existing child account.
-function GuardianTools({linkedStudents,onChildLinked}){
-  const [open,setOpen]=useState(false);
-  const [email,setEmail]=useState(""); const [childId,setChildId]=useState(linkedStudents[0]?.serverId||"");
-  const [lu,setLu]=useState(""); const [lp,setLp]=useState("");
-  const [msg,setMsg]=useState(""); const [busy,setBusy]=useState(false);
-  const inp={width:"100%",boxSizing:"border-box",padding:"9px 10px",borderRadius:8,border:`1px solid ${C.border}`,fontSize:13,marginBottom:8};
-  const btn={background:"#1F3F95",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer",marginBottom:12};
-  const [inv,setInv]=useState({sent:[],received:[]});
-  const loadInv=()=>serverGet("/api/parent/co-parents").then(r=>{ if(r.ok) setInv({sent:r.sent||[],received:r.received||[]}); });
-  useEffect(()=>{ loadInv(); },[]);
-  async function linkParent(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/co-parents",{email,childId:childId||linkedStudents[0]?.serverId}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); if(r.ok){ setEmail(""); loadInv(); } }
-  async function revokeInvite(id){ setBusy(true); const r=await serverPost("/api/parent/co-parents/revoke",{inviteId:id}); setBusy(false); setMsg(r.ok?r.message:(r.error||"Failed.")); loadInv(); }
-  async function acceptInvite(id){
-    setBusy(true); setMsg("");
-    const r=await serverPost("/api/parent/co-parents/accept",{inviteId:id});
-    setBusy(false);
-    setMsg(r.ok?r.message:(r.error||"Failed."));
-    if(r.ok){
-      if(r.child) onChildLinked&&onChildLinked(r.child);
-      setInv(v=>({...v, received:(v.received||[]).filter(x=>x.id!==id)}));
-    } else loadInv();
-  }
-  async function linkChild(){ setBusy(true); setMsg(""); const r=await serverPost("/api/parent/children/link",{username:lu,password:lp}); setBusy(false); if(r.ok){ onChildLinked&&onChildLinked(r.child); setMsg("Linked "+r.child.name+"."); setLu(""); setLp(""); } else setMsg(r.error||"Failed."); }
-  return(
-    <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
-      <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#1F3F95",padding:0}}>{open?"− ":"＋ "}Invite another parent / link existing child</button>
-      {inv.received.length>0&&(<div style={{marginTop:10,background:"#FEF3C7",border:"1px solid #F59E0B",borderRadius:10,padding:10}}>
-        <div style={{fontSize:12,fontWeight:800,marginBottom:6}}>Invitations for you</div>
-        {inv.received.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:13,marginBottom:4}}>
-          <span>{i.inviterName||"A parent"} invited you to follow <b>{i.childName||"a child"}</b></span>
-          <button disabled={busy} style={{...btn,marginBottom:0,padding:"6px 12px"}} onClick={()=>acceptInvite(i.id)}>Accept</button></div>))}
-      </div>)}
-      {open&&(<div style={{marginTop:10}}>
-        {linkedStudents.length>0&&(<>
-          <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Add another parent to a child</div>
-          <select style={inp} value={childId} onChange={e=>setChildId(e.target.value)}>{linkedStudents.map(s=><option key={s.id} value={s.serverId||""} disabled={!s.serverId}>{s.name}</option>)}</select>
-          <input style={inp} placeholder="Other parent's email (they log in or sign up with it, then accept)" value={email} onChange={e=>setEmail(e.target.value)}/>
-          <button disabled={busy} style={btn} onClick={linkParent}>Send invite</button>
-          {inv.sent.length>0&&(<div style={{marginBottom:12}}>
-            <div style={{fontSize:12,fontWeight:700,marginBottom:4}}>Pending invites (expire after 7 days)</div>
-            {inv.sent.map(i=>(<div key={i.id} style={{display:"flex",justifyContent:"space-between",alignItems:"center",gap:8,fontSize:12,marginBottom:4}}>
-              <span>{i.email} → {i.childName} · expires {String(i.expiresAt).slice(0,10)}</span>
-              <button disabled={busy} style={{background:"none",border:`1px solid ${C.border}`,borderRadius:8,padding:"4px 10px",cursor:"pointer",fontSize:12}} onClick={()=>revokeInvite(i.id)}>Revoke</button></div>))}
-          </div>)}
-        </>)}
-        <div style={{fontSize:12,fontWeight:700,marginBottom:6}}>Link an existing child account</div>
-        <input style={inp} placeholder="Child's username" value={lu} onChange={e=>setLu(e.target.value)}/>
-        <input style={inp} type="password" placeholder="Child's password" value={lp} onChange={e=>setLp(e.target.value)}/>
-        <button disabled={busy} style={btn} onClick={linkChild}>Link child</button>
-        {msg&&<div style={{fontSize:12,color:C.muted}}>{msg}</div>}
-        {SERVER_AUTH&&clewquestEnabled()&&<ParentPictureChild onChildLinked={onChildLinked}/>}
-      </div>)}
     </div>
   );
 }
@@ -822,7 +764,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           <button onClick={onLogout} style={{background:"none",border:"none",borderRadius:10,padding:"6px 12px",color:"#6B6F7B",cursor:"pointer",fontSize:12,fontWeight:700}}>Logout</button>
         </div> {linkedStudents.length===0?(
           <div style={{background:"#F6F2EA",borderRadius:12,padding:"10px 14px",marginBottom:12}}>
-            <div style={{color:"#6B6F7B",fontSize:12}}>No students linked. Ask your child to share their Student ID.</div>
+            <div style={{color:"#6B6F7B",fontSize:12}}>No children yet. Tap Add child below.</div>
           </div>
         ):(
           <div style={{display:"flex",gap:8,marginBottom:12,overflowX:"auto",paddingBottom:2}}>
@@ -869,14 +811,14 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
 
       <div style={{padding:"16px 16px 30px",overflowY:"auto"}}>
         {SERVER_AUTH&&onChildCreated&&<TodayCard linkedStudents={linkedStudents}/>}
+        {SERVER_AUTH&&onChildCreated&&child&&child.serverId&&clewquestEnabled()&&<ChildCard key={child.id} child={child}/>}
         {SERVER_AUTH&&onChildCreated&&<AddChildForm onCreated={onChildCreated}/>}
-        {SERVER_AUTH&&onChildCreated&&<GuardianTools linkedStudents={linkedStudents} onChildLinked={onChildCreated}/>}
         {SERVER_AUTH&&onChildCreated&&<AlertSettings/>}
         {!child&&linkedStudents.length===0&&(
           <div style={{textAlign:"center",padding:"48px 20px",color:C.muted}}>
             <div style={{fontSize:40,marginBottom:12}}>🔗</div>
             <div style={{fontWeight:700,fontSize:16,marginBottom:8}}>No children linked yet</div>
-            <div style={{fontSize:13,lineHeight:1.7}}>Go to Settings → Manage Children to link your child's Student ID. Ask your child to check their Profile for their ID.</div>
+            <div style={{fontSize:13,lineHeight:1.7}}>Tap Add child above to create your child's account. You choose their login ID and pictures.</div>
           </div>
         )}
         {parentToast&&<ComingSoonToast message={parentToast} onDone={()=>setParentToast(null)}/>}
@@ -888,7 +830,6 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}
-        {child&&SERVER_AUTH&&clewquestEnabled()&&child.serverId&&tab==="settings" && <ParentPictureReset child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
       </div>

@@ -42,6 +42,7 @@ async function run() {
   let taken = true;
   s = await ctx((p, u) => {
     if (p === "/api/auth/parent/confirm") return { ok: true, profile: parent, children: [] };
+    if (p === "/api/parent/children/picture") return { ok: true, child: { id: "c-9", role: "student", username: "AriaTan", name: "Aria Tan", grade: "P3", pictureCode: true } };
     if (p === "/api/auth/me") return { ok: true, profile: parent, children: [] };
     if (p === "/api/auth/username-available") { const n = u.searchParams.get("u"); return n === "Aria01" && taken ? { ok: true, state: "taken", suggestions: ["Aria01_2", "Aria47", "Aria01Quest"] } : { ok: true, state: "available" }; }
     return undefined;
@@ -51,7 +52,9 @@ async function run() {
   await page.getByRole("button", { name: "P3", exact: true }).click(); await page.getByRole("button", { name: "English" }).click(); await page.getByRole("button", { name: "Math" }).click(); await page.getByRole("button", { name: "Chinese", exact: true }).click();
   await page.getByTestId("ac-username").fill("AriaTan"); await page.waitForTimeout(900);
   for (const i of [0, 3, 8, 3]) await page.getByTestId(`pic-${i}`).first().click();
+  for (const i of [0, 3, 8, 3]) await page.getByTestId(`pic-${i}`).nth(1).click();
   await shot(page, "11-add-child-available-pictures");
+  await page.getByTestId("ac-create").click(); await page.getByTestId("child-ready").waitFor(); await shot(page, "18-child-ready");
   await s.c.close();
   // builder + logged-in landing + home
   s = await ctx((p) => {
@@ -68,9 +71,16 @@ async function run() {
     if (p === "/api/auth/me") return { ok: true, profile: parent, children: [kid] };
     if (p === "/api/parent/children") return { ok: true, children: [kid] };
     if (p.startsWith("/api/parent/today")) return { ok: true, children: [] };
+    if (p === "/api/clewquest/picture-reset") return { ok: true, username: "Aria01", name: "Aria Tan" };
     return undefined;
   }); page = s.page;
-  await page.goto(base); await page.getByTestId("ac-open").waitFor(); await shot(page, "16-parent-dashboard");
+  await page.goto(base); await page.getByTestId("child-card").waitFor(); await shot(page, "16-parent-dashboard-child-card");
+  await page.getByTestId("reset-signin-open").click(); await shot(page, "19-reset-signin-pick");
+  for (const i of [1, 2, 5, 6]) await page.getByTestId(`pic-${i}`).first().click();
+  for (const i of [1, 2, 5, 6]) await page.getByTestId(`pic-${i}`).nth(1).click();
+  await shot(page, "20-reset-signin-confirm-pictures");
+  await page.getByTestId("reset-review").click(); await shot(page, "21-reset-signin-review");
+  await page.getByTestId("reset-save").click(); await page.getByTestId("reset-done").waitFor(); await shot(page, "22-reset-signin-done");
   await page.getByTestId("ac-open").click(); await shot(page, "17-parent-add-child"); await s.c.close();
   await browser.close();
 }

@@ -628,7 +628,6 @@ function AuthScreen({onLogin, onSignup, confirmInfo, resetCode, onResetDone, onP
   return(
     <LoginFrame onBack={()=>setMode("landing")}>
       {mode==="login" && <LoginForm onLogin={onLogin} onPictureDone={pictureDone} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
-      {mode==="signup_student" && <SignupStudentForm onSignup={onSignup} onBack={()=>setMode("landing")}/>}
       {mode==="signup_parent"  && <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>}
     </LoginFrame>
   );
@@ -945,7 +944,7 @@ function LegacyParentEmailPrompt({local, onBack}){
   }
   if(done) return(<div>
     <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:8}}>Check your email 📧</div>
-    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in, use "Link existing child" on the dashboard to connect your child's account.</div>
+    <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,lineHeight:1.6,marginBottom:16}}>We sent a confirmation link to <b>{email.trim()}</b>. Open it, then log in here with your email and the new password. After logging in you add your child and pick their pictures.</div>
     <BigBtn color="#7C3AED" onClick={onBack}>Back to login</BigBtn></div>);
   return(<div>
     <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.286)",marginBottom:6}}>Add your email</div>
@@ -1033,96 +1032,6 @@ function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo}){
   );
 }
 
-function SignupStudentForm({onSignup, onBack}){
-  const [form, setForm] = useState({name:"",grade:"P3",id:"",password:"",confirm:"",school:"",schoolCustom:""});
-  const [showPw, setShowPw] = useState(false);
-  const [err, setErr] = useState("");
-  const [gender, setGender] = useState(null); // null | "boy" | "girl"
-
-  function f(k,v){ setForm(p=>({...p,[k]:v})); }
-
-  function selectGender(g){
-    setGender(g);
-  }
-
-  function handleSubmit(){
-    setErr("");
-    if(!gender)           return setErr("Please choose Boy or Girl.");
-    if(!form.name.trim()) return setErr("Please enter your name.");
-    const schoolFinal = form.school==="other" ? form.schoolCustom.trim() : form.school;
-    if(!form.id.trim())   return setErr("Please choose a Student ID.");
-    if(form.id.includes(" ")) return setErr("ID cannot contain spaces.");
-    if(allUsers().find(u=>u.id===form.id)) return setErr("This ID is already taken. Choose another.");
-    if(form.password.length<6) return setErr("Password must be at least 6 characters.");
-    if(form.password!==form.confirm) return setErr("Passwords do not match.");
-    const user = { id:form.id, password:form.password, name:form.name.trim(), grade:form.grade, role:"student", gender, school:schoolFinal };
-    onSignup("student", user);
-  }
-
-  return(
-    <div>
-      <button onClick={onBack} style={{background:"none",border:"none",cursor:"pointer",color:C.muted,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,marginBottom:16,padding:0}}> Back to Login</button>
-      <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.429)",color:"#0F172A",marginBottom:4}}>Create Student Account </div>
-      <div style={{fontSize:"calc(var(--fs) * 0.929)",color:C.muted,marginBottom:20}}>Set up your practice profile</div> <div style={{marginBottom:20}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:C.muted,marginBottom:10,textTransform:"uppercase",letterSpacing:1}}>Step 1 . I am a...</div>
-        <div style={{display:"flex",gap:12}}>
-          <button onClick={()=>selectGender("boy")} style={{flex:1,background:gender==="boy"?"linear-gradient(135deg,#3B82F6,#2563EB)":"#F1F5F9",border:gender==="boy"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="boy"?"0 6px 18px rgba(59,130,246,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}></div>
-            <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,color:gender==="boy"?"#fff":"#0F172A"}}>Boy</div>
-            
-          </button>
-          <button onClick={()=>selectGender("girl")} style={{flex:1,background:gender==="girl"?"linear-gradient(135deg,#EC4899,#A855F7)":"#F1F5F9",border:gender==="girl"?"none":`2px solid ${C.border}`,borderRadius:16,padding:"18px 12px",cursor:"pointer",transition:"all 0.2s",boxShadow:gender==="girl"?"0 6px 18px rgba(236,72,153,0.35)":"none"}}>
-            <div style={{fontSize:36,marginBottom:6}}></div>
-            <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:900,color:gender==="girl"?"#fff":"#0F172A"}}>Girl</div>
-            
-          </button>
-        </div>
-      </div>       <InputField label="Full Name" value={form.name} onChange={v=>f("name",v)} placeholder="e.g. Mei Lin Tan"/> <div style={{marginBottom:20}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
-           Step 3 . Your School
-        </div>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,marginBottom:10,lineHeight:1.5}}>
-          We use your school's past papers to tailor questions to your exam style!
-        </div> <SchoolDropdown value={form.school} onChange={v=>f("school",v)}/>
-
-        {form.school==="Other / Not Listed"&&(
-          <div style={{marginTop:10}}>
-            <InputField label="Type your school name" value={form.schoolCustom} onChange={v=>f("schoolCustom",v)} placeholder="e.g. Rosyth School"/>
-          </div>
-        )}
-        {form.school&&form.school!=="Other / Not Listed"&&<SchoolFeedbackBox school={form.school}/>}
-        {form.school==="Other / Not Listed"&&form.schoolCustom&&(
-          <div style={{marginTop:8,background:"#F0FDF4",borderRadius:10,padding:"9px 13px",fontSize:"calc(var(--fs) * 0.857)",color:"#065F46",fontWeight:600,lineHeight:1.6}}>
-             Got it! We'll use similar school papers as reference for your practice questions.
-          </div>
-        )}
-      </div>
-
-      <div style={{marginBottom:16}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>Grade</div>
-        <div style={{display:"flex",gap:8}}>
-          {GRADES.map(g=>(
-            <button key={g} onClick={()=>f("grade",g)} style={{flex:1,background:form.grade===g?C.navy:"#F1F5F9",color:form.grade===g?"#fff":C.muted,border:"none",borderRadius:10,padding:"10px",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,cursor:"pointer"}}>
-              {g}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <InputField label="Student ID (for login)" value={form.id} onChange={v=>f("id",v.toLowerCase().replace(/\s/g,"_"))} placeholder="e.g. mei_lin_2026"/>
-      <div style={{position:"relative",marginBottom:4}}>
-        <InputField label="Password (min 6 chars)" value={form.password} onChange={v=>f("password",v)} type={showPw?"text":"password"} placeholder="Create a password"/>
-        <button onClick={()=>setShowPw(p=>!p)} style={{position:"absolute",right:12,bottom:14,background:"none",border:"none",cursor:"pointer",fontSize:"calc(var(--fs) * 1.143)",color:C.muted}}>{showPw?"":""}</button>
-      </div>
-      <InputField label="Confirm Password" value={form.confirm} onChange={v=>f("confirm",v)} type="password" placeholder="Re-enter password" onEnter={handleSubmit}/>
-
-      {err&&<ErrorBox msg={err}/>}
-      <BigBtn color={C.navy} onClick={handleSubmit}>Create Student Account </BigBtn>
-    </div>
-  );
-}
-
-// Server mode: parent signs up with a real email (children are then created from the dashboard).
 function SignupParentServerForm({onLogin, onBack}){
   const [form, setForm] = useState({name:"",email:"",password:"",confirm:""});
   const [err, setErr] = useState("");
@@ -2353,18 +2262,20 @@ function App(){
     let alive = true;
     const jobs = [];
     // Supabase confirm link lands on /?code=...: exchange it for a session so the parent opens straight into the dashboard.
-    let confirmCode = "";
+    let confirmCode = ""; let confirmHash = ""; let confirmType = "";
     if(SERVER_AUTH){
       try{
         const u = new URL(window.location.href);
         confirmCode = u.searchParams.get("code") || "";
+        confirmHash = u.searchParams.get("token_hash") || ""; confirmType = u.searchParams.get("type") || "";
+        if(confirmHash){ u.searchParams.delete("token_hash"); u.searchParams.delete("type"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
         if(u.searchParams.get("reset")==="1" && confirmCode){ const rc=confirmCode; confirmCode=""; u.searchParams.delete("reset"); u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); setResetCode(rc); }
         if(confirmCode){ u.searchParams.delete("code"); window.history.replaceState(null,"",u.pathname+(u.search||"")+u.hash); }
       }catch{}
     }
     let pending = Promise.resolve();
-    if(confirmCode){
-      pending = serverPost("/api/auth/parent/confirm",{code:confirmCode}).then(r=>{
+    if(confirmCode || confirmHash){
+      pending = serverPost("/api/auth/parent/confirm",confirmHash?{tokenHash:confirmHash,type:confirmType}:{code:confirmCode}).then(r=>{
         let email = ""; try{ email = localStorage.getItem(PENDING_PARENT_EMAIL_KEY) || ""; }catch{}
         if(!alive) return;
         if(r && r.ok && r.profile){
@@ -2396,7 +2307,9 @@ function App(){
     setAuth({role, user:userData});
   }
   function handleLogin(role, user){ 
-    setAuth({role, user}); 
+    setAuth({role, user});
+    if(role==="parent" && confirmInfo && !(user.childIds||[]).length) setOnboard(true); // confirm link could not auto-login: after the Parent login go straight to step 2
+
     if(!window._GENIUS_STORE) window._GENIUS_STORE = {users:{},progress:{}};
     window._GENIUS_STORE._currentUser = user.id;
   }
@@ -2409,7 +2322,9 @@ function App(){
   if(!sessionChecked) return <div style={{minHeight:"100vh",display:"flex",alignItems:"center",justifyContent:"center",color:"#64748B",fontWeight:700}}>Loading…</div>;
   if(!auth) return <AuthScreen onLogin={handleLogin} onSignup={handleSignup} confirmInfo={confirmInfo} resetCode={resetCode} onResetDone={()=>setResetCode("")}
     onParentSignedUp={(p)=>{ handleLogin("parent", mirrorServerUser(p,{childIds:[]})); setOnboard(true); }}/>;
-  if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2 onDone={(c)=>{ const k=mirrorServerUser(c); if(STORE.users[auth.user.id]){ STORE.users[auth.user.id].childIds=[k.id]; persistUsers(); } setAuth(a=>({...a,user:{...a.user,childIds:[k.id]}})); setOnboard(false); }}/>;
+  if(auth.role==="parent" && onboard && !(auth.user.childIds||[]).length) return <SignupStep2
+    onCreated={(c)=>{ const k=mirrorServerUser(c); if(STORE.users[auth.user.id]){ STORE.users[auth.user.id].childIds=[...new Set([...(STORE.users[auth.user.id].childIds||[]), k.id])]; persistUsers(); } }}
+    onDone={()=>{ const ids=(STORE.users[auth.user.id]&&STORE.users[auth.user.id].childIds)||[]; setAuth(a=>({...a,user:{...a.user,childIds:ids}})); setOnboard(false); }}/>;
 
   if(auth.role==="student"){
     const user = STORE.users[auth.user.id] || auth.user;

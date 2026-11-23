@@ -4,20 +4,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import SchoolCombobox from "@/components/SchoolCombobox";
 import { PicturePad } from "./PictureAuth";
-import { CODE_LENGTH } from "@/lib/clewquest/pictures";
+import { PictureIcon } from "./PictureIcon";
+import { CODE_LENGTH, PICTURES } from "@/lib/clewquest/pictures";
 import { cqGet, cqPost } from "@/lib/clewquest/client";
-import { clewquestEnabled } from "@/lib/clewquest/config";
-import { serverPost } from "@/lib/serverClient";
 import { cleanNamePart, fullName, loginIdProblem, USERNAME_MSG } from "@/lib/supabase/config";
-import { Field, Chips, ErrorText, mainBtn, inputStyle, helperStyle, T, FONT } from "./Shell";
+import { Field, Chips, ErrorText, Card, mainBtn, secondaryBtn, inputStyle, helperStyle, T, FONT } from "./Shell";
 
 export const LEVELS = ["P3", "P4", "P5", "P6"];
 export const SUBJECTS = ["English", "Math", "Science"];
 export const MOTHER_TONGUES = ["Chinese", "Higher Chinese", "Other / none"];
 const suggestFrom = (first) => { const b = cleanNamePart(first).replace(/[^A-Za-z0-9_]/g, "").slice(0, 26); return b ? (b.length < 3 ? b + "01" : b) : ""; };
 
-export default function AddChild({ onCreated, step = false }) {
-  const pic = clewquestEnabled();
+export function CopyButton({ text, testId = "copy-id" }) {
+  const [done, setDone] = useState(false);
+  return <button type="button" data-testid={testId} onClick={() => { try { navigator.clipboard && navigator.clipboard.writeText(text); } catch {} setDone(true); setTimeout(() => setDone(false), 1500); }} style={{ ...secondaryBtn, width: "auto", height: 34, padding: "0 14px", fontSize: 13 }}>{done ? "Copied" : "Copy"}</button>;
+}
+export function PictureRow({ seq, size = 44 }) {
+  return <div data-testid="pic-row" style={{ display: "flex", gap: 10, justifyContent: "center" }}>{seq.map((i, n) => (
+    <span key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 2 }}><PictureIcon k={PICTURES[i].key} size={size} /><span style={{ fontSize: 11, fontWeight: 800 }}>{n + 1}. {PICTURES[i].label}</span></span>
+  ))}</div>;
+}
+
+// Step 2 / Add child. One server call creates the auth user (picture-code password), the profile and the parent link, with full rollback.
+// On success it shows "{First name} is ready!" with the login ID and the chosen pictures; the buttons are Add another child / Go to dashboard.
+export default function AddChild({ onCreated, onAnother, onDone, step = false }) {
+  const [made, setMade] = useState(null);
   const [f, setF] = useState({ first: "", last: "", level: "", subjects: [], tongue: "", school: "", username: "", password: "" });
   const [touched, setTouched] = useState(false);
   const [a, setA] = useState([]); const [b, setB] = useState([]);
@@ -41,7 +52,7 @@ export default function AddChild({ onCreated, step = false }) {
   }, [username, problem]);
   const cur = avail.key === username ? avail.state : "";
   const state = !username ? "" : problem ? "bad" : cur || "checking";
-  const pwOk = pic ? a.length === CODE_LENGTH && a.join() === b.join() : f.password.length >= 6;
+  const pwOk = a.length === CODE_LENGTH && a.join() === b.join();
   const valid = !!cleanNamePart(f.first) && !!f.level && f.subjects.length > 0 && !!f.tongue && state === "available" && pwOk;
   const border = state === "available" ? "#4F8A2B" : state === "taken" ? T.cta : T.border;
 
@@ -49,7 +60,7 @@ export default function AddChild({ onCreated, step = false }) {
     setErr(""); setBusy(true);
     const first = cleanNamePart(f.first), last = cleanNamePart(f.last);
     const body = { username, firstName: first, lastName: last, name: fullName(first, last), grade: f.level, school: f.school, subjects: f.subjects, motherTongue: f.tongue };
-    const r = pic ? await cqPost("/api/parent/children/picture", { ...body, sequence: a }) : await serverPost("/api/parent/children", { ...body, password: f.password });
+    const r = await cqPost("/api/parent/children/picture", { ...body, sequence: a });
     setBusy(false);
     if (!r.ok) {
       if (r.status === 409) { // 23505: someone took it meanwhile. Show Taken plus new suggestions.
@@ -60,7 +71,27 @@ export default function AddChild({ onCreated, step = false }) {
       return setErr(r.error || "Could not add your child. Try again.");
     }
     onCreated && onCreated(r.child);
+    setMade({ child: r.child, first, seq: a });
   }
+  function another() { setF({ first: "", last: "", level: "", subjects: [], tongue: "", school: "", username: "", password: "" }); setTouched(false); setA([]); setB([]); setAvail({ key: "", state: "", suggestions: [], message: "" }); setMade(null); onAnother && onAnother(); }
+
+  if (made) return (
+    <div data-testid="child-ready" style={{ textAlign: "center" }}>
+      <Card style={{ padding: 22 }}>
+        <h2 style={{ margin: "0 0 10px", fontSize: 24, fontWeight: 800 }}>{made.first} is ready!</h2>
+        <div style={helperStyle}>Login ID</div>
+        <div data-testid="ready-username" style={{ fontSize: 30, fontWeight: 800, color: T.primary, margin: "2px 0 8px", wordBreak: "break-all" }}>{made.child.username}</div>
+        <CopyButton text={made.child.username} />
+        <div style={{ margin: "18px 0 6px", ...helperStyle }}>Pictures, in order</div>
+        <PictureRow seq={made.seq} />
+        <p style={{ margin: "16px 0 0", fontSize: 14, lineHeight: 1.5 }}>Your child signs in on the <b>Student</b> tab with this login ID and these pictures.</p>
+      </Card>
+      <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 16 }}>
+        <button data-testid="ready-another" onClick={another} style={secondaryBtn}>Add another child</button>
+        <button data-testid="ready-dashboard" onClick={() => onDone && onDone(made.child)} style={mainBtn(false)}>Go to dashboard</button>
+      </div>
+    </div>
+  );
 
   return (
     <div data-testid="add-child">
@@ -91,14 +122,10 @@ export default function AddChild({ onCreated, step = false }) {
           </>)}
         </div>
       </Field>
-      {pic ? (
-        <div style={{ marginBottom: 14 }}>
+      <div style={{ marginBottom: 14 }}>
           <PicturePad value={a} onChange={setA} label={`Pick ${CODE_LENGTH} pictures for your child's secret code`} />
           {a.length === CODE_LENGTH && <div style={{ marginTop: 14 }}><PicturePad value={b} onChange={setB} label="Pick the same pictures again" />{b.length === CODE_LENGTH && a.join() !== b.join() && <ErrorText testId="ac-pic-mismatch">The two picture codes are different. Try again.</ErrorText>}</div>}
-        </div>
-      ) : (
-        <Field id="ac-pw" label="Password" helper="At least 6 characters."><input id="ac-pw" style={inputStyle} type="password" value={f.password} onChange={(e) => set("password", e.target.value)} /></Field>
-      )}
+      </div>
       <ErrorText testId="ac-error">{err}</ErrorText>
       <button data-testid="ac-create" disabled={!valid || busy} onClick={submit} style={mainBtn(!valid || busy)}>{busy ? "Adding..." : "Add child"}</button>
       {step && <div style={{ ...helperStyle, textAlign: "center", marginTop: 12 }}>Your child picks their Clew on first log in.</div>}

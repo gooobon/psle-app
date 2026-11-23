@@ -170,13 +170,13 @@ export function SignupParentStep1({ onSignedIn, onLoginInstead }) {
 }
 
 // Step 2 screen (also reached directly after the email-confirm link when the parent has no children yet).
-export function SignupStep2({ onDone }) {
+export function SignupStep2({ onCreated, onDone }) {
   return (
     <Page testId="cq-signup-step2"><HeaderBar />
       <div style={{ padding: 20 }}>
         <h1 style={{ margin: 0, fontWeight: 800, fontSize: 26, color: T.ink }}>Add your child</h1>
         <div style={{ ...helperStyle, fontSize: 15, margin: "6px 0 14px" }}>You can add more children later.</div>
-        <AddChild step onCreated={onDone} />
+        <AddChild step onCreated={onCreated} onDone={onDone} />
       </div>
     </Page>
   );

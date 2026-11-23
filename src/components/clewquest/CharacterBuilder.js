@@ -61,7 +61,7 @@ export default function CharacterBuilder({ initial, onSaved, onCancel, onSkip, o
         </div>
 
         <div role="tablist" data-testid="cq-tabs" style={{ display: "flex", gap: 8, overflowX: "auto", marginBottom: 12 }}>
-          {tabs.map((t) => (
+          {tabs.filter((t) => t.enabled).map((t) => (
             <button key={t.key} role="tab" aria-selected={tab === t.key} disabled={!t.enabled} data-testid={`cq-tab-${t.key}`} onClick={() => setTab(t.key)}
               style={{ padding: "8px 16px", borderRadius: 999, border: `1.5px solid ${tab === t.key ? T.primary : T.border}`, background: tab === t.key ? T.primary : "#fff", color: tab === t.key ? "#fff" : T.ink, fontWeight: 700, fontSize: 14, opacity: t.enabled ? 1 : 0.45, cursor: t.enabled ? "pointer" : "default", fontFamily: FONT, flexShrink: 0 }}>{t.label}</button>
           ))}

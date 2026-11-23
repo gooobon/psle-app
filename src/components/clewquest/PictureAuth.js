@@ -63,7 +63,7 @@ export function PictureLogin({ onDone, onUsePassword }) {
       <ErrorText testId="pic-error">{err}</ErrorText>
       {locked && (<div data-testid="pic-locked" style={{ background: "#FBF1D6", color: T.ink, borderRadius: 12, padding: 12, fontSize: 14, lineHeight: 1.5 }}>
         <b>Ask a parent to reset your picture code.</b> They log in on their own account and pick new pictures for you. You can log in again right away.<br />
-        No parent linked yet? Wait 15 minutes and log in. Then tap &quot;Link a parent&quot; to get 6 numbers, and give them to a parent.
+        Or wait 15 minutes and try again.
       </div>)}
       <button data-testid="pic-submit" disabled={!ready || busy} style={mainBtn(!ready || busy)} onClick={go}>{busy ? "Logging in..." : "Log in"}</button>
       <div style={{ textAlign: "center", color: T.muted, fontSize: 13 }}>Forgot your pictures? Ask a parent to reset them.</div>

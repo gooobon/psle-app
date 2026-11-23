@@ -1,61 +1,77 @@
 "use client";
-// Parent screen: set a new picture code for a child who signs in with pictures. Behind the ClewQuest flag (the parent dashboard only
-// renders this when the flag and server auth are on). Idle -> pick 4 pictures -> confirm -> saved. The server only accepts a parent
-// who is linked to the child (parent_child), and only for a child account that uses a picture code. English only.
+// Parent dashboard child card: the child's name and Login ID (with Copy) and a "Reset sign-in" sheet.
+// Reset, never reveal: codes are stored only as hashes, so the parent picks a NEW picture code (same picker as Add child), confirms it,
+// and saves. A child who still has a typed password is switched to pictures after an explicit confirm. The Login ID never changes.
 import React, { useState } from "react";
-import { PICTURES, CODE_LENGTH } from "@/lib/clewquest/pictures";
-import { PictureIcon } from "./PictureIcon";
-import { PicturePad } from "@/components/clewquest/PictureAuth";
+import { CODE_LENGTH } from "@/lib/clewquest/pictures";
+import { PicturePad } from "./PictureAuth";
 import { cqPost } from "@/lib/clewquest/client";
+import { CopyButton, PictureRow } from "./AddChild";
+import { Card, ErrorText, mainBtn, secondaryBtn, helperStyle, T } from "./Shell";
 
-const card = { background: "#fff", border: "1px solid #E2E8F0", borderRadius: 12, padding: 12, marginBottom: 14 };
-const btn = (bg, fg = "#fff") => ({ padding: "9px 14px", fontSize: 13, fontWeight: 800, color: fg, background: bg, border: bg === "#fff" ? "1px solid #CBD5E1" : "none", borderRadius: 10, cursor: "pointer" });
-
-export default function ParentPictureReset({ child }) {
-  const [step, setStep] = useState("idle"); // idle | pick | confirm | done
-  const [seq, setSeq] = useState([]);
-  const [msg, setMsg] = useState("");
-  const [busy, setBusy] = useState(false);
-  if (!child || !child.serverId) return null;
+export default function ChildCard({ child }) {
+  const [step, setStep] = useState("idle"); // idle | switch | pick | confirm | done
+  const [a, setA] = useState([]); const [b, setB] = useState([]);
+  const [msg, setMsg] = useState(""); const [busy, setBusy] = useState(false); const [saved, setSaved] = useState([]); const [confirmed, setConfirmed] = useState(false);
+  if (!child) return null;
   const name = child.name || "your child";
-  const reset = () => { setStep("idle"); setSeq([]); };
-  async function save() {
+  const loginId = child.username || child.id;
+  // The server decides: a typed-password child answers 409 needsConfirm, then we ask "{name} will log in with pictures from now on."
+  const close = () => { setConfirmed(false); setStep("idle"); setA([]); setB([]); setMsg(""); };
+  async function save(confirmSwitch = false) {
     setBusy(true); setMsg("");
-    const r = await cqPost("/api/clewquest/picture-reset", { childId: child.serverId, sequence: seq });
+    const r = await cqPost("/api/clewquest/picture-reset", { childId: child.serverId, sequence: a, confirmSwitch });
     setBusy(false);
-    if (r.ok) { setStep("done"); setSeq([]); return; }
-    setStep("pick");
-    setMsg(r.status === 403 ? "You can only reset the code of your own child." : r.status === 409 ? `${name} does not sign in with a picture code.` : r.status === 503 ? "Picture codes are not available right now." : "Could not save the new code. Please try again.");
+    if (r.ok) { setSaved(a); setA([]); setB([]); setStep("done"); return; }
+    if (r.status === 409) { setStep("switch"); return; }
+    setStep("pick"); setB([]);
+    setMsg(r.status === 403 ? "You can only reset the sign-in of your own child." : r.status === 404 ? "We could not find this child." : r.status === 429 ? "Too many tries. Please wait a while." : r.status === 503 ? "Picture codes are not available right now." : "Could not save the new code. Try again.");
   }
   return (
-    <div data-testid="picture-reset" style={card}>
-      <div style={{ fontSize: 13, fontWeight: 800, color: "#1F3F95", marginBottom: 4 }}>{name}&apos;s picture code</div>
-      {step === "idle" && (<>
-        <div style={{ fontSize: 11, color: "#64748B", marginBottom: 8, lineHeight: 1.5 }}>If {name} forgot the picture code or is locked out, you can set a new one. The old code stops working.</div>
-        <button data-testid="picture-reset-start" style={btn("#1F3F95")} onClick={() => { setMsg(""); setStep("pick"); }}>Reset picture code</button>
-      </>)}
-      {step === "pick" && (<>
-        <PicturePad value={seq} onChange={setSeq} label="Pick the new 4 pictures, in order" />
-        {msg && <div data-testid="picture-reset-error" style={{ color: "#B91C1C", fontWeight: 700, fontSize: 12, marginTop: 8 }}>{msg}</div>}
-        <div style={{ display: "flex", gap: 8, marginTop: 10 }}>
-          <button style={btn("#fff", "#334155")} onClick={reset}>Cancel</button>
-          {seq.length === CODE_LENGTH && <button data-testid="picture-reset-review" style={btn("#1F3F95")} onClick={() => setStep("confirm")}>Review</button>}
+    <Card testId="child-card" style={{ padding: 16, marginBottom: 14 }}>
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+        <div>
+          <div style={{ fontWeight: 800, fontSize: 17, color: T.ink }}>{name}</div>
+          <div style={helperStyle}>Login ID</div>
+          <div data-testid="child-login-id" style={{ fontWeight: 800, fontSize: 20, color: T.primary, wordBreak: "break-all" }}>{loginId}</div>
         </div>
-      </>)}
-      {step === "confirm" && (<>
-        <div style={{ fontSize: 13, marginBottom: 8 }}>Replace {name}&apos;s picture code with these 4 pictures? The old code will stop working.</div>
-        <div data-testid="picture-reset-preview" style={{ display: "flex", gap: 10, marginBottom: 10 }}>{seq.map((i, n) => (
-          <span key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center" }}><PictureIcon k={PICTURES[i].key} size={36} /><span style={{ fontSize: 11, fontWeight: 800 }}>{PICTURES[i].label}</span></span>
-        ))}</div>
         <div style={{ display: "flex", gap: 8 }}>
-          <button style={btn("#fff", "#334155")} onClick={() => setStep("pick")}>Back</button>
-          <button data-testid="picture-reset-confirm" style={btn("#1F3F95")} onClick={busy ? undefined : save}>{busy ? "Saving..." : "Yes, save new code"}</button>
+          <CopyButton text={loginId} testId="child-copy-id" />
+          <button data-testid="reset-signin-open" onClick={() => { setMsg(""); setStep("pick"); }} style={{ ...secondaryBtn, width: "auto", height: 34, padding: "0 14px", fontSize: 13 }}>Reset sign-in</button>
         </div>
-      </>)}
-      {step === "done" && (<>
-        <div data-testid="picture-reset-done" style={{ fontSize: 13, color: "#065F46", fontWeight: 700, marginBottom: 8 }}>Done. {name}&apos;s new picture code is saved. {name} can sign in with it now.</div>
-        <button style={btn("#fff", "#334155")} onClick={reset}>Close</button>
-      </>)}
-    </div>
+      </div>
+      {step !== "idle" && (
+        <div data-testid="reset-sheet" style={{ marginTop: 14, paddingTop: 14, borderTop: `1px dotted ${T.gold}` }}>
+          <div style={{ fontSize: 15, marginBottom: 10 }}>Your child&apos;s login ID is <b>{loginId}</b>. It does not change.</div>
+          {step === "switch" && (<>
+            <div data-testid="reset-switch-note" style={{ fontSize: 14, marginBottom: 10 }}>{name} will log in with pictures from now on. The old password stops working.</div>
+            <div style={{ display: "flex", gap: 8 }}><button style={{ ...secondaryBtn, flex: 1 }} onClick={close}>Cancel</button><button data-testid="reset-switch-yes" disabled={busy} style={{ ...mainBtn(false), flex: 1 }} onClick={() => { setConfirmed(true); save(true); }}>Continue</button></div>
+          </>)}
+          {step === "pick" && (<>
+            <PicturePad value={a} onChange={(v) => { setA(v); setB([]); }} label={`Pick ${CODE_LENGTH} new pictures, in order`} />
+            {a.length === CODE_LENGTH && <div style={{ marginTop: 12 }}><PicturePad value={b} onChange={setB} label="Pick the same pictures again" /></div>}
+            {b.length === CODE_LENGTH && a.join() !== b.join() && <ErrorText testId="reset-mismatch">The pictures did not match. Try the second set again.</ErrorText>}
+            <ErrorText testId="reset-error">{msg}</ErrorText>
+            <div style={{ display: "flex", gap: 8, marginTop: 12 }}>
+              <button style={{ ...secondaryBtn, flex: 1 }} onClick={close}>Cancel</button>
+              <button data-testid="reset-review" disabled={!(a.length === CODE_LENGTH && a.join() === b.join())} style={{ ...mainBtn(!(a.length === CODE_LENGTH && a.join() === b.join())), flex: 1 }} onClick={() => setStep("confirm")}>Review</button>
+            </div>
+          </>)}
+          {step === "confirm" && (<>
+            <div style={{ fontSize: 14, marginBottom: 10 }}>These will be {name}&apos;s new pictures. The old code stops working.</div>
+            <div data-testid="reset-preview" style={{ marginBottom: 14 }}><PictureRow seq={a} /></div>
+            <div style={{ display: "flex", gap: 8 }}>
+              <button style={{ ...secondaryBtn, flex: 1 }} onClick={() => setStep("pick")}>Back</button>
+              <button data-testid="reset-save" disabled={busy} style={{ ...mainBtn(busy), flex: 1 }} onClick={busy ? undefined : () => save(confirmed)}>{busy ? "Saving..." : "Save new code"}</button>
+            </div>
+          </>)}
+          {step === "done" && (<>
+            <div data-testid="reset-done" style={{ fontSize: 15, fontWeight: 700, color: T.successText, marginBottom: 10 }}>Done. {name} can log in now with {loginId} and these pictures.</div>
+            <div style={{ marginBottom: 14 }}><PictureRow seq={saved} /></div>
+            <button style={secondaryBtn} onClick={close}>Close</button>
+          </>)}
+        </div>
+      )}
+    </Card>
   );
 }
