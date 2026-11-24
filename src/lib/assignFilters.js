@@ -27,12 +27,16 @@ export function levelFromRate(rate) {
 // stats: { items: {id:{n,rate}}, concepts: {conceptId:{n,rate}} } (server-computed, aggregate only).
 // trialSkill: the key learning_trials.skill stores for this item (taxonomy leaf, else item skill / trap / "sec:<Section>"),
 // computed server-side (levels route) with the same rule as /api/learning/trials, so untagged items still find their rate.
-export function itemLevel(item, conceptIds, stats, trialSkill) {
+// Order: item tag > real first-try rate (>= MIN_ITEM_ATTEMPTS attempts) > generated content level (contentLevel:
+// foundation | core | stretch, from src/data/p3/english/difficulty.json; not "estimated") > concept rate > unrated.
+export function itemLevel(item, conceptIds, stats, trialSkill, contentLevel) {
   const tag = item && TAG_LEVEL[String(item.difficulty || "").toLowerCase()];
   if (tag) return { level: tag, estimated: false };
   const id = item && item.id;
   const s = (stats && stats.items && id && stats.items[id]) || null;
   if (s && s.n >= MIN_ITEM_ATTEMPTS) return { level: levelFromRate(s.rate), estimated: true };
+  const cl = contentLevel && TAG_LEVEL[String(contentLevel).toLowerCase()];
+  if (cl) return { level: cl, estimated: false };
   const keys = trialSkill ? [trialSkill].concat(conceptIds || []) : conceptIds || [];
   for (const c of keys) {
     const cs = stats && stats.concepts && stats.concepts[c];
@@ -76,6 +80,8 @@ export function planAssignments(pool, sources, opts) {
   const used = new Set();
   const rows = [];
   let capped = false;
+  // Funnel counts for the empty-preview message: candidates left after each filter.
+  const funnel = { skill: 0, afterSolved: 0, afterPending: 0, afterDifficulty: 0 };
   for (const skill of o.skills || []) {
     const src = (sources || []).find((s) => (s.skills || []).indexOf(skill) !== -1);
     if (!src) continue;
@@ -83,15 +89,32 @@ export function planAssignments(pool, sources, opts) {
     for (const q of pool || []) {
       if (taken >= per) break;
       if ((q.skills || []).indexOf(skill) === -1) continue;
-      if (used.has(q.id) || sourceIds.has(q.id) || solved.has(q.id) || pending.has(q.id)) continue;
+      if (used.has(q.id) || sourceIds.has(q.id)) continue;
+      funnel.skill++;
+      if (solved.has(q.id)) continue;
+      funnel.afterSolved++;
+      if (pending.has(q.id)) continue;
+      funnel.afterPending++;
       if (!levelMatches(q.level, o.difficulty)) continue;
+      funnel.afterDifficulty++;
       if (rows.length >= cap) { capped = true; break; }
       used.add(q.id); taken++;
       rows.push({ id: q.id, source: src.id, skill, level: q.level, estimated: !!q.estimated, stem: stemPreview(q.stem) });
     }
     if (capped) break;
   }
-  return { rows, capped };
+  return { rows, capped, funnel };
+}
+
+// Which filter emptied the preview. Walks the funnel in order: skill, solved in 14 days, already assigned, difficulty.
+const DIFF_NAME = { easier: "Easier", same: "Same level", harder: "Harder" };
+export function emptyReason(funnel, difficulty) {
+  const f = funnel || {};
+  if (!f.skill) return "No other runnable questions exist for the chosen skills. Try adding more skills.";
+  if (!f.afterSolved) return `All matching questions were already solved correctly in the last ${RECENT_DAYS} days. Try other skills.`;
+  if (!f.afterPending) return "All matching questions are already assigned and waiting to be solved.";
+  if (!f.afterDifficulty) return `No matching question is rated ${DIFF_NAME[difficulty] || "at this level"}. Try Mixed difficulty or another level.`;
+  return "Nothing matches the current filters.";
 }
 
 export function stemPreview(s) {
