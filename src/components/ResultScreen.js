@@ -28,7 +28,7 @@ function ZhResultScreen({results, sessionNum, onHome, onNext}){
             return(
               <div key={type} style={{marginBottom:10}}>
                 <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
-                  <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{meta.icon} {meta.label}</span>
+                  <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{meta.label}</span>
                   <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:sc}}>{c}/{items.length} · {p}%</span>
                 </div>
                 <AnimProgressBar pct={p} color={sc} height={7}/>
@@ -46,7 +46,7 @@ function ZhResultScreen({results, sessionNum, onHome, onNext}){
           <div style={{color:"rgba(255,255,255,.7)",fontSize:"calc(var(--fs) * 0.786)",marginBottom:4}}>准备好继续了吗？</div>
           <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,marginBottom:10}}>第 #{sessionNum+1} 节课已就绪！</div>
           <button onClick={onNext} style={{width:"100%",background:"rgba(255,255,255,.15)",border:"1.5px solid rgba(255,255,255,.3)",borderRadius:10,padding:"12px",color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900,cursor:"pointer"}}>
-            ▶ 开始下一节练习 →
+           开始下一节练习 →
           </button>
         </div>
         <button onClick={onHome} style={{width:"100%",background:"none",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:"pointer",color:C.muted}}>← 返回主页</button>
@@ -122,7 +122,7 @@ function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession
             return(
               <div key={type} style={{marginBottom:10}}>
                 <div style={{display:"flex",justifyContent:"space-between",marginBottom:2}}>
-                  <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{meta.icon} {meta.label}</span>
+                  <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700}}>{meta.label}</span>
                   <span style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:sc}}>{c}/{items.length} · {p}%</span>
                 </div>
                 <div style={{background:"#E8E4DC",borderRadius:6,height:7}}>
@@ -139,7 +139,7 @@ function StudentResultScreen({results, sessionNum, isMock, onHome, onNextSession
         <div style={{background:T.primary,borderRadius:16,padding:"16px",marginBottom:10}}>
           <div style={{color:"rgba(255,255,255,0.7)",fontSize:"calc(var(--fs) * 0.786)",marginBottom:4}}>Ready for more?</div>
           <div style={{color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:800,marginBottom:10}}>Session #{sessionNum+1} is ready!</div>
-          <button onClick={onNextSession} style={{width:"100%",background:"rgba(255,255,255,0.15)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:10,padding:"12px",color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900,cursor:"pointer"}}>▶ Go to Next Practice Session →</button>
+          <button onClick={onNextSession} style={{width:"100%",background:"rgba(255,255,255,0.15)",border:"1.5px solid rgba(255,255,255,0.3)",borderRadius:10,padding:"12px",color:"#fff",fontSize:"calc(var(--fs) * 1.000)",fontWeight:900,cursor:"pointer"}}>Go to Next Practice Session →</button>
         </div>
         <button onClick={onHome} style={{width:"100%",background:"none",border:`1.5px solid ${C.border}`,borderRadius:12,padding:"12px",fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,cursor:"pointer",color:C.muted}}>← Back to Home</button>
       </div>

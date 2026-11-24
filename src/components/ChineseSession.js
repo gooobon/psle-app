@@ -54,7 +54,7 @@ function BianZiSection({items, onDone}){
           {q.note==="verify-parent"&&(
             <span style={{background:"#FEF3C7",border:"1px solid #FDE68A",borderRadius:7,
               padding:"2px 8px",fontSize:"calc(var(--fs) * 0.780)",fontWeight:700,color:"#92400E",marginLeft:6}}>
-              ⚠️ 请家长确认
+             请家长确认
             </span>
           )}
         <div style={{display:"flex",alignItems:"center",gap:10,marginTop:10}}>
@@ -88,8 +88,8 @@ function BianZiSection({items, onDone}){
               <div style={{flex:1}}>
                 {showMeaning&&isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#065F46",fontStyle:"italic"}}>{q.meaning}</div>}
               </div>
-              {(solved||revealed)&&isAns&&<span>✅</span>}
-              {isWrong&&<span>❌</span>}
+              {(solved||revealed)&&isAns&&<span>✓</span>}
+              {isWrong&&<span>✗</span>}
             </div>
           );
         })}
@@ -177,8 +177,8 @@ function CiYuSection({items, onDone}){
                 {showM&&isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#065F46",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
                 {showM&&!isAns&&<div style={{fontSize:"calc(var(--fs) * 0.786)",color:"#94A3B8",marginTop:2,fontStyle:"italic"}}>{q.meaning}</div>}
               </div>
-              {(solved||revealed)&&isAns&&<span>✅</span>}
-              {isWrong&&<span>❌</span>}
+              {(solved||revealed)&&isAns&&<span>✓</span>}
+              {isWrong&&<span>✗</span>}
             </div>
           );
         })}
@@ -254,7 +254,7 @@ function KanTuSection({set, onDone}){
                 <div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.muted,lineHeight:1.5,marginBottom:4}}>{item.emojiLabel}</div>
                 {(isC||isR)&&(
                   <div style={{fontWeight:900,fontSize:"calc(var(--fs) * 1.143)",color:isC?"#065F46":C.red}}>
-                    {item.answer} {isC?"✅":"❌"}
+                    {item.answer} {isC?"✓":"✗"}
                   </div>
                 )}
               </div>
@@ -367,8 +367,8 @@ function PeiDuiSection({set, onDone}){
                 </button>
               </>
             )}
-            {isC&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.green,fontWeight:700}}>✅ 正确！</div>}
-            {isR&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.red,fontWeight:700}}>📖 答案：{item.answer}</div>}
+            {isC&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.green,fontWeight:700}}>✓ 正确！</div>}
+            {isR&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:C.red,fontWeight:700}}>答案：{item.answer}</div>}
           </div>
         );
       })}
@@ -447,7 +447,7 @@ function JuZiSection({items, onDone}){
         </div>
       </div> <div style={{background:C.card,borderRadius:18,padding:"16px",marginBottom:14,boxShadow:"0 2px 10px rgba(0,0,0,.06)"}}>
         <TagPill color={meta.color} bg={meta.color+"18"}>扩写句子</TagPill>
-        <div style={{marginTop:10,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.muted,marginBottom:4}}>📋 任务</div>
+        <div style={{marginTop:10,fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:C.muted,marginBottom:4}}>任务</div>
         <div style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:700,color:C.navy}}>{q.instruction}</div>
         {q.baseSentence&&(
           <div style={{marginTop:8,background:"#F8FAFC",borderRadius:10,padding:"8px 12px",fontSize:"calc(var(--fs) * 0.929)",color:C.muted}}>
@@ -456,7 +456,7 @@ function JuZiSection({items, onDone}){
         )}
       </div> {attempts>0&&!solved&&!revealed&&<HintBox text={q.hint}/>} <div style={{background:C.card,borderRadius:16,padding:"14px",marginBottom:14,boxShadow:"0 2px 8px rgba(0,0,0,.06)"}}>
         <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:C.muted,marginBottom:8,textTransform:"uppercase",letterSpacing:1}}>
-          {solved?"✅ 完成！":revealed?"📖 正确答案":"👆 点击词语，按顺序排列"}
+          {solved?"✓ 完成！":revealed?"正确答案":"点击词语，按顺序排列"}
         </div> <div style={{minHeight:56,background:solved?"#D1FAE5":revealed?"#FEE2E2":"#F0F9FF",border:`2px dashed ${solved?C.green:revealed?C.red:meta.color}`,borderRadius:12,padding:"10px 10px",marginBottom:12,display:"flex",flexWrap:"wrap",gap:6,alignItems:"center"}}>
           {revealed
             ? <span style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,color:C.red,lineHeight:1.8}}>{q.targetSentence}</span>
@@ -479,14 +479,14 @@ function JuZiSection({items, onDone}){
         )}
       </div> {!solved&&!revealed&&placed.length>0&&(
         <button onClick={resetTiles} style={{background:"none",border:`1.5px solid ${C.border}`,borderRadius:10,padding:"7px 14px",fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,cursor:"pointer",color:C.muted,marginBottom:10}}>
-          🔄 重新排列
+         重新排列
         </button>
       )}
 
       {solved&&<FeedbackBox badge={badge} meaning={null}/>}
       {revealed&&(
         <div style={{background:C.lRed,border:`1.5px solid ${C.red}`,borderRadius:14,padding:"12px 14px",marginBottom:12}}>
-          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red,marginBottom:4}}>📖 正确答案</div>
+          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red,marginBottom:4}}>正确答案</div>
           <div style={{fontSize:"calc(var(--fs) * 1.071)",fontWeight:700,color:C.text,lineHeight:1.8}}>{q.targetSentence}</div>
         </div>
       )}
@@ -540,7 +540,7 @@ function ZuJuSection({set, onDone}){
   return(
     <div style={{padding:"16px 16px 100px",overflowY:"auto",maxHeight:"calc(100vh - 80px)"}}>
       <div style={{background:"#F5F3FF",border:`1px solid #DDD6FE`,borderRadius:14,padding:"11px 14px",marginBottom:14}}>
-        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:"#4C1D95",marginBottom:4}}>📋 {set.setLabel}</div>
+        <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:800,color:"#4C1D95",marginBottom:4}}>{set.setLabel}</div>
         <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#6D28D9",lineHeight:1.6}}>
           {solved||revealed ? "正确顺序如下：" : "点击句子，按正确顺序排列（点击已选的可以取消）"}
         </div>
@@ -566,7 +566,7 @@ function ZuJuSection({set, onDone}){
       {solved&&<FeedbackBox badge={badge} meaning={null}/>}
       {revealed&&(
         <div style={{background:C.lRed,border:`1.5px solid ${C.red}`,borderRadius:14,padding:"12px 14px",marginBottom:12}}>
-          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red}}>📖 正确顺序已显示</div>
+          <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red}}>正确顺序已显示</div>
         </div>
       )}
 
@@ -636,7 +636,7 @@ function YueReadSection({set, onDone}){
                   <div key={i} onClick={()=>selectAns(q.id,i)} style={{background:bg,border:`2px solid ${border}`,borderRadius:12,padding:"10px 14px",marginBottom:8,cursor,display:"flex",alignItems:"center",gap:10,opacity:op,transition:"all .15s"}}>
                     <div style={{width:22,height:22,borderRadius:"50%",background:answers[q.id]===i&&!isC&&!isR?meta.color:"#EEF2F7",color:answers[q.id]===i&&!isC&&!isR?"#fff":C.muted,display:"flex",alignItems:"center",justifyContent:"center",fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,flexShrink:0}}>{i+1}</div>
                     <span style={{fontSize:"calc(var(--fs) * 1.000)",fontWeight:600,color:col,flex:1}}>{opt}</span>
-                    {(isC||isR)&&i===q.answer&&<span>✅</span>}
+                    {(isC||isR)&&i===q.answer&&<span>✓</span>}
                   </div>
                 );
               })}
@@ -686,7 +686,7 @@ function ZhSessionScreen({plan, onFinish, onBack}){
         <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:7}}>
           <button onClick={onBack} aria-label="Back" style={{background:"rgba(255,255,255,0.2)",border:"none",borderRadius:9,width:44,height:44,flexShrink:0,cursor:"pointer",color:"#fff",fontSize:"calc(var(--fs) * 1.071)",display:"flex",alignItems:"center",justifyContent:"center"}}>←</button>
           <div style={{flex:1}}>
-            <div style={{color:"#fff",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800}}>{meta.icon} {meta.label}</div>
+            <div style={{color:"#fff",fontSize:"calc(var(--fs) * 0.929)",fontWeight:800}}>{meta.label}</div>
             <div style={{color:"rgba(255,255,255,0.7)",fontSize:"calc(var(--fs) * 0.780)",marginTop:1}}>{meta.sub} · 第{secIdx+1}/{plan.length}节</div>
           </div>
           <div style={{background:"rgba(255,255,255,0.2)",borderRadius:9,padding:"3px 10px"}}>

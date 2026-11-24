@@ -2108,7 +2108,6 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       {questions.map((q, qi) => {
         const f        = getFormat(q);
         const isActive = activeQ === q.id && submitted;
-        const tagLabel = isZh ? (ZH_TAG[f] || f) : f.replace(/_/g, ' ').toUpperCase();
         return (
           <div key={q.id}
             onClick={() => submitted && setActiveQ(q.id)}
@@ -2121,12 +2120,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
             <div style={{ display: 'flex', gap: 8, marginBottom: 12,
               alignItems: 'baseline', fontFamily: EX.sans }}>
               <span style={{ fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)" }}>{q.questionNo || qi + 1}.</span>
-              {q.marks && <span style={{ fontSize: "calc(var(--fs) * 0.786)", color: EX.faint }}>[{q.marks}m]</span>}
-              <span style={{ marginLeft: 'auto', fontSize: "calc(var(--fs) * 0.780)", fontWeight: 700,
-                letterSpacing: '.5px', textTransform: 'uppercase', color: EX.muted,
-                border: '1px solid #aaa', padding: '2px 7px' }}>
-                {tagLabel}
-              </span>
+              {q.marks && <span style={{ fontSize: "calc(var(--fs) * 0.786)", color: EX.faint }}>{marksLabel(q.marks, isZh)}</span>}
             </div>
 
             {/* Stem */}

@@ -48,7 +48,7 @@ export const DAILY_TEMPLATE = {
 };
 
 const E164 = /^\+[1-9]\d{7,14}$/;
-const mark = (s) => (s.sets >= s.target ? "✅" : "❌");
+const mark = (s) => (s.sets >= s.target ? "✓" : "✗");
 
 // Template parameters must be single-line, no tabs, no 4+ consecutive spaces (Meta rule).
 const clean = (v) => String(v ?? "").replace(/[\r\n\t]+/g, " ").replace(/ {4,}/g, "   ").trim();

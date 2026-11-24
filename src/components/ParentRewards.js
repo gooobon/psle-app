@@ -65,7 +65,7 @@ export default function ParentRewards({ child }) {
   return (
     <div style={{ padding: '14px 0' }}>
       <div style={box}>
-        <div style={{ fontSize: 13, fontWeight: 800, color: '#1B2340', marginBottom: 6 }}>⭐ Stickers: {d.stickers.total}</div>
+        <div style={{ fontSize: 13, fontWeight: 800, color: '#1B2340', marginBottom: 6 }}>Stickers: {d.stickers.total}</div>
         <div style={{ fontSize: 12, color: '#6B6F7B' }}>
           {d.stickers.daily} target-met days · {d.stickers.weekly} weekly reviews
         </div>

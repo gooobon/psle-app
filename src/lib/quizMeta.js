@@ -2,25 +2,25 @@
 // Centralised constants extracted from QuizEngine.js
 
 export const SECTIONS = {
-  GrammarMCQ:    { label:"Grammar MCQ",           icon:"📝", color:"#3B82F6", fixedCount:16, timed:45 },
-  VocabMCQ:      { label:"Vocabulary MCQ",         icon:"📚", color:"#8B5CF6", fixedCount:16, timed:45 },
-  GrammarCloze:  { label:"Grammar Cloze",          icon:"✏️", color:"#10B981", blanksPerSet:4, timed:60 },
-  VocabCloze:    { label:"Vocabulary Cloze",       icon:"🔤", color:"#F59E0B", blanksPerSet:4, timed:60 },
-  Editing:       { label:"Editing for Spelling",   icon:"🔍", color:"#F97316", blanksPerSet:4, timed:50 },
-  Synthesis:     { label:"Synthesis & Transformation", icon:"🔁", color:"#0EA5E9", fixedCount:2, timed:30 },
-  Comprehension: { label:"Comprehension",          icon:"📖", color:"#EF4444", blanksPerSet:6, timed:90 },
+  GrammarMCQ:    { label:"Grammar MCQ",           icon:"", color:"#3B82F6", fixedCount:16, timed:45 },
+  VocabMCQ:      { label:"Vocabulary MCQ",         icon:"", color:"#8B5CF6", fixedCount:16, timed:45 },
+  GrammarCloze:  { label:"Grammar Cloze",          icon:"", color:"#10B981", blanksPerSet:4, timed:60 },
+  VocabCloze:    { label:"Vocabulary Cloze",       icon:"", color:"#F59E0B", blanksPerSet:4, timed:60 },
+  Editing:       { label:"Editing for Spelling",   icon:"", color:"#F97316", blanksPerSet:4, timed:50 },
+  Synthesis:     { label:"Synthesis & Transformation", icon:"", color:"#0EA5E9", fixedCount:2, timed:30 },
+  Comprehension: { label:"Comprehension",          icon:"", color:"#EF4444", blanksPerSet:6, timed:90 },
 };
 
 export const SECTION_ORDER = ["GrammarMCQ","VocabMCQ","GrammarCloze","VocabCloze","Editing","Comprehension"];
 
 export const ZH_SECTIONS = {
-  BianZi:    { label:"辨字测验", sub:"Choose the correct character", icon:"🔤", color:"#3B82F6" },
-  CiYu:      { label:"词语选择", sub:"Choose the correct word",      icon:"📝", color:"#8B5CF6" },
-  KanTu:     { label:"看图选词", sub:"Match picture to word",        icon:"🖼️", color:"#10B981" },
-  PeiDui:    { label:"词语搭配", sub:"Word collocation matching",    icon:"🔗", color:"#F59E0B" },
-  JuZi:      { label:"扩写句子", sub:"Build sentences with tiles",   icon:"🧩", color:"#F97316" },
-  ZuJu:      { label:"组句成段", sub:"Arrange sentences in order",   icon:"📋", color:"#EC4899" },
-  YueRead:   { label:"阅读理解", sub:"Reading comprehension",        icon:"📖", color:"#EF4444" },
+  BianZi:    { label:"辨字测验", sub:"Choose the correct character", icon:"", color:"#3B82F6" },
+  CiYu:      { label:"词语选择", sub:"Choose the correct word",      icon:"", color:"#8B5CF6" },
+  KanTu:     { label:"看图选词", sub:"Match picture to word",        icon:"", color:"#10B981" },
+  PeiDui:    { label:"词语搭配", sub:"Word collocation matching",    icon:"", color:"#F59E0B" },
+  JuZi:      { label:"扩写句子", sub:"Build sentences with tiles",   icon:"", color:"#F97316" },
+  ZuJu:      { label:"组句成段", sub:"Arrange sentences in order",   icon:"", color:"#EC4899" },
+  YueRead:   { label:"阅读理解", sub:"Reading comprehension",        icon:"", color:"#EF4444" },
 };
 
 export const ZH_SECTION_ORDER = ["BianZi","CiYu","KanTu","PeiDui","JuZi","ZuJu","YueRead"];

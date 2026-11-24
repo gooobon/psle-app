@@ -5,10 +5,10 @@ import { WORD_DICT, SYN_ANT, ZH_CHAR_DICT } from "@/lib/quizMeta";
 
 function reviewDays(a){ return a>=3?3:a===2?5:7; }
 function scoreBadge(att){
-  if(att===1) return {icon:"⭐⭐⭐",label:"First try!",   color:C.green,  bg:C.lGreen};
-  if(att===2) return {icon:"⭐⭐", label:"Second try",  color:"#D97706", bg:C.lAmber};
-  if(att===3) return {icon:"⭐",  label:"Third try",   color:C.orange,  bg:C.lOrange};
-              return  {icon:"📖", label:"Answer shown", color:C.red,     bg:C.lRed};
+  if(att===1) return {icon:"",label:"First try!",   color:C.green,  bg:C.lGreen};
+  if(att===2) return {icon:"", label:"Second try",  color:"#D97706", bg:C.lAmber};
+  if(att===3) return {icon:"",  label:"Third try",   color:C.orange,  bg:C.lOrange};
+              return  {icon:"", label:"Answer shown", color:C.red,     bg:C.lRed};
 }
 function fmtTime(ms){
   if(!ms||ms<0) return "—";
@@ -94,7 +94,7 @@ function OptionsGlossary({q, lang="en"}){
       borderRadius:14,padding:"12px 14px",marginBottom:10}}>
       <div style={{fontSize:11,fontWeight:800,color:"#475569",marginBottom:8,
         textTransform:"uppercase",letterSpacing:.7}}>
-        📚 {lang==="zh"?"所有选项的意思":"All the words — learn them all!"}
+       {lang==="zh"?"所有选项的意思":"All the words — learn them all!"}
       </div>
       {rows.map((r,i)=>(
         <div key={i} style={{background:r.isAns?"#ECFDF5":"#fff",
@@ -118,7 +118,7 @@ function OptionsGlossary({q, lang="en"}){
             </div>
           )}
           {r.unknown&&lang==="zh"&&(
-            <div style={{fontSize:10,color:"#92400E",marginTop:3}}>⚠️ 请家长确认意思</div>
+            <div style={{fontSize:10,color:"#92400E",marginTop:3}}>请家长确认意思</div>
           )}
         </div>
       ))}

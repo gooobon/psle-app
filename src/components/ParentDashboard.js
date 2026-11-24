@@ -3,10 +3,10 @@ import React, { useState, useEffect } from "react";
 import { CS as C, Wrap } from "@/lib/uiShared";
 import { T, FONT, RADIUS, SHADOW, mainBtn, secondaryBtn } from "@/lib/theme/tokens";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
-import { DEFAULT_SETTINGS, generateAdvice } from "@/lib/dataEngine";
+import { DEFAULT_SETTINGS } from "@/lib/dataEngine";
 import ParentExams from '@/components/ParentExams';
 import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, serverPut } from "@/lib/serverClient";
-import LearningDashboard from "@/components/LearningDashboard";
+import LearningDashboard, { skillName } from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
 import ChildCard from "@/components/clewquest/ParentPictureReset";
@@ -302,6 +302,31 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
 }
 
 // ── Parent: Overview / stats tab ──────────────────────────────
+// ── Parent: "This week's focus" (server data, same source as the Learning tab) ──
+function WeeklyFocus({child, subject}){
+  const [focus,setFocus]=useState(undefined);
+  useEffect(()=>{
+    setFocus(undefined);
+    if(!SERVER_AUTH||!LEARNING_DASHBOARD||!child?.serverId||!["English","Chinese"].includes(subject)) return;
+    let off=false;
+    serverGet("/api/parent/learning?child="+encodeURIComponent(child.serverId)+"&subject="+encodeURIComponent(subject)).then(r=>{ if(!off) setFocus(r&&r.ok&&Array.isArray(r.focus)?r.focus:null); }).catch(()=>{ if(!off) setFocus(null); });
+    return ()=>{ off=true; };
+  },[child?.serverId,subject]);
+  if(!child?.serverId||focus===undefined||focus===null) return null;
+  return(
+    <div data-testid="weekly-focus" style={{background:"#fff",borderRadius:14,padding:"12px 14px",marginBottom:14,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
+      <div style={{fontWeight:800,fontSize:13,marginBottom:8}}>This week's focus</div>
+      {focus.length===0&&<div style={{fontSize:12,color:C.muted}}>Not enough practice this week to pick a focus yet.</div>}
+      {focus.map(x=>(
+        <div key={x.skill} data-testid="weekly-focus-skill" style={{marginBottom:8}}>
+          <div style={{display:"flex",justifyContent:"space-between",fontSize:12,fontWeight:700}}><span>{skillName(x.skill)}</span><span>{x.now}% first try, {x.attempts} attempts</span></div>
+          <div style={{fontSize:11,color:C.muted}}>Next step: Assign 3 similar questions on this skill.</div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function ParentOverview({child, history, settings, subject}){
   // With server auth on, Sessions and Average come from the server (daily_activity) so they show on the parent's own device;
   // the child's local history is only the fallback (demo / server unavailable). Local data is never modified.
@@ -332,6 +357,7 @@ function ParentOverview({child, history, settings, subject}){
 
   return(
     <div>
+      <WeeklyFocus child={child} subject={subject}/>
       <div data-testid="parent-stat-cards" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:14}}>
         {[
           {l:"Sessions",v:sessionCount,bar:Math.min(100,Math.round(sessionCount/60*100))},
@@ -388,7 +414,7 @@ function ParentOverview({child, history, settings, subject}){
         <div style={{overflowX:"auto"}}>
           <table style={{width:"100%",borderCollapse:"collapse",fontSize:11}}>
             <thead><tr style={{background:"#FBF6EA"}}>
-              {["#","Date","Total","Gm%","Vc%","Comp%","Type"].map(h=><th key={h} style={{padding:"5px 3px",textAlign:"center",color:C.muted,fontWeight:700}}>{h}</th>)}
+              {["#","Date","Total","Grammar %","Vocabulary %","Comprehension %","Type"].map(h=><th key={h} style={{padding:"5px 3px",textAlign:"center",color:C.muted,fontWeight:700}}>{h}</th>)}
             </tr></thead>
             <tbody>
               {[...history].reverse().map((h,i)=>{
@@ -497,44 +523,10 @@ function ParentOverview({child, history, settings, subject}){
 }
 
 // ── Parent: Settings tab ──────────────────────────────────────
-function ParentSettings({child, settings, onUpdate, advice, onApplyAdvice}){
+function ParentSettings({child, settings, onUpdate}){
   const S=settings||DEFAULT_SETTINGS;
   return(
     <div>
-      {advice.filter(a=>a.type!=="maintain").length>0&&(
-        <div style={{background:"#FBF6EA",border:"1.5px solid #E2DBCF",borderRadius:14,padding:"12px",marginBottom:14}}>
-          <div style={{fontWeight:800,fontSize:12,color:"#1B2340",marginBottom:8}}> AI Recommends</div>
-          {advice.filter(a=>a.type!=="maintain").slice(0,2).map((adv,i)=>(
-            <div key={i} style={{display:"flex",gap:8,alignItems:"flex-start",marginBottom:8,background:"#fff",borderRadius:10,padding:"10px"}}>
-              
-              <div style={{flex:1}}>
-                <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#B3261E":T.success,marginBottom:2}}>{adv.priority}</div>
-                <div style={{fontSize:12,color:C.text,lineHeight:1.6,marginBottom:6}}>{adv.text}</div>
-              </div>
-              {adv.action&&<button onClick={()=>onApplyAdvice(adv)} style={{background:C.navy,color:"#fff",border:"none",borderRadius:8,padding:"6px 10px",fontSize:11,fontWeight:700,cursor:"pointer",flexShrink:0}}>Apply</button>}
-            </div>
-          ))}
-        </div>
-      )}
-      {["GrammarMCQ","VocabMCQ"].map(type=>{
-        const meta=SECTIONS[type];
-        return(
-          <div key={type} style={{background:"#fff",borderRadius:14,padding:"14px",marginBottom:10,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-            <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}><div style={{fontWeight:800,fontSize:13}}>{meta.label}</div></div>
-            <div style={{marginBottom:10}}>
-              <div style={{fontSize:11,color:C.muted,fontWeight:600,marginBottom:5}}>Questions: <strong style={{color:C.navy}}>{S[type]?.count||16}</strong></div>
-              <input type="range" min={8} max={24} step={2} value={S[type]?.count||16} onChange={e=>onUpdate(type,"count",+e.target.value)} style={{width:"100%",accentColor:C.navy}}/>
-              <div style={{display:"flex",justifyContent:"space-between",fontSize:9,color:C.muted}}><span>8</span><span>16 (default)</span><span>24</span></div>
-            </div>
-            <div style={{fontSize:11,color:C.muted,fontWeight:600,marginBottom:5}}>Difficulty</div>
-            <div style={{display:"flex",gap:5}}>
-              {[["standard","Standard"],["mixed","Mixed"],["advanced","Advanced"]].map(([v,l])=>(
-                <button key={v} onClick={()=>onUpdate(type,"difficulty",v)} style={{flex:1,background:(S[type]?.difficulty||"standard")===v?C.navy:"#FBF6EA",color:(S[type]?.difficulty||"standard")===v?"#fff":C.muted,border:"none",borderRadius:8,padding:"7px 4px",fontSize:10,fontWeight:700,cursor:"pointer"}}>{l}</button>
-              ))}
-            </div>
-          </div>
-        );
-      })}
       {["GrammarCloze","VocabCloze","Editing","Comprehension"].map(type=>{
         const meta=SECTIONS[type]; const sets=S[type]?.sets||1;
         return(
@@ -599,7 +591,7 @@ function ParentMockTab({child, history}){
                 );
               })}
               <div style={{marginTop:10,background:col+"15",borderRadius:8,padding:"8px 10px",fontSize:11,color:col,fontWeight:600,lineHeight:1.6}}>
-                {h.totalPct>=70?` ${child?.name} is on track for ${h.school} ${h.examType} level!`:h.totalPct>=55?` Making progress. Focus on weaker sections.`:` More practice needed. See AI Advice tab for recommendations.`}
+                {h.totalPct>=70?` ${child?.name} is on track for ${h.school} ${h.examType} level!`:h.totalPct>=55?` Making progress. Focus on weaker sections.`:` More practice needed. Short, regular sessions help most.`}
               </div>
             </div>
           );
@@ -609,30 +601,6 @@ function ParentMockTab({child, history}){
   );
 }
 
-// ── Parent: AI advice tab ─────────────────────────────────────
-function ParentAdviceTab({advice, child, onApply}){
-  return(
-    <div>
-      <div style={{background:C.lBlue,border:`1px solid #BAE6FD`,borderRadius:12,padding:"11px 13px",marginBottom:14}}>
-        <div style={{fontSize:11,fontWeight:700,color:"#1F3F95",marginBottom:3}}> AI Analysis — {child?.name}</div>
-        <div style={{fontSize:11,color:"#1F3F95",lineHeight:1.6}}>Based on recent performance across all sessions. Apply recommendations directly to settings.</div>
-      </div>
-      {advice.map((adv,i)=>(
-        <div key={i} style={{background:"#fff",borderRadius:14,padding:"14px",marginBottom:10,boxShadow:"0 2px 8px rgba(0,0,0,0.05)"}}>
-          <div style={{display:"flex",gap:10,alignItems:"flex-start"}}>
-            <div style={{width:40,height:40,borderRadius:12,background:adv.type==="increase"?C.lRed:adv.type==="advance"?C.lGreen:C.lAmber,display:"flex",alignItems:"center",justifyContent:"center",fontSize:20,flexShrink:0}}>{adv.icon}</div>
-            <div style={{flex:1}}>
-              <div style={{fontSize:10,fontWeight:800,color:adv.priority.includes("High")?"#B3261E":adv.priority.includes("Advance")?T.success:"#D9A52E",marginBottom:3}}>{adv.priority} · {SECTIONS[adv.section]?.label||"All"}</div>
-              <div style={{fontSize:12,color:C.text,lineHeight:1.7,marginBottom:8}}>{adv.text}</div>
-              {adv.action&&<div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:8}}>{Object.entries(adv.action).map(([k,v])=><div key={k} style={{background:"#FBF6EA",borderRadius:7,padding:"3px 9px",fontSize:10,fontWeight:700,color:C.navy}}>{k}: {String(v)}</div>)}</div>}
-              {adv.action&&<button onClick={()=>onApply(adv)} style={{background:C.navy,color:"#fff",border:"none",borderRadius:9,padding:"8px 16px",fontSize:11,fontWeight:800,cursor:"pointer"}}> Apply to Settings</button>}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  );
-}
 
 // ── Parent App (main container) ───────────────────────────────
 // Server mode only: parent adds a child. Same component and styling as sign-up step 2 (src/components/clewquest/AddChild.js).
@@ -742,15 +710,8 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
   const prog  = selectedId ? getProgress(selectedId, grade, subject) : null;
   const history  = prog?.history||[];
   const settings = prog?.settings||DEFAULT_SETTINGS;
-  const advice   = history.length ? generateAdvice(history) : [];
+  
 
-  function applyAdvice(adv){
-    if(!adv.action||!selectedId) return;
-    const current=getProgress(selectedId,grade,subject);
-    const newSettings={...current.settings};
-    if(adv.section!=="all") newSettings[adv.section]={...newSettings[adv.section],...adv.action};
-    setProgress(selectedId,grade,subject,{...current,settings:newSettings});
-  }
 
   function updateSetting(section,key,value){
     const current=getProgress(selectedId,grade,subject);
@@ -804,7 +765,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           </>
         )} {child&&(
           <div style={{display:"flex",gap:5,padding:"10px 0 0",overflowX:"auto"}}>
-            {[["overview","Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","Learning"]]:[]),["mistakes","Mistakes"],["settings","Settings"],["mock","Mock"],["advice","AI Advice"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&subject==="English"?[["papers","Papers"]]:[])].map(([t,l])=>(
+            {[["overview","Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","Learning"]]:[]),["mistakes","Mistakes"],["settings","Settings"],["mock","Mock"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&subject==="English"?[["papers","Papers"]]:[])].map(([t,l])=>(
               <button key={t} onClick={()=>setTab(t)} style={{background:tab===t?"#1F3F95":"#F6F2EA",border:"none",borderRadius:999,padding:"8px 14px",color:tab===t?"#fff":"#1B2340",fontSize:11,fontWeight:800,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>
                 {l}
               </button>
@@ -832,10 +793,9 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&SERVER_AUTH&&REWARDS&&tab==="rewards" && <ParentRewards child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings} subject={subject}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
+        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting}/>}
         {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="advice"    && <ParentAdviceTab advice={advice} child={child} onApply={applyAdvice}/>}
       </div>
     </ParentWrap>
   );
