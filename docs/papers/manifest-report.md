@@ -7,21 +7,17 @@ Source: `src/data/p3/{english,chinese}/papers/**` (read-only) → `src/data/pape
 
 ## 1. Year mismatches
 
-**1a. Declared year ≠ year printed in the file’s header comment (3) — most likely real errors:**
+**1a. Declared year ≠ year printed in the file’s header comment (0) — most likely real errors:**
 
-| File | Declared | Header says | Filename |
-|---|---|---|---|
-| `eoy_henrypark_paper2_2025.ts` | 2025 | 2023 | 2025 |
-| `eoy_rafflesgirls_mockpaper_2025.ts` | 2025 | 2023 | 2025 |
-| `eoy_taonan_paper3_2025.ts` | 2025 | 2023 | 2025 |
+_None._
 
-**1b. Declared year ≠ year in the filename, header agrees with declared (27):** filename is probably a batch tag; the UI must use the declared year. Confirm and no action needed.
+**1b. Declared year ≠ year in the filename, header agrees with declared (30):** filename is probably a batch tag; the UI must use the declared year. Confirm and no action needed.
 
-`wa1_tao_nan_2025.ts` (2024), `wa3_taonan_supp5_2025.ts` (2023), `eoy_acsj_bookletA_2025.ts` (2022), `eoy_acsj_bookletB_2025.ts` (2022), `eoy_acsj_bsa2_2025.ts` (2022), `eoy_acsp_bookletA_2025.ts` (2022), `eoy_acsp_bookletB_2025.ts` (2022), `eoy_ait_eoy2020_paper2_2025.ts` (2020), `eoy_catholichigh_p2_2025.ts` (2024), `eoy_chij_p2_2025.ts` (2023), `eoy_chijtp_sa2_2022_paper2_2025.ts` (2022), `eoy_chsp_eoy2022_paper2_2025.ts` (2022), `eoy_chsp_wa1_2025.ts` (2022), `eoy_henrypark_p2_2025.ts` (2024), `eoy_mahabodhi_p2_2025.ts` (2024), `eoy_mgs_p2_2025.ts` (2024), `eoy_nanhua_p2_2025.ts` (2024), `eoy_nanyang_p2_2025.ts` (2024), `eoy_peihwa_p2_2025.ts` (2023), `eoy_plmgs_p2_2025.ts` (2024), `eoy_rafflesgirls_p2_2025.ts` (2023), `eoy_redswastika_p2_2025.ts` (2023), `eoy_rgps_p2_2025.ts` (2024), `eoy_rosyth_p2_2025.ts` (2024), `eoy_scgs_p2_2025.ts` (2023), `eoy_sji_p2_2025.ts` (2023), `eoy_taonan_p2_2025.ts` (2023)
+`wa1_tao_nan_2025.ts` (2024), `wa3_taonan_supp5_2025.ts` (2023), `eoy_acsj_bookletA_2025.ts` (2022), `eoy_acsj_bookletB_2025.ts` (2022), `eoy_acsj_bsa2_2025.ts` (2022), `eoy_acsp_bookletA_2025.ts` (2022), `eoy_acsp_bookletB_2025.ts` (2022), `eoy_ait_eoy2020_paper2_2025.ts` (2020), `eoy_catholichigh_p2_2025.ts` (2024), `eoy_chij_p2_2025.ts` (2023), `eoy_chijtp_sa2_2022_paper2_2025.ts` (2022), `eoy_chsp_eoy2022_paper2_2025.ts` (2022), `eoy_chsp_wa1_2025.ts` (2022), `eoy_henrypark_p2_2025.ts` (2024), `eoy_henrypark_paper2_2025.ts` (2023), `eoy_mahabodhi_p2_2025.ts` (2024), `eoy_mgs_p2_2025.ts` (2024), `eoy_nanhua_p2_2025.ts` (2024), `eoy_nanyang_p2_2025.ts` (2024), `eoy_peihwa_p2_2025.ts` (2023), `eoy_plmgs_p2_2025.ts` (2024), `eoy_rafflesgirls_mockpaper_2025.ts` (2023), `eoy_rafflesgirls_p2_2025.ts` (2023), `eoy_redswastika_p2_2025.ts` (2023), `eoy_rgps_p2_2025.ts` (2024), `eoy_rosyth_p2_2025.ts` (2024), `eoy_scgs_p2_2025.ts` (2023), `eoy_sji_p2_2025.ts` (2023), `eoy_taonan_p2_2025.ts` (2023), `eoy_taonan_paper3_2025.ts` (2023)
 
 ## 2. Suspected duplicates
 
-7 likely pairs (same id, a “(n)” copy, or ≥ 80% of questions identical). Confirm which to keep; none have been merged or deleted. A further 31 weaker pairs (50–79% overlap, or only same school/year/marks) are listed under `suspectedDuplicates` with `tier: "weak"` in the manifest; they are mostly sibling papers (Paper 1 vs 2) or WA papers reusing a practice paper’s questions.
+7 likely pairs (same id, a “(n)” copy, or ≥ 80% of questions identical). Confirm which to keep; none have been merged or deleted. A further 30 weaker pairs (50–79% overlap, or only same school/year/marks) are listed under `suspectedDuplicates` with `tier: "weak"` in the manifest; they are mostly sibling papers (Paper 1 vs 2) or WA papers reusing a practice paper’s questions.
 
 | A | B | Why |
 |---|---|---|
@@ -54,7 +50,7 @@ _None found: every question parsed from every file has a non-empty answer value.
 
 ## Owner checklist
 
-- [ ] 1a: confirm the correct year for 3 file(s)
+- [ ] 1a: confirm the correct year for 0 file(s)
 - [ ] 2: pick the file to keep for 7 suspected duplicate pair(s)
 - [ ] 3: decide the minutes rule for papers without a time
 - [ ] 3: confirm papers whose answers are “derived” are acceptable for auto-grading
