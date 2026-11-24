@@ -320,8 +320,8 @@ test("saturday paper reward through the exam UI @paper", async ({ browser }) => 
   const wallet = await bodyText(sp);
   record("student", "Wallet shows the pending paper credits", "Pending line shows 12 credits (S$6 at S$0.50; the wallet shows credits, not dollars)", /Pending:\s*12 credits/.test(wallet) ? "12 credits pending" : wallet.slice(Math.max(0, wallet.indexOf("Pending")), Math.max(0, wallet.indexOf("Pending")) + 160), /Pending:\s*12 credits/.test(wallet) ? "PASS" : "FAIL", await snap(sp, "14-wallet"));
 
-  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("system", "8pm dry-run mentions the paper and sends nothing", "HTTP 200, Mock papers in the log, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
+  // The parent gets one daily WhatsApp (20:00 SGT) and a weekly email (Sunday evening). The daily summary payload is checked in roleplay.spec.js.
+  record("system", "8pm dry-run mentions the paper and sends nothing", "HTTP 200, Mock papers in the log, no answer key", "skipped: no daily email any more; the daily WhatsApp summary is covered in roleplay.spec.js and the weekly email in tools/weekly_report_selftest.mjs", "SKIP", "");
 
   // A review after hand-in is supposed to include correctAnswer and explanation.
   // An in-progress GET includes the student's own draft under the key "answers".

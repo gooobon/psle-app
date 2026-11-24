@@ -219,8 +219,8 @@ test("mock exam role-play @mock", async ({ browser }) => {
   for (let k = 0; k < 20; k++) { expired = await dbGet("exam_attempts?id=eq." + sitting.id + "&select=status"); if (expired[0] && expired[0].status !== "in_progress") break; await sp.waitForTimeout(300); }
   record("student", "Expired paper is handed in from the saved answers", "The old sitting is no longer in progress after the deadline passes (auto-submitted from server-saved answers)", "status " + (expired[0] && expired[0].status), expired[0] && /submitted/.test(expired[0].status) ? "PASS" : "FAIL", await snap(sp, "10-abandoned"));
 
-  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("parent", "8pm email has a Mock papers section", "Dry-run only, paper name and score, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
+  // The parent gets one daily WhatsApp (20:00 SGT) and a weekly email (Sunday evening). The daily summary payload is checked in roleplay.spec.js.
+  record("parent", "8pm email has a Mock papers section", "Dry-run only, paper name and score, no answer key", "skipped: no daily email any more; the daily WhatsApp summary is covered in roleplay.spec.js and the weekly email in tools/weekly_report_selftest.mjs", "SKIP", "");
 
   const fails = STEPS.filter((s) => s.status === "FAIL");
   console.log("MOCK " + STEPS.filter((s) => s.status === "PASS").length + " pass, " + fails.length + " fail, " + STEPS.filter((s) => s.status === "GAP").length + " gap");

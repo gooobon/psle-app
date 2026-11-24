@@ -38,6 +38,15 @@ export const EVENT_TEMPLATES = {
   },
 };
 
+// Daily 20:00 SGT summary (issue #116): ONE message per parent covering every linked child. This is a NEW body, so Meta must approve it
+// (category UTILITY, language en) before any real send; WHATSAPP_ENABLED stays off until then. Name can be overridden by env WHATSAPP_TEMPLATE_DAILY.
+// TODO(owner): submit this body in Meta Business Manager; the 5 positional params below are stable.
+export const DAILY_TEMPLATE = {
+  name: "daily_study_summary", envVar: "WHATSAPP_TEMPLATE_DAILY",
+  body: "Hi {{1}}, study summary for {{2}}. Homework: {{3}}. First attempt of the day: {{4}}. Time: {{5}}.",
+  sample: ["Parent", "24 Nov", "Amir 2 of 3 done", "Amir English 8/10 (80%), Chinese not done", "Amir 25 min"],
+};
+
 const E164 = /^\+[1-9]\d{7,14}$/;
 const mark = (s) => (s.sets >= s.target ? "✅" : "❌");
 
@@ -116,3 +125,19 @@ export const whatsappChannel = {
     return r.ok ? { status: "sent" } : { status: "error", error: `provider HTTP ${r.status}` };
   },
 };
+
+// Daily summary. payload: { parentName, date, children:[{ name, studied, homework:{assigned,solved}, minutes, subjects:[{name, done, score:{correct,total,pct}|null}] }] }
+export function formatDailyWhatsApp(p) {
+  const kids = p.children || [];
+  const label = (c) => (kids.length > 1 ? c.name + " " : "");
+  const hw = kids.map((c) => (c.homework.assigned ? `${label(c)}${c.homework.solved} of ${c.homework.assigned} done` : `${label(c)}none assigned`)).join("; ");
+  const first = kids.map((c) => {
+    if (!c.studied) return `${c.name} no study today`;
+    const parts = c.subjects.map((s) => (!s.done ? `${s.name} not done` : s.score ? `${s.name} ${s.score.correct}/${s.score.total} (${s.score.pct}%)` : `${s.name} done, no score`));
+    return `${label(c)}${parts.join(", ") || "no subjects"}`;
+  }).join("; ");
+  const time = kids.map((c) => `${label(c)}${c.minutes > 0 ? c.minutes + " min" : "not recorded"}`).join("; ");
+  const params = [p.parentName || "there", p.date, hw || "none assigned", first || "no children linked", time || "not recorded"].map((v) => clean(v) || "-");
+  const preview = DAILY_TEMPLATE.body.replace(/\{\{(\d)\}\}/g, (_, n) => params[Number(n) - 1] ?? "");
+  return { template: DAILY_TEMPLATE.name, templateEnvVar: DAILY_TEMPLATE.envVar, params, preview, text: preview };
+}

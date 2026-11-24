@@ -67,7 +67,7 @@ export const COPY_WEEKLY = {
     greeting: (p) => `Hi ${p.parentName},`,
     intro: (p) => `Here is the week of ${p.range} (Singapore time).`,
     childHeading: (c) => `${c.name}${c.grade ? ` (${c.grade})` : ""}`,
-    subjectLine: (s) => `${s.name}: ${s.sets} set${s.sets === 1 ? "" : "s"} vs target ${s.target} · daily target met on ${s.daysMet} of ${s.daysTracked} day${s.daysTracked === 1 ? "" : "s"}`,
+    subjectLine: (s) => `${s.name}: ${s.sets} set${s.sets === 1 ? "" : "s"} vs target ${s.target} · daily target met on ${s.daysMet} of ${s.daysTracked} day${s.daysTracked === 1 ? "" : "s"} · first attempt of the day: ${s.firstAttempt ? `${s.firstAttempt.avgPct}% average over ${s.firstAttempt.days} day${s.firstAttempt.days === 1 ? "" : "s"}` : "no scored first attempt"}`,
     noSubjects: "No subjects with a daily target this week.",
     stats: (c) => `Questions answered: ${c.questions} · Accuracy: ${c.accuracy == null ? "–" : c.accuracy + "%"} · Minutes: ${c.minutes} · Active ${c.activeDays} of ${c.daysTracked} days`,
     causesHeading: "Why answers were wrong",

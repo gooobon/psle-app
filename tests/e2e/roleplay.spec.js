@@ -116,13 +116,28 @@ async function finishNav(page) {
 
 async function cron() {
   const secret = process.env.CRON_SECRET || "e2e-cron-secret";
-  const r = await fetch((process.env.E2E_BASE_URL || "http://127.0.0.1:3000") + "/api/cron/daily-alert", {
+  const r = await fetch((process.env.E2E_BASE_URL || "http://127.0.0.1:3000") + "/api/cron/weekly-report", {
     headers: { Authorization: "Bearer " + secret },
   });
   const text = await r.text();
   let body = null;
   try { body = JSON.parse(text); } catch { body = { raw: text.slice(0, 300) }; }
   return { status: r.status, body };
+}
+
+// Daily 20:00 SGT parent WhatsApp (issue #116). The server runs with WHATSAPP_ENABLED unset, so the cron only RENDERS the message and appends it to
+// the dry-run log (no number is written, nothing is sent). The parent opts in with a placeholder number that is never dialled.
+async function optInWhatsApp(page) {
+  return page.evaluate(async () => {
+    const r = await fetch("/api/parent/settings", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ whatsapp: { number: "+10000000000", optIn: true } }) });
+    return r.status;
+  });
+}
+async function dailyWhatsApp() {
+  const before = alerts().length;
+  const res = await cron();
+  return { res, msgs: alerts().slice(before).filter((a) => a.type === "whatsapp" && a.status === "dry-run" && /study summary/.test(a.text || "")) };
 }
 
 test.describe.configure({ mode: "serial" });
@@ -262,12 +277,10 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const thuText = await bodyText(pp);
   record("parent A", "Thursday daily status before any study", "English and Chinese show not done", /English[\s\S]{0,40}(❌|Not yet) 0\//.test(thuText) && /Chinese[\s\S]{0,40}(❌|Not yet) 0\//.test(thuText) ? "Not done, 0 sets" : thuText.slice(thuText.indexOf("Did Amir"), thuText.indexOf("Did Amir") + 280), /(❌|Not yet) 0\/1/.test(thuText) ? "PASS" : "FAIL", file);
 
-  const beforeSkip = alerts().length;
-  const skipCron = await cron();
-  const skipMails = alerts().slice(beforeSkip).filter((a) => /Not done yet today/.test(a.subject || ""));
-  const skipBodyOk = skipMails.filter((a) => /NOT DONE YET today: Amir Tan/.test(a.text || "") && /❌ Not done – English: 0\/1 set/.test(a.text || "") && /❌ Not done – Chinese: 0\/1 set/.test(a.text || ""));
-  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("system", "8pm alert on a day with no study", "The parent gets a dry-run email that English and Chinese are not done. No real email is sent.", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
+  await optInWhatsApp(pp);
+  const skipDay = await dailyWhatsApp();
+  const skipMsg = skipDay.msgs.find((a) => /Amir Tan no study today/.test(a.text || ""));
+  record("system", "8pm WhatsApp summary on a day with no study", "Cron returns 200 and the dry-run daily summary says Amir Tan has no study today, with no homework done. Nothing is really sent.", skipDay.res.status + " / " + (skipMsg ? "no study today line present" : "no matching dry-run message (" + skipDay.msgs.length + " whatsapp dry-runs)"), skipDay.res.status === 200 && skipMsg && !/WHATSAPP|\+\d{8,}/.test(skipMsg.text) ? "PASS" : "FAIL", "");
 
   // —— Friday: rules apply, scored sets, homework, wallet, payout ——
   setDay(BASE + 1);
@@ -554,12 +567,11 @@ test("student and parent role-play across SGT days @roleplay", async ({ browser 
   const friText = await bodyText(pp);
   record("parent A", "Friday daily status after both subjects", "English 2/2 and Chinese 1/1 are done", /English\s*Done 2\/2 sets/.test(friText) && /Chinese\s*Done 1\/1 set/.test(friText) ? "Both done" : friText.slice(friText.indexOf("Did Amir"), friText.indexOf("Did Amir") + 320), /English\s*Done 2\/2 sets/.test(friText) && /Chinese\s*Done 1\/1 set/.test(friText) ? "PASS" : "FAIL", file);
 
-  const beforeDone = alerts().length;
-  const doneCron = await cron();
-  const doneMails = alerts().slice(beforeDone).filter((a) => /All done today/.test(a.subject || ""));
-  const doneBody = doneMails.filter((a) => /✅ Done – English: 2\/2 sets/.test(a.text || "") && /✅ Done – Chinese: 1\/1 set/.test(a.text || ""));
-  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("system", "8pm alert on a day that was studied", "The parent gets a dry-run email that English and Chinese are done. No real email is sent.", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
+  const doneDay = await dailyWhatsApp();
+  const doneMsg = doneDay.msgs.find((a) => /Amir Tan/.test(a.text || "") && !/Amir Tan no study today/.test(a.text || ""));
+  const doneText = (doneMsg && doneMsg.text) || "";
+  const doneOk = doneDay.res.status === 200 && /English \d+\/\d+ \(\d+%\)/.test(doneText) && /Chinese \d+\/\d+ \(\d+%\)/.test(doneText) && /Homework: [^.]*(\d+ of \d+ done|none assigned)/.test(doneText) && /Time: [^.]*(\d+ min|not recorded)/.test(doneText);
+  record("system", "8pm WhatsApp summary on a day that was studied", "The dry-run daily summary lists homework done of total, the first-attempt score for English and Chinese, and the time. Nothing is really sent.", doneText.slice(0, 260) || "no matching dry-run message", doneOk ? "PASS" : "FAIL", "");
 
   // —— Saturday: weekly bonus and the past-paper mock ——
   setDay(BASE + 2);
