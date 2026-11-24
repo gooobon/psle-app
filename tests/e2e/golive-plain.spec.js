@@ -375,7 +375,7 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   file = await snap(sp, "13-paper-score");
   const handed = await bodyText(sp);
   const attempt = (await dbGet("exam_attempts?student_id=eq." + kid.id + "&select=id,paper_label,score,total,auto_score,auto_total,parent_pending,settled_at,status&order=started_at.desc&limit=1"))[0];
-  record("student", "Hand in a paper with weighted marks", "Score line uses marks and open items wait for a parent", "wanted " + paper.label + "; screen " + ((handed.match(/Score[^\n]*/) || [""])[0]) + "; db " + JSON.stringify(attempt), attempt && Number(attempt.parent_pending) > 0 && /awaiting parent marking/.test(handed) ? "PASS" : "FAIL", file);
+  record("student", "Hand in a paper with weighted marks", "Score line uses marks; open items get an automatic mark and the paper settles", "wanted " + paper.label + "; screen " + ((handed.match(/Score[^\n]*/) || [""])[0]) + "; db " + JSON.stringify(attempt), attempt && !!attempt.settled_at && !/awaiting parent marking/.test(handed) ? "PASS" : "FAIL", file);
 
   const alertsAfterSets = Number(sql("select count(*) from public.event_alert_log;").trim());
   record("system", "Nothing is sent when email and WhatsApp are both off", "event_alert_log stays empty after sets, a mock and a paper hand-in", "rows before " + beforeAlerts + " after " + alertsAfterSets, alertsAfterSets === 0 ? "PASS" : "FAIL", "");

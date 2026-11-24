@@ -381,7 +381,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   record("student", "Editing is typed and punctuation is not underlined as a word", "A text box is present, sucesfully and the comma can be typed, the word is in the punctuation item is not highlighted", "spell=" + spelled + " punct=" + punctTyped + " highlightedIs=" + punctMarked, spelled && punctTyped && !punctMarked && /Write the correct word/.test(editBody) ? "PASS" : "FAIL", await snap(sp, "12-mock-editing"));
 
   await openSection(sp, "Comprehension");
-  const openBoxes = sp.getByPlaceholder("Write your answer (your parent will mark this one)");
+  const openBoxes = sp.getByPlaceholder("Write your answer in a full sentence");
   const openCount = await openBoxes.count();
   if (openCount) await openBoxes.first().fill("They were near their campsite.");
   const compBody = await bodyText(sp);
@@ -392,7 +392,7 @@ test("PR 57 student and parent click-through @pr57", async ({ browser }) => {
   await sp.getByText(/Score:/).waitFor({ timeout: 30000 });
   const taoResult = await bodyText(sp);
   const taoScore = (taoResult.match(/Score:\s*(\d+)\/(\d+)/) || []);
-  const taoLittle = /did not count as a set/.test(taoResult) && (/No Saturday paper reward/.test(taoResult) || /reward is decided after your parent/.test(taoResult)); // a paper with open-ended items shows the awaiting-parent note (route.js pendingRewardNote ignores counts)
+  const taoLittle = /did not count as a set/.test(taoResult) && (/No Saturday paper reward/.test(taoResult)); // a paper with open-ended items shows the awaiting-parent note (route.js pendingRewardNote ignores counts)
   const taoNoExcluded = !/not counted in your score|not available in our copy/.test(taoResult);
   record("student", "Short Saturday paper: full total, no excluded, effort check blocks the reward", "Score denominator is the auto-marked total (36 on Tao Nan WA3), the paper does not count, no Saturday credits", "score " + (taoScore[0] || "none") + "; little=" + taoLittle + "; excludedWording=" + !taoNoExcluded, taoScore[2] === "36" && taoLittle && taoNoExcluded ? "PASS" : "FAIL", await snap(sp, "14-taonan-result"));
 

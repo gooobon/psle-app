@@ -155,7 +155,7 @@ test("mock exam role-play @mock", async ({ browser }) => {
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });
   const comp = sp.getByRole("button", { name: "Comprehension" });
   if (await comp.count()) await comp.click();
-  const openBox = sp.getByPlaceholder("Write your answer (your parent will mark this one)");
+  const openBox = sp.getByPlaceholder("Write your answer in a full sentence");
   if (await openBox.count()) await openBox.first().fill("the park");
   const stopped = await sp.evaluate(() => {
     const stop = [...document.querySelectorAll("button")].find((b) => (b.innerText || "").includes("Stop early"));
