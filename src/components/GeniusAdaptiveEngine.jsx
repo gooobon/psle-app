@@ -930,7 +930,7 @@ export default function GeniusAdaptiveEngine() {
   const stages   = Object.keys(CURRICULUM_REGISTRY[ctx.grade]?.[ctx.subject]||{});
 
   const TABS = [
-    { id:"config",  label:"⚙ Curriculum" },
+    { id:"config",  label:"Curriculum" },
     { id:"student", label:"◎ Accuracy" },
     { id:"errors",  label:`! Error Patterns${perf.frequentErrors.length>0?` (${perf.frequentErrors.length})`:""}` },
     { id:"output",  label:"✦ Session Set" },
@@ -1082,7 +1082,7 @@ export default function GeniusAdaptiveEngine() {
               background:status==="loading"?"#B0A8E8":"#7B68EE",
               color:"#fff", fontWeight:900, fontSize:14, cursor:status==="loading"?"default":"pointer"
             }}>
-              {status==="loading" ? "Assembling..." : "✨  Generate Adaptive Session"}
+              {status==="loading" ? "Assembling..." : "Generate Adaptive Session"}
             </button>
           </div>
         )}
@@ -1260,7 +1260,7 @@ export default function GeniusAdaptiveEngine() {
                 <button onClick={generate} style={{
                   width:"100%", padding:"12px 0", borderRadius:14, border:"2px solid #7B68EE",
                   background:"transparent", color:"#7B68EE", fontWeight:800, fontSize:13, cursor:"pointer", marginTop:4
-                }}>🔄 Regenerate</button>
+                }}>Regenerate</button>
               </div>
             )}
           </div>

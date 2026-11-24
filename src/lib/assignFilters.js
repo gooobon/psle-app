@@ -25,13 +25,16 @@ export function levelFromRate(rate) {
 // Level of one item. Item tag first (foundation/core/stretch), else the global rate
 // per item (>= MIN_ITEM_ATTEMPTS attempts) or per concept. Derived levels are flagged estimated.
 // stats: { items: {id:{n,rate}}, concepts: {conceptId:{n,rate}} } (server-computed, aggregate only).
-export function itemLevel(item, conceptIds, stats) {
+// trialSkill: the key learning_trials.skill stores for this item (taxonomy leaf, else item skill / trap / "sec:<Section>"),
+// computed server-side (levels route) with the same rule as /api/learning/trials, so untagged items still find their rate.
+export function itemLevel(item, conceptIds, stats, trialSkill) {
   const tag = item && TAG_LEVEL[String(item.difficulty || "").toLowerCase()];
   if (tag) return { level: tag, estimated: false };
   const id = item && item.id;
   const s = (stats && stats.items && id && stats.items[id]) || null;
   if (s && s.n >= MIN_ITEM_ATTEMPTS) return { level: levelFromRate(s.rate), estimated: true };
-  for (const c of conceptIds || []) {
+  const keys = trialSkill ? [trialSkill].concat(conceptIds || []) : conceptIds || [];
+  for (const c of keys) {
     const cs = stats && stats.concepts && stats.concepts[c];
     if (cs && cs.n > 0) return { level: levelFromRate(cs.rate), estimated: true };
   }

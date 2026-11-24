@@ -20,6 +20,9 @@ eq("item rate with >=10 attempts", itemLevel({ id: "a" }, ["k"], stats), { level
 eq("item <10 attempts uses concept", itemLevel({ id: "b" }, ["k"], stats), { level: "same", estimated: true });
 eq("no data unrated", itemLevel({ id: "z" }, ["q"], stats), { level: null, estimated: true });
 
+eq("untagged item uses trial skill key", itemLevel({ id: "z" }, [], { items: {}, concepts: { "sec:Cloze": { n: 30, rate: 0.9 } } }, "sec:Cloze"), { level: "easier", estimated: true });
+eq("trial key beats concept ids", itemLevel({ id: "z" }, ["k"], stats, "k2"), { level: "same", estimated: true });
+
 const agg = aggregateTrialStats([
   { item_id: "x", skill: "k", first_try: true }, { item_id: "x", skill: "k", first_try: false },
   { item_id: "y", skill: "k", first_try: true },

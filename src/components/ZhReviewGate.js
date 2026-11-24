@@ -69,7 +69,7 @@ export default function ZhReviewGate({ words, dict, onDone }) {
     return (
       <div style={wrap}>
         <div style={card}>
-          <div style={{ fontFamily: ZH_FONT, fontSize: 20, fontWeight: 700, color: "#0f172a" }}>本次没有需要复习的词语 🎉</div>
+          <div style={{ fontFamily: ZH_FONT, fontSize: 20, fontWeight: 700, color: "#0f172a" }}>本次没有需要复习的词语</div>
           <div style={{ fontFamily: ZH_FONT, fontSize: 15, color: "#475569", marginTop: 8 }}>
             这一轮你没有点开不懂的词语，答错题里也没有需要巩固的生词。继续保持！
           </div>
@@ -84,7 +84,7 @@ export default function ZhReviewGate({ words, dict, onDone }) {
     return (
       <div style={wrap}>
         <div style={card}>
-          <div style={{ fontFamily: ZH_FONT, fontSize: 22, fontWeight: 800, color: "#0f172a" }}>复习完成 ✅</div>
+          <div style={{ fontFamily: ZH_FONT, fontSize: 22, fontWeight: 800, color: "#0f172a" }}>复习完成 ✓</div>
           <div style={{ fontFamily: ZH_FONT, fontSize: 15, color: "#334155", marginTop: 10, lineHeight: 1.9 }}>
             本次复习 <b>{questions.length}</b> 个词语 · 答对 <b style={{ color: "#16a34a" }}>{right}</b> · 还需巩固 <b style={{ color: "#dc2626" }}>{wrong}</b>
           </div>

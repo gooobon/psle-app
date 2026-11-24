@@ -28,23 +28,23 @@ export function generateAdvice(history){
   const advice = [];
   const gm=avg("GrammarMCQ"), vm=avg("VocabMCQ"), comp=avg("Comprehension"), edit=avg("Editing");
 
-  if(gm<70)  advice.push({type:"increase",section:"GrammarMCQ",icon:"📝",priority:"🔴 High",
+  if(gm<70)  advice.push({type:"increase",section:"GrammarMCQ",icon:"",priority:"High",
     text:`Grammar MCQ avg is ${gm}% (last 3 sessions). Increase to 20 questions and use 'mixed' difficulty to reinforce weak tenses and SVA.`,action:{count:20,difficulty:"mixed"}});
-  else if(gm>=90) advice.push({type:"advance",section:"GrammarMCQ",icon:"📝",priority:"🟢 Advance",
+  else if(gm>=90) advice.push({type:"advance",section:"GrammarMCQ",icon:"",priority:"Advance",
     text:`Grammar MCQ is strong at ${gm}%! Ready to challenge with advanced difficulty.`,action:{count:16,difficulty:"advanced"}});
 
-  if(vm<65)  advice.push({type:"increase",section:"VocabMCQ",icon:"📚",priority:"🔴 High",
+  if(vm<65)  advice.push({type:"increase",section:"VocabMCQ",icon:"",priority:"High",
     text:`Vocabulary avg is ${vm}%. Increase to 20 questions and focus on synonyms/antonyms.`,action:{count:20,difficulty:"standard"}});
-  else if(vm>=85) advice.push({type:"advance",section:"VocabMCQ",icon:"📚",priority:"🟢 Advance",
+  else if(vm>=85) advice.push({type:"advance",section:"VocabMCQ",icon:"",priority:"Advance",
     text:`Vocabulary is doing well at ${vm}%. Consider advancing to mixed difficulty.`,action:{count:16,difficulty:"mixed"}});
 
-  if(comp<70) advice.push({type:"increase",section:"Comprehension",icon:"📖",priority:"🔴 High",
+  if(comp<70) advice.push({type:"increase",section:"Comprehension",icon:"",priority:"High",
     text:`Comprehension at ${comp}% carries the most PSLE marks. Increase to 2 sets immediately.`,action:{sets:2}});
 
-  if(edit>=90) advice.push({type:"reduce",section:"Editing",icon:"🔍",priority:"🔵 Maintain",
+  if(edit>=90) advice.push({type:"reduce",section:"Editing",icon:"",priority:"Maintain",
     text:`Spelling/Editing is excellent at ${edit}%. Maintain current level.`,action:{sets:1}});
 
-  if(!advice.length) advice.push({type:"maintain",section:"all",icon:"⭐",priority:"🟡 Good",
+  if(!advice.length) advice.push({type:"maintain",section:"all",icon:"",priority:"Good",
     text:`Balanced performance! Focus on consistency and aim for 85%+ across all sections.`,action:null});
   return advice;
 }

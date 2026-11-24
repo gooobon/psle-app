@@ -30,7 +30,7 @@ export default function ParentAssignPractice({ child, subject, grade, mistakes, 
   const [per, setPer] = React.useState(DEFAULT_PER_SKILL);
   const [skills, setSkills] = React.useState(null); // null = "From recent mistakes" (default)
   const [picked, setPicked] = React.useState({}); // mistake id -> true
-  const [server, setServer] = React.useState({ solved: [], pending: [], stats: { items: {}, concepts: {} } });
+  const [server, setServer] = React.useState({ solved: [], pending: [], stats: { items: {}, concepts: {} }, skillKeys: {} });
   const [preview, setPreview] = React.useState(null);
   const [msg, setMsg] = React.useState("");
   const [busy, setBusy] = React.useState(false);
@@ -39,7 +39,7 @@ export default function ParentAssignPractice({ child, subject, grade, mistakes, 
     let alive = true;
     setPreview(null);
     serverGet(`/api/parent/homework/levels?child=${encodeURIComponent(child.serverId)}&subject=${encodeURIComponent(subj)}`)
-      .then((r) => { if (alive && r.ok) setServer({ solved: r.solved || [], pending: r.pending || [], stats: r.stats || { items: {}, concepts: {} } }); });
+      .then((r) => { if (alive && r.ok) setServer({ solved: r.solved || [], pending: r.pending || [], stats: r.stats || { items: {}, concepts: {} }, skillKeys: r.skillKeys || {} }); });
     return () => { alive = false; };
   }, [child?.serverId, subj]);
 
@@ -61,7 +61,7 @@ export default function ParentAssignPractice({ child, subject, grade, mistakes, 
       const row = idx.byId[id];
       const sk = skillIdsOf(row.conceptIds);
       if (!sk.length) return;
-      const lv = itemLevel(row.item, row.conceptIds, server.stats);
+      const lv = itemLevel(row.item, row.conceptIds, server.stats, server.skillKeys[id]);
       pool.push({ id, skills: sk, level: lv.level, estimated: lv.estimated, stem: stemOf(row) });
     });
     const sources = (pickedList.length ? pickedList : subjMistakes).map((m) => ({ id: m.id, skills: skillsOf(m) }));

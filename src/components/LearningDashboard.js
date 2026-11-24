@@ -8,7 +8,7 @@ import { causeLabel } from '@/lib/wrongNotebook';
 
 const SKILL_LABEL = {};
 for (const c of taxonomy.concepts || []) SKILL_LABEL[c.id] = c.label;
-const skillName = (k) => SKILL_LABEL[k] || (String(k).startsWith('sec:') ? String(k).slice(4) : k);
+export const skillName = (k) => SKILL_LABEL[k] || (String(k).startsWith('sec:') ? String(k).slice(4) : k);
 
 const WORD = {
   improving: { t: 'Improving', c: '#4F6B22', bg: '#FBF6EA' },

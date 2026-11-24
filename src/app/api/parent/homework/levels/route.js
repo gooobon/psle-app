@@ -5,8 +5,29 @@ import { adminClient, sessionClient, currentUser, serverAuthEnabled, jerr, jok }
 import { PARENT_HOMEWORK } from "@/lib/supabase/config";
 import { SUBJECT_KEYS, sgtDate } from "@/lib/activity";
 import { aggregateTrialStats, RECENT_DAYS } from "@/lib/assignFilters";
+import { itemIndex, resolveItem } from "@/lib/learningGrade";
+import { skillIdsOf } from "@/lib/similarItemsCore";
+import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
+import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
+import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
+import WA1_ZH_DRILL from "@/data/p3/chinese/wa1_drill";
 
 export const runtime = "nodejs";
+const SETS = { English: () => WA1_PRACTICE_SETS, Chinese: () => [...WA1_ZH_PRACTICE, ...(WA1_ZH_DRILL || [])] };
+// Same key rule as skillOfItem in /api/learning/trials: this is what learning_trials.skill holds.
+function trialSkillKeys(subject) {
+  const out = {};
+  if (!SETS[subject]) return out;
+  try {
+    const byId = itemIndex(subject, SETS[subject]);
+    for (const id of Object.keys(byId)) {
+      const rec = resolveItem(byId, id);
+      if (!rec) continue;
+      out[id] = skillIdsOf(taxonomyIdsFor(id) || [])[0] || rec.skill || rec.trap || ("sec:" + rec.sectionType);
+    }
+  } catch (e) { /* fail soft */ }
+  return out;
+}
 const UUID = /^[0-9a-f-]{36}$/i;
 
 export async function GET(request) {
@@ -33,5 +54,5 @@ export async function GET(request) {
     const g = await adminClient().from("learning_trials").select("item_id,skill,first_try").eq("subject", subject).limit(20000);
     if (!g.error) stats = aggregateTrialStats(g.data);
   } catch (e) { /* fail soft */ }
-  return jok({ solved, pending, stats });
+  return jok({ solved, pending, stats, skillKeys: trialSkillKeys(subject) });
 }

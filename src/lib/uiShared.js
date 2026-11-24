@@ -69,9 +69,9 @@ function AIHintBtn({question, topic, subject, studentAnswer, onHint}){
         borderRadius:10,padding:"6px 14px",cursor:used||loading?"default":"pointer",
         fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:used?"#94A3B8":loading?"#92400E":"#EA580C",
         display:"flex",alignItems:"center",gap:6,transition:"all .2s"}}>
-      {loading ? <><span style={{animation:"spin .6s linear infinite",display:"inline-block"}}>⏳</span> Getting hint...</>
-               : used ? "✅ Hint shown"
-               : "🤖 Get AI Hint"}
+      {loading ? <>Getting hint...</>
+               : used ? "✓ Hint shown"
+               : "Get AI Hint"}
     </button>
   );
 }
@@ -115,7 +115,7 @@ function SpeakBtn({text, lang='en', style={}}){
         border:"1.5px solid #0D9488",borderRadius:8,
         padding:"4px 10px",cursor:"pointer",fontSize:"calc(var(--fs) * 0.929)",
         transition:"all .2s",...style}}>
-      {speaking?"🔊":"🔉"}
+      {speaking?"Stop":"Listen"}
     </button>
   );
 }
@@ -426,7 +426,7 @@ function AnimNumber({ value, duration=600, style={} }){
 // Star burst effect — shown on perfect answer
 function StarBurst({ show }){
   if(!show) return null;
-  const stars = ['⭐','🌟','✨','⭐','🌟'];
+  const stars = ['•','•','•','•','•'];
   return(
     <div style={{position:'absolute',top:'50%',left:'50%',
       transform:'translate(-50%,-50%)',pointerEvents:'none',zIndex:999}}>
@@ -540,7 +540,7 @@ function ErrorBox({msg}){
   return(
     <div style={{background:C.lRed,border:"1.5px solid "+C.red,borderRadius:12,
       padding:"10px 14px",marginBottom:12,fontSize:"calc(var(--fs) * 0.929)",fontWeight:700,color:C.red}}>
-      ⚠️ {msg}
+     {msg}
     </div>
   );
 }
@@ -552,7 +552,7 @@ function HintBox({text}){
   return(
     <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,
       padding:"10px 13px",marginBottom:10}}>
-      <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:"#92400E"}}>💡 Hint: {text}</div>
+      <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:"#92400E"}}>Hint: {text}</div>
     </div>
   );
 }
@@ -562,7 +562,7 @@ function FeedbackBox({badge, meaning}){
     <div style={{background:C.lGreen,border:"1.5px solid "+C.green,borderRadius:14,
       padding:"11px 14px",marginBottom:10}}>
       <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 1.000)",color:"#065F46",marginBottom:meaning?4:0}}>
-        {badge==="gold"?"⭐⭐⭐ Perfect!":badge==="silver"?"⭐⭐ Great!":"⭐ Correct!"}
+        {badge==="gold"?"Perfect!":badge==="silver"?"Great!":"Correct!"}
       </div>
       {meaning&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#047857",fontWeight:600}}>{meaning}</div>}
     </div>
@@ -618,7 +618,7 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
 
       {/* Header */}
       <div style={{display:"flex",alignItems:"center",gap:8,marginBottom:10}}>
-        <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>{wasCorrect?"🎓":"📖"}</span>
+        
         <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:800,
           color:wasCorrect?"#065F46":"#9A3412"}}>
           {wasCorrect ? "Great! Now let's lock it in" : "Let's learn this properly"}
@@ -630,7 +630,7 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
         <div style={{background:"#fff",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid "+(wasCorrect?"#A7F3D0":"#FED7AA")}}>
           <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#0D9488",marginBottom:4,
-            textTransform:"uppercase",letterSpacing:.6}}>💡 Key Point</div>
+            textTransform:"uppercase",letterSpacing:.6}}>Key Point</div>
           <div style={{fontSize:"calc(var(--fs) * 0.929)",color:"#0F172A",fontWeight:600,lineHeight:1.6}}>
             {typeof keyPoint === 'string' ? keyPoint : ''}
           </div>
@@ -642,7 +642,7 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
         <div style={{background:"#EFF6FF",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid #BFDBFE"}}>
           <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#1D4ED8",marginBottom:6,
-            textTransform:"uppercase",letterSpacing:.6}}>📝 记住这个字 (Remember)</div>
+            textTransform:"uppercase",letterSpacing:.6}}>记住这个字 (Remember)</div>
           <div style={{display:"flex",alignItems:"center",gap:12}}>
             <div style={{fontSize:32,fontWeight:900,color:"#1E3A6E"}}>{memoryItem.char}</div>
             <div>
@@ -659,7 +659,7 @@ function LearnCard({ q, sectionType, wasCorrect, onAcknowledge }){
         <div style={{background:"#EFF6FF",borderRadius:10,padding:"10px 12px",marginBottom:10,
           border:"1px solid #BFDBFE"}}>
           <div style={{fontSize:"calc(var(--fs) * 0.780)",fontWeight:800,color:"#1D4ED8",marginBottom:6,
-            textTransform:"uppercase",letterSpacing:.6}}>📝 Word to Remember</div>
+            textTransform:"uppercase",letterSpacing:.6}}>Word to Remember</div>
           <div style={{fontSize:"calc(var(--fs) * 1.143)",fontWeight:800,color:"#1E3A6E"}}>{memoryItem.word}</div>
           <div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#475569",marginTop:2}}>{memoryItem.def}</div>
         </div>
@@ -695,7 +695,7 @@ function RevealBox({meaning}){
     <div style={{background:C.lRed,border:"1.5px solid "+C.red,borderRadius:14,
       padding:"11px 14px",marginBottom:10}}>
       <div style={{fontWeight:800,fontSize:"calc(var(--fs) * 0.929)",color:C.red,marginBottom:meaning?4:0}}>
-        📖 Let's learn from this one
+       Let's learn from this one
       </div>
       {meaning&&<div style={{fontSize:"calc(var(--fs) * 0.857)",color:"#991B1B",fontWeight:600}}>{meaning}</div>}
     </div>
@@ -703,12 +703,12 @@ function RevealBox({meaning}){
 }
 
 function WrongBanner({attempts}){
-  const msgs=["Try again! 💪","One more try! Think carefully…","Showing the answer now…"];
+  const msgs=["Try again!","One more try! Think carefully…","Showing the answer now…"];
   return(
     <div style={{background:C.lAmber,border:"1px solid #FDE68A",borderRadius:12,
       padding:"9px 13px",marginBottom:10}}>
       <div style={{fontSize:"calc(var(--fs) * 0.857)",fontWeight:700,color:"#92400E"}}>
-        ❌ {msgs[Math.min(attempts-1,2)]}
+        ✗ {msgs[Math.min(attempts-1,2)]}
       </div>
     </div>
   );
@@ -722,18 +722,18 @@ function RuleCard({card}){
       <div style={{background:"#EFF6FF",border:"1.5px solid #BFDBFE",borderRadius:14,
         padding:"12px 14px",marginBottom:10}}>
         <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",marginBottom:4,
-          textTransform:"uppercase",letterSpacing:.8}}>📌 Grammar Rule</div>
+          textTransform:"uppercase",letterSpacing:.8}}>Grammar Rule</div>
         <div style={{fontSize:"calc(var(--fs) * 0.929)",fontWeight:600,color:C.text,lineHeight:1.6}}>{card}</div>
       </div>
     );
   }
   // Object form: {title, emoji, rows:[["clue","tense"],...]}
-  const {title="", emoji="📌", rows=[]} = card;
+  const {title="", rows=[]} = card;
   return(
     <div style={{background:"#EFF6FF",border:"1.5px solid #BFDBFE",borderRadius:14,
       padding:"12px 14px",marginBottom:10}}>
       <div style={{display:"flex",alignItems:"center",gap:6,marginBottom:8}}>
-        <span style={{fontSize:"calc(var(--fs) * 1.286)"}}>{emoji}</span>
+        
         <div style={{fontSize:"calc(var(--fs) * 0.786)",fontWeight:800,color:"#1D4ED8",
           textTransform:"uppercase",letterSpacing:.8}}>{title}</div>
       </div>

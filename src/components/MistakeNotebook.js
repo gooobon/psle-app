@@ -83,7 +83,7 @@ export default function MistakeNotebook({ items, onCause, onTrySimilar, similarF
               <div style={{ fontSize: 'calc(var(--fs) * 0.786)', color: '#64748B', marginTop: 4 }}>
                 {m.date || ''}{m.topic || m.sectionType ? ' · ' + (m.topic || m.sectionType) : ''}
                 {cause ? ' · ' + cause.label : ' · cause not picked'}
-                {m.resolved_at ? ' · ✅ resolved' : ''}
+                {m.resolved_at ? ' · ✓ resolved' : ''}
               </div>
             </button>
             {isOpen && (

@@ -99,8 +99,27 @@ function judge(recent, before) {
   return "flat";
 }
 
+// Three weakest skills over the last 7 days with at least FOCUS_MIN_ATTEMPTS attempts (weighted like the mastery list).
+export const FOCUS_MIN_ATTEMPTS = 4;
+export function focusSkills(trials, nowMs) {
+  const now = nowMs == null ? Date.now() : nowMs;
+  const by = {};
+  for (const r of trials || []) {
+    if (!r || !r.skill) continue;
+    const at = t(r); if (Number.isNaN(at)) continue;
+    const age = now - at; if (age < 0 || age > 7 * DAY_MS) continue;
+    (by[r.skill] = by[r.skill] || []).push(r);
+  }
+  return Object.keys(by).map((skill) => {
+    const cur = rate(by[skill]);
+    return { skill, n: cur.n, now: cur.rate, attempts: by[skill].length };
+  }).filter((x) => x.attempts >= FOCUS_MIN_ATTEMPTS && x.now != null)
+    .sort((a, b) => (a.now - b.now) || (b.n - a.n)).slice(0, 3);
+}
+
 export function buildLearning(trials, wrongs, nowMs) {
   return {
+    focus: focusSkills(trials, nowMs),
     trend: trendWord(trials),
     weekly: weeklyScores(trials),
     skills: masteryBySkill(trials, nowMs),
