@@ -14,7 +14,23 @@ import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward, takePrefetch
 import { markIsland } from "@/lib/clewquest/perf";
 
 // Clew home (pose frames, history, level cards) is its own chunk: the island landing never loads it.
-const ClewHome = lazy(() => import("./ClewHome"));
+const loadClewHome = () => import("./ClewHome");
+const ClewHome = lazy(loadClewHome);
+
+// Lightweight placeholder shown the instant Clew home is requested (no art, no network): replaced when state + chunk arrive.
+function HomeSkeleton() {
+  const bar = (w, h, mt) => <div style={{ width: w, height: h, marginTop: mt, borderRadius: 10, background: T.track }} />;
+  return (
+    <div data-testid="cq-home-skeleton" role="status" aria-label="Loading your Clew" style={{ width: "100%", maxWidth: 480, margin: "0 auto", padding: "18px 18px 40px", minHeight: "100vh", background: T.bg, boxSizing: "border-box" }}>
+      <div style={{ display: "flex", justifyContent: "space-between" }}>{bar(120, 20, 0)}{bar(70, 36, 0)}</div>
+      <div style={{ background: "#fff", borderRadius: 20, margin: "14px 0", padding: 16 }}>
+        <div style={{ aspectRatio: "1600 / 893", background: "#E4DDD0", borderRadius: 12 }} />
+        {bar("50%", 20, 14)}{bar("35%", 14, 8)}{bar("100%", 10, 14)}
+      </div>
+      {bar("100%", 64, 8)}{bar("100%", 64, 8)}
+    </div>
+  );
+}
 
 // Invisible hotspots as percent of the landing art box (864x1184). Full names live only in aria-label.
 const HOTSPOTS = [
@@ -50,7 +66,7 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
   const [walk, setWalk] = useState(null);
   const reduced = usePrefersReducedMotion();
   const [shipReady, setShipReady] = useState(false);
-  useEffect(() => { markIsland("islands-visible"); const t = setTimeout(() => setShipReady(true), 700); return () => clearTimeout(t); }, []); // ship art loads after the islands are up
+  useEffect(() => { markIsland("islands-visible"); const w = setTimeout(() => { loadClewHome().catch(() => {}); }, 1200); const t = setTimeout(() => setShipReady(true), 700); return () => { clearTimeout(t); clearTimeout(w); }; }, []); // ship art loads after the islands are up
   const hex = character ? (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex : undefined;
   const artKey = character ? stageAssetKey(stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS) : null;
   useEffect(() => () => { if (walk && walk.t) clearTimeout(walk.t); }, [walk]);
@@ -139,6 +155,7 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
     </Page>
   );
   if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onLogout={onLogout} onSkip={view === "builder" ? () => { setSkipped(true); if (onLeaveQuest) onLeaveQuest(); else openToday(); } : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
-  if (view === "home" && st && character) return <Suspense fallback={<Page testId="cq-loading" />}><ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} /></Suspense>;
-  return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else if (st) { setView("home"); load("home"); } else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;
+  if (view === "home" && st && character) return <Suspense fallback={<HomeSkeleton />}><ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} /></Suspense>;
+  if (view === "home") return <HomeSkeleton />; // state still loading: show the skeleton, never a blank page
+  return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else if (st) { setView("home"); load("home"); } else { setView("home"); load("home").then((r) => { if (!r && !readCachedCharacter(uid)) setView("landing"); }); } }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;
 }
