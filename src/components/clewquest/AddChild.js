@@ -7,13 +7,12 @@ import { PicturePad } from "./PictureAuth";
 import { PictureIcon } from "./PictureIcon";
 import { CODE_LENGTH, PICTURES } from "@/lib/clewquest/pictures";
 import { cqGet, cqPost } from "@/lib/clewquest/client";
-import { cleanNamePart, fullName, loginIdProblem, USERNAME_MSG } from "@/lib/supabase/config";
+import { cleanNamePart, fullName, loginIdProblem, suggestLoginId, USERNAME_MSG } from "@/lib/supabase/config";
 import { Field, Chips, ErrorText, Card, mainBtn, secondaryBtn, inputStyle, helperStyle, T, FONT } from "./Shell";
 
 export const LEVELS = ["P3", "P4", "P5", "P6"];
 export const SUBJECTS = ["English", "Math", "Science"];
 export const MOTHER_TONGUES = ["Chinese", "Higher Chinese", "Other / none"];
-const suggestFrom = (first) => { const b = cleanNamePart(first).replace(/[^A-Za-z0-9_]/g, "").slice(0, 26); return b ? (b.length < 3 ? b + "01" : b) : ""; };
 
 export function CopyButton({ text, testId = "copy-id" }) {
   const [done, setDone] = useState(false);
@@ -39,7 +38,8 @@ export default function AddChild({ onCreated, onAnother, onDone, step = false })
   const problem = loginIdProblem(f.username);
   const timer = useRef(null);
 
-  function setFirst(v) { setF((p) => ({ ...p, first: v, ...(touched ? {} : { username: suggestFrom(v) }) })); }
+  // Until the parent edits Login ID by hand, keep it in sync with first + last name.
+  function setName(k, v) { setF((p) => { const n = { ...p, [k]: v }; return touched ? n : { ...n, username: suggestLoginId(n.first, n.last) }; }); }
   // Live check, 0.4s debounce. Bad format is shown immediately (no request).
   useEffect(() => {
     clearTimeout(timer.current);
@@ -97,21 +97,17 @@ export default function AddChild({ onCreated, onAnother, onDone, step = false })
     <div data-testid="add-child">
       {step && <div style={{ color: T.primary, fontWeight: 700, fontSize: 13, marginBottom: 4 }}>Step 2 of 2</div>}
       <div style={{ display: "flex", gap: 10 }}>
-        <div style={{ flex: 1 }}><Field id="ac-first" label="First name"><input id="ac-first" data-testid="ac-first" style={inputStyle} value={f.first} onChange={(e) => setFirst(e.target.value)} autoComplete="off" /></Field></div>
-        <div style={{ flex: 1 }}><Field id="ac-last" label="Last name"><input id="ac-last" data-testid="ac-last" style={inputStyle} value={f.last} onChange={(e) => set("last", e.target.value)} autoComplete="off" /></Field></div>
+        <div style={{ flex: 1 }}><Field id="ac-first" label="First name"><input id="ac-first" data-testid="ac-first" style={inputStyle} value={f.first} onChange={(e) => setName("first", e.target.value)} autoComplete="off" /></Field></div>
+        <div style={{ flex: 1 }}><Field id="ac-last" label="Last name"><input id="ac-last" data-testid="ac-last" style={inputStyle} value={f.last} onChange={(e) => setName("last", e.target.value)} autoComplete="off" /></Field></div>
       </div>
-      <Field label="Level"><Chips testId="ac-level" options={LEVELS} value={f.level} onChange={(v) => set("level", v)} /></Field>
-      <Field label="Subjects"><Chips testId="ac-subjects" multi options={SUBJECTS} value={f.subjects} onChange={(v) => set("subjects", v)} /></Field>
-      <Field label="Mother Tongue"><Chips testId="ac-tongue" options={MOTHER_TONGUES} value={f.tongue} onChange={(v) => set("tongue", v)} /></Field>
-      <Field label="School (optional)"><SchoolCombobox value={f.school} onChange={(v) => set("school", v)} border={T.border} placeholder="Helps pick familiar exam papers" /></Field>
-      <Field id="ac-username" label="Login username"
-        helper={<>{USERNAME_MSG.replace("Login ID", "Username")}. Capital letters are fine: Aquacat01 and aquacat01 count as the same. You can change it later.</>}>
+      <Field id="ac-username" label="Login ID"
+        helper={<>{USERNAME_MSG}. Capital letters are fine: Aquacat01 and aquacat01 count as the same. You can change it later.</>}>
         <input id="ac-username" data-testid="ac-username" style={{ ...inputStyle, borderColor: border }} value={f.username} onChange={(e) => { setTouched(true); set("username", e.target.value); }} autoCapitalize="none" autoCorrect="off" spellCheck={false} />
         <div aria-live="polite" style={{ marginTop: 6, fontSize: 13, fontWeight: 700 }}>
           {state === "checking" && <span data-testid="ac-status" style={{ color: T.muted }}>Checking...</span>}
           {state === "available" && <span data-testid="ac-status" style={{ color: T.successText }}>✓ Available</span>}
           {state === "bad" && <span data-testid="ac-status" style={{ color: T.error }}>{problem}</span>}
-          {state === "reserved" && <span data-testid="ac-status" style={{ color: T.error }}>Please choose a different username.</span>}
+          {state === "reserved" && <span data-testid="ac-status" style={{ color: T.error }}>Please choose a different Login ID.</span>}
           {state === "bad_format" && <span data-testid="ac-status" style={{ color: T.error }}>{avail.message || USERNAME_MSG}</span>}
           {state === "error" && <span data-testid="ac-status" style={{ color: T.error }}>Could not check. Try again.</span>}
           {state === "taken" && (<>
@@ -122,6 +118,10 @@ export default function AddChild({ onCreated, onAnother, onDone, step = false })
           </>)}
         </div>
       </Field>
+      <Field label="Level"><Chips testId="ac-level" options={LEVELS} value={f.level} onChange={(v) => set("level", v)} /></Field>
+      <Field label="Subjects"><Chips testId="ac-subjects" multi options={SUBJECTS} value={f.subjects} onChange={(v) => set("subjects", v)} /></Field>
+      <Field label="Mother Tongue"><Chips testId="ac-tongue" options={MOTHER_TONGUES} value={f.tongue} onChange={(v) => set("tongue", v)} /></Field>
+      <Field label="School (optional)"><SchoolCombobox value={f.school} onChange={(v) => set("school", v)} border={T.border} placeholder="Helps pick familiar exam papers" /></Field>
       <div style={{ marginBottom: 14 }}>
           <PicturePad value={a} onChange={setA} label={`Pick ${CODE_LENGTH} pictures for your child's secret code`} />
           {a.length === CODE_LENGTH && <div style={{ marginTop: 14 }}><PicturePad value={b} onChange={setB} label="Pick the same pictures again" />{b.length === CODE_LENGTH && a.join() !== b.join() && <ErrorText testId="ac-pic-mismatch">The two picture codes are different. Try again.</ErrorText>}</div>}
