@@ -1,5 +1,5 @@
 // Parent: extras for the mistake detail view (issue #131). Flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_PARENT_DETAIL_ENABLED.
-//   GET ?child=<uuid>&subject=English|Chinese  -> { tags:{wrongAnswerId:cause}, tagsAvailable, attempts:{itemId:n}, answers:{itemId:text}, answersAvailable }
+//   GET ?child=<uuid>&subject=English|Chinese  -> { tags:{wrongAnswerId:cause}, tagsAvailable, attempts:{itemId:n}, answers:{itemId:text}, answersAvailable, elapsed:{itemId:ms}, elapsedAvailable }
 //   PUT { child, wrongAnswerId, cause }         -> sets the parent cause tag (careless / concept / vocabulary); cause "" is not allowed
 // RLS (is_parent_of) enforces the parent-child link. Before 20261210000000_parent_detail.sql is applied, PUT answers 503 and GET reports tagsAvailable:false.
 import { sessionClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
@@ -24,8 +24,8 @@ export async function GET(request) {
   const child = u.searchParams.get("child") || "", subject = u.searchParams.get("subject") || "";
   if (!UUID.test(child) || !SUBJECT_KEYS.includes(subject)) return jerr("bad request", 400);
   const x = await loadMistakeExtras(child, subject);
-  const { attempts, answers } = attemptSummary(x.trials);
-  return jok({ tags: x.tags, tagsAvailable: x.tagsAvailable, attempts, answers, answersAvailable: x.hasAnswers });
+  const { attempts, answers, elapsed } = attemptSummary(x.trials);
+  return jok({ tags: x.tags, tagsAvailable: x.tagsAvailable, attempts, answers, answersAvailable: x.hasAnswers, elapsed, elapsedAvailable: x.hasElapsed });
 }
 
 export async function PUT(request) {

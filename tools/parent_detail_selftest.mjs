@@ -2,7 +2,7 @@
 // Student: answers wrong on purpose for different causes. Parent: opens a mistake and sees the question, the child's answer,
 // the correct answer and the cause tag, then sees concept-level weak spots. Run: node tools/parent_detail_selftest.mjs
 import fs from "node:fs";
-import { weakSpots, attemptSummary, answerShown, isParentCause, parentCauseLabel, PARENT_CAUSES, NOT_RECORDED, DAY_MS } from "../src/lib/parentDetail.js";
+import { weakSpots, attemptSummary, answerShown, timeTakenText, isParentCause, parentCauseLabel, PARENT_CAUSES, NOT_RECORDED, DAY_MS } from "../src/lib/parentDetail.js";
 
 let failed = 0;
 function eq(name, a, e) {
@@ -55,7 +55,22 @@ eq("answerShown text is Answer not recorded", NOT_RECORDED, "Answer not recorded
 const sum = attemptSummary(student);
 eq("attempts for a repeated item", sum.attempts["q-sva-1"], 2);
 eq("latest wrong answer text for an item", sum.answers["q-past-1"], "runned");
-eq("empty input is fine", attemptSummary(null), { attempts: {}, answers: {} });
+eq("empty input is fine", attemptSummary(null), { attempts: {}, answers: {}, elapsed: {} });
+
+// --- Time taken (learning_trials.elapsed_ms from #143; column may be missing or null) ---
+const timed = [
+  { skill: "k", item_id: "t1", first_try: false, elapsed_ms: 12400, attempted_at: at(1) },
+  { skill: "k", item_id: "t2", first_try: false, elapsed_ms: 4250, attempted_at: at(1, 1) },
+  { skill: "k", item_id: "t3", first_try: false, elapsed_ms: null, attempted_at: at(1, 2) },
+  { skill: "k", item_id: "t4", first_try: false, attempted_at: at(1, 3) },
+];
+const ts2 = attemptSummary(timed);
+eq("elapsed kept for items that have it", ts2.elapsed, { t1: 12400, t2: 4250 });
+eq("time shown in seconds (>= 10 s rounded)", timeTakenText(ts2.elapsed.t1), "Time taken: 12 s");
+eq("time shown with one decimal under 10 s", timeTakenText(ts2.elapsed.t2), "Time taken: 4.3 s");
+eq("null elapsed is not recorded", timeTakenText(ts2.elapsed.t3), "Time taken: not recorded");
+eq("missing column is not recorded", [timeTakenText(undefined), timeTakenText(0), timeTakenText("x")], ["Time taken: not recorded", "Time taken: not recorded", "Time taken: not recorded"]);
+eq("student data without elapsed_ms gives empty map", attemptSummary(student).elapsed, {});
 
 // --- Parent cause tag: careless / concept / vocabulary only ---
 eq("cause list", PARENT_CAUSES.map((c) => c.label), ["Careless", "Concept", "Vocabulary"]);

@@ -31,7 +31,7 @@ function rate(rows) {
 }
 
 // Skills with >= minAttempts first-try attempts in the last 14 days, weakest first.
-// trials: learning_trials rows {skill, item_id, first_try, weight?, attempted_at, answer_text?}.
+// trials: learning_trials rows {skill, item_id, first_try, weight?, attempted_at, answer_text?, elapsed_ms?}.
 // Each result: {skill, attempts, firstTryPct, prevPct, delta, trend, examples:[{itemId, at, answerText|null}]}; trend is
 // "up" / "down" / "flat" / "new" (no earlier attempts to compare with). Examples are up to 2 different missed items, newest first.
 export function weakSpots(trials, nowMs, opts) {
@@ -67,14 +67,23 @@ export function weakSpots(trials, nowMs, opts) {
   return out.sort((a, b) => (a.firstTryPct - b.firstTryPct) || (b.attempts - a.attempts));
 }
 
+// Time taken text: "Time taken: N s" when elapsed_ms is a positive number, else "Time taken: not recorded".
+export function timeTakenText(ms) {
+  const n = ms == null || ms === "" ? NaN : Number(ms);
+  if (!Number.isFinite(n) || n <= 0) return "Time taken: not recorded";
+  const s = n / 1000;
+  return "Time taken: " + (s >= 10 ? Math.round(s) : Math.round(s * 10) / 10) + " s";
+}
+
 // Count how many times each item was tried (all trial rows) and map item -> latest recorded answer text.
 export function attemptSummary(trials) {
-  const attempts = {}, answers = {};
+  const attempts = {}, answers = {}, elapsed = {};
   const sorted = (trials || []).slice().sort((a, b) => ts(b) - ts(a));
   for (const r of sorted) {
     if (!r || !r.item_id) continue;
     attempts[r.item_id] = (attempts[r.item_id] || 0) + 1;
     if (!(r.item_id in answers) && !r.first_try && r.answer_text != null && r.answer_text !== "") answers[r.item_id] = String(r.answer_text);
+    if (!r.first_try && !(r.item_id in elapsed) && Number(r.elapsed_ms) > 0) elapsed[r.item_id] = Number(r.elapsed_ms);
   }
-  return { attempts, answers };
+  return { attempts, answers, elapsed };
 }

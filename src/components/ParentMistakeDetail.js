@@ -6,7 +6,7 @@
 import React from "react";
 import { serverGet, serverPut } from "@/lib/serverClient";
 import { getTagIndex } from "@/lib/taxonomyLookup";
-import { PARENT_CAUSES, parentCauseLabel, answerShown } from "@/lib/parentDetail";
+import { PARENT_CAUSES, parentCauseLabel, answerShown, timeTakenText } from "@/lib/parentDetail";
 
 const card = { background: "#fff", borderRadius: 14, marginBottom: 8, boxShadow: "0 2px 8px rgba(0,0,0,0.05)", overflow: "hidden" };
 const btn = { border: "none", borderRadius: 8, padding: "5px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", background: "#fff", color: "#1F3F95" };
@@ -58,6 +58,7 @@ export default function ParentMistakeDetail({ child, subject, mistakes }) {
         const tag = m.waId ? tags[m.waId] : null;
         const fromTrial = extra && extra.answers ? extra.answers[m.id] : null;
         const attempts = extra && extra.attempts && extra.attempts[m.id];
+        const elapsedMs = extra && extra.elapsed ? extra.elapsed[m.id] : null;
         const expl = explanationOf(m.id);
         return (
           <div key={m.key} style={card}>
@@ -88,7 +89,7 @@ export default function ParentMistakeDetail({ child, subject, mistakes }) {
                   <b>Explanation: </b>{expl || "No explanation stored for this question."}
                 </div>
                 <div style={{ fontSize: 12, color: "#6B6F7B", marginBottom: 8 }}>
-                  Attempts: {attempts || "not recorded"}  |  Date: {fmtDate(m.sessionDate) || "unknown"}  |  Time taken: not recorded
+                  Attempts: {attempts || "not recorded"}  |  Date: {fmtDate(m.sessionDate) || "unknown"}  |  {timeTakenText(elapsedMs)}
                 </div>
                 <div style={{ display: "flex", gap: 6, alignItems: "center", flexWrap: "wrap" }}>
                   <span style={{ fontSize: 11, fontWeight: 700, color: "#6B6F7B" }}>Cause</span>
