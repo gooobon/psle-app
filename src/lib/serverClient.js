@@ -4,20 +4,31 @@
 export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD } from "@/lib/supabase/config";
 
-import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
-import { WA1_PRACTICE_SETS } from "@/data/p3/english/wa1_practice";
-import { WA1_ZH_PRACTICE } from "@/data/p3/chinese/wa1_practice";
+
+// The practice banks are big, so they are NOT imported here (this module is on the island-home path).
+// They load lazily the first time a mistake is described; reporting is only called from practice screens,
+// which load the same chunks anyway. Until then the first report falls back to the raw mistake.
+let _bank = null;
+export function loadBank() {
+  if (_bank || typeof window === "undefined") return;
+  _bank = Promise.all([
+    import("@/data/p3/english/wa1_practice"),
+    import("@/data/p3/chinese/wa1_practice"),
+    import("@/lib/taxonomyLookup"),
+  ]).then(([en, zh, tx]) => {
+    _bank = { QUESTION_INDEX: { English: indexSets(en.WA1_PRACTICE_SETS), Chinese: indexSets(zh.WA1_ZH_PRACTICE) }, taxonomyIdsFor: tx.taxonomyIdsFor };
+  }).catch(() => { _bank = null; });
+}
 
 // Exam results store an id and an option index. The notebook resolves the words for display;
 // the server copy has to do the same lookup or the parent sees a blank card.
-const QUESTION_INDEX = {
-  English: indexSets(WA1_PRACTICE_SETS),
-  Chinese: indexSets(WA1_ZH_PRACTICE),
-};
 function describedMistake(m, subject) {
-  return describeMistake(m, QUESTION_INDEX[subject] || QUESTION_INDEX.English);
+  loadBank();
+  const q = _bank && _bank.QUESTION_INDEX;
+  return describeMistake(m, q ? (q[subject] || q.English) : {});
 }
+function taxonomyIdsFor(id) { return _bank && _bank.taxonomyIdsFor ? _bank.taxonomyIdsFor(id) : null; }
 
 const IMPORT_MARKER = "genius_server_import_v1";
 

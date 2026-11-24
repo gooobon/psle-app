@@ -12,6 +12,11 @@ export const cqGet = (p) => call(p, "GET");
 export const cqPost = (p, b) => call(p, "POST", b || {});
 export const cqPut = (p, b) => call(p, "PUT", b || {});
 
+// Started by ClaudeApp in parallel with /api/auth/me so the island state is not a second serial round trip.
+// Single use and short lived: later loads (after an award) always hit the network, so totals are never stale.
+let _pre = null;
+export function prefetchState() { _pre = { t: Date.now(), p: call("/api/clewquest/state", "GET") }; }
+export function takePrefetchedState() { const v = _pre; _pre = null; return v && Date.now() - v.t < 20000 ? v.p : null; }
 export const CACHE_KEY = "clewquest_character_v1";
 export const LAST_AWARD_KEY = "clewquest_last_award_v1";
 export function cacheCharacter(userId, character) { try { localStorage.setItem(CACHE_KEY, JSON.stringify({ userId, character })); } catch {} }

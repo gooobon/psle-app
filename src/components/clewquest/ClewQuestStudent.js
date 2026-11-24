@@ -1,20 +1,20 @@
 "use client";
 // ClewQuest student shell: builder -> four-island landing -> Clew home. Practice screens are the EXISTING ones (renderPractice);
 // nothing here is ever rendered on solve / question / marking screens.
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, lazy, useCallback, useEffect, useState } from "react";
 import { CLEWQUEST } from "@/lib/clewquest/config";
 import { stageFromTotal, stageAssetKey, questGrade, subjectsFor, tintForStage } from "@/lib/clewquest/logic";
-import { levelFor, levelProgress, recentAverage, settleLevel, readFloor, writeFloor } from "@/lib/clewquest/levels";
-import { characterPoseKeys, petPoseKeys, resolveFrames } from "@/lib/clewquest/poses";
-import { todayStr } from "@/lib/sessionUtils";
-import { LevelCard } from "./LevelBadge";
-import PoseCycler, { usePrefersReducedMotion } from "./PoseCycler";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 import { SailingShip, ShopScreen } from "./TradersShip";
 import { Art, ASSET_KEYS } from "./Art";
 import CharacterBuilder from "./CharacterBuilder";
 import { LandingArt } from "./AuthScreens";
 import { Page, LogoBadge, IslandPill, ISLAND_PILLS, T, FONT, mainBtn, secondaryBtn, linkBtn } from "./Shell";
-import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward } from "@/lib/clewquest/client";
+import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward, takePrefetchedState } from "@/lib/clewquest/client";
+import { markIsland } from "@/lib/clewquest/perf";
+
+// Clew home (pose frames, history, level cards) is its own chunk: the island landing never loads it.
+const ClewHome = lazy(() => import("./ClewHome"));
 
 // Invisible hotspots as percent of the landing art box (864x1184). Full names live only in aria-label.
 const HOTSPOTS = [
@@ -23,12 +23,6 @@ const HOTSPOTS = [
   { key: "math", x: 57, y: 15, w: 40, h: 26 },
   { key: "science", x: 57, y: 61, w: 40, h: 26 },
 ];
-// Level for one subject island: threads from the server, 2-week average from local history, never below the highest level reached.
-export function subjectLevel(uid, key, threads, prog) {
-  const avg = recentAverage(prog && prog.history, todayStr());
-  const lv = levelFor({ threads, avg, floor: readFloor(uid, key) });
-  return { lv, p: levelProgress({ threads, avg, floor: lv.level }), avg };
-}
 const fmt = (n) => (Math.round(n * 10) / 10).toString();
 const SEEN_STAGE_KEY = "clewquest_seen_stage_v1";
 
@@ -55,6 +49,8 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
   const [pressed, setPressed] = useState(false);
   const [walk, setWalk] = useState(null);
   const reduced = usePrefersReducedMotion();
+  const [shipReady, setShipReady] = useState(false);
+  useEffect(() => { markIsland("islands-visible"); const t = setTimeout(() => setShipReady(true), 700); return () => clearTimeout(t); }, []); // ship art loads after the islands are up
   const hex = character ? (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex : undefined;
   const artKey = character ? stageAssetKey(stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS) : null;
   useEffect(() => () => { if (walk && walk.t) clearTimeout(walk.t); }, [walk]);
@@ -76,7 +72,7 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
           ))}
           {artKey && <WalkingClew artKey={artKey} tint={tintForStage(stage, hex)} alt="" walk={walk} />}
           <button data-testid="cq-clew" aria-label="The Clew" onClick={() => { setPressed(true); onHome(); }} onPointerDown={() => setPressed(true)} onPointerCancel={() => setPressed(false)} style={{ position: "absolute", left: "36%", top: "38%", width: "28%", height: "14%", background: pressed ? "rgba(255,255,255,.35)" : "transparent", border: "none", borderRadius: "50%", cursor: "pointer", transform: pressed ? "scale(.96)" : "none", transition: "background .08s, transform .08s", touchAction: "manipulation" }} />
-          {CLEWQUEST.ship.shopEnabled && <SailingShip onOpen={onShop} />}
+          {CLEWQUEST.ship.shopEnabled && shipReady && <SailingShip onOpen={onShop} />}
           <LogoBadge style={{ position: "absolute", top: 10, left: "50%", transform: "translateX(-50%)", pointerEvents: "none" }} />
         </LandingArt>
       </div>
@@ -87,105 +83,6 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
       </div>
       {toast && <div role="status" data-testid="cq-toast" style={{ position: "fixed", bottom: 24, left: "50%", transform: "translateX(-50%)", background: T.ink, color: "#fff", padding: "10px 18px", borderRadius: 14, fontWeight: 800 }}>{toast}</div>}
     </Page>
-  );
-}
-
-function History({ title, rows, empty, testId }) {
-  return (
-    <div data-testid={testId} style={{ background: "#fff", borderRadius: 16, padding: "10px 14px", margin: "10px 0", boxShadow: "0 2px 10px rgba(27,35,64,.08)" }}>
-      <div style={{ fontWeight: 800, marginBottom: 4 }}>{title}</div>
-      {rows.length === 0 ? <div style={{ color: T.muted, fontSize: 14 }}>{empty}</div> : rows.map((r) => (
-        <div key={r.k} style={{ display: "flex", justifyContent: "space-between", fontSize: 14, padding: "3px 0", borderTop: `1px solid ${T.border}` }}><span>{r.a}</span><b>{r.b}</b></div>
-      ))}
-    </div>
-  );
-}
-
-function ClewHome({ uid, st, character, award, onBack, onEdit, onOpen, onToday, subjects, getProgress, grade }) {
-  const [credits, setCredits] = useState(null);
-  useEffect(() => { let live = true; cqGet("/api/student/rewards").then((r) => { if (live && r && r.ok) setCredits(r); }); return () => { live = false; }; }, []);
-  const total = st.thread.total || 0, stage = stageFromTotal(total);
-  const reach = CLEWQUEST.stages.filter((s) => s.reachable);
-  const next = st.next;
-  const art = stageAssetKey(stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS);
-  const hex = (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex;
-  const tint = tintForStage(stage, hex); // black for stages 1-2: the chosen colour appears from stage 3 (100 threads)
-  // Pose art is the full character (face + hair), so it is only used from stage 5; before that the stage art stands in with the same motion.
-  const frames = resolveFrames(stage >= 5 ? characterPoseKeys(character.gender, character.hair_key) : Array.from({ length: CLEWQUEST.poses.count }, () => "none"), art, ASSET_KEYS);
-  const petFrames = CLEWQUEST.poses.pets.map((p) => ({ pet: p, frames: resolveFrames(petPoseKeys(p), art, ASSET_KEYS) }));
-  const levels = Object.entries(subjects).filter(([, v]) => v.status === "open").map(([key, v]) => {
-    const r = subjectLevel(uid, key, (st.thread.bySubject || {})[key] || 0, getProgress ? getProgress(grade, v.appSubject) : null);
-    return { key, label: v.label.replace(" Island", ""), ...r };
-  });
-  useEffect(() => { levels.forEach((l) => writeFloor(uid, l.key, l.lv.level)); }); // remember the highest level reached
-  const cur = reach.find((s) => s.stage === stage);
-  const pct = next ? Math.min(100, Math.round(((total - (cur ? cur.minThread : 0)) / (next.need - (cur ? cur.minThread : 0))) * 100)) : 100;
-  return (
-    <div data-testid="cq-home" style={{ width: "100%", maxWidth: 480, margin: "0 auto", padding: "18px 18px 40px", minHeight: "100vh", background: T.bg, color: T.ink, fontFamily: FONT, boxSizing: "border-box" }}>
-      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-        <button onClick={onBack} style={{ background: "none", border: "none", fontWeight: 700, cursor: "pointer", color: T.primary, fontFamily: FONT }}>Back to the islands</button>
-        <button data-testid="cq-today-home" onClick={onToday} style={todayBtn}>Today</button>
-      </div>
-      {award > 0 && <div data-testid="cq-award" style={{ background: "#EEF3E2", color: T.successText, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>+{fmt(award)} thread from your last round!</div>}
-      {st.leveledUp && <div data-testid="cq-stageup" style={{ background: "#FBF1D6", color: T.ink, fontWeight: 800, borderRadius: 14, padding: "10px 14px", margin: "10px 0" }}>Your Clew grew to Stage {stage}!</div>}
-      <div data-testid="cq-vault" style={{ textAlign: "center", background: "#fff", borderRadius: 20, boxShadow: "0 6px 20px rgba(27,35,64,.10)", margin: "10px 0", overflow: "hidden" }}>
-        <div data-testid="cq-vault-stage" style={{ position: "relative", aspectRatio: "1600 / 893", background: "#E4DDD0" }}>
-          {ASSET_KEYS.has(CLEWQUEST.vaultArt) && <Art priority k={CLEWQUEST.vaultArt} alt="The Vault of the Oracle: a marble temple with a golden light" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", maxWidth: "none" }} />}
-          <div style={{ position: "absolute", left: 0, right: 0, bottom: "9%", display: "flex", justifyContent: "center" }}>
-            <PoseCycler testId="cq-character" frames={frames} alt={`Your Clew at Stage ${stage}`} tint={tint} height={190} />
-          </div>
-        </div>
-        <div style={{ padding: "12px 16px 16px", background: "#fff" }}>
-        <div style={{ fontWeight: 800, fontSize: 20 }}>{character.nickname || "Your Clew"}</div>
-        <div style={{ color: T.muted }}>Stage {stage}: {(cur || {}).name}</div>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 8, marginTop: 8 }}>
-          <span title={stage < CLEWQUEST.colourFromStage ? "Your colour appears at 100 threads" : undefined} style={{ width: 22, height: 22, borderRadius: 11, background: stage < CLEWQUEST.colourFromStage ? "#111" : hex, border: "1px solid rgba(27,35,64,.18)" }} />
-          <span data-testid="cq-thread-total" style={{ fontWeight: 900, fontSize: 22 }}>{fmt(total)}</span><span>thread</span>
-        </div>
-        <div style={{ color: T.muted, fontSize: 14, marginTop: 4 }}>
-          English {fmt((st.thread.bySubject || {}).english || 0)} · Chinese {fmt((st.thread.bySubject || {}).chinese || 0)}
-        </div>
-        {next ? (<>
-          <div style={{ height: 10, background: T.track, borderRadius: 6, margin: "12px 0 4px" }}><div style={{ width: pct + "%", height: 10, background: T.gold, borderRadius: 6 }} /></div>
-          <div data-testid="cq-next" style={{ fontSize: 14, fontWeight: 700 }}>{fmt(next.have)} / {next.need} thread to Stage {next.stage}</div>
-        </>) : <div style={{ fontWeight: 800, marginTop: 10 }}>Full-grown Clew!</div>}
-        </div>
-      </div>
-      <div style={{ display: "flex", gap: 8, overflowX: "auto", padding: "6px 0" }}>
-        {reach.map((s) => {
-          const got = s.stage <= stage;
-          return (<div key={s.stage} data-testid={`cq-strip-${s.stage}`} style={{ textAlign: "center", minWidth: 64 }}>
-            <Art k={stageAssetKey(s.stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS)} alt={got ? `Stage ${s.stage}` : `Stage ${s.stage}, locked`} tint={tintForStage(s.stage, hex)} style={{ height: 72, width: "auto", filter: got ? "none" : "brightness(0) opacity(.35)" }} />
-            <div style={{ fontSize: 11, fontWeight: 700 }}>{got ? `Stage ${s.stage}` : `${s.minThread} thread`}</div>
-          </div>);
-        })}
-        <div style={{ textAlign: "center", minWidth: 64 }}>
-          <Art k="stages/stage-6-boy" alt="More stages, coming later" style={{ width: 56, filter: "brightness(0) opacity(.2)" }} />
-          <div style={{ fontSize: 11, fontWeight: 700 }}>Coming later</div>
-        </div>
-      </div>
-      <div data-testid="cq-levels" style={{ display: "grid", gap: 8, margin: "10px 0" }}>
-        {levels.map((l) => <LevelCard key={l.key} subjectLabel={l.label} lv={l.lv} p={l.p} />)}
-      </div>
-      <div data-testid="cq-pets" style={{ display: "flex", gap: 10, justifyContent: "center", background: "#fff", borderRadius: 20, padding: 12, margin: "10px 0", boxShadow: "0 2px 10px rgba(27,35,64,.08)" }}>
-        {petFrames.map(({ pet, frames: f }) => (
-          <div key={pet.key} style={{ textAlign: "center" }}>
-            <PoseCycler testId={`cq-pet-${pet.key}`} frames={f} alt={pet.name} height={90} />
-            <div style={{ fontSize: 12, fontWeight: 700 }}>{pet.name}</div>
-          </div>
-        ))}
-      </div>
-      <History title="Threads earned" testId="cq-thread-history" empty="No threads yet. Finish a round to earn some!"
-        rows={(st.threadHistory || []).slice(0, 10).map((d) => ({ k: d.day, a: d.day, b: `+${fmt(d.total)} thread` }))} />
-      {credits && <History title="Credits" testId="cq-credit-history" empty="No credits yet."
-        rows={(credits.creditHistory || []).slice(0, 10).map((c, i) => ({ k: i + c.period, a: `${c.period} · ${c.subject || c.kind}`, b: `${c.credits} · ${c.status === "confirmed" ? "earned" : c.status}` }))} />}
-      <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
-        {Object.entries(subjects).filter(([, v]) => v.status === "open").map(([key, v], i) => (
-          <button key={key} data-testid={`cq-go-${key}`} onClick={() => onOpen(key)} style={{ ...(i === 0 ? mainBtn(false) : secondaryBtn), flex: 1 }}>{v.label}</button>
-        ))}
-        <button data-testid="cq-edit-look" onClick={onEdit} style={secondaryBtn}>Edit look</button>
-      </div>
-    </div>
   );
 }
 
@@ -204,7 +101,11 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
   const [skipped, setSkipped] = useState(false); // "Skip for now" in the builder: no forced builder again this visit
 
   const load = useCallback(async (next) => {
-    const r = await cqGet("/api/clewquest/state");
+    // Islands need only character + totals + stage. The 30-day thread history is fetched only for Clew home.
+    // The first load can reuse the request ClaudeApp started in parallel with the session check (single use, 20 s max).
+    const wantHistory = next === "home";
+    const pre = wantHistory ? null : takePrefetchedState();
+    const r = await (pre || cqGet("/api/clewquest/state" + (wantHistory ? "?history=1" : "")));
     if (!r.ok) { setFailed(true); const cached = readCachedCharacter(uid); if (cached) { setCharacter(cached); setView(next || "landing"); } return null; }
     setFailed(false); setSt(r); setCharacter(r.character);
     if (r.character) cacheCharacter(uid, r.character);
@@ -238,6 +139,6 @@ export default function ClewQuestStudent({ user, onLogout, renderPractice, onLea
     </Page>
   );
   if (view === "builder" || view === "edit") return <CharacterBuilder initial={view === "edit" ? character : null} onLogout={onLogout} onSkip={view === "builder" ? () => { setSkipped(true); if (onLeaveQuest) onLeaveQuest(); else openToday(); } : null} onSaved={(c) => { cacheCharacter(uid, c); setCharacter(c); load("landing"); }} onCancel={view === "edit" ? () => setView("home") : null} />;
-  if (view === "home" && st && character) return <ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} />;
+  if (view === "home" && st && character) return <Suspense fallback={<Page testId="cq-loading" />}><ClewHome uid={uid} grade={grade} getProgress={getProgress} st={st} character={character} award={award} subjects={subjects} onBack={() => setView("landing")} onEdit={() => setView("edit")} onOpen={openSubject} onToday={openToday} /></Suspense>;
   return <Landing subjects={subjects} onOpen={openSubject} onHome={() => { if (!character) setView("builder"); else if (st) { setView("home"); load("home"); } else load("home"); }} onToday={openToday} onLogout={onLogout} onLeave={onLeaveQuest} onShop={() => setView("shop")} character={character} stage={st && st.thread ? stageFromTotal(st.thread.total || 0) : 1} pictureCode={!!user.pictureCode} toast={toast} />;
 }
