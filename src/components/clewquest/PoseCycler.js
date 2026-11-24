@@ -5,17 +5,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Art, ASSET_KEYS } from "./Art";
 
-export function usePrefersReducedMotion() {
-  const [r, setR] = useState(false);
-  useEffect(() => {
-    if (typeof window === "undefined" || !window.matchMedia) return undefined;
-    const m = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const on = () => setR(!!m.matches); on();
-    m.addEventListener ? m.addEventListener("change", on) : m.addListener(on);
-    return () => { m.removeEventListener ? m.removeEventListener("change", on) : m.removeListener(on); };
-  }, []);
-  return r;
-}
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
+export { usePrefersReducedMotion };
 
 export default function PoseCycler({ frames, intervalMs = 700, alt, tint, height = 220, testId = "cq-pose", assetKeys = ASSET_KEYS }) {
   const list = (frames || []).filter((f) => f && assetKeys.has(f.key));

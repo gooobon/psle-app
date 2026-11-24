@@ -404,8 +404,8 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
 
   // F7: the Today hub stays reachable with the flag ON
   { const cq = fs.readFileSync(path.join(root, "src/components/clewquest/ClewQuestStudent.js"), "utf8");
-    const app = fs.readFileSync(path.join(root, "src/app/ClaudeApp.js"), "utf8");
-    t("F7: Today button on the landing and on the home", /data-testid="cq-today" onClick=\{onToday\}/.test(cq) && /data-testid="cq-today-home" onClick=\{onToday\}/.test(cq));
+    const app = fs.readFileSync(path.join(root, "src/app/ClaudeApp.js"), "utf8") + fs.readFileSync(path.join(root, "src/app/PracticeApp.js"), "utf8"); // practice screens live in the lazy PracticeApp chunk
+    t("F7: Today button on the landing and on the home", /data-testid="cq-today" onClick=\{onToday\}/.test(cq) && /data-testid="cq-today-home" onClick=\{onToday\}/.test(fs.readFileSync(path.join(root, "src/components/clewquest/ClewHome.js"), "utf8")));
     t("F7: Today opens the existing StudentApp with no subject (Today hub)", /if \(view === "today"\) return renderPractice\(null, \(\) => load\(from\)\)/.test(cq) && /initialSubject:appSubject\|\|undefined/.test(app));
     t("F7: StudentApp starts on the hub when no subject is given", /useState\(!initialSubject\); \/\/ today overview/.test(app));
     t("F7: leaving a subject returns to the islands only when it was opened from an island", /const exitSubjectToQuest = !!\(onExitToQuest && initialSubject\)/.test(app) && /if\(exitSubjectToQuest\)\{ onExitToQuest\(\); return; \}/.test(app));
@@ -509,7 +509,7 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   t("migration: redeem is an atomic delete of an unexpired matching row", /delete from public\.clewquest_link_codes where child_id = p_child and code_hash = p_hash and expires_at > now\(\)/.test(mig));
 
   // Blocker 2: password students keep the Today hub; ClewQuest is opt-in; builder can be left
-  const app = rd("src/app/ClaudeApp.js"), cq = rd("src/components/clewquest/ClewQuestStudent.js"), cb = rd("src/components/clewquest/CharacterBuilder.js"), pa = rd("src/components/clewquest/PictureAuth.js");
+  const app = rd("src/app/ClaudeApp.js") + rd("src/app/PracticeApp.js"), cq = rd("src/components/clewquest/ClewQuestStudent.js"), cb = rd("src/components/clewquest/CharacterBuilder.js"), pa = rd("src/components/clewquest/PictureAuth.js");
   t("B2: shell is forced only for picture-code students, or when a password student opened it", /cqOk && \(user\.pictureCode \|\| cqOpen\)/.test(app));
   t("B2: a password student gets the Today hub plus an Open ClewQuest entry", /practice\(cqOk \? \{onOpenQuest/.test(app) && /today-open-clewquest/.test(app));
   t("B2: logout closes the opt-in view", /setAuth\(null\); setCqOpen\(false\)/.test(app));
@@ -557,6 +557,21 @@ for (const f of cqFiles.concat(["src/components/clewquest/ClewQuestStudent.js"])
   const PO = await import("../src/lib/clewquest/poses.js");
   const frames = PO.resolveFrames(PO.characterPoseKeys("boy", "apollo-curls"), "stages/stage-5-boy", new Set(Object.keys(manifest.assets)));
   t("pose cycle includes the blink frame right after pose 1", frames[1] && frames[1].key === "poses/boy-apollo-curls-1-blink" && frames[1].ms > 0);
+}
+
+// Island-home load speed (issue #119): the island path must not statically pull the practice / paper / dictionary banks.
+{
+  const HEAVY = /@\/data\/p3\/|@\/lib\/dataEngine['"]|p3PaperBridge|zh_vocab|en_vocab|wa1_bank|wa1_drill/;
+  const importsOf = (f) => (fs.readFileSync(path.join(root, f), "utf8").match(/^import[^;]*?from\s*['"][^'"]+['"]/gm) || []).join("\n");
+  for (const f of ["src/app/ClaudeApp.js", "src/app/appStore.js", "src/components/clewquest/ClewQuestStudent.js", "src/lib/serverClient.js", "src/lib/uiShared.js"]) {
+    t("islands: " + f + " has no static import of the practice banks", !HEAVY.test(importsOf(f)));
+  }
+  const ui = fs.readFileSync(path.join(root, "src/lib/uiShared.js"), "utf8");
+  t("islands: Tone.js is not preloaded at module load", !/^ensureTone\(\);/m.test(ui) && /await ensureTone\(\)/.test(ui));
+  const route = fs.readFileSync(path.join(root, "src/app/api/clewquest/state/route.js"), "utf8");
+  t("islands: ledger history only with ?history=1", /searchParams\.get\("history"\) === "1"/.test(route) && route.indexOf("clewquest_thread_ledger") > route.indexOf('"history"'));
+  const cqs = fs.readFileSync(path.join(root, "src/components/clewquest/ClewQuestStudent.js"), "utf8");
+  t("islands: Clew home (pose art) is lazy, ship mounts after first paint", /lazy\(\(\) => import\("\.\/ClewHome"\)\)/.test(cqs) && /shipReady && <SailingShip/.test(cqs) && !/PoseCycler/.test(importsOf("src/components/clewquest/ClewQuestStudent.js")));
 }
 
 console.log(`clewquest selftest: ${pass} pass, ${fail} fail`);

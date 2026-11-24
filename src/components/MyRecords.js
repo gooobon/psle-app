@@ -48,7 +48,7 @@ export default function MyRecords({ prog, subject, isZh, dict, vocabState, onBac
   const [threadsByDay, setThreads] = useState(null);
   useEffect(() => { // thread earned per day for this subject (ClewQuest only; read-only)
     if (!clewquestEnabled()) return undefined; let live = true;
-    cqGet("/api/clewquest/state").then((r) => { if (!live || !r || !r.ok) return; const m = {}; (r.threadHistory || []).forEach((d) => { m[d.day] = d.bySubject[String(subject).toLowerCase()] || 0; }); setThreads(m); });
+    cqGet("/api/clewquest/state?history=1").then((r) => { if (!live || !r || !r.ok) return; const m = {}; (r.threadHistory || []).forEach((d) => { m[d.day] = d.bySubject[String(subject).toLowerCase()] || 0; }); setThreads(m); });
     return () => { live = false; };
   }, [subject]);
   const [tab, setTab] = useState("history");

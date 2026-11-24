@@ -260,8 +260,7 @@ async function ensureTone(){
   return true;
 }
 
-// Pre-load Tone.js
-ensureTone();
+// Tone.js loads on first SFX use (a solving screen), not at app start.
 
 const SFX = {
   // Correct answer — ascending bright notes

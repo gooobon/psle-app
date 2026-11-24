@@ -6,7 +6,7 @@ import { progressToNext, groupThreadsByDay } from "@/lib/clewquest/logic";
 
 export const runtime = "nodejs";
 
-export async function GET() {
+export async function GET(req) {
   if (!clewquestRoutesOn()) return notFound();
   const me = await currentUser();
   if (!me || me.profile.role !== "student") return jerr("student login required", 401);
@@ -16,8 +16,13 @@ export async function GET() {
   const total = t.totals.total || 0;
   const st = await syncStage(admin, id, total);
   // Read-only: the student's own recent thread awards, grouped by day (My Clew history). A failure just means no history.
-  const hist = await admin.from("clewquest_thread_ledger").select("amount,subject,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(500);
-  const threadHistory = hist.error ? [] : groupThreadsByDay(hist.data || []).slice(0, 30);
+  // Only when ?history=1 (My Clew / Clew home, My records): the island landing does not need the 500-row ledger read.
+  const out = { character: character || null, thread: { total: 0, bySubject: {} }, stage: st.stage, leveledUp: st.leveledUp, next: progressToNext(total) };
   const bySubject = { ...t.totals }; delete bySubject.total;
-  return jok({ character: character || null, thread: { total, bySubject }, stage: st.stage, leveledUp: st.leveledUp, next: progressToNext(total), threadHistory });
+  out.thread = { total, bySubject };
+  if (new URL(req.url).searchParams.get("history") === "1") {
+    const hist = await admin.from("clewquest_thread_ledger").select("amount,subject,created_at").eq("user_id", id).order("created_at", { ascending: false }).limit(500);
+    out.threadHistory = hist.error ? [] : groupThreadsByDay(hist.data || []).slice(0, 30);
+  }
+  return jok(out);
 }

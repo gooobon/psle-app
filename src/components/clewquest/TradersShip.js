@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { CLEWQUEST } from "@/lib/clewquest/config";
 import { cqGet } from "@/lib/clewquest/client";
 import { Art, ASSET_KEYS } from "./Art";
-import { usePrefersReducedMotion } from "./PoseCycler";
+import { usePrefersReducedMotion } from "./usePrefersReducedMotion";
 import { SHIP_PATH, shipKeyframes } from "./shipPath";
 import { Page, T, FONT, secondaryBtn } from "./Shell";
 
