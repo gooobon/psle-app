@@ -94,6 +94,9 @@ export function normalizeTrial(r, meta) {
     // 1 for every normal mode; only homework trials carry a fraction (additive field, absent on old rows = 1).
     // Additive (learning dashboard sync): the submitted answer, so the SERVER can grade it. Absent on older rows.
     userAnswer: keepAnswer(r.userAnswer), userAnswerSeq: keepAnswer(r.userAnswerSeq), userAnswerReason: keepAnswer(r.userAnswerReason),
+    // Additive (#128): per-answer timing; only present when the answer-timing flag was on.
+    ...(typeof r.elapsedMs === 'number' && isFinite(r.elapsedMs) ? { elapsedMs: Math.round(r.elapsedMs) } : {}),
+    ...(typeof r.sessionId === 'string' ? { sessionId: r.sessionId } : {}),
     weight: meta.mode === MODE.HOMEWORK && typeof r.weight === 'number' && r.weight > 0 && r.weight < 1 ? r.weight : 1,
   };
 }

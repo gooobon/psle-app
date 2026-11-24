@@ -2,7 +2,7 @@
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
 export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
-import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD } from "@/lib/supabase/config";
+import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD, ANSWER_TIMING as _AT } from "@/lib/supabase/config";
 
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
 
@@ -214,6 +214,7 @@ export async function syncLearningTrials(userId, grade, subject, prog) {
     const items = fresh.filter(x => x.userAnswer !== undefined && x.userAnswer !== null).map(x => ({
       itemId: String(x.itemId), mode: x.mode, setId: x.setId || undefined, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
       guessed: !!x.guessed, hinted: !!x.solvedAfterHint, sessionNum: x.sessionNum, ts: x.ts, grade, subject,
+      ...(_AT && typeof x.elapsedMs === 'number' ? { elapsedMs: x.elapsedMs, sessionId: x.sessionId, answerText: x.userAnswer, attemptNo: x.attempts || 1 } : {}), // #128
     }));
     // The marker also moves past ungradable (older) trials so they are not retried forever.
     let top = since;
@@ -227,4 +228,10 @@ export async function syncLearningTrials(userId, grade, subject, prog) {
     if (top > since) { try { localStorage.setItem(LD_MARKER, JSON.stringify({ ...lsJson(LD_MARKER, {}), [key]: top })); } catch {} }
     return { ok: top > since };
   } finally { ldBusy[key] = false; }
+}
+
+// ── Practice session log (issue #128). Flag NEXT_PUBLIC_ANSWER_TIMING_ENABLED, default off. Fire-and-forget; never throws or blocks. ──
+export function reportPracticeSession(payload) {
+  if (!_SA || !_LD || !_AT || !payload) return;
+  try { serverPost("/api/learning/sessions", payload).catch(() => {}); } catch {}
 }
