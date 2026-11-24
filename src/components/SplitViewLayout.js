@@ -43,7 +43,7 @@ export default function SplitViewLayout({
           shrink-0
         "
       >
-        <PanelShell label={leftLabel} icon="📖" accent="#1D4ED8" bg="#EFF6FF" border="#BFDBFE">
+        <PanelShell label={leftLabel} icon="" accent="#1D4ED8" bg="#EFF6FF" border="#BFDBFE">
           {leftContent}
         </PanelShell>
       </div>
@@ -57,7 +57,7 @@ export default function SplitViewLayout({
           bg-slate-50
         "
       >
-        <PanelShell label={rightLabel} icon="✏️" accent="#475569" bg="#F8FAFC" border="#E2E8F0">
+        <PanelShell label={rightLabel} icon="" accent="#475569" bg="#F8FAFC" border="#E2E8F0">
           {rightContent}
         </PanelShell>
       </div>
@@ -74,7 +74,7 @@ function PanelShell({ label, icon, accent, bg, border: borderClr, children }) {
         className="sticky top-0 z-10 px-4 py-2 text-xs font-extrabold uppercase tracking-widest border-b shrink-0"
         style={{ background: bg, color: accent, borderColor: borderClr }}
       >
-        {icon} {label}
+        {label}
       </div>
       <div className="p-4 pb-24">
         {children}

@@ -23,10 +23,10 @@ ok("dry-run formats both channels", () => {
   assert.equal(dry.length, 2);
   const wa = dry.find((d) => d.type === "whatsapp").message;
   assert.equal(wa.params.length, 5);
-  assert(wa.preview.includes("✅ English 1/1") && wa.preview.includes("❌ Chinese 0/1") && wa.preview.includes("Questions answered: 40"));
+  assert(wa.preview.includes("✓ English 1/1") && wa.preview.includes("✗ Chinese 0/1") && wa.preview.includes("Questions answered: 40"));
   const email = dry.find((d) => d.type === "email").message.text;
-  assert(email.includes("✅ Done – English: 1/1 set"));
-  assert(email.includes("❌ Not done – Chinese: 0/1 set"));
+  assert(email.includes("✓ Done – English: 1/1 set"));
+  assert(email.includes("✗ Not done – Chinese: 0/1 set"));
   assert(email.includes("NOT DONE YET today: Mei Lin – Chinese"));
 });
 const off = await dispatchAlert(chans, payload, { env: {}, fetchImpl: fakeFetch });
