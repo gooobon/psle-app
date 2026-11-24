@@ -16,6 +16,9 @@ import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
 import ParentAssignPractice from "@/components/ParentAssignPractice";
+import ParentMistakeDetail from "@/components/ParentMistakeDetail";
+import ParentWeakSpots from "@/components/ParentWeakSpots";
+import { PARENT_DETAIL } from "@/lib/supabase/config";
 
 // ── Parent: homework status (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off) ──
 function HomeworkStatus({child, refreshKey}){
@@ -43,6 +46,7 @@ function HomeworkStatus({child, refreshKey}){
 function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, homeworkRunnable, notebookMistakes}){
   const [filterSession, setFilterSession] = React.useState("all");
   const [expanded, setExpanded] = React.useState(null);
+  const [assignPreset, setAssignPreset] = React.useState(null); // {skill, n}: set by "Assign practice on this skill"
 
   // Server mode (flags on): read this child's wrong answers from the server so any device works.
   // Flag off, or server unreachable: fall back to the local history exactly as before.
@@ -89,7 +93,7 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
     srv.filter(x=>!x.grade || x.grade===grade).forEach(x=>{
       const mm = /^set-(\d+)$/.exec(x.attempt_key||"");
       allMistakes.push({
-        id:x.question_id, q:x.question_text||undefined, topic:x.section_type||undefined, sectionType:x.section_type||undefined,
+        waId:x.id, key:x.id, id:x.question_id, q:x.question_text||undefined, topic:x.section_type||undefined, sectionType:x.section_type||undefined,
         yourAnswer:x.student_answer||undefined, correctAnswer:x.correct_answer||undefined,
         cause:x.cause||undefined,
         sessionNum: mm?Number(mm[1]):0, sessionDate:x.attempted_at,
@@ -122,6 +126,19 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
   const diffColor = d => d==="foundation"?"#1F3F95":d==="core"?"#1B2340":d==="stretch"?"#B3261E":"#6B6F7B";
   const diffBg    = d => d==="foundation"?"#FBF6EA":d==="core"?"#FBF6EA":d==="stretch"?"#FBF6EA":"#FBF6EA";
   const diffLabel = d => d==="foundation"?"⬤ Foundation":d==="core"?"⬤⬤ Core":d==="stretch"?"⬤⬤⬤ Stretch":"Core";
+
+  // Detail view (flag off => never reached). Same server rows, plus weak spots, cause tags and Expand all / Collapse all.
+  if(PARENT_DETAIL && useServer && srv){
+    const canAssign = hwOn && !!homeworkRunnable;
+    return(
+      <div style={{padding:"4px 0"}}>
+        {hwOn&&<HomeworkStatus child={child} refreshKey={hwKey}/>}
+        <ParentWeakSpots child={child} subject={subject} onAssign={canAssign?(skill)=>setAssignPreset(p=>({skill,n:(p?p.n:0)+1})):null}/>
+        {canAssign&&<ParentAssignPractice child={child} subject={subject} grade={grade} mistakes={allMistakes} runnableIndex={homeworkRunnable} presetSkill={assignPreset} onAssigned={()=>setHwKey(k=>k+1)}/>}
+        <ParentMistakeDetail child={child} subject={subject} mistakes={allMistakes}/>
+      </div>
+    );
+  }
 
   return(
     <div style={{padding:"4px 0"}}>

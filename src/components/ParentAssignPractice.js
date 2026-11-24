@@ -25,7 +25,7 @@ function stemOf(row) {
   return it.sentence || it.stem || it.q || it.question || it.sentenceA || it.wrongWord || it.word || row.id;
 }
 
-export default function ParentAssignPractice({ child, subject, grade, mistakes, runnableIndex, onAssigned }) {
+export default function ParentAssignPractice({ child, subject, grade, mistakes, runnableIndex, onAssigned, presetSkill }) {
   const [subj, setSubj] = React.useState(subject);
   React.useEffect(() => { setSubj(subject); }, [subject]);
   const [diff, setDiff] = React.useState("mixed");
@@ -88,6 +88,16 @@ export default function ParentAssignPractice({ child, subject, grade, mistakes, 
     setMsg(r.ok ? (r.message || "Assigned.") : (r.error || "Could not assign."));
     if (r.ok || r.code === "cap") { setUsedKey((k) => k + 1); setPreview(null); setPicked({}); if (onAssigned) onAssigned(); }
   }
+
+  // "Assign practice on this skill" from the weak-spots card: pick that one skill and build the preview straight away.
+  const [autoPreview, setAutoPreview] = React.useState(0);
+  React.useEffect(() => {
+    if (!presetSkill || !presetSkill.skill) return;
+    setSkills([presetSkill.skill]); setPicked({}); setMsg(""); setAutoPreview(presetSkill.n || 1);
+  }, [presetSkill && presetSkill.skill, presetSkill && presetSkill.n]);
+  React.useEffect(() => {
+    if (autoPreview) { setPreview(build()); setAutoPreview(0); }
+  }, [autoPreview]);
 
   const toggleSkill = (s) => setSkills((cur) => { const base = cur == null ? recent : cur; return base.indexOf(s) === -1 ? [...base, s] : base.filter((x) => x !== s); });
   const allPicked = subjMistakes.length > 0 && subjMistakes.every((m) => picked[m.id]);

@@ -54,3 +54,7 @@ export function loginIdProblem(u) {
   if (isReservedUsername(v)) return "That login ID is reserved. Try another";
   return "";
 }
+
+// Parent wrong-answer detail (child's exact answer, parent cause tag) and concept-level weak spots (issue #131). Default OFF; also requires SERVER_AUTH.
+// Works before supabase/migrations/20261210000000_parent_detail.sql is applied (tags just cannot be saved yet).
+export const PARENT_DETAIL = process.env.NEXT_PUBLIC_PARENT_DETAIL_ENABLED === "true";
