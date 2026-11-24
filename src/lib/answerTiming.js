@@ -53,6 +53,18 @@ export function answerText(v) {
   return s.slice(0, 500) || null;
 }
 
+// Per-trial answer fields (#128). One trial row per item: answerText is the answer the child ended on (the retry when one was
+// made, else the first answer), attemptNo is the attempt that produced it (1 first try, 2 after a hint/retry, 3+ if more were made).
+// The graded `answer` / first_try stay based on the FIRST attempt, so mastery is unchanged. options maps an MCQ index to its text.
+export function attemptFields(first, retry, retried, options, extraAttempts = 0) {
+  const useRetry = !!retried && retry != null;
+  const v = useRetry ? retry : first;
+  const t = typeof v === "number" && Array.isArray(options) ? options[v] : v;
+  const text = answerText(t);
+  const n = useRetry ? 2 + Math.max(0, Math.min(18, Math.floor(extraAttempts) || 0)) : 1;
+  return { ...(text ? { answerText: text } : {}), attemptNo: n };
+}
+
 // Server-side validation: returns only fields that are valid; everything else is null (never throws).
 export function cleanTimingFields(it) {
   const o = it || {};
@@ -72,6 +84,16 @@ export const stripTiming = (rows) => rows.map((r) => { const c = { ...r }; TIMIN
 export function isMissingColumnError(err) {
   const m = String((err && (err.message || err.details)) || "") + " " + String((err && err.code) || "");
   return /42703|PGRST204|42P01|PGRST205|does not exist|schema cache|Could not find/i.test(m);
+}
+
+// Parent view of one practice_sessions row (first_try_correct / guessed_count / item_count / active_ms are the stored columns).
+export function summarizeSessionRow(row) {
+  const r = row || {}, n = Number(r.item_count) || 0, ft = Number(r.first_try_correct) || 0, g = Number(r.guessed_count) || 0;
+  return {
+    items: n, firstTryCorrect: ft, guessedCount: g,
+    firstTryRate: n ? Math.round((ft / n) * 100) : null,
+    activeMin: Number.isFinite(Number(r.active_ms)) && r.active_ms != null ? Math.round(Number(r.active_ms) / 60000) : null,
+  };
 }
 
 export function summarizeSession(rows) {

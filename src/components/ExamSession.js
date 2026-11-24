@@ -22,7 +22,8 @@ import ZhReviewGate from "@/components/ZhReviewGate";
 import { addUnknown as zhAddUnknown, getSessionUnknown as zhGetSessionUnknown, clearSessionUnknown as zhClearSessionUnknown, assembleGate as zhAssembleGate, coreWordsFromWrong as zhCoreWordsFromWrong } from "@/lib/zhReview";
 import { detectPageGuesses } from "@/lib/antiGuess";
 import { ANSWER_TIMING } from "@/lib/supabase/config"; // #128, default off
-import { createActiveTimer, bindVisibility, combineGuess } from "@/lib/answerTiming";
+import { createActiveTimer, bindVisibility, combineGuess, attemptFields } from "@/lib/answerTiming";
+const AF = (first, retry, retried, options) => (ANSWER_TIMING ? attemptFields(first, retry, retried, options) : {}); // #128: answerText + attemptNo, {} when flag off
 import { reportPracticeSession } from "@/lib/serverClient";
 
 // Function words never worth pushing into the review gate (too common to be a
@@ -521,6 +522,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
       correct: answers[q.id] === q.answer,
       guessed: ANSWER_TIMING && !reviewMode ? combineGuess(flaggedIds && flaggedIds.has(q.id), elapsedRef.current[q.id], 'mcq') : !!(flaggedIds && flaggedIds.has(q.id)),
       ...(ANSWER_TIMING && !reviewMode && elapsedRef.current[q.id] != null ? { elapsedMs: elapsedRef.current[q.id] } : {}),
+      ...(reviewMode ? {} : AF(answers[q.id], retryAnswers[q.id], answers[q.id] !== q.answer && retried[q.id], q.options)),
       solvedAfterHint: answers[q.id] !== q.answer && retriedCorrect[q.id],
       attempts: answers[q.id] === q.answer ? 1 : retried[q.id] ? 2 : 1,
       retryAnswer: answers[q.id] !== q.answer && retried[q.id] ? retryAnswers[q.id] : undefined, // additive: the answer chosen after the hint (not used for scoring)
@@ -753,6 +755,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, onAnswered, reviewMod
       correct: cmp(answers[b.num], b.answer),
       solvedAfterHint: !cmp(answers[b.num], b.answer) && !!retriedCorrect[b.num],
       attempts: cmp(answers[b.num], b.answer) ? 1 : (retried[b.num] ? 2 : 1),
+      ...(reviewMode ? {} : AF(answers[b.num], retryAnswers[b.num], !cmp(answers[b.num], b.answer) && retried[b.num])),
       retryAnswer: !cmp(answers[b.num], b.answer) && retried[b.num] ? retryAnswers[b.num] : undefined, // additive: the answer chosen after the hint (not used for scoring)
       timeTaken: Math.round(t / Math.max(blanks.length, 1)),
     }));
@@ -1132,6 +1135,7 @@ function EditingPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewR
     const results = items.map(item => ({
       id: item.id, topic: "Editing", sectionType: "Editing", userAnswer: answers[item.id],
       correct: normTyped(answers[item.id]) === normTyped(item.answer),
+      ...(reviewMode ? {} : AF(answers[item.id], retryAnswers[item.id], normTyped(answers[item.id]) !== normTyped(item.answer) && retried[item.id])),
       timeTaken: Math.round(t / items.length),
     }));
     onPageDone(results, true);
@@ -1491,6 +1495,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
       userAnswer:  answers[q.id],
       userAnswerSeq: getFormat(q) === 'sequence' ? (q.sequenceItems || q.items || []).map(function (_, i) { return answers[q.id + '_seq_' + i]; }) : undefined,
       userAnswerReason: getFormat(q) === 'tf_reason' ? answers[q.id + '_reason'] : undefined,
+      ...AF(answers[q.id], undefined, false, q.options),
       timeTaken:   Math.round(t / Math.max(questions.length, 1)),
     }));
     onPageDone(results, true);
@@ -2330,7 +2335,7 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
     const results = qs.map(q => ({
       id: q.id, topic: "Synthesis", sectionType: "Synthesis", scored: false,
       skill: q.skill, trapType: q.explain && q.explain.trapType,
-      userAnswer: answers[q.id], correct: false,
+      userAnswer: answers[q.id], correct: false, ...AF(answers[q.id] || (built && Array.isArray(built[q.id]) && Array.isArray(q.tiles) ? built[q.id].map(i => q.tiles[i]).join('') : undefined), undefined, false),
       timeTaken: Math.round(t / Math.max(qs.length, 1)),
     }));
     onPageDone(results, true);
@@ -2543,6 +2548,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
       userAnswer: answers[it.num],
       correct: answers[it.num] === it.answer,
       attempts: 1,
+      ...AF(answers[it.num], undefined, false),
       timeTaken: Math.round(t / Math.max(items.length, 1)),
     }));
     onPageDone(results, true);
@@ -2691,7 +2697,7 @@ function MatchPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
   );
 }
 
-export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack, reviewMode, reviewResults, onSectionDone, completedTypes }) {
+export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singleSection, onFinish, onBack, reviewMode, reviewResults, onSectionDone, completedTypes, sessionMode }) {
   const _completed = completedTypes || [];
   const isZh = Array.isArray(plan) && plan.some(s => ZH_TYPES.has(s.type));
   const isMcqSection = (t) => t === "GrammarMCQ" || t === "VocabMCQ" || ZH_MCQ_TYPES.has(t);
@@ -2708,7 +2714,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const startRef = useRef(Date.now());
   // #128: session log + page timer (all no-ops unless the answer-timing flag is on).
   const logRef = useRef({ id: null, timer: null, stats: null });
-  const subjectOf = isZh ? "Chinese" : "English", modeOf = isMockExam ? "mock" : "exam";
+  const subjectOf = isZh ? "Chinese" : "English", modeOf = sessionMode || (isMockExam ? "mock" : "exam");
   const setKeyOf = (plan && plan[0] && (plan[0].setId || (plan[0].items && plan[0].items[0] && plan[0].items[0].id))) || "";
   const endLog = () => {
     const L = logRef.current;

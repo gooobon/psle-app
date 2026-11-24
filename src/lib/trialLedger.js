@@ -97,6 +97,8 @@ export function normalizeTrial(r, meta) {
     // Additive (#128): per-answer timing; only present when the answer-timing flag was on.
     ...(typeof r.elapsedMs === 'number' && isFinite(r.elapsedMs) ? { elapsedMs: Math.round(r.elapsedMs) } : {}),
     ...(typeof r.sessionId === 'string' ? { sessionId: r.sessionId } : {}),
+    ...(typeof r.answerText === 'string' && r.answerText ? { answerText: r.answerText.slice(0, 500) } : {}),
+    ...(Number.isInteger(r.attemptNo) && r.attemptNo >= 1 && r.attemptNo <= 20 ? { attemptNo: r.attemptNo } : {}),
     weight: meta.mode === MODE.HOMEWORK && typeof r.weight === 'number' && r.weight > 0 && r.weight < 1 ? r.weight : 1,
   };
 }

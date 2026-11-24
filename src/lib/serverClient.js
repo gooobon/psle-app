@@ -214,7 +214,7 @@ export async function syncLearningTrials(userId, grade, subject, prog) {
     const items = fresh.filter(x => x.userAnswer !== undefined && x.userAnswer !== null).map(x => ({
       itemId: String(x.itemId), mode: x.mode, setId: x.setId || undefined, answer: x.userAnswer, answerSeq: x.userAnswerSeq, answerReason: x.userAnswerReason,
       guessed: !!x.guessed, hinted: !!x.solvedAfterHint, sessionNum: x.sessionNum, ts: x.ts, grade, subject,
-      ...(_AT && typeof x.elapsedMs === 'number' ? { elapsedMs: x.elapsedMs, sessionId: x.sessionId, answerText: x.userAnswer, attemptNo: x.attempts || 1 } : {}), // #128
+      ...(_AT && typeof x.elapsedMs === 'number' ? { elapsedMs: x.elapsedMs, sessionId: x.sessionId, answerText: x.answerText, attemptNo: x.attemptNo } : {}), // #128
     }));
     // The marker also moves past ungradable (older) trials so they are not retried forever.
     let top = since;

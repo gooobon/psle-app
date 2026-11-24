@@ -1,5 +1,5 @@
 // Pure checks for answer timing (issue #128). No network, no Supabase. Run: node tools/answer_timing_selftest.mjs
-import { splitInterval, createActiveTimer, isTimeGuess, combineGuess, answerText, cleanTimingFields, stripTiming, isMissingColumnError, summarizeSession, IDLE_CAP_MS } from "../src/lib/answerTiming.js";
+import { splitInterval, createActiveTimer, isTimeGuess, combineGuess, answerText, cleanTimingFields, attemptFields, summarizeSessionRow, stripTiming, isMissingColumnError, summarizeSession, IDLE_CAP_MS } from "../src/lib/answerTiming.js";
 import { recordTrials, MODE } from "../src/lib/trialLedger.js";
 
 let failed = 0;
@@ -48,6 +48,26 @@ eq("missing column error detected", [isMissingColumnError({ code: "42703", messa
 const rows = [{ elapsed_ms: 1200, guessed: true }, { elapsed_ms: 8000, guessed: false }, { elapsed_ms: 45000, guessed: false }];
 eq("parent: session summary", summarizeSession(rows), { items: 3, avgMs: 18067, fastCount: 1, slowCount: 1 });
 eq("parent: old rows without timing do not break", summarizeSession([{ correct: true }]), { items: 1, avgMs: null, fastCount: 0, slowCount: 0 });
+
+// ROLE-PLAY: student answers wrong, gets the hint, retries and is right (answerText / attemptNo reach the trial and the server fields)
+const opts = ["went", "go", "goes", "going"];
+const wrongFirst = attemptFields(1, 2, false, opts);           // first attempt: picked "go", wrong, no retry yet
+eq("student: first attempt is attempt 1 with option text", wrongFirst, { answerText: "go", attemptNo: 1 });
+const retried = attemptFields(1, 0, true, opts);               // then retried and chose "went" (correct)
+eq("student: correct retry is attempt 2 with the retry text", retried, { answerText: "went", attemptNo: 2 });
+eq("student: typed answer capped at 500 chars", attemptFields("y".repeat(900), undefined, false).answerText.length, 500);
+eq("student: no answer => no answerText, still attemptNo", attemptFields(undefined, undefined, false), { attemptNo: 1 });
+const retryTrial = recordTrials({}, [{ id: "Q9", topic: "GrammarMCQ", sectionType: "GrammarMCQ", correct: false, solvedAfterHint: true, attempts: 2, userAnswer: 1, retryAnswer: 0, elapsedMs: 7000, sessionId: "s2", ...retried }], { mode: MODE.EXAM, sessionNum: 2, setId: "S02" });
+const rt = retryTrial.trials[0];
+eq("student: trial keeps answerText + attemptNo, first answer still graded", [rt.answerText, rt.attemptNo, rt.userAnswer, rt.firstTry, rt.solvedAfterHint], ["went", 2, 1, false, true]);
+const srv = cleanTimingFields({ elapsedMs: rt.elapsedMs, answerText: rt.answerText, attemptNo: rt.attemptNo, sessionId: "123e4567-e89b-12d3-a456-426614174000" });
+eq("student: server stores answer_text + attempt_no for the retry", [srv.answer_text, srv.attempt_no, srv.elapsed_ms], ["went", 2, 7000]);
+const noOld = recordTrials({}, [{ id: "Q10", sectionType: "GrammarMCQ", correct: true, userAnswer: 0 }], { mode: MODE.EXAM, sessionNum: 2, setId: "S02" }).trials[0];
+eq("student: flag off => no new fields on the trial", ["answerText" in noOld, "attemptNo" in noOld], [false, false]);
+
+// ROLE-PLAY: parent reads one practice_sessions row
+eq("parent: session summary row", summarizeSessionRow({ item_count: 10, first_try_correct: 7, guessed_count: 2, active_ms: 540000 }), { items: 10, firstTryCorrect: 7, guessedCount: 2, firstTryRate: 70, activeMin: 9 });
+eq("parent: row with nulls does not break", summarizeSessionRow({ item_count: null, first_try_correct: null, guessed_count: null, active_ms: null }), { items: 0, firstTryCorrect: 0, guessedCount: 0, firstTryRate: null, activeMin: null });
 
 if (failed) { console.error(failed + " FAILED"); process.exit(1); }
 console.log("answer_timing_selftest: all passed");
