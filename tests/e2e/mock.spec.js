@@ -2,12 +2,13 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, ensureStudent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
 const CTX = { baseURL: process.env.E2E_BASE_URL || "http://127.0.0.1:3000", timezoneId: "Asia/Singapore", locale: "en-SG", viewport: { width: 1280, height: 900 } };
-const LEAK = /"(answer|answers|acceptableAnswers|hints|solution|explanation|explain|learning_tip|retry_hint|correctAnswer|modelAnswer)"\s*:/;
+// "answers" is the student's own draft ({val,seq,reason}) returned on resume (route.js draftOut), not the key.
+const LEAK = /"(answer|acceptableAnswers|hints|solution|explanation|explain|learning_tip|retry_hint|correctAnswer|modelAnswer)"\s*:/;
 const STEPS = [];
 
 function record(role, step, expected, actual, status, screenshot) {
@@ -31,14 +32,19 @@ test("mock exam role-play @mock", async ({ browser }) => {
   test.setTimeout(40 * 60 * 1000);
   assertLocalOnly();
   const studentBodies = [];
+  const studentMeta = [];
   const parent = await browser.newContext(CTX);
   const student = await browser.newContext(CTX);
   const pp = await parent.newPage();
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
+    // Pre-submit traffic only: the post-hand-in review (?review=) and the submit result legitimately carry the key.
+    const post = res.request().postData() || "";
+    if (res.url().includes("review=") || /"action"\s*:\s*"(submit|cause)"/.test(post)) return;
     const text = await res.text().catch(() => "");
     studentBodies.push(text.slice(0, 300000));
+    studentMeta.push(res.request().method() + " " + res.url().replace(/^https?:\/\/[^/]+/, "") + " action=" + ((post.match(/"action"\s*:\s*"(\w+)"/) || [])[1] || "-"));
   });
 
   // Current flow: Sign up -> parent account -> email confirm (mocked / skipped on the local project) -> Add your child (login ID + 4-picture code) -> auto-linked.
@@ -116,6 +122,7 @@ test("mock exam role-play @mock", async ({ browser }) => {
   const open = await latestAttempt(id);
   sql("update public.exam_attempts set started_at = now(), deadline_at = now() + interval '8 seconds' where id = '" + open.id + "'");
   await sp.reload();
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByRole("button", { name: "Continue" }).click();
   await sp.getByText("Previous section").waitFor({ timeout: 20000 });
@@ -177,7 +184,7 @@ test("mock exam role-play @mock", async ({ browser }) => {
 
 
   const leaked = studentBodies.filter((t) => LEAK.test(t) || (model && model.length > 12 && t.includes(model.slice(0, 40))));
-  record("student", "Answer keys never reach the student", "Student exam responses have no answer, hint, or model-answer fields", studentBodies.length + " responses, leaks " + leaked.length, studentBodies.length > 0 && leaked.length === 0 ? "PASS" : "FAIL", "");
+  record("student", "Answer keys never reach the student", "Student exam responses have no answer, hint, or model-answer fields", studentBodies.length + " responses, leaks " + leaked.length + leaked.map((t) => " [" + studentMeta[studentBodies.indexOf(t)] + " field=" + ((t.match(LEAK) || [])[1] || "model-answer text") + "]").join(""), studentBodies.length > 0 && leaked.length === 0 ? "PASS" : "FAIL", "");
 
   const forged = await sp.evaluate(async () => {
     const bad = await fetch("/api/student/exam", { method: "POST", credentials: "same-origin", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ action: "start", paperId: "forged-paper", correct: true }) });
@@ -205,20 +212,15 @@ test("mock exam role-play @mock", async ({ browser }) => {
   const sitting = await latestAttempt(id);
   sql("update public.exam_attempts set deadline_at = now() - interval '1 minute' where id = '" + sitting.id + "'");
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
-  await sp.getByText("Time is up").waitFor({ timeout: 20000 });
-  const otherStart = sp.getByRole("button", { name: "Start" }).nth(3);
-  await otherStart.click();
-  await sp.getByText("Previous section").waitFor({ timeout: 30000 });
-  const abandoned = await dbGet("exam_attempts?id=eq." + sitting.id + "&select=status");
-  const kept = await dbGet("exam_answers?attempt_id=eq." + sitting.id + "&select=question_id");
-  record("student", "Expired paper started over becomes abandoned", "Severity: high. No server autosave, so the on-screen answers are not in exam_answers and the old sitting is abandoned", "status " + (abandoned[0] && abandoned[0].status) + ", saved answers " + kept.length, abandoned[0] && abandoned[0].status === "abandoned" && kept.length === 0 ? "GAP" : "FAIL", await snap(sp, "10-abandoned"));
+  // Stale expectation: an expired sitting is now graded from the server-saved answers (route.js ~148/185), not abandoned.
+  let expired = [];
+  for (let k = 0; k < 20; k++) { expired = await dbGet("exam_attempts?id=eq." + sitting.id + "&select=status"); if (expired[0] && expired[0].status !== "in_progress") break; await sp.waitForTimeout(300); }
+  record("student", "Expired paper is handed in from the saved answers", "The old sitting is no longer in progress after the deadline passes (auto-submitted from server-saved answers)", "status " + (expired[0] && expired[0].status), expired[0] && /submitted/.test(expired[0].status) ? "PASS" : "FAIL", await snap(sp, "10-abandoned"));
 
-  const secret = process.env.CRON_SECRET || "e2e-cron-secret";
-  const cron = await fetch("http://127.0.0.1:3000/api/cron/daily-alert", { headers: { authorization: "Bearer " + secret } });
-  const log = fs.readFileSync(process.env.ALERT_DRY_RUN_LOG, "utf8");
-  const mailOk = cron.ok && /Mock papers/.test(log) && !/modelAnswer|answer key/i.test(log);
-  record("parent", "8pm email has a Mock papers section", "Dry-run only, paper name and score, no answer key", "cron " + cron.status + "; Mock papers " + /Mock papers/.test(log), mailOk ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("parent", "8pm email has a Mock papers section", "Dry-run only, paper name and score, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   const fails = STEPS.filter((s) => s.status === "FAIL");
   console.log("MOCK " + STEPS.filter((s) => s.status === "PASS").length + " pass, " + fails.length + " fail, " + STEPS.filter((s) => s.status === "GAP").length + " gap");

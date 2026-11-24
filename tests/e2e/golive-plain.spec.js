@@ -308,8 +308,10 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   await driveToScore(sp, answers.pastPapers, { min: 50, max: 80 }, "past-mock");
   await sp.getByRole("button", { name: /Back to Home/ }).click();
   await sp.getByText(/Hello,/).waitFor({ timeout: 20000 });
+  // "Recent Sessions" moved: the history is now My records > History (data-testid home-my-records).
   await sp.getByRole("button", { name: "More" }).first().click();
-  await sp.getByText(/Recent Sessions/).click();
+  await sp.getByTestId("home-my-records").click();
+  await sp.getByTestId("rec-row").first().waitFor({ timeout: 20000 });
   file = await snap(sp, "11-history-school");
   const historyText = await bodyText(sp);
   const historySchool = await sp.evaluate((username) => {
@@ -392,13 +394,13 @@ test("plain practice student and parent role-play @golive", async ({ browser }) 
   const stats = await pp.evaluate(() => {
     const cards = [...document.querySelectorAll("div")].filter((d) => {
       const lines = (d.innerText || "").split("\n").map((s) => s.trim()).filter(Boolean);
-      return lines.length >= 2 && lines.length <= 3 && /^(Sessions|Average|Trend|Mock Done)$/.test(lines[lines.length - 1]);
+      return lines.length >= 2 && lines.length <= 3 && /^(Sessions|Average|Trend|Mock done)$/.test(lines[0]); // the card now shows the label first, then the value
     });
     const out = {};
     for (const c of cards) {
       const lines = c.innerText.split("\n").map((s) => s.trim()).filter(Boolean);
-      const label = lines[lines.length - 1];
-      if (!out[label]) out[label] = lines[lines.length - 2];
+      const label = lines[0];
+      if (!out[label]) out[label] = lines[1];
     }
     const section = ((document.body.innerText || "").match(/Section Performance[\s\S]{0,700}/) || [""])[0];
     return { cards: out, sectionHasBar: /%/.test(section) && /Grammar|Vocabulary|Editing|Comprehension|Cloze/.test(section) };

@@ -189,7 +189,9 @@ async function drive(page, { done, max = 900, label = "exam" }) {
     tally[action] = (tally[action] || 0) + 1;
     if (action === "stuck") {
       stuck++;
-      if (stuck >= 6) {
+      // A save request at the end of a round can keep the screen unchanged for a moment; give it time before giving up.
+      await page.waitForTimeout(400);
+      if (stuck >= 8) {
         await shot(page, "stuck-" + label);
         const snippet = (await bodyText(page).catch(() => "")).slice(0, 500);
         throw new Error("Exam driver stuck during " + label + " after " + i + " steps. On screen:\n" + snippet);
@@ -211,7 +213,7 @@ const CHILD_CODE = [0, 3, 8, 4]; // picture indexes: Owl, Bolt, Clew, Wing shoe
 async function openLogin(page) {
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Add child");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Add child") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
   });
   const btn = page.getByTestId("cq-landing-login");
   if (await btn.count()) await btn.click();
@@ -348,7 +350,7 @@ async function ensureStudent(page, username, password) {
   await page.goto("/");
   await page.waitForFunction(() => {
     const t = document.body.innerText;
-    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Today");
+    return t.includes("Log in") || t.includes("Untangle PSLE") || t.includes("Hello,") || t.includes("Today") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
   });
   await openLogin(page);
   if (await page.getByTestId("login-form").count()) await loginStudent(page, username, password);
@@ -362,5 +364,5 @@ async function logout(page) {
 
 module.exports = {
   SHOTS, PRODUCTION_REF, CHILD_CODE, openLogin, shot, bodyText, dbGet, drive, nudge, pickPictures, confirmLinkHash, signUpParent, addChild, setupFamily,
-  loginStudent, loginParent, logout, ensureParent, ensureStudent, toTodayHub, assertLocalOnly,
+  loginStudent, loginParent, logout, ensureParent, ensureStudent, toTodayHub, assertLocalOnly, restHeaders,
 };

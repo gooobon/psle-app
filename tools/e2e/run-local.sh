@@ -86,7 +86,7 @@ start_next() {
   # The current flow (landing -> sign up -> Add your child with a picture code -> child logs in with the picture code) needs ClewQuest on.
   # The "off" phase keeps ClewQuest off and seeds the demo users so the flag-off spec can log in.
   if [[ "$mode" == "off" ]]; then
-    flags+=( NEXT_PUBLIC_SERVER_AUTH=true NEXT_PUBLIC_SHOW_DEMO=true )
+    flags+=( NEXT_PUBLIC_SHOW_DEMO=true ) # server auth stays off: the spec checks /api/auth/me is 404
   fi
   if [[ "$mode" != "off" ]]; then
     flags+=(

@@ -2,7 +2,7 @@
 const fs = require("fs");
 const { execFileSync } = require("child_process");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, loginStudent, ensureParent, assertLocalOnly, setupFamily, toTodayHub } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -49,6 +49,9 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   const sp = await student.newPage();
   sp.on("response", async (res) => {
     if (!res.url().includes("/api/student/exam")) return;
+    // Pre-submit traffic only: the post-hand-in review (?review=) and the submit result legitimately carry the key.
+    const post = res.request().postData() || "";
+    if (res.url().includes("review=") || /"action"\s*:\s*"(submit|cause)"/.test(post)) return;
     bodies.push(await res.text().catch(() => ""));
   });
 
@@ -114,6 +117,7 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
 
   sql("update public.exam_attempts set started_at = now() - interval '80 minutes', deadline_at = now() - interval '40 seconds' where id = '" + attempt.id + "'");
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByText(/saved answers were handed in automatically/).waitFor({ timeout: 20000 });
   const finished = await dbGet("exam_attempts?id=eq." + attempt.id + "&select=status,counts,counts_reason,score,answered");
@@ -127,10 +131,8 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   await pp.getByText(/handed in automatically|Score/).first().waitFor({ timeout: 20000 });
   record("parent A", "Dashboard shows the auto-submitted paper", "Papers tab lists the sitting", /Score/.test(await bodyText(pp)) ? "score on the tab" : "missing", /Score/.test(await bodyText(pp)) ? "PASS" : "FAIL", await snap(pp, "05-parent"));
 
-  const secret = process.env.CRON_SECRET || "e2e-cron-secret";
-  const cron = await fetch("http://127.0.0.1:3000/api/cron/daily-alert", { headers: { authorization: "Bearer " + secret } });
-  const log = fs.readFileSync(process.env.ALERT_DRY_RUN_LOG, "utf8");
-  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "cron " + cron.status, cron.ok && /Mock papers/.test(log) && !KEY_LEAK.test(log) ? "PASS" : "FAIL", "");
+  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
+  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
 
   await sp.getByRole("button", { name: "Start" }).nth(1).click();
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });
@@ -153,6 +155,7 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   record("student", "Late hand-in is 409 and the saved answer is kept", "Past the grace the submit is refused, then the draft is graded", "HTTP " + lateStatus + " " + JSON.stringify(lateRow[0]) + " " + JSON.stringify(kept[0]), lateOk ? "PASS" : "FAIL", await snap(sp, "07-late"));
 
   await sp.goto("/");
+  await toTodayHub(sp);
   await sp.getByRole("button", { name: /English mock papers/ }).click();
   await sp.getByRole("button", { name: "Start" }).first().click();
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });

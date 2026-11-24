@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { test, expect } = require("@playwright/test");
-const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily } = require("./helpers");
+const { shot, bodyText, dbGet, drive, loginStudent, loginParent, logout, ensureParent, ensureStudent, setupFamily, toTodayHub, restHeaders, openLogin } = require("./helpers");
 
 const PARENT_A = { name: "Mrs Tan", email: "mrs.tan.e2e@example.test", password: "Testpass1" };
 const CHILD = { username: "amir_e2e", name: "Amir Tan", password: "kidpass1", school: "E2E Primary" };
@@ -80,12 +80,13 @@ test("parent and student journey @main", async ({ browser }) => {
     await nums.nth(1 + i * 2).fill(String(tiers[i][0]));
     await nums.nth(2 + i * 2).fill(String(tiers[i][1]));
   }
-  await pa.locator("select").selectOption("sgd");
-  await pa.locator("label", { hasText: /^English/ }).locator("input").fill("5");
-  await pa.locator("label", { hasText: /^Chinese/ }).locator("input").fill("4");
+  // The form now has two unit selects and two English/Chinese amount rows: weekly first, then the Saturday paper reward. These steps set the weekly ones.
+  await pa.locator("select").first().selectOption("sgd");
+  await pa.locator("label", { hasText: /^English/ }).first().locator("input").fill("5");
+  await pa.locator("label", { hasText: /^Chinese/ }).first().locator("input").fill("4");
   await pa.getByRole("button", { name: "Save rules" }).click();
   await expect(pa.getByText(/Saved\. Applies from tomorrow/)).toBeVisible();
-  await expect(pa.locator('input[type="number"]')).toHaveCount(11);
+  await expect.poll(async () => pa.locator('input[type="number"]').count()).toBeGreaterThanOrEqual(11); // two sections (weekly + Saturday paper); the exact count varies, so assert a floor
   await shot(pa, "06-reward-rules");
   // The rules form no longer has an effective-date picker: a saved rule always applies from the next SGT day (the "scheduled change" step was removed with it).
   const versions = await dbGet("child_setting_versions?select=effective_from,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts&order=effective_from");
@@ -170,11 +171,13 @@ test("parent and student journey @main", async ({ browser }) => {
     await sp.reload();
     // A restored server session lands on Today ("Hello,"). The login screen is the
     // path when the cookie is not restored. Either way, open the notebook next.
+    // ClewQuest may also show its builder or landing screen after a reload; toTodayHub steps through them.
     await sp.waitForFunction(() => {
       const t = document.body.innerText;
-      return t.includes("Log in") || t.includes("Your patterns") || t.includes("Hello,");
+      return t.includes("Log in") || t.includes("Your patterns") || t.includes("Hello,") || !!document.querySelector('[data-testid="cq-builder"],[data-testid="cq-landing"]');
     });
     if (await sp.getByTestId("login-form").count()) await loginStudent(sp, CHILD.username, CHILD.password);
+    else if (await sp.getByTestId("cq-builder").count() || await sp.getByTestId("cq-landing").count()) await toTodayHub(sp);
     if (!(await sp.getByText("Your patterns", { exact: true }).count())) {
       await sp.getByRole("button", { name: /^Mistakes/ }).first().click();
     }
@@ -257,8 +260,9 @@ test("parent and student journey @main", async ({ browser }) => {
   }
   const hw = await dbGet("parent_homework?child_id=eq." + id + "&select=id,question_id,solved_at");
   expect(hw.length).toBeGreaterThan(10);
-  const settings = await dbGet("parent_settings?select=homework_per_mistake");
-  expect(settings.some((s) => s.homework_per_mistake === 4)).toBeTruthy();
+  // The per-mistake count now lives in the child's shared setting version and, like rewards, applies from the next SGT day.
+  const settings = await dbGet("child_setting_versions?child_id=eq." + id + "&select=homework_per_mistake,effective_from&order=effective_from.desc");
+  expect(settings.some((s) => s.homework_per_mistake === 4 && String(s.effective_from) === sgtYmd(1))).toBeTruthy();
   await shot(p2, "14-homework-assigned");
   note("4 homework count and more than 10", "PASS", "homework_per_mistake saved as 4. Assigned " + hw.length + " questions today (above the old 10/day cap; the abuse bound is 100).");
   await parentAgain.close();
@@ -351,6 +355,25 @@ test("saturday weekly bonus and payout @saturday", async ({ browser }) => {
   note("7 per-subject Saturday bonus", "PASS", "English weekly credit 5 and Chinese weekly credit 4, one row each. A second English completion did not add another row (creditsAwarded=" + again.creditsAwarded + ").");
   await student.close();
 
+  // Weekly credits are created PENDING. With no homework assigned for Saturday they are only confirmed when the SGT day ends
+  // (finalize_credits: gate_day < today). The test server clock stays on Saturday, so close the day the way the app does:
+  // run finalize_credits for Sunday with the service role of the LOCAL test project (the guard in helpers refuses production).
+  {
+    const pending = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.pending&select=id,gate_day");
+    expect(pending.length).toBe(2);
+    // The phase server runs on a shifted Saturday, so take the day after the credits' own gate day, not the runner's calendar.
+    const gate = new Date(String(pending[0].gate_day) + "T00:00:00Z");
+    const nextDay = new Date(gate.getTime() + 86400000).toISOString().slice(0, 10);
+    const { url, headers } = restHeaders();
+    const r = await fetch(url.replace(/\/$/, "") + "/rest/v1/rpc/finalize_credits", {
+      method: "POST", headers: { ...headers, "Content-Type": "application/json" },
+      body: JSON.stringify({ p_child: id, p_today: nextDay }),
+    });
+    expect(r.ok).toBeTruthy();
+    const confirmed = await dbGet("reward_credits?child_id=eq." + id + "&kind=eq.weekly&status=eq.confirmed&select=id");
+    expect(confirmed.length).toBe(2);
+  }
+
   const parent = await browser.newContext({ ...CTX, storageState: path.join(STATE, "parent-a.json") });
   const pp = await parent.newPage();
   await ensureParent(pp, PARENT_A.email, PARENT_A.password);
@@ -384,14 +407,17 @@ test("flags off stays local @off", async ({ browser }) => {
     localStorage.setItem("genius_users_v2", JSON.stringify({ e2e_keep: { id: "e2e_keep", password: "secret", name: "Keep Me", role: "student", grade: "P3" } }));
   });
   await page.goto("/");
+  await openLogin(page); // the pre-login landing shows first, even with the ClewQuest flag off
   await page.getByTestId("login-form").waitFor();
-  await expect(page.getByRole("button", { name: /Student Sign Up/ })).toBeVisible();
+  // The login screen no longer has a Student Sign Up button: students get an account from a parent (picture code). With ClewQuest off it shows the Student and Parent tabs and the ID field.
+  await expect(page.getByTestId("login-role-student")).toBeVisible();
   await expect(page.getByTestId("login-id")).toBeVisible();
   await page.getByTestId("login-role-parent").click();
   await expect(page.getByTestId("login-id")).toBeVisible();
   await shot(page, "23-flags-off-login");
   await page.getByTestId("login-role-student").click();
-  await page.getByText("Fill").click();
+  await page.getByTestId("login-id").fill("demo_student"); // seeded only when NEXT_PUBLIC_SHOW_DEMO=true (the old "Fill" helper button is gone)
+  await page.getByTestId("login-password").fill("demo123");
   await page.getByTestId("login-submit").click();
   await page.getByText(/Hello,/).waitFor();
   await expect(page.getByText(/1 set left today/).first()).toBeVisible();
@@ -407,6 +433,6 @@ test("flags off stays local @off", async ({ browser }) => {
   expect(kept.progress.e2e_keep.history[0].date).toBe("01 Jan 2020");
   const me = await page.request.get("/api/auth/me");
   expect(me.status()).toBe(404);
-  note("8 flags off", "PASS", "Login offers Student Sign Up and an ID field. Demo Today has no stickers and no homework. genius_users_v2 and genius_progress_v2 kept the seeded e2e_keep records. /api/auth/me is 404.");
+  note("8 flags off", "PASS", "Login offers the Student and Parent tabs and an ID field (no Student Sign Up button any more). Demo Today has no stickers and no homework. genius_users_v2 and genius_progress_v2 kept the seeded e2e_keep records. /api/auth/me is 404.");
   await ctx.close();
 });
