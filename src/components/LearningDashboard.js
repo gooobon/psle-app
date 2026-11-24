@@ -5,6 +5,7 @@ import React from 'react';
 import taxonomy from '@/data/taxonomy/taxonomy.json';
 import { serverGet } from '@/lib/serverClient';
 import { causeLabel } from '@/lib/wrongNotebook';
+import LevelReport from '@/components/LevelReport';
 
 const SKILL_LABEL = {};
 for (const c of taxonomy.concepts || []) SKILL_LABEL[c.id] = c.label;
@@ -57,6 +58,7 @@ export default function LearningDashboard({ childId, subject, self }) {
           ))}
         </div>
       )}
+      {!self && d.levels && <LevelReport data={d.levels} subject={subject} skillName={skillName} />}
       <div style={card}>
         <div style={h}>Mastery by skill</div>
         {d.skills.length === 0 && <div style={{ fontSize: 13, color: '#6B6F7B' }}>No skill practice recorded yet. It appears after the child finishes a set with the app signed in.</div>}
