@@ -336,7 +336,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 2,
                 "answer": "she",
                 "hint": "The person doing the telling is MS TAN - one woman, and the pronoun starts the sentence, so it is the one acting. Ask: which pronoun is the SUBJECT form for a single female? The object form only comes after a verb or a preposition.",
-                "explanation": "After 'told', use object pronoun. Here, Ms Tan told the students (them) = E.",
+                "explanation": "Ms Tan is ONE female person doing the telling, so use the SUBJECT pronoun SHE = D. 'Her' is the object form.",
                 "conceptIds": [
                   "en.grammar.pronoun"
                 ],
@@ -346,7 +346,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 3,
                 "answer": "he",
                 "hint": "The excited one is RAJU - one boy, and this pronoun starts the sentence, so it is doing the pointing. Ask: which pronoun is the SUBJECT form for one male? Not 'him', which comes after a verb.",
-                "explanation": "A single female friend = SHE (subject pronoun). D = she.",
+                "explanation": "Raju is ONE boy doing the pointing, so use the SUBJECT pronoun HE = E. SHE is for a girl.",
                 "conceptIds": [
                   "en.grammar.pronoun"
                 ],
@@ -356,9 +356,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 4,
                 "answer": "him",
                 "hint": "Ms Tan SMILED AT Raju - he is receiving the smile, and the pronoun comes after 'at'. Ask: which pronoun for one male goes AFTER a verb or preposition? The subject form cannot sit there.",
-                "explanation": "Before a noun (teacher), use possessive: HER teacher = A. 'She teacher' is wrong.",
+                "explanation": "After 'smiled at' (a preposition), use the OBJECT pronoun: smiled at HIM (Raju) = B. 'He' is the subject form.",
                 "conceptIds": [
-                  "en.grammar.possessive"
+                  "en.grammar.pronoun"
                 ],
                 "taxonomyStatus": "certain"
               },
@@ -366,9 +366,9 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 5,
                 "answer": "his",
                 "hint": "The NOTEBOOK belongs to RAJU. Ask: which word shows that something belongs to one male? Careful: two of the choices sound similar, but only one can sit in front of a noun to show ownership.",
-                "explanation": "After 'smiled at' (preposition), use OBJECT pronoun: smiled at HIM (not he). B = him.",
+                "explanation": "Before a noun (notebook), use the possessive: HIS notebook = C (it belongs to Raju). 'Him notebook' is wrong.",
                 "conceptIds": [
-                  "en.grammar.pronoun"
+                  "en.grammar.possessive"
                 ],
                 "taxonomyStatus": "certain"
               },
@@ -396,11 +396,11 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 8,
                 "answer": "her",
                 "hint": "They GAVE a card to MS TAN - one woman, receiving the card. Ask: which pronoun for one female goes after a verb, in the object position? The subject form 'she' cannot receive anything.",
-                "explanation": "Ms Tan is ONE female person → SHE = D. 'They' is for more than one person.",
+                "explanation": "After 'gave', use the OBJECT pronoun for Ms Tan: gave HER a card = A. SHE is the subject form.",
                 "conceptIds": [
-                  "en.grammar"
+                  "en.grammar.pronoun"
                 ],
-                "taxonomyStatus": "uncertain"
+                "taxonomyStatus": "certain"
               }
             ]
           }
@@ -3873,7 +3873,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 1,
                 "answer": "our",
                 "hint": "The writer says MY FAMILY loves going there - the house belongs to the writer together with the family. Ask: which possessive word means 'belonging to me and the people I live with'? Not one person alone, and not somebody else's.",
-                "explanation": "MY FAMILY = we/our. 'Near OUR house' = belonging to us. OUR = E (first person plural possessive).",
+                "explanation": "MY FAMILY = we/our. 'Near OUR house' = belonging to us. OUR = A (first person plural possessive).",
                 "conceptIds": [
                   "en.grammar.possessive"
                 ],
@@ -3883,17 +3883,7 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 2,
                 "answer": "their",
                 "hint": "These words are inside the SISTER's speech, and she is pointing at the CHICKEN RICE STALL - the food belongs to the people who run that stall. Ask: which possessive word points to other people, not to you?",
-                "explanation": "Father brought US (the family, including the speaker) there. US = object pronoun for WE. H = us.",
-                "conceptIds": [
-                  "en.grammar.pronoun"
-                ],
-                "taxonomyStatus": "certain"
-              },
-              {
-                "num": 3,
-                "answer": "them",
-                "hint": "Father comes back with FIVE PLATES and puts those plates down on the table. Ask: which pronoun stands for more than one thing that is being acted upon? The plates are objects, and there are several.",
-                "explanation": "The chicken rice stall's food = THEIR food (belonging to the stall people). THEIR = F (third person plural possessive).",
+                "explanation": "The chicken rice stall's food = THEIR food (it belongs to the stall people). Possessive before a noun: THEIR = B.",
                 "conceptIds": [
                   "en.grammar.possessive"
                 ],
@@ -3903,22 +3893,32 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ]
               },
               {
+                "num": 3,
+                "answer": "them",
+                "hint": "Father comes back with FIVE PLATES and puts those plates down on the table. Ask: which pronoun stands for more than one thing that is being acted upon? The plates are objects, and there are several.",
+                "explanation": "'Placed' needs an OBJECT for the five plates (plural): placed THEM = C. 'It' is for one thing.",
+                "conceptIds": [
+                  "en.grammar"
+                ],
+                "taxonomyStatus": "uncertain"
+              },
+              {
                 "num": 4,
                 "answer": "us",
                 "hint": "The uncle SAW the whole family sitting TOGETHER - and the writer is part of that family, seen from outside. Ask: which pronoun means 'me and the people with me' when we are the ones being looked at, not the ones doing the looking?",
-                "explanation": "Five plates = plural → object pronoun = THEM = G. 'IT' (C) is for singular objects.",
+                "explanation": "The uncle saw the family (including the speaker) sitting together: saw US = D, the object form of WE.",
                 "conceptIds": [
-                  "en.grammar.pronoun"
+                  "en.grammar"
                 ],
-                "taxonomyStatus": "certain"
+                "taxonomyStatus": "uncertain"
               },
               {
                 "num": 5,
                 "answer": "it",
                 "hint": "He is speaking about the small BOWL of SOUP he has just brought over. Ask: which pronoun stands for a single thing that is neither male nor female? The blank starts the sentence, so you need the subject form.",
-                "explanation": "HE SAW US = he saw the family (object pronoun: us = H).",
+                "explanation": "'IT is a gift from me' = the small bowl of soup (one thing). IT = E. ITS is the possessive form.",
                 "conceptIds": [
-                  "en.grammar.pronoun"
+                  "en.grammar.possessive"
                 ],
                 "taxonomyStatus": "certain"
               },
@@ -3926,7 +3926,17 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 "num": 6,
                 "answer": "him",
                 "hint": "Mother THANKED the chicken rice UNCLE - one man, and he is the person receiving her thanks. Ask: which pronoun replaces a single male in the object position? Not the possessive, and not the subject form 'he'.",
-                "explanation": "'IT is a gift from me' = referring to the soup bowl. IT = C (pronoun for a thing). ITS = possessive (its colour, its taste).",
+                "explanation": "After THANKED (a verb), use the OBJECT pronoun: thanked HIM (the uncle) = F.",
+                "conceptIds": [
+                  "en.grammar.pronoun"
+                ],
+                "taxonomyStatus": "certain"
+              },
+              {
+                "num": 7,
+                "answer": "its",
+                "hint": "'A rich FLAVOUR all of ___ OWN' - the flavour belongs to the SOUP, and soup is a thing, not a person. Ask: which possessive word belongs to a thing? Careful: the look-alike with an apostrophe is short for 'it is'.",
+                "explanation": "'All of ITS own' = the soup's own flavour. Possessive for a thing: ITS = G.",
                 "conceptIds": [
                   "en.grammar.possessive"
                 ],
@@ -3936,20 +3946,10 @@ export const WA1_PRACTICE_SETS: PracticeSet[] = [
                 ]
               },
               {
-                "num": 7,
-                "answer": "its",
-                "hint": "'A rich FLAVOUR all of ___ OWN' - the flavour belongs to the SOUP, and soup is a thing, not a person. Ask: which possessive word belongs to a thing? Careful: the look-alike with an apostrophe is short for 'it is'.",
-                "explanation": "After THANKED (verb), use object pronoun: thanked HIM (the male uncle). HIM = B.",
-                "conceptIds": [
-                  "en.grammar.pronoun"
-                ],
-                "taxonomyStatus": "certain"
-              },
-              {
                 "num": 8,
                 "answer": "her",
                 "hint": "The SISTER hugs the MOTHER, and that mother belongs to the sister - one girl. Ask: which possessive word shows something belonging to a single female? Match the pronoun to who the mother belongs to.",
-                "explanation": "MY MOTHER said the chicken rice was HER best = belonging to her (the mother's own experience). HER = A.",
+                "explanation": "Before a noun (mother), use the possessive: gave HER mother a hug = H. 'She mother' is wrong.",
                 "conceptIds": [
                   "en.grammar.possessive"
                 ],

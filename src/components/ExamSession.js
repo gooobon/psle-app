@@ -2,6 +2,7 @@
 import OrderTap from '@/components/OrderTap';
 import React, { useState, useRef, useCallback, useEffect } from "react";
 import { createPortal } from "react-dom";
+import { ArrowLeft } from "lucide-react";
 import { C } from "@/lib/uiShared";
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { fmtTime, guessFlag } from "@/lib/sessionUtils";
@@ -344,12 +345,31 @@ function TransLine({ label, text }) {
   );
 }
 
-function EnExp({ en }) {
+function EnExp({ en, small }) {
   if (!en) return null;
   return (
-    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#0f172a", lineHeight: 1.6, marginTop: 6, paddingTop: 6, borderTop: "1px dashed #cbd5e1" }}>
+    <div style={{ fontSize: small ? "calc(var(--fs) * 0.85)" : "calc(var(--fs) * 1.000)", color: small ? "#64748b" : "#0f172a", lineHeight: 1.6, marginTop: 6, paddingTop: 6, borderTop: "1px dashed #cbd5e1" }}>
       {en}
     </div>
+  );
+}
+
+// Retry hint body. Chinese sessions: Chinese hint text (hint_zh / hints_zh) first, then the item's Chinese
+// key words with pinyin, then the English hint as a smaller secondary line. No Chinese text -> English only, labelled "Hint".
+// Nothing is machine-translated. The English hint text itself is unchanged (it never leaks the answer).
+function HintBody({ isZh, zh, keywords, en, fallback }) {
+  const text = en || fallback;
+  if (!isZh) return <>{text}</>;
+  const kw = (keywords || []).filter(k => k && k.w && k.py);
+  const hasZh = !!zh || kw.length > 0;
+  return (
+    <>
+      {zh && <div style={{ fontFamily: ZH_FONT, lineHeight: 1.7 }}>{zh}</div>}
+      {kw.length > 0 && <div style={{ fontFamily: ZH_FONT }}>{kw.map((k, i) => <span key={i} style={{ marginRight: 10 }}>{k.w} ({k.py})</span>)}</div>}
+      <div style={hasZh ? { fontSize: "calc(var(--fs) * 0.85)", color: "#92400e", marginTop: 4 } : undefined}>
+        {!hasZh && <span style={{ fontWeight: 700 }}>Hint: </span>}{text}
+      </div>
+    </>
   );
 }
 
@@ -410,7 +430,7 @@ function ExpContent({ q, isZh }) {
         </div>
       )}
       <Expl text={q.explanation} />
-      <EnExp en={q.explanation_en} />
+      <EnExp en={q.explanation_en} small={isZh} />
       <KeyWords list={q.keywords} isZh={isZh} />
     </div>
   );
@@ -440,7 +460,7 @@ function ExplanationBox({ correct, answer, explanation, tip }) {
 // 
 //  MCQ PAGE - Grammar MCQ / Vocab MCQ
 // 
-function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone, reviewMode, reviewResults, isZh }) {
+function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks, instructions, onPageDone, onAnswered, reviewMode, reviewResults, isZh }) {
   const _rev = reviewMode ? Object.fromEntries((reviewResults || []).map(r => [r.id, r.userAnswer])) : null;
   const [answers, setAnswers] = useState(_rev || {});
   const [retryAnswers, setRetryAnswers] = useState({});
@@ -504,6 +524,8 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
   }
 
   const allAnswered = items.every(q => answers[q.id] !== undefined);
+  const answeredCount = items.filter(q => answers[q.id] !== undefined).length;
+  useEffect(() => { if (onAnswered && !reviewMode) onAnswered(answeredCount); }, [answeredCount]); // eslint-disable-line react-hooks/exhaustive-deps
   const wrongItems = submitted ? items.filter(q => answers[q.id] !== q.answer) : [];
   const allRetriedOrCorrect = submitted && wrongItems.every(q => retried[q.id]);
   const score = submitted ? items.filter(q => answers[q.id] === q.answer).length : 0;
@@ -566,7 +588,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
                     {isZh ? "\u518D\u60F3\u60F3\uFF01\u63D0\u793A\uFF1A" : "Not quite! Hint:"}
                   </div>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#78350f", marginBottom: 10 }}>
-                    {q.hints?.[0] || "Think carefully and try again!"}
+                    <HintBody isZh={isZh} zh={q.hint_zh || (q.hints_zh && q.hints_zh[0])} keywords={q.keywords} en={q.hints?.[0]} fallback="Think carefully and try again!" />
                   </div>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 6 }}>{isZh ? "\u518D\u9009\u4E00\u6B21\uFF1A" : "Try again:"}</div>
                   {(q.options || []).map((opt, i) => {
@@ -678,7 +700,7 @@ function MCQPage({ items, pageIdx, totalPages, globalQStart, sectionLabel, marks
 }
 
 
-function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResults, isZh }) {
+function ClozePage({ set, sectionLabel, marks, onPageDone, onAnswered, reviewMode, reviewResults, isZh }) {
   const cmp = (a, b) => normTyped(a) === normTyped(b);
   const blanks = set.blanks || [];
   const wordBank = set.wordBank || [];
@@ -731,6 +753,8 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
   }
 
   const allAnswered = blanks.every(b => answers[b.num] !== undefined);
+  const answeredCount = blanks.filter(b => answers[b.num] !== undefined).length;
+  useEffect(() => { if (onAnswered && !reviewMode) onAnswered(answeredCount); }, [answeredCount]); // eslint-disable-line react-hooks/exhaustive-deps
   const wrongBlanks = submitted ? blanks.filter(b => !cmp(answers[b.num], b.answer)) : [];
   const allRetriedOrCorrect = submitted && wrongBlanks.every(b => retried[b.num]);
   const score = submitted ? blanks.filter(b => cmp(answers[b.num], b.answer)).length : 0;
@@ -964,7 +988,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                   borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px",
                   fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6,
                 }}>
-                  <TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} isZh={isZh} />
+                  <TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} small={isZh} /><KeyWords list={b.keywords} isZh={isZh} />
                 </div>
               )}
 
@@ -972,7 +996,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                 <div style={{ marginTop: 8, background: "#fffbeb", border: "1px solid #fde68a", borderRadius: 8, padding: "10px 12px" }}>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 4 }}>{isZh ? "\u518D\u60F3\u60F3\uFF01\u63D0\u793A\uFF1A" : "Not quite! Hint:"}</div>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#78350f", marginBottom: 10 }}>
-                    {b.hint || "Think about the word that fits the meaning and grammar."}
+                    <HintBody isZh={isZh} zh={b.hint_zh} keywords={b.keywords} en={b.hint} fallback="Think about the word that fits the meaning and grammar." />
                   </div>
                   <div style={{ fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700, color: "#92400e", marginBottom: 6 }}>{isZh ? "\u518D\u9009\u4E00\u6B21\uFF1A" : "Try again:"}</div>
                   {wordBank.length === 0 ? (
@@ -1019,7 +1043,7 @@ function ClozePage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewRes
                     {isRetryCorrect ? (isZh ? "\u2713 \u518D\u6B21\u9009\u5BF9\u4E86\uFF01" : "V Correct on retry!") : (isZh ? "\u2717 \u6B63\u786E\u7B54\u6848\uFF1A" : "X Correct answer: ") + b.answer}
                   </div>
                   {showExp && b.explanation && (
-                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6, marginTop: 6 }}><TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} /><KeyWords list={b.keywords} isZh={isZh} /></div>
+                    <div style={{ fontSize: "calc(var(--fs) * 1.000)", color: "#374151", lineHeight: 1.6, marginTop: 6 }}><TransLine label={isZh ? "\u7FFB\u8BD1" : "Translate"} text={b.sentence_en} /><Expl text={b.explanation} /><EnExp en={b.explanation_en} small={isZh} /><KeyWords list={b.keywords} isZh={isZh} /></div>
                   )}
                 </div>
               )}
@@ -1952,7 +1976,7 @@ function CompPage({ set, sectionLabel, marks, onPageDone, reviewMode, reviewResu
         {q.explanation ? (
           <div style={{ borderLeft: '3px solid #2563EB', background: '#eff6ff',
             borderRadius: '0 8px 8px 0', padding: '8px 10px 8px 14px' }}>
-            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} /></div>
+            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} small={isZh} /></div>
           </div>
         ) : null}
         <KeyWords list={q.keywords} isZh={isZh} />
@@ -2341,7 +2365,7 @@ function SynthesisPage({ items, sectionLabel, marks, onPageDone, reviewMode, rev
         {q.explanation ? (
           <div style={{ marginTop: 6, borderLeft: "3px solid #2563EB",
             background: "#eff6ff", borderRadius: "0 8px 8px 0", padding: "8px 10px 8px 14px" }}>
-            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} /></div>
+            <div><Expl text={q.explanation} /><EnExp en={q.explanation_en} small={isZh} /></div>
           </div>
         ) : null}
         {q.hint ? (
@@ -2672,6 +2696,8 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
   const [allResults, setAllResults] = useState([]);
   const [pageResults, setPageResults] = useState([]); // buffered until next page
   const [done, setDone] = useState(false);
+  const [liveAnswered, setLiveAnswered] = useState(0); // answers entered on the current page (display only)
+  const [confirmLeave, setConfirmLeave] = useState(false);
   const startRef = useRef(Date.now());
 
   // NOTE: the P4 review gate is NOT shown here. A Chinese "problem set" is
@@ -2746,6 +2772,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         setPageIdx(0);
       }
     }
+    if (advance) setLiveAnswered(0);
   }
 
   if (done) {
@@ -2760,9 +2787,15 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
     );
   }
 
-  // Progress
+  // Progress: answered questions / total questions across the sections this run covers.
+  // Display only - scoring and saved data are untouched.
   const totalSections = plan.length;
-  const progress = Math.round((secIdx / totalSections) * 100);
+  const unitsOf = (sec) => (isMcqSection(sec.type) ? (sec.items || []).length : (sec.marks ?? (sec.items?.length || sec.sets || 1)));
+  const runIdx = plan.map((sec, i) => i).filter(i => singleSection ? i === startSecIdx : !_completed.includes(plan[i].type) || i === secIdx);
+  const totalQ = runIdx.reduce((n, i) => n + unitsOf(plan[i]), 0);
+  const doneQ = runIdx.filter(i => i < secIdx).reduce((n, i) => n + unitsOf(plan[i]), 0);
+  const answeredQ = Math.min(totalQ, doneQ + (liveAnswered || 0) + (isMcqSection(sectionType) ? pageIdx * MCQ_PER_PAGE : 0));
+  const progress = totalQ > 0 ? Math.round((answeredQ / totalQ) * 100) : 0;
 
   const sectionLabel = meta.label || ZH_LABELS[sectionType] || sectionType;
   const sectionMarks = (section.marks ?? (section.items?.length || section.sets || 1));
@@ -2775,11 +2808,11 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
         position: "sticky", top: 0, zIndex: 100,
         display: "flex", alignItems: "center", gap: 10,
       }}>
-        <button onClick={onBack} style={{
+        <button onClick={() => (reviewMode || !onBack ? onBack && onBack() : setConfirmLeave(true))} aria-label="Exit" style={{
           background: "none", border: "1px solid #000", borderRadius: 6,
-          width: 30, height: 30, cursor: "pointer", fontSize: "calc(var(--fs) * 1.000)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}></button>
+          padding: "0 10px", height: 30, cursor: "pointer", fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
+          display: "flex", alignItems: "center", justifyContent: "center", gap: 4,
+        }}><ArrowLeft size={16} aria-hidden="true" />Exit</button>
         <div style={{ flex: 1 }}>
           <div style={{ fontFamily: EXAM_BODY, fontWeight: 700, fontSize: "calc(var(--fs) * 1.000)" }}>
             {isMockExam ? ` ${(plan && (plan.paperLabel || plan.paperSchool)) || (isZh ? "\u6A21\u62DF\u8003" : "Mock Exam")}` : (isZh ? `\u7B2C ${secIdx + 1}/${totalSections} \u8282` : `Section ${secIdx + 1}/${totalSections}`)}
@@ -2793,9 +2826,21 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
           fontFamily: EXAM_BODY, fontSize: "calc(var(--fs) * 1.000)", fontWeight: 700,
           background: "#f1f5f9", borderRadius: 6, padding: "3px 10px",
         }}>
-          {progress}%
+          {isZh ? `${answeredQ} / ${totalQ}` : `Q ${Math.min(totalQ, answeredQ + 1)} of ${totalQ}`}
         </div>
       </div>
+      {confirmLeave && (
+        <div role="dialog" aria-modal="true" aria-labelledby="leave-title" style={{ position: "fixed", inset: 0, zIndex: 10000, background: "rgba(15,23,42,.5)", display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
+          <div style={{ background: "#fff", borderRadius: 14, padding: 20, maxWidth: 340, width: "100%", fontFamily: EXAM_BODY }}>
+            <div id="leave-title" style={{ fontWeight: 700, fontSize: 18, marginBottom: 6 }}>Leave this set?</div>
+            <div style={{ color: "#475569", marginBottom: 16 }}>Your answers so far are saved.</div>
+            <div style={{ display: "flex", gap: 10, justifyContent: "flex-end" }}>
+              <button onClick={() => { setConfirmLeave(false); onBack && onBack(); }} style={{ background: "#fff", border: "1px solid #94a3b8", borderRadius: 8, padding: "8px 14px", cursor: "pointer" }}>Leave</button>
+              <button autoFocus onClick={() => setConfirmLeave(false)} style={{ background: "#1e3a6e", color: "#fff", border: "1px solid #1e3a6e", borderRadius: 8, padding: "8px 14px", fontWeight: 700, cursor: "pointer" }}>Keep going</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Progress bar */}
       <div style={{ background: "#e2e8f0", height: 3 }}>
@@ -2820,6 +2865,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
                 : "For each of the following, choose the best answer and write the number (1, 2, 3 or 4) in the brackets provided."
           }
           onPageDone={handlePageDone}
+          onAnswered={setLiveAnswered}
         />
       )}
 
@@ -2830,6 +2876,7 @@ export function ExamSessionScreen({ plan, isMockExam, mockInfo, startFrom, singl
           sectionLabel={sectionLabel}
           marks={sectionMarks}
           onPageDone={handlePageDone}
+          onAnswered={setLiveAnswered}
         />
       )}
 
