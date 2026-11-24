@@ -6,7 +6,66 @@ import { SUBJECT_KEYS, sgtDate, dailySetGoal, isLiveSubject } from "./activity.j
 // TODO(owner): default reward numbers. Rules ship empty/disabled; nothing accrues until a parent enables them.
 // paper* = the Saturday past-paper reward (mock exams phase 2, docs/design/mock-exams-v1.md decisions 8 and 9). Separate from the daily and
 // weekly-review rules. Default: nothing (amount 0 = no credit), and the anti-gaming check is ON (paperCheckOff false).
-export const DEFAULT_RULES = { enabled: false, sgdPerCredit: 0, dailyTiers: [], weeklyUnit: "credits", weeklyAmounts: {}, paperUnit: "credits", paperAmounts: {}, paperCheckOff: false };
+// Issue #133: creditsPerSgd (integer 1-1000, 0 = not set) is the parent-facing exchange rate; sgdPerCredit stays the value the engine uses and is
+// 1 / creditsPerSgd whenever creditsPerSgd is set. cashoutMinSgd / cashoutLimitSgd 0 = no minimum / no limit. Everything defaults OFF.
+export const DEFAULT_RULES = { enabled: false, sgdPerCredit: 0, creditsPerSgd: 0, cashoutMinSgd: 0, cashoutLimitSgd: 0, cashoutLimitPeriod: "month", dailyTiers: [], weeklyUnit: "credits", weeklyAmounts: {}, paperUnit: "credits", paperAmounts: {}, paperCheckOff: false };
+
+// "Use recommended" fills the form with these. It never saves and never turns credits on by itself: the parent reviews and presses Save.
+export const RECOMMENDED = { creditsPerSgd: 100, cashoutMinSgd: 5, cashoutLimitSgd: 20, cashoutLimitPeriod: "month" };
+export const applyRecommended = (rule) => ({ ...(rule || DEFAULT_RULES), ...RECOMMENDED, sgdPerCredit: 1 / RECOMMENDED.creditsPerSgd });
+
+// Credits per SGD 1 for a rule: the explicit integer, else derived from a legacy sgdPerCredit (0 = unknown).
+export function creditsPerSgdOf(rule) {
+  const c = Number(rule && rule.creditsPerSgd);
+  if (Number.isInteger(c) && c > 0) return c;
+  const s = Number(rule && rule.sgdPerCredit);
+  return s > 0 ? Math.max(1, Math.round(1 / s)) : 0;
+}
+// Credits -> SGD at the rule's rate (2 decimals). 0 when no rate is set.
+export function creditsToSgd(credits, rule) {
+  const c = creditsPerSgdOf(rule);
+  return c > 0 ? Math.round(((Number(credits) || 0) / c) * 100) / 100 : 0;
+}
+// Wallet view for the PARENT screen: credit counts plus SGD value at the current rate. (Students only ever see credits.)
+export function walletView(totals, rule) {
+  const t = totals || {};
+  return { rate: creditsPerSgdOf(rule), balanceCredits: t.balance || 0, balanceSgd: creditsToSgd(t.balance, rule), pendingSgd: creditsToSgd(t.pending, rule), forfeitedSgd: creditsToSgd(t.forfeited, rule), earnedSgd: creditsToSgd(t.confirmed, rule), paidSgd: creditsToSgd(t.paid, rule) };
+}
+
+// Validate the four cash-out / rate settings. Returns { value } or { error }. Rate is required (1-1000) when credits are on.
+export function parseCashout(b, enabled) {
+  const bad = (error) => ({ error });
+  const empty = (v) => v == null || v === "";
+  let cps = 0;
+  if (!empty(b && b.creditsPerSgd) && Number(b.creditsPerSgd) !== 0) { // 0 = "not set" (a rule that never had a rate)
+    cps = Number(b.creditsPerSgd);
+    if (!Number.isInteger(cps) || cps < 1 || cps > 1000) return bad("Credits per SGD 1 must be a whole number from 1 to 1000.");
+  } else if (enabled && !(Number(b && b.sgdPerCredit) > 0)) return bad("Enter how many credits equal SGD 1 (a whole number from 1 to 1000) before turning credits on.");
+  const min = empty(b && b.cashoutMinSgd) ? 0 : Math.round(Number(b.cashoutMinSgd) * 100) / 100;
+  if (!Number.isFinite(min) || min < 0 || min > 500) return bad("Cash-out minimum must be from SGD 0 to 500.");
+  const lim = empty(b && b.cashoutLimitSgd) ? 0 : Math.round(Number(b.cashoutLimitSgd) * 100) / 100;
+  if (!Number.isFinite(lim) || lim < 0 || lim > 1000) return bad("Cash-out limit must be from SGD 0 to 1000.");
+  const period = (b && b.cashoutLimitPeriod) === "week" ? "week" : "month";
+  if (lim > 0 && min > lim) return bad("Cash-out minimum cannot be higher than the cash-out limit.");
+  return { value: { creditsPerSgd: cps, cashoutMinSgd: min, cashoutLimitSgd: lim, cashoutLimitPeriod: period } };
+}
+
+// Payout check against the rule's minimum and limit. payouts = prior reward_payouts rows ({amount_sgd, paid_on}). Pure.
+// Returns { ok } or { ok:false, code: 'minimum'|'limit', error, ... }. min/limit 0 = not set.
+export function periodKey(ymd, period) { return period === "week" ? weekStart(ymd) : String(ymd).slice(0, 7); }
+export function checkPayout({ amountSgd, paidOn, rule, payouts }) {
+  const amount = Number(amountSgd) || 0;
+  const min = Number(rule && rule.cashoutMinSgd) || 0, lim = Number(rule && rule.cashoutLimitSgd) || 0;
+  const period = rule && rule.cashoutLimitPeriod === "week" ? "week" : "month";
+  if (min > 0 && amount < min) return { ok: false, code: "minimum", min, error: `The cash-out minimum is SGD ${min.toFixed(2)}. Enter at least that amount.` };
+  if (lim > 0) {
+    const key = periodKey(paidOn, period);
+    const used = Math.round((payouts || []).filter((p) => p && p.paid_on && periodKey(String(p.paid_on), period) === key).reduce((a, p) => a + (Number(p.amount_sgd) || 0), 0) * 100) / 100;
+    const left = Math.max(0, Math.round((lim - used) * 100) / 100);
+    if (amount > left) return { ok: false, code: "limit", limit: lim, used, left, period, error: `The cash-out limit is SGD ${lim.toFixed(2)} per ${period}. SGD ${used.toFixed(2)} is already used this ${period}, so at most SGD ${left.toFixed(2)} can be paid now.` };
+  }
+  return { ok: true };
+}
 
 // TODO(owner): if a child has several subjects with target > 0, the daily sticker needs ALL live subjects met (issue wording).
 // Stickers are unchanged (daily sticker once per day, weekly sticker once per week). CREDITS are per subject (issue #29):
@@ -211,8 +270,19 @@ export function studentCredits(rows) {
 export const PENDING_NOTE = "Pending: finish today's homework";
 
 // DB row <-> app shape.
+// Cash-out fields from a DB row. Before the migration the columns are absent: fall back to the legacy rate, no minimum, no limit.
+export function cashoutFromRow(r) {
+  const c = Number(r && r.credits_per_sgd);
+  const cps = Number.isInteger(c) && c > 0 ? c : 0;
+  const legacy = Number(r && r.sgd_per_credit) || 0;
+  return {
+    creditsPerSgd: cps || (legacy > 0 ? Math.max(1, Math.round(1 / legacy)) : 0), sgdPerCredit: cps ? 1 / cps : legacy,
+    cashoutMinSgd: Number(r && r.cashout_min_sgd) || 0, cashoutLimitSgd: Number(r && r.cashout_limit_sgd) || 0,
+    cashoutLimitPeriod: r && r.cashout_limit_period === "week" ? "week" : "month",
+  };
+}
 export const ruleFromRow = (r) => r ? ({
-  enabled: !!r.enabled, sgdPerCredit: Number(r.sgd_per_credit) || 0, dailyTiers: Array.isArray(r.daily_tiers) ? r.daily_tiers : [],
+  enabled: !!r.enabled, ...cashoutFromRow(r), dailyTiers: Array.isArray(r.daily_tiers) ? r.daily_tiers : [],
   weeklyUnit: r.weekly_unit === "sgd" ? "sgd" : "credits", weeklyAmounts: r.weekly_amounts || {}, effectiveFrom: r.effective_from,
   paperUnit: r.paper_unit === "sgd" ? "sgd" : "credits", paperAmounts: r.paper_amounts || {}, paperCheckOff: r.paper_check_off === true,
 }) : null;
@@ -225,8 +295,12 @@ export function parseRuleVersion(b, todayYmd = sgtDate()) {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(eff) || Number.isNaN(Date.parse(eff + "T00:00:00Z"))) return bad("Enter a valid effective date.");
   if (eff < todayYmd) return bad("The effective date cannot be in the past.");
   if (eff > addDays(todayYmd, 365)) return bad("The effective date is too far ahead.");
-  const rate = Math.round(Number(b && b.sgdPerCredit) * 100) / 100;
+  const hasCps = !!b && b.creditsPerSgd != null && b.creditsPerSgd !== "" && Number(b.creditsPerSgd) !== 0;
+  const co = parseCashout(b, false); // rate is required only on the parent Rewards save (see requireRate), so older saves keep working
+  if (co.error) return bad(co.error);
+  const rate = hasCps ? 1 / co.value.creditsPerSgd : Math.round(Number(b && b.sgdPerCredit || 0) * 100) / 100;
   if (!Number.isFinite(rate) || rate < 0 || rate > 1000) return bad("Enter a valid SGD value for 1 credit.");
+  const cpsOut = hasCps ? co.value.creditsPerSgd : (rate > 0 ? Math.max(1, Math.min(1000, Math.round(1 / rate))) : 0);
   const rawTiers = Array.isArray(b && b.dailyTiers) ? b.dailyTiers : [];
   if (rawTiers.length > 10) return bad("At most 10 score tiers.");
   const tiers = [];
@@ -254,7 +328,10 @@ export function parseRuleVersion(b, todayYmd = sgtDate()) {
     if (!Number.isFinite(n) || n < 0 || n > (punit === "sgd" ? 10000 : 1000) || (punit === "credits" && !Number.isInteger(n))) return bad("Saturday paper amounts must be 0 or more (whole credits, or SGD up to 2 decimals).");
     pamounts[s] = n;
   }
-  return { rule: { enabled: !!(b && b.enabled), sgdPerCredit: rate, dailyTiers: tiers, weeklyUnit: unit, weeklyAmounts: amounts, paperUnit: punit, paperAmounts: pamounts, paperCheckOff: !!(b && b.paperCheckOff), effectiveFrom: eff } };
+  return { rule: { enabled: !!(b && b.enabled), sgdPerCredit: rate, creditsPerSgd: cpsOut, cashoutMinSgd: co.value.cashoutMinSgd, cashoutLimitSgd: co.value.cashoutLimitSgd, cashoutLimitPeriod: co.value.cashoutLimitPeriod, dailyTiers: tiers, weeklyUnit: unit, weeklyAmounts: amounts, paperUnit: punit, paperAmounts: pamounts, paperCheckOff: !!(b && b.paperCheckOff), effectiveFrom: eff } };
 }
 
 export { addDays };
+
+// Parent Rewards save only: credits cannot be turned on without a rate. Existing enabled rules with no rate still save other settings.
+export const requireRate = (rule) => (rule && rule.enabled && !(creditsPerSgdOf(rule) > 0) ? "Enter how many credits equal SGD 1 (a whole number from 1 to 1000) before turning credits on." : null);
