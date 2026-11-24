@@ -85,8 +85,8 @@ function CompQuestion({ q, a, set }) {
       </div>
     );
   }
-  // fill_blank / fill_word / tf_reason / open_sentence: typed text. Open-ended answers are marked by the parent after the paper.
-  return <div>{head}<Text value={v} onChange={(t) => set({ val: t })} placeholder={q.fmt === 'open_sentence' ? 'Write your answer (your parent will mark this one)' : undefined} /></div>;
+  // fill_blank / fill_word / tf_reason / open_sentence: typed text. Open-ended answers get an automatic mark at hand-in.
+  return <div>{head}<Text value={v} onChange={(t) => set({ val: t })} placeholder={q.fmt === 'open_sentence' ? 'Write your answer in a full sentence' : undefined} /></div>;
 }
 
 function Section({ sec, answers, setAns, flags, toggleFlag }) {
@@ -239,7 +239,6 @@ function rewardLine(w) {
     if (w.credits > 0 && w.homework && w.homework.remaining > 0) bits.push("Finish today's homework to confirm it.");
     return bits.join(' ');
   }
-  if (w.reason === 'awaiting_parent') return 'Your reward is decided after your parent has marked the open-ended questions.';
   if (w.reason === 'too_little') return 'No Saturday paper reward this time: it needs at least half the time used or 80% of the questions answered.';
   return null; // rewards off / not configured: say nothing
 }
@@ -247,12 +246,14 @@ function Result({ r, onDone, onReview }) {
   const a = r.attempt;
   const bad = (r.verdicts || []).filter((v) => v.correct === false);
   const rw = rewardLine(r.reward);
+  const short = (r.verdicts || []).filter((v) => v.tooShort);
   return (
     <div style={{ padding: 16 }}>
       <div style={card}>
         <div style={{ fontSize: 18, fontWeight: 900 }}>{a.label}</div>
         <div style={{ fontSize: 15, marginTop: 6 }}>Score: <b>{scoreLine({ score: a.score, total: a.total, pending: a.parentPending })}</b>{a.parentPending ? '' : ` (${percentOf(a.score, a.total) == null ? 0 : percentOf(a.score, a.total)}%)`} · Answered {a.answered}/{a.questionCount} · Time used {fmt(a.elapsedSeconds || 0)}</div>
-        {a.parentPending ? <div style={note}>{a.parentPending} open-ended question{a.parentPending === 1 ? '' : 's'} will be marked by your parent. When they are marked, the marks are added to your score and your reward is settled from the final score.</div> : null}
+        {short.length ? <div style={note}>Write a full answer to earn this mark. Too short or blank: {short.map((v) => 'Question ' + (v.no || v.id)).join(', ')}.</div> : null}
+        {a.parentPending ? <div style={note}>{a.parentPending} open-ended question{a.parentPending === 1 ? ' has' : 's have'} no model answer to check against and {a.parentPending === 1 ? 'is' : 'are'} not in your score.</div> : null}
         {a.status === 'auto_submitted' ? <div style={note}>Time ran out, so your paper was handed in automatically.</div> : null}
         <div style={{ ...note, marginTop: 8 }}>{a.counts ? 'This paper counts as today\'s set.' : 'This paper did not count as a set: it needs at least half the time used or 80% of the questions answered.'}</div>
         {rw ? <div style={{ ...note, marginTop: 8, color: '#065F46', fontWeight: 700 }}>{rw}</div> : null}
@@ -320,7 +321,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
           {it.ambiguous || it.keyMissing
             ? <div style={note}>{it.keyMissing ? 'This question is not available in our copy of the paper, so it is not counted in your score.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
             : <div style={{ fontSize: 13 }}>{it.openEnded ? 'Model answer' : 'Correct answer'}: <b>{it.correctAnswer || '—'}</b></div>}
-          {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Your parent marked this: correct.' : it.parentMark === false ? 'Your parent marked this: not correct.' : 'Your parent has not marked this yet.'}</div> : null}
+          {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Marked correct. This mark is automatic and your parent can still change it.' : it.parentMark === false ? 'Marked not correct. This mark is automatic and your parent can still change it.' : 'This one has no automatic mark.'}</div> : null}
           {it.explanation ? <div style={{ fontSize: 13, marginTop: 6, background: '#F8FAFC', borderRadius: 8, padding: 8 }}>{it.explanation}</div> : null}
           {it.correct === false && it.inNotebook ? (
             <div style={{ marginTop: 8 }}>

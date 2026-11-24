@@ -26,7 +26,7 @@ export default function ParentExams({ child }) {
   if (!d) return <div style={{ ...box, fontSize: 13, color: '#6B6F7B' }}>Loading…</div>;
   async function mark(attemptId, questionId, correct) {
     const r = await serverPost('/api/parent/exam', { attemptId, questionId, correct });
-    if (r.ok) { setKey((k) => k + 1); setNote(r.pending ? '' : 'All marked. The final score is saved.'); } else setErr(r.error || 'Could not save the mark.');
+    if (r.ok) { setKey((k) => k + 1); setNote(r.pending ? '' : 'Mark changed. The score is updated.'); } else setErr(r.error || 'Could not save the mark.');
   }
   if (!d.attempts.length) return <div style={{ ...box, fontSize: 13 }}>No mock papers yet.</div>;
   return (
@@ -44,12 +44,13 @@ export default function ParentExams({ child }) {
           {(a.sections || []).length ? <div style={{ fontSize: 12, marginTop: 6 }}>{a.sections.map((s) => `${s.section} ${s.score}/${s.total}`).join(' · ')}</div> : null}
           {a.open.length ? (
             <div style={{ marginTop: 8 }}>
-              <div style={{ fontSize: 12, fontWeight: 800 }}>Open-ended answers to mark ({a.open.filter((o) => o.mark == null).length} left)</div>
+              <div style={{ fontSize: 12, fontWeight: 800 }}>Open-ended answers: marked automatically, you can change a mark ({a.open.filter((o) => o.mark == null).length} with no mark)</div>
               {a.open.map((o) => (
                 <div key={o.questionId} style={{ borderTop: '1px solid #FBF6EA', paddingTop: 6, marginTop: 6, fontSize: 13 }}>
                   <div>{o.question}</div>
                   <div><b>Child:</b> {o.studentAnswer || <i>(blank)</i>}</div>
                   <div><b>Model answer:</b> {o.modelAnswer}</div>
+                  {o.automatic ? <div style={{ fontSize: 12, color: '#6B6F7B' }}>Automatic mark: {o.mark ? 'correct' : 'not correct'}</div> : null}
                   <div style={{ marginTop: 4 }}>
                     {[[true, 'Correct'], [false, 'Not correct']].map(([v, t]) => (
                       <button key={t} onClick={() => mark(a.id, o.questionId, v)} style={{ marginRight: 8, padding: '4px 10px', borderRadius: 8, border: '2px solid ' + (o.mark === v ? '#1F3F95' : '#E2DBCF'), background: o.mark === v ? '#FBF6EA' : '#fff', cursor: 'pointer' }}>{t}</button>
