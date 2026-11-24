@@ -15,6 +15,7 @@ import { clewquestEnabled } from "@/lib/clewquest/config";
 import { HOMEWORK_ABUSE_MAX, HOMEWORK_PER_MISTAKE, clampHomeworkCount } from "@/lib/homework";
 import { SUBJECTS, GRADES, LIVE_CONTENT, ComingSoonToast, ComingSoonScreen } from "@/components/Dashboard";
 import { causeLabel } from "@/lib/wrongNotebook";
+import ParentAssignPractice from "@/components/ParentAssignPractice";
 
 // ── Parent: homework status (flag NEXT_PUBLIC_PARENT_HOMEWORK_ENABLED, default off) ──
 function HomeworkStatus({child, refreshKey}){
@@ -39,7 +40,7 @@ function HomeworkStatus({child, refreshKey}){
 }
 
 // ── Parent: Mistakes review tab ───────────────────────────────
-function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, notebookMistakes}){
+function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, homeworkRunnable, notebookMistakes}){
   const [filterSession, setFilterSession] = React.useState("all");
   const [expanded, setExpanded] = React.useState(null);
 
@@ -125,6 +126,7 @@ function ParentMistakesTab({child, history, grade, subject, homeworkSimilarFor, 
   return(
     <div style={{padding:"4px 0"}}>
       {hwOn&&<HomeworkStatus child={child} refreshKey={hwKey}/>}
+      {hwOn&&useServer&&srv&&homeworkRunnable&&<ParentAssignPractice child={child} subject={subject} grade={grade} mistakes={allMistakes} runnableIndex={homeworkRunnable} onAssigned={()=>setHwKey(k=>k+1)}/>}
       <div style={{background:"#FBF6EA",border:"1px solid #E2DBCF",borderRadius:14,
         padding:"12px 14px",marginBottom:14}}>
         <div style={{fontSize:13,fontWeight:800,color:"#1F3F95",marginBottom:4}}>
@@ -722,7 +724,7 @@ function ParentWrap({children}){
   return <div style={{background:"#F6F2EA",minHeight:"100vh"}}><div style={{maxWidth:"var(--wrap-w)",width:"100%",margin:"0 auto",position:"relative",overflowX:"hidden",boxSizing:"border-box",fontFamily:"var(--font-noto-sans),system-ui,sans-serif"}}>{children}</div></div>;
 }
 
-function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated, homeworkSimilarFor}){
+function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, refresh, onChildCreated, homeworkSimilarFor, homeworkRunnable}){
   const [selectedId, setSelectedId] = useState(linkedStudents[0]?.id||null);
   const [grade,   setGrade]   = useState("P3");
   const [subject, setSubject] = useState("English");
@@ -831,7 +833,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {child&&SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child.serverId&&subject==="English"&&tab==="papers" && <ParentExams child={child}/>}
         {child&&SERVER_AUTH&&REWARDS&&tab==="rewards" && <ParentRewards child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings} subject={subject}/>}
-        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} notebookMistakes={prog?.mistakes||[]}/>}
+        {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} homeworkRunnable={homeworkRunnable} notebookMistakes={prog?.mistakes||[]}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="settings"  && <ParentSettings  child={child} settings={settings} onUpdate={updateSetting} advice={advice} onApplyAdvice={applyAdvice}/>}
         {child&&SERVER_AUTH&&tab==="settings" && <ParentChildSettings child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mock"      && <ParentMockTab   child={child} history={history}/>}

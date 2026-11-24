@@ -34,6 +34,7 @@ export async function POST(request) {
   if (!me || me.profile.role !== "parent") return jerr("parent login required", 401);
   if (!rateLimit(`hwa:${me.profile.id}:${clientIp(request)}`, { max: 30, windowMs: 60_000 })) return jerr("too many requests", 429);
   const b = await readJson(request);
+  if (Array.isArray(b.items)) return bulkAssign(me, b);
   const child = String(b.child || "");
   const subject = String(b.subject || "");
   const source = b.sourceQuestionId == null ? "" : String(b.sourceQuestionId).slice(0, 200);
@@ -49,4 +50,40 @@ export async function POST(request) {
   if (data.error === "not_linked") return jerr("not your child", 403);
   if (data.error === "cap") return Response.json({ error: capMessage(data), code: "cap", ...data }, { status: 409, headers: { "Cache-Control": "no-store" } });
   return jok({ ...data, message: data.assigned ? `Assigned ${data.assigned} question${data.assigned > 1 ? "s" : ""} for today.` : "Already assigned for today." });
+}
+
+// Bulk: items = [{subject, question_id, source_question_id}] in one call. Grouped by (subject, source) and sent through
+// the same assign_homework() per group, so the atomic 100/day abuse bound and the guardian-link check are unchanged.
+async function bulkAssign(me, b) {
+  const child = String(b.child || "");
+  if (!UUID.test(child)) return jerr("bad request", 400);
+  if (!b.items.length || b.items.length > HOMEWORK_ABUSE_MAX) return jerr(`choose 1 to ${HOMEWORK_ABUSE_MAX} questions`, 400);
+  const groups = new Map();
+  for (const it of b.items) {
+    const subject = String((it && it.subject) || "");
+    const q = String((it && it.question_id) || "").slice(0, 200);
+    const src = String((it && it.source_question_id) || "").slice(0, 200);
+    if (!SUBJECT_KEYS.includes(subject) || !q || !src) return jerr("bad request", 400);
+    const k = subject + "\u0000" + src;
+    const g = groups.get(k) || { subject, src, ids: [] };
+    if (g.ids.indexOf(q) === -1) g.ids.push(q);
+    groups.set(k, g);
+  }
+  const grade = /^P[1-6]$/.test(b.grade || "") ? b.grade : null;
+  const sb = adminClient();
+  let assigned = 0, stopped = null;
+  for (const g of groups.values()) {
+    const { data, error } = await sb.rpc("assign_homework", {
+      p_parent: me.profile.id, p_child: child, p_subject: g.subject, p_grade: grade, p_source: g.src,
+      p_questions: g.ids, p_day: sgtDate(), p_cap: HOMEWORK_ABUSE_MAX,
+    });
+    if (error || !data) { stopped = "error"; break; }
+    if (data.error === "not_linked") return jerr("not your child", 403);
+    if (data.error === "cap") { stopped = capMessage(data); break; }
+    assigned += data.assigned || 0;
+  }
+  if (stopped === "error" && !assigned) return jerr("could not assign", 500);
+  const msg = assigned ? `Assigned ${assigned} question${assigned > 1 ? "s" : ""} for today.` : "Already assigned for today.";
+  if (stopped && stopped !== "error") return Response.json({ error: stopped, code: "cap", assigned, message: `${msg} ${stopped}` }, { status: 409, headers: { "Cache-Control": "no-store" } });
+  return jok({ assigned, partial: stopped === "error", message: stopped === "error" ? `${msg} Some could not be assigned; try again.` : msg });
 }
