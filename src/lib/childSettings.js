@@ -42,7 +42,7 @@ export function ruleInForce(versions, ymd) {
 
 // opts.paper: include the paper_* columns (migration 20261130000000_paper_rewards.sql). Off (the default) = the row is exactly what it was
 // before mock exams phase 2, so saving settings never depends on that migration while the mock-exam flag is off.
-// opts.cashout: include credits_per_sgd / cashout_* (migration 20261208000000_rewards_cashout_settings.sql). Off = the legacy row.
+// opts.cashout: include credits_per_sgd / cashout_* (migration 20261209000000_rewards_cashout_settings.sql). Off = the legacy row.
 export const settingToRow = (childId, s, updatedBy, nowIso, opts) => ({
   child_id: childId, effective_from: s.effectiveFrom, daily_target: s.dailyTarget, homework_per_mistake: s.homeworkPerMistake,
   enabled: !!s.rule.enabled, sgd_per_credit: Math.min(1000, Math.round((Number(s.rule.sgdPerCredit) || 0) * 100) / 100), daily_tiers: s.rule.dailyTiers,

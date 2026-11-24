@@ -86,7 +86,7 @@ ok("result lines: Thread +N and Credits +N, no emoji, zero hidden, flags respect
   for (const f of ["src/lib/setRewards.js", "src/components/SetRewards.js"]) assert.ok(!/[\u{1F300}-\u{1FAFF}☀-➿]/u.test(fs.readFileSync(path.join(ROOT, f), "utf8")), f + " has no emoji");
 });
 ok("migration is additive only", () => {
-  const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261208000000_rewards_cashout_settings.sql"), "utf8");
+  const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261209000000_rewards_cashout_settings.sql"), "utf8");
   assert.ok(!/\b(drop|delete|truncate|rename)\b/i.test(sql.replace(/--.*$/gm, "")), "no destructive statement");
   assert.equal((sql.match(/add column if not exists/g) || []).length, 4);
 });
