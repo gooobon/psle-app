@@ -3969,7 +3969,15 @@
       "hasAnswerKey": true,
       "answerKeyNote": "unknown",
       "notAutoGraded": [],
-      "suspectedDuplicates": []
+      "suspectedDuplicates": [
+        {
+          "file": "src/data/p3/english/papers/eoy/eoy_henrypark_paper2_2025.ts",
+          "tier": "weak",
+          "why": [
+            "same school + year + type + marks"
+          ]
+        }
+      ]
     },
     {
       "id": "eoy_henrypark_p2_2025",
@@ -4038,13 +4046,6 @@
           "tier": "strong",
           "why": [
             "filename is a \"(n)\" copy"
-          ]
-        },
-        {
-          "file": "src/data/p3/english/papers/eoy/eoy_henrypark_paper2_2025.ts",
-          "tier": "weak",
-          "why": [
-            "same school + year + type + marks"
           ]
         }
       ]
@@ -4134,7 +4135,7 @@
       "bucket": "eoy",
       "school": "Henry Park Primary School",
       "schoolFrom": "meta.school",
-      "year": 2025,
+      "year": 2023,
       "yearFrom": "meta.year",
       "filenameYear": 2025,
       "headerYears": [
@@ -4188,7 +4189,7 @@
       "notAutoGraded": [],
       "suspectedDuplicates": [
         {
-          "file": "src/data/p3/english/papers/eoy/eoy_henrypark_p2_2025 (2).ts",
+          "file": "src/data/p3/english/papers/eoy/eoy_henrypark_p2_2023.ts",
           "tier": "weak",
           "why": [
             "same school + year + type + marks"
@@ -5186,15 +5187,7 @@
       "hasAnswerKey": true,
       "answerKeyNote": "unknown",
       "notAutoGraded": [],
-      "suspectedDuplicates": [
-        {
-          "file": "src/data/p3/english/papers/eoy/eoy_rafflesgirls_mockpaper_2025.ts",
-          "tier": "weak",
-          "why": [
-            "same school + year + type + marks"
-          ]
-        }
-      ]
+      "suspectedDuplicates": []
     },
     {
       "id": "eoy_rafflesgirls_mockpaper_2025",
@@ -5205,7 +5198,7 @@
       "bucket": "eoy",
       "school": "Raffles Girls' Primary School",
       "schoolFrom": "meta.school",
-      "year": 2025,
+      "year": 2023,
       "yearFrom": "meta.year",
       "filenameYear": 2025,
       "headerYears": [
@@ -5249,7 +5242,7 @@
       "notAutoGraded": [],
       "suspectedDuplicates": [
         {
-          "file": "src/data/p3/english/papers/eoy/eoy_raffles_girls_primary_p2_2025.ts",
+          "file": "src/data/p3/english/papers/eoy/eoy_rafflesgirls_p2_2025.ts",
           "tier": "weak",
           "why": [
             "same school + year + type + marks"
@@ -5259,7 +5252,8 @@
           "file": "src/data/p3/english/papers/wa2/wa2_rafflesgirlsprimary_englishpaper_2023.ts",
           "tier": "weak",
           "why": [
-            "55% of question stems identical"
+            "55% of question stems identical",
+            "same school + year + type + marks"
           ]
         }
       ]
@@ -5306,6 +5300,13 @@
       "answerKeyNote": "unknown",
       "notAutoGraded": [],
       "suspectedDuplicates": [
+        {
+          "file": "src/data/p3/english/papers/eoy/eoy_rafflesgirls_mockpaper_2025.ts",
+          "tier": "weak",
+          "why": [
+            "same school + year + type + marks"
+          ]
+        },
         {
           "file": "src/data/p3/english/papers/wa2/wa2_rafflesgirlsprimary_englishpaper_2023.ts",
           "tier": "weak",
@@ -6162,7 +6163,15 @@
       "hasAnswerKey": true,
       "answerKeyNote": "unknown",
       "notAutoGraded": [],
-      "suspectedDuplicates": []
+      "suspectedDuplicates": [
+        {
+          "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper3_2025.ts",
+          "tier": "weak",
+          "why": [
+            "same school + year + type + marks"
+          ]
+        }
+      ]
     },
     {
       "id": "eoy_taonan_paper1_2025",
@@ -6231,13 +6240,6 @@
       "suspectedDuplicates": [
         {
           "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper2_2025.ts",
-          "tier": "weak",
-          "why": [
-            "same school + year + type + marks"
-          ]
-        },
-        {
-          "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper3_2025.ts",
           "tier": "weak",
           "why": [
             "same school + year + type + marks"
@@ -6316,13 +6318,6 @@
           "why": [
             "same school + year + type + marks"
           ]
-        },
-        {
-          "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper3_2025.ts",
-          "tier": "weak",
-          "why": [
-            "same school + year + type + marks"
-          ]
         }
       ]
     },
@@ -6335,7 +6330,7 @@
       "bucket": "eoy",
       "school": "Tao Nan School",
       "schoolFrom": "meta.school",
-      "year": 2025,
+      "year": 2023,
       "yearFrom": "meta.year",
       "filenameYear": 2025,
       "headerYears": [
@@ -6394,14 +6389,7 @@
       "notAutoGraded": [],
       "suspectedDuplicates": [
         {
-          "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper1_2025.ts",
-          "tier": "weak",
-          "why": [
-            "same school + year + type + marks"
-          ]
-        },
-        {
-          "file": "src/data/p3/english/papers/eoy/eoy_taonan_paper2_2025.ts",
+          "file": "src/data/p3/english/papers/eoy/eoy_taonan_p2_2025.ts",
           "tier": "weak",
           "why": [
             "same school + year + type + marks"
@@ -8863,7 +8851,8 @@
           "file": "src/data/p3/english/papers/eoy/eoy_rafflesgirls_mockpaper_2025.ts",
           "tier": "weak",
           "why": [
-            "55% of question stems identical"
+            "55% of question stems identical",
+            "same school + year + type + marks"
           ]
         },
         {
