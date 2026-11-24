@@ -687,11 +687,15 @@ ok("combineMarks / scoreLine: pending until marked, then added to score and tota
   assert.equal(flip.score, 4, "recomputed from all rows each time, so a changed mark never double counts");
   assert.ok(E.readyToSettle({ pending: 0, settledAt: null }) && !E.readyToSettle({ pending: 1, settledAt: null }) && !E.readyToSettle({ pending: 0, settledAt: "x" }));
 });
-await aok("hand-in with open-ended items leaves score auto-only, pending, and settles nothing; parent marks settle once with the final score", async () => {
+await aok("hand-in with open-ended items settles at once with a provisional mark; a parent mark is an optional override (issue #115)", async () => {
   const withOpen = S.listPapers().find((p) => S.gradeSubmission(p.id, {}).ungraded > 0);
   assert.ok(withOpen, "an offered paper has open-ended items");
   const g0 = S.gradeSubmission(withOpen.id, {});
-  const settleLog = [], rpcLog = [];
+  assert.equal(g0.autoScore, 0); assert.ok(g0.provisionalTotal > 0, "open-ended items with a key are scored provisionally (blank = 0)");
+  assert.equal(g0.score, 0); assert.equal(g0.total, g0.autoTotal + g0.provisionalTotal);
+  const openIds = g0.rows.filter((r) => r.provisional).map((r) => r.id);
+  assert.ok(openIds.length > 0 && g0.tooShort.length === openIds.length, "blank open answers are flagged too short");
+  const settleLog = [];
   const mk = async (db, file, extra) => loadSource(file, {
     "@/lib/supabase/server": { adminClient: () => db, currentUser: async () => ({ profile: { id: file.includes("parent") ? PID : SID, role: file.includes("parent") ? "parent" : "student", school: "x", grade: "P3" } }), serverAuthEnabled: () => true,
       jerr: (m, st) => ({ error: m, status: st }), jok: (o) => ({ ok: true, ...(o || {}) }), readJson: async (r) => r.body },
@@ -702,45 +706,51 @@ await aok("hand-in with open-ended items leaves score auto-only, pending, and se
   }, "return { GET, POST };");
   const PID = "99999999-9999-9999-9999-999999999999";
   const db = fakeDb({ parent_child: [{ parent_id: PID, child_id: SID }] });
-  const origRpc = db.rpc; db.rpc = async (n, a) => { rpcLog.push([n, a]); return origRpc(); };
+  const origRpc = db.rpc; db.rpc = async () => origRpc();
   db.tables().exam_attempts.push({ ...expiredAttempt(), paper_id: withOpen.id, deadline_at: new Date(Date.now() + 3600_000).toISOString(), started_at: new Date().toISOString(), settled_at: null });
   const sr = await mk(db, "src/app/api/student/exam/route.js");
   const res = await sr.POST(req("http://x", { action: "submit", attemptId: UUID1, answers: {} }));
   assert.ok(res.ok, JSON.stringify(res).slice(0, 200));
   let a = db.tables().exam_attempts[0];
-  assert.deepEqual([a.score, a.auto_score, a.total, a.auto_total, a.parent_pending, a.settled_at], [g0.score, g0.score, g0.total, g0.total, g0.ungraded, null]);
-  assert.equal(res.reward.reason, "awaiting_parent");
-  assert.equal(settleLog.length, 0, "no reward, weekly report or milestone while parent marking is outstanding");
-  const open = db.tables().exam_answers.filter((r) => r.attempt_id === UUID1 && r.correct === null);
-  assert.equal(open.length, g0.ungraded);
+  assert.deepEqual([a.score, a.auto_score, a.total, a.auto_total, a.parent_pending, a.parent_score, a.parent_total], [0, 0, g0.total, g0.autoTotal, g0.pending, 0, g0.provisionalTotal]);
+  assert.ok(a.settled_at, "settled at hand-in");
+  assert.equal(settleLog.length, 1, "reward, weekly report and milestone run at hand-in");
+  assert.equal(settleLog[0].total, g0.total);
+  assert.ok(res.verdicts.filter((v) => v.tooShort).length === openIds.length, "the student is told which answers were too short");
+  const open = db.tables().exam_answers.filter((r) => r.attempt_id === UUID1 && r.correct === null && openIds.includes(r.question_id));
+  assert.equal(open.length, openIds.length);
+  assert.ok(open.every((r) => r.parent_correct === false && !r.parent_marked_at), "stored as an automatic mark, not a parent mark");
+  // Optional parent override: changes the score, never settles (rewards) a second time.
   const pr = await mk(db, "src/app/api/parent/exam/route.js");
-  const w = S.marksByQuestion(withOpen.id, open.map((o) => o.question_id)); // marks each open item is worth (issue #66)
-  let markedTotal = 0, markedOk = 0;
-  for (let i = 0; i < open.length; i++) {
-    markedTotal += w[i]; if (i % 2 === 0) markedOk += w[i];
-    const r = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[i].question_id, correct: i % 2 === 0 }));
-    assert.ok(r.ok, JSON.stringify(r));
-    const left = open.length - 1 - i;
-    assert.equal(r.pending, left);
-    assert.equal(r.total, g0.total + markedTotal, "each mark adds its marks to the total");
-    assert.equal(settleLog.length, left === 0 ? 1 : 0, "settles exactly when the last item is marked");
-  }
+  const w = S.marksByQuestion(withOpen.id, [open[0].question_id])[0];
+  const r1 = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[0].question_id, correct: true }));
+  assert.ok(r1.ok, JSON.stringify(r1));
   a = db.tables().exam_attempts[0];
-  assert.deepEqual([a.score, a.total, a.parent_pending, a.parent_score, a.parent_total], [g0.score + markedOk, g0.total + markedTotal, 0, markedOk, markedTotal]);
-  assert.ok(a.settled_at && a.auto_score === g0.score, "settled once; the auto result is kept");
-  assert.deepEqual(settleLog[0], { score: a.score, total: a.total }, "settled from the FINAL score");
-  // Changing a mark afterwards recomputes the score and does not settle (reward) again.
-  const flip = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[0].question_id, correct: false }));
-  assert.ok(flip.ok && flip.score === g0.score + markedOk - w[0] && settleLog.length === 1);
-  const src = fs.readFileSync(path.join(ROOT, "src/app/api/parent/exam/route.js"), "utf8");
-  assert.ok(/is\("settled_at", null\)/.test(src), "settlement is claimed atomically");
+  assert.deepEqual([a.score, a.total, a.parent_score], [w, g0.total, w]);
+  assert.equal(settleLog.length, 1, "an override never awards again");
+  const r2 = await pr.POST(req("http://x", { attemptId: UUID1, questionId: open[0].question_id, correct: false }));
+  assert.ok(r2.ok && db.tables().exam_attempts[0].score === 0 && settleLog.length === 1);
 });
-ok("migration for parent marks is additive and the paper reward waits for settlement", () => {
+ok("provisionalMark: blank / short = 0 and too short; model answer or keywords = correct; no key = null", () => {
+  const m = (answer, models, keywords) => E.provisionalMark({ answer, models, keywords });
+  assert.deepEqual(m("", ["He felt proud of his work"]), { correct: false, tooShort: true });
+  assert.deepEqual(m("proud", ["He felt proud of his work"]), { correct: false, tooShort: true });
+  assert.equal(m("He felt very proud of his work today", ["He felt proud of his work"]).correct, true, "extra words are fine: the content words are covered");
+  assert.equal(m("He felt proud of his work", ["He felt proud of his work"]).correct, true);
+  assert.equal(m("Because he felt proud of the work he did", ["He felt proud of his work"]).correct, true, "enough content words of the model answer");
+  assert.equal(m("He was sad and went home early", ["He felt proud of his work"]).correct, false);
+  assert.equal(m("She walked slowly to the shop", ["x"], ["walked", "shop"]).correct, true);
+  assert.equal(m("It rained all day long here", ["x"], ["walked", "shop"]).correct, false);
+  assert.equal(m("the dog", ["the dog"]).correct, true, "a model answer of two words needs only two");
+  assert.equal(m("anything at all here", [], []).correct, null);
+  assert.deepEqual([m("a b c d e", ["He felt proud"]).correct, m("A B C", ["a b c"]).correct], [false, true], "deterministic");
+});
+ok("settle on hand-in is wired: the route settles every paper and the migration needs no change", () => {
+  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
+  assert.ok(!/awaiting_parent|g\.ungraded > 0/.test(r) && /settlePaper\(admin/.test(r) && !/settled_at: g\.ungraded/.test(r));
   const m = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261202000000_parent_marks_into_score.sql"), "utf8");
   assert.ok(!/drop\s+(table|column)|delete\s+from|truncate/i.test(m.replace(/--.*$/gm, "")), "no destructive statement");
   for (const c of ["auto_score", "auto_total", "parent_pending", "parent_score", "parent_total", "settled_at"]) assert.ok(m.includes(c));
-  const r = fs.readFileSync(path.join(ROOT, "src/app/api/student/exam/route.js"), "utf8");
-  assert.ok(/g\.ungraded > 0/.test(r) && !/awardPaperReward/.test(r), "hand-in never awards while items are unmarked");
 });
 
 // Issue #66 fix 2: "(2 marks)" is worth 2 in scores and totals.

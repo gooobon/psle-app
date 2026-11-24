@@ -182,6 +182,30 @@ export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSe
   });
   return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + pTotal, parentScore: pScore, parentTotal: pTotal, pending, settled: pending === 0, sections: secs };
 }
+// ── Automatic provisional mark for open-ended answers (issue #115) ───────────────────────────────────────────────
+// Deterministic and deliberately simple (no NLP): a blank or very short answer scores 0 ("too short"); otherwise the answer is right when it
+// contains a model / accepted answer, or covers enough of the marking keywords (or, with none, the content words of the model answer).
+// The parent can still change the mark later. correct: true | false | null (null = no key to compare against, left for the parent).
+export const OPEN_MIN_WORDS = 3;
+export const OPEN_COVERAGE = 0.6;
+const OPEN_STOP = new Set("a an the and or but of to in on at for with by from as is are was were be been am it its this that these those he she they his her their them we you i my your our not no do does did has have had will would can could so if then than there here what who whom which when where why how".split(" "));
+const owords = (s) => String(s == null ? "" : s).toLowerCase().replace(/[^a-z0-9\s'-]/g, " ").split(/\s+/).map((w) => w.replace(/^['-]+|['-]+$/g, "")).filter(Boolean);
+const ostem = (w) => (w.length > 3 && w.endsWith("s") ? w.slice(0, -1) : w);
+const oflat = (v) => (v == null ? [] : Array.isArray(v) ? v.flatMap(oflat) : typeof v === "object" ? oflat(v.w || v.text || v.answer) : [String(v)]);
+export function provisionalMark({ answer, models, keywords }) {
+  const ms = oflat(models).map((m) => owords(m)).filter((w) => w.length);
+  const ks = oflat(keywords).map((k) => owords(k).map(ostem).join(" ")).filter(Boolean);
+  const sw = owords(oflat(answer).join(" "));
+  if (!ms.length && !ks.length) return { correct: null, tooShort: false, noKey: true };
+  const need = Math.max(1, Math.min(OPEN_MIN_WORDS, ...(ms.length ? ms.map((m) => m.length) : [OPEN_MIN_WORDS])));
+  if (sw.length < need) return { correct: false, tooShort: true };
+  const text = " " + sw.map(ostem).join(" ") + " ";
+  if (ms.some((m) => text.includes(" " + m.map(ostem).join(" ") + " "))) return { correct: true, tooShort: false };
+  if (ks.length) return { correct: ks.filter((k) => text.includes(" " + k + " ")).length >= Math.ceil(ks.length * 0.5), tooShort: false };
+  const have = new Set(sw.map(ostem));
+  const best = Math.max(...ms.map((m) => { const c = [...new Set(m.filter((w) => !OPEN_STOP.has(w)).map(ostem))]; return c.length ? c.filter((w) => have.has(w)).length / c.length : 0; }));
+  return { correct: best >= OPEN_COVERAGE, tooShort: false };
+}
 export const percentOf = (score, total) => (total > 0 ? Math.round((score / total) * 100) : null);
 // "2/36 + 4 awaiting parent marking" while open items are unmarked; "6/40" once settled.
 export function scoreLine({ score, total, pending }) {

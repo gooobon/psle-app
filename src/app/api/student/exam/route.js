@@ -12,7 +12,6 @@ import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
 import { listPapers, publicPaper, paperMeta, gradeSubmission, cleanAnswers, cleanDraft, answersFromRows, reviewItems } from "@/lib/examServer";
-import { isSaturday } from "@/lib/rewards";
 import { settlePaper } from "@/lib/examSettle";
 import { writeNotebook, recordMockTrials } from "@/lib/examPostSubmit";
 import { minutesAllowed, paperFlags, paperLabel, deadlineMs, elapsedSeconds, countsAsAttempt, statusAfterSubmit, acceptSubmitTime, pickPaper, PAPER_FEEDS_SCORE_TIERS, canReview, notebookAttemptKey, suggestedCause, percentOf } from "@/lib/examEngine";
@@ -29,7 +28,7 @@ const attemptOut = (a) => ({
   questionCount: a.question_count, unanswered: a.unanswered, openTotal: a.open_total, sections: a.section_scores || [], counts: a.counts,
   countsReason: a.counts_reason, elapsedSeconds: a.elapsed_seconds, attemptNo: a.attempt_no,
   autoScore: a.auto_score == null ? a.score : a.auto_score, autoTotal: a.auto_total == null ? a.total : a.auto_total, parentPending: a.parent_pending || 0,
-  settled: !a.parent_pending, percent: percentOf(a.score, a.total),
+  settled: !a.parent_pending, automatic: !!a.settled_at, percent: percentOf(a.score, a.total),
 });
 
 // Draft answers saved so far for an open attempt (the student's own; never a key or a verdict). Used to resume on another device.
@@ -42,11 +41,6 @@ const draftOut = (m) => { const answers = {}, flags = {}; for (const [id, a] of 
 
 // Grade and store an attempt. Shared by a client hand-in and the server-side auto-submit of an expired sitting.
 // opts.expired: the deadline passed with no hand-in: grade the saved draft, record it at the deadline, status auto_submitted.
-// What the student sees about the Saturday reward while parent marking is outstanding. Nothing is awarded yet.
-async function pendingRewardNote(day) {
-  return { saturday: !!day && isSaturday(day), eligible: false, reason: "awaiting_parent", credits: 0, awarded: false, sticker: false };
-}
-
 async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   const id = a.id, sid = a.student_id;
   const deadline = Date.parse(a.deadline_at), startedMs = Date.parse(a.started_at);
@@ -63,15 +57,16 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
     status, submitted_at: new Date(endMs).toISOString(), elapsed_seconds: used, score: g.score, total: g.total, answered: g.answered,
     question_count: g.count, unanswered: g.unanswered, open_total: g.ungraded, section_scores: g.sections, counts: verdict.counts,
     counts_reason: reason, sgt_day: day,
-    // Parent marks join the score later (issue #62): the auto-graded result is kept, open-ended items are pending until marked.
-    auto_score: g.score, auto_total: g.total, auto_sections: g.sections, parent_pending: g.ungraded, parent_score: 0, parent_total: 0,
-    settled_at: g.ungraded === 0 ? new Date(endMs).toISOString() : null,
+    // Issue #115: every paper settles at hand-in. score = objective items (auto_*) + the automatic provisional mark of the open-ended items
+    // (parent_score / parent_total, also stored per answer in parent_correct with parent_marked_at null). A parent mark later overrides one.
+    auto_score: g.autoScore, auto_total: g.autoTotal, auto_sections: g.autoSections, parent_pending: g.pending, parent_score: g.provisionalScore, parent_total: g.provisionalTotal,
+    settled_at: new Date(endMs).toISOString(),
   }).eq("id", id).eq("status", "in_progress").select("*").maybeSingle();
   if (upd.error) return { error: "could not submit", code: 500 };
   if (!upd.data) { const cur = await admin.from("exam_attempts").select("*").eq("id", id).maybeSingle(); return { attempt: cur.data || a, already: true }; }
   const rows = g.rows.filter((r) => !r.excluded).map((r) => ({
     attempt_id: id, question_id: r.id, section: r.section, answer: r.answer ? { val: r.answer.val, seq: r.answer.seq, reason: r.answer.reason } : null,
-    correct: r.correct, flagged: r.flagged,
+    correct: r.correct, flagged: r.flagged, parent_correct: r.provisional ? r.provisional.correct : null,
   }));
   // Overwrite (not ignore) so autosaved draft rows (correct = null) become the graded rows.
   const w = await admin.from("exam_answers").upsert(rows, { onConflict: "attempt_id,question_id" });
@@ -86,12 +81,7 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   // Phase 2. Each step is best effort and never undoes or blocks the hand-in: the attempt and its answers are already saved.
   const notebook = await writeNotebook(admin, upd.data, g, endMs);
   const trials = await recordMockTrials(admin, upd.data, g, endMs);
-  // A paper with open-ended items is NOT settled yet: the reward, the Saturday report and the milestone alert wait until the parent has marked
-  // every one of them (settlePaper, called from /api/parent/exam), so they use the final score. The effort rule is decided at hand-in (counts).
-  if (g.ungraded > 0) {
-    const pend = await pendingRewardNote(day);
-    return { attempt: upd.data, daily, g, notebook, trials, reward: pend };
-  }
+  // Settled at hand-in: the reward, the Saturday report and the milestone alert use the score above (objective + provisional). The effort rule (counts) still applies.
   const reward = await settlePaper(admin, upd.data);
   return { attempt: upd.data, daily, g, notebook, trials, reward };
 }
@@ -266,7 +256,7 @@ export async function POST(request) {
     const r = await finalize(admin, a, cleanAnswers(b.answers), { nowMs, auto: b.auto });
     if (r.error) return jerr(r.error, r.code || 500);
     if (r.already) return jok({ attempt: attemptOut(r.attempt), already: true });
-    return jok({ attempt: attemptOut(r.attempt), daily: r.daily, reward: r.reward, notebook: r.notebook, verdicts: r.g.rows.map((x) => ({ id: x.id, section: x.section, answered: x.answered, correct: x.correct })) });
+    return jok({ attempt: attemptOut(r.attempt), daily: r.daily, reward: r.reward, notebook: r.notebook, verdicts: r.g.rows.map((x) => ({ id: x.id, no: x.no, section: x.section, answered: x.answered, correct: x.correct, provisional: x.provisional ? x.provisional.correct : null, tooShort: !!(x.provisional && x.provisional.tooShort) })) });
   }
   return jerr("bad request", 400);
 }

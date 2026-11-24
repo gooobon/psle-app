@@ -33,7 +33,7 @@ export async function GET(request) {
   if (error) return jerr("could not load", 500);
   const ids = (attempts || []).filter((a) => (a.open_total || 0) > 0).map((a) => a.id);
   const { data: open, error: oe } = ids.length
-    ? await admin.from("exam_answers").select("attempt_id,question_id,answer,parent_correct").in("attempt_id", ids).is("correct", null)
+    ? await admin.from("exam_answers").select("attempt_id,question_id,answer,parent_correct,parent_marked_at").in("attempt_id", ids).is("correct", null)
     : { data: [], error: null };
   if (oe) return jerr("could not load", 500);
   const byAttempt = {};
@@ -50,7 +50,7 @@ export async function GET(request) {
       percent: percentOf(a.score, a.total), settled: !a.parent_pending,
       open: items.map((i) => ({
         questionId: i.question_id, question: (models[i.question_id] || {}).question || "", modelAnswer: (models[i.question_id] || {}).answer || "",
-        studentAnswer: text(i.answer && i.answer.val), mark: i.parent_correct,
+        studentAnswer: text(i.answer && i.answer.val), mark: i.parent_correct, automatic: i.parent_correct != null && !i.parent_marked_at,
       })),
     };
   });

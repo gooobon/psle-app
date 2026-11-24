@@ -5,7 +5,7 @@ import manifest from "@/data/papers/manifest.json";
 import { flattenEnglishPool, paperKeyOf, englishPaperExamPlan } from "@/lib/p3PaperBridge";
 import { indexSets } from "@/lib/reviewRounds";
 import { resolveItem, getFormat } from "@/lib/learningGrade";
-import { isFullPaper, minutesAllowed, minutesRule, paperFlags, paperMarks, paperLabel, FLAG_NOTES, isAnswered, summarize, marksOf, pickNotebookRows, notebookAttemptKey } from "@/lib/examEngine";
+import { isFullPaper, minutesAllowed, minutesRule, paperFlags, paperMarks, paperLabel, FLAG_NOTES, isAnswered, summarize, combineMarks, provisionalMark, marksOf, pickNotebookRows, notebookAttemptKey } from "@/lib/examEngine";
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 import { skillIdsOf } from "@/lib/similarItemsCore";
 
@@ -135,6 +135,8 @@ export function answersFromRows(rows) {
 export function gradeSubmission(paperId, answers) {
   const d = paperData(paperId);
   if (!d) return null;
+  const planQ = new Map(); // open-ended items are read from the plan (the same place modelAnswersForParent reads the model answer)
+  for (const sec of d.plan) if (sec.type === "Comprehension") for (const st of sec.items) for (const pq of st.questions || []) planQ.set(pq.id, pq);
   const rows = d.questions.map((q) => {
     const a = answers[q.id];
     const answered = isAnswered(a);
@@ -145,11 +147,24 @@ export function gradeSubmission(paperId, answers) {
       if (!answered) correct = false; // unanswered auto-graded item = wrong (shown as unanswered)
       else { const g = rec.grade({ val: a.val, seq: a.seq, reason: a.reason }); correct = g.scored ? !!g.correct : null; }
     }
-    return { id: q.id, section: q.section, marks: q.marks || 1, answered, correct, flagged: !!(a && a.flagged), answer: a || null, excluded };
+    // Open-ended item with a key on the paper: an automatic provisional mark (the parent may override it later). correct stays null.
+    let provisional = null;
+    if (correct === null && !excluded && !d.dup.has(q.id)) {
+      const k = planQ.get(q.id) || q;
+      const p = provisionalMark({ answer: answered ? a.val : null, models: [k.answer, k.acceptableAnswers], keywords: k.keywords || k.markingPoints || k.keyPoints });
+      if (p.correct !== null) provisional = p;
+    }
+    return { id: q.id, no: q.questionNo || null, section: q.section, marks: q.marks || 1, answered, correct, provisional, flagged: !!(a && a.flagged), answer: a || null, excluded };
   });
   const sum = summarize(rows);
+  const open = rows.filter((r) => !r.excluded && r.correct === null && r.provisional);
+  const comb = combineMarks({ autoScore: sum.score, autoTotal: sum.total, sections: sum.sections, openMarks: open.map((r) => r.provisional.correct), openSections: open.map((r) => r.section || "Comprehension"), openWeights: open.map((r) => r.marks) });
   const live = rows.filter((r) => !r.excluded); // counts below ignore the excluded items
-  return { rows, ...sum, answered: live.filter((r) => r.answered).length, count: live.length, unanswered: live.filter((r) => !r.answered).length, excluded: rows.length - live.length };
+  // score / total / sections = objective + provisional open-ended. autoScore / autoTotal / autoSections = objective only.
+  // pending = open-ended items with no key to compare against (left for the parent); tooShort = the open items that scored 0 for being blank or too short.
+  return { rows, ...sum, autoScore: sum.score, autoTotal: sum.total, autoSections: sum.sections, score: comb.score, total: comb.total, sections: comb.sections,
+    provisionalScore: comb.parentScore, provisionalTotal: comb.parentTotal, pending: sum.ungraded - open.length, tooShort: open.filter((r) => r.provisional.tooShort).map((r) => r.id),
+    answered: live.filter((r) => r.answered).length, count: live.length, unanswered: live.filter((r) => !r.answered).length, excluded: rows.length - live.length };
 }
 
 // Marks each question is worth, by id (parent marking route). Unknown ids = 1.
