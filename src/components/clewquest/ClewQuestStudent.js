@@ -14,8 +14,7 @@ import { cqGet, cacheCharacter, readCachedCharacter, takeLastAward, takePrefetch
 import { markIsland } from "@/lib/clewquest/perf";
 
 // Clew home (pose frames, history, level cards) is its own chunk: the island landing never loads it.
-const loadClewHome = () => import("./ClewHome");
-const ClewHome = lazy(loadClewHome);
+const ClewHome = lazy(() => import("./ClewHome"));
 
 // Lightweight placeholder shown the instant Clew home is requested (no art, no network): replaced when state + chunk arrive.
 function HomeSkeleton() {
@@ -66,7 +65,7 @@ function Landing({ subjects, onOpen, onHome, onToday, onLogout, onLeave, onShop,
   const [walk, setWalk] = useState(null);
   const reduced = usePrefersReducedMotion();
   const [shipReady, setShipReady] = useState(false);
-  useEffect(() => { markIsland("islands-visible"); const w = setTimeout(() => { loadClewHome().catch(() => {}); }, 1200); const t = setTimeout(() => setShipReady(true), 700); return () => { clearTimeout(t); clearTimeout(w); }; }, []); // ship art loads after the islands are up
+  useEffect(() => { markIsland("islands-visible"); const w = setTimeout(() => { import("./ClewHome").catch(() => {}); }, 1200); const t = setTimeout(() => setShipReady(true), 700); return () => { clearTimeout(t); clearTimeout(w); }; }, []); // ship art loads after the islands are up
   const hex = character ? (CLEWQUEST.colours.find((c) => c.key === character.colour_key) || {}).hex : undefined;
   const artKey = character ? stageAssetKey(stage, character.gender, character.hair_key, character.colour_key, ASSET_KEYS) : null;
   useEffect(() => () => { if (walk && walk.t) clearTimeout(walk.t); }, [walk]);

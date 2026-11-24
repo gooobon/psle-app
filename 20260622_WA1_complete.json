@@ -252,7 +252,7 @@
               "answer": "D",
               "trap_type": "Corrected: 'told them' — referring to the students as 'them' (3rd person view from narrator who is also part of group). Actually in first-person narration, 'told us' is correct. Passage redesigned so blank 2 uses E (them) in a different sentence.",
               "answer_corrected": "E",
-              "learning_tip": "After 'told', use object pronoun. Here, Ms Tan told the students (them) = E.",
+              "learning_tip": "Ms Tan is ONE female person doing the telling, so use the SUBJECT pronoun SHE = D. 'Her' is the object form.",
               "retry_hint": "The person doing the telling is MS TAN - one woman, and the pronoun starts the sentence, so it is the one acting. Ask: which pronoun is the SUBJECT form for a single female? The object form only comes after a verb or a preposition."
             },
             {
@@ -262,7 +262,7 @@
               "answer": "E",
               "trap_type": "My friend Rita (female) → she = D. Students may confuse with 'they' (thinking of all friends).",
               "answer_corrected": "D",
-              "learning_tip": "A single female friend = SHE (subject pronoun). D = she.",
+              "learning_tip": "Raju is ONE boy doing the pointing, so use the SUBJECT pronoun HE = E. SHE is for a girl.",
               "retry_hint": "The excited one is RAJU - one boy, and this pronoun starts the sentence, so it is doing the pointing. Ask: which pronoun is the SUBJECT form for one male? Not 'him', which comes after a verb."
             },
             {
@@ -272,7 +272,7 @@
               "answer": "B",
               "trap_type": "'Asking her teacher' — her = A, referring to Ms Tan (female teacher). Students may pick D (she) but that is subject, not possessive.",
               "answer_corrected": "A",
-              "learning_tip": "Before a noun (teacher), use possessive: HER teacher = A. 'She teacher' is wrong.",
+              "learning_tip": "After 'smiled at' (a preposition), use the OBJECT pronoun: smiled at HIM (Raju) = B. 'He' is the subject form.",
               "retry_hint": "Ms Tan SMILED AT Raju - he is receiving the smile, and the pronoun comes after 'at'. Ask: which pronoun for one male goes AFTER a verb or preposition? The subject form cannot sit there."
             },
             {
@@ -282,7 +282,7 @@
               "answer": "C",
               "trap_type": "Redesigned: friend is Raju (male) → smiled at HIM = B. Students pick D (she) confusing subject/object.",
               "answer_corrected": "B",
-              "learning_tip": "After 'smiled at' (preposition), use OBJECT pronoun: smiled at HIM (not he). B = him.",
+              "learning_tip": "Before a noun (notebook), use the possessive: HIS notebook = C (it belongs to Raju). 'Him notebook' is wrong.",
               "retry_hint": "The NOTEBOOK belongs to RAJU. Ask: which word shows that something belongs to one male? Careful: two of the choices sound similar, but only one can sit in front of a noun to show ownership."
             },
             {
@@ -310,7 +310,7 @@
               "difficulty": "Hard",
               "answer": "A",
               "trap_type": "'She was very proud' — Ms Tan (female singular) = she = D. Students may pick F (they) thinking of multiple teachers.",
-              "learning_tip": "Ms Tan is ONE female person → SHE = D. 'They' is for more than one person.",
+              "learning_tip": "After 'gave', use the OBJECT pronoun for Ms Tan: gave HER a card = A. SHE is the subject form.",
               "retry_hint": "They GAVE a card to MS TAN - one woman, receiving the card. Ask: which pronoun for one female goes after a verb, in the object position? The subject form 'she' cannot receive anything."
             }
           ],
@@ -2671,7 +2671,7 @@
               "difficulty": "Easy",
               "answer": "A",
               "trap_type": "'Near our house' — E = our (possessive, first person plural). Students may pick F (their).",
-              "learning_tip": "MY FAMILY = we/our. 'Near OUR house' = belonging to us. OUR = E (first person plural possessive).",
+              "learning_tip": "MY FAMILY = we/our. 'Near OUR house' = belonging to us. OUR = A (first person plural possessive).",
               "retry_hint": "The writer says MY FAMILY loves going there - the house belongs to the writer together with the family. Ask: which possessive word means 'belonging to me and the people I live with'? Not one person alone, and not somebody else's."
             },
             {
@@ -2680,7 +2680,7 @@
               "difficulty": "Easy",
               "answer": "B",
               "trap_type": "'Brought us there' — H = us (object pronoun). Students pick G (them).",
-              "learning_tip": "Father brought US (the family, including the speaker) there. US = object pronoun for WE. H = us.",
+              "learning_tip": "The chicken rice stall's food = THEIR food (it belongs to the stall people). Possessive before a noun: THEIR = B.",
               "retry_hint": "These words are inside the SISTER's speech, and she is pointing at the CHICKEN RICE STALL - the food belongs to the people who run that stall. Ask: which possessive word points to other people, not to you?"
             },
             {
@@ -2689,7 +2689,7 @@
               "difficulty": "Medium",
               "answer": "C",
               "trap_type": "'Their food' — F = their (possessive for the stall/the people running it). Students pick D (its).",
-              "learning_tip": "The chicken rice stall's food = THEIR food (belonging to the stall people). THEIR = F (third person plural possessive).",
+              "learning_tip": "'Placed' needs an OBJECT for the five plates (plural): placed THEM = C. 'It' is for one thing.",
               "retry_hint": "Father comes back with FIVE PLATES and puts those plates down on the table. Ask: which pronoun stands for more than one thing that is being acted upon? The plates are objects, and there are several."
             },
             {
@@ -2698,7 +2698,7 @@
               "difficulty": "Medium",
               "answer": "D",
               "trap_type": "'Placed them on the table' — G = them (object pronoun for 'five plates'). Students pick C (it).",
-              "learning_tip": "Five plates = plural → object pronoun = THEM = G. 'IT' (C) is for singular objects.",
+              "learning_tip": "The uncle saw the family (including the speaker) sitting together: saw US = D, the object form of WE.",
               "retry_hint": "The uncle SAW the whole family sitting TOGETHER - and the writer is part of that family, seen from outside. Ask: which pronoun means 'me and the people with me' when we are the ones being looked at, not the ones doing the looking?"
             },
             {
@@ -2708,7 +2708,7 @@
               "answer": "E",
               "trap_type": "H is already used in blank 2. Must redesign. 'He saw us sitting' → H(us). But H used. Redesign blank 2 or 5.",
               "answer_corrected": "Blank 5: 'He saw (5)___ sitting together as a family' → needs US (H). But H is used in blank 2 too. Re-examine: If blank 2 uses a different word... OR redesign passage so only one blank needs 'us'. Resolution: blank 2 = 'brought (2)___ there' → could use G(them) if narrator speaks of family as 3rd person. But passage uses first person 'we'. Final fix: use 'the family' in blank 2 to free up H for blank 5.",
-              "learning_tip": "HE SAW US = he saw the family (object pronoun: us = H).",
+              "learning_tip": "'IT is a gift from me' = the small bowl of soup (one thing). IT = E. ITS is the possessive form.",
               "retry_hint": "He is speaking about the small BOWL of SOUP he has just brought over. Ask: which pronoun stands for a single thing that is neither male nor female? The blank starts the sentence, so you need the subject form."
             },
             {
@@ -2717,7 +2717,7 @@
               "difficulty": "Hard",
               "answer": "F",
               "trap_type": "'This/It is a gift from me' — C = it (referring to the soup bowl). Students pick D (its).",
-              "learning_tip": "'IT is a gift from me' = referring to the soup bowl. IT = C (pronoun for a thing). ITS = possessive (its colour, its taste).",
+              "learning_tip": "After THANKED (a verb), use the OBJECT pronoun: thanked HIM (the uncle) = F.",
               "retry_hint": "Mother THANKED the chicken rice UNCLE - one man, and he is the person receiving her thanks. Ask: which pronoun replaces a single male in the object position? Not the possessive, and not the subject form 'he'."
             },
             {
@@ -2727,7 +2727,7 @@
               "answer": "G",
               "trap_type": "'Thanked him' — the uncle is male. B = his? No: 'thanked him' = object pronoun = B(his)? No — 'him' is not in the box. Redesign: replace B(his) with B(him).",
               "answer_corrected": "Word box redesigned: B = 'him'. 'My mother thanked HIM = B (the uncle, male, object).'",
-              "learning_tip": "After THANKED (verb), use object pronoun: thanked HIM (the male uncle). HIM = B.",
+              "learning_tip": "'All of ITS own' = the soup's own flavour. Possessive for a thing: ITS = G.",
               "retry_hint": "'A rich FLAVOUR all of ___ OWN' - the flavour belongs to the SOUP, and soup is a thing, not a person. Ask: which possessive word belongs to a thing? Careful: the look-alike with an apostrophe is short for 'it is'."
             },
             {
@@ -2736,7 +2736,7 @@
               "difficulty": "Hard",
               "answer": "H",
               "trap_type": "'It was her best' — A = her (possessive for 'my mother'). Students pick E (our) thinking of the whole family.",
-              "learning_tip": "MY MOTHER said the chicken rice was HER best = belonging to her (the mother's own experience). HER = A.",
+              "learning_tip": "Before a noun (mother), use the possessive: gave HER mother a hug = H. 'She mother' is wrong.",
               "retry_hint": "The SISTER hugs the MOTHER, and that mother belongs to the sister - one girl. Ask: which possessive word shows something belonging to a single female? Match the pronoun to who the mother belongs to."
             }
           ],
