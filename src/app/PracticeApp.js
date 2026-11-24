@@ -1555,7 +1555,7 @@ loadBank(); // warm the mistake-description index so the first wrong-answer repo
 
 // Single lazy entry used by ClaudeApp (the islands never import this module).
 export function PracticeEntry({kind, ...props}){
-  if(kind==="parent") return <ParentApp {...props} homeworkSimilarFor={(subj,m,count)=>pickSimilar(getTagIndex(), subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX, {id:m.id}, similarQuestions, count)}/>;
+  if(kind==="parent") return <ParentApp {...props} homeworkRunnable={(subj)=>subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX} homeworkSimilarFor={(subj,m,count)=>pickSimilar(getTagIndex(), subj==="Chinese"?ZH_ROUND_INDEX:EN_ROUND_INDEX, {id:m.id}, similarQuestions, count)}/>;
   if(kind==="admin") return <AdminApp {...props}/>;
   return <StudentApp {...props}/>;
 }
