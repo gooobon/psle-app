@@ -705,9 +705,9 @@ function AlertSettings(){
     <div style={{background:"#fff",border:`1px solid ${C.border}`,borderRadius:12,padding:12,marginBottom:14}}>
       <button onClick={()=>setOpen(o=>!o)} style={{background:"none",border:"none",cursor:"pointer",fontWeight:800,fontSize:13,color:"#1F3F95",padding:0}}>{open?"− ":"＋ "}Alerts</button>
       {open&&(<div style={{marginTop:10}}>
-        <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me when my child finishes a set, a paper or assigned homework, plus the weekly report</label>
+        <label style={{fontSize:12,display:"block",margin:"10px 0 8px"}}><input type="checkbox" checked={em} onChange={e=>setEm(e.target.checked)}/> Email me when my child finishes a set, a paper or assigned homework, plus a weekly report every Sunday evening</label>
         <input style={inp} placeholder="WhatsApp number, e.g. +6591234567" value={num} onChange={e=>setNum(e.target.value)}/>
-        <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me daily WhatsApp alerts (coming soon; saved for when it is switched on)</label>
+        <label style={{fontSize:12,display:"block",marginBottom:8}}><input type="checkbox" checked={opt} onChange={e=>setOpt(e.target.checked)}/> Send me one daily WhatsApp summary around 8pm SGT (coming soon; saved for when it is switched on)</label>
         <label style={{fontSize:12,display:"block",marginBottom:6}}><input type="checkbox" checked={qOn} onChange={e=>setQOn(e.target.checked)}/> Quiet hours for live alerts (Singapore time). Alerts that arrive in this window are held and sent when it ends.</label>
         {qOn&&<div style={{fontSize:12,marginBottom:8}}>From <input type="time" value={qs} onChange={e=>setQs(e.target.value)}/> to <input type="time" value={qe} onChange={e=>setQe(e.target.value)}/></div>}
         <button onClick={save} style={{background:"#1F3F95",color:"#fff",border:"none",borderRadius:10,padding:"9px 16px",fontWeight:800,cursor:"pointer"}}>Save</button>

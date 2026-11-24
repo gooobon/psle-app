@@ -1,10 +1,10 @@
-// Server-only weekly parent report (issue #55). Replaces the daily 20:00 summary.
-//   * Primary send: EVENT-triggered on Saturday (child finishes the weekly review or hands in a past paper) -> sendForChild().
-//   * Fallback: the single daily cron calls runFallback(); it only acts in the documented window (see fallbackWindow()).
+// Server-only weekly parent report (issue #55, retimed in #116). Email is the WEEKLY report only; the daily parent message is WhatsApp (dailyWhatsApp.mjs).
+//   * Send time: SUNDAY evening SGT (>= 20:00), so the Mon-Sun week is complete. The daily 20:00 SGT cron calls runFallback() every day.
+//   * sendForChild() (Saturday event trigger) is now a no-op: a Saturday send would miss Sunday. Callers stay in place.
 //   * Both paths go through deliverWeekly(): allow-list, one report per parent per SGT week (alert_log claim), dry-run without a claim.
 // Relative imports only so tools/weekly_report_selftest.mjs can run it in plain node. No addresses are ever logged.
 import { SUBJECT_KEYS, sgtDate, isLiveSubject } from "../activity.js";
-import { weekStart, isSaturday, addDays } from "../rewards.js";
+import { weekStart, addDays, firstSetScore } from "../rewards.js";
 import { settingForDate } from "../childSettings.js";
 import { dispatchAlert } from "./index.mjs";
 import { renderWeeklyEmail } from "./emailTemplate.mjs";
@@ -12,7 +12,7 @@ import { timingSafeEqual, createHash } from "node:crypto";
 
 export const WEEKLY_CHANNEL = "email_weekly";       // alert_log.channel for the real weekly send (date column = Monday of the SGT week)
 export const TRIAL_CHANNEL = "email_weekly_trial";  // send-now trials are logged here so they never burn the real week's claim
-export const FALLBACK_HOUR_SGT = 21;                // cron is scheduled 21:00 SGT (13:00 UTC); Vercel Hobby may fire anywhere in that hour
+export const FALLBACK_HOUR_SGT = 20;                // cron is scheduled 20:00 SGT (12:00 UTC); Vercel Hobby may fire anywhere in that hour
 
 // ---------- recipient policy (env NAMES: EMAIL_ALERTS_ENABLED, ALERT_TEST_RECIPIENTS, ALERT_ALLOW_ALL_PARENTS) ----------
 // Precedence, first match wins:
@@ -42,14 +42,13 @@ export function recipientDecision(policy, address) {
 export const weekKey = (now = new Date()) => weekStart(sgtDate(now));          // Monday (SGT) = the dedupe key's date
 export const weekEnd = (now = new Date()) => addDays(weekKey(now), 6);          // Sunday
 const sgtHour = (now) => Number(new Intl.DateTimeFormat("en-GB", { timeZone: "Asia/Singapore", hour: "2-digit", hour12: false }).format(now)) % 24;
-// ONE rule: the daily cron fires at 21:00 SGT. It acts on Saturday from 21:00 (week's report not yet sent by the Saturday event), and again on
-// Sunday as catch-up for a Saturday run that failed. Any other day/hour = no-op. The claim stops a second send either way.
+// ONE rule: the daily cron fires at 20:00 SGT and the weekly email goes out on SUNDAY from 20:00 only. Any other day/hour = no-op.
+// The alert_log claim (parent + Monday + email_weekly) stops a second send on retries.
 export function fallbackWindow(now = new Date()) {
   const day = sgtDate(now), h = sgtHour(now);
   const dow = new Date(day + "T00:00:00Z").getUTCDay();
-  if (dow === 6 && h >= FALLBACK_HOUR_SGT) return { run: true, window: "saturday_21" };
-  if (dow === 0) return { run: true, window: "sunday_catchup" };
-  return { run: false, window: null, reason: "not_fallback_window" };
+  if (dow === 0 && h >= FALLBACK_HOUR_SGT) return { run: true, window: "sunday_evening" };
+  return { run: false, window: null, reason: "not_sunday_evening" };
 }
 
 // ---------- Bearer auth (cron + send-now): fail closed ----------
@@ -76,7 +75,10 @@ export function summariseChild({ profile, days, versions = [], activity = [], wr
       sets += s;
       if (t > 0) { target += t; daysTracked++; if (s >= t) daysMet++; }
     }
-    return { name: k, sets, target, daysMet, daysTracked };
+    // First attempt of the day: average of the first-set score over the days it was scored (null = no scored first set this week).
+    const fs = days.map((d) => firstSetScore(activity.find((r) => r.date === d && r.subject === k))).filter((x) => x != null);
+    const firstAttempt = fs.length ? { days: fs.length, avgPct: Math.round(fs.reduce((a, b) => a + b, 0) / fs.length) } : null;
+    return { name: k, sets, target, daysMet, daysTracked, firstAttempt };
   }).filter((s) => s.target > 0 && isLiveSubject(profile.grade, s.name));
   const q = activity.reduce((a, r) => a + (r.questions_answered || 0), 0), c = activity.reduce((a, r) => a + (r.correct || 0), 0);
   const byCause = {};
@@ -117,7 +119,7 @@ export async function buildWeeklyPayload(admin, parent, now = new Date(), { env 
   const mock = env.NEXT_PUBLIC_MOCK_EXAMS_ENABLED === "true";
   const [profs, act, vers, wr, hw, cr, ex] = await Promise.all([
     admin.from("profiles").select("id,display_name,grade").in("id", ids),
-    admin.from("daily_activity").select("user_id,date,subject,sets_completed,questions_answered,correct,minutes").in("user_id", ids).gte("date", wk).lte("date", end),
+    admin.from("daily_activity").select("user_id,date,subject,sets_completed,questions_answered,correct,minutes,first_set_questions,first_set_correct").in("user_id", ids).gte("date", wk).lte("date", end),
     admin.from("child_setting_versions").select("child_id,effective_from,daily_target").in("child_id", ids),
     admin.from("wrong_answers").select("student_id,cause").in("student_id", ids).gte("attempted_at", since).limit(2000),
     admin.from("parent_homework").select("child_id,solved_at").in("child_id", ids).gte("assigned_for", wk).lte("assigned_for", end).limit(2000),
@@ -146,7 +148,7 @@ async function confirmed(admin, id) {
   return !!data?.user?.email_confirmed_at;
 }
 // Claim (parent, Monday-of-week, channel) so duplicates/retries/both Saturday events cannot send twice. A previous 'error' may be retried.
-async function claim(admin, parentId, date, channel) {
+export async function claim(admin, parentId, date, channel) {
   const ins = await admin.from("alert_log").insert({ parent_id: parentId, date, channel, status: "claimed" });
   if (!ins.error) return true;
   if (ins.error.code !== "23505") throw new Error("alert_log insert failed");
@@ -154,7 +156,7 @@ async function claim(admin, parentId, date, channel) {
     .eq("parent_id", parentId).eq("date", date).eq("channel", channel).eq("status", "error").select("parent_id");
   return !!(data && data.length);
 }
-const finish = (admin, parentId, date, channel, status, detail) =>
+export const finish = (admin, parentId, date, channel, status, detail) =>
   admin.from("alert_log").update({ status, detail: detail ? String(detail).slice(0, 200) : null, updated_at: new Date().toISOString() })
     .eq("parent_id", parentId).eq("date", date).eq("channel", channel);
 
@@ -210,18 +212,10 @@ export async function runFallback(admin, { env = process.env, now = new Date(), 
   return sum;
 }
 
-// Event entry: the child just finished the Saturday weekly review or handed in a Saturday paper. Saturday (SGT) only; never throws.
-export async function sendForChild(admin, childId, { env = process.env, now = new Date(), deps = {} } = {}) {
-  const out = tally();
-  try {
-    if (!isSaturday(sgtDate(now))) return { ...out, noop: true, reason: "not_saturday" };
-    const { data: links } = await admin.from("parent_child").select("parent_id").eq("child_id", childId);
-    for (const id of [...new Set((links || []).map((l) => l.parent_id))]) {
-      const { data: parent } = await admin.from("profiles").select("id,display_name,email").eq("id", id).eq("role", "parent").maybeSingle();
-      if (parent) count(out, await deliverWeekly(admin, parent, { env, now, trigger: "event", deps }), id);
-    }
-  } catch (e) { console.error("[weekly-report] event send failed", String(e?.message || e)); out.errors++; }
-  return out;
+// Event entry (Saturday weekly review / paper hand-in). Intentionally a no-op since #116: the weekly email is sent Sunday evening SGT by the
+// daily cron (runFallback), so the Mon-Sun week is complete. Kept so existing callers need no change. Never throws.
+export async function sendForChild() {
+  return { ...tally(), noop: true, reason: "weekly_email_is_sent_sunday_evening" };
 }
 
 // Owner trial (send-now): ONE parent, chosen by id or email in the request body. dryRun defaults to true; a real trial additionally needs the

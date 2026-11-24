@@ -10,6 +10,8 @@ const SAT_NOON = new Date("2026-11-21T04:00:00Z");    // Sat 12:00 SGT
 const SUN_AM = new Date("2026-11-21T23:30:00Z");      // Sun 22 Nov 07:30 SGT
 const WED = new Date("2026-11-18T13:00:00Z");         // Wed 21:00 SGT
 const NEXT_SAT = new Date("2026-11-28T04:00:00Z");
+const SUN_EVE = new Date("2026-11-22T12:30:00Z");     // Sun 22 Nov 20:30 SGT (the send time since #116)
+const NEXT_SUN_EVE = new Date("2026-11-29T12:30:00Z");
 
 // Fake admin: tables as arrays. Supports the handful of query shapes weeklyReport.mjs uses.
 function fakeAdmin({ parents, links = {}, settings = {}, confirmedIds }) {
@@ -65,43 +67,43 @@ await ok("precedence: flag on + no list + no allow-all => fail closed", () => {
 await ok("allow-list: only listed parent is emailed, others skipped (cron fallback)", async () => {
   resetSent(); const a = mk();
   const env = { ...ON, ALERT_TEST_RECIPIENTS: "Owner@example.test" };
-  const sum = await runFallback(a, { env, now: SAT_EVENING, deps });
+  const sum = await runFallback(a, { env, now: SUN_EVE, deps });
   assert.deepEqual(sent, ["owner@example.test"].map((x) => x)); // channel address falls back to profile email
   assert.equal(sum.sent, 1); assert.equal(sum.skippedAllowList, 2); assert.deepEqual(sum.skippedAllowListParentIds.sort(), ["p2", "p3"]);
   assert.equal(a.alert.length, 1); // skipped parents get no claim, so a later list change can still send
 });
-await ok("allow-list applies to the event trigger too", async () => {
+await ok("Saturday event trigger is a no-op (weekly email is Sunday evening)", async () => {
   resetSent(); const a = mk();
-  const sum = await sendForChild(a, "c1", { env: { ...ON, ALERT_TEST_RECIPIENTS: "other@example.test" }, now: SAT_NOON, deps });
-  assert.deepEqual(sent, ["other@example.test"]); assert.equal(sum.sent, 1); assert.equal(sum.skippedAllowList, 1);
+  const sum = await sendForChild(a, "c1", { env: { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" }, now: SAT_NOON, deps });
+  assert.equal(sum.noop, true); assert.equal(sent.length, 0); assert.equal(a.alert.length, 0);
 });
-await ok("weekly dedupe: both Saturday events + fallback + Sunday catch-up => ONE send per parent", async () => {
+await ok("weekly dedupe: Saturday events + Sunday evening runs + retry => ONE send per parent", async () => {
   resetSent(); const a = mk(); const env = { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" };
-  await sendForChild(a, "c1", { env, now: SAT_NOON, deps });      // weekly review done
-  await sendForChild(a, "c1", { env, now: SAT_NOON, deps });      // paper handed in
-  await runFallback(a, { env, now: SAT_EVENING, deps });          // 21:00 fallback
-  await runFallback(a, { env, now: SUN_AM, deps });               // Sunday catch-up
+  await sendForChild(a, "c1", { env, now: SAT_NOON, deps });
+  await runFallback(a, { env, now: SAT_EVENING, deps });          // Saturday night: too early, no-op
+  await runFallback(a, { env, now: SUN_EVE, deps });
+  await runFallback(a, { env, now: new Date(SUN_EVE.getTime() + 600000), deps }); // retry
   assert.equal(sent.length, 1);
   assert.equal(a.alert.filter((r) => r.channel === "email_weekly").length, 1);
   assert.equal(a.alert[0].date, "2026-11-16"); // keyed by Monday of the SGT week
-  await sendForChild(a, "c1", { env, now: NEXT_SAT, deps });      // next week sends again
+  await runFallback(a, { env, now: NEXT_SUN_EVE, deps });         // next week sends again
   assert.equal(sent.length, 2);
 });
 await ok("failed send (status error) can be retried by the fallback", async () => {
   resetSent(); const a = mk(); const env = { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" };
   const bad = { ...deps, dispatch: async () => [{ type: "email", status: "error", error: "provider HTTP 500" }] };
-  await sendForChild(a, "c1", { env, now: SAT_NOON, deps: bad });
+  await runFallback(a, { env, now: SUN_EVE, deps: bad });
   assert.equal(a.alert[0].status, "error");
-  await runFallback(a, { env, now: SAT_EVENING, deps });
+  await runFallback(a, { env, now: SUN_EVE, deps });
   assert.equal(sent.length, 1); assert.equal(a.alert[0].status, "sent");
 });
 await ok("fallback no-ops on the wrong day/time", async () => {
-  for (const d of [WED, SAT_NOON, new Date("2026-11-16T13:00:00Z")]) { // Wed 21:00, Sat noon, Mon 21:00
+  for (const d of [WED, SAT_NOON, SAT_EVENING, SUN_AM, new Date("2026-11-16T13:00:00Z")]) { // Wed, Sat, Sun 07:30 (too early), Mon
     const a = mk(); resetSent();
     const sum = await runFallback(a, { env: { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" }, now: d, deps });
     assert.equal(sum.noop, true); assert.equal(sent.length, 0); assert.equal(a.alert.length, 0);
   }
-  assert.equal(fallbackWindow(SAT_EVENING).window, "saturday_21"); assert.equal(fallbackWindow(SUN_AM).window, "sunday_catchup");
+  assert.equal(fallbackWindow(SUN_EVE).window, "sunday_evening");
 });
 await ok("event trigger no-ops off Saturday", async () => {
   resetSent(); const sum = await sendForChild(mk(), "c1", { env: { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" }, now: WED, deps });
@@ -109,9 +111,9 @@ await ok("event trigger no-ops off Saturday", async () => {
 });
 await ok("flag off: dry run, nothing sent, NO alert_log claim, later real send still goes out", async () => {
   resetSent(); const a = mk();
-  const off = await runFallback(a, { env: {}, now: SAT_EVENING, deps });
+  const off = await runFallback(a, { env: {}, now: SUN_EVE, deps });
   assert.equal(off.dryRun, 3); assert.equal(sent.length, 0); assert.equal(a.alert.length, 0);
-  const real = await deliverWeekly(a, parents[0], { env: { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" }, now: SAT_EVENING, deps });
+  const real = await deliverWeekly(a, parents[0], { env: { ...ON, ALERT_TEST_RECIPIENTS: "owner@example.test" }, now: SUN_EVE, deps });
   assert.equal(real.status, "sent");
 });
 await ok("explicit dryRun with flag on: no claim", async () => {
@@ -128,7 +130,7 @@ await ok("send-now: real trial needs allow-list; uses trial channel, never the r
   assert.equal(sent.length, 0);
   assert.equal((await trialForParent(a, { email: "OWNER@example.test", dryRun: false }, { env, now: WED, deps })).status, "sent");
   assert.deepEqual(a.alert.map((r) => r.channel), ["email_weekly_trial"]);
-  assert.equal((await sendForChild(a, "c1", { env, now: NEXT_SAT, deps })).sent, 1); // the real weekly claim is untouched
+  assert.equal((await runFallback(a, { env, now: SUN_EVE, deps })).sent, 1); // the real weekly claim is untouched
   assert.equal((await trialForParent(a, { parentId: "nope" }, { env, deps })).reason, "no_such_parent");
 });
 await ok("send-now / cron auth: Bearer, fail closed", () => {
@@ -147,7 +149,7 @@ await ok("summariseChild: sets vs target, accuracy, causes (no invention), homew
   const days = daysSoFar(SAT_EVENING);
   const c = summariseChild({
     profile: { display_name: "K", grade: "P3" }, days,
-    activity: [{ date: "2026-11-16", subject: "English", sets_completed: 1, questions_answered: 10, correct: 8, minutes: 12 }, { date: "2026-11-17", subject: "English", sets_completed: 2, questions_answered: 20, correct: 10, minutes: 20 }],
+    activity: [{ date: "2026-11-16", subject: "English", sets_completed: 1, questions_answered: 10, correct: 8, minutes: 12, first_set_questions: 10, first_set_correct: 8 }, { date: "2026-11-17", subject: "English", sets_completed: 2, questions_answered: 20, correct: 10, minutes: 20, first_set_questions: 10, first_set_correct: 6 }],
     wrong: [{ cause: "misread" }, { cause: "misread" }, { cause: null }],
     homework: [{ solved_at: "x" }, { solved_at: null }],
     credits: [{ status: "confirmed", credits: 10, sgd_per_credit: 0.5 }, { status: "pending", credits: 2 }, { status: "forfeited", credits: 3 }],
@@ -155,6 +157,9 @@ await ok("summariseChild: sets vs target, accuracy, causes (no invention), homew
   });
   const en = c.subjects.find((s) => s.name === "English");
   assert.deepEqual([en.sets, en.target, en.daysMet, en.daysTracked], [3, 6, 2, 6]);
+  assert.deepEqual(en.firstAttempt, { days: 2, avgPct: 70 }); // first-attempt scores by subject: (80 + 60) / 2
+  assert.equal(c.subjects.find((x) => x.name === "Chinese").firstAttempt, null);
+  assert.equal(c.activeDays, 2); assert.equal(c.minutes, 32);
   assert.equal(c.accuracy, 60); assert.deepEqual(c.wrong, { total: 3, untagged: 1, byCause: { misread: 2 } });
   assert.deepEqual(c.homework, { assigned: 2, solved: 1, notDone: 1 }); assert.deepEqual(c.credits, { confirmed: 10, pending: 2, forfeited: 3, sgd: 5 });
   assert.equal(c.papers.length, 1);
@@ -169,6 +174,8 @@ await ok("template: causes shown only when tagged; honest fallbacks; no paper =>
   const t = mail({ total: 4, untagged: 1, byCause: { misread: 3 } });
   assert(t.text.includes("Misread the question: 3") && t.text.includes("1 more not tagged yet"));
   assert(t.text.includes("No mock exam or past paper handed in this week.") && t.text.includes("Homework: none assigned"));
+  assert(mail({ total: 0, untagged: 0, byCause: {} }).text.includes("no scored first attempt"));
+  assert(renderWeeklyEmail({ parentName: "P", weekStart: "2026-11-16", weekEnd: "2026-11-22", dashboardUrl: "https://example.test/", children: [{ ...base, subjects: [{ ...base.subjects[0], firstAttempt: { days: 2, avgPct: 70 } }], wrong: { total: 0, untagged: 0, byCause: {} } }] }).text.includes("first attempt of the day: 70% average over 2 days"));
   assert(t.subject.startsWith("Weekly report (") && t.html.includes("<h3"));
 });
 console.log(`ALL PASS (${n} checks)`);

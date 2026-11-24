@@ -131,8 +131,8 @@ test("mock exam autosave role-play @autosave", async ({ browser }) => {
   await pp.getByText(/handed in automatically|Score/).first().waitFor({ timeout: 20000 });
   record("parent A", "Dashboard shows the auto-submitted paper", "Papers tab lists the sitting", /Score/.test(await bodyText(pp)) ? "score on the tab" : "missing", /Score/.test(await bodyText(pp)) ? "PASS" : "FAIL", await snap(pp, "05-parent"));
 
-  // SKIPPED: daily-alert route removed; event-alerts-based design decision pending.
-  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "skipped: daily-alert route removed, event-alerts design decision pending", "SKIP", "");
+  // The parent gets one daily WhatsApp (20:00 SGT) and a weekly email (Sunday evening). The daily summary payload is checked in roleplay.spec.js.
+  record("parent", "8pm email includes the auto-submitted paper", "Dry-run Mock papers section, no answer key", "skipped: no daily email any more; the daily WhatsApp summary is covered in roleplay.spec.js and the weekly email in tools/weekly_report_selftest.mjs", "SKIP", "");
 
   await sp.getByRole("button", { name: "Start" }).nth(1).click();
   await sp.getByText("Previous section").waitFor({ timeout: 30000 });
