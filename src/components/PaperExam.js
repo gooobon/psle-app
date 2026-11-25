@@ -214,7 +214,7 @@ function Sitting({ attempt, paper, initial, onSubmitted, onExit }) {
       {warn ? <div style={{ ...card, background: '#FEF3C7', fontSize: 13 }}>{warn === 1 ? 'Less than 1 minute left.' : `${warn} minutes left.`}</div> : null}
       <div style={{ display: 'flex', gap: 6, overflowX: 'auto', marginBottom: 10 }}>
         {paper.sections.map((s, i) => (
-          <button key={s.type} onClick={() => setSecIdx(i)} style={{ ...ghost, background: i === secIdx ? '#7C3AED' : '#F1F5F9', color: i === secIdx ? '#fff' : '#334155', whiteSpace: 'nowrap' }}>{s.label}</button>
+          <button key={'sec' + i} onClick={() => setSecIdx(i)} style={{ ...ghost, background: i === secIdx ? '#7C3AED' : '#F1F5F9', color: i === secIdx ? '#fff' : '#334155', whiteSpace: 'nowrap' }}>{s.label}</button>
         ))}
       </div>
       <Section sec={sec} answers={answers} setAns={setAns} flags={flags} toggleFlag={toggleFlag} />

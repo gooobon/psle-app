@@ -170,6 +170,12 @@ if (P) {
   });
 }
 
+ok("PaperExam section tabs use a unique key (Chinese papers repeat section types)", () => {
+  const src = fs.readFileSync(path.join(ROOT, "src/components/PaperExam.js"), "utf8");
+  assert.ok(!/key=\{s\.type\}/.test(src), "tab key must not be s.type");
+  assert.ok(/key=\{'sec' \+ i\}/.test(src));
+});
+
 ok("no pictographic characters or Korean in the files this feature adds", () => {
   for (const f of ["src/lib/zhMock.js", "src/data/papers/zh_marks.json", "tools/chinese_mock_selftest.mjs"]) {
     const t = fs.readFileSync(path.join(ROOT, f), "utf8");
