@@ -298,6 +298,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ExamSessionScreen
         plan={adaptive.plan}
         isMockExam
+        sessionMode="exam"
         mockInfo={{school:"\u81EA\u9002\u5E94\u7EC3\u4E60 \u00B7 \u5F85\u5DE9\u56FA "+adaptive.parts.tickets+" \u00B7 \u63A5\u8FD1\u638C\u63E1 "+adaptive.parts.adjacent+" \u00B7 \u5DE9\u56FA "+adaptive.parts.maintain+" \u00B7 \u65B0\u9898\u578B "+adaptive.parts.explore}}
         onFinish={finishAdaptive}
         onBack={()=>setAdaptive(null)}
@@ -310,6 +311,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
+        sessionMode={roundReview.homework?'homework':roundReview.similar?'drill':'review'}
         mockInfo={{school:roundReview.homework?"Homework from Parent":roundReview.similar?"\u7C7B\u4F3C\u9898\u7EC3\u4E60":"\u9519\u9898\u590D\u4E60 \u7B2C "+roundReview.sessionNum+" \u8F6E"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
@@ -350,6 +352,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
       <ExamSessionScreen
         plan={drill.plan}
         isMockExam
+        sessionMode="drill"
         mockInfo={{school:"\u534E\u6587 \u5F31\u9879\u8BAD\u7EC3"}}
         onFinish={(results)=>{
           const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'ZS_DRILL' });
@@ -747,6 +750,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
       <ExamSessionScreen
         plan={roundReview.plan}
         isMockExam
+        sessionMode={roundReview.homework?'homework':roundReview.similar?'drill':'review'}
         mockInfo={{school:roundReview.homework?"Homework from Parent":roundReview.similar?"Similar questions":"Round "+roundReview.sessionNum+" review"}}
         onFinish={finishRoundReview}
         onBack={()=>setRoundReview(null)}
@@ -855,6 +859,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
       <ExamSessionScreen
         plan={enAdaptive.plan}
         isMockExam
+        sessionMode="exam"
         mockInfo={{school:"Adaptive round \u00B7 fix "+enAdaptive.parts.tickets+" \u00B7 nearly there "+enAdaptive.parts.adjacent+" \u00B7 keep sharp "+enAdaptive.parts.maintain+" \u00B7 new "+enAdaptive.parts.explore}}
         onFinish={(results)=>{
           const ses = prog.nextSession;
@@ -877,6 +882,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
       <ExamSessionScreen
         plan={enDrill.plan}
         isMockExam
+        sessionMode="drill"
         mockInfo={{school:"Weak-spot drill"}}
         onFinish={(results)=>{
           const withTrials=recordTrials(prog, results, { mode: TRIAL_MODE.DRILL, sessionNum: prog.nextSession, setId: 'EN_DRILL' });
