@@ -3,7 +3,7 @@
 // and the version in force on day D is the one with the greatest effective_from <= D (same pattern as reward_rule_versions).
 // A version is a COMPLETE snapshot, so two parents editing different fields merge instead of overwriting each other.
 import { SUBJECT_KEYS, resolveDailyTarget, sgtDate } from "./activity.js";
-import { parseRuleVersion, ruleForDate, addDays, DEFAULT_RULES } from "./rewards.js";
+import { parseRuleVersion, ruleForDate, addDays, DEFAULT_RULES, cashoutFromRow } from "./rewards.js";
 // Same bounds as src/lib/homework.js (default 3 similar questions per mistake, abuse bound 100). Duplicated on purpose so this module
 // stays importable by plain-node selftests (homework.js uses the "@/" alias).
 const HOMEWORK_PER_MISTAKE = 3, HOMEWORK_MAX = 100;
@@ -22,7 +22,7 @@ export function settingFromRow(r) {
     dailyTarget: resolveDailyTarget(r.daily_target),
     homeworkPerMistake: clampHomeworkCount(r.homework_per_mistake),
     rule: {
-      enabled: !!r.enabled, sgdPerCredit: Number(r.sgd_per_credit) || 0,
+      enabled: !!r.enabled, ...cashoutFromRow(r),
       dailyTiers: Array.isArray(r.daily_tiers) ? r.daily_tiers : [],
       weeklyUnit: r.weekly_unit === "sgd" ? "sgd" : "credits", weeklyAmounts: r.weekly_amounts || {},
       paperUnit: r.paper_unit === "sgd" ? "sgd" : "credits", paperAmounts: r.paper_amounts || {}, paperCheckOff: r.paper_check_off === true,
@@ -42,10 +42,12 @@ export function ruleInForce(versions, ymd) {
 
 // opts.paper: include the paper_* columns (migration 20261130000000_paper_rewards.sql). Off (the default) = the row is exactly what it was
 // before mock exams phase 2, so saving settings never depends on that migration while the mock-exam flag is off.
+// opts.cashout: include credits_per_sgd / cashout_* (migration 20261209000000_rewards_cashout_settings.sql). Off = the legacy row.
 export const settingToRow = (childId, s, updatedBy, nowIso, opts) => ({
   child_id: childId, effective_from: s.effectiveFrom, daily_target: s.dailyTarget, homework_per_mistake: s.homeworkPerMistake,
-  enabled: !!s.rule.enabled, sgd_per_credit: s.rule.sgdPerCredit, daily_tiers: s.rule.dailyTiers,
+  enabled: !!s.rule.enabled, sgd_per_credit: Math.min(1000, Math.round((Number(s.rule.sgdPerCredit) || 0) * 100) / 100), daily_tiers: s.rule.dailyTiers,
   weekly_unit: s.rule.weeklyUnit, weekly_amounts: s.rule.weeklyAmounts, updated_by: updatedBy, updated_at: nowIso,
+  ...(opts && opts.cashout ? { credits_per_sgd: s.rule.creditsPerSgd > 0 ? s.rule.creditsPerSgd : null, cashout_min_sgd: s.rule.cashoutMinSgd || 0, cashout_limit_sgd: s.rule.cashoutLimitSgd || 0, cashout_limit_period: s.rule.cashoutLimitPeriod === "week" ? "week" : "month" } : {}),
   ...(opts && opts.paper ? { paper_unit: s.rule.paperUnit || "credits", paper_amounts: s.rule.paperAmounts || {}, paper_check_off: !!s.rule.paperCheckOff } : {}),
 });
 
@@ -76,7 +78,12 @@ export function applySettingEdit(base, body, todayYmd = sgtDate()) {
   const p = parseRuleVersion({
     effectiveFrom: eff,
     enabled: has("enabled") ? b.enabled : r0.enabled,
+    // creditsPerSgd wins over a legacy sgdPerCredit; an edit of the legacy field alone clears the integer so the two never disagree.
+    creditsPerSgd: has("creditsPerSgd") ? b.creditsPerSgd : (has("sgdPerCredit") ? "" : r0.creditsPerSgd),
     sgdPerCredit: has("sgdPerCredit") ? b.sgdPerCredit : r0.sgdPerCredit,
+    cashoutMinSgd: has("cashoutMinSgd") ? b.cashoutMinSgd : r0.cashoutMinSgd,
+    cashoutLimitSgd: has("cashoutLimitSgd") ? b.cashoutLimitSgd : r0.cashoutLimitSgd,
+    cashoutLimitPeriod: has("cashoutLimitPeriod") ? b.cashoutLimitPeriod : r0.cashoutLimitPeriod,
     dailyTiers: has("dailyTiers") ? b.dailyTiers : r0.dailyTiers,
     weeklyUnit: has("weeklyUnit") ? b.weeklyUnit : r0.weeklyUnit,
     weeklyAmounts: has("weeklyAmounts") ? { ...r0.weeklyAmounts, ...b.weeklyAmounts } : r0.weeklyAmounts,
@@ -102,7 +109,9 @@ export function diffSettings(a, b) {
   if (A.homeworkPerMistake !== B.homeworkPerMistake) out.push(`homework questions per mistake from ${A.homeworkPerMistake} to ${B.homeworkPerMistake}`);
   const ra = A.rule || DEFAULT_RULES, rb = B.rule || DEFAULT_RULES;
   if (!!ra.enabled !== !!rb.enabled) out.push(rb.enabled ? "credits turned on" : "credits turned off");
-  if (Number(ra.sgdPerCredit) !== Number(rb.sgdPerCredit)) out.push(`exchange rate to ${money(rb.sgdPerCredit)} per credit`);
+  if (Number(ra.sgdPerCredit) !== Number(rb.sgdPerCredit) || (ra.creditsPerSgd || 0) !== (rb.creditsPerSgd || 0)) out.push(rb.creditsPerSgd > 0 ? `exchange rate to ${rb.creditsPerSgd} credits per SGD 1` : `exchange rate to ${money(rb.sgdPerCredit)} per credit`);
+  if ((Number(ra.cashoutMinSgd) || 0) !== (Number(rb.cashoutMinSgd) || 0)) out.push(`cash-out minimum to ${money(rb.cashoutMinSgd)}`);
+  if ((Number(ra.cashoutLimitSgd) || 0) !== (Number(rb.cashoutLimitSgd) || 0) || (ra.cashoutLimitPeriod || "month") !== (rb.cashoutLimitPeriod || "month")) out.push(rb.cashoutLimitSgd > 0 ? `cash-out limit to ${money(rb.cashoutLimitSgd)} per ${rb.cashoutLimitPeriod === "week" ? "week" : "month"}` : "cash-out limit removed");
   const ta = new Map((ra.dailyTiers || []).map((t) => [t.minPct, t.credits]));
   const tb = new Map((rb.dailyTiers || []).map((t) => [t.minPct, t.credits]));
   for (const [pct, c] of tb) {

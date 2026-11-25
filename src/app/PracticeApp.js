@@ -39,6 +39,7 @@ const ZH_GATE_STOP = new Set("的了是我你他她它们在有和就也都不�
 
 import { StudentResultScreen, ZhResultScreen } from '@/components/ResultScreen';
 import ZhWa1ResultScreen from '@/components/ZhWa1ResultScreen'; // STEP3B_ZH_RESULT
+import SetRewards from '@/components/SetRewards';
 import EnReviewGate from '@/components/EnReviewGate'; // STEP4_EN_GATE
 import { makeReviewStore } from '@/lib/vocabReview';
 const EN_REVIEW = makeReviewStore('en');
@@ -375,6 +376,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
   if(screen==="dailyResult"&&dailyResult) return(
     <Wrap>
+      <SetRewards />
       <ZhWa1ResultScreen
         results={dailyResult.results}
         sessionNum={dailyResult.sessionNum}
@@ -387,6 +389,7 @@ function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubject
 
   if(screen==="result"&&sessionResult) return(
     <Wrap shell>
+      <SetRewards />
       <ZhResultScreen
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}
@@ -904,6 +907,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
 
   if(screen==="result"&&sessionResult) return(
     <Wrap shell>
+      <SetRewards />
       <StudentResultScreen
         results={sessionResult.results}
         sessionNum={sessionResult.sessionNum}

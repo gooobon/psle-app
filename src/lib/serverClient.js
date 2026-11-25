@@ -73,6 +73,7 @@ export async function importLocalOnce(username) {
 // Idempotent server-side per (user, SGT date, subject, key). Does nothing when the flag is off.
 import { SERVER_AUTH as _FLAG } from "@/lib/supabase/config";
 import { reportThread } from "@/lib/clewquest/client";
+import { startSetRewards, addSetRewards, creditsFromClaim } from "@/lib/setRewards";
 // ── Study minutes ──────────────────────────────────────────────
 // Active time = sum of gaps between consecutive student interactions (tap/click/key/scroll) since the last report.
 // A gap longer than IDLE_CAP_MS (5 min) is treated as a break and not counted. The clock starts at the first
@@ -109,6 +110,7 @@ export function reportPracticeStarted(subject) {
 
 export function reportActivity(subject, key, results, minutes) {
   if (!_FLAG) return;
+  startSetRewards(); // fresh "Thread +N / Credits +N" record for the result screen of THIS set (own sessionStorage key)
   reportThread(subject, results); // ClewQuest thread award (flag NEXT_PUBLIC_CLEWQUEST_ENABLED, default off => no-op); independent of scoring
   try {
     if (minutes == null) minutes = takeActiveMinutes();
@@ -121,6 +123,7 @@ export function reportActivity(subject, key, results, minutes) {
       if (!_RW) return;
       serverPost("/api/student/rewards/claim", {}).then(r => {
         if (r && r.ok && typeof window !== "undefined") window.dispatchEvent(new Event("genius-rewards-changed"));
+        if (r && r.ok) addSetRewards({ credits: creditsFromClaim(r) });
       });
     });
   } catch {}

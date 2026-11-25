@@ -1,6 +1,6 @@
 // Pure checks for parent-configured reward tiers, homework gate, SGD conversion and per-subject weekly bonus (issue #29).
 // No network, no student data. Run: node tools/rewards_tiers_selftest.mjs
-import { firstSetScore, tierCredits, dailyCreditPlan, homeworkGate, sgdToCredits, weeklySubjectCredits, ruleForDate, parseRuleVersion, pickRewardParent, studentCredits } from "../src/lib/rewards.js";
+import { creditsPerSgdOf, creditsToSgd, applyRecommended, RECOMMENDED, firstSetScore, tierCredits, dailyCreditPlan, homeworkGate, sgdToCredits, weeklySubjectCredits, ruleForDate, parseRuleVersion, pickRewardParent, studentCredits } from "../src/lib/rewards.js";
 import { mockSchoolLabel, MOCK_FALLBACK_LABEL } from "../src/lib/attemptMeta.js";
 import fs from "node:fs";
 
@@ -93,6 +93,16 @@ eq("mock label: forced paper wins", mockSchoolLabel({ paperPlan: { paperLabel: "
 eq("mock label: flagged daily set label", mockSchoolLabel({ dailyPlan: { paperLabel: " Tao Nan " } }), "Tao Nan");
 eq("mock label: neutral fallback", mockSchoolLabel({}), MOCK_FALLBACK_LABEL);
 eq("ClaudeApp has no hard-coded mock school", /isMock\?"Nanyang Primary"/.test(fs.readFileSync(new URL("../src/app/ClaudeApp.js", import.meta.url), "utf8")), false);
+
+// Issue #133: exchange rate as "credits per SGD 1", wallet in SGD, recommended defaults (nothing is on by default).
+eq("rate: explicit integer wins", creditsPerSgdOf({ creditsPerSgd: 100, sgdPerCredit: 0.5 }), 100);
+eq("rate: legacy sgdPerCredit 0.5 = 2 credits per SGD", creditsPerSgdOf({ sgdPerCredit: 0.5 }), 2);
+eq("rate: nothing set = 0 (wallet shows 0 only because no rate exists)", creditsPerSgdOf({}), 0);
+eq("250 credits at 100 per SGD = S$2.50", creditsToSgd(250, { creditsPerSgd: 100 }), 2.5);
+eq("recommended values", RECOMMENDED, { creditsPerSgd: 100, cashoutMinSgd: 5, cashoutLimitSgd: 20, cashoutLimitPeriod: "month" });
+eq("recommended does not enable credits", applyRecommended({ enabled: false }).enabled, false);
+eq("tier rule with a per-SGD rate parses", parseRuleVersion({ enabled: true, creditsPerSgd: 100, dailyTiers: [{ minPct: 80, credits: 2 }] }, "2026-11-19").rule.creditsPerSgd, 100);
+eq("rate 1001 rejected by the rule parser", !!parseRuleVersion({ creditsPerSgd: 1001 }, "2026-11-19").error, true);
 
 if (failed) { console.error(failed + " FAILED"); process.exit(1); }
 console.log("ALL PASS");
