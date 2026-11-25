@@ -49,7 +49,7 @@ export function isFullPaper(row) {
 
 // Display label: the DECLARED school and year, never the filename.
 export function paperLabel(row) {
-  const bits = [row.school || "Past paper", row.year || null, (row.typeNormalised || row.bucket || "").toUpperCase() || null];
+  const bits = [row.school || "Past paper", row.year || null, (row.typeNormalised || row.bucket || "").toUpperCase() || null, row.subject === "Chinese" ? "Chinese" : null];
   return bits.filter(Boolean).join(" ");
 }
 

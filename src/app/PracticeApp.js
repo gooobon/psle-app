@@ -75,7 +75,7 @@ import { PictureLogin } from '@/components/clewquest/PictureAuth';
 import { PreLoginLanding, LoginFrame, ForgotPassword, SetNewPassword, SignupParentStep1, SignupStep2 } from '@/components/clewquest/AuthScreens';
 import { Field, Segmented, ErrorText, T, FONT, mainBtn, secondaryBtn, inputStyle, labelStyle, linkBtn, helperStyle } from '@/components/clewquest/Shell';
 import { questGrade } from '@/lib/clewquest/logic';
-import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
+import { SERVER_AUTH, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED, serverPost, serverGet, importLocalOnce, reportActivity, reportPracticeStarted, reportWrongAnswers, syncLocalWrongAnswersOnce, updateWrongAnswer, reportWeeklyReview, syncLearningTrials } from '@/lib/serverClient'; // server auth (flag NEXT_PUBLIC_SERVER_AUTH, default off)
 import { resolveDailyTarget, sgtDate as sgtToday } from '@/lib/activity';
 import { SEED_USERS, LS_USERS_KEY, LS_PROGRESS_KEY, _loadFromLS, _saveToLS, _persistedUsers, _persistedProgress, STORE, storeGet, storeSet, persistUsers, persistProgressLS, allUsers, mirrorServerUser, ADMIN_USER, adminLogin, adminSessionValid, getProgress, setProgress, makeSeedHistory } from "./appStore";
 function ChineseApp({user, getProgress, setProgress, onBack, onLogout, onSubjectChange, onGradeChange, initialAction, dailyTarget}){
@@ -846,7 +846,7 @@ function StudentApp({user, onLogout, getProgress, setProgress, initialSubject, o
       {SERVER_AUTH&&MOCK_EXAMS_ENABLED&&grade==="P3"&&(
         <div style={{padding:"0 16px 12px"}}>
           <button onClick={()=>setPaperExam(true)} style={{width:"100%",background:"#fff",border:`2px solid ${T.primary}`,color:T.primary,borderRadius:14,padding:"12px 16px",fontWeight:800,cursor:"pointer",textAlign:"left"}}>
-            English mock papers <span style={{fontSize:12,fontWeight:600,color:"#6B6F7B"}}>real past papers, timed</span>
+            {CHINESE_MOCK_ENABLED?"Mock papers":"English mock papers"} <span style={{fontSize:12,fontWeight:600,color:"#6B6F7B"}}>real past papers, timed</span>
           </button>
         </div>
       )}

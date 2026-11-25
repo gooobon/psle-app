@@ -6,6 +6,8 @@ import { flattenEnglishPool, paperKeyOf, englishPaperExamPlan } from "@/lib/p3Pa
 import { indexSets } from "@/lib/reviewRounds";
 import { resolveItem, getFormat } from "@/lib/learningGrade";
 import { isFullPaper, minutesAllowed, minutesRule, paperFlags, paperMarks, paperLabel, FLAG_NOTES, isAnswered, summarize, combineMarks, provisionalMark, marksOf, pickNotebookRows, notebookAttemptKey } from "@/lib/examEngine";
+import { CHINESE_MOCK_ENABLED } from "@/lib/supabase/config";
+import { chineseMockStatus } from "@/lib/zhMock";
 import { taxonomyIdsFor } from "@/lib/taxonomyLookup";
 import { skillIdsOf } from "@/lib/similarItemsCore";
 
@@ -13,6 +15,8 @@ const SECTION_LABEL = {
   GrammarMCQ: "Grammar (multiple choice)", VocabMCQ: "Vocabulary (multiple choice)", GrammarCloze: "Grammar cloze",
   VocabCloze: "Vocabulary cloze", Editing: "Editing", Comprehension: "Comprehension",
 };
+
+const ZH_INFERRED_NOTE = "Marks for some questions are worked out from the section totals on the paper (shared equally).";
 
 let cat = null;
 // Eligible papers (>= 45 marks, full answer key). Flagged papers are INCLUDED; flags ride along for a small neutral note.
@@ -24,6 +28,10 @@ export function catalogue() {
     if (!paper) return null;
     return { row: r, paper, key: paperKeyOf(paper) };
   }).filter(Boolean);
+  // Chinese papers (issue #146): only with the flag on, and only papers whose per-question marks reconcile to a sourced total (zhMock.js).
+  if (CHINESE_MOCK_ENABLED) {
+    for (const z of chineseMockStatus(manifest.papers)) if (z.ok) rows.push({ row: z.row, paper: z.paper, key: "zh:" + z.row.id, zh: true, plan: z.plan, inferred: z.inferred });
+  }
   const byId = new Map(rows.map((x) => [x.row.id, x]));
   cat = { rows, byId };
   return cat;
@@ -31,10 +39,10 @@ export function catalogue() {
 
 // Listing for the picker: no questions, no answers.
 export function listPapers() {
-  return catalogue().rows.map(({ row }) => ({
-    id: row.id, label: paperLabel(row), school: row.school, year: row.year, type: row.typeNormalised || row.bucket,
+  return catalogue().rows.map(({ row, zh, inferred }) => ({
+    subject: zh ? "Chinese" : "English", id: row.id, label: paperLabel(row), school: row.school, year: row.year, type: row.typeNormalised || row.bucket,
     marks: paperMarks(row), minutes: minutesAllowed(row), minutesRule: minutesRule(row), questionCount: row.questionCount,
-    flags: paperFlags(row), notes: paperFlags(row).map((f) => FLAG_NOTES[f]),
+    flags: paperFlags(row), notes: [...paperFlags(row).map((f) => FLAG_NOTES[f]), ...(inferred ? [ZH_INFERRED_NOTE] : [])],
   }));
 }
 
@@ -42,11 +50,12 @@ export function listPapers() {
 function flatten(plan) {
   const out = [];
   for (const sec of plan) {
+    const secName = sec.label || sec.type; // Chinese sections carry a label; English use the type
     for (const it of sec.items) {
-      if (sec.type.endsWith("MCQ")) out.push({ id: it.id, section: sec.type, marks: marksOf(it) });
-      else if (sec.type.endsWith("Cloze")) (it.blanks || []).forEach((b) => out.push({ id: it.id + "_" + b.num, section: sec.type, marks: marksOf(b) }));
-      else if (sec.type === "Editing") (it.items || []).forEach((q) => out.push({ id: q.id, section: sec.type, marks: marksOf(q) }));
-      else if (sec.type === "Comprehension") (it.questions || []).forEach((q) => out.push({ id: q.id, section: sec.type, marks: marksOf(q) }));
+      if (sec.type.endsWith("MCQ")) out.push({ id: it.id, section: secName, marks: marksOf(it) });
+      else if (sec.type.endsWith("Cloze")) (it.blanks || []).forEach((b) => out.push({ id: it.id + "_" + b.num, section: secName, marks: marksOf(b) }));
+      else if (sec.type === "Editing") (it.items || []).forEach((q) => out.push({ id: q.id, section: secName, marks: marksOf(q) }));
+      else if (sec.type === "Comprehension") (it.questions || []).forEach((q) => out.push({ id: q.id, section: secName, marks: marksOf(q) }));
     }
   }
   return out;
@@ -57,7 +66,7 @@ function paperData(paperId) {
   const hit = catalogue().byId.get(paperId);
   if (!hit) return null;
   if (cache.has(paperId)) return cache.get(paperId);
-  const plan = englishPaperExamPlan(hit.paper);
+  const plan = hit.zh ? hit.plan : englishPaperExamPlan(hit.paper);
   const index = indexSets([{ setId: hit.key, plan }]).byId; // ONE paper: ids reused by other papers cannot make this one ambiguous
   const questions = flatten(plan);
   const seen = new Map();
@@ -70,7 +79,7 @@ function paperData(paperId) {
     if (sec.type.endsWith("MCQ")) for (const q of sec.items) { if (!(q.options || []).length) noKey.add(q.id); }
     else if (sec.type === "Comprehension") for (const s of sec.items) for (const q of s.questions || []) { if (getFormat(q) === "mcq" && !(q.options || []).length) noKey.add(q.id); }
   }
-  const d = { hit, plan, index, questions: questions.filter((q, i) => questions.findIndex((x) => x.id === q.id) === i), dup, noKey };
+  const d = { zh: !!hit.zh, hit, plan, index, questions: questions.filter((q, i) => questions.findIndex((x) => x.id === q.id) === i), dup, noKey };
   cache.set(paperId, d);
   return d;
 }
@@ -86,7 +95,7 @@ export function publicPaper(paperId) {
   const d = paperData(paperId);
   if (!d) return null;
   const sections = d.plan.map((sec) => {
-    const base = { type: sec.type, label: SECTION_LABEL[sec.type] || sec.type };
+    const base = { type: sec.type, label: sec.label || SECTION_LABEL[sec.type] || sec.type };
     if (sec.type.endsWith("MCQ")) return { ...base, items: sec.items.map((q) => ({ id: q.id, sentence: q.sentence || "", options: q.options || [] })) };
     if (sec.type.endsWith("Cloze")) return { ...base, sets: sec.items.map((s) => ({ id: s.id, label: s.setLabel, passage: s.passage || "", wordBank: s.wordBank || [], blanks: (s.blanks || []).map((b) => ({ id: s.id + "_" + b.num, num: b.num, choices: b.choices || null })) })) };
     if (sec.type === "Editing") return { ...base, sets: sec.items.map((s) => ({ id: s.id, label: s.setLabel, instructions: s.instructions, items: (s.items || []).map((q) => ({ id: q.id, sentence: q.sentence || "", wrongWord: q.wrongWord || "", options: q.options || [] })) })) };
@@ -149,7 +158,7 @@ export function gradeSubmission(paperId, answers) {
     }
     // Open-ended item with a key on the paper: an automatic provisional mark (the parent may override it later). correct stays null.
     let provisional = null;
-    if (correct === null && !excluded && !d.dup.has(q.id)) {
+    if (correct === null && !excluded && !d.dup.has(q.id) && !d.zh) { // provisionalMark tokenises Latin words only: never on Chinese, those go to the parent
       const k = planQ.get(q.id) || q;
       const p = provisionalMark({ answer: answered ? a.val : null, models: [k.answer, k.acceptableAnswers], keywords: k.keywords || k.markingPoints || k.keyPoints });
       if (p.correct !== null) provisional = p;
@@ -288,7 +297,7 @@ export function reviewItems(paperId, rows, status) {
 // wrong_answers rows for a submitted paper (capped, see examEngine.pickNotebookRows). Written by the server with the service role.
 export function notebookRows(paperId, graded, { studentId, attemptId, grade, nowIso }) {
   const d = paperData(paperId), det = detailsFor(paperId);
-  if (!d || !det) return { rows: [], skipped: 0 };
+  if (!d || !det || d.zh) return { rows: [], skipped: 0 }; // Chinese papers: no notebook rows yet (the notebook is English-only)
   // Items with no readable key are left out: a notebook entry with no correct answer teaches nothing (and the item cannot be answered correctly anyway).
   const { picked, skipped } = pickNotebookRows(graded.rows.filter((r) => !d.dup.has(r.id) && (det.get(r.id) || {}).correctText));
   const rows = picked.map((r) => {
@@ -313,6 +322,7 @@ function trialSkill(id, rec) {
 export function mockTrialCandidates(paperId, graded) {
   const d = paperData(paperId);
   if (!d) return null;
+  if (d.zh) return []; // no Chinese mastery trials yet (no skill taxonomy for paper items)
   const out = [];
   for (const r of graded.rows) {
     if (r.correct === null || d.dup.has(r.id)) continue;

@@ -1,0 +1,110 @@
+{
+ "_readme": "Per-question marks for Chinese mock papers (issue #146). A paper is launchable only if it appears here, every item id of the paper has marks, and the marks sum to total. basis: 'printed' = marks printed on each question; 'inferred_equal_split' = the printed section total divided equally over its items (not printed per question). Papers not listed here are hidden from the mock picker; marks are never invented.",
+ "papers": {
+  "p3_zh_wa1_tao_nan_2025": {
+   "total": 45,
+   "totalSource": "meta.totalMarks and header comment of src/data/p3/chinese/papers/wa1/wa1_tao_nan_2025.ts (printed on the paper, /45)",
+   "sectionTotalsSource": "header comment: 辨字 5 + 汉语拼音 2 + 词语选择 4 + 词语搭配 5 + 改写句子 8 + 短文填空 4 + 阅读理解(选择) 8 + 理解问答 9 = 45",
+   "sections": [
+    {
+     "topic": "BianZi",
+     "label": "辨字",
+     "sectionTotal": 5,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_001": 1,
+      "p3_zh_wa1tn_002": 1,
+      "p3_zh_wa1tn_003": 1,
+      "p3_zh_wa1tn_004": 1,
+      "p3_zh_wa1tn_005": 1
+     }
+    },
+    {
+     "topic": "PinYin",
+     "label": "汉语拼音",
+     "sectionTotal": 2,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_006": 1,
+      "p3_zh_wa1tn_007": 1
+     }
+    },
+    {
+     "topic": "CiYu",
+     "label": "词语选择",
+     "sectionTotal": 4,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_008": 1,
+      "p3_zh_wa1tn_009": 1,
+      "p3_zh_wa1tn_010": 1,
+      "p3_zh_wa1tn_011": 1
+     }
+    },
+    {
+     "topic": "PeiDui",
+     "label": "词语搭配",
+     "sectionTotal": 5,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_012": 1,
+      "p3_zh_wa1tn_013": 1,
+      "p3_zh_wa1tn_014": 1,
+      "p3_zh_wa1tn_015": 1,
+      "p3_zh_wa1tn_016": 1
+     }
+    },
+    {
+     "topic": "JuZi",
+     "label": "改写句子",
+     "sectionTotal": 8,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_017": 2,
+      "p3_zh_wa1tn_018": 2,
+      "p3_zh_wa1tn_019": 2,
+      "p3_zh_wa1tn_020": 2
+     }
+    },
+    {
+     "topic": "TianKong",
+     "label": "短文填空",
+     "sectionTotal": 4,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_021": 1,
+      "p3_zh_wa1tn_022": 1,
+      "p3_zh_wa1tn_023": 1,
+      "p3_zh_wa1tn_024": 1
+     }
+    },
+    {
+     "topic": "YueReadMCQ",
+     "label": "阅读理解(选择)",
+     "sectionTotal": 8,
+     "basis": "inferred_equal_split",
+     "marks": {
+      "p3_zh_wa1tn_025": 2,
+      "p3_zh_wa1tn_026": 2,
+      "p3_zh_wa1tn_027": 2,
+      "p3_zh_wa1tn_028": 2
+     }
+    },
+    {
+     "topic": "YueReadOpen",
+     "label": "理解问答",
+     "sectionTotal": 9,
+     "basis": "printed",
+     "marks": {
+      "p3_zh_wa1tn_029a": 1,
+      "p3_zh_wa1tn_029b": 1,
+      "p3_zh_wa1tn_030": 1,
+      "p3_zh_wa1tn_031": 2,
+      "p3_zh_wa1tn_032": 2,
+      "p3_zh_wa1tn_033": 2
+     }
+    }
+   ]
+  }
+ }
+}
