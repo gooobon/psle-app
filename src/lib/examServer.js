@@ -101,7 +101,7 @@ export function publicPaper(paperId) {
     if (sec.type === "Editing") return { ...base, sets: sec.items.map((s) => ({ id: s.id, label: s.setLabel, instructions: s.instructions, items: (s.items || []).map((q) => ({ id: q.id, sentence: q.sentence || "", wrongWord: q.wrongWord || "", options: q.options || [] })) })) };
     return { ...base, sets: sec.items.map((s) => ({ id: s.id, label: s.setLabel, passage: s.passage || "", questions: (s.questions || []).map(pickQ) })) };
   });
-  return { sections, questionIds: d.questions.map((q) => q.id), questionCount: d.questions.length };
+  return { zh: !!d.zh, sections, questionIds: d.questions.map((q) => q.id), questionCount: d.questions.length };
 }
 
 const clean = (v) => {

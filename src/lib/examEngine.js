@@ -165,11 +165,13 @@ export function canReview({ attempt, studentId }) {
 // autoScore / autoTotal and every open-ended item is PENDING. Each parent mark adds 1 to the total, and 1 to the score when "correct".
 // Pure: the parent route, the self-test and the weekly report all use this. marks: array of true | false | null (null = not marked yet).
 // openWeights (optional): marks each open item is worth, same order as openMarks; missing = 1. Score and total count marks, `pending` counts items.
-export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections, openWeights }) {
+// openAwarded[i] (optional, integer 0..weight) is a parent's partial score; when absent a true mark is full marks and a false mark is 0.
+export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections, openWeights, openAwarded }) {
   const marks = Array.isArray(openMarks) ? openMarks : [];
   const wt = (i) => { const w = openWeights && openWeights[i]; return Number.isInteger(w) && w > 0 ? w : 1; };
   const marked = marks.filter((m) => m === true || m === false);
-  const pScore = marks.reduce((n, m, i) => n + (m === true ? wt(i) : 0), 0);
+  const got = (i) => { const a = openAwarded && openAwarded[i]; return Number.isInteger(a) && a >= 0 ? Math.min(a, wt(i)) : wt(i); };
+  const pScore = marks.reduce((n, m, i) => n + (m === true ? got(i) : m === false && Number.isInteger(openAwarded && openAwarded[i]) ? got(i) : 0), 0);
   const pTotal = marks.reduce((n, m, i) => n + (m === true || m === false ? wt(i) : 0), 0);
   const pending = marks.length - marked.length;
   const secs = (sections || []).map((s) => ({ ...s }));
@@ -178,7 +180,7 @@ export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSe
     if (m !== true && m !== false) return;
     let s = secs.find((x) => x.section === sec);
     if (!s) { s = { section: sec, score: 0, total: 0 }; secs.push(s); }
-    s.total += wt(i); if (m === true) s.score += wt(i);
+    s.total += wt(i); if (m === true) s.score += got(i); else if (Number.isInteger(openAwarded && openAwarded[i])) s.score += got(i);
   });
   return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + pTotal, parentScore: pScore, parentTotal: pTotal, pending, settled: pending === 0, sections: secs };
 }

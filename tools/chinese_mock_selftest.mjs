@@ -176,6 +176,22 @@ ok("PaperExam section tabs use a unique key (Chinese papers repeat section types
   assert.ok(/key=\{'sec' \+ i\}/.test(src));
 });
 
+{
+  const { combineMarks } = await import("../src/lib/examEngine.js");
+  ok("partial 1 of 2 adds 1, total adds 2", () => {
+    const c = combineMarks({ autoScore: 10, autoTotal: 20, openMarks: [false, true, false], openSections: ["C", "C", "C"], openWeights: [2, 2, 2], openAwarded: [1, null, null], sections: [] });
+    assert.equal(c.score, 10 + 1 + 2 + 0); assert.equal(c.total, 20 + 6); assert.equal(c.pending, 0);
+  });
+  ok("no openAwarded behaves as before", () => {
+    const c = combineMarks({ autoScore: 0, autoTotal: 0, openMarks: [true, false, null], openSections: ["C", "C", "C"], openWeights: [2, 2, 2] });
+    assert.equal(c.score, 2); assert.equal(c.total, 4); assert.equal(c.pending, 1);
+  });
+  ok("partial-marks migration is additive only", () => {
+    const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261211000000_exam_parent_partial_marks.sql"), "utf8");
+    assert.ok(!/\bdrop\s+(table|column)|\bdelete\b|\btruncate\b/i.test(sql)); assert.ok(/add column if not exists parent_marks/.test(sql));
+  });
+}
+
 ok("no pictographic characters or Korean in the files this feature adds", () => {
   for (const f of ["src/lib/zhMock.js", "src/data/papers/zh_marks.json", "tools/chinese_mock_selftest.mjs"]) {
     const t = fs.readFileSync(path.join(ROOT, f), "utf8");

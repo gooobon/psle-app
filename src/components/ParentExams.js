@@ -3,7 +3,7 @@
 // Flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_MOCK_EXAMS_ENABLED (default OFF). Read: linked parents only. The model answer is shown here
 // so the parent can mark; it is never sent to a student.
 import React from 'react';
-import { SERVER_AUTH, MOCK_EXAMS_ENABLED, serverGet, serverPost } from '@/lib/serverClient';
+import { SERVER_AUTH, MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED, serverGet, serverPost } from '@/lib/serverClient';
 import { FLAG_NOTES, scoreLine } from '@/lib/examEngine';
 
 const box = { background: '#fff', border: '1px solid #E2DBCF', borderRadius: 14, padding: '12px 14px', marginBottom: 12 };
@@ -15,6 +15,7 @@ export default function ParentExams({ child }) {
   const [err, setErr] = React.useState('');
   const [note, setNote] = React.useState('');
   const [key, setKey] = React.useState(0);
+  const [subj, setSubj] = React.useState('All');
   React.useEffect(() => {
     if (!on) return undefined;
     let alive = true;
@@ -24,15 +25,22 @@ export default function ParentExams({ child }) {
   if (!on) return null;
   if (err) return <div style={{ ...box, color: '#B3261E', fontSize: 13 }}>{err}</div>;
   if (!d) return <div style={{ ...box, fontSize: 13, color: '#6B6F7B' }}>Loading…</div>;
-  async function mark(attemptId, questionId, correct) {
-    const r = await serverPost('/api/parent/exam', { attemptId, questionId, correct });
+  async function mark(attemptId, questionId, correct, marks) {
+    const r = await serverPost('/api/parent/exam', marks == null ? { attemptId, questionId, correct } : { attemptId, questionId, marks });
     if (r.ok) { setKey((k) => k + 1); setNote(r.pending ? '' : 'Mark changed. The score is updated.'); } else setErr(r.error || 'Could not save the mark.');
   }
   if (!d.attempts.length) return <div style={{ ...box, fontSize: 13 }}>No mock papers yet.</div>;
   return (
     <div>
       {note ? <div style={{ ...box, fontSize: 13, color: '#4F6B22' }}>{note}</div> : null}
-      {d.attempts.map((a) => (
+      {CHINESE_MOCK_ENABLED && d.attempts.some((a) => a.subject === 'Chinese') ? (
+        <div style={{ marginBottom: 10 }}>
+          {['All', 'English', 'Chinese'].map((s) => (
+            <button key={s} onClick={() => setSubj(s)} style={{ marginRight: 8, padding: '4px 12px', borderRadius: 999, border: '2px solid ' + (subj === s ? '#1F3F95' : '#E2DBCF'), background: subj === s ? '#FBF6EA' : '#fff', cursor: 'pointer', fontSize: 13 }}>{s}</button>
+          ))}
+        </div>
+      ) : null}
+      {d.attempts.filter((a) => subj === 'All' || a.subject === subj).map((a) => (
         <div key={a.id} style={box}>
           <div style={{ fontWeight: 800 }}>{a.label}</div>
           <div style={{ fontSize: 13, marginTop: 4 }}>
@@ -52,9 +60,14 @@ export default function ParentExams({ child }) {
                   <div><b>Model answer:</b> {o.modelAnswer}</div>
                   {o.automatic ? <div style={{ fontSize: 12, color: '#6B6F7B' }}>Automatic mark: {o.mark ? 'correct' : 'not correct'}</div> : null}
                   <div style={{ marginTop: 4 }}>
-                    {[[true, 'Correct'], [false, 'Not correct']].map(([v, t]) => (
-                      <button key={t} onClick={() => mark(a.id, o.questionId, v)} style={{ marginRight: 8, padding: '4px 10px', borderRadius: 8, border: '2px solid ' + (o.mark === v ? '#1F3F95' : '#E2DBCF'), background: o.mark === v ? '#FBF6EA' : '#fff', cursor: 'pointer' }}>{t}</button>
-                    ))}
+                    {o.weight > 1
+                      ? Array.from({ length: o.weight + 1 }, (_, n) => n).map((n) => {
+                        const cur = o.awarded != null ? o.awarded : o.mark === true ? o.weight : o.mark === false ? 0 : null;
+                        return <button key={n} onClick={() => mark(a.id, o.questionId, null, n)} style={{ marginRight: 8, padding: '4px 10px', borderRadius: 8, border: '2px solid ' + (cur === n ? '#1F3F95' : '#E2DBCF'), background: cur === n ? '#FBF6EA' : '#fff', cursor: 'pointer' }}>{n} / {o.weight}</button>;
+                      })
+                      : [[true, 'Correct'], [false, 'Not correct']].map(([v, t]) => (
+                        <button key={t} onClick={() => mark(a.id, o.questionId, v)} style={{ marginRight: 8, padding: '4px 10px', borderRadius: 8, border: '2px solid ' + (o.mark === v ? '#1F3F95' : '#E2DBCF'), background: o.mark === v ? '#FBF6EA' : '#fff', cursor: 'pointer' }}>{t}</button>
+                      ))}
                   </div>
                 </div>
               ))}
