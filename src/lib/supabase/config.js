@@ -62,3 +62,7 @@ export function loginIdProblem(u) {
 // Parent wrong-answer detail (child's exact answer, parent cause tag) and concept-level weak spots (issue #131). Default OFF; also requires SERVER_AUTH.
 // Works before supabase/migrations/20261210000000_parent_detail.sql is applied (tags just cannot be saved yet).
 export const PARENT_DETAIL = process.env.NEXT_PUBLIC_PARENT_DETAIL_ENABLED === "true";
+
+// Chinese mock exams (issue #146, follow-up to #134). Default OFF; also requires SERVER_AUTH + MOCK_EXAMS_ENABLED.
+// Only papers with per-question marks in src/data/papers/zh_marks.json are offered. With the flag off no Chinese paper is listed anywhere.
+export const CHINESE_MOCK_ENABLED = process.env.NEXT_PUBLIC_CHINESE_MOCK_ENABLED === "true";

@@ -5,7 +5,7 @@ import { T, FONT, RADIUS, SHADOW, mainBtn, secondaryBtn } from "@/lib/theme/toke
 import { SECTIONS, SECTION_ORDER } from "@/lib/quizMeta";
 import { DEFAULT_SETTINGS } from "@/lib/dataEngine";
 import ParentExams from '@/components/ParentExams';
-import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, serverPost, serverGet, serverPut } from "@/lib/serverClient";
+import { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED, serverPost, serverGet, serverPut } from "@/lib/serverClient";
 import LearningDashboard, { skillName } from "@/components/LearningDashboard";
 import ParentRewards from "@/components/ParentRewards";
 import ParentChildSettings from "@/components/ParentChildSettings";
@@ -784,7 +784,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
           </>
         )} {child&&(
           <div style={{display:"flex",gap:5,padding:"10px 0 0",overflowX:"auto"}}>
-            {[["overview","Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","Learning"]]:[]),["mistakes","Mistakes"],["settings","Settings"],["mock","Mock"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&subject==="English"?[["papers","Papers"]]:[])].map(([t,l])=>(
+            {[["overview","Overview"],...(SERVER_AUTH&&LEARNING_DASHBOARD&&child?.serverId?[["learning","Learning"]]:[]),["mistakes","Mistakes"],["settings","Settings"],["mock","Mock"],...(SERVER_AUTH&&REWARDS&&child?.serverId?[["rewards","Rewards"]]:[]),...(SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child?.serverId&&(subject==="English"||(CHINESE_MOCK_ENABLED&&subject==="Chinese"))?[["papers","Papers"]]:[])].map(([t,l])=>(
               <button key={t} onClick={()=>setTab(t)} style={{background:tab===t?"#1F3F95":"#F6F2EA",border:"none",borderRadius:999,padding:"8px 14px",color:tab===t?"#fff":"#1B2340",fontSize:11,fontWeight:800,cursor:"pointer",whiteSpace:"nowrap",flexShrink:0}}>
                 {l}
               </button>
@@ -808,7 +808,7 @@ function ParentApp({user, linkedStudents, onLogout, getProgress, setProgress, re
         {parentToast&&<ComingSoonToast message={parentToast} onDone={()=>setParentToast(null)}/>}
         {child&&tab!=="rewards"&&tab!=="learning"&&tab!=="papers"&&!LIVE_CONTENT[`${grade}_${subject}`]&&<ComingSoonScreen grade={grade} subject={subject}/>}
         {child&&SERVER_AUTH&&LEARNING_DASHBOARD&&child.serverId&&tab==="learning" && (["English","Chinese"].includes(subject)?<LearningDashboard childId={child.serverId} subject={subject}/>:<ComingSoonScreen grade={grade} subject={subject}/>)}
-        {child&&SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child.serverId&&subject==="English"&&tab==="papers" && <ParentExams child={child}/>}
+        {child&&SERVER_AUTH&&MOCK_EXAMS_ENABLED&&child.serverId&&(subject==="English"||(CHINESE_MOCK_ENABLED&&subject==="Chinese"))&&tab==="papers" && <ParentExams child={child}/>}
         {child&&SERVER_AUTH&&REWARDS&&tab==="rewards" && <ParentRewards child={child}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="overview"  && <ParentOverview  child={child} history={history} settings={settings} subject={subject}/>}
         {child&&LIVE_CONTENT[`${grade}_${subject}`]&&tab==="mistakes"  && <ParentMistakesTab child={child} history={history} grade={grade} subject={subject} homeworkSimilarFor={homeworkSimilarFor} homeworkRunnable={homeworkRunnable} notebookMistakes={prog?.mistakes||[]}/>}

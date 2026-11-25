@@ -74,7 +74,7 @@ async function finalize(admin, a, answers, { nowMs, auto, expired }) {
   // A counted paper is the subject's daily set but never feeds the first-set score tiers (record_paper_activity stores a 0/0 first set).
   let daily = "skipped";
   if (verdict.counts && !PAPER_FEEDS_SCORE_TIERS) {
-    const r = await admin.rpc("record_paper_activity", { p_user: sid, p_subject: "English", p_key: "paper-" + id, p_questions: g.answered, p_correct: g.score, p_minutes: Math.max(1, Math.ceil(used / 60)) });
+    const r = await admin.rpc("record_paper_activity", { p_user: sid, p_subject: a.subject || "English", p_key: "paper-" + id, p_questions: g.answered, p_correct: g.score, p_minutes: Math.max(1, Math.ceil(used / 60)) });
     daily = r.error ? "error" : "recorded";
     if (r.error) console.error("[exam] daily activity failed", id);
   }
@@ -109,7 +109,7 @@ async function review(admin, me, id) {
   if (!canReview({ attempt: a, studentId: me.profile.id })) return jerr("answers are shown after you hand in", 409);
   const [ans, nb] = await Promise.all([
     admin.from("exam_answers").select("question_id,answer,correct,parent_correct,flagged").eq("attempt_id", id),
-    admin.from("wrong_answers").select("question_id,cause,resolved_at").eq("student_id", me.profile.id).eq("subject", "English").eq("attempt_key", notebookAttemptKey(id)),
+    admin.from("wrong_answers").select("question_id,cause,resolved_at").eq("student_id", me.profile.id).eq("subject", a.subject || "English").eq("attempt_key", notebookAttemptKey(id)),
   ]);
   if (ans.error) return jerr("could not load", 500);
   const items = reviewItems(a.paper_id, ans.data || [], a.status);
@@ -142,7 +142,8 @@ export async function GET(request) {
   const open = rows.find((a) => a.status === "in_progress") || null;
   const draft = open ? await loadDraft(admin, open.id) : null;
   const papers = listPapers();
-  const rec = pickPaper(papers.map((p) => ({ ...p })), { school: me.profile.school, attempts: rows.map((a) => ({ paperId: a.paper_id, status: a.status, at: Date.parse(a.submitted_at || a.started_at) })) });
+  const rec = pickPaper(papers.filter((p) => p.subject !== "Chinese").map((p) => ({ ...p })), // "next up" stays English; Chinese is chosen on purpose
+    { school: me.profile.school, attempts: rows.map((a) => ({ paperId: a.paper_id, status: a.status, at: Date.parse(a.submitted_at || a.started_at) })) });
   return jok({
     papers, recommendedId: rec ? rec.id : null,
     attempts: rows.filter((a) => a.status !== "in_progress").slice(0, 30).map(attemptOut),
@@ -181,7 +182,7 @@ export async function POST(request) {
     const minutes = minutesAllowed(meta.row);
     const started = new Date(nowMs);
     const ins = await admin.from("exam_attempts").insert({
-      student_id: sid, subject: "English", grade: me.profile.grade || null, paper_id: meta.row.id, paper_label: paperLabel(meta.row),
+      student_id: sid, subject: meta.row.subject === "Chinese" ? "Chinese" : "English", grade: me.profile.grade || null, paper_id: meta.row.id, paper_label: paperLabel(meta.row),
       paper_flags: paperFlags(meta.row), minutes_allowed: minutes, started_at: started.toISOString(),
       deadline_at: new Date(deadlineMs(nowMs, minutes)).toISOString(), attempt_no: mine.length + 1,
     }).select("*").single();

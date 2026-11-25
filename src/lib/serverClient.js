@@ -1,7 +1,7 @@
 // Browser-side helpers for the optional Supabase server (only used when NEXT_PUBLIC_SERVER_AUTH=true).
 // Never deletes or modifies existing localStorage data; it only reads it and (additively) writes the
 // genius_server_import_v1 marker.
-export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
+export { SERVER_AUTH, WRONG_ANSWERS_SYNC, PARENT_HOMEWORK, REWARDS, LEARNING_DASHBOARD, MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED } from "@/lib/supabase/config";
 import { SERVER_AUTH as _SA, WRONG_ANSWERS_SYNC as _WA, REWARDS as _RW, LEARNING_DASHBOARD as _LD, ANSWER_TIMING as _AT } from "@/lib/supabase/config";
 
 import { describeMistake, indexSets } from "@/lib/reviewRounds";
