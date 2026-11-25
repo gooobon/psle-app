@@ -275,7 +275,8 @@ export function reviewItems(paperId, rows, status) {
   const d = paperData(paperId), det = detailsFor(paperId);
   if (!d || !det) return null;
   const byId = new Map((rows || []).map((r) => [r.question_id, r]));
-  return d.questions.map((q) => {
+  const weights = marksByQuestion(paperId, d.questions.map((q) => q.id));
+  return d.questions.map((q, qi) => {
     const r = byId.get(q.id) || {};
     const x = det.get(q.id) || {};
     const a = r.answer && typeof r.answer === "object" ? r.answer : null;
@@ -289,6 +290,7 @@ export function reviewItems(paperId, rows, status) {
       // An auto-graded item whose paper data has no readable key (e.g. a "multiple choice" item stored without options). Shown as such, never with a guessed key.
       keyMissing: !ambiguous && (d.noKey.has(q.id) || (r.correct != null && !x.correctText)),
       parentMark: r.parent_correct === true ? true : r.parent_correct === false ? false : null,
+      parentMarks: r.parent_correct === false && Number.isInteger(r.parent_marks) ? r.parent_marks : null, weight: weights[qi],
       timeSuggested: !answered && status === "auto_submitted",
     };
   });

@@ -217,3 +217,31 @@ export function scoreLine({ score, total, pending }) {
 }
 // Is the settle step (reward, milestone, weekly report) due? Only when nothing is waiting for the parent and it has not run yet.
 export const readyToSettle = ({ pending, settledAt }) => (Number(pending) || 0) === 0 && !settledAt;
+
+// Parent mark write (issue #148). parent_marks is only included when a partial score is given (0 < marks < weight), or when a stale partial
+// value must be cleared, so a plain Correct / Not correct never touches the column and keeps working before the migration is applied.
+export function parentMarkUpdate({ marks, correct, weight, hadPartial, nowIso }) {
+  const partial = marks != null;
+  const upd = { parent_correct: partial ? marks >= weight : correct, parent_marked_at: nowIso };
+  const mid = partial && marks > 0 && marks < weight;
+  if (mid) upd.parent_marks = marks; else if (hadPartial) upd.parent_marks = null;
+  return upd;
+}
+export function isMissingParentMarks(error) {
+  if (!error) return false;
+  const m = String(error.message || "") + " " + String(error.details || "");
+  return error.code === "42703" || error.code === "PGRST204" || /parent_marks/.test(m);
+}
+// Writes the mark. If it fails only because parent_marks does not exist yet, saves the boolean mark without it (fail-soft) and logs.
+// A partial score then counts as Not correct until the migration is applied. Returns { data, error, degraded }.
+export async function saveParentMark(admin, { attemptId, qid, upd, log }) {
+  const run = (u) => admin.from("exam_answers").update(u).eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).select("question_id");
+  let r = await run(upd);
+  if (r.error && "parent_marks" in upd && isMissingParentMarks(r.error)) {
+    (log || console.error)("[exam] parent_marks column missing, saved the boolean mark only (apply migration 20261211000000)");
+    const { parent_marks: _drop, ...rest } = upd;
+    r = await run(rest);
+    return { data: r.data, error: r.error, degraded: true };
+  }
+  return { data: r.data, error: r.error, degraded: false };
+}

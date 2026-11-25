@@ -321,7 +321,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
           {it.ambiguous || it.keyMissing
             ? <div style={note}>{it.keyMissing ? 'This question is not available in our copy of the paper, so it is not counted in your score.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
             : <div style={{ fontSize: 13 }}>{it.openEnded ? 'Model answer' : 'Correct answer'}: <b>{it.correctAnswer || '—'}</b></div>}
-          {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Marked correct. This mark is automatic and your parent can still change it.' : it.parentMark === false ? 'Marked not correct. This mark is automatic and your parent can still change it.' : 'This one has no automatic mark.'}</div> : null}
+          {it.openEnded ? <div style={note}>{it.parentMarks != null ? 'Marked ' + it.parentMarks + ' / ' + it.weight + '. This mark is automatic and your parent can still change it.' : it.parentMark === true ? 'Marked correct. This mark is automatic and your parent can still change it.' : it.parentMark === false ? 'Marked not correct. This mark is automatic and your parent can still change it.' : 'This one has no automatic mark.'}</div> : null}
           {it.explanation ? <div style={{ fontSize: 13, marginTop: 6, background: '#F8FAFC', borderRadius: 8, padding: 8 }}>{it.explanation}</div> : null}
           {it.correct === false && it.inNotebook ? (
             <div style={{ marginTop: 8 }}>

@@ -5,7 +5,7 @@
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED } from "@/lib/supabase/config";
 import { modelAnswersForParent, marksByQuestion } from "@/lib/examServer";
-import { combineMarks, percentOf, readyToSettle } from "@/lib/examEngine";
+import { combineMarks, percentOf, readyToSettle, parentMarkUpdate, saveParentMark } from "@/lib/examEngine";
 import { settlePaper } from "@/lib/examSettle";
 
 export const runtime = "nodejs";
@@ -72,11 +72,9 @@ export async function POST(request) {
   // Partial score (issue #148): marks is 0..weight. Full marks = correct, 0 = not correct, in between is stored in parent_marks.
   const weight = marksByQuestion(a.paper_id, [qid])[0];
   if (partial && b.marks > weight) return jerr("marks above the question's total", 400);
-  const upd = partial
-    ? { parent_correct: b.marks >= weight, parent_marks: b.marks > 0 && b.marks < weight ? b.marks : null, parent_marked_at: new Date().toISOString() }
-    : { parent_correct: b.correct, parent_marks: null, parent_marked_at: new Date().toISOString() };
-  const { data, error } = await admin.from("exam_answers").update(upd)
-    .eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).select("question_id");
+  const prev = await admin.from("exam_answers").select("*").eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).maybeSingle();
+  const upd = parentMarkUpdate({ marks: partial ? b.marks : null, correct: b.correct, weight, hadPartial: !!(prev.data && prev.data.parent_marks != null), nowIso: new Date().toISOString() });
+  const { data, error } = await saveParentMark(admin, { attemptId, qid, upd });
   if (error) return jerr("could not save", 500);
   if (!data || !data.length) return jerr("not an open-ended item", 404);
   // The mark now counts: recompute the attempt's final score from ALL its open-ended rows (idempotent, so a repeat or a changed mark
