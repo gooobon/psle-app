@@ -13,7 +13,8 @@
 //   * daily cap     = at most MAX_PER_DAY new daily-set rows per subject per SGT day
 // Flags: NEXT_PUBLIC_SERVER_AUTH + NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED (default off).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
-import { LEARNING_DASHBOARD } from "@/lib/supabase/config";
+import { LEARNING_DASHBOARD, ANSWER_TIMING } from "@/lib/supabase/config";
+import { cleanTimingFields, stripTiming, isMissingColumnError } from "@/lib/answerTiming";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 import { sgtDate } from "@/lib/activity";
 import { LEARNING_SUBJECTS } from "@/lib/learningServer";
@@ -133,10 +134,14 @@ export async function POST(request) {
       first_try: firstTry, correct: graded.correct, weight,
       session_num: Number.isInteger(it.sessionNum) && it.sessionNum >= 0 && it.sessionNum < 100000 ? it.sessionNum : null,
       attempted_at: new Date(at).toISOString(), server_graded: true, dedupe_key: dk,
+      ...(ANSWER_TIMING ? cleanTimingFields(it) : {}), // issue #128, flag default off
     });
   }
   if (rows.length) {
-    const { error } = await admin.from("learning_trials").upsert(rows, { onConflict: "student_id,dedupe_key", ignoreDuplicates: true });
+    const opts = { onConflict: "student_id,dedupe_key", ignoreDuplicates: true };
+    let { error } = await admin.from("learning_trials").upsert(rows, opts);
+    // Fail soft (#128): if the timing columns are not applied yet, drop them and insert exactly as before.
+    if (error && ANSWER_TIMING && isMissingColumnError(error)) ({ error } = await admin.from("learning_trials").upsert(stripTiming(rows), opts));
     if (error) return jerr("could not record", 500);
   }
   // Counts only: no per-item verdict is returned, so the route is not an answer oracle.

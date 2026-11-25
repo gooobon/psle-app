@@ -1,5 +1,6 @@
 // Browser helpers for ClewQuest. Only writes new `clewquest_*` keys; never reads or modifies `genius_*` keys.
 import { clewquestEnabled } from "./config.js";
+import { addSetRewards } from "../setRewards.js";
 
 async function call(path, method, body) {
   try {
@@ -34,6 +35,7 @@ export function reportThread(subject, results) {
     cqPost("/api/clewquest/award", { subject: String(subject || "").toLowerCase(), items }).then((r) => {
       if (r && r.ok && r.added > 0) {
         try { const prev = JSON.parse(sessionStorage.getItem(LAST_AWARD_KEY) || "0") || 0; sessionStorage.setItem(LAST_AWARD_KEY, JSON.stringify(prev + r.added)); } catch {}
+        addSetRewards({ thread: r.added }); // shown on the result screen as "Thread +N" (separate key; LAST_AWARD_KEY is left for the home screen)
         window.dispatchEvent(new Event("clewquest-thread-changed"));
       }
     }).catch(() => {});

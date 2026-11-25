@@ -1,5 +1,5 @@
 // Pure checks for pending -> confirmed/forfeited credits (issue #32). No network. Run: node tools/pending_credits_selftest.mjs
-import { creditStatusFor, finalizeCreditRows, creditTotals, homeworkGate } from "../src/lib/rewards.js";
+import { checkPayout, creditStatusFor, finalizeCreditRows, creditTotals, homeworkGate } from "../src/lib/rewards.js";
 
 let failed = 0;
 function eq(name, actual, expected) {
@@ -38,6 +38,17 @@ eq("legacy pending row uses period", finalizeCreditRows([{ status: "pending", cr
 // Only confirmed credits count toward the balance
 const rows = [{ status: "confirmed", credits: 5 }, { status: "pending", credits: 3 }, { status: "forfeited", credits: 4 }, { credits: 2 /* legacy = confirmed */ }];
 eq("balance counts confirmed only", creditTotals(rows, 2), { confirmed: 7, pending: 3, forfeited: 4, paid: 2, balance: 5 });
+
+// Issue #133: only CONFIRMED credits can be cashed out, and a payout must respect the parent's minimum and limit.
+{
+  const t = creditTotals([credit({ status: "confirmed", credits: 600 }), credit({ status: "pending", credits: 400 }), credit({ status: "forfeited", credits: 99 })], 100);
+  eq("balance counts confirmed only, minus paid", t.balance, 500);
+  eq("pending credits cannot be cashed out (balance 500, pending 400 excluded)", t.pending, 400);
+  const rule = { cashoutMinSgd: 5, cashoutLimitSgd: 20, cashoutLimitPeriod: "month" };
+  eq("under the minimum is refused", checkPayout({ amountSgd: 4, paidOn: D, rule, payouts: [] }).code, "minimum");
+  eq("over the monthly limit is refused", checkPayout({ amountSgd: 21, paidOn: D, rule, payouts: [] }).code, "limit");
+  eq("within min and limit is allowed", checkPayout({ amountSgd: 20, paidOn: D, rule, payouts: [] }).ok, true);
+}
 
 if (failed) { console.error(failed + " FAILED"); process.exit(1); }
 console.log("ALL PASS");

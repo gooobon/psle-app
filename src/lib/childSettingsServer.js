@@ -27,7 +27,12 @@ export async function saveChildSetting(admin, parent, childId, body) {
   const changes = diffSettings(before, edit.setting);
   if (!changes.length) return { ok: true, setting: edit.setting, changes: [], note: "No changes." };
   const now = new Date().toISOString();
-  const { error } = await admin.from("child_setting_versions").upsert(settingToRow(childId, edit.setting, parent.id, now, { paper: MOCK_EXAMS_ENABLED || carryPaper }), { onConflict: "child_id,effective_from" });
+  const paper = MOCK_EXAMS_ENABLED || carryPaper;
+  // Cash-out columns missing (SQL not applied yet): the rate still saves through the legacy column, but a minimum or limit cannot be stored,
+  // so refuse instead of silently dropping it.
+  const rr = edit.setting.rule;
+  if (v.cashout === false && ((rr.cashoutMinSgd || 0) > 0 || (rr.cashoutLimitSgd || 0) > 0)) return { ok: false, error: "Cash-out minimum and limit cannot be saved yet: the database update for them has not been applied.", status: 409 };
+  const { error } = await admin.from("child_setting_versions").upsert(settingToRow(childId, edit.setting, parent.id, now, { paper, cashout: v.cashout }), { onConflict: "child_id,effective_from" });
   if (error) return { ok: false, error: "could not save", status: 500 };
   const lines = auditLines(parent.display_name, changes, tomorrow, today);
   await admin.from("child_setting_audit").insert({ child_id: childId, changed_by: parent.id, changed_by_name: parent.display_name || null, effective_from: tomorrow, changes: lines });

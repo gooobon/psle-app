@@ -14,6 +14,10 @@ export const REWARDS = process.env.NEXT_PUBLIC_REWARDS_ENABLED === "true";
 // Needs supabase/migrations/20261127000000_learning_trials.sql applied by hand.
 export const LEARNING_DASHBOARD = process.env.NEXT_PUBLIC_LEARNING_DASHBOARD_ENABLED === "true";
 
+// Answer timing + practice session logging (issue #128). Default OFF; also requires SERVER_AUTH + LEARNING_DASHBOARD.
+// Needs supabase/migrations/20261208000000_answer_timing.sql for storage; without it the server drops the fields (fail soft).
+export const ANSWER_TIMING = process.env.NEXT_PUBLIC_ANSWER_TIMING_ENABLED === "true";
+
 // Mock exams from real past papers (issue #44, docs/design/mock-exams-v1.md phase 1). Default OFF; also requires SERVER_AUTH
 // (objective items are graded on the server from the paper's own key). Needs supabase/migrations/20261129000000_exam_attempts.sql applied by hand.
 export const MOCK_EXAMS_ENABLED = process.env.NEXT_PUBLIC_MOCK_EXAMS_ENABLED === "true";

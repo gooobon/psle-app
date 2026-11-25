@@ -5,10 +5,10 @@
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
 import { REWARDS } from "@/lib/supabase/config";
 import { sgtDate } from "@/lib/activity";
-import { weekStart, creditTotals, PENDING_NOTE } from "@/lib/rewards";
+import { weekStart, creditTotals, PENDING_NOTE, walletView, creditsPerSgdOf } from "@/lib/rewards";
 import { settingForDate, tomorrowSgt } from "@/lib/childSettings";
 import { saveChildSetting } from "@/lib/childSettingsServer";
-import { finalizeCredits, SETTING_COLUMNS } from "@/lib/rewardsServer";
+import { finalizeCredits, loadSettingVersions } from "@/lib/rewardsServer";
 import { rateLimit, clientIp } from "@/lib/rateLimit";
 
 export const runtime = "nodejs";
@@ -31,19 +31,19 @@ export async function GET(request) {
   const today = sgtDate();
   const ws = weekStart(today);
   await finalizeCredits(admin, child, today);
-  const [st, wr, ru, cr, po] = await Promise.all([
+  const [st, wr, sv, cr, po] = await Promise.all([
     admin.from("stickers").select("kind,period").eq("child_id", child),
     admin.from("weekly_reviews").select("subject,items,completed_at").eq("child_id", child).eq("week_start", ws),
-    admin.from("child_setting_versions").select(SETTING_COLUMNS).eq("child_id", child).order("effective_from", { ascending: true }),
+    loadSettingVersions(admin, child),
     admin.from("reward_credits").select("kind,period,subject,score_pct,credits,sgd_per_credit,status,gate_day,created_at").eq("child_id", child).order("period", { ascending: false }),
     admin.from("reward_payouts").select("id,credits,amount_sgd,paid_on,note,created_at").eq("child_id", child).order("created_at", { ascending: false }),
   ]);
-  if (st.error || wr.error || ru.error || cr.error || po.error) return jerr("could not load", 500);
+  if (st.error || wr.error || !sv.ok || cr.error || po.error) return jerr("could not load", 500);
   const stickers = st.data || [];
   const credits = cr.data || [], payouts = po.data || [];
   const paid = payouts.reduce((a, r) => a + r.credits, 0);
   const totals = creditTotals(credits, paid);
-  const versions = ru.data || [];
+  const versions = sv.versions;
   const tomorrow = tomorrowSgt(today);
   const current = settingForDate(versions, today);
   const next = settingForDate(versions, tomorrow);
@@ -53,6 +53,9 @@ export async function GET(request) {
     stickers: { total: stickers.length, daily: stickers.filter((s) => s.kind === "daily").length, weekly: stickers.filter((s) => s.kind === "weekly").length, paper: stickers.filter((s) => s.kind === "paper").length },
     // rules = what applies TODAY (read-only in the form's header); form edits start from what applies tomorrow (includes a co-parent's edit).
     rules: current.rule, formRules: next.rule, upcoming: next.effectiveFrom > today ? [next.rule] : [],
+    cashoutReady: sv.cashout, // false until the cash-out SQL migration is applied (min / limit cannot be saved yet)
+    // Wallet SGD uses today's rate; if none is in force yet (just saved, starts tomorrow) it shows the saved rate rather than 0.
+    wallet: walletView({ ...totals }, creditsPerSgdOf(current.rule) > 0 ? current.rule : next.rule),
     ledger: { earned: totals.confirmed, pending: totals.pending, forfeited: totals.forfeited, pendingNote: PENDING_NOTE, paid, balance: totals.balance, rows: credits.slice(0, 60) },
     payouts: payouts.slice(0, 30).map((p) => ({ ...p, amount_sgd: Number(p.amount_sgd) })),
   });
@@ -69,10 +72,11 @@ export async function PUT(request) {
   const admin = adminClient();
   if (!(await linked(admin, me.profile.id, child))) return jerr("not your child", 403);
   // Any effectiveFrom sent by the client is ignored: the shared setting always changes from the next SGT day.
-  const r = await saveChildSetting(admin, me.profile, child, {
-    enabled: b.enabled, sgdPerCredit: b.sgdPerCredit, dailyTiers: b.dailyTiers, weeklyUnit: b.weeklyUnit, weeklyAmounts: b.weeklyAmounts,
-    paperUnit: b.paperUnit, paperAmounts: b.paperAmounts, paperCheckOff: b.paperCheckOff,
-  });
+  // Credits cannot be turned on without a rate (the form sends creditsPerSgd every time).
+  if (b.enabled === true && !(Number.isInteger(Number(b.creditsPerSgd)) && Number(b.creditsPerSgd) >= 1 && b.creditsPerSgd !== "")) return jerr("Enter how many credits equal SGD 1 (a whole number from 1 to 1000) before turning credits on.", 400);
+  const body = {};
+  for (const k of ["enabled", "creditsPerSgd", "cashoutMinSgd", "cashoutLimitSgd", "cashoutLimitPeriod", "sgdPerCredit", "dailyTiers", "weeklyUnit", "weeklyAmounts", "paperUnit", "paperAmounts", "paperCheckOff"]) if (b[k] !== undefined) body[k] = b[k];
+  const r = await saveChildSetting(admin, me.profile, child, body);
   if (!r.ok) return jerr(r.error, r.status || 500);
   return jok({ rule: r.setting.rule, changes: r.changes });
 }

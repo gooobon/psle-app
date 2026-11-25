@@ -25,11 +25,15 @@ export async function finalizeCredits(admin, childId, todayYmd) {
 // The paper_* columns are only selected while mock exams are on, so with the flag off the query is exactly what it was before.
 export const SETTING_COLUMNS = "effective_from,daily_target,homework_per_mistake,enabled,sgd_per_credit,daily_tiers,weekly_unit,weekly_amounts"
   + (MOCK_EXAMS_ENABLED ? ",paper_unit,paper_amounts,paper_check_off" : "");
+// Cash-out columns (migration 20261209000000_rewards_cashout_settings.sql). Selected first; if the migration is not applied yet the query
+// errors and we retry without them, so everything keeps working (no minimum, no limit, rate from the legacy column). `cashout` says which.
+export const CASHOUT_COLUMNS = ",credits_per_sgd,cashout_min_sgd,cashout_limit_sgd,cashout_limit_period";
 export async function loadSettingVersions(admin, childId) {
-  const { data, error } = await admin.from("child_setting_versions")
-    .select(SETTING_COLUMNS)
-    .eq("child_id", childId).order("effective_from", { ascending: true });
-  return error ? { ok: false, versions: [] } : { ok: true, versions: data || [] };
+  const q = (cols) => admin.from("child_setting_versions").select(cols).eq("child_id", childId).order("effective_from", { ascending: true });
+  const full = await q(SETTING_COLUMNS + CASHOUT_COLUMNS);
+  if (!full.error) return { ok: true, versions: full.data || [], cashout: true };
+  const base = await q(SETTING_COLUMNS);
+  return base.error ? { ok: false, versions: [] } : { ok: true, versions: base.data || [], cashout: false };
 }
 
 // The child's ONE shared setting in force on `ymd` ({dailyTarget, homeworkPerMistake, rule}); defaults when none saved. { ok, setting }.

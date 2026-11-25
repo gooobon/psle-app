@@ -2,13 +2,13 @@
 // Parent "Rewards" tab (roadmap step 9): sticker count, weekly review status, reward rules, credit ledger, mark-as-paid.
 // RECORD ONLY: the app never moves real money. Renders nothing unless the flags are on (default off).
 import React from 'react';
+import { RECOMMENDED, applyRecommended, parseCashout, creditsToSgd } from '@/lib/rewards';
 import { SERVER_AUTH, REWARDS, MOCK_EXAMS_ENABLED, serverGet, serverPost, serverPut } from '@/lib/serverClient';
 
 const box = { background: '#fff', border: '1px solid #E2DBCF', borderRadius: 14, padding: '12px 14px', marginBottom: 12 };
 const inp = { width: 90, padding: '7px 8px', borderRadius: 8, border: '1px solid #E2DBCF', fontSize: 13 };
 const btn = { background: '#1F3F95', color: '#fff', border: 'none', borderRadius: 10, padding: '8px 14px', fontWeight: 800, cursor: 'pointer' };
 const sgd = (n) => 'S$' + (Number(n) || 0).toFixed(2);
-const rowsSgd = (rows, status) => (rows || []).filter((r) => (r.status || 'confirmed') === status).reduce((a, r) => a + (Number(r.credits) || 0) * (Number(r.sgd_per_credit) || 0), 0);
 
 export default function ParentRewards({ child }) {
   const on = SERVER_AUTH && REWARDS && !!child?.serverId;
@@ -26,7 +26,7 @@ export default function ParentRewards({ child }) {
     let alive = true;
     serverGet('/api/parent/rewards?child=' + encodeURIComponent(child.serverId)).then((r) => {
       if (!alive) return;
-      if (r.ok) { setD(r); setErr(''); setRule((x) => x || { ...r.formRules }); } else setErr(r.error || 'Could not load rewards.');
+      if (r.ok) { setD(r); setErr(''); setRule((x) => x || { ...r.formRules, creditsPerSgd: r.formRules.creditsPerSgd || '' }); } else setErr(r.error || 'Could not load rewards.');
     });
     return () => { alive = false; };
   }, [on, child?.serverId, key]);
@@ -38,9 +38,12 @@ export default function ParentRewards({ child }) {
 
   const set = (k, v) => setRule((r) => ({ ...r, [k]: v }));
   const setTier = (i, k, v) => setRule((r) => ({ ...r, dailyTiers: r.dailyTiers.map((t, j) => (j === i ? { ...t, [k]: v } : t)) }));
+  // Same validation as the server (src/lib/rewards.js parseCashout), so the parent sees a clear message before anything is sent.
+  const check = parseCashout({ ...rule, creditsPerSgd: rule.creditsPerSgd, sgdPerCredit: 0 }, !!rule.enabled);
   async function saveRules() {
+    if (check.error) { setMsg(check.error); return; }
     setMsg('Saving…');
-    const r = await serverPut('/api/parent/rewards', { child: child.serverId, ...rule });
+    const r = await serverPut('/api/parent/rewards', { child: child.serverId, ...rule, creditsPerSgd: check.value.creditsPerSgd || '' });
     setMsg(r.ok ? `Saved. Applies from tomorrow (${d.tomorrow}); credits already earned are not changed. The other parent is notified.` : (r.error || 'Could not save.'));
     if (r.ok) { setRule(null); setKey((k) => k + 1); }
   }
@@ -53,7 +56,9 @@ export default function ParentRewards({ child }) {
     if (r.ok) { setPay({ credits: '', amount: '', date: '', note: '' }); setKey((k) => k + 1); }
   }
   const bal = d.ledger.balance;
-  const suggested = (n) => (rule.sgdPerCredit ? (n * rule.sgdPerCredit).toFixed(2) : '');
+  const wallet = d.wallet || { rate: 0, balanceSgd: 0, pendingSgd: 0, forfeitedSgd: 0 };
+  const cur = d.rules || {};
+  const suggested = (n) => (wallet.rate ? creditsToSgd(n, { creditsPerSgd: wallet.rate }).toFixed(2) : '');
   const num = (k, label) => (
     <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>{label}{' '}
       <input type="number" min="0" step="0.01" style={inp} value={rule[k]} onChange={(e) => set(k, e.target.value)} />
@@ -82,7 +87,23 @@ export default function ParentRewards({ child }) {
         <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>
           <input type="checkbox" checked={!!rule.enabled} onChange={(e) => set('enabled', e.target.checked)} /> Turn on credits for {child.name || 'this child'}
         </label>
-        {num('sgdPerCredit', 'SGD value of 1 credit (S$)')}
+        <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>Credits that equal SGD 1 (whole number, 1 to 1000){' '}
+          <input type="number" min="1" max="1000" step="1" style={inp} value={rule.creditsPerSgd ?? ''} onChange={(e) => set('creditsPerSgd', e.target.value)} />
+        </label>
+        <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>Cash-out minimum (SGD, 0 to 500; 0 = no minimum){' '}
+          <input type="number" min="0" max="500" step="0.01" style={inp} value={rule.cashoutMinSgd ?? 0} onChange={(e) => set('cashoutMinSgd', e.target.value)} />
+        </label>
+        <label style={{ fontSize: 12, display: 'block', marginBottom: 8 }}>Cash-out limit (SGD, 0 to 1000; 0 = no limit){' '}
+          <input type="number" min="0" max="1000" step="0.01" style={inp} value={rule.cashoutLimitSgd ?? 0} onChange={(e) => set('cashoutLimitSgd', e.target.value)} />{' per '}
+          <select value={rule.cashoutLimitPeriod === 'week' ? 'week' : 'month'} onChange={(e) => set('cashoutLimitPeriod', e.target.value)} style={{ ...inp, width: 90 }}>
+            <option value="week">week</option>
+            <option value="month">month</option>
+          </select>
+        </label>
+        {d.cashoutReady === false && <div style={{ fontSize: 11, color: '#B3261E', marginBottom: 6 }}>Cash-out minimum and limit cannot be saved until the database update for them is applied. The rate can still be saved.</div>}
+        <div style={{ marginBottom: 8 }}>
+          <button type="button" data-testid="use-recommended" onClick={() => { setRule((r) => applyRecommended(r)); setMsg(`Recommended values filled in (${RECOMMENDED.creditsPerSgd} credits = SGD 1, minimum SGD ${RECOMMENDED.cashoutMinSgd}, limit SGD ${RECOMMENDED.cashoutLimitSgd} per ${RECOMMENDED.cashoutLimitPeriod}). Nothing is saved or turned on until you press Save rules.`); }} style={{ ...btn, background: '#6B6F7B', padding: '5px 10px' }}>Use recommended</button>
+        </div>
         <div style={{ fontSize: 12, fontWeight: 800, margin: '6px 0 2px' }}>Daily credits per subject (first set of the day)</div>
         <div style={{ fontSize: 11, color: '#6B6F7B', marginBottom: 6 }}>
           The highest tier the first set reaches wins. Below every tier = 0. Credits start as pending and are confirmed once all of the day&apos;s homework is done (no homework assigned = confirmed at the end of the day; unfinished homework = forfeited).
@@ -141,11 +162,11 @@ export default function ParentRewards({ child }) {
 
       <div style={box}>
         <div style={{ fontSize: 13, fontWeight: 800, marginBottom: 6 }}>
-          Credits: {bal} unpaid{rule.sgdPerCredit ? ` (≈ ${sgd(bal * rule.sgdPerCredit)})` : ''}
+          Wallet: {bal} credits unpaid{wallet.rate ? ` = ${sgd(wallet.balanceSgd)} (${wallet.rate} credits = SGD 1)` : ' (set the exchange rate to see SGD)'}
         </div>
         <div style={{ fontSize: 11, color: '#6B6F7B', marginBottom: 4 }}>Confirmed {d.ledger.earned} · Paid {d.ledger.paid}</div>
-        {d.ledger.pending > 0 && <div style={{ fontSize: 11, color: '#1B2340', fontWeight: 700, marginBottom: 4 }}>Pending: {d.ledger.pending} (≈ {sgd(rowsSgd(d.ledger.rows, 'pending'))}) ({d.ledger.pendingNote})</div>}
-        {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B3261E', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited} (≈ {sgd(rowsSgd(d.ledger.rows, 'forfeited'))})</div>}
+        {d.ledger.pending > 0 && <div style={{ fontSize: 11, color: '#1B2340', fontWeight: 700, marginBottom: 4 }}>Pending: {d.ledger.pending} (= {sgd(wallet.pendingSgd)}) ({d.ledger.pendingNote})</div>}
+        {d.ledger.forfeited > 0 && <div style={{ fontSize: 11, color: '#B3261E', marginBottom: 4 }}>Forfeited (homework not finished): {d.ledger.forfeited} (= {sgd(wallet.forfeitedSgd)})</div>}
         {d.ledger.rows.slice(0, 10).map((r) => (
           <div key={r.kind + r.period + (r.subject || '')} style={{ fontSize: 11, color: '#6B6F7B' }}>
             {r.period}: {r.status === 'pending' ? 'pending ' : r.status === 'forfeited' ? 'forfeited ' : '+'}{r.credits} ({r.kind === 'weekly' ? 'weekly review' : r.kind === 'paper' ? 'Saturday past paper' : 'daily set'}{r.subject ? ' · ' + r.subject : ''}{r.score_pct != null ? ` · ${r.score_pct}%` : ''})
@@ -154,6 +175,7 @@ export default function ParentRewards({ child }) {
         {bal > 0 && (
           <div style={{ marginTop: 10, borderTop: '1px solid #E2DBCF', paddingTop: 10 }}>
             <div style={{ fontSize: 12, fontWeight: 800, marginBottom: 6 }}>Mark a payout as paid</div>
+            {(cur.cashoutMinSgd > 0 || cur.cashoutLimitSgd > 0) && <div style={{ fontSize: 11, color: '#6B6F7B', marginBottom: 6 }}>{cur.cashoutMinSgd > 0 ? `Minimum SGD ${Number(cur.cashoutMinSgd).toFixed(2)}. ` : ''}{cur.cashoutLimitSgd > 0 ? `Limit SGD ${Number(cur.cashoutLimitSgd).toFixed(2)} per ${cur.cashoutLimitPeriod}.` : ''}</div>}
             <input style={inp} type="number" min="1" max={bal} placeholder="Credits" value={pay.credits}
               onChange={(e) => setPay((p) => ({ ...p, credits: e.target.value, amount: p.amount || suggested(Number(e.target.value)) }))} />{' '}
             <input style={inp} type="number" min="0" step="0.01" placeholder="Amount S$" value={pay.amount}
