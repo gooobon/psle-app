@@ -165,11 +165,13 @@ export function canReview({ attempt, studentId }) {
 // autoScore / autoTotal and every open-ended item is PENDING. Each parent mark adds 1 to the total, and 1 to the score when "correct".
 // Pure: the parent route, the self-test and the weekly report all use this. marks: array of true | false | null (null = not marked yet).
 // openWeights (optional): marks each open item is worth, same order as openMarks; missing = 1. Score and total count marks, `pending` counts items.
-export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections, openWeights }) {
+// openAwarded[i] (optional, integer 0..weight) is a parent's partial score; when absent a true mark is full marks and a false mark is 0.
+export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSections, openWeights, openAwarded }) {
   const marks = Array.isArray(openMarks) ? openMarks : [];
   const wt = (i) => { const w = openWeights && openWeights[i]; return Number.isInteger(w) && w > 0 ? w : 1; };
   const marked = marks.filter((m) => m === true || m === false);
-  const pScore = marks.reduce((n, m, i) => n + (m === true ? wt(i) : 0), 0);
+  const got = (i) => { const a = openAwarded && openAwarded[i]; return Number.isInteger(a) && a >= 0 ? Math.min(a, wt(i)) : wt(i); };
+  const pScore = marks.reduce((n, m, i) => n + (m === true ? got(i) : m === false && Number.isInteger(openAwarded && openAwarded[i]) ? got(i) : 0), 0);
   const pTotal = marks.reduce((n, m, i) => n + (m === true || m === false ? wt(i) : 0), 0);
   const pending = marks.length - marked.length;
   const secs = (sections || []).map((s) => ({ ...s }));
@@ -178,7 +180,7 @@ export function combineMarks({ autoScore, autoTotal, openMarks, sections, openSe
     if (m !== true && m !== false) return;
     let s = secs.find((x) => x.section === sec);
     if (!s) { s = { section: sec, score: 0, total: 0 }; secs.push(s); }
-    s.total += wt(i); if (m === true) s.score += wt(i);
+    s.total += wt(i); if (m === true) s.score += got(i); else if (Number.isInteger(openAwarded && openAwarded[i])) s.score += got(i);
   });
   return { score: (autoScore || 0) + pScore, total: (autoTotal || 0) + pTotal, parentScore: pScore, parentTotal: pTotal, pending, settled: pending === 0, sections: secs };
 }
@@ -215,3 +217,31 @@ export function scoreLine({ score, total, pending }) {
 }
 // Is the settle step (reward, milestone, weekly report) due? Only when nothing is waiting for the parent and it has not run yet.
 export const readyToSettle = ({ pending, settledAt }) => (Number(pending) || 0) === 0 && !settledAt;
+
+// Parent mark write (issue #148). parent_marks is only included when a partial score is given (0 < marks < weight), or when a stale partial
+// value must be cleared, so a plain Correct / Not correct never touches the column and keeps working before the migration is applied.
+export function parentMarkUpdate({ marks, correct, weight, hadPartial, nowIso }) {
+  const partial = marks != null;
+  const upd = { parent_correct: partial ? marks >= weight : correct, parent_marked_at: nowIso };
+  const mid = partial && marks > 0 && marks < weight;
+  if (mid) upd.parent_marks = marks; else if (hadPartial) upd.parent_marks = null;
+  return upd;
+}
+export function isMissingParentMarks(error) {
+  if (!error) return false;
+  const m = String(error.message || "") + " " + String(error.details || "");
+  return error.code === "42703" || error.code === "PGRST204" || /parent_marks/.test(m);
+}
+// Writes the mark. If it fails only because parent_marks does not exist yet, saves the boolean mark without it (fail-soft) and logs.
+// A partial score then counts as Not correct until the migration is applied. Returns { data, error, degraded }.
+export async function saveParentMark(admin, { attemptId, qid, upd, log }) {
+  const run = (u) => admin.from("exam_answers").update(u).eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).select("question_id");
+  let r = await run(upd);
+  if (r.error && "parent_marks" in upd && isMissingParentMarks(r.error)) {
+    (log || console.error)("[exam] parent_marks column missing, saved the boolean mark only (apply migration 20261211000000)");
+    const { parent_marks: _drop, ...rest } = upd;
+    r = await run(rest);
+    return { data: r.data, error: r.error, degraded: true };
+  }
+  return { data: r.data, error: r.error, degraded: false };
+}

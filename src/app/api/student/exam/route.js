@@ -108,7 +108,7 @@ async function review(admin, me, id) {
   if (!a) return jerr("not found", 404);
   if (!canReview({ attempt: a, studentId: me.profile.id })) return jerr("answers are shown after you hand in", 409);
   const [ans, nb] = await Promise.all([
-    admin.from("exam_answers").select("question_id,answer,correct,parent_correct,flagged").eq("attempt_id", id),
+    admin.from("exam_answers").select("*").eq("attempt_id", id),
     admin.from("wrong_answers").select("question_id,cause,resolved_at").eq("student_id", me.profile.id).eq("subject", a.subject || "English").eq("attempt_key", notebookAttemptKey(id)),
   ]);
   if (ans.error) return jerr("could not load", 500);

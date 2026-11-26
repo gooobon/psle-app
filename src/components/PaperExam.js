@@ -55,7 +55,7 @@ function underlined(sentence, wrongWord) {
   return <>{sent.slice(0, at)}<span style={{ textDecoration: 'underline', background: '#FEF08A', fontWeight: 800, padding: '0 2px' }}>{sent.slice(at, at + w.length)}</span>{sent.slice(at + w.length)}</>;
 }
 
-function CompQuestion({ q, a, set }) {
+function CompQuestion({ q, a, set, zh }) {
   const v = (a && a.val) ?? null;
   const head = <div style={{ fontSize: 14, fontWeight: 700 }}>{q.no ? q.no + '. ' : ''}{q.stem} <span style={{ color: '#94A3B8', fontWeight: 600 }}>[{q.marks}]</span></div>;
   if (q.fmt === 'mcq') return <div>{head}<Choice options={q.options} value={v} onPick={(i) => set({ val: i })} /></div>;
@@ -86,10 +86,10 @@ function CompQuestion({ q, a, set }) {
     );
   }
   // fill_blank / fill_word / tf_reason / open_sentence: typed text. Open-ended answers get an automatic mark at hand-in.
-  return <div>{head}<Text value={v} onChange={(t) => set({ val: t })} placeholder={q.fmt === 'open_sentence' ? 'Write your answer in a full sentence' : undefined} /></div>;
+  return <div>{head}<Text value={v} onChange={(t) => set({ val: t })} placeholder={q.fmt === 'open_sentence' ? (zh ? '请用完整的句子回答 (Answer in a full sentence)' : 'Write your answer in a full sentence') : (zh ? '请输入答案' : undefined)} /></div>;
 }
 
-function Section({ sec, answers, setAns, flags, toggleFlag }) {
+function Section({ sec, answers, setAns, flags, toggleFlag, zh }) {
   const Flag = ({ id }) => <button onClick={() => toggleFlag(id)} style={{ ...ghost, padding: '2px 8px', fontSize: 11, marginLeft: 8, background: flags[id] ? '#FEF3C7' : '#F1F5F9' }}>{flags[id] ? '★ flagged' : '☆ flag'}</button>;
   if (sec.items) {
     return sec.items.map((q, i) => (
@@ -106,7 +106,7 @@ function Section({ sec, answers, setAns, flags, toggleFlag }) {
       {s.label ? <div style={{ fontSize: 12, fontWeight: 800, color: '#7C3AED', marginBottom: 6 }}>{s.label}</div> : null}
       {s.instructions ? <div style={note}>{s.instructions}</div> : null}
       {s.passage ? <div style={{ whiteSpace: 'pre-wrap', fontSize: 14, lineHeight: 1.5, background: '#F8FAFC', borderRadius: 10, padding: 10, margin: '6px 0' }}>{s.passage}</div> : null}
-      {s.wordBank && s.wordBank.length ? <div style={note}>Word bank: {s.wordBank.join(' · ')}</div> : null}
+      {s.wordBank && s.wordBank.length ? <div style={note}>{zh ? '词语表 (Word bank): ' : 'Word bank: '}{s.wordBank.join(' · ')}</div> : null}
       {(s.blanks || []).map((b) => (
         <div key={b.id} style={{ marginTop: 8, fontSize: 14 }}>
           <b>({b.num})</b><Flag id={b.id} />
@@ -122,12 +122,12 @@ function Section({ sec, answers, setAns, flags, toggleFlag }) {
           <div>{i + 1}. {underlined(q.sentence, q.wrongWord)}<Flag id={q.id} /></div>
           {q.options && q.options.length >= 2
             ? <Choice options={q.options} value={answers[q.id] ? answers[q.id].val : null} onPick={(k) => setAns(q.id, { val: k })} />
-            : <Text value={answers[q.id] && answers[q.id].val} onChange={(t) => setAns(q.id, { val: t })} placeholder="Write the correct word" />}
+            : <Text value={answers[q.id] && answers[q.id].val} onChange={(t) => setAns(q.id, { val: t })} placeholder={zh ? '请写出正确的字词' : 'Write the correct word'} />}
         </div>
       ))}
       {(s.questions || []).map((q) => (
         <div key={q.id} style={{ marginTop: 12 }}>
-          <CompQuestion q={q} a={answers[q.id]} set={(p) => setAns(q.id, p)} /><Flag id={q.id} />
+          <CompQuestion q={q} a={answers[q.id]} set={(p) => setAns(q.id, p)} zh={zh} /><Flag id={q.id} />
         </div>
       ))}
     </div>
@@ -214,10 +214,10 @@ function Sitting({ attempt, paper, initial, onSubmitted, onExit }) {
       {warn ? <div style={{ ...card, background: '#FEF3C7', fontSize: 13 }}>{warn === 1 ? 'Less than 1 minute left.' : `${warn} minutes left.`}</div> : null}
       <div style={{ display: 'flex', gap: 6, overflowX: 'auto', marginBottom: 10 }}>
         {paper.sections.map((s, i) => (
-          <button key={s.type} onClick={() => setSecIdx(i)} style={{ ...ghost, background: i === secIdx ? '#7C3AED' : '#F1F5F9', color: i === secIdx ? '#fff' : '#334155', whiteSpace: 'nowrap' }}>{s.label}</button>
+          <button key={'sec' + i} onClick={() => setSecIdx(i)} style={{ ...ghost, background: i === secIdx ? '#7C3AED' : '#F1F5F9', color: i === secIdx ? '#fff' : '#334155', whiteSpace: 'nowrap' }}>{s.label}</button>
         ))}
       </div>
-      <Section sec={sec} answers={answers} setAns={setAns} flags={flags} toggleFlag={toggleFlag} />
+      <Section sec={sec} answers={answers} setAns={setAns} flags={flags} toggleFlag={toggleFlag} zh={!!paper.zh} />
       <div style={{ display: 'flex', justifyContent: 'space-between', gap: 8 }}>
         <button style={ghost} disabled={secIdx === 0} onClick={() => setSecIdx(secIdx - 1)}>← Previous section</button>
         {secIdx + 1 < paper.sections.length
@@ -321,7 +321,7 @@ function Review({ attemptId, onBack, onNotebook, onCause }) {
           {it.ambiguous || it.keyMissing
             ? <div style={note}>{it.keyMissing ? 'This question is not available in our copy of the paper, so it is not counted in your score.' : 'This question could not be auto-marked, so no answer is shown.'}</div>
             : <div style={{ fontSize: 13 }}>{it.openEnded ? 'Model answer' : 'Correct answer'}: <b>{it.correctAnswer || '—'}</b></div>}
-          {it.openEnded ? <div style={note}>{it.parentMark === true ? 'Marked correct. This mark is automatic and your parent can still change it.' : it.parentMark === false ? 'Marked not correct. This mark is automatic and your parent can still change it.' : 'This one has no automatic mark.'}</div> : null}
+          {it.openEnded ? <div style={note}>{it.parentMarks != null ? 'Marked ' + it.parentMarks + ' / ' + it.weight + '. This mark is automatic and your parent can still change it.' : it.parentMark === true ? 'Marked correct. This mark is automatic and your parent can still change it.' : it.parentMark === false ? 'Marked not correct. This mark is automatic and your parent can still change it.' : 'This one has no automatic mark.'}</div> : null}
           {it.explanation ? <div style={{ fontSize: 13, marginTop: 6, background: '#F8FAFC', borderRadius: 8, padding: 8 }}>{it.explanation}</div> : null}
           {it.correct === false && it.inNotebook ? (
             <div style={{ marginTop: 8 }}>

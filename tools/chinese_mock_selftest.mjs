@@ -51,6 +51,7 @@ if (process.argv.includes("--probe")) {
 }
 
 let n = 0;
+const okA = async (name, fn) => { try { await fn(); n++; console.log("PASS", name); } catch (e) { console.error("FAIL", name, "\n ", e.message); process.exitCode = 1; } };
 const ok = (name, fn) => { try { fn(); n++; console.log("PASS", name); } catch (e) { console.error("FAIL", name, "\n ", e.message); process.exitCode = 1; } };
 
 ok("flag NEXT_PUBLIC_CHINESE_MOCK_ENABLED defaults off and is documented", () => {
@@ -167,6 +168,64 @@ if (P) {
   });
   ok("flag ON: no English notebook rows or mastery trials are written for Chinese papers", () => {
     for (const pr of Object.values(P.probes)) { assert.equal(pr.notebook, 0); assert.equal(pr.trials, 0); }
+  });
+}
+
+ok("PaperExam section tabs use a unique key (Chinese papers repeat section types)", () => {
+  const src = fs.readFileSync(path.join(ROOT, "src/components/PaperExam.js"), "utf8");
+  assert.ok(!/key=\{s\.type\}/.test(src), "tab key must not be s.type");
+  assert.ok(/key=\{'sec' \+ i\}/.test(src));
+});
+
+{
+  const { combineMarks } = await import("../src/lib/examEngine.js");
+  ok("partial 1 of 2 adds 1, total adds 2", () => {
+    const c = combineMarks({ autoScore: 10, autoTotal: 20, openMarks: [false, true, false], openSections: ["C", "C", "C"], openWeights: [2, 2, 2], openAwarded: [1, null, null], sections: [] });
+    assert.equal(c.score, 10 + 1 + 2 + 0); assert.equal(c.total, 20 + 6); assert.equal(c.pending, 0);
+  });
+  ok("no openAwarded behaves as before", () => {
+    const c = combineMarks({ autoScore: 0, autoTotal: 0, openMarks: [true, false, null], openSections: ["C", "C", "C"], openWeights: [2, 2, 2] });
+    assert.equal(c.score, 2); assert.equal(c.total, 4); assert.equal(c.pending, 1);
+  });
+  ok("partial-marks migration is additive only", () => {
+    const sql = fs.readFileSync(path.join(ROOT, "supabase/migrations/20261211000000_exam_parent_partial_marks.sql"), "utf8");
+    assert.ok(!/\bdrop\b|\bdelete\b|\btruncate\b/i.test(sql)); assert.ok(/add column if not exists parent_marks/.test(sql));
+  });
+  ok("no migration file uses the drop keyword (comments ignored)", () => {
+    const dir = path.join(ROOT, "supabase/migrations");
+    for (const f of fs.readdirSync(dir).filter((x) => x >= "20261211000000" && x.endsWith(".sql"))) {
+      const sql = fs.readFileSync(path.join(dir, f), "utf8").replace(/--.*$/gm, "");
+      assert.ok(!/\bdrop\b/i.test(sql), f + " must be additive (no drop)");
+    }
+  });
+  const { parentMarkUpdate, saveParentMark } = E;
+  const fake = (failFirst) => {
+    const calls = [];
+    const admin = { from: () => ({ update: (u) => { calls.push(u); const err = failFirst && "parent_marks" in u ? { code: "42703", message: 'column "parent_marks" does not exist' } : null;
+      const q = { eq: () => q, is: () => q, select: () => Promise.resolve({ data: err ? null : [{ question_id: "q" }], error: err }) }; return q; } }) };
+    return { admin, calls };
+  };
+  ok("boolean mark never sends parent_marks", () => {
+    const u = parentMarkUpdate({ correct: true, weight: 2, hadPartial: false, nowIso: "t" });
+    assert.ok(!("parent_marks" in u)); assert.equal(u.parent_correct, true);
+    assert.ok(!("parent_marks" in parentMarkUpdate({ marks: 0, weight: 2, hadPartial: false, nowIso: "t" })));
+    assert.equal(parentMarkUpdate({ marks: 1, weight: 2, hadPartial: false, nowIso: "t" }).parent_marks, 1);
+    assert.equal(parentMarkUpdate({ correct: false, weight: 2, hadPartial: true, nowIso: "t" }).parent_marks, null);
+  });
+  await okA("column missing: boolean mark saves without any parent_marks (no db)", async () => {
+    const { admin, calls } = fake(true);
+    const r = await saveParentMark(admin, { attemptId: "a", qid: "q", upd: parentMarkUpdate({ correct: false, weight: 1, hadPartial: false, nowIso: "t" }), log: () => {} });
+    assert.equal(r.error, null); assert.equal(calls.length, 1); assert.ok(!("parent_marks" in calls[0]));
+  });
+  await okA("column missing: partial score falls back to the boolean mark and logs (no db)", async () => {
+    const { admin, calls } = fake(true); let logged = 0;
+    const r = await saveParentMark(admin, { attemptId: "a", qid: "q", upd: parentMarkUpdate({ marks: 1, weight: 2, hadPartial: false, nowIso: "t" }), log: () => logged++ });
+    assert.equal(r.error, null); assert.equal(r.degraded, true); assert.equal(logged, 1); assert.equal(calls.length, 2); assert.ok(!("parent_marks" in calls[1])); assert.equal(calls[1].parent_correct, false);
+  });
+  await okA("column present: partial score saved with parent_marks (no db)", async () => {
+    const { admin, calls } = fake(false);
+    const r = await saveParentMark(admin, { attemptId: "a", qid: "q", upd: parentMarkUpdate({ marks: 1, weight: 2, hadPartial: false, nowIso: "t" }) });
+    assert.equal(r.degraded, false); assert.equal(calls.length, 1); assert.equal(calls[0].parent_marks, 1);
   });
 }
 

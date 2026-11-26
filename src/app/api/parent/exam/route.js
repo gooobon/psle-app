@@ -3,9 +3,9 @@
 //   POST { attemptId, questionId, correct }     -> the parent's mark for one open-ended item
 // The model answer is sent to a verified linked PARENT only, never to a student. Flags: SERVER_AUTH + MOCK_EXAMS_ENABLED (default OFF).
 import { adminClient, currentUser, serverAuthEnabled, jerr, jok, readJson } from "@/lib/supabase/server";
-import { MOCK_EXAMS_ENABLED } from "@/lib/supabase/config";
+import { MOCK_EXAMS_ENABLED, CHINESE_MOCK_ENABLED } from "@/lib/supabase/config";
 import { modelAnswersForParent, marksByQuestion } from "@/lib/examServer";
-import { combineMarks, percentOf, readyToSettle } from "@/lib/examEngine";
+import { combineMarks, percentOf, readyToSettle, parentMarkUpdate, saveParentMark } from "@/lib/examEngine";
 import { settlePaper } from "@/lib/examSettle";
 
 export const runtime = "nodejs";
@@ -33,24 +33,24 @@ export async function GET(request) {
   if (error) return jerr("could not load", 500);
   const ids = (attempts || []).filter((a) => (a.open_total || 0) > 0).map((a) => a.id);
   const { data: open, error: oe } = ids.length
-    ? await admin.from("exam_answers").select("attempt_id,question_id,answer,parent_correct,parent_marked_at").in("attempt_id", ids).is("correct", null)
+    ? await admin.from("exam_answers").select("*").in("attempt_id", ids).is("correct", null)
     : { data: [], error: null };
   if (oe) return jerr("could not load", 500);
   const byAttempt = {};
   for (const r of open || []) (byAttempt[r.attempt_id] = byAttempt[r.attempt_id] || []).push(r);
-  const out = (attempts || []).map((a) => {
+  const out = (attempts || []).filter((a) => CHINESE_MOCK_ENABLED || a.subject !== "Chinese").map((a) => {
     const items = byAttempt[a.id] || [];
     const models = modelAnswersForParent(a.paper_id, items.map((i) => i.question_id));
     const text = (v) => (v == null ? "" : Array.isArray(v) ? v.filter((x) => x != null).join("; ") : String(v));
     return {
-      id: a.id, label: a.paper_label, flags: a.paper_flags || [], status: a.status, submittedAt: a.submitted_at, minutes: a.minutes_allowed,
+      id: a.id, subject: a.subject || "English", label: a.paper_label, flags: a.paper_flags || [], status: a.status, submittedAt: a.submitted_at, minutes: a.minutes_allowed,
       elapsedSeconds: a.elapsed_seconds, score: a.score, total: a.total, answered: a.answered, questionCount: a.question_count,
       unanswered: a.unanswered, sections: a.section_scores || [], counts: a.counts, countsReason: a.counts_reason, openTotal: a.open_total || 0,
       autoScore: a.auto_score == null ? a.score : a.auto_score, autoTotal: a.auto_total == null ? a.total : a.auto_total, pending: a.parent_pending || 0,
       percent: percentOf(a.score, a.total), settled: !a.parent_pending,
       open: items.map((i) => ({
         questionId: i.question_id, question: (models[i.question_id] || {}).question || "", modelAnswer: (models[i.question_id] || {}).answer || "",
-        studentAnswer: text(i.answer && i.answer.val), mark: i.parent_correct, automatic: i.parent_correct != null && !i.parent_marked_at,
+        studentAnswer: text(i.answer && i.answer.val), mark: i.parent_correct, awarded: i.parent_marks == null ? null : i.parent_marks, weight: marksByQuestion(a.paper_id, [i.question_id])[0], automatic: i.parent_correct != null && !i.parent_marked_at,
       })),
     };
   });
@@ -63,22 +63,28 @@ export async function POST(request) {
   if (!me) return jerr("parent login required", 401);
   const b = await readJson(request);
   const attemptId = String(b.attemptId || ""), qid = String(b.questionId || "").slice(0, 200);
-  if (!UUID.test(attemptId) || !qid || typeof b.correct !== "boolean") return jerr("bad request", 400);
+  const partial = b.marks != null;
+  if (!UUID.test(attemptId) || !qid || (partial ? !Number.isInteger(b.marks) || b.marks < 0 : typeof b.correct !== "boolean")) return jerr("bad request", 400);
   const admin = adminClient();
   const { data: a } = await admin.from("exam_attempts").select("*").eq("id", attemptId).maybeSingle();
   if (!a || a.status === "in_progress") return jerr("not found", 404);
   if (!(await linked(admin, me.profile.id, a.student_id))) return jerr("not your child", 403);
-  const { data, error } = await admin.from("exam_answers").update({ parent_correct: b.correct, parent_marked_at: new Date().toISOString() })
-    .eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).select("question_id");
+  // Partial score (issue #148): marks is 0..weight. Full marks = correct, 0 = not correct, in between is stored in parent_marks.
+  const weight = marksByQuestion(a.paper_id, [qid])[0];
+  if (partial && b.marks > weight) return jerr("marks above the question's total", 400);
+  const prev = await admin.from("exam_answers").select("*").eq("attempt_id", attemptId).eq("question_id", qid).is("correct", null).maybeSingle();
+  const upd = parentMarkUpdate({ marks: partial ? b.marks : null, correct: b.correct, weight, hadPartial: !!(prev.data && prev.data.parent_marks != null), nowIso: new Date().toISOString() });
+  const { data, error } = await saveParentMark(admin, { attemptId, qid, upd });
   if (error) return jerr("could not save", 500);
   if (!data || !data.length) return jerr("not an open-ended item", 404);
   // The mark now counts: recompute the attempt's final score from ALL its open-ended rows (idempotent, so a repeat or a changed mark
   // can never double count), then settle the paper once nothing is left to mark.
-  const rows = await admin.from("exam_answers").select("question_id,section,parent_correct").eq("attempt_id", attemptId).is("correct", null).order("question_id");
+  const rows = await admin.from("exam_answers").select("*").eq("attempt_id", attemptId).is("correct", null).order("question_id");
   if (rows.error) return jerr("mark saved, but the score could not be updated", 500);
   const open = rows.data || [];
   const autoScore = a.auto_score == null ? a.score : a.auto_score, autoTotal = a.auto_total == null ? a.total : a.auto_total;
   const c = combineMarks({
+    openAwarded: open.map((r) => (r.parent_correct === false && r.parent_marks != null ? r.parent_marks : null)),
     autoScore, autoTotal, sections: a.auto_sections || a.section_scores || [],
     openMarks: open.map((r) => (r.parent_correct === true ? true : r.parent_correct === false ? false : null)), openSections: open.map((r) => r.section || "Comprehension"), openWeights: marksByQuestion(a.paper_id, open.map((r) => r.question_id)),
   });
