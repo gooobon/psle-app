@@ -19,7 +19,7 @@ export function LandingArt({ height = "60vh", minHeight = 420, pills = true, chi
 }
 
 // First screen for logged-out visitors.
-export function PreLoginLanding({ onLogin, onSignup }) {
+function LegacyLanding({ onLogin, onSignup }) {
   return (
     <Page testId="cq-prelogin">
       <div style={{ position: "relative" }}>
@@ -39,6 +39,103 @@ export function PreLoginLanding({ onLogin, onSignup }) {
       </div>
     </Page>
   );
+}
+
+// ---- New labyrinth landing (variant E), behind NEXT_PUBLIC_NEW_LANDING_ENABLED (default off) ----
+const NEW_LANDING = process.env.NEXT_PUBLIC_NEW_LANDING_ENABLED === "true";
+const NAVY = "#1F3F95", CORAL = "#C8372D", CREAM = "#FBF6EA";
+const CX = 195, CY = 126;
+const pt = (r, a) => [CX + r * Math.cos((a * Math.PI) / 180), CY + r * Math.sin((a * Math.PI) / 180)];
+const f = (n) => n.toFixed(1);
+// Clockwise (screen) arc on radius r from angle a1 to a2 (degrees, 0 = east, 90 = south).
+function arc(r, a1, a2, move = true) {
+  const [x1, y1] = pt(r, a1), [x2, y2] = pt(r, a2);
+  const large = Math.abs(a2 - a1) > 180 ? 1 : 0;
+  return `${move ? `M${f(x1)} ${f(y1)}` : ""}A${r} ${r} 0 ${large} 1 ${f(x2)} ${f(y2)}`;
+}
+const RINGS = [{ r: 126, gap: 90 }, { r: 102, gap: 270 }, { r: 78, gap: 90 }, { r: 54, gap: 270 }];
+const HALF = 8;
+const WALLS = RINGS.map(({ r, gap }) => arc(r, gap + HALF, gap + 360 - HALF)).join("");
+const JAMBS = RINGS.flatMap(({ r, gap }) => [gap - HALF, gap + HALF].map((a) => { const [x1, y1] = pt(r - 7, a), [x2, y2] = pt(r + 7, a); return `M${f(x1)} ${f(y1)}L${f(x2)} ${f(y2)}`; })).join("");
+const THREAD = `M195 264L195 240${arc(114, 90, 270, false)}L195 36${arc(90, 270, 450, false)}L195 192${arc(66, 90, 270, false)}L195 84${arc(42, 270, 450, false)}L195 148`;
+
+function LabyrinthHero() {
+  return (
+    <div data-testid="cq-landing-hero" style={{ position: "relative", height: 308, background: "radial-gradient(circle at 50% 41%, #FBF6EA 0%, #EDE4D4 60%, #E5D9C4 100%)", overflow: "hidden" }}>
+      <svg viewBox="0 0 390 308" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A winding red thread leads through a maze to a graduation cap" style={{ display: "block" }}>
+        <g fill="none" strokeLinecap="round" strokeLinejoin="round">
+          <path d={WALLS} stroke={NAVY} strokeWidth="5" />
+          <path d={JAMBS} stroke={NAVY} strokeWidth="4" />
+          <path d={THREAD} stroke="#8E241C" strokeWidth="7" opacity=".35" transform="translate(0 1.5)" />
+          <path d={THREAD} stroke={CORAL} strokeWidth="5" />
+          <path d={THREAD} stroke="#F3C2BD" strokeWidth="1.5" strokeDasharray="2 7" />
+        </g>
+        <g transform="translate(195 126)">
+          <circle r="19" fill={CREAM} />
+          <path d="M0 -11L-15 -4L0 3L15 -4Z" fill="#D9A52E" stroke={NAVY} strokeWidth="1.5" strokeLinejoin="round" />
+          <path d="M-8 -0.5V6C-4 10 4 10 8 6V-0.5L0 3Z" fill={NAVY} />
+          <path d="M13 -3V6" stroke={CORAL} strokeWidth="1.8" strokeLinecap="round" />
+          <circle cx="13" cy="8" r="2" fill={CORAL} />
+        </g>
+      </svg>
+      <div style={{ position: "absolute", top: 14, right: 14, background: CREAM, color: NAVY, border: `1.5px dashed ${CORAL}`, borderRadius: 999, padding: "4px 12px", fontSize: 12, fontWeight: 800, letterSpacing: "0.18em" }}>PSLE</div>
+    </div>
+  );
+}
+
+function StitchCard({ testId, onClick, label, children }) {
+  return (
+    <button data-testid={testId} onClick={onClick} style={{ position: "relative", flex: 1, minHeight: 132, background: "#FFFDF8", border: "none", borderRadius: 18, cursor: "pointer", padding: "16px 8px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: FONT, color: "#1B2340" }}>
+      <svg aria-hidden="true" width="100%" height="100%" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+        <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="17" fill="none" stroke={NAVY} strokeWidth="1" />
+        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="13" fill="none" stroke={CORAL} strokeWidth="1.5" strokeDasharray="5 6" strokeLinecap="round" />
+      </svg>
+      <svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke={NAVY} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative" }}>{children}</svg>
+      <span style={{ position: "relative", fontWeight: 800, fontSize: 17 }}>{label}</span>
+    </button>
+  );
+}
+
+function NewLanding({ onLogin, onSignup }) {
+  return (
+    <Page testId="cq-prelogin">
+      <div style={{ minHeight: "100vh", background: "#F4EEE4" }}>
+        <div style={{ position: "relative" }}>
+          <LabyrinthHero />
+          <div style={{ position: "relative", marginTop: -32, background: CREAM, borderRadius: "32px 32px 0 0", padding: "64px 20px 36px", minHeight: "calc(100vh - 276px)", textAlign: "center" }}>
+            <div data-testid="cq-landing-badge" style={{ position: "absolute", top: -48, left: "50%", transform: "translateX(-50%)", width: 98, height: 98, borderRadius: "50%", background: "#FFFDF8", border: `2px dashed ${CORAL}`, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
+              <Art priority k="brand/logo-b1" alt="ClewQuest" style={{ width: 68, height: "auto" }} />
+            </div>
+            <h1 style={{ margin: 0, fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, fontSize: 28, letterSpacing: "0.12em", color: NAVY }}>CLEWQUEST</h1>
+            <div style={{ marginTop: 6, fontSize: 15, color: "#5C564C" }}>The clew that guides you through</div>
+            <div style={{ marginTop: 28, fontSize: 17, fontWeight: 700, color: "#1B2340" }}>Who is using ClewQuest today?</div>
+            <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
+              <StitchCard testId="cq-landing-student" label="Student" onClick={() => onLogin("student")}>
+                <path d="M22 12C18 9 11 9 6 11V33C11 31 18 31 22 34C26 31 33 31 38 33V11C33 9 26 9 22 12Z" />
+                <path d="M22 12V34" />
+                <path d="M11 16C14 15 17 15.5 19 16.5M11 21C14 20 17 20.5 19 21.5" />
+              </StitchCard>
+              <StitchCard testId="cq-landing-parent" label="Parent" onClick={() => onLogin("parent")}>
+                <circle cx="15" cy="10" r="4.5" />
+                <path d="M7 36V25C7 20 10 17.5 15 17.5S23 20 23 25V36" />
+                <circle cx="32" cy="22" r="3.5" />
+                <path d="M26 36V31C26 27.5 28.5 26 32 26S38 27.5 38 31V36" />
+              </StitchCard>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "28px 4px 0", color: "#6B6F7B", fontSize: 13, fontWeight: 700, letterSpacing: "0.1em" }}>
+              <div style={{ flex: 1, borderTop: `2px dashed ${CORAL}`, opacity: 0.7 }} />OR<div style={{ flex: 1, borderTop: `2px dashed ${CORAL}`, opacity: 0.7 }} />
+            </div>
+            <button data-testid="cq-landing-signup" onClick={onSignup} style={{ marginTop: 56, width: "100%", background: NAVY, color: "#fff", border: "none", borderRadius: 999, padding: "16px 20px", fontSize: 17, fontWeight: 800, fontFamily: FONT, cursor: "pointer" }}>Sign up</button>
+          </div>
+        </div>
+      </div>
+    </Page>
+  );
+}
+
+// First screen for logged-out visitors. onLogin(role?) where role is "student" | "parent" (new landing only).
+export function PreLoginLanding(props) {
+  return NEW_LANDING ? <NewLanding {...props} /> : <LegacyLanding {...props} />;
 }
 
 // Login: ~170px strip of the art, logo badge overlapping its bottom edge, white sheet with 24px top radius.

@@ -29,6 +29,7 @@ const GOOGLE_LOGIN = process.env.NEXT_PUBLIC_GOOGLE_LOGIN_ENABLED === "true"; //
 const PENDING_PARENT_EMAIL_KEY = "clewquest_pending_parent_email";
 
 function AuthScreen({onLogin, onSignup, confirmInfo, resetCode, onResetDone, onParentSignedUp}){
+  const [loginRole, setLoginRole] = useState("student"); // tab LoginForm opens on (set by the new landing's Parent card)
   const [mode, setMode] = useState(confirmInfo?"login":"landing");   // landing | login | signup_parent | signup_legacy_student
   function pictureDone(profile){
     const user = mirrorServerUser(profile);
@@ -36,11 +37,11 @@ function AuthScreen({onLogin, onSignup, confirmInfo, resetCode, onResetDone, onP
     onLogin("student", user);
   }
   if(resetCode) return <SetNewPassword code={resetCode} onDone={()=>{ onResetDone(); setMode("login"); }}/>;
-  if(mode==="landing") return <PreLoginLanding onLogin={()=>setMode("login")} onSignup={()=>setMode("signup_parent")}/>;
+  if(mode==="landing") return <PreLoginLanding onLogin={(r)=>{ setLoginRole(r==="parent"?"parent":"student"); setMode("login"); }} onSignup={()=>setMode("signup_parent")}/>;
   if(mode==="signup_parent" && SERVER_AUTH) return <SignupParentStep1 onLoginInstead={()=>setMode("login")} onSignedIn={(p)=>onParentSignedUp(p)}/>;
   return(
     <LoginFrame onBack={()=>setMode("landing")}>
-      {mode==="login" && <LoginForm onLogin={onLogin} onPictureDone={pictureDone} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
+      {mode==="login" && <LoginForm initialRole={loginRole} onLogin={onLogin} onPictureDone={pictureDone} onGoSignup={r=>setMode(r)} confirmInfo={confirmInfo}/>}
       {mode==="signup_parent"  && <SignupParentForm  onSignup={onSignup} onBack={()=>setMode("landing")}/>}
     </LoginFrame>
   );
@@ -370,8 +371,8 @@ function LegacyParentEmailPrompt({local, onBack}){
   </div>);
 }
 
-function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo}){
-  const [role, setRole] = useState(confirmInfo ? "parent" : "student");
+function LoginForm({onLogin, onPictureDone, onGoSignup, confirmInfo, initialRole}){
+  const [role, setRole] = useState(confirmInfo ? "parent" : (initialRole==="parent" ? "parent" : "student"));
   const [id,   setId]   = useState(confirmInfo?.email || "");
   const [pw,   setPw]   = useState("");
   const [showPw, setShowPw] = useState(false);
