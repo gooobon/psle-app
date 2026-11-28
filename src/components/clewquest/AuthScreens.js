@@ -61,7 +61,7 @@ const THREAD = `M195 264L195 240${arc(114, 90, 270, false)}L195 36${arc(90, 270,
 
 function LabyrinthHero() {
   return (
-    <div data-testid="cq-landing-hero" style={{ position: "relative", height: 308, background: "radial-gradient(circle at 50% 41%, #FBF6EA 0%, #EDE4D4 60%, #E5D9C4 100%)", overflow: "hidden" }}>
+    <div data-testid="cq-landing-hero" className="cq-hero" style={{ position: "relative", height: 308, background: "radial-gradient(circle at 50% 41%, #FBF6EA 0%, #EDE4D4 60%, #E5D9C4 100%)", overflow: "hidden" }}>
       <svg viewBox="0 0 390 308" width="100%" height="100%" preserveAspectRatio="xMidYMax meet" role="img" aria-label="A winding red thread leads through a maze to a graduation cap" style={{ display: "block" }}>
         <g fill="none" strokeLinecap="round" strokeLinejoin="round">
           <path d={WALLS} stroke={NAVY} strokeWidth="5" />
@@ -85,11 +85,9 @@ function LabyrinthHero() {
 
 function StitchCard({ testId, onClick, label, children }) {
   return (
-    <button data-testid={testId} onClick={onClick} style={{ position: "relative", flex: 1, minHeight: 132, background: "#FFFDF8", border: "none", borderRadius: 18, cursor: "pointer", padding: "16px 8px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: FONT, color: "#1B2340" }}>
-      <svg aria-hidden="true" width="100%" height="100%" style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
-        <rect x="1" y="1" width="calc(100% - 2px)" height="calc(100% - 2px)" rx="17" fill="none" stroke={NAVY} strokeWidth="1" />
-        <rect x="5" y="5" width="calc(100% - 10px)" height="calc(100% - 10px)" rx="13" fill="none" stroke={CORAL} strokeWidth="1.5" strokeDasharray="5 6" strokeLinecap="round" />
-      </svg>
+    <button data-testid={testId} className="cq-stitch" onClick={onClick} style={{ position: "relative", flex: 1, minHeight: 132, background: "#FFFDF8", border: "none", borderRadius: 18, cursor: "pointer", padding: "16px 8px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 10, fontFamily: FONT, color: "#1B2340" }}>
+      <span aria-hidden="true" style={{ position: "absolute", inset: 0, boxSizing: "border-box", border: `1px solid ${NAVY}`, borderRadius: 18, pointerEvents: "none" }} />
+      <span aria-hidden="true" style={{ position: "absolute", inset: 4, boxSizing: "border-box", border: `1.5px dashed ${CORAL}`, borderRadius: 14, pointerEvents: "none" }} />
       <svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44" fill="none" stroke={NAVY} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: "relative" }}>{children}</svg>
       <span style={{ position: "relative", fontWeight: 800, fontSize: 17 }}>{label}</span>
     </button>
@@ -99,16 +97,17 @@ function StitchCard({ testId, onClick, label, children }) {
 function NewLanding({ onLogin, onSignup }) {
   return (
     <Page testId="cq-prelogin">
-      <div style={{ minHeight: "100vh", background: "#F4EEE4" }}>
+      <style>{`@media (max-height: 720px) { .cq-hero { height: 200px !important; } .cq-sheet { padding: 60px 20px 16px !important; } .cq-sheet .cq-stitch { min-height: 104px !important; } .cq-sheet .cq-tag { margin-top: 18px !important; } .cq-sheet .cq-or { margin-top: 16px !important; } }`}</style>
+      <div style={{ background: "#F4EEE4" }}>
         <div style={{ position: "relative" }}>
           <LabyrinthHero />
-          <div style={{ position: "relative", marginTop: -32, background: CREAM, borderRadius: "32px 32px 0 0", padding: "64px 20px 36px", minHeight: "calc(100vh - 276px)", textAlign: "center" }}>
+          <div className="cq-sheet" style={{ position: "relative", marginTop: -32, background: CREAM, borderRadius: "32px 32px 0 0", padding: "64px 20px 36px", textAlign: "center" }}>
             <div data-testid="cq-landing-badge" style={{ position: "absolute", top: -48, left: "50%", transform: "translateX(-50%)", width: 98, height: 98, borderRadius: "50%", background: "#FFFDF8", border: `2px dashed ${CORAL}`, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center" }}>
               <Art priority k="brand/logo-b1" alt="ClewQuest" style={{ width: 68, height: "auto" }} />
             </div>
             <h1 style={{ margin: 0, fontFamily: "Georgia, 'Times New Roman', serif", fontWeight: 700, fontSize: 28, letterSpacing: "0.12em", color: NAVY }}>CLEWQUEST</h1>
             <div style={{ marginTop: 6, fontSize: 15, color: "#5C564C" }}>The clew that guides you through</div>
-            <div style={{ marginTop: 28, fontSize: 17, fontWeight: 700, color: "#1B2340" }}>Who is using ClewQuest today?</div>
+            <div className="cq-tag" style={{ marginTop: 28, fontSize: 17, fontWeight: 700, color: "#1B2340" }}>Who is using ClewQuest today?</div>
             <div style={{ display: "flex", gap: 14, marginTop: 16 }}>
               <StitchCard testId="cq-landing-student" label="Student" onClick={() => onLogin("student")}>
                 <path d="M22 12C18 9 11 9 6 11V33C11 31 18 31 22 34C26 31 33 31 38 33V11C33 9 26 9 22 12Z" />
@@ -122,10 +121,10 @@ function NewLanding({ onLogin, onSignup }) {
                 <path d="M26 36V31C26 27.5 28.5 26 32 26S38 27.5 38 31V36" />
               </StitchCard>
             </div>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "28px 4px 0", color: "#6B6F7B", fontSize: 13, fontWeight: 700, letterSpacing: "0.1em" }}>
+            <div className="cq-or" style={{ display: "flex", alignItems: "center", gap: 12, margin: "28px 4px 0", color: "#6B6F7B", fontSize: 13, fontWeight: 700, letterSpacing: "0.1em" }}>
               <div style={{ flex: 1, borderTop: `2px dashed ${CORAL}`, opacity: 0.7 }} />OR<div style={{ flex: 1, borderTop: `2px dashed ${CORAL}`, opacity: 0.7 }} />
             </div>
-            <button data-testid="cq-landing-signup" onClick={onSignup} style={{ marginTop: 56, width: "100%", background: NAVY, color: "#fff", border: "none", borderRadius: 999, padding: "16px 20px", fontSize: 17, fontWeight: 800, fontFamily: FONT, cursor: "pointer" }}>Sign up</button>
+            <button data-testid="cq-landing-signup" onClick={onSignup} style={{ marginTop: 20, width: "100%", background: NAVY, color: "#fff", border: "none", borderRadius: 999, padding: "16px 20px", fontSize: 17, fontWeight: 800, fontFamily: FONT, cursor: "pointer" }}>Sign up</button>
           </div>
         </div>
       </div>
